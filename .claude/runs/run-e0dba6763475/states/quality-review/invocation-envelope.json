@@ -1,0 +1,436 @@
+{
+  "invocation_id": "inv-e0dba6763475-05-001",
+  "run_id": "run-e0dba6763475",
+  "work_item_id": "run-e0dba6763475::quality-review",
+  "idempotency_key": "sha256:08c69cfc1779240ba337bfadaed0cd75",
+  "state_id": "quality-review",
+  "phase_index": 5,
+  "agent_id": "omn-dev-2-reviewer",
+  "agent_version": "1.1.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-2-reviewer.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-2-reviewer/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-2-reviewer/system.md",
+      "agents/omn-dev-2-reviewer/identity.md",
+      "agents/omn-dev-2-reviewer/reasoning.md",
+      "agents/omn-dev-2-reviewer/execution.md",
+      "agents/omn-dev-2-reviewer/output.md",
+      "agents/omn-dev-2-reviewer/quality.md",
+      "agents/omn-dev-2-reviewer/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-2-reviewer/system.md": "sha256:ef234d6d8e6b74d21d099ab744ab9f60",
+      "agents/omn-dev-2-reviewer/identity.md": "sha256:725ba943cf8532dc4f666e68ca191592",
+      "agents/omn-dev-2-reviewer/reasoning.md": "sha256:f84d57686c7afa96e74cb1907e954c71",
+      "agents/omn-dev-2-reviewer/execution.md": "sha256:6c93e33bae84f6254f626f3fd1b447d7",
+      "agents/omn-dev-2-reviewer/output.md": "sha256:1b324b77d86f30d076d08768be2f9d5c",
+      "agents/omn-dev-2-reviewer/quality.md": "sha256:4d4c09812b441785acd1b03330468cc9",
+      "agents/omn-dev-2-reviewer/examples.md": "sha256:488657c9d243c3d498245922c2d92906"
+    },
+    "capabilities": [
+      "code-review",
+      "governance-enforcement",
+      "quality-verification"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "pull-request-diff",
+      "quality-scan-scope",
+      "technical-design",
+      "execution-plan",
+      "scope-definition",
+      "bug-analysis",
+      "architecture-decision-record",
+      "coding-standards",
+      "test-evidence",
+      "architecture-rules",
+      "security-criteria",
+      "standards-checklist",
+      "regression-targets",
+      "known-issues",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-02-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-02-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-02: Ship the framework payload as package data\n\n## Source\n\nTicket CKA-02 in the adoption backlog under `docs/` (Epic A \u2014 Verification baseline,\nDays 0\u201330). Source recommendation: R1 of the ClaudeKit Adoption Review (2026-08-27).\nType: Task. Priority: Highest. Effort: M. Depends on: nothing.\n\n## Request\n\nA non-editable `pip install` of the `omn-agent` wheel produces a CLI that cannot install\nanything: the framework payload (the framework payload directory at the repo root \u2014\nruntime, registries, agents, workflows, config, templates) is not packaged into the\nwheel, and `omn_agent/source.py::find_source` only looks for a framework tree next to\nthe package checkout (which exists for an editable install of the source repo, but not\nfor a wheel installed into site-packages). Every fresh-environment user must pass\n`--source <path>` to a framework checkout they may not have.\n\nThree deliverables:\n\n1. Package the framework payload into the wheel: `pyproject.toml` package-data (or\n   `MANIFEST.in` with include directives) so a non-editable build carries the full\n   payload tree \u2014 all managed directories plus the seed directories, subject to the\n   same exclusion patterns the installer applies (`__pycache__`, `*.pyc`, etc.).\n2. Extend `omn_agent/source.py::find_source` to resolve the bundled payload from the\n   installed package location as a fallback after the existing candidates (explicit\n   `--source` first, then a tree next to the checkout, then the bundled copy), keeping\n   the existing error message actionable when nothing resolves.\n3. Regenerate the stale egg-info metadata so the sdist/wheel file lists match the new\n   packaging configuration.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- In a clean venv, `pip install <wheel>` (non-editable) then\n  `omn-agent init && install && validate` succeeds with no `--source` flag.\n- `omn-agent install --dry-run` enumerates the same payload file count as an\n  editable install.\n\n## Constraints\n\n- Additive change only: the ticket list forbids altering `record_gate_decision`, the\n  gate matrix semantics, producer exclusion, `runner._require_approval`, or any\n  human-block path.\n- Source-resolution precedence must not change for existing users: an explicit\n  `--source` and a checkout-adjacent tree keep winning over the bundled copy.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py`\n  proof scripts PROVEN, no change to gate-decision behavior, and where docs were\n  touched, `user-guide.html` updated to match.\n\n## Priority and deadline\n\nHighest priority; Phase 1 (Days 0\u201330) of the adoption plan. Blocks CKA-03 (CI gating)\ntogether with CKA-01 (already delivered).",
+        "digest": "sha256:c153cb3a0a4f3d8bc12bb9e8a069b1a0"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-e0dba6763475/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-e0dba6763475/states/implementation/artifacts/implementation-report.md",
+        "text": "```yaml\nimplementationReport:\n  reportId: IR-2026-0004\n  changeReference: CKA-02 -- ship the framework payload as package data so a non-editable install is self-contained (ticket CKA-02 in the adoption backlog under docs/, Epic A)\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-02-feature-request.md\n    - type: technical-design\n      reference: runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  workflowPhase: implementation\n  verificationStatus: partially-verified\n  inputDigest: sha256:444028e71817b75797d14081d13928e4\n  contextDigest: sha256:fbf2e953c78bf37cdf0ac7f7c01da129\n```\n\n## Metadata\n\n- Report ID: IR-2026-0004\n- Change reference: CKA-02 -- ship the framework payload as package data so a non-editable install is self-contained (ticket CKA-02 in the adoption backlog under docs/, Epic A)\n- Workflow phase: implementation\n- Status: provisional\n- Verification status: partially-verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: a non-editable wheel install of the CLI now carries a complete, resolvable copy of the framework payload inside the `omn_agent` package, so a fresh environment can run `init`, `install`, and `validate` with no `--source` flag, while every existing resolution mode -- explicit source first, then a checkout-adjacent framework tree -- behaves exactly as before, including every failure mode.\n- Approach taken: the design's selected option O-001 as accepted -- a bundled payload data subtree inside the package (`omn_agent/_bundled_payload`, an exact committed mirror of the framework payload directory at the repository root: all ten managed directories plus both seed directories, filtered by the installer's own exclusion-pattern constant), declared as package data in the packaging configuration through two recursive glob patterns (the second covering dot-named files the first cannot match); `find_source` gains exactly one appended last-resort candidate resolved from the installed package location, validated by the existing framework-tree check unchanged, with the typed failure and its hint retained verbatim; the mirror is refreshed by a one-line sync command carried in the new test module and locked by parity tests that fail the suite on any file-set or content drift.\n- Design reference: decision records D-001 and D-002 (with inline decisions D-003 and D-004), impacted modules M-001, M-002, M-003, and M-008 delivered; M-004 deferred under deviation `V-001`; M-005, M-006, and M-007 verified untouched; sequencing constraints P-001 through P-004 and the executable portion of P-007, of technical design CKA-02-technical-design.\n- Out of scope: gate-decision recording, gate-matrix semantics, producer exclusion, approval-requirement enforcement, and every human-block path (the design's additive-only constraint, confirmed by a forbidden-symbol search across every changed file); any precedence change for existing users; the dependent continuous-integration ticket CKA-03; the installer, validator, and target-resolution modules, which the design records as no-change -- the installer consumes `find_source` unchanged and its source-equals-target guard already covers the bundled candidate, since the bundle lives under the installed package and never under a target framework directory; and user documentation, which the design sequences after verified behaviour (P-009). Leaving each is safe because the change is purely additive at the end of the candidate list in one branch, and no untouched module's inputs changed shape.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | `omn_agent/_bundled_payload/` | added | The bundled payload data subtree: 267 files mirroring the framework payload directory at the repository root -- every managed directory plus both seed directories, filtered by the installer's exclusion patterns -- generated by the sync command carried in `C-004`, so built distributions have a payload resolvable from the installed package | `D-001`, `M-003`, `P-003` |\n| `C-002` | `pyproject.toml` | modified | Declare the bundled subtree as package data: two recursive glob patterns under the packaging configuration's package-data table, the second required because the build backend's glob resolution never matches dot-named entries and the payload carries them | `D-001`, `M-001`, `P-001` |\n| `C-003` | `omn_agent/source.py` | modified | Append exactly one bundled-payload candidate to `find_source`, strictly after the checkout-adjacent candidates and only in the no-explicit-source branch, so an invalid `--source` still errors and never silently falls back; the existing framework-tree validity check applies to the new candidate unchanged and the typed failure with its `--source` hint is retained verbatim; adds the constant naming the bundle directory | `D-002`, `D-003`, `M-002`, `P-004` |\n| `C-004` | `tests/test_bundled_payload.py` | added | Durable regression net for the bundle: mirror parity by file set and per-file content digest, framework-tree validity, exclusion-filter cleanliness, packaging-glob coverage of every bundled file reproduced with the build backend's recursive-glob semantics, three-environment candidate precedence, invalid-explicit non-fallback, and retained failure guidance; doubles as the mirror's sync tool via its `--sync` mode | `M-008`, `P-007` |\n| `C-005` | `tests/test_omn_agent.py` | modified | CLI-level coverage of the new environment class: `install` then `validate` succeed with no `--source` flag resolving a bundled payload, and a bundle-resolved dry-run plans the identical file set as an explicit-source dry-run of the same payload | `M-008`, `P-007` |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | pre-change regression baseline: the full suite is green before any file was changed (303 tests), the reference for the post-change comparison | regression | `C-003`, `C-005` | `python -m unittest discover -s tests` (repository root, executed before the change) | pass |\n| `T-002` | the bundled subtree mirrors the authoritative payload exactly -- identical file set and identical per-file content digests -- and passes the framework-tree validity check | static | `C-001`, `C-004` | `python -m unittest discover -s tests -p test_bundled_payload.py` | pass |\n| `T-003` | the bundle contains no file matching the installer's exclusion patterns and nothing outside the filtered managed-plus-seed payload map | static | `C-001`, `C-004` | `python -m unittest discover -s tests -p test_bundled_payload.py` | pass |\n| `T-004` | the declared package-data globs cover every bundled file, reproduced with the build backend's recursive-glob semantics, including the dot-named file the plain pattern cannot match | static | `C-002`, `C-004` | `python -m unittest discover -s tests -p test_bundled_payload.py` | pass |\n| `T-005` | candidate precedence across environment classes: an explicit source wins; a checkout-adjacent tree wins over the bundle; the bundle resolves only when neither exists; an invalid explicit source errors without falling back to a valid bundle | unit | `C-003`, `C-004` | `python -m unittest discover -s tests -p test_bundled_payload.py` | pass |\n| `T-006` | when no candidate resolves -- including a present-but-invalid bundle -- the typed invalid-target error and the hint naming the `--source` remedy are retained | unit | `C-003`, `C-004` | `python -m unittest discover -s tests -p test_bundled_payload.py` | pass |\n| `T-007` | in this repository's own checkout the checkout-adjacent payload tree still resolves ahead of the committed bundle, so precedence is unchanged for existing users | unit | `C-001`, `C-003`, `C-004` | `python -m unittest discover -s tests -p test_bundled_payload.py` | pass |\n| `T-008` | CLI walkthrough with no `--source` flag: `install` succeeds from the bundled payload and `validate` passes on the installed result | integration | `C-003`, `C-005` | `python -m unittest discover -s tests -p test_omn_agent.py -k BundledPayload` | pass |\n| `T-009` | a bundle-resolved dry-run plans the identical file set as an explicit-source dry-run of the same payload | integration | `C-003`, `C-005` | `python -m unittest discover -s tests -p test_omn_agent.py -k BundledPayload` | pass |\n| `T-010` | simulated non-editable install (the package copied to a site-packages-style directory outside the repository, so no checkout-adjacent tree exists): dry-run enumerates 253 planned writes from the bundle and 253 from the editable checkout resolution -- file-count parity and file-set identity both hold | end-to-end | `C-001`, `C-002`, `C-003` | `python sim_noneditable.py <repository-root>` (temporary driver executed outside the repository; it drives only the repository's own CLI, `python -m omn_agent install ... --dry-run`, in both layouts) | pass |\n| `T-011` | simulated clean-environment walkthrough on the same site-packages-style layout: `init`, then `install`, then `validate` all exit OK with no `--source` flag, resolving the bundled payload | end-to-end | `C-001`, `C-003` | `python sim_noneditable.py <repository-root>` (same driver, same execution) | pass |\n| `T-012` | four framework proof scripts PROVEN: manifests, recovery, registry coverage, vertical slice | regression | `C-001` | `python verify_manifests.py && python verify_recovery.py && python verify_registry_coverage.py && python verify_vertical_slice.py` (executed in the framework runtime directory) | pass |\n| `T-013` | post-change regression: the full suite is green (316 tests -- the 303 baseline tests unchanged plus the 13 added) | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005` | `python -m unittest discover -s tests` (repository root, executed after the change) | pass |\n\n## Verification Results\n\n- Verification method: hermetic execution of the repository's own unittest suite (synthetic payload trees in temporary directories, and the package location patched per test to construct each environment class), run in full before the change as the regression baseline and in full after it; a site-packages-style simulation outside the repository driving the CLI's own install, init, and validate commands against the real committed bundle; a static reproduction of the build backend's package-data glob resolution over the real bundle; and the framework proof scripts. Additionally, the full seven-script proof loop was executed: three scripts fail on findings that predate this change, and an attribution re-run with the bundled subtree temporarily moved aside reproduced the identical three failures, while a symbol search confirmed no proof script reads any changed file -- recorded as residual risk `R-003`.\n- Commands executed: `python -m unittest discover -s tests` (repository root, once before and once after the change); `python tests/test_bundled_payload.py --sync` (generates the bundle); `python -m unittest discover -s tests -p test_bundled_payload.py`; `python -m unittest discover -s tests -p test_omn_agent.py -k BundledPayload`; `python sim_noneditable.py <repository-root>` (temporary driver outside the repository); in the framework runtime directory, the seven `verify_*.py` proof scripts individually, the four-script chain recorded at `T-012`, and the three failing scripts re-run with the bundled subtree temporarily absent for attribution.\n- Result summary: 13 test-evidence entries executed, 13 passed, 0 failed; baseline suite 303 passed; post-change suite 316 passed with 0 failures; simulated dry-run parity 253 = 253 with file-set identity; four proof scripts PROVEN. Outside the evidence table, three proof scripts fail on pre-existing conditions unrelated to this change (`R-003`).\n- Unverified areas: the content of an actually built wheel and sdist -- this environment carries no packaging build backend and the invocation prohibits fetching one, so the bundle's inclusion in built distributions is verified only by the static glob-coverage reproduction (`T-004`) and the simulated site-packages layout (`T-010`, `T-011`); the committed distribution-metadata refresh, deferred under `V-001`; and the design's final-checkpoint demonstrations that require a built wheel -- the true clean-venv `pip install` walkthrough and the distribution-content inspection.\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | The committed distribution metadata was not regenerated in this run: its recorded file lists still predate the packaging change carried by `C-002`, so ticket deliverable 3 is deferred | `D-004`, `M-004`, `P-005` -- regenerate the metadata from the new packaging configuration rather than editing the recorded lists | The regeneration is executable only by the packaging build backend; this environment has none installed anywhere the interpreter can reach, and the invocation prohibits external access to obtain one. Hand-writing the recorded lists is exactly what decision D-004 rejects, so the honest options were deferral with escalation or fabrication -- deferral was taken | escalated to omn-tech-lead via `Q-001` |\n| `V-002` | The bundled subtree in `C-001` is a committed mirror refreshed by a manual one-line sync command carried in `C-004`, with drift caught by parity tests, rather than synchronized by a step of the build procedure | the design's synchronization assumption A-003 and its open sync-verification question (owned by omn-tech-lead) | No standard build step exists in this repository that could carry the sync, and the design itself provides for an explicit sync-verification obligation in that case; the parity tests implement that obligation -- any file-set or content drift fails the suite and the failure message names the refresh command | not-required |\n\n## Boundary Compliance\n\n- Module boundaries preserved: the change stays inside the modules the design names -- the packaging configuration, the source-discovery module, a new data-only subtree inside the package, and the test suite. The installer, validator, and target-resolution modules the design records as no-change are untouched, and a symbol search across every changed file found none of the forbidden gate-behavior surfaces (gate-decision recording, gate-matrix semantics, producer exclusion, approval-requirement enforcement, human-block paths).\n- Public interface changes: additive only. Source resolution gains one last-resort candidate in exactly one new environment class -- no explicit source and no checkout-adjacent tree -- and every existing environment class resolves identically, an invalid explicit source still errors, and the failure message and hint are unchanged; the source module gains one public constant naming the bundle directory; the distribution contract gains the bundled payload subtree, with no existing file moved or changed.\n- Data or migration impact: none -- no data store, manifest format, bootstrap descriptor schema, or installed-target layout changed; installed targets are governed by the install manifest and are unaffected, and withdrawing the package-data declaration and the appended candidate would restore the prior shape without touching any installed target.\n- Declared side effects: exactly the five change-set paths, where `C-001` denotes the bundled subtree of 267 files (each file enumerated individually in the result envelope), plus the two evidence artifacts this invocation wrote -- this report and its result envelope at their envelope-named paths. The attribution re-run recorded under `R-003` temporarily moved the `C-001` subtree aside and restored it unchanged, re-verified by re-running the parity tests. No other file was written, no external system was reached, and no gate decision was recorded.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | The committed bundle drifts from the framework payload directory between refreshes, since every payload edit now carries a sync obligation | medium | medium | In place: the parity tests in `C-004` fail the suite on any file-set or content drift and name the one-line refresh command, and the glob-coverage test fails on any payload shape the declared patterns could not carry into a build |\n| `R-002` | Until the deferred regeneration (`V-001`) runs, the committed distribution metadata misstates the distribution's file lists to any consumer that trusts the recorded lists without building | medium | low | In place: fresh builds regenerate their own metadata from the changed configuration regardless of the committed copy; the deferral is escalated with a named owner (`Q-001`), and the configuration itself carries executed evidence (`T-004`, `T-010`, `T-011`) |\n| `R-003` | Three of the seven framework proof scripts fail: the multi-phase traversal check on one historical run, the self-hosting checks on scope-rule reachability, six committed change proposals each failing one check of their own validator, and historical orphan runs, and one validator's conforming-acceptance check | high | low | In place: attribution is recorded -- the identical three failures reproduce with the bundled subtree temporarily absent, and no proof script reads any changed file -- so review cannot misattribute them to this change; remediation of the underlying governance findings belongs to framework governance, outside this accepted change |\n\n## Handoff Notes\n\n- Reviewer focus areas: the deferred metadata regeneration `V-001` and its effect on the design's zero-discrepancy constraint; the committed-mirror tradeoff `V-002`, including the sync command living in the test module rather than in a build step; the candidate-order change in `C-003`, specifically that the bundled candidate is appended only in the no-explicit-source branch so an invalid `--source` never silently falls back -- the reading the design's one-additional-environment-class statement requires; and the packaging globs in `C-002`, whose dot-named-file coverage is exercised only by the static reproduction until a real build runs.\n- Follow-up work: execute the deferred build-backend steps in an environment that has one -- regenerate the committed metadata, build the sdist and wheel, inspect their contents against the design's completeness and filtering constraints, and run the true clean-venv install walkthrough (`Q-001`); the design's parity-assurance question remains with omn-product-owner, noting this run's executed parity held at both file-count and file-set level; the design's sync-verification question remains with omn-tech-lead, for whom the parity tests supply an interim verification he may relocate into the build procedure; framework governance owns the three pre-existing proof-script failures (`R-003`).\n- Documentation impact: the self-contained non-editable install and the three-candidate resolution order are new user-visible behaviour; the user guide and the HTML handbook document install flows with `--source` and should gain the no-flag path once wheel-level verification lands -- that work belongs to omn-documentation under the design's documentation sequencing (P-009) and was deliberately not performed here.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | Which environment executes the deferred build-backend steps -- regenerating the committed distribution metadata (`V-001`), building the wheel and sdist for the distribution-content inspection, and running the true clean-venv install walkthrough -- given this invocation's environment carries no packaging build backend and may not fetch one? | yes | omn-tech-lead | `C-001`, `C-002` |",
+        "digest": "sha256:36c3660864e4ff7fd1c4f66aec7a4d0f",
+        "produced_by": "implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the subject under review: an implementation report for a delivered change, a stable pull request diff for a review-pull-request run, or a quality-scan scope naming the repository boundary, exclusions, and risk threshold for a code-quality-scan run. Without one there is nothing under review, and reviewing anyway would mean assessing this agent's own choice of what to read."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-e0dba6763475/states/implementation/artifacts/implementation-report.md",
+      "produced_by": "implementation"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-03T13:22:45Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8d6bd0735e4288ea81c161556faa7c18",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:d2a44ef0a7d382b3285bf0991857fe61",
+    "input_digest": "sha256:fb2f48cfcef64623fcf5a24ceb8fe821",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-02-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-02-feature-request.md",
+        "digest": "sha256:c153cb3a0a4f3d8bc12bb9e8a069b1a0"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-e0dba6763475/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-e0dba6763475/states/implementation/artifacts/implementation-report.md",
+        "digest": "sha256:36c3660864e4ff7fd1c4f66aec7a4d0f"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/review-package.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-e0dba6763475/states/quality-review/artifacts/review-package.md",
+      "runs/run-e0dba6763475/states/quality-review/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies repository source, tests, or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the review package"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code or tests",
+      "revise the technical design rather than raising a finding against it",
+      "define, widen, or narrow product scope",
+      "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+      "record a merge or release decision",
+      "decide a gate that assesses evidence this agent produced",
+      "review a change this agent authored",
+      "approve while a critical or high finding is open, or while test evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "review an implemented change against the requirements, the accepted design, and the standards in force",
+        "survey a bounded repository scope for redundant, dead, duplicated, over-abstracted, or generated low-value code, against the maintainability standards in force",
+        "assess conformance to coding standards, architecture rules, and security criteria",
+        "judge whether the supplied evidence supports the claim it is offered for",
+        "judge whether executed tests cover the behavior the change altered",
+        "classify each defect by severity, category, and location against a named standard",
+        "issue correction requests that state a required outcome and name its owner",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "execute the repository's own verification commands to confirm reported results",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code or tests",
+        "revise the technical design rather than raising a finding against it",
+        "define, widen, or narrow product scope",
+        "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+        "record a merge or release decision",
+        "decide a gate that assesses evidence this agent produced",
+        "review a change this agent authored",
+        "approve while a critical or high finding is open, or while test evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "Independence is the whole value of this role. An agent that can change the code it assesses becomes the producer of the work it is about to judge, and the Producer Exclusion Rule then disqualifies it from the very verdict it exists to give. The review reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies repository source, tests, or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the review package"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same finding set, the same severity assignment, the same correction-request set, the same verdict, and the same declared package status.",
+      "identifierSchemes": {
+        "findings": "F-<zero-padded-sequence>",
+        "correctionRequests": "CR-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Findings are ordered by descending severity; ties break toward the lower location in lexical order. Correction requests follow the findings they address.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "review-package.md",
+    "artifact_path": "runs/run-e0dba6763475/states/quality-review/artifacts/review-package.md",
+    "template_ref": "templates/review-package.md",
+    "contract_ref": "agents/omn-dev-2-reviewer/output.md",
+    "quality_ref": "agents/omn-dev-2-reviewer/quality.md",
+    "validator": "review_package_validator",
+    "result_envelope_path": "runs/run-e0dba6763475/states/quality-review/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-03T13:22:45Z"
+}

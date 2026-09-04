@@ -1,0 +1,96 @@
+{
+  "invocation_id": "inv-8f8a1ab0d16e-06-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-8f8a1ab0d16e/states/documentation-and-release-handoff/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "releaseId": "RN-2026-0005-CKA-03",
+    "changeReference": "CKA-03 -- CI verification workflow gating every pull request and default-branch push (ticket CKA-03 in the adoption backlog under docs/)",
+    "communicationBasis": "release-handoff",
+    "releaseVerdict": "released",
+    "artifactStatus": "complete",
+    "version": "0+CKA-03-unreleased",
+    "counts": {
+      "knownIssues": 6,
+      "publishedStatements": 25,
+      "sourcesTraced": 2,
+      "changesByStage5Class": {
+        "breaking": 0,
+        "contract": 1,
+        "operational": 1,
+        "feature": 1,
+        "fix": 0,
+        "improvement": 2,
+        "internal": 0
+      },
+      "openQuestionsCarried": 3,
+      "correctionRequestsCarried": 2
+    },
+    "audience": {
+      "source": "inferred from the release-handoff basis of the routed phase; no stakeholder list was supplied, and the inference is recorded in the artifact's Communication section",
+      "recipients": [
+        "omn-orchestrator (Closure Gate owner)",
+        "omn-tech-lead (branch-protection enactment, flip, Q-002, Q-003)",
+        "omn-qa (live hosted-run validation, Q-001)",
+        "omn-dev-1-implement (CR-001, CR-002)",
+        "repository contributors (via the delivered documentation)"
+      ]
+    },
+    "statementSources": {
+      "verification-report": "runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md (RP-2026-0005, read in full)",
+      "final-change-summary": "runs/run-8f8a1ab0d16e/states/implementation/artifacts/implementation-report.md (IR-2026-0005, read in full)"
+    },
+    "stage8Adjudication": {
+      "row": "every change in scope reached its target environment -- all five change-set entries of IR-2026-0005 delivered in the repository tree and read in full by RP-2026-0005",
+      "verdict": "released",
+      "status": "complete",
+      "note": "the merge itself is decided at the Closure Gate by omn-orchestrator and is not recorded in this artifact"
+    },
+    "qualityChecks": {
+      "run": 60,
+      "passed": 60,
+      "failed": 0,
+      "detail": {
+        "structural": {"S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass"},
+        "metadata": {"D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass"},
+        "traceability": {"P1": "pass", "P2": "pass", "P3": "pass", "P4": "pass", "P5": "pass", "P6": "pass"},
+        "compatibility": {"R3": "pass", "X1": "pass", "X2": "pass", "X3": "pass", "X4": "pass"},
+        "releasePosition": {"R1": "pass", "R2": "pass", "R4": "pass", "R5": "pass", "R7": "pass", "V1": "pass", "V2": "pass", "V3": "pass"},
+        "knownIssues": {"K1": "pass", "K2": "pass", "K3": "pass", "K4": "pass", "K5": "pass", "K6": "pass"},
+        "contentAudience": {"R6": "pass", "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass"},
+        "authority": {"A7": "pass", "A8": "pass", "A9": "pass", "A10": "pass", "A11": "pass", "A12": "pass", "A13": "pass"},
+        "securityData": {"C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"}
+      },
+      "repairs": []
+    },
+    "notMachineCheckableObligations": {
+      "N1": "judged discharged: every published statement about delivered behavior is taken from IR-2026-0005's change set and Boundary Compliance or from RP-2026-0005's conformance and test-adequacy record, with the reviewer's independent confirmations (13-test net re-executed) distinguished from results recorded as claimed (full suite 316/316, local assertions T-001 to T-005)",
+      "N2": "judged discharged: no prior release note exists for this surface, so nothing was carried forward; the one overstating claim found in the delivered files (the workflow header's never-cancelled wording) is published as known issue K-001 and routed to omn-dev-1-implement via CR-001 rather than corrected here",
+      "N3": "judged discharged: the workflow is published as the single feature at its actual size, the check-name contract as a contract change with its additive compatibility position from the supplied evidence, the documentation and the 13-test net as improvements, and no bug fix is claimed; the six known issues carry every open finding, unvalidated area, and pending enactment the two supplied artifacts record"
+    },
+    "handoffs": {
+      "closureGate": {"gate": "Closure Gate", "decidedBy": "omn-orchestrator", "note": "producer exclusion: this agent wrote the package that gate assesses and does not decide it"},
+      "corrections": {"owner": "omn-dev-1-implement", "ids": ["CR-001", "CR-002"], "blocking": false},
+      "liveRunValidation": {"owner": "omn-qa", "id": "Q-001", "summary": "matrix fan-out, rendered per-verifier check names, fan-in fail-never-skip under real failure and cancellation, both platforms' hosted results"},
+      "enactment": {"owner": "omn-tech-lead", "ids": ["Q-002", "Q-003"], "summary": "default-branch literal confirmation; day-one required set and flip enactment with recorded ownership"}
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    "agents/omn-documentation/examples.md",
+    "runs/run-8f8a1ab0d16e/states/documentation-and-release-handoff/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-8f8a1ab0d16e/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "runs/run-8f8a1ab0d16e/states/documentation-and-release-handoff/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

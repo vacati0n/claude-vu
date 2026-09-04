@@ -1,0 +1,401 @@
+{
+  "invocation_id": "inv-e0dba6763475-06-001",
+  "run_id": "run-e0dba6763475",
+  "work_item_id": "run-e0dba6763475::documentation-and-release-handoff",
+  "idempotency_key": "sha256:9771b7ec9ded9995b2f223acf676bf60",
+  "state_id": "documentation-and-release-handoff",
+  "phase_index": 6,
+  "agent_id": "omn-documentation",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-documentation.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-documentation/manifest.yaml",
+    "load_order": [
+      "agents/omn-documentation/system.md",
+      "agents/omn-documentation/identity.md",
+      "agents/omn-documentation/reasoning.md",
+      "agents/omn-documentation/execution.md",
+      "agents/omn-documentation/output.md",
+      "agents/omn-documentation/quality.md",
+      "agents/omn-documentation/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-documentation/system.md": "sha256:407f35d95b5e232c7d87d7740a942844",
+      "agents/omn-documentation/identity.md": "sha256:e40e9fd9da20ae31f5af17d3cc97fcf2",
+      "agents/omn-documentation/reasoning.md": "sha256:11b286235d28b0bc358674c5b9357736",
+      "agents/omn-documentation/execution.md": "sha256:0077338ee3cbe3eee246e3556f9da205",
+      "agents/omn-documentation/output.md": "sha256:9e0c56ac978b9695f13668e209f8e2e4",
+      "agents/omn-documentation/quality.md": "sha256:972fe80aafbde6b6f8142b6dbd97e081",
+      "agents/omn-documentation/examples.md": "sha256:baead714ded57fbb1d36b103b957ee78"
+    },
+    "capabilities": [
+      "documentation",
+      "release-communication"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "validation-report",
+      "review-package",
+      "deployment-status",
+      "scope-definition",
+      "technical-design",
+      "execution-plan",
+      "bug-analysis",
+      "monitoring-health-record",
+      "final-change-summary",
+      "stakeholder-list",
+      "verification-report",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "closure-context",
+      "communication-requirements",
+      "existing-documentation",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "review-package",
+        "reference": "runs/run-e0dba6763475/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-e0dba6763475/states/quality-review/artifacts/review-package.md",
+        "text": "```yaml\nreviewPackage:\n  packageId: RP-2026-0004\n  reviewReference: CKA-02 implementation (report IR-2026-0004), run run-e0dba6763475, ticket CKA-02 in the adoption backlog under docs/\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-02-feature-request.md\n    - type: implementation-report\n      reference: runs/run-e0dba6763475/states/implementation/artifacts/implementation-report.md\n    - type: design-reference\n      reference: runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n    - type: code-diff\n      reference: inline\n    - type: test-evidence\n      reference: cka-02-wheel-verification.md (run coordinator's host-run transcript, session scratchpad, 2026-09-03)\n  producedBy: omn-dev-2-reviewer\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: approve\n  inputDigest: sha256:fb2f48cfcef64623fcf5a24ceb8fe821\n  contextDigest: sha256:d2a44ef0a7d382b3285bf0991857fe61\n```\n\n## Metadata\n\n- Review ID: RP-2026-0004\n- Reviewer: omn-dev-2-reviewer\n- Change under review: CKA-02 \u2014 ship the framework payload as package data so a non-editable install is self-contained; implementation report IR-2026-0004 covering change-set entries `C-001` through `C-005`\n- Review date: 2026-09-03\n\n## Review Scope\n\n- In scope: All five change-set entries \u2014 the packaging configuration (`pyproject.toml`), the source-resolution module (`omn_agent/source.py`), the bundled payload subtree (`omn_agent/_bundled_payload/`, 267 files), the new test module (`tests/test_bundled_payload.py`), and the two added CLI tests in `tests/test_omn_agent.py` \u2014 judged for correctness of the candidate order, conformance to the accepted design (decisions `D-001` through `D-004`, constraints `C-001` through `C-010`), maintainability of the committed-mirror approach, standards conformance, and test adequacy; both ticket acceptance criteria; the report's two deviations `V-001` and `V-002` and its residual-risk register.\n- Out of scope: The three pre-existing proof-script failures the report records as `R-003` \u2014 they predate this change, no proof script reads a changed file per the report's attribution account, and remediation belongs to framework governance; the dependent continuous-integration ticket CKA-03; user documentation, which the design's `P-009` sequences after verified behaviour and assigns to omn-documentation; inspection of a built sdist archive \u2014 safe to exclude because the regenerated distribution metadata file lists were verified directly against the bundle and the wheel, the artifact both acceptance criteria bind, was inspected in full.\n- Evidence reviewed: The implementation report, the accepted technical design, and the feature request, each in full; the four changed or added source and test files in full; the bundled subtree through executed verification (mirror parity by file set and per-file digest, framework-tree validity, exclusion cleanliness \u2014 the change's own tests, re-run by this review) plus an independent file count (267); the regenerated distribution metadata (`omn_agent.egg-info/SOURCES.txt`) compared entry-by-entry against the bundle; the run coordinator's host-run wheel-verification transcript in full; the full test suite, the new test modules, and four framework proof scripts re-executed by this review.\n\n## Findings\n\n| ID | Severity | Category | Location | Requirement | Finding | Correction Request | Status |\n|---|---|---|---|---|---|---|---|\n| `F-001` | medium | packaging | `omn_agent.egg-info/SOURCES.txt` | Ticket CKA-02 deliverable 3; design constraint `C-007`, decision `D-004`, module `M-004` | The implementation phase deferred the distribution-metadata regeneration (deviation `V-001`), so at implementation handoff the recorded file lists still predated the packaging change and ticket deliverable 3 was undelivered. The regeneration has since executed: the run coordinator's wheel build (2026-09-03) rebuilt the metadata in place, and this review confirmed the recorded lists now carry exactly the 267 bundled payload files, file-set identical to the committed bundle, with the metadata files timestamped to that build | `CR-001` | resolved |\n\n## Severity Summary\n\n- Critical: 0\n- High: 0\n- Medium: 1\n- Low: 0\n\n## Standards and Architecture Conformance\n\n- Coding standards: No repository coding-standards catalogue was supplied in the context slice, so the change was measured against `context/technical-context.md` (automation-first for repeatable checks; backward compatibility for externally consumed contracts) and the prevailing conventions of the modules it touches. Conformant: the source-module change is one appended candidate plus one documented constant, the docstrings state the resolution order and its rationale, and the resolution contract stays backward compatible \u2014 every pre-existing environment class resolves identically, which the re-executed precedence tests demonstrate.\n- Architecture rules: Measured against the accepted design. Conformant: the bundled candidate is appended strictly last and only in the no-explicit-source branch, so an invalid explicit source still errors without fallback (`C-001`, `D-002`); the existing framework-tree validity check is reused unchanged on the new candidate (`D-003`); the typed failure and its hint naming the `--source` remedy are retained (`C-005`, confirmed by re-executed tests); the installer, validator, and target-resolution modules the design records as no-change are untouched. A symbol scan of the changed non-bundle files found none of the forbidden gate-behavior surfaces (`C-002`), and the executed mirror-parity check rules out gate-behavior alteration riding in through the bundle, since the bundle is byte-identical to the authoritative payload tree.\n- Security criteria: Measured against `skills/security/secure-engineering.md` (no hardcoded credentials; controls testable) and design risk `R-007`. No credential, token, or secret appears in any changed file; the executed cleanliness check confirms the bundle carries no file matching the installer's exclusion patterns and nothing outside the filtered managed-plus-seed payload map; the coordinator's wheel inspection (267 payload files, matching the bundle count exactly) closes the unreviewed-content ride-along channel for the verified build. The distribution becoming a payload delivery vector is a design-accepted property with the exclusion filter and content inspection as its controls.\n- Exceptions requested: None identified.\n\n## Test Adequacy Assessment\n\n- Test evidence reviewed: Re-executed by this review from the repository root \u2014 `python -m unittest discover -s tests`: 316 tests, OK, exit 0, matching the report's post-change count exactly; `python -m unittest discover -s tests -p test_bundled_payload.py`: 11 of 11 pass (mirror parity, validity, cleanliness, packaging-glob coverage, three-environment precedence, invalid-explicit non-fallback, retained failure guidance, checkout-precedence); `python -m unittest discover -s tests -p test_omn_agent.py -k BundledPayload`: 2 of 2 pass (CLI install-then-validate from the bundle; dry-run plan identity bundle versus explicit source); the four proof scripts `verify_manifests.py`, `verify_recovery.py`, `verify_registry_coverage.py`, `verify_vertical_slice.py` each exit 0, confirming `T-012`. Relied on as reviewer-confirmed third-party evidence: the run coordinator's wheel transcript \u2014 real wheel built, 267 payload files inside it, clean-venv non-editable install running init, install, and validate with no `--source` flag at exit 0 (253 create, 17 seed), and dry-run parity 253 = 253 against the editable source \u2014 which demonstrates both ticket acceptance criteria and closes the report's deferred wheel-verification item. Recorded as claimed, not confirmed: the 303-test pre-change baseline (`T-001`, the pre-change state no longer exists), the simulated site-packages driver runs (`T-010`, `T-011`, superseded by the stronger real-wheel walkthrough), and the attribution re-run behind `R-003`.\n- Coverage of changed behavior: Complete. Every behavior the change altered carries an executed check re-run by this review: candidate precedence across all three environment classes, non-fallback on an invalid explicit source, retained failure guidance, mirror parity by file set and content digest, exclusion-filter cleanliness, packaging-glob coverage including the dot-named file the plain pattern cannot match, and the CLI walkthrough and dry-run plan identity at integration level. Both acceptance criteria are additionally demonstrated on a real built wheel in a clean environment.\n- Gaps requiring new tests: No repeatable automated check inspects a built distribution's contents \u2014 the wheel inspection was a one-off host run; a repeatable distribution-content check belongs with the CKA-03 continuous-integration work and is handed to omn-qa as non-blocking.\n\n## Correction Requests\n\n| ID | Addresses | Required change | Blocking | Owner |\n|---|---|---|---|---|\n| `CR-001` | `F-001` | The distribution metadata stays current from here on: the refresh obligation is recorded alongside the documented mirror-sync command so any future packaging-configuration or payload change regenerates both, and the run record notes that ticket deliverable 3 is now satisfied by the regenerated, verified file lists | no | omn-dev-1-implement |\n\n## Residual Risk\n\n- Accepted risk: The committed-mirror duplication and its manual sync obligation \u2014 accepted by the accepted design's selected approach (option O-001's recorded tradeoff and assumption A-003's contingency), with the delivered parity tests as the control and design risk `R-001` owned by omn-dev-1-implement. The payload-delivery-vector exposure (`R-007`) \u2014 accepted by the design with the exclusion filter and distribution inspection as controls.\n- Unmitigated risk: A wheel built in the window between a payload edit and the next full-suite run ships a stale mirror, because nothing outside the test suite verifies sync until CKA-03 lands continuous gating; likewise the packaging globs cannot reach a dot-named directory, and the only guard is the loud test failure, so the residual is confined to builds made without running the suite.\n- Monitoring required: The mirror-parity and glob-coverage test outcomes on every payload or packaging change; the appearance of any dot-named directory in the payload; the three pre-existing proof-script failures (`R-003`), which remain with framework governance and must not be misattributed to this change at the gate.\n\n## Verdict\n\n- Decision: approve\n- Rationale: The delivered change realizes accepted design option O-001 exactly \u2014 one appended last-resort candidate in one branch, the reused validity check, the retained failure guidance, and a bundle proven byte-identical to the authoritative payload tree. Every changed behavior carries an executed check this review re-ran (316 tests green, 13 of them new, four proof scripts passing), both ticket acceptance criteria are demonstrated on a real wheel in a clean environment, and the single finding \u2014 the deferred metadata regeneration \u2014 was resolved during this cycle by a regeneration this review verified entry-by-entry. No finding remains open.\n- Blocking findings outstanding: None identified.\n- Readiness recommendation: This reviewer recommends the Review Gate be passed; the decision belongs to omn-qa, since this agent produced the evidence that gate assesses. The gate record should note that the report's provisional status and its blocking question `Q-001` are overtaken by verified events \u2014 the wheel-level acceptance walkthrough and the metadata regeneration are done \u2014 and that the non-blocking follow-ups are `CR-001`, the documentation work sequenced by design `P-009`, and the CKA-03 distribution-inspection gap handed to omn-qa.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | Does the mirror-sync verification remain in the test module, or relocate into a build-procedure step, per the accepted design's open sync-verification question? | no | omn-tech-lead | the unmitigated stale-mirror window recorded in Residual Risk; `CR-001` |",
+        "digest": "sha256:1c4315b2244eca574eca701e3fcc4a38",
+        "produced_by": "quality-review"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was delivered: an implementation report for the change set itself, a validation report for what was proven about it, a review package for a `review-pull-request` run, or a deployment status for the `communication-and-post-release` phase, which publishes after a release has landed. Without one there is nothing to publish from, and publishing anyway would mean describing a system from this agent's own reading of what it was supposed to become."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "review-package",
+      "reference": "runs/run-e0dba6763475/states/quality-review/artifacts/review-package.md",
+      "produced_by": "quality-review"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-04T04:49:49Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/release-note.md",
+        "digest": "sha256:a6125cac38eb2edeca7105d936d9304c",
+        "supplies": null
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:bc0fb4ee128c1855f84c63b3ea12319c",
+    "input_digest": "sha256:1c4315b2244eca574eca701e3fcc4a38",
+    "inputs": [
+      {
+        "type": "review-package",
+        "reference": "runs/run-e0dba6763475/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-e0dba6763475/states/quality-review/artifacts/review-package.md",
+        "digest": "sha256:1c4315b2244eca574eca701e3fcc4a38"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-e0dba6763475/states/documentation-and-release-handoff/artifacts/release-note.md",
+      "runs/run-e0dba6763475/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "reproducing a test or validation result, which belongs to omn-qa"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author or amend a technical design, an architecture decision, or a structural constraint",
+      "define, widen, or narrow product scope or acceptance criteria",
+      "award, withhold, or restate a validation verdict as though this agent reached it",
+      "record a merge, release, or deployment decision",
+      "publish a statement the supplied evidence does not support",
+      "omit, soften, or defer a breaking change a supplied input declares",
+      "carry forward prior-release content the delivered change made false",
+      "resolve an engineering gap rather than returning it to the role that owns it",
+      "decide a gate that assesses evidence this agent produced",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "describe delivered behavior from the implementation and validation evidence supplied",
+        "draft release notes, change summaries, and closure communication packages",
+        "record usage, limitations, known issues, and troubleshooting guidance",
+        "state the compatibility consequence a declared contract change carries",
+        "identify documentation the delivered change made stale, and propose its correction",
+        "name the audience a communication was addressed to and the handoff it carries",
+        "maintain the trace from each published statement to the artifact that supports it",
+        "record an unresolved engineering question as an open question against its owning role"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author or amend a technical design, an architecture decision, or a structural constraint",
+        "define, widen, or narrow product scope or acceptance criteria",
+        "award, withhold, or restate a validation verdict as though this agent reached it",
+        "record a merge, release, or deployment decision",
+        "publish a statement the supplied evidence does not support",
+        "omit, soften, or defer a breaking change a supplied input declares",
+        "carry forward prior-release content the delivered change made false",
+        "resolve an engineering gap rather than returning it to the role that owns it",
+        "decide a gate that assesses evidence this agent produced",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else. Product documentation living in the repository is proposed as content inside the artifact and applied by the role that owns the file, so a documentation change never travels as an unreviewed write.",
+        "rationale": "This agent's authority is over what is said about a change, never over the change itself. Writing to the repository would let a publication step alter the delivered behavior it exists to describe, and the resulting document would then be accurate about a system this agent had just modified."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "reproducing a test or validation result, which belongs to omn-qa"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same published statements, the same known-issue set, the same compatibility statement, the same declared release verdict, and the same declared artifact status.",
+      "identifierSchemes": {
+        "knownIssues": "K-<zero-padded-sequence>"
+      },
+      "orderingRule": "Known issues keep the order of the source that recorded them, so a supplied defect list and the issues published from it can be read side by side.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied evidence, release context, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "release-note.md",
+    "artifact_path": "runs/run-e0dba6763475/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "template_ref": "templates/release-note.md",
+    "contract_ref": "agents/omn-documentation/output.md",
+    "quality_ref": "agents/omn-documentation/quality.md",
+    "validator": "release_note_validator",
+    "result_envelope_path": "runs/run-e0dba6763475/states/documentation-and-release-handoff/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-04T04:49:49Z"
+}

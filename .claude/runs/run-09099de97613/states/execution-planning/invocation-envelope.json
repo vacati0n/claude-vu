@@ -1,0 +1,280 @@
+{
+  "invocation_id": "inv-09099de97613-02-001",
+  "run_id": "run-09099de97613",
+  "work_item_id": "run-09099de97613::execution-planning",
+  "idempotency_key": "sha256:3a6ac57afd9dd9fa94236c276a386a32",
+  "state_id": "execution-planning",
+  "phase_index": 2,
+  "agent_id": "planner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/planner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/planner/manifest.yaml",
+    "load_order": [
+      "agents/planner/system.md",
+      "agents/planner/identity.md",
+      "agents/planner/reasoning.md",
+      "agents/planner/execution.md",
+      "agents/planner/output.md",
+      "agents/planner/quality.md",
+      "agents/planner/examples.md"
+    ],
+    "module_digests": {
+      "agents/planner/system.md": "sha256:a26a26a95267c61a29c1dafb3b9c8e4a",
+      "agents/planner/identity.md": "sha256:37d6e6d4dc74073c46777abdd086b4de",
+      "agents/planner/reasoning.md": "sha256:6eb7dddf6dbcfb86df5f9cf2f9e3e7df",
+      "agents/planner/execution.md": "sha256:f8aaa279d8b0d06d7d1b32222b66d390",
+      "agents/planner/output.md": "sha256:cadffa959e4adea6cfe8f1a8df094a60",
+      "agents/planner/quality.md": "sha256:4bf46c7470028daff64dbfe9ac74dd6e",
+      "agents/planner/examples.md": "sha256:a0fb0394722c454920a25849c3938f8f"
+    },
+    "capabilities": [
+      "requirement-analysis",
+      "task-decomposition",
+      "dependency-analysis",
+      "execution-sequencing",
+      "complexity-estimation",
+      "risk-identification",
+      "execution-planning"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "user-story",
+      "jira-ticket",
+      "epic",
+      "product-requirement",
+      "product-context",
+      "technical-context",
+      "release-context",
+      "architecture-decision-records",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/omt-01-feature-request.md",
+        "source_file": ".claude/runs/inputs/omt-01-feature-request.md",
+        "text": "# Feature Request \u2014 OMT-01 Memory Token Optimizer Command\n\n## Request\n\nGive the framework a command that rewrites its durable knowledge surfaces \u2014 memory, context, and\nthe standing instruction files \u2014 to their minimum token cost without changing what they instruct.\n\nThe capability comprises three things the framework does not have today:\n\n1. `commands/optimize-memory.md`, a command contract with an active record in\n   `registry/commands.yaml`.\n2. `runtime/optimize_memory.py`, the runtime module the command executes.\n3. An index in `config/self-hosting-profile.md` recording each accepted change proposal against\n   the run that carried it.\n\n## Why now\n\nMemory, context, and instruction files are loaded into the context slice of every dispatch. Their\ntoken cost is therefore paid per run rather than once, and it grows monotonically: every\nincrement that records a decision, a known issue, or a standard makes every later run more\nexpensive to start. Twenty-one files totalling roughly sixty-five kilobytes are in that position\nnow. Nothing in the framework reduces that cost, and no existing command's contract covers doing\nso.\n\nThe framework already owns the shape of this work. A change that alters wording while preserving\nmeaning is a `structure-preserving-change`, and `workflows/refactor.md` exists to hold that claim\nto account: `scope-invariants-and-risk-profile` states what may not change, and\n`behavioral-validation` checks that it did not. What is missing is a bounded entry point that\nroutes there with the scope and the mechanical check already fixed.\n\n## Expected outcome\n\n- An operator types one command and receives a reviewable proposal: per-file token delta, a\n  unified diff per candidate, and a named reason for every candidate that was rejected.\n- No file is overwritten without a recoverable pre-image and a recorded digest pair.\n- Every accepted candidate has passed a mechanical invariant check against its original.\n- Generated and evidence surfaces are unreachable by the pass, whatever the operator asks for.\n- The framework's registry coverage, self-hosting, and release checks continue to pass.\n\n## Explicit non-goals\n\n- Deciding what belongs in memory or context. That stays with `memory/memory-governance.md`.\n- Rewriting source code, agent contracts, registries, workflow specifications, or command\n  specifications. None is a knowledge surface loaded per run.\n- Proving semantic equivalence. The request asks for a mechanical structural check plus a\n  reviewable diff, and asks that the difference between those two be stated rather than blurred.\n\n## Known obstacles the request does not resolve\n\n- A generative model cannot prove it preserved meaning. Any acceptance rule built on its own\n  assurance is worthless. The design must therefore judge candidates against the original by a\n  rule the framework can run, and must say plainly what that rule does and does not cover.\n- The compression pass requires a provider client library and resolvable credentials, neither of\n  which the framework carries today. The command must fail before touching a file when they are\n  absent, and the offline surfaces must stay usable without them.",
+        "digest": "sha256:2719daabacb06dca76da89e24b04daed"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present and must express an identifiable business or user outcome."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "scope-definition",
+      "reference": "runs/run-09099de97613/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "produced_by": "scope-and-acceptance"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-08-28T06:57:15Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/execution-plan.md",
+        "digest": "sha256:4b6afb5767cda1767df4d8183bfb459a",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:9f90eb89f94639cd8aec24f921d08586",
+    "input_digest": "sha256:2719daabacb06dca76da89e24b04daed",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/omt-01-feature-request.md",
+        "source_file": ".claude/runs/inputs/omt-01-feature-request.md",
+        "digest": "sha256:2719daabacb06dca76da89e24b04daed"
+      }
+    ],
+    "unnarrowed": [
+      "templates/execution-plan.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-09099de97613/states/execution-planning/artifacts/execution-plan.md",
+      "runs/run-09099de97613/states/execution-planning/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code",
+      "review code",
+      "modify architecture",
+      "generate tests",
+      "execute workflows",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze business and technical requirements",
+        "decompose scope into executable engineering tasks",
+        "derive dependencies and implementation order",
+        "estimate complexity at planning granularity",
+        "record assumptions, risks, and open questions",
+        "produce execution-plan.md"
+      ],
+      "prohibited": [
+        "write production code",
+        "review code",
+        "modify architecture",
+        "generate tests",
+        "execute workflows",
+        "access external systems directly"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and identical context snapshot must produce an execution plan with identical section set, identical task identifiers, and identical dependency and ordering relationships.",
+      "taskIdentifierScheme": "T-<zero-padded-sequence>",
+      "orderingRule": "Topological order over declared dependencies; ties broken by ascending task identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, tool, runtime, or implementation technology."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "execution-plan.md",
+    "artifact_path": "runs/run-09099de97613/states/execution-planning/artifacts/execution-plan.md",
+    "template_ref": "templates/execution-plan.md",
+    "contract_ref": "agents/planner/output.md",
+    "quality_ref": "agents/planner/quality.md",
+    "validator": "plan_validator",
+    "result_envelope_path": "runs/run-09099de97613/states/execution-planning/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-08-28T06:57:15Z"
+}

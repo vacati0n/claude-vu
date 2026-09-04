@@ -1,0 +1,182 @@
+{
+  "invocation_id": "inv-93b302cbdb28-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-93b302cbdb28/states/scope-and-acceptance/artifacts/scope-definition.md"
+  ],
+  "structured_output": {
+    "artifact": "scope-definition.md",
+    "scopeId": "SCOPE-2026-0001",
+    "featureName": "Wave 1 delivery core agent rollout",
+    "status": "provisional",
+    "scopeVerdict": "partially-bounded",
+    "counts": {
+      "scopeItems": 6,
+      "exclusions": 7,
+      "acceptanceCriteria": 13,
+      "scopeDecisions": 6,
+      "openQuestions": 3,
+      "blockingOpenQuestions": 1,
+      "suppliedInputs": 4,
+      "acceptanceCriteriaCountDeclared": 13
+    },
+    "verdictBasis": "Q-001 is recorded blocking: the business intent defers the acceptance boundary to a five-part definition of done held in a document that is neither a supplied input nor a member of this run's frozen context slice, and this agent may not reach outside those to read it. The narrowest defensible reading is recorded as D-005 and every acceptance criterion is written against it. Per reasoning.md Stage 7 a standing blocking question yields partially-bounded, and status follows it to provisional.",
+    "reasoningStagesRun": [
+      "Stage 1 - Normalize the request: 4 supplied inputs classified, 13 distinct expectations extracted and restated as outcomes",
+      "Stage 2 - Establish the business context: problem, affected users, and success measure established from the supplied inputs; one gap found and carried to Stage 7 as Q-001",
+      "Stage 3 - Draw the boundary: 6 delivered, 7 deliberately excluded, 3 undecidable expectations routed to Stage 7",
+      "Stage 4 - State each in-scope item as behaviour: 6 items rewritten as observable outcomes, implementation routes removed, priorities assigned",
+      "Stage 5 - Derive acceptance criteria: 13 criteria derived, each carrying a scope reference and a verification method",
+      "Stage 6 - Record constraints and decisions: 4 constraint fields populated, 6 scope decisions recorded with rationale and impact",
+      "Stage 7 - Record open questions and set the verdict: 3 questions recorded, 1 blocking, verdict set to partially-bounded",
+      "Stage 8 - Record the handoff: downstream owner, gate, gate evidence, and deferred work recorded",
+      "Stage 9 - Self-verification: full quality.md check set run once, no repair required, artifact emitted"
+    ],
+    "checksRun": 50,
+    "checksPassed": 50,
+    "checksFailed": 0,
+    "blockingFailures": 0,
+    "correctableFailures": 0,
+    "advisoryFailures": 0,
+    "checks": [
+      { "id": "S1", "severity": "Blocking", "result": "pass", "detail": "nine mandatory sections present exactly once, in contract order" },
+      { "id": "S2", "severity": "Correctable", "result": "pass", "detail": "no level-2 section other than the nine; no appendix" },
+      { "id": "S3", "severity": "Blocking", "result": "pass", "detail": "no mandatory section empty" },
+      { "id": "S4", "severity": "Blocking", "result": "pass", "detail": "exactly one fenced block, the leading metadata block" },
+      { "id": "S5", "severity": "Blocking", "result": "pass", "detail": "17 declared field bullets present with labels exactly as output.md states them" },
+      { "id": "S6", "severity": "Blocking", "result": "pass", "detail": "no declared field left unanswered" },
+      { "id": "S7", "severity": "Advisory", "result": "pass", "detail": "no template authoring comment remains" },
+      { "id": "S8", "severity": "Blocking", "result": "pass", "detail": "five tables carry their declared columns in declared order; no required cell empty" },
+      { "id": "D1", "severity": "Blocking", "result": "pass", "detail": "metadata block parses; all 11 declared fields populated" },
+      { "id": "D2", "severity": "Blocking", "result": "pass", "detail": "producedBy is omn-product-owner" },
+      { "id": "D3", "severity": "Blocking", "result": "pass", "detail": "schemaVersion 1.0.0, agentVersion 1.0.0" },
+      { "id": "D4", "severity": "Blocking", "result": "pass", "detail": "status is provisional" },
+      { "id": "SD1", "severity": "Blocking", "result": "pass", "detail": "scopeVerdict is partially-bounded" },
+      { "id": "SD2", "severity": "Blocking", "result": "pass", "detail": "acceptanceCriteriaCount 13 equals 13 rows in the Acceptance Criteria table" },
+      { "id": "D5", "severity": "Blocking", "result": "pass", "detail": "featureName agrees between metadata block and Metadata section; status provisional stated in the Handoff evidence bullet" },
+      { "id": "D6", "severity": "Blocking", "result": "pass", "detail": "inputDigest and contextDigest copied verbatim from the envelope context slice" },
+      { "id": "SD3", "severity": "Blocking", "result": "pass", "detail": "13 of 13 criteria name a verification method" },
+      { "id": "SD4", "severity": "Blocking", "result": "pass", "detail": "13 of 13 criteria name an S-nnn defined in the In Scope section" },
+      { "id": "A4", "severity": "Blocking", "result": "pass", "detail": "each criterion states a threshold that can be met or missed; no aspiration recorded as a criterion" },
+      { "id": "A5", "severity": "Blocking", "result": "pass", "detail": "each criterion states a condition on observable behaviour rather than a task to perform" },
+      { "id": "A6", "severity": "Blocking", "result": "pass", "detail": "S-001:2, S-002:2, S-003:1, S-004:2, S-005:5, S-006:1 criteria" },
+      { "id": "A7", "severity": "Correctable", "result": "pass", "detail": "each criterion bounds exactly one scope item" },
+      { "id": "SD5", "severity": "Blocking", "result": "pass", "detail": "partially-bounded scope records 3 open questions" },
+      { "id": "SD8", "severity": "Correctable", "result": "pass", "detail": "not applicable at this verdict; 7 exclusions recorded regardless" },
+      { "id": "G1", "severity": "Blocking", "result": "pass", "detail": "each of the 6 in-scope items traces to a stated expectation in a supplied input" },
+      { "id": "G2", "severity": "Blocking", "result": "pass", "detail": "all 13 extracted expectations appear in scope, exclusions, questions, or the constraints they set" },
+      { "id": "G3", "severity": "Blocking", "result": "pass", "detail": "verdict derived from the Stage 7 question set: one blocking question yields partially-bounded" },
+      { "id": "G4", "severity": "Blocking", "result": "pass", "detail": "provisional moves with partially-bounded" },
+      { "id": "G5", "severity": "Blocking", "result": "pass", "detail": "verdict is not bounded, so the blocking question is compatible with it" },
+      { "id": "L1", "severity": "Blocking", "result": "pass", "detail": "Business goal states the outcome bought, with no mechanism named" },
+      { "id": "L2", "severity": "Blocking", "result": "pass", "detail": "Problem statement carries no solution inside it" },
+      { "id": "L3", "severity": "Blocking", "result": "pass", "detail": "Success measure stated from the supplied business intent measures" },
+      { "id": "L4", "severity": "Blocking", "result": "pass", "detail": "no in-scope item names an implementation route, technology, or component; artifact type and validating form excluded as X-007" },
+      { "id": "L5", "severity": "Correctable", "result": "pass", "detail": "priorities drawn from must-have and should-have; S-006 held at should-have to separate the stated floor from the stated target" },
+      { "id": "SD6", "severity": "Blocking", "result": "pass", "detail": "6 of 6 decisions carry a rationale a reviewer can assess" },
+      { "id": "D7", "severity": "Blocking", "result": "pass", "detail": "6 of 6 decisions name who they were decided by" },
+      { "id": "D8", "severity": "Blocking", "result": "pass", "detail": "6 of 6 decisions state their impact on the delivered outcome" },
+      { "id": "D9", "severity": "Blocking", "result": "pass", "detail": "7 of 7 exclusions state both a reason and a revisit trigger" },
+      { "id": "SD7", "severity": "Blocking", "result": "pass", "detail": "no task, change-set, or decision-record identifier issued" },
+      { "id": "B1", "severity": "Blocking", "result": "pass", "detail": "no technical design, structure, or technology decision recorded; the artifact-type choice is excluded as X-007 and routed by D-003" },
+      { "id": "B2", "severity": "Blocking", "result": "pass", "detail": "no task breakdown, estimate, wave, or delivery sequence recorded; sequencing excluded as X-006" },
+      { "id": "B3", "severity": "Blocking", "result": "pass", "detail": "no gate decision, merge decision, or readiness claim recorded; the Handoff names the Producer Exclusion Rule and the deciding owner" },
+      { "id": "B4", "severity": "Blocking", "result": "pass", "detail": "verification methods name the check that decides each criterion, not a test strategy" },
+      { "id": "B5", "severity": "Blocking", "result": "pass", "detail": "two files written, both named in constraints.permitted_writes" },
+      { "id": "B6", "severity": "Blocking", "result": "pass", "detail": "no external system, tracker, or stakeholder accessed; no command executed" },
+      { "id": "C1", "severity": "Blocking", "result": "pass", "detail": "no diff, patch, hunk, or file-modification directive present" },
+      { "id": "C2", "severity": "Blocking", "result": "pass", "detail": "no model, vendor, or agent-runtime name present" },
+      { "id": "C3", "severity": "Correctable", "result": "pass", "detail": "S, X, A, D, and Q identifiers are zero-padded three digits, ascend from 001 without gaps, and are unique" },
+      { "id": "C4", "severity": "Blocking", "result": "pass", "detail": "every referenced identifier is defined in its declaring section" },
+      { "id": "C5", "severity": "Blocking", "result": "pass", "detail": "no credential, token, secret, or customer-identifying content present" }
+    ],
+    "notMachineCheckableObligations": [
+      {
+        "id": "SN1",
+        "obligation": "Each acceptance criterion states a threshold the business would actually accept",
+        "judgement": "discharged",
+        "detail": "Every threshold is drawn from a stated measure in the supplied inputs: the owner count moving from two to six, a passing validation report with zero blocking failures, the three currently dispatching phases still dispatching, the two replay-reference fingerprints unchanged, and no verifier verdict regressing. A-007 states the reporting threshold the business intent itself sets, that a role meeting only the registration conditions is reported as partially rolled out."
+      },
+      {
+        "id": "SN2",
+        "obligation": "The recorded scope matches what the requester asked for, with no silent widening",
+        "judgement": "discharged",
+        "detail": "All six in-scope items trace to the feature request's expected outcome list or to the business intent's success criteria. The four surfaces the change request marks conditional are admitted by D-004 with the requester's own blast-radius declaration as the basis, and the four stated non-goals are recorded as X-001 to X-004. Nothing unrequested was added; the one improvement the inputs invite but do not decide, the selection of which phase each role carries, is held as Q-002 rather than scoped."
+      },
+      {
+        "id": "SN3",
+        "obligation": "The stated business goal is the goal the requester holds, not one inferred for them",
+        "judgement": "discharged",
+        "detail": "The Business goal restates the business intent's own Outcome sought sentence, that the framework can carry a change from scope through implementation, review, and quality without an operator standing in for a missing agent at each step. It is a restatement, not an inference."
+      }
+    ],
+    "escalationsRaised": [
+      {
+        "questionId": "Q-001",
+        "blocking": true,
+        "target": "omn-business-analyst",
+        "decisionRequired": "Confirm whether the five expected outcomes the feature request states per role are the five-part definition of done the business intent names as the acceptance boundary, and whether the first three are the registration conditions and the last two the execution conditions.",
+        "basis": "The named definition of done lives outside both the supplied inputs and the frozen context slice, and this agent may not access it. The reading is recorded as D-005.",
+        "downstreamImpact": "Every acceptance criterion is written against that reading. If it is wrong, the criteria change, and planning, design, and validation all inherit a different bar."
+      },
+      {
+        "questionId": "Q-002",
+        "blocking": false,
+        "target": "architect",
+        "decisionRequired": "Which phase each of the four roles carries to a completed and accepted output, given that only one of the twelve phases they own already declares a named output.",
+        "basis": "A feasibility judgement this artifact has no supplied basis to make; deciding it here would be choosing the technical route under the appearance of choosing scope.",
+        "downstreamImpact": "Solution design selects the phase per role; the boundary states only that each role reaches the bar."
+      },
+      {
+        "questionId": "Q-003",
+        "blocking": false,
+        "target": "omn-context-agent",
+        "decisionRequired": "Which reading is current, the supplied architecture context that records the feature workflow's scope and implementation phases as prose-output phases, or the workflow specification in this run's frozen context slice that names an output for both.",
+        "basis": "The supplied architecture context is dated 2026-08-18 and the context slice was frozen 2026-08-19; they disagree on how many phases still need a named output.",
+        "downstreamImpact": "Changes the volume of work execution planning decomposes, not the boundary itself."
+      }
+    ],
+    "boundaryStatements": {
+      "gateDecisionRecorded": false,
+      "gateDecisionOwner": "omn-business-analyst, under the Producer Exclusion Rule, because this agent is a named owner of the Scope Gate and is the producer of this evidence",
+      "readinessOrReleaseClaimRecorded": false,
+      "downstreamIdentifiersIssued": false,
+      "externalSystemAccessed": false,
+      "commandExecuted": false,
+      "repositorySourceModified": false
+    },
+    "deferredDownstream": [
+      "decomposition, sequencing, and increment sizing to execution-planning, owned by planner",
+      "artifact type, template shape, and validating form for each phase that gains a named output, and the selection of which phase each role carries, to solution-design-and-risk-assessment, owned by architect",
+      "test strategy and the execution of validation to omn-qa",
+      "the decision on this artifact to omn-business-analyst at the Scope Gate"
+    ]
+  },
+  "evidence_refs": [
+    "runs/run-93b302cbdb28/states/scope-and-acceptance/invocation-envelope.json",
+    "agents/omn-product-owner/manifest.yaml",
+    "agents/omn-product-owner/system.md",
+    "agents/omn-product-owner/identity.md",
+    "agents/omn-product-owner/reasoning.md",
+    "agents/omn-product-owner/execution.md",
+    "agents/omn-product-owner/output.md",
+    "agents/omn-product-owner/quality.md",
+    "agents/omn-product-owner/examples.md",
+    "templates/scope-definition.md",
+    "runs/inputs/wave-1-rollout-feature-request.md",
+    "runs/inputs/wave-1-rollout-change-request.md",
+    "runs/inputs/wave-1-rollout-business-intent.md",
+    "runs/inputs/wave-1-rollout-architecture-context.md",
+    "workflows/implement-feature.md",
+    "context/product-context.md",
+    "runtime/scope_definition_validator.py",
+    "runs/run-93b302cbdb28/states/scope-and-acceptance/dispatch-prompt.md"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-93b302cbdb28/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "runs/run-93b302cbdb28/states/scope-and-acceptance/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

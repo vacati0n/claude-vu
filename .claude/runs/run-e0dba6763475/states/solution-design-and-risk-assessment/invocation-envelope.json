@@ -1,0 +1,421 @@
+{
+  "invocation_id": "inv-e0dba6763475-03-002",
+  "run_id": "run-e0dba6763475",
+  "work_item_id": "run-e0dba6763475::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:ff0c10c173ee38584982905a8a394e8d",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:33d317684aece20ce5b970f6b595c107",
+      "agents/architect/identity.md": "sha256:fc073d2135f891349e8f6639243819e3",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:9b9f220dee72dd93faca5d9c021d6ead",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:d9fa58935c242fb724123ea69d5eeb61",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "feature-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-02-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-02-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-02: Ship the framework payload as package data\n\n## Source\n\nTicket CKA-02 in the adoption backlog under `docs/` (Epic A \u2014 Verification baseline,\nDays 0\u201330). Source recommendation: R1 of the ClaudeKit Adoption Review (2026-08-27).\nType: Task. Priority: Highest. Effort: M. Depends on: nothing.\n\n## Request\n\nA non-editable `pip install` of the `omn-agent` wheel produces a CLI that cannot install\nanything: the framework payload (the framework payload directory at the repo root \u2014\nruntime, registries, agents, workflows, config, templates) is not packaged into the\nwheel, and `omn_agent/source.py::find_source` only looks for a framework tree next to\nthe package checkout (which exists for an editable install of the source repo, but not\nfor a wheel installed into site-packages). Every fresh-environment user must pass\n`--source <path>` to a framework checkout they may not have.\n\nThree deliverables:\n\n1. Package the framework payload into the wheel: `pyproject.toml` package-data (or\n   `MANIFEST.in` with include directives) so a non-editable build carries the full\n   payload tree \u2014 all managed directories plus the seed directories, subject to the\n   same exclusion patterns the installer applies (`__pycache__`, `*.pyc`, etc.).\n2. Extend `omn_agent/source.py::find_source` to resolve the bundled payload from the\n   installed package location as a fallback after the existing candidates (explicit\n   `--source` first, then a tree next to the checkout, then the bundled copy), keeping\n   the existing error message actionable when nothing resolves.\n3. Regenerate the stale egg-info metadata so the sdist/wheel file lists match the new\n   packaging configuration.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- In a clean venv, `pip install <wheel>` (non-editable) then\n  `omn-agent init && install && validate` succeeds with no `--source` flag.\n- `omn-agent install --dry-run` enumerates the same payload file count as an\n  editable install.\n\n## Constraints\n\n- Additive change only: the ticket list forbids altering `record_gate_decision`, the\n  gate matrix semantics, producer exclusion, `runner._require_approval`, or any\n  human-block path.\n- Source-resolution precedence must not change for existing users: an explicit\n  `--source` and a checkout-adjacent tree keep winning over the bundled copy.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py`\n  proof scripts PROVEN, no change to gate-decision behavior, and where docs were\n  touched, `user-guide.html` updated to match.\n\n## Priority and deadline\n\nHighest priority; Phase 1 (Days 0\u201330) of the adoption plan. Blocks CKA-03 (CI gating)\ntogether with CKA-01 (already delivered).",
+        "digest": "sha256:c153cb3a0a4f3d8bc12bb9e8a069b1a0"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-e0dba6763475/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-e0dba6763475/states/execution-planning/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: CKA-02-execution-plan\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-02-feature-request.md\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:c153cb3a0a4f3d8bc12bb9e8a069b1a0\n  contextDigest: sha256:9f90eb89f94639cd8aec24f921d08586\n```\n\n## Executive Summary\n\nThis plan makes the distributed package self-contained for fresh-environment users: a non-editable install of the built package initializes, installs, and validates with no explicit source flag, while every existing installation mode keeps its current behaviour. The work is requested by ticket CKA-02 in the adoption backlog under docs/ and is bounded by the upstream scope definition produced in this run. It decomposes into ten tasks across five execution waves, beginning with the packaging-mechanism decision and the parity-assurance clarification. Delivery covers carrying the complete framework payload in the built distributions, adding a bundled-payload resolution fallback behind the existing candidates, and regenerating the distribution metadata to match. The highest-impact risk is R-003: an incompletely enumerated payload directory set would ship non-editable installs that miss files and fail the parity check. One open question, Q-001, is non-blocking and is resolved by task T-008 ahead of validation design. Plan status is complete.\n\n## Business Objectives\n\n1. A user who installs the published package into a fresh environment can use the tool immediately, with no separate framework checkout to locate or supply. Received by fresh-environment adopters; measured by the clean-environment walkthrough and the dry-run parity comparison. Traces to S-003, S-007, S-008.\n2. Existing installation modes keep their current behaviour, so the adoption improvement costs current users nothing. Received by explicit-source and checkout-adjacent users; measured by the precedence demonstrations and the failure-guidance check. Traces to S-010, S-011.\n3. The dependent continuous-integration gating ticket (CKA-03) is unblocked. Received by the adoption programme; measured by backlog dependency closure once this change is delivered. Traces to S-012.\n\n## Technical Objectives\n\n1. A non-editable build carries the complete framework payload tree \u2014 all managed directories plus the seed directories \u2014 with zero files matching the installer's exclusion patterns. Verified by inspection of the built distributions and the dry-run parity comparison. Traces to business objective 1 and S-004, S-013.\n2. Source resolution selects the bundled payload only when neither an explicit source nor a checkout-adjacent tree resolves, leaving the existing candidate order unchanged. Verified by demonstration across the three named environment configurations. Traces to business objective 2 and S-005, S-010, S-017.\n3. When no source candidate resolves, the failure message retains the existing actionable guidance, naming at least the explicit-source remedy. Verified by demonstration in an environment where nothing resolves. Traces to business objective 2 and S-005.\n4. Freshly built source and binary distributions show zero discrepancies between their file lists and the configured payload tree. Verified by comparison of the freshly built distributions against the source payload tree. Traces to business objective 1 and S-006, S-014.\n\n## Scope\n\n### In Scope\n\n- A working non-editable install: initialize, install, and validate succeed in a clean environment with no explicit source flag (S-007). Delivered by T-002 and T-004; verified by T-007.\n- The complete framework payload \u2014 all managed directories plus the seed directories, filtered by the installer's exclusion patterns \u2014 carried in the built distributions (S-004, S-013). Delivered by T-001 and T-002.\n- A bundled-payload resolution fallback behind the existing candidates, with existing precedence preserved and the failure guidance kept actionable (S-005, S-010, S-017). Delivered by T-003 and T-004.\n- Distribution file lists regenerated to match the new packaging configuration with zero discrepancies (S-006, S-014). Delivered by T-005.\n- Validation, constraint-compliance review, and documentation of the change per the delivery constraints (S-009, S-011). Delivered by T-006, T-007, T-009, and T-010.\n\n### Out of Scope\n\n- Any alteration to gate-decision recording, gate-matrix semantics, producer exclusion, approval-requirement enforcement, or any human-block path. Excluded because the request constrains this change to be additive only (S-009).\n- The dependent continuous-integration gating ticket (CKA-03). Excluded because it is a separate backlog ticket that depends on this one; delivering it here would widen the change beyond its request (S-012).\n- Any reordering of source-resolution precedence for existing users. Excluded because the request constrains precedence to remain unchanged (S-010).\n\n### Deferred\n\n- Strengthening the dry-run comparison from file-count parity to file-set identity. Enters scope if the decision recorded by T-008 requires set identity (S-018, Q-001).\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | The exclusion-pattern set the installer applies is enumerable and authoritative for the packaging filter; the request lists it non-exhaustively | S-004 | The packaging filter is mis-scoped; T-002 is re-scoped and the zero-excluded-files check is re-baselined | architect |\n| A-002 | The two candidate packaging mechanisms named in the request are stated preferences, not mandates; either satisfies scope and the design decision selects one | S-004, S-015 | T-001 narrows to confirming the mandated mechanism; no other task changes | omn-product-owner |\n| A-003 | The managed and seed directory sets are enumerable from the framework payload tree at the planned revision | S-004 | Packaging scope cannot be bounded; T-001 escalates to architect and T-002 is re-scoped | architect |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | The parity-assurance decision resolves to file-set identity after validation design has begun | The parity portion of validation coverage and its execution are reworked | low | T-006, T-007 | T-008 is sequenced ahead of T-006 by a decision-gate edge | omn-product-owner |\n| R-002 | technical | The exclusion-pattern set applied at packaging diverges from the set the installer applies (A-001 false) | The bundled payload carries excluded files or omits needed ones; the zero-excluded-files and parity checks fail | medium | T-002, T-007 | T-001 records the authoritative pattern set before packaging begins | architect |\n| R-003 | technical | The managed-plus-seed directory set is enumerated incompletely at packaging (A-003 false) | Non-editable installs miss payload files; the dry-run parity check fails | medium | T-002, T-007 | T-001 records the packaged directory set; the paired parity comparison in T-007 detects drift | architect |\n| R-004 | technical | The bundled fallback changes the resolved source in an environment where an existing candidate is present | Existing users' behaviour changes; the precedence acceptance checks fail | low | T-004, T-007 | Three-environment precedence demonstration designed in T-006 and executed in T-007 | omn-qa |\n| R-005 | technical | Regenerated distribution metadata still disagrees with the configured payload | The file-list acceptance check fails; stale entries ship | low | T-005, T-007 | Zero-discrepancy comparison executed in T-007 | omn-dev-1-implement |\n| R-006 | delivery | Packaging or resolution work touches a forbidden gate-behavior path | The additive-only constraint is breached; the change is rejected at review and reworked | low | T-002, T-004, T-009 | T-009 explicitly checks the named forbidden areas; the suite and proof scripts are executed in T-007 | omn-dev-2-reviewer |\n\n## Task Breakdown\n\n### T-001 Select the payload packaging mechanism\n\n- Owner: architect\n- Complexity: S (confidence: high)\n- Depends on: none\n- Traces to: S-004, S-015, A-002\n- Status: ready\n- Description: An approved packaging decision record exists that selects one mechanism from the candidates the request names, enumerates the managed and seed directories the built package must carry, and records the authoritative exclusion-pattern set the packaging filter must match.\n- Acceptance Criteria:\n  - One packaging mechanism is selected and recorded with the rationale for the selection\n  - The packaged directory set (managed plus seed) is enumerated in the decision record\n  - The recorded exclusion-pattern set matches the set the installer applies\n- Gate: Design Gate\n\n### T-002 Deliver payload packaging in the built distributions\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-001\n- Traces to: S-004, S-013, A-001, A-003\n- Status: assumption-dependent\n- Description: A non-editable build carries the complete framework payload tree recorded in the packaging decision, filtered so that zero files match the recorded exclusion-pattern set.\n- Acceptance Criteria:\n  - A freshly built distribution contains every file of the recorded payload directory set\n  - The carried payload contains zero files matching the recorded exclusion-pattern set\n- Gate: Review Gate\n\n### T-003 Define the source-resolution fallback contract\n\n- Owner: architect\n- Complexity: S (confidence: high)\n- Depends on: T-001\n- Traces to: S-005, S-010, S-017\n- Status: ready\n- Description: A resolution contract exists stating the full candidate order \u2014 explicit source first, then the checkout-adjacent tree, then the bundled payload \u2014 the location at which the bundled payload is resolvable under the selected mechanism, and the failure guidance retained when no candidate resolves.\n- Acceptance Criteria:\n  - The contract states the candidate order with the bundled payload strictly last\n  - The contract states where the bundled payload resides under the selected packaging mechanism\n  - The contract states the failure-message content, naming at least the explicit-source remedy\n- Gate: Design Gate\n\n### T-004 Deliver the bundled-payload resolution fallback\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-002, T-003\n- Traces to: S-005, S-010\n- Status: ready\n- Description: Resolution behaves per the defined contract: the existing candidates keep winning, the bundled payload resolves only when neither existing candidate is present, and the failure guidance is retained when nothing resolves.\n- Acceptance Criteria:\n  - With an explicit source given, resolution selects it\n  - With a checkout-adjacent tree present and no explicit source, resolution selects the tree\n  - With neither present, resolution selects the bundled payload\n  - With no candidate resolvable, the command fails with the guidance stated in the contract\n- Gate: Review Gate\n\n### T-005 Regenerate distribution metadata to match the configured payload\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-002\n- Traces to: S-006, S-014\n- Status: ready\n- Description: The built source and binary distributions' file lists agree with the configured payload tree, with no stale entries surviving from the previous configuration.\n- Acceptance Criteria:\n  - Every configured payload file appears in the freshly built distributions' file lists\n  - No listed entry is absent from the source payload tree\n- Gate: Review Gate\n\n### T-006 Design validation coverage for the delivered change\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-003, T-008\n- Traces to: S-007, S-008, S-011, S-017\n- Status: ready\n- Description: Validation coverage exists addressing every plan acceptance criterion: the clean-environment walkthrough, the parity comparison at the assurance level decided in T-008, the three-environment precedence demonstration, the failure-guidance check, the distribution inspections, and the regression obligations from the delivery constraints.\n- Acceptance Criteria:\n  - Coverage addresses each acceptance criterion of T-002, T-004, and T-005\n  - The parity comparison is specified at the assurance level recorded by T-008\n  - The regression obligations from the delivery constraints are included as explicit checks\n- Gate: Verification Gate\n\n### T-007 Execute acceptance verification with recorded evidence\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-002, T-004, T-005, T-006\n- Traces to: S-007, S-008, S-011, S-013, S-014, S-017\n- Status: ready\n- Description: Every item of the designed validation coverage is executed with recorded evidence: the clean-environment walkthrough, the paired parity comparison, the three-environment precedence demonstration, the failure-guidance check, the distribution inspections, the existing test suite, and the proof scripts.\n- Acceptance Criteria:\n  - Each coverage item from T-006 has a recorded pass or a recorded, dispositioned failure\n  - The clean-environment walkthrough shows initialize, install, and validate succeeding with no explicit source flag\n  - The suite run is recorded green and every proof script is recorded PROVEN\n- Gate: Verification Gate\n\n### T-008 Resolve the parity-assurance level for the dry-run comparison\n\n- Owner: omn-product-owner\n- Complexity: XS (confidence: high)\n- Depends on: none\n- Traces to: S-008, S-018\n- Status: ready\n- Description: A recorded decision states whether the dry-run comparison between a non-editable and an editable install must show file-count parity or file-set identity.\n- Acceptance Criteria:\n  - A decision record exists selecting exactly one assurance level \u2014 file-count parity or file-set identity \u2014 as the binding assurance for the dry-run comparison\n  - The decision record states the rationale for the selected level\n  - The decision record names Q-001 as the question it closes, and Q-001 is marked closed by it\n- Gate: Scope Gate\n\n### T-009 Review the delivered change for additive-only compliance\n\n- Owner: omn-dev-2-reviewer\n- Complexity: S (confidence: high)\n- Depends on: T-002, T-004, T-005\n- Traces to: S-009\n- Status: ready\n- Description: A review record confirms the delivered change leaves gate-decision recording, gate-matrix semantics, producer exclusion, approval-requirement enforcement, and every human-block path untouched.\n- Acceptance Criteria:\n  - Each named forbidden area is explicitly checked and recorded untouched\n  - Any finding is severity-classified with a correction request\n- Gate: Review Gate\n\n### T-010 Update documentation for the delivered behaviour\n\n- Owner: omn-documentation\n- Complexity: S (confidence: high)\n- Depends on: T-004, T-007\n- Traces to: S-011\n- Status: ready\n- Description: User-facing documentation reflects the self-contained install behaviour and the resolution order, release-impact notes are drafted, and the handbook matches every touched document per the delivery constraint.\n- Acceptance Criteria:\n  - The install and source-resolution documentation reflects the delivered behaviour\n  - The handbook matches every touched document\n  - Release-impact notes are drafted\n- Gate: Closure Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-002 | decision-gate | Packaging work binds to the selected mechanism and the recorded directory and filter sets |\n| T-001 | T-003 | decision-gate | The resolution contract states where the bundled payload resides, which the selected mechanism determines |\n| T-002 | T-004 | produces-consumes | The fallback resolves the bundled payload that the packaging places in the built distribution |\n| T-003 | T-004 | contract | The fallback implementation binds to the defined resolution contract |\n| T-002 | T-005 | produces-consumes | The regenerated metadata must list the payload the packaging configuration carries |\n| T-003 | T-006 | contract | Validation coverage targets the candidate order and failure guidance the contract defines |\n| T-008 | T-006 | decision-gate | The parity comparison is designed at the assurance level the decision records |\n| T-002 | T-007 | verification | Acceptance verification validates the payload the packaging produced |\n| T-004 | T-007 | verification | Acceptance verification validates the delivered resolution behaviour |\n| T-005 | T-007 | verification | Acceptance verification validates the regenerated file lists |\n| T-006 | T-007 | produces-consumes | Verification executes the coverage the design produced |\n| T-002 | T-009 | verification | The review assesses the packaging change against the forbidden areas |\n| T-004 | T-009 | verification | The review assesses the resolution change against the forbidden areas |\n| T-005 | T-009 | verification | The review assesses the metadata change against the forbidden areas |\n| T-004 | T-010 | produces-consumes | Documentation describes the delivered resolution behaviour |\n| T-007 | T-010 | verification | Documentation reflects verified behaviour and its evidence |\n\n### 8.2 External Dependencies\n\nNone identified. The request declares no dependency on any party outside the plan's authority, and the upstream scope definition records no external dependency.\n\n| Responsible party | What is needed | Blocks |\n|---|---|---|\n| \u2014 | None identified | \u2014 |\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-008\n- Wave 2: T-002, T-003\n- Wave 3: T-004, T-005, T-006\n- Wave 4: T-007, T-009\n- Wave 5: T-010\n\n## Suggested Workflow\n\nSelected workflow: `implement-feature`\n\nSelected because: the plan delivers new user-facing capability \u2014 a self-contained install of the published package \u2014 with measurable acceptance criteria, a design decision, implementation, constraint-compliance review, verification, and release documentation; it continues the run in which this plan was produced.\n\n| Phase | Tasks |\n|---|---|\n| `scope-and-acceptance` | T-008 |\n| `execution-planning` | plan handoff (this artifact) |\n| `solution-design-and-risk-assessment` | T-001, T-003 |\n| `implementation` | T-002, T-004, T-005 |\n| `quality-review` | T-006, T-007, T-009 |\n| `documentation-and-release-handoff` | T-010 |\n\n| Gate | Required owners |\n|---|---|\n| Scope Gate | omn-product-owner, omn-business-analyst |\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer, omn-qa |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| acceptance-authority | T-008 | omn-product-owner | Primary |\n| architecture-analysis | T-001, T-003 | architect | Primary |\n| technical-approach-definition | T-001, T-003 | architect | Primary |\n| implementation-delivery | T-002, T-004, T-005 | omn-dev-1-implement | Primary |\n| validation-design | T-006 | omn-qa | Primary |\n| quality-verification | T-007 | omn-qa | Primary |\n| code-review | T-009 | omn-dev-2-reviewer | Primary |\n| governance-enforcement | T-009 | omn-dev-2-reviewer | Primary |\n| documentation | T-010 | omn-documentation | Primary |\n| release-communication | T-010 | omn-documentation | Primary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S02 | business/domain-modeling.md | T-008 | Primary |\n| S01 | architecture/clean-architecture-checklist.md | T-001, T-003 | Primary |\n| S07 | testing/testing-strategy.md | T-006, T-007 | Primary |\n| S09 | security/secure-engineering.md | T-004 | Secondary |\n\n## Acceptance Criteria\n\n1. In a clean environment, a non-editable install of the built package followed by initialize, install, and validate succeeds, with every command exiting successfully and no explicit source flag supplied. Verifies business objective 1. Evidence: scripted walkthrough record from T-007 at the Verification Gate.\n2. A dry-run install in a non-editable environment enumerates the payload at parity with an editable install of the same revision, at the assurance level decided by T-008. Verifies business objective 1. Evidence: paired comparison record from T-007.\n3. In each existing configuration, resolution selects the same source as before this change \u2014 the explicit source when given, the checkout-adjacent tree when present with no explicit source \u2014 and the bundled copy only when neither is present; when nothing resolves, the failure message names the explicit-source remedy. Verifies business objective 2. Evidence: three-environment demonstration and failure-message record from T-007.\n4. Freshly built distributions carry zero files matching the installer's exclusion patterns and show zero discrepancies between their file lists and the configured payload tree. Verifies business objective 1. Evidence: distribution inspection record from T-007.\n5. This change is recorded delivered in the adoption backlog, leaving the dependent gating ticket blocked only on already-delivered work. Verifies business objective 3. Evidence: backlog status record at the Closure Gate.\n\n## Definition of Done\n\n- [ ] All five plan acceptance criteria are verified with recorded evidence\n- [ ] The Scope, Planning, Design, Review, Verification, and Closure Gates are approved with owners recorded\n- [ ] Task acceptance criteria for T-001 through T-010 are satisfied or formally waived\n- [ ] The existing test suite is recorded green and every proof script is recorded PROVEN, per the delivery constraint carried from scope (S-011, S-016)\n- [ ] A-001 through A-003 are confirmed or converted to recorded decisions\n- [ ] R-001 through R-006 are closed or accepted with named owners\n- [ ] Q-001 is closed by the decision record from T-008 or explicitly accepted\n- [ ] Documentation and release-impact notes are published, with the handbook matching every touched document\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Is file-count parity or file-set identity the intended assurance for the dry-run comparison between a non-editable and an editable install? Count parity could pass while the contents differ. Carried forward from the upstream scope definition. | No | omn-product-owner | T-006, T-007, T-008 |\n\n## Traceability Matrix\n\nStatements S-001 through S-012 are normalized from the supplied feature request in document order; S-013 through S-018 are normalized from the upstream scope definition's claims that refine or extend the request, in document order. Forward closure: 18 of 18 statements covered. Backward closure: 10 of 10 tasks traced. Lateral closure: every risk, assumption, and edge resolves to existing identifiers.\n\n| Statement | Covered by |\n|---|---|\n| S-001 | Context (non-editable install cannot install); motivates business objective 1; addressed by T-002, T-004 |\n| S-002 | Context (resolution finds only a checkout-adjacent tree); motivates technical objective 2; addressed by T-003, T-004 |\n| S-003 | Context (users must pass an explicit source path); motivates business objective 1; addressed by T-004, T-007 |\n| S-004 | T-001, T-002; A-001, A-002, A-003 |\n| S-005 | T-003, T-004 |\n| S-006 | T-005 |\n| S-007 | T-006, T-007 |\n| S-008 | T-006, T-007, T-008 |\n| S-009 | T-009; Out of Scope exclusion 1 |\n| S-010 | T-003, T-004, T-006, T-007; Out of Scope exclusion 3 |\n| S-011 | T-006, T-007, T-010; Definition of Done |\n| S-012 | Context (priority; blocks the dependent gating ticket); acceptance criterion 5; Out of Scope exclusion 2 |\n| S-013 | T-002, T-007 |\n| S-014 | T-005, T-007 |\n| S-015 | T-001; A-002 |\n| S-016 | Definition of Done (delivery constraints carried, not duplicated as acceptance criteria); T-007 |\n| S-017 | T-003, T-006, T-007 |\n| S-018 | Q-001; T-008 |",
+        "digest": "sha256:9cf9e61dcc876254d00daf00db23ace9",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change this agent designs against: a change request, a feature request, or a business intent. Without one there is no requested change to design, and designing anyway would mean inventing the requirement."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+      "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md",
+      "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/technical-design.md"
+    ],
+    "failures": [
+      {
+        "id": "D4.3",
+        "severity": "Blocking",
+        "quality_ref": "A5.3",
+        "requirement": "Every requirement traces to a statement identifier",
+        "detail": "untraced: ['Functional requirements: block absent', 'Non-functional requirements: block absent', 'Acceptance criteria: block absent']"
+      },
+      {
+        "id": "D14.3",
+        "severity": "Correctable",
+        "quality_ref": "A14.2",
+        "requirement": "Every open decision owner resolves to a known agent",
+        "detail": "unresolvable: ['omn-tech-lead (accepting owner under producer exclusion; gate owners omn-architect, omn-tech-lead)']"
+      },
+      {
+        "id": "D15.2",
+        "severity": "Blocking",
+        "quality_ref": "A14.2",
+        "requirement": "Every referenced agent resolves in registry/agents.yaml or under agents/",
+        "detail": "unresolvable: ['omn-agent', 'omn-bak']"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-e0dba6763475/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-03T12:06:55Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+        "supplies": null
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+        "supplies": null
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:ea8b3b5e9812546f9b4054458bb8143e",
+    "input_digest": "sha256:f7ffdf9d3e4b07e7b5b0242843ac6ca7",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-02-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-02-feature-request.md",
+        "digest": "sha256:c153cb3a0a4f3d8bc12bb9e8a069b1a0"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-e0dba6763475/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-e0dba6763475/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:9cf9e61dcc876254d00daf00db23ace9"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "memory/architecture.md",
+      "runtime/README.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+      "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/review-package-*.md"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      },
+      {
+        "artifact": "review-package.md",
+        "template_ref": "templates/review-package.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "Emitted only for review-pull-request/structural-compliance, where this agent applies the structural and security lens and the findings are classified under the architecture and security categories. runtime/review_package_validator.py already contracts this agent as a permitted producer of review-package.md; the quality rules it applies to the structural lens are the ones in quality.md.",
+        "artifact_path_glob": "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/review-package-*.md",
+        "naming": "runs/run-e0dba6763475/states/solution-design-and-risk-assessment/artifacts/review-package-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-09-03T12:06:55Z"
+}

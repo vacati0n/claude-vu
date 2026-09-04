@@ -1,0 +1,982 @@
+{
+  "schema": "framework.runtime/state-engine.v1",
+  "run_id": "run-0db4765d0eab",
+  "runtime_version": "0.4.0",
+  "command_id": "refactor",
+  "workflow_id": "refactor",
+  "workflow_version": "1.0.0",
+  "run_status": "WaitingForHuman",
+  "created_at": "2026-08-18T14:42:16Z",
+  "updated_at": "2026-08-19T01:39:19Z",
+  "input_digest": "sha256:158fc31efe3d1b46ce302a185888e7da",
+  "inputs": [
+    {
+      "type": "change-request",
+      "reference": "runs/inputs/self-hosting-discovery-change-request.md",
+      "source_file": ".claude/runs/inputs/self-hosting-discovery-change-request.md",
+      "digest": "sha256:45be29122808d3fcfd5b90ab07dec776"
+    },
+    {
+      "type": "business-intent",
+      "reference": "runs/inputs/self-hosting-discovery-business-intent.md",
+      "source_file": ".claude/runs/inputs/self-hosting-discovery-business-intent.md",
+      "digest": "sha256:66a21bc98cbac7f08ed2c88bbc895daa"
+    },
+    {
+      "type": "architecture-context",
+      "reference": "runs/inputs/self-hosting-discovery-architecture-context.md",
+      "source_file": ".claude/runs/inputs/self-hosting-discovery-architecture-context.md",
+      "digest": "sha256:2a1b226dd0388e396433a634e535d798"
+    }
+  ],
+  "work_items": {
+    "scope-invariants-and-risk-profile": {
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "run_id": "run-0db4765d0eab",
+      "workflow_id": "refactor",
+      "state_id": "scope-invariants-and-risk-profile",
+      "work_type": "state",
+      "owner_agent_id": "architect",
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": true,
+      "phase_index": 1,
+      "gate": "Invariant Gate",
+      "artifact": "technical-design.md",
+      "depends_on": [],
+      "attempt": 2,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": "host-subagent:architect",
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "payload_digest": "sha256:d06a61a66247659bb49e45bdc3c2cf07",
+      "blocked_reason": null,
+      "blocked_detail": null,
+      "failure_class": "output-schema-failure",
+      "failure_detail": "validation rejected the artifact: 0 blocking and 1 correctable failure(s) ['D12.3']",
+      "guards": [
+        {
+          "id": "G1-CAPABILITY",
+          "title": "owner agent is invocable for this phase",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "architect v1.0.0 resolves through agents/architect.agent.md; validator design_validator"
+        },
+        {
+          "id": "G2-CONTEXT",
+          "title": "a context slice is declared for this phase",
+          "outcome": "pass",
+          "reason_code": "context_hydration_completed",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "17 declared member(s), including the routed workflow specification"
+        },
+        {
+          "id": "G3-PREDECESSOR",
+          "title": "hard predecessors have completed",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "hard predecessors: none"
+        },
+        {
+          "id": "G4-GATE",
+          "title": "predecessor gates are approved",
+          "outcome": "pass",
+          "reason_code": "output_accepted",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "gates on hard predecessors: none"
+        },
+        {
+          "id": "G5-INPUT",
+          "title": "the agent input contract is satisfied",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "supplied ['change-request', 'business-intent', 'architecture-context']; required ['change-request', 'business-intent', 'architecture-context']"
+        }
+      ],
+      "completion": {
+        "committed_at": "2026-08-18T15:11:01Z",
+        "artifact_path": "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+        "artifact_digest": "sha256:5073a42468b4fc56702f140f0adc8725",
+        "result_status": "succeeded",
+        "invocation_id": "inv-0db4765d0eab-01-002",
+        "validation": {
+          "result": "pass",
+          "checksRun": 78,
+          "checksPassed": 78,
+          "blockingFailures": 0,
+          "correctableFailures": 0,
+          "notMachineCheckable": 10,
+          "counts": {
+            "sections": 14,
+            "facts": 14,
+            "assumptions": 5,
+            "constraints": 11,
+            "modules": 12,
+            "options": 4,
+            "decisions": 4,
+            "reuseRows": 11,
+            "planSteps": 8,
+            "risks": 8,
+            "openDecisions": 6,
+            "decisionRecords": 1,
+            "designStatus": "provisional"
+          },
+          "undeclaredSideEffects": []
+        }
+      },
+      "replays": [
+        {
+          "at": "2026-08-18T15:14:16Z",
+          "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+          "state_id": "scope-invariants-and-risk-profile",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+          "detail": "phase already completed under idempotency key sha256:e8b3e67605bc22b533bd6f60aca52747; no envelope rebuilt"
+        },
+        {
+          "at": "2026-08-18T15:14:16Z",
+          "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+          "state_id": "scope-invariants-and-risk-profile",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+          "detail": "completion already committed at 2026-08-18T15:11:01Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-08-18T15:14:30Z",
+          "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+          "state_id": "scope-invariants-and-risk-profile",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+          "detail": "phase already completed under idempotency key sha256:e8b3e67605bc22b533bd6f60aca52747; no envelope rebuilt"
+        },
+        {
+          "at": "2026-08-18T15:14:31Z",
+          "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+          "state_id": "scope-invariants-and-risk-profile",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+          "detail": "completion already committed at 2026-08-18T15:11:01Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-08-19T01:38:44Z",
+          "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+          "state_id": "scope-invariants-and-risk-profile",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+          "detail": "phase already completed under idempotency key sha256:e8b3e67605bc22b533bd6f60aca52747; no envelope rebuilt"
+        },
+        {
+          "at": "2026-08-19T01:38:44Z",
+          "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+          "state_id": "scope-invariants-and-risk-profile",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+          "detail": "completion already committed at 2026-08-18T15:11:01Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-08-19T01:39:18Z",
+          "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+          "state_id": "scope-invariants-and-risk-profile",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+          "detail": "phase already completed under idempotency key sha256:e8b3e67605bc22b533bd6f60aca52747; no envelope rebuilt"
+        },
+        {
+          "at": "2026-08-19T01:39:19Z",
+          "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+          "state_id": "scope-invariants-and-risk-profile",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+          "detail": "completion already committed at 2026-08-18T15:11:01Z; artifact digest unchanged"
+        }
+      ],
+      "created_at": "2026-08-18T14:42:16Z",
+      "updated_at": "2026-08-18T15:11:01Z",
+      "invocation_id": "inv-0db4765d0eab-01-002",
+      "artifact_path": "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+      "artifact_identifier": "technical-design"
+    },
+    "gate:Invariant Gate": {
+      "work_item_id": "run-0db4765d0eab::gate::Invariant Gate",
+      "run_id": "run-0db4765d0eab",
+      "workflow_id": "refactor",
+      "state_id": "Invariant Gate",
+      "work_type": "gate",
+      "owner_agent_id": null,
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": false,
+      "phase_index": 1,
+      "gate": "Invariant Gate",
+      "artifact": null,
+      "depends_on": [
+        {
+          "state_id": "scope-invariants-and-risk-profile",
+          "kind": "hard",
+          "basis": "the gate closes this phase"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": "awaiting_human_decision",
+      "blocked_detail": "G6-GATE-EVIDENCE: evidence for scope-invariants-and-risk-profile is complete; awaiting a decision from ['omn-architect', 'omn-tech-lead']",
+      "failure_class": "gate-approval-required",
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G6-GATE-EVIDENCE",
+          "title": "the gated phase has produced its evidence",
+          "outcome": "block",
+          "reason_code": "approval_wait",
+          "blocked_reason": "awaiting_human_decision",
+          "failure_class": "gate-approval-required",
+          "detail": "evidence for scope-invariants-and-risk-profile is complete; awaiting a decision from ['omn-architect', 'omn-tech-lead']"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-08-18T14:42:16Z",
+      "updated_at": "2026-08-18T15:11:45Z",
+      "blocked_by": "guard"
+    },
+    "safety-net-establishment": {
+      "work_item_id": "run-0db4765d0eab::safety-net-establishment",
+      "run_id": "run-0db4765d0eab",
+      "workflow_id": "refactor",
+      "state_id": "safety-net-establishment",
+      "work_type": "state",
+      "owner_agent_id": "omn-qa",
+      "status": "blocked",
+      "queue_status": "Blocked",
+      "eligible": false,
+      "phase_index": 2,
+      "gate": "none",
+      "artifact": "strengthened test suite and baseline validation record",
+      "depends_on": [
+        {
+          "state_id": "scope-invariants-and-risk-profile",
+          "kind": "hard",
+          "basis": "Input column names the upstream output 'technical-design.md'"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": "awaiting_capability_registration",
+      "blocked_detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml",
+      "failure_class": "missing-capability-failure",
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G1-CAPABILITY",
+          "title": "owner agent is invocable for this phase",
+          "outcome": "block",
+          "reason_code": "policy_block",
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-08-18T14:42:16Z",
+      "updated_at": "2026-08-19T01:39:18Z",
+      "blocked_by": "guard"
+    },
+    "refactor-implementation": {
+      "work_item_id": "run-0db4765d0eab::refactor-implementation",
+      "run_id": "run-0db4765d0eab",
+      "workflow_id": "refactor",
+      "state_id": "refactor-implementation",
+      "work_type": "state",
+      "owner_agent_id": "omn-dev-1-implement",
+      "status": "blocked",
+      "queue_status": "Blocked",
+      "eligible": false,
+      "phase_index": 3,
+      "gate": "Implementation Gate",
+      "artifact": "incremental refactor changes with updated tests",
+      "depends_on": [
+        {
+          "state_id": "safety-net-establishment",
+          "kind": "hard",
+          "basis": "Input column names the upstream output 'strengthened test suite'"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": "awaiting_capability_registration",
+      "blocked_detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-dev-1-implement' has no record in registry/agents.yaml",
+      "failure_class": "missing-capability-failure",
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G1-CAPABILITY",
+          "title": "owner agent is invocable for this phase",
+          "outcome": "block",
+          "reason_code": "policy_block",
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-dev-1-implement' has no record in registry/agents.yaml"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-08-18T14:42:16Z",
+      "updated_at": "2026-08-19T01:39:18Z",
+      "blocked_by": "guard"
+    },
+    "gate:Implementation Gate": {
+      "work_item_id": "run-0db4765d0eab::gate::Implementation Gate",
+      "run_id": "run-0db4765d0eab",
+      "workflow_id": "refactor",
+      "state_id": "Implementation Gate",
+      "work_type": "gate",
+      "owner_agent_id": null,
+      "status": "pending",
+      "queue_status": "Waiting",
+      "eligible": false,
+      "phase_index": 3,
+      "gate": "Implementation Gate",
+      "artifact": null,
+      "depends_on": [
+        {
+          "state_id": "refactor-implementation",
+          "kind": "hard",
+          "basis": "the gate closes this phase"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": null,
+      "blocked_detail": null,
+      "failure_class": null,
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G6-GATE-EVIDENCE",
+          "title": "the gated phase has produced its evidence",
+          "outcome": "wait",
+          "reason_code": "dependency_wait",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "refactor-implementation is blocked; a gate assesses evidence that does not exist yet"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-08-18T14:42:16Z",
+      "updated_at": "2026-08-19T01:39:18Z"
+    },
+    "behavioral-validation": {
+      "work_item_id": "run-0db4765d0eab::behavioral-validation",
+      "run_id": "run-0db4765d0eab",
+      "workflow_id": "refactor",
+      "state_id": "behavioral-validation",
+      "work_type": "state",
+      "owner_agent_id": "omn-qa",
+      "status": "blocked",
+      "queue_status": "Blocked",
+      "eligible": false,
+      "phase_index": 4,
+      "gate": "Regression Gate",
+      "artifact": "parity validation report and regression status",
+      "depends_on": [
+        {
+          "state_id": "refactor-implementation",
+          "kind": "hard",
+          "basis": "Input column names the upstream output 'incremental refactor changes with updated tests'"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": "awaiting_capability_registration",
+      "blocked_detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml",
+      "failure_class": "missing-capability-failure",
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G1-CAPABILITY",
+          "title": "owner agent is invocable for this phase",
+          "outcome": "block",
+          "reason_code": "policy_block",
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-08-18T14:42:16Z",
+      "updated_at": "2026-08-19T01:39:18Z",
+      "blocked_by": "guard"
+    },
+    "gate:Regression Gate": {
+      "work_item_id": "run-0db4765d0eab::gate::Regression Gate",
+      "run_id": "run-0db4765d0eab",
+      "workflow_id": "refactor",
+      "state_id": "Regression Gate",
+      "work_type": "gate",
+      "owner_agent_id": null,
+      "status": "pending",
+      "queue_status": "Waiting",
+      "eligible": false,
+      "phase_index": 4,
+      "gate": "Regression Gate",
+      "artifact": null,
+      "depends_on": [
+        {
+          "state_id": "behavioral-validation",
+          "kind": "hard",
+          "basis": "the gate closes this phase"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": null,
+      "blocked_detail": null,
+      "failure_class": null,
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G6-GATE-EVIDENCE",
+          "title": "the gated phase has produced its evidence",
+          "outcome": "wait",
+          "reason_code": "dependency_wait",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "behavioral-validation is blocked; a gate assesses evidence that does not exist yet"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-08-18T14:42:16Z",
+      "updated_at": "2026-08-19T01:39:18Z"
+    },
+    "closure-and-debt-record": {
+      "work_item_id": "run-0db4765d0eab::closure-and-debt-record",
+      "run_id": "run-0db4765d0eab",
+      "workflow_id": "refactor",
+      "state_id": "closure-and-debt-record",
+      "work_type": "state",
+      "owner_agent_id": "omn-orchestrator",
+      "status": "blocked",
+      "queue_status": "Blocked",
+      "eligible": false,
+      "phase_index": 5,
+      "gate": "Closure Gate",
+      "artifact": "closure summary with technical debt delta and follow-up actions",
+      "depends_on": [
+        {
+          "state_id": "behavioral-validation",
+          "kind": "hard",
+          "basis": "Input column names the upstream output 'parity validation report'"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": "awaiting_capability_registration",
+      "blocked_detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-orchestrator' has no record in registry/agents.yaml",
+      "failure_class": "missing-capability-failure",
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G1-CAPABILITY",
+          "title": "owner agent is invocable for this phase",
+          "outcome": "block",
+          "reason_code": "policy_block",
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-orchestrator' has no record in registry/agents.yaml"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-08-18T14:42:16Z",
+      "updated_at": "2026-08-19T01:39:18Z",
+      "blocked_by": "guard"
+    },
+    "gate:Closure Gate": {
+      "work_item_id": "run-0db4765d0eab::gate::Closure Gate",
+      "run_id": "run-0db4765d0eab",
+      "workflow_id": "refactor",
+      "state_id": "Closure Gate",
+      "work_type": "gate",
+      "owner_agent_id": null,
+      "status": "pending",
+      "queue_status": "Waiting",
+      "eligible": false,
+      "phase_index": 5,
+      "gate": "Closure Gate",
+      "artifact": null,
+      "depends_on": [
+        {
+          "state_id": "closure-and-debt-record",
+          "kind": "hard",
+          "basis": "the gate closes this phase"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": null,
+      "blocked_detail": null,
+      "failure_class": null,
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G6-GATE-EVIDENCE",
+          "title": "the gated phase has produced its evidence",
+          "outcome": "wait",
+          "reason_code": "dependency_wait",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "closure-and-debt-record is blocked; a gate assesses evidence that does not exist yet"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-08-18T14:42:16Z",
+      "updated_at": "2026-08-19T01:39:18Z"
+    }
+  },
+  "gates": {
+    "Invariant Gate": {
+      "gate": "Invariant Gate",
+      "closes_state": "scope-invariants-and-risk-profile",
+      "owner_roles": [
+        "omn-architect",
+        "omn-tech-lead"
+      ],
+      "producer_agent": "architect",
+      "decision": "approved",
+      "owner_role": "omn-tech-lead",
+      "decided_by": "operator, on behalf of omn-tech-lead (architect is the producer and is excluded from deciding this gate)",
+      "rationale": "Design validated 78/78 after one retryable rejection on the risk-class vocabulary and a repair pass. Seven human indexes gain a pointer each; no machine index, registry record, or contract changes, so the structure-preserving claim holds. The one frozen-slice member edited carries a re-verification obligation the design sequences explicitly.",
+      "evidence_ref": "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/validation-report.json",
+      "decided_at": "2026-08-18T15:11:45Z"
+    },
+    "Implementation Gate": {
+      "gate": "Implementation Gate",
+      "closes_state": "refactor-implementation",
+      "owner_roles": [
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-dev-1-implement",
+      "decision": null,
+      "owner_role": null,
+      "decided_by": null,
+      "rationale": null,
+      "evidence_ref": null,
+      "decided_at": null
+    },
+    "Regression Gate": {
+      "gate": "Regression Gate",
+      "closes_state": "behavioral-validation",
+      "owner_roles": [
+        "omn-qa",
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-qa",
+      "decision": null,
+      "owner_role": null,
+      "decided_by": null,
+      "rationale": null,
+      "evidence_ref": null,
+      "decided_at": null
+    },
+    "Closure Gate": {
+      "gate": "Closure Gate",
+      "closes_state": "closure-and-debt-record",
+      "owner_roles": [
+        "omn-orchestrator",
+        "omn-documentation"
+      ],
+      "producer_agent": "omn-orchestrator",
+      "decision": null,
+      "owner_role": null,
+      "decided_by": null,
+      "rationale": null,
+      "evidence_ref": null,
+      "decided_at": null
+    }
+  },
+  "transitions": [
+    {
+      "seq": 1,
+      "at": "2026-08-18T14:42:16Z",
+      "work_item_id": "run-0db4765d0eab::safety-net-establishment",
+      "state_id": "safety-net-establishment",
+      "work_type": "state",
+      "phase_index": 2,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "blocker_detected",
+      "reason_code": "policy_block",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+    },
+    {
+      "seq": 2,
+      "at": "2026-08-18T14:42:16Z",
+      "work_item_id": "run-0db4765d0eab::refactor-implementation",
+      "state_id": "refactor-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "blocker_detected",
+      "reason_code": "policy_block",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-dev-1-implement' has no record in registry/agents.yaml"
+    },
+    {
+      "seq": 3,
+      "at": "2026-08-18T14:42:16Z",
+      "work_item_id": "run-0db4765d0eab::behavioral-validation",
+      "state_id": "behavioral-validation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "blocker_detected",
+      "reason_code": "policy_block",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+    },
+    {
+      "seq": 4,
+      "at": "2026-08-18T14:42:16Z",
+      "work_item_id": "run-0db4765d0eab::closure-and-debt-record",
+      "state_id": "closure-and-debt-record",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "blocker_detected",
+      "reason_code": "policy_block",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-orchestrator' has no record in registry/agents.yaml"
+    },
+    {
+      "seq": 5,
+      "at": "2026-08-18T14:45:47Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "work_type": "state",
+      "phase_index": 1,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:b60dbde9401fae0e5490ab3b5899d402",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 6,
+      "at": "2026-08-18T14:45:47Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "work_type": "state",
+      "phase_index": 1,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:b60dbde9401fae0e5490ab3b5899d402",
+      "detail": "dispatching architect v1.0.0 through agents/architect.agent.md"
+    },
+    {
+      "seq": 7,
+      "at": "2026-08-18T15:03:48Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "work_type": "state",
+      "phase_index": 1,
+      "from": "running",
+      "to": "retrying",
+      "trigger": "retryable_failure_classified",
+      "reason_code": "validation_failed",
+      "queue_status": "Retrying",
+      "actor_type": "runtime",
+      "actor_id": "recovery-controller",
+      "attempt": 1,
+      "idempotency_key": "sha256:b60dbde9401fae0e5490ab3b5899d402",
+      "detail": "class 'output-schema-failure' is retryable and 2 of 3 charged attempt(s) remain, so one further attempt is scheduled after 2.263s of exponential backoff"
+    },
+    {
+      "seq": 8,
+      "at": "2026-08-18T15:04:22Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "work_type": "state",
+      "phase_index": 1,
+      "from": "retrying",
+      "to": "pending",
+      "trigger": "backoff_elapsed",
+      "reason_code": "enqueued",
+      "queue_status": "Waiting",
+      "actor_type": "runtime",
+      "actor_id": "recovery-controller",
+      "attempt": 1,
+      "idempotency_key": "sha256:b60dbde9401fae0e5490ab3b5899d402",
+      "detail": "backoff elapsed at 2026-08-18T15:03:50Z; attempt 2 of 3 may now be dispatched"
+    },
+    {
+      "seq": 9,
+      "at": "2026-08-18T15:04:23Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "work_type": "state",
+      "phase_index": 1,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 2,
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 10,
+      "at": "2026-08-18T15:04:23Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "work_type": "state",
+      "phase_index": 1,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 2,
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "dispatching architect v1.0.0 through agents/architect.agent.md"
+    },
+    {
+      "seq": 11,
+      "at": "2026-08-18T15:11:01Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "work_type": "state",
+      "phase_index": 1,
+      "from": "running",
+      "to": "completed",
+      "trigger": "result_accepted",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "runtime",
+      "actor_id": "validation-engine",
+      "attempt": 2,
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "artifact accepted: 78/78 checks passed"
+    },
+    {
+      "seq": 12,
+      "at": "2026-08-18T15:11:01Z",
+      "work_item_id": "run-0db4765d0eab::gate::Invariant Gate",
+      "state_id": "Invariant Gate",
+      "work_type": "gate",
+      "phase_index": 1,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "awaiting_decision",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G6-GATE-EVIDENCE: evidence for scope-invariants-and-risk-profile is complete; awaiting a decision from ['omn-architect', 'omn-tech-lead']"
+    },
+    {
+      "seq": 13,
+      "at": "2026-08-18T15:11:45Z",
+      "work_item_id": "run-0db4765d0eab::gate::Invariant Gate",
+      "state_id": "Invariant Gate",
+      "work_type": "gate",
+      "phase_index": 1,
+      "from": "blocked",
+      "to": "completed",
+      "trigger": "decision_approved",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "human",
+      "actor_id": "operator, on behalf of omn-tech-lead (architect is the producer and is excluded from deciding this gate)",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "approved by omn-tech-lead: Design validated 78/78 after one retryable rejection on the risk-class vocabulary and a repair pass. Seven human indexes gain a pointer each; no machine index, registry record, or contract changes, so the structure-preserving claim holds. The one frozen-slice member edited carries a re-verification obligation the design sequences explicitly."
+    }
+  ],
+  "replays": [
+    {
+      "at": "2026-08-18T15:14:16Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "phase already completed under idempotency key sha256:e8b3e67605bc22b533bd6f60aca52747; no envelope rebuilt"
+    },
+    {
+      "at": "2026-08-18T15:14:16Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "completion already committed at 2026-08-18T15:11:01Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-08-18T15:14:30Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "phase already completed under idempotency key sha256:e8b3e67605bc22b533bd6f60aca52747; no envelope rebuilt"
+    },
+    {
+      "at": "2026-08-18T15:14:31Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "completion already committed at 2026-08-18T15:11:01Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-08-19T01:38:44Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "phase already completed under idempotency key sha256:e8b3e67605bc22b533bd6f60aca52747; no envelope rebuilt"
+    },
+    {
+      "at": "2026-08-19T01:38:44Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "completion already committed at 2026-08-18T15:11:01Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-08-19T01:39:18Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "phase already completed under idempotency key sha256:e8b3e67605bc22b533bd6f60aca52747; no envelope rebuilt"
+    },
+    {
+      "at": "2026-08-19T01:39:19Z",
+      "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+      "state_id": "scope-invariants-and-risk-profile",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+      "detail": "completion already committed at 2026-08-18T15:11:01Z; artifact digest unchanged"
+    }
+  ],
+  "last_aggregation": {
+    "signature": "sha256:7d7681ad7809f46a5e82b2e28f66ff5d",
+    "at": "2026-08-18T15:11:45Z"
+  }
+}

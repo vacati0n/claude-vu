@@ -1,0 +1,67 @@
+```yaml
+releaseNote:
+  releaseId: RN-CKA-01-run-efe092286625
+  version: 0+CKA-01-unreleased
+  sourceInputs:
+    - type: verification-report
+      reference: runs/run-efe092286625/states/quality-review/artifacts/review-package.md
+    - type: final-change-summary
+      reference: runs/run-efe092286625/states/implementation/artifacts/implementation-report.md
+    - type: stakeholder-list
+      reference: runs/run-efe092286625/states/scope-and-acceptance/artifacts/scope-definition.md
+  producedBy: omn-documentation
+  agentVersion: 1.0.0
+  schemaVersion: 1.0.0
+  status: complete
+  releaseVerdict: released
+  inputDigest: sha256:2420129958174a5fa637e6f4074d560d
+  contextDigest: sha256:bc0fb4ee128c1855f84c63b3ea12319c
+```
+
+## Metadata
+
+- Version: 0+CKA-01-unreleased
+- Release date and time: 2026-08-28 (closure handoff of run run-efe092286625; context frozen 2026-08-28T06:16:47Z per the invocation envelope). No supplied artifact states a numbered distribution version for this change, so the version of record for this closure event is 0+CKA-01-unreleased, carrying the change reference — ticket CKA-01 in the adoption backlog under docs/ — as its provenance.
+- Environment: the repository working tree of run run-efe092286625. The change set is delivered and review-approved there; it has not been merged, released, or deployed to any other environment.
+- Release owner: omn-tech-lead, who holds merge and release judgement for this change per review package RP-2026-0002. This note communicates the handoff; it records no merge or release decision.
+
+## Highlights
+
+- Feature additions: `omn-agent validate` and `omn-agent doctor` now detect a broken installation instead of certifying it. An installed runtime file in the framework payload directory (installed name .omn-agent/) whose module-top-level import cannot be resolved produces a stable ERROR finding, `V-IMPORT`, naming the checked file, the missing module, and the checking interpreter, with a hint naming the providing distribution where known; both commands exit non-OK (exit 3). A healthy installation reports exactly what it reported before, with no new output. (Implementation report IR-2026-0003 change `C-001`; confirmed by executed tests re-run in review package RP-2026-0002.)
+- Bug fixes: a fresh install of the CLI into a clean environment previously produced a runtime that fails on a missing YAML module while the install, the documentation, and `doctor` all called it healthy. The distribution metadata now declares `pyyaml>=6`, so a clean install pulls the library the installed runtime files import (IR-2026-0003 `C-002`). The published claim that the tool needs nothing beyond the standard library was false and is gone: `README.md` and the HTML handbook now state the true footprint — the CLI package itself is standard-library only, while the installed framework runtime files require PyYAML, which the declared dependency provides (IR-2026-0003 `C-003`, `C-004`).
+- Improvements: None identified.
+
+## Technical Changes and Compatibility
+
+- API or contract changes: two, both recorded as strictly additive by IR-2026-0003 Boundary Compliance and confirmed by RP-2026-0002. (1) The distribution's dependency metadata gains its first entry, `pyyaml>=6`, the lower-bounded unpinned range fixed by the Design Gate decision recorded by omn-tech-lead on 2026-08-28, ending the distribution's zero-dependency status. (2) The `validate`/`doctor` report vocabulary gains one stable finding code, `V-IMPORT`, at ERROR severity. No existing finding code, message, severity, exit-code mapping, or CLI signature changed.
+- Database or migration impact: none — no data store, stored artifact schema, or bootstrap descriptor schema changed, so no migration exists; already-installed environments are untouched (IR-2026-0003 Boundary Compliance).
+- Configuration changes: none required for existing installations. Restricted or offline install processes must now source one additional distribution, PyYAML, because the dependency is declared rather than implicit (IR-2026-0003 residual risk `R-003`).
+- Backward compatibility notes: healthy installations are unaffected — the healthy path emits nothing new, and the 265-test pre-change baseline passes unchanged inside the 272-test post-change suite (IR-2026-0003 `T-007`; corroborated by the reviewer's independent re-execution in RP-2026-0002). An environment missing a module-top-level import of an installed runtime file, which prior verification certified as healthy, now receives the `V-IMPORT` ERROR and a non-OK exit from both commands; the required consumer action is to install the distribution the finding's hint names (for the `yaml` root, `pip install pyyaml`). This behavior change is the delivered intent of scope item `S-003` in scope definition SCOPE-2026-0001, not a regression. Sibling-module imports of descriptor-named validators do not false-positive (IR-2026-0003 `T-003`; RP-2026-0002 executed confirmation).
+
+## Operational Notes
+
+- Deployment considerations: nothing was deployed by this run; the change set awaits the merge and release judgement held by omn-tech-lead. Once released, clean installs pull PyYAML automatically; offline or mirrored package indexes must carry one additional distribution (IR-2026-0003 `R-003`).
+- Monitoring and alerts: per RP-2026-0002 Residual Risk — the `KNOWN_DISTRIBUTIONS` hint map must stay aligned if the framework payload ever acquires a third-party top-level import root other than `yaml`, or the finding's hint degrades to its generic form; and the healthy-path finding set should be re-compared whenever payload runtime files change their sibling-import structure (the design's `R-001` trigger, assigned to omn-qa). The healthy signal is `validate`/`doctor` exiting OK with no `V-IMPORT` finding.
+- Rollback criteria: revert if a healthy installation begins reporting `V-IMPORT` findings, since the healthy path is required to stay silent and false-ERROR exposure is the primary detection risk the design records (RP-2026-0002 conformance assessment). Reversal is low-cost by the delivered account: removing the dependency declaration restores the prior metadata shape without breaking installed environments, and the detection step is strictly additive (IR-2026-0003 Boundary Compliance).
+
+## Validation Summary
+
+- Test status: reported by omn-dev-1-implement in IR-2026-0003 — full suite green post-change (272 tests: the 265-test baseline unchanged plus 7 added), with a pre-change failing witness on the new tests. Independently corroborated by omn-dev-2-reviewer in RP-2026-0002, verdict `approve-with-corrections`: the 7 targeted tests and a 22-test healthy-path slice re-executed, all pass, and the 272-test collection count confirmed. The two acceptance demonstrations of design checkpoint P-005 — clean-environment `pip install` resolution of the declared dependency, and a `doctor` run against a real environment lacking the YAML distribution — are recorded by both artifacts as not yet executed and owned by omn-qa; the broken-environment behavior is so far proven hermetically through a stand-in module.
+- Known risk acceptance: the O-001 detection tradeoffs — blind below module top level, and payload files outside the descriptor-named set not individually checked (design risk `R-004`, the `C-003` bound) — were accepted by omn-tech-lead as the recorded Design Gate owner on 2026-08-28 (RP-2026-0002 Residual Risk).
+- Post-release checks: record the P-005 demonstrations (clean-venv install resolution; `doctor` in a real PyYAML-less environment) — owner omn-qa; confirm healthy environments remain silent against the pre-change result; and run the `verify_*.py` proof scripts the backlog's definition of done requires, which read none of the changed files (IR-2026-0003 Handoff Notes).
+
+## Known Issues
+
+| ID | Issue | Impact | Workaround | Tracking |
+|---|---|---|---|---|
+| `K-001` | The exception guard in `_import_resolves` that converts a failure raised inside the environment import lookup into a `V-IMPORT` finding is exercised by no executed test; RP-2026-0002 records it as verified by inspection only | No defect exists today, but a future regression in that guard would surface as an unhandled exception escaping verification instead of a reported finding, and no test would catch it | None needed today; current behavior is correct per review inspection | Finding `F-001` / correction request `CR-001` in RP-2026-0002, non-blocking, owned by omn-qa |
+| `K-002` | Detection is bounded: it is blind below module top level (function-local, conditional, dynamic imports) and does not individually check payload files outside the descriptor-named set — for example, `verify_vertical_slice.py` imports `yaml` but is not individually checked | A dependency imported only inside a function, or by an unchecked payload file, still surfaces at runtime rather than at verification time | None within verification; the accepted scope's revisit triggers govern any broadening | Design risk `R-004` and the `C-003` bound, accepted by omn-tech-lead at the Design Gate (RP-2026-0002 Residual Risk) |
+| `K-003` | An operator running `validate`/`doctor` from a different interpreter environment than the one executing the installed runtime receives an answer about the wrong environment | A finding, or its absence, may describe an environment other than the one the operator meant to check | The finding message embeds the checking interpreter's path, and the corrected README states that verification checks the environment it runs in; the risk is reduced, not eliminated | Design risk `R-002`, recorded unmitigated in RP-2026-0002 Residual Risk |
+| `K-004` | The two P-005 acceptance demonstrations — clean-environment install resolution of `pyyaml>=6`, and `doctor` against a real environment lacking the YAML distribution — have not been executed; broken-environment behavior is proven through a hermetic stand-in module | The ticket's verbatim acceptance expectations `A-001`, `A-004`, and `A-005` are not yet demonstrated against the YAML distribution itself, so acceptance cannot close until they are | None required; the hermetic evidence covers the mechanism while the real demonstrations remain outstanding | IR-2026-0003 open question `Q-001` / design checkpoint P-005, owned by omn-qa |
+| `K-005` | Decision-record files D-001 and D-002 still read `Status: Proposed` with unsigned approval lines, although the Design Gate's recorded rationale moved both to Accepted on 2026-08-28 | A reader of the committed design record sees a status contradicting the recorded gate decision; no runtime behavior is affected | Consult the Design Gate decision record in the run's state evidence, which RP-2026-0002 cites as authoritative | RP-2026-0002 open question `Q-001`, routed to architect, non-blocking |
+| `K-006` | Declaring `pyyaml>=6` ends the distribution's zero-dependency status: installs in restricted or offline environments must now source one additional distribution | An installer without package-index access to PyYAML cannot complete a clean install until their mirror carries it | Mirror or vendor the PyYAML distribution; the constraint is lower-bounded and unpinned to maximize resolvability, and the `V-IMPORT` finding names the module wherever it is absent | IR-2026-0003 residual risk `R-003`; supply-chain exposure of the unpinned range recorded as design risk `R-006`, owned by omn-tech-lead (RP-2026-0002) |
+
+## Communication
+
+- Stakeholders notified: from the scope definition's affected-users statement (SCOPE-2026-0001) — anyone installing the CLI into a clean environment, operators who rely on `omn-agent validate` and `omn-agent doctor` to certify installation health, readers of the project documentation, and the dependent CI-gating change CKA-03. Handoff roles for this closure package: omn-orchestrator (Closure Gate assessor of this package — the gate is decided there, not here), omn-tech-lead (merge and release judgement), omn-qa (correction request `CR-001` and the P-005 demonstrations). No stakeholder list was supplied to this run; the handoff roles are implied by the phase and recorded here as inferred.
+- Support handoff notes: a `V-IMPORT` ERROR names the checked file, the missing module, and the checking interpreter's path — the finding describes the environment of the interpreter that ran the command, which may not be the environment executing the installed runtime, so the first diagnostic step is to compare the interpreter path in the finding against the environment actually in question. A clean result is not proof for everything in the framework payload directory: only module-top-level imports of the descriptor-named file set are checked, so a runtime failure on an import elsewhere is consistent with a silent `doctor`. The hint reads `pip install pyyaml` for the `yaml` root and degrades to a generic form for unknown roots. Proposed documentation correction, to be applied by the role owning the file, never here: `docs/USER-GUIDE.md` section 2 carries no false claim but could state the PyYAML footprint for symmetry with the HTML handbook (IR-2026-0003 Handoff Notes); the HTML handbook itself was updated by the implementer and its agreement with the metadata and README is pinned by static test `T-006` and confirmed by the reviewer's full read — it needs no rewrite. If omn-qa has since recorded the P-005 clean-install demonstration, that record is not among this note's inputs and `K-004` stands until it is supplied.

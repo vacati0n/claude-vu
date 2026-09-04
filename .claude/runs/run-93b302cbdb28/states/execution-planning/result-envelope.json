@@ -1,0 +1,130 @@
+{
+  "invocation_id": "inv-93b302cbdb28-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-93b302cbdb28/states/execution-planning/artifacts/execution-plan.md"
+  ],
+  "structured_output": {
+    "plan_id": "wave-1-delivery-core-agent-rollout-execution-plan",
+    "plan_status": "partial",
+    "plan_status_reason": "Phased fallback applied at R4. The request names four Wave 1 agents; its own constraint S-015 permits one primary capability increment at a time, so increment 1 (omn-product-owner) is decomposed in full and increments 2 to 4 are deferred with recorded entry conditions. No blocking open question exists, so the status is partial rather than blocked.",
+    "schema_version": "1.0.0",
+    "input_digest": "sha256:127b427528513043db51b8729290834e",
+    "context_digest": "sha256:c02a893250a487966bd7e0b20eb783cd",
+    "counts": {
+      "statements": 17,
+      "assumptions": 5,
+      "risks": 10,
+      "tasks": 15,
+      "dependency_edges": 20,
+      "external_dependencies": 2,
+      "waves": 9,
+      "open_questions": 4,
+      "blocking_open_questions": 0,
+      "business_objectives": 3,
+      "technical_objectives": 5,
+      "plan_acceptance_criteria": 5,
+      "deferred_scope_items": 4
+    },
+    "suggested_workflow": "implement-feature",
+    "recomputed_topological_order": {
+      "method": "Kahn over the 8.1 edge table; ties broken by ascending task identifier",
+      "waves": [
+        ["T-001", "T-002", "T-003"],
+        ["T-006"],
+        ["T-007", "T-010"],
+        ["T-008", "T-012", "T-014"],
+        ["T-009", "T-011"],
+        ["T-013"],
+        ["T-015"],
+        ["T-004"],
+        ["T-005"]
+      ],
+      "linear_order": ["T-001", "T-002", "T-003", "T-006", "T-007", "T-010", "T-008", "T-012", "T-014", "T-009", "T-011", "T-013", "T-015", "T-004", "T-005"],
+      "acyclic": true,
+      "matches_stated_order": true
+    },
+    "traceability_closure": {
+      "forward_statements_covered": "17 of 17",
+      "backward_tasks_traced": "15 of 15",
+      "lateral_resolution": "10 of 10 risks attached to existing task identifiers; 5 of 5 assumptions attached to a statement; 20 of 20 edges resolve to existing tasks; 2 of 2 external dependencies name a responsible party and a matching risk"
+    },
+    "repair_passes": [
+      {
+        "pass": 1,
+        "check": "Q5.9",
+        "defect": "T-001 and T-002 each trace an unconfirmed assumption (A-003, A-004) while carrying medium confidence and ready status",
+        "repair": "Confidence lowered to low and status set to assumption-dependent on both tasks; A-003 added to the T-012 trace; the Executive Summary sentence describing low-confidence tasks reworded to match"
+      },
+      {
+        "pass": 1,
+        "check": "Q7.5",
+        "defect": "The R-006 mitigation described work but named no task that performs it, because no plan task can discharge a prerequisite outside the plan's authority",
+        "repair": "Mitigation reworded to state that confirming the section 8.2 external prerequisite is a run entry condition rather than plan work, and that Wave 1 does not start until it is confirmed"
+      }
+    ],
+    "quality_checks": {
+      "check_set_version": "agents/planner/quality.md",
+      "checks_run": 70,
+      "checks_passed": 70,
+      "checks_failed": 0,
+      "results": {
+        "Q1.1": "pass", "Q1.2": "pass", "Q1.3": "pass", "Q1.4": "pass", "Q1.5": "pass", "Q1.6": "pass", "Q1.7": "pass",
+        "Q2.1": "pass", "Q2.2": "pass", "Q2.3": "pass", "Q2.4": "pass", "Q2.5": "pass", "Q2.6": "pass", "Q2.7": "pass", "Q2.8": "pass",
+        "Q3.1": "pass", "Q3.2": "pass", "Q3.3": "pass", "Q3.4": "pass",
+        "Q4.1": "pass", "Q4.2": "pass", "Q4.3": "pass", "Q4.4": "pass", "Q4.5": "pass",
+        "Q5.1": "pass", "Q5.2": "pass", "Q5.3": "pass", "Q5.4": "pass", "Q5.5": "pass", "Q5.6": "pass", "Q5.7": "pass", "Q5.8": "pass", "Q5.9": "pass after repair pass 1", "Q5.10": "pass",
+        "Q6.1": "pass", "Q6.2": "pass", "Q6.3": "pass", "Q6.4": "pass by recomputation", "Q6.5": "pass", "Q6.6": "pass", "Q6.7": "pass", "Q6.8": "pass",
+        "Q7.1": "pass", "Q7.2": "pass", "Q7.3": "pass", "Q7.4": "pass", "Q7.5": "pass after repair pass 1", "Q7.6": "pass",
+        "Q8.1": "pass", "Q8.2": "pass", "Q8.3": "pass", "Q8.4": "pass", "Q8.5": "pass",
+        "Q9.1": "pass", "Q9.2": "pass", "Q9.3": "pass", "Q9.4": "pass", "Q9.5": "pass", "Q9.6": "pass", "Q9.7": "pass",
+        "Q10.1": "pass", "Q10.2": "pass", "Q10.3": "pass", "Q10.4": "pass", "Q10.5": "pass",
+        "Q11.1": "pass", "Q11.2": "pass", "Q11.3": "pass", "Q11.4": "pass", "Q11.5": "pass"
+      }
+    },
+    "owner_resolution_note": "Q5.2: owner architect resolves to a record in registry/agents.yaml. Owners omn-product-owner, omn-dev-1-implement, omn-qa, omn-orchestrator, omn-tech-lead, and omn-documentation resolve to agent contracts under agents/ (agents/<id>.agent.md) but hold no registry record; accepted and recorded per the Owner Resolution Note in agents/planner/quality.md. This gap is the subject the plan addresses, and R-006 carries it as a delivery-blocking dependency risk.",
+    "gates_required_before_execution": {
+      "product_review": ["T-003"],
+      "architecture_review": ["T-001", "T-002", "T-006"],
+      "code_review": ["T-007", "T-008", "T-009", "T-012", "T-014"],
+      "qa_review": ["T-010", "T-011", "T-013"],
+      "closure_review": ["T-004", "T-005", "T-015"]
+    },
+    "deferred_increments": [
+      {"increment": 2, "agent": "omn-dev-1-implement", "entry_condition": "increment 1 recorded complete against run evidence by T-015 and entry conditions from T-004 approved"},
+      {"increment": 3, "agent": "omn-dev-2-reviewer", "entry_condition": "increment 2 recorded complete against run evidence"},
+      {"increment": 4, "agent": "omn-qa", "entry_condition": "increment 3 recorded complete against run evidence"}
+    ],
+    "boundary_statement": "No implementation work was performed, no repository file outside the permitted writes was modified, no command was executed, and no external system was accessed. All requirement content was consumed from the supplied input text in the invocation envelope.",
+    "lifecycle_path": ["Initialization", "ContextLoading", "Execution", "Completion", "Retirement"],
+    "internal_gate_outcomes": {
+      "Input Gate": "pass",
+      "Intent Gate": "pass",
+      "Boundary Gate": "pass",
+      "Decomposition Gate": "pass",
+      "Graph Gate": "pass",
+      "Evidence Gate": "pass",
+      "Traceability Gate": "pass"
+    },
+    "error_classes_raised": []
+  },
+  "evidence_refs": [
+    "agents/planner/manifest.yaml",
+    "agents/planner/system.md",
+    "agents/planner/identity.md",
+    "agents/planner/reasoning.md",
+    "agents/planner/execution.md",
+    "agents/planner/output.md",
+    "agents/planner/quality.md",
+    "agents/planner/examples.md",
+    "templates/execution-plan.md",
+    "runs/run-93b302cbdb28/states/execution-planning/invocation-envelope.json"
+  ],
+  "confidence": 0.74,
+  "declared_side_effects": [
+    "runs/run-93b302cbdb28/states/execution-planning/artifacts/execution-plan.md",
+    "runs/run-93b302cbdb28/states/execution-planning/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

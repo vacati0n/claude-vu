@@ -1,0 +1,209 @@
+{
+  "invocation_id": "inv-27e36c138498-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "triage",
+    "workflow": "fix-bug",
+    "phase": "triage-and-impact",
+    "severity": "critical",
+    "reproducibility": "deterministic",
+    "declaredStatus": "provisional",
+    "counts": {
+      "evidenceRecords": 15,
+      "causalSteps": 6,
+      "causalStepsByConfidence": {
+        "high": 6,
+        "medium": 0,
+        "low": 0
+      },
+      "evidenceByConfidence": {
+        "high": 13,
+        "medium": 1,
+        "low": 1
+      },
+      "openQuestions": 5,
+      "openQuestionsBlocking": 2
+    },
+    "statusBasis": "reasoning.md Stage 9, first matching row: an alternative account remains uneliminated (Q-001), therefore provisional. Reproducibility is deterministic, so the not-reproduced rows do not fire; no required input was missing; no step the conclusion depends on carries low confidence; a business impact statement was supplied.",
+    "severityBasis": "reasoning.md Stage 5: a core path unavailable with no workaround. The entry phase of the defect-repair workflow blocked one second after the run was accepted and the workflow produced no artifact (E-001, E-009), and the failure is classified non-retryable with a recorded clearing action stating that no runtime command clears it (E-003). Severity rests on that observed impact and its likelihood, not on the reporter's business claim, which is registered at low confidence as E-012.",
+    "reproducibilityBasis": "Established in this run, not copied from the report. The defect class reproduced on five sibling phases in four other workflows under the same precondition, by two independent means (E-007 resolution probe, E-008 coverage verifier), and the reported instance is carried first-hand by this run's own transition record, which shows the phase blocking at 07:55:08Z and clearing at 07:56:30Z when the operator correction removed the varying precondition (E-001, E-002).",
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "notApplicablePassed": 4,
+      "byGroup": {
+        "structural": {
+          "S1": "pass",
+          "S2": "pass",
+          "S3": "pass",
+          "S4": "pass",
+          "S5": "pass",
+          "S6": "pass",
+          "S7": "pass",
+          "S8": "pass",
+          "S9": "pass"
+        },
+        "metadata": {
+          "D1": "pass",
+          "D2": "pass",
+          "D3": "pass",
+          "D4": "pass",
+          "D5": "pass",
+          "D6": "pass",
+          "D7": "pass"
+        },
+        "agreement": {
+          "B2": "pass",
+          "B3": "pass",
+          "A1": "pass"
+        },
+        "reproduction": {
+          "B4": "pass",
+          "V1": "pass",
+          "V2": "pass",
+          "V3": "pass (not applicable; frequency is deterministic)",
+          "V4": "pass (not applicable; frequency is deterministic)",
+          "V5": "pass"
+        },
+        "evidence": {
+          "B1": "pass",
+          "V6": "pass",
+          "V7": "pass",
+          "V8": "pass",
+          "V9": "pass",
+          "V10": "pass after repair"
+        },
+        "causalChain": {
+          "V11": "pass",
+          "V12": "pass",
+          "V13": "pass",
+          "V14": "pass",
+          "V15": "pass",
+          "V16": "pass"
+        },
+        "impactAndSeverity": {
+          "V17": "pass",
+          "V18": "pass",
+          "V19": "pass",
+          "V20": "pass",
+          "V21": "pass",
+          "V22": "pass (not applicable; a business impact statement was supplied, and its provenance and confidence are recorded)"
+        },
+        "fixStrategy": {
+          "V23": "pass",
+          "V24": "pass",
+          "V25": "pass",
+          "V26": "pass",
+          "V27": "pass",
+          "V28": "pass"
+        },
+        "statusAndQuestions": {
+          "B5": "pass",
+          "V29": "pass",
+          "V30": "pass",
+          "V31": "pass after repair",
+          "V32": "pass",
+          "V33": "pass"
+        },
+        "authority": {
+          "A2": "pass",
+          "A3": "pass",
+          "A4": "pass",
+          "A5": "pass",
+          "A6": "pass",
+          "A7": "pass",
+          "A8": "pass"
+        },
+        "content": {
+          "C1": "pass",
+          "C2": "pass (not applicable; not a security defect)",
+          "C3": "pass after repair",
+          "C4": "pass",
+          "C5": "pass",
+          "C6": "pass",
+          "C7": "pass"
+        }
+      },
+      "repairsApplied": [
+        "V10: E-006, E-007 and E-011 were registered and relied on but not cited by identifier outside the register; the citations were added at the points that rest on them. No citation was added to a claim the evidence does not support.",
+        "C3: the reproduction steps named executables by a path whose leading directory carries a provider name; the paths were restated relative to the framework root, which is how every other reference in the artifact is written, leaving the steps executable.",
+        "V31: the environments not observed were recorded in Affected environments but not raised as an open question; Q-005 now records them."
+      ],
+      "repairsRefused": [
+        "No severity, confidence, status, or blast radius was altered to satisfy an agreement or arithmetic check.",
+        "No reproduction attempt was re-run because its outcome was unwelcome."
+      ],
+      "repairedBeforeEmission": {
+        "correctable": 1,
+        "blocking": 2,
+        "note": "V10 is Correctable; C3 and V31 are Blocking and were repaired and the full set re-run before emission, per the repair procedure in quality.md. No artifact was emitted while a Blocking check failed."
+      }
+    },
+    "validationEngine": {
+      "validator": "bug_analysis_validator",
+      "result": "PASS",
+      "checksPassed": 30,
+      "checksTotal": 30,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "digestCrossCheck": "inputDigest and contextDigest match the frozen snapshot in the invocation envelope"
+    },
+    "notMachineCheckableObligations": {
+      "N1": {
+        "obligation": "The stated root cause is the cause, not the symptom location",
+        "judgement": "discharged",
+        "detail": "The guard that blocked, the resolution function that raised, and the phase where the block surfaced are registered as evidence (E-001, E-004, E-005) and are treated as locations, not as the cause. The chain continues past them to a contract mismatch between two readers of one Phase Model column, which is a condition that could have been different by design. Because no specification states which reading the column owes (E-015), this phase declines to declare that mismatch settled and says so in the root cause statement itself, routing the remaining branch as Q-001 rather than presenting a location or an unsupported condition as the cause."
+      },
+      "N2": {
+        "obligation": "No speculative conclusion appears without supporting data",
+        "judgement": "discharged",
+        "detail": "Every causal step cites evidence produced by a command run or a file read in this run, and each cited record was checked for whether it supports the claim rather than merely relating to it. The one genuinely speculative question, which of the two readers holds the defective assumption, is not concluded and is routed as Q-001. The reporter's business impact claim is quarantined at low confidence as E-012 and is excluded from the severity basis. Two alternative accounts were tested and eliminated on registered evidence: that the manifest rather than the workflow column was defective, eliminated because the manifest declared the same single output before the block and after the clearing (E-013) and the phase resolves once the column names that file (E-006); and that the runtime halts an entire run when any phase blocks, eliminated because only the entry phase transitioned to blocked while the other four work items stayed pending, and the derived graph shows the hard edges that held them (E-001, E-009)."
+      },
+      "N3": {
+        "obligation": "The declared blast radius covers every boundary the defect crosses",
+        "judgement": "discharged with one recorded limit",
+        "detail": "The radius was derived from evidence rather than from the reported scope, and it is wider than the report stated: the report described one phase of one workflow, while two independent measurements taken in this run agree that five phases across four further workflows still carry the same condition (E-007, E-008). It also names boundaries a code or specification correction does not reach: two earlier runs holding a work item durably blocked, and this run's failure envelope and append-only recovery-ledger entry (E-011, E-003). The radius was not narrowed toward the correction the operator already applied. The recorded limit is that no host, checkout, or revision other than this run's frozen one was reached, which is registered as Q-005 rather than being treated as evidence of absence."
+      }
+    },
+    "boundariesEnforced": [
+      "No corrective change was produced, in the artifact or in the repository; the fix strategy names what a fix must achieve and hands building it to omn-dev-1-implement.",
+      "The Triage Gate was not decided. This agent produced the severity classification and reproducibility decision the gate assesses, so under the Producer Exclusion Rule the decision rests with omn-tech-lead.",
+      "The structural question of what the Output Artifact column must name was named and routed to architect as Q-001 and Q-002; no redesign was drafted here.",
+      "No closure, merge, or release decision was recorded; Closure states that the operator correction is evidence of the varying precondition and not a resolution."
+    ],
+    "handoffs": {
+      "omn-tech-lead": "severity critical, reproducibility deterministic, blast radius and the evidence behind them, for the Triage Gate; plus Q-003 on the workflow specification's narrative disagreeing with its own corrected table",
+      "architect": "Q-001, the column contract decision the fix strategy is conditional on, and Q-002, the artifact type each of the five still-blocked phases emits",
+      "omn-orchestrator": "Q-004, the disposition of two earlier runs holding a phase durably blocked, and Q-005, the environments not reached",
+      "omn-dev-1-implement": "the fix strategy, its two alternatives, and the five-area regression scope with the dependency connecting each area to the change",
+      "omn-qa": "the reproduction steps, the verification that must reach the condition rather than the symptom, and the monitoring signals"
+    },
+    "nextPhase": {
+      "phase": "root-cause-analysis",
+      "mustClose": "Q-001, the alternative this phase could not eliminate; the causal chain is provisional until it is settled or the reason it cannot be is stated."
+    },
+    "statusNote": "The phase's declared output is bug-analysis.md carrying the severity classification and reproducibility decision at status provisional, so a provisional artifact is this phase's success condition rather than a shortfall. The five open questions, two of them blocking for the fix, travel with the handoff still open, per the Handoff Contract in execution.md; they do not make this work item an escalation."
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/execution.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "agents/omn-dev-1-bug-analyst/examples.md",
+    "runs/run-27e36c138498/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-27e36c138498/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

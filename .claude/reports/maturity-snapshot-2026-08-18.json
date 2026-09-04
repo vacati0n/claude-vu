@@ -1,0 +1,274 @@
+{
+  "artifact": "maturity-snapshot",
+  "version": "1.0.0",
+  "date": "2026-08-18",
+  "purpose": "Frozen Day-1 baseline for the Wave 1 agent and skill rollout. Every pass/fail below is a verifier verdict, re-derivable by re-running the commands under `reproduce`.",
+  "verdict": "BASELINE-ESTABLISHED",
+  "verifiers": {
+    "verify_registry_coverage.py": {
+      "verdict": "COVERED",
+      "checks": {
+        "C1": "PASS",
+        "C2": "PASS",
+        "C3": "PASS",
+        "C4": "PASS",
+        "C5": "PASS",
+        "C6": "PASS"
+      }
+    },
+    "verify_validators.py": {
+      "verdict": "pass",
+      "checks": {
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "V4": "pass"
+      }
+    },
+    "verify_recovery.py": {
+      "verdict": "pass",
+      "checks_run": 41,
+      "checks_passed": 41
+    },
+    "verify_self_hosting.py": {
+      "verdict": "pass",
+      "checks": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "S9": "pass"
+      }
+    }
+  },
+  "metrics": {
+    "agents": {
+      "active_registry_records": 12,
+      "active_identifiers": [
+        "planner",
+        "architect",
+        "omn-product-owner",
+        "omn-dev-1-implement",
+        "omn-dev-1-bug-analyst",
+        "omn-dev-2-reviewer",
+        "omn-qa",
+        "omn-business-analyst",
+        "omn-context-agent",
+        "omn-documentation",
+        "omn-tech-lead",
+        "omn-orchestrator"
+      ],
+      "host_invocable_entrypoints": 12,
+      "runtime_module_sets": 12,
+      "module_set_identifiers": [
+        "architect",
+        "omn-business-analyst",
+        "omn-context-agent",
+        "omn-dev-1-bug-analyst",
+        "omn-dev-1-implement",
+        "omn-dev-2-reviewer",
+        "omn-documentation",
+        "omn-orchestrator",
+        "omn-product-owner",
+        "omn-qa",
+        "omn-tech-lead",
+        "planner"
+      ],
+      "phase_owners_named_by_active_phase_models": 12,
+      "invocable_over_phase_owners": "12/12",
+      "registered_over_phase_owners": "12/12",
+      "phase_owners_without_registry_record": []
+    },
+    "commands": {
+      "active_records": 9,
+      "specs_on_disk": 9,
+      "unresolved": 0
+    },
+    "workflows": {
+      "active": 7,
+      "with_phase_model": 7,
+      "phases_total": 36
+    },
+    "phases": {
+      "total": 36,
+      "dispatchable": 3,
+      "blocked": 33,
+      "blocked_reason_histogram": {
+        "awaiting_capability_registration": 32,
+        "awaiting_contract_reconciliation": 1
+      }
+    },
+    "skills": {
+      "active_registry_records": 12,
+      "registered_codes": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "phase_skill_references": 101,
+      "resolved": 101,
+      "unresolved": 0,
+      "unregistered_catalog_assets": [
+        "S04 skills/avalonia/desktop-ux-guidelines.md",
+        "S05 skills/react/react-engineering.md",
+        "skills/cicd/release-automation.md (no canonical skill code)",
+        "skills/coding-style/dotnet-coding-style.md (no canonical skill code)"
+      ]
+    },
+    "gates": {
+      "references": 28,
+      "decidable": 28
+    },
+    "validators": {
+      "registered": 7,
+      "artifact_types_named_by_active_phase_models": 6,
+      "verdict": "pass"
+    },
+    "runs": {
+      "total": 7,
+      "by_status": {
+        "Completed": 2,
+        "WaitingForHuman": 5
+      },
+      "completed_per_workflow": {
+        "implement-feature": [
+          "run-308f4d0ee447",
+          "run-b6780677468b"
+        ]
+      },
+      "active_workflows_with_zero_completed_runs": [
+        "fix-bug",
+        "investigate",
+        "refactor",
+        "release",
+        "research",
+        "review-pull-request"
+      ]
+    }
+  },
+  "wave_1_readiness": {
+    "omn-product-owner": {
+      "dod_1_runtime_module_set": true,
+      "dod_2_host_entrypoint": true,
+      "dod_3_active_registry_record": true,
+      "dod_4_completed_run_as_owner": [],
+      "owned_phases": [
+        "implement-feature/scope-and-acceptance"
+      ],
+      "dispatchable_phases": [],
+      "blocked_reasons": [
+        "awaiting_capability_registration"
+      ]
+    },
+    "omn-dev-1-implement": {
+      "dod_1_runtime_module_set": true,
+      "dod_2_host_entrypoint": true,
+      "dod_3_active_registry_record": true,
+      "dod_4_completed_run_as_owner": [],
+      "owned_phases": [
+        "fix-bug/fix-implementation",
+        "implement-feature/implementation",
+        "refactor/refactor-implementation"
+      ],
+      "dispatchable_phases": [],
+      "blocked_reasons": [
+        "awaiting_capability_registration"
+      ]
+    },
+    "omn-dev-2-reviewer": {
+      "dod_1_runtime_module_set": true,
+      "dod_2_host_entrypoint": true,
+      "dod_3_active_registry_record": true,
+      "dod_4_completed_run_as_owner": [],
+      "owned_phases": [
+        "implement-feature/quality-review",
+        "release/artifact-packaging",
+        "review-pull-request/code-quality-review"
+      ],
+      "dispatchable_phases": [],
+      "blocked_reasons": [
+        "awaiting_capability_registration"
+      ]
+    },
+    "omn-qa": {
+      "dod_1_runtime_module_set": true,
+      "dod_2_host_entrypoint": true,
+      "dod_3_active_registry_record": true,
+      "dod_4_completed_run_as_owner": [],
+      "owned_phases": [
+        "fix-bug/regression-validation",
+        "refactor/behavioral-validation",
+        "refactor/safety-net-establishment",
+        "release/candidate-validation",
+        "review-pull-request/test-risk-validation"
+      ],
+      "dispatchable_phases": [],
+      "blocked_reasons": [
+        "awaiting_capability_registration"
+      ]
+    }
+  },
+  "frozen_baseline_runs": {
+    "run-0db4765d0eab": {
+      "command_id": "refactor",
+      "workflow_id": "refactor",
+      "status": "WaitingForHuman",
+      "layout": "multi-phase"
+    },
+    "run-308f4d0ee447": {
+      "command_id": "implement",
+      "workflow_id": "implement-feature",
+      "status": "Completed",
+      "layout": "pre-slice-3"
+    },
+    "run-3e22f11cb34d": {
+      "command_id": "implement",
+      "workflow_id": "implement-feature",
+      "status": "WaitingForHuman",
+      "layout": "multi-phase"
+    },
+    "run-93b302cbdb28": {
+      "command_id": "implement",
+      "workflow_id": "implement-feature",
+      "status": "WaitingForHuman",
+      "layout": "multi-phase"
+    },
+    "run-b6780677468b": {
+      "command_id": "implement",
+      "workflow_id": "implement-feature",
+      "status": "Completed",
+      "layout": "pre-slice-3"
+    },
+    "run-c5a8d50d3238": {
+      "command_id": "implement",
+      "workflow_id": "implement-feature",
+      "status": "WaitingForHuman",
+      "layout": "multi-phase"
+    },
+    "run-c9bdf5dbca7a": {
+      "command_id": "bugfix",
+      "workflow_id": "fix-bug",
+      "status": "WaitingForHuman",
+      "layout": "multi-phase"
+    }
+  },
+  "reproduce": [
+    "python .claude/runtime/verify_registry_coverage.py",
+    "python .claude/runtime/verify_validators.py",
+    "python .claude/runtime/verify_recovery.py",
+    "python .claude/runtime/verify_self_hosting.py --mode-evidence"
+  ]
+}

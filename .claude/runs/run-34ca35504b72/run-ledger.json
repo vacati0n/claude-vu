@@ -1,0 +1,211 @@
+{
+  "run_id": "run-34ca35504b72",
+  "runtime_version": "0.5.0",
+  "command_id": "refactor",
+  "workflow_id": "refactor",
+  "workflow_version": "1.0.0",
+  "status": "ExecutingState",
+  "input_digest": "sha256:27b6c853ba4dc8d4b8b498ce1925efe5",
+  "created_at": "2026-08-27T12:50:39Z",
+  "updated_at": "2026-08-27T13:10:29Z",
+  "states": {
+    "scope-invariants-and-risk-profile": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "architect",
+      "attempt": 2,
+      "attempts_lost": 0,
+      "attempts_charged": 2,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:c3c68b03de7cc9296f618119b8780d0e",
+      "artifact_path": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+      "blocked_reason": null,
+      "failure_class": "output-schema-failure",
+      "state_ledger": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 78,
+        "checksPassed": 78,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 10,
+        "counts": {
+          "sections": 13,
+          "facts": 12,
+          "assumptions": 4,
+          "constraints": 9,
+          "modules": 8,
+          "options": 3,
+          "decisions": 3,
+          "reuseRows": 4,
+          "planSteps": 4,
+          "risks": 4,
+          "openDecisions": 2,
+          "decisionRecords": 0,
+          "designStatus": "complete"
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "safety-net-establishment": {
+      "status": "running",
+      "queue_status": "Executing",
+      "owner_agent_id": "omn-qa",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:c3f8dd99611c2560dcaac0d662c729e0",
+      "artifact_path": "runs/run-34ca35504b72/states/safety-net-establishment/artifacts/validation-report.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-34ca35504b72/states/safety-net-establishment/state-ledger.json",
+      "validation": null
+    },
+    "refactor-implementation": {
+      "status": "pending",
+      "queue_status": "Waiting",
+      "owner_agent_id": "omn-dev-1-implement",
+      "attempt": 0,
+      "attempts_lost": 0,
+      "attempts_charged": 0,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": null,
+      "artifact_path": null,
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": null,
+      "validation": null
+    },
+    "behavioral-validation": {
+      "status": "pending",
+      "queue_status": "Waiting",
+      "owner_agent_id": "omn-qa",
+      "attempt": 0,
+      "attempts_lost": 0,
+      "attempts_charged": 0,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": null,
+      "artifact_path": null,
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": null,
+      "validation": null
+    },
+    "closure-and-debt-record": {
+      "status": "pending",
+      "queue_status": "Waiting",
+      "owner_agent_id": "omn-orchestrator",
+      "attempt": 0,
+      "attempts_lost": 0,
+      "attempts_charged": 0,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": null,
+      "artifact_path": null,
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": null,
+      "validation": null
+    }
+  },
+  "gates": {
+    "Invariant Gate": {
+      "gate": "Invariant Gate",
+      "closes_state": "scope-invariants-and-risk-profile",
+      "owner_roles": [
+        "omn-architect",
+        "omn-tech-lead"
+      ],
+      "producer_agent": "architect",
+      "decision": "approved",
+      "owner_role": "omn-tech-lead",
+      "decided_by": "framework-runtime auto-on-clean-evidence; recorded by operator session (vuhoangcao@kms-technology.com)",
+      "rationale": "technical-design.md validated 78/78 by design_validator; change is additive documentation confined to the orientation document's Folder Descriptions section; invariants INV-1..INV-4 carry no contract, registry, routing, or runtime surface",
+      "evidence_ref": ".claude/runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+      "decided_at": "2026-08-27T13:10:13Z"
+    },
+    "Implementation Gate": {
+      "gate": "Implementation Gate",
+      "closes_state": "refactor-implementation",
+      "owner_roles": [
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-dev-1-implement",
+      "decision": null,
+      "owner_role": null,
+      "decided_by": null,
+      "rationale": null,
+      "evidence_ref": null,
+      "decided_at": null
+    },
+    "Regression Gate": {
+      "gate": "Regression Gate",
+      "closes_state": "behavioral-validation",
+      "owner_roles": [
+        "omn-qa",
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-qa",
+      "decision": null,
+      "owner_role": null,
+      "decided_by": null,
+      "rationale": null,
+      "evidence_ref": null,
+      "decided_at": null
+    },
+    "Closure Gate": {
+      "gate": "Closure Gate",
+      "closes_state": "closure-and-debt-record",
+      "owner_roles": [
+        "omn-orchestrator",
+        "omn-documentation"
+      ],
+      "producer_agent": "omn-orchestrator",
+      "decision": null,
+      "owner_role": null,
+      "decided_by": null,
+      "rationale": null,
+      "evidence_ref": null,
+      "decided_at": null
+    }
+  },
+  "summary": {
+    "run_id": "run-34ca35504b72",
+    "run_status": "ExecutingState",
+    "phases": 5,
+    "completed": 1,
+    "blocked": 0,
+    "failed": 0,
+    "pending": 3,
+    "retrying": 0,
+    "active": 1,
+    "transitions": 13,
+    "replays_suppressed": 0
+  },
+  "recovery": {
+    "ledger": "runs/run-34ca35504b72/recovery-ledger.json",
+    "classifications": 3,
+    "open": 0,
+    "resolved": 3,
+    "retries_scheduled": 1,
+    "by_failure_class": {
+      "output-schema-failure": 1,
+      "gate-approval-required": 2
+    },
+    "retry_profile": {
+      "max_attempts": 3,
+      "backoff_strategy": "exponential",
+      "base_delay_seconds": 2,
+      "multiplier": 2,
+      "max_delay_seconds": 60,
+      "jitter_ratio": 0.2,
+      "circuit_breaker_threshold": 3,
+      "policy_ref": "config/runtime.md#retry-policy"
+    }
+  }
+}

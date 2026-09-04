@@ -1,0 +1,202 @@
+{
+  "invocation_id": "inv-27e36c138498-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-27e36c138498/states/root-cause-analysis/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "root-cause",
+    "workflow": "fix-bug",
+    "phase": "root-cause-analysis",
+    "supersedes": "runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md",
+    "severity": "critical",
+    "reproducibility": "deterministic",
+    "declaredStatus": "complete",
+    "counts": {
+      "evidenceRecords": 21,
+      "evidenceAddedThisPhase": 6,
+      "causalSteps": 8,
+      "causalStepsAddedThisPhase": 2,
+      "causalStepsByConfidence": {
+        "high": 8,
+        "medium": 0,
+        "low": 0
+      },
+      "evidenceByConfidence": {
+        "high": 19,
+        "medium": 1,
+        "low": 1
+      },
+      "openQuestions": 5,
+      "openQuestionsBlocking": 1,
+      "openQuestionsResolvedThisPhase": 1
+    },
+    "rootCause": "No rule anywhere governs what the Phase Model Output Artifact column must contain, while three runtime consumers each read that one cell under a different and unstated requirement, so a cell that satisfies one consumer can block another and nothing at authoring time can detect the conflict.",
+    "questionThisPhaseWasDispatchedToClose": {
+      "question": "Q-001: which reading of the Output Artifact column is authoritative",
+      "resolution": "resolved, by showing the question was mis-framed",
+      "detail": "Neither reading is authoritative, because no contract exists that would authorise either. The workflow authoring contract declares the Phase Model table the machine contract and then enumerates exactly three rules for what may appear in it, none of which constrains this column (E-016); the workflow registry requires only that the table exist (E-017). Against that absence, three consumers read the same cell three ways (E-018): the output-contract reader requires exactly one artifact-name token, the coverage proof accepts any count including none, and the dependency-graph reader wants matchable prose terms. Only a cell naming exactly one file satisfies all three. The runtime's own source asserts that the first two readers agree, which holds solely in that single-token case and fails for zero tokens and for two (E-019). Q-001 is therefore recorded resolved rather than carried forward, and is retained in the appendix so the triage artifact's reference to it resolves."
+    },
+    "statusBasis": "reasoning.md Stage 9, evaluated top to bottom. Reproducibility is deterministic, so row 1 does not fire. No required input was missing and the environment was reachable, so row 2 does not fire. Row 3 does not fire: the chain terminates on a condition rather than a location, and both competing accounts were eliminated on registered evidence. No step the conclusion depends on carries low confidence, so row 4 does not fire. A business impact statement was supplied, so row 5 does not fire. Row 6 therefore decides: complete.",
+    "severityBasis": "Unchanged from triage at critical, and re-tested rather than assumed. No evidence lowering it was found and the measured reach widened: E-021 shows the blocked phases hold implement-feature to five of six completable phases, investigate and research to four of five, and review-pull-request to one of five, with its merge-decision phase unreachable. The failure remains non-retryable with a recorded clearing action stating no runtime command clears it (E-003). Severity rests on that observed impact and its likelihood, not on the reporter's business claim, which stays registered at low confidence as E-012.",
+    "reproducibilityBasis": "Re-established in this phase rather than carried on the triage finding. The varying precondition was isolated to a single measurable quantity: the count of artifact-name tokens in the Output Artifact cell. Zero tokens and two or more tokens each produce divergence between the readers, one token does not, and the outcome is a pure function of that count with the owning agent, manifest, and validator held constant (E-018, E-019, E-006, E-013).",
+    "alternativesTested": [
+      {
+        "account": "the runtime is wrong to require a file, because the column is documentation rather than machine input",
+        "verdict": "eliminated",
+        "evidence": "E-016",
+        "detail": "the authoring contract states the Phase Model table is the machine contract and that the Task Router reads it for artifacts and derives the dependency graph from this column, so the column is machine-read by design"
+      },
+      {
+        "account": "the workflow authors are wrong, because the column always had to name a file",
+        "verdict": "eliminated",
+        "evidence": "E-015, E-016, E-017, E-018",
+        "detail": "no source states that requirement; five rows across four workflows were authored as prose, passed review, and pass the coverage proof, and the dependency-graph reader consumes prose successfully, so the requirement was neither stated nor enforced"
+      },
+      {
+        "account": "the coverage proof is the defective reader rather than the runtime",
+        "verdict": "eliminated as a framing, subsumed by the root cause",
+        "evidence": "E-016, E-017",
+        "detail": "judging either reader defective presupposes a contract to judge it against, and no such contract exists; that absence is the cause rather than a tie-breaker between readers"
+      }
+    ],
+    "findingsAddedThisPhase": [
+      "The column has three consumers, not the two the triage phase identified and not the two the runtime's own source names: the dependency-graph derivation reads the same cell as prose terms and succeeds on exactly the cells that block the output-contract reader (E-018).",
+      "The divergence runs in both directions. A cell naming two artifacts blocks the phase while the coverage proof demands a validator for each, so the defect is a property of the column's readers rather than of the five rows that trip it today (E-018, E-019).",
+      "The runtime's own source documents the two artifact readers as agreeing, which is true only for a single-token cell. The divergence was recorded as impossible in the one place a maintainer would check (E-019).",
+      "Correcting all five prose cells to a single filename changes no dependency edge in any active workflow, because in each case the prose-derived edge coincides with the row-order fallback (E-020). This measured result lowers one specific regression risk; it holds for current row adjacency only and is stated with that limit.",
+      "review-pull-request is the worst-affected workflow, not implement-feature: its blocked phase sits at row two of five, so only one phase can complete and no pull request can reach a merge decision (E-021)."
+    ],
+    "carriedForwardIntact": {
+      "severity": "critical",
+      "reproducibility": "deterministic",
+      "identifiers": "E-001 through E-015, C-001 through C-006, and Q-001 through Q-005 retain the meanings the triage artifact assigned them; evidence text and confidence ratings are unchanged and were diffed against the triage artifact to confirm it. Source cells were extended only to record re-verification performed in this phase.",
+      "note": "No fact the triage artifact recorded is contradicted. The two causal steps added this phase, C-007 and C-008, sit upstream of C-001 and explain why the condition C-001 records was authorable and undetected; they do not overturn it."
+    },
+    "identifierOrderingJudgement": "Two ordering rules met head-on and the conflict is recorded rather than hidden. output.md requires identifiers to be assigned once and never renumbered, explicitly including the case where a root-cause invocation supersedes a triage artifact in the same run; it also requires causal rows to run from trigger to observed symptom. The two steps added this phase are causally upstream of the trigger the triage artifact had recorded, so they cannot both carry lower identifiers and keep the existing ones stable. Non-renumbering was honoured, because the triage artifact's Q-001 and Q-003 cite C-001 and C-002 by identifier and renumbering would silently break those references. The rows are therefore ordered causally as C-007, C-008, C-001 to C-006, and the identifier set remains contiguous from C-001. The same resolution applies to the Open Questions appendix, ordered blocking first per V33 with Q-002 ahead of the resolved Q-001.",
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "notApplicablePassed": 3,
+      "byGroup": {
+        "structural": {
+          "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass",
+          "S6": "pass", "S7": "pass", "S8": "pass", "S9": "pass"
+        },
+        "metadata": {
+          "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass",
+          "D6": "pass", "D7": "pass"
+        },
+        "agreement": { "B2": "pass", "B3": "pass", "A1": "pass" },
+        "reproduction": {
+          "B4": "pass", "V1": "pass", "V2": "pass",
+          "V3": "pass (not applicable; frequency is deterministic)",
+          "V4": "pass (not applicable; frequency is deterministic)",
+          "V5": "pass"
+        },
+        "evidence": {
+          "B1": "pass", "V6": "pass", "V7": "pass", "V8": "pass", "V9": "pass",
+          "V10": "pass after repair"
+        },
+        "causalChain": {
+          "V11": "pass", "V12": "pass", "V13": "pass", "V14": "pass", "V15": "pass",
+          "V16": "pass"
+        },
+        "impactAndSeverity": {
+          "V17": "pass", "V18": "pass", "V19": "pass", "V20": "pass", "V21": "pass",
+          "V22": "pass (not applicable; a business impact statement was supplied, with its provenance and confidence recorded)"
+        },
+        "fixStrategy": {
+          "V23": "pass", "V24": "pass", "V25": "pass",
+          "V26": "pass (chain is not provisional this phase; the strategy states its dependence on the Q-002 decision rather than on an unclosed chain)",
+          "V27": "pass", "V28": "pass"
+        },
+        "statusAndQuestions": {
+          "B5": "pass", "V29": "pass", "V30": "pass", "V31": "pass", "V32": "pass",
+          "V33": "pass"
+        },
+        "authority": {
+          "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+          "A7": "pass", "A8": "pass"
+        },
+        "content": {
+          "C1": "pass",
+          "C2": "pass (not applicable; not a security defect)",
+          "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass", "C7": "pass"
+        }
+      },
+      "repairedBeforeEmission": {
+        "correctable": 1,
+        "blocking": 1,
+        "detail": [
+          "V10, Correctable: E-006, E-007 and E-015 were registered and relied on but not cited by identifier outside the register; citations were added at the points that rest on them.",
+          "Carried-record integrity, Blocking under the non-contradiction rule in execution.md: the E-015 evidence text had been reworded from the triage record. It was restored verbatim, since a superseding artifact may not alter a recorded fact without registering the evidence that overturns it."
+        ]
+      },
+      "repairsRefused": [
+        "No severity, confidence, status, or blast radius was altered to satisfy an agreement or arithmetic check.",
+        "No identifier was renumbered to make row order and identifier order coincide.",
+        "No reproduction attempt was re-run because its outcome was unwelcome."
+      ]
+    },
+    "validationEngine": {
+      "validator": "bug_analysis_validator",
+      "result": "PASS",
+      "checksPassed": 30,
+      "checksTotal": 30,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "digestCrossCheck": "inputDigest and contextDigest match this phase's own frozen snapshot, which differs from the triage phase's context digest as the dispatch required"
+    },
+    "notMachineCheckableObligations": {
+      "N1": {
+        "obligation": "The stated root cause is the cause, not the symptom location",
+        "judgement": "discharged",
+        "detail": "The guard, the resolution function, the blocked phase and the five sibling phases are all locations, and all are registered as evidence rather than offered as the cause. The chain continues past them to a missing constraint, which is one of the condition types reasoning.md names and is something that could have been different by design: had the authoring contract stated what the column must contain, the prose cell could not have been authored and the readers could not have diverged. The test applied was whether removing the stated condition removes the defect class rather than the five instances, and it does; correcting the five cells alone does not, which is why the fix strategy says so explicitly."
+      },
+      "N2": {
+        "obligation": "No speculative conclusion appears without supporting data",
+        "judgement": "discharged",
+        "detail": "Every causal step cites evidence produced by a command run or a file read in this run, and each cited record was checked for whether it supports the claim rather than merely relating to it. The two absences the root cause rests on, E-016 and E-017, were established by reading the enumerated authoring rules and the registry resolution block in full, so each records a confirmed absence rather than an unnoticed one. Three competing accounts were tested and eliminated on registered evidence. Where a measurement lowered a risk, at E-020, the limit of that measurement is stated in the same sentence rather than left implicit. The reporter's business claim remains quarantined at low confidence and excluded from the severity basis."
+      },
+      "N3": {
+        "obligation": "The declared blast radius covers every boundary the defect crosses",
+        "judgement": "discharged",
+        "detail": "The radius carried from triage was re-derived rather than copied, and it widened in two ways. Per-workflow reachability was measured rather than asserted, which revealed that review-pull-request loses four of five phases including the merge decision, a boundary the triage radius named only as a blocked phase. And because the cause is a property of the column's readers rather than of five rows, the radius now names every future row authored against that column, including the opposite-direction failure for a cell naming two artifacts, which no live row exhibits today. The radius was not narrowed toward the fix: E-020 lowers one regression risk but changes no boundary. The recorded limit remains that no host, checkout, or revision other than this phase's frozen one was reached, carried as Q-005."
+      }
+    },
+    "boundariesEnforced": [
+      "No corrective change was produced, in the artifact or in the repository. The one simulation that modelled a correction ran in memory over parsed table rows and wrote nothing, and it was performed to measure regression scope rather than to repair or mask the defect.",
+      "Three fix approaches are named with their tradeoffs and none is chosen; the choice is a design decision routed to architect as Q-002.",
+      "No redesign was drafted. The third alternative is named as an option with its cost, not specified.",
+      "No gate, closure, merge, or release decision was recorded. Closure states that the operator correction is evidence of the varying precondition and not a resolution."
+    ],
+    "handoffs": {
+      "omn-dev-1-implement": "the root cause, the three candidate column contracts with what distinguishes them, and the five-area regression scope with the dependency connecting each area to the change, including the measured result that correcting the five cells changes no dependency edge under current row adjacency",
+      "omn-qa": "the reproduction reduced to a single varying quantity, verification that must exercise the reader divergence in both directions rather than only the passing single-artifact case, and the monitoring signals",
+      "architect": "Q-002, the column contract and the artifact type per blocked phase, which the fix strategy is conditional on",
+      "omn-tech-lead": "Q-003, the defect-repair workflow narrative disagreeing with its own corrected table",
+      "omn-orchestrator": "Q-004, the disposition of two earlier runs holding a phase durably blocked, and Q-005, the environments not reached"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/execution.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "agents/omn-dev-1-bug-analyst/examples.md",
+    "runs/run-27e36c138498/states/root-cause-analysis/invocation-envelope.json",
+    "runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-27e36c138498/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-27e36c138498/states/root-cause-analysis/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

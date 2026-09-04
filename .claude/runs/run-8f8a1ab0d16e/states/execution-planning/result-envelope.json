@@ -1,0 +1,81 @@
+{
+  "invocation_id": "inv-8f8a1ab0d16e-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-8f8a1ab0d16e/states/execution-planning/artifacts/execution-plan.md"
+  ],
+  "structured_output": {
+    "plan_id": "CKA-03-execution-plan",
+    "plan_status": "complete",
+    "input_digest": "sha256:2fa4520294ab5f75c7525d234633a09f",
+    "context_digest": "sha256:9f90eb89f94639cd8aec24f921d08586",
+    "counts": {
+      "statements": 20,
+      "assumptions": 5,
+      "risks": 9,
+      "tasks": 10,
+      "dependency_edges": 15,
+      "external_dependencies": 2,
+      "waves": 6,
+      "open_questions": 2,
+      "blocking_open_questions": 0,
+      "plan_acceptance_criteria": 7
+    },
+    "recomputed_topological_order": [
+      "T-006", "T-010", "T-001", "T-002", "T-003", "T-008", "T-004", "T-005", "T-009", "T-007"
+    ],
+    "recomputed_waves": {
+      "wave_1": ["T-006", "T-010"],
+      "wave_2": ["T-001"],
+      "wave_3": ["T-002", "T-003", "T-008"],
+      "wave_4": ["T-004"],
+      "wave_5": ["T-005", "T-009"],
+      "wave_6": ["T-007"]
+    },
+    "order_check": "recomputed topological order from the 8.1 edge table matches the stated 8.3 implementation order exactly; ties broken by ascending task identifier",
+    "traceability_closure": {
+      "forward": "20 of 20 statements map to a task, assumption, or open question",
+      "backward": "10 of 10 tasks trace to statements or assumptions",
+      "lateral": "9 risks, 5 assumptions, and 15 edges all resolve to existing identifiers or plan-wide"
+    },
+    "gate_condition_handling": "the approved Scope Gate condition that the default-branch push trigger runs both verification surfaces is registered as A-001 with matching risk R-001; the pull-request-only wording in the upstream scope artifact is treated as imprecision, not narrowing",
+    "quality_checks": {
+      "checks_run": 70,
+      "checks_passed": 70,
+      "checks_failed": 0,
+      "results": {
+        "Q1.1": "pass", "Q1.2": "pass", "Q1.3": "pass", "Q1.4": "pass", "Q1.5": "pass", "Q1.6": "pass", "Q1.7": "pass",
+        "Q2.1": "pass", "Q2.2": "pass", "Q2.3": "pass", "Q2.4": "pass", "Q2.5": "pass", "Q2.6": "pass", "Q2.7": "pass", "Q2.8": "pass",
+        "Q3.1": "pass", "Q3.2": "pass", "Q3.3": "pass", "Q3.4": "pass",
+        "Q4.1": "pass", "Q4.2": "pass", "Q4.3": "pass", "Q4.4": "pass", "Q4.5": "pass",
+        "Q5.1": "pass", "Q5.2": "pass", "Q5.3": "pass", "Q5.4": "pass", "Q5.5": "pass", "Q5.6": "pass", "Q5.7": "pass", "Q5.8": "pass", "Q5.9": "pass", "Q5.10": "pass",
+        "Q6.1": "pass", "Q6.2": "pass", "Q6.3": "pass", "Q6.4": "pass", "Q6.5": "pass", "Q6.6": "pass", "Q6.7": "pass", "Q6.8": "pass",
+        "Q7.1": "pass", "Q7.2": "pass", "Q7.3": "pass", "Q7.4": "pass", "Q7.5": "pass", "Q7.6": "pass",
+        "Q8.1": "pass", "Q8.2": "pass", "Q8.3": "pass", "Q8.4": "pass", "Q8.5": "pass",
+        "Q9.1": "pass", "Q9.2": "pass", "Q9.3": "pass", "Q9.4": "pass", "Q9.5": "pass", "Q9.6": "pass", "Q9.7": "pass",
+        "Q10.1": "pass", "Q10.2": "pass", "Q10.3": "pass", "Q10.4": "pass", "Q10.5": "pass",
+        "Q11.1": "pass", "Q11.2": "pass", "Q11.3": "pass", "Q11.4": "pass", "Q11.5": "pass"
+      },
+      "repair_passes": []
+    },
+    "boundary_statement": "no implementation work was performed, no repository file outside the permitted writes was modified, no command was executed, and no external system was accessed; all ticket and scope content was consumed as supplied input text"
+  },
+  "evidence_refs": [
+    "agents/planner/manifest.yaml",
+    "agents/planner/system.md",
+    "agents/planner/identity.md",
+    "agents/planner/reasoning.md",
+    "agents/planner/execution.md",
+    "agents/planner/output.md",
+    "agents/planner/quality.md",
+    "agents/planner/examples.md",
+    "runs/run-8f8a1ab0d16e/states/execution-planning/invocation-envelope.json"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "runs/run-8f8a1ab0d16e/states/execution-planning/artifacts/execution-plan.md",
+    "runs/run-8f8a1ab0d16e/states/execution-planning/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

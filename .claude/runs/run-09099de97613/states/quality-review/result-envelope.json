@@ -1,0 +1,74 @@
+{
+  "invocation_id": "inv-09099de97613-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-09099de97613/states/quality-review/artifacts/review-package.md"
+  ],
+  "structured_output": {
+    "package_id": "OMT-01-quality-review",
+    "package_status": "complete",
+    "verdict": "approve-with-corrections",
+    "severity": {
+      "critical": 1,
+      "high": 0,
+      "medium": 2,
+      "low": 3
+    },
+    "findings": 6,
+    "correction_requests": 6,
+    "blocking_correction_requests": 2,
+    "blocking_correction_requests_closed": 2,
+    "blocking_findings_outstanding": [],
+    "finding_status": {
+      "resolved": [
+        "F-001",
+        "F-002"
+      ],
+      "open": [
+        "F-003",
+        "F-005"
+      ],
+      "accepted-risk": [
+        "F-004",
+        "F-006"
+      ]
+    },
+    "tests_re_executed_by_review": {
+      "executed": 31,
+      "passed": 31,
+      "failed": 0
+    },
+    "coverage_checks_re_executed": {
+      "executed": 6,
+      "passed": 6
+    },
+    "critical_finding_summary": "F-001: session writes joined an absolute path, so for a root outside the repository the pre-image write and the dry-run candidate write both resolved to the original file. Corrected under CR-001 with five regression tests.",
+    "input_digest": "sha256:cbc350ff977178e78b79c3766de4630b",
+    "context_digest": "sha256:d2a44ef0a7d382b3285bf0991857fe61",
+    "attestations": [
+      "no critical or high finding was approved away; the one critical finding is resolved and its correction re-executed",
+      "the severity counts are recomputed from the findings table and do not drift from it",
+      "test evidence was re-executed by this review rather than accepted from the implementation report",
+      "no source file was modified by the review itself; CR-001 and CR-002 were executed by the implementing owner",
+      "no gate decision was recorded by this agent"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-2-reviewer/system.md",
+    "agents/omn-dev-2-reviewer/identity.md",
+    "agents/omn-dev-2-reviewer/reasoning.md",
+    "agents/omn-dev-2-reviewer/execution.md",
+    "agents/omn-dev-2-reviewer/output.md",
+    "agents/omn-dev-2-reviewer/quality.md",
+    "agents/omn-dev-2-reviewer/examples.md",
+    "runs/run-09099de97613/states/quality-review/invocation-envelope.json",
+    "runs/run-09099de97613/states/implementation/artifacts/implementation-report.md"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "runs/run-09099de97613/states/quality-review/artifacts/review-package.md",
+    "runs/run-09099de97613/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,436 @@
+{
+  "invocation_id": "inv-8f8a1ab0d16e-05-001",
+  "run_id": "run-8f8a1ab0d16e",
+  "work_item_id": "run-8f8a1ab0d16e::quality-review",
+  "idempotency_key": "sha256:86ad85f469bfb9a74014aa190b0e3833",
+  "state_id": "quality-review",
+  "phase_index": 5,
+  "agent_id": "omn-dev-2-reviewer",
+  "agent_version": "1.1.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-2-reviewer.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-2-reviewer/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-2-reviewer/system.md",
+      "agents/omn-dev-2-reviewer/identity.md",
+      "agents/omn-dev-2-reviewer/reasoning.md",
+      "agents/omn-dev-2-reviewer/execution.md",
+      "agents/omn-dev-2-reviewer/output.md",
+      "agents/omn-dev-2-reviewer/quality.md",
+      "agents/omn-dev-2-reviewer/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-2-reviewer/system.md": "sha256:ef234d6d8e6b74d21d099ab744ab9f60",
+      "agents/omn-dev-2-reviewer/identity.md": "sha256:725ba943cf8532dc4f666e68ca191592",
+      "agents/omn-dev-2-reviewer/reasoning.md": "sha256:f84d57686c7afa96e74cb1907e954c71",
+      "agents/omn-dev-2-reviewer/execution.md": "sha256:6c93e33bae84f6254f626f3fd1b447d7",
+      "agents/omn-dev-2-reviewer/output.md": "sha256:1b324b77d86f30d076d08768be2f9d5c",
+      "agents/omn-dev-2-reviewer/quality.md": "sha256:4d4c09812b441785acd1b03330468cc9",
+      "agents/omn-dev-2-reviewer/examples.md": "sha256:488657c9d243c3d498245922c2d92906"
+    },
+    "capabilities": [
+      "code-review",
+      "governance-enforcement",
+      "quality-verification"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "pull-request-diff",
+      "quality-scan-scope",
+      "technical-design",
+      "execution-plan",
+      "scope-definition",
+      "bug-analysis",
+      "architecture-decision-record",
+      "coding-standards",
+      "test-evidence",
+      "architecture-rules",
+      "security-criteria",
+      "standards-checklist",
+      "regression-targets",
+      "known-issues",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-03-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-03-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-03: CI workflow gating every PR (tests + verifiers, by discovery)\n\n## Source\n\nTicket CKA-03 in the adoption backlog under `docs/` (Epic A \u2014 Verification baseline,\nDays 0\u201330). Source recommendation: R1 of the adoption review (2026-08-27).\nType: Story. Priority: Highest. Effort: M. Depends on: CKA-01 (delivered,\nrun-efe092286625) and CKA-02 (delivered, run-e0dba6763475).\n\n## Request\n\nNothing gates a pull request today: the unit-test suite and the framework's proof\nscripts run only when a contributor remembers to run them locally. The adoption review\nidentified this as the highest-leverage baseline gap \u2014 a regression in any verifier or\ntest can merge silently.\n\nDeliverable: a new CI workflow that runs on every pull request (and on pushes to the\ndefault branch) with two verification surfaces, both located **by discovery, never a\ncurated file list** (the reviewed sibling project's failure mode was a hand-curated\ntest list that silently ran 14 of 77 suites):\n\n1. The unit-test suite via `python -m unittest discover -s tests` from the repo root.\n2. Every proof script matching `verify_*.py` under the framework payload runtime\n   directory, each executed individually and asserted to exit successfully with its\n   `PROVEN` verdict. A failing script must fail CI **naming that verifier**.\n\nPlatform matrix: ubuntu and windows runners.\n\nRollout policy (encoded in the workflow, documented where contributors will see it):\n- Verifier jobs are advisory (non-blocking) for the first week after merge, then\n  required.\n- The windows job is advisory for week 1.\n- The ubuntu unit-test job is required from day one.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- A PR that breaks any single verifier fails CI naming the verifier.\n- Adding a new `tests/test_*.py` or `verify_*.py` file is picked up with no CI config\n  change.\n\n## Constraints\n\n- Additive change only: the ticket list forbids altering `record_gate_decision`, the\n  gate matrix semantics, producer exclusion, `runner._require_approval`, or any\n  human-block path. This ticket adds CI configuration and, at most, a small discovery\n  helper script; it changes no runtime behavior.\n- Discovery, not curation: no workflow step may enumerate test or verifier files by\n  name in a way that requires editing CI config when a file is added.\n- Known operational facts the design must absorb:\n  - The recovery proof script is timing-sensitive under CPU load (a backoff-deadline\n    assertion) and its crash can leave injected runs behind that fail the self-hosting\n    proof's run-accounting check downstream \u2014 verifier ordering/isolation in CI must\n    not let one flake cascade.\n  - Some render tests assert color output and fail spuriously when `NO_COLOR` is set\n    in the environment; CI must not set it.\n  - The working tree currently carries three pre-existing orphan run directories from\n    2026-08-27 that fail the self-hosting run-accounting check (S8); a follow-up task\n    exists. CI design must state how this is handled (advisory window covers it, or\n    the orphans are cleaned first) rather than shipping a permanently red required job.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py`\n  proof scripts PROVEN, no change to gate-decision behavior, and where docs were\n  touched, `user-guide.html` updated to match.\n\n## Priority and deadline\n\nHighest priority; the closing ticket of Phase 1 (Days 0\u201330) of the adoption plan.\nCKA-06, CKA-07, CKA-08, CKA-09, CKA-13, and CKA-15 all depend on this CI hook existing.",
+        "digest": "sha256:2fa4520294ab5f75c7525d234633a09f"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-8f8a1ab0d16e/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-8f8a1ab0d16e/states/implementation/artifacts/implementation-report.md",
+        "text": "```yaml\nimplementationReport:\n  reportId: IR-2026-0005\n  changeReference: CKA-03 -- CI workflow gating every pull request and default-branch push with the discovered unit-test and verifier surfaces (ticket CKA-03 in the adoption backlog under docs/, Epic A)\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-03-feature-request.md\n    - type: technical-design\n      reference: runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  workflowPhase: implementation\n  verificationStatus: partially-verified\n  inputDigest: sha256:aa002c6a6625f9473332a8db3c0b7f77\n  contextDigest: sha256:fbf2e953c78bf37cdf0ac7f7c01da129\n```\n\n## Metadata\n\n- Report ID: IR-2026-0005\n- Change reference: CKA-03 -- CI workflow gating every pull request and default-branch push with the discovered unit-test and verifier surfaces (ticket CKA-03 in the adoption backlog under docs/, Epic A)\n- Workflow phase: implementation\n- Status: provisional\n- Verification status: partially-verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: every pull request and every default-branch push now carries a CI definition that runs two verification surfaces on ubuntu and windows -- the unit-test suite by standard-library discovery from the repository root, and every proof script matching `verify_*.py` under the framework runtime directory, each in its own job on its own runner -- where previously no CI configuration existed and a regression in any verifier or test could merge silently. A failing verifier fails CI naming itself in its check name, a verifier passes only on exit code 0 plus its own all-checks-passed summary with a non-negative verdict, and branch protection has a stable four-name check contract to bind to.\n- Approach taken: the design's selected option O-001 as accepted -- one new workflow definition at `.github/workflows/verify.yml` containing: a discovery job whose single inline interpreter expression globs `verify_*.py` scoped to the framework runtime directory (the bundled package mirror and build output are outside the scope by construction, and no helper file is committed) and publishes the sorted list as job output, refusing an empty set; per-platform unit-test jobs (`tests-ubuntu`, `tests-windows`) provisioned at the packaging floor (3.10) with the package and its declared YAML dependency installed first; per-platform verifier matrices fanned out from the discovery output, one job per discovered script per platform on a fresh runner and fresh checkout, executing the script with no arguments and asserting exit 0 plus the generic summary-and-verdict contract, with fail-fast disabled so no failure cancels a sibling; and two always-run fan-in checks (`verifiers-ubuntu-ok`, `verifiers-windows-ok`) that evaluate every upstream result explicitly and fail -- never succeed and never skip -- on any upstream failure or cancellation. Advisory standing is encoded as absence from the branch-protection required-checks list, never as a per-job failure-tolerance flag; the check-name contract, rollout standings, and the flip's green-self-hosting precondition are documented in the workflow header and in the contributor documentation, with the hand-synced HTML handbook counterpart updated to match. A committed regression net locks the workflow's contract properties into the unit-test suite. Superseded pull-request runs are cancelled; jobs carry read-only repository access and no secrets.\n- Design reference: decision records D-001 and D-002 implemented as accepted; D-003 honored by encoding its clean-first flip precondition in the workflow header and documentation while the cleanup itself remains owned by the existing follow-up task; inline decisions D-004 through D-007 implemented; impacted modules M-001 and M-008 delivered, M-003 through M-007 verified untouched, M-002 documented but not writable from this change; sequencing constraints P-001 through P-004 encoded and P-008 delivered; of technical design CKA-03-technical-design.\n- Out of scope: the branch-protection required-checks configuration itself -- a hosting-platform settings surface, not a repository file, enacted by its named owners per the design's staged rollout; the orphan-run cleanup, owned by the existing follow-up task; the proof scripts, the existing unit tests, the framework runtime, and every gate-decision surface the ticket names, which are executed or documented here but never modified; and the dependent backlog tickets, including the documentation-synchronization automation. Leaving each is safe because this change is purely additive at the repository level: removing the workflow definition restores the repository's prior state, and no runtime behavior changed in either direction.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | `.github/workflows/verify.yml` | added | The CI verification workflow: pull-request and default-branch push triggers, per-platform unit-test jobs, the inline discovery job, one verifier job per discovered script per platform with the generic exit-plus-verdict assertion, two always-run per-platform fan-in checks, read-only permissions, superseded-run cancellation, and the header documenting the check-name contract, the rollout standings, and the flip precondition | `D-001`, `D-002`, `D-004`, `D-005`, `D-006`, `D-007`, `M-001`, `P-001`, `P-002`, `P-003`, `P-004` |\n| `C-002` | `tests/test_ci_workflow.py` | added | Committed regression net locking the workflow contract: topology and stable check names, matrix fed from the discovery output with fail-fast disabled, always-run fan-ins with explicit result evaluation, no color-suppression value and no failure-tolerance flag in effective lines, no curated test or verifier filename, the discovery expression enumerating exactly the present verifier set, the verifier-assertion wrapper's accept and reject semantics against synthetic scripts, and documentation parity of the check names | `M-008`, and the design's rename risk and file-addition acceptance intent (its structural-review mitigation), inside this agent's test latitude |\n| `C-003` | `README.md` | modified | Contributor-facing record of the CI surface: the two discovered surfaces, the four stable check names and their standings, advisory-by-omission, the flip mechanism and its green-self-hosting precondition, and the self-containment expectation for new verifiers | `M-008`, `P-008` |\n| `C-004` | `docs/USER-GUIDE.md` | modified | Handbook section documenting the CI gating, the check-name contract, and the rollout policy where contributors read | `M-008`, `P-008` |\n| `C-005` | `docs/user-guide.html` | modified | Hand-synced HTML counterpart of the handbook change, preserving the documentation parity the definition of done requires | `M-008`, `P-008`, `F-013` |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | the workflow parses as YAML and encodes the accepted structure: both triggers, the six-job topology, the four stable check names, the verifier matrices fed from the discovery job's output, fail-fast disabled, always-run fan-ins, read-only permissions, and the 3.10 interpreter floor | static | `C-001` | `python ci_local_checks.py` (temporary verification script executed from a session scratch directory outside the repository) | pass |\n| `T-002` | policy and curation scans: no color-suppression value set and no per-job failure-tolerance flag in any effective line, the header documents the check-name contract and standings, and no test or verifier filename is enumerated anywhere in the workflow | static | `C-001` | `python ci_local_checks.py` (same script, same run) | pass |\n| `T-003` | the discovery step's inline expression, executed locally with the step-output file redirected, enumerates exactly the seven `verify_*.py` files present under the framework runtime directory, with a matching count and a non-empty guard | unit | `C-001` | `python ci_local_checks.py` (same script, same run) | pass |\n| `T-004` | the verifier-assertion wrapper, extracted verbatim from the workflow, accepts a really passing proof script: `verify_manifests.py` executed with no arguments returned exit 0 and `2/2 checks passed -- CONFORMS` | unit | `C-001` | `python ci_local_checks.py` (same script, same run) | pass |\n| `T-005` | the wrapper rejects each failure shape: nonzero exit, exit 0 with a negative-verdict summary, and exit 0 with no summary line, against synthetic scripts in a temporary tree; the two platform copies of the wrapper are byte-identical | unit | `C-001` | `python ci_local_checks.py` (same script, same run) | pass |\n| `T-006` | the committed regression net: 13 tests locking the workflow topology, stable names, discovery-fed fan-out, fan-in semantics, environment and permission policy, no-curation property, discovery-expression correctness, wrapper accept and reject semantics, and check-name documentation parity across all three documentation surfaces | unit | `C-001`, `C-002`, `C-003`, `C-004`, `C-005` | `python -m unittest discover -s tests -p test_ci_workflow.py` | pass |\n| `T-007` | post-change regression: the full suite by discovery from the repository root is green -- 316 tests, OK -- matching the most recent recorded full-suite baseline in count and verdict, so no existing test regressed | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005` | `python -m unittest discover -s tests` | pass |\n\n## Verification Results\n\n- Verification method: local static and dynamic verification of the workflow definition -- YAML parse plus structural assertions, local execution of the discovery expression and the verifier-assertion wrapper extracted verbatim from the workflow (positively against a real proof script, negatively against synthetic failing scripts), documentation-parity scans, a committed regression net running inside the unit-test suite, and the full suite by discovery executed after the change. The hosting platform's own execution of the workflow cannot be exercised from this environment; the checks above are the compensating local evidence for exactly the properties a live run would exercise.\n- Commands executed: `python -m unittest discover -s tests` (executed once before any change and once after; the pre-change run's per-test verdict stream was truncated by its capture pipe, so the regression claim rests on the post-change run -- 316 tests, OK -- which matches the most recent recorded full-suite baseline in both count and verdict, and on the fact that no source file consumed by the pre-existing 316 tests was modified); `python ci_local_checks.py` from a session scratch directory outside the repository (three runs: the first surfaced three raw-scan findings against the workflow's own header comment, repaired by removing concrete verifier filenames from the comment and scoping the policy scans to effective lines; the final run passed 27 of 27 assertions); `python -m unittest discover -s tests -p test_ci_workflow.py` (13 tests, OK).\n- Result summary: 7 test-evidence entries executed, 7 passed, 0 failed; underlying counts: 27 of 27 local assertions, 13 of 13 committed regression-net tests, 316 of 316 full-suite tests.\n- Unverified areas: live execution of the workflow on the hosting platform -- the matrix fan-out from the discovery job's output, the rendered per-verifier check names, fan-in behavior under a real upstream failure and a real cancellation, superseded-run cancellation, and both surfaces' results on hosted runner images across the two platforms, including interpreter provisioning, the runner environments' absence of a color-suppression value, and the recovery proof's timing behavior on shared hardware; and the branch-protection binding of the four check names, which is a platform settings surface no repository file can carry.\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | The push trigger in `C-001` names the branch literally as `main` rather than resolving the default branch, and the workflow header flags the literal for correction if the default branch differs | the design's requirement that the workflow trigger on every default-branch push | The trigger syntax requires a literal branch name and the repository snapshot supplied to this run carries no branch metadata from which to read the actual name; the platform-default name was encoded and its confirmation routed to the owner via `Q-002` | not-required |\n| `V-002` | The verifier fan-out in `C-001` is realized as two per-platform matrix jobs rather than a single two-axis matrix | `D-001` -- one job per discovered verifier per platform, with one stable fan-in check per platform | The per-platform fan-ins must evaluate their own platform's aggregate result, and the platform reports an aggregate result per upstream job, not per matrix slice; splitting by platform yields exactly the per-verifier-per-platform job set `D-001` states while keeping each fan-in's evaluation exact | not-required |\n\n## Boundary Compliance\n\n- Module boundaries preserved: nothing under the framework payload directory changed -- the proof scripts, the framework runtime, the gate-decision surfaces the ticket names, the bundled package mirror, and the packaging metadata are all untouched, matching the design's no-change-verified modules; the change is additive at the repository level (one workflow definition, one test module, documentation), and the committed regression net's curation scan holds the workflow to the discovery boundary.\n- Public interface changes: one new externally referenced contract -- the four stable check names `tests-ubuntu`, `tests-windows`, `verifiers-ubuntu-ok`, and `verifiers-windows-ok` that branch protection binds to, documented as a rename-sensitive contract in the workflow header and both documentation surfaces and locked by `C-002`. No code interface changed.\n- Data or migration impact: none -- no data store, schema, or persistent state is created, read differently, or migrated; the workflow reads the repository tree and writes nothing into it.\n- Declared side effects: exactly the five change-set paths, plus the two evidence artifacts this invocation wrote -- this report and its result envelope at their envelope-named paths, `runs/run-8f8a1ab0d16e/states/implementation/artifacts/implementation-report.md` and `runs/run-8f8a1ab0d16e/states/implementation/result-envelope.json`. The temporary verification script ran from a session scratch directory outside the repository and wrote nothing inside it; its synthetic verifier fixtures lived in interpreter-managed temporary directories. No other file was written, no external system was reached, and no gate decision was recorded.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | The verifier fan-in checks report red from the first live run on pre-existing repository state: the three orphan run directories the ticket records make the self-hosting proof's run-accounting check fail until the externally owned cleanup lands, and the previous delivery's report records further pre-existing proof-script findings | high | low | In place: advisory standing -- the fan-in and windows names are absent from the required-checks list at merge, so red is visible but non-blocking -- and the flip precondition documented in the workflow header, README, and handbook: a default-branch run showing the self-hosting proof passing before any verifier check becomes required |\n| `R-002` | A future workflow edit renames one of the four stable check names, detaching branch protection: a renamed required check blocks every pull request as forever-expected, or blocking silently lapses | low | high | In place: the four names are locked by the committed regression net in `C-002`, which fails the suite on any rename, and are documented as a rename-sensitive contract in the workflow header and both documentation surfaces |\n| `R-003` | The recovery proof's backoff-deadline assertion flakes on hosted-runner hardware despite a dedicated runner per verifier, especially on windows | medium | medium | In place: runner-boundary isolation and disabled fail-fast keep a flake from cascading into any other verifier's result; advisory standing keeps a flake from blocking during week one; and the documented flip precondition defers required standing until the advisory-week evidence supports it |\n\n## Handoff Notes\n\n- Reviewer focus areas: the verifier-assertion wrapper in `C-001` (the generic summary-and-verdict contract, duplicated across the two platform jobs -- byte-identity is asserted by `C-002`, but the duplication itself is where drift would start); the fan-in result evaluation (never-skip semantics under failure and cancellation, which only a live run can finally confirm); the branch literal in the push trigger (`V-001`); and the check-name contract sites (`R-002`).\n- Follow-up work: enact the day-one required set (only `tests-ubuntu`) in branch protection and record the flip ownership per the design's flip-ownership decision (`Q-003`); validate the first live runs on both platforms (`Q-001`); observe the advisory week and land the externally owned orphan cleanup so the flip precondition can be met; then enact the flip as a settings-only change adding the two fan-in names and `tests-windows`; the documentation-synchronization automation remains with its own backlog ticket.\n- Documentation impact: delivered within this change -- README, the handbook, and its hand-synced HTML counterpart all carry the check names, standings, flip mechanism, and orphan handling, and parity is asserted by `C-002`; the only remaining documentation event is recording the flip when its owner enacts it.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | Which run validates the workflow's live behavior on the hosting platform -- the matrix fan-out from the discovery output, the rendered per-verifier check names, fan-in failure and cancellation semantics, and both platforms' suite results -- before the verification claim for this change is treated as sufficient at the Review Gate? | yes | omn-qa | `C-001` |\n| `Q-002` | Is the repository's default branch literally `main`, as the push-trigger literal in `C-001` assumes given the snapshot carries no branch metadata? | no | omn-tech-lead | `C-001` |\n| `Q-003` | Who enacts the day-one required set and the later flip in branch protection, and where is the flip recorded -- the enactor and record location the design's flip-ownership decision assigns to the tech lead? | no | omn-tech-lead | `C-001` |",
+        "digest": "sha256:9b30a1faab467f8cd89ba15c6f95f6db",
+        "produced_by": "implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the subject under review: an implementation report for a delivered change, a stable pull request diff for a review-pull-request run, or a quality-scan scope naming the repository boundary, exclusions, and risk threshold for a code-quality-scan run. Without one there is nothing under review, and reviewing anyway would mean assessing this agent's own choice of what to read."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-8f8a1ab0d16e/states/implementation/artifacts/implementation-report.md",
+      "produced_by": "implementation"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-04T07:12:12Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8d6bd0735e4288ea81c161556faa7c18",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:d2a44ef0a7d382b3285bf0991857fe61",
+    "input_digest": "sha256:f87a4b566a69a484f4ebce485990801e",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-03-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-03-feature-request.md",
+        "digest": "sha256:2fa4520294ab5f75c7525d234633a09f"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-8f8a1ab0d16e/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-8f8a1ab0d16e/states/implementation/artifacts/implementation-report.md",
+        "digest": "sha256:9b30a1faab467f8cd89ba15c6f95f6db"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/review-package.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md",
+      "runs/run-8f8a1ab0d16e/states/quality-review/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies repository source, tests, or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the review package"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code or tests",
+      "revise the technical design rather than raising a finding against it",
+      "define, widen, or narrow product scope",
+      "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+      "record a merge or release decision",
+      "decide a gate that assesses evidence this agent produced",
+      "review a change this agent authored",
+      "approve while a critical or high finding is open, or while test evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "review an implemented change against the requirements, the accepted design, and the standards in force",
+        "survey a bounded repository scope for redundant, dead, duplicated, over-abstracted, or generated low-value code, against the maintainability standards in force",
+        "assess conformance to coding standards, architecture rules, and security criteria",
+        "judge whether the supplied evidence supports the claim it is offered for",
+        "judge whether executed tests cover the behavior the change altered",
+        "classify each defect by severity, category, and location against a named standard",
+        "issue correction requests that state a required outcome and name its owner",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "execute the repository's own verification commands to confirm reported results",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code or tests",
+        "revise the technical design rather than raising a finding against it",
+        "define, widen, or narrow product scope",
+        "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+        "record a merge or release decision",
+        "decide a gate that assesses evidence this agent produced",
+        "review a change this agent authored",
+        "approve while a critical or high finding is open, or while test evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "Independence is the whole value of this role. An agent that can change the code it assesses becomes the producer of the work it is about to judge, and the Producer Exclusion Rule then disqualifies it from the very verdict it exists to give. The review reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies repository source, tests, or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the review package"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same finding set, the same severity assignment, the same correction-request set, the same verdict, and the same declared package status.",
+      "identifierSchemes": {
+        "findings": "F-<zero-padded-sequence>",
+        "correctionRequests": "CR-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Findings are ordered by descending severity; ties break toward the lower location in lexical order. Correction requests follow the findings they address.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "review-package.md",
+    "artifact_path": "runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md",
+    "template_ref": "templates/review-package.md",
+    "contract_ref": "agents/omn-dev-2-reviewer/output.md",
+    "quality_ref": "agents/omn-dev-2-reviewer/quality.md",
+    "validator": "review_package_validator",
+    "result_envelope_path": "runs/run-8f8a1ab0d16e/states/quality-review/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-04T07:12:13Z"
+}

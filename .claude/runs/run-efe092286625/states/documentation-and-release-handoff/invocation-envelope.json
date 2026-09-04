@@ -1,0 +1,417 @@
+{
+  "invocation_id": "inv-efe092286625-06-002",
+  "run_id": "run-efe092286625",
+  "work_item_id": "run-efe092286625::documentation-and-release-handoff",
+  "idempotency_key": "sha256:f4afd2e881cca63d1a8ec54ce32d082f",
+  "state_id": "documentation-and-release-handoff",
+  "phase_index": 6,
+  "agent_id": "omn-documentation",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-documentation.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-documentation/manifest.yaml",
+    "load_order": [
+      "agents/omn-documentation/system.md",
+      "agents/omn-documentation/identity.md",
+      "agents/omn-documentation/reasoning.md",
+      "agents/omn-documentation/execution.md",
+      "agents/omn-documentation/output.md",
+      "agents/omn-documentation/quality.md",
+      "agents/omn-documentation/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-documentation/system.md": "sha256:407f35d95b5e232c7d87d7740a942844",
+      "agents/omn-documentation/identity.md": "sha256:e40e9fd9da20ae31f5af17d3cc97fcf2",
+      "agents/omn-documentation/reasoning.md": "sha256:11b286235d28b0bc358674c5b9357736",
+      "agents/omn-documentation/execution.md": "sha256:0077338ee3cbe3eee246e3556f9da205",
+      "agents/omn-documentation/output.md": "sha256:9e0c56ac978b9695f13668e209f8e2e4",
+      "agents/omn-documentation/quality.md": "sha256:972fe80aafbde6b6f8142b6dbd97e081",
+      "agents/omn-documentation/examples.md": "sha256:baead714ded57fbb1d36b103b957ee78"
+    },
+    "capabilities": [
+      "documentation",
+      "release-communication"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "validation-report",
+      "review-package",
+      "deployment-status",
+      "scope-definition",
+      "technical-design",
+      "execution-plan",
+      "bug-analysis",
+      "monitoring-health-record",
+      "final-change-summary",
+      "stakeholder-list",
+      "verification-report",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "closure-context",
+      "communication-requirements",
+      "existing-documentation",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "review-package",
+        "reference": "runs/run-efe092286625/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-efe092286625/states/quality-review/artifacts/review-package.md",
+        "text": "```yaml\nreviewPackage:\n  packageId: RP-2026-0002\n  reviewReference: run-efe092286625 -- implement-feature/quality-review over implementation report IR-2026-0003, delivering CKA-01 from the adoption backlog under docs/ (Epic A, verification baseline)\n  sourceInputs:\n    - type: implementation-report\n      reference: runs/run-efe092286625/states/implementation/artifacts/implementation-report.md\n    - type: feature-request\n      reference: runs/inputs/cka-01-feature-request.md\n    - type: technical-design\n      reference: runs/run-efe092286625/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n    - type: architecture-decision-record\n      reference: runs/run-efe092286625/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md\n    - type: architecture-decision-record\n      reference: runs/run-efe092286625/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md\n  producedBy: omn-dev-2-reviewer\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: approve-with-corrections\n  inputDigest: sha256:fb26410c6c64c9dbbeb2eb290fc44d4a\n  contextDigest: sha256:d2a44ef0a7d382b3285bf0991857fe61\n```\n\n## Metadata\n\n- Review ID: RP-2026-0002\n- Reviewer: omn-dev-2-reviewer\n- Change under review: run-efe092286625 -- the five-entry change set `C-001` to `C-005` recorded by implementation report IR-2026-0003, which declares the framework payload's YAML dependency in the distribution metadata, corrects the published dependency claim in both documentation surfaces, and extends the shared `validate`/`doctor` verification path with static module-top-level import resolution reporting the new ERROR finding `V-IMPORT`\n- Review date: 2026-08-28\n\n## Review Scope\n\n- In scope: the five change-set entries `C-001` to `C-005` -- `omn_agent/validator.py`, `pyproject.toml`, `README.md`, `docs/user-guide.html`, and `tests/test_omn_agent.py`, each read in full in its current working-tree state -- measured against technical design CKA-01-technical-design (decisions `D-001` to `D-003`, hard constraints `C-001` to `C-008`, sequencing constraints `P-001` to `P-005`, and the section 9 test focus areas), decision records D-001 and D-002, the feature request's constraints, and the phase's skill playbooks; the deviation `V-001` the report records against the design's sibling-resolution wording; the test evidence entries `T-001` to `T-007`; and the additivity obligation, verified by symbol search showing `record_gate_decision`, `_require_approval`, producer-exclusion, and human-block symbols occur only in `omn_agent/runner.py`, `omn_agent/update.py`, `omn_agent/quality_scan.py`, and `omn_agent/fix_comments.py` -- none in the changed code module -- matching the symbol-inventory fact the design records in section 4.1, row 13.\n- Out of scope: validation of the ticket's acceptance criteria and the two P-005 demonstrations (clean-environment install resolution and a `doctor` run against a real environment lacking the YAML distribution), which belong to `omn-qa` and are already routed there by the report's own open question; the untouched modules M-005 through M-008 beyond confirming the change set does not name them and the forbidden symbols are absent from the changed module; whether the ticket was worth delivering, which is scope authority held by `omn-product-owner`; merge and release, which belong to `omn-tech-lead`; and whole-tree untouched-ness beyond the declared change set -- the working tree carries no version-control history, so the claim that only five files changed rests on the report's declared side effects plus content inspection of the modules the design requires unchanged, not on a diff, and is recorded here as an examination limit rather than silently assumed.\n- Evidence reviewed: read in full during this review -- implementation report IR-2026-0003, the feature request, technical design CKA-01-technical-design, decision records D-001 and D-002, all five changed files, the run's Design Gate records (`runs/run-efe092286625/gates/design-gate/failure-envelope.json` and the decision record in `runs/run-efe092286625/state.json`, which confirm the gate was approved by `omn-tech-lead` on 2026-08-28 with the rationale resolving the design's open version-range question as `pyyaml>=6` and moving D-001/D-002 to Accepted), and the skill playbooks `skills/testing/testing-strategy.md`, `skills/security/secure-engineering.md`, `skills/performance/performance-engineering.md`, and `skills/architecture/clean-architecture-checklist.md`. Executed in this review from the repository root, all read-only: (1) `env -u NO_COLOR python -m unittest discover -s tests -k missing_toplevel_import -k import_check -k import_finding_hint -k DependencyDeclaration` -- 7 tests, all pass, confirming `T-002` through `T-006`; (2) `env -u NO_COLOR python -m unittest discover -s tests -k install -k validate -k validation -k doctor -k status` -- 22 tests, all pass, confirming healthy-path preservation on the behaviors this change touches; (3) `python -c \"import unittest; s=unittest.defaultTestLoader.discover('tests'); print(s.countTestCases())\"` -- 272 collected, matching the report's post-change total exactly; (4) a read-only script scan of `runs/run-efe092286625/state.json` for the Design Gate decision, which returned nothing under its first filter, with the rationale then located by direct reading of that file. The full-suite post-change pass (`T-007`, 272 tests) and the pre-change baseline (`T-001`, 265 tests) are recorded by the report as executed and are cited here as claimed results, corroborated by the targeted re-runs and the collection count but not re-executed in full in this review.\n\n## Findings\n\n| ID | Severity | Category | Location | Requirement | Finding | Correction Request | Status |\n|---|---|---|---|---|---|---|---|\n| `F-001` | low | test-adequacy | `omn_agent/validator.py:259` (`_import_resolves` exception guard) | `technical-design.md` `C-006` and section 9 test focus area \"Non-raising behavior\"; `skills/testing/testing-strategy.md`, negative-path coverage | The guard that converts a failure raised inside the environment import lookup (`find_spec` raising on an odd meta-path finder) into an unresolved result -- and therefore into a `V-IMPORT` finding rather than an exception escaping verification -- is exercised by no executed check. The unresolvable-import half of `C-006` is covered by `T-002`; the raising-lookup half is verified by inspection only, so a regression in that guard would surface as the unhandled exception `C-006` forbids and no test would catch it. No behavioral defect exists today; the gap is in the evidence, not the code | `CR-001` | open |\n\n## Severity Summary\n\n- Critical: 0\n- High: 0\n- Medium: 0\n- Low: 1\n\n## Standards and Architecture Conformance\n\n- Coding standards: no Python coding-standards catalogue is supplied by the inputs or the frozen context slice, so no style finding is raised against one; the changed module was measured against the repository's own recorded conventions and the design's structural constraints instead. Conforms: the extension follows the codebase's documented static-not-imported precedent (recorded in the design's fact inventory, section 4.1, row 11), carries explanatory docstrings on all three new helpers, reuses the existing report model without a parallel path, and updates the module docstring to state the new behavior.\n- Architecture rules: `skills/architecture/clean-architecture-checklist.md` and design constraints `C-001` to `C-008` with decision records D-001 and D-002 applied. Conforms on every examined rule: the change is confined to the four modules the design names plus tests; the detection step sits inside `_check_python` on the shared `run_validation` path exactly as D-001 states, so the finding surfaces identically in `validate` and `doctor` (`C-002`, confirmed by executed test); detection reads statements directly in the module body only, skipping relative imports, satisfying the `C-003` bound (confirmed by executed test); compile-failed files keep their existing finding and are not import-checked; the finding message names the checked file, the unresolved module, and the checking interpreter, and the hint names the providing distribution for known roots, matching the P-001 contract and D-003; `pyproject.toml` carries `pyyaml>=6`, the shape the Design Gate's recorded rationale fixed; and the additivity constraint `C-001` holds -- the forbidden symbols are absent from the changed module and live only in files the change set does not touch. Deviation `V-001` (the sibling rule accepts a package directory containing `__init__.py` beside the checked file, in addition to the flat module file the design's wording states) is assessed acceptable: the payload resolves siblings by inserting its own directory on the import path at execution time, which resolves both forms identically, so the implementation is more faithful to the execution-time semantics D-001 mirrors than the literal wording, and it narrows -- never widens -- the false-ERROR exposure the design records as its primary detection risk R-001. It crosses no constraint and requires no design revision.\n- Security criteria: `skills/security/secure-engineering.md` applied. Conforms: verification remains static -- it parses and resolves without executing payload code (`C-005`; `find_spec` inspects finders without importing the target), and writes nothing; no credential, token, or secret appears in the change set or in this package; the dependency declaration converts an already de facto runtime dependency into a visible, managed supply-chain surface, with the lower-bounded unpinned range the gate decision fixed and its residual exposure already recorded as the design's R-006 owned by `omn-tech-lead`.\n- Exceptions requested: None identified. `V-001` is a recorded deviation with rationale, not an exception request -- it violates no constraint, so nothing requires granting.\n\n## Test Adequacy Assessment\n\n- Test evidence reviewed: the seven executed evidence entries `T-001` to `T-007` recorded by IR-2026-0003, of which this review re-executed the targeted post-change subset (7 tests, all pass, command cited in Review Scope) and a 22-test healthy-path slice over install/validate/doctor/status behaviors (all pass), and independently confirmed the collected suite size of 272 the report claims for `T-007`. The pre-change baseline `T-001` and the full post-change run `T-007` stand as claimed results corroborated but not re-executed here; the pre-change failing witness the report records (4 failures, 1 error on the seven new tests before the change) is a claimed result consistent with the tests' content.\n- Coverage of changed behavior: complete at change-set granularity -- every entry `C-001` to `C-005` is exercised by at least one executed check this review confirmed. The broken-install behavior is asserted in both commands with the module named and a non-OK exit (`test_validate_and_doctor_report_missing_toplevel_import`); sibling silence is asserted through a descriptor-named validator importing a payload module beside it (`test_import_check_resolves_sibling_payload_modules`); boundedness is asserted for function-local, conditional, and relative imports (`test_import_check_ignores_non_toplevel_imports`); hint content for known and unknown roots is asserted directly; and the packaging metadata and both documentation surfaces are pinned by static assertions. Healthy-path silence holds against both the hermetic fixtures (both negative tests assert exit OK with no `V-IMPORT`) and the 265-test baseline passing unchanged post-change. One sub-entry branch has no covering check, raised as `F-001`.\n- Gaps requiring new tests: the raising-lookup branch of `_import_resolves` (`F-001`, carried by `CR-001`); and, for completeness of the record rather than as new-test demand on this change, the two acceptance demonstrations the report names as unverified -- clean-environment install resolution of the declared dependency, and a `doctor` run in a real environment lacking the YAML distribution -- which belong to design checkpoint P-005, are owned by `omn-qa`, and are already routed there by the report's own open question.\n\n## Correction Requests\n\n| ID | Addresses | Required change | Blocking | Owner |\n|---|---|---|---|---|\n| `CR-001` | `F-001` | An executed hermetic check demonstrates that a failure raised inside the environment import lookup during verification surfaces as a `V-IMPORT` finding with a normal non-OK exit, never as an unhandled exception, so the report-never-raise constraint `C-006` is held by executed evidence rather than by inspection alone | no | omn-qa |\n\n## Residual Risk\n\n- Accepted risk: the O-001 tradeoffs the Design Gate accepted with D-001 on 2026-08-28 -- detection is blind below module top level and does not individually check payload files outside the descriptor-named set (design risk R-004 and the `C-003` bound) -- accepted by `omn-tech-lead` as the recorded gate owner, with the scope's revisit triggers governing any broadening.\n- Unmitigated risk: the verification-environment mismatch the design records as R-002 -- an operator running `validate`/`doctor` from a different interpreter than the one executing the installed runtime receives an answer about the wrong environment -- is reduced only by the finding message embedding the checking interpreter's path and by the corrected documentation stating that verification checks the environment it runs in; it is not eliminated. Until `omn-qa` records the P-005 demonstrations, the broken-environment behavior is proven hermetically through a stand-in module rather than against the YAML distribution itself.\n- Monitoring required: the `KNOWN_DISTRIBUTIONS` hint map should stay aligned if the framework payload ever acquires a third-party top-level import root other than `yaml`, or the finding's hint degrades to its generic form; and the healthy-path finding set should be re-compared whenever payload runtime files change their sibling-import structure, which is the R-001 trigger the design assigns to `omn-qa`.\n\n## Verdict\n\n- Decision: approve-with-corrections\n- Rationale: one low test-adequacy finding is open and nothing else -- the adjudication row for only medium or low findings open decides. The change realizes decisions D-001 and D-002 as the Design Gate accepted them, holds every hard constraint examined, keeps the healthy path silent, names the missing module in both commands, and its recorded evidence reproduces under independent re-execution; the one gap is in negative-path evidence, not in behavior, and the recorded deviation `V-001` is a faithful narrowing of a recorded risk rather than a departure from the design.\n- Blocking findings outstanding: None identified.\n- Readiness recommendation: this agent recommends the Review Gate accept the change with `CR-001` carried as a non-blocking correction owned by `omn-qa`, and recommends the gate note that the P-005 acceptance demonstrations remain with `omn-qa` before the ticket closes. This is a recommendation only: this agent produced the evidence the Review Gate assesses, so under the Producer Exclusion Rule the gate decision rests with `omn-qa`, and merge and release judgement rests with `omn-tech-lead`.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | The Design Gate's recorded rationale moves D-001 and D-002 to Accepted, but both decision-record files still read `Status: Proposed` with unsigned approval lines -- should the committed records be reconciled with the gate decision, and by whom, given that neither the implementer nor this reviewer may modify committed run evidence? | no | architect | the durability of the design record only; no finding, no scope element, and no part of this verdict moves with the answer |",
+        "digest": "sha256:2420129958174a5fa637e6f4074d560d",
+        "produced_by": "quality-review"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was delivered: an implementation report for the change set itself, a validation report for what was proven about it, a review package for a `review-pull-request` run, or a deployment status for the `communication-and-post-release` phase, which publishes after a release has landed. Without one there is nothing to publish from, and publishing anyway would mean describing a system from this agent's own reading of what it was supposed to become."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-efe092286625/states/documentation-and-release-handoff/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-efe092286625/states/documentation-and-release-handoff/artifacts/release-note.md"
+    ],
+    "failures": [
+      {
+        "id": "R7",
+        "severity": "Correctable",
+        "quality_ref": "templates/release-note.md",
+        "requirement": "The version is a recognisable version string",
+        "detail": "version='CKA-01-unreleased'"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "review-package",
+      "reference": "runs/run-efe092286625/states/quality-review/artifacts/review-package.md",
+      "produced_by": "quality-review"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-08-28T06:25:50Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/release-note.md",
+        "digest": "sha256:a6125cac38eb2edeca7105d936d9304c",
+        "supplies": null
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:bc0fb4ee128c1855f84c63b3ea12319c",
+    "input_digest": "sha256:2420129958174a5fa637e6f4074d560d",
+    "inputs": [
+      {
+        "type": "review-package",
+        "reference": "runs/run-efe092286625/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-efe092286625/states/quality-review/artifacts/review-package.md",
+        "digest": "sha256:2420129958174a5fa637e6f4074d560d"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-efe092286625/states/documentation-and-release-handoff/artifacts/release-note.md",
+      "runs/run-efe092286625/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "reproducing a test or validation result, which belongs to omn-qa"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author or amend a technical design, an architecture decision, or a structural constraint",
+      "define, widen, or narrow product scope or acceptance criteria",
+      "award, withhold, or restate a validation verdict as though this agent reached it",
+      "record a merge, release, or deployment decision",
+      "publish a statement the supplied evidence does not support",
+      "omit, soften, or defer a breaking change a supplied input declares",
+      "carry forward prior-release content the delivered change made false",
+      "resolve an engineering gap rather than returning it to the role that owns it",
+      "decide a gate that assesses evidence this agent produced",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "describe delivered behavior from the implementation and validation evidence supplied",
+        "draft release notes, change summaries, and closure communication packages",
+        "record usage, limitations, known issues, and troubleshooting guidance",
+        "state the compatibility consequence a declared contract change carries",
+        "identify documentation the delivered change made stale, and propose its correction",
+        "name the audience a communication was addressed to and the handoff it carries",
+        "maintain the trace from each published statement to the artifact that supports it",
+        "record an unresolved engineering question as an open question against its owning role"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author or amend a technical design, an architecture decision, or a structural constraint",
+        "define, widen, or narrow product scope or acceptance criteria",
+        "award, withhold, or restate a validation verdict as though this agent reached it",
+        "record a merge, release, or deployment decision",
+        "publish a statement the supplied evidence does not support",
+        "omit, soften, or defer a breaking change a supplied input declares",
+        "carry forward prior-release content the delivered change made false",
+        "resolve an engineering gap rather than returning it to the role that owns it",
+        "decide a gate that assesses evidence this agent produced",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else. Product documentation living in the repository is proposed as content inside the artifact and applied by the role that owns the file, so a documentation change never travels as an unreviewed write.",
+        "rationale": "This agent's authority is over what is said about a change, never over the change itself. Writing to the repository would let a publication step alter the delivered behavior it exists to describe, and the resulting document would then be accurate about a system this agent had just modified."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "reproducing a test or validation result, which belongs to omn-qa"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same published statements, the same known-issue set, the same compatibility statement, the same declared release verdict, and the same declared artifact status.",
+      "identifierSchemes": {
+        "knownIssues": "K-<zero-padded-sequence>"
+      },
+      "orderingRule": "Known issues keep the order of the source that recorded them, so a supplied defect list and the issues published from it can be read side by side.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied evidence, release context, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "release-note.md",
+    "artifact_path": "runs/run-efe092286625/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "template_ref": "templates/release-note.md",
+    "contract_ref": "agents/omn-documentation/output.md",
+    "quality_ref": "agents/omn-documentation/quality.md",
+    "validator": "release_note_validator",
+    "result_envelope_path": "runs/run-efe092286625/states/documentation-and-release-handoff/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-08-28T06:25:50Z"
+}

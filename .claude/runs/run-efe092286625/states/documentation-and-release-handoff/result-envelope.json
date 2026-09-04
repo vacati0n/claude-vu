@@ -1,0 +1,89 @@
+{
+  "invocation_id": "inv-efe092286625-06-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-efe092286625/states/documentation-and-release-handoff/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "artifact_status": "complete",
+    "release_verdict": "released",
+    "communication_basis": "release-handoff",
+    "retry_of": "inv-efe092286625-06-001",
+    "retry_reason": "runtime validator rejected R7 (Correctable): version 'CKA-01-unreleased' did not match the accepted version-string form; repaired to '0+CKA-01-unreleased' in the metadata block and the Metadata section Version bullet, with the explanatory clause in the Release date and time bullet aligned to the same string so the version stays one fact throughout the artifact (system.md invariant 10); no other content changed",
+    "audience": {
+      "supplied_by": "scope-definition affected-users statement (SCOPE-2026-0001)",
+      "inferred_portion": "handoff roles (omn-orchestrator, omn-tech-lead, omn-qa) implied by the documentation-and-release-handoff phase; recorded as inferred in the Communication section"
+    },
+    "known_issues_count": 6,
+    "known_issues": ["K-001", "K-002", "K-003", "K-004", "K-005", "K-006"],
+    "known_issue_ordering": "review-package RP-2026-0002 recorded order (F-001, accepted risk R-004, unmitigated R-002, P-005 pending, open question Q-001), then implementation-report-only residual R-003, following sourceInputs order",
+    "published_statements": {
+      "count": 25,
+      "traced_to": {
+        "runs/run-efe092286625/states/quality-review/artifacts/review-package.md": "review verdict, findings, executed re-verification, residual risk, conformance, Design Gate decision record, open question Q-001",
+        "runs/run-efe092286625/states/implementation/artifacts/implementation-report.md": "change set C-001..C-005, test evidence T-001..T-007, boundary compliance, residual risks R-001..R-003, unverified areas, handoff notes, open question Q-001",
+        "runs/run-efe092286625/states/scope-and-acceptance/artifacts/scope-definition.md": "affected users (audience), scope item S-003 intent attribution, acceptance expectation identifiers A-001/A-004/A-005 named as not yet demonstrated",
+        "runs/run-efe092286625/states/documentation-and-release-handoff/invocation-envelope.json": "digests, freeze timestamp, phase and run identity"
+      },
+      "untraced": 0
+    },
+    "changes_by_stage5_class": {
+      "breaking": 0,
+      "contract": 1,
+      "operational": 0,
+      "feature": 1,
+      "fix": 2,
+      "improvement": 0,
+      "internal": 1
+    },
+    "stage8_row": "every change in scope reached its target environment (the run's working-tree delivery; merge and release remain undecided and are attributed to omn-tech-lead, not recorded here)",
+    "checks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass",
+      "P1": "pass", "P2": "pass", "P3": "pass", "P4": "pass", "P5": "pass", "P6": "pass",
+      "R3": "pass", "X1": "pass", "X2": "pass", "X3": "pass", "X4": "pass",
+      "R1": "pass", "R2": "pass", "R4": "pass", "R5": "pass", "R7": "pass", "V1": "pass", "V2": "pass", "V3": "pass",
+      "K1": "pass", "K2": "pass", "K3": "pass", "K4": "pass", "K5": "pass", "K6": "pass",
+      "R6": "pass", "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+      "A7": "pass", "A8": "pass", "A9": "pass", "A10": "pass", "A11": "pass", "A12": "pass", "A13": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+    },
+    "checks_run": 60,
+    "checks_passed": 60,
+    "check_judgements": {
+      "R7": "no supplied artifact states a numbered distribution version; the version of record is '0+CKA-01-unreleased' — a leading digit satisfying the validator's version-string form, with the change reference (ticket CKA-01 in the adoption backlog under docs/) carried as build-metadata-style provenance. The leading 0 is a format device, not a published version claim; the artifact's Metadata section states explicitly that no numbered distribution version is established by the evidence",
+      "R2": "the metadata block version and the Metadata section Version bullet both read exactly '0+CKA-01-unreleased'",
+      "K1": "carried from the first attempt: implementation-report residual risk R-003 appears as known issue K-006"
+    },
+    "not_machine_checkable": {
+      "N1": "judged met: every behavioral statement was taken from the implementation report or the review package, both of which record executed evidence; the dispatch prompt's stronger claims (clean-venv install verified, F-001 covered by executed QA evidence) are unsupported by any supplied artifact and were not published — the artifacts' account (P-005 outstanding, F-001 verified by inspection only) governs",
+      "N2": "judged met: the stale standard-library-only claim was retired by the delivered change itself (C-003, C-004); nothing was carried forward from prior communication, and the one remaining symmetry correction (docs/USER-GUIDE.md section 2) is proposed as content in the Communication section for the owning role to apply",
+      "N3": "judged met: the change surface is one feature (V-IMPORT detection), one contract change (pyyaml>=6 declaration), two fixes (broken clean install; false documentation claim), and one internal change (tests) published only as validation context; no item is promoted or demoted, and the broken-environment exit-code change is stated in Backward compatibility notes with its required consumer action"
+    },
+    "artifact_measurement_note": "this agent's manifest forbids command execution, so no cryptographic hash of the artifact was computed here; the runtime gateway computes and records artifact digests on ingestion",
+    "open_items_carried": [
+      {"item": "CR-001 (F-001 raising-lookup guard test)", "owner": "omn-qa", "carried_as": "K-001"},
+      {"item": "P-005 acceptance demonstrations", "owner": "omn-qa", "carried_as": "K-004"},
+      {"item": "decision-record status reconciliation (RP Q-001)", "owner": "architect", "carried_as": "K-005"},
+      {"item": "docs/USER-GUIDE.md section 2 symmetry correction", "owner": "role owning the file", "carried_as": "proposed content in Communication section"}
+    ],
+    "gate_note": "the Closure Gate assesses this package; under the Producer Exclusion Rule its decision rests with omn-orchestrator and no gate decision is recorded here"
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    "agents/omn-documentation/examples.md",
+    "runs/run-efe092286625/states/documentation-and-release-handoff/invocation-envelope.json"
+  ],
+  "confidence": 0.93,
+  "declared_side_effects": [
+    "runs/run-efe092286625/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "runs/run-efe092286625/states/documentation-and-release-handoff/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

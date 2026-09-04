@@ -1,0 +1,434 @@
+{
+  "invocation_id": "inv-3e22f11cb34d-03-002",
+  "run_id": "run-3e22f11cb34d",
+  "work_item_id": "run-3e22f11cb34d::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:58eba81ca45cbfac16192c05b9eb76bc",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:7a08861f6a692bd5b4e65be426a0fcb7",
+      "agents/architect/identity.md": "sha256:a2ddb7032106c2e4ec70f0cddff9bae1",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:384164c51047d05f590d9f796d731b1c",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:90ec2ac3e9e1337d42ab7be8f4f11418",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "supplied": [
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/review-package-routing-feature-request.md",
+        "source_file": ".claude/runs/inputs/review-package-routing-feature-request.md",
+        "text": "Route the review package artifact into the review workflow.\n\n`review-package.md` is a contracted, validated artifact type that no workflow phase emits.\nThe review lifecycle should produce it, so that a review verdict is a validated artifact\nunder run evidence rather than prose in an Output Artifact column.",
+        "digest": "sha256:59644fd3b625988cc30879fe11c2dfcb"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/review-package-routing-business-intent.md",
+        "source_file": ".claude/runs/inputs/review-package-routing-business-intent.md",
+        "text": "# Business Intent: Route the Review Package\n\nSupplied by the operator for framework change `FC-001`, routed as change class\n`capability-addition` by `config/self-hosting-profile.md`. This states intent and acceptance\nexpectation only. It defines no solution, names no module, and takes no design decision.\n\n## Why the change is wanted\n\nThe framework contracts an artifact it never asks any phase to produce. `templates/review-package.md`\nis registered, `runtime/review_package_validator.py` decides its conformance, and\n`reports/validation-recovery-hardening-report-2026-08-18.md` records the consequence plainly:\nthe artifact is \"not yet named in any Phase Model's Output Artifact column, so no phase routes\nit\". `runtime/README.md` carries the same statement as known gap 7.\n\nA contracted artifact that nothing emits is a capability the framework claims and does not\noffer. Every other artifact type it validates is named by a phase.\n\n## Outcome expected\n\n1. A phase of the review lifecycle declares the review package as the artifact it emits.\n2. The Validation Engine's coverage proof counts that artifact as routed rather than as an\n   exception, so the count of contracted-but-unrouted artifact types reaches zero.\n3. The recorded gap is closed in the record that raised it, rather than left standing while the\n   behaviour changes underneath it.\n\n## Acceptance intent\n\n- One phase, not several, names the artifact. Two phases emitting one artifact type would\n  reintroduce the ambiguity the Phase Model exists to remove.\n- The phase that names it is the phase whose declared work the artifact already describes. No new\n  phase is introduced and no phase changes owner.\n- Registry coverage, validator coverage, and every previously proven run still verify after the\n  change, with unresolved counts unchanged or lower.\n\n## Constraints the business places on the change\n\n- Gate ownership is not in scope. Nothing in this intent authorizes a change to\n  `workflows/workflow-gate-matrix.md`.\n- No agent gains or loses a contract. If naming the artifact would require an owning agent to\n  declare a new output, that is a decision to surface, not a change to make silently.\n- The change must not claim the phase becomes executable. Whether a phase can be dispatched is\n  decided by capability registration, which this change does not perform.\n\n## Open to the design\n\n- Which review phase is the correct emitter, and on what ground.\n- Whether the Input column of any downstream phase must change to consume the artifact by name.\n- What the change implies for the phase's blocked reason, if anything.",
+        "digest": "sha256:b651de296eacd6b5be17b6db9e721856"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/review-package-routing-architecture-context.md",
+        "source_file": ".claude/runs/inputs/review-package-routing-architecture-context.md",
+        "text": "# Architecture Context: Routing the Review Package\n\nSupplied by the operator for framework change `FC-001`. The system under design is the framework\nin this repository, so the current-state architecture is the framework's own structure.\n\nThis document does not restate that structure. It names the authoritative records of it. Every\nfile named below is a member of the frozen context slice recorded in this run's\n`context-snapshot.json`, so a fact drawn from one carries a citable digest.\n\n## The surface this change touches\n\n| Concern | Authoritative record |\n|---|---|\n| Which phase emits which artifact | the `## Phase Model` table of each `workflows/*.md` |\n| Which artifact types the runtime can validate | the `VALIDATORS` map in `runtime/framework_runtime.py` |\n| Whether a phase can be dispatched | the `G1-CAPABILITY` chain, reported per phase by `runtime/verify_registry_coverage.py` |\n| Gate ownership | `workflows/workflow-gate-matrix.md` |\n| Artifact contract | `templates/review-package.md`, enforced by `runtime/review_package_validator.py` |\n\n`dependency-map.md` records the permitted dependency directions between component types.\n`runtime/README.md` records what of the runtime is implemented and which gaps remain open.\n\n## Known current-state properties the operator asserts\n\nEach is verifiable in the files named above.\n\n1. `workflows/review-pull-request.md` declares five phases. Every Output Artifact cell in that\n   table is prose describing a deliverable; none names a file.\n2. `review-package.md` is registered in `registry/templates.yaml`, carries a validator in the\n   `VALIDATORS` map, and passes `verify_validators.py` against its fixture with a declared\n   mutation caught by `P3`.\n3. `verify_validators.py` check `V1` reads the Output Artifact column of every active Phase Model\n   and treats any token ending in `.md` as a routed artifact type. It asserts coverage in one\n   direction only: every routed artifact has a validator. A validated artifact that no phase\n   routes is invisible to it.\n4. `runtime/framework_runtime.resolve_output_contract` resolves a phase's declared artifact\n   against the owning agent's manifest outputs and the `VALIDATORS` map. A phase whose artifact\n   is prose resolves no file contract.\n5. `review-pull-request/structural-compliance` currently blocks with failure class\n   `workflow-contract-violation`, recorded in `reports/registry-coverage-report-2026-08-18.md`\n   section 7, because the artifact that phase asks of `architect` is neither declared in the\n   architect manifest's `outputs` nor covered by a validator.\n6. `code-quality-review` is owned by `omn-dev-2-reviewer`, which is host-invocable through\n   `agents/omn-dev-2-reviewer.agent.md` and holds no record in `registry/agents.yaml`.\n\n## Constraints the operator places on the design\n\n- A Phase Model is a machine-read contract. The runtime derives sequencing edges from its Input\n  and Output Artifact columns, so a change to either changes what the runtime enforces.\n- A phase's declared artifact must be one the Validation Engine can decide, or the phase becomes\n  undispatchable for a new reason. Trading one blocked reason for another is not an improvement\n  and must be surfaced if it would occur.\n- Committed run evidence must remain valid. Any file inside a frozen context slice that this\n  change edits requires the affected runs to be re-verified rather than assumed intact.\n- The framework's discovery registries are single-authority. This change adds no second place\n  where an artifact type is declared.",
+        "digest": "sha256:262855dd9bad7121dc25f77d7165415f"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-3e22f11cb34d/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-3e22f11cb34d/states/execution-planning/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: review-package-routing-execution-plan\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/review-package-routing-feature-request.md\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:59644fd3b625988cc30879fe11c2dfcb\n  contextDigest: sha256:c02a893250a487966bd7e0b20eb783cd\n```\n\n## Executive Summary\n\nThe review package artifact type is contracted and validated but is declared as the output of\nno workflow phase, so a review verdict reaches a run as prose in an Output Artifact column\nrather than as a validated artifact under run evidence. This plan routes that artifact type\ninto the phases that produce review verdicts, so gate owners and downstream consumers read one\nvalidated record instead of an undeclared prose entry. Success is that every approved\nreview-producing phase declares the artifact, the artifact type's registry record and the phase\ndeclarations agree, and the phase sequencing the runtime derives from the Input and Output\nArtifact columns still resolves. The work decomposes into ten tasks across five execution\nwaves, beginning with an approval of exactly which phases are review-producing and a\nconfirmation that the artifact type is already contracted and validated. The highest-impact\nrisk is `R-003`: if declaring an Output Artifact does not by itself place a validated artifact\nunder run evidence, the declaration work in `T-003` would not achieve the intended outcome and\nfurther work outside this task set is required. Plan status is complete; `A-001` through\n`A-005` each have a confirming or deciding task ahead of the work that depends on them, and\n`Q-001` through `Q-005` are recorded as non-blocking with named owners.\n\n## Business Objectives\n\n- A review verdict is retrievable as a validated artifact under run evidence rather than as a\n  prose entry, measured as the proportion of approved review-producing phases whose verdict is\n  carried by a validated artifact, with a target of all of them. Traces to `S-004`, `S-005`.\n- The framework carries no active contracted artifact type that no routed phase emits, measured\n  as the count of active artifact type records with no declaring phase, with the review package\n  no longer among them. Traces to `S-002`, `S-003`.\n- Consumers of the review lifecycle read one review output form across review-producing phases,\n  measured as the number of distinct declared review output forms across the approved phase\n  set, with a target of one. Traces to `S-001`.\n\n## Technical Objectives\n\n- Each approved review-producing phase declares the review package artifact type as its Output\n  Artifact in its Phase Model table, verified by inspecting those tables against the approved\n  phase list. Traces to business objective 2.\n- A review package recorded by an approved phase conforms to the artifact type's contracted\n  structure and is rejected when it does not, verified by the recorded result of the validation\n  coverage. Traces to business objective 1 and `A-002`.\n- The phase edges the runtime derives from the Input and Output Artifact columns of the affected\n  workflows continue to resolve after the change, verified by comparing the derived edges to the\n  recorded after-state. Traces to business objective 2 and `A-005`.\n- The review verdict is addressable at a declared artifact location under the run's evidence\n  rather than only in workflow prose, verified by the recorded declaration mechanism. Traces to\n  business objective 1 and `A-003`.\n\n## Scope\n\n### In Scope\n\n- Approving which workflow phases are review-producing and must emit the review package\n  (`S-001`, `S-004`). Covered by `T-001`.\n- Confirming that the artifact type is already contracted and validated (`S-002`). Covered by\n  `T-005`.\n- Deciding how a declared Output Artifact becomes validated run evidence (`S-004`, `S-005`).\n  Covered by `T-008`.\n- Deciding the disposition of the prose outputs the review package supersedes (`S-005`).\n  Covered by `T-010`.\n- Determining and preserving the phase sequencing derived from the Input and Output Artifact\n  columns (`S-001`). Covered by `T-002` and `T-004`.\n- Declaring the artifact in the approved phases' Phase Model tables and re-pointing the\n  consuming Input entries (`S-001`, `S-003`, `S-004`). Covered by `T-003`.\n- Aligning the artifact type's registry record with the declared emitting phases (`S-002`,\n  `S-003`). Covered by `T-006`.\n- Validation coverage for the routed artifact (`S-002`, `S-005`). Covered by `T-007`.\n- Documentation of the review output form for gate owners (`S-004`, `S-005`). Covered by\n  `T-009`.\n\n### Out of Scope\n\n- Changing the structure of the review package artifact type itself. Excluded because `S-002`\n  states the type is already contracted and validated, and no supplied statement requests a\n  structural change.\n- Producing an actual review verdict or performing any review. Excluded because the request\n  routes an artifact type into a lifecycle; it does not commission a review.\n- Registering owner agents for the review-producing phases, or otherwise making those phases\n  runtime-executable. Excluded because no supplied statement requests capability resolution.\n- Changing gate names or gate ownership for the affected workflows. Excluded because no\n  supplied statement requests a gate change.\n- Routing any artifact type other than the review package. Excluded because the request names\n  one artifact type.\n\n### Deferred\n\n- End-to-end demonstration that an executed review-producing phase emits a validated review\n  package. Enters scope once an owner agent for at least one approved review-producing phase\n  holds a registry record, so that the phase no longer blocks at capability resolution.\n- Applying the same routing treatment to other contracted artifact types that no phase emits.\n  Enters scope when a statement identifies another such artifact type.\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | \"The review lifecycle\" means the phases that the review package artifact type's registry record already names as its consumers, and no others | `S-004` | The approved phase set changes; `T-003` changes a different set of phases, the edge set in `T-002` changes, and `T-006` becomes a registry correction rather than an alignment | omn-product-owner |\n| A-002 | The review package artifact type already carries a structural contract and a validation path, so no artifact-contract authoring is required | `S-002` | A contract-definition outcome and a validation-path outcome are added ahead of `T-007`, and technical objective 2 is unmet until they exist | architect |\n| A-003 | Declaring an artifact in a phase's Output Artifact column is the mechanism by which that phase places the artifact under run evidence | plan-wide | An additional change beyond the Phase Model declaration is required; `T-003` alone does not achieve business objective 1 and further tasks are added | architect |\n| A-004 | The prose Output Artifact entries of the approved phases are superseded by the review package rather than retained alongside it | `S-005` | Affected phases declare both forms, business objective 3 is unmet for those phases, and `T-009` must document two coexisting forms | omn-product-owner |\n| A-005 | Every phase whose Input column names a superseded output can be re-pointed to the review package without changing that phase's own outcome | plan-wide | `T-003` grows to cover an outcome change in a consuming phase, and the after-state recorded in `T-002` and checked in `T-004` changes | architect |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | `T-001` approves a review-producing phase set that differs from the set the artifact type's registry record names | The declaration scope of `T-003`, the edge set of `T-002`, and the alignment target of `T-006` all change | medium | T-001, T-002, T-003, T-006 | `T-001` approves the phase set before any declaration work begins | omn-product-owner |\n| R-002 | requirement | `T-010` records that a prose output is retained alongside the review package for one or more phases | The review verdict is not the single validated record for those phases and business objective 3 is unmet for them | medium | T-003, T-009, T-010 | `T-010` requires a named consumer for every retained prose output | omn-product-owner |\n| R-003 | technical | `T-008` finds that placing an artifact under run evidence requires a change beyond the Phase Model declaration | `T-003` alone does not achieve business objective 1, and work outside the current task set is required | medium | T-003, T-008 | `T-008` names any additional required change as a distinct outcome before `T-003` starts | architect |\n| R-004 | technical | `T-005` identifies no validation path for the artifact type | The emitted package is not a validated artifact, technical objective 2 is unmet, and contract work precedes `T-007` | low | T-005, T-007 | `T-005` records the absence as a gap carried by `Q-002` | architect |\n| R-005 | dependency | `T-002` identifies a consuming phase whose Input entry names a superseded output it materially depends on | Derived sequencing changes, `T-003` scope grows, and the after-state checked by `T-004` changes | medium | T-002, T-003, T-004 | `T-002` records every affected consumer with its required replacement Input entry before `T-003` starts | architect |\n| R-006 | security | An approved review-producing phase records findings that quote restricted content into the review package | Restricted content becomes durable run evidence rather than transient review prose | low | T-007, T-009 | `Q-005` establishes whether the artifact type may carry restricted content; the answer determines whether further coverage is required | omn-dev-2-reviewer |\n| R-007 | operational | A run reaches an approved review-producing phase and blocks at capability resolution because that phase's owner agent holds no registry record | The routed artifact cannot be observed in an executed run, so plan acceptance rests on declaration-level and coverage-level evidence | high | T-004, T-007 | `T-007` states the expected run outcome for a phase blocked at capability resolution, and the end-to-end demonstration is deferred under `Q-004` | omn-tech-lead |\n| R-008 | delivery | `T-003` changes some but not all approved phases, or `T-006` is not applied | The artifact type's registry record and the Phase Model tables disagree about which phases emit the artifact | medium | T-003, T-006 | `T-006` requires the registry record and the Phase Model declarations to name the same phase set | omn-tech-lead |\n\n## Task Breakdown\n\n### T-001 Approve the set of review-producing phases that must emit the review package\n\n- Owner: omn-product-owner\n- Complexity: S (confidence: medium)\n- Depends on: none\n- Traces to: S-001, S-004, A-001\n- Status: ready\n- Description: An approved list exists of the workflow phases that must declare the review\n  package as their Output Artifact, and the review-adjacent phases considered and excluded are\n  recorded as non-goals.\n- Acceptance Criteria:\n  - The approved list names each phase by its canonical phase identifier together with the\n    workflow that declares it\n  - Every review-adjacent phase considered and excluded is recorded with its exclusion reason\n- Gate: Scope Gate\n\n### T-002 Determine the sequencing impact of the declaration change\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: T-001, T-010\n- Traces to: S-001, A-005\n- Status: ready\n- Description: For each affected workflow, the phase edges the runtime derives from the Input\n  and Output Artifact columns are recorded in a before state and an intended after state, and\n  every phase whose Input entry must be re-pointed is identified.\n- Acceptance Criteria:\n  - Each affected workflow carries a recorded before-state and after-state edge set\n  - Every phase whose Input entry names a superseded output is listed with the replacement\n    Input entry it requires\n  - Any consuming phase that cannot be re-pointed without changing its own outcome is recorded\n    against `A-005`\n- Gate: Design Gate\n\n### T-003 Declare the review package as the Output Artifact of each approved phase\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-001, T-002, T-008, T-010\n- Traces to: S-001, S-003, S-004, A-003, A-004, A-005\n- Status: assumption-dependent\n- Description: Every phase in the approved list names the review package as its Output Artifact\n  in its Phase Model row, every consuming Input entry identified in `T-002` names it, and the\n  superseded prose entries are handled as `T-010` decided.\n- Acceptance Criteria:\n  - Every phase in the approved list names the review package in its Output Artifact entry\n  - Every Input entry identified in `T-002` names the review package\n  - Superseded prose entries are absent, or present with the justification `T-010` recorded\n  - No phase outside the approved list has a changed Input or Output Artifact entry\n- Gate: Review Gate\n\n### T-004 Verify the derived sequencing of the affected workflows\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-002, T-003\n- Traces to: S-001, A-005\n- Status: ready\n- Description: Each affected workflow resolves its Phase Model after the change, and the edges\n  the runtime derives match the after-state recorded in `T-002`.\n- Acceptance Criteria:\n  - Each affected workflow resolves its Phase Model without a resolution error\n  - The derived edge set matches the `T-002` after-state, and every difference is recorded with\n    a disposition\n- Gate: Verification Gate\n\n### T-005 Confirm that the review package artifact type is contracted and validated\n\n- Owner: architect\n- Complexity: S (confidence: medium)\n- Depends on: none\n- Traces to: S-002, A-002\n- Status: ready\n- Description: The claim that the artifact type is contracted and validated is confirmed\n  against the framework as it stands, or the part of the claim that does not hold is recorded\n  as a gap.\n- Acceptance Criteria:\n  - The structural contract for the artifact type is identified by its repository-relative path,\n    or its absence is recorded\n  - The mechanism that decides conformance is identified, or its absence is recorded as a gap\n    carried by `Q-002`\n- Gate: Design Gate\n\n### T-006 Align the artifact type's registry record with the declared emitting phases\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-001, T-003\n- Traces to: S-002, S-003\n- Status: ready\n- Description: The review package registry record and the Phase Model declarations name the\n  same set of emitting phases.\n- Acceptance Criteria:\n  - The registry record and the Phase Model declarations name an identical phase set\n  - Any difference found is resolved on one side with the reason recorded\n- Gate: Review Gate\n\n### T-007 Design validation coverage for the routed review package\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-001, T-005\n- Traces to: S-002, S-005\n- Status: ready\n- Description: Validation coverage exists for a conforming review package, a non-conforming\n  review package, and an approved phase that records no package, for every phase in the\n  approved list.\n- Acceptance Criteria:\n  - Coverage addresses a conforming and a non-conforming review package for each approved phase\n  - Coverage states the expected run outcome when an approved phase records no package\n  - Coverage states the expected run outcome for an approved phase that blocks at capability\n    resolution and therefore records nothing\n- Gate: Verification Gate\n\n### T-008 Decide how a declared Output Artifact becomes validated run evidence\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: T-005\n- Traces to: S-004, S-005, A-003\n- Status: ready\n- Description: An approved statement exists of what must be true for a phase's declared Output\n  Artifact to be recorded as validated run evidence, and of whether that condition is met by the\n  Phase Model declaration alone.\n- Acceptance Criteria:\n  - The condition is stated by reference to a phase that already records a validated artifact\n  - The statement says whether the Phase Model declaration alone satisfies the condition for the\n    approved review-producing phases\n  - Any further change required is named as a distinct outcome rather than assumed absent\n- Gate: Design Gate\n\n### T-009 Document the review output form for gate owners\n\n- Owner: omn-documentation\n- Complexity: S (confidence: medium)\n- Depends on: T-003, T-010\n- Traces to: S-004, S-005, A-004\n- Status: ready\n- Description: The review lifecycle documentation states that a review verdict is carried by the\n  review package artifact under run evidence, names the phases that emit it, and states what it\n  supersedes.\n- Acceptance Criteria:\n  - Documentation names each emitting phase and the artifact that carries its verdict\n  - Documentation states where a gate owner assessing review evidence locates the verdict\n  - Documentation states which prose outputs were superseded and which were retained\n- Gate: Closure Gate\n\n### T-010 Decide the disposition of the superseded prose outputs\n\n- Owner: omn-product-owner\n- Complexity: S (confidence: medium)\n- Depends on: T-001\n- Traces to: S-005, A-004\n- Status: ready\n- Description: For each phase in the approved list, a decision is recorded on whether the\n  existing prose Output Artifact entries are replaced by the review package or retained\n  alongside it.\n- Acceptance Criteria:\n  - Every phase in the approved list carries exactly one recorded disposition\n  - Every retained prose output is justified by a named consumer\n- Gate: Scope Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-002 | decision-gate | The sequencing impact is derived only over the phases the approved list names |\n| T-001 | T-003 | decision-gate | The phases whose Output Artifact entry changes are exactly the approved list |\n| T-001 | T-006 | decision-gate | The registry record is aligned to the approved phase set |\n| T-001 | T-007 | decision-gate | Coverage enumerates the approved phase set |\n| T-001 | T-010 | decision-gate | A disposition is decided per phase in the approved list |\n| T-002 | T-003 | produces-consumes | `T-003` applies the Input re-pointing list `T-002` produces |\n| T-002 | T-004 | produces-consumes | `T-004` compares the derived edges against the after-state `T-002` records |\n| T-003 | T-004 | verification | `T-004` validates the declarations `T-003` produced |\n| T-003 | T-006 | produces-consumes | The registry record is aligned to the declarations `T-003` produced |\n| T-003 | T-009 | produces-consumes | Documentation describes the declarations `T-003` produced |\n| T-005 | T-007 | contract | Coverage binds to the structural contract and conformance mechanism `T-005` confirms |\n| T-005 | T-008 | contract | The evidence condition is stated against the artifact contract `T-005` confirms |\n| T-008 | T-003 | decision-gate | What each declaration must satisfy changes with the recorded evidence condition |\n| T-010 | T-002 | decision-gate | The after-state edge set depends on whether prose outputs are retained |\n| T-010 | T-003 | decision-gate | Whether prose entries are removed or retained changes the declared entries |\n| T-010 | T-009 | decision-gate | Documentation states which prose outputs were superseded |\n\n### 8.2 External Dependencies\n\nNone identified. Every prerequisite this plan depends on is owned by an agent inside the\nframework agent set. The registration of owner agents for the review-producing phases is\nrecorded as deferred scope and as `R-007`, not as a prerequisite that blocks a listed task,\nbecause every listed task completes at declaration, coverage, or documentation level.\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-005\n- Wave 2: T-007, T-008, T-010\n- Wave 3: T-002\n- Wave 4: T-003\n- Wave 5: T-004, T-006, T-009\n\n## Suggested Workflow\n\nSelected workflow: `implement-feature`.\n\nSelected because the plan delivers new framework functionality with an approval decision, a\ndesign decision, a declaration change, verification, and documentation, rather than restoring\nbehavior, preserving behavior under internal change, or reducing decision uncertainty.\n\n| Phase | Tasks |\n|---|---|\n| `scope-and-acceptance` | T-001, T-010 |\n| `execution-planning` | plan handoff, this artifact |\n| `solution-design-and-risk-assessment` | T-002, T-005, T-008 |\n| `implementation` | T-003, T-006 |\n| `quality-review` | T-004, T-007 |\n| `documentation-and-release-handoff` | T-009 |\n\n| Gate | Required owners |\n|---|---|\n| Scope Gate | omn-product-owner, omn-business-analyst |\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer, omn-qa |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| scope-definition | T-001, T-010 | omn-product-owner | Primary |\n| acceptance-authority | T-001, T-010 | omn-product-owner | Primary |\n| architecture-analysis | T-005, T-008 | architect | Primary |\n| impact-analysis | T-002 | architect | Primary |\n| sequencing-guidance | T-002 | architect | Primary |\n| technical-approach-definition | T-008 | architect | Primary |\n| implementation-delivery | T-003, T-006 | omn-dev-1-implement | Primary |\n| validation-design | T-007 | omn-qa | Primary |\n| quality-verification | T-004 | omn-qa | Primary |\n| documentation | T-009 | omn-documentation | Primary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S02 | business/domain-modeling.md | T-001, T-010 | Primary |\n| S01 | architecture/clean-architecture-checklist.md | T-002, T-005, T-008 | Primary |\n| S07 | testing/testing-strategy.md | T-004, T-007 | Primary |\n| S09 | security/secure-engineering.md | T-007 | Secondary |\n| S10 | git/git-collaboration.md | T-003, T-006, T-009 | Secondary |\n\n## Acceptance Criteria\n\n1. Every phase in the approved review-producing phase list declares the review package as its\n   Output Artifact. Verifies business objective 2. Evidence: the approved list from `T-001`\n   cross-checked against the declarations assessed at the Review Gate in `T-003`.\n2. The condition under which an approved review-producing phase records its verdict as a\n   validated artifact under run evidence is stated, and coverage exists that a non-conforming\n   package is rejected. Verifies business objective 1. Evidence: the recorded statement from\n   `T-008` and the coverage record from `T-007`.\n3. The artifact type's registry record and the Phase Model declarations name an identical set\n   of emitting phases. Verifies business objective 2. Evidence: the alignment record from\n   `T-006`.\n4. Each approved review-producing phase declares one review output form, and every retained\n   prose output is justified by a named consumer. Verifies business objective 3. Evidence: the\n   disposition record from `T-010` and the declarations from `T-003`.\n5. Each affected workflow resolves its Phase Model after the change and its derived edges match\n   the recorded after-state, so the declared verdict location remains reachable. Verifies\n   business objective 1. Evidence: the verification record from `T-004`.\n6. A gate owner assessing review evidence can locate the verdict for each emitting phase from\n   the documentation alone. Verifies business objective 3. Evidence: the documentation record\n   accepted at the Closure Gate in `T-009`.\n\n## Definition of Done\n\n- [ ] All six plan acceptance criteria are verified with recorded evidence\n- [ ] Scope, Design, Review, Verification, and Closure Gates are approved with owners recorded\n- [ ] Task acceptance criteria for `T-001` through `T-010` are satisfied or formally waived\n- [ ] `A-001` through `A-005` are confirmed or converted to recorded decisions\n- [ ] `R-001` through `R-008` are closed or accepted with named owners\n- [ ] `Q-001` through `Q-005` are closed or explicitly accepted with the acceptance recorded\n- [ ] Documentation and release-impact notes are published\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Does \"the review lifecycle\" mean exactly the phases the review package registry record names as its consumers, or a different set? | No | omn-product-owner | T-001, T-003 |\n| Q-002 | Does a validation path for the review package artifact type exist today, or must one be introduced before the artifact can be called validated? | No | architect | T-005, T-007 |\n| Q-003 | Is a Phase Model Output Artifact declaration sufficient for the artifact to be recorded under run evidence, or is a further change required? | No | architect | T-003, T-008 |\n| Q-004 | Can an emitted review package be demonstrated end to end while the review-producing phases block at capability resolution, or is declaration-level evidence accepted for closure? | No | omn-tech-lead | T-004, T-007 |\n| Q-005 | May a review package carry restricted content, and if so what must not be recorded into durable run evidence? | No | omn-dev-2-reviewer | T-007, T-009 |\n\n## Traceability Matrix\n\n| Statement | Covered by |\n|---|---|\n| S-001 | T-001, T-002, T-003, T-004 |\n| S-002 | T-005, T-006, T-007, A-002, Q-002 |\n| S-003 | T-003, T-006 |\n| S-004 | T-001, T-003, T-008, T-009, A-001, Q-001 |\n| S-005 | T-007, T-008, T-009, T-010, A-004 |",
+        "digest": "sha256:7431c78c5561517622eae1f3f65c3b90",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "All three required inputs must be present. Architecture context that cannot support impact analysis is a missing input, not a gap to be inferred."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-d-001.md",
+      "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-d-002.md",
+      "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-d-003.md",
+      "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/technical-design.md"
+    ],
+    "failures": [
+      {
+        "id": "D8.5",
+        "severity": "Blocking",
+        "quality_ref": "A8.6",
+        "requirement": "At least one rejected alternative is recorded with its rationale",
+        "detail": "value=''"
+      },
+      {
+        "id": "D8.6",
+        "severity": "Blocking",
+        "quality_ref": "A8.7",
+        "requirement": "Tradeoffs accepted by the selection are stated",
+        "detail": "absent or empty"
+      },
+      {
+        "id": "D12.5",
+        "severity": "Blocking",
+        "quality_ref": "A11.5",
+        "requirement": "Security and compliance impact is assessed, with a reason when none is identified",
+        "detail": "value=''"
+      },
+      {
+        "id": "D13.3",
+        "severity": "Blocking",
+        "quality_ref": "A12.5",
+        "requirement": "The scope assumptions behind the estimate are stated",
+        "detail": "absent or empty"
+      },
+      {
+        "id": "D15.1",
+        "severity": "Blocking",
+        "quality_ref": "A14.1",
+        "requirement": "Every named gate exists in workflows/workflow-gate-matrix.md",
+        "detail": "unknown: ['Quality Gate']"
+      },
+      {
+        "id": "D17.1",
+        "severity": "Blocking",
+        "quality_ref": "A13.1",
+        "requirement": "Every architecture-significant decision has exactly one decision record",
+        "detail": "records=[] significant=['D-001', 'D-002', 'D-003']"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-3e22f11cb34d/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-08-18T14:15:44Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:89f09c2b8213d9844fc91b78d79e4fc2"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:3bf28ee046a18af6bf2eaa46be764811"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:057444bb03e86f3c5a852fadf6007b83"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:feea8081b9ed985742ea763daf6a9cf6"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:9d70f79b90fadd0f134a44b03380e8a4"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:083e4c09e43314332cacd5497972ae9c"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:c18143d075aa49cb11b00ab39d74b90a"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6d6ab6cd8e38500a7e51087ad8111fb6"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820"
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205"
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1"
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:56f60f027adcaa5ed88fde34eb9cffe9"
+      }
+    ],
+    "context_digest": "sha256:7d8ca68a52d086a09b4c0e56a1e900b7",
+    "input_digest": "sha256:87e7a870518ba78d52e011e0ccd641be",
+    "inputs": [
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/review-package-routing-feature-request.md",
+        "source_file": ".claude/runs/inputs/review-package-routing-feature-request.md",
+        "digest": "sha256:59644fd3b625988cc30879fe11c2dfcb"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/review-package-routing-business-intent.md",
+        "source_file": ".claude/runs/inputs/review-package-routing-business-intent.md",
+        "digest": "sha256:b651de296eacd6b5be17b6db9e721856"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/review-package-routing-architecture-context.md",
+        "source_file": ".claude/runs/inputs/review-package-routing-architecture-context.md",
+        "digest": "sha256:262855dd9bad7121dc25f77d7165415f"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-3e22f11cb34d/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-3e22f11cb34d/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:7431c78c5561517622eae1f3f65c3b90"
+      }
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md"
+    ],
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-08-18T14:15:44Z"
+}

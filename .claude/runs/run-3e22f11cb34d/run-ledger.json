@@ -1,0 +1,276 @@
+{
+  "run_id": "run-3e22f11cb34d",
+  "runtime_version": "0.4.0",
+  "command_id": "implement",
+  "workflow_id": "implement-feature",
+  "workflow_version": "1.0.0",
+  "status": "WaitingForHuman",
+  "input_digest": "sha256:e5e3b21053e33707b62632144e787dc4",
+  "created_at": "2026-08-18T13:42:26Z",
+  "updated_at": "2026-08-18T14:29:01Z",
+  "states": {
+    "scope-and-acceptance": {
+      "status": "blocked",
+      "queue_status": "Blocked",
+      "owner_agent_id": "omn-product-owner",
+      "attempt": 0,
+      "attempts_lost": 0,
+      "attempts_charged": 0,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": null,
+      "artifact_path": null,
+      "blocked_reason": "awaiting_capability_registration",
+      "failure_class": "missing-capability-failure",
+      "state_ledger": null,
+      "validation": null
+    },
+    "execution-planning": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "planner",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:95542695aeebfb0678337fae2b7aa0e9",
+      "artifact_path": "runs/run-3e22f11cb34d/states/execution-planning/artifacts/execution-plan.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-3e22f11cb34d/states/execution-planning/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 45,
+        "checksPassed": 45,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 5,
+        "counts": {
+          "sections": 14,
+          "tasks": 10,
+          "assumptions": 5,
+          "risks": 8,
+          "edges": 16,
+          "waves": 5,
+          "openQuestions": 5,
+          "planStatus": "complete"
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "solution-design-and-risk-assessment": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "architect",
+      "attempt": 2,
+      "attempts_lost": 0,
+      "attempts_charged": 2,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:58eba81ca45cbfac16192c05b9eb76bc",
+      "artifact_path": "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "blocked_reason": null,
+      "failure_class": "policy-failure",
+      "state_ledger": "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 78,
+        "checksPassed": 78,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 10,
+        "counts": {
+          "sections": 13,
+          "facts": 25,
+          "assumptions": 6,
+          "constraints": 12,
+          "modules": 12,
+          "options": 5,
+          "decisions": 6,
+          "reuseRows": 8,
+          "planSteps": 8,
+          "risks": 10,
+          "openDecisions": 7,
+          "decisionRecords": 6,
+          "designStatus": "complete"
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "implementation": {
+      "status": "blocked",
+      "queue_status": "Blocked",
+      "owner_agent_id": "omn-dev-1-implement",
+      "attempt": 0,
+      "attempts_lost": 0,
+      "attempts_charged": 0,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": null,
+      "artifact_path": null,
+      "blocked_reason": "awaiting_capability_registration",
+      "failure_class": "missing-capability-failure",
+      "state_ledger": null,
+      "validation": null
+    },
+    "quality-review": {
+      "status": "blocked",
+      "queue_status": "Blocked",
+      "owner_agent_id": "omn-dev-2-reviewer",
+      "attempt": 0,
+      "attempts_lost": 0,
+      "attempts_charged": 0,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": null,
+      "artifact_path": null,
+      "blocked_reason": "awaiting_capability_registration",
+      "failure_class": "missing-capability-failure",
+      "state_ledger": null,
+      "validation": null
+    },
+    "documentation-and-release-handoff": {
+      "status": "blocked",
+      "queue_status": "Blocked",
+      "owner_agent_id": "omn-documentation",
+      "attempt": 0,
+      "attempts_lost": 0,
+      "attempts_charged": 0,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": null,
+      "artifact_path": null,
+      "blocked_reason": "awaiting_capability_registration",
+      "failure_class": "missing-capability-failure",
+      "state_ledger": null,
+      "validation": null
+    }
+  },
+  "gates": {
+    "Scope Gate": {
+      "gate": "Scope Gate",
+      "closes_state": "scope-and-acceptance",
+      "owner_roles": [
+        "omn-product-owner",
+        "omn-business-analyst"
+      ],
+      "producer_agent": "omn-product-owner",
+      "decision": null,
+      "owner_role": null,
+      "decided_by": null,
+      "rationale": null,
+      "evidence_ref": null,
+      "decided_at": null
+    },
+    "Planning Gate": {
+      "gate": "Planning Gate",
+      "closes_state": "execution-planning",
+      "owner_roles": [
+        "omn-tech-lead",
+        "omn-orchestrator"
+      ],
+      "producer_agent": "planner",
+      "decision": "approved",
+      "owner_role": "omn-tech-lead",
+      "decided_by": "operator, on behalf of omn-tech-lead (no registry record; self-hosting profile C-3)",
+      "rationale": "Plan validated 45/45 with 5 not-machine-checkable; 14 tasks trace to the intent's three outcomes; scope excludes gate ownership and capability registration as the intent requires; no blocking open question.",
+      "evidence_ref": "runs/run-3e22f11cb34d/states/execution-planning/validation-report.json",
+      "decided_at": "2026-08-18T13:53:46Z"
+    },
+    "Design Gate": {
+      "gate": "Design Gate",
+      "closes_state": "solution-design-and-risk-assessment",
+      "owner_roles": [
+        "omn-architect",
+        "omn-tech-lead"
+      ],
+      "producer_agent": "architect",
+      "decision": "approved",
+      "owner_role": "omn-tech-lead",
+      "decided_by": "operator, on behalf of omn-tech-lead (architect is the producer and is excluded from deciding this gate)",
+      "rationale": "Design validated 78/78 with 10 not-machine-checkable after one rejected attempt and a repair pass. One cell changes in one machine-read contract; the four options that would edit a frozen-slice member or create a second routing authority are eliminated on stated constraints. Rollback is one cell. Two validator limitations found in the framework itself are recorded as open decisions rather than worked around.",
+      "evidence_ref": "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/validation-report.json",
+      "decided_at": "2026-08-18T14:29:01Z"
+    },
+    "Review Gate": {
+      "gate": "Review Gate",
+      "closes_state": "quality-review",
+      "owner_roles": [
+        "omn-dev-2-reviewer",
+        "omn-qa"
+      ],
+      "producer_agent": "omn-dev-2-reviewer",
+      "decision": null,
+      "owner_role": null,
+      "decided_by": null,
+      "rationale": null,
+      "evidence_ref": null,
+      "decided_at": null
+    },
+    "Verification Gate": {
+      "gate": "Verification Gate",
+      "closes_state": "quality-review",
+      "owner_roles": [
+        "omn-qa"
+      ],
+      "producer_agent": "omn-dev-2-reviewer",
+      "decision": null,
+      "owner_role": null,
+      "decided_by": null,
+      "rationale": null,
+      "evidence_ref": null,
+      "decided_at": null
+    },
+    "Closure Gate": {
+      "gate": "Closure Gate",
+      "closes_state": "documentation-and-release-handoff",
+      "owner_roles": [
+        "omn-orchestrator",
+        "omn-documentation"
+      ],
+      "producer_agent": "omn-documentation",
+      "decision": null,
+      "owner_role": null,
+      "decided_by": null,
+      "rationale": null,
+      "evidence_ref": null,
+      "decided_at": null
+    }
+  },
+  "summary": {
+    "run_id": "run-3e22f11cb34d",
+    "run_status": "WaitingForHuman",
+    "phases": 6,
+    "completed": 2,
+    "blocked": 4,
+    "failed": 0,
+    "pending": 0,
+    "retrying": 0,
+    "active": 0,
+    "transitions": 20,
+    "replays_suppressed": 0
+  },
+  "recovery": {
+    "ledger": "runs/run-3e22f11cb34d/recovery-ledger.json",
+    "classifications": 8,
+    "open": 4,
+    "resolved": 4,
+    "retries_scheduled": 0,
+    "by_failure_class": {
+      "missing-capability-failure": 4,
+      "gate-approval-required": 3,
+      "policy-failure": 1
+    },
+    "retry_profile": {
+      "max_attempts": 3,
+      "backoff_strategy": "exponential",
+      "base_delay_seconds": 2,
+      "multiplier": 2,
+      "max_delay_seconds": 60,
+      "jitter_ratio": 0.2,
+      "circuit_breaker_threshold": 3,
+      "policy_ref": "config/runtime.md#retry-policy"
+    }
+  }
+}

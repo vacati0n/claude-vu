@@ -1,0 +1,401 @@
+{
+  "invocation_id": "inv-8f8a1ab0d16e-06-001",
+  "run_id": "run-8f8a1ab0d16e",
+  "work_item_id": "run-8f8a1ab0d16e::documentation-and-release-handoff",
+  "idempotency_key": "sha256:6543a4b094fe65b6174912b53fa68889",
+  "state_id": "documentation-and-release-handoff",
+  "phase_index": 6,
+  "agent_id": "omn-documentation",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-documentation.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-documentation/manifest.yaml",
+    "load_order": [
+      "agents/omn-documentation/system.md",
+      "agents/omn-documentation/identity.md",
+      "agents/omn-documentation/reasoning.md",
+      "agents/omn-documentation/execution.md",
+      "agents/omn-documentation/output.md",
+      "agents/omn-documentation/quality.md",
+      "agents/omn-documentation/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-documentation/system.md": "sha256:407f35d95b5e232c7d87d7740a942844",
+      "agents/omn-documentation/identity.md": "sha256:e40e9fd9da20ae31f5af17d3cc97fcf2",
+      "agents/omn-documentation/reasoning.md": "sha256:11b286235d28b0bc358674c5b9357736",
+      "agents/omn-documentation/execution.md": "sha256:0077338ee3cbe3eee246e3556f9da205",
+      "agents/omn-documentation/output.md": "sha256:9e0c56ac978b9695f13668e209f8e2e4",
+      "agents/omn-documentation/quality.md": "sha256:972fe80aafbde6b6f8142b6dbd97e081",
+      "agents/omn-documentation/examples.md": "sha256:baead714ded57fbb1d36b103b957ee78"
+    },
+    "capabilities": [
+      "documentation",
+      "release-communication"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "validation-report",
+      "review-package",
+      "deployment-status",
+      "scope-definition",
+      "technical-design",
+      "execution-plan",
+      "bug-analysis",
+      "monitoring-health-record",
+      "final-change-summary",
+      "stakeholder-list",
+      "verification-report",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "closure-context",
+      "communication-requirements",
+      "existing-documentation",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "review-package",
+        "reference": "runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md",
+        "text": "```yaml\nreviewPackage:\n  packageId: RP-2026-0005\n  reviewReference: CKA-03 -- CI workflow gating every pull request and default-branch push (ticket CKA-03 in the adoption backlog under docs/), as delivered by implementation report IR-2026-0005\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-03-feature-request.md\n    - type: implementation-report\n      reference: runs/run-8f8a1ab0d16e/states/implementation/artifacts/implementation-report.md\n    - type: design-reference\n      reference: runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n    - type: design-reference\n      reference: runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md\n    - type: design-reference\n      reference: runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md\n    - type: design-reference\n      reference: runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-003.md\n  producedBy: omn-dev-2-reviewer\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: approve-with-corrections\n  inputDigest: sha256:f87a4b566a69a484f4ebce485990801e\n  contextDigest: sha256:d2a44ef0a7d382b3285bf0991857fe61\n```\n\n## Metadata\n\n- Review ID: RP-2026-0005\n- Reviewer: omn-dev-2-reviewer\n- Change under review: CKA-03 -- the CI verification workflow `.github/workflows/verify.yml` gating every pull request and default-branch push with two discovered verification surfaces, plus its committed regression net `tests/test_ci_workflow.py` and the CI documentation in `README.md`, `docs/USER-GUIDE.md`, and `docs/user-guide.html` (change-set entries C-001 through C-005 of implementation report IR-2026-0005)\n- Review date: 2026-09-04\n\n## Review Scope\n\n- In scope: all five change-set entries read in full -- the workflow definition, the committed 13-test regression net, and the three documentation surfaces' CI sections; conformance of the delivered change to the accepted technical design CKA-03-technical-design (constraints C-001 through C-012, decisions D-001 through D-007) and its three decision records; the implementation report's test-evidence claims, including independent re-execution of the committed regression net; the workflow's embedded interpreter expressions checked against the actual summary-line and verdict format of the proof scripts under the framework runtime directory; the interpreter floor checked against `pyproject.toml`; the additive-only constraint checked against the declared side effects and by content inspection of the framework runtime files read during this review.\n- Out of scope: live execution of the workflow on the hosting platform (matrix fan-out, rendered per-verifier check names, fan-in behavior under a real upstream failure and a real cancellation, both platforms' hosted-runner results) -- unreachable from this review environment, compensated by the local evidence below and routed to omn-qa by the implementation report's own blocking open question; the branch-protection required-checks configuration -- a platform settings surface, not a repository file, owned by omn-tech-lead per the design's rollout; the proof scripts, unit tests, framework runtime, and gate-decision surfaces themselves -- executed and read, never part of the change set, and their non-modification is assessed from the declared side effects plus content inspection because this review environment carries no version-control baseline for a byte-level diff; the orphan-run cleanup, owned by an existing follow-up task per ADR D-003. Each exclusion is safe because it is owned by a named role or covered by compensating evidence recorded here.\n- Evidence reviewed: implementation report IR-2026-0005 (in full); the feature request (in full); technical design CKA-03-technical-design and ADRs D-001, D-002, D-003 (in full); `.github/workflows/verify.yml` (in full); `tests/test_ci_workflow.py` (in full); the CI sections of `README.md` (lines 400-427), `docs/USER-GUIDE.md` (lines 993-1010), and `docs/user-guide.html` (lines 962-978); the `requires-python` and `dependencies` declarations of `pyproject.toml`; the final summary-line print statements of all seven `verify_*.py` proof scripts under the framework runtime directory, with the verdict-token logic of `verify_manifests.py`, `verify_recovery.py`, and `verify_self_hosting.py` read in context; and one command executed this run -- `python -m unittest tests.test_ci_workflow -v`, which ran the committed regression net: 13 tests, OK.\n\n## Findings\n\n| ID | Severity | Category | Location | Requirement | Finding | Correction Request | Status |\n|---|---|---|---|---|---|---|---|\n| `F-001` | low | correctness | `.github/workflows/verify.yml:55-59` | technical-design constraint C-001 (both triggers run both surfaces on every default-branch push) and the workflow's own documented cancellation claim | All default-branch push runs share one concurrency group with cancellation of in-progress runs disabled, which protects only in-progress runs: on the hosting platform a pending run in a group is cancelled when a newer run queues, so under rapid consecutive pushes an intermediate push run can be superseded, and the in-file claim that default-branch push runs are never cancelled overstates the guarantee. The branch head is still always verified, so no regression lands unobserved; the loss is per-commit check attribution in a narrow race, a consistency defect between the configuration and its documented claim | `CR-001` | open |\n| `F-002` | low | test-adequacy | `tests/test_ci_workflow.py` | technical-design decision D-004 (the unit-test surface is provisioned at the packaging floor the packaging metadata declares, per the design's packaging-floor fact) | No committed check ties the workflow's four interpreter-version literals (`3.10`) to the `requires-python` floor declared in `pyproject.toml`; the two agree today, but a floor bump in either file alone passes the entire suite, silently diverging CI provisioning from the declared floor -- while every other rename-sensitive contract property this change delivers carries a lock in the regression net | `CR-002` | open |\n\n## Severity Summary\n\n- Critical: 0\n- High: 0\n- Medium: 0\n- Low: 2\n\n## Standards and Architecture Conformance\n\n- Coding standards: the repository's test conventions (standard-library unittest, `tests/test_*.py` naming discoverable from the repository root) -- conforms; `tests/test_ci_workflow.py` runs under discovery, is hermetic as its docstring claims, and passed 13 of 13 when re-executed this run.\n- Architecture rules: technical-design constraints C-001 through C-012 and decisions D-001 through D-007, with ADRs D-001, D-002, D-003 -- conforms with one low deviation (`F-001`). Verified by reading the workflow: discovery-not-curation holds (no verifier or test filename appears anywhere in the workflow; discovery is a single inline scoped glob with an empty-set guard, and the committed net asserts the property); per-verifier isolation holds structurally (one matrix job per discovered verifier per platform, fresh runner and fresh checkout, `fail-fast: false`, no execution ordering); the verifier pass assertion is generic and requires exit code 0 plus the script's own all-checks-passed summary with a non-negative verdict (negative forms `NOT ...` and `NON-CONFORMANT` rejected, and a passed-not-equal-total count rejected independently), confirmed against the actual final print statements of all seven proof scripts and the verdict logic of three; the four stable check names render as documented and the two fan-ins carry `if: always()` with explicit upstream-result evaluation that fails -- never succeeds and never skips -- on upstream failure or cancellation; advisory standing is encoded by omission (no failure-tolerance flag in any effective line) and no `NO_COLOR` value is set in any effective line; both surfaces run on both triggers with no event-conditional job; the interpreter floor 3.10 matches `requires-python >=3.10`. The report's two declared deviations were examined: V-002 (two per-platform matrices) realizes exactly the per-verifier-per-platform job set D-001 states while keeping each fan-in's evaluation exact, and V-001 (the `main` branch literal) is flagged in the workflow header and routed to omn-tech-lead by the report's own open question -- neither warrants a finding.\n- Security criteria: the technical design's security constraints (Operational Considerations and risk R-009: verification jobs carry no secrets and least-privilege read-only repository access, because pull-request code executes on the runners) -- conforms; the workflow declares `permissions: contents: read`, references no secret anywhere, and uses the ordinary pull-request trigger rather than any elevated-privilege variant.\n- Exceptions requested: None identified.\n\n## Test Adequacy Assessment\n\n- Test evidence reviewed: the implementation report's seven test-evidence entries T-001 through T-007; of these, T-006 (the committed 13-test regression net) was independently re-executed this run via `python -m unittest tests.test_ci_workflow -v` and confirmed -- 13 tests, OK; T-007 (full suite by discovery, 316 of 316) is recorded here as claimed by the report and not re-run this review; T-001 through T-005 ran from a session scratch script outside the repository and are recorded as claimed, with their substance independently reconstructed by this review's own reading of the workflow, its discovery expression, and its wrapper, and by the overlapping committed net that was confirmed.\n- Coverage of changed behavior: strong for the contract the change delivers -- the net locks both triggers, the six-job topology, the four stable check names, the discovery-fed matrix fan-out with `fail-fast: false`, the always-run fan-ins with explicit result evaluation, the no-`NO_COLOR` and no-failure-tolerance policy over effective lines, read-only permissions, the no-curation property against the present verifier and test file sets, the discovery expression's exact enumeration, the wrapper's accept and reject semantics including exit-0-with-negative-verdict and exit-0-with-no-summary, byte-identity of the two platform wrapper copies, and check-name parity across all three documentation surfaces. Probed specifically: a curated file list, removal of a fan-in's `always()` guard, an added `NO_COLOR` value, or a dropped trigger would each fail a named test in the committed net.\n- Gaps requiring new tests: the interpreter-floor coupling to `pyproject.toml` (`F-002`); the concurrency block's group and cancellation semantics, pinned by no check; the `tests` job's `fail-fast: false`, unasserted (only the verifier matrices are asserted); and live hosted-runner behavior -- rendered per-verifier check names, fan-in results under a real failure and a real cancellation, superseded-run cancellation, and both platforms' suite results -- which no local check can exercise and which is handed to omn-qa with the readiness recommendation below.\n\n## Correction Requests\n\n| ID | Addresses | Required change | Blocking | Owner |\n|---|---|---|---|---|\n| `CR-001` | `F-001` | The workflow's documented cancellation guarantee and its concurrency configuration state the same behavior: either default-branch push runs are exempt from pending-run supersession, or the workflow header and the contributor documentation state that only the newest queued push run is retained while the branch head is always verified | no | omn-dev-1-implement |\n| `CR-002` | `F-002` | A committed check fails the unit-test suite whenever the workflow's interpreter version diverges from the packaging floor declared in `pyproject.toml` | no | omn-dev-1-implement |\n\n## Residual Risk\n\n- Accepted risk: the fan-out's runner cost (about 18 hosted jobs per run) is accepted by the design against negotiable constraint C-011, recorded in ADR D-001's tradeoffs and mitigated by superseded-run cancellation -- acceptance owned by the design and its Design Gate owners; the `main` branch-literal assumption stands accepted pending omn-tech-lead's confirmation via the report's open question.\n- Unmitigated risk: the recovery proof's flake rate on hosted runners, especially windows, is unmeasured until the advisory week produces evidence (design risk R-001); live fan-in and matrix behavior is unconfirmed until the first hosted runs; the verifier fan-ins will report red on pre-existing repository state (the three orphan run directories) until the externally owned cleanup lands -- visible but non-blocking under the advisory standing.\n- Monitoring required: per-verifier failure and flake rates by platform across the advisory week; the first live run's rendered check names, matrix fan-out from the discovery output, and fan-in behavior under real failure and cancellation; continued byte-identity of the two platform wrapper copies (a drift fails the committed net); the flip precondition -- a default-branch run showing the self-hosting proof passing after the orphan cleanup lands -- before any advisory check becomes required.\n\n## Verdict\n\n- Decision: approve-with-corrections\n- Rationale: every hard design constraint verified against the delivered files holds, the evidence offered is either confirmed by this run's own command or honestly labeled as claimed, and the only open findings are two low-severity, non-blocking defects; the adjudication row for open medium-or-low findings with the declared scope fully examined yields approve-with-corrections at package status complete.\n- Blocking findings outstanding: None identified.\n- Readiness recommendation: this reviewer recommends the change progress from quality-review, with `CR-001` and `CR-002` carried as non-blocking corrections and the live hosted-run validation completed by omn-qa before the verification claim is treated as sufficient; the Review Gate is decided by omn-qa, not by this agent, because this agent produced the findings that gate assesses.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | Does the first live hosted run confirm the locally verified contract properties -- the matrix fan-out from the discovery output, the rendered per-verifier check names, fan-in fail-never-skip under a real upstream failure and a real cancellation, and both platforms' suite results? | no | omn-qa | the confidence carried by the readiness recommendation; neither finding nor the verdict moves on the answer, but the Review Gate's sufficiency judgement does |",
+        "digest": "sha256:01a9cd2a2048444277d596e0426867c2",
+        "produced_by": "quality-review"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was delivered: an implementation report for the change set itself, a validation report for what was proven about it, a review package for a `review-pull-request` run, or a deployment status for the `communication-and-post-release` phase, which publishes after a release has landed. Without one there is nothing to publish from, and publishing anyway would mean describing a system from this agent's own reading of what it was supposed to become."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "review-package",
+      "reference": "runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md",
+      "produced_by": "quality-review"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-04T07:27:43Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/release-note.md",
+        "digest": "sha256:a6125cac38eb2edeca7105d936d9304c",
+        "supplies": null
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:bc0fb4ee128c1855f84c63b3ea12319c",
+    "input_digest": "sha256:01a9cd2a2048444277d596e0426867c2",
+    "inputs": [
+      {
+        "type": "review-package",
+        "reference": "runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md",
+        "digest": "sha256:01a9cd2a2048444277d596e0426867c2"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-8f8a1ab0d16e/states/documentation-and-release-handoff/artifacts/release-note.md",
+      "runs/run-8f8a1ab0d16e/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "reproducing a test or validation result, which belongs to omn-qa"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author or amend a technical design, an architecture decision, or a structural constraint",
+      "define, widen, or narrow product scope or acceptance criteria",
+      "award, withhold, or restate a validation verdict as though this agent reached it",
+      "record a merge, release, or deployment decision",
+      "publish a statement the supplied evidence does not support",
+      "omit, soften, or defer a breaking change a supplied input declares",
+      "carry forward prior-release content the delivered change made false",
+      "resolve an engineering gap rather than returning it to the role that owns it",
+      "decide a gate that assesses evidence this agent produced",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "describe delivered behavior from the implementation and validation evidence supplied",
+        "draft release notes, change summaries, and closure communication packages",
+        "record usage, limitations, known issues, and troubleshooting guidance",
+        "state the compatibility consequence a declared contract change carries",
+        "identify documentation the delivered change made stale, and propose its correction",
+        "name the audience a communication was addressed to and the handoff it carries",
+        "maintain the trace from each published statement to the artifact that supports it",
+        "record an unresolved engineering question as an open question against its owning role"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author or amend a technical design, an architecture decision, or a structural constraint",
+        "define, widen, or narrow product scope or acceptance criteria",
+        "award, withhold, or restate a validation verdict as though this agent reached it",
+        "record a merge, release, or deployment decision",
+        "publish a statement the supplied evidence does not support",
+        "omit, soften, or defer a breaking change a supplied input declares",
+        "carry forward prior-release content the delivered change made false",
+        "resolve an engineering gap rather than returning it to the role that owns it",
+        "decide a gate that assesses evidence this agent produced",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else. Product documentation living in the repository is proposed as content inside the artifact and applied by the role that owns the file, so a documentation change never travels as an unreviewed write.",
+        "rationale": "This agent's authority is over what is said about a change, never over the change itself. Writing to the repository would let a publication step alter the delivered behavior it exists to describe, and the resulting document would then be accurate about a system this agent had just modified."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "reproducing a test or validation result, which belongs to omn-qa"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same published statements, the same known-issue set, the same compatibility statement, the same declared release verdict, and the same declared artifact status.",
+      "identifierSchemes": {
+        "knownIssues": "K-<zero-padded-sequence>"
+      },
+      "orderingRule": "Known issues keep the order of the source that recorded them, so a supplied defect list and the issues published from it can be read side by side.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied evidence, release context, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "release-note.md",
+    "artifact_path": "runs/run-8f8a1ab0d16e/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "template_ref": "templates/release-note.md",
+    "contract_ref": "agents/omn-documentation/output.md",
+    "quality_ref": "agents/omn-documentation/quality.md",
+    "validator": "release_note_validator",
+    "result_envelope_path": "runs/run-8f8a1ab0d16e/states/documentation-and-release-handoff/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-04T07:27:43Z"
+}

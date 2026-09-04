@@ -1,0 +1,412 @@
+{
+  "invocation_id": "inv-34ca35504b72-01-002",
+  "run_id": "run-34ca35504b72",
+  "work_item_id": "run-34ca35504b72::scope-invariants-and-risk-profile",
+  "idempotency_key": "sha256:c3c68b03de7cc9296f618119b8780d0e",
+  "state_id": "scope-invariants-and-risk-profile",
+  "phase_index": 1,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:33d317684aece20ce5b970f6b595c107",
+      "agents/architect/identity.md": "sha256:fc073d2135f891349e8f6639243819e3",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:9b9f220dee72dd93faca5d9c021d6ead",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:d9fa58935c242fb724123ea69d5eeb61",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "feature-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/claude-md-folder-sync-change-request.md",
+        "source_file": ".claude/runs/inputs/claude-md-folder-sync-change-request.md",
+        "text": "# Change Request \u2014 CLAUDE.md Folder Descriptions Sync\n\n## Change class\n\n`structure-preserving-change` per `config/self-hosting-profile.md` Routing Table. Wording of a\ndocumentation surface changes; no contract, routing, or runtime behaviour changes.\n\nClassification evidence:\n\n```\npython .claude/runtime/self_hosting.py classify --path .claude/CLAUDE.md\n  [IN ] .claude/CLAUDE.md   SR-1: Every framework surface the runtime resolves lives here\n  framework-internal change\n\npython .claude/runtime/self_hosting.py route --intent structure-preserving-change\n  command : /refactor   workflow : refactor v1.0.0   entry phase : scope-invariants-and-risk-profile\n```\n\n## Defect being corrected\n\n`.claude/CLAUDE.md` section `## Folder Descriptions` enumerates twelve directories. The\n`.claude/` tree contains sixteen. Four existing, load-bearing directories are undocumented:\n\n| Missing folder | What it actually holds |\n|---|---|\n| `domain-model/` | Canonical specifications of the framework's domain concepts: agent, command, skill, workflow, and memory specifications |\n| `prompts/` | Curated, versioned prompt patterns used by the task-force agents |\n| `registry/` | Single-authority discovery indexes (`agents.yaml`, `commands.yaml`, `skills.yaml`, `templates.yaml`, `workflows.yaml`) the runtime resolves routing against |\n| `runtime/` | The executable runtime: state engine, routing resolver, artifact validators, self-hosting classifier, and verification scripts |\n\nThe omission is a correctness defect in the orientation document every contributor is told to\nread first, and `runtime/` in particular is named repeatedly in CLAUDE.md's own Architecture and\nContributor Usage sections while absent from its folder inventory.\n\n## Surfaces this change is expected to touch\n\n| Surface | Nature of change |\n|---|---|\n| `.claude/CLAUDE.md` | Four rows added to `## Folder Descriptions`; no other section changes |\n| `proposals/` | New change proposal (governance record, `SR-5` out of routing scope) |\n| `runs/` | Run evidence written by this run (`SR-3` out of routing scope) |\n\n## Behavioral invariants\n\n| ID | Invariant |\n|---|---|\n| `INV-1` | No contract, registry record, routing row, gate, or runtime behaviour changes |\n| `INV-2` | Every existing row of `## Folder Descriptions` keeps its meaning; only additions occur |\n| `INV-3` | All verification scripts (`verify_manifests.py`, `verify_registry_coverage.py`, `verify_validators.py`, `verify_recovery.py`, `verify_self_hosting.py`) keep their current verdict |\n| `INV-4` | Every path CLAUDE.md cites resolves on the filesystem after the change, as all currently cited paths already do |\n\n## Constraints\n\n- Descriptions must state what each folder holds today, verified against its contents, not\n  aspirational purpose.\n- One line per folder, matching the existing list's register and length.\n- No reordering of existing rows beyond what alphabet-free structural grouping already present\n  requires; new rows are inserted where a reader scanning the tree would look for them.\n\n## Requested decision\n\nConfirm the four added descriptions are accurate against folder contents and that the change is\npurely additive to `## Folder Descriptions`.",
+        "digest": "sha256:29b515198505a25873ee0d7464601672"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/claude-md-folder-sync-business-intent.md",
+        "source_file": ".claude/runs/inputs/claude-md-folder-sync-business-intent.md",
+        "text": "# Business Intent \u2014 CLAUDE.md Folder Descriptions Sync\n\n## Outcome sought\n\nA contributor reading `.claude/CLAUDE.md` \u2014 the document the framework itself instructs every\ncontributor to read first \u2014 sees a folder inventory that matches the repository.\n\n## Value\n\nCLAUDE.md is loaded into every agent session as authoritative project instructions. Its\n`## Folder Descriptions` section is the map a contributor and every routed agent orients by.\nToday that map omits four of the sixteen directories under `.claude/`, including `runtime/`,\nwhich the same document's Contributor Usage section requires contributors to invoke, and\n`registry/`, which the routing the document mandates resolves against. A map that silently\nomits the framework's execution and discovery surfaces misleads exactly the audience the\ndocument exists to orient.\n\n## Success criteria\n\n| ID | Criterion | Measure |\n|---|---|---|\n| `BI-1` | Every directory under `.claude/` has a row in `## Folder Descriptions` | 16 of 16 directories documented |\n| `BI-2` | Each added description matches the folder's actual contents | Reviewer confirms against `domain-model/`, `prompts/README.md`, `registry/*.yaml`, `runtime/README.md` |\n| `BI-3` | Nothing else about CLAUDE.md changes | Diff confined to `## Folder Descriptions` |\n| `BI-4` | No metric regresses | All verification scripts keep their current verdict |\n\n## Non-goals\n\n- Rewriting any other CLAUDE.md section.\n- Changing what any folder holds or how the runtime resolves it.\n- Documenting repository-root files (`README.md`, `dependency-map.md`); the section is a folder\n  inventory and stays one.\n\n## Risk posture\n\nMinimal-risk documentation change. Zero tolerance for any behavioural or contract drift; the\nchange is rejected if the diff leaves `## Folder Descriptions`.",
+        "digest": "sha256:362aa758a8d1c6928b1753cf0d395b49"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "source_file": ".claude/runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "text": "# Architecture Context \u2014 CLAUDE.md Folder Descriptions Sync\n\nSupplied by the operator for the `scope-invariants-and-risk-profile` phase of the CLAUDE.md\nfolder-descriptions correction. The system under design is the framework in this repository;\nthe surface under change is its top-level orientation document.\n\n## Position of the changed surface\n\n`.claude/CLAUDE.md` is a documentation surface, not a resolved runtime surface: no registry\nrecord points at it, no validator parses it, and no workflow phase consumes it as an input\nartifact. It is, however, injected into every contributor session as project instructions, so\nits accuracy is a governance concern even though its content is load-bearing for humans and\nsession-context only.\n\n## Authoritative records the added descriptions must match\n\n| Folder to document | Authority on its contents |\n|---|---|\n| `domain-model/` | The five `*-specification.md` files it contains (agent, command, skill, workflow, memory) |\n| `prompts/` | `prompts/README.md` |\n| `registry/` | The five `registry/*.yaml` discovery indexes; `dependency-map.md` records their position |\n| `runtime/` | `runtime/README.md`, the current-state record of what is implemented |\n\n## Current-state properties the operator asserts\n\n1. `.claude/` contains sixteen directories; CLAUDE.md documents twelve.\n2. Every path CLAUDE.md currently cites resolves on the filesystem (verified 2026-08-27):\n   `config/self-hosting-profile.md`, `validation/framework-release-checklist.md`,\n   `runtime/verify_self_hosting.py`, `runtime/self_hosting.py`,\n   `templates/framework-change-proposal.md`.\n3. The framework's discovery registries are single-authority; CLAUDE.md describes them, it does\n   not duplicate their records.\n\n## Constraints the operator places on the design\n\n- The change must not create a second authority: descriptions summarize, they do not restate\n  registry or specification content.\n- The diff is confined to `## Folder Descriptions`. A correction that finds defects elsewhere in\n  CLAUDE.md names them for a separate routed change rather than folding them in.",
+        "digest": "sha256:36a5a86305d4a0bcfe63560e13e3c0f3"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change this agent designs against: a change request, a feature request, or a business intent. Without one there is no requested change to design, and designing anyway would mean inventing the requirement."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md"
+    ],
+    "failures": [
+      {
+        "id": "D3.6",
+        "severity": "Blocking",
+        "quality_ref": "A4.1",
+        "requirement": "No model, vendor, provider, or agent runtime named",
+        "detail": "found: ['claude']"
+      },
+      {
+        "id": "D8.5",
+        "severity": "Blocking",
+        "quality_ref": "A8.6",
+        "requirement": "At least one rejected alternative is recorded with its rationale",
+        "detail": "value=''"
+      }
+    ]
+  },
+  "upstream_artifacts": [],
+  "context_slice": {
+    "frozen_at": "2026-08-27T13:09:24Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/refactor.md",
+        "digest": "sha256:7a364f76b2347a77f5fb16e67c727416",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+        "supplies": null
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+        "supplies": null
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:4c96eba9412c3b0eeb8ff4342513f027",
+    "input_digest": "sha256:330aaf18ec7fac4aa965ff3238384a54",
+    "inputs": [
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/claude-md-folder-sync-change-request.md",
+        "source_file": ".claude/runs/inputs/claude-md-folder-sync-change-request.md",
+        "digest": "sha256:29b515198505a25873ee0d7464601672"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/claude-md-folder-sync-business-intent.md",
+        "source_file": ".claude/runs/inputs/claude-md-folder-sync-business-intent.md",
+        "digest": "sha256:362aa758a8d1c6928b1753cf0d395b49"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "source_file": ".claude/runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "digest": "sha256:36a5a86305d4a0bcfe63560e13e3c0f3"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "memory/architecture.md",
+      "runtime/README.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+      "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/result-envelope.json",
+      "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/architecture-decision-record-*.md",
+      "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/review-package-*.md"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/architecture-decision-record-<identifier>.md"
+      },
+      {
+        "artifact": "review-package.md",
+        "template_ref": "templates/review-package.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "Emitted only for review-pull-request/structural-compliance, where this agent applies the structural and security lens and the findings are classified under the architecture and security categories. runtime/review_package_validator.py already contracts this agent as a permitted producer of review-package.md; the quality rules it applies to the structural lens are the ones in quality.md.",
+        "artifact_path_glob": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/review-package-*.md",
+        "naming": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/review-package-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-08-27T13:09:24Z"
+}

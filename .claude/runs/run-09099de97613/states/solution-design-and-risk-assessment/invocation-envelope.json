@@ -1,0 +1,446 @@
+{
+  "invocation_id": "inv-09099de97613-03-002",
+  "run_id": "run-09099de97613",
+  "work_item_id": "run-09099de97613::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:f2c7c581cb98a4814bb33956dc5b4f6b",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:33d317684aece20ce5b970f6b595c107",
+      "agents/architect/identity.md": "sha256:fc073d2135f891349e8f6639243819e3",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:9b9f220dee72dd93faca5d9c021d6ead",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:d9fa58935c242fb724123ea69d5eeb61",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "feature-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/omt-01-feature-request.md",
+        "source_file": ".claude/runs/inputs/omt-01-feature-request.md",
+        "text": "# Feature Request \u2014 OMT-01 Memory Token Optimizer Command\n\n## Request\n\nGive the framework a command that rewrites its durable knowledge surfaces \u2014 memory, context, and\nthe standing instruction files \u2014 to their minimum token cost without changing what they instruct.\n\nThe capability comprises three things the framework does not have today:\n\n1. `commands/optimize-memory.md`, a command contract with an active record in\n   `registry/commands.yaml`.\n2. `runtime/optimize_memory.py`, the runtime module the command executes.\n3. An index in `config/self-hosting-profile.md` recording each accepted change proposal against\n   the run that carried it.\n\n## Why now\n\nMemory, context, and instruction files are loaded into the context slice of every dispatch. Their\ntoken cost is therefore paid per run rather than once, and it grows monotonically: every\nincrement that records a decision, a known issue, or a standard makes every later run more\nexpensive to start. Twenty-one files totalling roughly sixty-five kilobytes are in that position\nnow. Nothing in the framework reduces that cost, and no existing command's contract covers doing\nso.\n\nThe framework already owns the shape of this work. A change that alters wording while preserving\nmeaning is a `structure-preserving-change`, and `workflows/refactor.md` exists to hold that claim\nto account: `scope-invariants-and-risk-profile` states what may not change, and\n`behavioral-validation` checks that it did not. What is missing is a bounded entry point that\nroutes there with the scope and the mechanical check already fixed.\n\n## Expected outcome\n\n- An operator types one command and receives a reviewable proposal: per-file token delta, a\n  unified diff per candidate, and a named reason for every candidate that was rejected.\n- No file is overwritten without a recoverable pre-image and a recorded digest pair.\n- Every accepted candidate has passed a mechanical invariant check against its original.\n- Generated and evidence surfaces are unreachable by the pass, whatever the operator asks for.\n- The framework's registry coverage, self-hosting, and release checks continue to pass.\n\n## Explicit non-goals\n\n- Deciding what belongs in memory or context. That stays with `memory/memory-governance.md`.\n- Rewriting source code, agent contracts, registries, workflow specifications, or command\n  specifications. None is a knowledge surface loaded per run.\n- Proving semantic equivalence. The request asks for a mechanical structural check plus a\n  reviewable diff, and asks that the difference between those two be stated rather than blurred.\n\n## Known obstacles the request does not resolve\n\n- A generative model cannot prove it preserved meaning. Any acceptance rule built on its own\n  assurance is worthless. The design must therefore judge candidates against the original by a\n  rule the framework can run, and must say plainly what that rule does and does not cover.\n- The compression pass requires a provider client library and resolvable credentials, neither of\n  which the framework carries today. The command must fail before touching a file when they are\n  absent, and the offline surfaces must stay usable without them.",
+        "digest": "sha256:2719daabacb06dca76da89e24b04daed"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/omt-01-change-request.md",
+        "source_file": ".claude/runs/inputs/omt-01-change-request.md",
+        "text": "# Change Request \u2014 OMT-01 Memory Token Optimizer Command\n\n## Change class\n\n`capability-addition`, per `config/self-hosting-profile.md` `## Routing Table`. The framework\ngains a command contract, a registry record, and a runtime behaviour it did not have.\n\nClassification was performed before the work began:\n\n```\npython .claude/runtime/self_hosting.py classify --path .claude/commands/optimize-memory.md \\\n    --path .claude/runtime/optimize_memory.py --path .claude/config/self-hosting-profile.md\npython .claude/runtime/self_hosting.py route --intent capability-addition\n```\n\nEvery touched path resolves in-scope under `SR-1`. The route resolves to `/implement` ->\n`implement-feature`, entry phase `scope-and-acceptance`.\n\n## Paths touched\n\n| Path | Scope Rule | Change |\n|---|---|---|\n| `.claude/commands/optimize-memory.md` | `SR-1` | New command contract |\n| `.claude/runtime/optimize_memory.py` | `SR-1` | New runtime module |\n| `.claude/registry/commands.yaml` | `SR-1` | New active command record |\n| `.claude/commands/command-catalog.md` | `SR-1` | New catalog row |\n| `.claude/commands/README.md` | `SR-1` | Command contract count corrected |\n| `.claude/config/self-hosting-profile.md` | `SR-1` | New proposal index section |\n\n## Required behaviour\n\n- The command routes to `refactor`, not to a new workflow. Its claim is the invariant claim that\n  workflow already holds to account, and a second workflow asserting the same thing would be a\n  second answer to a question the framework has already answered.\n- The runtime module defaults to a dry run. Overwriting is an explicit flag.\n- Every applied overwrite is preceded by a pre-image write and followed by a digest pair.\n- Candidates are judged against the original by a mechanical rule, and a candidate that breaks\n  it is discarded without a retry.\n- Denied paths bind regardless of caller arguments.\n\n## Constraints\n\n- No change to any existing workflow, phase model, agent manifest, gate matrix row, or validator.\n  A change that required one would be a larger change than this one claims to be.\n- No new dependency for any existing surface. The provider client library is required only by the\n  new module's online path, and only at the point it makes a request.\n- `verify_registry_coverage.py`, `verify_self_hosting.py`, and the framework release checklist\n  must pass after the change, at the same counts as before plus the one added command.\n\n## Out of scope\n\n- Executing an optimization pass against this repository's own memory and context. Adding the\n  capability and using it are separate changes; the second is the operator's decision and carries\n  its own review of its own diffs.\n- Any change to what the knowledge surfaces say.",
+        "digest": "sha256:57cb78c9c9358a975469516b917ee28b"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/omt-01-business-intent.md",
+        "source_file": ".claude/runs/inputs/omt-01-business-intent.md",
+        "text": "# Business Intent \u2014 OMT-01 Memory Token Optimizer Command\n\n## Goal\n\nStop the per-run cost of the framework's own knowledge from growing without a control on it.\n\n## Value\n\nEvery dispatch loads memory, context, and instruction files into its context slice. That cost is\npaid on each run and by every agent the run dispatches. Roughly sixty-five kilobytes across\ntwenty-one files are in that position today, and the number only rises: recording a decision, a\nknown issue, or a standard is the framework working correctly, and each recording makes every\nlater run start more expensive.\n\nTwo things follow. Density in these files has a measurable return, unlike density in a document\nread once. And the absence of any control means the trend has no counterweight \u2014 no phase, no\ngate, and no command currently asks whether a knowledge surface is carrying tokens that do not\ncarry rules.\n\n## Success measures\n\n| Measure | Target |\n|---|---|\n| Recurring token cost of the knowledge surfaces | Measurably reduced, by measurement rather than estimate |\n| Rules, constraints, and identifiers lost | Zero, checked mechanically per file |\n| Files overwritten without a recoverable pre-image | Zero |\n| Operator review possible before any overwrite | Always: the default performs no overwrite |\n| Existing framework verification results | Unchanged, at the same counts plus the added command |\n\n## Acceptance boundary\n\nThe framework may claim only what it can check. A structural and identifier-level invariant check\nis checkable and is what the capability asserts. Semantic equivalence of reworded prose is not\ncheckable by the framework, so it is not asserted: the recorded diff is offered to a reviewer\ninstead, and the difference between the two claims is stated in the command contract rather than\nelided.\n\nA capability that quietly overstated its guarantee would be worse than no capability, because the\nsurfaces it rewrites are the ones every later run trusts without re-reading.\n\n## Constraints\n\n- No degradation of any existing framework guarantee.\n- No new obligation on an operator who never runs the command.\n- The offline surfaces stay usable with no credentials and no client library present.\n\n## Not intended\n\n- Reducing what the framework knows.\n- Making knowledge terser at the cost of making it ambiguous.\n- Running the pass automatically, on a schedule, or as part of another lifecycle.",
+        "digest": "sha256:d1636efe4c8492b0b8da39f798f8149e"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/omt-01-architecture-context.md",
+        "source_file": ".claude/runs/inputs/omt-01-architecture-context.md",
+        "text": "# Architecture Context \u2014 OMT-01 Memory Token Optimizer Command\n\nSupplied by the operator for the `solution-design-and-risk-assessment` phase of the memory token\noptimizer change. The system under design is the framework in this repository, so the\ncurrent-state architecture is the framework's own structure.\n\nThis document names the authoritative records rather than restating them. Every file named is a\nmember of the frozen context slice recorded in this run's `context-snapshot.json`, so a fact drawn\nfrom one carries a citable digest.\n\n## Component model\n\n| Component type | Discovery registry | Specification |\n|---|---|---|\n| Agents | `registry/agents.yaml` | `domain-model/agent-specification.md` |\n| Skills | `registry/skills.yaml` | `skills/agent-skill-matrix.md` |\n| Workflows | `registry/workflows.yaml` | `workflows/refactor.md` and siblings |\n| Templates | `registry/templates.yaml` | `templates/` |\n| Commands | `registry/commands.yaml` | `commands/` |\n\n`dependency-map.md` records permitted dependency directions. `commands/README.md` records the\ndistinction between a command contract and a grouped runbook, and the rule that every contract\ncarries exactly one primary workflow.\n\n## Current-state properties the operator asserts\n\nEach is verifiable in the files named above, and each was checked before this change began.\n\n1. Ten command contracts hold active records in `registry/commands.yaml`, and\n   `verify_registry_coverage.py` check `C1` fails if any contract on disk lacks a record.\n2. Two contracts already share a primary workflow with another contract: `/document` and `/test`\n   route to `implement-feature` and `review-pull-request` respectively, alongside `/implement` and\n   `/review`. Sharing a workflow is therefore an established pattern, not a new one.\n3. `workflows/refactor.md` declares five phases: `scope-invariants-and-risk-profile`,\n   `safety-net-establishment`, `refactor-implementation`, `behavioral-validation`, and\n   `closure-and-debt-record`. All five are dispatchable, per `C6`.\n4. All thirty-seven declared phases across eight active workflows are dispatchable today.\n5. The runtime and its verifiers depend on the standard library and one YAML package. No framework\n   surface currently makes a network request or requires a provider credential.\n6. `runtime/artifact_lib.py` forbids naming a model, vendor, or provider inside a validated\n   artifact, and strips the framework's own path prefix before that scan.\n7. `config/self-hosting-profile.md` is parsed by `runtime/self_hosting.py`, which reads named\n   sections by heading. A section added after the last parsed heading does not alter what parses.\n\n## Constraints the design must respect\n\n- A command contract resolves to exactly one primary workflow, and that workflow must hold an\n  active registry record.\n- A new workflow would require a phase model, gate matrix rows with non-producing owners, agent\n  manifest entries, runtime context slices, and a registered validator per output artifact. The\n  design should establish whether it needs one before incurring that.\n- Run evidence under `runs/`, dated reports under `reports/`, and change proposals under\n  `proposals/` are excluded from the self-hosting scope rule because rewriting them would falsify\n  the record a routed change resolves against. Any capability that writes files must respect the\n  same boundary for the same reason.\n- The verifiers `verify_registry_coverage.py`, `verify_validators.py`, `verify_recovery.py`, and\n  `verify_self_hosting.py` decide current-state truth. The change is accountable to all four.\n\n## Risk targets\n\n| Concern | Target |\n|---|---|\n| Existing framework guarantees | No regression; identical verifier results plus the added command |\n| Irreversible file modification | None reachable without an explicit flag and a written pre-image |\n| Dependency creep | The new dependency is confined to the new module's online path |\n| Overstated guarantee | The contract states what is checked mechanically and what is not |",
+        "digest": "sha256:0f659b58b1b23b1307d3401f4c218782"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-09099de97613/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-09099de97613/states/execution-planning/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: OMT-01-execution-plan\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/omt-01-feature-request.md\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:2719daabacb06dca76da89e24b04daed\n  contextDigest: sha256:9f90eb89f94639cd8aec24f921d08586\n```\n\n## Executive Summary\n\nThe framework gains an operator entry point that rewrites its durable knowledge surfaces \u2014 memory, context, and the standing instruction files \u2014 to a lower token cost without changing what they instruct, together with the runtime module that performs the pass and the discovery record that makes the entry point resolvable. The outcome that defines success is a measured reduction in the recurring cost of those surfaces with zero rules, constraints, or identifiers lost and zero files modified without a recoverable pre-image. The work decomposes into nine tasks across six execution waves, opening in parallel with the current-state inventory (T-001), the judging rule (T-003), the request path (T-004), and the proposal index (T-008). The highest-impact risk is R-002: the judging rule is the only mechanical defence against a candidate that reads plausibly and has quietly dropped a rule, so an incomplete invariant set would let a silent loss through into surfaces that every later run trusts without re-reading. Plan status is complete; assumption A-002 is unconfirmed and holds T-004's demonstration, not its delivery, because the delivery environment carries no provider client library or credential.\n\n## Business Objectives\n\n1. Operators receive a control on the recurring cost of the framework's own knowledge, which today only grows. Measured by a reduction in the recorded token cost of the knowledge surfaces after a reviewed pass. Traces to S-001, S-003, S-005.\n2. Operators can see exactly what a pass would change before anything changes, and can undo it afterwards. Measured by an invocation that leaves every in-scope file byte-identical while producing a difference record, and by a recorded undo that restores a modified file. Traces to S-006, S-009.\n3. The framework's existing guarantees survive the addition intact, so an operator who never invokes the entry point carries no new obligation and no new risk. Measured by the framework verifiers reporting their prior results plus the one added entry point. Traces to S-010, S-013.\n4. A reader of the governance record can reach the run evidence behind any accepted change without opening every proposal to find it. Measured by each accepted proposal appearing in the index against the run that carried it. Traces to S-004.\n\n## Technical Objectives\n\n1. Every candidate rewrite is judged against its original by a rule the framework executes, and a candidate that drops a heading, a fenced block, a table row, a link target, an inline code span, a declared identifier, or a list item is refused with the loss named. Verified by executing the rule against constructed candidates that each drop one class of content, and against a document compared with itself. Traces to business objective 2, and to S-014, which is why acceptance may not rest on the producing model's own assurance.\n2. Discovery refuses every generated and evidence surface by path, and the refusal binds regardless of the arguments an operator supplies. Verified by invoking discovery against each denied location and reading the recorded disposition. Traces to business objective 3.\n3. No modification reaches disk without a pre-image written first and a digest pair recorded, and the recorded undo restores the pre-image or refuses and says why. Verified by inspecting a session record after a modifying invocation and executing the undo. Traces to business objective 2.\n4. The offline surfaces complete with no provider credential and no client library present, and the modifying surface fails before reading any file when either is absent. Verified by executing all three surfaces in an environment carrying neither. Traces to business objective 3, and to A-002.\n5. The entry point resolves through framework discovery without a new workflow, phase, gate, role manifest entry, or artifact validator. Verified by the registry coverage verifier reporting its prior phase, owner, skill, and gate counts unchanged with one added command record. Traces to business objective 3.\n\n## Scope\n\n### In Scope\n\n- An operator entry point that reduces the recurring token cost of the knowledge surfaces and reports what it did (S-001, S-003; delivered by T-002, T-004, T-005, T-006)\n- A default invocation that modifies nothing and produces a reviewable difference record instead (S-006; delivered by T-005)\n- A mechanical judging rule that refuses a candidate which drops content, naming what was dropped (S-007, S-008; delivered by T-003)\n- Recoverability: a pre-image and a digest pair for every modification, and an undo that uses them (S-009; delivered by T-005)\n- Denial of generated and evidence surfaces, binding regardless of operator argument (S-010; delivered by T-002)\n- A command contract that states the checked guarantee and the unchecked one as separate claims (S-011; delivered by T-006)\n- Offline surfaces usable with no credential and no client library present (S-012; delivered by T-002, T-005)\n- An active discovery record and an index entry for the new entry point (S-002; delivered by T-007)\n- An index of accepted change proposals against the runs that carried them (S-004; delivered by T-008)\n- Confirmation that existing framework verification results are unchanged plus the added entry point (S-013; verified by T-009)\n\n### Out of Scope\n\n- Executing an optimization pass over this repository's own knowledge surfaces. Excluded because a pass produces its own difference record requiring its own review, and bundling it would place two decisions behind one acceptance.\n- Deciding what belongs in memory or context. Excluded because that ownership sits with the governance document for memory and with the lifecycles that add and retire knowledge.\n- Rewriting source code, role contracts, discovery registries, workflow specifications, or command specifications. Excluded because none is a knowledge surface loaded per dispatch, so none carries the recurring cost that motivates the change.\n- Proving that reworded prose means the same thing. Excluded because it is not decidable by the framework, and asserting it would overstate what the change can keep.\n- A new workflow, phase, gate, role, or artifact validator for the entry point. Excluded because the claim the entry point makes is the invariant claim an existing lifecycle already holds to account.\n\n### Deferred\n\n- An advisory threshold that reports when the knowledge surfaces have grown past a stated size. Brought into scope when a subsequent increment establishes what that size should be; the current change measures cost but sets no target for it.\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | The invariant classes named in technical objective 1 cover the loss modes that matter for these documents; a loss that escapes all of them is visible in the difference record a reviewer reads | S-007, S-014 | The judging rule admits a silent loss, and the guarantee stated in the contract is narrower than the contract claims; the invariant set extends and T-003 re-executes | architect |\n| A-002 | A provider client library and resolvable credentials are available at the time an operator first runs a modifying pass | S-012 | The modifying surface cannot be demonstrated end to end; delivery is unaffected because the failure path is itself in scope and testable, but the first live pass has no recorded evidence until an environment exists | omn-qa |\n| A-003 | Adding a command record whose primary workflow is already carried by another contract needs no change to that workflow, its phases, its gates, or its owning roles | S-013 | T-007 expands to carry a phase model, gate rows, and role manifest changes, and the exclusion forbidding a new workflow is revisited with omn-product-owner | architect |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | technical | An operator invokes the modifying surface without reading the difference record | A trusted knowledge surface is rewritten unreviewed, and the loss is discovered by a later run behaving differently rather than by a reader | medium | T-005, T-006 | The default invocation modifies nothing, so reaching a modification requires a deliberate second act; the contract states the review step as part of the operator path | omn-dev-1-implement |\n| R-002 | technical | The judging rule's invariant set is incomplete, and a candidate that drops a rule expressed only in prose passes it (A-001 false) | A silent loss enters a surface every later run trusts without re-reading, and the contract's guarantee is wider than what is checked | medium | T-003, T-006 | T-003 demonstrates refusal per loss class rather than asserting coverage; T-006 states the checked guarantee and the unchecked one separately so no reader infers more than holds | architect |\n| R-003 | security | An operator points the pass at run evidence, dated reports, or change proposals | The record a routed change resolves against is falsified, and the governance layer's verification becomes meaningless | low | T-002 | Denial binds by path inside discovery rather than by argument validation, so no argument reaches the denied surface; T-002 demonstrates refusal at each denied location | omn-dev-1-implement |\n| R-004 | operational | A modifying pass is interrupted, or a candidate is accepted and later judged wrong by a reviewer | Files are left rewritten with no route back to what they said | low | T-005 | The pre-image is written before the modification, not after; the undo refuses a file changed since the pass rather than discarding the later edit | omn-dev-1-implement |\n| R-005 | dependency | The provider client library or credentials are absent when a pass is attempted (A-002 false) | No modifying pass can run | medium | T-004, T-009 | The failure occurs before any file is read and names the remediation; the offline surfaces remain usable, so scope and undo do not depend on provisioning | omn-qa |\n| R-006 | requirement | Adding a command record disturbs an existing workflow, gate, or role contract (A-003 false) | The change becomes a lifecycle change, which the scope excludes | low | T-007, T-009 | T-007 reuses a workflow already shared by two other contracts; T-009 compares every verifier result against the recorded baseline before acceptance | architect |\n| R-007 | delivery | The framework verifiers do not return to their baseline after the change | The change cannot be accepted, and the fault is found late | low | T-009 | T-009 runs after registration and compares to a baseline recorded before the work began, so a divergence names what moved | omn-tech-lead |\n\n## Task Breakdown\n\n### T-001 Record the current-state inventory of the knowledge surfaces\n\n- Owner: architect\n- Complexity: XS (confidence: high)\n- Depends on: none\n- Traces to: S-005\n- Status: ready\n- Description: The set of files that are loaded per dispatch is enumerated with their sizes, and the boundary between a knowledge surface and an artifact a run writes is stated, so that discovery has a definition to implement rather than a convention to infer.\n- Acceptance Criteria:\n  - Every file in the candidate set is listed with its size and the root that supplies it\n  - The rule separating a knowledge surface from a written artifact is stated in one sentence and covers every listed file\n- Gate: none\n\n### T-002 Build discovery and the denial rule\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-001\n- Traces to: S-010, S-012\n- Status: ready\n- Description: Discovery enumerates the eligible files under the supplied roots and records, for every file it refuses, the reason it was refused; denial of generated and evidence surfaces binds regardless of the arguments supplied.\n- Acceptance Criteria:\n  - Invoking discovery against a denied location refuses it and records the denial reason\n  - A refusal reason is recorded for every skipped file, including files below the size floor and files declaring themselves generated\n  - Discovery completes with no provider credential and no client library present\n- Gate: Review Gate\n\n### T-003 Build the invariant judging rule\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: medium)\n- Depends on: none\n- Traces to: S-007, S-008, S-014\n- Status: ready\n- Description: A candidate is judged against its original and refused when it drops a heading, a fenced block, a table row, a link target, an inline code span, a declared identifier, or a list item, or when it falls below the floor that separates compression from deletion; a refusal names what was lost.\n- Acceptance Criteria:\n  - A document judged against itself reports no violation\n  - A candidate constructed to drop one class of content is refused, and the refusal names that class, for every class the rule covers\n  - A refused candidate leaves its original byte-identical\n- Gate: Review Gate\n\n### T-004 Build the compression request path\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: none\n- Traces to: S-003, S-012\n- Status: assumption-dependent\n- Description: A request carrying the document and the compression instruction is issued to the configured provider endpoint, and its response is returned as a candidate; a declined, truncated, or failed request is recorded against that file and leaves the original untouched.\n- Acceptance Criteria:\n  - A missing client library or unresolvable credentials fails before any file is read and names the remediation\n  - A declined or truncated response is recorded as a failure for that file and the pass continues\n  - The instruction states what may be removed, what must be rewritten, and what may never change\n- Gate: Review Gate\n\n### T-005 Build the session record and the undo\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: high)\n- Depends on: T-002, T-003, T-004\n- Traces to: S-006, S-009\n- Status: ready\n- Description: A pass writes a session record carrying the per-file token delta, the verdict, a difference record per accepted candidate, and a digest pair; a modification writes the pre-image first, and the undo restores it or refuses a file changed since the pass.\n- Acceptance Criteria:\n  - The default invocation leaves every in-scope file byte-identical and writes its candidates elsewhere\n  - Every modified file has a pre-image on disk and a recorded digest pair\n  - The undo restores a modified file, and refuses with a stated reason where the file changed after the pass\n- Gate: Review Gate\n\n### T-006 Author the command contract\n\n- Owner: omn-documentation\n- Complexity: S (confidence: high)\n- Depends on: T-002, T-003, T-005\n- Traces to: S-001, S-011\n- Status: ready\n- Description: The contract states the entry point's purpose, its inputs, the lifecycle it routes to, the operator path from scan to undo, the invariants it checks, and the guarantee it does not check, so a reader infers no more than the change can keep.\n- Acceptance Criteria:\n  - The checked guarantee and the unchecked guarantee appear as separate statements, and the unchecked one names what stands in for it\n  - The operator path names every command in order, including the review step before any modification\n  - The denial boundary is stated with the reason it exists\n- Gate: Review Gate\n\n### T-007 Register the entry point in discovery\n\n- Owner: omn-dev-1-implement\n- Complexity: XS (confidence: high)\n- Depends on: T-006\n- Traces to: S-002\n- Status: ready\n- Description: The entry point holds an active discovery record naming the lifecycle it routes to, and appears in the operator-facing index alongside the existing contracts, so the framework can resolve it.\n- Acceptance Criteria:\n  - The discovery record resolves to an active lifecycle record and to the contract on disk\n  - The index lists the entry point, and the stated contract count matches the contracts on disk\n- Gate: Review Gate\n\n### T-008 Index accepted change proposals against their runs\n\n- Owner: omn-documentation\n- Complexity: XS (confidence: high)\n- Depends on: none\n- Traces to: S-004\n- Status: ready\n- Description: The governance profile carries an index recording each accepted change proposal with the run that carried it, stated as a directory rather than as a second authority, so discovery of proposals remains where it is.\n- Acceptance Criteria:\n  - Every accepted proposal appears with its change class, routed command, and run\n  - The index states that it neither admits a proposal nor exempts one\n  - The profile continues to parse, and routing resolves unchanged\n- Gate: Review Gate\n\n### T-009 Confirm the framework verifiers return to baseline\n\n- Owner: omn-qa\n- Complexity: S (confidence: high)\n- Depends on: T-007, T-008\n- Traces to: S-013\n- Status: ready\n- Description: Every framework verifier is executed after the change and its result compared against the baseline recorded before the work began, so a divergence names what moved rather than being discovered later.\n- Acceptance Criteria:\n  - Coverage, validator, and recovery verification report their baseline results with one added entry point and no other count changed\n  - Any divergence from baseline is recorded with the check that moved and the reason\n- Gate: Verification Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-002 | produces-consumes | Discovery implements the surface boundary the inventory states |\n| T-002 | T-005 | produces-consumes | The session record iterates the files discovery yields |\n| T-003 | T-005 | produces-consumes | The verdict recorded per file is the judging rule's decision |\n| T-004 | T-005 | produces-consumes | The candidate the session record judges and writes comes from the request path |\n| T-002 | T-006 | contract | The contract states the denial boundary discovery implements |\n| T-003 | T-006 | contract | The contract states the invariants the judging rule checks, and only those |\n| T-005 | T-006 | produces-consumes | The contract states the operator path the session record and undo define |\n| T-006 | T-007 | produces-consumes | The discovery record names the contract path, so the contract exists first |\n| T-007 | T-009 | verification | Baseline comparison validates the registered entry point |\n| T-008 | T-009 | verification | Baseline comparison validates that the profile still parses and routes |\n| Operating environment | T-004 | external | A modifying pass waits on a client library and resolvable credentials at invocation time |\n\n### 8.2 External Dependencies\n\n| Responsible party | What is needed | Blocks |\n|---|---|---|\n| Operating environment | A provider client library and resolvable credentials, at the time a modifying pass is invoked | T-004 |\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-003, T-004, T-008\n- Wave 2: T-002\n- Wave 3: T-005\n- Wave 4: T-006\n- Wave 5: T-007\n- Wave 6: T-009\n\n## Suggested Workflow\n\nSelected workflow: implement-feature\n\nSelected because: the change adds a capability, a contract, and a discovery record the framework did not have, which is the class the governance profile routes to this lifecycle; the delivered entry point itself routes to `refactor`, and the two are separate questions.\n\n| Phase | Tasks |\n|---|---|\n| scope-and-acceptance | T-001 |\n| execution-planning | T-001 |\n| solution-design-and-risk-assessment | T-001, T-003 |\n| implementation | T-002, T-003, T-004, T-005, T-006, T-007, T-008 |\n| quality-review | T-009 |\n| documentation-and-release-handoff | T-006 |\n\n| Gate | Required owners |\n|---|---|\n| Scope Gate | omn-product-owner, omn-business-analyst |\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer, omn-qa |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| architecture-analysis | T-001 | architect | expert |\n| implementation-delivery | T-002, T-003, T-004, T-005, T-007 | omn-dev-1-implement | expert |\n| documentation | T-006, T-008 | omn-documentation | expert |\n| quality-verification | T-009 | omn-qa | expert |\n| code-review | T-009 | omn-dev-2-reviewer | expert |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S01 | skills/architecture/system-design.md | T-001 | advanced |\n| S03 | skills/testing/test-strategy.md | T-003, T-009 | advanced |\n| S06 | skills/error-handling/error-handling-standards.md | T-004 | advanced |\n| S07 | skills/security/secure-coding.md | T-002 | advanced |\n| S11 | skills/git/git-collaboration.md | T-006, T-008 | intermediate |\n| S12 | skills/logging/logging-standards.md | T-005 | intermediate |\n\n## Acceptance Criteria\n\n1. The recorded token cost of the knowledge surfaces falls after a reviewed pass, measured rather than estimated. Verified by the per-file delta in the session record. Traces to business objective 1.\n2. No rule, constraint, or declared identifier is lost by any accepted candidate. Verified by the judging rule's verdict per file and by the difference record a reviewer reads. Traces to business objective 1.\n3. An invocation that has not been told to modify leaves every in-scope file byte-identical. Verified by comparing digests before and after. Traces to business objective 2.\n4. Every modification is reversible from what the pass itself wrote. Verified by executing the undo against a modifying session and comparing digests to the pre-images. Traces to business objective 2.\n5. The framework verifiers report their baseline results with one added entry point and no other count changed. Verified by the recorded comparison in T-009. Traces to business objective 3.\n6. Every accepted change proposal is reachable from the index with the run that carried it. Verified by comparing the index against the proposal set. Traces to business objective 4.\n\n## Definition of Done\n\n- [ ] All plan acceptance criteria are verified with recorded evidence\n- [ ] All mandatory gates are approved with owners recorded\n- [ ] Task acceptance criteria are satisfied or formally waived\n- [ ] Assumptions are confirmed or converted to recorded decisions\n- [ ] Risks are closed or accepted with named owners\n- [ ] Open questions are closed or explicitly accepted\n- [ ] Documentation and release-impact notes are published\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Who accepts the first modifying pass over this repository's own knowledge surfaces, and against which files, given that the delivery environment cannot demonstrate one? | no | omn-tech-lead | T-004, A-002 |\n| Q-002 | Should the invariant set extend to prose-level obligations, and if so by what checkable rule, or does the difference record remain the only control for them? | no | architect | T-003, A-001, R-002 |\n\n## Traceability Matrix\n\n| Statement | Covered by |\n|---|---|\n| S-001 | T-006 |\n| S-002 | T-007 |\n| S-003 | T-004 |\n| S-004 | T-008 |\n| S-005 | T-001 |\n| S-006 | T-005 |\n| S-007 | T-003 |\n| S-008 | T-003 |\n| S-009 | T-005 |\n| S-010 | T-002 |\n| S-011 | T-006 |\n| S-012 | T-002, T-004 |\n| S-013 | T-009 |\n| S-014 | T-003, A-001 |",
+        "digest": "sha256:6c39671d01d74dd3e52d0852d66e21ad",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change this agent designs against: a change request, a feature request, or a business intent. Without one there is no requested change to design, and designing anyway would mean inventing the requirement."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-09099de97613/states/solution-design-and-risk-assessment/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+      "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md",
+      "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/technical-design.md"
+    ],
+    "failures": [
+      {
+        "id": "D16.4",
+        "severity": "Correctable",
+        "quality_ref": "A15.5",
+        "requirement": "No supplied planner task is left unaddressed by the sequencing constraints",
+        "detail": "unaddressed: ['T-004', 'T-008']"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-09099de97613/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-08-28T07:06:22Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+        "supplies": null
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+        "supplies": null
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:ea8b3b5e9812546f9b4054458bb8143e",
+    "input_digest": "sha256:1bb78e10f8fa731f5cbf36b2ba77d72c",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/omt-01-feature-request.md",
+        "source_file": ".claude/runs/inputs/omt-01-feature-request.md",
+        "digest": "sha256:2719daabacb06dca76da89e24b04daed"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/omt-01-change-request.md",
+        "source_file": ".claude/runs/inputs/omt-01-change-request.md",
+        "digest": "sha256:57cb78c9c9358a975469516b917ee28b"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/omt-01-business-intent.md",
+        "source_file": ".claude/runs/inputs/omt-01-business-intent.md",
+        "digest": "sha256:d1636efe4c8492b0b8da39f798f8149e"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/omt-01-architecture-context.md",
+        "source_file": ".claude/runs/inputs/omt-01-architecture-context.md",
+        "digest": "sha256:0f659b58b1b23b1307d3401f4c218782"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-09099de97613/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-09099de97613/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:6c39671d01d74dd3e52d0852d66e21ad"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "memory/architecture.md",
+      "runtime/README.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-09099de97613/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+      "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/review-package-*.md"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-09099de97613/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      },
+      {
+        "artifact": "review-package.md",
+        "template_ref": "templates/review-package.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "Emitted only for review-pull-request/structural-compliance, where this agent applies the structural and security lens and the findings are classified under the architecture and security categories. runtime/review_package_validator.py already contracts this agent as a permitted producer of review-package.md; the quality rules it applies to the structural lens are the ones in quality.md.",
+        "artifact_path_glob": "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/review-package-*.md",
+        "naming": "runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/review-package-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-08-28T07:06:22Z"
+}

@@ -1,0 +1,78 @@
+{
+  "invocation_id": "inv-e0dba6763475-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-e0dba6763475/states/quality-review/artifacts/review-package.md"
+  ],
+  "structured_output": {
+    "packageId": "RP-2026-0004",
+    "reviewReference": "CKA-02 implementation (report IR-2026-0004), run run-e0dba6763475",
+    "packageStatus": "complete",
+    "verdict": "approve",
+    "counts": {
+      "findings": { "critical": 0, "high": 0, "medium": 1, "low": 0, "total": 1 },
+      "findingsByStatus": { "open": 0, "resolved": 1, "accepted-risk": 0 },
+      "correctionRequests": 1,
+      "blockingCorrectionRequests": 0,
+      "openQuestions": 1,
+      "blockingOpenQuestions": 0
+    },
+    "commandsExecuted": [
+      { "command": "python -m unittest discover -s tests (repository root)", "result": "Ran 316 tests, OK, exit 0" },
+      { "command": "python -m unittest discover -s tests -p test_bundled_payload.py", "result": "11 of 11 pass" },
+      { "command": "python -m unittest discover -s tests -p test_omn_agent.py -k BundledPayload", "result": "2 of 2 pass" },
+      { "command": "verify_manifests.py, verify_recovery.py, verify_registry_coverage.py, verify_vertical_slice.py (framework runtime directory)", "result": "exit 0 each" },
+      { "command": "bundle file count and SOURCES.txt entry-by-entry diff against the bundle", "result": "267 files; file sets identical" },
+      { "command": "python runtime/review_package_validator.py <artifact> (payload-relative)", "result": "PASS, 30/30 machine checks" }
+    ],
+    "qualityChecks": {
+      "run": 46,
+      "passed": 46,
+      "failed": 0,
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass",
+        "P2": "pass", "F1": "pass", "F2": "pass", "F3": "pass", "F4": "pass", "F5": "pass",
+        "P3": "pass", "P5": "pass", "P7": "pass",
+        "P1": "pass", "P4": "pass", "P6": "pass", "R1": "pass", "R2": "pass", "R3": "pass",
+        "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass", "E5": "pass",
+        "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+      },
+      "notes": {
+        "R3": "not triggered: package status is complete; the Open Questions appendix is carried as optional",
+        "E3": "the 303-test pre-change baseline, the simulated site-packages driver runs T-010/T-011, and the R-003 attribution re-run are recorded as claimed, not confirmed",
+        "A6": "no repository source, test, or committed run record was written; all executed commands were read-only over the repository"
+      }
+    },
+    "notMachineCheckableObligations": {
+      "N1": "discharged: all seven review lenses were applied to every in-scope item; the two high-risk channels — gate-behavior alteration riding in through the mirror, and unreviewed content riding into the distribution — were each closed by executed checks (mirror parity plus forbidden-symbol scan; exclusion-cleanliness check plus the coordinator's wheel-content inspection)",
+      "N2": "discharged: the single finding is anchored to ticket CKA-02 deliverable 3 and design constraint C-007 with decision D-004; candidate concerns lacking a written standard (sync-tool placement) were routed to an open question owned by omn-tech-lead rather than raised as findings",
+      "N3": "discharged: no severity was lowered; F-001 was set once at medium from the Stage 6 table, and its resolved status rests on regeneration evidence this review verified entry-by-entry"
+    },
+    "verdictBasis": "Stage 8 row: no finding open and no in-scope element unreviewed -> approve / complete. Test evidence was reviewed and re-executed; both ticket acceptance criteria are demonstrated on a real built wheel (coordinator transcript, reviewer-confirmed), closing the implementation report's deferred wheel-verification item and its blocking question Q-001.",
+    "handoffs": {
+      "omn-qa": "Review Gate decision (this agent produced the evidence it assesses); test gap: no repeatable automated built-distribution content check (belongs with CKA-03)",
+      "omn-dev-1-implement": "CR-001, non-blocking",
+      "omn-tech-lead": "open question Q-001: whether mirror-sync verification relocates from the test module into a build-procedure step",
+      "omn-documentation": "self-contained no-flag install and three-candidate resolution order, sequenced by design P-009"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-2-reviewer/system.md",
+    "agents/omn-dev-2-reviewer/identity.md",
+    "agents/omn-dev-2-reviewer/reasoning.md",
+    "agents/omn-dev-2-reviewer/execution.md",
+    "agents/omn-dev-2-reviewer/output.md",
+    "agents/omn-dev-2-reviewer/quality.md",
+    "agents/omn-dev-2-reviewer/examples.md",
+    "runs/run-e0dba6763475/states/quality-review/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-e0dba6763475/states/quality-review/artifacts/review-package.md",
+    "runs/run-e0dba6763475/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

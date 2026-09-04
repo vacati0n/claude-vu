@@ -1,0 +1,128 @@
+{
+  "invocation_id": "inv-34ca35504b72-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md"
+  ],
+  "structured_output": {
+    "package_status": "complete",
+    "attempt": 2,
+    "counts": {
+      "statements": 20,
+      "facts": 12,
+      "assumptions": 4,
+      "constraints": 9,
+      "impacted_modules": 8,
+      "options": 3,
+      "decisions": 3,
+      "architecture_significant_decisions": 0,
+      "decision_records_emitted": 0,
+      "risks": 4,
+      "sequencing_constraints": 4,
+      "open_questions": 2,
+      "blocking_open_questions": 0,
+      "speculative_impacts": 0,
+      "contract_change_modules": 0
+    },
+    "selection": {
+      "selected_option": "O-001",
+      "recomputed_ranking": [
+        {
+          "option": "O-001",
+          "hard_constraints": "all satisfied",
+          "impact_surface": 0,
+          "reuse_leverage": 4,
+          "migration_burden": 0,
+          "outcome": "selected"
+        },
+        {
+          "option": "O-002",
+          "hard_constraints": "violates C-002",
+          "impact_surface": 0,
+          "reuse_leverage": 3,
+          "migration_burden": 0,
+          "outcome": "eliminated on C-002"
+        },
+        {
+          "option": "O-003",
+          "hard_constraints": "violates C-001, C-004",
+          "impact_surface": 0,
+          "reuse_leverage": 2,
+          "migration_burden": 0,
+          "outcome": "eliminated on C-001, C-004"
+        }
+      ],
+      "recomputation_result": "hard-constraint filter leaves O-001 as the sole surviving option; recorded selection agrees with the evaluation table (A8.5 verified by recomputation)"
+    },
+    "quality_checks": {
+      "check_set_version": "1.0.0",
+      "run": 98,
+      "passed": 98,
+      "failed": 0,
+      "results": {
+        "A1": {"A1.1": "pass", "A1.2": "pass", "A1.3": "pass", "A1.4": "pass", "A1.5": "pass", "A1.6": "pass", "A1.7": "pass", "A1.8": "pass"},
+        "A2": {"A2.1": "pass", "A2.2": "pass", "A2.3": "pass", "A2.4": "pass", "A2.5": "pass", "A2.6": "pass", "A2.7": "pass", "A2.8": "pass", "A2.9": "pass", "A2.10": "pass"},
+        "A3": {"A3.1": "pass", "A3.2": "pass", "A3.3": "pass", "A3.4": "pass", "A3.5": "pass", "A3.6": "pass"},
+        "A4": {"A4.1": "pass", "A4.2": "pass", "A4.3": "pass", "A4.4": "pass"},
+        "A5": {"A5.1": "pass", "A5.2": "pass", "A5.3": "pass", "A5.4": "pass"},
+        "A6": {"A6.1": "pass", "A6.2": "pass", "A6.3": "pass", "A6.4": "pass", "A6.5": "pass", "A6.6": "pass"},
+        "A7": {"A7.1": "pass", "A7.2": "pass", "A7.3": "pass", "A7.4": "pass", "A7.5": "pass"},
+        "A8": {"A8.1": "pass", "A8.2": "pass", "A8.3": "pass", "A8.4": "pass", "A8.5": "pass", "A8.6": "pass", "A8.7": "pass"},
+        "A9": {"A9.1": "pass", "A9.2": "pass", "A9.3": "pass", "A9.4": "pass", "A9.5": "pass", "A9.6": "pass"},
+        "A10": {"A10.1": "pass", "A10.2": "pass", "A10.3": "pass", "A10.4": "pass", "A10.5": "pass", "A10.6": "pass", "A10.7": "pass"},
+        "A11": {"A11.1": "pass", "A11.2": "pass", "A11.3": "pass", "A11.4": "pass", "A11.5": "pass"},
+        "A12": {"A12.1": "pass", "A12.2": "pass", "A12.3": "pass", "A12.4": "pass", "A12.5": "pass"},
+        "A13": {"A13.1": "pass", "A13.2": "pass", "A13.3": "pass", "A13.4": "pass", "A13.5": "pass", "A13.6": "pass", "A13.7": "pass"},
+        "A14": {"A14.1": "pass", "A14.2": "pass", "A14.3": "pass", "A14.4": "pass", "A14.5": "pass", "A14.6": "pass", "A14.7": "pass", "A14.8": "pass"},
+        "A15": {"A15.1": "pass", "A15.2": "pass", "A15.3": "pass", "A15.4": "pass", "A15.5": "pass"},
+        "A16": {"A16.1": "pass", "A16.2": "pass", "A16.3": "pass", "A16.4": "pass", "A16.5": "pass"}
+      },
+      "repair_passes": [
+        {
+          "attempt": 2,
+          "trigger": "runtime validator rejection: D3.6 (A4.1) vendor token, D8.5 (A8.6) empty labelled rejected-alternative field",
+          "error_class": "E-OUTPUT-SCHEMA",
+          "recovery": "repaired in place and revalidated per execution.md Retry rule; no regeneration, no identifier, option-set, or selection change",
+          "repairs": [
+            "A4.1 / D3.6: removed every occurrence of the orientation document's literal filename and every other non-path-prefix vendor-token occurrence (designId, changeReference, sourceInputs references, Feature or Change ID, title, and all prose mentions); the file is now referred to as 'the orientation document' at the .claude/ root, with elided input filenames disambiguated by wildcard forms and the envelope digests; .claude/-prefixed directory paths retained under the validator's path-prefix exemption; repair verified by replaying the D3.6 scan condition (no vendor token outside the exempt prefix form remains)",
+            "A8.6 / D8.5: section 5.3 restated with the template's exact labelled bullets; the field 'Highest-scoring rejected alternative and why it lost' now names O-002 from the evaluation table with its losing rationale (violates hard constraint C-002 and the S-016 zero-tolerance posture despite a stronger completeness guarantee)"
+          ],
+          "unchanged": "section set, identifier assignments, impacted-module set, option set, selected approach, decision set, digests"
+        }
+      ],
+      "notes": [
+        "A13 passes with zero decision records: no decision meets an architecture-significance criterion, so decisionRecords is empty and non-significant decisions D-001, D-002, D-003 are recorded inline per A13.7.",
+        "A14.2 owner-resolution note: omn-architect (named only as an Invariant Gate owner quoted from workflows/workflow-gate-matrix.md) resolves to the agent contract set under agents/ rather than to an active registry record; recorded here per the Owner Resolution Note in quality.md so the gap stays visible.",
+        "A15.5 vacuously satisfied: no execution plan was supplied (consumesPlan: none).",
+        "Metadata deviation note: changeReference and sourceInputs references elide the leading token of the supplied input filenames because it is itself a forbidden vendor token; the wildcard forms plus the recorded input digest keep the references unambiguous against the invocation envelope. The deviation is documented in the artifact's Metadata block."
+      ]
+    },
+    "traceability_closure": {
+      "forward": "20 of 20 statements mapped to an objective, module, constraint, or open question",
+      "backward": "8 of 8 modules trace to facts or assumptions; 3 of 3 decisions trace to option O-001; 3 of 3 options trace to the constraint set",
+      "lateral": "4 of 4 risks, 4 of 4 plan steps attach to existing identifiers; 0 decision records match 0 registered significant decisions; 0 speculative impacts match 0 speculative-impact risks",
+      "register": "every current-state claim carries an F-nnn or A-nnn reference; fact and assumption registers are disjoint"
+    },
+    "open_items": {
+      "context_discrepancy": "Q-002 records that the supplied architecture context attributes registry positioning to dependency-map.md while the frozen dependency-map.md does not mention the registry indexes; non-blocking, routed to omn-tech-lead as a separate structure-preserving change."
+    },
+    "attestation": "No implementation work was performed, no external system was accessed, and no file outside permitted_writes was written."
+  },
+  "evidence_refs": [
+    "agents/architect/system.md",
+    "agents/architect/identity.md",
+    "agents/architect/reasoning.md",
+    "agents/architect/execution.md",
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "agents/architect/examples.md",
+    "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+    "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

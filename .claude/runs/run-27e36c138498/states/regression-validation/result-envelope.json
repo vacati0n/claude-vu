@@ -1,0 +1,144 @@
+{
+  "invocation_id": "inv-27e36c138498-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-27e36c138498/states/regression-validation/artifacts/validation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "VR-run-27e36c138498-regression-validation",
+    "workflowPhase": "regression-validation",
+    "validationBasis": "regression",
+    "status": "complete",
+    "verdict": "pass-with-reservations",
+    "counts": {
+      "criteriaByResult": {
+        "validated": 3,
+        "met": 2,
+        "not-met": 0,
+        "blocked": 1
+      },
+      "defectsBySeverity": {
+        "critical": 0,
+        "high": 2,
+        "medium": 1,
+        "low": 0
+      },
+      "defectsByStatus": {
+        "open": 1,
+        "resolved": 2,
+        "accepted-risk": 0
+      },
+      "openQuestions": 4
+    },
+    "blockingDefectsOutstanding": [],
+    "criteriaResults": [
+      {
+        "id": "AC-001",
+        "result": "met",
+        "method": "end-to-end",
+        "basisOfEvidence": "confirmed by this agent"
+      },
+      {
+        "id": "AC-002",
+        "result": "met",
+        "method": "integration",
+        "basisOfEvidence": "confirmed by this agent"
+      },
+      {
+        "id": "AC-003",
+        "result": "blocked",
+        "method": "regression",
+        "basisOfEvidence": "unsettleable as written, and partly outside this agent's execution authority"
+      }
+    ],
+    "executedByThisAgent": [
+      "python .claude/runtime/verify_validators.py -- 6/6 COVERED",
+      "python .claude/runtime/verify_registry_coverage.py -- 6/6 COVERED, 36 phases, 31 dispatchable, 5 blocked",
+      "python .claude/runtime/verify_vertical_slice.py -- 10/10 PROVEN",
+      "python .claude/runtime/verify_self_hosting.py -- 7/8, S8 FAIL, reproduced on a second execution",
+      "python .claude/runtime/framework_runtime.py resolve --command bugfix --phase <each of the five phases> -- RESOLVED",
+      "read-only probes over the M6 predicate, the carried_at baseline resolver, the _phase_status_as_of helper, and the dependency derivation for all 7 active workflows",
+      "python .claude/runtime/validation_report_validator.py over this report with the envelope digest cross-check -- PASS 31/31"
+    ],
+    "operatorMeasurementsCitedNotExecutedHere": [
+      "verify_multi_phase.py --run-id run-c5a8d50d3238 -- 15/15 PROVEN",
+      "verify_multi_phase.py --run-id run-93b302cbdb28 -- 15/15 PROVEN",
+      "verify_recovery.py -- 41/41 RECOVERY PROVEN",
+      "verify_self_hosting.py --mode-evidence -- 7/10 NOT SELF-HOSTING"
+    ],
+    "baselineComparison": {
+      "baselineSource": "reports/*-2026-08-18.json, the only pre-change baseline available in this checkout, which carries no version control",
+      "checksRegressedAgainstBaseline": [
+        "verify_self_hosting.py S8, recorded PASS on 2026-08-18, FAIL now, attributed by its own detail to this run being unaccounted for by a change proposal"
+      ],
+      "checksUnchangedOrImproved": [
+        "verify_validators.py V1-V4 pass, with V5 and V6 added",
+        "verify_registry_coverage.py C1-C6 pass, dispatchable count 3 of 36 at baseline against 31 of 36 now",
+        "verify_self_hosting.py S1-S7 pass"
+      ]
+    },
+    "runStoreImmutabilityProof": "425 files under runs/, runtime/, workflows/, agents/, registry/, config/, proposals/ and templates/ digested before and after every command group; zero changed, one added, the artifact this phase was permitted to write",
+    "qualityChecks": {
+      "checksRun": 57,
+      "checksPassed": 57,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass",
+        "S6": "pass", "S7": "pass", "S8": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass",
+        "D6": "pass", "D7": "pass",
+        "Q2": "pass", "Q5": "pass", "A7": "pass", "A8": "pass",
+        "T1": "pass", "T2": "pass", "T3": "pass",
+        "Q3": "pass", "Q7": "pass",
+        "F1": "pass", "F2": "pass", "F3": "pass", "F4": "pass", "F5": "pass", "F6": "pass",
+        "Q1": "pass", "Q4": "pass", "Q6": "pass", "R1": "pass", "R2": "pass", "R3": "pass",
+        "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass", "E5": "pass",
+        "E6": "pass", "E7": "pass",
+        "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass",
+        "A6": "pass", "A9": "pass", "A10": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+      }
+    },
+    "validationEngineSelfCheck": {
+      "validator": "validation_report_validator.py",
+      "result": "PASS",
+      "checksPassed": 31,
+      "checksRun": 31,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3,
+      "envelopeDigestCrossCheck": "executed with --envelope; inputDigest and contextDigest match the frozen snapshot"
+    },
+    "notMachineCheckableObligations": {
+      "N1": "discharged: the depth was set above the floor the Stage 4 table gives, because the change is itself a verification surface, where a weakened check reports success rather than failure. Branch coverage was taken over the column readers across cells naming zero, one and two artifacts; the changed predicate was exercised through the helpers the check calls rather than only through its suite; and a whole-repository digest stood in for the state comparison the table asks of a data change.",
+      "N2": "discharged: both met criteria rest on commands executed in this run, not on the change account's claims. AC-001's evidence separates what was demonstrated, the reach, the execution and the validator's acceptance, from the completion transition the runtime records after emission. Every result this agent did not produce is labelled as the operator's measurement and no criterion rests on one.",
+      "N3": "discharged as far as this agent may reach: the recorded 2026-08-18 baselines were compared check by check against four verifier suites executed here, which found exactly one regressed check and attributed it on its own detail. Two suites could not be executed at all under this agent's authority scope, and that gap is recorded on AC-003, in Untested areas, and as DF-003's neighbouring risk rather than absorbed."
+    },
+    "escalations": [
+      { "id": "Q-001", "routedTo": "omn-product-owner", "blocking": false },
+      { "id": "Q-002", "routedTo": "architect", "blocking": false },
+      { "id": "Q-003", "routedTo": "omn-orchestrator", "blocking": false },
+      { "id": "Q-004", "routedTo": "architect", "blocking": false }
+    ],
+    "gateAuthority": "the Verification Gate this phase feeds is decided by omn-dev-2-reviewer under the Producer Exclusion Rule, because this agent produced the evidence assessed there",
+    "independence": "confirmed: the change was authored by omn-dev-1-implement and both analyses by omn-dev-1-bug-analyst; this agent authored neither the change nor the evidence under validation"
+  },
+  "evidence_refs": [
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/identity.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/execution.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "agents/omn-qa/examples.md",
+    "runs/run-27e36c138498/states/regression-validation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-27e36c138498/states/regression-validation/artifacts/validation-report.md",
+    "runs/run-27e36c138498/states/regression-validation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

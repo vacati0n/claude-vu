@@ -1,0 +1,75 @@
+{
+  "slice": {
+    "agent": "architect",
+    "command": "implement",
+    "phase": "solution-design-and-risk-assessment",
+    "artifact": "technical-design.md",
+    "min_bytes": 2000
+  },
+  "run": "run-308f4d0ee447",
+  "verdict": "PROVEN",
+  "passed": 10,
+  "total": 10,
+  "checks": [
+    {
+      "id": "C1",
+      "check": "architect is registered in registry/agents.yaml",
+      "result": "PASS",
+      "detail": "record found, status=active, specificationPath=agents/architect/manifest.yaml resolves"
+    },
+    {
+      "id": "C2",
+      "check": "architect host registration exists and is host-compatible",
+      "result": "PASS",
+      "detail": "agents/architect.agent.md: name='architect', tools='Read, Glob, Grep, Write', description 507 chars"
+    },
+    {
+      "id": "C3",
+      "check": "architect module load order resolves from the manifest",
+      "result": "PASS",
+      "detail": "7 module(s) in declared order: ['system.md', 'identity.md', 'reasoning.md', 'execution.md', 'output.md', 'quality.md', 'examples.md']"
+    },
+    {
+      "id": "C4",
+      "check": "architect manifest skills and phase-mandatory skills resolve",
+      "result": "PASS",
+      "detail": "manifest: S01->clean-architecture-checklist, S02->domain-modeling, S06->database-engineering, S08->performance-engineering, S09->secure-engineering, S12->error-handling-strategy | phase: S01=active, S03=active, S06=active, S09=active"
+    },
+    {
+      "id": "C5",
+      "check": "architect is invocable: the full routing chain resolves to a registered host entry point",
+      "result": "PASS",
+      "detail": "/implement -> implement-feature -> solution-design-and-risk-assessment -> architect -> technical-design.md -> host agents/architect.agent.md"
+    },
+    {
+      "id": "C6",
+      "check": "architect executed: the run ledger records a completed real invocation",
+      "result": "PASS",
+      "detail": "invocation_id=inv-308f4d0ee447-001, adapter=host-subagent/bootstrap, agent result status='succeeded', agent-actor events=2, module digest drift=none"
+    },
+    {
+      "id": "C7",
+      "check": "technical-design.md was produced at the declared artifact path",
+      "result": "PASS",
+      "detail": "runs/run-308f4d0ee447/artifacts/technical-design.md (65117 bytes); declared side effects=['runs/run-308f4d0ee447/artifacts/architecture-decision-record-D-001.md', 'runs/run-308f4d0ee447/artifacts/architecture-decision-record-D-002.md', 'runs/run-308f4d0ee447/artifacts/architecture-decision-record-D-003.md', 'runs/run-308f4d0ee447/artifacts/technical-design.md', 'runs/run-308f4d0ee447/result-envelope.json']; undeclared=none"
+    },
+    {
+      "id": "C8",
+      "check": "the artifact conforms to the architect output and quality contract",
+      "result": "PASS",
+      "detail": "design_validator: 78/78 checks passed, 0 blocking, 0 correctable, 10 declared not-machine-checkable; counts={'sections': 13, 'facts': 30, 'assumptions': 5, 'constraints': 16, 'modules': 13, 'options': 4, 'decisions': 5, 'reuseRows': 13, 'planSteps': 14, 'risks': 15, 'openDecisions': 9, 'decisionRecords': 3, 'designStatus': 'complete'}"
+    },
+    {
+      "id": "C9",
+      "check": "execution evidence exists and is complete",
+      "result": "PASS",
+      "detail": "14 event(s) for run-308f4d0ee447::solution-design-and-risk-assessment of 14 in the run; missing evidence fields=none; missing canonical events=none; completion package=present"
+    },
+    {
+      "id": "C10",
+      "check": "no architect contract duplication exists",
+      "result": "PASS",
+      "detail": "host adapter shares no 12-word sequence with any authoritative module (7 module(s) compared)"
+    }
+  ]
+}

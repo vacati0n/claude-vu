@@ -1,0 +1,371 @@
+{
+  "invocation_id": "inv-0db4765d0eab-01-002",
+  "run_id": "run-0db4765d0eab",
+  "work_item_id": "run-0db4765d0eab::scope-invariants-and-risk-profile",
+  "idempotency_key": "sha256:e8b3e67605bc22b533bd6f60aca52747",
+  "state_id": "scope-invariants-and-risk-profile",
+  "phase_index": 1,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:7a08861f6a692bd5b4e65be426a0fcb7",
+      "agents/architect/identity.md": "sha256:a2ddb7032106c2e4ec70f0cddff9bae1",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:384164c51047d05f590d9f796d731b1c",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:90ec2ac3e9e1337d42ab7be8f4f11418",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "supplied": [
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/self-hosting-discovery-change-request.md",
+        "source_file": ".claude/runs/inputs/self-hosting-discovery-change-request.md",
+        "text": "# Change Request: Make the Self-Hosting Surface Discoverable\n\nFramework change `FC-002`, routed as change class `structure-preserving-change` by\n`config/self-hosting-profile.md`.\n\n## What is asked for\n\nThe self-hosting operating mode was delivered as four new surfaces:\n\n- `config/self-hosting-profile.md`, the one command profile for framework-internal change routing\n- `templates/framework-change-proposal.md` and its validator, the required change record\n- `validation/framework-release-checklist.md`, the checklist a framework update must satisfy\n- `runtime/self_hosting.py` and `runtime/verify_self_hosting.py`, the executable form of both\n\nNone of the framework's index documents mentions any of them. A contributor following\n`README.md` and the module READMEs reaches every other surface of the framework and does not\nreach this one, so the operating mode that is supposed to be the default is the one a reader is\nleast likely to find.\n\n## The change\n\nRecord the new surfaces in the index documents that already index their kind:\n\n- the folder descriptions and contributor usage in `README.md`\n- `config/README.md`, where routing and governance policies are indexed\n- `config/agent-routing.md`, which currently answers \"which command for which intent\" without\n  reference to the profile that overrides it for framework-internal changes\n- `commands/README.md`, whose command-contract rules are the ones the profile routes through\n- `templates/template-catalog.md`, the controlled index of templates\n- `validation/README.md`, the index of validation rules and checklists\n- `runtime/README.md`, the current-state record of the runtime and its known gaps\n\n## Behavioural invariants\n\nNothing about how the framework runs may change.\n\n1. No registry record changes. No command, workflow, agent, skill, or template gains, loses, or\n   alters a record.\n2. No Phase Model, gate matrix row, or agent contract changes.\n3. No runtime module changes behaviour. `RUNTIME_VERSION` does not move.\n4. Every verifier that passes before the change passes after it, with identical counts.\n5. Every committed run's evidence remains valid. Where an edited file is a member of a frozen\n   context slice, the affected runs are re-verified rather than assumed intact.\n\n## Baseline\n\nThe commands whose output must not change:\n\n- `python .claude/runtime/verify_registry_coverage.py`\n- `python .claude/runtime/verify_validators.py`\n- `python .claude/runtime/verify_self_hosting.py`\n- `python .claude/runtime/verify_vertical_slice.py --run-id run-c5a8d50d3238`\n\n## Out of scope\n\n- Any change to the profile's routing table, scope rule, evidence rule, or completion rule.\n- Any change to the release checklist items.\n- Registering the profile as a record in a registry. Whether a profile is a registered component\n  type is a contract question, not a documentation one.",
+        "digest": "sha256:45be29122808d3fcfd5b90ab07dec776"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/self-hosting-discovery-business-intent.md",
+        "source_file": ".claude/runs/inputs/self-hosting-discovery-business-intent.md",
+        "text": "# Business Intent: Make the Self-Hosting Surface Discoverable\n\nSupplied by the operator for framework change `FC-002`, routed as change class\n`structure-preserving-change` by `config/self-hosting-profile.md`. This states intent and\nacceptance expectation only. It defines no solution, names no module, and takes no design\ndecision.\n\n## Why the change is wanted\n\nThe framework now has an operating mode that is meant to be the default for its own development:\nevery framework-internal change is routed by one command profile, recorded in a validated change\nproposal, and held to a release checklist. None of the framework's index documents mentions any\nof it.\n\nAn operating mode nobody can find is not a default. A contributor reading the framework's own\nentry points is led to every other surface and not to this one, so the first thing they will do\nwith a framework change is exactly what the mode exists to stop: make it ad hoc.\n\n## Outcome expected\n\n1. A reader arriving at the framework's top-level entry point can reach the self-hosting profile,\n   the change-proposal contract, and the framework release checklist by following indexes,\n   without knowing the file names in advance.\n2. Each index describes the new surface in the terms that index already uses, so a reader learns\n   what kind of thing it is from where it appears.\n3. The precedence between the profile and the routing policy that predates it is stated once,\n   where a reader would look for it.\n\n## Acceptance intent\n\n- Nothing about how the framework runs changes. The same commands produce the same results, with\n  the same counts, before and after.\n- No index becomes a second authority. Where the profile already states a rule, an index points at\n  it rather than restating it, so the two cannot drift apart later.\n- Every committed run's evidence still verifies.\n\n## Constraints the business places on the change\n\n- This is a description of what exists, not a change to it. Any wording that would require a rule\n  to change is out of scope and is to be surfaced rather than written.\n- No registry record, workflow phase, gate, or agent contract is touched.\n- The change must not claim the operating mode is complete where it is not. Where the mode depends\n  on capability that is still missing, the index says so.\n\n## Open to the design\n\n- Which indexes must change and which merely could, and on what ground.\n- Whether the profile belongs in the framework's layered responsibility list as a layer of its\n  own, or inside an existing one.\n- How much of the profile a reader needs at the index level before following the link.",
+        "digest": "sha256:66a21bc98cbac7f08ed2c88bbc895daa"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/self-hosting-discovery-architecture-context.md",
+        "source_file": ".claude/runs/inputs/self-hosting-discovery-architecture-context.md",
+        "text": "# Architecture Context: The Framework's Discovery Surfaces\n\nSupplied by the operator for framework change `FC-002`. The system under change is the framework\nin this repository, so the current-state architecture is the framework's own structure.\n\nThis document does not restate that structure. It names the authoritative records of it. Every\nfile named below is a member of the frozen context slice recorded in this run's\n`context-snapshot.json`, so a fact drawn from one carries a citable digest.\n\n## What a discovery surface is here\n\nThe framework has two kinds of index, and they are not interchangeable.\n\n| Kind | Read by | Examples |\n|---|---|---|\n| Machine index | the runtime resolvers | `registry/*.yaml`, the `## Phase Model` tables, `workflows/workflow-gate-matrix.md` |\n| Human index | a contributor or an operator | `README.md`, the module `README.md` files, `commands/command-catalog.md`, `templates/template-catalog.md`, `skills/agent-skill-matrix.md` |\n\nThis change touches human indexes only. A machine index is a contract surface: adding a record\nto one changes what resolves, which is a different class of change than describing what exists.\n\n## Known current-state properties the operator asserts\n\nEach is verifiable in the files named.\n\n1. `config/` holds `.md` policy documents and no registry. `config/README.md` indexes them, and\n   the runtime reads none of them directly; they bind the roles that read them.\n2. `config/agent-routing.md` maps intent to primary agent and states its own precedence rule:\n   where it and a Phase Model disagree, the Phase Model governs. It carries no statement about\n   framework-internal changes.\n3. `templates/template-catalog.md` indexes templates by usage point and owner, and states the\n   governance rule of one canonical template per artifact type.\n4. `validation/README.md` indexes validation rules and checklist definitions.\n   `validation/framework-validation-checklist.md` asks whether the framework is well-formed and\n   is a different question from whether a given update may ship.\n5. `runtime/README.md` records the implemented surface, the file roles, and a numbered list of\n   known gaps. It is the current-state record cited by every increment report.\n6. `README.md` describes eight layered responsibilities and ten folders. Neither list mentions\n   proposals or the self-hosting profile.\n7. `runtime/framework_runtime.py` reads `config/self-hosting-profile.md` only through\n   `runtime/self_hosting.py`, which is imported by `runtime/change_proposal_validator.py` and\n   `runtime/verify_self_hosting.py`. No resolution path in the gateway depends on it, so editing\n   documentation about it cannot change what the gateway resolves.\n\n## Constraints the operator places on the change\n\n- A human index may describe a surface; it may not become a second authority for it. Where the\n  profile already states a rule, an index references it rather than restating it, so the two\n  cannot drift.\n- `config/execution-engine.md` narrows each phase's context slice. A document added to a slice\n  changes the digests of runs that hydrate it, so the slice is not to be widened by this change.\n- The framework's precedence rules are contract statements. Recording that the profile governs\n  entry-command selection for framework-internal changes is a statement about existing behaviour;\n  changing what governs would be out of scope.",
+        "digest": "sha256:2a1b226dd0388e396433a634e535d798"
+      }
+    ],
+    "minimum_satisfaction": "All three required inputs must be present. Architecture context that cannot support impact analysis is a missing input, not a gap to be inferred."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/architecture-decision-record-D-001.md",
+      "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/technical-design.md"
+    ],
+    "failures": [
+      {
+        "id": "D12.3",
+        "severity": "Correctable",
+        "quality_ref": "A11.1",
+        "requirement": "Risk class and likelihood use the declared vocabularies",
+        "detail": "invalid class: ['R-005']; invalid likelihood: []"
+      }
+    ]
+  },
+  "upstream_artifacts": [],
+  "context_slice": {
+    "frozen_at": "2026-08-18T15:04:23Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:89f09c2b8213d9844fc91b78d79e4fc2"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:3bf28ee046a18af6bf2eaa46be764811"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:057444bb03e86f3c5a852fadf6007b83"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:feea8081b9ed985742ea763daf6a9cf6"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:9d70f79b90fadd0f134a44b03380e8a4"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:083e4c09e43314332cacd5497972ae9c"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:c18143d075aa49cb11b00ab39d74b90a"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674"
+      },
+      {
+        "path": "workflows/refactor.md",
+        "digest": "sha256:5eb32751021c2b6fa545db067e25c892"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820"
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205"
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1"
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:a319203767c56962636a1858b4f31873"
+      }
+    ],
+    "context_digest": "sha256:cb5e1c4ca1c1577fe963da783d448ad7",
+    "input_digest": "sha256:e44d8c328913d9cf30026cc65ac8bddd",
+    "inputs": [
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/self-hosting-discovery-change-request.md",
+        "source_file": ".claude/runs/inputs/self-hosting-discovery-change-request.md",
+        "digest": "sha256:45be29122808d3fcfd5b90ab07dec776"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/self-hosting-discovery-business-intent.md",
+        "source_file": ".claude/runs/inputs/self-hosting-discovery-business-intent.md",
+        "digest": "sha256:66a21bc98cbac7f08ed2c88bbc895daa"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/self-hosting-discovery-architecture-context.md",
+        "source_file": ".claude/runs/inputs/self-hosting-discovery-architecture-context.md",
+        "digest": "sha256:2a1b226dd0388e396433a634e535d798"
+      }
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+      "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/result-envelope.json",
+      "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/architecture-decision-record-*.md"
+    ],
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/architecture-decision-record-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-08-18T15:04:23Z"
+}

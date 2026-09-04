@@ -1,0 +1,286 @@
+{
+  "schema": "framework.runtime/recovery-verification.v1",
+  "verified_at": "2026-08-18T13:20:30Z",
+  "runtime_version": "0.4.0",
+  "retry_profile": {
+    "max_attempts": 3,
+    "backoff_strategy": "exponential",
+    "base_delay_seconds": 2,
+    "multiplier": 2,
+    "max_delay_seconds": 60,
+    "jitter_ratio": 0.2,
+    "circuit_breaker_threshold": 3,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "result": "pass",
+  "checks_run": 41,
+  "checks_passed": 41,
+  "scenarios": [
+    {
+      "title": "Run A -- a rejected artifact, classified retryable, repaired on the next attempt",
+      "checks": [
+        {
+          "id": "A0",
+          "description": "the run materialized and its planning phase is dispatchable",
+          "result": "pass",
+          "detail": "run run-62db758f9671, execution-planning is pending"
+        },
+        {
+          "id": "A1",
+          "description": "the Validation Engine rejected the artifact",
+          "result": "pass",
+          "detail": "validation     : FAIL  (42/45 checks passed, 5 not machine-checkable)"
+        },
+        {
+          "id": "A2",
+          "description": "the failure was classified, not merely recorded",
+          "result": "pass",
+          "detail": "output-schema-failure at validation, retryable=True, basis config/execution-engine.md#failure-classification-matrix"
+        },
+        {
+          "id": "A3",
+          "description": "the chosen action was retry, with the budget stated",
+          "result": "pass",
+          "detail": "action=retry, 1 of 3 charged, 2 remaining"
+        },
+        {
+          "id": "A4",
+          "description": "the work item holds the canonical Retrying status with a deadline",
+          "result": "pass",
+          "detail": "status=retrying queue=Retrying available_at=2026-08-18T13:20:12Z (+1.663s)"
+        },
+        {
+          "id": "A5",
+          "description": "the transition the state engine recorded is the canonical one",
+          "result": "pass",
+          "detail": "leased -> running -> retrying"
+        },
+        {
+          "id": "A6",
+          "description": "a retry_scheduled event names the class, the action, and the deadline",
+          "result": "pass",
+          "detail": "E-0023 artifact rejected; classified output-schema-failure -> retry"
+        },
+        {
+          "id": "A7",
+          "description": "the failure envelope states the decision needed and the action that clears it",
+          "result": "pass",
+          "detail": "FE-run-62db758f9671-execution-planning-01: decision recovery-authorisation, impacted ['runs/run-62db758f9671/states/execution-planning/artifacts/execution-plan.md']"
+        },
+        {
+          "id": "A8",
+          "description": "the run projects the canonical Retrying lifecycle state",
+          "result": "pass",
+          "detail": "run_status=Retrying"
+        },
+        {
+          "id": "A9",
+          "description": "the scheduler holds the work item until its deadline and admits it after",
+          "result": "pass",
+          "detail": "the persisted item is retrying, not eligible, and its deadline 2026-08-18T13:20:12Z is what the scheduler tests"
+        },
+        {
+          "id": "A10",
+          "description": "the scheduled attempt is not dispatchable before its deadline",
+          "result": "pass",
+          "detail": "waited 0.5s for the deadline 2026-08-18T13:20:12Z set by the retry profile (exponential, base 2s)"
+        },
+        {
+          "id": "A11",
+          "description": "the scheduler promoted the work item once the backoff elapsed",
+          "result": "pass",
+          "detail": "status=pending eligible=True; `next` says: NEXT: dispatch phase execution-planning to planner"
+        },
+        {
+          "id": "A12",
+          "description": "the idempotency key survived the retry, because the unit of work did",
+          "result": "pass",
+          "detail": "sha256:6c9dc59b14b793a718111b8b1496e4b5 recomputed from the persisted payload"
+        },
+        {
+          "id": "A13",
+          "description": "the second attempt carries the rejection back to the agent as a repair pass",
+          "result": "pass",
+          "detail": "attempt 2, 3 failed check(s) named in the envelope and in the dispatch prompt"
+        },
+        {
+          "id": "A14",
+          "description": "the repaired artifact was accepted and committed",
+          "result": "pass",
+          "detail": "status=completed, validation 45/45 checks passed"
+        },
+        {
+          "id": "A15",
+          "description": "the recovery ledger records the classification and its resolution, rather than discarding it",
+          "result": "pass",
+          "detail": "1 entry: FE-run-62db758f9671-execution-planning-01 resolved -- the artifact was accepted on a later attempt"
+        },
+        {
+          "id": "A16",
+          "description": "one dispatched attempt was charged and one was not needed",
+          "result": "pass",
+          "detail": "2 attempt(s) dispatched, 2 charged, 0 lost to worker loss"
+        },
+        {
+          "id": "A17",
+          "description": "every guard-raised block emitted a classified envelope as well",
+          "result": "pass",
+          "detail": "6 blocked work item(s), 6 guard-raised classification(s): G1-CAPABILITY=missing-capability-failure, G4-GATE=gate-approval-required, G6-GATE-EVIDENCE=gate-approval-required"
+        },
+        {
+          "id": "A18",
+          "description": "each guard-raised envelope names the action that clears it",
+          "result": "pass",
+          "detail": "decision types: capability-registration, gate-approval"
+        }
+      ]
+    },
+    {
+      "title": "Run B -- the same rejection every attempt: the budget bounds it and the fourth attempt is refused",
+      "checks": [
+        {
+          "id": "B1w",
+          "description": "the scheduled attempt is not dispatchable before its deadline",
+          "result": "pass",
+          "detail": "waited 0.5s for the deadline 2026-08-18T13:20:19Z set by the retry profile (exponential, base 2s)"
+        },
+        {
+          "id": "B0",
+          "description": "a live dispatch before the deadline is refused, and reports it",
+          "result": "pass",
+          "detail": "RETRYING  execution-planning: output-schema-failure was classified retryable, and attempt 3 of 3 becomes dispatchable at 2026-08-18T13:20:24Z."
+        },
+        {
+          "id": "B2w",
+          "description": "the scheduled attempt is not dispatchable before its deadline",
+          "result": "pass",
+          "detail": "waited 1.0s for the deadline 2026-08-18T13:20:24Z set by the retry profile (exponential, base 2s)"
+        },
+        {
+          "id": "B1",
+          "description": "every attempt that produced a judged result was charged to the budget",
+          "result": "pass",
+          "detail": "charged after each attempt: [1, 2, 3], ceiling 3"
+        },
+        {
+          "id": "B2",
+          "description": "the retry budget was enforced rather than exceeded",
+          "result": "pass",
+          "detail": "attempt 3 of 3: budget_exhausted=True, action=escalate"
+        },
+        {
+          "id": "B3",
+          "description": "the work item blocked with a recorded reason rather than failing, because its artifact still exists",
+          "result": "pass",
+          "detail": "status=blocked reason=awaiting_recovery_task raised_by=recovery-controller"
+        },
+        {
+          "id": "B4",
+          "description": "the envelope explains the exhaustion and names a human decision",
+          "result": "pass",
+          "detail": "class 'output-schema-failure' is retryable, but 3 of 3 charged attempts are spent, so the retry budget is exhausted and the failure escalates instead"
+        },
+        {
+          "id": "B5",
+          "description": "the run reports itself as waiting for a human, not as progressing",
+          "result": "pass",
+          "detail": "run_status=WaitingForHuman"
+        },
+        {
+          "id": "B6",
+          "description": "a fourth attempt is refused, because the budget does not have one",
+          "result": "pass",
+          "detail": "RUNTIME FAILURE [policy-failure] execution-planning has spent 3 of 3 charged attempts; releasing it again would exceed the retry budget its work item declares"
+        },
+        {
+          "id": "B7",
+          "description": "the refusal changed nothing: the work item is still blocked on the same condition",
+          "result": "pass",
+          "detail": "status=blocked attempt=3 envelope=open"
+        },
+        {
+          "id": "B8",
+          "description": "every attempt left an append-only ledger entry, none overwritten",
+          "result": "pass",
+          "detail": "3 classification(s), occurrences [1, 2, 3], actions ['retry', 'retry', 'escalate']"
+        }
+      ]
+    },
+    {
+      "title": "Run C -- a policy violation is never retried, however many attempts remain",
+      "checks": [
+        {
+          "id": "C1",
+          "description": "the artifact itself conformed, so the rejection is attributable to the policy alone",
+          "result": "pass",
+          "detail": "side effects   : UNDECLARED: ['memory/architecture.md']"
+        },
+        {
+          "id": "C2",
+          "description": "the failure was classified as a policy failure, not a schema failure",
+          "result": "pass",
+          "detail": "policy-failure at policy decision, retryable=False, basis config/runtime.md#failure-classes"
+        },
+        {
+          "id": "C3",
+          "description": "no retry was scheduled, although the budget had attempts left",
+          "result": "pass",
+          "detail": "action=escalate with 2 attempt(s) unspent; status=blocked"
+        },
+        {
+          "id": "C4",
+          "description": "the block names the policy condition and the exception decision it needs",
+          "result": "pass",
+          "detail": "reason=awaiting_policy_exception, decision=policy-exception"
+        },
+        {
+          "id": "C5",
+          "description": "no retry_scheduled event was emitted for this run at all",
+          "result": "pass",
+          "detail": "event types: ['aggregation_completed', 'context_hydrated', 'escalation_opened', 'invocation_completed', 'invocation_started', 'run_initialized', 'validation_failed', 'work_item_enqueued', 'work_item_leased']"
+        },
+        {
+          "id": "C6",
+          "description": "the undeclared write is named in the envelope evidence",
+          "result": "pass",
+          "detail": "permitted_writes were ['runs/run-d8870619db82/states/execution-planning/artifacts/execution-plan.md', 'runs/run-d8870619db82/states/execution-planning/result-envelope.json']; declared write outside that set is recorded"
+        }
+      ]
+    },
+    {
+      "title": "Policy closure -- no failure class is retried against its own declaration",
+      "checks": [
+        {
+          "id": "P1",
+          "description": "every classified action matches the matrix row that declares it",
+          "result": "pass",
+          "detail": "12 class(es) checked across 5 attempt positions each"
+        },
+        {
+          "id": "P2",
+          "description": "no non-retryable class is retried, and no budget is exceeded",
+          "result": "pass",
+          "detail": "the retry action appears only for retryable classes inside the budget"
+        },
+        {
+          "id": "P3",
+          "description": "an unclassified failure escalates rather than being treated as transient",
+          "result": "pass",
+          "detail": "action=escalate, retryable=False"
+        },
+        {
+          "id": "P4",
+          "description": "backoff grows exponentially and is capped by the profile",
+          "result": "pass",
+          "detail": "delays [2.007, 4.015, 8.029, 16.058, 32.117, 60, 60, 60] under base=2s x2, cap 60s, jitter +-20%"
+        },
+        {
+          "id": "P5",
+          "description": "jitter is stable per work item and spread across work items, so replay stays deterministic",
+          "result": "pass",
+          "detail": "one key over five evaluations -> {3.478}; eight keys -> 8 distinct delay(s)"
+        }
+      ]
+    }
+  ]
+}

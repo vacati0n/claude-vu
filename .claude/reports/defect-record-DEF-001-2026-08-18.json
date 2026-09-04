@@ -1,0 +1,810 @@
+{
+  "schema": "framework.runtime/defect-record.v1",
+  "defect_id": "DEF-001",
+  "title": "A subcommand given --run-id but no --command re-plans the run under the default command",
+  "found_by": "self-hosting execution of framework change FC-002, 2026-08-18",
+  "found_in": "runtime/framework_runtime.py, add_request_args --command default 'implement', consumed by plan_run",
+  "symptom": "`next --run-id <refactor run>` materialised six implement-feature work items into a refactor run's state store and re-evaluated the five refactor phases against the implement-feature Phase Model, turning each into workflow-contract-violation. runtime/README.md documents `next --run-id <run-id>` without --command, so the documented usage is the one that corrupts the store.",
+  "impact": "The run is unusable: re-planning with the correct command leaves both phase sets in one store, and the refactor entry phase then blocks on a dependency belonging to the other workflow. No agent executed, so no artifact or validated evidence was lost.",
+  "suggested_fix": "When --run-id names an existing run, take command_id and workflow_id from the run store rather than from the argument default, and reject an explicit --command that disagrees with the stored one.",
+  "routing": {
+    "change_class": "defect-repair",
+    "command": "bugfix",
+    "workflow": "fix-bug",
+    "note": "Routed but not executed in this increment. Every phase of fix-bug blocks at capability registration, so the run would produce no validated artifact; config/self-hosting-profile.md Evidence Rule was amended to state what evidence is required when a routed workflow has no dispatchable phase."
+  },
+  "corrupted_run": {
+    "run_id": "run-36e1d3d32384",
+    "command_id": "refactor",
+    "workflow_id": "refactor",
+    "work_items": {
+      "scope-invariants-and-risk-profile": {
+        "work_type": "state",
+        "phase_index": 1,
+        "owner_agent_id": "architect",
+        "status": "blocked",
+        "blocked_reason": "awaiting_dependency_output"
+      },
+      "gate:Invariant Gate": {
+        "work_type": "gate",
+        "phase_index": 1,
+        "owner_agent_id": null,
+        "status": "pending",
+        "blocked_reason": null
+      },
+      "safety-net-establishment": {
+        "work_type": "state",
+        "phase_index": 2,
+        "owner_agent_id": "omn-qa",
+        "status": "blocked",
+        "blocked_reason": "awaiting_capability_registration"
+      },
+      "refactor-implementation": {
+        "work_type": "state",
+        "phase_index": 3,
+        "owner_agent_id": "omn-dev-1-implement",
+        "status": "blocked",
+        "blocked_reason": "awaiting_capability_registration"
+      },
+      "gate:Implementation Gate": {
+        "work_type": "gate",
+        "phase_index": 3,
+        "owner_agent_id": null,
+        "status": "pending",
+        "blocked_reason": null
+      },
+      "behavioral-validation": {
+        "work_type": "state",
+        "phase_index": 4,
+        "owner_agent_id": "omn-qa",
+        "status": "blocked",
+        "blocked_reason": "awaiting_capability_registration"
+      },
+      "gate:Regression Gate": {
+        "work_type": "gate",
+        "phase_index": 4,
+        "owner_agent_id": null,
+        "status": "pending",
+        "blocked_reason": null
+      },
+      "closure-and-debt-record": {
+        "work_type": "state",
+        "phase_index": 5,
+        "owner_agent_id": "omn-orchestrator",
+        "status": "blocked",
+        "blocked_reason": "awaiting_capability_registration"
+      },
+      "gate:Closure Gate": {
+        "work_type": "gate",
+        "phase_index": 5,
+        "owner_agent_id": null,
+        "status": "pending",
+        "blocked_reason": null
+      },
+      "scope-and-acceptance": {
+        "work_type": "state",
+        "phase_index": 1,
+        "owner_agent_id": "omn-product-owner",
+        "status": "blocked",
+        "blocked_reason": "awaiting_contract_reconciliation"
+      },
+      "gate:Scope Gate": {
+        "work_type": "gate",
+        "phase_index": 1,
+        "owner_agent_id": null,
+        "status": "pending",
+        "blocked_reason": null
+      },
+      "execution-planning": {
+        "work_type": "state",
+        "phase_index": 2,
+        "owner_agent_id": "planner",
+        "status": "blocked",
+        "blocked_reason": "awaiting_contract_reconciliation"
+      },
+      "gate:Planning Gate": {
+        "work_type": "gate",
+        "phase_index": 2,
+        "owner_agent_id": null,
+        "status": "pending",
+        "blocked_reason": null
+      },
+      "solution-design-and-risk-assessment": {
+        "work_type": "state",
+        "phase_index": 3,
+        "owner_agent_id": "architect",
+        "status": "blocked",
+        "blocked_reason": "awaiting_contract_reconciliation"
+      },
+      "gate:Design Gate": {
+        "work_type": "gate",
+        "phase_index": 3,
+        "owner_agent_id": null,
+        "status": "pending",
+        "blocked_reason": null
+      },
+      "implementation": {
+        "work_type": "state",
+        "phase_index": 4,
+        "owner_agent_id": "omn-dev-1-implement",
+        "status": "blocked",
+        "blocked_reason": "awaiting_contract_reconciliation"
+      },
+      "quality-review": {
+        "work_type": "state",
+        "phase_index": 5,
+        "owner_agent_id": "omn-dev-2-reviewer",
+        "status": "blocked",
+        "blocked_reason": "awaiting_contract_reconciliation"
+      },
+      "gate:Review Gate": {
+        "work_type": "gate",
+        "phase_index": 5,
+        "owner_agent_id": null,
+        "status": "pending",
+        "blocked_reason": null
+      },
+      "gate:Verification Gate": {
+        "work_type": "gate",
+        "phase_index": 5,
+        "owner_agent_id": null,
+        "status": "pending",
+        "blocked_reason": null
+      },
+      "documentation-and-release-handoff": {
+        "work_type": "state",
+        "phase_index": 6,
+        "owner_agent_id": "omn-documentation",
+        "status": "blocked",
+        "blocked_reason": "awaiting_contract_reconciliation"
+      }
+    },
+    "events": [
+      {
+        "event_id": "E-0001",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::scope-invariants-and-risk-profile",
+        "event_type": "run_initialized",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "execution-coordinator",
+        "state_id": "scope-invariants-and-risk-profile",
+        "reason_code": "enqueued",
+        "summary": "run accepted for /refactor -> refactor across 5 phase(s)",
+        "details_ref": {
+          "request": "execution-request.json",
+          "input_digest": "sha256:85faaf59362d179b996cb14a5937fadb"
+        }
+      },
+      {
+        "event_id": "E-0002",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::scope-invariants-and-risk-profile",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "scope-invariants-and-risk-profile",
+        "reason_code": "enqueued",
+        "summary": "state work item 1/5 routed to owner agent architect",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "architect",
+          "depends_on": []
+        }
+      },
+      {
+        "event_id": "E-0003",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::gate::Invariant Gate",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "Invariant Gate",
+        "reason_code": "enqueued",
+        "summary": "gate work item 'Invariant Gate' enqueued to close phase scope-invariants-and-risk-profile",
+        "details_ref": {
+          "work_type": "gate",
+          "owner_roles": [
+            "omn-architect",
+            "omn-tech-lead"
+          ],
+          "producer_agent": "architect"
+        }
+      },
+      {
+        "event_id": "E-0004",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::safety-net-establishment",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "safety-net-establishment",
+        "reason_code": "enqueued",
+        "summary": "state work item 2/5 routed to owner agent omn-qa",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "omn-qa",
+          "depends_on": [
+            {
+              "state_id": "scope-invariants-and-risk-profile",
+              "kind": "hard",
+              "basis": "Input column names the upstream output 'technical-design.md'"
+            }
+          ]
+        }
+      },
+      {
+        "event_id": "E-0005",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::refactor-implementation",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "refactor-implementation",
+        "reason_code": "enqueued",
+        "summary": "state work item 3/5 routed to owner agent omn-dev-1-implement",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "omn-dev-1-implement",
+          "depends_on": [
+            {
+              "state_id": "safety-net-establishment",
+              "kind": "hard",
+              "basis": "Input column names the upstream output 'strengthened test suite'"
+            }
+          ]
+        }
+      },
+      {
+        "event_id": "E-0006",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::gate::Implementation Gate",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "Implementation Gate",
+        "reason_code": "enqueued",
+        "summary": "gate work item 'Implementation Gate' enqueued to close phase refactor-implementation",
+        "details_ref": {
+          "work_type": "gate",
+          "owner_roles": [
+            "omn-dev-2-reviewer"
+          ],
+          "producer_agent": "omn-dev-1-implement"
+        }
+      },
+      {
+        "event_id": "E-0007",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::behavioral-validation",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "behavioral-validation",
+        "reason_code": "enqueued",
+        "summary": "state work item 4/5 routed to owner agent omn-qa",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "omn-qa",
+          "depends_on": [
+            {
+              "state_id": "refactor-implementation",
+              "kind": "hard",
+              "basis": "Input column names the upstream output 'incremental refactor changes with updated tests'"
+            }
+          ]
+        }
+      },
+      {
+        "event_id": "E-0008",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::gate::Regression Gate",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "Regression Gate",
+        "reason_code": "enqueued",
+        "summary": "gate work item 'Regression Gate' enqueued to close phase behavioral-validation",
+        "details_ref": {
+          "work_type": "gate",
+          "owner_roles": [
+            "omn-qa",
+            "omn-dev-2-reviewer"
+          ],
+          "producer_agent": "omn-qa"
+        }
+      },
+      {
+        "event_id": "E-0009",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::closure-and-debt-record",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "closure-and-debt-record",
+        "reason_code": "enqueued",
+        "summary": "state work item 5/5 routed to owner agent omn-orchestrator",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "omn-orchestrator",
+          "depends_on": [
+            {
+              "state_id": "behavioral-validation",
+              "kind": "hard",
+              "basis": "Input column names the upstream output 'parity validation report'"
+            }
+          ]
+        }
+      },
+      {
+        "event_id": "E-0010",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::gate::Closure Gate",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "Closure Gate",
+        "reason_code": "enqueued",
+        "summary": "gate work item 'Closure Gate' enqueued to close phase closure-and-debt-record",
+        "details_ref": {
+          "work_type": "gate",
+          "owner_roles": [
+            "omn-orchestrator",
+            "omn-documentation"
+          ],
+          "producer_agent": "omn-orchestrator"
+        }
+      },
+      {
+        "event_id": "E-0011",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::scope-invariants-and-risk-profile",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "scope-invariants-and-risk-profile",
+        "reason_code": "dependency_wait",
+        "summary": "state work item blocked: awaiting_dependency_output",
+        "details_ref": {
+          "guard": "G5-INPUT",
+          "detail": "[request-validation-failure] required input(s) not supplied: ['business-intent']",
+          "transition": "pending -> blocked",
+          "failure_class": "dependency-failure",
+          "failure_envelope": "FE-run-36e1d3d32384-scope-invariants-and-risk-profile-01"
+        }
+      },
+      {
+        "event_id": "E-0012",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::safety-net-establishment",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:35:31Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "safety-net-establishment",
+        "reason_code": "policy_block",
+        "summary": "state work item blocked: awaiting_capability_registration",
+        "details_ref": {
+          "guard": "G1-CAPABILITY",
+          "detail": "[missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml",
+          "transition": "pending -> blocked",
+          "failure_class": "missing-capability-failure",
+          "failure_envelope": "FE-run-36e1d3d32384-safety-net-establishment-01"
+        }
+      },
+      {
+        "event_id": "E-0013",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::refactor-implementation",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:35:32Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "refactor-implementation",
+        "reason_code": "policy_block",
+        "summary": "state work item blocked: awaiting_capability_registration",
+        "details_ref": {
+          "guard": "G1-CAPABILITY",
+          "detail": "[missing-capability-failure] agent 'omn-dev-1-implement' has no record in registry/agents.yaml",
+          "transition": "pending -> blocked",
+          "failure_class": "missing-capability-failure",
+          "failure_envelope": "FE-run-36e1d3d32384-refactor-implementation-01"
+        }
+      },
+      {
+        "event_id": "E-0014",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::behavioral-validation",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:35:32Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "behavioral-validation",
+        "reason_code": "policy_block",
+        "summary": "state work item blocked: awaiting_capability_registration",
+        "details_ref": {
+          "guard": "G1-CAPABILITY",
+          "detail": "[missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml",
+          "transition": "pending -> blocked",
+          "failure_class": "missing-capability-failure",
+          "failure_envelope": "FE-run-36e1d3d32384-behavioral-validation-01"
+        }
+      },
+      {
+        "event_id": "E-0015",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::closure-and-debt-record",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:35:32Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "closure-and-debt-record",
+        "reason_code": "policy_block",
+        "summary": "state work item blocked: awaiting_capability_registration",
+        "details_ref": {
+          "guard": "G1-CAPABILITY",
+          "detail": "[missing-capability-failure] agent 'omn-orchestrator' has no record in registry/agents.yaml",
+          "transition": "pending -> blocked",
+          "failure_class": "missing-capability-failure",
+          "failure_envelope": "FE-run-36e1d3d32384-closure-and-debt-record-01"
+        }
+      },
+      {
+        "event_id": "E-0016",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::scope-and-acceptance",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "scope-and-acceptance",
+        "reason_code": "enqueued",
+        "summary": "state work item 1/6 routed to owner agent omn-product-owner",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "omn-product-owner",
+          "depends_on": []
+        }
+      },
+      {
+        "event_id": "E-0017",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::gate::Scope Gate",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "Scope Gate",
+        "reason_code": "enqueued",
+        "summary": "gate work item 'Scope Gate' enqueued to close phase scope-and-acceptance",
+        "details_ref": {
+          "work_type": "gate",
+          "owner_roles": [
+            "omn-product-owner",
+            "omn-business-analyst"
+          ],
+          "producer_agent": "omn-product-owner"
+        }
+      },
+      {
+        "event_id": "E-0018",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::execution-planning",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "execution-planning",
+        "reason_code": "enqueued",
+        "summary": "state work item 2/6 routed to owner agent planner",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "planner",
+          "depends_on": [
+            {
+              "state_id": "scope-and-acceptance",
+              "kind": "hard",
+              "basis": "Input column names the upstream output 'scoped requirement summary'"
+            }
+          ]
+        }
+      },
+      {
+        "event_id": "E-0019",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::gate::Planning Gate",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "Planning Gate",
+        "reason_code": "enqueued",
+        "summary": "gate work item 'Planning Gate' enqueued to close phase execution-planning",
+        "details_ref": {
+          "work_type": "gate",
+          "owner_roles": [
+            "omn-tech-lead",
+            "omn-orchestrator"
+          ],
+          "producer_agent": "planner"
+        }
+      },
+      {
+        "event_id": "E-0020",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::solution-design-and-risk-assessment",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "solution-design-and-risk-assessment",
+        "reason_code": "enqueued",
+        "summary": "state work item 3/6 routed to owner agent architect",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "architect",
+          "depends_on": [
+            {
+              "state_id": "execution-planning",
+              "kind": "hard",
+              "basis": "Input column names the upstream output 'execution-plan.md'"
+            }
+          ]
+        }
+      },
+      {
+        "event_id": "E-0021",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::gate::Design Gate",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "Design Gate",
+        "reason_code": "enqueued",
+        "summary": "gate work item 'Design Gate' enqueued to close phase solution-design-and-risk-assessment",
+        "details_ref": {
+          "work_type": "gate",
+          "owner_roles": [
+            "omn-architect",
+            "omn-tech-lead"
+          ],
+          "producer_agent": "architect"
+        }
+      },
+      {
+        "event_id": "E-0022",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::implementation",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "implementation",
+        "reason_code": "enqueued",
+        "summary": "state work item 4/6 routed to owner agent omn-dev-1-implement",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "omn-dev-1-implement",
+          "depends_on": [
+            {
+              "state_id": "solution-design-and-risk-assessment",
+              "kind": "hard",
+              "basis": "Input column names the upstream output 'technical-design.md'"
+            }
+          ]
+        }
+      },
+      {
+        "event_id": "E-0023",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::quality-review",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "quality-review",
+        "reason_code": "enqueued",
+        "summary": "state work item 5/6 routed to owner agent omn-dev-2-reviewer",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "omn-dev-2-reviewer",
+          "depends_on": [
+            {
+              "state_id": "implementation",
+              "kind": "hard",
+              "basis": "Input column names the upstream output 'automated test evidence'"
+            }
+          ]
+        }
+      },
+      {
+        "event_id": "E-0024",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::gate::Review Gate",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "Review Gate",
+        "reason_code": "enqueued",
+        "summary": "gate work item 'Review Gate' enqueued to close phase quality-review",
+        "details_ref": {
+          "work_type": "gate",
+          "owner_roles": [
+            "omn-dev-2-reviewer",
+            "omn-qa"
+          ],
+          "producer_agent": "omn-dev-2-reviewer"
+        }
+      },
+      {
+        "event_id": "E-0025",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::gate::Verification Gate",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "Verification Gate",
+        "reason_code": "enqueued",
+        "summary": "gate work item 'Verification Gate' enqueued to close phase quality-review",
+        "details_ref": {
+          "work_type": "gate",
+          "owner_roles": [
+            "omn-qa"
+          ],
+          "producer_agent": "omn-dev-2-reviewer"
+        }
+      },
+      {
+        "event_id": "E-0026",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::documentation-and-release-handoff",
+        "event_type": "work_item_enqueued",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "task-router",
+        "state_id": "documentation-and-release-handoff",
+        "reason_code": "enqueued",
+        "summary": "state work item 6/6 routed to owner agent omn-documentation",
+        "details_ref": {
+          "work_type": "state",
+          "owner_agent_id": "omn-documentation",
+          "depends_on": [
+            {
+              "state_id": "quality-review",
+              "kind": "hard",
+              "basis": "Input column names the upstream output 'verification report'"
+            }
+          ]
+        }
+      },
+      {
+        "event_id": "E-0027",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::scope-and-acceptance",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:35:41Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "scope-and-acceptance",
+        "reason_code": "policy_block",
+        "summary": "state work item blocked: awaiting_capability_registration",
+        "details_ref": {
+          "guard": "G1-CAPABILITY",
+          "detail": "[missing-capability-failure] agent 'omn-product-owner' has no record in registry/agents.yaml",
+          "transition": "pending -> blocked",
+          "failure_class": "missing-capability-failure",
+          "failure_envelope": "FE-run-36e1d3d32384-scope-and-acceptance-01"
+        }
+      },
+      {
+        "event_id": "E-0028",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::implementation",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:35:42Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "implementation",
+        "reason_code": "policy_block",
+        "summary": "state work item blocked: awaiting_capability_registration",
+        "details_ref": {
+          "guard": "G1-CAPABILITY",
+          "detail": "[missing-capability-failure] agent 'omn-dev-1-implement' has no record in registry/agents.yaml",
+          "transition": "pending -> blocked",
+          "failure_class": "missing-capability-failure",
+          "failure_envelope": "FE-run-36e1d3d32384-implementation-01"
+        }
+      },
+      {
+        "event_id": "E-0029",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::quality-review",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:35:42Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "quality-review",
+        "reason_code": "policy_block",
+        "summary": "state work item blocked: awaiting_capability_registration",
+        "details_ref": {
+          "guard": "G1-CAPABILITY",
+          "detail": "[missing-capability-failure] agent 'omn-dev-2-reviewer' has no record in registry/agents.yaml",
+          "transition": "pending -> blocked",
+          "failure_class": "missing-capability-failure",
+          "failure_envelope": "FE-run-36e1d3d32384-quality-review-01"
+        }
+      },
+      {
+        "event_id": "E-0030",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::documentation-and-release-handoff",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:35:42Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "documentation-and-release-handoff",
+        "reason_code": "policy_block",
+        "summary": "state work item blocked: awaiting_capability_registration",
+        "details_ref": {
+          "guard": "G1-CAPABILITY",
+          "detail": "[missing-capability-failure] agent 'omn-documentation' has no record in registry/agents.yaml",
+          "transition": "pending -> blocked",
+          "failure_class": "missing-capability-failure",
+          "failure_envelope": "FE-run-36e1d3d32384-documentation-and-release-handoff-01"
+        }
+      },
+      {
+        "event_id": "E-0031",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::execution-planning",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:36:57Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "execution-planning",
+        "reason_code": "policy_block",
+        "summary": "state work item blocked: awaiting_contract_reconciliation",
+        "details_ref": {
+          "guard": "G1-CAPABILITY",
+          "detail": "[workflow-contract-violation] phase 'execution-planning' is not declared by refactor; declared: ['scope-invariants-and-risk-profile', 'safety-net-establishment', 'refactor-implementation', 'behavioral-validation', 'closure-and-debt-record']",
+          "transition": "pending -> blocked",
+          "failure_class": "workflow-contract-violation",
+          "failure_envelope": "FE-run-36e1d3d32384-execution-planning-01"
+        }
+      },
+      {
+        "event_id": "E-0032",
+        "run_id": "run-36e1d3d32384",
+        "work_item_id": "run-36e1d3d32384::solution-design-and-risk-assessment",
+        "event_type": "escalation_opened",
+        "timestamp": "2026-08-18T14:36:57Z",
+        "actor_type": "runtime",
+        "actor_id": "state-engine",
+        "state_id": "solution-design-and-risk-assessment",
+        "reason_code": "policy_block",
+        "summary": "state work item blocked: awaiting_contract_reconciliation",
+        "details_ref": {
+          "guard": "G1-CAPABILITY",
+          "detail": "[workflow-contract-violation] phase 'solution-design-and-risk-assessment' is not declared by refactor; declared: ['scope-invariants-and-risk-profile', 'safety-net-establishment', 'refactor-implementation', 'behavioral-validation', 'closure-and-debt-record']",
+          "transition": "pending -> blocked",
+          "failure_class": "workflow-contract-violation",
+          "failure_envelope": "FE-run-36e1d3d32384-solution-design-and-risk-assessment-01"
+        }
+      }
+    ]
+  },
+  "disposition": "The corrupted run directory was deleted so the same request could be re-planned cleanly under the same run identity. This record is its evidence; nothing executed inside it."
+}

@@ -1,0 +1,134 @@
+{
+  "invocation_id": "inv-8f8a1ab0d16e-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-8f8a1ab0d16e/states/implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-0005",
+    "workflowPhase": "implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 5,
+      "testEvidenceEntries": 7,
+      "deviations": 2,
+      "residualRisks": 3,
+      "openQuestions": 3
+    },
+    "evidenceExecution": {
+      "commandsExecuted": 5,
+      "commandsPassed": 5,
+      "commandsFailed": 0,
+      "commands": [
+        "python -m unittest discover -s tests -- pre-change baseline execution; its per-test verdict stream was truncated by the capture pipe, recorded as a limitation in the report's Verification Results",
+        "python ci_local_checks.py -- temporary verification script from a session scratch directory outside the repository, three runs: the first surfaced three raw-scan findings against the workflow's own header comment (repaired by removing concrete verifier filenames from the comment and scoping the policy scans to effective lines), the final run passed 27/27 assertions including local execution of the discovery expression (exactly the seven present verifiers) and the verifier-assertion wrapper (accepts a really-passing proof script; rejects nonzero exit, negative verdict at exit 0, and missing summary)",
+        "python -m unittest discover -s tests -p test_ci_workflow.py -- committed regression net, 13 tests, OK",
+        "python -m unittest discover -s tests -- post-change full suite: 316 tests, OK, matching the most recent recorded full-suite baseline in count and verdict",
+        "python .claude/runtime/implementation_report_validator.py <artifact> --envelope <envelope> -- Validation Engine self-check on the emitted artifact: PASS, 32/32 decidable checks"
+      ],
+      "executionNote": "The hosting platform's execution of the workflow cannot be exercised from this environment; this is recorded as the report's unverified area with the compensating local checks named. The NO_COLOR variable was verified absent from the executing environment and is never set by the workflow. A case-insensitive vendor-string scan of the emitted artifact found no hit, and the artifact carries exactly one fenced block with the envelope digests copied verbatim."
+    },
+    "qualityChecks": {
+      "total": 44,
+      "passed": 44,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "M1": "pass",
+        "M5": "pass",
+        "M7": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "M3": "pass",
+        "M2": "pass",
+        "K1": "pass",
+        "K2": "pass",
+        "M4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "B1": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "B4": "pass",
+        "B5": "pass",
+        "B6": "pass",
+        "M6": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass"
+      }
+    },
+    "validationEngine": {
+      "validator": "implementation_report_validator",
+      "decidableChecks": 32,
+      "decidablePassed": 32,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "advisoryFailures": 0,
+      "notMachineCheckable": 3,
+      "note": "PASS on the emitted artifact, executed with the invocation envelope supplied so the digest checks ran against the frozen slice"
+    },
+    "notMachineCheckableObligations": {
+      "N1": "satisfied -- each change-set row was checked against the file state after the edit: the workflow file carries exactly the triggers, six-job topology, inline discovery, generic verifier assertion, always-run fan-ins, permissions, concurrency, and header contract its row describes; the test module contains the 13 assertions its row describes; the three documentation files carry the check names, standings, flip mechanism, and orphan handling with markdown-to-HTML parity",
+      "N2": "satisfied -- the local checks and the committed regression net execute the workflow's own extracted step code (discovery expression and verifier wrapper) rather than a reimplementation; the doc-parity tests read the real documentation files; the full-suite row exercises the repository the five entries changed",
+      "N3": "satisfied -- no production code path changed at all: the change adds a CI definition, a test module, and documentation; the gate-decision surfaces, proof scripts, runtime, packaging, and bundled mirror are untouched, and the workflow grants itself read-only repository access and no secrets"
+    },
+    "designConformance": {
+      "topologyDecision": "D-001 implemented as accepted: discovery-fed per-verifier matrix fan-out, fresh runner and checkout per verifier, no execution ordering, stable per-platform fan-ins that fail (never skip) on upstream failure or cancellation; realized as two per-platform matrix jobs so each fan-in evaluates its own platform's aggregate result (deviation V-002, inside latitude)",
+      "blockingDecision": "D-002 implemented as accepted: advisory standing encoded as absence from the branch-protection required-checks list, continue-on-error used nowhere, day-one required set documented as tests-ubuntu only, flip documented as a settings-only change; the settings surface itself is out of this change's reach and routed to its owners via Q-003",
+      "orphanDecision": "D-003 honored: clean-first handling and the green-self-hosting flip precondition are documented in the workflow header and both documentation surfaces; the cleanup itself remains owned by the existing follow-up task and was not performed",
+      "forbiddenPaths": "gate-decision recording, gate-matrix semantics, producer exclusion, approval requirement, and human-block paths untouched; no file under the framework payload directory was modified"
+    },
+    "escalations": [],
+    "boundariesDeclined": [
+      "no review verdict, merge decision, or release readiness claim recorded",
+      "no branch-protection settings change attempted: the platform settings surface is outside this agent's reach and is routed to its named owners as open questions",
+      "no verification claim beyond the executed evidence: live platform execution is named as the unverified area and the status is provisional, not complete"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-8f8a1ab0d16e/states/implementation/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    ".github/workflows/verify.yml",
+    "tests/test_ci_workflow.py",
+    "README.md",
+    "docs/USER-GUIDE.md",
+    "docs/user-guide.html",
+    "runs/run-8f8a1ab0d16e/states/implementation/artifacts/implementation-report.md",
+    "runs/run-8f8a1ab0d16e/states/implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,89 @@
+{
+  "invocation_id": "inv-8f8a1ab0d16e-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md"
+  ],
+  "structured_output": {
+    "packageId": "RP-2026-0005",
+    "reviewReference": "CKA-03 -- CI workflow gating every pull request and default-branch push, implementation report IR-2026-0005",
+    "packageStatus": "complete",
+    "verdict": "approve-with-corrections",
+    "counts": {
+      "findings": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 2,
+        "total": 2
+      },
+      "correctionRequests": 2,
+      "correctionRequestsBlocking": 0,
+      "openQuestions": 1,
+      "openQuestionsBlocking": 0
+    },
+    "blockingFindingsOutstanding": [],
+    "commandsExecuted": [
+      {
+        "command": "python -m unittest tests.test_ci_workflow -v",
+        "purpose": "independently confirm the implementation report's T-006 claim for the committed regression net",
+        "result": "13 tests, OK"
+      },
+      {
+        "command": "python .claude/runtime/review_package_validator.py .claude/runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md --envelope .claude/runs/run-8f8a1ab0d16e/states/quality-review/invocation-envelope.json",
+        "purpose": "Validation Engine re-run of the machine-decidable check subset over this run's own artifact (Stage 10 self-verification)",
+        "result": "PASS -- 31/31 checks, 0 blocking, 0 correctable, 3 declared not-machine-checkable"
+      }
+    ],
+    "qualityChecks": {
+      "run": 46,
+      "passed": 46,
+      "failed": 0,
+      "detail": {
+        "structural": {"S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass"},
+        "metadata": {"D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass"},
+        "findings": {"P2": "pass", "F1": "pass", "F2": "pass", "F3": "pass", "F4": "pass", "F5": "pass"},
+        "arithmetic": {"P3": "pass", "P5": "pass", "P7": "pass"},
+        "verdict": {"P1": "pass", "P4": "pass", "P6": "pass", "R1": "pass", "R2": "pass", "R3": "pass"},
+        "evidence": {"E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass", "E5": "pass"},
+        "authority": {"A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass"},
+        "content": {"C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"}
+      },
+      "repairs": [
+        "one correctable draft defect repaired before completion: a design fact token in a Requirement cell parsed as an undefined finding identifier (C5/C6.2); the cell now describes the fact in prose, and the entire check set was re-run after the repair"
+      ]
+    },
+    "notMachineCheckableObligations": {
+      "N1": "judged discharged: every lens of the Stage 4 procedure was applied to every in-scope item; the high-risk surfaces of this change (curation, per-verifier isolation, verdict assertion strength, fan-in fail-never-skip semantics, security posture, environment policy, trigger coverage, interpreter floor) were each examined directly against the delivered files, and the two defects recorded are the ones the evidence supports",
+      "N2": "judged discharged: both findings anchor to written standards -- technical-design constraint C-001 with the workflow's own documented claim, and technical-design decision D-004; no candidate without a standard was promoted",
+      "N3": "judged discharged: no severity was assigned and later lowered; both severities are the first-matching row of the Stage 6 table and were set once"
+    },
+    "adjudication": {
+      "stage8Row": "Only medium or low findings are open",
+      "verdict": "approve-with-corrections",
+      "packageStatus": "complete"
+    },
+    "handoffs": {
+      "correctionRequests": {"owner": "omn-dev-1-implement", "ids": ["CR-001", "CR-002"], "blocking": false},
+      "testGaps": {"owner": "omn-qa", "summary": "interpreter-floor coupling unpinned; concurrency semantics unpinned; tests-job fail-fast unasserted; live hosted-run behavior (rendered check names, fan-in under real failure and cancellation, both platforms' results) locally unexercisable"},
+      "readinessRecommendation": {"gate": "Review Gate", "decidedBy": "omn-qa", "recommendation": "progress with the two non-blocking corrections carried and live hosted-run validation completed by omn-qa"}
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-2-reviewer/system.md",
+    "agents/omn-dev-2-reviewer/identity.md",
+    "agents/omn-dev-2-reviewer/reasoning.md",
+    "agents/omn-dev-2-reviewer/execution.md",
+    "agents/omn-dev-2-reviewer/output.md",
+    "agents/omn-dev-2-reviewer/quality.md",
+    "agents/omn-dev-2-reviewer/examples.md",
+    "runs/run-8f8a1ab0d16e/states/quality-review/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-8f8a1ab0d16e/states/quality-review/artifacts/review-package.md",
+    "runs/run-8f8a1ab0d16e/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,88 @@
+{
+  "invocation_id": "inv-e0dba6763475-06-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-e0dba6763475/states/documentation-and-release-handoff/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "artifact_status": "complete",
+    "release_verdict": "released",
+    "communication_basis": "release-handoff",
+    "audience": {
+      "supplied_by": "none — no stakeholder list or communication requirements supplied",
+      "inferred_portion": "entire audience inferred from the phase and the delivered account: non-editable-install adopters, payload and packaging maintainers, the dependent CKA-03 work, and the handoff roles omn-orchestrator, omn-tech-lead, omn-qa, omn-dev-1-implement; recorded as inferred in the Communication section"
+    },
+    "known_issues_count": 8,
+    "known_issues": ["K-001", "K-002", "K-003", "K-004", "K-005", "K-006", "K-007", "K-008"],
+    "known_issue_ordering": "review-package RP-2026-0004 recorded order (Test Adequacy gap, correction request CR-001, accepted risks R-001 then R-007, unmitigated stale-mirror window then dot-named-glob limitation, monitoring item R-003), then the implementation-report-only documentation-impact item last, following sourceInputs order",
+    "published_statements": {
+      "count": 28,
+      "traced_to": {
+        "runs/run-e0dba6763475/states/quality-review/artifacts/review-package.md": "review verdict approve, F-001 resolution and metadata verification, re-executed test results (316 OK, 11/11, 2/2, four proof scripts), reliance on the coordinator's wheel transcript as confirmed third-party evidence, claimed-not-confirmed items, residual risk (accepted, unmitigated, monitoring), CR-001, Q-001, CKA-03 test-adequacy gap",
+        "runs/run-e0dba6763475/states/implementation/artifacts/implementation-report.md": "change set C-001..C-005, bundled subtree and packaging-glob facts, candidate-order and retained-failure-guidance facts, boundary compliance and additive-only interface statement, migration impact none, rollback reversibility, deviations V-001/V-002, residual risks R-001..R-003, handoff documentation impact (user guide and HTML handbook document --source-only flows)",
+        "runs/run-e0dba6763475/states/documentation-and-release-handoff/invocation-envelope.json": "digests, freeze timestamp, phase and run identity"
+      },
+      "untraced": 0
+    },
+    "changes_by_stage5_class": {
+      "breaking": 0,
+      "contract": 2,
+      "operational": 1,
+      "feature": 1,
+      "fix": 0,
+      "improvement": 0,
+      "internal": 2
+    },
+    "stage8_row": "every change in scope reached its target environment (the run's working-tree delivery, review-approved, with both acceptance criteria demonstrated on a real wheel in a clean environment; merge and release remain undecided and are attributed to omn-tech-lead, not recorded here)",
+    "checks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass",
+      "P1": "pass", "P2": "pass", "P3": "pass", "P4": "pass", "P5": "pass", "P6": "pass",
+      "R3": "pass", "X1": "pass", "X2": "pass", "X3": "pass", "X4": "pass",
+      "R1": "pass", "R2": "pass", "R4": "pass", "R5": "pass", "R7": "pass", "V1": "pass", "V2": "pass", "V3": "pass",
+      "K1": "pass", "K2": "pass", "K3": "pass", "K4": "pass", "K5": "pass", "K6": "pass",
+      "R6": "pass", "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+      "A7": "pass", "A8": "pass", "A9": "pass", "A10": "pass", "A11": "pass", "A12": "pass", "A13": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+    },
+    "checks_run": 60,
+    "checks_passed": 60,
+    "check_judgements": {
+      "R7": "no supplied artifact states a numbered distribution version; the version of record is '0+CKA-02-unreleased' — a leading digit satisfying the validator's version-string form, with the change reference (ticket CKA-02 in the adoption backlog under docs/) carried as build-metadata-style provenance; the Metadata section states explicitly that no numbered distribution version is established by the evidence",
+      "R2": "the metadata block version and the Metadata section Version bullet both read exactly '0+CKA-02-unreleased'",
+      "P5": "the implementation report's deferred metadata regeneration (V-001) and the review package's record of its completed, entry-by-entry-verified regeneration are not a live contradiction: the review package itself records the resolution (F-001 resolved), so the resolved account is published with both sources attributed",
+      "A11": "the dispatch prompt asked for direct user-facing documentation edits (README.md, USER-GUIDE.md with its hand-mirrored user-guide.html); this agent's contract prohibits repository writes and the envelope's permitted_writes carries only the artifact and this envelope, so no documentation file was written — the corrections are proposed as content in the Support handoff notes and Known Issue K-008, routed to the role owning the files, per the boundary-enforcement table in the operating charter"
+    },
+    "not_machine_checkable": {
+      "N1": "judged met: every behavioral statement is taken from the implementation report or the review package, both recording executed evidence; the wheel-level acceptance walkthrough is published as reviewer-confirmed third-party evidence, not as this run's or the reviewer's own execution, and the items the reviewer recorded as claimed-not-confirmed are published as exactly that",
+      "N2": "judged met: no prior-release content existed to carry forward for this change; the one existing-documentation staleness the evidence records (user guide and HTML handbook describing --source-only install flows) is published as K-008 with proposed replacement content, and the unestablished README.md question is routed with it rather than assumed either way",
+      "N3": "judged met: the change surface is one feature (self-contained no-flag non-editable install), two additive contract changes (bundled payload subtree in the distribution; one appended last-resort resolution candidate plus one public constant), one operational change (maintainer sync and metadata-refresh obligations), and two internal changes (test modules, metadata regeneration) published only in their technical and operational context; nothing internal is promoted to a highlight and the feature is stated at the size the wheel walkthrough demonstrated"
+    },
+    "open_items_carried": [
+      {"item": "CKA-03 repeatable distribution-content inspection gap", "owner": "omn-qa", "carried_as": "K-001"},
+      {"item": "CR-001 metadata-refresh obligation recording", "owner": "omn-dev-1-implement", "carried_as": "K-002"},
+      {"item": "RP-2026-0004 Q-001 — sync verification location (test module vs build step)", "owner": "omn-tech-lead", "carried_as": "Post-release checks and Communication, open"},
+      {"item": "user guide, HTML handbook (and README.md check) no-flag install path corrections", "owner": "role owning the files (omn-dev-1-implement per repository-write ownership)", "carried_as": "K-008 with proposed content in Support handoff notes"},
+      {"item": "three pre-existing proof-script failures (R-003)", "owner": "framework governance", "carried_as": "K-007"}
+    ],
+    "gate_note": "the Closure Gate assesses this package; under the Producer Exclusion Rule its decision rests with omn-orchestrator and no gate decision is recorded here",
+    "artifact_measurement_note": "this agent's manifest forbids command execution, so no cryptographic hash of the artifact was computed here; the runtime gateway computes and records artifact digests on ingestion"
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    "agents/omn-documentation/examples.md",
+    "runs/run-e0dba6763475/states/documentation-and-release-handoff/invocation-envelope.json"
+  ],
+  "confidence": 0.93,
+  "declared_side_effects": [
+    "runs/run-e0dba6763475/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "runs/run-e0dba6763475/states/documentation-and-release-handoff/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

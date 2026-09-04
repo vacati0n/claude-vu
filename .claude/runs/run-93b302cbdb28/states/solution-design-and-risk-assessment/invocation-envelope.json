@@ -1,0 +1,426 @@
+{
+  "invocation_id": "inv-93b302cbdb28-03-002",
+  "run_id": "run-93b302cbdb28",
+  "work_item_id": "run-93b302cbdb28::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:84565fec0293783bf1377292757eab6d",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:7a08861f6a692bd5b4e65be426a0fcb7",
+      "agents/architect/identity.md": "sha256:a2ddb7032106c2e4ec70f0cddff9bae1",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:384164c51047d05f590d9f796d731b1c",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:90ec2ac3e9e1337d42ab7be8f4f11418",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "supplied": [
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/wave-1-rollout-change-request.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-change-request.md",
+        "text": "# Change Request \u2014 Wave 1 Delivery Core Agent Rollout\n\n## Change class\n\n`capability-addition` per `config/self-hosting-profile.md` Routing Table. The framework gains\nagent runtime contracts, registry records, and phase execution it did not have.\n\nClassification evidence:\n\n```\npython .claude/runtime/self_hosting.py classify --path .claude/agents/omn-product-owner/manifest.yaml\n  [IN ] .claude/agents/omn-product-owner/manifest.yaml   SR-1\n  framework-internal change\n\npython .claude/runtime/self_hosting.py route --intent capability-addition\n  command : /implement   workflow : implement-feature v1.0.0   entry phase : scope-and-acceptance\n```\n\n## Surfaces this change is expected to touch\n\n| Surface | Nature of change |\n|---|---|\n| `agents/<wave-1-id>/` | New runtime module sets: `manifest.yaml` plus the modules its `loadOrder` declares |\n| `registry/agents.yaml` | New active records, one per Wave 1 agent |\n| `agents/<wave-1-id>.agent.md` | Registration status table updated to match reality |\n| `workflows/*.md` Phase Model | Possible Output Artifact column changes, if the artifact-type decision requires them |\n| `templates/` | Possible new artifact templates |\n| `runtime/framework_runtime.py` | Possible `VALIDATORS` and `CONTEXT_SLICE_PHASE` additions |\n| `runtime/*_validator.py` | Possible new validators |\n| `reports/` | Board and evidence updates (out of routing scope, `SR-4`) |\n\nThe four rows marked *possible* are conditional on the design decision. They are listed so the\nblast radius is declared up front rather than discovered during implementation.\n\n## Current state the change starts from\n\nFrozen in `reports/maturity-snapshot-2026-08-18.json`:\n\n- active agent registry records: 2 of 12 phase owners\n- host-invocable entrypoints: 12 of 12\n- runtime module sets: 2\n- dispatchable phases: 3 of 36; blocked: 33, all with reason `awaiting_capability_registration`\n- registered validators: 7; artifact types named as files by active Phase Models: 6\n- phase-mandatory skill references resolved: 101 of 101\n- runs: 6 total, 2 Completed, 4 WaitingForHuman\n- active workflows with zero completed runs: 6 of 7\n\n## Behavioral invariants\n\n| ID | Invariant |\n|---|---|\n| `INV-1` | `implement-feature/execution-planning` and `implement-feature/solution-design-and-risk-assessment` remain dispatchable |\n| `INV-2` | `refactor/scope-invariants-and-risk-profile` remains dispatchable |\n| `INV-3` | The two Completed runs held as replay references remain readable and their fingerprints unchanged |\n| `INV-4` | All four verifiers keep their current verdict; no check moves from pass to fail |\n| `INV-5` | No phase-mandatory skill reference becomes unresolved |\n| `INV-6` | Gate ownership and the Producer Exclusion Rule are unchanged |\n\n## Constraints\n\n- One primary capability surface per increment.\n- No registry activation without the runtime module set it points at.\n- No completion claim without a run under `runs/` that carries the evidence.\n- Where a phase cannot be made dispatchable inside this increment, it blocks with a recorded\n  reason and the increment reports it, rather than the scope being quietly narrowed.\n\n## Requested decision\n\nWhich increment sequence makes the four Wave 1 agents dispatchable at the lowest risk to\n`INV-1` through `INV-6`, and what artifact type each prose-output phase should emit so that\n`D-4` and `D-5` of the Agent Definition of Done become reachable.",
+        "digest": "sha256:460be1bbed3416e8c50741901edaa530"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/wave-1-rollout-business-intent.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-business-intent.md",
+        "text": "# Business Intent \u2014 Wave 1 Delivery Core Agent Rollout\n\n## Outcome sought\n\nThe framework can carry a change from scope through implementation, review, and quality\nwithout an operator standing in for a missing agent at each step.\n\n## Value\n\nToday the framework decides the route, holds the gates, and keeps the record, but executes\n3 of its 36 phases. Every other phase is performed by the operator against the run and recorded\nas a blocked phase in a change proposal. That is honest, and it does not scale: the operator is\nthe bottleneck for every increment, and the framework's own claim to be self-hosting rests on\nrouting rather than on execution.\n\nWave 1 converts the delivery core from recorded-blocked to executed. The measurable value is\nthe number of phases that dispatch and the number of active workflows with a completed run.\n\n## Success criteria\n\n| ID | Criterion | Measure |\n|---|---|---|\n| `BI-1` | The four Wave 1 agents hold active registry records | `registry/agents.yaml` active record count rises from 2 to 6 |\n| `BI-2` | Each of the four has a runtime module set whose load order resolves | 6 module sets under `agents/*/manifest.yaml` |\n| `BI-3` | At least one phase owned by a Wave 1 agent dispatches and completes | `verify_registry_coverage.py` C6 dispatchable count rises above 3 |\n| `BI-4` | The artifact of every executed Wave 1 phase is accepted by a registered validator | `validation-report.json` present and passing per executed phase |\n| `BI-5` | No metric regresses | all four verifiers still report their current verdict |\n\n## Non-goals\n\n- Waves 2 to 4 agents.\n- Skill registration for S04 and S05, and normalization of the CI/CD and coding-style assets.\n- Any change to gate ownership or to the Producer Exclusion Rule.\n- Making all 36 phases dispatchable.\n\n## Acceptance boundary\n\nA Wave 1 agent is accepted only on the full five-part Agent Definition of Done in\n`reports/self-hosting-execution-plan-2026-08-18.md` section 9.5. An agent that satisfies the\nfirst three conditions and not the last two is reported as partially rolled out, with the\nblocker named. Reporting it as done would make the board unusable as a record.\n\n## Risk posture\n\nLow tolerance for silent breakage of the existing executable path: `execution-planning` and\n`solution-design-and-risk-assessment` must keep dispatching, and the two completed runs held as\nreplay references must stay reproducible. Higher tolerance for an increment that lands\npartially and says so.",
+        "digest": "sha256:e44b4e1a4512bacd8b4a18a7815e2d66"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/wave-1-rollout-architecture-context.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-architecture-context.md",
+        "text": "# Architecture Context \u2014 Wave 1 Delivery Core Agent Rollout\n\nCurrent structural state of the framework, as read from source on 2026-08-18. Every claim\nbelow is checkable against the file named beside it.\n\n## 1. The capability chain a phase must clear\n\n`runtime/framework_runtime.py` gates every state work item on five guards. `G1-CAPABILITY`\nresolves the whole chain and is the one that stops Wave 1 phases today:\n\n| Link | Source of truth | Wave 1 state |\n|---|---|---|\n| active record in `registry/agents.yaml` | `registry/agents.yaml` | missing for all four agents |\n| manifest declaring the workflow and phase in `supportedWorkflows` | `agents/<id>/manifest.yaml` | no manifest exists for any of the four |\n| host registration | `agents/<id>.agent.md` | present for all twelve phase owners |\n| phase-mandatory skills resolvable | `registry/skills.yaml` | resolves; 101 of 101 references |\n| registered validator for the phase's output artifact | `VALIDATORS` in `framework_runtime.py` | see section 3 |\n\n`G2-CONTEXT` is a separate guard: `CONTEXT_SLICE_PHASE` declares `execution-planning`,\n`solution-design-and-risk-assessment`, and `scope-invariants-and-risk-profile`, and nothing else.\nAny other phase blocks there even after `G1-CAPABILITY` clears.\n\n## 2. The runtime module set pattern\n\nTwo exist, `agents/planner/` and `agents/architect/`. Both hold `manifest.yaml` plus seven\nmodules in a declared `loadOrder`:\n\n```\nsystem.md      operating-charter        authoritative operating instructions and invariants\nidentity.md    agent-contract           the Standard Agent Contract implementation\nreasoning.md   reasoning-procedure      deterministic analysis procedure\nexecution.md   execution-lifecycle      lifecycle states, phase gates, retry, escalation\noutput.md      output-contract          structural and semantic contract for the artifact\nquality.md     quality-contract         self-verification checks, gates, rejection rules\nexamples.md    reference-examples       conforming and non-conforming examples\n```\n\n`resolve_output_contract` requires `quality.md` to exist by path, independently of the manifest,\nand requires each declared output's `templateRef` and `contractRef` to resolve. The manifest\nalso carries `authorityScope`, `inputs`, `outputs`, `supportedWorkflows`, `skills`,\n`collaboration`, `determinism`, and `versioning`.\n\nEach of the four Wave 1 agents already has a single-file prose contract at `agents/<id>.md`,\naround 50 lines. `agents/planner/manifest.yaml` records the precedent for what happens to it:\n`versioning.supersedes` names the superseded single file with a reason.\n\n## 3. Output artifacts and validators\n\n`framework_runtime.py:334` reads the Phase Model Output Artifact cell literally, stripping only\nbackticks. `resolve_output_contract` then requires that exact string to be present in the\nowning manifest's `outputs[].artifact` and to be a key of `VALIDATORS`.\n\nRegistered validators (7): `execution-plan.md`, `technical-design.md`, `bug-analysis.md`,\n`investigation-report.md`, `release-note.md`, `review-package.md`, and\n`framework-change-proposal.md`. The first two are hand-written against the Planner and Architect\nnumbered check sets; four are declared as data and executed by `artifact_contract.py`; the last\nis a governance artifact no phase emits.\n\nWave 1 phases against that map:\n\n| Workflow / Phase | Owner | Output Artifact column | Resolvable |\n|---|---|---|---|\n| `implement-feature/scope-and-acceptance` | `omn-product-owner` | scoped requirement summary | no, prose |\n| `implement-feature/implementation` | `omn-dev-1-implement` | code changes and automated test evidence | no, prose |\n| `fix-bug/fix-implementation` | `omn-dev-1-implement` | corrective change set with regression tests | no, prose |\n| `refactor/refactor-implementation` | `omn-dev-1-implement` | incremental refactor changes with updated tests | no, prose |\n| `review-pull-request/code-quality-review` | `omn-dev-2-reviewer` | `review-package.md` | **yes** |\n| `implement-feature/quality-review` | `omn-dev-2-reviewer` | review findings log, verification report | no, prose |\n| `release/artifact-packaging` | `omn-dev-2-reviewer` | versioned artifacts with packaging evidence | no, prose |\n| `refactor/safety-net-establishment` | `omn-qa` | strengthened test suite and baseline validation record | no, prose |\n| `refactor/behavioral-validation` | `omn-qa` | parity validation report and regression status | no, prose |\n| `fix-bug/regression-validation` | `omn-qa` | verification evidence and residual risk notes | no, prose |\n| `review-pull-request/test-risk-validation` | `omn-qa` | test adequacy verdict with residual risk notes | no, prose |\n| `release/candidate-validation` | `omn-qa` | validation evidence with release candidate verdict | no, prose |\n\n`runtime/README.md` known gap 7 records the precedent for changing one of these columns:\n`review-pull-request/code-quality-review` was moved from a prose entry to `review-package.md`\nunder proposal `FC-001`, and the reasoning plus four rejected alternatives are held in\n`runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/`. The same note records that\nextending the declaration to the three other review-producing phases is available and is a\nproduct decision about scope, not a structural finding.\n\n`runtime/README.md` known gap 9 records the converse: four artifact types gained a validator\nwithout their phases becoming dispatchable, because a validator removes one condition of five.\n\n## 4. Artifact contract engine\n\n`artifact_contract.py` executes artifact contracts declared as data rather than coded. Four of\nthe seven validators are built this way. A new artifact type therefore has two available\nshapes: a declarative contract executed by that engine, or a hand-written validator where the\nowning agent ships a numbered check set in its `quality.md` that a validator must reproduce\nexactly.\n\n`templates/bug-analysis.md`, `templates/investigation-report.md`, and `templates/release-note.md`\nwere raised to 1.1.0 to become decidable: each gained a leading metadata block and the tables\nthat turn its agent's decision rules into something checkable. `templates/review-package.md`\nwas added new. That is the precedent for what a new template must carry.\n\n## 5. Gate ownership\n\nRead from `workflows/workflow-gate-matrix.md`, never invented by the runtime. 28 gate references\nacross the active Phase Models, all decidable, with the Producer Exclusion Rule enforced \u2014\nincluding through the `omn-` alias the matrix still uses for the architecture role. Wave 1 phases\nare closed by the Scope Gate, Review Gate, Verification Gate, Implementation Gate, Regression\nGate, Code Quality Gate, and Artifact Gate.\n\n`agents/omn-product-owner.agent.md` records that this role is a listed owner of the Scope Gate it\nproduces evidence for, so under the Producer Exclusion Rule the decision rests with\n`omn-business-analyst`.\n\n## 6. Self-hosting constraints on this increment\n\n`config/self-hosting-profile.md`:\n\n- `SR-1` puts every path under `.claude/**` in routing scope; `SR-3` to `SR-6` exempt runs,\n  reports, proposals, and `__pycache__`, and the exemption set is closed.\n- `C-3` requires every phase of the routed workflow to be enqueued and either executed with a\n  validated artifact or blocked with a recorded reason.\n- `E-6` and `E-7` require a phase artifact and its validation report where the routed workflow\n  has a dispatchable phase. `implement-feature` has two, so both are required here and cannot be\n  satisfied by the run's own record of blocking.\n- `C-7` requires every mandatory item of `validation/framework-release-checklist.md` recorded\n  with its result.\n\n## 7. Recorded structural risks\n\nFrom `runtime/README.md` known gaps, unchanged by this increment and relevant to it:\n\n- Gate decisions are recorded, not solicited; an undecided gate holds its successor indefinitely.\n- Retry is scheduled, not driven; a deadline is evaluated when a command next reads the run.\n- No lease expiry timer; a lost adapter leaves a work item `running` until `release` is run.\n- `workflows/workflow-engine.md` has no planning state and disagrees with\n  `workflows/implement-feature.md`; the registry points at the latter, so routing is unambiguous.\n- `workflows/workflow-engine.md` names a different owner than the Phase Model for the refactor\n  scope state and for two analysis states in `investigate` and `research`.",
+        "digest": "sha256:7a51081f7a8c82bc5c8e2615ded73ebb"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-93b302cbdb28/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-93b302cbdb28/states/execution-planning/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: wave-1-delivery-core-agent-rollout-execution-plan\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/wave-1-rollout-feature-request.md\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: partial\n  inputDigest: sha256:127b427528513043db51b8729290834e\n  contextDigest: sha256:c02a893250a487966bd7e0b20eb783cd\n```\n\n## Executive Summary\n\nThis plan makes the first of the four Wave 1 delivery core agents runtime-dispatchable for one\nphase it owns, so that the delivery path after planning and design gains an executable owner\ninside a framework run. Success is a completed run in which `omn-product-owner` owns and\ncompletes a phase, and in which the artifact that phase emits is recorded as accepted by a\nregistered validator. The work decomposes into fifteen tasks across nine execution waves,\nopening with two recorded architecture dispositions for the stated obstacles and one scope\nconfirmation of the target phase. The highest-impact risk is `R-006`: every task in increment 1\nis owned by an agent that is not itself runtime-dispatchable today, so the plan depends on an\nexecutor outside the framework's own dispatch path. Plan status is `partial`: the request names\nfour agents, its own constraint permits one primary capability increment at a time, so\n`omn-dev-1-implement`, `omn-dev-2-reviewer`, and `omn-qa` are deferred with recorded entry\nconditions rather than planned now. Five unconfirmed assumptions carry `low` estimate confidence\ninto the two disposition tasks and the tasks that apply them, and `T-015` records whether\nincrement 1 closes as complete or as partial with the blocking gate named.\n\n## Business Objectives\n\n- The delivery path after planning and design has at least one executable phase owner, so a\n  framework run traverses it rather than halting at capability resolution. Received by the\n  framework's delivery workflows; measured as the number of phases owned by a Wave 1 agent that\n  complete inside a run, against the current zero. Traces to `S-001` and `S-004`.\n- Framework capability claims rest on completed run evidence rather than on registration alone.\n  Received by whoever reads framework capability state; measured as the proportion of increments\n  declared complete that carry run evidence under the run record location. Traces to `S-016` and\n  `S-017`.\n- Wave 1 progress becomes a usable prerequisite for Waves 2 to 4 and for the claim that the\n  framework builds itself. Received by the maintainers sequencing the later waves; measured as\n  whether each deferred increment carries a recorded entry condition and rollout order. Traces to\n  `S-005` and `S-002`.\n\n## Technical Objectives\n\n- Each agent brought into an increment resolves at capability resolution: a runtime module set\n  whose declared load order resolves on disk, plus an active registry record. Verified by the\n  owning phase no longer reporting a blocked reason at capability resolution. Traces to business\n  objective 1, `S-006`, and `S-007`.\n- Each phase brought into an increment resolves a context slice rather than blocking at context\n  resolution. Verified by the phase advancing past context resolution inside a run. Traces to\n  business objective 1 and `S-014`.\n- Each phase brought into an increment declares an output artifact that resolves to a registered\n  validator and to the owning manifest's declared output. Verified by the emitted artifact\n  carrying a recorded validator acceptance result. Traces to business objective 1, `S-010`, and\n  `S-012`.\n- The existing host entrypoint for a registered agent continues to resolve after registration.\n  Verified by a recorded entrypoint resolution result taken after registration. Traces to\n  business objective 1 and `A-002`.\n- Increment status is reported honestly: an agent registered whose phase still cannot dispatch is\n  recorded as a partial increment naming the blocking gate. Verified by inspection of the\n  increment record. Traces to business objective 2 and `S-017`.\n\n## Scope\n\n### In Scope\n\n- Deciding the disposition of the prose Output Artifact cells for the phases the four Wave 1\n  agents own (`S-011`, `S-012`, `S-013`)\n- Deciding the disposition of the missing context-slice declarations for those phases (`S-011`,\n  `S-014`)\n- Defining the reusable registration contract by which a delivery core agent becomes dispatchable\n  (`S-006`, `S-007`)\n- Increment 1: making `omn-product-owner` dispatchable for one phase it owns, including module\n  set, registry record, entrypoint continuity, applied output contract, and applied context-slice\n  declaration (`S-001`, `S-002`, `S-006`, `S-007`, `S-008`, `S-010`, `S-014`)\n- Producing and verifying completed-run evidence for that phase (`S-009`, `S-010`, `S-016`)\n- Recording increment 1's completion status and the entry conditions for the deferred increments\n  (`S-015`, `S-016`, `S-017`, `S-005`)\n- Documenting the resulting framework dispatch state and the rollout pattern (`S-003`, `S-005`)\n\n### Out of Scope\n\n- Wave 2, Wave 3, and Wave 4 agent rollouts. Excluded because the request scopes Wave 1 and names\n  the later waves only as beneficiaries.\n- Changing which agent owns which phase, or introducing new phases. Excluded because the request\n  asks for dispatchability of existing phase owners, not for re-ownership.\n- Making phase owners outside the four named agents dispatchable. Excluded because the request\n  names exactly four agents.\n- Deciding the disposition of prose Output Artifact cells for phases the four Wave 1 agents do\n  not own. Excluded because the request bounds the obstacle to the phases those agents own.\n\n### Deferred\n\n- Increment 2, `omn-dev-1-implement`. Enters scope when increment 1's status is recorded by\n  `T-015` as complete against run evidence and the entry conditions from `T-004` are approved.\n- Increment 3, `omn-dev-2-reviewer`. Enters scope when increment 2's status is recorded as\n  complete against run evidence.\n- Increment 4, `omn-qa`. Enters scope when increment 3's status is recorded as complete against\n  run evidence.\n- Applying the two dispositions to the phases outside increment 1, including the eleven remaining\n  phases the four agents own. Enters scope with the increment that covers each phase.\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | The phase used to prove increment 1 is a phase `omn-product-owner` owns in a workflow that already reaches a run, rather than a newly created phase | `S-001` | `T-007`, `T-012`, and `T-014` re-scope to a different phase and its artifact | omn-product-owner |\n| A-002 | Introducing a runtime module set and a registry record does not change how the agent's existing host entrypoint resolves | `S-008` | An entrypoint migration task is inserted ahead of `T-009` and the increment-1 run is delayed | omn-tech-lead |\n| A-003 | An output contract resolves once a named artifact identifier appears both in the owning manifest's declared outputs and in the runtime validator map, with no further resolution requirement | `S-012` | `T-001` has options this plan did not surface, and `T-012` re-scopes | architect |\n| A-004 | A context-slice declaration can be added for a phase without changing the context-slice contract itself | `S-014` | An additional architecture decision precedes `T-014` and the increment-1 run is delayed | architect |\n| A-005 | A framework run can reach a completed state for the increment-1 phase without a gate approval that this plan cannot obtain | `S-004` | `T-011` yields a waiting run rather than a completed one, and increment 1 is recorded partial | omn-orchestrator |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | The target phase approved in `T-003` differs from the phase assumed in `A-001` | `T-007`, `T-012`, and `T-014` re-scope to a different phase and artifact | medium | T-007, T-012, T-014 | `T-003` confirms the target phase before the module set is authored | omn-product-owner |\n| R-002 | requirement | Increment 1 is declared complete without run evidence under the run record location | A capability is reported as delivered that no run demonstrates, contradicting `S-016` | medium | T-015 | `T-015` accepts a complete status only against the evidence set defined in `T-010` | omn-tech-lead |\n| R-003 | technical | The disposition decided in `T-001` does not resolve because the runtime requires more than a named identifier in the manifest and the validator map, making `A-003` false | `T-012` cannot complete and the increment-1 artifact cannot be accepted | medium | T-001, T-012, T-013 | `T-001` decides the disposition against the resolution requirement stated in `S-012` before `T-012` starts | architect |\n| R-004 | technical | Declaring a context slice for the increment-1 phase requires changing the context-slice contract itself, making `A-004` false | An additional architecture decision precedes `T-014` and the increment-1 run is delayed | medium | T-002, T-014 | `T-002` states whether the existing contract suffices and what changes if it does not | architect |\n| R-005 | technical | The host entrypoint stops resolving once the module set and the registry record exist, making `A-002` false | The phase cannot be dispatched and `T-011` produces no evidence | low | T-009, T-011 | `T-009` verifies entrypoint continuity and records the result before the increment status is set | omn-qa |\n| R-006 | dependency | No executor is available for tasks owned by agents that are not themselves runtime-dispatchable | Every increment-1 task stalls and the plan cannot start | high | T-003, T-007, T-008, T-009, T-010, T-012, T-013, T-014 | Confirming the external prerequisite recorded in section 8.2 is a run entry condition rather than plan work; Wave 1 does not start until it is confirmed | omn-orchestrator |\n| R-007 | dependency | The gate owners for the increment-1 run do not approve inside the run, so it reaches a waiting state, making `A-005` false | `T-011` yields no completed run and increment 1 is recorded partial | medium | T-011, T-015 | `T-010` defines what evidence a waiting run still yields and `T-015` records the partial status | omn-orchestrator |\n| R-008 | security | A registered delivery core agent declares an authority scope wider than the phase it owns | A dispatchable agent can act outside its declared boundary | low | T-006, T-007 | `T-006` requires an explicit authority scope in the registration contract | architect |\n| R-009 | operational | Registering the agent changes resolution for phases outside increment 1 that the same agent owns | Previously blocked phases dispatch without their output or context declarations in place | medium | T-008, T-015 | `T-003` records the excluded phases as non-goals and `T-015` names every phase that still cannot dispatch | omn-tech-lead |\n| R-010 | delivery | A deferred increment begins before increment 1's status is recorded | More than one capability increment is in flight, contradicting `S-015` | medium | T-004 | `T-004` depends on `T-015`, so entry conditions are recorded only after the increment status is | omn-tech-lead |\n\n## Task Breakdown\n\n### T-001 Decide the output-artifact disposition for the Wave 1 phases\n\n- Owner: architect\n- Complexity: M (confidence: low)\n- Depends on: none\n- Traces to: S-001, S-011, S-012, S-013, A-003\n- Status: assumption-dependent\n- Description: A recorded decision states how a phase whose declared Output Artifact is prose\n  reaches a resolvable output contract, and which disposition applies to each phase the four\n  Wave 1 agents own.\n- Acceptance Criteria:\n  - The decision names a disposition for every phase the four Wave 1 agents own, including the\n    one phase that already names a file artifact\n  - The decision states the resolution path an output contract must satisfy against the runtime\n    requirement recorded in `S-012`\n  - The decision is recorded at status Proposed for Design Gate acceptance\n- Gate: Design Gate\n\n### T-002 Decide the context-slice declaration disposition for the Wave 1 phases\n\n- Owner: architect\n- Complexity: M (confidence: low)\n- Depends on: none\n- Traces to: S-001, S-011, S-014, A-004\n- Status: assumption-dependent\n- Description: A recorded decision states how a phase owned by a Wave 1 agent obtains the\n  context-slice declaration it needs to clear context resolution, and what that declaration\n  must contain.\n- Acceptance Criteria:\n  - The decision states what a context-slice declaration must contain for a Wave 1 phase to\n    clear context resolution as described in `S-014`\n  - The decision states whether the existing context-slice contract suffices, and the\n    consequence if it does not\n  - The decision is recorded at status Proposed for Design Gate acceptance\n- Gate: Design Gate\n\n### T-003 Confirm the increment-1 target phase and its acceptance conditions\n\n- Owner: omn-product-owner\n- Complexity: S (confidence: high)\n- Depends on: none\n- Traces to: S-001, S-002, A-001\n- Status: ready\n- Description: One phase is approved as the subject of increment 1, together with the conditions\n  that separate a complete increment from a partial one.\n- Acceptance Criteria:\n  - Exactly one phase is named as the increment-1 target, with the workflow that contains it\n  - The recorded completion conditions distinguish a complete increment from a partial one\n  - Phases the same agent owns that are excluded from increment 1 are recorded as non-goals\n- Gate: Scope Gate\n\n### T-004 Define the entry conditions for the deferred increments\n\n- Owner: omn-tech-lead\n- Complexity: S (confidence: medium)\n- Depends on: T-015\n- Traces to: S-002, S-005, S-015\n- Status: ready\n- Description: Each deferred increment carries a recorded entry condition derived from increment\n  1's outcome, so that no later increment starts before the prior one holds run evidence.\n- Acceptance Criteria:\n  - Each of the three deferred increments names its entry condition and the evidence that\n    satisfies it\n  - The recorded sequence matches the rollout order stated in `S-002`\n  - Elements of the increment-1 pattern that are reusable are distinguished from those that are\n    specific to the agent\n- Gate: Closure Gate\n\n### T-005 Document the rollout pattern and the resulting dispatch state\n\n- Owner: omn-documentation\n- Complexity: S (confidence: high)\n- Depends on: T-004\n- Traces to: S-003, S-005\n- Status: ready\n- Description: The framework's dispatch state after increment 1 is recorded, together with the\n  pattern by which a delivery core agent becomes dispatchable.\n- Acceptance Criteria:\n  - The count of dispatchable phase owners and phases is restated from verified evidence rather\n    than from the request\n  - The rollout pattern is described in terms a later increment can follow without a new decision\n  - Release-impact notes state what changed for runs already in progress\n- Gate: Closure Gate\n\n### T-006 Define the delivery core agent registration contract\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: T-001, T-002\n- Traces to: S-006, S-007\n- Status: ready\n- Description: One recorded contract states every declaration a delivery core agent must carry \u2014\n  module set and load order, registry record, owned phase, output contract, context-slice\n  declaration, and authority scope \u2014 for a phase it owns to become dispatchable.\n- Acceptance Criteria:\n  - The contract enumerates each declaration required for capability resolution and for context\n    resolution to clear\n  - The contract states how those declarations correspond to the dispositions recorded in `T-001`\n    and `T-002`\n  - The contract is expressed so that a second agent can be registered against it without a new\n    architecture decision\n- Gate: Design Gate\n\n### T-007 Author the runtime module set for `omn-product-owner`\n\n- Owner: omn-dev-1-implement\n- Complexity: L (confidence: low)\n- Depends on: T-003, T-006\n- Traces to: S-006, A-001\n- Status: assumption-dependent\n- Description: A runtime module set exists for the agent, declaring a load order that resolves on\n  disk and the phase confirmed in `T-003`.\n- Acceptance Criteria:\n  - Every module named in the declared load order resolves on disk\n  - The manifest declares the workflow and phase confirmed in `T-003`\n  - The declared output matches the disposition recorded in `T-001`\n  - The declared authority scope is bounded to the phase the agent owns\n- Gate: Review Gate\n\n### T-008 Register `omn-product-owner` in the agent registry\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-007\n- Traces to: S-007\n- Status: ready\n- Description: An active agent registry record exists for the agent and resolves to the module\n  set produced by `T-007`.\n- Acceptance Criteria:\n  - The record is active and names the module set as its specification path\n  - Every capability the record declares already exists in the capability matrix\n  - Capability resolution for the increment-1 phase no longer reports a blocked reason\n- Gate: Review Gate\n\n### T-009 Verify host entrypoint continuity for `omn-product-owner`\n\n- Owner: omn-qa\n- Complexity: S (confidence: low)\n- Depends on: T-008\n- Traces to: S-008, A-002\n- Status: assumption-dependent\n- Description: The agent's existing host entrypoint still resolves once the module set and the\n  registry record are in place.\n- Acceptance Criteria:\n  - Entrypoint resolution is demonstrated after registration and the result is recorded\n  - Any difference from the pre-registration behavior is recorded with its cause\n- Gate: Review Gate\n\n### T-010 Design the increment-1 evidence set\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-006\n- Traces to: S-009, S-016\n- Status: ready\n- Description: The evidence that proves increment 1 \u2014 phase dispatched, resolution gates cleared,\n  artifact accepted \u2014 is defined before the proving run is attempted.\n- Acceptance Criteria:\n  - For each claim the increment makes, the evidence set names the record that demonstrates it\n  - The evidence set states how a completed phase is distinguished from a blocked or skipped one\n  - The evidence set states what a run that stops short of completion still demonstrates\n  - Absence of any named record is defined as a failure to prove the increment\n- Gate: Verification Gate\n\n### T-011 Produce a completed run in which `omn-product-owner` owns and completes its phase\n\n- Owner: omn-orchestrator\n- Complexity: M (confidence: low)\n- Depends on: T-008, T-010, T-012, T-014\n- Traces to: S-009, A-005\n- Status: assumption-dependent\n- Description: A run record exists under the framework's run record location in which the\n  increment-1 phase is dispatched to the agent and reaches a completed state.\n- Acceptance Criteria:\n  - The run record shows the increment-1 phase dispatched to the agent and completed\n  - The run record shows capability resolution and context resolution cleared for that phase\n  - Every record named by the evidence set from `T-010` is present in the run record\n- Gate: Verification Gate\n\n### T-012 Apply the output-artifact disposition to the increment-1 phase\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-001, T-007\n- Traces to: S-010, S-012, A-003\n- Status: assumption-dependent\n- Description: The increment-1 phase declares an output artifact that resolves to a registered\n  validator and to the owning manifest's declared output.\n- Acceptance Criteria:\n  - The phase's declared output artifact is a named artifact identifier rather than prose\n  - The same identifier appears in the owning manifest's declared outputs\n  - The identifier resolves to a registered validator\n- Gate: Review Gate\n\n### T-013 Verify validator acceptance of the increment-1 artifact\n\n- Owner: omn-qa\n- Complexity: S (confidence: medium)\n- Depends on: T-011\n- Traces to: S-010\n- Status: ready\n- Description: The artifact emitted by the increment-1 phase carries a recorded acceptance result\n  from the validator registered for it.\n- Acceptance Criteria:\n  - The acceptance result for the emitted artifact is recorded in the run record\n  - The recorded result names the validator that produced it\n  - A rejection is recorded with its reason rather than resolved silently\n- Gate: Verification Gate\n\n### T-014 Apply the context-slice declaration to the increment-1 phase\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: low)\n- Depends on: T-002, T-007\n- Traces to: S-014, A-004\n- Status: assumption-dependent\n- Description: The increment-1 phase carries the context-slice declaration it needs to clear\n  context resolution.\n- Acceptance Criteria:\n  - The phase resolves a context slice at run time rather than blocking at context resolution\n  - Each declared slice member is recorded with the reason it is included\n- Gate: Review Gate\n\n### T-015 Record the increment-1 completion status\n\n- Owner: omn-tech-lead\n- Complexity: S (confidence: high)\n- Depends on: T-009, T-013\n- Traces to: S-016, S-017\n- Status: ready\n- Description: The increment record states whether increment 1 closed as complete or as partial,\n  and names the gate at which any covered phase still cannot dispatch.\n- Acceptance Criteria:\n  - A complete status is recorded only when run evidence exists under the run record location\n  - A partial status names the specific gate and the reason that prevents dispatch\n  - The record names the agent and the phase the increment covers, and every phase the agent owns\n    that the increment did not cover\n- Gate: Closure Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-006 | decision-gate | The registration contract binds to the recorded output-artifact disposition |\n| T-001 | T-012 | decision-gate | The phase's declared output applies a disposition that must already be decided |\n| T-002 | T-006 | decision-gate | The registration contract binds to the recorded context-slice disposition |\n| T-002 | T-014 | decision-gate | The phase's context-slice declaration applies a disposition that must already be decided |\n| T-003 | T-007 | decision-gate | The module set declares the phase confirmed for increment 1 |\n| T-006 | T-007 | contract | The module set is authored against the registration contract |\n| T-006 | T-010 | contract | The evidence set targets the declarations the registration contract requires |\n| T-007 | T-008 | produces-consumes | The registry record names the authored module set as its specification path |\n| T-007 | T-012 | contract | The declared output identifier must appear in the authored manifest |\n| T-007 | T-014 | contract | The context-slice declaration attaches to the phase the authored manifest declares |\n| T-008 | T-009 | produces-consumes | Entrypoint continuity is assessed against the registered agent |\n| T-008 | T-011 | produces-consumes | The run dispatches the phase to the registered agent |\n| T-010 | T-011 | contract | The run must produce the records the evidence set names |\n| T-012 | T-011 | produces-consumes | The run emits the artifact the applied output contract names |\n| T-014 | T-011 | produces-consumes | The run resolves the context slice the applied declaration provides |\n| T-011 | T-013 | verification | Acceptance is verified against the artifact the run emitted |\n| T-009 | T-015 | produces-consumes | The increment status consumes the recorded entrypoint continuity result |\n| T-013 | T-015 | produces-consumes | The increment status consumes the recorded validator acceptance result |\n| T-015 | T-004 | decision-gate | Entry conditions for the deferred increments depend on the recorded increment status |\n| T-004 | T-005 | produces-consumes | The documentation restates the recorded entry conditions and the outcome they rest on |\n\n### 8.2 External Dependencies\n\n| Responsible party | What is needed | Blocks |\n|---|---|---|\n| Framework maintainer outside the framework's agent set | An executor for tasks owned by agents that are not yet runtime-dispatchable, since three of the four Wave 1 agents own tasks in this plan | T-003, T-007, T-008, T-009, T-010, T-012, T-013, T-014 |\n| Gate owners named in the workflow gate matrix | Gate approval inside the increment-1 run, so the run reaches a completed state rather than a waiting one | T-011 |\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-002, T-003\n- Wave 2: T-006\n- Wave 3: T-007, T-010\n- Wave 4: T-008, T-012, T-014\n- Wave 5: T-009, T-011\n- Wave 6: T-013\n- Wave 7: T-015\n- Wave 8: T-004\n- Wave 9: T-005\n\n## Suggested Workflow\n\nSelected workflow: `implement-feature`.\n\nSelected because the plan delivers new framework capability with approved scope, recorded\narchitecture decisions, review of the produced declarations, verification against run evidence,\nand a closure record \u2014 which is the phase shape this workflow declares.\n\n| Phase | Tasks |\n|---|---|\n| `scope-and-acceptance` | T-003 |\n| `execution-planning` | plan handoff |\n| `solution-design-and-risk-assessment` | T-001, T-002, T-006 |\n| `implementation` | T-007, T-008, T-012, T-014 |\n| `quality-review` | T-009, T-010, T-011, T-013 |\n| `documentation-and-release-handoff` | T-004, T-005, T-015 |\n\n| Gate | Required owners |\n|---|---|\n| Scope Gate | omn-product-owner, omn-business-analyst |\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer, omn-qa |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\nThe producer exclusion rule in the gate matrix applies to `T-001`, `T-002`, and `T-006`: the\ndecisions are produced by `architect`, so Design Gate acceptance rests with `omn-tech-lead`.\nThis section recommends the workflow; it does not start it.\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| scope-definition | T-003 | omn-product-owner | Primary |\n| acceptance-authority | T-003 | omn-product-owner | Primary |\n| architecture-analysis | T-001, T-002 | architect | Primary |\n| architecture-decision-authoring | T-001, T-002 | architect | Primary |\n| technical-approach-definition | T-006 | architect | Primary |\n| implementation-delivery | T-007, T-008, T-012, T-014 | omn-dev-1-implement | Primary |\n| validation-design | T-010 | omn-qa | Primary |\n| quality-verification | T-009, T-013 | omn-qa | Primary |\n| run-coordination | T-011 | omn-orchestrator | Primary |\n| execution-sequencing | T-004 | omn-tech-lead | Secondary |\n| release-readiness | T-015 | omn-tech-lead | Primary |\n| documentation | T-005 | omn-documentation | Primary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S01 | architecture/clean-architecture-checklist.md | T-001, T-002, T-006 | Primary |\n| S02 | business/domain-modeling.md | T-003, T-004 | Primary |\n| S07 | testing/testing-strategy.md | T-009, T-010, T-013 | Primary |\n| S09 | security/secure-engineering.md | T-006, T-008 | Secondary |\n| S10 | git/git-collaboration.md | T-007, T-008, T-012, T-014 | Secondary |\n\n## Acceptance Criteria\n\n1. The increment-1 phase is dispatched to `omn-product-owner` and completes inside a framework\n   run. Verifies business objective 1. Evidence: the run record produced by `T-011`, assessed\n   against the evidence set defined in `T-010`.\n2. The artifact emitted by the increment-1 phase carries a recorded acceptance result from a\n   registered validator. Verifies business objective 1. Evidence: the acceptance result recorded\n   by `T-013`.\n3. Increment 1's status is recorded as complete or partial against run evidence, and a partial\n   status names the gate that prevents dispatch. Verifies business objective 2. Evidence: the\n   increment record produced by `T-015`.\n4. Each deferred increment carries a recorded entry condition, in the rollout order the request\n   states. Verifies business objective 3. Evidence: the entry conditions recorded by `T-004`.\n5. The framework's dispatchable phase-owner state after increment 1 is restated from verified\n   evidence rather than from the request. Verifies business objectives 2 and 3. Evidence: the\n   documentation produced by `T-005`.\n\n## Definition of Done\n\n- [ ] All five plan acceptance criteria are verified with recorded evidence\n- [ ] Scope, Design, Review, Verification, and Closure Gates are approved with owners recorded\n- [ ] Task acceptance criteria for `T-001` through `T-015` are satisfied or formally waived\n- [ ] `A-001` through `A-005` are confirmed or converted to recorded decisions\n- [ ] `R-001` through `R-010` are closed or accepted with named owners\n- [ ] `Q-001` through `Q-004` are closed or explicitly accepted with the acceptance recorded\n- [ ] The increment record from `T-015` states complete or partial, and names any phase that\n      still cannot dispatch together with its blocking gate\n- [ ] Documentation and release-impact notes from `T-005` are published\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Does the increment-1 phase reuse an artifact type that is already registered with a validator and a template, or does the disposition require a newly registered one? | No | architect | T-001, T-012 |\n| Q-002 | Does a run that dispatches the phase but stops short of completion count as evidence of dispatch, or only a fully completed run? | No | omn-orchestrator | T-010, T-011, T-015 |\n| Q-003 | Is deferring the three remaining Wave 1 agents acceptable under the one-increment-at-a-time constraint, or must all four be planned as a single increment? | No | omn-product-owner | T-004 |\n| Q-004 | The four Wave 1 agents own twelve phases and increment 1 covers one. Do the agent's remaining phases require their own increments, or do they follow from the same registration once their output and context declarations exist? | No | omn-tech-lead | T-003, T-004, T-015 |\n\n## Traceability Matrix\n\n| Statement | Covered by |\n|---|---|\n| S-001 | T-001, T-002, T-003 |\n| S-002 | T-003, T-004 |\n| S-003 | T-005 |\n| S-004 | A-005, R-007 |\n| S-005 | T-004, T-005 |\n| S-006 | T-006, T-007 |\n| S-007 | T-006, T-008 |\n| S-008 | T-009, A-002 |\n| S-009 | T-010, T-011 |\n| S-010 | T-012, T-013 |\n| S-011 | T-001, T-002 |\n| S-012 | T-001, T-012, A-003 |\n| S-013 | T-001, Q-001 |\n| S-014 | T-002, T-014, A-004 |\n| S-015 | T-004, Q-003 |\n| S-016 | T-010, T-015 |\n| S-017 | T-015 |",
+        "digest": "sha256:f060c0543114b8f325924400396065d5",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "All three required inputs must be present. Architecture context that cannot support impact analysis is a missing input, not a gap to be inferred."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+      "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md",
+      "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/artifacts/technical-design.md"
+    ],
+    "failures": [
+      {
+        "id": "D8.2",
+        "severity": "Blocking",
+        "quality_ref": "A8.3",
+        "requirement": "Every option is evaluated against every recorded criterion",
+        "detail": "unevaluated cells: {'O-001': ['C-011'], 'O-002': ['C-011'], 'O-003': ['C-011', 'Score'], 'O-004': ['C-011', 'Score'], 'O-005': ['C-011', 'Score'], 'O-006': ['C-010'], 'O-007': ['C-010', 'Score'], 'O-008': ['C-010']}"
+      },
+      {
+        "id": "D8.4",
+        "severity": "Blocking",
+        "quality_ref": "A8.5",
+        "requirement": "The recorded selection is the option the evaluation table marks selected",
+        "detail": "Selected names ['O-002', 'O-006']; evaluation table marks it selected: True"
+      },
+      {
+        "id": "D10.1",
+        "severity": "Blocking",
+        "quality_ref": "A9.1",
+        "requirement": "Every contract-change module appears in the API and Data Model Impact section",
+        "detail": "absent: ['M-002', 'M-003', 'M-004']"
+      },
+      {
+        "id": "D14.3",
+        "severity": "Correctable",
+        "quality_ref": "A14.2",
+        "requirement": "Every open decision owner resolves to a known agent",
+        "detail": "unresolvable: ['Design Gate owners; under the Producer Exclusion Rule, omn-tech-lead']"
+      },
+      {
+        "id": "D16.4",
+        "severity": "Correctable",
+        "quality_ref": "A15.5",
+        "requirement": "No supplied planner task is left unaddressed by the sequencing constraints",
+        "detail": "unaddressed: ['T-001', 'T-002', 'T-003', 'T-006']"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-93b302cbdb28/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-08-19T01:20:12Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:89f09c2b8213d9844fc91b78d79e4fc2"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:3bf28ee046a18af6bf2eaa46be764811"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:057444bb03e86f3c5a852fadf6007b83"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:feea8081b9ed985742ea763daf6a9cf6"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:9d70f79b90fadd0f134a44b03380e8a4"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:083e4c09e43314332cacd5497972ae9c"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:c18143d075aa49cb11b00ab39d74b90a"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6d6ab6cd8e38500a7e51087ad8111fb6"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820"
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205"
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1"
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0d3d7ae399ebca4b6b0151bcba18c508"
+      }
+    ],
+    "context_digest": "sha256:079539584551833ae3bf361840ce2616",
+    "input_digest": "sha256:6cb9485fea49474aae41df46bb43f9a2",
+    "inputs": [
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/wave-1-rollout-change-request.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-change-request.md",
+        "digest": "sha256:460be1bbed3416e8c50741901edaa530"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/wave-1-rollout-business-intent.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-business-intent.md",
+        "digest": "sha256:e44b4e1a4512bacd8b4a18a7815e2d66"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/wave-1-rollout-architecture-context.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-architecture-context.md",
+        "digest": "sha256:7a51081f7a8c82bc5c8e2615ded73ebb"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-93b302cbdb28/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-93b302cbdb28/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:f060c0543114b8f325924400396065d5"
+      }
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md"
+    ],
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-08-19T01:20:12Z"
+}

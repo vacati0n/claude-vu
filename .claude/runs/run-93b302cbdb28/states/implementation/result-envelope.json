@@ -1,0 +1,137 @@
+{
+  "invocation_id": "inv-93b302cbdb28-04-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-93b302cbdb28/states/implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-0001",
+    "workflowPhase": "implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 20,
+      "testEvidenceEntries": 10,
+      "deviations": 4,
+      "residualRisks": 6,
+      "openQuestions": 5
+    },
+    "evidenceExecution": {
+      "commandsExecuted": 10,
+      "commandsPassed": 7,
+      "commandsFailed": 3,
+      "failing": [
+        "verify_vertical_slice.py --slice implement (8/10 NOT PROVEN; C6 and C9 await the runtime's commit of this phase after this agent returns)",
+        "verify_multi_phase.py --run-id run-93b302cbdb28 (14/15 NOT PROVEN; M6 awaits a completed delivery phase)",
+        "verify_self_hosting.py (5/8 NOT SELF-HOSTING; S6, S7 and S8 fail, each attributed to this increment)"
+      ],
+      "executionNote": "Every command was executed from the repository root. The scope classification the self-hosting and change-proposal checks apply resolves paths against the working directory, so a run from another directory yields different verdicts; the recorded results are the repository-root ones and were reproduced at the end of the run."
+    },
+    "qualityChecks": {
+      "total": 44,
+      "passed": 44,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "M1": "pass",
+        "M5": "pass",
+        "M7": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "M3": "pass",
+        "M2": "pass",
+        "K1": "pass",
+        "K2": "pass",
+        "M4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "B1": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "B4": "pass",
+        "B5": "pass",
+        "B6": "pass",
+        "M6": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass"
+      }
+    },
+    "validationEngine": {
+      "validator": "implementation_report_validator",
+      "decidableChecks": 32,
+      "decidablePassed": 32,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3,
+      "digestCrossCheck": "C7.1 pass -- inputDigest and contextDigest match the envelope context slice"
+    },
+    "notMachineCheckableObligations": {
+      "N1": "satisfied -- each of the twenty change-set paths was opened and its content confirmed to match the purpose the row states; no path is recorded that was not read",
+      "N2": "satisfied -- each test-evidence row names a verifier, resolver, or validator that reads the declarations carried by the change-set entries in its Covers cell; coverage was mapped entry by entry rather than asserted",
+      "N3": "satisfied as declared rather than absent -- one side effect reached committed run state, where activating the agent record cleared the capability blocker on an earlier run's implementation phase; it is recorded as a residual risk and an open question rather than left hidden"
+    },
+    "invariantStatus": {
+      "dispatchablePhases": "3 -> 6; the three phases this agent owns now resolve and dispatch",
+      "activeRegistryRecords": "2 -> 3",
+      "registeredValidators": "7 -> 8",
+      "INV-1_INV-2_dispatchable_phases_preserved": "holds -- registry coverage C6 reports six dispatchable phases including the three pre-existing ones",
+      "INV-3_replay_fingerprints_unchanged": "holds -- the fingerprint is computed over the persisted run record, not re-derived from current file content, and multi-phase M14 reports artifact digests unchanged",
+      "INV-4_no_verifier_check_moves_pass_to_fail": "VIOLATED -- verify_self_hosting S6, S7 and S8 moved from pass to fail; attributed to this increment and escalated",
+      "INV-5_skill_references_resolved": "holds -- 101 of 101 references resolve",
+      "INV-6_gate_ownership_unchanged": "holds -- 28 of 28 gate references decidable under the Producer Exclusion Rule"
+    },
+    "escalations": [
+      "omn-product-owner -- increment target applied to rollout item 2 ahead of item 1 (V-001, Q-001)",
+      "omn-tech-lead -- restoration of the no-regression invariant after three self-hosting checks failed (V-004, Q-002)",
+      "architect -- context-slice per-member input attribution required by D-002 is absent (V-003, Q-003)",
+      "omn-orchestrator -- change proposal accounting for this run and the pre-dispatch declarations (Q-004)"
+    ],
+    "boundariesDeclined": [
+      "no review verdict, merge decision, or release readiness claim recorded",
+      "no scope decision taken; the increment-target question is routed to product authority",
+      "no design revision taken; the D-002 gap is routed to architecture authority",
+      "no acceptance criterion, threshold, or invariant relaxed; the failing invariant is reported as failing"
+    ],
+    "determinismNote": "Two runtime files in the change set were written once by an actor outside this invocation during the run. The full evidence set was re-executed afterwards and every verdict reproduced unchanged, so no recorded result rests on the earlier state. Recorded as a residual risk rather than left unstated."
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-93b302cbdb28/states/implementation/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-93b302cbdb28/states/implementation/artifacts/implementation-report.md",
+    "runs/run-93b302cbdb28/states/implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

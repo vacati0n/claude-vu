@@ -1,0 +1,334 @@
+{
+  "run_id": "run-27e36c138498",
+  "runtime_version": "0.5.0",
+  "command_id": "bugfix",
+  "workflow_id": "fix-bug",
+  "workflow_version": "1.0.0",
+  "status": "Completed",
+  "input_digest": "sha256:a95dc18c9c3d6fa5d2bd37eadb78848d",
+  "created_at": "2026-08-19T07:55:07Z",
+  "updated_at": "2026-08-19T10:19:34Z",
+  "states": {
+    "triage-and-impact": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:cdecd3ff1056353cdcaa21a7d49a9e5c",
+      "artifact_path": "runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-27e36c138498/states/triage-and-impact/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 30,
+        "checksPassed": 30,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 9,
+          "status": "provisional",
+          "identifiers": {
+            "E": 15,
+            "C": 6,
+            "Q": 5
+          },
+          "tableRows": {
+            "Reproduction": 15,
+            "Root Cause Analysis": 6
+          }
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "root-cause-analysis": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:483360ec03eca1a3f384ea9d47aa6e4c",
+      "artifact_path": "runs/run-27e36c138498/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-27e36c138498/states/root-cause-analysis/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 30,
+        "checksPassed": 30,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 9,
+          "status": "complete",
+          "identifiers": {
+            "E": 21,
+            "C": 8,
+            "Q": 5
+          },
+          "tableRows": {
+            "Reproduction": 21,
+            "Root Cause Analysis": 8
+          }
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "fix-implementation": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-implement",
+      "attempt": 2,
+      "attempts_lost": 0,
+      "attempts_charged": 2,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:6c11c26ffa59d169df285b0fd6fb0d06",
+      "artifact_path": "runs/run-27e36c138498/states/fix-implementation/artifacts/implementation-report.md",
+      "blocked_reason": null,
+      "failure_class": "policy-failure",
+      "state_ledger": "runs/run-27e36c138498/states/fix-implementation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 32,
+        "checksPassed": 32,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "provisional",
+          "identifiers": {
+            "C": 4,
+            "T": 14,
+            "V": 5,
+            "R": 5,
+            "Q": 5
+          },
+          "tableRows": {
+            "Change Set": 4,
+            "Test Evidence": 14,
+            "Deviations and Tradeoffs": 5,
+            "Residual Risk": 5
+          }
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "regression-validation": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-qa",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:a1af196e68c0be3068f2c8e64592239f",
+      "artifact_path": "runs/run-27e36c138498/states/regression-validation/artifacts/validation-report.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-27e36c138498/states/regression-validation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 31,
+        "checksPassed": 31,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "AC": 3,
+            "DF": 3,
+            "Q": 4
+          },
+          "tableRows": {
+            "Acceptance Criteria Results": 3,
+            "Defects": 3
+          },
+          "criteria": 3,
+          "defects": 3,
+          "verdict": "pass-with-reservations",
+          "validationBasis": "regression",
+          "results": {
+            "met": 2,
+            "not-met": 0,
+            "blocked": 1
+          },
+          "severity": {
+            "critical": 0,
+            "high": 2,
+            "medium": 1,
+            "low": 0
+          }
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "closure-and-communication": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-orchestrator",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:fd5197f31f7b3edef2febd89b5c47318",
+      "artifact_path": "runs/run-27e36c138498/states/closure-and-communication/artifacts/orchestration-result.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-27e36c138498/states/closure-and-communication/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 34,
+        "checksPassed": 34,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "provisional",
+          "identifiers": {
+            "PH": 5,
+            "HO": 5,
+            "ES": 9,
+            "FU": 7,
+            "Q": 3
+          },
+          "tableRows": {
+            "Phase Progression": 5,
+            "Handoffs": 5,
+            "Escalations": 9,
+            "Follow-Up Actions": 7
+          },
+          "phases": 5,
+          "handoffs": 5,
+          "escalations": 9,
+          "followUps": 7,
+          "disposition": "held",
+          "coordinationBasis": "closure",
+          "progression": {
+            "complete": 4,
+            "blocked": 1,
+            "not-started": 0
+          },
+          "escalationSeverity": {
+            "critical": 1,
+            "high": 3,
+            "medium": 5,
+            "low": 0
+          }
+        },
+        "undeclaredSideEffects": []
+      }
+    }
+  },
+  "gates": {
+    "Triage Gate": {
+      "gate": "Triage Gate",
+      "closes_state": "triage-and-impact",
+      "owner_roles": [
+        "omn-dev-1-bug-analyst",
+        "omn-tech-lead"
+      ],
+      "producer_agent": "omn-dev-1-bug-analyst",
+      "decision": "approved",
+      "owner_role": "omn-tech-lead",
+      "decided_by": "operator",
+      "rationale": "bug-analysis.md validated 30/30 by bug_analysis_validator at status provisional. Severity critical and reproducibility deterministic are both evidenced: reproducibility is established against this run's own transition log, which records triage-and-impact moving blocked to pending when the operator correction landed. Blast radius widened on evidence from one phase to six, and the analysis correctly withholds the root cause because no specification states which reading the Output Artifact column owes; Q-001 routes that to architect and root-cause-analysis closes it. omn-dev-1-bug-analyst produced this and is excluded from deciding under the Producer Exclusion Rule.",
+      "evidence_ref": "runs/run-27e36c138498/states/triage-and-impact",
+      "decided_at": "2026-08-19T08:17:10Z"
+    },
+    "Fix Gate": {
+      "gate": "Fix Gate",
+      "closes_state": "fix-implementation",
+      "owner_roles": [
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-dev-1-implement",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "operator",
+      "rationale": "implementation-report.md validated 32/32 by implementation_report_validator, side effects declared only. Attempt 1 was refused for a policy-failure the check was right to raise: the agent declared two writes under runs/**, which its own manifest excludes so that a change cannot rewrite the evidence assessing it. Root cause was the operator's dispatch instruction requiring a verifier that mutates the run store; cleared by recorded policy exception, and attempt 2 wrote no run-store path, proven by digesting all 213 files under runs/ before and after. The two regressions the operator identified are closed at their cause and independently re-measured: V4 by expressing the bug-analysis mutation as a derivation so it survives a real run artifact, M6 by replaying the append-only transition log through the existing GD-001 helpers rather than adding a third reconstruction. Both repairs were checked for decisiveness. Scope boundary held: the column contract and the five prose rows are untouched and stay escalated as V-001.",
+      "evidence_ref": "runs/run-27e36c138498/states/fix-implementation",
+      "decided_at": "2026-08-19T09:37:02Z"
+    },
+    "Verification Gate": {
+      "gate": "Verification Gate",
+      "closes_state": "regression-validation",
+      "owner_roles": [
+        "omn-qa",
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-qa",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "operator",
+      "rationale": "validation-report.md validated 31/31 by validation_report_validator, verdict pass-with-reservations. All three acceptance criteria met: this run reached and completed regression-validation under omn-qa with its artifact accepted; no fix-bug phase reports awaiting_capability_registration, all five resolve; and every previously passing verifier passes, after one breach during the run that was identified, sent back, and repaired at its cause. The reservations are recorded rather than waived: verify_self_hosting.py at 7/10 pending this run's change proposal, which is closure work; and open items Q-002 and V-001 escalated to architect. omn-qa produced this evidence and is excluded from deciding under the Producer Exclusion Rule.",
+      "evidence_ref": "runs/run-27e36c138498/states/regression-validation",
+      "decided_at": "2026-08-19T09:57:43Z"
+    },
+    "Closure Gate": {
+      "gate": "Closure Gate",
+      "closes_state": "closure-and-communication",
+      "owner_roles": [
+        "omn-orchestrator",
+        "omn-documentation"
+      ],
+      "producer_agent": "omn-orchestrator",
+      "decision": "approved",
+      "owner_role": "omn-documentation",
+      "decided_by": "operator",
+      "rationale": "orchestration-result.md validated 34/34 by orchestration_result_validator. All five fix-bug phases executed and every artifact accepted by its registered validator: bug-analysis.md 30/30 twice, implementation-report.md 32/32, validation-report.md 31/31, orchestration-result.md 34/34. The run is the first end-to-end completion of fix-bug and satisfies omn-qa D-4 and D-5, closing Wave 1. The orchestrator correctly held its own disposition rather than closing over ES-002, and correctly refused to decide this gate under the Producer Exclusion Rule; omn-documentation decides it. Open escalations ES-002 (Output Artifact column contract), Q-002 (verify_multi_phase.py mutates the run store it verifies), ES-007 (omn-orchestrator is routed the change-proposal action but its manifest permits no repository write) and ES-008 (blocked-run count discrepancy) are carried forward as recorded items with owners, not waived.",
+      "evidence_ref": "runs/run-27e36c138498/states/closure-and-communication",
+      "decided_at": "2026-08-19T10:19:34Z"
+    }
+  },
+  "summary": {
+    "run_id": "run-27e36c138498",
+    "run_status": "Completed",
+    "phases": 5,
+    "completed": 5,
+    "blocked": 0,
+    "failed": 0,
+    "pending": 0,
+    "retrying": 0,
+    "active": 0,
+    "transitions": 35,
+    "replays_suppressed": 0
+  },
+  "recovery": {
+    "ledger": "runs/run-27e36c138498/recovery-ledger.json",
+    "classifications": 9,
+    "open": 0,
+    "resolved": 9,
+    "retries_scheduled": 0,
+    "by_failure_class": {
+      "workflow-contract-violation": 1,
+      "gate-approval-required": 7,
+      "policy-failure": 1
+    },
+    "retry_profile": {
+      "max_attempts": 3,
+      "backoff_strategy": "exponential",
+      "base_delay_seconds": 2,
+      "multiplier": 2,
+      "max_delay_seconds": 60,
+      "jitter_ratio": 0.2,
+      "circuit_breaker_threshold": 3,
+      "policy_ref": "config/runtime.md#retry-policy"
+    }
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "invocation_id": "inv-27e36c138498-03-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-27e36c138498/states/fix-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-0002",
+    "workflowPhase": "fix-implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "reviewStatus": "pending-review",
+    "attempt": 2,
+    "counts": {
+      "changeSetEntries": 4,
+      "testEvidenceEntries": 14,
+      "deviations": 5,
+      "residualRisks": 5,
+      "openQuestions": 5
+    },
+    "evidenceTotals": {
+      "executed": 11,
+      "passed": 11,
+      "failed": 0,
+      "notRun": 3
+    },
+    "verificationStatusBasis": "Stage 7 of reasoning.md: no accepted element was unimplemented and no evidence entry is fail, so the first matching row is 'any evidence entry is not-run', which yields partially-verified and provisional. The three not-run entries are the whole-suite verifiers this agent may not execute because they write under runs/.",
+    "attemptNote": "Attempt 1 was refused at completion because its declared side effects named two files under runs/, written by verify_multi_phase.py, which this agent's manifest excludes. The exclusion was correct and was not relaxed. Attempt 2 wrote no source file, ran no command that writes under runs/, and carries the affected whole-suite results as operator measurements recorded not-run rather than as executed results.",
+    "sourceFilesUnchangedInThisAttempt": [
+      {"path": "runtime/framework_runtime.py", "sha256Prefix": "873b682aff70e8a9"},
+      {"path": "runtime/verify_validators.py", "sha256Prefix": "bfd6ce20bd65901b"},
+      {"path": "runtime/verify_multi_phase.py", "sha256Prefix": "965ab24721f19a7e"},
+      {"path": "workflows/fix-bug.md", "sha256Prefix": "fc1409f4aec4749c"}
+    ],
+    "executedByThisAgent": [
+      {
+        "command": "python .claude/runtime/verify_validators.py",
+        "result": "6/6 checks passed -- COVERED",
+        "runStoreFilesChanged": 0
+      },
+      {
+        "command": "python .claude/runtime/verify_registry_coverage.py",
+        "result": "6/6 checks passed -- COVERED",
+        "runStoreFilesChanged": 0
+      },
+      {
+        "command": "python .claude/runtime/framework_runtime.py resolve --command bugfix --phase <each of the five fix-bug phases>",
+        "result": "RESOLVED for all five",
+        "runStoreFilesChanged": 0
+      },
+      {
+        "command": "four inline python -c probes: detection-gap witness, dependency-graph digest, M6 predicate over both historical runs and both failing directions, and the run-store snapshot guard",
+        "result": "V5 fails naming fix-bug/triage-and-impact while V1 passes; graph digest 712ed6390a7da991e0db3eea610ff75d67bdeb346fef0a621c6e0af4a3fedff6 unchanged; M6 PASS for both runs at their recorded baselines and FAIL in both required failing directions",
+        "runStoreFilesChanged": 0
+      }
+    ],
+    "runStoreImmutabilityProof": {
+      "method": "all files under runs/ digested before and after each command group in this attempt",
+      "filesDigested": 213,
+      "filesChanged": 0
+    },
+    "operatorMeasurements": {
+      "attribution": "measured by the operator after this change and cited in the report's verification section; not executed by this agent, and recorded not-run in the Test Evidence table",
+      "results": [
+        {"command": "python .claude/runtime/verify_registry_coverage.py", "result": "6/6 COVERED"},
+        {"command": "python .claude/runtime/verify_validators.py", "result": "6/6 COVERED"},
+        {"command": "python .claude/runtime/verify_recovery.py", "result": "41/41 RECOVERY PROVEN"},
+        {"command": "python .claude/runtime/verify_multi_phase.py --run-id run-c5a8d50d3238", "result": "15/15 PROVEN"},
+        {"command": "python .claude/runtime/verify_multi_phase.py --run-id run-93b302cbdb28", "result": "15/15 PROVEN"},
+        {"command": "python .claude/runtime/verify_self_hosting.py --mode-evidence", "result": "7/10 NOT SELF-HOSTING"}
+      ],
+      "selfHostingShortfall": "S8 and S9, and through them the mandatory checklist items FR-05 and FR-06, all because this run carries no change proposal yet. That is closure work, outside this agent's write scope, recorded as R-002 and routed as Q-004."
+    },
+    "regressionsCausedByThisIncrementAndRepaired": [
+      {
+        "check": "V4",
+        "verifier": "verify_validators.py",
+        "checklistItem": "FR-02",
+        "beforeIncrement": "4/4 COVERED",
+        "cause": "conforming_instance prefers a committed run artifact over a fixture; this run committed two real bug-analysis.md artifacts at severity critical, so the literal MUTATIONS anchor for severity high stopped matching and the mutation could not be applied at all",
+        "repair": "the bug-analysis mutation is now the derivation disagree_about_the_severity, reading the severity the instance carries and restating the Metadata section as a different member of the declared vocabulary, which is the pattern the same file already applies to four other artifact types",
+        "afterRepair": "6/6 COVERED; the mutation is caught by B2 and by no other check",
+        "changeSetEntry": "C-003"
+      },
+      {
+        "check": "M6",
+        "verifier": "verify_multi_phase.py --run-id run-c5a8d50d3238",
+        "checklistItem": "FR-11",
+        "beforeIncrement": "15/15 PROVEN",
+        "cause": "M6 read phase status from current state.json; run-c5a8d50d3238 is a completed historical run whose delivery phase was blocked when the run was carried and reads pending now, because the scheduler cleared a guard-raised block once the capability arrived. The run did not change; the framework did.",
+        "repair": "M6 now replays the run's append-only transition log to the baseline the run recorded, via the existing verify_self_hosting._phase_status_as_of helper rather than a third reconstruction, and reports divergence since as informational drift, applying GD-001",
+        "afterRepair": "15/15 PROVEN on the operator's measurement; the predicate was additionally exercised read-only in this attempt over both runs and both failing directions",
+        "changeSetEntry": "C-004"
+      }
+    ],
+    "qualityChecks": {
+      "run": 44,
+      "passed": 44,
+      "failed": 0,
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass",
+        "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass",
+        "D5": "pass", "D6": "pass",
+        "M1": "pass", "M5": "pass", "M7": "pass",
+        "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass",
+        "M3": "pass", "M2": "pass", "K1": "pass", "K2": "pass",
+        "M4": "pass", "V1": "pass", "V2": "pass", "V3": "pass",
+        "B1": "pass", "B2": "pass", "B3": "pass", "B4": "pass",
+        "B5": "pass", "B6": "pass",
+        "M6": "pass", "A1": "pass", "A2": "pass", "A3": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass"
+      },
+      "notes": [
+        "B2 and B6: this attempt wrote only the two permitted paths. No file under runs/ or proposals/ was written outside them, proven by digesting all 213 run-store files before and after every command group, with zero changed. The four source files were written in attempt 1 and are unchanged here, with digests re-measured at the start of this attempt.",
+        "E1 and E2: every Command cell for an executed row names a command this agent ran in this attempt, and every Result cell records what that command returned. The three whole-suite rows this agent may not run are recorded not-run with the operator's measurement attributed in the report, rather than reported as passes this agent did not observe.",
+        "E3: the regression baseline was re-run in this attempt for the two verifiers that can be run read-only, and carried on the operator's measurement for the three that cannot.",
+        "B4: no existing check was disabled, skipped, weakened, or made unfailable; both repaired checks were exercised against inputs that must make them fail."
+      ]
+    },
+    "validationEngineSelfCheck": {
+      "validator": "implementation_report_validator",
+      "result": "pass",
+      "checksRun": 32,
+      "checksPassed": 32,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3
+    },
+    "notMachineCheckableObligations": [
+      {
+        "id": "N1",
+        "obligation": "Each change-set row describes the change actually made at that path",
+        "judgement": "discharged",
+        "basis": "All four rows describe changes written in attempt 1, whose digests were re-measured at the start of this attempt and are unchanged. C-001 changes a docstring and a comment only, corroborated by the unchanged dependency-graph digest and unchanged registry-coverage verdict. C-002 edits prose below the boundary ending the machine-resolvable Phase Model section, confirmed by re-parsing the table. C-003 adds two checks and the functions they read and converts one mutation entry to a derivation. C-004 adds one helper and moves M6 onto the recorded baseline."
+      },
+      {
+        "id": "N2",
+        "obligation": "Each test-evidence row exercises the change-set entries its Covers cell names",
+        "judgement": "discharged",
+        "basis": "T-001 to T-005 are the checks C-003 adds and repairs, and T-002 additionally asserts the statement C-001's corrected docstring makes. T-006 and T-007 exercise C-002 by resolving every phase of the edited workflow, and T-008 re-derives the graph its table feeds. T-009 and T-010 exercise C-004 through the same baseline resolver and reconstruction helper the check calls, in the passing direction and both failing directions. T-011 measures the read-only claim every other row in this attempt depends on. T-012 to T-014 are the whole-suite rows recorded not-run. Every C identifier appears in at least one Covers cell."
+      },
+      {
+        "id": "N3",
+        "obligation": "No hidden side effect was introduced into critical business logic",
+        "judgement": "discharged",
+        "basis": "No source file was written in this attempt. In the change itself, no executable statement in framework_runtime.py changed; C-003 modifies phase_model_artifacts only to call the extracted cell reader, whose collected artifact set is identical across all 36 active rows; C-004 changes only how M6 sources phase status and adds a helper, touching no other check in that file. The dependency graph of every active workflow is unchanged by digest, and the run store is byte-identical after this attempt."
+      }
+    ],
+    "escalations": [
+      {
+        "deviation": "V-001",
+        "to": "architect",
+        "decision_required": "which of the three Output Artifact column contracts is adopted, and which artifact type each of the five rows recorded outstanding emits",
+        "tracked_as": "O-001 of proposals/framework-change-proposal-FC-004.md",
+        "state_at_handoff": "open"
+      },
+      {
+        "deviation": "V-005",
+        "to": "architect",
+        "decision_required": "where verification that mutates its own subject should live: verify_multi_phase.py writes replay bookkeeping into the run store it verifies, so no agent whose contract excludes runs/ can execute it, and it is operator-only today",
+        "tracked_as": "Q-002 of this report; surfaced by this increment and deliberately not fixed here",
+        "state_at_handoff": "open"
+      }
+    ],
+    "blockingOpenQuestions": [
+      {
+        "id": "Q-001",
+        "owner": "architect",
+        "affects": ["C-003"]
+      }
+    ],
+    "scopeCompliance": {
+      "inScopeItemsAddressed": [
+        "verified the operator's correction to workflows/fix-bug.md Phase Model, the root-cause-analysis Input column, and the CONTEXT_SLICE_PHASE entry; found it correct in substance and incomplete in one place, and completed it (C-001, deviation V-003)",
+        "closed the detection gap in verify_validators.phase_model_artifacts() with checks V5 and V6 (C-003)",
+        "corrected the false agreement claim in declared_output_artifact's documentation (C-001)",
+        "reconciled the fix-bug.md prose narrative with its corrected Phase Model table (C-002)",
+        "repaired the two regressions this increment caused, V4 and M6, at their cause (C-003, C-004)"
+      ],
+      "outOfScopeItemsNotImplemented": [
+        "giving the five remaining prose-cell phases an artifact type, template, or validator -- deferred to the increment tracked as O-001; recorded in Out of scope, deviation V-001, risk R-001, and question Q-001",
+        "enforcing a column contract at authoring time -- cannot land before that decision; recorded in Out of scope and deviation V-001",
+        "re-evaluating work items already recorded blocked in earlier runs -- recorded as question Q-005",
+        "repairing the verifier finding routed as Q-002, which this increment surfaced and was directed not to fix here"
+      ]
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-27e36c138498/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runtime/framework_runtime.py",
+    "runtime/verify_validators.py",
+    "runtime/verify_multi_phase.py",
+    "workflows/fix-bug.md",
+    "runs/run-27e36c138498/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-27e36c138498/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

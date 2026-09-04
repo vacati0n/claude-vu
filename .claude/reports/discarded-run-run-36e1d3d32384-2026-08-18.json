@@ -1,0 +1,37 @@
+{
+  "schema": "framework.runtime/discarded-run.v1",
+  "run_id": "run-36e1d3d32384",
+  "command_id": "refactor",
+  "workflow_id": "refactor",
+  "submitted_at": "2026-08-18T14:37:24Z",
+  "reason": "The request was incomplete under a profile row that was itself wrong. config/self-hosting-profile.md listed change-request and architecture-context as the required inputs for structure-preserving-change; the architect input contract also requires business-intent, so the entry phase blocked at G5-INPUT with \"required input(s) not supplied: ['business-intent']\".",
+  "disposition": "The profile row was corrected to list business-intent, which makes the corrected request a different request with a different run identity, per the runtime's own rule that a changed input starts a new run rather than repairing this one. This run executed no phase, produced no artifact, and held no validated evidence, so it was discarded rather than carried as a second unaccounted run inside the self-hosted window.",
+  "superseded_by": "the run recorded in proposals/framework-change-proposal-FC-002.md",
+  "work_items": {
+    "scope-invariants-and-risk-profile": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_dependency_output",
+      "blocked_detail": "G5-INPUT: [request-validation-failure] required input(s) not supplied: ['business-intent']"
+    },
+    "safety-net-establishment": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_capability_registration",
+      "blocked_detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+    },
+    "refactor-implementation": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_capability_registration",
+      "blocked_detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-dev-1-implement' has no record in registry/agents.yaml"
+    },
+    "behavioral-validation": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_capability_registration",
+      "blocked_detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+    },
+    "closure-and-debt-record": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_capability_registration",
+      "blocked_detail": "G1-CAPABILITY: [missing-capability-failure] agent 'omn-orchestrator' has no record in registry/agents.yaml"
+    }
+  }
+}

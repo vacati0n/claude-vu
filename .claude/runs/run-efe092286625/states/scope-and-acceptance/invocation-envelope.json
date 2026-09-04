@@ -1,0 +1,312 @@
+{
+  "invocation_id": "inv-efe092286625-01-002",
+  "run_id": "run-efe092286625",
+  "work_item_id": "run-efe092286625::scope-and-acceptance",
+  "idempotency_key": "sha256:a62d14398b4a7be604c620f283fe7e0b",
+  "state_id": "scope-and-acceptance",
+  "phase_index": 1,
+  "agent_id": "omn-product-owner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-product-owner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-product-owner/manifest.yaml",
+    "load_order": [
+      "agents/omn-product-owner/system.md",
+      "agents/omn-product-owner/identity.md",
+      "agents/omn-product-owner/reasoning.md",
+      "agents/omn-product-owner/execution.md",
+      "agents/omn-product-owner/output.md",
+      "agents/omn-product-owner/quality.md",
+      "agents/omn-product-owner/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-product-owner/system.md": "sha256:ca10caae54f63fa52580220f1f88812f",
+      "agents/omn-product-owner/identity.md": "sha256:8a5df5e407d8c96ce1e5bb7faaa07f55",
+      "agents/omn-product-owner/reasoning.md": "sha256:ee417de8bc3f21281299d8e5f53dfdcf",
+      "agents/omn-product-owner/execution.md": "sha256:68ec1cc7479d592bd875b98ecb8546ab",
+      "agents/omn-product-owner/output.md": "sha256:da40434a6907e6912979430f12430025",
+      "agents/omn-product-owner/quality.md": "sha256:53c8887fbc5888342d68c2e7a02d6ecc",
+      "agents/omn-product-owner/examples.md": "sha256:0e1b087f304a35d8527abc9aa5f0052b"
+    },
+    "capabilities": [
+      "scope-definition",
+      "acceptance-authority"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "acceptance-intent",
+      "business-constraints",
+      "architecture-context",
+      "prior-scope-definition",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-01-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-01-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-01: Declare PyYAML and make `doctor` detect missing runtime deps\n\n## Source\n\nTicket CKA-01 in `docs/claudekit-adoption-backlog.md`, Epic A \u2014 Verification baseline\n(Days 0\u201330). Source recommendation: R1 of the ClaudeKit Adoption Review (2026-08-27).\nType: Task. Priority: Highest. Effort: S. Depends on: nothing.\n\n## Request\n\nThe `omn-agent` CLI imports PyYAML at runtime (agent manifests, registry files are YAML),\nbut `pyproject.toml` declares `dependencies = []`, and `README.md` line 10 claims the tool\nis \"standard library only\". A `pip install omn-agent` into a clean virtual environment\ntherefore produces an installation whose runtime dies on `import yaml`, while\n`omn-agent validate` / `omn-agent doctor` certify that same installation as healthy,\nbecause `omn_agent/validator.py::_check_python` only `compile()`s the installed runtime\nfiles and never resolves their imports.\n\nThree deliverables:\n\n1. Declare `pyyaml` in `dependencies` in `pyproject.toml` so a clean install pulls it.\n2. Correct the \"standard library only\" claim in `README.md` (line 10) to match reality.\n3. Extend `omn_agent/validator.py::_check_python` (currently `compile()`-only) to resolve\n   top-level imports of installed runtime files, so `validate`/`doctor` report a finding\n   that names the missing module instead of certifying a dead runtime.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- `pip install` in a clean venv pulls PyYAML.\n- `omn-agent doctor` against an install in an env without PyYAML reports a finding\n  (not OK) and names the module.\n- Existing `tests/` remain green.\n\n## Constraints\n\n- Additive check only: the ticket list forbids altering `record_gate_decision`, the gate\n  matrix semantics, producer exclusion, `runner._require_approval`, or any human-block path.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py`\n  proof scripts PROVEN, no change to gate-decision behavior, and where docs were touched,\n  `user-guide.html` updated to match.\n\n## Priority and deadline\n\nHighest priority; Phase 1 (Days 0\u201330) of the adoption plan. Blocks CKA-03 (CI gating)\ntogether with CKA-02.",
+        "digest": "sha256:c11c3ae32c8bc1ffae41e19265d962b4"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the business intent this agent bounds: a feature request for new functionality, a change request for a modification to delivered behaviour, or a business intent for an outcome stated without a proposed solution. Without one there is nothing to scope, and scoping anyway would mean inventing what the requester wants."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-efe092286625/states/scope-and-acceptance/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-efe092286625/states/scope-and-acceptance/artifacts/scope-definition.md"
+    ],
+    "failures": [
+      {
+        "id": "C3.2",
+        "severity": "Blocking",
+        "quality_ref": "domain-model/agent-specification.md",
+        "requirement": "No model, vendor, or provider named",
+        "detail": "found: ['claude']"
+      }
+    ]
+  },
+  "upstream_artifacts": [],
+  "context_slice": {
+    "frozen_at": "2026-08-27T13:22:06Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/scope-definition.md",
+        "digest": "sha256:9f082102c11c1de4d4b53c8252a0a9bc",
+        "supplies": "feature-request"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "business-constraints"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": "acceptance-intent"
+      }
+    ],
+    "context_digest": "sha256:c5cc1c3bdd1db9b2d550e98fd7f931ed",
+    "input_digest": "sha256:c11c3ae32c8bc1ffae41e19265d962b4",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-01-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-01-feature-request.md",
+        "digest": "sha256:c11c3ae32c8bc1ffae41e19265d962b4"
+      }
+    ],
+    "unnarrowed": [],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-efe092286625/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "runs/run-efe092286625/states/scope-and-acceptance/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository modification of any kind",
+        "any command whose effect is not recorded in the artifact"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "author or revise a technical design, structure, or technology decision",
+      "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+      "write, modify, or review code, tests, migrations, or configuration",
+      "record the Scope Gate decision on this agent's own artifact",
+      "record a merge, readiness, or release decision",
+      "define the test strategy or execute validation",
+      "relax a stated regulatory, policy, or quality constraint to close the scope",
+      "record scope no supplied input supports",
+      "access external systems, ticket trackers, or stakeholders directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "decide which deliverables fall inside this change and which fall outside it",
+        "decide the relative priority of the in-scope items",
+        "decide the acceptance threshold each criterion states",
+        "decide when a stated expectation is too vague to be an acceptance criterion",
+        "decide when an adjacent request is a separate change rather than a widening of this one",
+        "record a scope decision together with the rationale that justifies it",
+        "record an unresolved ambiguity as an open question with a named owner",
+        "set the scope verdict the recorded question set supports"
+      ],
+      "prohibited": [
+        "author or revise a technical design, structure, or technology decision",
+        "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+        "write, modify, or review code, tests, migrations, or configuration",
+        "record the Scope Gate decision on this agent's own artifact",
+        "record a merge, readiness, or release decision",
+        "define the test strategy or execute validation",
+        "relax a stated regulatory, policy, or quality constraint to close the scope",
+        "record scope no supplied input supports",
+        "access external systems, ticket trackers, or stakeholders directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "This role produces one artifact and changes no repository source. Its writes are the artifact path and the result envelope path the invocation envelope names, and nothing else. A scope decision that edited the repository would be deciding the change it is supposed to bound.",
+        "scope": [
+          "runs/**/states/scope-and-acceptance/**"
+        ]
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository modification of any kind",
+          "any command whose effect is not recorded in the artifact"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical supplied inputs and an identical context snapshot must produce the same in-scope item set, the same exclusion set, the same acceptance criterion set, the same scope decision set, the same open question set, and the same scope verdict.",
+      "identifierSchemes": {
+        "scopeItems": "S-<zero-padded-sequence>",
+        "exclusions": "X-<zero-padded-sequence>",
+        "acceptanceCriteria": "A-<zero-padded-sequence>",
+        "scopeDecisions": "D-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "In-scope items are ordered by business priority; ties break toward the order the expectation appeared in the supplied inputs. Acceptance criteria are ordered by the scope item they bound, ties breaking toward derivation order. Exclusions, decisions, and questions follow the order the reasoning stage that produced them declares.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied inputs or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "scope-definition.md",
+    "artifact_path": "runs/run-efe092286625/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "template_ref": "templates/scope-definition.md",
+    "contract_ref": "agents/omn-product-owner/output.md",
+    "quality_ref": "agents/omn-product-owner/quality.md",
+    "validator": "scope_definition_validator",
+    "result_envelope_path": "runs/run-efe092286625/states/scope-and-acceptance/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-08-27T13:22:06Z"
+}

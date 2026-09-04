@@ -1,0 +1,165 @@
+{
+  "invocation_id": "inv-93b302cbdb28-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-93b302cbdb28/states/quality-review/artifacts/review-package.md"
+  ],
+  "structured_output": {
+    "packageId": "RP-2026-0001",
+    "workflowPhase": "quality-review",
+    "packageStatus": "complete",
+    "verdict": "approve-with-corrections",
+    "adjudication": {
+      "table": "reasoning.md Stage 8",
+      "rowMatched": "Any high finding is open",
+      "verdictYielded": "approve-with-corrections",
+      "packageStatusYielded": "complete",
+      "note": "Rows above the matched row were tested and did not match: the change account was reviewable, test evidence was available and re-executed, and no critical finding is open."
+    },
+    "counts": {
+      "findings": 6,
+      "severity": {
+        "critical": 0,
+        "high": 3,
+        "medium": 2,
+        "low": 1
+      },
+      "byCategory": {
+        "architecture": 3,
+        "standards": 2,
+        "test-adequacy": 1
+      },
+      "byStatus": {
+        "open": 6,
+        "resolved": 0,
+        "accepted-risk": 0
+      },
+      "correctionRequests": 6,
+      "correctionRequestsBlocking": 4,
+      "openQuestions": 4,
+      "blockingFindingsOutstanding": ["F-001", "F-002", "F-003"]
+    },
+    "evidenceExecution": {
+      "commandsExecuted": 15,
+      "reportedResultsReExecuted": 10,
+      "reproducedAsReported": 7,
+      "reportedFailuresSinceCleared": 2,
+      "reportedFailuresConfirmedStanding": 1,
+      "additionalCommandsRun": 5,
+      "commands": [
+        {"command": "python .claude/runtime/verify_registry_coverage.py", "result": "pass 6/6", "reported": "pass", "agreement": "verdict reproduces; dispatchable count now 9 where the report states 6, attributed to later increments"},
+        {"command": "python .claude/runtime/verify_validators.py", "result": "pass 4/4", "reported": "pass", "agreement": "reproduces"},
+        {"command": "python .claude/runtime/verify_vertical_slice.py --slice implement", "result": "pass 10/10", "reported": "fail 8/10", "agreement": "cleared exactly as the report predicted once the runtime committed the phase"},
+        {"command": "python .claude/runtime/verify_multi_phase.py --run-id run-93b302cbdb28", "result": "pass 15/15", "reported": "fail 14/15", "agreement": "cleared exactly as the report predicted once the runtime committed the phase"},
+        {"command": "python .claude/runtime/verify_recovery.py", "result": "pass 41/41", "reported": "pass", "agreement": "reproduces"},
+        {"command": "python .claude/runtime/verify_self_hosting.py", "result": "fail 5/8; S6, S7, S8 failing", "reported": "fail 5/8", "agreement": "reproduces; basis of F-001"},
+        {"command": "python .claude/runtime/framework_runtime.py resolve --command implement --phase implementation", "result": "RESOLVED", "reported": "pass", "agreement": "reproduces"},
+        {"command": "python .claude/runtime/framework_runtime.py resolve --command bugfix --phase fix-implementation", "result": "RESOLVED", "reported": "pass", "agreement": "reproduces"},
+        {"command": "python .claude/runtime/framework_runtime.py resolve --command refactor --phase refactor-implementation", "result": "RESOLVED", "reported": "pass", "agreement": "reproduces"},
+        {"command": "cd .claude/runtime && python implementation_report_validator.py fixtures/implementation-report.md", "result": "PASS 31/31", "reported": "pass", "agreement": "reproduces"},
+        {"command": "python .claude/runtime/change_proposal_validator.py .claude/proposals/framework-change-proposal-FC-001.md", "result": "FAIL 36/37, blocking F6", "reported": "not reported", "agreement": "independent confirmation of the S6 constituent failure"},
+        {"command": "python .claude/runtime/change_proposal_validator.py .claude/proposals/framework-change-proposal-FC-002.md", "result": "FAIL 36/37, blocking F12", "reported": "not reported", "agreement": "independent confirmation of the S6 constituent failure"},
+        {"command": "python .claude/runtime/framework_runtime.py resolve --command implement --phase execution-planning", "result": "RESOLVED", "reported": "not reported", "agreement": "INV-1 confirmed held"},
+        {"command": "python .claude/runtime/framework_runtime.py resolve --command implement --phase solution-design-and-risk-assessment", "result": "RESOLVED", "reported": "not reported", "agreement": "INV-1 confirmed held"},
+        {"command": "python .claude/runtime/framework_runtime.py resolve --command refactor --phase scope-invariants-and-risk-profile", "result": "RESOLVED", "reported": "not reported", "agreement": "INV-2 confirmed held"}
+      ],
+      "claimedButNotConfirmed": [
+        "T-001 states dispatchable phases rise from three to six; the verifier now reports nine, so the figure could not be confirmed against the present tree and is recorded as claimed",
+        "R-003 states the phase identifier source tables of the three edited workflow specifications are stale; all three now name the manifest, so the risk could not be confirmed and is recorded as claimed"
+      ]
+    },
+    "qualityChecks": {
+      "run": 46,
+      "passed": 46,
+      "failed": 0,
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass",
+        "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass",
+        "D5": "pass", "D6": "pass",
+        "P1": "pass", "P2": "pass", "P3": "pass", "P4": "pass",
+        "P5": "pass", "P6": "pass", "P7": "pass",
+        "F1": "pass", "F2": "pass", "F3": "pass", "F4": "pass", "F5": "pass",
+        "R1": "pass", "R2": "pass", "R3": "pass",
+        "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass", "E5": "pass",
+        "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass",
+        "A6": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+      },
+      "repairsPerformed": [
+        "C5 and the Validation Engine's C6.2 failed on first render because two citations of the technical design's own registers, its fact F-008 and its open decision Q-005, collided with this package's F-nnn and Q-nnn identifier namespaces. Both citations were reworded to descriptive form and the entire check set was re-run, not only the repaired check."
+      ],
+      "a6Disclosure": "This agent wrote no production source, test file, committed run record, or governance record. One consequential mutation is disclosed rather than concealed: executing verify_multi_phase.py against run-3e22f11cb34d, a command the change under review names as executed evidence, caused the runtime's own lazy guard re-evaluation to append an escalation_resolved event and rewrite that run's state.json. Its replay check failed on that first read and passed on the second. No committed artifact changed and every artifact digest in that run still verifies. The observation is recorded in the package under Monitoring required and is confirming evidence for F-001."
+    },
+    "validationEngine": {
+      "validator": "review_package_validator",
+      "result": "PASS",
+      "checksPassed": "30/30",
+      "blocking": 0,
+      "correctable": 0,
+      "notMachineCheckable": 4
+    },
+    "notMachineCheckableObligations": {
+      "N1": "Discharged. The two highest-consequence issues were found: the hard invariant that no verifier check moves from pass to fail is broken by the change that declares it (F-001), and the context-slice declarations breach the accepted composition rule while omitting phase-mandatory standards (F-002). F-002 and F-006 were found by independent inspection of the repository and the run record rather than taken from the report's own deviation list, which is the test of whether the review looked or only read.",
+      "N2": "Discharged. Every finding names a design constraint, a declared invariant, a decision record, a sequencing constraint, or a Phase Model column. One candidate had no written floor rule on its own terms, the omission of phase-mandatory skills from a slice, and it was raised only after A-005's member-kind enumeration was read and found to be violated; without that anchor it would have been recorded as an open question rather than a finding.",
+      "N3": "Discharged, in both directions. F-004 was held at medium rather than raised to high on positive evidence: the property P-001 was to safeguard was verified directly, both completed reference runs carrying unchanged bytes and timestamps preceding the increment. F-002 was set at high rather than medium only after A-005's enumeration established a violated architecture rule; before that reading, medium was the defensible classification, and the change was made by evidence, not to reach a verdict row."
+    },
+    "invariantStatus": {
+      "INV-1": "held; execution-planning and solution-design-and-risk-assessment both resolve",
+      "INV-2": "held; scope-invariants-and-risk-profile resolves",
+      "INV-3": "held on direct inspection; both completed reference runs are byte-unchanged with timestamps preceding the increment and carry no orchestration state record. The safeguard P-001 required to prove it was not executed, which is part of F-004",
+      "INV-4": "broken; three verify_self_hosting checks moved from pass to fail. This is F-001",
+      "INV-5": "held; 101 of 101 phase-mandatory skill references resolve",
+      "INV-6": "held; 28 of 28 gate references decidable with the Producer Exclusion Rule enforced"
+    },
+    "escalations": [
+      {"id": "Q-001", "owner": "omn-tech-lead", "blocking": true, "subject": "whether C-007 binds verifier checks or verifier verdicts"},
+      {"id": "Q-002", "owner": "architect", "blocking": true, "subject": "the internal contradiction in D-002 between its required per-member input record and its out-of-scope boundary"},
+      {"id": "Q-003", "owner": "omn-tech-lead", "blocking": true, "subject": "whether skill playbooks are an admitted context-slice member kind under A-005"},
+      {"id": "Q-004", "owner": "omn-orchestrator", "blocking": true, "subject": "authorship of the change proposal accounting for this run"}
+    ],
+    "boundariesDeclined": [
+      "No gate decision recorded. This agent produced the evidence the Review Gate assesses, so under the Producer Exclusion Rule the decision rests with omn-qa; the package states a recommendation only.",
+      "No merge or release decision recorded; that judgement belongs to omn-tech-lead.",
+      "No correction implemented. Every correction request states an outcome and names its owner; none supplies the change.",
+      "No scope judgement offered on whether this increment should have preceded the recorded rollout order; that question is routed to omn-product-owner and the finding raised is confined to the ordering breach against a written precondition.",
+      "No acceptance criterion, quality threshold, or declared invariant relaxed. C-007 is reported as broken rather than reinterpreted to pass."
+    ],
+    "gateAuthority": {
+      "gate": "Review Gate",
+      "producedEvidenceHere": true,
+      "decidedBy": "omn-qa",
+      "basis": "workflows/workflow-gate-matrix.md, Producer Exclusion Rule"
+    },
+    "determinismNote": "Finding identifiers were assigned once in Stage 6 and never renumbered. Order is descending severity with ties broken lexically by location: registry/agents.yaml before runtime/framework_runtime.py:157-240 before runtime/framework_runtime.py:641-651 at high, and proposals/ before workflows/fix-bug.md:35 at medium. Severity follows the Stage 6 table alone and the verdict the Stage 8 table alone."
+  },
+  "evidence_refs": [
+    "agents/omn-dev-2-reviewer.agent.md",
+    "agents/omn-dev-2-reviewer/manifest.yaml",
+    "agents/omn-dev-2-reviewer/system.md",
+    "agents/omn-dev-2-reviewer/identity.md",
+    "agents/omn-dev-2-reviewer/reasoning.md",
+    "agents/omn-dev-2-reviewer/execution.md",
+    "agents/omn-dev-2-reviewer/output.md",
+    "agents/omn-dev-2-reviewer/quality.md",
+    "agents/omn-dev-2-reviewer/examples.md",
+    "templates/review-package.md",
+    "runs/run-93b302cbdb28/states/quality-review/invocation-envelope.json",
+    "runs/run-93b302cbdb28/states/quality-review/dispatch-prompt.md",
+    "runs/run-93b302cbdb28/states/implementation/artifacts/implementation-report.md",
+    "runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-93b302cbdb28/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "runs/inputs/wave-1-rollout-feature-request.md",
+    "runs/inputs/wave-1-rollout-change-request.md",
+    "runs/inputs/wave-1-rollout-business-intent.md",
+    "runs/inputs/wave-1-rollout-architecture-context.md",
+    "reports/maturity-snapshot-2026-08-18.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-93b302cbdb28/states/quality-review/artifacts/review-package.md",
+    "runs/run-93b302cbdb28/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

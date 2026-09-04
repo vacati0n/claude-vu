@@ -1,0 +1,238 @@
+# Verification workflow for this repository (adoption backlog ticket CKA-03).
+#
+# Two verification surfaces, both located BY DISCOVERY, never a curated file list:
+#   1. The unit-test suite: `python -m unittest discover -s tests` from the repo root.
+#   2. Every proof script matching `verify_*.py` under `.claude/runtime/` (the framework
+#      payload runtime directory -- the bundled mirror under omn_agent/_bundled_payload
+#      and build output are outside the discovery scope by construction). Each verifier
+#      runs in ITS OWN JOB on a fresh runner with a fresh checkout: no execution order
+#      exists between verifiers, and one verifier's crash or flake (including the
+#      timing-sensitive recovery proof, whose crash leaves injected runs behind in its
+#      own discarded workspace only) cannot change any other verifier's reported result.
+#      A failing verifier fails CI naming itself in its check name.
+#
+# CHECK-NAME CONTRACT (branch protection binds to these names; renaming any of them is a
+# contract change -- a renamed required check blocks every PR forever as "expected"):
+#
+#   | Check name           | Standing                                                  |
+#   |----------------------|-----------------------------------------------------------|
+#   | tests-ubuntu         | REQUIRED from day one                                     |
+#   | tests-windows        | advisory week 1, REQUIRED after the flip                  |
+#   | verifiers-ubuntu-ok  | advisory week 1, REQUIRED after the flip                  |
+#   | verifiers-windows-ok | advisory week 1, REQUIRED after the flip                  |
+#
+# Advisory standing is encoded as ABSENCE FROM the branch-protection required-checks
+# list, never as continue-on-error: advisory jobs still run and a failure shows red,
+# which is what the week-one soak exists to observe. The flip at the end of week one is
+# a settings-only change (add the three names above to the required list; no workflow
+# edit), enacted by the owner the tech lead's flip-ownership decision names, and only
+# after a default-branch run at the flip revision shows the self-hosting proof passing
+# (the pre-existing orphan run directories must be cleaned first -- owned by the
+# existing follow-up task, not by this workflow).
+#
+# Per-verifier check names ("verifier-<platform> (<script name>)") are dynamic
+# and informational only; blocking never binds to them, so adding a verify_*.py or a
+# tests/test_*.py file is picked up with no CI or blocking-configuration change.
+#
+# Environment rules: NO_COLOR is never set anywhere in this workflow (render tests
+# assert colored output and fail spuriously under it). Jobs carry no secrets and
+# read-only repository access, because pull-request code executes on the runners.
+# New verifiers must be self-contained: runnable alone, with no arguments, in any
+# order -- no verifier may depend on another verifier having run first.
+
+name: verify
+
+on:
+  pull_request:
+  # The push trigger names the repository's default branch; correct the literal if the
+  # default branch is not `main`.
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# Superseded runs of the same pull request are cancelled to bound runner-queue
+# pressure from the per-verifier fan-out; default-branch push runs are never cancelled.
+concurrency:
+  group: verify-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  # Enumerates verify_*.py under .claude/runtime/ at CI runtime. Discovery, not
+  # curation: no file is named here or anywhere else in this workflow. The step fails
+  # rather than publish an empty list, so the verifier surface can never quietly gate
+  # on nothing.
+  discover:
+    name: discover-verifiers
+    runs-on: ubuntu-latest
+    outputs:
+      verifiers: ${{ steps.list.outputs.verifiers }}
+      count: ${{ steps.list.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: List verify_*.py under the framework runtime directory
+        id: list
+        shell: python
+        run: |
+          import json, os, pathlib
+          names = sorted(p.name for p in pathlib.Path(".claude/runtime").glob("verify_*.py"))
+          if not names:
+              raise SystemExit("discovery found no verify_*.py under .claude/runtime -- refusing to gate on an empty verifier set")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write("verifiers=" + json.dumps(names) + "\n")
+              out.write("count=" + str(len(names)) + "\n")
+          print("discovered " + str(len(names)) + " verifiers: " + ", ".join(names))
+
+  # Surface 1: the unit-test suite, by unittest's own discovery, per platform.
+  # Python is provisioned at the packaging floor declared in pyproject.toml, and the
+  # package is installed first so the declared pyyaml dependency is present.
+  tests:
+    name: tests-${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: ubuntu
+            os: ubuntu-latest
+          - platform: windows
+            os: windows-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install the package and its declared dependencies
+        run: python -m pip install .
+      - name: Run the unit-test suite by discovery
+        run: python -m unittest discover -s tests
+
+  # Surface 2: one job per discovered verifier per platform. Exit code 0 alone is not
+  # a pass: the script's own final "N/N checks passed -- <verdict>" summary must show
+  # all checks passed and a non-negative verdict (negative verdicts start with "NOT "
+  # or are "NON-CONFORMANT"). No per-script verdict-token list exists here; the
+  # assertion is generic so new verifiers need no CI change.
+  verifier-ubuntu:
+    name: verifier-ubuntu (${{ matrix.verifier }})
+    needs: discover
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        verifier: ${{ fromJSON(needs.discover.outputs.verifiers) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install the package and its declared dependencies
+        run: python -m pip install .
+      - name: Run the verifier and assert its passing verdict
+        env:
+          VERIFIER: ${{ matrix.verifier }}
+        shell: python
+        run: |
+          import os, re, subprocess, sys
+          script = os.path.join(".claude", "runtime", os.environ["VERIFIER"])
+          proc = subprocess.run([sys.executable, script], capture_output=True, text=True)
+          sys.stdout.write(proc.stdout)
+          sys.stderr.write(proc.stderr)
+          summary = None
+          for line in proc.stdout.splitlines():
+              m = re.match(r"(\d+)/(\d+) checks passed -- (.+)", line.strip())
+              if m:
+                  summary = m
+          if proc.returncode != 0:
+              print("::error::" + script + " exited " + str(proc.returncode))
+              sys.exit(1)
+          if summary is None:
+              print("::error::" + script + " exited 0 but printed no 'N/N checks passed' summary line")
+              sys.exit(1)
+          passed, total, verdict = int(summary.group(1)), int(summary.group(2)), summary.group(3).strip()
+          if passed != total or verdict.startswith("NOT ") or verdict == "NON-CONFORMANT":
+              print("::error::" + script + ": " + str(passed) + "/" + str(total) + " checks passed -- " + verdict)
+              sys.exit(1)
+          print(script + ": " + str(passed) + "/" + str(total) + " checks passed -- " + verdict)
+
+  verifier-windows:
+    name: verifier-windows (${{ matrix.verifier }})
+    needs: discover
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        verifier: ${{ fromJSON(needs.discover.outputs.verifiers) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install the package and its declared dependencies
+        run: python -m pip install .
+      - name: Run the verifier and assert its passing verdict
+        env:
+          VERIFIER: ${{ matrix.verifier }}
+        shell: python
+        run: |
+          import os, re, subprocess, sys
+          script = os.path.join(".claude", "runtime", os.environ["VERIFIER"])
+          proc = subprocess.run([sys.executable, script], capture_output=True, text=True)
+          sys.stdout.write(proc.stdout)
+          sys.stderr.write(proc.stderr)
+          summary = None
+          for line in proc.stdout.splitlines():
+              m = re.match(r"(\d+)/(\d+) checks passed -- (.+)", line.strip())
+              if m:
+                  summary = m
+          if proc.returncode != 0:
+              print("::error::" + script + " exited " + str(proc.returncode))
+              sys.exit(1)
+          if summary is None:
+              print("::error::" + script + " exited 0 but printed no 'N/N checks passed' summary line")
+              sys.exit(1)
+          passed, total, verdict = int(summary.group(1)), int(summary.group(2)), summary.group(3).strip()
+          if passed != total or verdict.startswith("NOT ") or verdict == "NON-CONFORMANT":
+              print("::error::" + script + ": " + str(passed) + "/" + str(total) + " checks passed -- " + verdict)
+              sys.exit(1)
+          print(script + ": " + str(passed) + "/" + str(total) + " checks passed -- " + verdict)
+
+  # Stable fan-in checks: the names branch protection references for the verifier
+  # surface. `if: always()` plus explicit result checks means a fan-in FAILS -- it
+  # never succeeds and never skips -- when discovery or any verifier job on its
+  # platform failed or was cancelled. A skipped check would neither block nor inform.
+  verifiers-ubuntu-ok:
+    name: verifiers-ubuntu-ok
+    needs: [discover, verifier-ubuntu]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail unless discovery and every ubuntu verifier job succeeded
+        env:
+          DISCOVER_RESULT: ${{ needs.discover.result }}
+          VERIFIER_RESULT: ${{ needs['verifier-ubuntu'].result }}
+        run: |
+          echo "discover: $DISCOVER_RESULT"
+          echo "verifier-ubuntu: $VERIFIER_RESULT"
+          if [ "$DISCOVER_RESULT" != "success" ] || [ "$VERIFIER_RESULT" != "success" ]; then
+            echo "::error::an upstream verifier-surface job failed or was cancelled"
+            exit 1
+          fi
+
+  verifiers-windows-ok:
+    name: verifiers-windows-ok
+    needs: [discover, verifier-windows]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail unless discovery and every windows verifier job succeeded
+        env:
+          DISCOVER_RESULT: ${{ needs.discover.result }}
+          VERIFIER_RESULT: ${{ needs['verifier-windows'].result }}
+        run: |
+          echo "discover: $DISCOVER_RESULT"
+          echo "verifier-windows: $VERIFIER_RESULT"
+          if [ "$DISCOVER_RESULT" != "success" ] || [ "$VERIFIER_RESULT" != "success" ]; then
+            echo "::error::an upstream verifier-surface job failed or was cancelled"
+            exit 1
+          fi

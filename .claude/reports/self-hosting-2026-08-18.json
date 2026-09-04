@@ -1,0 +1,611 @@
+{
+  "schema": "framework.runtime/self-hosting.v1",
+  "runtime_version": "0.4.1",
+  "profile": {
+    "profile identifier": "framework-internal-change",
+    "version": "1.0.0",
+    "status": "active",
+    "owner": "Architecture",
+    "applies to": "every change whose touched paths satisfy `## Scope Rule",
+    "authority over": "command selection, required inputs, required evidence, acceptance",
+    "not authority over": "phase ownership, gate ownership, artifact contracts, which stay with the routed workflow's Phase Model, `workflows/workflow-gate-matrix.md`, and the owning agent's contract"
+  },
+  "profile_digest": "sha256:9499c1d277b68786958cd14e04b0e154",
+  "routes": {
+    "decision-support": {
+      "change_class": "decision-support",
+      "command": "investigate",
+      "workflow": "investigate",
+      "workflow_version": "1.0.0",
+      "entry_phase": "problem-framing",
+      "phases": [
+        "problem-framing",
+        "technical-discovery",
+        "option-analysis",
+        "recommendation",
+        "publication"
+      ],
+      "required_inputs": [
+        "investigation-request"
+      ],
+      "command_spec": "commands/investigate.md",
+      "workflow_spec": "workflows/investigate.md",
+      "selector": "The change cannot be specified yet: current-state behaviour or the option set is unknown"
+    },
+    "external-research": {
+      "change_class": "external-research",
+      "command": "research",
+      "workflow": "research",
+      "workflow_version": "1.0.0",
+      "entry_phase": "research-framing",
+      "phases": [
+        "research-framing",
+        "technical-validation",
+        "option-synthesis",
+        "recommendation-draft",
+        "findings-publication"
+      ],
+      "required_inputs": [
+        "research-question"
+      ],
+      "command_spec": "commands/research.md",
+      "workflow_spec": "workflows/research.md",
+      "selector": "The change depends on evidence that does not exist inside this repository"
+    },
+    "defect-repair": {
+      "change_class": "defect-repair",
+      "command": "bugfix",
+      "workflow": "fix-bug",
+      "workflow_version": "1.0.0",
+      "entry_phase": "triage-and-impact",
+      "phases": [
+        "triage-and-impact",
+        "root-cause-analysis",
+        "fix-implementation",
+        "regression-validation",
+        "closure-and-communication"
+      ],
+      "required_inputs": [
+        "defect-report"
+      ],
+      "command_spec": "commands/bugfix.md",
+      "workflow_spec": "workflows/fix-bug.md",
+      "selector": "A registered capability behaves other than its contract declares"
+    },
+    "structure-preserving-change": {
+      "change_class": "structure-preserving-change",
+      "command": "refactor",
+      "workflow": "refactor",
+      "workflow_version": "1.0.0",
+      "entry_phase": "scope-invariants-and-risk-profile",
+      "phases": [
+        "scope-invariants-and-risk-profile",
+        "safety-net-establishment",
+        "refactor-implementation",
+        "behavioral-validation",
+        "closure-and-debt-record"
+      ],
+      "required_inputs": [
+        "change-request",
+        "business-intent",
+        "architecture-context"
+      ],
+      "command_spec": "commands/refactor.md",
+      "workflow_spec": "workflows/refactor.md",
+      "selector": "Structure or wording changes; no contract, routing, or runtime behaviour changes"
+    },
+    "capability-addition": {
+      "change_class": "capability-addition",
+      "command": "implement",
+      "workflow": "implement-feature",
+      "workflow_version": "1.0.0",
+      "entry_phase": "scope-and-acceptance",
+      "phases": [
+        "scope-and-acceptance",
+        "execution-planning",
+        "solution-design-and-risk-assessment",
+        "implementation",
+        "quality-review",
+        "documentation-and-release-handoff"
+      ],
+      "required_inputs": [
+        "feature-request",
+        "change-request",
+        "business-intent",
+        "architecture-context"
+      ],
+      "command_spec": "commands/implement.md",
+      "workflow_spec": "workflows/implement-feature.md",
+      "selector": "The framework gains a capability, a contract, a registry record, or a runtime behaviour it did not have"
+    },
+    "change-review": {
+      "change_class": "change-review",
+      "command": "review",
+      "workflow": "review-pull-request",
+      "workflow_version": "1.0.0",
+      "entry_phase": "code-quality-review",
+      "phases": [
+        "code-quality-review",
+        "structural-compliance",
+        "test-risk-validation",
+        "documentation-impact",
+        "merge-decision"
+      ],
+      "required_inputs": [
+        "review-request"
+      ],
+      "command_spec": "commands/review.md",
+      "workflow_spec": "workflows/review-pull-request.md",
+      "selector": "An authored framework change is being assessed before acceptance"
+    },
+    "framework-release": {
+      "change_class": "framework-release",
+      "command": "release",
+      "workflow": "release",
+      "workflow_version": "1.0.0",
+      "entry_phase": "readiness-assessment",
+      "phases": [
+        "readiness-assessment",
+        "artifact-packaging",
+        "candidate-validation",
+        "deployment-execution",
+        "communication-and-post-release"
+      ],
+      "required_inputs": [
+        "release-candidate"
+      ],
+      "command_spec": "commands/release.md",
+      "workflow_spec": "workflows/release.md",
+      "selector": "A framework version is being published to its consumers"
+    }
+  },
+  "scope_probes": [
+    {
+      "rule": "SR-1",
+      "probe": ".claude/probe-artifact.md",
+      "decided_by": "SR-1",
+      "in_scope": true
+    },
+    {
+      "rule": "SR-2",
+      "probe": "decision-matrix.md",
+      "decided_by": "SR-2",
+      "in_scope": true
+    },
+    {
+      "rule": "SR-2",
+      "probe": "quality-gates.md",
+      "decided_by": "SR-2",
+      "in_scope": true
+    },
+    {
+      "rule": "SR-2",
+      "probe": "rule-engine.md",
+      "decided_by": "SR-2",
+      "in_scope": true
+    },
+    {
+      "rule": "SR-2",
+      "probe": "working-memory.md",
+      "decided_by": "SR-2",
+      "in_scope": true
+    },
+    {
+      "rule": "SR-3",
+      "probe": ".claude/runs/probe-artifact.md",
+      "decided_by": "SR-3",
+      "in_scope": false
+    },
+    {
+      "rule": "SR-4",
+      "probe": ".claude/reports/probe-artifact.md",
+      "decided_by": "SR-4",
+      "in_scope": false
+    },
+    {
+      "rule": "SR-5",
+      "probe": ".claude/proposals/probe-artifact.md",
+      "decided_by": "SR-5",
+      "in_scope": false
+    },
+    {
+      "rule": "SR-6",
+      "probe": ".claude/runtime/__pycache__/probe-artifact.md",
+      "decided_by": "SR-6",
+      "in_scope": false
+    }
+  ],
+  "checklist_items": [
+    {
+      "id": "FR-01",
+      "requirement": "Every active command resolves to an active workflow, every active workflow publishes a Phase Model, and every phase owner is host-invocable",
+      "obligation": "mandatory",
+      "owner_role": "omn-tech-lead",
+      "verification": "python .claude/runtime/verify_registry_coverage.py",
+      "mode": "command"
+    },
+    {
+      "id": "FR-02",
+      "requirement": "Every artifact type a Phase Model names has a registered validator, and every registered validator accepts a conforming artifact and rejects a mutated one",
+      "obligation": "mandatory",
+      "owner_role": "omn-qa",
+      "verification": "python .claude/runtime/verify_validators.py",
+      "mode": "command"
+    },
+    {
+      "id": "FR-03",
+      "requirement": "Failure classification, bounded retry, and failure envelopes still behave as the recovery policy declares",
+      "obligation": "mandatory",
+      "owner_role": "omn-qa",
+      "verification": "python .claude/runtime/verify_recovery.py",
+      "mode": "command"
+    },
+    {
+      "id": "FR-04",
+      "requirement": "Previously proven run evidence still verifies after the change, so no committed proof was invalidated",
+      "obligation": "mandatory",
+      "owner_role": "omn-qa",
+      "verification": "python .claude/runtime/verify_vertical_slice.py --run-id run-c5a8d50d3238",
+      "mode": "command"
+    },
+    {
+      "id": "FR-05",
+      "requirement": "The self-hosting profile resolves, the change-proposal contract is registered, and every recorded framework change validates against it",
+      "obligation": "mandatory",
+      "owner_role": "omn-orchestrator",
+      "verification": "python .claude/runtime/verify_self_hosting.py",
+      "mode": "command"
+    },
+    {
+      "id": "FR-06",
+      "requirement": "The change is carried by a run of the command the profile routes it to, with a change proposal linking that run's artifacts",
+      "obligation": "mandatory",
+      "owner_role": "omn-orchestrator",
+      "verification": "python .claude/runtime/verify_self_hosting.py",
+      "mode": "command"
+    },
+    {
+      "id": "FR-07",
+      "requirement": "The `RUNTIME_VERSION` constant in `runtime/framework_runtime.py` is raised when runtime behaviour changed, and left alone when it did not",
+      "obligation": "mandatory",
+      "owner_role": "architect",
+      "verification": null,
+      "mode": "inspection"
+    },
+    {
+      "id": "FR-08",
+      "requirement": "Documentation matches delivered behaviour: `runtime/README.md`, the folder descriptions in `README.md`, and any catalog the change touched",
+      "obligation": "mandatory",
+      "owner_role": "omn-documentation",
+      "verification": null,
+      "mode": "inspection"
+    },
+    {
+      "id": "FR-09",
+      "requirement": "Every capability claim the change makes is backed by executable evidence under `runs/` or `reports/`, and every gap is recorded rather than omitted",
+      "obligation": "mandatory",
+      "owner_role": "omn-dev-2-reviewer",
+      "verification": null,
+      "mode": "inspection"
+    },
+    {
+      "id": "FR-10",
+      "requirement": "Rollback is stated: what reverting this change requires, and what evidence would be invalidated by reverting it",
+      "obligation": "mandatory",
+      "owner_role": "omn-tech-lead",
+      "verification": null,
+      "mode": "inspection"
+    },
+    {
+      "id": "FR-11",
+      "requirement": "The multi-phase state machine still proves out end to end",
+      "obligation": "advisory",
+      "owner_role": "omn-qa",
+      "verification": "python .claude/runtime/verify_multi_phase.py --run-id run-c5a8d50d3238",
+      "mode": "command"
+    },
+    {
+      "id": "FR-12",
+      "requirement": "A release note draft exists where the change alters behaviour a consumer of the framework depends on",
+      "obligation": "advisory",
+      "owner_role": "omn-documentation",
+      "verification": null,
+      "mode": "inspection"
+    }
+  ],
+  "proposals": [
+    {
+      "proposal": "proposals/framework-change-proposal-FC-001.md",
+      "proposalId": "FC-001",
+      "changeClass": "capability-addition",
+      "routedCommand": "implement",
+      "runId": "run-3e22f11cb34d",
+      "result": "pass",
+      "checksPassed": 37,
+      "checksRun": 37,
+      "failed": []
+    },
+    {
+      "proposal": "proposals/framework-change-proposal-FC-002.md",
+      "proposalId": "FC-002",
+      "changeClass": "defect-repair",
+      "routedCommand": "bugfix",
+      "runId": "run-c9bdf5dbca7a",
+      "result": "pass",
+      "checksPassed": 37,
+      "checksRun": 37,
+      "failed": []
+    },
+    {
+      "proposal": "proposals/framework-change-proposal-FC-003.md",
+      "proposalId": "FC-003",
+      "changeClass": "structure-preserving-change",
+      "routedCommand": "refactor",
+      "runId": "run-0db4765d0eab",
+      "result": "pass",
+      "checksPassed": 37,
+      "checksRun": 37,
+      "failed": []
+    }
+  ],
+  "completions": [
+    {
+      "run_id": "run-3e22f11cb34d",
+      "C-2": true,
+      "C-3": true,
+      "C-4": true,
+      "C-5": true,
+      "command_id": "implement",
+      "workflow_id": "implement-feature",
+      "submitted_at": "2026-08-18T13:42:26Z",
+      "phases": 6,
+      "executed": [
+        "execution-planning",
+        "solution-design-and-risk-assessment"
+      ],
+      "blocked": [
+        "documentation-and-release-handoff",
+        "implementation",
+        "quality-review",
+        "scope-and-acceptance"
+      ],
+      "unaccounted": [],
+      "unvalidated": []
+    },
+    {
+      "run_id": "run-c9bdf5dbca7a",
+      "C-2": true,
+      "C-3": true,
+      "C-4": true,
+      "C-5": true,
+      "command_id": "bugfix",
+      "workflow_id": "fix-bug",
+      "submitted_at": "2026-08-18T14:40:53Z",
+      "phases": 5,
+      "executed": [],
+      "blocked": [
+        "closure-and-communication",
+        "fix-implementation",
+        "regression-validation",
+        "root-cause-analysis",
+        "triage-and-impact"
+      ],
+      "unaccounted": [],
+      "unvalidated": []
+    },
+    {
+      "run_id": "run-0db4765d0eab",
+      "C-2": true,
+      "C-3": true,
+      "C-4": true,
+      "C-5": true,
+      "command_id": "refactor",
+      "workflow_id": "refactor",
+      "submitted_at": "2026-08-18T14:42:16Z",
+      "phases": 5,
+      "executed": [
+        "scope-invariants-and-risk-profile"
+      ],
+      "blocked": [
+        "behavioral-validation",
+        "closure-and-debt-record",
+        "refactor-implementation",
+        "safety-net-establishment"
+      ],
+      "unaccounted": [],
+      "unvalidated": []
+    }
+  ],
+  "checklist_execution": [
+    {
+      "id": "FR-01",
+      "requirement": "Every active command resolves to an active workflow, every active workflow publishes a Phase Model, and every phase owner is host-invocable",
+      "obligation": "mandatory",
+      "owner_role": "omn-tech-lead",
+      "verification": "python .claude/runtime/verify_registry_coverage.py",
+      "mode": "command",
+      "result": "pass",
+      "returncode": 0,
+      "tail": "6/6 checks passed -- COVERED"
+    },
+    {
+      "id": "FR-02",
+      "requirement": "Every artifact type a Phase Model names has a registered validator, and every registered validator accepts a conforming artifact and rejects a mutated one",
+      "obligation": "mandatory",
+      "owner_role": "omn-qa",
+      "verification": "python .claude/runtime/verify_validators.py",
+      "mode": "command",
+      "result": "pass",
+      "returncode": 0,
+      "tail": "4/4 checks passed -- COVERED"
+    },
+    {
+      "id": "FR-03",
+      "requirement": "Failure classification, bounded retry, and failure envelopes still behave as the recovery policy declares",
+      "obligation": "mandatory",
+      "owner_role": "omn-qa",
+      "verification": "python .claude/runtime/verify_recovery.py",
+      "mode": "command",
+      "result": "pass",
+      "returncode": 0,
+      "tail": "injected runs and inputs removed; pass --keep to retain them as evidence"
+    },
+    {
+      "id": "FR-04",
+      "requirement": "Previously proven run evidence still verifies after the change, so no committed proof was invalidated",
+      "obligation": "mandatory",
+      "owner_role": "omn-qa",
+      "verification": "python .claude/runtime/verify_vertical_slice.py --run-id run-c5a8d50d3238",
+      "mode": "command",
+      "result": "pass",
+      "returncode": 0,
+      "tail": "10/10 checks passed -- PROVEN"
+    },
+    {
+      "id": "FR-05",
+      "requirement": "The self-hosting profile resolves, the change-proposal contract is registered, and every recorded framework change validates against it",
+      "obligation": "mandatory",
+      "owner_role": "omn-orchestrator",
+      "verification": "python .claude/runtime/verify_self_hosting.py",
+      "mode": "command",
+      "result": "pass",
+      "returncode": 0,
+      "tail": "8/8 checks passed -- SELF-HOSTING"
+    },
+    {
+      "id": "FR-06",
+      "requirement": "The change is carried by a run of the command the profile routes it to, with a change proposal linking that run's artifacts",
+      "obligation": "mandatory",
+      "owner_role": "omn-orchestrator",
+      "verification": "python .claude/runtime/verify_self_hosting.py",
+      "mode": "command",
+      "result": "pass",
+      "returncode": 0,
+      "tail": "8/8 checks passed -- SELF-HOSTING"
+    },
+    {
+      "id": "FR-07",
+      "requirement": "The `RUNTIME_VERSION` constant in `runtime/framework_runtime.py` is raised when runtime behaviour changed, and left alone when it did not",
+      "obligation": "mandatory",
+      "owner_role": "architect",
+      "verification": null,
+      "mode": "inspection",
+      "result": "inspection",
+      "returncode": null
+    },
+    {
+      "id": "FR-08",
+      "requirement": "Documentation matches delivered behaviour: `runtime/README.md`, the folder descriptions in `README.md`, and any catalog the change touched",
+      "obligation": "mandatory",
+      "owner_role": "omn-documentation",
+      "verification": null,
+      "mode": "inspection",
+      "result": "inspection",
+      "returncode": null
+    },
+    {
+      "id": "FR-09",
+      "requirement": "Every capability claim the change makes is backed by executable evidence under `runs/` or `reports/`, and every gap is recorded rather than omitted",
+      "obligation": "mandatory",
+      "owner_role": "omn-dev-2-reviewer",
+      "verification": null,
+      "mode": "inspection",
+      "result": "inspection",
+      "returncode": null
+    },
+    {
+      "id": "FR-10",
+      "requirement": "Rollback is stated: what reverting this change requires, and what evidence would be invalidated by reverting it",
+      "obligation": "mandatory",
+      "owner_role": "omn-tech-lead",
+      "verification": null,
+      "mode": "inspection",
+      "result": "inspection",
+      "returncode": null
+    },
+    {
+      "id": "FR-11",
+      "requirement": "The multi-phase state machine still proves out end to end",
+      "obligation": "advisory",
+      "owner_role": "omn-qa",
+      "verification": "python .claude/runtime/verify_multi_phase.py --run-id run-c5a8d50d3238",
+      "mode": "command",
+      "result": "pass",
+      "returncode": 0,
+      "tail": "15/15 checks passed -- PROVEN"
+    },
+    {
+      "id": "FR-12",
+      "requirement": "A release note draft exists where the change alters behaviour a consumer of the framework depends on",
+      "obligation": "advisory",
+      "owner_role": "omn-documentation",
+      "verification": null,
+      "mode": "inspection",
+      "result": "inspection",
+      "returncode": null
+    }
+  ],
+  "checks": [
+    {
+      "id": "S1",
+      "description": "the self-hosting command profile parses and declares one active profile",
+      "result": "pass",
+      "detail": "framework-internal-change v1.0.0, 6 scope rule(s), 7 routing row(s), 7 evidence row(s), 7 completion condition(s)"
+    },
+    {
+      "id": "S2",
+      "description": "every routing row resolves to an active command, its primary workflow, and a declared entry phase",
+      "result": "pass",
+      "detail": "decision-support -> /investigate -> investigate/problem-framing; external-research -> /research -> research/research-framing; defect-repair -> /bugfix -> fix-bug/triage-and-impact; structure-preserving-change -> /refactor -> refactor/scope-invariants-and-risk-profile; capability-addition -> /implement -> implement-feature/scope-and-acceptance; change-review -> /review -> review-pull-request/code-quality-review; framework-release -> /release -> release/readiness-assessment"
+    },
+    {
+      "id": "S3",
+      "description": "every scope rule is reachable, exclusions take precedence, and a path outside the framework is out of scope",
+      "result": "pass",
+      "detail": "9 probe(s) decided; exclusions bind"
+    },
+    {
+      "id": "S4",
+      "description": "the change-proposal contract is registered: template record, registered validator, importable module",
+      "result": "pass",
+      "detail": "templates.yaml -> templates/framework-change-proposal.md; VALIDATORS[framework-change-proposal.md] -> change_proposal_validator"
+    },
+    {
+      "id": "S5",
+      "description": "the framework release checklist parses, and every item names a real owner and a runnable verification",
+      "result": "pass",
+      "detail": "12 item(s), 10 mandatory, 7 executable"
+    },
+    {
+      "id": "S6",
+      "description": "every recorded framework change carries a change proposal that passes its own validator",
+      "result": "pass",
+      "detail": "3 proposal(s), all accepted: FC-001, FC-002, FC-003"
+    },
+    {
+      "id": "S7",
+      "description": "every recorded change was carried by a run satisfying the profile's Completion Rule",
+      "result": "pass",
+      "detail": "run-3e22f11cb34d: 2 executed, 4 blocked with a reason, of 6; run-c9bdf5dbca7a: 0 executed, 5 blocked with a reason, of 5; run-0db4765d0eab: 1 executed, 4 blocked with a reason, of 5"
+    },
+    {
+      "id": "S8",
+      "description": "no framework run inside the self-hosted window is unaccounted for by a change proposal",
+      "result": "pass",
+      "detail": "window opens 2026-08-18T13:42:26Z; 3 run(s) accounted for, none unaccounted"
+    },
+    {
+      "id": "S9",
+      "description": "two or more framework changes are recorded consecutively in self-hosting mode, each carried by its own run",
+      "result": "pass",
+      "detail": "3 distinct run(s) in submission order: run-3e22f11cb34d -> run-c9bdf5dbca7a -> run-0db4765d0eab"
+    },
+    {
+      "id": "S10",
+      "description": "every mandatory checklist item with a command passes",
+      "result": "pass",
+      "detail": "7 executed item(s) passed"
+    }
+  ],
+  "result": "pass"
+}

@@ -1,0 +1,112 @@
+{
+  "invocation_id": "inv-8f8a1ab0d16e-03-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md",
+    "runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-003.md"
+  ],
+  "structured_output": {
+    "design_id": "CKA-03-technical-design",
+    "package_status": "complete",
+    "counts": {
+      "statements": 18,
+      "facts": 14,
+      "assumptions": 5,
+      "constraints": 12,
+      "impacted_modules": 9,
+      "options": 4,
+      "decisions": 7,
+      "architecture_significant_decisions": 3,
+      "decision_records_emitted": 3,
+      "risks": 9,
+      "sequencing_constraints": 8,
+      "open_questions": 3,
+      "open_questions_blocking": 0
+    },
+    "recomputed_option_ranking": {
+      "criteria_order": [
+        "hard-constraint satisfaction",
+        "impact surface (contract-change or dependency-change module count)",
+        "reuse leverage (reuse-as-is or reuse-extended capability count)",
+        "quality-attribute satisfaction",
+        "migration burden",
+        "operability impact"
+      ],
+      "eliminations": {
+        "O-003": "violates C-002 (files enumerated by name) and C-010",
+        "O-004": "violates C-009 (permanently red required check at the flip; by-name exemption path also violates C-002)"
+      },
+      "surviving_comparison": {
+        "impact_surface": {"O-001": 0, "O-002": 0},
+        "reuse_leverage": {"O-001": 8, "O-002": 6},
+        "decided_at_criterion": "reuse leverage",
+        "corroborated_by": "quality-attribute satisfaction (structural isolation, check-grade failure naming, visible advisory failures)"
+      },
+      "recomputed_winner": "O-001",
+      "stated_selection": "O-001",
+      "agreement": true
+    },
+    "decision_records": ["D-001", "D-002", "D-003"],
+    "delegated_decisions_resolved": {
+      "verifier_isolation_and_ordering": "D-001: per-verifier matrix fan-out, fresh runner and checkout per verifier, no execution ordering exists",
+      "advisory_encoding_and_flip": "D-002: blocking authority solely in the branch-protection required-checks list; advisory = absence from the list; flip = settings-only change by the owner the tech lead's decision names",
+      "orphan_run_handling_T-010": "D-003: clean-first via the existing follow-up task before the flip; advisory week is buffer; flip precondition is a green self-hosting run at the flip revision"
+    },
+    "quality_checks": {
+      "check_set_version": "1.0.0",
+      "total": 98,
+      "passed": 98,
+      "failed": 0,
+      "by_group": {
+        "A1_structural_conformance": {"run": 8, "passed": 8},
+        "A2_boundary_compliance": {"run": 10, "passed": 10},
+        "A3_register_integrity": {"run": 6, "passed": 6},
+        "A4_model_tool_independence": {"run": 4, "passed": 4},
+        "A5_objective_requirement_integrity": {"run": 4, "passed": 4},
+        "A6_impact_analysis_quality": {"run": 6, "passed": 6},
+        "A7_reuse_discipline": {"run": 5, "passed": 5},
+        "A8_option_selection_integrity": {"run": 7, "passed": 7},
+        "A9_contract_migration_integrity": {"run": 6, "passed": 6},
+        "A10_sequencing_integrity": {"run": 7, "passed": 7},
+        "A11_risk_integrity": {"run": 5, "passed": 5},
+        "A12_estimation_integrity": {"run": 5, "passed": 5},
+        "A13_decision_record_integrity": {"run": 7, "passed": 7},
+        "A14_framework_alignment": {"run": 8, "passed": 8},
+        "A15_traceability_closure": {"run": 5, "passed": 5},
+        "A16_determinism": {"run": 5, "passed": 5}
+      },
+      "repair_passes": [],
+      "notes": [
+        "A8.5 verified by recomputation; recorded winner agrees with stated selection",
+        "A14.2 owner resolution: architect resolves in the agent registry; omn-* roles resolve against the agent contract set, recorded per the owner resolution note",
+        "traceability closure: 18/18 statements mapped forward; 9/9 modules, 7/7 decisions traced backward; 9 risks, 8 plan steps, 3 records resolved laterally; 0 current-state claims without an F/A reference"
+      ]
+    },
+    "estimate": {"overall": "M", "confidence": "medium"},
+    "consumed_plan_tasks_bound": ["T-001", "T-002", "T-003", "T-004", "T-005", "T-006", "T-007", "T-008", "T-009", "T-010"],
+    "no_implementation_performed": true,
+    "no_external_access": true
+  },
+  "evidence_refs": [
+    "agents/architect/system.md",
+    "agents/architect/identity.md",
+    "agents/architect/reasoning.md",
+    "agents/architect/execution.md",
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "agents/architect/examples.md",
+    "runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md",
+    "runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-003.md",
+    "runs/run-8f8a1ab0d16e/states/solution-design-and-risk-assessment/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

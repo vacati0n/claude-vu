@@ -1,0 +1,257 @@
+{
+  "invocation_id": "inv-c5a8d50d3238-03-004",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md",
+    "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-003.md",
+    "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-004.md"
+  ],
+  "structured_output": {
+    "design_id": "reviewer-agent-technical-design",
+    "package_status": "complete",
+    "schema_version": "1.0.0",
+    "agent_version": "1.0.0",
+    "input_digest": "sha256:da4a20cbe33a60d23ff785c2b8f49124",
+    "context_digest": "sha256:c03357d6457b8908d5f91f96d183273e",
+    "pass_type": "repair",
+    "repair_record": {
+      "repair_pass_number": 1,
+      "validation_report": "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/validation-report.json",
+      "findings_addressed": [
+        {
+          "check": "D5.5",
+          "quality_ref": "A3.4",
+          "severity": "Correctable",
+          "finding": "invalid class: ['C-013']; invalid force: []",
+          "repair": "Constraint C-013's class cell read 'Quality attribute', which is not a member of the declared constraint-class vocabulary in output.md section 4.3 (functional, quality-attribute, security, compliance, operability, structural, migration). The cell now reads 'Quality-attribute'. Constraint text, force ('Negotiable'), and source ('S-017') are unchanged.",
+          "location": "section 4.3 Constraints, row C-013",
+          "recheck": "pass"
+        },
+        {
+          "check": "D14.3",
+          "quality_ref": "A14.2",
+          "severity": "Correctable",
+          "finding": "unresolvable owner: 'omn-tech-lead as the accepting Design Gate owner under the Producer Exclusion Rule, with omn-product-owner confirmation for D-001'",
+          "repair": "The Owner cell of Q-009 held a sentence rather than a registered agent identifier. Output contract section 12 requires the owning agent, and structural rule 7 requires registered agent identifiers exactly as registered. The Owner cell now reads 'omn-tech-lead'. The Design Gate owner obligation the cell previously carried is preserved in the Consequence cell, which names the Design Gate owners, the Producer Exclusion Rule basis for omn-tech-lead accepting, and the omn-product-owner confirmation required for D-001, satisfying the section 12 rule that a proposed record appears here with its Design Gate owners.",
+          "location": "section 12 Open Decisions and Escalations, row Q-009",
+          "recheck": "pass"
+        }
+      ],
+      "identifiers_renumbered": 0,
+      "sections_otherwise_modified": 0,
+      "metadata_digests_modified": false
+    },
+    "counts": {
+      "statements": 21,
+      "facts": 24,
+      "assumptions": 8,
+      "constraints": 19,
+      "constraints_hard": 18,
+      "constraints_negotiable": 1,
+      "impacted_modules": 18,
+      "impacted_modules_confirmed": 16,
+      "impacted_modules_speculative": 2,
+      "impacted_modules_by_type": {
+        "contract-change": 5,
+        "behavior-change": 0,
+        "extension": 7,
+        "dependency-change": 0,
+        "operational-impact": 1,
+        "no-change-verified": 5
+      },
+      "reuse_survey_rows": 13,
+      "reuse_survey_by_outcome": {
+        "reuse-as-is": 8,
+        "reuse-extended": 3,
+        "rejected": 1,
+        "none-found": 1
+      },
+      "options": 5,
+      "options_eliminated": 3,
+      "decisions": 5,
+      "decisions_architecture_significant": 4,
+      "decisions_inline": 1,
+      "decision_records_emitted": 4,
+      "risks": 17,
+      "sequencing_constraints": 16,
+      "open_questions": 9,
+      "open_questions_blocking": 0,
+      "planner_tasks_referenced": 14,
+      "planner_tasks_created": 0
+    },
+    "selected_option": "O-001",
+    "recomputed_option_ranking": {
+      "method": "A8 criteria re-applied to the section 5.2 evaluation table, in declared order: hard-constraint satisfaction eliminates first; then impact surface; then reuse leverage; then quality attribute; then migration burden; then operability. Ties break toward the smaller impact surface, then toward the lower option identifier.",
+      "step_1_hard_constraint_elimination": [
+        {
+          "option": "O-002",
+          "verdict": "eliminated",
+          "violated": ["C-018"]
+        },
+        {
+          "option": "O-003",
+          "verdict": "eliminated",
+          "violated": ["C-017"]
+        },
+        {
+          "option": "O-005",
+          "verdict": "eliminated",
+          "violated": ["C-005", "C-014", "C-017"]
+        },
+        {
+          "option": "O-001",
+          "verdict": "retained",
+          "violated": []
+        },
+        {
+          "option": "O-004",
+          "verdict": "retained",
+          "violated": []
+        }
+      ],
+      "step_2_impact_surface": {
+        "O-001": 5,
+        "O-004": 8,
+        "decided_by_this_criterion": true,
+        "winner": "O-001"
+      },
+      "step_3_reuse_leverage_not_reached": {
+        "O-001": 10,
+        "O-004": 10
+      },
+      "step_4_quality_attribute_not_reached": "C-013 is negotiable and non-numeric; no option is distinguished by it",
+      "step_5_migration_burden_not_reached": {
+        "O-001": 5,
+        "O-004": 8
+      },
+      "step_6_operability_not_reached": "O-001 unblocks quality-review and leaves three gate rows in two other workflows untouched; O-004 unblocks the same phase but leaves two further workflows mid-migration with non-canonical phase identifiers",
+      "recomputed_winner": "O-001",
+      "stated_selection": "O-001",
+      "agreement": true,
+      "unchanged_by_repair": true
+    },
+    "quality_checks": {
+      "check_set_version": "agents/architect/quality.md",
+      "total_run": 98,
+      "total_passed": 98,
+      "total_failed": 0,
+      "repair_passes": 1,
+      "blocking_failures": 0,
+      "correctable_failures": 0,
+      "advisory_failures": 0,
+      "rechecked_this_pass": [
+        "A3.4",
+        "A14.2",
+        "A1.3",
+        "A1.6",
+        "A1.7",
+        "A14.8",
+        "A16.1",
+        "A16.2",
+        "A16.3",
+        "A16.5"
+      ],
+      "results": {
+        "A1.1": "pass", "A1.2": "pass", "A1.3": "pass", "A1.4": "pass",
+        "A1.5": "pass", "A1.6": "pass", "A1.7": "pass", "A1.8": "pass",
+        "A2.1": "pass", "A2.2": "pass", "A2.3": "pass", "A2.4": "pass",
+        "A2.5": "pass", "A2.6": "pass", "A2.7": "pass", "A2.8": "pass",
+        "A2.9": "pass", "A2.10": "pass",
+        "A3.1": "pass", "A3.2": "pass", "A3.3": "pass", "A3.4": "pass",
+        "A3.5": "pass", "A3.6": "pass",
+        "A4.1": "pass", "A4.2": "pass", "A4.3": "pass", "A4.4": "pass",
+        "A5.1": "pass", "A5.2": "pass", "A5.3": "pass", "A5.4": "pass",
+        "A6.1": "pass", "A6.2": "pass", "A6.3": "pass", "A6.4": "pass",
+        "A6.5": "pass", "A6.6": "pass",
+        "A7.1": "pass", "A7.2": "pass", "A7.3": "pass", "A7.4": "pass",
+        "A7.5": "pass",
+        "A8.1": "pass", "A8.2": "pass", "A8.3": "pass", "A8.4": "pass",
+        "A8.5": "pass", "A8.6": "pass", "A8.7": "pass",
+        "A9.1": "pass", "A9.2": "pass", "A9.3": "pass", "A9.4": "pass",
+        "A9.5": "pass", "A9.6": "pass",
+        "A10.1": "pass", "A10.2": "pass", "A10.3": "pass", "A10.4": "pass",
+        "A10.5": "pass", "A10.6": "pass", "A10.7": "pass",
+        "A11.1": "pass", "A11.2": "pass", "A11.3": "pass", "A11.4": "pass",
+        "A11.5": "pass",
+        "A12.1": "pass", "A12.2": "pass", "A12.3": "pass", "A12.4": "pass",
+        "A12.5": "pass",
+        "A13.1": "pass", "A13.2": "pass", "A13.3": "pass", "A13.4": "pass",
+        "A13.5": "pass", "A13.6": "pass", "A13.7": "pass",
+        "A14.1": "pass", "A14.2": "pass", "A14.3": "pass", "A14.4": "pass",
+        "A14.5": "pass", "A14.6": "pass", "A14.7": "pass", "A14.8": "pass",
+        "A15.1": "pass", "A15.2": "pass", "A15.3": "pass", "A15.4": "pass",
+        "A15.5": "pass",
+        "A16.1": "pass", "A16.2": "pass", "A16.3": "pass", "A16.4": "pass",
+        "A16.5": "pass"
+      },
+      "verification_notes": {
+        "A3.4": "C-013's class now uses the declared constraint-class vocabulary. All 19 constraints state class, text, force, and source; every current-state claim still carries an F-nnn or A-nnn reference, and no fact or assumption row was touched by this pass.",
+        "A14.2": "Every open-decision owner cell is now a single registered agent identifier: omn-tech-lead (Q-001, Q-002, Q-004, Q-008, Q-009), omn-product-owner (Q-003, Q-005), omn-documentation (Q-006), omn-business-analyst (Q-007). All resolve under agents/ per the Owner Resolution Note.",
+        "A14.8": "Q-009's Consequence cell names the Design Gate owners and states that omn-tech-lead accepts under the Producer Exclusion Rule because architect produced the records; the Sign-off section states the same and is unchanged.",
+        "A8.5": "Verified by recomputation, not inspection. See recomputed_option_ranking; the recomputed winner and the stated selection agree. The repair touched no option, criterion, or outcome cell.",
+        "A16.2": "No identifier was reused or renumbered in this repair pass. Register cardinalities are unchanged: F=24, A=8, C=19, M=18, O=5, D=5, P=16, R=17, Q=9.",
+        "A16.3": "inputDigest and contextDigest in the metadata block are byte-identical to the prior attempt and to the invocation envelope.",
+        "A16.5": "Resumed run, repair pass 1 against the attempt-2 artifact. Prior identifiers preserved; the two edited cells are recorded in repair_record.findings_addressed.",
+        "A14.7": "One genuine framework gap recorded as an open decision: F-007, capability ownership is recorded at coarse column level rather than at capability-identifier level, routed as Q-002 to omn-tech-lead."
+      }
+    },
+    "traceability_closure": {
+      "forward_statements_mapped": 21,
+      "forward_statements_unmapped": 0,
+      "backward_modules_traced_to_fact_or_assumption": 18,
+      "backward_decisions_traced_to_option": 5,
+      "backward_options_traced_to_constraint_set": 5,
+      "lateral_risks_attached": 17,
+      "lateral_plan_steps_resolving_to_modules": 16,
+      "lateral_records_matching_registered_decisions": 4,
+      "speculative_impacts_with_matching_risk": 2,
+      "planner_tasks_addressed_by_sequencing": 14,
+      "register_integrity_violations": 0
+    },
+    "internal_gate_outcomes": {
+      "Input Gate": "pass",
+      "Register Gate": "pass",
+      "Objective Gate": "pass",
+      "Constraint Gate": "pass",
+      "Impact Gate": "pass",
+      "Reuse Gate": "pass",
+      "Option Gate": "pass",
+      "Selection Gate": "pass",
+      "Migration Gate": "pass",
+      "Evidence Gate": "pass",
+      "Traceability Gate": "pass"
+    },
+    "lifecycle_path": [
+      "Initialization",
+      "Execution",
+      "Completion",
+      "Retirement"
+    ],
+    "handoff": {
+      "targets": ["orchestrator", "omn-tech-lead", "omn-dev-1-implement"],
+      "design_gate_owners": ["omn-architect", "omn-tech-lead"],
+      "accepting_owner_under_producer_exclusion": "omn-tech-lead",
+      "decisions_remaining_proposed": ["D-001", "D-002", "D-003", "D-004"],
+      "requires_product_confirmation": ["D-001", "Q-003", "Q-005"],
+      "requires_qa_review": ["test strategy focus areas in section 9"],
+      "implementation_work_performed": false,
+      "external_system_accessed": false
+    }
+  },
+  "evidence_refs": [
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "templates/technical-design.md",
+    "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/validation-report.json",
+    "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

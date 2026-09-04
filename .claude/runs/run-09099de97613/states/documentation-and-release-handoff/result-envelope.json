@@ -1,0 +1,50 @@
+{
+  "invocation_id": "inv-09099de97613-06-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-09099de97613/states/documentation-and-release-handoff/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "release_id": "OMT-01-release-note",
+    "version": "0+OMT-01-unreleased",
+    "note_status": "complete",
+    "release_verdict": "partial",
+    "known_issues": 3,
+    "communication_basis": "release-handoff",
+    "contract_change_declared": true,
+    "compatibility_statement_present": true,
+    "documentation_updated": [
+      ".claude/commands/optimize-memory.md",
+      ".claude/commands/command-catalog.md",
+      ".claude/commands/README.md",
+      ".claude/config/self-hosting-profile.md"
+    ],
+    "stale_content_removed": "the ten-contract count in commands/README.md, which the addition made wrong",
+    "input_digest": "sha256:06a6e104dd467eb3eab86108dc0e77fa",
+    "context_digest": "sha256:bc0fb4ee128c1855f84c63b3ea12319c",
+    "attestations": [
+      "every statement in the note describes behaviour the run's own evidence records",
+      "the release verdict is partial because one delivered path ships unexercised, and K-001 records it",
+      "the distinction between the checked guarantee and a reader's likely assumption is stated as a known issue rather than left implicit",
+      "no source file was modified by this phase"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    "agents/omn-documentation/examples.md",
+    "runs/run-09099de97613/states/documentation-and-release-handoff/invocation-envelope.json",
+    "runs/run-09099de97613/states/quality-review/artifacts/review-package.md"
+  ],
+  "confidence": 0.91,
+  "declared_side_effects": [
+    "runs/run-09099de97613/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "runs/run-09099de97613/states/documentation-and-release-handoff/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

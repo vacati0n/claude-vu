@@ -1,0 +1,99 @@
+{
+  "invocation_id": "inv-09099de97613-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-09099de97613/states/execution-planning/artifacts/execution-plan.md"
+  ],
+  "structured_output": {
+    "plan_id": "OMT-01-execution-plan",
+    "plan_status": "complete",
+    "counts": {
+      "statements": 14,
+      "in_scope_statements": 10,
+      "assumptions": 3,
+      "risks": 7,
+      "tasks": 9,
+      "dependency_edges": 11,
+      "task_to_task_edges": 10,
+      "external_edges": 1,
+      "external_dependencies": 1,
+      "waves": 6,
+      "open_questions": 2,
+      "plan_acceptance_criteria": 6
+    },
+    "recomputed_topological_order": [
+      "T-001",
+      "T-003",
+      "T-004",
+      "T-008",
+      "T-002",
+      "T-005",
+      "T-006",
+      "T-007",
+      "T-009"
+    ],
+    "waves": {
+      "wave_1": [
+        "T-001",
+        "T-003",
+        "T-004",
+        "T-008"
+      ],
+      "wave_2": [
+        "T-002"
+      ],
+      "wave_3": [
+        "T-005"
+      ],
+      "wave_4": [
+        "T-006"
+      ],
+      "wave_5": [
+        "T-007"
+      ],
+      "wave_6": [
+        "T-009"
+      ]
+    },
+    "order_check": "recomputed topological order over the 8.1 edge table matches the 8.3 wave order exactly; wave 1 holds exactly the tasks with no task-to-task prerequisite",
+    "traceability_closure": {
+      "forward": "14 of 14 statements covered by a task or an assumption",
+      "backward": "9 of 9 tasks trace to at least one statement",
+      "lateral": "every referenced S/A/R/T/Q identifier resolves"
+    },
+    "quality_checks": {
+      "run": 44,
+      "passed": 44,
+      "failed": 0,
+      "not_machine_checkable": 6
+    },
+    "retry_repair": "none charged; two blocking findings were corrected before completion was requested -- an external edge whose From did not match its 8.2 responsible party, and two capability names absent from the capability matrix",
+    "input_digest": "sha256:2719daabacb06dca76da89e24b04daed",
+    "context_digest": "sha256:9f90eb89f94639cd8aec24f921d08586",
+    "attestations": [
+      "no implementation work was performed",
+      "no external system was accessed",
+      "no repository file outside permitted_writes was modified",
+      "every capability and skill named resolves against the framework matrices",
+      "the dependency graph is acyclic and the stated waves are recomputable from the edge table alone"
+    ]
+  },
+  "evidence_refs": [
+    "agents/planner/system.md",
+    "agents/planner/identity.md",
+    "agents/planner/reasoning.md",
+    "agents/planner/execution.md",
+    "agents/planner/output.md",
+    "agents/planner/quality.md",
+    "agents/planner/examples.md",
+    "runs/run-09099de97613/states/execution-planning/invocation-envelope.json",
+    "runs/run-09099de97613/states/scope-and-acceptance/artifacts/scope-definition.md"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "runs/run-09099de97613/states/execution-planning/artifacts/execution-plan.md",
+    "runs/run-09099de97613/states/execution-planning/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

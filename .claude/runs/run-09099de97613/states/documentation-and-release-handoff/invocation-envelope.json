@@ -1,0 +1,414 @@
+{
+  "invocation_id": "inv-09099de97613-06-001",
+  "run_id": "run-09099de97613",
+  "work_item_id": "run-09099de97613::documentation-and-release-handoff",
+  "idempotency_key": "sha256:55ff5aae378baca3f57def3030ca3658",
+  "state_id": "documentation-and-release-handoff",
+  "phase_index": 6,
+  "agent_id": "omn-documentation",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-documentation.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-documentation/manifest.yaml",
+    "load_order": [
+      "agents/omn-documentation/system.md",
+      "agents/omn-documentation/identity.md",
+      "agents/omn-documentation/reasoning.md",
+      "agents/omn-documentation/execution.md",
+      "agents/omn-documentation/output.md",
+      "agents/omn-documentation/quality.md",
+      "agents/omn-documentation/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-documentation/system.md": "sha256:407f35d95b5e232c7d87d7740a942844",
+      "agents/omn-documentation/identity.md": "sha256:e40e9fd9da20ae31f5af17d3cc97fcf2",
+      "agents/omn-documentation/reasoning.md": "sha256:11b286235d28b0bc358674c5b9357736",
+      "agents/omn-documentation/execution.md": "sha256:0077338ee3cbe3eee246e3556f9da205",
+      "agents/omn-documentation/output.md": "sha256:9e0c56ac978b9695f13668e209f8e2e4",
+      "agents/omn-documentation/quality.md": "sha256:972fe80aafbde6b6f8142b6dbd97e081",
+      "agents/omn-documentation/examples.md": "sha256:baead714ded57fbb1d36b103b957ee78"
+    },
+    "capabilities": [
+      "documentation",
+      "release-communication"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "validation-report",
+      "review-package",
+      "deployment-status",
+      "scope-definition",
+      "technical-design",
+      "execution-plan",
+      "bug-analysis",
+      "monitoring-health-record",
+      "final-change-summary",
+      "stakeholder-list",
+      "verification-report",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "closure-context",
+      "communication-requirements",
+      "existing-documentation",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/omt-01-architecture-context.md",
+        "source_file": ".claude/runs/inputs/omt-01-architecture-context.md",
+        "text": "# Architecture Context \u2014 OMT-01 Memory Token Optimizer Command\n\nSupplied by the operator for the `solution-design-and-risk-assessment` phase of the memory token\noptimizer change. The system under design is the framework in this repository, so the\ncurrent-state architecture is the framework's own structure.\n\nThis document names the authoritative records rather than restating them. Every file named is a\nmember of the frozen context slice recorded in this run's `context-snapshot.json`, so a fact drawn\nfrom one carries a citable digest.\n\n## Component model\n\n| Component type | Discovery registry | Specification |\n|---|---|---|\n| Agents | `registry/agents.yaml` | `domain-model/agent-specification.md` |\n| Skills | `registry/skills.yaml` | `skills/agent-skill-matrix.md` |\n| Workflows | `registry/workflows.yaml` | `workflows/refactor.md` and siblings |\n| Templates | `registry/templates.yaml` | `templates/` |\n| Commands | `registry/commands.yaml` | `commands/` |\n\n`dependency-map.md` records permitted dependency directions. `commands/README.md` records the\ndistinction between a command contract and a grouped runbook, and the rule that every contract\ncarries exactly one primary workflow.\n\n## Current-state properties the operator asserts\n\nEach is verifiable in the files named above, and each was checked before this change began.\n\n1. Ten command contracts hold active records in `registry/commands.yaml`, and\n   `verify_registry_coverage.py` check `C1` fails if any contract on disk lacks a record.\n2. Two contracts already share a primary workflow with another contract: `/document` and `/test`\n   route to `implement-feature` and `review-pull-request` respectively, alongside `/implement` and\n   `/review`. Sharing a workflow is therefore an established pattern, not a new one.\n3. `workflows/refactor.md` declares five phases: `scope-invariants-and-risk-profile`,\n   `safety-net-establishment`, `refactor-implementation`, `behavioral-validation`, and\n   `closure-and-debt-record`. All five are dispatchable, per `C6`.\n4. All thirty-seven declared phases across eight active workflows are dispatchable today.\n5. The runtime and its verifiers depend on the standard library and one YAML package. No framework\n   surface currently makes a network request or requires a provider credential.\n6. `runtime/artifact_lib.py` forbids naming a model, vendor, or provider inside a validated\n   artifact, and strips the framework's own path prefix before that scan.\n7. `config/self-hosting-profile.md` is parsed by `runtime/self_hosting.py`, which reads named\n   sections by heading. A section added after the last parsed heading does not alter what parses.\n\n## Constraints the design must respect\n\n- A command contract resolves to exactly one primary workflow, and that workflow must hold an\n  active registry record.\n- A new workflow would require a phase model, gate matrix rows with non-producing owners, agent\n  manifest entries, runtime context slices, and a registered validator per output artifact. The\n  design should establish whether it needs one before incurring that.\n- Run evidence under `runs/`, dated reports under `reports/`, and change proposals under\n  `proposals/` are excluded from the self-hosting scope rule because rewriting them would falsify\n  the record a routed change resolves against. Any capability that writes files must respect the\n  same boundary for the same reason.\n- The verifiers `verify_registry_coverage.py`, `verify_validators.py`, `verify_recovery.py`, and\n  `verify_self_hosting.py` decide current-state truth. The change is accountable to all four.\n\n## Risk targets\n\n| Concern | Target |\n|---|---|\n| Existing framework guarantees | No regression; identical verifier results plus the added command |\n| Irreversible file modification | None reachable without an explicit flag and a written pre-image |\n| Dependency creep | The new dependency is confined to the new module's online path |\n| Overstated guarantee | The contract states what is checked mechanically and what is not |",
+        "digest": "sha256:0f659b58b1b23b1307d3401f4c218782"
+      },
+      {
+        "type": "review-package",
+        "reference": "runs/run-09099de97613/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-09099de97613/states/quality-review/artifacts/review-package.md",
+        "text": "```yaml\nreviewPackage:\n  packageId: OMT-01-quality-review\n  reviewReference: OMT-01\n  sourceInputs:\n    - type: code-diff\n      reference: inline\n    - type: test-evidence\n      reference: tests/test_optimize_memory.py\n    - type: design-reference\n      reference: runs/run-09099de97613/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n  producedBy: omn-dev-2-reviewer\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: approve-with-corrections\n  inputDigest: sha256:cbc350ff977178e78b79c3766de4630b\n  contextDigest: sha256:d2a44ef0a7d382b3285bf0991857fe61\n```\n\n## Metadata\n\n- Review ID: OMT-01-quality-review\n- Reviewer: omn-dev-2-reviewer\n- Change under review: OMT-01, the memory token optimizer entry point and its runtime module\n- Review date: 2026-08-28\n\n## Review Scope\n\n- In scope: The seven change-set entries of the implementation report \u2014 the runtime module, the command contract, the discovery record, the two index documents, the governance profile index, and the test module. Correctness of the invariant judgement, the denial boundary, and the recovery path; conformance to the accepted design; adequacy of the test evidence.\n- Out of scope: Whether the compression instruction produces good compressions, which no evidence in this run can decide and which the contract does not claim. The knowledge surfaces themselves, which this change does not modify. Product scope, which the Scope Gate settled.\n- Evidence reviewed: The delivered module in full, the command contract in full, the test module in full, the discovery record and both index edits, the appended profile section, the accepted design package including both decision records, and the executed output of every command the implementation report cites. The review re-executed the module's offline surfaces rather than reading their claimed results.\n\n## Findings\n\n| ID | Severity | Category | Location | Requirement | Finding | Correction Request | Status |\n|---|---|---|---|---|---|---|---|\n| `F-001` | critical | correctness | `.claude/runtime/optimize_memory.py`, the pre-image write and the dry-run candidate write | Design constraint `C-006`: no modification reaches disk without a recoverable pre-image written first | Both writes joined the session directory with `Target.rel`, which is absolute for a file outside the repository. Joining an absolute path discards everything to its left, so for a root outside the repository the pre-image write resolved to the original file: backing a file up overwrote it with itself, and a dry run \u2014 which must modify nothing \u2014 wrote the candidate straight over the original. The drive-letter scrub masked this on one platform and not on the other, so the defect was platform-conditional and silent. | `CR-001` | resolved |\n| `F-002` | medium | correctness | `.claude/runtime/optimize_memory.py`, token counting | The report states a saving is measured rather than estimated | When the token-count request failed, the count fell back to a byte heuristic and was reported through the same column as a measured count, so a reader could not tell which kind of number they were reading while the report asserted measurement | `CR-002` | resolved |\n| `F-003` | low | maintainability | `.claude/runtime/optimize_memory.py`, the fenced-block comparison in the judgement | Coding standard: no redundant construction | The membership test rebuilt the comparison list with an identity comprehension rather than testing against the list directly | `CR-003` | open |\n| `F-004` | medium | test-adequacy | `tests/test_optimize_memory.py` | Design sequencing constraint `P-002`: the judgement is demonstrated per loss class before any modifying path exists | The compression request path has no automated exercise, because this environment carries no client library and no credential. The implementation report records this as an unverified area and the design carries it as assumption `A-002`, so it is disclosed rather than hidden \u2014 but it remains the one path in the change whose first execution will be in production | `CR-004` | accepted-risk |\n| `F-005` | low | test-adequacy | `tests/test_optimize_memory.py` | Coverage of changed behaviour | The session report renderer has no test. Its output is advisory rather than load-bearing, so a defect in it misinforms a reader without misdirecting the pass | `CR-005` | open |\n| `F-006` | low | maintainability | `.claude/runtime/optimize_memory.py`, the identifier pattern | Design decision `D-002`: every declared rule or requirement identifier survives | The identifier pattern matches short uppercase-plus-digit tokens, so an ordinary word in that shape would be treated as a protected identifier. The error direction is a false refusal rather than a false acceptance, which is the safe direction for this rule | `CR-006` | accepted-risk |\n\n## Severity Summary\n\n- Critical: 1\n- High: 0\n- Medium: 2\n- Low: 3\n\n## Standards and Architecture Conformance\n\n- Coding standards: Conformant. The module is stdlib-only apart from the provider client library, matches the repository's module layout, docstring density, and naming, and states its rationale where a reader would otherwise ask why. `F-003` is the one departure and it is cosmetic.\n- Architecture rules: Conformant with the accepted design. `O-001` is what was built. No workflow, phase, gate row, role manifest, or artifact validator was touched, so `C-002` holds, and coverage verification confirms the phase, owner, skill, and gate counts are unmoved. The module imports nothing from the framework runtime and nothing imports it, so the dependency directions in `dependency-map.md` are unchanged and no existing surface acquires the new dependency \u2014 `C-005` holds, and the review confirmed it by executing the offline surfaces with the client library absent.\n- Security criteria: The denial boundary is the security property of this change, and it is implemented where the design said it must be \u2014 inside discovery, by path segment and filename, on the single path every candidate passes through. The review checked the alternative routes: a directory root that is itself denied, a denied directory reached by recursion, and a denied filename inside a permitted root. All three refuse. `F-001` was a security-adjacent defect in the same area \u2014 not a bypass of the denial, but a loss of the recoverability that makes a permitted rewrite safe \u2014 and it is corrected.\n- Exceptions requested: None identified.\n\n## Test Adequacy Assessment\n\n- Test evidence reviewed: `tests/test_optimize_memory.py`, 31 automated checks, re-executed by this review rather than accepted from the report: 31 passed, 0 failed. The framework's own coverage verification re-executed: 6 of 6 checks passed, 11 of 11 active command records resolve, 37 phases and 8 workflows unmoved. The module's offline surfaces re-executed: discovery reports 21 eligible of 21 considered, and the modifying surface exits before reading any file when the client library is absent.\n- Coverage of changed behavior: Strong where it matters most. Every invariant class the judgement checks has a constructed candidate that must be refused, and the refusal is asserted to name the class rather than merely to occur \u2014 a rule that refused everything would fail the identity and genuine-compression tests, and a rule that accepted everything would fail the other ten. The denial boundary is covered per denied segment. The recovery path is covered in all four of its outcomes, including the refusal to overwrite a file edited after the pass. `F-001`'s correction carries five regression tests that fix the defect's shape in place.\n- Gaps requiring new tests: The compression request path (`F-004`), which cannot be exercised in this environment and is disclosed as such. The report renderer (`F-005`), which is advisory output.\n\n## Correction Requests\n\n| ID | Addresses | Required change | Blocking | Owner |\n|---|---|---|---|---|\n| `CR-001` | `F-001` | Confine every session write to the session directory: strip drive letters, leading separators, and parent traversals from the path before joining, and cover the fix with regression tests for each of those shapes | yes | omn-dev-1-implement |\n| `CR-002` | `F-002` | Record per file whether a token count was measured or estimated, and surface an estimated basis in the report so the measurement claim stays true | yes | omn-dev-1-implement |\n| `CR-003` | `F-003` | Test membership against the list directly | no | omn-dev-1-implement |\n| `CR-004` | `F-004` | Exercise the compression request path end to end once an environment with the client library and a credential exists, before the first pass is applied to a knowledge surface | no | omn-qa |\n| `CR-005` | `F-005` | Add coverage for the session report renderer | no | omn-dev-1-implement |\n| `CR-006` | `F-006` | Narrow the identifier pattern, or accept the false-refusal direction and record it in the contract | no | architect |\n\n## Residual Risk\n\n- Accepted risk: `F-004` \u2014 the compression request path ships unexercised, and its first execution will be its first test. The exposure is bounded by the module's own failure accounting: a declined, truncated, or malformed response is recorded against that file and leaves the original untouched, so a first invocation that goes wrong costs a session and no content. `F-006` \u2014 the identifier pattern may protect a token that is not an identifier, producing a false refusal, which is the safe direction of error for a rule whose purpose is to refuse.\n- Unmitigated risk: The gap between what `I0`-`I9` check and what a reader assumes \"lossless\" means. The contract states the distinction in its own words and names the recorded difference record as the control, which is the strongest available answer, but it is a documentation control over a reader's assumption rather than a mechanical one. Design risk `R-001` and open question `Q-002` carry it, and this review does not consider it closed.\n- Monitoring required: The verdict of every future pass \u2014 specifically the count of refused candidates and the invariant each broke. A pass in which nothing is ever refused is the signal that the judgement has stopped working, and it looks identical to a pass in which everything was correct.\n\n## Verdict\n\n- Decision: approve-with-corrections\n- Rationale: The change implements what the Design Gate accepted, adds no lifecycle surface, and leaves every existing verifier at its baseline with one added command record. The review found one critical defect, `F-001`, in exactly the place the design said the most care was owed \u2014 the ordering and destination of the pre-image write \u2014 and it is corrected with regression tests that fix its shape in place; the re-executed suite passes at 31 of 31. `F-002` is corrected: the report no longer presents a heuristic as a measurement. Both blocking correction requests are closed. What remains is three low findings and one accepted risk, none of which prevents progression, and one honest residual: the distance between the checked guarantee and what a careless reader will assume. The contract addresses that in words, which is the best this change can do, and `Q-002` keeps it open rather than declaring it solved.\n- Blocking findings outstanding: None identified.\n- Readiness recommendation: Ready to proceed to documentation and release handoff. The capability ships correct and unexercised against a live request path; the first such pass should carry `CR-004` before it is applied to any knowledge surface.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | Should a pass in which no candidate is ever refused raise a signal of its own, given that a silently broken judgement is indistinguishable from a clean pass? | no | omn-dev-2-reviewer | `F-004`, monitoring |\n| `Q-002` | Does a checkable prose-level invariant exist, or does the reviewed difference record remain the only control for obligations expressed in prose? | no | architect | `F-006`, design risk `R-001` |",
+        "digest": "sha256:7fba27a0bfedbe36e9f2ce33d2e64407",
+        "produced_by": "quality-review"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was delivered: an implementation report for the change set itself, a validation report for what was proven about it, a review package for a `review-pull-request` run, or a deployment status for the `communication-and-post-release` phase, which publishes after a release has landed. Without one there is nothing to publish from, and publishing anyway would mean describing a system from this agent's own reading of what it was supposed to become."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "review-package",
+      "reference": "runs/run-09099de97613/states/quality-review/artifacts/review-package.md",
+      "produced_by": "quality-review"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-08-28T07:17:37Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/release-note.md",
+        "digest": "sha256:a6125cac38eb2edeca7105d936d9304c",
+        "supplies": null
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:bc0fb4ee128c1855f84c63b3ea12319c",
+    "input_digest": "sha256:06a6e104dd467eb3eab86108dc0e77fa",
+    "inputs": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/omt-01-architecture-context.md",
+        "source_file": ".claude/runs/inputs/omt-01-architecture-context.md",
+        "digest": "sha256:0f659b58b1b23b1307d3401f4c218782"
+      },
+      {
+        "type": "review-package",
+        "reference": "runs/run-09099de97613/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-09099de97613/states/quality-review/artifacts/review-package.md",
+        "digest": "sha256:7fba27a0bfedbe36e9f2ce33d2e64407"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-09099de97613/states/documentation-and-release-handoff/artifacts/release-note.md",
+      "runs/run-09099de97613/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "reproducing a test or validation result, which belongs to omn-qa"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author or amend a technical design, an architecture decision, or a structural constraint",
+      "define, widen, or narrow product scope or acceptance criteria",
+      "award, withhold, or restate a validation verdict as though this agent reached it",
+      "record a merge, release, or deployment decision",
+      "publish a statement the supplied evidence does not support",
+      "omit, soften, or defer a breaking change a supplied input declares",
+      "carry forward prior-release content the delivered change made false",
+      "resolve an engineering gap rather than returning it to the role that owns it",
+      "decide a gate that assesses evidence this agent produced",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "describe delivered behavior from the implementation and validation evidence supplied",
+        "draft release notes, change summaries, and closure communication packages",
+        "record usage, limitations, known issues, and troubleshooting guidance",
+        "state the compatibility consequence a declared contract change carries",
+        "identify documentation the delivered change made stale, and propose its correction",
+        "name the audience a communication was addressed to and the handoff it carries",
+        "maintain the trace from each published statement to the artifact that supports it",
+        "record an unresolved engineering question as an open question against its owning role"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author or amend a technical design, an architecture decision, or a structural constraint",
+        "define, widen, or narrow product scope or acceptance criteria",
+        "award, withhold, or restate a validation verdict as though this agent reached it",
+        "record a merge, release, or deployment decision",
+        "publish a statement the supplied evidence does not support",
+        "omit, soften, or defer a breaking change a supplied input declares",
+        "carry forward prior-release content the delivered change made false",
+        "resolve an engineering gap rather than returning it to the role that owns it",
+        "decide a gate that assesses evidence this agent produced",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else. Product documentation living in the repository is proposed as content inside the artifact and applied by the role that owns the file, so a documentation change never travels as an unreviewed write.",
+        "rationale": "This agent's authority is over what is said about a change, never over the change itself. Writing to the repository would let a publication step alter the delivered behavior it exists to describe, and the resulting document would then be accurate about a system this agent had just modified."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "reproducing a test or validation result, which belongs to omn-qa"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same published statements, the same known-issue set, the same compatibility statement, the same declared release verdict, and the same declared artifact status.",
+      "identifierSchemes": {
+        "knownIssues": "K-<zero-padded-sequence>"
+      },
+      "orderingRule": "Known issues keep the order of the source that recorded them, so a supplied defect list and the issues published from it can be read side by side.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied evidence, release context, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "release-note.md",
+    "artifact_path": "runs/run-09099de97613/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "template_ref": "templates/release-note.md",
+    "contract_ref": "agents/omn-documentation/output.md",
+    "quality_ref": "agents/omn-documentation/quality.md",
+    "validator": "release_note_validator",
+    "result_envelope_path": "runs/run-09099de97613/states/documentation-and-release-handoff/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-08-28T07:17:37Z"
+}

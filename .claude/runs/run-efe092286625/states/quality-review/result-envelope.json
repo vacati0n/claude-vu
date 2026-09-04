@@ -1,0 +1,97 @@
+{
+  "invocation_id": "inv-efe092286625-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-efe092286625/states/quality-review/artifacts/review-package.md"
+  ],
+  "structured_output": {
+    "packageId": "RP-2026-0002",
+    "workflowPhase": "quality-review",
+    "packageStatus": "complete",
+    "verdict": "approve-with-corrections",
+    "counts": {
+      "findings": 1,
+      "findingsBySeverity": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 1
+      },
+      "correctionRequests": 1,
+      "blockingCorrectionRequests": 0,
+      "openQuestions": 1
+    },
+    "evidenceExecution": {
+      "commandsExecuted": 4,
+      "commandsPassed": 4,
+      "commandsFailed": 0,
+      "commands": [
+        "env -u NO_COLOR python -m unittest discover -s tests -k missing_toplevel_import -k import_check -k import_finding_hint -k DependencyDeclaration -- 7 tests, OK, confirming the report's targeted post-change evidence",
+        "env -u NO_COLOR python -m unittest discover -s tests -k install -k validate -k validation -k doctor -k status -- 22 tests, OK, confirming healthy-path preservation",
+        "python -c \"import unittest; s=unittest.defaultTestLoader.discover('tests'); print(s.countTestCases())\" -- 272 collected, matching the report's post-change suite size",
+        "read-only script scan of runs/run-efe092286625/state.json for the Design Gate decision -- no output under its first filter; the decision record was then located by direct reading: approved by omn-tech-lead, version-range question resolved as pyyaml>=6, D-001/D-002 moved to Accepted"
+      ],
+      "executionNote": "All commands read-only, executed from the repository root with the NO_COLOR variable cleared. The report's full-suite runs (265-test baseline, 272-test post-change) and its pre-change failing witness are recorded in the package as claimed results corroborated by these confirmations, not re-executed in full."
+    },
+    "qualityChecks": {
+      "total": 46,
+      "passed": 46,
+      "failed": 0,
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass",
+        "P1": "pass", "P2": "pass", "P3": "pass", "P4": "pass", "P5": "pass", "P6": "pass", "P7": "pass",
+        "F1": "pass", "F2": "pass", "F3": "pass", "F4": "pass", "F5": "pass",
+        "R1": "pass", "R2": "pass", "R3": "pass",
+        "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass", "E5": "pass",
+        "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+      },
+      "repairNote": "First draft failed C5 (Blocking): prose references to the technical design's fact-register rows collided with the F-nnn finding identifier scheme. The prose was rephrased to cite the design rows without the identifier tokens, and the entire check set was re-run after the repair. No finding, severity, or verdict changed."
+    },
+    "validationEngine": {
+      "validator": "review_package_validator",
+      "decidableChecks": 31,
+      "decidablePassed": 31,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3,
+      "note": "PASS on the emitted artifact with the invocation envelope supplied for the digest cross-check; re-run in full after the one C5 repair"
+    },
+    "notMachineCheckableObligations": {
+      "N1": "satisfied -- every lens of the Stage 4 procedure was applied to all five change-set entries: correctness confirmed by full reads and executed tests, architecture and additivity confirmed against the accepted design and by symbol search of the changed module, security confirmed static-and-write-nothing, test adequacy confirmed by independent re-execution; the one gap found (untested lookup-failure guard) is recorded as F-001 rather than passed over",
+      "N2": "satisfied -- the single finding cites the design's hard constraint C-006 with its section 9 test focus area and the testing-strategy playbook's negative-path coverage rule; candidate observations with no governing standard (duplicate source parse, absent Python style catalogue) were set aside, not raised",
+      "N3": "satisfied -- one severity was assigned once from the Stage 6 table (low) and never moved; no severity in this review was reduced from an earlier value"
+    },
+    "verdictBasis": {
+      "adjudicationRow": "Only medium or low findings are open -> approve-with-corrections, package status complete",
+      "blockingFindingsOutstanding": [],
+      "producerExclusion": "this agent produced the evidence the Review Gate assesses; the gate decision rests with omn-qa per the gate matrix, and the package words readiness as a recommendation only",
+      "deviationJudgement": "V-001 (sibling rule accepts package directories) assessed acceptable: faithful to the payload's execution-time path-insertion semantics, narrows the false-ERROR exposure the design records as risk R-001, crosses no constraint",
+      "designGateTrace": "the report's claims that D-001/D-002 were Accepted and that the version range was gate-resolved as pyyaml>=6 were verified against the recorded Design Gate decision in the run store; no input conflict stands"
+    },
+    "handoffs": {
+      "omn-qa": "CR-001 (non-blocking test gap), the coverage assessment, and the P-005 acceptance demonstrations already routed by the report",
+      "omn-dev-1-implement": "no correction request owned; no code change required by this review",
+      "architect": "open question Q-001 on reconciling the committed decision-record status with the Design Gate decision",
+      "omn-tech-lead": "readiness recommendation and residual risk, for the merge judgement it owns"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-2-reviewer/system.md",
+    "agents/omn-dev-2-reviewer/identity.md",
+    "agents/omn-dev-2-reviewer/reasoning.md",
+    "agents/omn-dev-2-reviewer/execution.md",
+    "agents/omn-dev-2-reviewer/output.md",
+    "agents/omn-dev-2-reviewer/quality.md",
+    "agents/omn-dev-2-reviewer/examples.md",
+    "runs/run-efe092286625/states/quality-review/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-efe092286625/states/quality-review/artifacts/review-package.md",
+    "runs/run-efe092286625/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

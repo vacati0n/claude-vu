@@ -1,0 +1,56 @@
+{
+  "schema": "framework.runtime/discarded-run.v1",
+  "run_id": "run-0db4765d0eab",
+  "command_id": "refactor",
+  "workflow_id": "refactor",
+  "submitted_at": "2026-08-18T14:38:43Z",
+  "reason": "Corrupted by DEF-001, the same defect the previous discard record names: `dispatch --run-id <refactor run> --phase <phase>` was issued without --command, so plan_run re-materialised the run under the default command `implement` and injected six implement-feature work items into a refactor run's store. The refactor phases were then evaluated against the implement-feature Phase Model and recorded as workflow-contract-violation.",
+  "disposition": "Discarded. No phase executed and no artifact was produced. DEF-001 was repaired before this request was re-submitted, so the replacement run is carried by a runtime that cannot repeat the corruption.",
+  "defect": "reports/defect-record-DEF-001-2026-08-18.json",
+  "work_items": {
+    "scope-invariants-and-risk-profile": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_contract_reconciliation"
+    },
+    "safety-net-establishment": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_contract_reconciliation"
+    },
+    "refactor-implementation": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_contract_reconciliation"
+    },
+    "behavioral-validation": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_contract_reconciliation"
+    },
+    "closure-and-debt-record": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_contract_reconciliation"
+    },
+    "scope-and-acceptance": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_capability_registration"
+    },
+    "execution-planning": {
+      "status": "pending",
+      "blocked_reason": null
+    },
+    "solution-design-and-risk-assessment": {
+      "status": "pending",
+      "blocked_reason": null
+    },
+    "implementation": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_capability_registration"
+    },
+    "quality-review": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_capability_registration"
+    },
+    "documentation-and-release-handoff": {
+      "status": "blocked",
+      "blocked_reason": "awaiting_capability_registration"
+    }
+  }
+}

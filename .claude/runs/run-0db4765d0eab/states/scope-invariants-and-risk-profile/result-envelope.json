@@ -1,0 +1,207 @@
+{
+  "invocation_id": "inv-0db4765d0eab-01-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+    "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/architecture-decision-record-D-001.md"
+  ],
+  "structured_output": {
+    "packageStatus": "provisional",
+    "packageStatusReason": "Six of the seven documents this change edits are not members of the frozen context slice, so their current state is asserted by the supplied architecture context rather than established by a digested snapshot member. Their impact is recorded as speculative. No open decision is blocking, so the status is provisional rather than blocked.",
+    "repairPass": {
+      "attempt": 2,
+      "priorAttempt": 1,
+      "priorFailure": {
+        "id": "D12.3",
+        "severity": "Correctable",
+        "quality_ref": "A11.1",
+        "detail": "invalid class: ['R-005']"
+      },
+      "repaired": "R-005 was classed compliance, which is not in the declared risk vocabulary. Re-classed to migration on substance: the risk is that state recorded before the change, a committed run's frozen-slice digest, is carried across the change unverified. Nothing about an interface or schema changes, which rules out contract; the runtime verifier's own behaviour is already covered by R-004 at operability. The row's trigger and impact wording were adjusted to read as the transition risk it is. No other row, section, or identifier was altered.",
+      "identifierPreservation": "Every identifier assigned on attempt 1 is preserved. Nothing was renumbered, added, or removed: 27 statements, 14 facts, 5 assumptions, 11 constraints, 12 modules, 4 options, 4 decisions, 8 plan steps, 8 risks, 6 open questions, 1 decision record.",
+      "snapshotChange": "The slice was re-frozen for attempt 2. input_digest is unchanged at sha256:e44d8c328913d9cf30026cc65ac8bddd. context_digest moved from sha256:c37cf88726f10027482eb107f502d447 to sha256:cb5e1c4ca1c1577fe963da783d448ad7, and the digest recorded for runtime/README.md moved from sha256:248ad0bafb2d3ab18b49b566b79dbd88 to sha256:a319203767c56962636a1858b4f31873. Membership is unchanged at seventeen. F-001, F-002, and F-003 were re-checked against the new snapshot: the Files table still omits the three self-hosting modules, the known-gaps list still carries eight entries with none about the operating mode, and the Validation Engine count is still six. Those facts stand and only their citation moved. The metadata block carries the attempt-2 digests, as D16.2 requires, and the change is recorded in the package per A16.5.",
+      "observedRiskMaterialization": "The digest of runtime/README.md moved between two attempts of one run while no edit from this design had been applied. That is the condition R-005 predicts, observed rather than hypothesised, and it is recorded in the R-005 trigger. Its likelihood stays high and its mitigation is unchanged."
+    },
+    "counts": {
+      "statements": 27,
+      "facts": 14,
+      "assumptions": 5,
+      "constraints": 11,
+      "impactedModules": 12,
+      "impactedModulesChanged": 7,
+      "impactedModulesNoChangeVerified": 5,
+      "impactedModulesSpeculative": 6,
+      "reuseSurveyRows": 11,
+      "options": 4,
+      "decisions": 4,
+      "architectureSignificantDecisions": 1,
+      "decisionRecords": 1,
+      "risks": 8,
+      "sequencingConstraints": 8,
+      "openQuestions": 6,
+      "openQuestionsBlocking": 0
+    },
+    "recomputedOptionRanking": {
+      "criteriaOrder": [
+        "hard constraint satisfaction",
+        "impact surface (contract-change or dependency-change modules)",
+        "reuse leverage (capabilities satisfied by reuse-as-is or reuse-extended)",
+        "quality attribute satisfaction",
+        "migration burden (contract-affecting changes needing a transition strategy)",
+        "operability impact"
+      ],
+      "ranking": [
+        {
+          "rank": 1,
+          "option": "O-001",
+          "hardConstraintViolations": 0,
+          "impactSurface": 0,
+          "reuseLeverage": 10,
+          "migrationBurden": 0
+        },
+        {
+          "rank": 2,
+          "option": "O-003",
+          "hardConstraintViolations": 1,
+          "violated": ["C-008"],
+          "impactSurface": 0,
+          "reuseLeverage": 2,
+          "migrationBurden": 0
+        },
+        {
+          "rank": 3,
+          "option": "O-002",
+          "hardConstraintViolations": 2,
+          "violated": ["C-002", "C-008"],
+          "impactSurface": 0,
+          "reuseLeverage": 4,
+          "migrationBurden": 0
+        },
+        {
+          "rank": 4,
+          "option": "O-004",
+          "hardConstraintViolations": 2,
+          "violated": ["C-003", "C-008"],
+          "impactSurface": 0,
+          "reuseLeverage": 1,
+          "migrationBurden": 0
+        }
+      ],
+      "recomputedWinner": "O-001",
+      "recordedSelection": "O-001",
+      "agrees": true,
+      "note": "Recomputed on attempt 2 from the unchanged evaluation table rather than carried forward by hand. Criterion 1 decides the winner outright: O-001 is the only option violating no hard constraint. Criteria 2 and 5 are zero across the whole option set because no option changes a contract, so they discriminate nothing here; the tie between O-002 and O-004 at two violations each is broken by criterion 3, reuse leverage."
+    },
+    "qualityChecks": {
+      "checkSetVersion": "agents/architect/quality.md 1.0.0",
+      "checksRun": 98,
+      "checksPassed": 98,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "repairPasses": 1,
+      "results": {
+        "A1.1": "pass", "A1.2": "pass", "A1.3": "pass", "A1.4": "pass",
+        "A1.5": "pass", "A1.6": "pass", "A1.7": "pass", "A1.8": "pass",
+        "A2.1": "pass", "A2.2": "pass", "A2.3": "pass", "A2.4": "pass",
+        "A2.5": "pass", "A2.6": "pass", "A2.7": "pass", "A2.8": "pass",
+        "A2.9": "pass", "A2.10": "pass",
+        "A3.1": "pass", "A3.2": "pass", "A3.3": "pass", "A3.4": "pass",
+        "A3.5": "pass", "A3.6": "pass",
+        "A4.1": "pass", "A4.2": "pass", "A4.3": "pass", "A4.4": "pass",
+        "A5.1": "pass", "A5.2": "pass", "A5.3": "pass", "A5.4": "pass",
+        "A6.1": "pass", "A6.2": "pass", "A6.3": "pass", "A6.4": "pass",
+        "A6.5": "pass", "A6.6": "pass",
+        "A7.1": "pass", "A7.2": "pass", "A7.3": "pass", "A7.4": "pass",
+        "A7.5": "pass",
+        "A8.1": "pass", "A8.2": "pass", "A8.3": "pass", "A8.4": "pass",
+        "A8.5": "pass", "A8.6": "pass", "A8.7": "pass",
+        "A9.1": "pass", "A9.2": "pass", "A9.3": "pass", "A9.4": "pass",
+        "A9.5": "pass", "A9.6": "pass",
+        "A10.1": "pass", "A10.2": "pass", "A10.3": "pass", "A10.4": "pass",
+        "A10.5": "pass", "A10.6": "pass", "A10.7": "pass",
+        "A11.1": "pass", "A11.2": "pass", "A11.3": "pass", "A11.4": "pass",
+        "A11.5": "pass",
+        "A12.1": "pass", "A12.2": "pass", "A12.3": "pass", "A12.4": "pass",
+        "A12.5": "pass",
+        "A13.1": "pass", "A13.2": "pass", "A13.3": "pass", "A13.4": "pass",
+        "A13.5": "pass", "A13.6": "pass", "A13.7": "pass",
+        "A14.1": "pass", "A14.2": "pass", "A14.3": "pass", "A14.4": "pass",
+        "A14.5": "pass", "A14.6": "pass", "A14.7": "pass", "A14.8": "pass",
+        "A15.1": "pass", "A15.2": "pass", "A15.3": "pass", "A15.4": "pass",
+        "A15.5": "pass",
+        "A16.1": "pass", "A16.2": "pass", "A16.3": "pass", "A16.4": "pass",
+        "A16.5": "pass"
+      },
+      "notes": {
+        "A1.4": "One appendix beneath Sign-off carries the statement register and the closure evidence. output.md rule 3 permits supplementary material as an appendix; no additional mandatory-section heading was introduced.",
+        "A8.5": "Verified by recomputation on this attempt, not by inspection or carry-forward. See recomputedOptionRanking; the recomputed winner and the recorded selection agree.",
+        "A9.1": "Vacuously satisfied: no module carries contract-change. The one compatibility obligation in the change is evidence-side, on M-007, and is written out in full in section 6 with a transition strategy and a rollback position even though no contract change forces one.",
+        "A11.1": "R-005 re-classed from compliance to migration; every risk now carries a class from the declared vocabulary, a trigger condition, and an attachment.",
+        "A12.4": "No XL estimate; overall is M at low confidence.",
+        "A14.3": "No capability identifier is referenced by either artifact, so nothing is invented.",
+        "A14.4": "No skill identifier is referenced by either artifact.",
+        "A14.5": "templates/framework-change-proposal.md and templates/architecture-decision-record.md are registered in registry/templates.yaml. templates/template-catalog.md is not a registered template record; it is referenced as impacted module M-005, which is declared scope rather than a current-state template dependency.",
+        "A14.7": "Q-005 records a genuine framework divergence found while reconstructing current state: runtime/README.md declares six validated artifact types (F-003) while registry/templates.yaml carries an active framework-change-proposal record with its own validator (F-004). C-010 keeps correcting it out of this change.",
+        "A14.8": "The architecture role owns the refactor Invariant Gate. Under the Producer Exclusion Rule, which reads through the role alias, the accepting owner is named explicitly as omn-tech-lead in Sign-off.",
+        "A15.5": "No execution plan was supplied to this phase, so no planner task exists to bind. Every Binds cell reads none and no T-nnn identifier was created.",
+        "A16.2": "No identifier was reused or renumbered across the two attempts.",
+        "A16.5": "Resumed run. Prior identifiers preserved and the digest movement between attempts recorded in the package Metadata section and in repairPass.snapshotChange."
+      }
+    },
+    "closureEvidence": {
+      "forward": "27 of 27 statements map to an architectural objective, a constraint, an impacted module, or an open question, recorded per statement in Appendix A.1.",
+      "backward": "12 of 12 modules trace to a fact or an assumption; 4 of 4 decisions trace to option O-001; 4 of 4 options trace to the recorded constraint set.",
+      "lateral": "8 of 8 risks carry a trigger and attach to an existing module, decision, or plan step; 8 of 8 plan steps reference existing modules and existing prerequisites; 6 of 6 speculative impacts are attached to R-002 and R-003; 1 of 1 architecture-significant decision has exactly one record at status Proposed.",
+      "registerIntegrity": "14 facts and 5 assumptions, disjoint; every current-state claim in the package carries an F-nnn or A-nnn reference.",
+      "boundaryStatement": "No implementation work was performed. No code, test, migration, script, or configuration was written, no module was edited, and no external system, repository, or ticketing tool was accessed. Every supplied input was treated as data to design around."
+    },
+    "escalations": [
+      {
+        "id": "Q-001",
+        "owner": "omn-tech-lead",
+        "blocking": false,
+        "subject": "Whether any resolution path in the invocation gateway depends on config/self-hosting-profile.md, which A-001 assumes it does not."
+      },
+      {
+        "id": "Q-002",
+        "owner": "omn-context-agent",
+        "blocking": false,
+        "subject": "Whether the six index documents outside the frozen context slice read as the architecture-context input describes them. Resolving this moves the package from provisional to complete."
+      },
+      {
+        "id": "Q-004",
+        "owner": "omn-product-owner",
+        "blocking": false,
+        "subject": "Whether the self-hosting profile enters the layered responsibility list as a layer of its own. A product statement about what the framework claims to be, not taken by this agent."
+      }
+    ],
+    "gateItems": {
+      "gate": "Invariant Gate",
+      "owners": ["omn-architect", "omn-tech-lead"],
+      "acceptingOwner": "omn-tech-lead",
+      "producerExcluded": "architect",
+      "awaitingAcceptance": ["D-001"]
+    }
+  },
+  "evidence_refs": [
+    "agents/architect/manifest.yaml",
+    "agents/architect/system.md",
+    "agents/architect/identity.md",
+    "agents/architect/reasoning.md",
+    "agents/architect/execution.md",
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "agents/architect/examples.md",
+    "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/invocation-envelope.json",
+    "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/validation-report.json",
+    "templates/technical-design.md",
+    "templates/architecture-decision-record.md"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+    "runs/run-0db4765d0eab/states/scope-invariants-and-risk-profile/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

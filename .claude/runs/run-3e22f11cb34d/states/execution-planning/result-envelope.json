@@ -1,0 +1,102 @@
+{
+  "invocation_id": "inv-3e22f11cb34d-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-3e22f11cb34d/states/execution-planning/artifacts/execution-plan.md"
+  ],
+  "structured_output": {
+    "plan_id": "review-package-routing-execution-plan",
+    "plan_status": "complete",
+    "schema_version": "1.0.0",
+    "input_digest": "sha256:59644fd3b625988cc30879fe11c2dfcb",
+    "context_digest": "sha256:c02a893250a487966bd7e0b20eb783cd",
+    "counts": {
+      "statements": 5,
+      "assumptions": 5,
+      "risks": 8,
+      "tasks": 10,
+      "dependency_edges": 16,
+      "external_dependencies": 0,
+      "waves": 5,
+      "open_questions": 5,
+      "blocking_open_questions": 0,
+      "business_objectives": 3,
+      "technical_objectives": 4,
+      "plan_acceptance_criteria": 6
+    },
+    "suggested_workflow": "implement-feature",
+    "recomputed_topological_order": {
+      "method": "Kahn over the 8.1 edge table; ties broken by ascending task identifier",
+      "waves": [
+        ["T-001", "T-005"],
+        ["T-007", "T-008", "T-010"],
+        ["T-002"],
+        ["T-003"],
+        ["T-004", "T-006", "T-009"]
+      ],
+      "linear_order": ["T-001", "T-005", "T-007", "T-008", "T-010", "T-002", "T-003", "T-004", "T-006", "T-009"],
+      "acyclic": true,
+      "matches_stated_order": true
+    },
+    "traceability_closure": {
+      "forward_statements_covered": "5 of 5",
+      "backward_tasks_traced": "10 of 10",
+      "lateral_resolution": "8 of 8 risks attached; 5 of 5 assumptions attached; 16 of 16 edges resolve to existing tasks"
+    },
+    "repair_passes": [
+      {
+        "pass": 1,
+        "check": "Q5.5",
+        "defect": "Task title of T-005 joined two independently verifiable outcomes",
+        "repair": "Retitled T-005 to a single confirmation outcome; the two observable checks moved into its acceptance criteria; dependent edge justifications and the In Scope entry reworded to match"
+      }
+    ],
+    "quality_checks": {
+      "check_set_version": "agents/planner/quality.md",
+      "checks_run": 70,
+      "checks_passed": 70,
+      "checks_failed": 0,
+      "results": {
+        "Q1.1": "pass", "Q1.2": "pass", "Q1.3": "pass", "Q1.4": "pass", "Q1.5": "pass", "Q1.6": "pass", "Q1.7": "pass",
+        "Q2.1": "pass", "Q2.2": "pass", "Q2.3": "pass", "Q2.4": "pass", "Q2.5": "pass", "Q2.6": "pass", "Q2.7": "pass", "Q2.8": "pass",
+        "Q3.1": "pass", "Q3.2": "pass", "Q3.3": "pass", "Q3.4": "pass",
+        "Q4.1": "pass", "Q4.2": "pass", "Q4.3": "pass", "Q4.4": "pass", "Q4.5": "pass",
+        "Q5.1": "pass", "Q5.2": "pass", "Q5.3": "pass", "Q5.4": "pass", "Q5.5": "pass after repair pass 1", "Q5.6": "pass", "Q5.7": "pass", "Q5.8": "pass", "Q5.9": "pass", "Q5.10": "pass",
+        "Q6.1": "pass", "Q6.2": "pass", "Q6.3": "pass", "Q6.4": "pass by recomputation", "Q6.5": "pass", "Q6.6": "pass", "Q6.7": "pass", "Q6.8": "pass",
+        "Q7.1": "pass", "Q7.2": "pass", "Q7.3": "pass", "Q7.4": "pass", "Q7.5": "pass", "Q7.6": "pass",
+        "Q8.1": "pass", "Q8.2": "pass", "Q8.3": "pass", "Q8.4": "pass", "Q8.5": "pass",
+        "Q9.1": "pass", "Q9.2": "pass", "Q9.3": "pass", "Q9.4": "pass", "Q9.5": "pass", "Q9.6": "pass", "Q9.7": "pass",
+        "Q10.1": "pass", "Q10.2": "pass", "Q10.3": "pass", "Q10.4": "pass", "Q10.5": "pass",
+        "Q11.1": "pass", "Q11.2": "pass", "Q11.3": "pass", "Q11.4": "pass", "Q11.5": "pass"
+      }
+    },
+    "owner_resolution_note": "Q5.2 owners omn-product-owner, omn-dev-1-implement, omn-qa, and omn-documentation resolve to agent contracts under agents/ but hold no registry record; recorded per the Owner Resolution Note in agents/planner/quality.md. Owner architect resolves to registry/agents.yaml.",
+    "gates_required_before_execution": {
+      "architecture_review": ["T-002", "T-005", "T-008"],
+      "product_review": ["T-001", "T-010"],
+      "qa_review": ["T-004", "T-007"]
+    },
+    "boundary_statement": "No implementation work was performed, no repository file outside the permitted writes was modified, and no external system was accessed.",
+    "lifecycle_path": ["Initialization", "ContextLoading", "Execution", "Completion", "Retirement"],
+    "error_classes_raised": []
+  },
+  "evidence_refs": [
+    "agents/planner/manifest.yaml",
+    "agents/planner/system.md",
+    "agents/planner/identity.md",
+    "agents/planner/reasoning.md",
+    "agents/planner/execution.md",
+    "agents/planner/output.md",
+    "agents/planner/quality.md",
+    "agents/planner/examples.md",
+    "templates/execution-plan.md",
+    "runs/run-3e22f11cb34d/states/execution-planning/invocation-envelope.json"
+  ],
+  "confidence": 0.78,
+  "declared_side_effects": [
+    "runs/run-3e22f11cb34d/states/execution-planning/artifacts/execution-plan.md",
+    "runs/run-3e22f11cb34d/states/execution-planning/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

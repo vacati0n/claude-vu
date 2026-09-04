@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omn-agent"
+version = "0.1.0"
+description = "Bootstrap, installer, and orchestration CLI for the Omn-Agent AI engineering framework"
+requires-python = ">=3.10"
+readme = "README.md"
+license = { text = "Proprietary" }
+# The omn_agent package itself is standard-library only; pyyaml is required
+# by the framework runtime files the CLI installs and runs with the same
+# interpreter (agent manifests and registries are YAML).
+dependencies = ["pyyaml>=6"]
+
+[project.scripts]
+omn-agent = "omn_agent.cli:main"
+
+[tool.setuptools]
+packages = ["omn_agent"]
+
+# The framework payload is bundled into the package (omn_agent/_bundled_payload,
+# a committed mirror of the repo's framework payload tree; refresh it with
+# `python tests/test_bundled_payload.py --sync`) so a non-editable wheel install
+# is self-contained -- see omn_agent/source.py::find_source. Both patterns are
+# needed: glob's `*`/`**` never match dot-named entries, and the payload carries
+# dotfiles (e.g. runtime/.gitignore). tests/test_bundled_payload.py asserts the
+# patterns cover every bundled file.
+[tool.setuptools.package-data]
+omn_agent = ["_bundled_payload/**/*", "_bundled_payload/**/.*"]

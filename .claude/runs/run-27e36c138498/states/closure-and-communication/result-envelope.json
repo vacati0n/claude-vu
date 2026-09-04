@@ -1,0 +1,173 @@
+{
+  "invocation_id": "inv-27e36c138498-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-27e36c138498/states/closure-and-communication/artifacts/orchestration-result.md"
+  ],
+  "structured_output": {
+    "coordinationBasis": "closure",
+    "disposition": "held",
+    "status": "provisional",
+    "gateOwnerAddressed": "omn-documentation",
+    "gateThisArtifactIsEvidenceFor": "Closure Gate",
+    "producerExclusionApplied": true,
+    "counts": {
+      "phases": 5,
+      "complete": 4,
+      "blocked": 1,
+      "notStarted": 0,
+      "handoffs": 5,
+      "handoffsAccepted": 4,
+      "handoffsRefused": 0,
+      "handoffsPending": 1,
+      "escalations": 9,
+      "followUps": 7,
+      "openQuestions": 3
+    },
+    "escalationSeverity": {
+      "critical": 1,
+      "high": 3,
+      "medium": 5,
+      "low": 0
+    },
+    "escalationStatus": {
+      "open": 5,
+      "resolved": 4,
+      "routed": 0,
+      "accepted-risk": 0
+    },
+    "blockingEscalationsOutstanding": [
+      "ES-002"
+    ],
+    "followUpSeverity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 3,
+      "low": 3
+    },
+    "selfVerification": {
+      "checksRun": 44,
+      "checksPassed": 44,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "repairAttempts": 0,
+      "checks": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "M1": "pass",
+        "M2": "pass",
+        "M3": "pass",
+        "M4": "pass",
+        "M5": "pass",
+        "O1": "pass",
+        "P1": "pass",
+        "P2": "pass",
+        "P3": "pass",
+        "P4": "pass",
+        "O5": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "O4": "pass",
+        "O3": "pass",
+        "N-COUNT": "pass",
+        "H1": "pass",
+        "H2": "pass",
+        "H3": "pass",
+        "H4": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "pass",
+        "O8": "pass",
+        "O6": "pass",
+        "O7": "pass",
+        "O9": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "T1": "pass",
+        "T2": "pass",
+        "T3": "pass",
+        "T4": "pass",
+        "T5": "pass"
+      }
+    },
+    "validationEngine": {
+      "validator": "orchestration_result_validator",
+      "result": "PASS",
+      "checksRun": 34,
+      "checksPassed": 34,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3,
+      "digestCrossCheck": "C7.1 pass - inputDigest and contextDigest match the invocation envelope"
+    },
+    "notMachineCheckableObligations": {
+      "N1": "declared - the run executed the Phase Model's declared dependency order, and each transition waited on its predecessor's completion and its governing gate rather than on availability",
+      "N2": "declared - each of the nine escalations is beyond this role's authority to resolve; the six routine gate-approval waits in the recovery ledger are recorded in the phase evidence column rather than raised as escalation rows, so they do not bury the ones that matter",
+      "N3": "declared - no follow-up defers work the run was obliged to finish; the repair and its validation are complete, FU-002 is closure work no agent in this run holds the write scope to perform, and FU-004 belongs to omn-documentation by contract",
+      "N4": "declared - every phase state, gate decision, handoff, and escalation traces to run-ledger.json, state.json, events.jsonl, recovery-ledger.json, a committed artifact, or a read-only command executed and named in this record"
+    },
+    "commandsExecuted": [
+      "python .claude/runtime/verify_registry_coverage.py",
+      "python .claude/runtime/verify_registry_coverage.py --json-out (machine-readable, written outside the repository)",
+      "python .claude/runtime/verify_validators.py",
+      "python .claude/runtime/verify_self_hosting.py",
+      "python .claude/runtime/framework_runtime.py resolve --command bugfix --phase closure-and-communication",
+      "python .claude/runtime/orchestration_result_validator.py <artifact> --envelope <envelope>",
+      "read-only digest of all 228 files under runs/ before and after each command group; zero changed",
+      "read-only pass over the run ledger of every run in the store"
+    ],
+    "commandsWithheld": [
+      "python .claude/runtime/verify_multi_phase.py - writes replay bookkeeping under runs/, which this manifest excludes; recorded as ES-005",
+      "python .claude/runtime/verify_recovery.py - injects and removes runs under runs/; recorded as ES-005"
+    ],
+    "runStoreUnchanged": {
+      "filesDigested": 228,
+      "changed": 0,
+      "added": 0,
+      "removed": 0
+    },
+    "filesWrittenOutsideTheRepository": [
+      "%TEMP%/runstore_before.json",
+      "%TEMP%/regcov.json",
+      "%TEMP%/orval.json"
+    ],
+    "note": "Files written outside the repository are scratch measurement output from the read-only inspection above. They are named here rather than omitted, because concealing a declared side effect is the failure this run's own policy-failure at fix-implementation attempt 1 exists to catch."
+  },
+  "evidence_refs": [
+    "agents/omn-orchestrator/manifest.yaml",
+    "agents/omn-orchestrator/system.md",
+    "agents/omn-orchestrator/identity.md",
+    "agents/omn-orchestrator/reasoning.md",
+    "agents/omn-orchestrator/execution.md",
+    "agents/omn-orchestrator/output.md",
+    "agents/omn-orchestrator/quality.md",
+    "agents/omn-orchestrator/examples.md",
+    "runs/run-27e36c138498/states/closure-and-communication/invocation-envelope.json",
+    "templates/orchestration-result.md",
+    "workflows/fix-bug.md",
+    "workflows/workflow-gate-matrix.md",
+    "runs/run-27e36c138498/run-ledger.json",
+    "runs/run-27e36c138498/state.json",
+    "runs/run-27e36c138498/events.jsonl",
+    "runs/run-27e36c138498/recovery-ledger.json",
+    "runs/run-27e36c138498/completion-package.md",
+    "runs/run-27e36c138498/states/regression-validation/artifacts/validation-report.md",
+    "runs/run-27e36c138498/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/inputs/fix-bug-triage-stall-defect-report.md"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-27e36c138498/states/closure-and-communication/artifacts/orchestration-result.md",
+    "runs/run-27e36c138498/states/closure-and-communication/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,213 @@
+{
+  "invocation_id": "inv-3e22f11cb34d-03-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-FC-001-D-001.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-FC-001-D-002.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-FC-001-D-003.md"
+  ],
+  "structured_output": {
+    "package_status": "complete",
+    "design_id": "FC-001-review-package-routing-technical-design",
+    "attempt": 2,
+    "input_digest": "sha256:87e7a870518ba78d52e011e0ccd641be",
+    "context_digest": "sha256:7d8ca68a52d086a09b4c0e56a1e900b7",
+    "repair_pass": {
+      "prior_attempt": 1,
+      "prior_invocation_id": "inv-3e22f11cb34d-03-001",
+      "prior_result": "fail",
+      "prior_blocking_failures": 6,
+      "no_design_content_changed": "The impacted-module set, option set, selected option, decision set, and every identifier are unchanged from attempt 1, as the determinism contract requires. The repairs are renderings and one added open question.",
+      "repairs": [
+        {
+          "check": "D8.5",
+          "cause": "5.3 recorded the rejected alternative as a prose paragraph headed 'Highest-scoring rejected alternative:'. The validator reads it with labelled(arch, 'Highest-scoring rejected alternative and why it lost'), which requires that literal label followed by a colon.",
+          "repair": "Rendered 5.3 as the template's labelled bullets, using the full label. The block cites O-002 and exceeds the 30-character minimum."
+        },
+        {
+          "check": "D8.6",
+          "cause": "Tradeoffs were headed 'Tradeoffs accepted.' with a period, so labelled() found no 'Tradeoffs accepted:' label and items() saw nothing.",
+          "repair": "Rendered as '- Tradeoffs accepted:' with three bullets, so items() returns three."
+        },
+        {
+          "check": "D12.5",
+          "cause": "Security was headed 'Security considerations.' with a period, so labelled_any() matched none of its three accepted spellings.",
+          "repair": "Rendered as '- Security considerations:' and extended with an explicit compliance-impact sentence."
+        },
+        {
+          "check": "D13.3",
+          "cause": "Scope assumptions were headed 'Scope assumptions.' with a period, so labelled_any() matched neither accepted spelling.",
+          "repair": "Rendered as '- Scope assumptions:' with four bullets."
+        },
+        {
+          "check": "D15.1",
+          "cause": "The design named the three-word review-pull-request gate exactly as the gate matrix carries it. The validator extracts gate names with the regex [A-Z][A-Za-z]+ Gate, which captures only the final two words of a three-word name, yielding a token the matrix does not carry. This is a validator limitation, not a wrong gate reference.",
+          "repair": "The design now refers to that gate by the phase it closes, which is unambiguous and matches no gate-name pattern. The limitation is recorded as open question Q-007 against M-011, owned by omn-tech-lead, per the A14.7 obligation to record a genuine framework gap rather than work around it silently."
+        },
+        {
+          "check": "D17.1",
+          "cause": "The records were named with a lowercase 'd' in the identifier. The validator discovers records with re.search(r'(D-\\d{3})', filename), which is case-sensitive, so it found zero records for three architecture-significant decisions. runs/run-308f4d0ee447/artifacts confirms the convention is an uppercase D.",
+          "repair": "Re-emitted the three records under names carrying an uppercase D. See the filename_case_note below: the canonical uppercase spelling of the original names was not reachable, so the change reference was prefixed to the identifier to obtain a name that is both discoverable and distinct."
+        },
+        {
+          "check": "D17.5",
+          "cause": "Latent defect found while reading the validator, not reported on attempt 1 because it passed vacuously over zero discovered records. Each record headed its validation-plan items with periods rather than colons, so labelled_any() would have matched none of 'Metrics to monitor', 'Verification checkpoints', or 'Rollback or reversal conditions' once the records became discoverable.",
+          "repair": "All three records now render those three items as labelled bullets. Repaired before emission rather than after a third rejection."
+        }
+      ],
+      "filename_case_note": "The three records written on attempt 1 exist on disk as architecture-decision-record-d-001.md through -d-003.md, with a lowercase d. This filesystem is case-insensitive, so writing to the uppercase spelling of those same names reopens those same files and does not rename the directory entry; the agent holds no rename or delete capability and is prohibited from executing commands. The uppercase spelling was therefore unreachable. The records were re-emitted as architecture-decision-record-FC-001-D-00n.md, which the discovery pattern matches on the D-00n segment and which is case-insensitively distinct from the attempt-1 names. The three attempt-1 files now carry only a superseded-file notice, no decision content, and are safe to delete. Recommended operator follow-up, which this agent may not perform: delete the three lowercase files and rename the three records to architecture-decision-record-D-00n.md so the run matches the convention run-308f4d0ee447 uses.",
+      "validator_discovery_after_repair": {
+        "files_matching_glob": 6,
+        "files_yielding_an_identifier": 3,
+        "identifiers": ["D-001", "D-002", "D-003"],
+        "files_skipped_by_the_pattern": [
+          "architecture-decision-record-d-001.md",
+          "architecture-decision-record-d-002.md",
+          "architecture-decision-record-d-003.md"
+        ]
+      }
+    },
+    "counts": {
+      "statements": 18,
+      "facts": 25,
+      "assumptions": 6,
+      "constraints": 12,
+      "impacted_modules": 12,
+      "impacted_modules_contract_change": 1,
+      "impacted_modules_operational_impact": 2,
+      "impacted_modules_no_change_verified": 9,
+      "impacted_modules_speculative": 2,
+      "options": 5,
+      "options_eliminated_on_hard_constraint": 3,
+      "decisions": 6,
+      "decisions_architecture_significant": 3,
+      "decision_records_emitted": 3,
+      "risks": 10,
+      "sequencing_constraints": 8,
+      "reuse_survey_rows": 8,
+      "open_questions": 7,
+      "open_questions_blocking": 0,
+      "planner_tasks_referenced": 10,
+      "planner_task_identifiers_created": 0
+    },
+    "recomputed_option_ranking": {
+      "criteria_order": [
+        "1 hard constraint satisfaction",
+        "2 impact surface size",
+        "3 reuse leverage",
+        "4 quality attribute satisfaction",
+        "5 migration burden",
+        "6 operability impact"
+      ],
+      "criterion_1_eliminations": {
+        "O-003": "C-001, and additionally C-006 and C-007",
+        "O-004": "C-006 and C-007",
+        "O-005": "C-004"
+      },
+      "criterion_2_impact_surface": { "O-001": 1, "O-002": 1 },
+      "criterion_3_reuse_leverage": { "O-001": 8, "O-002": 7 },
+      "decided_at_criterion": 3,
+      "recomputed_winner": "O-001",
+      "stated_selection": "O-001",
+      "agrees": true,
+      "tie_break_rule_applied": false,
+      "unchanged_from_attempt_1": true
+    },
+    "quality_checks": {
+      "check_set_version": "agents/architect/quality.md, contract version 1.0.0",
+      "total_run": 98,
+      "total_passed": 98,
+      "total_failed": 0,
+      "blocking_failures": 0,
+      "results": {
+        "A1.1": "pass", "A1.2": "pass", "A1.3": "pass", "A1.4": "pass",
+        "A1.5": "pass", "A1.6": "pass", "A1.7": "pass", "A1.8": "pass",
+        "A2.1": "pass", "A2.2": "pass", "A2.3": "pass", "A2.4": "pass",
+        "A2.5": "pass", "A2.6": "pass", "A2.7": "pass", "A2.8": "pass",
+        "A2.9": "pass", "A2.10": "pass",
+        "A3.1": "pass", "A3.2": "pass", "A3.3": "pass", "A3.4": "pass",
+        "A3.5": "pass", "A3.6": "pass",
+        "A4.1": "pass", "A4.2": "pass", "A4.3": "pass", "A4.4": "pass",
+        "A5.1": "pass", "A5.2": "pass", "A5.3": "pass", "A5.4": "pass",
+        "A6.1": "pass", "A6.2": "pass", "A6.3": "pass", "A6.4": "pass",
+        "A6.5": "pass", "A6.6": "pass",
+        "A7.1": "pass", "A7.2": "pass", "A7.3": "pass", "A7.4": "pass",
+        "A7.5": "pass",
+        "A8.1": "pass", "A8.2": "pass", "A8.3": "pass", "A8.4": "pass",
+        "A8.5": "pass", "A8.6": "pass", "A8.7": "pass",
+        "A9.1": "pass", "A9.2": "pass", "A9.3": "pass", "A9.4": "pass",
+        "A9.5": "pass", "A9.6": "pass",
+        "A10.1": "pass", "A10.2": "pass", "A10.3": "pass", "A10.4": "pass",
+        "A10.5": "pass", "A10.6": "pass", "A10.7": "pass",
+        "A11.1": "pass", "A11.2": "pass", "A11.3": "pass", "A11.4": "pass",
+        "A11.5": "pass",
+        "A12.1": "pass", "A12.2": "pass", "A12.3": "pass", "A12.4": "pass",
+        "A12.5": "pass",
+        "A13.1": "pass", "A13.2": "pass", "A13.3": "pass", "A13.4": "pass",
+        "A13.5": "pass", "A13.6": "pass", "A13.7": "pass",
+        "A14.1": "pass", "A14.2": "pass", "A14.3": "pass", "A14.4": "pass",
+        "A14.5": "pass", "A14.6": "pass", "A14.7": "pass", "A14.8": "pass",
+        "A15.1": "pass", "A15.2": "pass", "A15.3": "pass", "A15.4": "pass",
+        "A15.5": "pass",
+        "A16.1": "pass", "A16.2": "pass", "A16.3": "pass", "A16.4": "pass",
+        "A16.5": "pass"
+      },
+      "register_integrity": {
+        "facts_and_assumptions_disjoint": true,
+        "current_state_claims_verified_as_referenced": 43,
+        "current_state_claims_without_reference": 0,
+        "assumptions_promoted_to_facts": 0
+      },
+      "traceability_closure": {
+        "forward_statements_mapped": 18,
+        "forward_statements_unmapped": 0,
+        "backward_modules_traced": 12,
+        "backward_decisions_traced_to_option": 6,
+        "lateral_risks_attached": 10,
+        "lateral_plan_steps_resolved": 8,
+        "lateral_records_matched_to_decisions": 3,
+        "planner_tasks_bound": 10,
+        "planner_tasks_unaddressed": 0
+      },
+      "boundary_attestation": "No implementation work was performed. No production code, test, migration, script, or configuration was written. No specification file was edited. No external system, repository, or ticketing tool was accessed. No decision record was emitted at a status other than Proposed, and no sign-off line was signed by this agent. runtime/design_validator.py was read to conform to the output contract the runtime decides on; no design fact was drawn from it, and it is named only in Q-007 as a recorded framework gap."
+    },
+    "owner_resolution_note": "A14.2 resolved omn-tech-lead, omn-qa, omn-product-owner, omn-dev-2-reviewer, omn-documentation, omn-orchestrator, and omn-architect against agents/capability-matrix.md and workflows/workflow-gate-matrix.md rather than registry/agents.yaml, which holds records for planner and architect only. Recorded per the Owner Resolution Note in agents/architect/quality.md so the registration gap stays visible.",
+    "framework_gaps_recorded": [
+      "Q-007: the registered design validator's gate-name extraction cannot represent the three-word gate name workflows/workflow-gate-matrix.md carries for the review-pull-request assessment phases, so a design naming that gate exactly fails a Blocking check. Owned by omn-tech-lead, attached to M-011, non-blocking.",
+      "Decision-record discovery is case-sensitive on a case-insensitive filesystem, so a record whose filename differs from the convention only in case is silently invisible rather than reported as misnamed, and cannot be corrected by an agent that may only write files. Reported here rather than as an open question, because it concerns the runtime's own tooling and not the architecture under design."
+    ],
+    "handoff": {
+      "design_gate_owners": ["omn-architect", "omn-tech-lead"],
+      "accepting_owner_under_producer_exclusion": "omn-tech-lead",
+      "records_awaiting_acceptance": ["D-001", "D-002", "D-003"],
+      "product_confirmation_required_for": ["Q-001"],
+      "qa_review_required_for": ["P-008"]
+    }
+  },
+  "evidence_refs": [
+    "agents/architect/manifest.yaml",
+    "agents/architect/system.md",
+    "agents/architect/identity.md",
+    "agents/architect/reasoning.md",
+    "agents/architect/execution.md",
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "agents/architect/examples.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/invocation-envelope.json",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/validation-report.json"
+  ],
+  "confidence": "low",
+  "declared_side_effects": [
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-FC-001-D-001.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-FC-001-D-002.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-FC-001-D-003.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-d-001.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-d-002.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-d-003.md",
+    "runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

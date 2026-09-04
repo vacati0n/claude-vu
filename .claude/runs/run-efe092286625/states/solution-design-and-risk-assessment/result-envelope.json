@@ -1,0 +1,122 @@
+{
+  "invocation_id": "inv-efe092286625-03-003",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-efe092286625/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-efe092286625/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-efe092286625/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md"
+  ],
+  "structured_output": {
+    "design_id": "CKA-01-technical-design",
+    "package_status": "complete",
+    "attempt": 3,
+    "repair_of": "inv-efe092286625-03-002",
+    "repair_passes": 1,
+    "repairs": [
+      "D8.2/A8.3: the provisioning option rows (O-004, O-005, O-006) now carry the identical 13-column shape as the detection rows, with every criterion cell filled, including Operability and Outcome; C-007 through C-009 dispositions are recorded in each row's Structural change and Outcome cells and C-008 elimination is cited in the Outcome cells",
+      "D8.4/A8.5: exactly one selected option remains — O-001, the option the design's structural change, ADR D-001, and the sequencing constraints implement. The table Outcome cell of O-001 and the 5.3 'Selected: O-001.' field are the only selection markers; O-004 is consistently worded as the provisioning decision adopted because hard constraint C-008 forces it ('Adopted for D-002, forced by hard constraint C-008' in the table, 'adopts O-004' in 5.4, 'forced by hard constraint C-008' in the appendix), never as selected"
+    ],
+    "surgical_scope_note": "only section 5.2 (provisioning table columns and O-004 outcome wording), section 5.3 (single Selected field, rationale and tradeoff rewording), section 5.4 D-001/D-002 marker verbs, and the appendix backward-closure phrase changed; digests, section structure, option set, ADR files, and all previously passing content untouched",
+    "counts": {
+      "statements": 17,
+      "facts": 18,
+      "assumptions": 2,
+      "constraints": 9,
+      "impacted_modules": 8,
+      "options": 6,
+      "decisions": 3,
+      "architecture_significant_decisions": 2,
+      "risks": 6,
+      "sequencing_constraints": 5,
+      "open_questions": 2
+    },
+    "plan_assumption_dispositions": {
+      "plan-assumption-1 (additive extension exists without touching forbidden paths)": "confirmed: design facts F-013 and F-014; impact surface confined to omn_agent/validator.py, pyproject.toml, README.md, user-guide.html",
+      "plan-assumption-2 (PyYAML is the only undeclared runtime dependency)": "confirmed: the recorded top-level import inventory (design fact F-014) shows the YAML module is the only third-party top-level root across the installed payload runtime files"
+    },
+    "recomputed_option_ranking": {
+      "criteria_order": [
+        "hard_constraint_satisfaction",
+        "impact_surface",
+        "reuse_leverage",
+        "quality_attribute_satisfaction",
+        "migration_burden",
+        "operability_impact"
+      ],
+      "single_selected_option": "O-001",
+      "evaluation": {
+        "O-001": {"hard_constraints": "all satisfied", "impact_surface": 1, "reuse_leverage": 7, "quality_exposure": "lowest", "migration_burden": 1, "operability": "negligible", "outcome": "Selected"},
+        "O-002": {"hard_constraints": "all satisfied", "impact_surface": 1, "reuse_leverage": 5, "quality_exposure": "higher", "migration_burden": 1, "operability": "larger scan", "outcome": "rejected on reuse leverage and C-004 exposure"},
+        "O-003": {"hard_constraints": "violates C-005", "outcome": "eliminated"},
+        "O-004": {"hard_constraints": "all satisfied; only provisioning option satisfying C-008", "impact_surface": 1, "reuse_leverage": 1, "migration_burden": 1, "operability": "one additional wheel", "outcome": "adopted for D-002, forced by C-008 (not a selection marker)"},
+        "O-005": {"hard_constraints": "violates C-008", "outcome": "eliminated"},
+        "O-006": {"hard_constraints": "violates C-008", "outcome": "eliminated"}
+      },
+      "recomputed_winner": "O-001",
+      "stated_selection": "O-001",
+      "agreement": true,
+      "tie_break_used": false
+    },
+    "quality_checks": {
+      "check_set_version": "1.0.0",
+      "total": 98,
+      "passed": 98,
+      "failed": 0,
+      "results": {
+        "A1": {"A1.1": "pass", "A1.2": "pass", "A1.3": "pass", "A1.4": "pass", "A1.5": "pass", "A1.6": "pass", "A1.7": "pass", "A1.8": "pass"},
+        "A2": {"A2.1": "pass", "A2.2": "pass", "A2.3": "pass", "A2.4": "pass", "A2.5": "pass", "A2.6": "pass", "A2.7": "pass", "A2.8": "pass", "A2.9": "pass", "A2.10": "pass"},
+        "A3": {"A3.1": "pass", "A3.2": "pass", "A3.3": "pass", "A3.4": "pass", "A3.5": "pass", "A3.6": "pass"},
+        "A4": {"A4.1": "pass (case-insensitive vendor-string sweep clean)", "A4.2": "pass", "A4.3": "pass", "A4.4": "pass"},
+        "A5": {"A5.1": "pass", "A5.2": "pass", "A5.3": "pass", "A5.4": "pass"},
+        "A6": {"A6.1": "pass", "A6.2": "pass", "A6.3": "pass", "A6.4": "pass", "A6.5": "pass", "A6.6": "pass"},
+        "A7": {"A7.1": "pass", "A7.2": "pass", "A7.3": "pass", "A7.4": "pass", "A7.5": "pass"},
+        "A8": {"A8.1": "pass", "A8.2": "pass", "A8.3": "pass (repaired: all six option rows carry every criterion cell filled; grep confirms no empty or dash cell in any O-00x row)", "A8.4": "pass (O-003 names C-005; O-005/O-006 name C-008; O-002 cites its scoring criteria)", "A8.5": "pass (repaired: single selection marker; recomputation confirms O-001; grep confirms 'selected' is adjacent only to O-001)", "A8.6": "pass", "A8.7": "pass"},
+        "A9": {"A9.1": "pass", "A9.2": "pass", "A9.3": "pass", "A9.4": "pass (vacuous: no data migration)", "A9.5": "pass", "A9.6": "pass"},
+        "A10": {"A10.1": "pass", "A10.2": "pass", "A10.3": "pass", "A10.4": "pass", "A10.5": "pass", "A10.6": "pass", "A10.7": "pass"},
+        "A11": {"A11.1": "pass", "A11.2": "pass", "A11.3": "pass", "A11.4": "pass", "A11.5": "pass"},
+        "A12": {"A12.1": "pass", "A12.2": "pass", "A12.3": "pass", "A12.4": "pass (vacuous: no XL estimate)", "A12.5": "pass"},
+        "A13": {"A13.1": "pass", "A13.2": "pass", "A13.3": "pass (ADR D-001 alternatives O-002/O-003 and ADR D-002 alternatives O-005/O-006 match the 5.2 tables; ADR files unchanged this attempt)", "A13.4": "pass", "A13.5": "pass", "A13.6": "pass", "A13.7": "pass"},
+        "A14": {"A14.1": "pass", "A14.8": "pass (accepting owner omn-tech-lead named under producer exclusion)", "A14.2": "pass", "A14.3": "pass", "A14.4": "pass", "A14.5": "pass", "A14.6": "pass", "A14.7": "pass"},
+        "A15": {"A15.1": "pass (17/17 statements mapped)", "A15.2": "pass (8/8 modules traced)", "A15.3": "pass (D-001 to selected O-001; D-002 to adopted O-004, forced by C-008)", "A15.4": "pass", "A15.5": "pass (T-001..T-007 all bound, T-004 at P-001)"},
+        "A16": {"A16.1": "pass", "A16.2": "pass (no identifier renumbered; wording-only repair)", "A16.3": "pass (digests verbatim from the invocation envelope, unchanged)", "A16.4": "pass", "A16.5": "pass (retry attempt: all prior identifiers preserved; changes recorded in structured_output.repairs)"}
+      }
+    },
+    "closure_counts": {
+      "forward_mapped_statements": 17,
+      "backward_traced_modules": 8,
+      "lateral_resolved_risks": 6,
+      "current_state_claims_verified_referenced": true
+    },
+    "self_check_evidence": {
+      "selection_marker_grep": "case-insensitive 'select' occurrences in the artifact: O-001 table Outcome ('Selected'), section heading '5.3 Selected Approach', field 'Selected: O-001.', and one generic 'the selected approach' phrase with no option identifier adjacent; no other option id ever appears next to a selection marker",
+      "table_cell_grep": "no empty or dash-only cell in any O-00x row; both option tables share the identical 13-column header and every row carries 13 filled cells"
+    },
+    "attestations": [
+      "no implementation work was performed",
+      "no external system was accessed; all context came from supplied inputs and authorized repository reads",
+      "decision records D-001 and D-002 emitted at status Proposed; acceptance rests with the Design Gate owners (accepting owner omn-tech-lead under producer exclusion)",
+      "input and context digests carried verbatim from the invocation envelope; the frozen snapshot was not extended during repair",
+      "only technical-design.md and this envelope were written in this attempt; both ADR files are unchanged from attempt 2"
+    ],
+    "open_decisions_blocking": 0,
+    "items_requiring_gate_approval": ["ADR D-001", "ADR D-002"]
+  },
+  "evidence_refs": [
+    "agents/architect/system.md",
+    "agents/architect/identity.md",
+    "agents/architect/reasoning.md",
+    "agents/architect/execution.md",
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "agents/architect/examples.md",
+    "runs/run-efe092286625/states/solution-design-and-risk-assessment/invocation-envelope.json",
+    "runs/run-efe092286625/states/solution-design-and-risk-assessment/failure-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-efe092286625/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-efe092286625/states/solution-design-and-risk-assessment/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

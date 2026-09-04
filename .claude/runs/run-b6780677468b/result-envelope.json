@@ -1,0 +1,146 @@
+{
+  "invocation_id": "inv-b6780677468b-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-b6780677468b/artifacts/execution-plan.md"
+  ],
+  "structured_output": {
+    "planId": "reviewer-agent-execution-plan",
+    "planStatus": "complete",
+    "counts": {
+      "statements": 8,
+      "assumptions": 6,
+      "risks": 10,
+      "tasks": 14,
+      "edges": 21,
+      "waves": 6,
+      "openQuestions": 7,
+      "blockingOpenQuestions": 0,
+      "businessObjectives": 2,
+      "technicalObjectives": 4,
+      "planAcceptanceCriteria": 4,
+      "externalDependencies": 0
+    },
+    "openQuestions": 7,
+    "recomputedTopologicalOrder": {
+      "method": "level-based topological sort over the 8.1 edge table; ties within a wave ordered by ascending task identifier",
+      "wave1": ["T-001", "T-009"],
+      "wave2": ["T-002", "T-010", "T-011", "T-012", "T-013", "T-014"],
+      "wave3": ["T-003", "T-004"],
+      "wave4": ["T-005", "T-007"],
+      "wave5": ["T-006"],
+      "wave6": ["T-008"],
+      "matchesStatedOrder": true,
+      "acyclic": true,
+      "tasksOrdered": 14
+    },
+    "identifierDerivation": {
+      "taskOrderingRule": "ascending by the lowest statement identifier each task serves; ties broken by R6 rule class (decision, contract, build, validation, documentation), then owning agent identifier ascending, then traced-identifier sequence",
+      "renumberedDuringRun": false
+    },
+    "reasoningStages": {
+      "R1": "8 statements extracted from 1 feature-request input; no embedded instruction obeyed",
+      "R2": "S-001 to S-003 classified outcome; S-004 to S-008 classified constraint; 0 unclear",
+      "R3": "2 business objectives, 4 technical objectives, disjoint",
+      "R4": "13 in-scope, 3 out-of-scope, 3 deferred; scope boundable, no phased fallback",
+      "R5": "6 assumptions registered",
+      "R6": "14 tasks; all five validity conditions satisfied",
+      "R7": "21 edges, all justified; no cycle detected",
+      "R8": "6 execution waves derived by topological sort",
+      "R9": "9 M, 4 S, 1 L, 0 XS, 0 XL; 2 tasks at low confidence for unconfirmed assumption dependence",
+      "R10": "10 risks across requirement, technical, dependency, security, operational, delivery",
+      "R11": "implement-feature selected; 14 tasks mapped across 6 phases; 10 capability rows, 4 skill rows",
+      "R12": "4 plan acceptance criteria, all tracing to business objectives",
+      "R13": "forward closure 8 of 8 statements; backward closure 14 of 14 tasks; lateral closure holds"
+    },
+    "qualityChecks": {
+      "Q1.1": "pass", "Q1.2": "pass", "Q1.3": "pass", "Q1.4": "pass",
+      "Q1.5": "pass", "Q1.6": "pass", "Q1.7": "pass",
+      "Q2.1": "pass", "Q2.2": "pass", "Q2.3": "pass", "Q2.4": "pass",
+      "Q2.5": "pass", "Q2.6": "pass", "Q2.7": "pass", "Q2.8": "pass",
+      "Q3.1": "pass", "Q3.2": "pass", "Q3.3": "pass", "Q3.4": "pass",
+      "Q4.1": "pass", "Q4.2": "pass", "Q4.3": "pass", "Q4.4": "pass", "Q4.5": "pass",
+      "Q5.1": "pass", "Q5.2": "pass", "Q5.3": "pass", "Q5.4": "pass", "Q5.5": "pass",
+      "Q5.6": "pass", "Q5.7": "pass", "Q5.8": "pass", "Q5.9": "pass", "Q5.10": "pass",
+      "Q6.1": "pass", "Q6.2": "pass", "Q6.3": "pass", "Q6.4": "pass",
+      "Q6.5": "pass", "Q6.6": "pass", "Q6.7": "pass", "Q6.8": "pass",
+      "Q7.1": "pass", "Q7.2": "pass", "Q7.3": "pass", "Q7.4": "pass",
+      "Q7.5": "pass", "Q7.6": "pass",
+      "Q8.1": "pass", "Q8.2": "pass", "Q8.3": "pass", "Q8.4": "pass", "Q8.5": "pass",
+      "Q9.1": "pass", "Q9.2": "pass", "Q9.3": "pass", "Q9.4": "pass",
+      "Q9.5": "pass", "Q9.6": "pass", "Q9.7": "pass",
+      "Q10.1": "pass", "Q10.2": "pass", "Q10.3": "pass", "Q10.4": "pass", "Q10.5": "pass",
+      "Q11.1": "pass", "Q11.2": "pass", "Q11.3": "pass", "Q11.4": "pass", "Q11.5": "pass"
+    },
+    "qualityCheckSummary": {
+      "checkSetVersion": "1.0.0",
+      "checksRun": 70,
+      "checksPassed": 70,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "advisoryFailures": 0
+    },
+    "repairPasses": [
+      {
+        "check": "Q5.5",
+        "finding": "Four task titles joined two independently verifiable outcomes with 'and'",
+        "repair": "Retitled T-002, T-006, T-007, and T-008 to a single outcome each; task content unchanged"
+      },
+      {
+        "check": "Q9.4",
+        "finding": "The documentation capability identifier is declared in agents/capability-matrix.md without a hyphenated form, so it does not resolve through the capability resolver",
+        "repair": "T-008 declares release-communication instead, and the resolution gap is recorded as open question Q-007"
+      },
+      {
+        "check": "Q6.2",
+        "finding": "A placeholder row in the External Dependencies table would have registered 'None identified.' as a named external party",
+        "repair": "Section 8.2 states None identified. in prose with the reason, and declares no table row"
+      }
+    ],
+    "closureCounts": {
+      "forwardStatementsCovered": 8,
+      "forwardStatementsTotal": 8,
+      "backwardTasksTraced": 14,
+      "backwardTasksTotal": 14,
+      "lateralUnresolvedReferences": 0
+    },
+    "tasksRequiringGateApprovalBeforeExecution": {
+      "Scope Gate": ["T-009"],
+      "Design Gate": ["T-001", "T-002", "T-003", "T-004", "T-010"],
+      "Review Gate": ["T-011", "T-013", "T-014"],
+      "Verification Gate": ["T-007", "T-012"],
+      "Closure Gate": ["T-008"]
+    },
+    "boundaryStatement": "No implementation work was performed. No code, test, configuration, schema, or architecture decision was produced. No external system, repository, or ticketing tool was accessed; all requirement content came from the supplied input text."
+  },
+  "evidence_refs": [
+    "agents/planner/manifest.yaml",
+    "agents/planner/system.md",
+    "agents/planner/identity.md",
+    "agents/planner/reasoning.md",
+    "agents/planner/execution.md",
+    "agents/planner/output.md",
+    "agents/planner/quality.md",
+    "agents/planner/examples.md",
+    "runs/run-b6780677468b/invocation-envelope.json",
+    "templates/execution-plan.md",
+    "registry/agents.yaml",
+    "registry/workflows.yaml",
+    "registry/skills.yaml",
+    "registry/templates.yaml",
+    "agents/capability-matrix.md",
+    "skills/agent-skill-matrix.md",
+    "workflows/workflow-gate-matrix.md",
+    "workflows/implement-feature.md",
+    "context/product-context.md",
+    "context/technical-context.md",
+    "context/release-context.md"
+  ],
+  "confidence": 0.82,
+  "declared_side_effects": [
+    "runs/run-b6780677468b/artifacts/execution-plan.md",
+    "runs/run-b6780677468b/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

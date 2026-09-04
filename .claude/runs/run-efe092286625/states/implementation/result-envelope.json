@@ -1,0 +1,132 @@
+{
+  "invocation_id": "inv-efe092286625-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-efe092286625/states/implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-0003",
+    "workflowPhase": "implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 5,
+      "testEvidenceEntries": 7,
+      "deviations": 1,
+      "residualRisks": 3,
+      "openQuestions": 1
+    },
+    "evidenceExecution": {
+      "commandsExecuted": 4,
+      "commandsPassed": 4,
+      "commandsFailed": 0,
+      "commands": [
+        "env -u NO_COLOR python -m unittest discover -s tests -- pre-change baseline: 265 tests, OK",
+        "env -u NO_COLOR python -m unittest discover -s tests -k missing_toplevel_import -k import_check -k import_finding_hint -k DependencyDeclaration -- pre-change failing witness: 7 tests, 4 failures, 1 error, as expected before the change",
+        "env -u NO_COLOR python -m unittest discover -s tests -k missing_toplevel_import -k import_check -k import_finding_hint -k DependencyDeclaration -- post-change: 7 tests, OK",
+        "env -u NO_COLOR python -m unittest discover -s tests -- post-change full suite: 272 tests, OK (265 baseline unchanged plus 7 added)"
+      ],
+      "executionNote": "Every command was executed from the repository root with the NO_COLOR variable cleared, per the repository's own test invocation. The failing-witness run is counted as passing evidence execution because it returned exactly the pre-change failures the witness exists to demonstrate; the deciding post-change runs total 279 test executions with 0 failures."
+    },
+    "qualityChecks": {
+      "total": 44,
+      "passed": 44,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "M1": "pass",
+        "M5": "pass",
+        "M7": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "M3": "pass",
+        "M2": "pass",
+        "K1": "pass",
+        "K2": "pass",
+        "M4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "B1": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "B4": "pass",
+        "B5": "pass",
+        "B6": "pass",
+        "M6": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass"
+      }
+    },
+    "validationEngine": {
+      "validator": "implementation_report_validator",
+      "decidableChecks": 31,
+      "decidablePassed": 31,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 4,
+      "note": "PASS on the emitted artifact; re-run in full after the one correctable repair (the baseline row's Covers cell was narrowed to the entries the pre-change suite actually exercised)"
+    },
+    "notMachineCheckableObligations": {
+      "N1": "satisfied -- each of the five change-set paths was read before and after the edit and its content matches the purpose the row states; the validator change is additive after the compile step, the metadata change is one dependency entry, and the two documentation changes state the corrected footprint",
+      "N2": "satisfied -- the broken-install, sibling, boundedness, and hint tests execute the changed verification helper; the static tests read the changed metadata and documentation files; the full-suite rows cover the entries their runs actually exercised, and the baseline row's Covers cell was narrowed to keep that true",
+      "N3": "satisfied -- the only behavioural additions are one new finding code on the shared validation path and one dependency declaration; the healthy path emits nothing new (proved by the unchanged 265-test baseline passing post-change), and no gate-decision, producer-exclusion, or approval path was touched, re-verified by symbol inspection of the changed module"
+    },
+    "designConformance": {
+      "detectionDecision": "D-001 implemented as accepted (static top-level import resolution inside _check_python; ERROR finding V-IMPORT names file, module, and checking interpreter; report-never-raise; compile-failed files not import-checked; healthy path silent)",
+      "provisioningDecision": "D-002 implemented as accepted; the design's open version-range question was resolved at the Design Gate as a lower-bounded unpinned constraint and implemented as pyyaml>=6",
+      "carryForwardHonored": "no test asserts that the non-descriptor-named verification script produces a finding; that gap is the accepted tradeoff recorded as residual risk R-001",
+      "forbiddenPaths": "record_gate_decision, gate matrix semantics, producer exclusion, runner approval requirement, and human-block paths untouched; none of those symbols occur in the changed code module"
+    },
+    "escalations": [],
+    "boundariesDeclined": [
+      "no review verdict, merge decision, or release readiness claim recorded",
+      "no scope or design decision taken; the sibling-resolution latitude is recorded as deviation V-001 with rationale, not as a design revision",
+      "no acceptance criterion, threshold, or invariant relaxed; the two acceptance demonstrations this invocation cannot perform (clean-venv install, real dependency-absent doctor run) are named as unverified areas and routed to omn-qa as open question Q-001"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-efe092286625/states/implementation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "omn_agent/validator.py",
+    "pyproject.toml",
+    "README.md",
+    "docs/user-guide.html",
+    "tests/test_omn_agent.py",
+    "runs/run-efe092286625/states/implementation/artifacts/implementation-report.md",
+    "runs/run-efe092286625/states/implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

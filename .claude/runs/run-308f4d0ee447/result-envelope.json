@@ -1,0 +1,240 @@
+{
+  "invocation_id": "inv-308f4d0ee447-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-308f4d0ee447/artifacts/technical-design.md",
+    "runs/run-308f4d0ee447/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-308f4d0ee447/artifacts/architecture-decision-record-D-002.md",
+    "runs/run-308f4d0ee447/artifacts/architecture-decision-record-D-003.md"
+  ],
+  "structured_output": {
+    "package_status": "complete",
+    "design_id": "reviewer-agent-technical-design",
+    "input_digest": "sha256:9b2ffccc86173b79b469d7b81155db11",
+    "context_digest": "sha256:44927b3bcdd3fa660562ae2b83f0ce6e",
+    "counts": {
+      "statements": 16,
+      "facts": 30,
+      "assumptions": 5,
+      "constraints": 16,
+      "constraints_hard": 15,
+      "constraints_negotiable": 1,
+      "impacted_modules": 13,
+      "impacted_modules_confirmed": 11,
+      "impacted_modules_speculative": 2,
+      "impacted_modules_no_change_verified": 2,
+      "options": 4,
+      "options_eliminated": 3,
+      "decisions": 5,
+      "decisions_architecture_significant": 3,
+      "decisions_inline": 2,
+      "decision_records_emitted": 3,
+      "risks": 15,
+      "sequencing_constraints": 14,
+      "open_questions": 9,
+      "open_questions_blocking": 0
+    },
+    "impacted_module_set": [
+      "M-001 registry/agents.yaml :: contract-change :: confirmed",
+      "M-002 agents/reviewer/ contract module set :: extension :: confirmed",
+      "M-003 agents/reviewer.agent.md host registration :: extension :: speculative",
+      "M-004 agents/capability-matrix.md :: contract-change :: confirmed",
+      "M-005 skills/agent-skill-matrix.md :: contract-change :: confirmed",
+      "M-006 templates/review-result.md :: extension :: confirmed",
+      "M-007 registry/templates.yaml :: contract-change :: confirmed",
+      "M-008 agents/omn-dev-2-reviewer.md :: contract-change :: confirmed",
+      "M-009 workflows/implement-feature.md :: dependency-change :: speculative",
+      "M-010 workflows/workflow-gate-matrix.md :: behavior-change :: confirmed",
+      "M-011 registry/workflows.yaml :: no-change-verified :: confirmed",
+      "M-012 dependency-map.md :: no-change-verified :: confirmed",
+      "M-013 runtime/README.md :: operational-impact :: confirmed"
+    ],
+    "option_set": [
+      "O-001 new registered identity superseding the existing review responsibility, superseded rows retained",
+      "O-002 new identity holding plan and design review plus framework governance, existing role retains code-change review",
+      "O-003 in-place migration of the existing review contract, registered under its current identifier",
+      "O-004 new identity Primary for both review capabilities alongside the unchanged existing role"
+    ],
+    "recomputed_option_ranking": {
+      "method": "A8.5 verified by recomputation, not inspection. Evaluation criteria re-applied to the 5.2 table in fixed order.",
+      "criterion_1_hard_constraint_satisfaction": {
+        "O-001": "satisfies C-001, C-003, C-006, C-007, C-012 :: survives",
+        "O-002": "violates C-001, C-006 :: eliminated",
+        "O-003": "violates C-007 :: eliminated",
+        "O-004": "violates C-001, C-003, C-006 :: eliminated"
+      },
+      "surviving_set": ["O-001"],
+      "criteria_2_to_6_applied": false,
+      "criteria_2_to_6_note": "One option survives criterion 1, so impact surface, reuse leverage, quality attributes, migration burden, and operability do not decide the selection and are recorded for comparison only.",
+      "recomputed_winner": "O-001",
+      "recorded_selection": "O-001",
+      "agreement": true,
+      "highest_scoring_rejected_alternative": "O-003 (impact surface 5, reuse leverage 11, migration burden 1; best on every criterion after the first; lost on C-007 alone)"
+    },
+    "decision_records": [
+      "D-001 :: Proposed :: register the review role under a new agent identity superseding the existing review responsibility",
+      "D-002 :: Proposed :: one contract-defined review-result artifact with a per-dimension outcome register",
+      "D-003 :: Proposed :: separate contract registration from runtime dispatchability"
+    ],
+    "planner_task_coverage": {
+      "supplied_plan": "runs/run-b6780677468b/artifacts/execution-plan.md",
+      "tasks_supplied": 14,
+      "tasks_bound_by_sequencing_constraints": 14,
+      "unaddressed": [],
+      "binding": {
+        "T-001": ["P-001"],
+        "T-002": ["P-003"],
+        "T-003": ["P-005", "P-007"],
+        "T-004": ["P-006"],
+        "T-005": ["P-009"],
+        "T-006": ["P-007", "P-008", "P-011"],
+        "T-007": ["P-010"],
+        "T-008": ["P-012", "P-013"],
+        "T-009": ["P-002"],
+        "T-010": ["P-004"],
+        "T-011": ["P-004"],
+        "T-012": ["P-004"],
+        "T-013": ["P-004"],
+        "T-014": ["P-004"]
+      }
+    },
+    "traceability_closure": {
+      "forward_statements_mapped": "16 of 16",
+      "backward_modules_traced_to_fact_or_assumption": "13 of 13",
+      "backward_decisions_traced_to_option": "5 of 5",
+      "lateral_risks_attached": "15 of 15",
+      "lateral_plan_steps_resolving": "14 of 14",
+      "lateral_records_matching_decisions": "3 of 3",
+      "register_integrity_current_state_claims_referenced": "all verified referenced to an F-nnn or A-nnn",
+      "speculative_impacts_with_matching_risk": "2 of 2 (M-003 via R-007 and R-010; M-009 via R-009)",
+      "approach_changing_assumptions_with_matching_risk": "5 of 5 (A-001/R-006, A-002/R-005, A-003/R-014, A-004/R-015, A-005/R-007)"
+    },
+    "estimate": {
+      "overall": "L",
+      "confidence": "medium",
+      "expressed_as": "complexity level, never duration"
+    },
+    "context_conflict_handling": {
+      "detected": true,
+      "detail": "F-030 records that the known-gaps entry in runtime/README.md disagrees with registry/skills.yaml on the registration status of S03, and with the architecture context's asserted property 4 on whether solution-design-and-risk-assessment executes.",
+      "resolution": "Not reconciled by this agent. Both records are registered as facts and the divergence itself is recorded as F-030. C-001 and F-019 establish the registries as the declared single authority for identity metadata, so a declared precedence settles the substantive question rather than this agent doing so. The stale narrative is routed as Q-006, owned by omn-tech-lead, and corrected at P-013. E-CONTEXT-STALE was therefore not raised as a blocking condition, because the conflict does not prevent approach selection.",
+      "package_status_effect": "none; status remains complete"
+    },
+    "quality_checks": {
+      "check_set_version": "agents/architect/quality.md, contract version 1.0.0",
+      "total": 98,
+      "passed": 98,
+      "failed": 0,
+      "blocking_failures": 0,
+      "repair_passes": 2,
+      "repairs": [
+        "pass 1 :: A6.3 :: M-006 basis cited C-008 and C-009, which are constraints, not fact or assumption identifiers. Replaced with F-016 and F-029.",
+        "pass 1 :: A3.4 :: two current-state claims opening the API and Data Model Impact section carried no F-nnn or C-nnn reference. Rewritten to cite F-001 and C-012.",
+        "pass 1 :: A13.3 :: the Alternatives Considered sections of ADR D-002 and ADR D-003 were derived per decision rather than carried from the 5.2 evaluation table. Both rewritten to carry O-002, O-003, and O-004, stated in terms of each decision.",
+        "pass 2 :: A5.3 :: Blocking failure raised by the Validation Engine. Section 3, Non-functional requirements, fourth item carried a constraint trace only. The requirement derives from S-010, the acceptance intent that the role hold on the same terms as the roles already registered, which is what licenses applying the framework's determinism property to it. The line now reads 'on the same terms as the roles already registered (S-010, C-016)'. C-016 was retained, because the constraint is what makes the requirement hard. No identifier was added, removed, or renumbered, and no other line or section changed."
+      ],
+      "repair_pass_2_scope": {
+        "trigger": "Validation Engine rejection, one Blocking check: A5.3.",
+        "lifecycle_path": "Completion -> Execution (repair) -> Completion, per the rejection rules in agents/architect/quality.md.",
+        "files_changed": ["runs/run-308f4d0ee447/artifacts/technical-design.md"],
+        "lines_changed": 1,
+        "identifiers_added": 0,
+        "identifiers_removed": 0,
+        "identifiers_renumbered": 0,
+        "digests_unchanged": true,
+        "checks_rerun": ["A5.3", "A5.1", "A5.2", "A5.4", "A15.1", "A1.3", "A1.6", "A16.1", "A16.2"],
+        "checks_rerun_passed": 9,
+        "checks_rerun_failed": 0,
+        "rerun_detail": {
+          "A5.3": "pass :: every requirement in section 3 now carries a statement trace; the determinism requirement cites S-010",
+          "A5.1": "pass :: architectural objectives untouched, each still tracing to a statement identifier",
+          "A5.2": "pass :: objectives remain structural properties",
+          "A5.4": "pass :: structural out-of-scope untouched and non-empty",
+          "A15.1": "pass :: forward closure holds; S-010 maps to the second architectural objective, M-001, and this requirement",
+          "A1.3": "pass :: no section empty",
+          "A1.6": "pass :: S-010 and C-016 both match the declared identifier patterns",
+          "A16.1": "pass :: identifiers remain ascending, zero-padded, and unique within each scheme",
+          "A16.2": "pass :: no identifier reused or renumbered; an existing statement identifier was cited, not created"
+        }
+      },
+      "results": {
+        "A1.1": "pass", "A1.2": "pass", "A1.3": "pass", "A1.4": "pass",
+        "A1.5": "pass", "A1.6": "pass", "A1.7": "pass", "A1.8": "pass",
+        "A2.1": "pass", "A2.2": "pass", "A2.3": "pass", "A2.4": "pass",
+        "A2.5": "pass", "A2.6": "pass", "A2.7": "pass", "A2.8": "pass",
+        "A2.9": "pass", "A2.10": "pass",
+        "A3.1": "pass", "A3.2": "pass", "A3.3": "pass",
+        "A3.4": "pass (after repair pass 1)", "A3.5": "pass", "A3.6": "pass",
+        "A4.1": "pass", "A4.2": "pass", "A4.3": "pass", "A4.4": "pass",
+        "A5.1": "pass", "A5.2": "pass",
+        "A5.3": "pass (after repair pass 2)", "A5.4": "pass",
+        "A6.1": "pass", "A6.2": "pass", "A6.3": "pass (after repair pass 1)",
+        "A6.4": "pass", "A6.5": "pass", "A6.6": "pass",
+        "A7.1": "pass", "A7.2": "pass", "A7.3": "pass", "A7.4": "pass", "A7.5": "pass",
+        "A8.1": "pass", "A8.2": "pass", "A8.3": "pass", "A8.4": "pass",
+        "A8.5": "pass (verified by recomputation; recomputed winner O-001 equals recorded selection)",
+        "A8.6": "pass", "A8.7": "pass",
+        "A9.1": "pass", "A9.2": "pass", "A9.3": "pass", "A9.4": "pass", "A9.5": "pass", "A9.6": "pass",
+        "A10.1": "pass", "A10.2": "pass", "A10.3": "pass (prerequisite graph verified acyclic)",
+        "A10.4": "pass", "A10.5": "pass", "A10.6": "pass", "A10.7": "pass",
+        "A11.1": "pass", "A11.2": "pass", "A11.3": "pass", "A11.4": "pass", "A11.5": "pass",
+        "A12.1": "pass", "A12.2": "pass", "A12.3": "pass",
+        "A12.4": "pass (no XL estimate recorded)", "A12.5": "pass",
+        "A13.1": "pass", "A13.2": "pass", "A13.3": "pass (after repair pass 1)",
+        "A13.4": "pass", "A13.5": "pass", "A13.6": "pass", "A13.7": "pass",
+        "A14.1": "pass", "A14.2": "pass (all referenced agents resolve; omn-* agents resolve to contract files under agents/ per the Owner Resolution Note, which is recorded here as a visible gap)",
+        "A14.3": "pass", "A14.4": "pass", "A14.5": "pass", "A14.6": "pass",
+        "A14.7": "pass", "A14.8": "pass",
+        "A15.1": "pass", "A15.2": "pass", "A15.3": "pass", "A15.4": "pass", "A15.5": "pass",
+        "A16.1": "pass", "A16.2": "pass", "A16.3": "pass", "A16.4": "pass",
+        "A16.5": "pass (first attempt; no prior identifiers to preserve)"
+      }
+    },
+    "rejection_rules_evaluated": {
+      "any_blocking_check_failed": false,
+      "two_or_more_correctable_in_one_section_after_repair": false,
+      "complete_status_with_blocking_open_decision": false,
+      "current_state_claim_without_reference": false,
+      "selection_disagrees_with_evaluation_table": false,
+      "contract_change_without_transition_strategy": false,
+      "new_structure_over_unexamined_candidate": false,
+      "decision_record_not_at_proposed": false,
+      "any_A2_boundary_check_failed": false,
+      "verdict": "not rejected"
+    },
+    "owner_resolution_ledger_note": "Per the Owner Resolution Note in agents/architect/quality.md, the agents omn-product-owner, omn-tech-lead, omn-qa, omn-dev-2-reviewer, omn-documentation, omn-dev-1-implement, omn-architect and omn-orchestrator resolve only to contract files under agents/ and hold no record in registry/agents.yaml. This is valid today and is recorded here so the registration gap stays visible.",
+    "handoff": {
+      "recipients": ["orchestrator", "omn-tech-lead", "omn-dev-1-implement"],
+      "design_gate_owners": ["omn-architect", "omn-tech-lead"],
+      "accepting_owner_under_producer_exclusion": "omn-tech-lead",
+      "decisions_remaining_proposed": ["D-001", "D-002", "D-003"],
+      "requires_product_confirmation": ["Q-001", "Q-002", "Q-003", "Q-009"],
+      "requires_qa_review": ["P-010"],
+      "gate_approval_required_before": "P-006 changes any governance record"
+    },
+    "boundary_attestation": "No production code, test, migration, script, or configuration was written. No application module was edited. No planner task identifier was created. No decision record was emitted at a status other than Proposed. No sign-off or approval line was signed by this agent. No external system, repository, or ticketing tool was accessed; all context was consumed from the frozen input and context snapshot."
+  },
+  "evidence_refs": [
+    "agents/architect/system.md",
+    "agents/architect/identity.md",
+    "agents/architect/reasoning.md",
+    "agents/architect/execution.md",
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "agents/architect/examples.md",
+    "agents/architect/manifest.yaml",
+    "runs/run-308f4d0ee447/invocation-envelope.json",
+    "templates/technical-design.md",
+    "templates/architecture-decision-record.md"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-308f4d0ee447/artifacts/technical-design.md",
+    "runs/run-308f4d0ee447/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-308f4d0ee447/artifacts/architecture-decision-record-D-002.md",
+    "runs/run-308f4d0ee447/artifacts/architecture-decision-record-D-003.md",
+    "runs/run-308f4d0ee447/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

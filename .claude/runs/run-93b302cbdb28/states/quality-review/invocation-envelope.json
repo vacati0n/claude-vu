@@ -1,0 +1,444 @@
+{
+  "invocation_id": "inv-93b302cbdb28-05-001",
+  "run_id": "run-93b302cbdb28",
+  "work_item_id": "run-93b302cbdb28::quality-review",
+  "idempotency_key": "sha256:42e823e32101fb90e5bdc3f01b606e47",
+  "state_id": "quality-review",
+  "phase_index": 5,
+  "agent_id": "omn-dev-2-reviewer",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-2-reviewer.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-2-reviewer/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-2-reviewer/system.md",
+      "agents/omn-dev-2-reviewer/identity.md",
+      "agents/omn-dev-2-reviewer/reasoning.md",
+      "agents/omn-dev-2-reviewer/execution.md",
+      "agents/omn-dev-2-reviewer/output.md",
+      "agents/omn-dev-2-reviewer/quality.md",
+      "agents/omn-dev-2-reviewer/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-2-reviewer/system.md": "sha256:ef234d6d8e6b74d21d099ab744ab9f60",
+      "agents/omn-dev-2-reviewer/identity.md": "sha256:eb3a25037732ea072d8ee0a47fd5cf68",
+      "agents/omn-dev-2-reviewer/reasoning.md": "sha256:7a606b01a0779a20aeb5e56442b2c6ed",
+      "agents/omn-dev-2-reviewer/execution.md": "sha256:95492254f748b6b2c979f525537013de",
+      "agents/omn-dev-2-reviewer/output.md": "sha256:defcf8cb1031c7572a1b350db7a4d4a1",
+      "agents/omn-dev-2-reviewer/quality.md": "sha256:4d4c09812b441785acd1b03330468cc9",
+      "agents/omn-dev-2-reviewer/examples.md": "sha256:488657c9d243c3d498245922c2d92906"
+    },
+    "capabilities": [
+      "code-review",
+      "governance-enforcement",
+      "quality-verification"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "pull-request-diff",
+      "technical-design",
+      "execution-plan",
+      "scope-definition",
+      "bug-analysis",
+      "architecture-decision-record",
+      "coding-standards",
+      "test-evidence",
+      "architecture-rules",
+      "security-criteria",
+      "standards-checklist",
+      "regression-targets",
+      "known-issues",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/wave-1-rollout-feature-request.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-feature-request.md",
+        "text": "# Feature Request \u2014 Wave 1 Delivery Core Agent Rollout\n\n## Request\n\nMake the four Wave 1 delivery core agents of the AI Engineering Framework runtime-dispatchable,\nstarting with `omn-product-owner`, so that the phases they own stop blocking at\n`G1-CAPABILITY` and can execute inside a framework run.\n\nThe four agents, in rollout order:\n\n1. `omn-product-owner`\n2. `omn-dev-1-implement`\n3. `omn-dev-2-reviewer`\n4. `omn-qa`\n\n## Why now\n\nTwo of twelve phase owners hold an agent registry record today (`planner`, `architect`), so\n3 of 36 declared phases across the seven active workflows are dispatchable. Every other phase\nis enqueued and blocked with a recorded reason. The delivery path after planning and design \u2014\nscope, implementation, review, quality \u2014 has no executable owner at all, which is why no active\nworkflow other than `implement-feature` has a completed run, and why `implement-feature` itself\nreaches `WaitingForHuman` rather than `Completed`.\n\nWave 1 closes that path. It is the prerequisite for Waves 2 to 4, and for the claim that the\nframework builds itself rather than being built beside itself.\n\n## Expected outcome\n\nFor each of the four agents:\n\n- a runtime module set at `agents/<id>/` whose `manifest.yaml` declares a load order that\n  resolves on disk;\n- an active record in `registry/agents.yaml`;\n- the existing `agents/<id>.agent.md` host entrypoint continuing to resolve;\n- at least one completed run in which the agent owns a phase;\n- the artifact that phase emits accepted by a registered validator.\n\n## Known obstacles the request does not resolve\n\nThese are stated as facts about the current framework, not as instructions about what to do\nabout them. Deciding what to do about them is the point of routing this through the framework.\n\n1. Eleven of the twelve phases these four agents own declare a **prose** Output Artifact in\n   their workflow Phase Model \u2014 for example `scoped requirement summary` rather than a named\n   file. `framework_runtime.py` reads that column literally and requires the resulting string\n   to appear both in the owning manifest's `outputs[].artifact` and in the `VALIDATORS` map, so\n   a prose cell cannot resolve to an output contract however the agent is registered.\n   `review-pull-request/code-quality-review` is the single exception: it already names\n   `review-package.md`, for which a validator and a template exist.\n\n2. No phase these four agents own has an entry in `CONTEXT_SLICE_PHASE`, which declares three\n   phases today. A phase without one blocks at `G2-CONTEXT` even after `G1-CAPABILITY` clears.\n\n## Constraints on the request\n\n- One primary capability increment at a time.\n- No capability is complete without completed run evidence under `runs/`.\n- Registering an agent whose phase still cannot dispatch is not a completed increment; it is\n  a partial increment that must say so.",
+        "digest": "sha256:127b427528513043db51b8729290834e"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/wave-1-rollout-change-request.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-change-request.md",
+        "text": "# Change Request \u2014 Wave 1 Delivery Core Agent Rollout\n\n## Change class\n\n`capability-addition` per `config/self-hosting-profile.md` Routing Table. The framework gains\nagent runtime contracts, registry records, and phase execution it did not have.\n\nClassification evidence:\n\n```\npython .claude/runtime/self_hosting.py classify --path .claude/agents/omn-product-owner/manifest.yaml\n  [IN ] .claude/agents/omn-product-owner/manifest.yaml   SR-1\n  framework-internal change\n\npython .claude/runtime/self_hosting.py route --intent capability-addition\n  command : /implement   workflow : implement-feature v1.0.0   entry phase : scope-and-acceptance\n```\n\n## Surfaces this change is expected to touch\n\n| Surface | Nature of change |\n|---|---|\n| `agents/<wave-1-id>/` | New runtime module sets: `manifest.yaml` plus the modules its `loadOrder` declares |\n| `registry/agents.yaml` | New active records, one per Wave 1 agent |\n| `agents/<wave-1-id>.agent.md` | Registration status table updated to match reality |\n| `workflows/*.md` Phase Model | Possible Output Artifact column changes, if the artifact-type decision requires them |\n| `templates/` | Possible new artifact templates |\n| `runtime/framework_runtime.py` | Possible `VALIDATORS` and `CONTEXT_SLICE_PHASE` additions |\n| `runtime/*_validator.py` | Possible new validators |\n| `reports/` | Board and evidence updates (out of routing scope, `SR-4`) |\n\nThe four rows marked *possible* are conditional on the design decision. They are listed so the\nblast radius is declared up front rather than discovered during implementation.\n\n## Current state the change starts from\n\nFrozen in `reports/maturity-snapshot-2026-08-18.json`:\n\n- active agent registry records: 2 of 12 phase owners\n- host-invocable entrypoints: 12 of 12\n- runtime module sets: 2\n- dispatchable phases: 3 of 36; blocked: 33, all with reason `awaiting_capability_registration`\n- registered validators: 7; artifact types named as files by active Phase Models: 6\n- phase-mandatory skill references resolved: 101 of 101\n- runs: 6 total, 2 Completed, 4 WaitingForHuman\n- active workflows with zero completed runs: 6 of 7\n\n## Behavioral invariants\n\n| ID | Invariant |\n|---|---|\n| `INV-1` | `implement-feature/execution-planning` and `implement-feature/solution-design-and-risk-assessment` remain dispatchable |\n| `INV-2` | `refactor/scope-invariants-and-risk-profile` remains dispatchable |\n| `INV-3` | The two Completed runs held as replay references remain readable and their fingerprints unchanged |\n| `INV-4` | All four verifiers keep their current verdict; no check moves from pass to fail |\n| `INV-5` | No phase-mandatory skill reference becomes unresolved |\n| `INV-6` | Gate ownership and the Producer Exclusion Rule are unchanged |\n\n## Constraints\n\n- One primary capability surface per increment.\n- No registry activation without the runtime module set it points at.\n- No completion claim without a run under `runs/` that carries the evidence.\n- Where a phase cannot be made dispatchable inside this increment, it blocks with a recorded\n  reason and the increment reports it, rather than the scope being quietly narrowed.\n\n## Requested decision\n\nWhich increment sequence makes the four Wave 1 agents dispatchable at the lowest risk to\n`INV-1` through `INV-6`, and what artifact type each prose-output phase should emit so that\n`D-4` and `D-5` of the Agent Definition of Done become reachable.",
+        "digest": "sha256:460be1bbed3416e8c50741901edaa530"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/wave-1-rollout-business-intent.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-business-intent.md",
+        "text": "# Business Intent \u2014 Wave 1 Delivery Core Agent Rollout\n\n## Outcome sought\n\nThe framework can carry a change from scope through implementation, review, and quality\nwithout an operator standing in for a missing agent at each step.\n\n## Value\n\nToday the framework decides the route, holds the gates, and keeps the record, but executes\n3 of its 36 phases. Every other phase is performed by the operator against the run and recorded\nas a blocked phase in a change proposal. That is honest, and it does not scale: the operator is\nthe bottleneck for every increment, and the framework's own claim to be self-hosting rests on\nrouting rather than on execution.\n\nWave 1 converts the delivery core from recorded-blocked to executed. The measurable value is\nthe number of phases that dispatch and the number of active workflows with a completed run.\n\n## Success criteria\n\n| ID | Criterion | Measure |\n|---|---|---|\n| `BI-1` | The four Wave 1 agents hold active registry records | `registry/agents.yaml` active record count rises from 2 to 6 |\n| `BI-2` | Each of the four has a runtime module set whose load order resolves | 6 module sets under `agents/*/manifest.yaml` |\n| `BI-3` | At least one phase owned by a Wave 1 agent dispatches and completes | `verify_registry_coverage.py` C6 dispatchable count rises above 3 |\n| `BI-4` | The artifact of every executed Wave 1 phase is accepted by a registered validator | `validation-report.json` present and passing per executed phase |\n| `BI-5` | No metric regresses | all four verifiers still report their current verdict |\n\n## Non-goals\n\n- Waves 2 to 4 agents.\n- Skill registration for S04 and S05, and normalization of the CI/CD and coding-style assets.\n- Any change to gate ownership or to the Producer Exclusion Rule.\n- Making all 36 phases dispatchable.\n\n## Acceptance boundary\n\nA Wave 1 agent is accepted only on the full five-part Agent Definition of Done in\n`reports/self-hosting-execution-plan-2026-08-18.md` section 9.5. An agent that satisfies the\nfirst three conditions and not the last two is reported as partially rolled out, with the\nblocker named. Reporting it as done would make the board unusable as a record.\n\n## Risk posture\n\nLow tolerance for silent breakage of the existing executable path: `execution-planning` and\n`solution-design-and-risk-assessment` must keep dispatching, and the two completed runs held as\nreplay references must stay reproducible. Higher tolerance for an increment that lands\npartially and says so.",
+        "digest": "sha256:e44b4e1a4512bacd8b4a18a7815e2d66"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/wave-1-rollout-architecture-context.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-architecture-context.md",
+        "text": "# Architecture Context \u2014 Wave 1 Delivery Core Agent Rollout\n\nCurrent structural state of the framework, as read from source on 2026-08-18. Every claim\nbelow is checkable against the file named beside it.\n\n## 1. The capability chain a phase must clear\n\n`runtime/framework_runtime.py` gates every state work item on five guards. `G1-CAPABILITY`\nresolves the whole chain and is the one that stops Wave 1 phases today:\n\n| Link | Source of truth | Wave 1 state |\n|---|---|---|\n| active record in `registry/agents.yaml` | `registry/agents.yaml` | missing for all four agents |\n| manifest declaring the workflow and phase in `supportedWorkflows` | `agents/<id>/manifest.yaml` | no manifest exists for any of the four |\n| host registration | `agents/<id>.agent.md` | present for all twelve phase owners |\n| phase-mandatory skills resolvable | `registry/skills.yaml` | resolves; 101 of 101 references |\n| registered validator for the phase's output artifact | `VALIDATORS` in `framework_runtime.py` | see section 3 |\n\n`G2-CONTEXT` is a separate guard: `CONTEXT_SLICE_PHASE` declares `execution-planning`,\n`solution-design-and-risk-assessment`, and `scope-invariants-and-risk-profile`, and nothing else.\nAny other phase blocks there even after `G1-CAPABILITY` clears.\n\n## 2. The runtime module set pattern\n\nTwo exist, `agents/planner/` and `agents/architect/`. Both hold `manifest.yaml` plus seven\nmodules in a declared `loadOrder`:\n\n```\nsystem.md      operating-charter        authoritative operating instructions and invariants\nidentity.md    agent-contract           the Standard Agent Contract implementation\nreasoning.md   reasoning-procedure      deterministic analysis procedure\nexecution.md   execution-lifecycle      lifecycle states, phase gates, retry, escalation\noutput.md      output-contract          structural and semantic contract for the artifact\nquality.md     quality-contract         self-verification checks, gates, rejection rules\nexamples.md    reference-examples       conforming and non-conforming examples\n```\n\n`resolve_output_contract` requires `quality.md` to exist by path, independently of the manifest,\nand requires each declared output's `templateRef` and `contractRef` to resolve. The manifest\nalso carries `authorityScope`, `inputs`, `outputs`, `supportedWorkflows`, `skills`,\n`collaboration`, `determinism`, and `versioning`.\n\nEach of the four Wave 1 agents already has a single-file prose contract at `agents/<id>.md`,\naround 50 lines. `agents/planner/manifest.yaml` records the precedent for what happens to it:\n`versioning.supersedes` names the superseded single file with a reason.\n\n## 3. Output artifacts and validators\n\n`framework_runtime.py:334` reads the Phase Model Output Artifact cell literally, stripping only\nbackticks. `resolve_output_contract` then requires that exact string to be present in the\nowning manifest's `outputs[].artifact` and to be a key of `VALIDATORS`.\n\nRegistered validators (7): `execution-plan.md`, `technical-design.md`, `bug-analysis.md`,\n`investigation-report.md`, `release-note.md`, `review-package.md`, and\n`framework-change-proposal.md`. The first two are hand-written against the Planner and Architect\nnumbered check sets; four are declared as data and executed by `artifact_contract.py`; the last\nis a governance artifact no phase emits.\n\nWave 1 phases against that map:\n\n| Workflow / Phase | Owner | Output Artifact column | Resolvable |\n|---|---|---|---|\n| `implement-feature/scope-and-acceptance` | `omn-product-owner` | scoped requirement summary | no, prose |\n| `implement-feature/implementation` | `omn-dev-1-implement` | code changes and automated test evidence | no, prose |\n| `fix-bug/fix-implementation` | `omn-dev-1-implement` | corrective change set with regression tests | no, prose |\n| `refactor/refactor-implementation` | `omn-dev-1-implement` | incremental refactor changes with updated tests | no, prose |\n| `review-pull-request/code-quality-review` | `omn-dev-2-reviewer` | `review-package.md` | **yes** |\n| `implement-feature/quality-review` | `omn-dev-2-reviewer` | review findings log, verification report | no, prose |\n| `release/artifact-packaging` | `omn-dev-2-reviewer` | versioned artifacts with packaging evidence | no, prose |\n| `refactor/safety-net-establishment` | `omn-qa` | strengthened test suite and baseline validation record | no, prose |\n| `refactor/behavioral-validation` | `omn-qa` | parity validation report and regression status | no, prose |\n| `fix-bug/regression-validation` | `omn-qa` | verification evidence and residual risk notes | no, prose |\n| `review-pull-request/test-risk-validation` | `omn-qa` | test adequacy verdict with residual risk notes | no, prose |\n| `release/candidate-validation` | `omn-qa` | validation evidence with release candidate verdict | no, prose |\n\n`runtime/README.md` known gap 7 records the precedent for changing one of these columns:\n`review-pull-request/code-quality-review` was moved from a prose entry to `review-package.md`\nunder proposal `FC-001`, and the reasoning plus four rejected alternatives are held in\n`runs/run-3e22f11cb34d/states/solution-design-and-risk-assessment/`. The same note records that\nextending the declaration to the three other review-producing phases is available and is a\nproduct decision about scope, not a structural finding.\n\n`runtime/README.md` known gap 9 records the converse: four artifact types gained a validator\nwithout their phases becoming dispatchable, because a validator removes one condition of five.\n\n## 4. Artifact contract engine\n\n`artifact_contract.py` executes artifact contracts declared as data rather than coded. Four of\nthe seven validators are built this way. A new artifact type therefore has two available\nshapes: a declarative contract executed by that engine, or a hand-written validator where the\nowning agent ships a numbered check set in its `quality.md` that a validator must reproduce\nexactly.\n\n`templates/bug-analysis.md`, `templates/investigation-report.md`, and `templates/release-note.md`\nwere raised to 1.1.0 to become decidable: each gained a leading metadata block and the tables\nthat turn its agent's decision rules into something checkable. `templates/review-package.md`\nwas added new. That is the precedent for what a new template must carry.\n\n## 5. Gate ownership\n\nRead from `workflows/workflow-gate-matrix.md`, never invented by the runtime. 28 gate references\nacross the active Phase Models, all decidable, with the Producer Exclusion Rule enforced \u2014\nincluding through the `omn-` alias the matrix still uses for the architecture role. Wave 1 phases\nare closed by the Scope Gate, Review Gate, Verification Gate, Implementation Gate, Regression\nGate, Code Quality Gate, and Artifact Gate.\n\n`agents/omn-product-owner.agent.md` records that this role is a listed owner of the Scope Gate it\nproduces evidence for, so under the Producer Exclusion Rule the decision rests with\n`omn-business-analyst`.\n\n## 6. Self-hosting constraints on this increment\n\n`config/self-hosting-profile.md`:\n\n- `SR-1` puts every path under `.claude/**` in routing scope; `SR-3` to `SR-6` exempt runs,\n  reports, proposals, and `__pycache__`, and the exemption set is closed.\n- `C-3` requires every phase of the routed workflow to be enqueued and either executed with a\n  validated artifact or blocked with a recorded reason.\n- `E-6` and `E-7` require a phase artifact and its validation report where the routed workflow\n  has a dispatchable phase. `implement-feature` has two, so both are required here and cannot be\n  satisfied by the run's own record of blocking.\n- `C-7` requires every mandatory item of `validation/framework-release-checklist.md` recorded\n  with its result.\n\n## 7. Recorded structural risks\n\nFrom `runtime/README.md` known gaps, unchanged by this increment and relevant to it:\n\n- Gate decisions are recorded, not solicited; an undecided gate holds its successor indefinitely.\n- Retry is scheduled, not driven; a deadline is evaluated when a command next reads the run.\n- No lease expiry timer; a lost adapter leaves a work item `running` until `release` is run.\n- `workflows/workflow-engine.md` has no planning state and disagrees with\n  `workflows/implement-feature.md`; the registry points at the latter, so routing is unambiguous.\n- `workflows/workflow-engine.md` names a different owner than the Phase Model for the refactor\n  scope state and for two analysis states in `investigate` and `research`.",
+        "digest": "sha256:7a51081f7a8c82bc5c8e2615ded73ebb"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-93b302cbdb28/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-93b302cbdb28/states/implementation/artifacts/implementation-report.md",
+        "text": "```yaml\nimplementationReport:\n  reportId: IR-2026-0001\n  changeReference: run-93b302cbdb28 -- Wave 1 Delivery Core Agent Rollout, rollout item 2\n  sourceInputs:\n    - type: technical-design\n      reference: runs/run-93b302cbdb28/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n    - type: feature-request\n      reference: runs/inputs/wave-1-rollout-feature-request.md\n    - type: change-request\n      reference: runs/inputs/wave-1-rollout-change-request.md\n    - type: business-intent\n      reference: runs/inputs/wave-1-rollout-business-intent.md\n    - type: architecture-context\n      reference: runs/inputs/wave-1-rollout-architecture-context.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  workflowPhase: implementation\n  verificationStatus: partially-verified\n  inputDigest: sha256:a9a54edefd45836ebc78f231a4ef78c8\n  contextDigest: sha256:ff0556cfec8f11008fd2c2c1faf1c805\n```\n\n## Metadata\n\n- Report ID: IR-2026-0001\n- Change reference: run-93b302cbdb28 -- Wave 1 Delivery Core Agent Rollout, rollout item 2\n- Workflow phase: implementation\n- Status: provisional\n- Verification status: partially-verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: the three phases owned by this agent -- the implementation phase of implement-feature, the fix-implementation phase of fix-bug, and the refactor-implementation phase of refactor -- now resolve a named output contract and a per-phase context slice by declaration alone, so each dispatches instead of blocking at the capability guard.\n- Approach taken: the two accepted dispositions were applied to one role's phases in the order the design's sequencing constraints require -- template and template registry record, then validator and its mutation registration, then the manifest output declaration, then the Output Artifact cells with their paired Input columns, then the module set and the registry record, then the host registration, then the three phase-keyed context-slice entries -- so that the three-point identity of the artifact string was never partially true at any step.\n- Design reference: decision records D-001 and D-002, with D-003 supplying the registration contract, D-005 selecting the declarative validator shape, and D-006 bounding the supported-workflow declarations; sequencing constraints P-002 through P-009 govern the order.\n- Out of scope: the nine phases the other three Wave 1 roles own, which keep their prose Output Artifact cells and their recorded blocked reasons; the scope-and-acceptance phase, whose disposition belongs to a different owner; and the context-slice contract itself, which the design leaves unchanged. Leaving them is safe because each remains at the blocked reason it already carried, which is its pre-increment state.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | `registry/templates.yaml` | modified | Register the implementation-report template record so the artifact type is discoverable at the shape the registry enforces | D-001, P-002 |\n| `C-002` | `templates/implementation-report.md` | added | Supply the decidable template: a leading metadata block plus the tables that turn this agent's decision rules into checkable form | D-001, P-002 |\n| `C-003` | `runtime/fixtures/implementation-report.md` | added | Provide the conforming instance the validator is proved against, so acceptance and rejection are both demonstrable | D-001, P-003 |\n| `C-004` | `runtime/framework_runtime.py` | modified | Add the validator map key for the artifact identifier, and add the three phase-keyed context-slice entries the context guard reads | D-001, D-002, P-003, P-009 |\n| `C-005` | `runtime/implementation_report_validator.py` | added | Decide artifact conformance, executing the structural rules as data and the seven semantic rules of the quality module directly | D-005, P-003 |\n| `C-006` | `runtime/verify_validators.py` | modified | Register the mutation that proves the new validator rejects a non-conforming artifact by a named check rather than accepting everything | D-001, P-003 |\n| `C-007` | `agents/omn-dev-1-implement/manifest.yaml` | added | Declare the artifact identifier as a manifest output with template and contract references that resolve, supplying the third declaration point | D-001, P-004 |\n| `C-008` | `workflows/fix-bug.md` | modified | Name the artifact in the fix-implementation Output Artifact cell and reconcile the regression-validation Input column in the same change | D-001, P-005 |\n| `C-009` | `workflows/implement-feature.md` | modified | Name the artifact in the implementation Output Artifact cell and reconcile the quality-review Input column in the same change | D-001, P-005 |\n| `C-010` | `workflows/refactor.md` | modified | Name the artifact in the refactor-implementation Output Artifact cell and reconcile the behavioral-validation Input column in the same change | D-001, P-005 |\n| `C-011` | `agents/omn-dev-1-implement/examples.md` | added | Supply conforming and non-conforming references, last in the declared load order | D-003, P-007 |\n| `C-012` | `agents/omn-dev-1-implement/execution.md` | added | Bind the agent to the canonical lifecycle: states, phase gates, retry budget, and escalation routing | D-003, P-007 |\n| `C-013` | `agents/omn-dev-1-implement/identity.md` | added | Implement the Standard Agent Contract, including an authority scope bounded to the phases this agent owns | D-003, P-007 |\n| `C-014` | `agents/omn-dev-1-implement/output.md` | added | Define the structural and semantic contract for the artifact, resolved through the manifest contract reference | D-001, D-003, P-007 |\n| `C-015` | `agents/omn-dev-1-implement/quality.md` | added | Supply the numbered self-verification set, which output-contract resolution requires to exist by path independently of the manifest | D-003, P-007 |\n| `C-016` | `agents/omn-dev-1-implement/reasoning.md` | added | Supply the deterministic implementation and verification procedure that makes two runs over one input set agree | D-003, P-007 |\n| `C-017` | `agents/omn-dev-1-implement/system.md` | added | Supply the operating charter and invariants, declared as the manifest entrypoint and loaded first | D-003, P-007 |\n| `C-018` | `registry/agents.yaml` | modified | Activate the agent record, after the module set it points at resolves on disk, declaring the capability the matrix already carried | D-003, P-006, P-007 |\n| `C-019` | `agents/omn-dev-1-implement.agent.md` | modified | Point the host registration at the manifest and module set, replacing the prior contract-free registration | D-003, P-008 |\n| `C-020` | `runtime/verify_vertical_slice.py` | modified | Wire the third vertical slice so entrypoint resolution and execution evidence for this agent are decidable rather than asserted | D-003, P-008, P-011 |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | the capability chain resolves for every phase owner, and dispatchable phases rise from three to six with every other phase carrying a recorded blocked reason | contract | `C-007`, `C-008`, `C-009`, `C-010`, `C-018`, `C-019` | `python .claude/runtime/verify_registry_coverage.py` | pass |\n| `T-002` | every artifact a Phase Model names as a file has a registered validator, which accepts a conforming artifact and rejects a mutated one by a named check | contract | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006` | `python .claude/runtime/verify_validators.py` | pass |\n| `T-003` | the implementation phase resolves command, workflow, owner, manifest, host registration, load order, skills, output contract, and validator | contract | `C-004`, `C-007`, `C-009`, `C-014`, `C-015`, `C-017` | `python .claude/runtime/framework_runtime.py resolve --command implement --phase implementation` | pass |\n| `T-004` | the fix-implementation phase resolves the same chain to the same artifact identifier | contract | `C-007`, `C-008` | `python .claude/runtime/framework_runtime.py resolve --command bugfix --phase fix-implementation` | pass |\n| `T-005` | the refactor-implementation phase resolves the same chain to the same artifact identifier | contract | `C-007`, `C-010` | `python .claude/runtime/framework_runtime.py resolve --command refactor --phase refactor-implementation` | pass |\n| `T-006` | the conforming fixture passes every structural, field, vocabulary, identifier, and semantic check of the new contract | contract | `C-002`, `C-003`, `C-005` | `cd .claude/runtime && python implementation_report_validator.py fixtures/implementation-report.md` | pass |\n| `T-007` | the vertical slice from command to agent to artifact is real: registration, host compatibility, load order, skills, invocability, execution, artifact, conformance, evidence, and absence of contract duplication | end-to-end | `C-011`, `C-012`, `C-013`, `C-016`, `C-019`, `C-020` | `python .claude/runtime/verify_vertical_slice.py --slice implement` | fail |\n| `T-008` | this run's orchestration is well formed: work items, transitions, leases, gates, idempotency keys, events, blocked reasons, committed artifacts, and replay without new side effect | integration | `C-004`, `C-009` | `python .claude/runtime/verify_multi_phase.py --run-id run-93b302cbdb28` | fail |\n| `T-009` | the failure-classification, retry, budget, backoff, and jitter behaviour is unchanged by this change, as the pre-increment baseline recorded it | regression | `C-004`, `C-005` | `python .claude/runtime/verify_recovery.py` | pass |\n| `T-010` | every recorded framework change still carries a passing change proposal, a run satisfying the Completion Rule, and no unaccounted run | contract | `C-008`, `C-009`, `C-010`, `C-018` | `python .claude/runtime/verify_self_hosting.py` | fail |\n\n## Verification Results\n\n- Verification method: the repository's own verifiers, resolver, and artifact validator were executed against the applied change set, and each result was compared against the pre-increment baseline frozen in `reports/maturity-snapshot-2026-08-18.json` and against the per-file digests persisted in the context snapshots of the runs that completed before this increment.\n- Commands executed: `python .claude/runtime/verify_registry_coverage.py`; `python .claude/runtime/verify_validators.py`; `python .claude/runtime/verify_vertical_slice.py --slice implement`; `python .claude/runtime/verify_multi_phase.py --run-id run-93b302cbdb28`; `python .claude/runtime/verify_recovery.py`; `python .claude/runtime/verify_self_hosting.py`; `python .claude/runtime/framework_runtime.py resolve --command implement --phase implementation`; `python .claude/runtime/framework_runtime.py resolve --command bugfix --phase fix-implementation`; `python .claude/runtime/framework_runtime.py resolve --command refactor --phase refactor-implementation`; `cd .claude/runtime && python implementation_report_validator.py fixtures/implementation-report.md`\n- Result summary: 10 commands executed, 7 returned a passing verdict, 3 returned a failing verdict; within them registry coverage passed 6 of 6, validator coverage 4 of 4, recovery 41 of 41, the fixture 31 of 31, and all three resolutions RESOLVED, while the vertical slice passed 8 of 10, its two remaining checks awaiting the runtime's commit of this phase, multi-phase orchestration 14 of 15, and self-hosting 5 of 8. Every command was executed from the repository root, which the scope classification the self-hosting checks apply is sensitive to.\n- Unverified areas: the executed-phase half of the vertical slice and the orchestration check that the run has traversed a delivery phase, none of which can pass until the runtime commits this phase after this agent returns; the correctness of the code behind each change-set row and whether each check exercises what it claims, both recorded as not-machine-checkable obligations; the behaviour of the two phases in fix-bug and refactor, which resolve their contract but which no run has yet dispatched; and the restoration of the invariant that no verifier check moves from pass to fail, which three self-hosting checks currently contradict.\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | The increment was applied to this agent's three phases -- `C-007` through `C-020` -- rather than to the scope-and-acceptance phase that the feature request's rollout order places first | The design's open decision on which phase is the increment-1 target, reserved to product authority | Both dispositions are phase-independent, so the target changes which phase applies them first rather than what they say; but selecting the target is a scope decision this agent may not take, and the recorded rollout order names a different phase | escalated to omn-product-owner |\n| `V-002` | The registered artifact identifier is `implementation-report.md` where the design's disposition table proposed a different string, applied consistently across `C-001`, `C-002`, `C-004`, `C-007`, `C-008`, `C-009`, and `C-010` | D-001 disposition table, artifact type column | D-001 binds only that one identifier serves one role's phases and that the same string appears at all three declaration points, and states that exact strings are fixed when each type is registered; both bound properties hold, so the choice sits inside the latitude the decision record grants | not-required |\n| `V-003` | The context-slice entries added in `C-004` are plain member path lists; no member records the declared manifest input it supplies, and no exclusion reason is carried per phase declaration | D-002 required declaration content, and sequencing constraint P-009 | The existing declaration mechanism carries paths only, and recording a consuming input per member would change the context-slice contract, which D-002 places out of scope; the gap means an unnarrowed member is not visible at declaration time, which is the property D-002 asked the recording to provide | escalated to architect |\n| `V-004` | The change set was applied to the repository before this invocation was dispatched, so the pre-change baseline required before any file is modified was reconstructed from frozen records rather than executed against the unmodified tree, affecting `C-001` through `C-020` | Stage 2 of the reasoning procedure, and the profile's Completion Rule condition on operator-performed work | The phase had no dispatchable owner until the very declarations under test existed, so no dispatch could precede them; the profile's Completion Rule admits operator-performed work for a blocked phase but requires it recorded in a change proposal's Phase Disposition section, which does not yet exist for this run | escalated to omn-tech-lead |\n\n## Boundary Compliance\n\n- Module boundaries preserved: the change adds declarations and one validator module and alters no execution path; the validator reuses the shared artifact contract engine rather than duplicating it, the agent module set is confined to its own directory, and the vertical-slice verifier confirms the host registration shares no twelve-word sequence with any authoritative module, so the adapter did not absorb contract text it only loads.\n- Public interface changes: three Output Artifact cells and three Input columns changed from prose to the artifact identifier, the validator map gained one key, the context-slice declaration gained three phase keys, and the agent registry gained one active record; the artifact identifier is additive and no existing key's resolution changed.\n- Data or migration impact: none in the persistent-data sense, since no data store participates and the framework's declarations are files read at resolution time; the one persisted-state effect is recorded as a residual risk below, where clearing a capability blocker altered the recorded status of a phase in an earlier run.\n- Declared side effects: this invocation wrote exactly two files, the report at `runs/run-93b302cbdb28/states/implementation/artifacts/implementation-report.md` and the result envelope beside it. The twenty files in the change set were written before this invocation was dispatched and lie outside its permitted writes; the record that governs that arrangement is the Completion Rule of `config/self-hosting-profile.md`, in the condition requiring every phase to be executed with a validated artifact or blocked with a recorded reason, whose commentary admits operator-performed work for a phase blocked at the capability guard and requires it recorded in a change proposal's Phase Disposition section. That proposal does not yet exist, so the two sets differ and the difference is stated here rather than left to be discovered. The Bootstrap Exception of that same profile does not cover this increment, which the profile limits to the increment that authored it.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | Activating the record in `C-018` cleared the capability guard for the implementation phase of an earlier run, moving it from blocked to pending, so that run no longer satisfies the Completion Rule and the change proposal describing it now misreports that phase's status | occurred | high | The transition is recorded in that run's own transition log with its timestamp and trigger, so the cause is attributable rather than latent; no committed artifact of that run changed, and its recorded artifact digests still verify |\n| `R-002` | Bringing a fix-bug phase into the dispatchable set flipped the evidence branch that the change proposal for an earlier defect repair is judged under, so evidence that previously satisfied the rule by the run's own record of blocking is now required to link a phase artifact and a validation report | occurred | medium | The failure is reported by a named check of the change-proposal validator rather than silently, and the proposal remains readable and unmodified |\n| `R-003` | The phase identifier source tables of the three edited workflow specifications still record that the owner has no runtime manifest, which is now false for the three phases this increment covers | high | low | Resolution is unaffected: the identifier is read from the Phase Model row rather than from this table, and all three phases resolve and dispatch, so the staleness misleads a reader without misleading the runtime |\n| `R-004` | The two phases in fix-bug and refactor resolve their output contract and context slice but have never been dispatched, so their declarations are proved by resolution rather than by execution | medium | medium | Both were resolved end to end by executed commands recorded above, and both share the artifact type, validator, template, and module set that the implementation phase exercises |\n| `R-005` | The context-slice entries carry no per-member record of the input each supplies, so a member no declared input consumes cannot be distinguished from one that is required | medium | low | Every member carries a content digest in the frozen snapshot, and the member set was checked against the manifest's declared inputs for this phase, which accounts for all eighteen members |\n| `R-006` | Two runtime files carrying `C-004` and `C-020` were written once by an actor outside this invocation while it was running, so the repository state under the evidence was not frozen for the duration of the run | occurred | low | The full evidence set was re-executed after the write and every verdict reproduced unchanged, so no recorded result rests on the earlier state; the write is declared here because a reviewer re-running these commands is entitled to know the tree moved underneath them |\n\n## Handoff Notes\n\n- Reviewer focus areas: the three self-hosting checks that moved from passing to failing, and whether the invariant they express survives this increment; the transition in the earlier run that `R-001` describes, which is the one place this change reached committed run state; the context-slice entries in `C-004`, where `V-003` records a required property of the accepted decision that the implementation does not carry; and the Output Artifact and Input column pairs in `C-008`, `C-009`, and `C-010`, where a mismatched pair would silently re-derive a dependency edge. A reviewer re-running the evidence should run it from the repository root, because the scope classification the self-hosting checks apply resolves paths against the working directory and returns different verdicts from elsewhere.\n- Follow-up work: record the change proposal for this run with its Phase Disposition section, so the operator-performed declarations and this run are accounted for; decide whether the remaining nine Wave 1 phases adopt their dispositions in later increments; correct the stale phase identifier source tables named in `R-003`; and reconcile the two earlier change proposals whose checks this increment invalidated.\n- Documentation impact: the runtime notes record that no Wave 1 agent holds a runtime module set and that three of thirty-six phases dispatch; both statements are now out of date, as is the known gap describing prose Output Artifact cells for this agent's phases. The maturity snapshot remains correct as a frozen baseline and should not be edited.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | Does applying the increment to this agent's phases, ahead of the scope-and-acceptance phase the recorded rollout order places first, stand as the increment-1 target? | yes | omn-product-owner | `C-007`, `C-018`, `C-019` |\n| `Q-002` | How is the invariant that no verifier check moves from pass to fail restored, given that three self-hosting checks now fail as a consequence of this increment? | yes | omn-tech-lead | `C-008`, `C-009`, `C-010`, `C-018` |\n| `Q-003` | Does D-002's requirement that each context-slice member record the declared input it supplies stand, given that carrying it would change the context-slice contract the decision places out of scope? | no | architect | `C-004` |\n| `Q-004` | Who authors the change proposal accounting for this run and for the declarations applied ahead of it, so the profile's Completion Rule and its evidence condition are satisfied? | yes | omn-orchestrator | `C-001`, `C-018` |\n| `Q-005` | Should the phase identifier source tables of the three edited workflow specifications be corrected in this increment or in the increment that covers the remaining phases? | no | architect | `C-008`, `C-009`, `C-010` |",
+        "digest": "sha256:a845b2ea33e84d2f9b107969f38ef5af",
+        "produced_by": "implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change account under review: an implementation report for a delivered change, or a stable pull request diff for a review-pull-request run. Without one there is nothing under review, and reviewing anyway would mean assessing this agent's own reading of the repository."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-93b302cbdb28/states/implementation/artifacts/implementation-report.md",
+      "produced_by": "implementation"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-08-19T03:36:16Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:7891dd78b09daa8bb73bf54f8cfd5bed"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:3bf28ee046a18af6bf2eaa46be764811"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:057444bb03e86f3c5a852fadf6007b83"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:b29333c809983e66ee7a88d5772e0f49"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:9d70f79b90fadd0f134a44b03380e8a4"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:083e4c09e43314332cacd5497972ae9c"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:c18143d075aa49cb11b00ab39d74b90a"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:78c94afb1a1a6391d034f1f07fd56cf5"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:eb092caaae110f6d11221ab6434ade97"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820"
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6"
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357"
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e"
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8d6bd0735e4288ea81c161556faa7c18"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:cc02df899189ab18e74b7d5cd0577865"
+      }
+    ],
+    "context_digest": "sha256:c4b8d71f42e7448156cee2f12ece6d49",
+    "input_digest": "sha256:99ec342df2ad2a17364afc82c2116573",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/wave-1-rollout-feature-request.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-feature-request.md",
+        "digest": "sha256:127b427528513043db51b8729290834e"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/wave-1-rollout-change-request.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-change-request.md",
+        "digest": "sha256:460be1bbed3416e8c50741901edaa530"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/wave-1-rollout-business-intent.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-business-intent.md",
+        "digest": "sha256:e44b4e1a4512bacd8b4a18a7815e2d66"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/wave-1-rollout-architecture-context.md",
+        "source_file": ".claude/runs/inputs/wave-1-rollout-architecture-context.md",
+        "digest": "sha256:7a51081f7a8c82bc5c8e2615ded73ebb"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-93b302cbdb28/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-93b302cbdb28/states/implementation/artifacts/implementation-report.md",
+        "digest": "sha256:a845b2ea33e84d2f9b107969f38ef5af"
+      }
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-93b302cbdb28/states/quality-review/artifacts/review-package.md",
+      "runs/run-93b302cbdb28/states/quality-review/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies repository source, tests, or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the review package"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code or tests",
+      "revise the technical design rather than raising a finding against it",
+      "define, widen, or narrow product scope",
+      "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+      "record a merge or release decision",
+      "decide a gate that assesses evidence this agent produced",
+      "review a change this agent authored",
+      "approve while a critical or high finding is open, or while test evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "review an implemented change against the requirements, the accepted design, and the standards in force",
+        "assess conformance to coding standards, architecture rules, and security criteria",
+        "judge whether the supplied evidence supports the claim it is offered for",
+        "judge whether executed tests cover the behavior the change altered",
+        "classify each defect by severity, category, and location against a named standard",
+        "issue correction requests that state a required outcome and name its owner",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "execute the repository's own verification commands to confirm reported results",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code or tests",
+        "revise the technical design rather than raising a finding against it",
+        "define, widen, or narrow product scope",
+        "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+        "record a merge or release decision",
+        "decide a gate that assesses evidence this agent produced",
+        "review a change this agent authored",
+        "approve while a critical or high finding is open, or while test evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "Independence is the whole value of this role. An agent that can change the code it assesses becomes the producer of the work it is about to judge, and the Producer Exclusion Rule then disqualifies it from the very verdict it exists to give. The review reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies repository source, tests, or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the review package"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same finding set, the same severity assignment, the same correction-request set, the same verdict, and the same declared package status.",
+      "identifierSchemes": {
+        "findings": "F-<zero-padded-sequence>",
+        "correctionRequests": "CR-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Findings are ordered by descending severity; ties break toward the lower location in lexical order. Correction requests follow the findings they address.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "review-package.md",
+    "artifact_path": "runs/run-93b302cbdb28/states/quality-review/artifacts/review-package.md",
+    "template_ref": "templates/review-package.md",
+    "contract_ref": "agents/omn-dev-2-reviewer/output.md",
+    "quality_ref": "agents/omn-dev-2-reviewer/quality.md",
+    "validator": "review_package_validator",
+    "result_envelope_path": "runs/run-93b302cbdb28/states/quality-review/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-08-19T03:36:16Z"
+}

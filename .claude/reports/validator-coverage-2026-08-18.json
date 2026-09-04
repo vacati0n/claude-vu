@@ -1,0 +1,278 @@
+{
+  "schema": "framework.runtime/validator-coverage.v1",
+  "runtime_version": "0.4.0",
+  "result": "pass",
+  "registered_validators": {
+    "execution-plan.md": "plan_validator",
+    "technical-design.md": "design_validator",
+    "bug-analysis.md": "bug_analysis_validator",
+    "investigation-report.md": "investigation_report_validator",
+    "release-note.md": "release_note_validator",
+    "review-package.md": "review_package_validator"
+  },
+  "phase_model_artifacts": {
+    "execution-plan.md": [
+      "implement-feature/execution-planning"
+    ],
+    "technical-design.md": [
+      "implement-feature/solution-design-and-risk-assessment",
+      "refactor/scope-invariants-and-risk-profile"
+    ],
+    "investigation-report.md": [
+      "investigate/technical-discovery",
+      "research/technical-validation"
+    ],
+    "bug-analysis.md": [
+      "fix-bug/root-cause-analysis"
+    ],
+    "release-note.md": [
+      "release/communication-and-post-release"
+    ]
+  },
+  "checks": [
+    {
+      "id": "V1",
+      "description": "every artifact a Phase Model names as a file has a registered validator",
+      "result": "pass",
+      "detail": "5 artifact type(s) named across the active Phase Models, 6 registered: bug-analysis.md (1 phase(s)), execution-plan.md (1 phase(s)), investigation-report.md (2 phase(s)), release-note.md (1 phase(s)), technical-design.md (2 phase(s))"
+    },
+    {
+      "id": "V2",
+      "description": "every registered validator module exists, imports, and exposes validate()",
+      "result": "pass",
+      "detail": "6 registration(s): bug-analysis.md -> bug_analysis_validator, execution-plan.md -> plan_validator, investigation-report.md -> investigation_report_validator, release-note.md -> release_note_validator, review-package.md -> review_package_validator, technical-design.md -> design_validator"
+    },
+    {
+      "id": "V3",
+      "description": "every registered validator accepts a conforming artifact of its type",
+      "result": "pass",
+      "detail": "6 artifact type(s) validated"
+    },
+    {
+      "id": "V4",
+      "description": "every registered validator rejects a mutated artifact, by the named check",
+      "result": "pass",
+      "detail": "bug-analysis.md -> B2; execution-plan.md -> V2.1; investigation-report.md -> I1; release-note.md -> R2; review-package.md -> P3; technical-design.md -> D2.1"
+    }
+  ],
+  "summaries": [
+    {
+      "artifact": "bug-analysis.md",
+      "validator": "bug_analysis_validator",
+      "conforming_instance": "runtime/fixtures/bug-analysis.md",
+      "instance_source": "fixture",
+      "envelope": null,
+      "phases_served": [
+        "fix-bug/root-cause-analysis"
+      ],
+      "result": "pass",
+      "checksRun": 29,
+      "checksPassed": 29,
+      "notMachineCheckable": 4,
+      "mutation": {
+        "description": "disagreeing with the metadata block about severity",
+        "expected_check": "B2",
+        "checks_failed": [
+          "B2"
+        ]
+      },
+      "counts": {
+        "sections": 9,
+        "status": "complete",
+        "identifiers": {
+          "E": 3,
+          "C": 3,
+          "Q": 0
+        },
+        "tableRows": {
+          "Reproduction": 3,
+          "Root Cause Analysis": 3
+        }
+      }
+    },
+    {
+      "artifact": "execution-plan.md",
+      "validator": "plan_validator",
+      "conforming_instance": "runs/run-c5a8d50d3238/states/execution-planning/artifacts/execution-plan.md",
+      "instance_source": "committed run artifact",
+      "envelope": "runs/run-c5a8d50d3238/states/execution-planning/invocation-envelope.json",
+      "phases_served": [
+        "implement-feature/execution-planning"
+      ],
+      "result": "pass",
+      "checksRun": 45,
+      "checksPassed": 45,
+      "notMachineCheckable": 5,
+      "mutation": {
+        "description": "renaming a mandatory section",
+        "expected_check": "V2.1",
+        "checks_failed": [
+          "V2.1",
+          "V2.3",
+          "V2.4"
+        ]
+      },
+      "counts": {
+        "sections": 14,
+        "tasks": 14,
+        "assumptions": 7,
+        "risks": 12,
+        "edges": 20,
+        "waves": 7,
+        "openQuestions": 4,
+        "planStatus": "complete"
+      }
+    },
+    {
+      "artifact": "investigation-report.md",
+      "validator": "investigation_report_validator",
+      "conforming_instance": "runtime/fixtures/investigation-report.md",
+      "instance_source": "fixture",
+      "envelope": null,
+      "phases_served": [
+        "investigate/technical-discovery",
+        "research/technical-validation"
+      ],
+      "result": "pass",
+      "checksRun": 30,
+      "checksPassed": 30,
+      "notMachineCheckable": 4,
+      "mutation": {
+        "description": "recommending an option the report never evaluated",
+        "expected_check": "I1",
+        "checks_failed": [
+          "C6.2",
+          "I1"
+        ]
+      },
+      "counts": {
+        "sections": 9,
+        "status": "complete",
+        "identifiers": {
+          "E": 4,
+          "O": 3,
+          "Q": 0
+        },
+        "tableRows": {
+          "Evidence": 4,
+          "Options Evaluated": 3
+        }
+      }
+    },
+    {
+      "artifact": "release-note.md",
+      "validator": "release_note_validator",
+      "conforming_instance": "runtime/fixtures/release-note.md",
+      "instance_source": "fixture",
+      "envelope": null,
+      "phases_served": [
+        "release/communication-and-post-release"
+      ],
+      "result": "pass",
+      "checksRun": 31,
+      "checksPassed": 31,
+      "notMachineCheckable": 4,
+      "mutation": {
+        "description": "disagreeing with itself about the version",
+        "expected_check": "R2",
+        "checks_failed": [
+          "R2"
+        ]
+      },
+      "counts": {
+        "sections": 7,
+        "status": "complete",
+        "identifiers": {
+          "K": 1
+        },
+        "tableRows": {
+          "Known Issues": 1
+        },
+        "releaseVerdict": "released",
+        "knownIssues": 1,
+        "version": "0.4.0"
+      }
+    },
+    {
+      "artifact": "review-package.md",
+      "validator": "review_package_validator",
+      "conforming_instance": "runtime/fixtures/review-package.md",
+      "instance_source": "fixture",
+      "envelope": null,
+      "phases_served": [],
+      "result": "pass",
+      "checksRun": 30,
+      "checksPassed": 30,
+      "notMachineCheckable": 4,
+      "mutation": {
+        "description": "understating the high-severity finding count",
+        "expected_check": "P3",
+        "checks_failed": [
+          "P3"
+        ]
+      },
+      "counts": {
+        "sections": 10,
+        "status": "complete",
+        "identifiers": {
+          "F": 3,
+          "CR": 2,
+          "Q": 0
+        },
+        "tableRows": {
+          "Findings": 3,
+          "Correction Requests": 2
+        },
+        "findings": 3,
+        "verdict": "approve-with-corrections",
+        "correctionRequests": 2,
+        "severity": {
+          "critical": 0,
+          "high": 1,
+          "medium": 1,
+          "low": 1
+        }
+      }
+    },
+    {
+      "artifact": "technical-design.md",
+      "validator": "design_validator",
+      "conforming_instance": "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "instance_source": "committed run artifact",
+      "envelope": "runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/invocation-envelope.json",
+      "phases_served": [
+        "implement-feature/solution-design-and-risk-assessment",
+        "refactor/scope-invariants-and-risk-profile"
+      ],
+      "result": "pass",
+      "checksRun": 78,
+      "checksPassed": 78,
+      "notMachineCheckable": 10,
+      "mutation": {
+        "description": "renaming a mandatory section",
+        "expected_check": "D2.1",
+        "checks_failed": [
+          "D2.1",
+          "D2.3",
+          "D2.4",
+          "D17.1"
+        ]
+      },
+      "counts": {
+        "sections": 13,
+        "facts": 24,
+        "assumptions": 8,
+        "constraints": 19,
+        "modules": 18,
+        "options": 5,
+        "decisions": 5,
+        "reuseRows": 13,
+        "planSteps": 16,
+        "risks": 17,
+        "openDecisions": 9,
+        "decisionRecords": 4,
+        "designStatus": "complete"
+      }
+    }
+  ]
+}

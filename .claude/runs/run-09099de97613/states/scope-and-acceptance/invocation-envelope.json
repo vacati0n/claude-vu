@@ -1,0 +1,351 @@
+{
+  "invocation_id": "inv-09099de97613-01-002",
+  "run_id": "run-09099de97613",
+  "work_item_id": "run-09099de97613::scope-and-acceptance",
+  "idempotency_key": "sha256:0fafbca0a1bff2cbee16421a649647b2",
+  "state_id": "scope-and-acceptance",
+  "phase_index": 1,
+  "agent_id": "omn-product-owner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-product-owner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-product-owner/manifest.yaml",
+    "load_order": [
+      "agents/omn-product-owner/system.md",
+      "agents/omn-product-owner/identity.md",
+      "agents/omn-product-owner/reasoning.md",
+      "agents/omn-product-owner/execution.md",
+      "agents/omn-product-owner/output.md",
+      "agents/omn-product-owner/quality.md",
+      "agents/omn-product-owner/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-product-owner/system.md": "sha256:ca10caae54f63fa52580220f1f88812f",
+      "agents/omn-product-owner/identity.md": "sha256:8a5df5e407d8c96ce1e5bb7faaa07f55",
+      "agents/omn-product-owner/reasoning.md": "sha256:ee417de8bc3f21281299d8e5f53dfdcf",
+      "agents/omn-product-owner/execution.md": "sha256:68ec1cc7479d592bd875b98ecb8546ab",
+      "agents/omn-product-owner/output.md": "sha256:da40434a6907e6912979430f12430025",
+      "agents/omn-product-owner/quality.md": "sha256:53c8887fbc5888342d68c2e7a02d6ecc",
+      "agents/omn-product-owner/examples.md": "sha256:0e1b087f304a35d8527abc9aa5f0052b"
+    },
+    "capabilities": [
+      "scope-definition",
+      "acceptance-authority"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "acceptance-intent",
+      "business-constraints",
+      "architecture-context",
+      "prior-scope-definition",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/omt-01-feature-request.md",
+        "source_file": ".claude/runs/inputs/omt-01-feature-request.md",
+        "text": "# Feature Request \u2014 OMT-01 Memory Token Optimizer Command\n\n## Request\n\nGive the framework a command that rewrites its durable knowledge surfaces \u2014 memory, context, and\nthe standing instruction files \u2014 to their minimum token cost without changing what they instruct.\n\nThe capability comprises three things the framework does not have today:\n\n1. `commands/optimize-memory.md`, a command contract with an active record in\n   `registry/commands.yaml`.\n2. `runtime/optimize_memory.py`, the runtime module the command executes.\n3. An index in `config/self-hosting-profile.md` recording each accepted change proposal against\n   the run that carried it.\n\n## Why now\n\nMemory, context, and instruction files are loaded into the context slice of every dispatch. Their\ntoken cost is therefore paid per run rather than once, and it grows monotonically: every\nincrement that records a decision, a known issue, or a standard makes every later run more\nexpensive to start. Twenty-one files totalling roughly sixty-five kilobytes are in that position\nnow. Nothing in the framework reduces that cost, and no existing command's contract covers doing\nso.\n\nThe framework already owns the shape of this work. A change that alters wording while preserving\nmeaning is a `structure-preserving-change`, and `workflows/refactor.md` exists to hold that claim\nto account: `scope-invariants-and-risk-profile` states what may not change, and\n`behavioral-validation` checks that it did not. What is missing is a bounded entry point that\nroutes there with the scope and the mechanical check already fixed.\n\n## Expected outcome\n\n- An operator types one command and receives a reviewable proposal: per-file token delta, a\n  unified diff per candidate, and a named reason for every candidate that was rejected.\n- No file is overwritten without a recoverable pre-image and a recorded digest pair.\n- Every accepted candidate has passed a mechanical invariant check against its original.\n- Generated and evidence surfaces are unreachable by the pass, whatever the operator asks for.\n- The framework's registry coverage, self-hosting, and release checks continue to pass.\n\n## Explicit non-goals\n\n- Deciding what belongs in memory or context. That stays with `memory/memory-governance.md`.\n- Rewriting source code, agent contracts, registries, workflow specifications, or command\n  specifications. None is a knowledge surface loaded per run.\n- Proving semantic equivalence. The request asks for a mechanical structural check plus a\n  reviewable diff, and asks that the difference between those two be stated rather than blurred.\n\n## Known obstacles the request does not resolve\n\n- A generative model cannot prove it preserved meaning. Any acceptance rule built on its own\n  assurance is worthless. The design must therefore judge candidates against the original by a\n  rule the framework can run, and must say plainly what that rule does and does not cover.\n- The compression pass requires a provider client library and resolvable credentials, neither of\n  which the framework carries today. The command must fail before touching a file when they are\n  absent, and the offline surfaces must stay usable without them.",
+        "digest": "sha256:2719daabacb06dca76da89e24b04daed"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/omt-01-change-request.md",
+        "source_file": ".claude/runs/inputs/omt-01-change-request.md",
+        "text": "# Change Request \u2014 OMT-01 Memory Token Optimizer Command\n\n## Change class\n\n`capability-addition`, per `config/self-hosting-profile.md` `## Routing Table`. The framework\ngains a command contract, a registry record, and a runtime behaviour it did not have.\n\nClassification was performed before the work began:\n\n```\npython .claude/runtime/self_hosting.py classify --path .claude/commands/optimize-memory.md \\\n    --path .claude/runtime/optimize_memory.py --path .claude/config/self-hosting-profile.md\npython .claude/runtime/self_hosting.py route --intent capability-addition\n```\n\nEvery touched path resolves in-scope under `SR-1`. The route resolves to `/implement` ->\n`implement-feature`, entry phase `scope-and-acceptance`.\n\n## Paths touched\n\n| Path | Scope Rule | Change |\n|---|---|---|\n| `.claude/commands/optimize-memory.md` | `SR-1` | New command contract |\n| `.claude/runtime/optimize_memory.py` | `SR-1` | New runtime module |\n| `.claude/registry/commands.yaml` | `SR-1` | New active command record |\n| `.claude/commands/command-catalog.md` | `SR-1` | New catalog row |\n| `.claude/commands/README.md` | `SR-1` | Command contract count corrected |\n| `.claude/config/self-hosting-profile.md` | `SR-1` | New proposal index section |\n\n## Required behaviour\n\n- The command routes to `refactor`, not to a new workflow. Its claim is the invariant claim that\n  workflow already holds to account, and a second workflow asserting the same thing would be a\n  second answer to a question the framework has already answered.\n- The runtime module defaults to a dry run. Overwriting is an explicit flag.\n- Every applied overwrite is preceded by a pre-image write and followed by a digest pair.\n- Candidates are judged against the original by a mechanical rule, and a candidate that breaks\n  it is discarded without a retry.\n- Denied paths bind regardless of caller arguments.\n\n## Constraints\n\n- No change to any existing workflow, phase model, agent manifest, gate matrix row, or validator.\n  A change that required one would be a larger change than this one claims to be.\n- No new dependency for any existing surface. The provider client library is required only by the\n  new module's online path, and only at the point it makes a request.\n- `verify_registry_coverage.py`, `verify_self_hosting.py`, and the framework release checklist\n  must pass after the change, at the same counts as before plus the one added command.\n\n## Out of scope\n\n- Executing an optimization pass against this repository's own memory and context. Adding the\n  capability and using it are separate changes; the second is the operator's decision and carries\n  its own review of its own diffs.\n- Any change to what the knowledge surfaces say.",
+        "digest": "sha256:57cb78c9c9358a975469516b917ee28b"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/omt-01-business-intent.md",
+        "source_file": ".claude/runs/inputs/omt-01-business-intent.md",
+        "text": "# Business Intent \u2014 OMT-01 Memory Token Optimizer Command\n\n## Goal\n\nStop the per-run cost of the framework's own knowledge from growing without a control on it.\n\n## Value\n\nEvery dispatch loads memory, context, and instruction files into its context slice. That cost is\npaid on each run and by every agent the run dispatches. Roughly sixty-five kilobytes across\ntwenty-one files are in that position today, and the number only rises: recording a decision, a\nknown issue, or a standard is the framework working correctly, and each recording makes every\nlater run start more expensive.\n\nTwo things follow. Density in these files has a measurable return, unlike density in a document\nread once. And the absence of any control means the trend has no counterweight \u2014 no phase, no\ngate, and no command currently asks whether a knowledge surface is carrying tokens that do not\ncarry rules.\n\n## Success measures\n\n| Measure | Target |\n|---|---|\n| Recurring token cost of the knowledge surfaces | Measurably reduced, by measurement rather than estimate |\n| Rules, constraints, and identifiers lost | Zero, checked mechanically per file |\n| Files overwritten without a recoverable pre-image | Zero |\n| Operator review possible before any overwrite | Always: the default performs no overwrite |\n| Existing framework verification results | Unchanged, at the same counts plus the added command |\n\n## Acceptance boundary\n\nThe framework may claim only what it can check. A structural and identifier-level invariant check\nis checkable and is what the capability asserts. Semantic equivalence of reworded prose is not\ncheckable by the framework, so it is not asserted: the recorded diff is offered to a reviewer\ninstead, and the difference between the two claims is stated in the command contract rather than\nelided.\n\nA capability that quietly overstated its guarantee would be worse than no capability, because the\nsurfaces it rewrites are the ones every later run trusts without re-reading.\n\n## Constraints\n\n- No degradation of any existing framework guarantee.\n- No new obligation on an operator who never runs the command.\n- The offline surfaces stay usable with no credentials and no client library present.\n\n## Not intended\n\n- Reducing what the framework knows.\n- Making knowledge terser at the cost of making it ambiguous.\n- Running the pass automatically, on a schedule, or as part of another lifecycle.",
+        "digest": "sha256:d1636efe4c8492b0b8da39f798f8149e"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/omt-01-architecture-context.md",
+        "source_file": ".claude/runs/inputs/omt-01-architecture-context.md",
+        "text": "# Architecture Context \u2014 OMT-01 Memory Token Optimizer Command\n\nSupplied by the operator for the `solution-design-and-risk-assessment` phase of the memory token\noptimizer change. The system under design is the framework in this repository, so the\ncurrent-state architecture is the framework's own structure.\n\nThis document names the authoritative records rather than restating them. Every file named is a\nmember of the frozen context slice recorded in this run's `context-snapshot.json`, so a fact drawn\nfrom one carries a citable digest.\n\n## Component model\n\n| Component type | Discovery registry | Specification |\n|---|---|---|\n| Agents | `registry/agents.yaml` | `domain-model/agent-specification.md` |\n| Skills | `registry/skills.yaml` | `skills/agent-skill-matrix.md` |\n| Workflows | `registry/workflows.yaml` | `workflows/refactor.md` and siblings |\n| Templates | `registry/templates.yaml` | `templates/` |\n| Commands | `registry/commands.yaml` | `commands/` |\n\n`dependency-map.md` records permitted dependency directions. `commands/README.md` records the\ndistinction between a command contract and a grouped runbook, and the rule that every contract\ncarries exactly one primary workflow.\n\n## Current-state properties the operator asserts\n\nEach is verifiable in the files named above, and each was checked before this change began.\n\n1. Ten command contracts hold active records in `registry/commands.yaml`, and\n   `verify_registry_coverage.py` check `C1` fails if any contract on disk lacks a record.\n2. Two contracts already share a primary workflow with another contract: `/document` and `/test`\n   route to `implement-feature` and `review-pull-request` respectively, alongside `/implement` and\n   `/review`. Sharing a workflow is therefore an established pattern, not a new one.\n3. `workflows/refactor.md` declares five phases: `scope-invariants-and-risk-profile`,\n   `safety-net-establishment`, `refactor-implementation`, `behavioral-validation`, and\n   `closure-and-debt-record`. All five are dispatchable, per `C6`.\n4. All thirty-seven declared phases across eight active workflows are dispatchable today.\n5. The runtime and its verifiers depend on the standard library and one YAML package. No framework\n   surface currently makes a network request or requires a provider credential.\n6. `runtime/artifact_lib.py` forbids naming a model, vendor, or provider inside a validated\n   artifact, and strips the framework's own path prefix before that scan.\n7. `config/self-hosting-profile.md` is parsed by `runtime/self_hosting.py`, which reads named\n   sections by heading. A section added after the last parsed heading does not alter what parses.\n\n## Constraints the design must respect\n\n- A command contract resolves to exactly one primary workflow, and that workflow must hold an\n  active registry record.\n- A new workflow would require a phase model, gate matrix rows with non-producing owners, agent\n  manifest entries, runtime context slices, and a registered validator per output artifact. The\n  design should establish whether it needs one before incurring that.\n- Run evidence under `runs/`, dated reports under `reports/`, and change proposals under\n  `proposals/` are excluded from the self-hosting scope rule because rewriting them would falsify\n  the record a routed change resolves against. Any capability that writes files must respect the\n  same boundary for the same reason.\n- The verifiers `verify_registry_coverage.py`, `verify_validators.py`, `verify_recovery.py`, and\n  `verify_self_hosting.py` decide current-state truth. The change is accountable to all four.\n\n## Risk targets\n\n| Concern | Target |\n|---|---|\n| Existing framework guarantees | No regression; identical verifier results plus the added command |\n| Irreversible file modification | None reachable without an explicit flag and a written pre-image |\n| Dependency creep | The new dependency is confined to the new module's online path |\n| Overstated guarantee | The contract states what is checked mechanically and what is not |",
+        "digest": "sha256:0f659b58b1b23b1307d3401f4c218782"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the business intent this agent bounds: a feature request for new functionality, a change request for a modification to delivered behaviour, or a business intent for an outcome stated without a proposed solution. Without one there is nothing to scope, and scoping anyway would mean inventing what the requester wants."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-09099de97613/states/scope-and-acceptance/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-09099de97613/states/scope-and-acceptance/artifacts/scope-definition.md"
+    ],
+    "failures": [
+      {
+        "id": "C7.1",
+        "severity": "Blocking",
+        "quality_ref": "config/execution-engine.md#context-loader",
+        "requirement": "Metadata digests match the frozen snapshot recorded in the invocation envelope",
+        "detail": "artifact=(sha256:2719daabacb06dca76da89e24b04daed, sha256:c5cc1c3bdd1db9b2d550e98fd7f931ed) envelope=(sha256:39be708b47d19eb28667e5e4c7785813, sha256:c5cc1c3bdd1db9b2d550e98fd7f931ed)"
+      }
+    ]
+  },
+  "upstream_artifacts": [],
+  "context_slice": {
+    "frozen_at": "2026-08-28T06:56:38Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/scope-definition.md",
+        "digest": "sha256:9f082102c11c1de4d4b53c8252a0a9bc",
+        "supplies": "feature-request"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "business-constraints"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": "acceptance-intent"
+      }
+    ],
+    "context_digest": "sha256:c5cc1c3bdd1db9b2d550e98fd7f931ed",
+    "input_digest": "sha256:39be708b47d19eb28667e5e4c7785813",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/omt-01-feature-request.md",
+        "source_file": ".claude/runs/inputs/omt-01-feature-request.md",
+        "digest": "sha256:2719daabacb06dca76da89e24b04daed"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/omt-01-change-request.md",
+        "source_file": ".claude/runs/inputs/omt-01-change-request.md",
+        "digest": "sha256:57cb78c9c9358a975469516b917ee28b"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/omt-01-business-intent.md",
+        "source_file": ".claude/runs/inputs/omt-01-business-intent.md",
+        "digest": "sha256:d1636efe4c8492b0b8da39f798f8149e"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/omt-01-architecture-context.md",
+        "source_file": ".claude/runs/inputs/omt-01-architecture-context.md",
+        "digest": "sha256:0f659b58b1b23b1307d3401f4c218782"
+      }
+    ],
+    "unnarrowed": [],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-09099de97613/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "runs/run-09099de97613/states/scope-and-acceptance/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository modification of any kind",
+        "any command whose effect is not recorded in the artifact"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "author or revise a technical design, structure, or technology decision",
+      "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+      "write, modify, or review code, tests, migrations, or configuration",
+      "record the Scope Gate decision on this agent's own artifact",
+      "record a merge, readiness, or release decision",
+      "define the test strategy or execute validation",
+      "relax a stated regulatory, policy, or quality constraint to close the scope",
+      "record scope no supplied input supports",
+      "access external systems, ticket trackers, or stakeholders directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "decide which deliverables fall inside this change and which fall outside it",
+        "decide the relative priority of the in-scope items",
+        "decide the acceptance threshold each criterion states",
+        "decide when a stated expectation is too vague to be an acceptance criterion",
+        "decide when an adjacent request is a separate change rather than a widening of this one",
+        "record a scope decision together with the rationale that justifies it",
+        "record an unresolved ambiguity as an open question with a named owner",
+        "set the scope verdict the recorded question set supports"
+      ],
+      "prohibited": [
+        "author or revise a technical design, structure, or technology decision",
+        "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+        "write, modify, or review code, tests, migrations, or configuration",
+        "record the Scope Gate decision on this agent's own artifact",
+        "record a merge, readiness, or release decision",
+        "define the test strategy or execute validation",
+        "relax a stated regulatory, policy, or quality constraint to close the scope",
+        "record scope no supplied input supports",
+        "access external systems, ticket trackers, or stakeholders directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "This role produces one artifact and changes no repository source. Its writes are the artifact path and the result envelope path the invocation envelope names, and nothing else. A scope decision that edited the repository would be deciding the change it is supposed to bound.",
+        "scope": [
+          "runs/**/states/scope-and-acceptance/**"
+        ]
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository modification of any kind",
+          "any command whose effect is not recorded in the artifact"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical supplied inputs and an identical context snapshot must produce the same in-scope item set, the same exclusion set, the same acceptance criterion set, the same scope decision set, the same open question set, and the same scope verdict.",
+      "identifierSchemes": {
+        "scopeItems": "S-<zero-padded-sequence>",
+        "exclusions": "X-<zero-padded-sequence>",
+        "acceptanceCriteria": "A-<zero-padded-sequence>",
+        "scopeDecisions": "D-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "In-scope items are ordered by business priority; ties break toward the order the expectation appeared in the supplied inputs. Acceptance criteria are ordered by the scope item they bound, ties breaking toward derivation order. Exclusions, decisions, and questions follow the order the reasoning stage that produced them declares.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied inputs or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "scope-definition.md",
+    "artifact_path": "runs/run-09099de97613/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "template_ref": "templates/scope-definition.md",
+    "contract_ref": "agents/omn-product-owner/output.md",
+    "quality_ref": "agents/omn-product-owner/quality.md",
+    "validator": "scope_definition_validator",
+    "result_envelope_path": "runs/run-09099de97613/states/scope-and-acceptance/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-08-28T06:56:38Z"
+}

@@ -1,0 +1,364 @@
+{
+  "invocation_id": "inv-308f4d0ee447-001",
+  "run_id": "run-308f4d0ee447",
+  "state_id": "solution-design-and-risk-assessment",
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "bootstrap",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:7a08861f6a692bd5b4e65be426a0fcb7",
+      "agents/architect/identity.md": "sha256:a2ddb7032106c2e4ec70f0cddff9bae1",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:384164c51047d05f590d9f796d731b1c",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:90ec2ac3e9e1337d42ab7be8f4f11418",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "supplied": [
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/reviewer-agent-feature-request.md",
+        "source_file": "runs/inputs/reviewer-agent-feature-request.md",
+        "text": "Add a Reviewer Agent to the AI Engineering Framework.\n\nThe Reviewer Agent should review implementation plans and code changes for architecture\ncompliance, coding quality, testing strategy, security, and framework governance."
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/reviewer-agent-business-intent.md",
+        "source_file": "runs/inputs/reviewer-agent-business-intent.md",
+        "text": "# Business Intent: Reviewer Agent\n\nSupplied by the operator for the `solution-design-and-risk-assessment` phase of the\nReviewer Agent change. This states intent and acceptance expectation only. It defines no\nsolution, names no module, and takes no design decision.\n\n## Why the change is wanted\n\nReview coverage in the framework is currently assigned case by case. Implementation plans\nand code changes should instead be reviewed by one accountable role, so that the same\nexpectations apply to every governed change rather than varying with whoever picks the\nreview up.\n\n## Outcome expected\n\n1. One accountable framework role reviews implementation plans and code changes before\n   they progress.\n2. That role states an explicit outcome for each of the five named review dimensions:\n   architecture compliance, coding quality, testing strategy, security, and framework\n   governance.\n3. Review results are consumable by the delivery and quality roles that act on them,\n   without a reader having to reconstruct what was reviewed or what the verdict was.\n\n## Acceptance intent\n\n- A governed change carries a recorded verdict from the review role.\n- An emitted review result records an outcome for every declared review dimension.\n- The role is discoverable through the framework's own discovery surfaces, on the same\n  terms as the roles already registered.\n\n## Constraints the business places on the change\n\n- The change adds a role to the framework. It does not change what any existing role is\n  accountable for without that being surfaced as a decision.\n- No numeric coverage target is set. Coverage is expressed as a proportion and measured,\n  not committed to at a level.\n- Nothing in this intent asks for the new role to be exercised on real work as part of\n  this change.\n\n## Open to the design\n\n- Whether the new role coexists with existing review responsibility or supersedes it.\n- What the review result artifact contains beyond the per-dimension outcome.\n- When, in the delivery sequence, the role becomes routable by a workflow."
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/framework-architecture-context.md",
+        "source_file": "runs/inputs/framework-architecture-context.md",
+        "text": "# Architecture Context: AI Engineering Framework\n\nSupplied by the operator for the `solution-design-and-risk-assessment` phase of the\nReviewer Agent change. The system under design is the framework in this repository, so the\ncurrent-state architecture is the framework's own structure.\n\nThis document does not restate that structure. It names the authoritative records of it.\nEvery file named below is a member of the frozen context slice recorded in this run's\n`context-snapshot.json`, so a fact drawn from one carries a citable digest.\n\n## Component model\n\nThe framework is composed of five component types, each with a discovery registry and a\nspecification set:\n\n| Component type | Discovery registry | Specification |\n|---|---|---|\n| Agents | `registry/agents.yaml` | `domain-model/agent-specification.md` |\n| Skills | `registry/skills.yaml` | `skills/agent-skill-matrix.md` |\n| Workflows | `registry/workflows.yaml` | `workflows/implement-feature.md` and siblings |\n| Templates | `registry/templates.yaml` | `templates/` |\n| Commands | `registry/commands.yaml` | `commands/` |\n\n`dependency-map.md` records the permitted dependency directions between them.\n`agents/capability-matrix.md` records capability ownership.\n`workflows/workflow-gate-matrix.md` records gate ownership.\n\n## Execution surface\n\n`runtime/README.md` records what of the runtime is implemented, what is specification only,\nand the gaps the current slices leave open. It is the current-state record for anything\nconcerning invocation, adapters, validation, or run evidence.\n\n## What the change must be designed against\n\nThe Reviewer Agent change described by the accompanying change request, business intent,\nand execution plan is a change to this framework. Its impact surface is therefore made of\nframework components: registry records, agent contract module sets, artifact templates,\ngovernance matrices, workflow phase rows, and the runtime's resolution and validation path.\n\n## Known current-state properties the operator asserts\n\nThese are supplied as context, not as design conclusions. Each is verifiable in the files\nnamed above.\n\n1. Two agents hold registry records at status `active`: `planner` and `architect`. The\n   `omn-*` contracts and `orchestrator`, `backend-developer` hold no registry record.\n2. An agent becomes invocable when it holds an active registry record, a manifest with a\n   resolvable module load order, a host registration at `agents/<agent-id>.agent.md`, and a\n   workflow phase that routes to it with an output artifact the runtime can validate.\n3. Review responsibility today sits with `omn-dev-2-reviewer`, which owns the Review Gate\n   and the review-pull-request Readiness Gate in the gate matrix, and holds no registry\n   record.\n4. The runtime executes two phases of `implement-feature`: `execution-planning` and\n   `solution-design-and-risk-assessment`. No other phase has a registered validator.\n\n## Constraints the operator places on the design\n\n- Registration and governance records are the framework's own contract surface. A change to\n  one is a contract change, not an implementation detail.\n- The framework's discovery registries are single-authority. A second authority for the\n  same identity metadata is a defect, not a design option.\n- No change to gate ownership is authorized by this request without it being recorded as a\n  decision with the gate matrix owners named."
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-b6780677468b/artifacts/execution-plan.md",
+        "source_file": "runs/run-b6780677468b/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: reviewer-agent-execution-plan\n  sourceInputs:\n    - type: feature-request\n      reference: inline\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:91557f0e82e8fb1e387591ed315c6987\n  contextDigest: sha256:8ece050d279c85ca640cd13faa1ee786\n```\n\n## Executive Summary\n\nA Reviewer Agent is added to the AI Engineering Framework as an accountable role that\nreviews implementation plans and code changes across five declared dimensions:\narchitecture compliance, coding quality, testing strategy, security, and framework\ngovernance. Success is that a single registered review role is discoverable, resolves to a\nloadable contract, and emits a review artifact that records an explicit outcome for each\ndeclared dimension. The work decomposes into fourteen tasks across six execution waves,\nbeginning with a boundary decision that separates the new role from review responsibility\nalready held elsewhere in the framework. The highest-impact risk is `R-007`: five tasks map\nto the solution design phase, and loaded context records that phase as unable to pass skill\nresolution because one of its mandatory skills is catalogued but unregistered, so those\ntasks cannot execute under the framework runtime as it stands. Plan status is complete; seven\nopen questions are recorded, none of them blocking, and `A-001` through `A-006` require\nconfirmation before the tasks that rely on them begin.\n\n## Business Objectives\n\n- Implementation plans and code changes are reviewed by one accountable framework role\n  before they progress, so review coverage is consistent rather than assigned case by case.\n  Received by engineering delivery workflows. Measured as the proportion of governed changes\n  that carry a recorded Reviewer Agent verdict, per the measure assumed in `A-004`.\n  Traces to `S-001`, `S-002`, `S-003`.\n- Review outcomes are stated consistently across the five declared review dimensions, so\n  quality expectations do not vary between reviews. Received by the delivery and quality\n  roles that consume review results. Measured as the proportion of emitted review artifacts\n  that record an explicit outcome for each declared dimension.\n  Traces to `S-004`, `S-005`, `S-006`, `S-007`, `S-008`.\n\n## Technical Objectives\n\n- One registered Reviewer Agent contract resolves through the framework discovery\n  registries to a loadable module set. Verified by resolving the agent identifier to a\n  specification path that loads in declared order. Traces to business objective 1.\n- The Reviewer Agent declares an authority boundary that does not duplicate an existing\n  agent's Primary review capability. Verified by inspecting the governance matrices for a\n  single Primary owner of each review capability. Traces to business objective 1 and\n  `A-001`.\n- The review artifact has a contract-defined structure that requires an explicit recorded\n  outcome for each declared review dimension. Verified by checking an emitted artifact\n  against its output contract. Traces to business objective 2 and `A-002`.\n- Two runs of the Reviewer Agent over identical inputs and an identical context snapshot\n  produce an artifact with an identical section set and identical finding identifiers.\n  Verified by comparing the two emitted artifacts. Traces to business objective 2.\n\n## Scope\n\n### In Scope\n\n- The Reviewer Agent's responsibility boundary against existing review ownership (`S-001`)\n- The Reviewer Agent's authority scope and accepted input set (`S-001`, `S-002`, `S-003`)\n- The review artifact output contract (`S-001`, `A-002`)\n- Framework governance records for the new role (`S-001`)\n- The Reviewer Agent contract module set (`S-001`)\n- Discovery registration for the agent and its artifact template (`S-001`, `A-002`)\n- Validation coverage for the contract and its artifact (`S-001`)\n- Documentation of the agent and its handoff points (`S-001`)\n- Architecture-compliance review criteria (`S-004`)\n- Coding-quality review criteria (`S-005`)\n- Testing-strategy review criteria (`S-006`)\n- Security review criteria (`S-007`)\n- Framework-governance review criteria (`S-008`)\n\n### Out of Scope\n\n- Running any review with the new role. Excluded because the input asks for the role to be\n  added, not exercised.\n- Registering a new workflow or command that routes to the Reviewer Agent. Excluded because\n  the input names an agent and no statement names a workflow; the routing gap is recorded in\n  `Q-003`.\n- Changing existing gate ownership. Excluded because gate ownership is fixed by the gate\n  matrix in loaded context and no statement asks for it to change.\n\n### Deferred\n\n- Migration of references to the existing review identifier. Enters scope if `T-001` decides\n  that the Reviewer Agent supersedes the existing review contract.\n- Dispatchability of the Reviewer Agent by the framework runtime. Enters scope once an owning\n  workflow phase and a host registration surface are approved, per `Q-004` and `A-006`.\n- Registration of the mandatory skill that currently blocks the solution design phase. Enters\n  scope once the framework accepts the registration recorded in `Q-006`.\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | The Reviewer Agent is a new framework-level role that coexists with the review responsibility already recorded in loaded context, rather than replacing it | S-001 | `T-004` replaces governance rows instead of adding them, `T-011`, `T-013`, and `T-014` change owner, and reference migration moves from deferred into scope | architect |\n| A-002 | The Reviewer Agent produces exactly one deliverable artifact, matching the single-deliverable pattern of the registered agents in loaded context | plan-wide | The output contract, the artifact template, and the template registration multiply; `T-003` and `T-006` re-scope | architect |\n| A-003 | \"Implementation plans\" denotes the registered planning and design artifacts already produced inside the framework | S-002 | The Reviewer Agent's accepted input set changes and `T-002` re-scopes | omn-product-owner |\n| A-004 | Review coverage is measured as the proportion of governed changes carrying a recorded Reviewer Agent verdict; the input states no numeric target | plan-wide | Plan acceptance criteria 1 and 4 are restated against the confirmed measure | omn-product-owner |\n| A-005 | The five named review dimensions are the complete required coverage set for the first version of the agent | S-004, S-005, S-006, S-007, S-008 | Additional dimension-criteria tasks are required and the acceptance of `T-005` and `T-007` expands | omn-product-owner |\n| A-006 | Defining and registering the Reviewer Agent contract is separable from making the agent dispatchable at run time | S-003 | Runtime enablement moves from deferred into scope and further tasks precede closure | omn-tech-lead |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | `T-001` rules that the Reviewer Agent supersedes the existing review contract rather than coexisting with it | Every reference to the superseded identifier must be migrated; `T-004` replaces rather than adds governance rows and three criteria tasks change owner | medium | T-004, T-011, T-013, T-014 | Take the boundary decision in `T-001` before wave 2 begins | architect |\n| R-002 | requirement | `A-002` is false and the Reviewer Agent must emit more than one deliverable artifact | Output contract, template, and template registration multiply; `T-003` and `T-006` re-scope | low | T-003, T-006 | Fix the deliverable count in the output contract produced by `T-003` | architect |\n| R-003 | requirement | The artifact set confirmed in `T-009` differs from `A-003` | The Reviewer Agent's accepted input set changes and `T-002` re-scopes | medium | T-002, T-009 | Confirm the reviewed artifact set in `T-009` before `T-002` begins | omn-product-owner |\n| R-004 | requirement | The coverage set confirmed in `T-009` contains dimensions beyond the five named in the input | Further dimension-criteria tasks are required and the acceptance of `T-005` and `T-007` expands | medium | T-002, T-005, T-007 | Confirm the coverage set in `T-009` before `T-002` begins | omn-product-owner |\n| R-005 | technical | The authored module set declares descriptor fields or a load order the framework agent loader does not accept | The agent registers but does not resolve at invocation; `T-006` completes while the role stays unusable | medium | T-005, T-006 | Include module-set resolution against the loader contract in the coverage designed in `T-007` | omn-qa |\n| R-006 | dependency | The Reviewer Agent is registered while no registered workflow declares a phase the agent owns | The role is discoverable but unroutable; records produced by `T-004` and `T-006` cannot be exercised by any run | medium | T-004, T-006 | Record the owning phase, or its absence, in the governance rows produced by `T-004` | omn-tech-lead |\n| R-007 | dependency | The tasks mapped to the solution design phase are dispatched while that phase's mandatory skill set does not resolve | Five tasks cannot execute under the framework runtime and delivery stalls after wave 1 | high | T-001, T-002, T-003, T-004, T-010 | Track the unresolved skill registration in `Q-006`; no task in this plan performs the registration, which is recorded as deferred | omn-tech-lead |\n| R-008 | security | The review artifact contract permits verbatim inclusion of reviewed source content | Secrets or restricted content present in reviewed material are copied into a durable framework artifact | low | T-003 | State a redaction rule for reviewed content in the output contract produced by `T-003` | omn-dev-2-reviewer |\n| R-009 | operational | `A-006` is false and the contract is accepted only once the agent is dispatchable at run time | Runtime enablement moves from deferred into scope and further work precedes `T-008` | medium | T-002, T-008 | State the runtime invocability expectation in the authority scope produced by `T-002` | omn-tech-lead |\n| R-010 | delivery | `T-001` is not decided before wave 2 begins | Twelve of the fourteen tasks cannot start and delivery stalls at wave 1 | medium | plan-wide | Sequence `T-001` as the sole architecture decision in wave 1 and escalate it at plan handoff | omn-tech-lead |\n\n## Task Breakdown\n\n### T-001 Decide the Reviewer Agent boundary against existing review ownership\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: none\n- Traces to: S-001\n- Status: ready\n- Description: An approved statement exists of which review responsibilities the new role\n  holds, which remain with the review responsibility already recorded in loaded context, and\n  what identifier the new role carries.\n- Acceptance Criteria:\n  - The responsibility split between the new role and existing review ownership is recorded\n    with no responsibility assigned to both\n  - The agent identifier is recorded and conforms to the framework naming convention in\n    loaded context\n  - The disposition of the existing review contract is recorded as unchanged, superseded, or\n    re-scoped\n- Gate: Design Gate\n\n### T-002 Define the Reviewer Agent authority scope\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: T-001\n- Traces to: S-001, S-002, S-003\n- Status: ready\n- Description: The role's in-scope responsibilities, out-of-scope boundaries, accepted input\n  types, and prohibited actions are approved, together with the expectation for whether the\n  role must be dispatchable at run time.\n- Acceptance Criteria:\n  - Accepted input types name the plan artifacts and the change artifacts the role reviews\n  - Out-of-scope boundaries name each neighbouring role and the responsibility retained by it\n  - The five review dimensions are declared as the role's coverage surface\n  - The runtime invocability expectation is stated as required or not required for acceptance\n- Gate: Design Gate\n\n### T-003 Define the review artifact output contract\n\n- Owner: architect\n- Complexity: M (confidence: low)\n- Depends on: T-002\n- Traces to: S-001, A-002\n- Status: assumption-dependent\n- Description: The structure, identifier scheme, severity model, and closure semantics of the\n  review artifact are defined, together with the rule governing how reviewed content may be\n  reproduced.\n- Acceptance Criteria:\n  - The artifact requires an explicit recorded outcome for each declared review dimension\n  - The finding identifier scheme is fixed so that repeated runs over identical inputs assign\n    identical identifiers\n  - A redaction rule for reviewed content is stated\n  - The artifact template matching the contract exists and is referenced by the contract\n- Gate: Design Gate\n\n### T-004 Record the Reviewer Agent in the framework governance matrices\n\n- Owner: architect\n- Complexity: S (confidence: medium)\n- Depends on: T-002\n- Traces to: S-001\n- Status: ready\n- Description: The capability, skill, and routing maps record the new role consistently with\n  the approved authority scope.\n- Acceptance Criteria:\n  - Each review capability the role holds resolves to exactly one Primary owner across the\n    governance maps\n  - The role's skill coverage is recorded using existing skill identifiers only\n  - The owning workflow phase is recorded, or its absence is recorded as a framework gap\n- Gate: Design Gate\n\n### T-005 Author the Reviewer Agent contract module set\n\n- Owner: omn-dev-1-implement\n- Complexity: L (confidence: medium)\n- Depends on: T-003, T-004, T-010, T-011, T-012, T-013, T-014\n- Traces to: S-001, S-004, S-005, S-006, S-007, S-008\n- Status: ready\n- Description: A complete agent contract exists in the runtime module set layout described in\n  loaded context, carrying the approved authority scope, the review dimension criteria, and\n  the review artifact output contract.\n- Acceptance Criteria:\n  - Every mandatory contract section required by the framework agent contract is present\n    exactly once and in contract order\n  - The declared load order names every module in the set and each named module exists\n  - Every declared capability identifier already exists in the framework capability map\n  - The criteria for all five review dimensions are represented in the contract\n- Gate: none\n\n### T-006 Publish the Reviewer Agent discovery records\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: low)\n- Depends on: T-003, T-005\n- Traces to: S-001, A-002\n- Status: assumption-dependent\n- Description: The new role and its review artifact are discoverable through the framework\n  discovery registries, with every reference resolving.\n- Acceptance Criteria:\n  - The agent record resolves to the authored contract entry point\n  - The artifact template record resolves to the template produced by `T-003`\n  - Every declared dependency of both records resolves to an existing active record\n- Gate: none\n\n### T-007 Design validation coverage for the Reviewer Agent deliverables\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-003\n- Traces to: S-001, S-004, S-005, S-006, S-007, S-008\n- Status: ready\n- Description: Validation coverage exists for contract conformance, artifact conformance,\n  determinism, and the boundary that keeps the role from acting outside its authority.\n- Acceptance Criteria:\n  - Coverage addresses every acceptance criterion in `T-005` and `T-006`\n  - Coverage includes resolution of the module set against the framework loader contract\n  - Coverage includes a repeat-run comparison that evidences identical structure and\n    identifiers\n  - Coverage includes negative cases for each declared out-of-scope boundary\n- Gate: Verification Gate\n\n### T-008 Document the Reviewer Agent\n\n- Owner: omn-documentation\n- Complexity: S (confidence: high)\n- Depends on: T-006, T-007\n- Traces to: S-001\n- Status: ready\n- Description: Framework documentation states what the role reviews, what it produces, which\n  roles hand work to it, and which roles consume its output.\n- Acceptance Criteria:\n  - The role, its deliverable, and its upstream and downstream handoffs are documented\n  - The intent-to-agent routing entry for review intent reflects the decision recorded in\n    `T-001`\n  - Release-impact notes for the framework change are drafted\n- Gate: Closure Gate\n\n### T-009 Confirm the review coverage scope with the requester\n\n- Owner: omn-product-owner\n- Complexity: S (confidence: high)\n- Depends on: none\n- Traces to: S-002, S-003\n- Status: ready\n- Description: The set of artifacts the role reviews, the set of review dimensions it must\n  cover, and the measure of review coverage are approved.\n- Acceptance Criteria:\n  - The reviewed artifact set is recorded by name, resolving `Q-002`\n  - The review dimension set is recorded as complete or extended, resolving `Q-005`\n  - The review coverage measure is recorded, with a pre-adoption baseline or an explicit\n    statement that none exists\n- Gate: Scope Gate\n\n### T-010 Define architecture-compliance review criteria\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: T-001\n- Traces to: S-004\n- Status: ready\n- Description: The conditions under which a reviewed artifact passes or fails\n  architecture-compliance review are stated, with each condition judgeable from the artifact\n  and its declared context.\n- Acceptance Criteria:\n  - Each criterion states an observable condition and the evidence that settles it\n  - Each criterion names the severity assigned when it fails\n  - The criteria reference existing framework architecture guidance rather than restating it\n- Gate: Design Gate\n\n### T-011 Define coding-quality review criteria\n\n- Owner: omn-dev-2-reviewer\n- Complexity: M (confidence: medium)\n- Depends on: T-001\n- Traces to: S-005\n- Status: ready\n- Description: The conditions under which a reviewed change passes or fails coding-quality\n  review are stated, with each condition judgeable from the change and its evidence.\n- Acceptance Criteria:\n  - Each criterion states an observable condition and the evidence that settles it\n  - Each criterion names the severity assigned when it fails\n  - Criteria are policy-backed rather than reviewer preference\n- Gate: Review Gate\n\n### T-012 Define testing-strategy review criteria\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-001\n- Traces to: S-006\n- Status: ready\n- Description: The conditions under which the testing evidence accompanying a reviewed change\n  is judged adequate are stated.\n- Acceptance Criteria:\n  - Each criterion states an observable condition and the evidence that settles it\n  - Each criterion names the severity assigned when it fails\n  - Criteria state how test adequacy is judged against the reviewed change's acceptance\n    criteria\n- Gate: Verification Gate\n\n### T-013 Define security review criteria\n\n- Owner: omn-dev-2-reviewer\n- Complexity: M (confidence: medium)\n- Depends on: T-001\n- Traces to: S-007\n- Status: ready\n- Description: The conditions under which a reviewed artifact passes or fails security review\n  are stated, including the handling of restricted content encountered during review.\n- Acceptance Criteria:\n  - Each criterion states an observable condition and the evidence that settles it\n  - Each criterion names the severity assigned when it fails\n  - Handling of restricted content encountered during review is stated\n- Gate: Review Gate\n\n### T-014 Define framework-governance review criteria\n\n- Owner: omn-dev-2-reviewer\n- Complexity: M (confidence: medium)\n- Depends on: T-001\n- Traces to: S-008\n- Status: ready\n- Description: The conditions under which a reviewed artifact conforms to framework\n  governance, including contract conformance, registry resolution, and gate ownership, are\n  stated.\n- Acceptance Criteria:\n  - Each criterion states an observable condition and the evidence that settles it\n  - Each criterion names the severity assigned when it fails\n  - Criteria cover contract conformance, registry resolution, and respect for declared gate\n    ownership\n- Gate: Review Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-002 | decision-gate | The authority scope binds to the approved responsibility split |\n| T-001 | T-010 | decision-gate | Architecture-compliance criteria scope depends on which review responsibilities the role holds |\n| T-001 | T-011 | decision-gate | Coding-quality criteria scope depends on which review responsibilities the role holds |\n| T-001 | T-012 | decision-gate | Testing-strategy criteria scope depends on which review responsibilities the role holds |\n| T-001 | T-013 | decision-gate | Security criteria scope depends on which review responsibilities the role holds |\n| T-001 | T-014 | decision-gate | Framework-governance criteria scope depends on which review responsibilities the role holds |\n| T-009 | T-002 | decision-gate | The accepted input set binds to the confirmed reviewed artifact set and coverage set |\n| T-002 | T-003 | contract | The output contract binds to the approved authority scope and accepted inputs |\n| T-002 | T-004 | contract | Governance rows record the approved authority scope |\n| T-003 | T-005 | contract | The module set binds to the defined output contract |\n| T-003 | T-006 | produces-consumes | The template record references the template produced by `T-003` |\n| T-003 | T-007 | contract | Validation coverage targets the defined output contract |\n| T-004 | T-005 | policy-gate | A contract may declare only capability identifiers already recorded in the framework capability map |\n| T-010 | T-005 | produces-consumes | The module set embeds the architecture-compliance criteria |\n| T-011 | T-005 | produces-consumes | The module set embeds the coding-quality criteria |\n| T-012 | T-005 | produces-consumes | The module set embeds the testing-strategy criteria |\n| T-013 | T-005 | produces-consumes | The module set embeds the security criteria |\n| T-014 | T-005 | produces-consumes | The module set embeds the framework-governance criteria |\n| T-005 | T-006 | produces-consumes | The agent record must resolve to the authored contract entry point |\n| T-006 | T-008 | produces-consumes | Documentation describes the registered role |\n| T-007 | T-008 | verification | Documentation reflects verified conformance |\n\n### 8.2 External Dependencies\n\nNone identified.\n\nNo prerequisite outside the plan's authority blocks an in-scope task. The host registration\nsurface that would make the role dispatchable is recorded as deferred and gates no in-scope\ntask; the unresolved skill registration behind `R-007` is likewise deferred and is tracked in\n`Q-006`.\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-009\n- Wave 2: T-002, T-010, T-011, T-012, T-013, T-014\n- Wave 3: T-003, T-004\n- Wave 4: T-005, T-007\n- Wave 5: T-006\n- Wave 6: T-008\n\n## Suggested Workflow\n\nSelected workflow: `implement-feature`.\n\nSelected because the plan delivers new framework functionality with acceptance criteria,\ndesign impact, registration work, validation coverage, and documentation handoff. Defect\nresolution, internal quality change, and discovery workflows do not match the plan intent.\n\n| Phase | Tasks |\n|---|---|\n| `scope-and-acceptance` | T-009 |\n| `execution-planning` | plan handoff |\n| `solution-design-and-risk-assessment` | T-001, T-002, T-003, T-004, T-010 |\n| `implementation` | T-005, T-006 |\n| `quality-review` | T-007, T-011, T-012, T-013, T-014 |\n| `documentation-and-release-handoff` | T-008 |\n\n| Gate | Required owners |\n|---|---|\n| Scope Gate | omn-product-owner, omn-business-analyst |\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| scope-definition | T-009 | omn-product-owner | Primary |\n| architecture-decision-authoring | T-001 | architect | Primary |\n| technical-approach-definition | T-002, T-003 | architect | Primary |\n| architecture-analysis | T-010 | architect | Primary |\n| governance-enforcement | T-004 | architect | Secondary |\n| implementation-delivery | T-005, T-006 | omn-dev-1-implement | Primary |\n| code-review | T-011, T-013 | omn-dev-2-reviewer | Primary |\n| governance-enforcement | T-014 | omn-dev-2-reviewer | Primary |\n| validation-design | T-007, T-012 | omn-qa | Primary |\n| release-communication | T-008 | omn-documentation | Primary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S01 | architecture/clean-architecture-checklist.md | T-001, T-002, T-010 | Primary |\n| S02 | business/domain-modeling.md | T-002, T-009 | Primary |\n| S07 | testing/testing-strategy.md | T-007, T-012 | Primary |\n| S09 | security/secure-engineering.md | T-013 | Primary |\n\n## Acceptance Criteria\n\n1. One accountable review role is discoverable in the framework and resolves to a loadable\n   contract. Verifies business objective 1. Evidence: the registry resolution recorded by\n   `T-006` and the conformance evidence from `T-007`.\n2. Both governed change types named in the request, implementation plans and code changes,\n   appear in the role's approved accepted input set. Verifies business objective 1. Evidence:\n   the approved authority scope from `T-002` and the documentation from `T-008`.\n3. The review artifact contract requires an explicit recorded outcome for each of the five\n   declared review dimensions. Verifies business objective 2. Evidence: the output contract\n   from `T-003` checked against the criteria from `T-010` through `T-014`.\n4. The review coverage measure is recorded, with a pre-adoption baseline or an explicit\n   statement that none exists. Verifies business objectives 1 and 2. Evidence: the measure\n   recorded by `T-009`.\n\n## Definition of Done\n\n- [ ] All four plan acceptance criteria are verified with recorded evidence\n- [ ] Scope, Design, Review, Verification, and Closure Gates are approved with owners recorded\n- [ ] Task acceptance criteria for `T-001` through `T-014` are satisfied or formally waived\n- [ ] `A-001` through `A-006` are confirmed or converted to recorded decisions\n- [ ] `R-001` through `R-010` are closed or accepted with named owners\n- [ ] `Q-001` through `Q-007` are closed or explicitly accepted\n- [ ] Documentation and release-impact notes are published\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Does the Reviewer Agent supersede the review responsibility already recorded in loaded context, or coexist with it? | No | architect | T-001, T-004, T-011, T-013, T-014 |\n| Q-002 | Which registered artifacts constitute the \"implementation plans\" the Reviewer Agent reviews? | No | omn-product-owner | T-002, T-009 |\n| Q-003 | Which registered workflow and phase owns the Reviewer Agent's execution, given that the gate matrix names a review workflow that has no registered workflow record? | No | omn-tech-lead | T-004, T-006 |\n| Q-004 | Is dispatchability of the Reviewer Agent at run time required for this delivery to be accepted? | No | omn-tech-lead | T-002, T-008 |\n| Q-005 | Are the five named review dimensions the complete coverage set for the first version of the role? | No | omn-product-owner | T-002, T-009 |\n| Q-006 | How is the solution design phase made routable, given that loaded context records one of its mandatory skills as catalogued but unregistered? | No | omn-tech-lead | T-001, T-002, T-003, T-004, T-010 |\n| Q-007 | The capability map declares a documentation capability identifier in a form the capability resolver does not match, so `T-008` declares the release-communication identifier instead. Should the documentation identifier be made resolvable? | No | architect | T-008 |\n\n## Traceability Matrix\n\n| Statement | Covered by |\n|---|---|\n| S-001 | T-001, T-002, T-004, T-005, T-006, T-007, T-008, A-001 |\n| S-002 | T-002, T-009, A-003, Q-002 |\n| S-003 | T-002, T-009, A-006, Q-004 |\n| S-004 | T-005, T-007, T-010, A-005 |\n| S-005 | T-005, T-007, T-011, A-005 |\n| S-006 | T-005, T-007, T-012, A-005 |\n| S-007 | T-005, T-007, T-013, A-005 |\n| S-008 | T-005, T-007, T-014, A-005 |"
+      }
+    ],
+    "minimum_satisfaction": "All three required inputs must be present. Architecture context that cannot support impact analysis is a missing input, not a gap to be inferred."
+  },
+  "context_slice": {
+    "frozen_at": "2026-08-18T09:05:19Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:89f09c2b8213d9844fc91b78d79e4fc2"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:2f760bd51087e13ff5c6607311bc8405"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:c4fb985889c05856d49c77f1a05ac776"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:e1857ae817b79595cdc5a442268e75cc"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:9d70f79b90fadd0f134a44b03380e8a4"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:8263eebb32caca999f82a1b848cb9689"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:43bfd7607987f40afdf71941d77f44ba"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6e3ce0cabc4c28a56908a85108889214"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820"
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205"
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1"
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:bd6285ffcc1821ca6e1e2210ebcb779e"
+      }
+    ],
+    "context_digest": "sha256:44927b3bcdd3fa660562ae2b83f0ce6e",
+    "input_digest": "sha256:9b2ffccc86173b79b469d7b81155db11",
+    "inputs": [
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/reviewer-agent-feature-request.md",
+        "source_file": "runs/inputs/reviewer-agent-feature-request.md",
+        "digest": "sha256:91557f0e82e8fb1e387591ed315c6987"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/reviewer-agent-business-intent.md",
+        "source_file": "runs/inputs/reviewer-agent-business-intent.md",
+        "digest": "sha256:fd4d5ffa03c9af8589e581db435beced"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/framework-architecture-context.md",
+        "source_file": "runs/inputs/framework-architecture-context.md",
+        "digest": "sha256:51c90f0fa333a4e045af4e594108d0df"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-b6780677468b/artifacts/execution-plan.md",
+        "source_file": "runs/run-b6780677468b/artifacts/execution-plan.md",
+        "digest": "sha256:ab2711c58d8151c8c74803b482d20960"
+      }
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-308f4d0ee447/artifacts/technical-design.md",
+      "runs/run-308f4d0ee447/result-envelope.json",
+      "runs/run-308f4d0ee447/artifacts/architecture-decision-record-*.md"
+    ],
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-308f4d0ee447/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-308f4d0ee447/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-308f4d0ee447/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-308f4d0ee447/artifacts/architecture-decision-record-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-08-18T09:05:19Z"
+}

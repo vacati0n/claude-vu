@@ -1,0 +1,98 @@
+{
+  "run": "run-c5a8d50d3238",
+  "verdict": "PROVEN",
+  "passed": 15,
+  "total": 15,
+  "checks": [
+    {
+      "id": "M0",
+      "check": "the run carries persisted state-engine state",
+      "result": "PASS",
+      "detail": "run-c5a8d50d3238/state.json, schema framework.runtime/state-engine.v1, run_status=WaitingForHuman"
+    },
+    {
+      "id": "M1",
+      "check": "the run holds one work item per declared phase and per declared gate",
+      "result": "PASS",
+      "detail": "6 phase item(s) matching the Phase Model row order, 6 gate item(s); complete"
+    },
+    {
+      "id": "M2",
+      "check": "every work item holds one of the six persisted statuses, projected onto the canonical queue vocabulary",
+      "result": "PASS",
+      "detail": "statuses in use: ['blocked', 'completed', 'pending']; queue projections: ['Blocked', 'Completed', 'Waiting']"
+    },
+    {
+      "id": "M3",
+      "check": "every recorded transition is legal for its work type and carries a canonical reason code",
+      "result": "PASS",
+      "detail": "26 transition(s) replayed against the transition table"
+    },
+    {
+      "id": "M4",
+      "check": "the transition log is strictly ordered and no work item leaves a terminal status",
+      "result": "PASS",
+      "detail": "seq 1..26 contiguous=True, timestamps non-decreasing=True, terminal escapes=none"
+    },
+    {
+      "id": "M5",
+      "check": "no phase reached completed without being leased and invoked",
+      "result": "PASS",
+      "detail": "execution-planning: pending -> leased -> running -> completed (3 transitions); solution-design-and-risk-assessment: pending -> blocked -> pending -> leased -> running -> pending -> leased -> running -> blocked -> pending -> leased -> running -> pending -> leased -> running -> completed (15 transitions)"
+    },
+    {
+      "id": "M6",
+      "check": "the run traversed planning, design, and a delivery phase",
+      "result": "PASS",
+      "detail": "planning=completed, design=completed, delivery=blocked; 2 phase(s) completed"
+    },
+    {
+      "id": "M7",
+      "check": "no phase was leased before its hard predecessors had committed",
+      "result": "PASS",
+      "detail": "lease order [('execution-planning', 5), ('solution-design-and-risk-assessment', 22)] against commit order [('execution-planning', 7), ('solution-design-and-risk-assessment', 24)]"
+    },
+    {
+      "id": "M8",
+      "check": "every gate closing a hard predecessor was decided, by a non-producing owner, before its successor was leased",
+      "result": "PASS",
+      "detail": "decisions recorded: {'Planning Gate': 'approved', 'Design Gate': 'approved'}"
+    },
+    {
+      "id": "M9",
+      "check": "each dispatched work item carries a derivable, unique idempotency key",
+      "result": "PASS",
+      "detail": "2 key(s), each recomputed from the persisted run, phase, agent, and payload digest"
+    },
+    {
+      "id": "M10",
+      "check": "the event stream is append-only, unique, ordered, and canonical",
+      "result": "PASS",
+      "detail": "53 event(s), 12 distinct canonical type(s)"
+    },
+    {
+      "id": "M11",
+      "check": "every blocked work item records a reason and opened an escalation",
+      "result": "PASS",
+      "detail": "scope-and-acceptance=awaiting_capability_registration; implementation=awaiting_capability_registration; quality-review=awaiting_capability_registration; documentation-and-release-handoff=awaiting_capability_registration"
+    },
+    {
+      "id": "M12",
+      "check": "every committed artifact is present and unchanged since it was committed",
+      "result": "PASS",
+      "detail": "execution-planning -> sha256:f1bd944cf4888e50a197631a433e5f95; solution-design-and-risk-assessment -> sha256:5738e7da2aadb5aecc2fbada617b8a01"
+    },
+    {
+      "id": "M13",
+      "check": "the state machine refuses illegal transitions",
+      "result": "PASS",
+      "detail": "5 illegal operation(s) refused: state pending -> completed (skipping lease and invocation); gate pending -> leased (a gate is never leased); non-canonical reason code; completed -> running (a terminal status is terminal); rebinding a completed work item to a different payload"
+    },
+    {
+      "id": "M14",
+      "check": "re-running the same request produces no new side effect",
+      "result": "PASS",
+      "detail": "re-executed 5 runtime command(s) against the committed run; events 53 -> 53, transitions 26 -> 26, artifact digests unchanged, 13 replay(s) recorded and suppressed"
+    }
+  ]
+}

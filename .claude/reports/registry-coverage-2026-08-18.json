@@ -1,0 +1,1527 @@
+{
+  "verdict": "COVERED",
+  "checks": [
+    {
+      "id": "C1",
+      "check": "every active command record resolves to exactly one active workflow record",
+      "result": "PASS",
+      "counts": {
+        "active_commands": 9,
+        "resolved": 9,
+        "unresolved": 0,
+        "command_specs_on_disk": 9,
+        "specs_without_a_record": 0
+      },
+      "detail": "9/9 active command record(s) resolve; every command specification on disk carries a record",
+      "rows": [
+        {
+          "command": "implement",
+          "primary_workflow": "implement-feature",
+          "workflow_status": "active",
+          "command_spec_exists": true,
+          "workflow_spec_exists": true,
+          "resolved": true
+        },
+        {
+          "command": "bugfix",
+          "primary_workflow": "fix-bug",
+          "workflow_status": "active",
+          "command_spec_exists": true,
+          "workflow_spec_exists": true,
+          "resolved": true
+        },
+        {
+          "command": "refactor",
+          "primary_workflow": "refactor",
+          "workflow_status": "active",
+          "command_spec_exists": true,
+          "workflow_spec_exists": true,
+          "resolved": true
+        },
+        {
+          "command": "investigate",
+          "primary_workflow": "investigate",
+          "workflow_status": "active",
+          "command_spec_exists": true,
+          "workflow_spec_exists": true,
+          "resolved": true
+        },
+        {
+          "command": "research",
+          "primary_workflow": "research",
+          "workflow_status": "active",
+          "command_spec_exists": true,
+          "workflow_spec_exists": true,
+          "resolved": true
+        },
+        {
+          "command": "review",
+          "primary_workflow": "review-pull-request",
+          "workflow_status": "active",
+          "command_spec_exists": true,
+          "workflow_spec_exists": true,
+          "resolved": true
+        },
+        {
+          "command": "release",
+          "primary_workflow": "release",
+          "workflow_status": "active",
+          "command_spec_exists": true,
+          "workflow_spec_exists": true,
+          "resolved": true
+        },
+        {
+          "command": "document",
+          "primary_workflow": "implement-feature",
+          "workflow_status": "active",
+          "command_spec_exists": true,
+          "workflow_spec_exists": true,
+          "resolved": true
+        },
+        {
+          "command": "test",
+          "primary_workflow": "review-pull-request",
+          "workflow_status": "active",
+          "command_spec_exists": true,
+          "workflow_spec_exists": true,
+          "resolved": true
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "check": "every active workflow publishes a `## Phase Model` table the Task Router can read",
+      "result": "PASS",
+      "counts": {
+        "active_workflows": 7,
+        "with_phase_model": 7,
+        "unresolved": 0,
+        "phases_total": 36
+      },
+      "detail": "7/7 active workflow(s) publish a Phase Model, 36 phase(s) in total",
+      "rows": [
+        {
+          "workflow": "implement-feature",
+          "phase_count": 6,
+          "phases": [
+            "scope-and-acceptance",
+            "execution-planning",
+            "solution-design-and-risk-assessment",
+            "implementation",
+            "quality-review",
+            "documentation-and-release-handoff"
+          ],
+          "resolved": true
+        },
+        {
+          "workflow": "refactor",
+          "phase_count": 5,
+          "phases": [
+            "scope-invariants-and-risk-profile",
+            "safety-net-establishment",
+            "refactor-implementation",
+            "behavioral-validation",
+            "closure-and-debt-record"
+          ],
+          "resolved": true
+        },
+        {
+          "workflow": "investigate",
+          "phase_count": 5,
+          "phases": [
+            "problem-framing",
+            "technical-discovery",
+            "option-analysis",
+            "recommendation",
+            "publication"
+          ],
+          "resolved": true
+        },
+        {
+          "workflow": "fix-bug",
+          "phase_count": 5,
+          "phases": [
+            "triage-and-impact",
+            "root-cause-analysis",
+            "fix-implementation",
+            "regression-validation",
+            "closure-and-communication"
+          ],
+          "resolved": true
+        },
+        {
+          "workflow": "research",
+          "phase_count": 5,
+          "phases": [
+            "research-framing",
+            "technical-validation",
+            "option-synthesis",
+            "recommendation-draft",
+            "findings-publication"
+          ],
+          "resolved": true
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase_count": 5,
+          "phases": [
+            "code-quality-review",
+            "structural-compliance",
+            "test-risk-validation",
+            "documentation-impact",
+            "merge-decision"
+          ],
+          "resolved": true
+        },
+        {
+          "workflow": "release",
+          "phase_count": 5,
+          "phases": [
+            "readiness-assessment",
+            "artifact-packaging",
+            "candidate-validation",
+            "deployment-execution",
+            "communication-and-post-release"
+          ],
+          "resolved": true
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "check": "every phase owner named by an active Phase Model is host-invocable",
+      "result": "PASS",
+      "counts": {
+        "phase_owners": 12,
+        "host_invocable": 12,
+        "unresolved": 0
+      },
+      "detail": "12/12 phase owner(s) resolve to a valid `agents/<agent-id>.agent.md` entry point",
+      "rows": [
+        {
+          "agent": "architect",
+          "phases_owned": 3,
+          "phase_refs": [
+            "implement-feature/solution-design-and-risk-assessment",
+            "refactor/scope-invariants-and-risk-profile",
+            "review-pull-request/structural-compliance"
+          ],
+          "entry_point": "agents/architect.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "omn-business-analyst",
+          "phases_owned": 2,
+          "phase_refs": [
+            "investigate/problem-framing",
+            "research/research-framing"
+          ],
+          "entry_point": "agents/omn-business-analyst.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "omn-context-agent",
+          "phases_owned": 2,
+          "phase_refs": [
+            "investigate/technical-discovery",
+            "research/technical-validation"
+          ],
+          "entry_point": "agents/omn-context-agent.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "omn-dev-1-bug-analyst",
+          "phases_owned": 2,
+          "phase_refs": [
+            "fix-bug/triage-and-impact",
+            "fix-bug/root-cause-analysis"
+          ],
+          "entry_point": "agents/omn-dev-1-bug-analyst.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "omn-dev-1-implement",
+          "phases_owned": 3,
+          "phase_refs": [
+            "implement-feature/implementation",
+            "refactor/refactor-implementation",
+            "fix-bug/fix-implementation"
+          ],
+          "entry_point": "agents/omn-dev-1-implement.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "omn-dev-2-reviewer",
+          "phases_owned": 3,
+          "phase_refs": [
+            "implement-feature/quality-review",
+            "review-pull-request/code-quality-review",
+            "release/artifact-packaging"
+          ],
+          "entry_point": "agents/omn-dev-2-reviewer.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "omn-documentation",
+          "phases_owned": 5,
+          "phase_refs": [
+            "implement-feature/documentation-and-release-handoff",
+            "investigate/publication",
+            "research/findings-publication",
+            "review-pull-request/documentation-impact",
+            "release/communication-and-post-release"
+          ],
+          "entry_point": "agents/omn-documentation.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "omn-orchestrator",
+          "phases_owned": 3,
+          "phase_refs": [
+            "refactor/closure-and-debt-record",
+            "fix-bug/closure-and-communication",
+            "release/deployment-execution"
+          ],
+          "entry_point": "agents/omn-orchestrator.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "omn-product-owner",
+          "phases_owned": 1,
+          "phase_refs": [
+            "implement-feature/scope-and-acceptance"
+          ],
+          "entry_point": "agents/omn-product-owner.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "omn-qa",
+          "phases_owned": 5,
+          "phase_refs": [
+            "refactor/safety-net-establishment",
+            "refactor/behavioral-validation",
+            "fix-bug/regression-validation",
+            "review-pull-request/test-risk-validation",
+            "release/candidate-validation"
+          ],
+          "entry_point": "agents/omn-qa.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "omn-tech-lead",
+          "phases_owned": 6,
+          "phase_refs": [
+            "investigate/option-analysis",
+            "investigate/recommendation",
+            "research/option-synthesis",
+            "research/recommendation-draft",
+            "review-pull-request/merge-decision",
+            "release/readiness-assessment"
+          ],
+          "entry_point": "agents/omn-tech-lead.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        },
+        {
+          "agent": "planner",
+          "phases_owned": 1,
+          "phase_refs": [
+            "implement-feature/execution-planning"
+          ],
+          "entry_point": "agents/planner.agent.md",
+          "host_invocable": true,
+          "detail": "frontmatter parses and name matches"
+        }
+      ]
+    },
+    {
+      "id": "C4",
+      "check": "every phase-mandatory skill resolves to an active skill registry record",
+      "result": "PASS",
+      "counts": {
+        "skill_references": 101,
+        "resolved": 101,
+        "unresolved": 0,
+        "unresolved_codes": []
+      },
+      "detail": "101/101 phase skill reference(s) resolve",
+      "rows": [
+        {
+          "workflow": "implement-feature",
+          "phase": "scope-and-acceptance",
+          "required": [
+            "S02",
+            "S07"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "execution-planning",
+          "required": [
+            "S02",
+            "S01",
+            "S07"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "solution-design-and-risk-assessment",
+          "required": [
+            "S01",
+            "S03",
+            "S06",
+            "S09"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "implementation",
+          "required": [
+            "S03",
+            "S06",
+            "S10",
+            "S11",
+            "S12"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "quality-review",
+          "required": [
+            "S07",
+            "S09",
+            "S08"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "documentation-and-release-handoff",
+          "required": [
+            "S11",
+            "S10",
+            "S12"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "refactor",
+          "phase": "scope-invariants-and-risk-profile",
+          "required": [
+            "S01",
+            "S02",
+            "S07"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "refactor",
+          "phase": "safety-net-establishment",
+          "required": [
+            "S07",
+            "S03"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "refactor",
+          "phase": "refactor-implementation",
+          "required": [
+            "S03",
+            "S06",
+            "S12"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "refactor",
+          "phase": "behavioral-validation",
+          "required": [
+            "S07",
+            "S08",
+            "S09"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "refactor",
+          "phase": "closure-and-debt-record",
+          "required": [
+            "S10",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "investigate",
+          "phase": "problem-framing",
+          "required": [
+            "S02"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "investigate",
+          "phase": "technical-discovery",
+          "required": [
+            "S01",
+            "S03",
+            "S06",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "investigate",
+          "phase": "option-analysis",
+          "required": [
+            "S01",
+            "S08",
+            "S09"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "investigate",
+          "phase": "recommendation",
+          "required": [
+            "S02",
+            "S08"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "investigate",
+          "phase": "publication",
+          "required": [
+            "S10",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "triage-and-impact",
+          "required": [
+            "S11",
+            "S12",
+            "S02"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "root-cause-analysis",
+          "required": [
+            "S03",
+            "S06",
+            "S08",
+            "S12"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "fix-implementation",
+          "required": [
+            "S03",
+            "S06",
+            "S10",
+            "S12"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "regression-validation",
+          "required": [
+            "S07",
+            "S09",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "closure-and-communication",
+          "required": [
+            "S10",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "research",
+          "phase": "research-framing",
+          "required": [
+            "S02"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "research",
+          "phase": "technical-validation",
+          "required": [
+            "S01",
+            "S03",
+            "S06",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "research",
+          "phase": "option-synthesis",
+          "required": [
+            "S01",
+            "S08",
+            "S09"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "research",
+          "phase": "recommendation-draft",
+          "required": [
+            "S02",
+            "S08"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "research",
+          "phase": "findings-publication",
+          "required": [
+            "S10",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "code-quality-review",
+          "required": [
+            "S03",
+            "S07",
+            "S09"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "structural-compliance",
+          "required": [
+            "S01",
+            "S06",
+            "S09"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "test-risk-validation",
+          "required": [
+            "S07",
+            "S08",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "documentation-impact",
+          "required": [
+            "S10",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "merge-decision",
+          "required": [
+            "S07",
+            "S09",
+            "S10"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "release",
+          "phase": "readiness-assessment",
+          "required": [
+            "S07",
+            "S08",
+            "S09"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "release",
+          "phase": "artifact-packaging",
+          "required": [
+            "S10",
+            "S11",
+            "S12"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "release",
+          "phase": "candidate-validation",
+          "required": [
+            "S07",
+            "S08",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "release",
+          "phase": "deployment-execution",
+          "required": [
+            "S11",
+            "S08",
+            "S12"
+          ],
+          "unresolved": [],
+          "resolved": true
+        },
+        {
+          "workflow": "release",
+          "phase": "communication-and-post-release",
+          "required": [
+            "S02",
+            "S11"
+          ],
+          "unresolved": [],
+          "resolved": true
+        }
+      ]
+    },
+    {
+      "id": "C5",
+      "check": "every gate a Phase Model names resolves to a non-producing owner",
+      "result": "PASS",
+      "counts": {
+        "gate_references": 28,
+        "decidable": 28,
+        "unresolved": 0
+      },
+      "detail": "28/28 gate reference(s) carry an owner permitted to decide under the Producer Exclusion Rule",
+      "rows": [
+        {
+          "workflow": "implement-feature",
+          "phase": "scope-and-acceptance",
+          "gate": "Scope Gate",
+          "owners": [
+            "omn-product-owner",
+            "omn-business-analyst"
+          ],
+          "producer": "omn-product-owner",
+          "eligible_deciders": [
+            "omn-business-analyst"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "execution-planning",
+          "gate": "Planning Gate",
+          "owners": [
+            "omn-tech-lead",
+            "omn-orchestrator"
+          ],
+          "producer": "planner",
+          "eligible_deciders": [
+            "omn-tech-lead",
+            "omn-orchestrator"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "solution-design-and-risk-assessment",
+          "gate": "Design Gate",
+          "owners": [
+            "omn-architect",
+            "omn-tech-lead"
+          ],
+          "producer": "architect",
+          "eligible_deciders": [
+            "omn-tech-lead"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "quality-review",
+          "gate": "Review Gate",
+          "owners": [
+            "omn-dev-2-reviewer",
+            "omn-qa"
+          ],
+          "producer": "omn-dev-2-reviewer",
+          "eligible_deciders": [
+            "omn-qa"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "quality-review",
+          "gate": "Verification Gate",
+          "owners": [
+            "omn-qa"
+          ],
+          "producer": "omn-dev-2-reviewer",
+          "eligible_deciders": [
+            "omn-qa"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "documentation-and-release-handoff",
+          "gate": "Closure Gate",
+          "owners": [
+            "omn-orchestrator",
+            "omn-documentation"
+          ],
+          "producer": "omn-documentation",
+          "eligible_deciders": [
+            "omn-orchestrator"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "refactor",
+          "phase": "scope-invariants-and-risk-profile",
+          "gate": "Invariant Gate",
+          "owners": [
+            "omn-architect",
+            "omn-tech-lead"
+          ],
+          "producer": "architect",
+          "eligible_deciders": [
+            "omn-tech-lead"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "refactor",
+          "phase": "refactor-implementation",
+          "gate": "Implementation Gate",
+          "owners": [
+            "omn-dev-2-reviewer"
+          ],
+          "producer": "omn-dev-1-implement",
+          "eligible_deciders": [
+            "omn-dev-2-reviewer"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "refactor",
+          "phase": "behavioral-validation",
+          "gate": "Regression Gate",
+          "owners": [
+            "omn-qa",
+            "omn-dev-2-reviewer"
+          ],
+          "producer": "omn-qa",
+          "eligible_deciders": [
+            "omn-dev-2-reviewer"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "refactor",
+          "phase": "closure-and-debt-record",
+          "gate": "Closure Gate",
+          "owners": [
+            "omn-orchestrator",
+            "omn-documentation"
+          ],
+          "producer": "omn-orchestrator",
+          "eligible_deciders": [
+            "omn-documentation"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "investigate",
+          "phase": "problem-framing",
+          "gate": "Framing Gate",
+          "owners": [
+            "omn-business-analyst",
+            "omn-product-owner"
+          ],
+          "producer": "omn-business-analyst",
+          "eligible_deciders": [
+            "omn-product-owner"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "investigate",
+          "phase": "technical-discovery",
+          "gate": "Technical Gate",
+          "owners": [
+            "omn-context-agent",
+            "omn-architect"
+          ],
+          "producer": "omn-context-agent",
+          "eligible_deciders": [
+            "omn-architect"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "investigate",
+          "phase": "recommendation",
+          "gate": "Recommendation Gate",
+          "owners": [
+            "omn-tech-lead",
+            "omn-orchestrator"
+          ],
+          "producer": "omn-tech-lead",
+          "eligible_deciders": [
+            "omn-orchestrator"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "triage-and-impact",
+          "gate": "Triage Gate",
+          "owners": [
+            "omn-dev-1-bug-analyst",
+            "omn-tech-lead"
+          ],
+          "producer": "omn-dev-1-bug-analyst",
+          "eligible_deciders": [
+            "omn-tech-lead"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "fix-implementation",
+          "gate": "Fix Gate",
+          "owners": [
+            "omn-dev-2-reviewer"
+          ],
+          "producer": "omn-dev-1-implement",
+          "eligible_deciders": [
+            "omn-dev-2-reviewer"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "regression-validation",
+          "gate": "Verification Gate",
+          "owners": [
+            "omn-qa",
+            "omn-dev-2-reviewer"
+          ],
+          "producer": "omn-qa",
+          "eligible_deciders": [
+            "omn-dev-2-reviewer"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "closure-and-communication",
+          "gate": "Closure Gate",
+          "owners": [
+            "omn-orchestrator",
+            "omn-documentation"
+          ],
+          "producer": "omn-orchestrator",
+          "eligible_deciders": [
+            "omn-documentation"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "research",
+          "phase": "research-framing",
+          "gate": "Framing Gate",
+          "owners": [
+            "omn-business-analyst",
+            "omn-product-owner"
+          ],
+          "producer": "omn-business-analyst",
+          "eligible_deciders": [
+            "omn-product-owner"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "research",
+          "phase": "technical-validation",
+          "gate": "Technical Validity Gate",
+          "owners": [
+            "omn-context-agent",
+            "omn-architect"
+          ],
+          "producer": "omn-context-agent",
+          "eligible_deciders": [
+            "omn-architect"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "research",
+          "phase": "recommendation-draft",
+          "gate": "Recommendation Gate",
+          "owners": [
+            "omn-tech-lead",
+            "omn-orchestrator"
+          ],
+          "producer": "omn-tech-lead",
+          "eligible_deciders": [
+            "omn-orchestrator"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "code-quality-review",
+          "gate": "Code Quality Gate",
+          "owners": [
+            "omn-dev-2-reviewer",
+            "omn-tech-lead"
+          ],
+          "producer": "omn-dev-2-reviewer",
+          "eligible_deciders": [
+            "omn-tech-lead"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "structural-compliance",
+          "gate": "Architecture Gate",
+          "owners": [
+            "omn-architect",
+            "omn-tech-lead"
+          ],
+          "producer": "architect",
+          "eligible_deciders": [
+            "omn-tech-lead"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "test-risk-validation",
+          "gate": "Verification Gate",
+          "owners": [
+            "omn-qa",
+            "omn-dev-2-reviewer"
+          ],
+          "producer": "omn-qa",
+          "eligible_deciders": [
+            "omn-dev-2-reviewer"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "merge-decision",
+          "gate": "Merge Gate",
+          "owners": [
+            "omn-tech-lead",
+            "omn-orchestrator"
+          ],
+          "producer": "omn-tech-lead",
+          "eligible_deciders": [
+            "omn-orchestrator"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "release",
+          "phase": "readiness-assessment",
+          "gate": "Readiness Gate",
+          "owners": [
+            "omn-tech-lead",
+            "omn-qa"
+          ],
+          "producer": "omn-tech-lead",
+          "eligible_deciders": [
+            "omn-qa"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "release",
+          "phase": "artifact-packaging",
+          "gate": "Artifact Gate",
+          "owners": [
+            "omn-dev-2-reviewer",
+            "omn-tech-lead"
+          ],
+          "producer": "omn-dev-2-reviewer",
+          "eligible_deciders": [
+            "omn-tech-lead"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "release",
+          "phase": "deployment-execution",
+          "gate": "Deployment Gate",
+          "owners": [
+            "omn-orchestrator",
+            "omn-tech-lead"
+          ],
+          "producer": "omn-orchestrator",
+          "eligible_deciders": [
+            "omn-tech-lead"
+          ],
+          "decidable": true
+        },
+        {
+          "workflow": "release",
+          "phase": "communication-and-post-release",
+          "gate": "Communication Gate",
+          "owners": [
+            "omn-documentation",
+            "omn-product-owner"
+          ],
+          "producer": "omn-documentation",
+          "eligible_deciders": [
+            "omn-product-owner"
+          ],
+          "decidable": true
+        }
+      ]
+    },
+    {
+      "id": "C6",
+      "check": "phase dispatchability is reported per phase, with a reason for each blocker",
+      "result": "PASS",
+      "counts": {
+        "phases": 36,
+        "dispatchable": 3,
+        "blocked": 33
+      },
+      "detail": "3/36 phase(s) resolve the full capability and context chain today; every other phase carries a recorded blocked reason",
+      "rows": [
+        {
+          "workflow": "implement-feature",
+          "phase": "scope-and-acceptance",
+          "owner": "omn-product-owner",
+          "command": "implement",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-product-owner' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "execution-planning",
+          "owner": "planner",
+          "command": "implement",
+          "dispatchable": true,
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "G1-CAPABILITY and G2-CONTEXT both resolve"
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "solution-design-and-risk-assessment",
+          "owner": "architect",
+          "command": "implement",
+          "dispatchable": true,
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "G1-CAPABILITY and G2-CONTEXT both resolve"
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "implementation",
+          "owner": "omn-dev-1-implement",
+          "command": "implement",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-dev-1-implement' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "quality-review",
+          "owner": "omn-dev-2-reviewer",
+          "command": "implement",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-dev-2-reviewer' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "implement-feature",
+          "phase": "documentation-and-release-handoff",
+          "owner": "omn-documentation",
+          "command": "implement",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-documentation' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "refactor",
+          "phase": "scope-invariants-and-risk-profile",
+          "owner": "architect",
+          "command": "refactor",
+          "dispatchable": true,
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "G1-CAPABILITY and G2-CONTEXT both resolve"
+        },
+        {
+          "workflow": "refactor",
+          "phase": "safety-net-establishment",
+          "owner": "omn-qa",
+          "command": "refactor",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "refactor",
+          "phase": "refactor-implementation",
+          "owner": "omn-dev-1-implement",
+          "command": "refactor",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-dev-1-implement' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "refactor",
+          "phase": "behavioral-validation",
+          "owner": "omn-qa",
+          "command": "refactor",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "refactor",
+          "phase": "closure-and-debt-record",
+          "owner": "omn-orchestrator",
+          "command": "refactor",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-orchestrator' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "investigate",
+          "phase": "problem-framing",
+          "owner": "omn-business-analyst",
+          "command": "investigate",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-business-analyst' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "investigate",
+          "phase": "technical-discovery",
+          "owner": "omn-context-agent",
+          "command": "investigate",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-context-agent' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "investigate",
+          "phase": "option-analysis",
+          "owner": "omn-tech-lead",
+          "command": "investigate",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-tech-lead' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "investigate",
+          "phase": "recommendation",
+          "owner": "omn-tech-lead",
+          "command": "investigate",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-tech-lead' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "investigate",
+          "phase": "publication",
+          "owner": "omn-documentation",
+          "command": "investigate",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-documentation' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "triage-and-impact",
+          "owner": "omn-dev-1-bug-analyst",
+          "command": "bugfix",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-dev-1-bug-analyst' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "root-cause-analysis",
+          "owner": "omn-dev-1-bug-analyst",
+          "command": "bugfix",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-dev-1-bug-analyst' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "fix-implementation",
+          "owner": "omn-dev-1-implement",
+          "command": "bugfix",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-dev-1-implement' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "regression-validation",
+          "owner": "omn-qa",
+          "command": "bugfix",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "fix-bug",
+          "phase": "closure-and-communication",
+          "owner": "omn-orchestrator",
+          "command": "bugfix",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-orchestrator' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "research",
+          "phase": "research-framing",
+          "owner": "omn-business-analyst",
+          "command": "research",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-business-analyst' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "research",
+          "phase": "technical-validation",
+          "owner": "omn-context-agent",
+          "command": "research",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-context-agent' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "research",
+          "phase": "option-synthesis",
+          "owner": "omn-tech-lead",
+          "command": "research",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-tech-lead' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "research",
+          "phase": "recommendation-draft",
+          "owner": "omn-tech-lead",
+          "command": "research",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-tech-lead' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "research",
+          "phase": "findings-publication",
+          "owner": "omn-documentation",
+          "command": "research",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-documentation' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "code-quality-review",
+          "owner": "omn-dev-2-reviewer",
+          "command": "review",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-dev-2-reviewer' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "structural-compliance",
+          "owner": "architect",
+          "command": "review",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_contract_reconciliation",
+          "failure_class": "workflow-contract-violation",
+          "detail": "[workflow-contract-violation] agent declares no output 'structural and security findings assessment'; declares ['technical-design.md', 'architecture-decision-record.md']"
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "test-risk-validation",
+          "owner": "omn-qa",
+          "command": "review",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "documentation-impact",
+          "owner": "omn-documentation",
+          "command": "review",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-documentation' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "review-pull-request",
+          "phase": "merge-decision",
+          "owner": "omn-tech-lead",
+          "command": "review",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-tech-lead' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "release",
+          "phase": "readiness-assessment",
+          "owner": "omn-tech-lead",
+          "command": "release",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-tech-lead' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "release",
+          "phase": "artifact-packaging",
+          "owner": "omn-dev-2-reviewer",
+          "command": "release",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-dev-2-reviewer' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "release",
+          "phase": "candidate-validation",
+          "owner": "omn-qa",
+          "command": "release",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-qa' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "release",
+          "phase": "deployment-execution",
+          "owner": "omn-orchestrator",
+          "command": "release",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-orchestrator' has no record in registry/agents.yaml"
+        },
+        {
+          "workflow": "release",
+          "phase": "communication-and-post-release",
+          "owner": "omn-documentation",
+          "command": "release",
+          "dispatchable": false,
+          "blocked_reason": "awaiting_capability_registration",
+          "failure_class": "missing-capability-failure",
+          "detail": "[missing-capability-failure] agent 'omn-documentation' has no record in registry/agents.yaml"
+        }
+      ]
+    }
+  ]
+}

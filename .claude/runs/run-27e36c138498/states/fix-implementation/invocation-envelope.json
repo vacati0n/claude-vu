@@ -1,0 +1,418 @@
+{
+  "invocation_id": "inv-27e36c138498-03-002",
+  "run_id": "run-27e36c138498",
+  "work_item_id": "run-27e36c138498::fix-implementation",
+  "idempotency_key": "sha256:6c11c26ffa59d169df285b0fd6fb0d06",
+  "state_id": "fix-implementation",
+  "phase_index": 3,
+  "agent_id": "omn-dev-1-implement",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-1-implement.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-1-implement/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-1-implement/system.md",
+      "agents/omn-dev-1-implement/identity.md",
+      "agents/omn-dev-1-implement/reasoning.md",
+      "agents/omn-dev-1-implement/execution.md",
+      "agents/omn-dev-1-implement/output.md",
+      "agents/omn-dev-1-implement/quality.md",
+      "agents/omn-dev-1-implement/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-1-implement/system.md": "sha256:19e8b4ae2aad6df4dcc5eb87cc91bcf7",
+      "agents/omn-dev-1-implement/identity.md": "sha256:ebe0b5ca1ba82d21b3df7312fa4853d0",
+      "agents/omn-dev-1-implement/reasoning.md": "sha256:bd8227a7ccb3381d58c3bb56327ab2fd",
+      "agents/omn-dev-1-implement/execution.md": "sha256:d4aa70332f7b234d6eedff98dd8c9cda",
+      "agents/omn-dev-1-implement/output.md": "sha256:3aa228e50cc07de0b61bc5d706447a37",
+      "agents/omn-dev-1-implement/quality.md": "sha256:7b8a9362ce6a01d63ab8a5f7761c66af",
+      "agents/omn-dev-1-implement/examples.md": "sha256:f48ee3f3baff365758263d94b56f4d93"
+    },
+    "capabilities": [
+      "implementation-delivery"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S03",
+        "proficiency": "Primary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Primary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "technical-design",
+      "bug-analysis",
+      "test-baseline-record",
+      "execution-plan",
+      "coding-standards",
+      "architecture-decision-record",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context",
+      "regression-targets",
+      "parity-checklist",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md",
+        "text": "```yaml\nbugAnalysis:\n  analysisId: BA-run-27e36c138498-triage-and-impact\n  defectReference: runs/inputs/fix-bug-triage-stall-defect-report.md\n  sourceInputs:\n    - type: defect-report\n      reference: runs/inputs/fix-bug-triage-stall-defect-report.md\n    - type: symptom-evidence\n      reference: runs/run-27e36c138498/state.json\n    - type: symptom-evidence\n      reference: runs/run-27e36c138498/events.jsonl\n    - type: symptom-evidence\n      reference: runs/run-27e36c138498/recovery-ledger.json\n    - type: symptom-evidence\n      reference: runs/run-93b302cbdb28/state.json\n    - type: symptom-evidence\n      reference: runs/run-c5a8d50d3238/state.json\n    - type: code-context\n      reference: runtime/framework_runtime.py\n    - type: code-context\n      reference: runtime/verify_validators.py\n    - type: code-context\n      reference: runtime/verify_registry_coverage.py\n    - type: code-context\n      reference: workflows/fix-bug.md\n    - type: code-context\n      reference: agents/omn-dev-1-bug-analyst/manifest.yaml\n  producedBy: omn-dev-1-bug-analyst\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  severity: critical\n  reproducibility: deterministic\n  inputDigest: sha256:404f062123f5e690c567a64a909193cb\n  contextDigest: sha256:550e204f958bc16d12e2b0eb45e0cc73\n```\n\n## Metadata\n\n- Bug ID: runs/inputs/fix-bug-triage-stall-defect-report.md\n- Reporter: the supplied defect report, which attributes its observation to check `C6` of the registry coverage verifier; no individual, team, or monitor is named in it\n- Severity: critical\n- Status: provisional\n\n## Symptom Summary\n\n- Observed behavior: a run of the bugfix command accepted the request, enqueued all five workflow phases and four gate work items, and then executed none of them, producing no artifact; one second after acceptance the entry phase moved out of the queue into a blocked state, and the four downstream phases stayed pending behind it\n- Expected behavior: a run reaches each phase in turn and completes it, with each phase's declared artifact accepted by its registered validator and no phase reporting a capability or contract blocker, which is the acceptance criteria the supplied defect report states\n- First observed date: 2026-08-19, recorded at 07:55:08Z in this run's own transition record. The supplied report gives no earlier date. Two earlier runs dated 2026-08-18 carry the same blocked reason against a different phase, so the underlying condition predates this run.\n- Affected environments: known affected is the repository at the revision this run froze, on this host, for the workflows named in the blast radius below. Known unaffected is none established, because no environment was shown to be free of the condition. Not observed is any other host, checkout, or revision of this repository, none of which this analysis could reach; these are recorded as not observed and are not counted as unaffected.\n\n## Reproduction\n\n- Preconditions: an active workflow Phase Model row whose Output Artifact cell contains no whitespace token ending in the markdown extension, an owning agent whose manifest declares its outputs as filenames, and the runtime resolution chain evaluated for that phase. The cell's content is the varying precondition and it was isolated: rows naming exactly one file resolve, rows naming none block. For the reported phase the precondition was removed before this analysis began to execute, when an operator corrected the Output Artifact column; this run's own transition record carries both the failing and the corrected state of that same phase, which is what makes the variation observable rather than asserted.\n- Steps to reproduce: change into the framework directory at the repository root, the one holding `runtime/` and `workflows/`, then run the registry coverage verifier at `runtime/verify_registry_coverage.py` and read check `C6`, which reports every phase with a dispatchable verdict and a recorded reason for each blocker. For any phase it reports blocked, run `runtime/framework_runtime.py` with the resolve subcommand and that phase's command and phase identifiers, and observe the run end in a workflow-contract-violation naming the Output Artifact cell text where a filename was expected. For the corrected phase, run the same resolve subcommand with command bugfix and phase triage-and-impact, and observe it resolve to an artifact and a registered validator, which is the outcome recorded as `E-006`. For the originally reported instance, read the transitions array of `runs/run-27e36c138498/state.json`, which records that phase blocking and then clearing. Every step is read-only and changes nothing.\n- Reproduction frequency: deterministic\n- Evidence: every artifact and command result this analysis rests on is registered in the Evidence Register below.\n\n### Evidence Register\n\n| ID | Evidence | Source | Confidence |\n|---|---|---|---|\n| `E-001` | this run's entry phase transitioned from pending to blocked at 07:55:08Z under guard `G1-CAPABILITY`, with the recorded detail that the owning agent declares no output named by the prose string the workflow routed and declares a bug analysis file instead | `runs/run-27e36c138498/state.json` transitions and the event stream in `events.jsonl`, read in this analysis | high |\n| `E-002` | the same phase transitioned from blocked back to pending at 07:56:30Z with the recorded reason that every guard now passes, and the recovery ledger marks the failure envelope resolved at the same instant | `runs/run-27e36c138498/state.json` and `recovery-ledger.json`, read in this analysis | high |\n| `E-003` | the failure envelope classifies the failure as non-retryable at detection point validation with action rollback, and records the clearing action as reconciling the manifest with the Phase Model, stating explicitly that no runtime command clears it | `runs/run-27e36c138498/recovery-ledger.json` and the phase failure envelope beside it, read in this analysis | high |\n| `E-004` | the runtime derives a phase's artifact by tokenising the Output Artifact cell for names carrying the markdown extension, and returns the cell whole whenever the count of such names is not exactly one | source read of `runtime/framework_runtime.py` in this analysis | high |\n| `E-005` | output-contract resolution requires that derived string to appear both in the owning manifest's declared outputs and as a key of the registered validator map, raising a workflow-contract-violation otherwise; the validator map holds thirteen keys, every one a filename, so no prose string can match | source read of `runtime/framework_runtime.py` and enumeration of the validator map, in this analysis | high |\n| `E-006` | resolving the chain for the reported phase against the frozen revision returns a resolved verdict, naming the bug analysis artifact and its registered validator | the runtime resolve subcommand for command bugfix and phase triage-and-impact, run in this analysis | high |\n| `E-007` | five phases across four other active workflows still carry an Output Artifact cell naming no file, and resolving each one's output contract raises the identical failure class and yields the identical blocked reason; they are the documentation and release handoff phase of implement-feature, the publication phase of investigate, the findings publication phase of research, and both the structural compliance and documentation impact phases of review-pull-request | read-only resolution probe over every record in `registry/workflows.yaml`, executed in this analysis | high |\n| `E-008` | the coverage verifier reports 36 phases with 31 dispatchable and 5 blocked, names the same five phases with reason `awaiting_contract_reconciliation`, and records its own check `C6` as passing while reporting them | `runtime/verify_registry_coverage.py`, run in this analysis | high |\n| `E-009` | the derived dependency graph for this workflow is a single hard chain rooted at the entry phase, with the three middle phases and the closing phase each depending hard, directly or transitively, on it, and with no edge downgraded to soft | the runtime dependency derivation evaluated read-only over the frozen `workflows/fix-bug.md`, in this analysis | high |\n| `E-010` | the Validation Engine coverage proof collects a row's Output Artifact only from tokens carrying the markdown extension, so a cell naming no file contributes nothing and the row is never examined; the absence of any branch that records such a row was confirmed by reading the whole function rather than inferred from the check passing | source read of `runtime/verify_validators.py` in this analysis | high |\n| `E-011` | two earlier implement-feature runs each hold a durable work item for the documentation and release handoff phase in status blocked with reason `awaiting_contract_reconciliation`, written while the condition was active and still present | `runs/run-93b302cbdb28/state.json` and `runs/run-c5a8d50d3238/state.json`, read in this analysis | high |\n| `E-012` | the business consequence is stated as the quality agent being unable to satisfy two conditions of the Agent Definition of Done, the first rollout wave being unable to close, and every defect repair routed under the self-hosting profile's defect-repair class being blocked | the supplied defect report, reported and not independently confirmed in this analysis | low |\n| `E-013` | the owning agent manifest declares exactly one output, and the block detail captured at 07:55:08Z already reported that same single declared output, so the manifest side of the comparison did not change between the block and the clearing | `agents/omn-dev-1-bug-analyst/manifest.yaml` read in this analysis, together with the detail in `E-001` | high |\n| `E-014` | the frozen workflow specification still states in prose that four phases are dispatchable and that the entry phase blocks at `G1-CAPABILITY` with reason `awaiting_contract_reconciliation`, contradicting the corrected Phase Model table in the same file and contradicting the measured verdict | `workflows/fix-bug.md` read in this analysis, cross-checked against `E-006` and `E-008` | high |\n| `E-015` | no specification in the repository states that the Output Artifact column must name a validatable file; the material found describes the consequence of a cell that does not, but states no requirement on the column itself. The absence was confirmed by searching the markdown and runtime sources for such a requirement, not assumed from its not being cited. | repository-wide search executed in this analysis | medium |\n\n## Impact Assessment\n\n- User impact: an operator invoking the bugfix command received a run that accepted the request, enqueued every phase and gate, and produced nothing, with no runtime command able to clear the condition and therefore no route to a diagnosis of any defect through the workflow that exists to diagnose defects. The same holds today for operators of the commands routing the five phases that still carry the condition. No supplied input quantifies how many operators that is; the framework offers no alternative route to those phases, so every operator of an affected command is affected.\n- Business impact: taken as given from the supplied defect report, which states that the quality agent cannot satisfy two conditions of the Agent Definition of Done, that the first rollout wave cannot close, and that every defect repair routed under the self-hosting profile's defect-repair class is blocked. That statement came from the reporter rather than from the product owner and was not independently confirmed here, so it is registered at low confidence in `E-012` and is not what the severity rests on.\n- Technical impact: availability rather than correctness. A core execution path was wholly unavailable: the entry phase of the defect-repair workflow blocked one second after the run was accepted, the failure is classified non-retryable with action rollback, and the recorded clearing action states that no runtime command clears it, so the runtime had no path back to a working state on its own. Nothing was computed incorrectly and no data was corrupted. Durable run state was written while the condition was active and survives correction of the specification that caused it.\n- Blast radius:\n  - the whole of this workflow: the entry phase directly, and the root-cause, fix-implementation, regression-validation and closure phases through the hard dependency chain rooted at it, together with the Triage Gate work item enqueued to close the entry phase and therefore unreachable while that phase is blocked\n  - implement-feature, at its documentation and release handoff phase, which is that workflow's terminal phase and is still blocked today, per `E-007` and `E-008`\n  - investigate, at its publication phase, still blocked today\n  - research, at its findings publication phase, still blocked today\n  - review-pull-request, at both its structural compliance phase and its documentation impact phase, both still blocked today\n  - the commands routing those four workflows, each of which reaches its blocked phase by no alternative path, together with any downstream phase of those workflows held behind a blocked phase by a hard dependency edge\n  - persisted state written while the condition was active and not removed by correcting a specification: two earlier runs each holding a work item durably in status blocked under this reason, per `E-011`, plus this run's failure envelope and its append-only recovery-ledger entry, which per `E-003` record the condition permanently by design\n  - the reported dispatchability figure itself, which counts phases resolving their own capability chain and therefore reports as dispatchable a phase that a hard predecessor makes permanently unreachable\n\n## Root Cause Analysis\n\n- Root cause statement: not established at this phase. The evidence reaches a contract mismatch between two readers of one column, where the runtime requires the Output Artifact cell to name exactly one validatable file and blocks the phase when it does not, while the coverage proof reads the same cell as declaring nothing to cover and passes; no specification states which reading the column owes, so this analysis did not establish which of the two readers carries the defective assumption, and the root-cause phase must settle that.\n- Why detection failed earlier: the check that exists to catch an unvalidatable artifact cannot see this condition. The Validation Engine coverage proof collects a row's artifact only when the cell yields a token carrying the markdown extension, so a prose-only cell contributes nothing and the row passes without being examined, per `E-010`. The registry coverage proof does observe the blocked phases and names each with its reason, but it is written to pass whenever every blocker carries a recorded reason, so per `E-008` it reported five blocked phases and returned a passing verdict in the same run. No check anywhere fails on the condition itself.\n\n### Causal Chain\n\n| ID | Step | Claim | Evidence | Confidence |\n|---|---|---|---|---|\n| `C-001` | column authored as prose | the Phase Model stated the entry phase's Output Artifact as a prose decision naming no file, while the owning manifest declared exactly one output and that output was a filename | `E-001`, `E-013` | high |\n| `C-002` | runtime derives an artifact from the cell | the runtime tokenises the cell for names carrying the markdown extension and, finding none, returns the cell whole, so the prose text became the artifact identifier the phase was held to | `E-004` | high |\n| `C-003` | output contract fails to resolve | resolution requires that identifier to be both a declared manifest output and a registered validator key, and the prose text was neither, so resolution raised a workflow-contract-violation | `E-005`, `E-001` | high |\n| `C-004` | capability guard converts it to a block | the guard turned that violation into a non-retryable block carrying reason `awaiting_contract_reconciliation`, which the classification matrix records as clearable by no runtime command | `E-001`, `E-003` | high |\n| `C-005` | the block propagates along hard edges | the workflow's dependency graph is a single hard chain rooted at the blocked entry phase, so the predecessor guard held all four downstream phases irrespective of their own capability verdicts | `E-009` | high |\n| `C-006` | observed symptom | the run enqueued five phases and four gates and produced no artifact, because the only phase eligible to begin was the blocked one | `E-001`, `E-009` | high |\n\n## Fix Strategy\n\n- Proposed fix: what a fix must achieve is agreement on what the Output Artifact column is required to name, and conformance of every active Phase Model row to that agreement, so that a row which cannot yield a validatable artifact is rejected when it is authored rather than when a run reaches it. The strategy is conditional on the branch this analysis could not close, recorded as `Q-001`: until it is settled which reader holds the defective assumption, it is not determined whether conformance is reached by giving every remaining row an artifact type or by changing what the runtime demands of the column. A fix must additionally reach the state already persisted while the condition was active, namely the two runs holding a phase durably blocked and this run's failure envelope and append-only ledger entry, because none of that is re-evaluated by editing a specification. It must also leave this workflow's own narrative agreeing with its Phase Model table and with the measured verdict, which per `E-014` it does not today.\n- Alternative options: the first approach makes the column's contract explicit and enforces it at authoring time, so a row naming no validatable artifact fails a verification check instead of blocking a run; this keeps every phase's output decided by a validator, but it cannot land until each remaining prose row has been given an artifact type, a template, and a registered validator. The second approach relaxes the runtime so that a phase declaring no validatable artifact dispatches with no Validation Engine verdict; this clears the blocked phases at once but gives up the guarantee that every phase's output is judged, which is the property the block exists to protect. What distinguishes them is where the cost falls and what is conserved: the first moves the cost forward to authoring and keeps validation total, the second leaves authoring unconstrained and makes validation partial. Choosing between them is a design decision this analysis routes rather than makes.\n- Regression risk: high\n- Regression scope:\n  - the phase dependency graph, which is derived from the same Output Artifact column by matching its terms against the Input columns of later phases; changing what that column may contain changes the terms matched and therefore the hard and soft edges the runtime enforces across every workflow, not only the rows being corrected\n  - the Validation Engine coverage proof, which reads that same column through a different filter and currently passes by never examining the rows at issue; any change to the column's contract changes which rows that proof observes and can flip its verdict\n  - the four workflows holding the five phases that still carry the condition; giving each phase an artifact type changes those workflows' Output Artifact cells, which are the cells the dependency graph is derived from, so those workflows' sequencing moves with them\n  - the durable run store, reached through the state machine's transition rules; re-evaluating work items already recorded blocked in earlier runs touches the transition path every run in flight depends on\n  - the reported dispatchability figure and the passing verdict of the registry coverage check, which move with all of the above and which other framework records cite as a readiness measure\n\n## Validation Plan\n\n- Verification steps: for every phase the registry coverage check reports, resolving its output contract must return an artifact the Validation Engine has a registered validator for, and that check must report no phase carrying reason `awaiting_contract_reconciliation`; a rising dispatchable count is not sufficient, because that count rises when any blocker of any kind clears. Because the condition reached here is a disagreement between two readers of one column, verification must exercise both readers over the same set of active Phase Model rows and confirm they name the same artifact for every row. A check that only confirms runs now complete would confirm the symptom stopped while leaving the two readers free to diverge again. A run reaching regression validation is necessary and demonstrates the symptom is gone, but it does not on its own demonstrate the condition was removed.\n- Regression tests added: a check that fails when an active Phase Model row's Output Artifact cell yields no artifact the validator map registers, so the condition is caught at verification time rather than at run time; and a check that the runtime's artifact derivation and the coverage proof's artifact collection return the same rows and the same artifacts for every active workflow, so the two readers cannot silently diverge again. These state what should exist; writing them belongs to `omn-dev-1-implement` and running them to `omn-qa`.\n- Monitoring signals after release: the per-phase blocked reasons reported by the registry coverage check, where any phase reappearing with reason `awaiting_contract_reconciliation` indicates recurrence; the count of phases that resolve their own capability chain yet sit behind a blocked hard predecessor, which is the number the reported dispatchability figure currently conceals; and the number of durable work items across the run store carrying that blocked reason, which must not increase after the fix.\n\n## Closure\n\n- Resolution summary: None identified. The defect is not resolved. The operator correction that removed the precondition for one phase of one workflow is registered as `E-002`, as evidence of the varying precondition rather than as a resolution, and closure is a gate decision this analysis does not record.\n- Linked PR and release: None identified.\n- Prevention actions: the candidate prevention is the authoring-time check named under `Regression tests added`, which would fail on the condition rather than leave it to surface as a run-time block. It is not yet an agreed action, because which check is correct depends on the column contract decision recorded as `Q-001`.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected steps |\n|---|---|---|---|---|\n| `Q-001` | Which reading of the Output Artifact column is authoritative: the runtime's, which requires exactly one validatable file and blocks otherwise, or the coverage proof's, which treats a cell naming none as declaring nothing to cover? Per `E-015` no specification states the requirement, so the two cannot both be right and this analysis did not establish which carries the defective assumption. An architecture decision recording the column's contract would resolve it. | yes | `architect` | `C-001`, `C-002` |\n| `Q-002` | Which artifact type does each of the five phases still carrying the condition emit? Each needs an artifact, a template, and a registered validator before it can dispatch, and choosing them defines what those phases produce, which is beyond this analysis. A recorded artifact-type decision per phase would resolve it. | yes | `architect` | none |\n| `Q-003` | Is this workflow's narrative merely stale against its own corrected table and the measured verdict, or was the table corrected without the decision the narrative records? Reconciling the two, or recording the decision the correction rests on, would resolve it. | no | `omn-tech-lead` | `C-001` |\n| `Q-004` | What becomes of the two earlier runs holding a phase durably blocked under this condition: are they re-opened, re-planned, or closed once the column contract is settled? That is a run-management decision this analysis does not hold. A recorded disposition for each run would resolve it. | no | `omn-orchestrator` | none |\n| `Q-005` | No environment other than this host's frozen checkout was reached, so the analysis cannot state whether another host, checkout, or revision carries the same column contents and therefore the same condition. Resolving it needs the condition checked against another checkout, which is environment access this analysis does not hold. | no | `omn-orchestrator` | none |",
+        "digest": "sha256:99cfbadd996f87a95751633cbbc4ed4a",
+        "produced_by": "triage-and-impact"
+      },
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-27e36c138498/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-27e36c138498/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "text": "```yaml\nbugAnalysis:\n  analysisId: BA-run-27e36c138498-root-cause-analysis\n  defectReference: runs/inputs/fix-bug-triage-stall-defect-report.md\n  sourceInputs:\n    - type: defect-report\n      reference: runs/inputs/fix-bug-triage-stall-defect-report.md\n    - type: bug-analysis\n      reference: runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md\n    - type: symptom-evidence\n      reference: runs/run-27e36c138498/state.json\n    - type: symptom-evidence\n      reference: runs/run-27e36c138498/recovery-ledger.json\n    - type: symptom-evidence\n      reference: runs/run-93b302cbdb28/state.json\n    - type: symptom-evidence\n      reference: runs/run-c5a8d50d3238/state.json\n    - type: code-context\n      reference: runtime/framework_runtime.py\n    - type: code-context\n      reference: runtime/verify_validators.py\n    - type: code-context\n      reference: runtime/verify_registry_coverage.py\n    - type: code-context\n      reference: workflows/README.md\n    - type: code-context\n      reference: workflows/fix-bug.md\n    - type: code-context\n      reference: workflows/review-pull-request.md\n    - type: architecture-context\n      reference: registry/workflows.yaml\n    - type: architecture-context\n      reference: runtime/README.md\n  producedBy: omn-dev-1-bug-analyst\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  severity: critical\n  reproducibility: deterministic\n  inputDigest: sha256:404f062123f5e690c567a64a909193cb\n  contextDigest: sha256:859732d5f75f500da7d8e023cf3aafff\n```\n\n## Metadata\n\n- Bug ID: runs/inputs/fix-bug-triage-stall-defect-report.md\n- Reporter: the supplied defect report, which attributes its observation to check `C6` of the registry coverage verifier; no individual, team, or monitor is named in it\n- Severity: critical\n- Status: complete\n\n## Symptom Summary\n\n- Observed behavior: a run of the bugfix command accepted the request, enqueued all five workflow phases and four gate work items, and then executed none of them, producing no artifact; one second after acceptance the entry phase moved out of the queue into a blocked state, and the four downstream phases stayed pending behind it\n- Expected behavior: a run reaches each phase in turn and completes it, with each phase's declared artifact accepted by its registered validator and no phase reporting a capability or contract blocker, which is the acceptance criteria the supplied defect report states\n- First observed date: 2026-08-19, recorded at 07:55:08Z in this run's own transition record. The supplied report gives no earlier date. Two earlier runs dated 2026-08-18 carry the same blocked reason against a different phase, so the underlying condition predates this run.\n- Affected environments: known affected is the repository at the revision this phase froze, on this host, for the workflows named in the blast radius below. Known unaffected is none established, because no environment was shown to be free of the condition. Not observed is any other host, checkout, or revision of this repository, none of which this analysis could reach; these are recorded as not observed and are not counted as unaffected.\n\n## Reproduction\n\n- Preconditions: an active workflow Phase Model row, and the count of whitespace-delimited tokens carrying the markdown extension in that row's Output Artifact cell. That count is the varying precondition and it fully determines the outcome: a cell with exactly one such token satisfies every consumer of the column, a cell with none blocks the phase while the coverage proof stays silent, and a cell with two or more blocks the phase while the coverage proof demands a validator for each. No other precondition was found to matter; the owning agent, its manifest, and its registered validator are unchanged across the failing and passing cases, per `E-006` and `E-013`.\n- Steps to reproduce: change into the framework directory at the repository root, the one holding `runtime/` and `workflows/`, then run the registry coverage verifier at `runtime/verify_registry_coverage.py` and read check `C6`, which reports every phase with a dispatchable verdict and a recorded reason for each blocker. For any phase it reports blocked, which per `E-007` and `E-008` are the same five phases, run `runtime/framework_runtime.py` with the resolve subcommand and that phase's command and phase identifiers, and observe the run end in a workflow-contract-violation quoting the Output Artifact cell text where a filename was expected. To observe the divergence directly, call the runtime's output-artifact derivation and the coverage proof's artifact collection on the same cell text and compare their results across cells carrying zero, one, and two markdown tokens. For the originally reported instance, read the transitions array of `runs/run-27e36c138498/state.json`, which records that phase blocking and then clearing. Every step is read-only and changes nothing.\n- Reproduction frequency: deterministic\n- Evidence: every artifact and command result this analysis rests on is registered in the Evidence Register below.\n\n### Evidence Register\n\n| ID | Evidence | Source | Confidence |\n|---|---|---|---|\n| `E-001` | this run's entry phase transitioned from pending to blocked at 07:55:08Z under guard `G1-CAPABILITY`, with the recorded detail that the owning agent declares no output named by the prose string the workflow routed and declares a bug analysis file instead | `runs/run-27e36c138498/state.json` transitions and the event stream beside it, re-read in this phase | high |\n| `E-002` | the same phase transitioned from blocked back to pending at 07:56:30Z with the recorded reason that every guard now passes, and the recovery ledger marks the failure envelope resolved at the same instant | `runs/run-27e36c138498/state.json` and `recovery-ledger.json`, re-read in this phase | high |\n| `E-003` | the failure envelope classifies the failure as non-retryable at detection point validation with action rollback, and records the clearing action as reconciling the manifest with the Phase Model, stating explicitly that no runtime command clears it | `runs/run-27e36c138498/recovery-ledger.json` and the phase failure envelope beside it, re-read in this phase | high |\n| `E-004` | the runtime derives a phase's artifact by tokenising the Output Artifact cell for names carrying the markdown extension, and returns the cell whole whenever the count of such names is not exactly one | source read of `runtime/framework_runtime.py` in this run | high |\n| `E-005` | output-contract resolution requires that derived string to appear both in the owning manifest's declared outputs and as a key of the registered validator map, raising a workflow-contract-violation otherwise; the validator map holds thirteen keys, every one a filename, so no prose string can match | source read of `runtime/framework_runtime.py` and enumeration of the validator map, in this run | high |\n| `E-006` | resolving the chain for the reported phase against the frozen revision returns a resolved verdict, naming the bug analysis artifact and its registered validator | the runtime resolve subcommand, run in this run for the entry phase and re-run in this phase for the root-cause phase | high |\n| `E-007` | five phases across four other active workflows still carry an Output Artifact cell naming no file, and resolving each one's output contract raises the identical failure class and yields the identical blocked reason; they are the documentation and release handoff phase of implement-feature, the publication phase of investigate, the findings publication phase of research, and both the structural compliance and documentation impact phases of review-pull-request | read-only resolution probe over every record in `registry/workflows.yaml`, executed in this run | high |\n| `E-008` | the coverage verifier reports 36 phases with 31 dispatchable and 5 blocked, names the same five phases with reason `awaiting_contract_reconciliation`, and records its own check `C6` as passing while reporting them | `runtime/verify_registry_coverage.py`, run in this run and re-run in this phase with the same result | high |\n| `E-009` | the derived dependency graph for this workflow is a single hard chain rooted at the entry phase, with the three middle phases and the closing phase each depending hard, directly or transitively, on it, and with no edge downgraded to soft | the runtime dependency derivation evaluated read-only over the frozen `workflows/fix-bug.md`, in this run | high |\n| `E-010` | the Validation Engine coverage proof collects a row's Output Artifact only from tokens carrying the markdown extension, so a cell naming no file contributes nothing and the row is never examined; the absence of any branch that records such a row was confirmed by reading the whole function rather than inferred from the check passing | source read of `runtime/verify_validators.py` in this run | high |\n| `E-011` | two earlier implement-feature runs each hold a durable work item for the documentation and release handoff phase in status blocked with reason `awaiting_contract_reconciliation`, written while the condition was active and still present | `runs/run-93b302cbdb28/state.json` and `runs/run-c5a8d50d3238/state.json`, re-read in this phase | high |\n| `E-012` | the business consequence is stated as the quality agent being unable to satisfy two conditions of the Agent Definition of Done, the first rollout wave being unable to close, and every defect repair routed under the self-hosting profile's defect-repair class being blocked | the supplied defect report, reported and not independently confirmed in this analysis | low |\n| `E-013` | the owning agent manifest declares exactly one output, and the block detail captured at 07:55:08Z already reported that same single declared output, so the manifest side of the comparison did not change between the block and the clearing | `agents/omn-dev-1-bug-analyst/manifest.yaml` read in this run, together with the detail in `E-001` | high |\n| `E-014` | the frozen workflow specification still states in prose that four phases are dispatchable and that the entry phase blocks at `G1-CAPABILITY` with reason `awaiting_contract_reconciliation`, contradicting the corrected Phase Model table in the same file and contradicting the measured verdict | `workflows/fix-bug.md` read in this run, cross-checked against `E-006` and `E-008` | high |\n| `E-015` | no specification in the repository states that the Output Artifact column must name a validatable file; the material found describes the consequence of a cell that does not, but states no requirement on the column itself. The absence was confirmed by searching the markdown and runtime sources for such a requirement, not assumed from its not being cited. | repository-wide search executed in this run | medium |\n| `E-016` | the workflow authoring contract declares the Phase Model table to be the machine contract, states that the Task Router reads it for artifacts and derives the dependency graph from the Input and Output Artifact columns, and then enumerates exactly three rules constraining what may appear in the table: the form of phase identifiers, one owner agent per phase, and a gate matrix row for every gate named. None of the three constrains the Output Artifact column. The absence was confirmed by reading the enumerated rules in full, not inferred from the column not being mentioned. | `workflows/README.md` read in this phase | high |\n| `E-017` | the workflow registry requires only that an active record's specification publish a machine-resolvable Phase Model section, failing when the section is missing, and states no requirement on the content of any cell within it. The absence was confirmed by reading the resolution and validation blocks in full. | `registry/workflows.yaml` read in this phase | high |\n| `E-018` | three consumers read the same Output Artifact cell under three different rules: the output-contract reader requires exactly one markdown token and returns the cell whole otherwise, the coverage proof collects every markdown token and collects nothing when there are none, and the dependency-graph reader splits the cell into prose terms and matches them by containment. Across the 36 active rows the first two agree on 31 and disagree on 5, and on those 5 the third reader succeeds where the first fails. | read-only probe exercising all three readers over every active Phase Model row, executed in this phase | high |\n| `E-019` | the output-contract reader's own source states that its tokenising rule is the same one the coverage proof applies and that the two readers of the column therefore agree, while the next paragraph of the same comment records that a cell naming no file or more than one is returned whole. Exercising both readers on cells carrying zero, one, and two markdown tokens shows they agree only in the single-token case and diverge in both other directions. | source read of `runtime/framework_runtime.py` together with the reader probe, in this phase | high |\n| `E-020` | replacing all five prose cells with a single filename, simulated in memory without writing to the repository, changes no dependency edge in any active workflow, because in every one of those rows the prose-derived edge coincides with the row-order fallback the derivation applies when no term matches | in-memory simulation over the parsed Phase Models, executed in this phase | high |\n| `E-021` | the five blocked phases hold their workflows to five of six, four of five, four of five, and one of five completable phases; review-pull-request loses both test-risk-validation and merge-decision transitively because its blocked structural compliance phase is the second of five rows, so only its first phase can complete | transitive hard-edge closure computed over the parsed Phase Models, executed in this phase | high |\n\n## Impact Assessment\n\n- User impact: an operator invoking the bugfix command received a run that accepted the request, enqueued every phase and gate, and produced nothing, with no runtime command able to clear the condition and therefore no route to a diagnosis of any defect through the workflow that exists to diagnose defects. The same holds today for operators of the four commands routing the five phases that still carry the condition, and per `E-021` it is worst for pull-request review, where only the first of five phases can complete and the phase that decides whether a change merges is unreachable. No supplied input quantifies how many operators that is; the framework offers no alternative route to those phases, so every operator of an affected command is affected.\n- Business impact: taken as given from the supplied defect report, which states that the quality agent cannot satisfy two conditions of the Agent Definition of Done, that the first rollout wave cannot close, and that every defect repair routed under the self-hosting profile's defect-repair class is blocked. That statement came from the reporter rather than from the product owner and was not independently confirmed here, so it is registered at low confidence as `E-012` and is not what the severity rests on.\n- Technical impact: availability rather than correctness. A core execution path was wholly unavailable: the entry phase of the defect-repair workflow blocked one second after the run was accepted, the failure is classified non-retryable with action rollback, and the recorded clearing action states that no runtime command clears it, so the runtime had no path back to a working state on its own. Four further workflows cannot reach their terminal phase today, and one cannot get past its second row. Nothing was computed incorrectly and no data was corrupted. Durable run state was written while the condition was active and survives correction of the specification that caused it.\n- Blast radius:\n  - the whole of this workflow: the entry phase directly, and the root-cause, fix-implementation, regression-validation and closure phases through the hard dependency chain rooted at it, together with the Triage Gate work item enqueued to close the entry phase and therefore unreachable while that phase is blocked\n  - implement-feature, which per `E-021` completes five of six phases and cannot reach its terminal documentation and release handoff phase, so no run of it can close\n  - investigate, which completes four of five and cannot reach its publication phase\n  - research, which completes four of five and cannot reach its findings publication phase\n  - review-pull-request, which completes one of five: its structural compliance phase is blocked at the second row, and test-risk-validation and merge-decision are held behind it by hard edges, so no pull request can reach a merge decision through this workflow\n  - the commands routing those four workflows, each of which reaches its blocked phase by no alternative path\n  - every future Phase Model row authored against the same column, because per `E-018` and `E-019` the divergence is a property of the column's readers and not of the five rows that happen to trip it today; a cell naming two artifacts diverges in the opposite direction, blocking the phase while the coverage proof demands a validator for each name\n  - persisted state written while the condition was active and not removed by correcting a specification: two earlier runs each holding a work item durably in status blocked under this reason per `E-011`, plus this run's failure envelope and its append-only recovery-ledger entry, which per `E-003` record the condition permanently by design\n  - the reported dispatchability figure itself, which counts phases resolving their own capability chain and therefore reports as dispatchable a phase that a hard predecessor makes permanently unreachable\n\n## Root Cause Analysis\n\n- Root cause statement: no rule anywhere governs what the Phase Model Output Artifact column must contain, while three runtime consumers each read that one cell under a different and unstated requirement, so a cell that satisfies one consumer can block another and nothing at authoring time can detect the conflict.\n- Why detection failed earlier: four things had to fail together, and each did. No authoring-time check exists for this column because no constraint exists to check, per `E-016` and `E-017`. The Validation Engine coverage proof, which is the check that exists to catch an artifact with no validator, collects a row's artifact only from tokens carrying the markdown extension, so a prose-only cell contributes nothing and the row passes without being examined, per `E-010`. The registry coverage proof does observe the blocked phases and names each with its reason, but it is written to pass whenever every blocker carries a recorded reason, so per `E-008` it reported five blocked phases and returned a passing verdict in the same run. And the runtime's own source asserts that the two artifact readers of this column agree, per `E-019`, so the divergence was documented as impossible in the one place a maintainer would look to check it.\n\n### Causal Chain\n\n| ID | Step | Claim | Evidence | Confidence |\n|---|---|---|---|---|\n| `C-007` | no constraint governs the column | the authoring contract declares the Phase Model table the machine contract and enumerates three rules for what may appear in it, none constraining the Output Artifact column, and the registry requires only that the table exist | `E-016`, `E-017` | high |\n| `C-008` | three consumers impose three unstated requirements on it | the output-contract reader needs exactly one filename token, the coverage proof accepts any count including none, and the dependency-graph reader needs matchable prose terms, so only a cell naming exactly one file satisfies all three, and the runtime's own source records the first two as agreeing when they diverge for zero tokens and for two | `E-018`, `E-019` | high |\n| `C-001` | column authored as prose | the Phase Model stated the entry phase's Output Artifact as a prose decision naming no file, which no rule forbade, while the owning manifest declared exactly one output and that output was a filename | `E-001`, `E-013` | high |\n| `C-002` | runtime derives an artifact from the cell | the runtime tokenises the cell for names carrying the markdown extension and, finding none, returns the cell whole, so the prose text became the artifact identifier the phase was held to | `E-004` | high |\n| `C-003` | output contract fails to resolve | resolution requires that identifier to be both a declared manifest output and a registered validator key, and the prose text was neither, so resolution raised a workflow-contract-violation | `E-005`, `E-001` | high |\n| `C-004` | capability guard converts it to a block | the guard turned that violation into a non-retryable block carrying reason `awaiting_contract_reconciliation`, which the classification matrix records as clearable by no runtime command | `E-001`, `E-003` | high |\n| `C-005` | the block propagates along hard edges | the workflow's dependency graph is a single hard chain rooted at the blocked entry phase, so the predecessor guard held all four downstream phases irrespective of their own capability verdicts | `E-009` | high |\n| `C-006` | observed symptom | the run enqueued five phases and four gates and produced no artifact, because the only phase eligible to begin was the blocked one | `E-001`, `E-009` | high |\n\n## Fix Strategy\n\n- Proposed fix: give the Output Artifact column a stated contract, and make that contract the thing every consumer of the column reads. What a fix must achieve is that a row which cannot yield an artifact the Validation Engine can decide is rejected when it is authored, rather than resolving differently in three places and surfacing as a run-time block in one of them. Because the cause is the absence of a rule rather than a fault in any one reader, correcting the five cells alone does not remove it: the same divergence returns with the next row authored, and per `E-018` it returns in the opposite direction for a cell naming two artifacts. The fix must also reach the state already persisted while the condition was active, namely the two runs holding a phase durably blocked and this run's failure envelope and append-only ledger entry, because none of that is re-evaluated by editing a specification. It must also leave the defect-repair workflow's own narrative agreeing with its Phase Model table and with the measured verdict, which per `E-014` it does not today. No part of this states how to build the change.\n- Alternative options: the first approach states the contract as one artifact file per phase and enforces it at authoring time, so a non-conforming row fails a verification check instead of blocking a run; this keeps every phase's output decided by a validator and makes the three readers agree by construction, but it cannot land until each of the five remaining prose rows has been given an artifact type, a template, and a registered validator, which is the decision recorded as `Q-002`. The second approach states the contract as an optional artifact, letting a phase declare that it emits no validatable file and dispatching it with no Validation Engine verdict; this clears the blocked phases without waiting on artifact-type decisions, but it gives up the guarantee that every phase's output is judged, which is the property the block exists to protect. A third approach separates the concerns the column currently carries at once, giving the machine-read artifact its own column and leaving the prose description in another; this removes the conflict at its source rather than legislating one reading over the others, at the cost of changing the table shape every workflow publishes and every reader parses. What distinguishes them is where the cost falls and what is conserved: the first keeps validation total and pays at authoring, the second keeps authoring free and makes validation partial, the third pays once in structure and removes the ambiguity permanently.\n- Regression risk: high\n- Regression scope:\n  - the phase dependency graph, which per `E-018` reads the same cell as prose terms and matches them by containment; any change to what the column carries changes the terms available to match, and the third alternative above changes the table shape the derivation parses. Measured for the five rows at issue: per `E-020` replacing each prose cell with a single filename changes no edge in any active workflow, because in each case the prose-derived edge coincides with the row-order fallback. That measurement holds for the current row adjacency only and must be re-taken if rows move or if a non-adjacent row is corrected.\n  - the Validation Engine coverage proof, which reads the same cell through a different filter and currently passes by never examining the rows at issue; giving the column a contract changes which rows that proof observes and can flip its verdict, and per `E-019` its agreement with the output-contract reader is asserted in source rather than tested\n  - the four workflows holding the five phases that still carry the condition, reached through their own Output Artifact and Input columns; giving each phase an artifact type changes cells the dependency graph is derived from, and per `E-021` review-pull-request is the sensitive one because its blocked phase sits at the second of five rows rather than at the end\n  - the durable run store, reached through the state machine's transition rules; re-evaluating work items already recorded blocked in earlier runs touches the transition path every run in flight depends on\n  - the reported dispatchability figure and the passing verdict of the registry coverage check, which move with all of the above and which other framework records cite as a readiness measure\n\n## Validation Plan\n\n- Verification steps: the condition is removed when the column has a stated contract and every consumer of the column is held to it, so verification must reach the contract and not only the symptom. For every active Phase Model row, the runtime's artifact derivation and the coverage proof's artifact collection must return the same artifact, and that artifact must have a registered validator; a row that cannot satisfy this must fail a check at authoring time rather than resolve three ways. The registry coverage check must report no phase carrying reason `awaiting_contract_reconciliation`, and a rising dispatchable count is not sufficient because that count rises when any blocker of any kind clears. The divergence must be exercised deliberately in both directions, on a cell naming no artifact and on a cell naming two, since per `E-019` the single-artifact case is the only one in which the readers agree today and testing only that case would confirm nothing. A bugfix run reaching regression validation is necessary and demonstrates the symptom is gone, but it does not on its own demonstrate the cause was removed.\n- Regression tests added: a check that fails when an active Phase Model row's Output Artifact cell does not satisfy the stated column contract, so the condition is caught at authoring time rather than at run time; a check that the runtime's artifact derivation and the coverage proof's artifact collection agree on every active row, exercised over cells carrying zero, one, and two artifact names, so the agreement is tested rather than asserted; and a check that the derived dependency graph for every active workflow is unchanged by the corrections, so a sequencing regression cannot land unnoticed. These state what should exist; writing them belongs to `omn-dev-1-implement` and running them to `omn-qa`.\n- Monitoring signals after release: the per-phase blocked reasons reported by the registry coverage check, where any phase reappearing with reason `awaiting_contract_reconciliation` indicates recurrence; the count of phases that resolve their own capability chain yet sit behind a blocked hard predecessor, which is the number the reported dispatchability figure currently conceals and which per `E-021` is where the real cost of this defect sits; and the number of durable work items across the run store carrying that blocked reason, which must not increase after the fix.\n\n## Closure\n\n- Resolution summary: None identified. The defect is not resolved. The operator correction that removed the precondition for one phase of one workflow is registered as `E-002`, as evidence of the varying precondition rather than as a resolution, and closure is a gate decision this analysis does not record.\n- Linked PR and release: None identified.\n- Prevention actions: the authoring-time check named under `Regression tests added`, which fails on a non-conforming row instead of leaving it to surface as a run-time block, together with a test that exercises the agreement between the two artifact readers rather than asserting it in source. Both follow from `Why detection failed earlier` and neither is yet an agreed action, because the form of the check depends on the column contract chosen through `Q-002`.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected steps |\n|---|---|---|---|---|\n| `Q-002` | Which of the three column contracts is adopted, and which artifact type does each of the five phases still carrying the condition emit? The choice decides the form of the authoring-time check and, under the first two alternatives, requires an artifact, a template, and a registered validator per phase. A recorded architecture decision naming the column contract and the artifact type per phase would resolve it. | yes | `architect` | `C-007`, `C-008` |\n| `Q-001` | Resolved by this phase, and recorded here so the triage artifact's reference to it resolves. The question was which reading of the Output Artifact column is authoritative. Neither is: per `E-015`, `E-016` and `E-017` no rule constrains the column at all, so no reading is authorised over another, and per `E-018` three consumers read it three ways. The question was mis-framed as a choice between two readers, and the answer is that the contract they would be judged against does not exist. | no | `architect` | `C-001`, `C-002`, `C-007`, `C-008` |\n| `Q-003` | Is the defect-repair workflow's narrative merely stale against its own corrected table and the measured verdict, or was the table corrected without the decision the narrative records? Reconciling the two, or recording the decision the correction rests on, would resolve it. | no | `omn-tech-lead` | `C-001` |\n| `Q-004` | What becomes of the two earlier runs holding a phase durably blocked under this condition: are they re-opened, re-planned, or closed once the column contract is settled? That is a run-management decision this analysis does not hold. A recorded disposition for each run would resolve it. | no | `omn-orchestrator` | none |\n| `Q-005` | No environment other than this host's frozen checkout was reached, so the analysis cannot state whether another host, checkout, or revision carries the same column contents and therefore the same condition. Resolving it needs the condition checked against another checkout, which is environment access this analysis does not hold. | no | `omn-orchestrator` | none |",
+        "digest": "sha256:673bbd173ce1bb5fc682cfca7841373d",
+        "produced_by": "root-cause-analysis"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the accepted change this agent implements: a technical design for feature work, a bug analysis for a defect fix, or a baseline validation record for a behaviour-preserving refactor. Without one there is no accepted change, and implementing anyway would mean designing."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "bug-analysis",
+      "reference": "runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md",
+      "produced_by": "triage-and-impact"
+    },
+    {
+      "type": "bug-analysis",
+      "reference": "runs/run-27e36c138498/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "produced_by": "root-cause-analysis"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-08-19T09:29:20Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:d8c3ab649c8e82a8933cddc8cdfb74de",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:3bf28ee046a18af6bf2eaa46be764811",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3dae77736d919b06656bee01f3bacf89",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:c18143d075aa49cb11b00ab39d74b90a",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "templates/bug-analysis.md",
+        "digest": "sha256:6f1f25f536d3d80353873990835ce1bd",
+        "supplies": null
+      },
+      {
+        "path": "skills/dotnet/engineering-playbook.md",
+        "digest": "sha256:35fc0c6fcd8f834c3e2528d14465e17c",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:d8213adc3731689bb555748e593c1436",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:8a7a73d9881b5920ea3274176c2e4124",
+    "input_digest": "sha256:c6bf6a5558ddcb0fc1512b705b46c154",
+    "inputs": [
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-27e36c138498/states/triage-and-impact/artifacts/bug-analysis.md",
+        "digest": "sha256:99cfbadd996f87a95751633cbbc4ed4a"
+      },
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-27e36c138498/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-27e36c138498/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "digest": "sha256:673bbd173ce1bb5fc682cfca7841373d"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/logging/observability-logging.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-27e36c138498/states/fix-implementation/artifacts/implementation-report.md",
+      "runs/run-27e36c138498/states/fix-implementation/result-envelope.json",
+      "**"
+    ],
+    "write_exclusions": [
+      "runs/**",
+      "proposals/**"
+    ],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose effect is not recorded in the report's verification results"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "any write matching ['runs/**', 'proposals/**']",
+      "command execution other than the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "external system, repository, or ticketing access",
+      "define or widen product scope",
+      "decide or revise the technical design rather than escalating the mismatch",
+      "approve, review, or award a readiness verdict to its own change",
+      "record a merge, release, or gate decision",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "introduce an undeclared side effect in critical business logic",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "implement the change the accepted design and analysis describe",
+        "add, modify, and remove production code inside the impacted modules the design names",
+        "add or update automated tests that exercise the change",
+        "execute the project's own test and static-analysis commands to gather evidence",
+        "record the change set, the verification evidence, and the residual risk",
+        "record a tradeoff taken inside this agent's own implementation latitude",
+        "raise a deviation record when the design cannot be implemented as accepted"
+      ],
+      "prohibited": [
+        "define or widen product scope",
+        "decide or revise the technical design rather than escalating the mismatch",
+        "approve, review, or award a readiness verdict to its own change",
+        "record a merge, release, or gate decision",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "introduce an undeclared side effect in critical business logic",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "rationale": "This is the only framework role that changes repository source. Its write scope cannot be enumerated per agent, because the files a change touches are named by the accepted design rather than by the manifest. The scope is therefore the repository, minus the evidence classes below, and every file actually written is declared in the change set and in the result envelope, where the runtime compares them.",
+        "scope": [
+          "**"
+        ],
+        "excluded": [
+          "runs/**",
+          "proposals/**"
+        ],
+        "exclusionRationale": "Committed run evidence and governance records are immutable to the agents whose work they record. A run artifact this agent could edit would let a change rewrite the evidence assessed against it."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose effect is not recorded in the report's verification results"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical context snapshot must produce the same change-set entry set, the same test-evidence set, the same deviation set, and the same declared verification status.",
+      "identifierSchemes": {
+        "changes": "C-<zero-padded-sequence>",
+        "tests": "T-<zero-padded-sequence>",
+        "deviations": "V-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Change-set entries are ordered by the sequence in which the accepted design requires them; ties break toward the lower path in lexical order. Test-evidence entries follow the change-set entries they cover.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied design, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "implementation-report.md",
+    "artifact_path": "runs/run-27e36c138498/states/fix-implementation/artifacts/implementation-report.md",
+    "template_ref": "templates/implementation-report.md",
+    "contract_ref": "agents/omn-dev-1-implement/output.md",
+    "quality_ref": "agents/omn-dev-1-implement/quality.md",
+    "validator": "implementation_report_validator",
+    "result_envelope_path": "runs/run-27e36c138498/states/fix-implementation/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-08-19T09:29:20Z"
+}

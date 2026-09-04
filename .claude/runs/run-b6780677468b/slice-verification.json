@@ -1,0 +1,68 @@
+{
+  "run": "run-b6780677468b",
+  "verdict": "PROVEN",
+  "passed": 10,
+  "total": 10,
+  "checks": [
+    {
+      "id": "C1",
+      "check": "planner is registered in registry/agents.yaml",
+      "result": "PASS",
+      "detail": "record found, status=active, specificationPath=agents/planner/manifest.yaml resolves"
+    },
+    {
+      "id": "C2",
+      "check": "planner host registration exists and is host-compatible",
+      "result": "PASS",
+      "detail": "agents/planner.agent.md: name='planner', tools='Read, Glob, Grep, Write', description 363 chars"
+    },
+    {
+      "id": "C3",
+      "check": "planner module load order resolves from the manifest",
+      "result": "PASS",
+      "detail": "7 module(s) in declared order: ['system.md', 'identity.md', 'reasoning.md', 'execution.md', 'output.md', 'quality.md', 'examples.md']"
+    },
+    {
+      "id": "C4",
+      "check": "planner manifest skills and phase-mandatory skills resolve",
+      "result": "PASS",
+      "detail": "manifest: S02->domain-modeling, S01->clean-architecture-checklist, S07->testing-strategy, S09->secure-engineering | phase: S02=active, S01=active, S07=active"
+    },
+    {
+      "id": "C5",
+      "check": "planner is invocable: the full routing chain resolves to a registered host entry point",
+      "result": "PASS",
+      "detail": "/implement -> implement-feature -> execution-planning -> planner -> host agents/planner.agent.md"
+    },
+    {
+      "id": "C6",
+      "check": "planner executed: the run ledger records a completed real invocation",
+      "result": "PASS",
+      "detail": "invocation_id=inv-b6780677468b-001, adapter=host-subagent/bootstrap, agent result status='succeeded', agent-actor events=1, module digest drift=none"
+    },
+    {
+      "id": "C7",
+      "check": "execution-plan.md was produced at the declared artifact path",
+      "result": "PASS",
+      "detail": "runs/run-b6780677468b/artifacts/execution-plan.md (28421 bytes); declared side effects=['runs/run-b6780677468b/artifacts/execution-plan.md', 'runs/run-b6780677468b/result-envelope.json']; undeclared=none"
+    },
+    {
+      "id": "C8",
+      "check": "the artifact conforms to the Planner output and quality contract",
+      "result": "PASS",
+      "detail": "45/45 checks passed, 0 blocking, 0 correctable, 5 declared not-machine-checkable; counts={'sections': 14, 'tasks': 14, 'assumptions': 6, 'risks': 10, 'edges': 21, 'waves': 6, 'openQuestions': 7, 'planStatus': 'complete'}"
+    },
+    {
+      "id": "C9",
+      "check": "execution evidence exists and is complete",
+      "result": "PASS",
+      "detail": "9 ledger event(s); missing evidence fields=none; missing canonical events=none; completion package=present"
+    },
+    {
+      "id": "C10",
+      "check": "no Planner contract duplication exists",
+      "result": "PASS",
+      "detail": "host adapter shares no 12-word sequence with any authoritative module (7 module(s) compared)"
+    }
+  ]
+}

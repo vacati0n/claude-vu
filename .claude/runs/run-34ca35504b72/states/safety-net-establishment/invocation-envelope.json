@@ -1,0 +1,430 @@
+{
+  "invocation_id": "inv-34ca35504b72-02-001",
+  "run_id": "run-34ca35504b72",
+  "work_item_id": "run-34ca35504b72::safety-net-establishment",
+  "idempotency_key": "sha256:c3f8dd99611c2560dcaac0d662c729e0",
+  "state_id": "safety-net-establishment",
+  "phase_index": 2,
+  "agent_id": "omn-qa",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-qa.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-qa/manifest.yaml",
+    "load_order": [
+      "agents/omn-qa/system.md",
+      "agents/omn-qa/identity.md",
+      "agents/omn-qa/reasoning.md",
+      "agents/omn-qa/execution.md",
+      "agents/omn-qa/output.md",
+      "agents/omn-qa/quality.md",
+      "agents/omn-qa/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-qa/system.md": "sha256:3e97eea7ec77003b26899aac0a9eddec",
+      "agents/omn-qa/identity.md": "sha256:9195b995eafd7f686fd5f97037f324fd",
+      "agents/omn-qa/reasoning.md": "sha256:424d6ef785f44f034fc61b9a3b56078c",
+      "agents/omn-qa/execution.md": "sha256:cff25dcd8fb4c7a92b261ef8c4fb130b",
+      "agents/omn-qa/output.md": "sha256:cfb5abc0ed0c9122e1e0c56be30038d3",
+      "agents/omn-qa/quality.md": "sha256:11fe13aef1252759858b98c89edc6ef9",
+      "agents/omn-qa/examples.md": "sha256:84f6d1663eea48190fce8ec74e909371"
+    },
+    "capabilities": [
+      "acceptance-validation",
+      "regression-assessment",
+      "test-strategy-definition",
+      "defect-classification",
+      "release-readiness-recommendation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Primary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "review-package",
+      "technical-design",
+      "scope-definition",
+      "bug-analysis",
+      "execution-plan",
+      "acceptance-criteria",
+      "validation-criteria",
+      "regression-targets",
+      "test-evidence",
+      "test-baseline",
+      "quality-thresholds",
+      "parity-checklist",
+      "performance-baseline",
+      "packaging-evidence",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "source_file": ".claude/runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "text": "# Architecture Context \u2014 CLAUDE.md Folder Descriptions Sync\n\nSupplied by the operator for the `scope-invariants-and-risk-profile` phase of the CLAUDE.md\nfolder-descriptions correction. The system under design is the framework in this repository;\nthe surface under change is its top-level orientation document.\n\n## Position of the changed surface\n\n`.claude/CLAUDE.md` is a documentation surface, not a resolved runtime surface: no registry\nrecord points at it, no validator parses it, and no workflow phase consumes it as an input\nartifact. It is, however, injected into every contributor session as project instructions, so\nits accuracy is a governance concern even though its content is load-bearing for humans and\nsession-context only.\n\n## Authoritative records the added descriptions must match\n\n| Folder to document | Authority on its contents |\n|---|---|\n| `domain-model/` | The five `*-specification.md` files it contains (agent, command, skill, workflow, memory) |\n| `prompts/` | `prompts/README.md` |\n| `registry/` | The five `registry/*.yaml` discovery indexes; `dependency-map.md` records their position |\n| `runtime/` | `runtime/README.md`, the current-state record of what is implemented |\n\n## Current-state properties the operator asserts\n\n1. `.claude/` contains sixteen directories; CLAUDE.md documents twelve.\n2. Every path CLAUDE.md currently cites resolves on the filesystem (verified 2026-08-27):\n   `config/self-hosting-profile.md`, `validation/framework-release-checklist.md`,\n   `runtime/verify_self_hosting.py`, `runtime/self_hosting.py`,\n   `templates/framework-change-proposal.md`.\n3. The framework's discovery registries are single-authority; CLAUDE.md describes them, it does\n   not duplicate their records.\n\n## Constraints the operator places on the design\n\n- The change must not create a second authority: descriptions summarize, they do not restate\n  registry or specification content.\n- The diff is confined to `## Folder Descriptions`. A correction that finds defects elsewhere in\n  CLAUDE.md names them for a separate routed change rather than folding them in.",
+        "digest": "sha256:36a5a86305d4a0bcfe63560e13e3c0f3"
+      },
+      {
+        "type": "technical-design",
+        "reference": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+        "text": "# Technical Design: Orientation Document Folder Descriptions Sync\n\n```yaml\ndesign:\n  designId: run-34ca35504b72-folder-descriptions-sync-technical-design\n  changeReference: >-\n    runs/inputs/*-md-folder-sync-change-request.md (digest\n    sha256:29b515198505a25873ee0d7464601672; the filename's leading token is\n    elided because the vendor-token rule forbids reproducing it)\n  sourceInputs:\n    - type: change-request\n      reference: runs/inputs/*-md-folder-sync-change-request.md\n    - type: business-intent\n      reference: runs/inputs/*-md-folder-sync-business-intent.md\n    - type: architecture-context\n      reference: runs/inputs/*-md-folder-sync-architecture-context.md\n  producedBy: architect\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  decisionRecords: []\n  consumesPlan: none\n  inputDigest: sha256:330aaf18ec7fac4aa965ff3238384a54\n  contextDigest: sha256:4c96eba9412c3b0eeb8ff4342513f027\n```\n\n## Metadata\n\n- Feature or Change ID: folder-descriptions-sync\n- Author: architect\n- Reviewers: omn-tech-lead (Invariant Gate accepting owner), omn-qa\n- Last Updated: 2026-08-27\n- Note: the changed file is referred to throughout as \"the orientation document\":\n  the project-instructions file at the root of `.claude/`, the one carrying the\n  `## Folder Descriptions` section. Its literal filename, and the leading token of\n  the supplied input filenames, are withheld because each embeds a token the\n  model-independence rule (A4.1) forbids naming; the elided input filenames are\n  disambiguated by the wildcard forms and digests above, which match the invocation\n  envelope exactly.\n\n## Objective\n\nDesired outcome: the folder inventory in the framework orientation document \u2014 the\nproject-instructions file at the root of `.claude/`, hereafter \"the orientation\ndocument\" \u2014 is complete for every directory under `.claude/` and remains a\nnon-authoritative summary layer over the framework's actual discovery, specification,\nand runtime surfaces.\n\nArchitectural objectives:\n\n- The `## Folder Descriptions` inventory covers every directory under `.claude/`,\n  sixteen of sixteen. Traces to S-002, S-011.\n- The inventory remains a summary layer: each row binds to an existing authority for\n  the folder's contents and duplicates none of that authority's records. Traces to\n  S-018, S-019.\n- The change is confined to one additive edit of one documentation section, leaving\n  every runtime-resolved surface untouched. Traces to S-004, S-005, S-013.\n\nIn structural scope: extension of the `## Folder Descriptions` section of the\norientation document by four rows (M-001); the governance artifacts the self-hosting\nprofile requires \u2014 a change proposal under `proposals/` and run evidence under `runs/`\n(M-007, M-008; S-003).\n\nOut of structural scope: every other section of the orientation document (S-015);\nevery contract, registry record, routing row, gate, and runtime behaviour (S-004);\nrepository-root files, which the section's folder-inventory purpose excludes (S-015);\nany correction to `dependency-map.md`, which is named for separate routing in Q-002\n(S-020). The out-of-scope list is non-empty because the orientation document is a\nshared orientation surface read by every contributor session (F-004).\n\n## Requirements Summary\n\nFunctional requirements:\n\n- Every directory under `.claude/` has a row in `## Folder Descriptions`; sixteen of\n  sixteen documented after the change (S-002, S-011).\n- Each added row is a one-line description of what the folder holds today, bound to\n  the folder's named authority (S-008, S-012, S-018).\n- New rows are inserted where a reader scanning the tree would look, without\n  reordering existing rows (S-008).\n\nNon-functional requirements:\n\n- All five verification scripts keep their current verdicts; no metric regresses\n  (S-006, S-014; C-007).\n- Every path the orientation document cites resolves on the filesystem after the\n  change (S-007; C-008).\n- No second authority is created: rows summarize, they do not restate registry or\n  specification content (S-019; C-006).\n\nAcceptance intent: the Design Gate reviewers confirm the four added descriptions are\naccurate against folder contents and that the diff is purely additive and confined to\nthe section; the change is rejected if the diff leaves the section (S-009, S-012,\nS-013, S-016).\n\n## Current-State Assumptions and Constraints\n\n### 4.1 Facts\n\n| ID | Fact | Established by |\n|---|---|---|\n| F-001 | The orientation document's `## Folder Descriptions` section documents twelve directories while `.claude/` contains sixteen | Change request; architecture context, current-state property 1 |\n| F-002 | The four undocumented directories are `domain-model/`, `prompts/`, `registry/`, `runtime/` | Change request, defect table |\n| F-003 | The orientation document is not a runtime-resolved surface: no registry record points at it, no validator parses it, no workflow phase consumes it as an input artifact | Architecture context |\n| F-004 | The orientation document is injected into every contributor session as authoritative project instructions | Architecture context; business intent |\n| F-005 | `registry/` holds machine-read discovery indexes; the frozen context slice carries `registry/agents.yaml`, `registry/workflows.yaml`, `registry/skills.yaml`, and `registry/templates.yaml` | Frozen context slice members `registry/*.yaml` |\n| F-006 | `runtime/` holds the executable runtime: the runtime gateway and state engine, recovery policy, registered artifact validators, and the verification proof scripts | `runtime/README.md`, frozen context slice member |\n| F-007 | `domain-model/` holds at least `agent-specification.md`, the Agent Contract authority | `domain-model/agent-specification.md`, frozen context slice member |\n| F-008 | Every path the orientation document currently cites resolves on the filesystem, operator-verified 2026-08-27 | Architecture context, current-state property 2 |\n| F-009 | The `refactor` workflow routes phase `scope-invariants-and-risk-profile` to `architect`, output `technical-design.md`, gated by the Invariant Gate whose owners are `omn-architect` and `omn-tech-lead`, with acceptance resting with `omn-tech-lead` under the producer exclusion rule | `workflows/refactor.md` and `workflows/workflow-gate-matrix.md`, frozen context slice members |\n| F-010 | The framework's discovery registries are single-authority; the orientation document describes them and does not duplicate their records | Architecture context, current-state property 3 |\n| F-011 | The frozen `dependency-map.md` defines dependency relationships among Agents, Skills, Workflows, Memory, and Commands, and does not mention the registry indexes | `dependency-map.md`, frozen context slice member |\n| F-012 | A framework-internal change produces a change proposal under `proposals/` and run evidence under `runs/`, both out of routing scope per the self-hosting profile | Change request, surfaces table (SR-5, SR-3) |\n\n### 4.2 Assumptions\n\n| ID | Assumption | Why needed | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | `prompts/` holds curated, versioned prompt patterns used by the framework's agents, as the operator asserts; `prompts/README.md` is not in the frozen context slice, so its contents are unverified within this run | To bound the content requirement for the `prompts/` row (D-002) | The `prompts/` row is reworded per its authority under P-001; nothing structural changes | omn-dev-2-reviewer |\n| A-002 | `domain-model/` holds exactly the five domain-concept specifications the operator asserts (agent, command, skill, workflow, memory); only `agent-specification.md` (F-007) is in the frozen slice | To bound the content requirement for the `domain-model/` row (D-002) | The `domain-model/` row's enumeration is adjusted under P-001; nothing structural changes | omn-dev-2-reviewer |\n| A-003 | `registry/` also holds `commands.yaml`, the fifth discovery index the operator asserts; the frozen slice corroborates four of five (F-005) | To bound the content requirement for the `registry/` row (D-002) | The `registry/` row's enumeration is adjusted under P-001; nothing structural changes | omn-dev-2-reviewer |\n| A-004 | The sixteen-directory count (F-001) remains current at implementation time; it was asserted as of 2026-08-27 | The BI-1 measure, sixteen of sixteen, is the completeness target C-004 enforces | The row set and the completeness measure are re-derived under P-001 before the edit | omn-qa |\n\n### 4.3 Constraints\n\n| ID | Class | Constraint | Hard or negotiable | Source |\n|---|---|---|---|---|\n| C-001 | structural | The diff is confined to `## Folder Descriptions` of the orientation document; the change is rejected if the diff leaves the section | Hard | S-013, S-016 |\n| C-002 | structural | The change is purely additive: every existing row keeps its meaning and relative order | Hard | S-005, S-008 |\n| C-003 | compliance | No contract, registry record, routing row, gate, or runtime behaviour changes | Hard | S-004 |\n| C-004 | functional | After the change, every directory under `.claude/` has a row: sixteen of sixteen | Hard | S-002, S-011 |\n| C-005 | functional | Each added description accurately states what the folder holds today, verified against the folder's named authority | Hard | S-008, S-012, S-018 |\n| C-006 | structural | No second authority is created: descriptions summarize, they do not restate registry or specification content | Hard | S-019, F-010 |\n| C-007 | operability | All five verification scripts keep their current verdicts; no metric regresses | Hard | S-006, S-014 |\n| C-008 | structural | Every path the orientation document cites resolves on the filesystem after the change | Hard | S-007 |\n| C-009 | functional | One line per folder, matching the existing list's register and length; new rows inserted where a reader scanning the tree would look | Negotiable | S-008 |\n\n## Architecture and Component Design\n\n### 5.1 Impacted Modules\n\n| ID | Module | Impact type | Basis | Interfaces affected | Confidence |\n|---|---|---|---|---|---|\n| M-001 | Orientation document (project-instructions file at the `.claude/` root), section `## Folder Descriptions` | extension | F-001, F-002 | none; documentation surface, not runtime-resolved (F-003) | confirmed |\n| M-002 | Orientation document, all sections other than `## Folder Descriptions` | no-change-verified | F-003, F-004 | none | confirmed |\n| M-003 | `registry/` discovery indexes | no-change-verified | F-002, F-005 | none | confirmed |\n| M-004 | `runtime/` executable runtime | no-change-verified | F-002, F-006 | none | confirmed |\n| M-005 | `domain-model/` specifications | no-change-verified | F-002, F-007 | none | confirmed |\n| M-006 | `prompts/` prompt patterns | no-change-verified | F-002, A-001 | none | confirmed |\n| M-007 | `proposals/` change-proposal store | extension | F-012 | none | confirmed |\n| M-008 | `runs/` run-evidence store | extension | F-012 | none | confirmed |\n\nM-003 through M-006 are recorded because a reader would reasonably expect the four\nfolders being newly documented to change in some way. They do not: each is described,\nnever modified (C-003). The no-change verdict for M-006 is confirmed by scope (F-002:\nthe folder is only being documented); A-001 bears only on the wording of its row, and\ncarries risk R-002. M-002 is recorded because the zero-tolerance posture (C-001) makes\nthe rest of the document the surface most likely to be damaged accidentally.\n\n### 5.2 Options Considered\n\n| Option | Structural change | C-001 | C-002 | C-004 | C-006 | Impact surface | Reuse leverage | Migration burden | Outcome |\n|---|---|---|---|---|---|---|---|---|---|\n| O-001 | Extend the existing `## Folder Descriptions` list in place with four additive rows | Satisfied | Satisfied | Satisfied | Satisfied | 0 | 4 | 0 | Selected |\n| O-002 | Regenerate the section as a complete, restructured inventory of all sixteen directories | Satisfied | Violated | Satisfied | Satisfied | 0 | 3 | 0 | Eliminated on C-002 |\n| O-003 | Leave the section as-is and add a separate complete-inventory document linked from the orientation document | Violated | Satisfied | Violated | Satisfied | 0 | 2 | 0 | Eliminated on C-001, C-004 |\n\nImpact surface counts modules with `contract-change` or `dependency-change`; it is zero\nfor every option because no runtime-resolved surface changes under any of them. Reuse\nleverage counts capabilities satisfied by `reuse-as-is` or `reuse-extended` in the\nsurvey below. Hard constraints C-003, C-005, C-007, and C-008 do not discriminate\nbetween the options and are satisfied by all three; the discriminating constraints are\nshown as columns.\n\n### 5.3 Selected Approach\n\n- Selected: `O-001`.\n- Structural change: the existing `## Folder Descriptions` list in the orientation\n  document gains four rows \u2014 one each for `domain-model/`, `prompts/`, `registry/`,\n  and `runtime/` \u2014 inserted where a reader scanning the tree would look (C-009), with\n  every pre-existing row unchanged in meaning and relative order (C-002). No other\n  surface changes.\n- Rationale: `O-001` is the only option satisfying all hard constraints. It carries\n  the maximum reuse leverage of the three and requires no new structure of any kind.\n- Highest-scoring rejected alternative and why it lost: `O-002`, regenerating the\n  section as a complete restructured inventory. It would guarantee completeness\n  mechanically and produce the same sixteen rows, but regeneration cannot guarantee\n  that the twelve existing rows survive with meaning and relative order intact, which\n  violates hard constraint C-002 and the zero-tolerance posture in S-016; it therefore\n  lost to the additive in-place extension despite its stronger completeness guarantee.\n- Tradeoffs accepted: the additive manual edit gives no mechanical guarantee that the\n  inventory stays complete as directories are added in the future; completeness is\n  enforced only at review time against the count in C-004. This residual staleness\n  exposure is attached to R-004.\n\nContent requirements each row must satisfy (D-002), stated as requirements rather than\nas authored text, which is produced at implementation under P-001:\n\n- `domain-model/` \u2014 conveys that the folder holds the canonical specifications of the\n  framework's domain concepts; enumeration bound to the specification files present\n  (F-007, A-002).\n- `prompts/` \u2014 conveys that the folder holds curated, versioned prompt patterns used by\n  the framework's agents; wording bound to `prompts/README.md` (A-001).\n- `registry/` \u2014 conveys that the folder holds the single-authority discovery indexes\n  the runtime resolves routing against; enumeration bound to the index files present\n  (F-005, F-010, A-003).\n- `runtime/` \u2014 conveys that the folder holds the executable runtime: state engine,\n  routing and invocation gateway, artifact validators, self-hosting classifier, and\n  verification scripts (F-006).\n\nEach row is a one-line summary at the granularity of the existing rows (C-009) and\nmust not restate any record its authority holds (C-006).\n\n### 5.4 Decisions\n\n| ID | Decision | Architecture-significant | Record |\n|---|---|---|---|\n| D-001 | Extend `## Folder Descriptions` in place with four additive rows (`O-001`) | No | none; inline. Documentation-only, fully reversible by removing the rows, no contract, boundary, or structural component affected |\n| D-002 | Each added row is a one-line summary bound to a named authority; this design fixes the content requirements, and the row text is authored at implementation under P-001 | No | none; inline |\n| D-003 | Content assertions not corroborated by the frozen context slice are registered as assumptions (A-001, A-002, A-003) and routed to reviewer confirmation, never restated as facts | No | none; inline |\n\nNo decision meets any architecture-significance criterion: no externally visible\ncontract changes, no dependency direction or boundary changes, no structural component\nis introduced or removed, the change is trivially reversible, and no quality-attribute\ntradeoff is committed. `decisionRecords` is therefore empty and no decision record is\nemitted.\n\n## API and Data Model Impact\n\nNone identified. No module in 5.1 carries `contract-change` or `dependency-change`;\nthe changed surface is a documentation section that no registry record, validator, or\nworkflow phase resolves (F-003), and C-003 forbids any contract, routing, gate, or\nruntime behaviour change. There is no API, schema, or data migration, and therefore no\ntransition strategy is required. Rollback for the documentation edit itself is stated\nin the Delivery Plan.\n\n## Reusable Components and Reuse Rationale\n\n| Capability | Candidate | Outcome | Rationale |\n|---|---|---|---|\n| Governed routing of a framework-internal documentation change | `/refactor` workflow via the self-hosting profile | reuse-as-is | F-009; the change is already classified and routed through it (S-001), and the workflow's Invariant Gate supplies the acceptance authority C-005 needs |\n| Folder-inventory surface for contributor orientation | Existing `## Folder Descriptions` section of the orientation document | reuse-extended | Four rows are added to the existing list; C-001 and C-004 together forbid any new document or section |\n| Authority for folder contents | `registry/*.yaml` indexes, `runtime/README.md`, `domain-model/` specifications, `prompts/README.md` | reuse-as-is | F-005, F-006, F-007, A-001; the rows summarize these authorities, and C-006 forbids creating a second authority beside them |\n| Post-change verification | Existing verification scripts and the Invariant Gate review | reuse-as-is | F-009, C-007; verdict parity over the existing scripts is the regression measure, so no new validation structure is required |\n\nEvery capability the selected approach requires is satisfied by `reuse-as-is` or\n`reuse-extended`. No survey outcome is `rejected` or `none-found`, and accordingly no\nnew structure is proposed anywhere in this design.\n\n## Operational Considerations\n\n- Logging and observability updates: none required; no runtime surface changes (C-003,\n  M-004 `no-change-verified`). Run evidence is written under `runs/` by the runtime as\n  usual (M-008, F-012).\n- Error handling strategy: no runtime error path changes. The failure mode of this\n  change is procedural \u2014 a diff that leaves the section \u2014 and is handled by rejection\n  under C-001 at verification (P-003, R-003).\n- Security considerations: None identified, with reason: the change adds one-line\n  descriptions of folders whose existence and role are already stated across the\n  repository's own governance documents (F-005, F-006, F-007); C-006 caps every row at\n  summary granularity, so no secret, credential, or restricted architecture detail is\n  introduced, and no access path changes (C-003).\n- Performance considerations: None identified, with reason: no executable path changes\n  (F-003, C-003), and no recorded quality attribute is affected; the only measured\n  regression surface is verification-script verdict parity, which C-007 covers.\n- Deployment and operability impact: confined to C-007 \u2014 all verification scripts must\n  keep their current verdicts, proven at P-003 before closure.\n\n## Delivery Plan\n\n### Sequencing Constraints\n\n| ID | Constraint | Modules | Prerequisites | Reason | Binds |\n|---|---|---|---|---|---|\n| P-001 | The wording basis for each of the four rows is confirmed against its named authority, and the sixteen-directory count is re-confirmed | M-003, M-004, M-005, M-006 | none | C-005 accuracy must be establishable before the section is edited; assumptions A-001, A-002, A-003, and A-004 resolve here, so a false one changes wording before it can propagate | none |\n| P-002 | The four rows exist in `## Folder Descriptions` with every pre-existing row unchanged in meaning and relative order | M-001, M-002 | P-001 | C-002 and C-004 must hold in one additive edit; editing before the wording basis is fixed forces rework of the same section | none |\n| P-003 | The diff is confirmed confined to the section, every cited path resolves, and all verification scripts keep their verdicts | M-001, M-002, M-004 | P-002 | C-001, C-007, and C-008 are the rejection conditions of this change; they must be proven before any closure artifact records the change as done | none |\n| P-004 | The change proposal under `proposals/` links this run's artifacts | M-007, M-008 | P-003 | The self-hosting profile (F-012) makes the proposal the governance record of a verified change, so verification structurally precedes it | none |\n\n`Binds` is empty because no execution plan was supplied (`consumesPlan: none`). The\nplanner converts these constraints into executable tasks; this design creates no task\nidentifiers.\n\n### Test Strategy Focus Areas\n\nFor `omn-qa`:\n\n- Diff scope: the only changed lines in the repository, outside `proposals/` and\n  `runs/`, sit inside `## Folder Descriptions` of the orientation document (C-001).\n- Completeness: the section's row count equals the directory count under `.claude/`,\n  sixteen of sixteen (C-004).\n- Accuracy: each added row matches its named authority per D-002 (C-005), and no row\n  restates authority content (C-006).\n- Resolvability: every path the orientation document cites resolves on the filesystem\n  (C-008).\n- Regression: all five verification scripts report the same verdicts as before the\n  change (C-007).\n\n### Rollout and Rollback\n\n- Rollout: follows P-001 through P-004 inside the `refactor` workflow, with Invariant\n  Gate acceptance (F-009) before implementation proceeds downstream.\n- Rollback: remove the four added rows, restoring the section to its prior content.\n  The change is fully reversible with no data, contract, or behavioural effect\n  (D-001); the reversal itself is another structure-preserving documentation edit.\n\n## Risks and Mitigations\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | structural | An added row restates registry or specification detail rather than summarizing it | A second authority is created beside the single-authority records (F-010) and drifts from them over time, violating C-006 | low | M-001, D-002 | P-001 binds each row to a named authority at summary granularity; the Invariant Gate review confirms register and granularity before acceptance | omn-tech-lead |\n| R-002 | delivery | A-001, A-002, or A-003 is false: a folder's actual contents differ from the operator's assertion | An added description is inaccurate, failing C-005 and the BI-2 acceptance measure | low | M-006, D-002 | P-001 verifies each row against its authority file before the edit; Q-001 routes the confirmation to the reviewer | omn-dev-2-reviewer |\n| R-003 | operability | The edit strays outside `## Folder Descriptions`, including incidental formatting changes elsewhere in the file | The change is rejected under the zero-tolerance posture (C-001, S-016) and reworked | low | M-002, P-002 | P-003 proves diff confinement and verification-script verdict parity before closure | omn-qa |\n| R-004 | delivery | A-004 is false: the `.claude/` directory set changes between the design freeze of 2026-08-27 and implementation | The sixteen-of-sixteen measure (C-004) fails, or a row is missing or stale on landing | low | M-001, P-002 | P-001 re-confirms the directory count at implementation start and re-derives the row set if it moved | omn-qa |\n\n## Estimate and Confidence\n\nOverall: `XS` (confidence: high).\n\nBreakdown:\n\n- P-001: `XS`; reading four authority files and fixing four one-line wordings.\n- P-002: `XS`; a single additive edit to one documentation section.\n- P-003: `XS`; a diff-scope check and existing verification scripts re-run.\n- P-004: `XS`; one governance record from the existing proposal template.\n\nScope assumptions: the estimate covers exactly the four sequencing constraints \u2014 the\nfour added rows, their verification, and the change proposal. It excludes any other\ncorrection to the orientation document (S-020), any change to `dependency-map.md`\n(Q-002), and any change to what the four folders hold.\n\nUncertainty drivers: the only open items are the wording assumptions A-001, A-002, and\nA-003, which affect row text, not structure or effort \u2014 a false assumption changes one\nline's wording inside the same P-001 activity. The estimate does not depend on any\nspeculative impact (every module in 5.1 is confirmed), so confidence remains high.\n\n## Open Decisions and Escalations\n\n| ID | Question | Blocking | Owner | Affects | Consequence |\n|---|---|---|---|---|---|\n| Q-001 | Are the four row descriptions, as bounded by the D-002 content requirements, accurate against the folder authorities \u2014 `prompts/README.md`, the domain-model specification set, and the registry index set including `commands.yaml`? This is the confirmation the change request explicitly asks for (S-009), and it belongs to the reviewing roles, not to this agent. | No | omn-dev-2-reviewer | M-001, D-002 | If accurate, the rows land as designed. If any differs, that row is reworded per its authority under P-001, with no structural effect. |\n| Q-002 | The supplied architecture context states that `dependency-map.md` records the registries' position, but the frozen `dependency-map.md` does not mention the registry indexes (F-011). Which of the two is corrected? | No | omn-tech-lead | M-003 | Either outcome is a separate structure-preserving change routed on its own (S-020); this design is unaffected either way. It is recorded here so the discrepancy does not silently persist. |\n\nNo entry is blocking, so package status is `complete`.\n\n## Sign-off\n\n- Architect: architect (producing role; excluded from accepting this package)\n- Tech Lead: omn-tech-lead (accepting owner for the Invariant Gate)\n- QA: omn-qa\n\nThe gate for this phase is the Invariant Gate, whose owners per\n`workflows/workflow-gate-matrix.md` are `omn-architect` and `omn-tech-lead`. Under the\nproducer exclusion rule, acceptance rests with `omn-tech-lead` because the architecture\nrole produced this package (F-009). Lines are left unsigned by the producing agent.\n\n### Appendix: Statement Register and Traceability\n\nStatements normalized from the supplied inputs, in supplied order and document order,\nwith their forward trace. Every statement maps to an objective, module, constraint, or\nopen question; no statement is dropped.\n\n| ID | Statement (source) | Maps to |\n|---|---|---|\n| S-001 | The change is a structure-preserving framework-internal change routed to `/refactor`, entering at `scope-invariants-and-risk-profile` (change request) | Reuse survey row 1; F-009 |\n| S-002 | `## Folder Descriptions` enumerates twelve of sixteen `.claude/` directories; `domain-model/`, `prompts/`, `registry/`, `runtime/` are undocumented (change request) | Objective 1; M-001; C-004 |\n| S-003 | Expected touched surfaces: the orientation document's section, a change proposal, run evidence (change request) | M-001, M-007, M-008 |\n| S-004 | INV-1: no contract, registry record, routing row, gate, or runtime behaviour changes (change request) | C-003 |\n| S-005 | INV-2: every existing row keeps its meaning; only additions occur (change request) | C-002 |\n| S-006 | INV-3: all verification scripts keep their current verdicts (change request) | C-007 |\n| S-007 | INV-4: every path the orientation document cites resolves after the change (change request) | C-008 |\n| S-008 | Descriptions state current contents verified against the folder, one line each in the existing register, inserted where a reader would look, without reordering (change request) | C-002, C-005, C-009 |\n| S-009 | Requested decision: confirm the four descriptions are accurate and the change purely additive (change request) | Q-001 |\n| S-010 | Outcome: a contributor reading the orientation document sees a folder inventory matching the repository (business intent) | Objective 1 |\n| S-011 | BI-1: sixteen of sixteen directories documented (business intent) | C-004 |\n| S-012 | BI-2: each added description matches actual contents, reviewer-confirmed (business intent) | C-005; Q-001 |\n| S-013 | BI-3: diff confined to `## Folder Descriptions` (business intent) | C-001 |\n| S-014 | BI-4: no metric regresses (business intent) | C-007 |\n| S-015 | Non-goals: no other section rewritten, no behaviour change, no root-file documentation (business intent) | Objective, out-of-scope; M-002 |\n| S-016 | Risk posture: minimal risk, zero tolerance for drift; rejected if the diff leaves the section (business intent) | C-001; R-003 |\n| S-017 | The orientation document is a documentation and session-context surface, not runtime-resolved (architecture context) | F-003, F-004; M-002 |\n| S-018 | Added descriptions must match the named authorities per folder (architecture context) | C-005; P-001 |\n| S-019 | No second authority: descriptions summarize, never restate (architecture context) | C-006; Objective 2 |\n| S-020 | Defects found elsewhere in the orientation document are named for separate routed changes (architecture context) | Q-002; Objective, out-of-scope |\n\nBackward closure: every module in 5.1 traces to a fact or assumption; every decision in\n5.4 traces to option O-001 and the constraint set; every option traces to constraints\nC-001 through C-009. Lateral closure: every risk attaches to an existing module,\ndecision, or plan step; every plan step references existing modules; no decision record\nexists, matching the empty `decisionRecords` list; no speculative impact exists,\nmatching the absence of a speculative-impact risk. Register closure: every current-state\nclaim in this package carries an `F-nnn` or `A-nnn` reference.\n\nNo implementation work was performed and no external system was accessed in producing\nthis design.",
+        "digest": "sha256:b6e464a5448b4b3ded99336dc4f24737",
+        "produced_by": "scope-invariants-and-risk-profile"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what changed and what it was meant to achieve: an implementation report for a delivered change, a review package for a `review-pull-request` or `release` run, or a technical design for the `safety-net-establishment` phase, which runs before any change exists. Without one there is nothing to validate against, and validating anyway would mean measuring the system against this agent's own reading of what it was supposed to do."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "technical-design",
+      "reference": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+      "produced_by": "scope-invariants-and-risk-profile"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-08-27T13:10:29Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/refactor.md",
+        "digest": "sha256:7a364f76b2347a77f5fb16e67c727416",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/validation-report.md",
+        "digest": "sha256:289a25ebf7d54fb95ddf4fd44925d038",
+        "supplies": null
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/dotnet/engineering-playbook.md",
+        "digest": "sha256:35fc0c6fcd8f834c3e2528d14465e17c",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:b5595bb4fe87f1067bbee4dd85d57c35",
+    "input_digest": "sha256:b81549f82159b643e7b59ab4f73ee0b9",
+    "inputs": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "source_file": ".claude/runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "digest": "sha256:36a5a86305d4a0bcfe63560e13e3c0f3"
+      },
+      {
+        "type": "technical-design",
+        "reference": "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+        "source_file": "D:/Project/Claude-Vu/.claude/runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+        "digest": "sha256:b6e464a5448b4b3ded99336dc4f24737"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/testing/testing-strategy.md",
+      "templates/technical-design.md",
+      "templates/validation-report.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-34ca35504b72/states/safety-net-establishment/artifacts/validation-report.md",
+      "runs/run-34ca35504b72/states/safety-net-establishment/result-envelope.json",
+      "**/*Tests/**",
+      "**/*.Tests/**",
+      "**/*Test/**",
+      "**/*.Tests.*",
+      "**/test_*.py",
+      "**/*_test.py",
+      "**/*.test.*",
+      "**/*.spec.*"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the validation report"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "revise the technical design rather than raising a defect against it",
+      "define, widen, or narrow product scope",
+      "relax, reinterpret, or waive an acceptance criterion in order to reach a pass",
+      "judge code quality, maintainability, or standards conformance, which belongs to omn-dev-2-reviewer",
+      "decompose work into tasks, which belongs to planner",
+      "record a merge, release, or deployment decision",
+      "decide a gate that assesses evidence this agent produced",
+      "validate a change this agent authored",
+      "record a criterion as met without evidence that demonstrates it",
+      "pass while a critical or high defect stands open, or while required evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "validate delivered behavior against the acceptance criteria it was accepted under",
+        "define a validation strategy proportionate to the risk the change carries",
+        "execute the repository's own functional, integration, and regression checks",
+        "establish and strengthen a safety net of checks before a structural change proceeds",
+        "assess behavioral parity between a pre-change and post-change baseline",
+        "judge whether executed checks reach the behavior a change altered",
+        "record each defect with severity, category, location, reproducibility, and status",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "revise the technical design rather than raising a defect against it",
+        "define, widen, or narrow product scope",
+        "relax, reinterpret, or waive an acceptance criterion in order to reach a pass",
+        "judge code quality, maintainability, or standards conformance, which belongs to omn-dev-2-reviewer",
+        "decompose work into tasks, which belongs to planner",
+        "record a merge, release, or deployment decision",
+        "decide a gate that assesses evidence this agent produced",
+        "validate a change this agent authored",
+        "record a criterion as met without evidence that demonstrates it",
+        "pass while a critical or high defect stands open, or while required evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "scope": [
+          "**/*Tests/**",
+          "**/*.Tests/**",
+          "**/*Test/**",
+          "**/*.Tests.*",
+          "**/test_*.py",
+          "**/*_test.py",
+          "**/*.test.*",
+          "**/*.spec.*"
+        ],
+        "scopePhases": [
+          "refactor/safety-net-establishment"
+        ],
+        "scopePhasesRationale": "This grant is automated test files only, and only in the `safety-net-establishment` phase of refactor, where establishing the safety net is the phase's declared output. Production source is never written in any phase, and this grant does not apply outside the one phase named above.",
+        "rationale": "QA judges behavior, not code, so it does not author the change it validates. One phase is the exception the framework declares deliberately: a refactor cannot be validated at all until a safety net exists, and building that net is the phase's whole purpose. Even there the boundary holds, because a test that pins existing behavior is not the change under validation. Every other phase reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the validation report"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same criterion result set, the same defect set, the same severity assignment, the same verdict, and the same declared report status.",
+      "identifierSchemes": {
+        "acceptanceCriteria": "AC-<zero-padded-sequence>",
+        "defects": "DF-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Acceptance criteria keep the order of the source that declared them. Defects are ordered by descending severity; ties break toward the lower location in lexical order.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, criteria, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "validation-report.md",
+    "artifact_path": "runs/run-34ca35504b72/states/safety-net-establishment/artifacts/validation-report.md",
+    "template_ref": "templates/validation-report.md",
+    "contract_ref": "agents/omn-qa/output.md",
+    "quality_ref": "agents/omn-qa/quality.md",
+    "validator": "validation_report_validator",
+    "result_envelope_path": "runs/run-34ca35504b72/states/safety-net-establishment/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-08-27T13:10:29Z"
+}
