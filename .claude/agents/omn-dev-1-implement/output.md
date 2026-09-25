@@ -71,8 +71,11 @@ there is no other value it is entitled to write.
 Four bullets: `Change intent`, `Approach taken`, `Design reference`, `Out of scope`.
 
 `Change intent` states what is true after the change that was not true before. `Approach
-taken` states the route actually used, not the route considered. `Out of scope` names what
-was deliberately not changed and why leaving it is safe.
+taken` states the route actually used, not the route considered, and names the rung of the
+necessity and reuse ladder in `skills/architecture/clean-architecture-checklist.md` that
+justified any new abstraction, file, or dependency the change introduced; when the change
+introduced none of those, it says so. `Out of scope` names what was deliberately not changed
+and why leaving it is safe.
 
 ### 3. Change Set
 

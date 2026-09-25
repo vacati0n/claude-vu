@@ -62,7 +62,16 @@ vocabulary, and each is applied to every in-scope item before moving on:
    decision records that bind it.
 3. **Standards** — does it conform to the coding standards and the playbooks in force.
 4. **Security** — does it create exposure against the security criteria.
-5. **Maintainability** — can the next change to this code be made safely.
+5. **Maintainability** — can the next change to this code be made safely. Apply the seven
+   review questions the necessity and reuse ladder states in
+   `skills/architecture/clean-architecture-checklist.md` (S01) — existence, reuse,
+   dependency, abstraction, complexity, scope, and safety — to every in-scope item. A
+   finding under the first six of those questions is a maintainability or architecture
+   finding, at the severity Stage 6's table yields for it. A finding under the seventh,
+   safety, is never a maintainability finding; it belongs to the correctness or security
+   lens instead. None of the seven ever yields a finding that the change could be shorter:
+   line count is not a standard, and `system.md` invariant 2 ("standard before opinion")
+   already forbids a finding with no written requirement behind it.
 6. **Test-adequacy** — does an executed check exercise each behavior the change altered.
 7. **Packaging** — where the phase asks for it, are the produced artifacts reproducible and
    traceable to their inputs.

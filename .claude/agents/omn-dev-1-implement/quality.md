@@ -24,7 +24,7 @@ appears in both, the two are the same rule, and the Validation Engine's verdict 
 that decides whether the phase advances.
 
 An obligation this module states but no machine can decide is recorded as
-not-machine-checkable rather than dropped. Three such obligations exist, listed last.
+not-machine-checkable rather than dropped. Four such obligations exist, listed last.
 
 ## Structural checks
 
@@ -98,6 +98,7 @@ table decides; the report records what it decided.
 | `B4` | No existing test was disabled, skipped, or weakened to obtain a passing result | Blocking |
 | `B5` | No credential, token, or secret appears in the change or in the report | Blocking |
 | `B6` | No committed run evidence and no governance record was modified; a registry or workflow edit the accepted design names is inside scope, and is declared | Blocking |
+| `B7` | No change removes or weakens input validation at a trust boundary, error handling that prevents data loss, authorization or audit paths, accessibility, required observability, data integrity, or the tests that prove the change | Blocking |
 
 ## Authority checks
 
@@ -153,10 +154,11 @@ stated in the run's result envelope.
 | `N1` | Each change-set row describes the change actually made at that path | `output.md#change-set` |
 | `N2` | Each test-evidence row exercises the change-set entries its `Covers` cell names | this module, Evidence checks |
 | `N3` | No hidden side effect was introduced into critical business logic | this module, Boundary checks |
+| `N4` | Every new abstraction, file, or dependency the change introduces is justified by the rung of the necessity and reuse ladder that required it, recorded in `Approach taken` | `output.md#implementation-summary` |
 
 ## Result envelope reporting
 
 The result envelope carries: the counts of change-set entries, test-evidence entries,
 deviations, residual risks, and open questions; the declared status and verification status;
-the pass or fail result of every check in this module; and the three obligations above with
+the pass or fail result of every check in this module; and the four obligations above with
 the judgement made on each.

@@ -259,3 +259,4 @@ not a second authority: `runtime/verify_self_hosting.py` discovers proposals by 
 | `FC-004` | `capability-addition` | `/implement` | `run-93b302cbdb28` | `runs/run-93b302cbdb28/` |
 | `FC-005` | `defect-repair` | `/bugfix` | `run-27e36c138498` | `runs/run-27e36c138498/` |
 | `FC-006` | `capability-addition` | `/implement` | `run-09099de97613` | `runs/run-09099de97613/` |
+| `FC-015` | `capability-addition` | `/implement` | `run-ae91e085f481` | `runs/run-ae91e085f481/` |

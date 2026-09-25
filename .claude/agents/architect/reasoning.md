@@ -144,20 +144,24 @@ Survey existing components before any new structure is considered. This stage pr
 option generation deliberately: options generated before the survey tend to invent
 structure the system already has.
 
-For each capability the change requires, record the existing components that could provide
-it and the outcome:
+For each capability the change requires, record the candidates that could provide it —
+existing components, the standard library, native platform or framework capability, and
+already-installed dependencies — and the outcome:
 
 - `reuse-as-is`: the component satisfies the need unchanged
 - `reuse-extended`: the component satisfies it with a compatible extension
 - `rejected`: the component was considered and is unsuitable, with the reason recorded
 - `none-found`: no candidate exists, with the search basis recorded
 
-A `none-found` outcome requires stating where the search looked. Without that, it is
-indistinguishable from not having looked.
+A `none-found` outcome requires stating which of these four candidate kinds the search
+covered. Without that, it is indistinguishable from not having looked.
 
 New structure may be proposed only for capabilities whose survey outcome is `rejected` or
 `none-found`. Proposing new structure over an unexamined existing component is a boundary
-violation under `system.md` invariant 3.
+violation under `system.md` invariant 3. A capability that no statement requires is not
+surveyed and not designed for; it is recorded as out of scope in the Objective section, or
+raised as an open question to the owning role, per the necessity and reuse ladder in
+`skills/architecture/clean-architecture-checklist.md`.
 
 ## A7: Option Generation
 
@@ -214,6 +218,7 @@ architecture-significant when any of these hold:
 - it introduces or removes a structural component
 - it is costly to reverse once implemented
 - it commits the system to a quality-attribute tradeoff
+- it introduces a new external dependency
 
 Every architecture-significant decision produces an architecture decision record at status
 `Proposed`. Emitting `Accepted` bypasses the Design Gate and is forbidden by `system.md`

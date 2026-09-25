@@ -100,7 +100,7 @@ and fails only after implementation.
 |---|---|---|
 | A7.1 | Every capability the selected approach requires appears in the reuse survey | Blocking |
 | A7.2 | Every survey row has an outcome and a rationale | Blocking |
-| A7.3 | Every `none-found` outcome states where the search looked | Blocking |
+| A7.3 | Every `none-found` outcome states which of the four candidate kinds — existing components, the standard library, native platform or framework capability, already-installed dependencies — the search covered | Blocking |
 | A7.4 | No new structure is proposed for a capability whose candidate was not examined | Blocking |
 | A7.5 | Every `rejected` outcome states why the component is unsuitable | Blocking |
 

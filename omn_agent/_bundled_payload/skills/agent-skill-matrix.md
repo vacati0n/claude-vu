@@ -13,7 +13,7 @@ workflow phase requirements. The registry identifier is the discovery key in
 
 | Skill ID | Category | Skill File | Registry Identifier | Version | Registry Status |
 |---|---|---|---|---|---|
-| S01 | Architecture | architecture/clean-architecture-checklist.md | clean-architecture-checklist | 1.0.0 | active |
+| S01 | Architecture | architecture/clean-architecture-checklist.md | clean-architecture-checklist | 1.1.0 | active |
 | S02 | Business | business/domain-modeling.md | domain-modeling | 1.0.0 | active |
 | S03 | .NET | dotnet/engineering-playbook.md | engineering-playbook | 1.0.0 | active |
 | S04 | Avalonia | avalonia/desktop-ux-guidelines.md | desktop-ux-guidelines | 1.0.0 | active |

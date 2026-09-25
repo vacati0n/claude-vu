@@ -51,6 +51,11 @@ Output of this stage: the impacted-site list, the test command, and the baseline
    or record it as a deviation. Never leave it implicit.
 5. If an element cannot be implemented as accepted, raise `E-DESIGN-INFEASIBLE`, record the
    deviation, and escalate before writing code against it.
+6. Choose each entry's implementation route by the necessity and reuse ladder in
+   `skills/architecture/clean-architecture-checklist.md`, stopping at the first rung that
+   holds. A new abstraction, file, or dependency is introduced only when the rung that
+   required it is recorded; that rung is stated in the report's `Approach taken` field, and
+   no new report field is introduced to carry it.
 
 Output of this stage: the change-set table, complete except for the evidence column.
 
