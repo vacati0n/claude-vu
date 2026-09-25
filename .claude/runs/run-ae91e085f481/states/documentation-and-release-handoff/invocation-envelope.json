@@ -1,0 +1,430 @@
+{
+  "invocation_id": "inv-ae91e085f481-06-003",
+  "run_id": "run-ae91e085f481",
+  "work_item_id": "run-ae91e085f481::documentation-and-release-handoff",
+  "idempotency_key": "sha256:1b6e24df0689dcb806f153a5ab691356",
+  "state_id": "documentation-and-release-handoff",
+  "phase_index": 6,
+  "agent_id": "omn-documentation",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-documentation.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-documentation/manifest.yaml",
+    "load_order": [
+      "agents/omn-documentation/system.md",
+      "agents/omn-documentation/identity.md",
+      "agents/omn-documentation/reasoning.md",
+      "agents/omn-documentation/execution.md",
+      "agents/omn-documentation/output.md",
+      "agents/omn-documentation/quality.md",
+      "agents/omn-documentation/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-documentation/system.md": "sha256:407f35d95b5e232c7d87d7740a942844",
+      "agents/omn-documentation/identity.md": "sha256:e40e9fd9da20ae31f5af17d3cc97fcf2",
+      "agents/omn-documentation/reasoning.md": "sha256:11b286235d28b0bc358674c5b9357736",
+      "agents/omn-documentation/execution.md": "sha256:0077338ee3cbe3eee246e3556f9da205",
+      "agents/omn-documentation/output.md": "sha256:9e0c56ac978b9695f13668e209f8e2e4",
+      "agents/omn-documentation/quality.md": "sha256:972fe80aafbde6b6f8142b6dbd97e081",
+      "agents/omn-documentation/examples.md": "sha256:baead714ded57fbb1d36b103b957ee78"
+    },
+    "capabilities": [
+      "documentation",
+      "release-communication"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "validation-report",
+      "review-package",
+      "deployment-status",
+      "scope-definition",
+      "technical-design",
+      "execution-plan",
+      "bug-analysis",
+      "monitoring-health-record",
+      "final-change-summary",
+      "stakeholder-list",
+      "verification-report",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "closure-context",
+      "communication-requirements",
+      "existing-documentation",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/mnc-architecture-context.md",
+        "source_file": ".claude/runs/inputs/mnc-architecture-context.md",
+        "text": "# Architecture Context \u2014 where build-or-not decisions live today\n\nCurrent-state facts established by inspection on 2026-09-15 at runtime 0.5.0.\n\n## Layers and insertion points\n\n- Skills are the framework's reusable engineering knowledge, loaded per agent through the\n  manifest `skills` block and per phase through the frozen context slice\n  (`framework_runtime.CONTEXT_SLICE_PHASE`). S01 `skills/architecture/clean-architecture-checklist.md`\n  is declared by ten agent manifests including `architect`, `omn-dev-1-implement`, and\n  `omn-dev-2-reviewer`, and is a slice member of `implementation`,\n  `refactor-implementation`, `quality-review`, `code-quality-review`,\n  `repository-quality-scan`, `structural-compliance`, `technical-discovery`,\n  `technical-validation`, `option-analysis`, and `option-synthesis`. It is 1,690 bytes and\n  already carries three seed rules: \"Introduce a new layer only when it reduces coupling or\n  clarifies ownership\", \"Creating abstractions without real variation points\" (common\n  mistake), and \"Sharing utility modules that hide cross-layer dependencies\".\n- Skill identity metadata (code, category, version, status) lives in `registry/skills.yaml`\n  and the Skill Catalog of `skills/agent-skill-matrix.md`; skill files carry none. The\n  category taxonomy is closed; extending it is a registry schema change.\n- Agents are runtime module sets loaded in `manifest.yaml` `loadOrder`:\n  system, identity, reasoning, execution, output, quality, examples. Host registrations\n  (`agents/<id>.agent.md`) are adapters that pin `metadata.version is 1.0.0` and abort on a\n  mismatch. Module digests are frozen into each run's invocation envelope; drift against a\n  historical run is informational under decision GD-001.\n- The dispatch prompt built by the runtime carries routing and addressing only; every\n  instruction about how to do the work lives in the module set. There are no host hooks or\n  settings files in this repository; the dispatch envelope is the only injection mechanism,\n  and it injects the module set and the context slice.\n\n## Where the seven decisions are made now\n\n| Decision | Owner today | Existing rule |\n|---|---|---|\n| What to build | `omn-product-owner` Stage 3 (S-nnn / X-nnn), `planner` R4 and R13 | Untraced task is invented scope, a hard failure; unstated exclusion is the common drift |\n| Whether to create new structure | `architect` A6 Reuse Survey, A7 options, A9 significance; identity decision rules | \"Prefer the simplest architecture\", \"prefer extending a proven reusable component before creating new structural elements\"; A6 outcomes reuse-as-is, reuse-extended, rejected, none-found; new structure only after rejected or none-found; A7.3 requires a none-found basis. Candidates today are \"existing components\" only: the standard library, platform capability, and installed dependencies are not named |\n| Whether to reuse existing code | `architect` A6; `omn-dev-1-implement` Stage 2 reads existing code first | Same as above; implementer decision rule \"prefer the smallest change that satisfies the accepted element over a wider refactor taken in passing\" |\n| Whether to introduce a dependency | `architect` impact type `dependency-change` scores against options; not named as architecture-significant | A9 significance list: contract change, dependency direction or boundary, structural component, costly reversal, quality-attribute tradeoff |\n| How much code to write | `omn-dev-1-implement` Stage 5.2 \"write the code the entry describes, and nothing the entry does not describe\"; invariant 1 \"accepted change only\" | No route-selection rule between reuse, standard library, direct code, and new abstraction |\n| When to stop | `omn-dev-1-implement` decision rule \"never widen the change set\"; quality check V3; `omn-dev-2-reviewer` Stage 4 lenses | Reviewer lenses: correctness, architecture, standards, security, maintainability, test-adequacy, packaging. Junk-detection lenses (duplication, dead-code, over-abstraction, generated-noise, legacy-drift, reviewability) exist for `repository-quality-scan` only |\n| Safety floor | `omn-dev-1-implement` security constraint \"must not weaken an existing authorization, validation, or audit path\"; quality B4 no test weakened | No check names error handling, accessibility, observability, or data integrity |\n\n## Validator constraints that bound any change\n\n- `runtime/review_package_validator.py` `CATEGORIES` already accepts all thirteen categories\n  for every review phase; only the reviewer `output.md` prose restricts the junk lenses to\n  the scan phase.\n- `runtime/implementation_report_validator.py` checks declared field bullets by label and\n  non-emptiness (C4) and table columns by declared header (C4.5); adding a column or a\n  bullet changes the contract, changing a field's description does not.\n- `runtime/design_validator.py` D7.3 checks that a `none-found` row states a basis; it does\n  not check which candidate kinds the basis names.\n- Every artifact validator rejects the vendor substring, and the dot-directory path prefix\n  is stripped before that scan (C3.2).\n- `tests/test_bundled_payload.py` fails on any drift between the framework tree and the\n  mirror under `omn_agent/_bundled_payload/`; `--sync` regenerates the mirror.\n\n## Baseline measurements (2026-09-15, this worktree)\n\n- `verify_registry_coverage.py` 6/6, 37 of 37 phases dispatchable; `verify_validators.py`\n  6/6; `verify_manifests.py` 2/2; `verify_recovery.py` 41/41;\n  `verify_vertical_slice.py --run-id run-c5a8d50d3238` 10/10;\n  `verify_multi_phase.py --run-id run-c5a8d50d3238` 15/15;\n  `verify_self_hosting.py` 7/8, S8 failing on four pre-existing runs from 2026-08-27 to\n  2026-09-04 that carry no proposal (recorded as `O-005` of FC-006).\n- `python -m unittest discover -s tests`: 329 tests, OK, 855 s.\n- Module-set bytes: planner 91,711; architect 119,162; omn-dev-1-implement 76,418;\n  omn-dev-2-reviewer 85,093; omn-product-owner 73,869; omn-qa 93,035.\n- Active agents 12, skills 12 (S01 to S12), workflows 8, phases 37, commands 11.\n\n## Environmental constraint\n\nThe repository's primary checkout carries roughly 194 uncommitted changes at runtime 0.8.0\nthat this worktree's base commit does not have. Of the files this change proposes to touch,\nonly `agents/omn-dev-1-implement/identity.md` (one line) and `templates/implementation-report.md`\nhave uncommitted edits there, and `runtime/framework_runtime.py` differs by about 1,700\nlines. The change therefore avoids the runtime and the implementation-report template\nentirely, so it can be carried onto the newer base without conflict.",
+        "digest": "sha256:cdb7cb03685b91e8f79fe2c971b61d07"
+      },
+      {
+        "type": "review-package",
+        "reference": "runs/run-ae91e085f481/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/ponytail-framework-integration-bf84e0/.claude/runs/run-ae91e085f481/states/quality-review/artifacts/review-package.md",
+        "text": "```yaml\nreviewPackage:\n  packageId: RP-2026-0007\n  reviewReference: SCOPE-2026-0007 (run-ae91e085f481::quality-review), implementation-report IR-2026-0006\n  sourceInputs:\n    - type: design-reference\n      reference: runs/inputs/mnc-feature-request.md\n    - type: design-reference\n      reference: runs/inputs/mnc-change-request.md\n    - type: design-reference\n      reference: runs/inputs/mnc-business-intent.md\n    - type: design-reference\n      reference: runs/inputs/mnc-architecture-context.md\n    - type: code-diff\n      reference: runs/run-ae91e085f481/states/implementation/artifacts/implementation-report.md\n    - type: design-reference\n      reference: runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n    - type: design-reference\n      reference: runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md\n    - type: design-reference\n      reference: runs/run-ae91e085f481/states/scope-and-acceptance/artifacts/scope-definition.md\n    - type: design-reference\n      reference: runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md\n    - type: code-diff\n      reference: working-tree diff over 8 files, obtained read-only via git diff/git status at the repository root\n    - type: test-evidence\n      reference: implementation-report.md Test Evidence table (T-001-T-014), plus this review's own re-executed verifier and test commands\n  producedBy: omn-dev-2-reviewer\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: approve-with-corrections\n  inputDigest: sha256:4fdcf585398b08bdc2c95ab2039f0b3e\n  contextDigest: sha256:cc17689a2ce5188e14f1ec1ce95b8f0a\n```\n\n## Metadata\n\n- Review ID: RP-2026-0007\n- Reviewer: omn-dev-2-reviewer\n- Change under review: SCOPE-2026-0007, Minimum Necessary Change policy - implementation-report IR-2026-0006 (change-set entries C-001 through C-008), an eight-file diff against the accepted technical design\n- Review date: 2026-09-18\n\n## Review Scope\n\n- In scope: the eight-file diff (`skills/architecture/clean-architecture-checklist.md`, `agents/architect/reasoning.md`, `agents/architect/quality.md`, `agents/omn-dev-1-implement/reasoning.md`, `agents/omn-dev-1-implement/output.md`, `agents/omn-dev-1-implement/quality.md`, `registry/skills.yaml`, `skills/agent-skill-matrix.md`) measured against `technical-design.md` Impacted Modules M-001 through M-008 and Appendix A.1 through A.4 target content; the implementation report's Change Set, Test Evidence, Verification Results, Deviations, Boundary Compliance, and Handoff Notes; and this change's own conformance to the necessity-and-reuse standard it introduces.\n- Out of scope: `agents/omn-dev-2-reviewer/reasoning.md` (design module M-009) was not touched by this change and is not assessable as a delivered edit - its absence is itself Finding F-001, not an excluded area. `omn_agent/_bundled_payload/**` content beyond confirming the drift the failing test already reports. `verify_recovery.py` and `verify_self_hosting.py --release-checklist`, reserved for the Verification and Closure Gates and excluded from this run's command-execution guidance. `T-008` (instruction-byte measurement) and `T-012` (contract-version-increment decision), owned by `omn-tech-lead` and not yet produced at this phase.\n- Evidence reviewed: the working-tree diff for the eight changed files (`git diff`, `git status --porcelain`); the implementation report in full, including its Test Evidence, Verification Results, Deviations and Tradeoffs, Boundary Compliance, Residual Risk, and Handoff Notes sections; the accepted `technical-design.md` (including its Appendix A.1-A.4), `architecture-decision-record-D-001.md`, `scope-definition.md`, and `execution-plan.md`; `agents/omn-dev-1-implement/manifest.yaml`'s `repositoryWrites` declaration; this run's own `state.json` gate-decision ledger for the Design Gate; and this review's own re-execution of `verify_registry_coverage.py`, `verify_validators.py`, `verify_manifests.py`, `verify_vertical_slice.py --run-id run-c5a8d50d3238`, `verify_multi_phase.py --run-id run-c5a8d50d3238`, and `python -m unittest tests.test_bundled_payload`.\n\n## Findings\n\n| ID | Severity | Category | Location | Requirement | Finding | Correction Request | Status |\n|---|---|---|---|---|---|---|---|\n| `F-001` | high | architecture | `agents/omn-dev-2-reviewer/reasoning.md` (Stage 4, maintainability lens - required content absent) | `technical-design.md` Impacted Modules M-009 and Delivery Plan P-005/P-006; `scope-definition.md` S-005/A-009 (must-have); `execution-plan.md` T-006 | The accepted design commits M-009 - extending this reviewer's own Stage 4 lens with the seven review questions - and the execution plan assigns it as T-006, owned by `omn-dev-2-reviewer`, scheduled inside the `quality-review` phase: the very phase and role producing this package. `agents/omn-dev-2-reviewer/manifest.yaml` records `authorityScope.repositoryWrites.allowed: false` unconditionally, and this run's own invocation envelope repeats the prohibition. No phase or role assignment lets this reviewer perform that write. The Design Gate's own rationale resolved the identical question for the architect's tasks (\"the implementer is the only agent whose authority scope reaches repository source\") without ever extending that reasoning to T-006. Consequently M-009 was never implemented, and scope-definition's must-have acceptance criterion A-009 (and scope item S-005) is unmet by the delivered change. | `CR-001` | open |\n| `F-002` | high | packaging | `tests/test_bundled_payload.py::BundleParityTestCase::test_bundle_matches_authoritative_payload_exactly` | `scope-definition.md` S-006/A-010 (must-have: \"every verifier at its recorded baseline...the unit test suite at its baseline count including the packaging-mirror drift test\"); `technical-design.md` Delivery Plan P-006 | Re-executing the packaging-mirror test module confirms the implementation report's own claim: `omn_agent/_bundled_payload/**` is stale against exactly the eight files this change modified, so the unit suite runs 328 of 329 rather than the required 329. The framework is not at its recorded baseline as of this review, in direct violation of a must-have acceptance criterion. | `CR-002` | open |\n| `F-003` | medium | correctness | `runs/run-ae91e085f481/states/implementation/artifacts/implementation-report.md` (Deviations and Tradeoffs V-001; Open Questions Q-001) | `agents/omn-dev-1-implement/manifest.yaml` `repositoryWrites` declaration, read against the report's own boundary claim | The report attributes the deferred packaging-mirror refresh to `omn_agent/_bundled_payload/**` being \"outside this run's permitted writes.\" Direct inspection of the implementer's manifest shows `repositoryWrites.scope: [\"**\"]`, excluding only `runs/**` and `proposals/**` - the mirror path is within scope. The actual blocking condition is the accepted design's own sequencing constraint P-006, which requires M-009/T-006 to land before the mirror refresh runs; the report never cites it, and Q-001 misroutes the escalation to \"operator\" for a write-permission question that does not exist rather than to the true blocker (F-001). | `CR-003` | open |\n\n## Severity Summary\n\n- Critical: 0\n- High: 2\n- Medium: 1\n- Low: 0\n\n## Standards and Architecture Conformance\n\n- Coding standards: `skills/architecture/clean-architecture-checklist.md` (S01), including its own newly added Necessity and Reuse Ladder applied reflexively to this change - conformant. Every edit reuses an existing file or existing record (ladder rung 2: \"does the codebase already have it\"), introduces no new abstraction, file, or dependency (rung 7 never reached), and touches nothing outside the eight-entry change set (confirmed against `git status --porcelain`, which shows no other framework-tree file modified).\n- Architecture rules: `technical-design.md` section 5.1 Impacted Modules and 5.4 Decisions - conformant for M-001 through M-008: the Appendix A.1 through A.4 target content was applied verbatim, confirmed by direct diff comparison against the appendix text for `skills/architecture/clean-architecture-checklist.md`, `agents/architect/reasoning.md` (A6, A9), and `agents/architect/quality.md` (A7.3), and by the version-identity match in `registry/skills.yaml` and `skills/agent-skill-matrix.md`. Not conformant for M-009 (F-001).\n- Security criteria: `skills/security/secure-engineering.md` - conformant. No executable code path, credential, authorization, or audit path is touched by any of the eight changes; every edit is additive prose or a version-identity field.\n- Exceptions requested: None identified.\n\n## Test Adequacy Assessment\n\n- Test evidence reviewed: the implementation report's 14-row Test Evidence table (T-001 through T-014); this review's own re-execution of `verify_registry_coverage.py` (6/6, matches recorded baseline), `verify_manifests.py` (2/2, matches recorded baseline), `verify_vertical_slice.py --run-id run-c5a8d50d3238` (10/10, matches recorded baseline), `verify_multi_phase.py --run-id run-c5a8d50d3238` (15/15, matches recorded baseline), `verify_validators.py` (5/6 - see Residual Risk), and `python -m unittest tests.test_bundled_payload` (10 of 11 tests pass, reproducing the one reported failure exactly, including the same eight stale files).\n- Coverage of changed behavior: complete for C-001 through C-008. Each change-set entry is exercised by at least one static content check (confirmed by the implementation-report validator's M1 check: 8 changes covered by 14 test rows) and by the whole-repository regression sweep (registry coverage, validator coverage, manifest shape, vertical slice, multi-phase).\n- Gaps requiring new tests: None identified beyond the already-recorded packaging-mirror failure (F-002), which an existing test correctly detects rather than an undercovered behavior needing a new one.\n\n## Correction Requests\n\n| ID | Addresses | Required change | Blocking | Owner |\n|---|---|---|---|---|\n| `CR-001` | `F-001` | Assign and complete T-006/M-009 - extending `agents/omn-dev-2-reviewer/reasoning.md` Stage 4 with the seven review questions - through a role whose authority scope reaches repository source, following the same reasoning the Design Gate applied to resolve its own Q-001 for the architect's tasks, sequenced so it lands before the packaging-mirror refresh (P-006). Only then does `scope-definition.md` A-009 hold. | yes | architect (design/ownership correction), omn-orchestrator (workflow resequencing) |\n| `CR-002` | `F-002` | Refresh `omn_agent/_bundled_payload/**` for the eight files this change touched, together with the M-009 edit once CR-001 lands, so `test_bundle_matches_authoritative_payload_exactly` and the full unit suite return to 329 of 329 passing. | yes | omn-dev-1-implement |\n| `CR-003` | `F-003` | Correct the implementation report's V-001 and Q-001 text to name the true blocking condition (design sequencing constraint P-006 pending M-009) instead of a permitted-writes restriction that `agents/omn-dev-1-implement/manifest.yaml` does not impose. | no | omn-dev-1-implement |\n\n## Residual Risk\n\n- Accepted risk: None identified. No owning role has formally accepted F-001, F-002, or F-003 as residual.\n- Unmitigated risk: SCOPE-2026-0007 does not meet its accepted must-have acceptance criteria (A-009, A-010) until CR-001 and CR-002 close; the reviewer's own Stage 4 lens and the packaging mirror both remain out of sync with the rest of the change until then.\n- Monitoring required: re-run `verify_validators.py` at the Verification Gate. This review's own re-execution returned 5 of 6 (check V3 failing on `framework-change-proposal.md`, its `change_proposal_validator` rejecting its own governance-artifact conforming instance under `proposals/` on check F7), against the implementation report's claimed 6 of 6. This review confirmed no file this change touches lies under `runtime/` or `proposals/` (no diff exists there), so the drift is not attributable to C-001 through C-008; `omn-qa` should confirm its cause before relying on that verifier for A-010 at the Verification Gate.\n\n## Verdict\n\n- Decision: approve-with-corrections\n- Rationale: Two high findings are open - the reviewer's own required module edit (M-009/T-006) was never implemented, and the packaging-mirror parity test that same gap leaves unresolved currently fails - both correctable without redesigning the accepted approach, so the change is not rejected outright.\n- Blocking findings outstanding: F-001, F-002\n- Readiness recommendation: Hold at the Review Gate until CR-001 and CR-002 close. Per `agents/omn-dev-2-reviewer/execution.md` Phase Ownership and this run's own gate ledger, `omn-qa` is the Review Gate's second owner and decides it over the evidence this package produced.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | Which role and phase will author `agents/omn-dev-2-reviewer/reasoning.md`'s T-006 content, given the reviewer's permanent no-repository-write invariant that the Design Gate's own rationale never applied to this task? | yes | architect, omn-orchestrator | F-001, CR-001, scope-definition A-009 |",
+        "digest": "sha256:495a85f1b68106af59f0155d6402951e",
+        "produced_by": "quality-review"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was delivered: an implementation report for the change set itself, a validation report for what was proven about it, a review package for a `review-pull-request` run, or a deployment status for the `communication-and-post-release` phase, which publishes after a release has landed. Without one there is nothing to publish from, and publishing anyway would mean describing a system from this agent's own reading of what it was supposed to become."
+  },
+  "prior_validation": {
+    "attempt": 2,
+    "report": "runs/run-ae91e085f481/states/documentation-and-release-handoff/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-ae91e085f481/states/documentation-and-release-handoff/artifacts/release-note.md"
+    ],
+    "failures": [
+      {
+        "id": "R7",
+        "severity": "Correctable",
+        "quality_ref": "templates/release-note.md",
+        "requirement": "The version is a recognisable version string",
+        "detail": "version='S01 v1.1.0'"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "review-package",
+      "reference": "runs/run-ae91e085f481/states/quality-review/artifacts/review-package.md",
+      "produced_by": "quality-review"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-18T00:25:19Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/release-note.md",
+        "digest": "sha256:a6125cac38eb2edeca7105d936d9304c",
+        "supplies": null
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:e4904c45d308dc74bbf8f9076cca2ea1",
+    "input_digest": "sha256:5007761c27c3fcfe66f27422901e2f2e",
+    "inputs": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/mnc-architecture-context.md",
+        "source_file": ".claude/runs/inputs/mnc-architecture-context.md",
+        "digest": "sha256:cdb7cb03685b91e8f79fe2c971b61d07"
+      },
+      {
+        "type": "review-package",
+        "reference": "runs/run-ae91e085f481/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/ponytail-framework-integration-bf84e0/.claude/runs/run-ae91e085f481/states/quality-review/artifacts/review-package.md",
+        "digest": "sha256:495a85f1b68106af59f0155d6402951e"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-ae91e085f481/states/documentation-and-release-handoff/artifacts/release-note.md",
+      "runs/run-ae91e085f481/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "reproducing a test or validation result, which belongs to omn-qa"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author or amend a technical design, an architecture decision, or a structural constraint",
+      "define, widen, or narrow product scope or acceptance criteria",
+      "award, withhold, or restate a validation verdict as though this agent reached it",
+      "record a merge, release, or deployment decision",
+      "publish a statement the supplied evidence does not support",
+      "omit, soften, or defer a breaking change a supplied input declares",
+      "carry forward prior-release content the delivered change made false",
+      "resolve an engineering gap rather than returning it to the role that owns it",
+      "decide a gate that assesses evidence this agent produced",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "describe delivered behavior from the implementation and validation evidence supplied",
+        "draft release notes, change summaries, and closure communication packages",
+        "record usage, limitations, known issues, and troubleshooting guidance",
+        "state the compatibility consequence a declared contract change carries",
+        "identify documentation the delivered change made stale, and propose its correction",
+        "name the audience a communication was addressed to and the handoff it carries",
+        "maintain the trace from each published statement to the artifact that supports it",
+        "record an unresolved engineering question as an open question against its owning role"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author or amend a technical design, an architecture decision, or a structural constraint",
+        "define, widen, or narrow product scope or acceptance criteria",
+        "award, withhold, or restate a validation verdict as though this agent reached it",
+        "record a merge, release, or deployment decision",
+        "publish a statement the supplied evidence does not support",
+        "omit, soften, or defer a breaking change a supplied input declares",
+        "carry forward prior-release content the delivered change made false",
+        "resolve an engineering gap rather than returning it to the role that owns it",
+        "decide a gate that assesses evidence this agent produced",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else. Product documentation living in the repository is proposed as content inside the artifact and applied by the role that owns the file, so a documentation change never travels as an unreviewed write.",
+        "rationale": "This agent's authority is over what is said about a change, never over the change itself. Writing to the repository would let a publication step alter the delivered behavior it exists to describe, and the resulting document would then be accurate about a system this agent had just modified."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "reproducing a test or validation result, which belongs to omn-qa"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same published statements, the same known-issue set, the same compatibility statement, the same declared release verdict, and the same declared artifact status.",
+      "identifierSchemes": {
+        "knownIssues": "K-<zero-padded-sequence>"
+      },
+      "orderingRule": "Known issues keep the order of the source that recorded them, so a supplied defect list and the issues published from it can be read side by side.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied evidence, release context, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 3,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "release-note.md",
+    "artifact_path": "runs/run-ae91e085f481/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "template_ref": "templates/release-note.md",
+    "contract_ref": "agents/omn-documentation/output.md",
+    "quality_ref": "agents/omn-documentation/quality.md",
+    "validator": "release_note_validator",
+    "result_envelope_path": "runs/run-ae91e085f481/states/documentation-and-release-handoff/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-18T00:25:19Z"
+}

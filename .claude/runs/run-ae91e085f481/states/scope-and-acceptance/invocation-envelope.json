@@ -1,0 +1,335 @@
+{
+  "invocation_id": "inv-ae91e085f481-01-001",
+  "run_id": "run-ae91e085f481",
+  "work_item_id": "run-ae91e085f481::scope-and-acceptance",
+  "idempotency_key": "sha256:4ae4fc79a72c18af3cda594f6fdba789",
+  "state_id": "scope-and-acceptance",
+  "phase_index": 1,
+  "agent_id": "omn-product-owner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-product-owner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-product-owner/manifest.yaml",
+    "load_order": [
+      "agents/omn-product-owner/system.md",
+      "agents/omn-product-owner/identity.md",
+      "agents/omn-product-owner/reasoning.md",
+      "agents/omn-product-owner/execution.md",
+      "agents/omn-product-owner/output.md",
+      "agents/omn-product-owner/quality.md",
+      "agents/omn-product-owner/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-product-owner/system.md": "sha256:ca10caae54f63fa52580220f1f88812f",
+      "agents/omn-product-owner/identity.md": "sha256:8a5df5e407d8c96ce1e5bb7faaa07f55",
+      "agents/omn-product-owner/reasoning.md": "sha256:ee417de8bc3f21281299d8e5f53dfdcf",
+      "agents/omn-product-owner/execution.md": "sha256:68ec1cc7479d592bd875b98ecb8546ab",
+      "agents/omn-product-owner/output.md": "sha256:da40434a6907e6912979430f12430025",
+      "agents/omn-product-owner/quality.md": "sha256:53c8887fbc5888342d68c2e7a02d6ecc",
+      "agents/omn-product-owner/examples.md": "sha256:0e1b087f304a35d8527abc9aa5f0052b"
+    },
+    "capabilities": [
+      "scope-definition",
+      "acceptance-authority"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "acceptance-intent",
+      "business-constraints",
+      "architecture-context",
+      "prior-scope-definition",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/mnc-feature-request.md",
+        "source_file": ".claude/runs/inputs/mnc-feature-request.md",
+        "text": "# Feature Request \u2014 Minimum Necessary Change policy (necessity and reuse ladder)\n\n## Source\n\nOperator request dated 2026-09-15: integrate the engineering philosophy of the upstream\nPonytail ruleset (\"lazy senior developer\": lazy about the solution, never lazy about\nunderstanding the problem) into this framework's existing agents as a native, cross-cutting\nbehaviour. The framework's own philosophy is \"code less, but make it work well\". The upstream\nruleset is the source of the principle; nothing from it is copied wholesale.\n\n## Request\n\nMake planning, architecture, implementation, and code review behave like a senior engineer\nwho understands the problem deeply, chooses the simplest solution that satisfies the real\nrequirement, and refuses to build unnecessary things. The behaviour must be embedded in the\nexisting agent lifecycle rather than added as a new agent, a new workflow phase, a new\ncommand, a new runtime mechanism, or a second orchestration layer.\n\nThe principle to embed, in order, stopping at the first rung that holds:\n\n1. Does this need to exist? If not, do not build it.\n2. Does the codebase already have it? Reuse it.\n3. Does the standard library solve it? Use it.\n4. Does the platform or framework in use solve it natively? Use it.\n5. Does an already-installed dependency solve it? Use it.\n6. Can it be written directly in a few lines at the call site? Write it there.\n7. Only then: implement the minimum code necessary, introducing new abstraction only when\n   the reason no lower rung held is recorded.\n\nThe ladder runs after the problem is understood, never instead of understanding it.\n\nTwo rules bound the ladder and are not negotiable:\n\n- Minimum necessary change = required behaviour + required safety + required integration\n  + required tests. Everything outside that boundary requires a recorded justification:\n  scope creep, opportunistic refactoring, speculative abstraction, \"while we are here\"\n  changes, unnecessary cleanup.\n- Safety floor: no simplification may remove or weaken input validation at a trust\n  boundary, error handling that prevents data loss, authorization or audit paths,\n  accessibility, required observability, data integrity, or the tests that prove the\n  change. A shorter implementation is not automatically better; line count is not a\n  criterion. If twenty lines are required, twenty lines are written.\n\nReview must be extended so a reviewer can detect over-engineering with seven questions \u2014\nexistence, reuse, dependency, abstraction, complexity, scope, safety \u2014 and must not demand\narbitrary line-count reduction.\n\n## Non-goals\n\n- No new agent, skill file, workflow phase, gate, command, template section, validator\n  vocabulary, configuration surface, prompt layer, or hook.\n- No copy of the upstream repository, its intensity modes, its comment markers, or its\n  commands.\n- No change to current agent contracts' authority, to dispatching, to existing safety\n  mechanisms, to testing obligations, or to logging and observability requirements.\n- No change to runtime behaviour: `runtime/framework_runtime.py` is not touched and\n  `RUNTIME_VERSION` stays 0.5.0.\n\n## Acceptance criteria\n\n1. One written standard states the ladder, the minimum-necessary-change definition, the\n   safety floor, and the seven review questions, and it is already loaded by the design,\n   implementation, refactor-implementation, quality-review, code-quality-review,\n   structural-compliance, and repository-quality-scan phases without any runtime change.\n2. The architect's reuse survey considers, for every required capability, the standard\n   library, the native platform or framework capability, and already-installed dependencies\n   in addition to existing components, and records a capability that no statement requires\n   as out of scope rather than designing for it.\n3. The implementer selects the route for every change-set entry by the ladder, records the\n   rung that justified any new abstraction, file, or dependency in the implementation\n   report's existing `Approach taken` field, and treats removal or weakening of a\n   safety-floor item as a blocking self-check failure.\n4. The reviewer applies the seven questions to every change review, each finding measured\n   against the written standard, never against line count; a safety-floor breach is a\n   correctness or security finding, the other six are maintainability or architecture\n   findings at the severity the existing severity table yields.\n5. Every framework verifier stays at its recorded baseline: registry coverage 6/6 with 37 of\n   37 phases dispatchable, validators 6/6, vertical slice 10/10, multi-phase 15/15, recovery\n   41/41, manifests 2/2; the `omn-agent` test suite stays at 329 passing.\n6. The component counts do not move: 12 active agents, 12 skills, 8 workflows, 37 phases,\n   11 commands. Added instruction volume is measured and reported in bytes per agent module\n   set.\n7. The planner and product owner contracts are not modified, because their existing\n   traceability rules already reject invented scope and undeclared exclusions.",
+        "digest": "sha256:0089f08e0f80fccd37040a21394244d4"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/mnc-change-request.md",
+        "source_file": ".claude/runs/inputs/mnc-change-request.md",
+        "text": "# Change Request \u2014 Embed the necessity and reuse ladder in existing contracts\n\n## Requested change set\n\nThe smallest integration that produces the requested behaviour, as proposed by the operator\nafter inspecting every layer. The architect evaluates it against alternatives and may narrow\nit; widening it requires a recorded reason under the same ladder.\n\n| Surface | File | Change |\n|---|---|---|\n| Written standard | `skills/architecture/clean-architecture-checklist.md` (skill S01) | Add sections stating the ladder, the minimum-necessary-change definition, the safety floor, and the seven review questions; add one anti-pattern and one common mistake. Keep the heading `Skill: Architecture Foundations` unchanged, because the registry `displayName` indexes it |\n| Skill identity | `registry/skills.yaml`, `skills/agent-skill-matrix.md` | S01 version 1.0.0 to 1.1.0 (additive guidance is a MINOR change under `domain-model/skill-specification.md`), in the registry record and the Skill Catalog row |\n| Architect behaviour | `agents/architect/reasoning.md` | A6 Reuse Survey: candidates are existing components, the standard library, native platform or framework capability, and already-installed dependencies; a `none-found` basis names which of these were searched; a capability no statement requires is recorded as out of scope, not surveyed. A9: introducing a new external dependency is architecture-significant |\n| Architect self-check | `agents/architect/quality.md` | A7.3 wording names the candidate kinds a `none-found` basis must cover, so the check states the same rule as the procedure |\n| Implementer behaviour | `agents/omn-dev-1-implement/reasoning.md` | Stage 3: choose each entry's route by the ladder, stopping at the first rung that holds; a new file, abstraction, or dependency is justified by the rung that required it. Stage 5: no speculative abstraction, no refactoring of code the accepted change does not touch, no safety-floor item removed or weakened to shorten the change |\n| Implementer output | `agents/omn-dev-1-implement/output.md` | `Approach taken` additionally names the ladder rung that justified any new abstraction, file, or dependency. No structural change; the validator's field checks are unaffected |\n| Implementer self-check | `agents/omn-dev-1-implement/quality.md` | One Blocking boundary check: no safety-floor item was removed or weakened to reduce code. One not-machine-checkable obligation: every new abstraction, file, or dependency is justified in `Approach taken` |\n| Reviewer behaviour | `agents/omn-dev-2-reviewer/reasoning.md` | Stage 4, maintainability lens: apply the seven questions against S01; the seventh routes to the correctness or security lens; a finding is never that the change could be shorter |\n| Packaging mirror | `omn_agent/_bundled_payload/**` | Refresh with `python tests/test_bundled_payload.py --sync`; `tests/test_bundled_payload.py` fails on any drift |\n\nNothing else changes. In particular: no runtime module, no template, no validator, no\nworkflow specification, no manifest, no host registration, no agent version, no gate matrix\nrow, no registry record other than the S01 version, no new file.\n\n## Draft wording for the written standard\n\nOffered as the requested content; the implementer may tighten wording, never weaken a rule.\n\n```text\n## Necessity and Reuse Ladder\n\nApplies to every design option, every change-set entry, and every review of a change.\nUnderstand the problem first: read the task and the code it touches, and trace the real\nflow end to end. Then climb the ladder and stop at the first rung that holds.\n\n1. Does this need to exist? A capability no accepted statement requires is not built; it\n   is recorded as out of scope or raised as an open question to the owning role.\n2. Does the codebase already have it? Reuse the existing helper, component, or pattern.\n3. Does the standard library solve it? Use it.\n4. Does the platform or framework in use solve it natively? Use it.\n5. Does an already-installed dependency solve it? Use it.\n6. Can it be written directly in a few lines at the call site? Write it there.\n7. Only then: implement the minimum code necessary. A new abstraction, file, or dependency\n   is introduced only when the reason no lower rung held is recorded.\n\n### Minimum necessary change\n\nRequired behaviour, required safety, required integration, and required tests together\nare the minimum necessary change. Everything outside that boundary requires a recorded\njustification: opportunistic refactoring, cleanup of code the change does not touch,\nspeculative generalization, and configuration or extension points for requirements that\ndo not yet exist.\n\n### Safety floor\n\nThe ladder minimizes unnecessary code, never necessary protection. No simplification may\nremove or weaken input validation at a trust boundary, error handling that prevents data\nloss, authorization or audit paths, accessibility, observability the design requires, data\nintegrity, or the tests that prove the change. A shorter implementation is not\nautomatically better: correctness, readability, and maintainability are requirements, and\nline count is not a criterion. Where two equally small solutions differ, the\nedge-case-correct one is chosen.\n\n### Review questions\n\nA change is measured against this ladder with seven questions, each answered against the\naccepted change and the code, never against line count:\n\n- Existence: was something built that no accepted statement requires?\n- Reuse: does the change duplicate something the codebase already provides?\n- Dependency: was a dependency added where the standard library, the platform, or an\n  installed dependency already served?\n- Abstraction: was an interface, wrapper, factory, helper class, or configuration point\n  introduced before a second concrete use required it?\n- Complexity: does a simpler implementation exist with the same behaviour and the same\n  safety?\n- Scope: did the change touch code the accepted change did not require?\n- Safety: did a simplification remove or weaken anything the safety floor protects?\n\nA finding under the first six questions is a maintainability or architecture finding at\nthe severity the evidence supports. A finding under the seventh is a correctness or\nsecurity finding.\n```\n\nAnti-pattern to add: \"Speculative abstraction, generalization, or configuration for a\nrequirement that does not exist.\" Common mistake to add: \"Reducing line count by removing\nvalidation, error handling, or tests.\"\n\n## Why these surfaces and not others\n\n- The reviewer's own contract forbids a finding without a written standard (\"standard\n  before opinion\"), so over-engineering cannot be raised as a finding today: the written\n  standard is the enabling change, and S01 is already the skill every affected phase loads\n  and the one the quality-scan workflow already uses for \"structural and abstraction\n  judgement\". Extending S01 is rung 2 of the ladder applied to the ladder itself; a new S13\n  would be rung 7 with a taxonomy column, a registry record, a catalog row, and a matrix\n  column it does not need.\n- The planner's R13 already fails an untraced task as invented scope, and the product\n  owner's Stage 3 already requires explicit exclusions. Rung 1 is therefore already\n  enforced upstream of design; those contracts are not touched.\n- Agent contract versions stay at 1.0.0. Every host registration pins\n  `metadata.version is 1.0.0` and aborts otherwise, and the gate auto-approval policy keys\n  precedent on producing-agent version; a version bump is a governance decision for the\n  tech lead and is recorded as an open question, not taken here.\n- No runtime change: S01 already reaches every affected agent through the manifest skill\n  bindings and the phase context slices the runtime freezes, so no slice member is added\n  and `RUNTIME_VERSION` stays 0.5.0.",
+        "digest": "sha256:1e6552a2dca51315185356ca795f7b72"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/mnc-business-intent.md",
+        "source_file": ".claude/runs/inputs/mnc-business-intent.md",
+        "text": "# Business Intent \u2014 Minimum Necessary Change policy\n\n## Outcome the business is buying\n\nLess code, less architecture, less cognitive load, same or better correctness \u2014 delivered by\nthe agents this framework already runs, at no added execution cost. The best code is often\nthe code the team never had to write.\n\n## Why now\n\nAgents default to over-building: speculative abstractions, helper classes with one caller,\ncustom implementations of standard-library behaviour, new dependencies where an installed one\nserves, and opportunistic refactoring of unrelated code. Each costs review time, tokens,\nmaintenance, and defect surface. The upstream ruleset this request adapts reports roughly half\nthe lines of code, a fifth fewer tokens, and a quarter less wall time on comparable tasks with\nsafety behaviour preserved. Those figures are the upstream's; this change measures its own.\n\n## Constraints on the outcome\n\n- Correctness and required safety stay at one hundred percent. The policy reduces\n  unnecessary code, unnecessary decisions, unnecessary dependencies, and unnecessary\n  abstractions; it never reduces validation, error handling, security, accessibility,\n  observability, testability, or data integrity.\n- Execution performance is preserved: no added agent invocation, no added reasoning loop,\n  no added workflow step. The framework is already optimized for orchestration cost, and\n  this change must not spend that budget.\n- The implementation of the policy must itself satisfy the policy: the smallest integration\n  that produces the behaviour, with no framework bloat.\n\n## How success is measured\n\nBefore and after, on the same representative implementation tasks: lines and files changed,\nagent calls, tokens and wall time where the host reports them, test results, and reviewer\nfindings \u2014 read together, never line count alone. Framework-side: component counts unchanged,\nadded instruction bytes reported, every verifier at baseline.",
+        "digest": "sha256:9d4d342007cc5b01b3b44ab043c76bc1"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/mnc-architecture-context.md",
+        "source_file": ".claude/runs/inputs/mnc-architecture-context.md",
+        "text": "# Architecture Context \u2014 where build-or-not decisions live today\n\nCurrent-state facts established by inspection on 2026-09-15 at runtime 0.5.0.\n\n## Layers and insertion points\n\n- Skills are the framework's reusable engineering knowledge, loaded per agent through the\n  manifest `skills` block and per phase through the frozen context slice\n  (`framework_runtime.CONTEXT_SLICE_PHASE`). S01 `skills/architecture/clean-architecture-checklist.md`\n  is declared by ten agent manifests including `architect`, `omn-dev-1-implement`, and\n  `omn-dev-2-reviewer`, and is a slice member of `implementation`,\n  `refactor-implementation`, `quality-review`, `code-quality-review`,\n  `repository-quality-scan`, `structural-compliance`, `technical-discovery`,\n  `technical-validation`, `option-analysis`, and `option-synthesis`. It is 1,690 bytes and\n  already carries three seed rules: \"Introduce a new layer only when it reduces coupling or\n  clarifies ownership\", \"Creating abstractions without real variation points\" (common\n  mistake), and \"Sharing utility modules that hide cross-layer dependencies\".\n- Skill identity metadata (code, category, version, status) lives in `registry/skills.yaml`\n  and the Skill Catalog of `skills/agent-skill-matrix.md`; skill files carry none. The\n  category taxonomy is closed; extending it is a registry schema change.\n- Agents are runtime module sets loaded in `manifest.yaml` `loadOrder`:\n  system, identity, reasoning, execution, output, quality, examples. Host registrations\n  (`agents/<id>.agent.md`) are adapters that pin `metadata.version is 1.0.0` and abort on a\n  mismatch. Module digests are frozen into each run's invocation envelope; drift against a\n  historical run is informational under decision GD-001.\n- The dispatch prompt built by the runtime carries routing and addressing only; every\n  instruction about how to do the work lives in the module set. There are no host hooks or\n  settings files in this repository; the dispatch envelope is the only injection mechanism,\n  and it injects the module set and the context slice.\n\n## Where the seven decisions are made now\n\n| Decision | Owner today | Existing rule |\n|---|---|---|\n| What to build | `omn-product-owner` Stage 3 (S-nnn / X-nnn), `planner` R4 and R13 | Untraced task is invented scope, a hard failure; unstated exclusion is the common drift |\n| Whether to create new structure | `architect` A6 Reuse Survey, A7 options, A9 significance; identity decision rules | \"Prefer the simplest architecture\", \"prefer extending a proven reusable component before creating new structural elements\"; A6 outcomes reuse-as-is, reuse-extended, rejected, none-found; new structure only after rejected or none-found; A7.3 requires a none-found basis. Candidates today are \"existing components\" only: the standard library, platform capability, and installed dependencies are not named |\n| Whether to reuse existing code | `architect` A6; `omn-dev-1-implement` Stage 2 reads existing code first | Same as above; implementer decision rule \"prefer the smallest change that satisfies the accepted element over a wider refactor taken in passing\" |\n| Whether to introduce a dependency | `architect` impact type `dependency-change` scores against options; not named as architecture-significant | A9 significance list: contract change, dependency direction or boundary, structural component, costly reversal, quality-attribute tradeoff |\n| How much code to write | `omn-dev-1-implement` Stage 5.2 \"write the code the entry describes, and nothing the entry does not describe\"; invariant 1 \"accepted change only\" | No route-selection rule between reuse, standard library, direct code, and new abstraction |\n| When to stop | `omn-dev-1-implement` decision rule \"never widen the change set\"; quality check V3; `omn-dev-2-reviewer` Stage 4 lenses | Reviewer lenses: correctness, architecture, standards, security, maintainability, test-adequacy, packaging. Junk-detection lenses (duplication, dead-code, over-abstraction, generated-noise, legacy-drift, reviewability) exist for `repository-quality-scan` only |\n| Safety floor | `omn-dev-1-implement` security constraint \"must not weaken an existing authorization, validation, or audit path\"; quality B4 no test weakened | No check names error handling, accessibility, observability, or data integrity |\n\n## Validator constraints that bound any change\n\n- `runtime/review_package_validator.py` `CATEGORIES` already accepts all thirteen categories\n  for every review phase; only the reviewer `output.md` prose restricts the junk lenses to\n  the scan phase.\n- `runtime/implementation_report_validator.py` checks declared field bullets by label and\n  non-emptiness (C4) and table columns by declared header (C4.5); adding a column or a\n  bullet changes the contract, changing a field's description does not.\n- `runtime/design_validator.py` D7.3 checks that a `none-found` row states a basis; it does\n  not check which candidate kinds the basis names.\n- Every artifact validator rejects the vendor substring, and the dot-directory path prefix\n  is stripped before that scan (C3.2).\n- `tests/test_bundled_payload.py` fails on any drift between the framework tree and the\n  mirror under `omn_agent/_bundled_payload/`; `--sync` regenerates the mirror.\n\n## Baseline measurements (2026-09-15, this worktree)\n\n- `verify_registry_coverage.py` 6/6, 37 of 37 phases dispatchable; `verify_validators.py`\n  6/6; `verify_manifests.py` 2/2; `verify_recovery.py` 41/41;\n  `verify_vertical_slice.py --run-id run-c5a8d50d3238` 10/10;\n  `verify_multi_phase.py --run-id run-c5a8d50d3238` 15/15;\n  `verify_self_hosting.py` 7/8, S8 failing on four pre-existing runs from 2026-08-27 to\n  2026-09-04 that carry no proposal (recorded as `O-005` of FC-006).\n- `python -m unittest discover -s tests`: 329 tests, OK, 855 s.\n- Module-set bytes: planner 91,711; architect 119,162; omn-dev-1-implement 76,418;\n  omn-dev-2-reviewer 85,093; omn-product-owner 73,869; omn-qa 93,035.\n- Active agents 12, skills 12 (S01 to S12), workflows 8, phases 37, commands 11.\n\n## Environmental constraint\n\nThe repository's primary checkout carries roughly 194 uncommitted changes at runtime 0.8.0\nthat this worktree's base commit does not have. Of the files this change proposes to touch,\nonly `agents/omn-dev-1-implement/identity.md` (one line) and `templates/implementation-report.md`\nhave uncommitted edits there, and `runtime/framework_runtime.py` differs by about 1,700\nlines. The change therefore avoids the runtime and the implementation-report template\nentirely, so it can be carried onto the newer base without conflict.",
+        "digest": "sha256:cdb7cb03685b91e8f79fe2c971b61d07"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the business intent this agent bounds: a feature request for new functionality, a change request for a modification to delivered behaviour, or a business intent for an outcome stated without a proposed solution. Without one there is nothing to scope, and scoping anyway would mean inventing what the requester wants."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [],
+  "context_slice": {
+    "frozen_at": "2026-09-15T05:00:46Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/scope-definition.md",
+        "digest": "sha256:9f082102c11c1de4d4b53c8252a0a9bc",
+        "supplies": "feature-request"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "business-constraints"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": "acceptance-intent"
+      }
+    ],
+    "context_digest": "sha256:c5cc1c3bdd1db9b2d550e98fd7f931ed",
+    "input_digest": "sha256:a32ab8e7e0a3d8d7f1085b0d6f50c968",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/mnc-feature-request.md",
+        "source_file": ".claude/runs/inputs/mnc-feature-request.md",
+        "digest": "sha256:0089f08e0f80fccd37040a21394244d4"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/mnc-change-request.md",
+        "source_file": ".claude/runs/inputs/mnc-change-request.md",
+        "digest": "sha256:1e6552a2dca51315185356ca795f7b72"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/mnc-business-intent.md",
+        "source_file": ".claude/runs/inputs/mnc-business-intent.md",
+        "digest": "sha256:9d4d342007cc5b01b3b44ab043c76bc1"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/mnc-architecture-context.md",
+        "source_file": ".claude/runs/inputs/mnc-architecture-context.md",
+        "digest": "sha256:cdb7cb03685b91e8f79fe2c971b61d07"
+      }
+    ],
+    "unnarrowed": [],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-ae91e085f481/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "runs/run-ae91e085f481/states/scope-and-acceptance/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository modification of any kind",
+        "any command whose effect is not recorded in the artifact"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "author or revise a technical design, structure, or technology decision",
+      "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+      "write, modify, or review code, tests, migrations, or configuration",
+      "record the Scope Gate decision on this agent's own artifact",
+      "record a merge, readiness, or release decision",
+      "define the test strategy or execute validation",
+      "relax a stated regulatory, policy, or quality constraint to close the scope",
+      "record scope no supplied input supports",
+      "access external systems, ticket trackers, or stakeholders directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "decide which deliverables fall inside this change and which fall outside it",
+        "decide the relative priority of the in-scope items",
+        "decide the acceptance threshold each criterion states",
+        "decide when a stated expectation is too vague to be an acceptance criterion",
+        "decide when an adjacent request is a separate change rather than a widening of this one",
+        "record a scope decision together with the rationale that justifies it",
+        "record an unresolved ambiguity as an open question with a named owner",
+        "set the scope verdict the recorded question set supports"
+      ],
+      "prohibited": [
+        "author or revise a technical design, structure, or technology decision",
+        "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+        "write, modify, or review code, tests, migrations, or configuration",
+        "record the Scope Gate decision on this agent's own artifact",
+        "record a merge, readiness, or release decision",
+        "define the test strategy or execute validation",
+        "relax a stated regulatory, policy, or quality constraint to close the scope",
+        "record scope no supplied input supports",
+        "access external systems, ticket trackers, or stakeholders directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "This role produces one artifact and changes no repository source. Its writes are the artifact path and the result envelope path the invocation envelope names, and nothing else. A scope decision that edited the repository would be deciding the change it is supposed to bound.",
+        "scope": [
+          "runs/**/states/scope-and-acceptance/**"
+        ]
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository modification of any kind",
+          "any command whose effect is not recorded in the artifact"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical supplied inputs and an identical context snapshot must produce the same in-scope item set, the same exclusion set, the same acceptance criterion set, the same scope decision set, the same open question set, and the same scope verdict.",
+      "identifierSchemes": {
+        "scopeItems": "S-<zero-padded-sequence>",
+        "exclusions": "X-<zero-padded-sequence>",
+        "acceptanceCriteria": "A-<zero-padded-sequence>",
+        "scopeDecisions": "D-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "In-scope items are ordered by business priority; ties break toward the order the expectation appeared in the supplied inputs. Acceptance criteria are ordered by the scope item they bound, ties breaking toward derivation order. Exclusions, decisions, and questions follow the order the reasoning stage that produced them declares.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied inputs or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "scope-definition.md",
+    "artifact_path": "runs/run-ae91e085f481/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "template_ref": "templates/scope-definition.md",
+    "contract_ref": "agents/omn-product-owner/output.md",
+    "quality_ref": "agents/omn-product-owner/quality.md",
+    "validator": "scope_definition_validator",
+    "result_envelope_path": "runs/run-ae91e085f481/states/scope-and-acceptance/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-15T05:00:46Z"
+}

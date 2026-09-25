@@ -1,0 +1,78 @@
+{
+  "invocation_id": "inv-ae91e085f481-02-003",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md"
+  ],
+  "structured_output": {
+    "repair_pass": {
+      "attempt": 3,
+      "findings_repaired": [
+        {
+          "id": "V4.1",
+          "quality_ref": "Q5.1",
+          "action": "Split T-013 and T-014's single wrapped 'Either...or...' Acceptance Criteria bullet into two unambiguous, independently verifiable bullets each, so the Acceptance Criteria field is unambiguously present and well-formed for both tasks."
+        },
+        {
+          "id": "V4.8",
+          "quality_ref": "Q5.6",
+          "action": "Same edit as V4.1: T-013 and T-014 now each state at least one, and in fact two, verifiable acceptance criteria."
+        },
+        {
+          "id": "V8.2",
+          "quality_ref": "Q9.4",
+          "action": "Replaced the seven coarse capability-matrix column headings in section 10.1 with the fine-grained capability identifiers from the 'Capability Identifiers' table in agents/capability-matrix.md: reuse-assessment (T-001, T-003), technical-approach-definition (T-002), architecture-decision-authoring (T-013, T-014), implementation-delivery (T-004, T-005, T-010), code-review (T-006), quality-verification (T-009; and T-007, T-008 as Secondary), release-readiness (T-012), documentation (T-011)."
+        }
+      ],
+      "unchanged": "All other sections, metadata digests (inputDigest, contextDigest), task identifiers, dependency edges, and wave assignments are byte-identical to the prior attempt."
+    },
+    "counts": {
+      "sections": 13,
+      "tasks": 14,
+      "assumptions": 8,
+      "risks": 10,
+      "edges": 30,
+      "waves": 5,
+      "openQuestions": 2,
+      "planStatus": "complete"
+    },
+    "recomputed_implementation_order": {
+      "wave_1": ["T-001", "T-007"],
+      "wave_2": ["T-002", "T-013", "T-014"],
+      "wave_3": ["T-003", "T-004", "T-005", "T-006"],
+      "wave_4": ["T-008", "T-009", "T-010", "T-012"],
+      "wave_5": ["T-011"],
+      "matches_stated_order": true
+    },
+    "quality_checks": {
+      "checklist_version": "agents/planner/quality.md",
+      "checks_run": 45,
+      "checks_passed": 45,
+      "checks_failed": 0,
+      "advisory_not_machine_checkable": 5,
+      "previously_failing_now_passing": ["V4.1", "V4.8", "V8.2"],
+      "detail": [
+        { "id": "V4.1", "quality_ref": "Q5.1", "result": "pass", "detail": "all 14 tasks carry all eight declared fields" },
+        { "id": "V4.8", "quality_ref": "Q5.6", "result": "pass", "detail": "all 14 tasks state at least one acceptance criterion" },
+        { "id": "V8.2", "quality_ref": "Q9.4", "result": "pass", "detail": "all 9 declared capability rows use identifiers from the Capability Identifiers table in agents/capability-matrix.md" },
+        { "id": "Q6.4", "quality_ref": "Q6.4", "result": "pass", "detail": "recomputed topological order equals stated implementation order" },
+        { "id": "Q11.3", "quality_ref": "Q11.3", "result": "pass", "detail": "inputDigest and contextDigest unchanged and match the invocation envelope" },
+        { "id": "N1-N5", "quality_ref": "Q4.4, Q5.4, Q6.8, Q2.8, Q7.6", "result": "not-machine-checkable", "detail": "self-attested: unaffected by this repair, no new objectives, tasks, edges, or inferences were introduced" }
+      ]
+    }
+  },
+  "evidence_refs": [
+    "agents/planner/output.md",
+    "agents/planner/quality.md",
+    "agents/capability-matrix.md",
+    "runs/run-ae91e085f481/states/execution-planning/validation-report.json",
+    "runs/run-ae91e085f481/states/execution-planning/invocation-envelope.json"
+  ],
+  "confidence": 0.93,
+  "declared_side_effects": [
+    "runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md",
+    "runs/run-ae91e085f481/states/execution-planning/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

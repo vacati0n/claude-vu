@@ -1,0 +1,457 @@
+{
+  "invocation_id": "inv-ae91e085f481-04-001",
+  "run_id": "run-ae91e085f481",
+  "work_item_id": "run-ae91e085f481::implementation",
+  "idempotency_key": "sha256:0840491fe61d4d8a748efb54793a9bc7",
+  "state_id": "implementation",
+  "phase_index": 4,
+  "agent_id": "omn-dev-1-implement",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-1-implement.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-1-implement/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-1-implement/system.md",
+      "agents/omn-dev-1-implement/identity.md",
+      "agents/omn-dev-1-implement/reasoning.md",
+      "agents/omn-dev-1-implement/execution.md",
+      "agents/omn-dev-1-implement/output.md",
+      "agents/omn-dev-1-implement/quality.md",
+      "agents/omn-dev-1-implement/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-1-implement/system.md": "sha256:19e8b4ae2aad6df4dcc5eb87cc91bcf7",
+      "agents/omn-dev-1-implement/identity.md": "sha256:ebe0b5ca1ba82d21b3df7312fa4853d0",
+      "agents/omn-dev-1-implement/reasoning.md": "sha256:fb032135e8e341d27c379ed77e24ce30",
+      "agents/omn-dev-1-implement/execution.md": "sha256:15bf2b877bf250004448048ebb3a07a8",
+      "agents/omn-dev-1-implement/output.md": "sha256:fecdb2dbe3e74ede307e80b8441a0acf",
+      "agents/omn-dev-1-implement/quality.md": "sha256:7b8a9362ce6a01d63ab8a5f7761c66af",
+      "agents/omn-dev-1-implement/examples.md": "sha256:5265c7bf5b7d869c9aa34ffe83bfd547"
+    },
+    "capabilities": [
+      "implementation-delivery"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S03",
+        "proficiency": "Primary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Primary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "technical-design",
+      "bug-analysis",
+      "test-baseline-record",
+      "execution-plan",
+      "coding-standards",
+      "architecture-decision-record",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context",
+      "regression-targets",
+      "parity-checklist",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/mnc-feature-request.md",
+        "source_file": ".claude/runs/inputs/mnc-feature-request.md",
+        "text": "# Feature Request \u2014 Minimum Necessary Change policy (necessity and reuse ladder)\n\n## Source\n\nOperator request dated 2026-09-15: integrate the engineering philosophy of the upstream\nPonytail ruleset (\"lazy senior developer\": lazy about the solution, never lazy about\nunderstanding the problem) into this framework's existing agents as a native, cross-cutting\nbehaviour. The framework's own philosophy is \"code less, but make it work well\". The upstream\nruleset is the source of the principle; nothing from it is copied wholesale.\n\n## Request\n\nMake planning, architecture, implementation, and code review behave like a senior engineer\nwho understands the problem deeply, chooses the simplest solution that satisfies the real\nrequirement, and refuses to build unnecessary things. The behaviour must be embedded in the\nexisting agent lifecycle rather than added as a new agent, a new workflow phase, a new\ncommand, a new runtime mechanism, or a second orchestration layer.\n\nThe principle to embed, in order, stopping at the first rung that holds:\n\n1. Does this need to exist? If not, do not build it.\n2. Does the codebase already have it? Reuse it.\n3. Does the standard library solve it? Use it.\n4. Does the platform or framework in use solve it natively? Use it.\n5. Does an already-installed dependency solve it? Use it.\n6. Can it be written directly in a few lines at the call site? Write it there.\n7. Only then: implement the minimum code necessary, introducing new abstraction only when\n   the reason no lower rung held is recorded.\n\nThe ladder runs after the problem is understood, never instead of understanding it.\n\nTwo rules bound the ladder and are not negotiable:\n\n- Minimum necessary change = required behaviour + required safety + required integration\n  + required tests. Everything outside that boundary requires a recorded justification:\n  scope creep, opportunistic refactoring, speculative abstraction, \"while we are here\"\n  changes, unnecessary cleanup.\n- Safety floor: no simplification may remove or weaken input validation at a trust\n  boundary, error handling that prevents data loss, authorization or audit paths,\n  accessibility, required observability, data integrity, or the tests that prove the\n  change. A shorter implementation is not automatically better; line count is not a\n  criterion. If twenty lines are required, twenty lines are written.\n\nReview must be extended so a reviewer can detect over-engineering with seven questions \u2014\nexistence, reuse, dependency, abstraction, complexity, scope, safety \u2014 and must not demand\narbitrary line-count reduction.\n\n## Non-goals\n\n- No new agent, skill file, workflow phase, gate, command, template section, validator\n  vocabulary, configuration surface, prompt layer, or hook.\n- No copy of the upstream repository, its intensity modes, its comment markers, or its\n  commands.\n- No change to current agent contracts' authority, to dispatching, to existing safety\n  mechanisms, to testing obligations, or to logging and observability requirements.\n- No change to runtime behaviour: `runtime/framework_runtime.py` is not touched and\n  `RUNTIME_VERSION` stays 0.5.0.\n\n## Acceptance criteria\n\n1. One written standard states the ladder, the minimum-necessary-change definition, the\n   safety floor, and the seven review questions, and it is already loaded by the design,\n   implementation, refactor-implementation, quality-review, code-quality-review,\n   structural-compliance, and repository-quality-scan phases without any runtime change.\n2. The architect's reuse survey considers, for every required capability, the standard\n   library, the native platform or framework capability, and already-installed dependencies\n   in addition to existing components, and records a capability that no statement requires\n   as out of scope rather than designing for it.\n3. The implementer selects the route for every change-set entry by the ladder, records the\n   rung that justified any new abstraction, file, or dependency in the implementation\n   report's existing `Approach taken` field, and treats removal or weakening of a\n   safety-floor item as a blocking self-check failure.\n4. The reviewer applies the seven questions to every change review, each finding measured\n   against the written standard, never against line count; a safety-floor breach is a\n   correctness or security finding, the other six are maintainability or architecture\n   findings at the severity the existing severity table yields.\n5. Every framework verifier stays at its recorded baseline: registry coverage 6/6 with 37 of\n   37 phases dispatchable, validators 6/6, vertical slice 10/10, multi-phase 15/15, recovery\n   41/41, manifests 2/2; the `omn-agent` test suite stays at 329 passing.\n6. The component counts do not move: 12 active agents, 12 skills, 8 workflows, 37 phases,\n   11 commands. Added instruction volume is measured and reported in bytes per agent module\n   set.\n7. The planner and product owner contracts are not modified, because their existing\n   traceability rules already reject invented scope and undeclared exclusions.",
+        "digest": "sha256:0089f08e0f80fccd37040a21394244d4"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/mnc-change-request.md",
+        "source_file": ".claude/runs/inputs/mnc-change-request.md",
+        "text": "# Change Request \u2014 Embed the necessity and reuse ladder in existing contracts\n\n## Requested change set\n\nThe smallest integration that produces the requested behaviour, as proposed by the operator\nafter inspecting every layer. The architect evaluates it against alternatives and may narrow\nit; widening it requires a recorded reason under the same ladder.\n\n| Surface | File | Change |\n|---|---|---|\n| Written standard | `skills/architecture/clean-architecture-checklist.md` (skill S01) | Add sections stating the ladder, the minimum-necessary-change definition, the safety floor, and the seven review questions; add one anti-pattern and one common mistake. Keep the heading `Skill: Architecture Foundations` unchanged, because the registry `displayName` indexes it |\n| Skill identity | `registry/skills.yaml`, `skills/agent-skill-matrix.md` | S01 version 1.0.0 to 1.1.0 (additive guidance is a MINOR change under `domain-model/skill-specification.md`), in the registry record and the Skill Catalog row |\n| Architect behaviour | `agents/architect/reasoning.md` | A6 Reuse Survey: candidates are existing components, the standard library, native platform or framework capability, and already-installed dependencies; a `none-found` basis names which of these were searched; a capability no statement requires is recorded as out of scope, not surveyed. A9: introducing a new external dependency is architecture-significant |\n| Architect self-check | `agents/architect/quality.md` | A7.3 wording names the candidate kinds a `none-found` basis must cover, so the check states the same rule as the procedure |\n| Implementer behaviour | `agents/omn-dev-1-implement/reasoning.md` | Stage 3: choose each entry's route by the ladder, stopping at the first rung that holds; a new file, abstraction, or dependency is justified by the rung that required it. Stage 5: no speculative abstraction, no refactoring of code the accepted change does not touch, no safety-floor item removed or weakened to shorten the change |\n| Implementer output | `agents/omn-dev-1-implement/output.md` | `Approach taken` additionally names the ladder rung that justified any new abstraction, file, or dependency. No structural change; the validator's field checks are unaffected |\n| Implementer self-check | `agents/omn-dev-1-implement/quality.md` | One Blocking boundary check: no safety-floor item was removed or weakened to reduce code. One not-machine-checkable obligation: every new abstraction, file, or dependency is justified in `Approach taken` |\n| Reviewer behaviour | `agents/omn-dev-2-reviewer/reasoning.md` | Stage 4, maintainability lens: apply the seven questions against S01; the seventh routes to the correctness or security lens; a finding is never that the change could be shorter |\n| Packaging mirror | `omn_agent/_bundled_payload/**` | Refresh with `python tests/test_bundled_payload.py --sync`; `tests/test_bundled_payload.py` fails on any drift |\n\nNothing else changes. In particular: no runtime module, no template, no validator, no\nworkflow specification, no manifest, no host registration, no agent version, no gate matrix\nrow, no registry record other than the S01 version, no new file.\n\n## Draft wording for the written standard\n\nOffered as the requested content; the implementer may tighten wording, never weaken a rule.\n\n```text\n## Necessity and Reuse Ladder\n\nApplies to every design option, every change-set entry, and every review of a change.\nUnderstand the problem first: read the task and the code it touches, and trace the real\nflow end to end. Then climb the ladder and stop at the first rung that holds.\n\n1. Does this need to exist? A capability no accepted statement requires is not built; it\n   is recorded as out of scope or raised as an open question to the owning role.\n2. Does the codebase already have it? Reuse the existing helper, component, or pattern.\n3. Does the standard library solve it? Use it.\n4. Does the platform or framework in use solve it natively? Use it.\n5. Does an already-installed dependency solve it? Use it.\n6. Can it be written directly in a few lines at the call site? Write it there.\n7. Only then: implement the minimum code necessary. A new abstraction, file, or dependency\n   is introduced only when the reason no lower rung held is recorded.\n\n### Minimum necessary change\n\nRequired behaviour, required safety, required integration, and required tests together\nare the minimum necessary change. Everything outside that boundary requires a recorded\njustification: opportunistic refactoring, cleanup of code the change does not touch,\nspeculative generalization, and configuration or extension points for requirements that\ndo not yet exist.\n\n### Safety floor\n\nThe ladder minimizes unnecessary code, never necessary protection. No simplification may\nremove or weaken input validation at a trust boundary, error handling that prevents data\nloss, authorization or audit paths, accessibility, observability the design requires, data\nintegrity, or the tests that prove the change. A shorter implementation is not\nautomatically better: correctness, readability, and maintainability are requirements, and\nline count is not a criterion. Where two equally small solutions differ, the\nedge-case-correct one is chosen.\n\n### Review questions\n\nA change is measured against this ladder with seven questions, each answered against the\naccepted change and the code, never against line count:\n\n- Existence: was something built that no accepted statement requires?\n- Reuse: does the change duplicate something the codebase already provides?\n- Dependency: was a dependency added where the standard library, the platform, or an\n  installed dependency already served?\n- Abstraction: was an interface, wrapper, factory, helper class, or configuration point\n  introduced before a second concrete use required it?\n- Complexity: does a simpler implementation exist with the same behaviour and the same\n  safety?\n- Scope: did the change touch code the accepted change did not require?\n- Safety: did a simplification remove or weaken anything the safety floor protects?\n\nA finding under the first six questions is a maintainability or architecture finding at\nthe severity the evidence supports. A finding under the seventh is a correctness or\nsecurity finding.\n```\n\nAnti-pattern to add: \"Speculative abstraction, generalization, or configuration for a\nrequirement that does not exist.\" Common mistake to add: \"Reducing line count by removing\nvalidation, error handling, or tests.\"\n\n## Why these surfaces and not others\n\n- The reviewer's own contract forbids a finding without a written standard (\"standard\n  before opinion\"), so over-engineering cannot be raised as a finding today: the written\n  standard is the enabling change, and S01 is already the skill every affected phase loads\n  and the one the quality-scan workflow already uses for \"structural and abstraction\n  judgement\". Extending S01 is rung 2 of the ladder applied to the ladder itself; a new S13\n  would be rung 7 with a taxonomy column, a registry record, a catalog row, and a matrix\n  column it does not need.\n- The planner's R13 already fails an untraced task as invented scope, and the product\n  owner's Stage 3 already requires explicit exclusions. Rung 1 is therefore already\n  enforced upstream of design; those contracts are not touched.\n- Agent contract versions stay at 1.0.0. Every host registration pins\n  `metadata.version is 1.0.0` and aborts otherwise, and the gate auto-approval policy keys\n  precedent on producing-agent version; a version bump is a governance decision for the\n  tech lead and is recorded as an open question, not taken here.\n- No runtime change: S01 already reaches every affected agent through the manifest skill\n  bindings and the phase context slices the runtime freezes, so no slice member is added\n  and `RUNTIME_VERSION` stays 0.5.0.",
+        "digest": "sha256:1e6552a2dca51315185356ca795f7b72"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/mnc-business-intent.md",
+        "source_file": ".claude/runs/inputs/mnc-business-intent.md",
+        "text": "# Business Intent \u2014 Minimum Necessary Change policy\n\n## Outcome the business is buying\n\nLess code, less architecture, less cognitive load, same or better correctness \u2014 delivered by\nthe agents this framework already runs, at no added execution cost. The best code is often\nthe code the team never had to write.\n\n## Why now\n\nAgents default to over-building: speculative abstractions, helper classes with one caller,\ncustom implementations of standard-library behaviour, new dependencies where an installed one\nserves, and opportunistic refactoring of unrelated code. Each costs review time, tokens,\nmaintenance, and defect surface. The upstream ruleset this request adapts reports roughly half\nthe lines of code, a fifth fewer tokens, and a quarter less wall time on comparable tasks with\nsafety behaviour preserved. Those figures are the upstream's; this change measures its own.\n\n## Constraints on the outcome\n\n- Correctness and required safety stay at one hundred percent. The policy reduces\n  unnecessary code, unnecessary decisions, unnecessary dependencies, and unnecessary\n  abstractions; it never reduces validation, error handling, security, accessibility,\n  observability, testability, or data integrity.\n- Execution performance is preserved: no added agent invocation, no added reasoning loop,\n  no added workflow step. The framework is already optimized for orchestration cost, and\n  this change must not spend that budget.\n- The implementation of the policy must itself satisfy the policy: the smallest integration\n  that produces the behaviour, with no framework bloat.\n\n## How success is measured\n\nBefore and after, on the same representative implementation tasks: lines and files changed,\nagent calls, tokens and wall time where the host reports them, test results, and reviewer\nfindings \u2014 read together, never line count alone. Framework-side: component counts unchanged,\nadded instruction bytes reported, every verifier at baseline.",
+        "digest": "sha256:9d4d342007cc5b01b3b44ab043c76bc1"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/mnc-architecture-context.md",
+        "source_file": ".claude/runs/inputs/mnc-architecture-context.md",
+        "text": "# Architecture Context \u2014 where build-or-not decisions live today\n\nCurrent-state facts established by inspection on 2026-09-15 at runtime 0.5.0.\n\n## Layers and insertion points\n\n- Skills are the framework's reusable engineering knowledge, loaded per agent through the\n  manifest `skills` block and per phase through the frozen context slice\n  (`framework_runtime.CONTEXT_SLICE_PHASE`). S01 `skills/architecture/clean-architecture-checklist.md`\n  is declared by ten agent manifests including `architect`, `omn-dev-1-implement`, and\n  `omn-dev-2-reviewer`, and is a slice member of `implementation`,\n  `refactor-implementation`, `quality-review`, `code-quality-review`,\n  `repository-quality-scan`, `structural-compliance`, `technical-discovery`,\n  `technical-validation`, `option-analysis`, and `option-synthesis`. It is 1,690 bytes and\n  already carries three seed rules: \"Introduce a new layer only when it reduces coupling or\n  clarifies ownership\", \"Creating abstractions without real variation points\" (common\n  mistake), and \"Sharing utility modules that hide cross-layer dependencies\".\n- Skill identity metadata (code, category, version, status) lives in `registry/skills.yaml`\n  and the Skill Catalog of `skills/agent-skill-matrix.md`; skill files carry none. The\n  category taxonomy is closed; extending it is a registry schema change.\n- Agents are runtime module sets loaded in `manifest.yaml` `loadOrder`:\n  system, identity, reasoning, execution, output, quality, examples. Host registrations\n  (`agents/<id>.agent.md`) are adapters that pin `metadata.version is 1.0.0` and abort on a\n  mismatch. Module digests are frozen into each run's invocation envelope; drift against a\n  historical run is informational under decision GD-001.\n- The dispatch prompt built by the runtime carries routing and addressing only; every\n  instruction about how to do the work lives in the module set. There are no host hooks or\n  settings files in this repository; the dispatch envelope is the only injection mechanism,\n  and it injects the module set and the context slice.\n\n## Where the seven decisions are made now\n\n| Decision | Owner today | Existing rule |\n|---|---|---|\n| What to build | `omn-product-owner` Stage 3 (S-nnn / X-nnn), `planner` R4 and R13 | Untraced task is invented scope, a hard failure; unstated exclusion is the common drift |\n| Whether to create new structure | `architect` A6 Reuse Survey, A7 options, A9 significance; identity decision rules | \"Prefer the simplest architecture\", \"prefer extending a proven reusable component before creating new structural elements\"; A6 outcomes reuse-as-is, reuse-extended, rejected, none-found; new structure only after rejected or none-found; A7.3 requires a none-found basis. Candidates today are \"existing components\" only: the standard library, platform capability, and installed dependencies are not named |\n| Whether to reuse existing code | `architect` A6; `omn-dev-1-implement` Stage 2 reads existing code first | Same as above; implementer decision rule \"prefer the smallest change that satisfies the accepted element over a wider refactor taken in passing\" |\n| Whether to introduce a dependency | `architect` impact type `dependency-change` scores against options; not named as architecture-significant | A9 significance list: contract change, dependency direction or boundary, structural component, costly reversal, quality-attribute tradeoff |\n| How much code to write | `omn-dev-1-implement` Stage 5.2 \"write the code the entry describes, and nothing the entry does not describe\"; invariant 1 \"accepted change only\" | No route-selection rule between reuse, standard library, direct code, and new abstraction |\n| When to stop | `omn-dev-1-implement` decision rule \"never widen the change set\"; quality check V3; `omn-dev-2-reviewer` Stage 4 lenses | Reviewer lenses: correctness, architecture, standards, security, maintainability, test-adequacy, packaging. Junk-detection lenses (duplication, dead-code, over-abstraction, generated-noise, legacy-drift, reviewability) exist for `repository-quality-scan` only |\n| Safety floor | `omn-dev-1-implement` security constraint \"must not weaken an existing authorization, validation, or audit path\"; quality B4 no test weakened | No check names error handling, accessibility, observability, or data integrity |\n\n## Validator constraints that bound any change\n\n- `runtime/review_package_validator.py` `CATEGORIES` already accepts all thirteen categories\n  for every review phase; only the reviewer `output.md` prose restricts the junk lenses to\n  the scan phase.\n- `runtime/implementation_report_validator.py` checks declared field bullets by label and\n  non-emptiness (C4) and table columns by declared header (C4.5); adding a column or a\n  bullet changes the contract, changing a field's description does not.\n- `runtime/design_validator.py` D7.3 checks that a `none-found` row states a basis; it does\n  not check which candidate kinds the basis names.\n- Every artifact validator rejects the vendor substring, and the dot-directory path prefix\n  is stripped before that scan (C3.2).\n- `tests/test_bundled_payload.py` fails on any drift between the framework tree and the\n  mirror under `omn_agent/_bundled_payload/`; `--sync` regenerates the mirror.\n\n## Baseline measurements (2026-09-15, this worktree)\n\n- `verify_registry_coverage.py` 6/6, 37 of 37 phases dispatchable; `verify_validators.py`\n  6/6; `verify_manifests.py` 2/2; `verify_recovery.py` 41/41;\n  `verify_vertical_slice.py --run-id run-c5a8d50d3238` 10/10;\n  `verify_multi_phase.py --run-id run-c5a8d50d3238` 15/15;\n  `verify_self_hosting.py` 7/8, S8 failing on four pre-existing runs from 2026-08-27 to\n  2026-09-04 that carry no proposal (recorded as `O-005` of FC-006).\n- `python -m unittest discover -s tests`: 329 tests, OK, 855 s.\n- Module-set bytes: planner 91,711; architect 119,162; omn-dev-1-implement 76,418;\n  omn-dev-2-reviewer 85,093; omn-product-owner 73,869; omn-qa 93,035.\n- Active agents 12, skills 12 (S01 to S12), workflows 8, phases 37, commands 11.\n\n## Environmental constraint\n\nThe repository's primary checkout carries roughly 194 uncommitted changes at runtime 0.8.0\nthat this worktree's base commit does not have. Of the files this change proposes to touch,\nonly `agents/omn-dev-1-implement/identity.md` (one line) and `templates/implementation-report.md`\nhave uncommitted edits there, and `runtime/framework_runtime.py` differs by about 1,700\nlines. The change therefore avoids the runtime and the implementation-report template\nentirely, so it can be carried onto the newer base without conflict.",
+        "digest": "sha256:cdb7cb03685b91e8f79fe2c971b61d07"
+      },
+      {
+        "type": "technical-design",
+        "reference": "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/ponytail-framework-integration-bf84e0/.claude/runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+        "text": "```yaml\ndesign:\n  designId: SCOPE-2026-0007-technical-design\n  changeReference: SCOPE-2026-0007\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/mnc-feature-request.md\n    - type: change-request\n      reference: runs/inputs/mnc-change-request.md\n    - type: business-intent\n      reference: runs/inputs/mnc-business-intent.md\n    - type: architecture-context\n      reference: runs/inputs/mnc-architecture-context.md\n    - type: execution-plan\n      reference: runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md\n  producedBy: architect\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  decisionRecords: [D-001]\n  consumesPlan: runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md\n  inputDigest: sha256:25a02ca166aa92074ee2fbe8142b210d\n  contextDigest: sha256:ea8b3b5e9812546f9b4054458bb8143e\n```\n\n## Metadata\n\n- Feature or Change ID: SCOPE-2026-0007\n- Author: architect\n- Reviewers: omn-tech-lead, omn-qa\n- Last Updated: 2026-09-17\n\n## Objective\n\n- Desired outcome: The necessity-and-reuse standard (the ladder, the minimum-necessary-change\n  definition, the safety floor, and the seven review questions) is carried by one existing\n  knowledge artifact that already reaches, through bindings that exist today, every one of\n  the seven phases the feature request names, with zero new files and zero runtime change.\n  The architect's own reuse-survey and significance procedures are the first consumers to\n  apply the standard to themselves.\n- Architectural objectives:\n  - The standard is delivered as additive content on an existing skill file, reachable by\n    `solution-design-and-risk-assessment`, `implementation`, `refactor-implementation`,\n    `quality-review`, `code-quality-review`, `structural-compliance`, and\n    `repository-quality-scan` without any change to `runtime/framework_runtime.py`. Traces\n    to `S-001`, `S-006`, `S-009`, `S-010`.\n  - The architect's own reuse-survey rule (`A6`) and significance rule (`A9`) name the full\n    candidate set \u2014 existing components, the standard library, native platform or framework\n    capability, and already-installed dependencies \u2014 and a new-dependency significance\n    trigger, so the procedure that helps carry the standard also follows it. Traces to\n    `S-011`, and the change request's architect-behaviour proposal.\n  - The architect's self-check (`A7.3`) states the same candidate-kind rule its procedure\n    states, so the two cannot drift apart. Traces to `S-013` and the change request's\n    architect self-check proposal.\n  - Not an objective of this design phase, but a structural consequence it hands forward:\n    the implementer's route-selection and safety-floor self-check, and the reviewer's\n    seven-question procedure, apply the same standard in their own later phases. Traces to\n    `S-012`, `S-013`.\n- In scope: this phase's own tasks (`T-001`, `T-002`, `T-003`, `T-013`, `T-014`) \u2014 selecting\n  and extending the standard's carrier; authoring the carrier's new content; extending the\n  architect's own reuse-survey, significance, and self-check wording; deciding the\n  dependency-significance and skill-version questions those two tasks raise.\n- Out of scope:\n  - Any change to `runtime/framework_runtime.py` or its version constant, to any template,\n    validator, workflow specification, manifest, host registration, or registry record other\n    than the carrier skill's own version identity (`S-006`, `S-008`, `S-009`, `S-027`).\n  - A new agent, skill file, workflow phase, gate, command, template section, validator\n    vocabulary, configuration surface, prompt layer, or hook (`S-006`).\n  - Authoring the literal wording for the implementer's (`omn-dev-1-implement`) or the\n    reviewer's (`omn-dev-2-reviewer`) own module edits (`S-012`, `S-013`, `S-022`\u2013`S-025`):\n    this design states the structural requirement those edits must satisfy and binds them\n    as sequencing constraints, but the wording itself is authored by the owning agent in its\n    own phase, consistent with this agent never becoming the implementer.\n  - Modification of the planner or product-owner contracts (`S-016`).\n  - A line-count threshold or any finding whose substance is \"the change could be shorter\"\n    (`S-005`, and scope-definition `X-007`).\n\n## Requirements Summary\n\n- Functional requirements:\n  - One written standard states, in one place: understanding the problem precedes the\n    ladder; the seven rungs in order with the stop-at-first-rung rule; the\n    minimum-necessary-change definition; the safety floor with line count stated as not a\n    criterion; and the seven review questions with the finding category each yields\n    (`S-010`).\n  - The architect's reuse survey names four candidate kinds for every required capability\n    and records an unrequired capability as out of scope rather than surveying or designing\n    it (`S-011`).\n  - The architect's significance rule additionally names a new external dependency as\n    architecture-significant (`S-011`; change request, architect-behaviour proposal;\n    consumed by a future design's own `A9` application, not by this one, since `D-004`\n    finds no new dependency here).\n- Non-functional requirements:\n  - Zero runtime change, zero new repository files, and unchanged agent contract versions\n    (`1.0.0`) for `architect`, `omn-dev-1-implement`, and `omn-dev-2-reviewer` (`S-006`,\n    `S-008`, `S-009`).\n  - Every framework verifier, the `omn_agent` unit test suite, and the five component counts\n    remain at their recorded baseline after the whole change is delivered (`S-014`,\n    `S-015`); this design phase's own contribution to that baseline is verified by\n    inspection, not by execution, per the Estimate section below.\n- Acceptance criteria: this design targets the scope definition's own acceptance criteria\n  for phase reachability without a runtime change, for the reuse-survey rule and\n  out-of-scope recording, and for skill version identity (`S-012`, `S-013`); those criteria\n  are cited by subject here, not by the scope definition's own identifiers, because that\n  register uses the same letter-prefixed numbering as this design's own Assumptions\n  register.\n\n## Current-State Assumptions and Constraints\n\n### 4.1 Facts\n\n| ID | Fact | Established by |\n|---|---|---|\n| F-001 | S01 (`skills/architecture/clean-architecture-checklist.md`) is declared by ten agent manifests, including `architect`, `omn-dev-1-implement`, and `omn-dev-2-reviewer` | Architecture context |\n| F-002 | S01 is a context-slice member of `implementation`, `refactor-implementation`, `quality-review`, `code-quality-review`, `repository-quality-scan`, `structural-compliance`, `technical-discovery`, `technical-validation`, `option-analysis`, and `option-synthesis` | Architecture context; confirmed by inspection of `runtime/framework_runtime.py` `CONTEXT_SLICE_PHASE` |\n| F-003 | S01 is not a context-slice member of `solution-design-and-risk-assessment`; the architect receives it through the agent's own manifest skill binding (S01, Primary) and the phase's mandatory-skill list (S01, S03, S06, S09), not through a slice entry | Inspection of `runtime/framework_runtime.py` `CONTEXT_SLICE_PHASE` and `skills/agent-skill-matrix.md` |\n| F-004 | S01 carries, before this change, three rules: the decision rule \"Introduce a new layer only when it reduces coupling or clarifies ownership,\" the common mistake \"Creating abstractions without real variation points,\" and the anti-pattern \"Sharing utility modules that hide cross-layer dependencies\" | Architecture context; confirmed by direct inspection of `skills/architecture/clean-architecture-checklist.md` |\n| F-005 | Skill identity metadata (code, category, version, status) lives in `registry/skills.yaml` and the Skill Catalog of `skills/agent-skill-matrix.md`; S01's currently recorded version is `1.0.0` in both | Direct inspection of `registry/skills.yaml` and `skills/agent-skill-matrix.md` |\n| F-006 | `domain-model/skill-specification.md` records semantic versioning for skills: MAJOR for a breaking rule or structure change, MINOR for additive guidance and examples, PATCH for wording fixes and metadata corrections | Direct inspection of `domain-model/skill-specification.md` |\n| F-007 | The dispatch prompt the runtime builds carries routing and addressing only; every instruction about how to do the work lives in the module set; there are no host hooks or settings files in this repository; the dispatch envelope is the only injection mechanism | Architecture context |\n| F-008 | Agent host registrations pin `metadata.version is 1.0.0` and abort on a mismatch; module digests are frozen into each run's invocation envelope | Architecture context |\n| F-009 | The architect's `reasoning.md` A6 today records candidates only as \"existing components,\" with outcomes `reuse-as-is`, `reuse-extended`, `rejected`, `none-found`; new structure is permitted only where the outcome is `rejected` or `none-found`; a `none-found` outcome requires a recorded search basis | Direct inspection of this run's own loaded module, `agents/architect/reasoning.md` A6 |\n| F-010 | The architect's `quality.md` A7.3 requires every `none-found` outcome to state where the search looked, but does not name which candidate kinds that basis must cover | Direct inspection of this run's own loaded module, `agents/architect/quality.md` A7.3 |\n| F-011 | The architect's `reasoning.md` A9 names five conditions that make a decision architecture-significant; introducing a new external dependency is not among them today | Direct inspection of this run's own loaded module, `agents/architect/reasoning.md` A9 |\n| F-012 | The implementer's `reasoning.md` Stage 3 states no rule for choosing between reuse, standard library, direct code, and new abstraction; Stage 5 states \"write the code the entry describes, and nothing the entry does not describe\" and \"touch no file outside the change set,\" but does not name a stop-at-first-rung route rule or forbid speculative abstraction, refactor of untouched code, or safety-floor weakening as its own named rule | Architecture context; confirmed by direct inspection of `agents/omn-dev-1-implement/reasoning.md` Stage 3, Stage 5 |\n| F-013 | The implementer's `output.md` defines `Approach taken` as one of four Implementation Summary bullets, stating \"the route actually used, not the route considered\" | Direct inspection of `agents/omn-dev-1-implement/output.md` section 2 |\n| F-014 | The implementer's `quality.md` Boundary checks (`B1`\u2013`B6`) name authorization, validation, audit paths, and weakened tests (`B4`); they do not separately name error handling, accessibility, observability, or data integrity; its Not-machine-checkable obligations (`N1`\u2013`N3`) do not include a justification obligation for new abstractions, files, or dependencies | Direct inspection of `agents/omn-dev-1-implement/quality.md` |\n| F-015 | The reviewer's `reasoning.md` Stage 4 applies seven lenses to a change review \u2014 correctness, architecture, standards, security, maintainability, test-adequacy, packaging \u2014 and a separate junk-detection lens set for `repository-quality-scan` only; Stage 6 assigns severity from a four-row table keyed to consequence, not to lens identity | Architecture context; confirmed by direct inspection of `agents/omn-dev-2-reviewer/reasoning.md` Stage 4, Stage 6 |\n| F-016 | `runtime/review_package_validator.py`'s `CATEGORIES` already accept all thirteen categories for every review phase; only the reviewer's `output.md` prose restricts the junk lenses to the scan phase | Architecture context |\n| F-017 | `runtime/implementation_report_validator.py` checks declared field bullets by label and non-emptiness, and table columns by declared header; adding a column or a bullet changes the contract, changing a field's description does not | Architecture context |\n| F-018 | `runtime/design_validator.py` D7.3 checks that a `none-found` row states a basis; it does not check which candidate kinds the basis names | Architecture context |\n| F-019 | Every artifact validator rejects the vendor substring, and the dot-directory path prefix is stripped before that scan | Architecture context |\n| F-020 | `tests/test_bundled_payload.py` fails on any drift between the framework tree and the mirror under `omn_agent/_bundled_payload/`; `--sync` regenerates the mirror | Architecture context |\n| F-021 | Recorded framework baselines as of 2026-09-15: `verify_registry_coverage.py` 6/6 with 37 of 37 phases dispatchable; `verify_validators.py` 6/6; `verify_manifests.py` 2/2; `verify_recovery.py` 41/41; `verify_vertical_slice.py` 10/10; `verify_multi_phase.py` 15/15; `verify_self_hosting.py` 7/8 (S8 failing on four pre-existing, unrelated runs); the `omn_agent` unit test suite: 329 tests, OK | Architecture context |\n| F-022 | Recorded module-set byte sizes as of 2026-09-15: `planner` 91,711; `architect` 119,162; `omn-dev-1-implement` 76,418; `omn-dev-2-reviewer` 85,093; `omn-product-owner` 73,869; `omn-qa` 93,035; active agents 12, skills 12, workflows 8, phases 37, commands 11 | Architecture context |\n| F-023 | The repository's primary checkout carries roughly 194 uncommitted changes at a newer runtime version; of the files this change touches, only `agents/omn-dev-1-implement/identity.md` (one line) and `templates/implementation-report.md` have uncommitted edits there, and `runtime/framework_runtime.py` differs by about 1,700 lines | Architecture context |\n| F-024 | The planner's contract already treats an untraced task as invented scope; the product owner's contract already requires explicit exclusions | Architecture context |\n\n### 4.2 Assumptions\n\n| ID | Assumption | Why needed | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | The framework documents this design cites by direct inspection (`domain-model/skill-specification.md` and the `architect`, `omn-dev-1-implement`, `omn-dev-2-reviewer` modules) read the same at implementation time as they do now | The transition strategy and the target content below are stated against today's text | The implementer's own baseline read supersedes this design's \"current shape\" statements, and the deviation is recorded there, not here | omn-tech-lead |\n| A-002 | The `F-021`/`F-022` baseline is still valid immediately before this change's edits land | The post-change verification (`T-009`) must attribute any mismatch to this change alone | A fresh pre-change snapshot (`T-007`) is the baseline actually used, not `F-021`/`F-022` | omn-tech-lead |\n| A-003 | Extending S01's prose with the new sections and one new anti-pattern/common-mistake entry is \"additive guidance\" (MINOR) under `F-006`, not a \"breaking rule or structure change\" (MAJOR) | `T-014`'s version-increment decision rests on this classification | The version target for `T-014` is wrong and must be revised by `omn-tech-lead` before the registry and catalog are edited | omn-tech-lead |\n| A-004 | Applying the ladder inside the existing `architect` A6, implementer Stage 3/5, and reviewer Stage 4 stages is not itself \"an added reasoning loop\" under the business intent's execution-cost constraint (`S-030`), because it is additional guidance content evaluated within stages these agents already execute, not an additional stage, gate, or invocation | No other measurable proxy for \"reasoning loop\" is supplied | The whole approach registers as violating the non-goals list (`S-006`) and must be re-evaluated at the Design Gate | omn-tech-lead |\n| A-005 | The target content this design specifies for `skills/architecture/clean-architecture-checklist.md`, `agents/architect/reasoning.md`, and `agents/architect/quality.md` is applied to the repository by the implementation-phase owner (`omn-dev-1-implement`), because this agent's own permitted writes for this run do not include those paths, even though the supplied execution plan attributes `T-002` and `T-003` to the `architect` role | `T-002` and `T-003` are attributed to `architect` in the supplied execution plan, and this design's own write boundary would otherwise make those tasks impossible to close from inside this phase | Closure of `T-002`/`T-003` stalls on a permitted-writes mismatch that only `omn-orchestrator` can resolve; no content in this design changes either way | omn-orchestrator |\n\n### 4.3 Constraints\n\n| ID | Class | Constraint | Hard or negotiable | Source |\n|---|---|---|---|---|\n| C-001 | Structural | No new agent, skill file, workflow phase, gate, command, template section, validator vocabulary, configuration surface, prompt layer, or hook | Hard | `S-006` |\n| C-002 | Structural | No change to `runtime/framework_runtime.py`; `RUNTIME_VERSION` stays `0.5.0` | Hard | `S-009` |\n| C-003 | Structural | No change to any template, validator, workflow specification, manifest, host registration, gate-matrix row, or registry record, other than the carrier skill's own version identity | Hard | `S-027` |\n| C-004 | Structural | Agent contract versions for `architect`, `omn-dev-1-implement`, and `omn-dev-2-reviewer` stay at `1.0.0` | Hard | `F-008`; scope-definition `X-006` |\n| C-005 | Security | No simplification may remove or weaken a safety-floor item: input validation at a trust boundary, error handling that prevents data loss, authorization or audit paths, accessibility, required observability, data integrity, or the tests that prove the change | Hard | `S-004` |\n| C-006 | Functional | The delivered standard must already be reachable, without a runtime change, by all seven named phases: `solution-design-and-risk-assessment`, `implementation`, `refactor-implementation`, `quality-review`, `code-quality-review`, `structural-compliance`, `repository-quality-scan` | Hard | `S-010` |\n| C-007 | Quality-attribute | Line count is not a review criterion; no finding may be \"the change could be shorter\" | Hard | `S-005`; scope-definition `X-007` |\n| C-008 | Operability | Added instruction volume is measured and reported in bytes per module set; no numeric ceiling is supplied | Negotiable | `S-015` |\n| C-009 | Structural | The heading `Skill: Architecture Foundations` must remain unchanged, because the registry indexes S01 by that display name | Hard | `F-005` |\n| C-010 | Structural | No new file is added to the repository tree; the packaging mirror is refreshed mechanically | Hard | `S-006`, `S-026` |\n| C-011 | Structural | The planner and product-owner contracts are not modified | Hard | `S-016` |\n\n## Architecture and Component Design\n\n### 5.1 Impacted Modules\n\n| ID | Module | Impact type | Basis | Interfaces affected | Confidence |\n|---|---|---|---|---|---|\n| M-001 | `skills/architecture/clean-architecture-checklist.md` (S01) | extension | F-001, F-004, F-005 | none (knowledge document, consumed via agent skill bindings and phase context-slice membership) | confirmed |\n| M-002 | `registry/skills.yaml` (S01 record) | behavior-change | F-005 | skill registry lookup by identifier and version | confirmed |\n| M-003 | `skills/agent-skill-matrix.md` (S01 Skill Catalog row) | behavior-change | F-005 | none | confirmed |\n| M-004 | `agents/architect/reasoning.md` (A6, A9) | behavior-change | F-009, F-011 | none | confirmed |\n| M-005 | `agents/architect/quality.md` (A7.3) | behavior-change | F-010 | none | confirmed |\n| M-006 | `agents/omn-dev-1-implement/reasoning.md` (Stage 3, Stage 5) | behavior-change | F-012 | none | confirmed |\n| M-007 | `agents/omn-dev-1-implement/output.md` (`Approach taken` field) | behavior-change | F-013 | none | confirmed |\n| M-008 | `agents/omn-dev-1-implement/quality.md` (Boundary checks, Not-machine-checkable obligations) | behavior-change | F-014 | none | confirmed |\n| M-009 | `agents/omn-dev-2-reviewer/reasoning.md` (Stage 4 maintainability lens) | behavior-change | F-015 | none | confirmed |\n| M-010 | `omn_agent/_bundled_payload/**` (packaging mirror) | operational-impact | F-020 | `tests/test_bundled_payload.py` drift check | confirmed |\n| M-011 | `runtime/framework_runtime.py` | no-change-verified | F-007, F-008 | none | confirmed |\n| M-012 | `agents/planner/**`, `agents/omn-product-owner/**` | no-change-verified | F-024 | none | confirmed |\n| M-013 | `templates/implementation-report.md` | no-change-verified | F-013, F-017, F-023 | none | confirmed |\n| M-014 | `workflows/**`, `registry/agents.yaml`, `registry/workflows.yaml`, `registry/templates.yaml`, `workflows/workflow-gate-matrix.md` | no-change-verified | F-008 (by extension of C-003) | none | confirmed |\n| M-015 | `agents/architect.agent.md`, `agents/omn-dev-1-implement.agent.md`, `agents/omn-dev-2-reviewer.agent.md` (host registrations) | no-change-verified | F-008 | none | confirmed |\n\n`M-011` through `M-015` are recorded because a reader would reasonably expect a cross-cutting\nbehavioral policy to touch the runtime, a template, or a registration surface. It does not:\nthe standard reaches every named phase through bindings that already exist (`F-001`\u2013`F-003`).\n\n### 5.2 Options Considered\n\n| Option | Structural change | C-001 | C-006 | Impact surface | Reuse leverage | Migration burden | Outcome |\n|---|---|---|---|---|---|---|---|\n| O-001 | Extend S01 in place with new sections and an updated anti-pattern/common-mistake list; raise its recorded version | Satisfied | Satisfied | 0 | 9 | 0 | Selected |\n| O-002 | Add the standard's content to `domain-model/agent-specification.md` | Satisfied | Violated | 0 | 9 | 0 | Eliminated on C-006 |\n| O-003 | Duplicate the standard's content into each affected agent's own `reasoning.md` | Violated | Violated | 3 | 0 | 0 | Eliminated on C-001, C-006 |\n| O-004 | Introduce a new, dedicated skill file for the ladder | Violated | Violated | 0 | 0 | 0 | Eliminated on C-001 |\n\nImpact surface counts modules with `contract-change` or `dependency-change`; none exist in\nthis design (see 5.1), so every option scores 0 on that column. Reuse leverage counts\ncapabilities satisfied by `reuse-as-is` or `reuse-extended` in 7 below. O-004's `C-006`\ncolumn is scored `Violated` because a brand-new file carries no manifest skill binding or\ncontext-slice membership of its own until a separate structural change adds one, which\n`C-001` already forbids.\n\n### 5.3 Selected Approach\n\n- Selected: `O-001`.\n- Structural change: extend S01 (`skills/architecture/clean-architecture-checklist.md`) in\n  place with four new subsections \u2014 the ladder, the minimum-necessary-change definition, the\n  safety floor, and the seven review questions \u2014 plus one new anti-pattern entry and one new\n  common-mistake entry, and raise its recorded version from `1.0.0` to `1.1.0` in\n  `registry/skills.yaml` and `skills/agent-skill-matrix.md`. The architect's own\n  `reasoning.md` (A6, A9) and `quality.md` (A7.3) are extended in place to reference the same\n  candidate-kind vocabulary. The target content for both is specified in the appendix below.\n- Rationale: `O-001` is the only option satisfying both hard constraints that decide this\n  question (`C-001`, `C-006`). It reuses an artifact ten agent manifests and ten phases\n  already load, so it costs zero new files and zero runtime change.\n- Highest-scoring rejected alternative and why it lost: `O-002`, adding the content to\n  `domain-model/agent-specification.md`. It is also zero-impact-surface and equally reusable\n  in principle, but `domain-model/agent-specification.md` is not a context-slice member of\n  five of the seven named phases (`implementation`, `refactor-implementation`,\n  `quality-review`, `code-quality-review`, `repository-quality-scan`), so it fails `C-006`\n  outright.\n- Tradeoffs accepted: S01 now carries two conceptually distinct bodies of guidance \u2014 general\n  clean-architecture principles and the necessity-and-reuse governance ladder \u2014 inside one\n  skill file. The alternative that would keep them separate (`O-004`) requires a new file,\n  which a hard constraint forbids, so the tradeoff is accepted rather than designed away\n  (see `D-001`).\n\n### 5.4 Decisions\n\n| ID | Decision | Architecture-significant | Record |\n|---|---|---|---|\n| D-001 | Carry the necessity-and-reuse standard by extending S01 in place rather than any new file or a different existing document | Yes | ADR D-001, status Proposed |\n| D-002 | Raise S01's recorded version from `1.0.0` to `1.1.0` under the MINOR rule for additive guidance, contingent on `A-003` | No | Inline; pure identity bookkeeping following from D-001, no independent contract, dependency, structural, or quality-attribute implication |\n| D-003 | Extend the architect's own `reasoning.md` (A6, A9) and `quality.md` (A7.3) in place rather than any new module | No | Inline; reuse-extended of the agent's own existing procedure, no external contract or dependency change |\n| D-004 | No new external dependency is introduced by this design; `T-013` is not applicable | No | Inline; rung 1 of the ladder applied to itself \u2014 no accepted statement requires a dependency capability, so none is surveyed or designed |\n\n## API and Data Model Impact\n\nNone identified. No module in 5.1 is classified `contract-change` or `dependency-change`:\nevery edit is additive prose to an existing knowledge or procedure document (`extension` or\n`behavior-change`), or a metadata update to an existing registry record. No API, schema, or\ndata model is touched (`C-002`, `C-003`), so no transition strategy, coexistence period, or\nrollback position is required beyond the plain-text revert stated in Delivery Plan.\n\n## Reusable Components and Reuse Rationale\n\n| Capability | Candidate | Outcome | Rationale |\n|---|---|---|---|\n| Deliver a shared necessity-and-reuse standard reachable by all seven named phases without a runtime change | S01 `skills/architecture/clean-architecture-checklist.md` | reuse-extended | F-001\u2013F-003 establish S01 already reaches all seven phases through ten agent manifests' skill bindings and ten phases' context-slice membership; extending it in place needs no new file and no runtime change (`C-001`, `C-002`, `C-006`) |\n| Same capability | The other eleven existing skill files (S02\u2013S12) | rejected | None is bound to all seven named phases; each fails `C-006` for at least one phase (searched: `skills/agent-skill-matrix.md` phase-skill rows and `runtime/framework_runtime.py` `CONTEXT_SLICE_PHASE` entries for each of the seven phases) |\n| Same capability | `domain-model/agent-specification.md` | rejected | Not a context-slice member of `implementation`, `refactor-implementation`, `quality-review`, `code-quality-review`, or `repository-quality-scan`; fails `C-006` (searched: the same `CONTEXT_SLICE_PHASE` entries) |\n| Same capability | Per-agent duplication across each affected `reasoning.md` | rejected | Duplicating the same text into three or more private procedure modules is the duplication the standard itself forbids, and `structural-compliance` is not owned by `omn-dev-2-reviewer` at all, so no single agent's `reasoning.md` reaches every phase; fails `C-006` |\n| Architect's own reuse-survey candidate-kind rule | `agents/architect/reasoning.md` A6 (existing procedure) | reuse-extended | F-009 establishes the survey already exists; the requested candidate kinds are added to it directly |\n| Architect's own none-found self-check wording | `agents/architect/quality.md` A7.3 (existing check) | reuse-extended | F-010 establishes the check already exists; its wording is extended to name the same candidate kinds A6 states |\n| Architect's own significance rule | `agents/architect/reasoning.md` A9 (existing list) | reuse-extended | F-011 establishes the five-item significance list already exists; a sixth item is appended |\n| New external dependency for this change | \u2014 | none-found | Rung 1 of the ladder applied to itself: no accepted statement requires a new dependency to deliver this standard; the search covered the feature request, the change request, the business intent, and the architecture context for any stated need, and found none; recorded out of scope rather than surveyed (`D-004`) |\n| Carrier skill's version identity update | `registry/skills.yaml`, `skills/agent-skill-matrix.md` (existing records) | reuse-extended | F-005 establishes both records already carry S01's identity; the version field is updated in place under the MINOR rule (`F-006`), contingent on `A-003` |\n\n## Operational Considerations\n\n- Logging and observability updates: None identified. No runtime code path, log statement, or\n  observability signal is touched; every edit is documentation or registry-metadata prose\n  (`C-002`).\n- Error handling strategy: None identified. No executable error path is touched by this\n  design; the safety floor's error-handling protection (`C-005`) is stated as policy content\n  in `M-001` for a later implementer to apply to actual code changes, not exercised here.\n- Security considerations: Assessed. The safety-floor content in `M-001` explicitly protects\n  authorization, audit, validation, and data-integrity paths from being weakened under this\n  policy's own banner (`C-005`); this design introduces no new attack surface because it\n  edits no executable code, credential, or access path. `F-019` confirms the existing\n  vendor-substring scan already governs artifact content, and this design's content contains\n  no such substring.\n- Performance considerations: None identified. No runtime code path is touched (`C-002`); the\n  business intent's execution-cost constraint (`S-030`, `A-004`) is addressed structurally by\n  choosing extension-in-place over any new reasoning stage, not by a runtime performance\n  change.\n\n## Delivery Plan\n\n### Sequencing Constraints\n\n| ID | Constraint | Modules | Prerequisites | Reason | Binds |\n|---|---|---|---|---|---|\n| P-001 | The carrier-file decision and the standard's target content are fixed before any dependent module states or references the standard | M-001 | none | Every downstream procedure edit cites the same standard text; defining it after those edits begin forces rework if wording changes | T-001, T-002 |\n| P-002 | The carrier skill's registry identity (`registry/skills.yaml`, `skills/agent-skill-matrix.md`) is raised to `1.1.0` only after the S01 content edit is final | M-001, M-002, M-003 | P-001 | A version identity must describe content that already exists; bumping first records a version for content not yet written | T-014 |\n| P-003 | The architect's own `reasoning.md` (A6, A9) and `quality.md` (A7.3) wording changes are made only after the standard's content is final | M-004, M-005 | P-001 | The reuse-survey rule and its self-check reference the standard's candidate-kind list by name; they cannot precede content that does not yet exist | T-003 |\n| P-004 | The implementer's `reasoning.md`, `output.md`, and `quality.md` wording changes are made only after the standard's content is final | M-006, M-007, M-008 | P-001 | Same citation reason as P-003 | T-004, T-005 |\n| P-005 | The reviewer's `reasoning.md` wording change is made only after the standard's content is final | M-009 | P-001 | Same citation reason as P-003 | T-006 |\n| P-006 | The packaging-mirror refresh runs only after every module edit under P-002 through P-005 is complete | M-010 | P-002, P-003, P-004, P-005 | Refreshing before every source edit lands risks a second refresh, and the drift test is only meaningful against final content | T-010 |\n| P-007 | The post-change baseline verification runs only after every module edit and the mirror refresh are complete | M-001\u2013M-010 | P-002, P-003, P-004, P-005, P-006 | Comparing against baseline before every edit lands would attribute an incomplete change's results to the finished design | T-009 |\n| P-008 | The remaining supplied planner tasks this phase does not itself further sequence \u2014 the fresh pre-change baseline snapshot (`T-007`), the instruction-byte measurement (`T-008`), the closure package (`T-011`), the version-bump governance decision (`T-012`), and the dependency-significance recording (`T-013`) \u2014 carry no additional module-level structural prerequisite from this design beyond `P-001` through `P-007` | M-001 | P-001 | These tasks are owned by roles outside this design phase (`omn-tech-lead`, `omn-documentation`) or are already resolved by this design's own decision (`D-004` for `T-013`); recording them here closes planner-task coverage without inventing a module-level ordering constraint none of them structurally requires | T-007, T-008, T-011, T-012, T-013 |\n\nNo step here is irreversible: every edit is a text or metadata change with a trivial version-\ncontrol revert, so no reversibility safeguard step is required (`A10.5` is vacuously\nsatisfied).\n\n### Test Strategy Focus Areas\n\nFor whoever verifies this phase's own deliverables: confirm the registry coverage verifier\nstill resolves S01 by its display name after the version bump (`C-009`); confirm\n`runtime/design_validator.py` D7.3 still accepts a `none-found` row under the extended A7.3\nwording; confirm, by inspecting resolved skill bindings and context-slice membership at\nruntime `0.5.0`, that each of the seven named phases still receives S01 unchanged in\nmechanism; confirm the `omn_agent` test suite and the packaging-mirror drift test both stay\nat their recorded pass counts after P-006.\n\n### Rollout and Rollback\n\nRollout follows `P-001` through `P-008` in order. Rollback is a plain-text revert of the\ntouched files (`M-001` through `M-005`, and the registry records) to their prior content;\nno data migration, coexistence period, or consumer coordination is required, because nothing\nthis design touches is a runtime contract.\n\n## Risks and Mitigations\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | structural | `A-003` is false: extending S01's prose is judged a breaking rule/structure change rather than additive guidance | The version increment should be MAJOR, not MINOR, invalidating `T-014`'s classification | low | M-002, M-003, D-002 | `omn-tech-lead` confirms the classification before the registry edit lands (`P-002`) | omn-tech-lead |\n| R-002 | delivery | `A-002` is false: an unrelated change lands on the recorded baseline between this design and the post-change verification | `T-009` cannot cleanly attribute a mismatch to this change alone | medium | P-007 | `T-007` (execution-planning phase) captures a fresh pre-change snapshot immediately before implementation begins; `T-009` compares against that snapshot, not against `F-021`/`F-022` directly | omn-tech-lead |\n| R-003 | delivery | `A-005` is false: the workflow instead expects this design phase to write the affected files directly | `T-002` and `T-003` cannot close within this run's permitted-writes boundary; closure stalls until clarified | low | P-001, P-003 | This design states the full target content for `T-002` and `T-003` (appendix) so any downstream writer can apply it verbatim without re-deciding anything structural | omn-orchestrator |\n| R-004 | structural | A future phase is added to the framework that the seven-phase list did not anticipate, and it does not receive S01 through any existing binding | The standard would not automatically reach a new phase without a further change | low | M-001 | None required now; `C-006`'s phase-coverage requirement is scoped to the seven named phases; a new phase's skill bindings are decided when that phase is designed | omn-tech-lead |\n| R-005 | security | An implementer or reviewer reads \"prefer less code\" as license to relax a safety-floor item on a future change that also touches a trust boundary | A safety regression ships before the strengthened review catches it | low | M-006, M-008, M-009 | The safety-floor wording in the target content (appendix) makes removal or weakening of a safety-floor item a Blocking self-check failure for the implementer and a correctness-or-security finding for the reviewer, never a maintainability finding | omn-dev-2-reviewer |\n| R-006 | delivery | The packaging-mirror refresh does not automatically pick up the content-only edits this design specifies | `tests/test_bundled_payload.py` fails, blocking closure | low | M-010 | Run the existing `--sync` refresh procedure first, per `P-006`; escalate only on failure | omn-dev-1-implement |\n\n## Estimate and Confidence\n\n- Overall: `M` (confidence: medium).\n- Breakdown:\n  - `P-001` (S01 content authoring, fully specified below): `S`, confidence high.\n  - `P-002` (version bump, two registry records): `XS`, confidence low (depends on `A-003`).\n  - `P-003` (architect's own `reasoning.md`/`quality.md` wording, fully specified below): `S`,\n    confidence high.\n  - `P-004` (implementer edits, structural requirement fixed here, exact wording delegated to\n    `omn-dev-1-implement`'s own phase): `S`, confidence medium.\n  - `P-005` (reviewer edit, same delegation): `S`, confidence medium.\n  - `P-006` (mirror refresh, mechanical): `XS`, confidence high.\n  - `P-007` (post-change verification): `S`, confidence low (depends on `A-002`).\n- Scope assumptions: the estimate covers only this phase's own tasks (`T-001`, `T-002`,\n  `T-003`, `T-013`, `T-014`) plus the sequencing this design hands to `T-004`, `T-005`,\n  `T-006`, `T-009`, `T-010`. It excludes the closure package (`T-011`) and the version-bump\n  governance decision (`T-012`), which are outside this agent's authority.\n- Uncertainty drivers: `A-002` and `A-003` each hold two breakdown items at low confidence;\n  the delegated wording for `P-004`/`P-005` holds two items at medium confidence because this\n  design fixes their structural requirement but not their final prose.\n\n## Open Decisions and Escalations\n\n| ID | Question | Blocking | Owner | Affects | Consequence |\n|---|---|---|---|---|---|\n| Q-001 | Does the workflow expect this design phase to write `skills/architecture/clean-architecture-checklist.md`, `agents/architect/reasoning.md`, and `agents/architect/quality.md` directly, or does a later implementation-phase agent apply this design's target content? | No | omn-orchestrator | P-001, P-003, D-001, D-003 | Either way, the content specified in the appendix is unchanged; only which phase performs the repository write differs |\n| Q-002 | Is extending S01's prose with the content this design specifies \"additive guidance\" (MINOR) or a \"breaking rule or structure change\" (MAJOR) under `domain-model/skill-specification.md`? | No | omn-tech-lead | M-002, M-003, D-002, P-002 | MINOR confirms `1.1.0` as specified; MAJOR requires a different version target, decided before `P-002` |\n| Q-003 | Do the additive edits to the `architect`, `omn-dev-1-implement`, and `omn-dev-2-reviewer` module sets warrant a contract-version increment in a later governance change (carried from the scope definition's `Q-002`)? | No | omn-tech-lead | none in this design directly; named because Sign-off shares the same owners | A \"yes\" opens a separate governance change; this design's content is unaffected either way |\n\nDecision record `D-001` remains at status `Proposed` and requires Design Gate acceptance\nbefore `P-002` and `P-003` begin.\n\n## Sign-off\n\n- Architect: architect (producing role; excluded from accepting this package)\n- Tech Lead: omn-tech-lead (accepting owner for the Design Gate, per the Producer Exclusion\n  Rule in `workflows/workflow-gate-matrix.md`)\n- QA: omn-qa\n\n## Appendix: Target Content for T-002 and T-003\n\nThis appendix states the target content this design specifies for the tasks the supplied\nexecution plan attributes to the `architect` role \u2014 the current shape and the target shape,\nin the same idiom section 6 uses for a contract change. It is a specification for a later\nwriter to apply, not a diff or an edit command; per `A-005`/`Q-001`, the repository write\nitself is performed by whichever agent the workflow directs.\n\n### A.1 Target content for `skills/architecture/clean-architecture-checklist.md` (T-002)\n\nCurrent shape: the skill ends after its `## Common Mistakes` section (`F-004`); the heading\n`Skill: Architecture Foundations` indexes the registry record (`C-009`).\n\nTarget shape: the skill retains its unchanged heading and every existing section, followed\nby four new subsections under one new heading, and one new line in each of the two existing\nlist sections named below.\n\nNew heading and subsections (target content, following the existing `## Common Mistakes`\nsection): a new level-2 heading titled \"Necessity and Reuse Ladder\", with the body below\nrendered beneath it.\n\n~~~markdown\nApplies to every design option, every change-set entry, and every review of a change.\nUnderstand the problem first: read the task and the code it touches, and trace the real\nflow end to end. Then climb the ladder and stop at the first rung that holds.\n\n1. Does this need to exist? A capability no accepted statement requires is not built; it\n   is recorded as out of scope or raised as an open question to the owning role.\n2. Does the codebase already have it? Reuse the existing helper, component, or pattern.\n3. Does the standard library solve it? Use it.\n4. Does the platform or framework in use solve it natively? Use it.\n5. Does an already-installed dependency solve it? Use it.\n6. Can it be written directly in a few lines at the call site? Write it there.\n7. Only then: implement the minimum code necessary. A new abstraction, file, or dependency\n   is introduced only when the reason no lower rung held is recorded.\n\n### Minimum Necessary Change\n\nRequired behaviour, required safety, required integration, and required tests together\nare the minimum necessary change. Everything outside that boundary requires a recorded\njustification: opportunistic refactoring, cleanup of code the change does not touch,\nspeculative generalization, and configuration or extension points for requirements that\ndo not yet exist.\n\n### Safety Floor\n\nThe ladder minimizes unnecessary code, never necessary protection. No simplification may\nremove or weaken input validation at a trust boundary, error handling that prevents data\nloss, authorization or audit paths, accessibility, observability the design requires, data\nintegrity, or the tests that prove the change. A shorter implementation is not\nautomatically better: correctness, readability, and maintainability are requirements, and\nline count is not a criterion. Where two equally small solutions differ, the\nedge-case-correct one is chosen.\n\n### Review Questions\n\nA change is measured against this ladder with seven questions, each answered against the\naccepted change and the code, never against line count:\n\n- Existence: was something built that no accepted statement requires?\n- Reuse: does the change duplicate something the codebase already provides?\n- Dependency: was a dependency added where the standard library, the platform, or an\n  installed dependency already served?\n- Abstraction: was an interface, wrapper, factory, helper class, or configuration point\n  introduced before a second concrete use required it?\n- Complexity: does a simpler implementation exist with the same behaviour and the same\n  safety?\n- Scope: did the change touch code the accepted change did not require?\n- Safety: did a simplification remove or weaken anything the safety floor protects?\n\nA finding under the first six questions is a maintainability or architecture finding at\nthe severity the evidence supports. A finding under the seventh is a correctness or\nsecurity finding.\n~~~\n\nTarget addition, one new line in the existing `## Anti-patterns` list:\n\n`- Speculative abstraction, generalization, or configuration for a requirement that does not exist.`\n\nTarget addition, one new line in the existing `## Common Mistakes` list:\n\n`- Reducing line count by removing validation, error handling, or tests.`\n\nTarget identity: version `1.1.0`, recorded in `registry/skills.yaml` and in the Skill\nCatalog row of `skills/agent-skill-matrix.md` (`D-002`, `P-002`).\n\n### A.2 Target wording for `agents/architect/reasoning.md`, A6 Reuse Survey (T-003)\n\nCurrent wording, first sentence: \"For each capability the change requires, record the\nexisting components that could provide it and the outcome:\"\n\nTarget wording: \"For each capability the change requires, record the candidates that could\nprovide it \u2014 existing components, the standard library, native platform or framework\ncapability, and already-installed dependencies \u2014 and the outcome:\"\n\nCurrent wording, the `none-found` sentence: \"A `none-found` outcome requires stating where\nthe search looked.\"\n\nTarget wording: \"A `none-found` outcome requires stating which of these four candidate kinds\nthe search covered. Without that, it is indistinguishable from not having looked.\"\n\nTarget addition, a new closing sentence immediately after the existing sentence \"Proposing\nnew structure over an unexamined existing component is a boundary violation under\n`system.md` invariant 3.\": \"A capability that no statement requires is not surveyed and not\ndesigned for; it is recorded as out of scope in the Objective section, or raised as an open\nquestion to the owning role, per the necessity and reuse ladder in\n`skills/architecture/clean-architecture-checklist.md`.\"\n\n### A.3 Target wording for `agents/architect/reasoning.md`, A9 significance list (T-003)\n\nCurrent shape: five bullets ending with \"it commits the system to a quality-attribute\ntradeoff\".\n\nTarget shape: a sixth bullet follows it: \"- it introduces a new external dependency\".\n\n### A.4 Target wording for `agents/architect/quality.md`, A7.3 (T-003)\n\nCurrent wording: \"Every `none-found` outcome states where the search looked\"\n\nTarget wording: \"Every `none-found` outcome states which of the four candidate kinds \u2014\nexisting components, the standard library, native platform or framework capability,\nalready-installed dependencies \u2014 the search covered\"\n\nSeverity is unchanged: `Blocking`.",
+        "digest": "sha256:32cf91cbfac8629d9e42476880c7e5c0",
+        "produced_by": "solution-design-and-risk-assessment"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the accepted change this agent implements: a technical design for feature work, a bug analysis for a defect fix, or a baseline validation record for a behaviour-preserving refactor. Without one there is no accepted change, and implementing anyway would mean designing."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "technical-design",
+      "reference": "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "produced_by": "solution-design-and-risk-assessment"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-17T16:48:42Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "skills/dotnet/engineering-playbook.md",
+        "digest": "sha256:35fc0c6fcd8f834c3e2528d14465e17c",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8d6bd0735e4288ea81c161556faa7c18",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:fbf2e953c78bf37cdf0ac7f7c01da129",
+    "input_digest": "sha256:3493c32373f9037150d8074c6c8fe8fd",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/mnc-feature-request.md",
+        "source_file": ".claude/runs/inputs/mnc-feature-request.md",
+        "digest": "sha256:0089f08e0f80fccd37040a21394244d4"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/mnc-change-request.md",
+        "source_file": ".claude/runs/inputs/mnc-change-request.md",
+        "digest": "sha256:1e6552a2dca51315185356ca795f7b72"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/mnc-business-intent.md",
+        "source_file": ".claude/runs/inputs/mnc-business-intent.md",
+        "digest": "sha256:9d4d342007cc5b01b3b44ab043c76bc1"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/mnc-architecture-context.md",
+        "source_file": ".claude/runs/inputs/mnc-architecture-context.md",
+        "digest": "sha256:cdb7cb03685b91e8f79fe2c971b61d07"
+      },
+      {
+        "type": "technical-design",
+        "reference": "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/ponytail-framework-integration-bf84e0/.claude/runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+        "digest": "sha256:32cf91cbfac8629d9e42476880c7e5c0"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-ae91e085f481/states/implementation/artifacts/implementation-report.md",
+      "runs/run-ae91e085f481/states/implementation/result-envelope.json",
+      "**"
+    ],
+    "write_exclusions": [
+      "runs/**",
+      "proposals/**"
+    ],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose effect is not recorded in the report's verification results"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "any write matching ['runs/**', 'proposals/**']",
+      "command execution other than the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "external system, repository, or ticketing access",
+      "define or widen product scope",
+      "decide or revise the technical design rather than escalating the mismatch",
+      "approve, review, or award a readiness verdict to its own change",
+      "record a merge, release, or gate decision",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "introduce an undeclared side effect in critical business logic",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "implement the change the accepted design and analysis describe",
+        "add, modify, and remove production code inside the impacted modules the design names",
+        "add or update automated tests that exercise the change",
+        "execute the project's own test and static-analysis commands to gather evidence",
+        "record the change set, the verification evidence, and the residual risk",
+        "record a tradeoff taken inside this agent's own implementation latitude",
+        "raise a deviation record when the design cannot be implemented as accepted"
+      ],
+      "prohibited": [
+        "define or widen product scope",
+        "decide or revise the technical design rather than escalating the mismatch",
+        "approve, review, or award a readiness verdict to its own change",
+        "record a merge, release, or gate decision",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "introduce an undeclared side effect in critical business logic",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "rationale": "This is the only framework role that changes repository source. Its write scope cannot be enumerated per agent, because the files a change touches are named by the accepted design rather than by the manifest. The scope is therefore the repository, minus the evidence classes below, and every file actually written is declared in the change set and in the result envelope, where the runtime compares them.",
+        "scope": [
+          "**"
+        ],
+        "excluded": [
+          "runs/**",
+          "proposals/**"
+        ],
+        "exclusionRationale": "Committed run evidence and governance records are immutable to the agents whose work they record. A run artifact this agent could edit would let a change rewrite the evidence assessed against it."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose effect is not recorded in the report's verification results"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical context snapshot must produce the same change-set entry set, the same test-evidence set, the same deviation set, and the same declared verification status.",
+      "identifierSchemes": {
+        "changes": "C-<zero-padded-sequence>",
+        "tests": "T-<zero-padded-sequence>",
+        "deviations": "V-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Change-set entries are ordered by the sequence in which the accepted design requires them; ties break toward the lower path in lexical order. Test-evidence entries follow the change-set entries they cover.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied design, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "implementation-report.md",
+    "artifact_path": "runs/run-ae91e085f481/states/implementation/artifacts/implementation-report.md",
+    "template_ref": "templates/implementation-report.md",
+    "contract_ref": "agents/omn-dev-1-implement/output.md",
+    "quality_ref": "agents/omn-dev-1-implement/quality.md",
+    "validator": "implementation_report_validator",
+    "result_envelope_path": "runs/run-ae91e085f481/states/implementation/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-17T16:48:42Z"
+}

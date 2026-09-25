@@ -1,0 +1,494 @@
+{
+  "invocation_id": "inv-ae91e085f481-03-002",
+  "run_id": "run-ae91e085f481",
+  "work_item_id": "run-ae91e085f481::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:ded38f878e7e5ef719dcdffd6c0b9015",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:33d317684aece20ce5b970f6b595c107",
+      "agents/architect/identity.md": "sha256:fc073d2135f891349e8f6639243819e3",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:9b9f220dee72dd93faca5d9c021d6ead",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:d9fa58935c242fb724123ea69d5eeb61",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "feature-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/mnc-feature-request.md",
+        "source_file": ".claude/runs/inputs/mnc-feature-request.md",
+        "text": "# Feature Request \u2014 Minimum Necessary Change policy (necessity and reuse ladder)\n\n## Source\n\nOperator request dated 2026-09-15: integrate the engineering philosophy of the upstream\nPonytail ruleset (\"lazy senior developer\": lazy about the solution, never lazy about\nunderstanding the problem) into this framework's existing agents as a native, cross-cutting\nbehaviour. The framework's own philosophy is \"code less, but make it work well\". The upstream\nruleset is the source of the principle; nothing from it is copied wholesale.\n\n## Request\n\nMake planning, architecture, implementation, and code review behave like a senior engineer\nwho understands the problem deeply, chooses the simplest solution that satisfies the real\nrequirement, and refuses to build unnecessary things. The behaviour must be embedded in the\nexisting agent lifecycle rather than added as a new agent, a new workflow phase, a new\ncommand, a new runtime mechanism, or a second orchestration layer.\n\nThe principle to embed, in order, stopping at the first rung that holds:\n\n1. Does this need to exist? If not, do not build it.\n2. Does the codebase already have it? Reuse it.\n3. Does the standard library solve it? Use it.\n4. Does the platform or framework in use solve it natively? Use it.\n5. Does an already-installed dependency solve it? Use it.\n6. Can it be written directly in a few lines at the call site? Write it there.\n7. Only then: implement the minimum code necessary, introducing new abstraction only when\n   the reason no lower rung held is recorded.\n\nThe ladder runs after the problem is understood, never instead of understanding it.\n\nTwo rules bound the ladder and are not negotiable:\n\n- Minimum necessary change = required behaviour + required safety + required integration\n  + required tests. Everything outside that boundary requires a recorded justification:\n  scope creep, opportunistic refactoring, speculative abstraction, \"while we are here\"\n  changes, unnecessary cleanup.\n- Safety floor: no simplification may remove or weaken input validation at a trust\n  boundary, error handling that prevents data loss, authorization or audit paths,\n  accessibility, required observability, data integrity, or the tests that prove the\n  change. A shorter implementation is not automatically better; line count is not a\n  criterion. If twenty lines are required, twenty lines are written.\n\nReview must be extended so a reviewer can detect over-engineering with seven questions \u2014\nexistence, reuse, dependency, abstraction, complexity, scope, safety \u2014 and must not demand\narbitrary line-count reduction.\n\n## Non-goals\n\n- No new agent, skill file, workflow phase, gate, command, template section, validator\n  vocabulary, configuration surface, prompt layer, or hook.\n- No copy of the upstream repository, its intensity modes, its comment markers, or its\n  commands.\n- No change to current agent contracts' authority, to dispatching, to existing safety\n  mechanisms, to testing obligations, or to logging and observability requirements.\n- No change to runtime behaviour: `runtime/framework_runtime.py` is not touched and\n  `RUNTIME_VERSION` stays 0.5.0.\n\n## Acceptance criteria\n\n1. One written standard states the ladder, the minimum-necessary-change definition, the\n   safety floor, and the seven review questions, and it is already loaded by the design,\n   implementation, refactor-implementation, quality-review, code-quality-review,\n   structural-compliance, and repository-quality-scan phases without any runtime change.\n2. The architect's reuse survey considers, for every required capability, the standard\n   library, the native platform or framework capability, and already-installed dependencies\n   in addition to existing components, and records a capability that no statement requires\n   as out of scope rather than designing for it.\n3. The implementer selects the route for every change-set entry by the ladder, records the\n   rung that justified any new abstraction, file, or dependency in the implementation\n   report's existing `Approach taken` field, and treats removal or weakening of a\n   safety-floor item as a blocking self-check failure.\n4. The reviewer applies the seven questions to every change review, each finding measured\n   against the written standard, never against line count; a safety-floor breach is a\n   correctness or security finding, the other six are maintainability or architecture\n   findings at the severity the existing severity table yields.\n5. Every framework verifier stays at its recorded baseline: registry coverage 6/6 with 37 of\n   37 phases dispatchable, validators 6/6, vertical slice 10/10, multi-phase 15/15, recovery\n   41/41, manifests 2/2; the `omn-agent` test suite stays at 329 passing.\n6. The component counts do not move: 12 active agents, 12 skills, 8 workflows, 37 phases,\n   11 commands. Added instruction volume is measured and reported in bytes per agent module\n   set.\n7. The planner and product owner contracts are not modified, because their existing\n   traceability rules already reject invented scope and undeclared exclusions.",
+        "digest": "sha256:0089f08e0f80fccd37040a21394244d4"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/mnc-change-request.md",
+        "source_file": ".claude/runs/inputs/mnc-change-request.md",
+        "text": "# Change Request \u2014 Embed the necessity and reuse ladder in existing contracts\n\n## Requested change set\n\nThe smallest integration that produces the requested behaviour, as proposed by the operator\nafter inspecting every layer. The architect evaluates it against alternatives and may narrow\nit; widening it requires a recorded reason under the same ladder.\n\n| Surface | File | Change |\n|---|---|---|\n| Written standard | `skills/architecture/clean-architecture-checklist.md` (skill S01) | Add sections stating the ladder, the minimum-necessary-change definition, the safety floor, and the seven review questions; add one anti-pattern and one common mistake. Keep the heading `Skill: Architecture Foundations` unchanged, because the registry `displayName` indexes it |\n| Skill identity | `registry/skills.yaml`, `skills/agent-skill-matrix.md` | S01 version 1.0.0 to 1.1.0 (additive guidance is a MINOR change under `domain-model/skill-specification.md`), in the registry record and the Skill Catalog row |\n| Architect behaviour | `agents/architect/reasoning.md` | A6 Reuse Survey: candidates are existing components, the standard library, native platform or framework capability, and already-installed dependencies; a `none-found` basis names which of these were searched; a capability no statement requires is recorded as out of scope, not surveyed. A9: introducing a new external dependency is architecture-significant |\n| Architect self-check | `agents/architect/quality.md` | A7.3 wording names the candidate kinds a `none-found` basis must cover, so the check states the same rule as the procedure |\n| Implementer behaviour | `agents/omn-dev-1-implement/reasoning.md` | Stage 3: choose each entry's route by the ladder, stopping at the first rung that holds; a new file, abstraction, or dependency is justified by the rung that required it. Stage 5: no speculative abstraction, no refactoring of code the accepted change does not touch, no safety-floor item removed or weakened to shorten the change |\n| Implementer output | `agents/omn-dev-1-implement/output.md` | `Approach taken` additionally names the ladder rung that justified any new abstraction, file, or dependency. No structural change; the validator's field checks are unaffected |\n| Implementer self-check | `agents/omn-dev-1-implement/quality.md` | One Blocking boundary check: no safety-floor item was removed or weakened to reduce code. One not-machine-checkable obligation: every new abstraction, file, or dependency is justified in `Approach taken` |\n| Reviewer behaviour | `agents/omn-dev-2-reviewer/reasoning.md` | Stage 4, maintainability lens: apply the seven questions against S01; the seventh routes to the correctness or security lens; a finding is never that the change could be shorter |\n| Packaging mirror | `omn_agent/_bundled_payload/**` | Refresh with `python tests/test_bundled_payload.py --sync`; `tests/test_bundled_payload.py` fails on any drift |\n\nNothing else changes. In particular: no runtime module, no template, no validator, no\nworkflow specification, no manifest, no host registration, no agent version, no gate matrix\nrow, no registry record other than the S01 version, no new file.\n\n## Draft wording for the written standard\n\nOffered as the requested content; the implementer may tighten wording, never weaken a rule.\n\n```text\n## Necessity and Reuse Ladder\n\nApplies to every design option, every change-set entry, and every review of a change.\nUnderstand the problem first: read the task and the code it touches, and trace the real\nflow end to end. Then climb the ladder and stop at the first rung that holds.\n\n1. Does this need to exist? A capability no accepted statement requires is not built; it\n   is recorded as out of scope or raised as an open question to the owning role.\n2. Does the codebase already have it? Reuse the existing helper, component, or pattern.\n3. Does the standard library solve it? Use it.\n4. Does the platform or framework in use solve it natively? Use it.\n5. Does an already-installed dependency solve it? Use it.\n6. Can it be written directly in a few lines at the call site? Write it there.\n7. Only then: implement the minimum code necessary. A new abstraction, file, or dependency\n   is introduced only when the reason no lower rung held is recorded.\n\n### Minimum necessary change\n\nRequired behaviour, required safety, required integration, and required tests together\nare the minimum necessary change. Everything outside that boundary requires a recorded\njustification: opportunistic refactoring, cleanup of code the change does not touch,\nspeculative generalization, and configuration or extension points for requirements that\ndo not yet exist.\n\n### Safety floor\n\nThe ladder minimizes unnecessary code, never necessary protection. No simplification may\nremove or weaken input validation at a trust boundary, error handling that prevents data\nloss, authorization or audit paths, accessibility, observability the design requires, data\nintegrity, or the tests that prove the change. A shorter implementation is not\nautomatically better: correctness, readability, and maintainability are requirements, and\nline count is not a criterion. Where two equally small solutions differ, the\nedge-case-correct one is chosen.\n\n### Review questions\n\nA change is measured against this ladder with seven questions, each answered against the\naccepted change and the code, never against line count:\n\n- Existence: was something built that no accepted statement requires?\n- Reuse: does the change duplicate something the codebase already provides?\n- Dependency: was a dependency added where the standard library, the platform, or an\n  installed dependency already served?\n- Abstraction: was an interface, wrapper, factory, helper class, or configuration point\n  introduced before a second concrete use required it?\n- Complexity: does a simpler implementation exist with the same behaviour and the same\n  safety?\n- Scope: did the change touch code the accepted change did not require?\n- Safety: did a simplification remove or weaken anything the safety floor protects?\n\nA finding under the first six questions is a maintainability or architecture finding at\nthe severity the evidence supports. A finding under the seventh is a correctness or\nsecurity finding.\n```\n\nAnti-pattern to add: \"Speculative abstraction, generalization, or configuration for a\nrequirement that does not exist.\" Common mistake to add: \"Reducing line count by removing\nvalidation, error handling, or tests.\"\n\n## Why these surfaces and not others\n\n- The reviewer's own contract forbids a finding without a written standard (\"standard\n  before opinion\"), so over-engineering cannot be raised as a finding today: the written\n  standard is the enabling change, and S01 is already the skill every affected phase loads\n  and the one the quality-scan workflow already uses for \"structural and abstraction\n  judgement\". Extending S01 is rung 2 of the ladder applied to the ladder itself; a new S13\n  would be rung 7 with a taxonomy column, a registry record, a catalog row, and a matrix\n  column it does not need.\n- The planner's R13 already fails an untraced task as invented scope, and the product\n  owner's Stage 3 already requires explicit exclusions. Rung 1 is therefore already\n  enforced upstream of design; those contracts are not touched.\n- Agent contract versions stay at 1.0.0. Every host registration pins\n  `metadata.version is 1.0.0` and aborts otherwise, and the gate auto-approval policy keys\n  precedent on producing-agent version; a version bump is a governance decision for the\n  tech lead and is recorded as an open question, not taken here.\n- No runtime change: S01 already reaches every affected agent through the manifest skill\n  bindings and the phase context slices the runtime freezes, so no slice member is added\n  and `RUNTIME_VERSION` stays 0.5.0.",
+        "digest": "sha256:1e6552a2dca51315185356ca795f7b72"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/mnc-business-intent.md",
+        "source_file": ".claude/runs/inputs/mnc-business-intent.md",
+        "text": "# Business Intent \u2014 Minimum Necessary Change policy\n\n## Outcome the business is buying\n\nLess code, less architecture, less cognitive load, same or better correctness \u2014 delivered by\nthe agents this framework already runs, at no added execution cost. The best code is often\nthe code the team never had to write.\n\n## Why now\n\nAgents default to over-building: speculative abstractions, helper classes with one caller,\ncustom implementations of standard-library behaviour, new dependencies where an installed one\nserves, and opportunistic refactoring of unrelated code. Each costs review time, tokens,\nmaintenance, and defect surface. The upstream ruleset this request adapts reports roughly half\nthe lines of code, a fifth fewer tokens, and a quarter less wall time on comparable tasks with\nsafety behaviour preserved. Those figures are the upstream's; this change measures its own.\n\n## Constraints on the outcome\n\n- Correctness and required safety stay at one hundred percent. The policy reduces\n  unnecessary code, unnecessary decisions, unnecessary dependencies, and unnecessary\n  abstractions; it never reduces validation, error handling, security, accessibility,\n  observability, testability, or data integrity.\n- Execution performance is preserved: no added agent invocation, no added reasoning loop,\n  no added workflow step. The framework is already optimized for orchestration cost, and\n  this change must not spend that budget.\n- The implementation of the policy must itself satisfy the policy: the smallest integration\n  that produces the behaviour, with no framework bloat.\n\n## How success is measured\n\nBefore and after, on the same representative implementation tasks: lines and files changed,\nagent calls, tokens and wall time where the host reports them, test results, and reviewer\nfindings \u2014 read together, never line count alone. Framework-side: component counts unchanged,\nadded instruction bytes reported, every verifier at baseline.",
+        "digest": "sha256:9d4d342007cc5b01b3b44ab043c76bc1"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/mnc-architecture-context.md",
+        "source_file": ".claude/runs/inputs/mnc-architecture-context.md",
+        "text": "# Architecture Context \u2014 where build-or-not decisions live today\n\nCurrent-state facts established by inspection on 2026-09-15 at runtime 0.5.0.\n\n## Layers and insertion points\n\n- Skills are the framework's reusable engineering knowledge, loaded per agent through the\n  manifest `skills` block and per phase through the frozen context slice\n  (`framework_runtime.CONTEXT_SLICE_PHASE`). S01 `skills/architecture/clean-architecture-checklist.md`\n  is declared by ten agent manifests including `architect`, `omn-dev-1-implement`, and\n  `omn-dev-2-reviewer`, and is a slice member of `implementation`,\n  `refactor-implementation`, `quality-review`, `code-quality-review`,\n  `repository-quality-scan`, `structural-compliance`, `technical-discovery`,\n  `technical-validation`, `option-analysis`, and `option-synthesis`. It is 1,690 bytes and\n  already carries three seed rules: \"Introduce a new layer only when it reduces coupling or\n  clarifies ownership\", \"Creating abstractions without real variation points\" (common\n  mistake), and \"Sharing utility modules that hide cross-layer dependencies\".\n- Skill identity metadata (code, category, version, status) lives in `registry/skills.yaml`\n  and the Skill Catalog of `skills/agent-skill-matrix.md`; skill files carry none. The\n  category taxonomy is closed; extending it is a registry schema change.\n- Agents are runtime module sets loaded in `manifest.yaml` `loadOrder`:\n  system, identity, reasoning, execution, output, quality, examples. Host registrations\n  (`agents/<id>.agent.md`) are adapters that pin `metadata.version is 1.0.0` and abort on a\n  mismatch. Module digests are frozen into each run's invocation envelope; drift against a\n  historical run is informational under decision GD-001.\n- The dispatch prompt built by the runtime carries routing and addressing only; every\n  instruction about how to do the work lives in the module set. There are no host hooks or\n  settings files in this repository; the dispatch envelope is the only injection mechanism,\n  and it injects the module set and the context slice.\n\n## Where the seven decisions are made now\n\n| Decision | Owner today | Existing rule |\n|---|---|---|\n| What to build | `omn-product-owner` Stage 3 (S-nnn / X-nnn), `planner` R4 and R13 | Untraced task is invented scope, a hard failure; unstated exclusion is the common drift |\n| Whether to create new structure | `architect` A6 Reuse Survey, A7 options, A9 significance; identity decision rules | \"Prefer the simplest architecture\", \"prefer extending a proven reusable component before creating new structural elements\"; A6 outcomes reuse-as-is, reuse-extended, rejected, none-found; new structure only after rejected or none-found; A7.3 requires a none-found basis. Candidates today are \"existing components\" only: the standard library, platform capability, and installed dependencies are not named |\n| Whether to reuse existing code | `architect` A6; `omn-dev-1-implement` Stage 2 reads existing code first | Same as above; implementer decision rule \"prefer the smallest change that satisfies the accepted element over a wider refactor taken in passing\" |\n| Whether to introduce a dependency | `architect` impact type `dependency-change` scores against options; not named as architecture-significant | A9 significance list: contract change, dependency direction or boundary, structural component, costly reversal, quality-attribute tradeoff |\n| How much code to write | `omn-dev-1-implement` Stage 5.2 \"write the code the entry describes, and nothing the entry does not describe\"; invariant 1 \"accepted change only\" | No route-selection rule between reuse, standard library, direct code, and new abstraction |\n| When to stop | `omn-dev-1-implement` decision rule \"never widen the change set\"; quality check V3; `omn-dev-2-reviewer` Stage 4 lenses | Reviewer lenses: correctness, architecture, standards, security, maintainability, test-adequacy, packaging. Junk-detection lenses (duplication, dead-code, over-abstraction, generated-noise, legacy-drift, reviewability) exist for `repository-quality-scan` only |\n| Safety floor | `omn-dev-1-implement` security constraint \"must not weaken an existing authorization, validation, or audit path\"; quality B4 no test weakened | No check names error handling, accessibility, observability, or data integrity |\n\n## Validator constraints that bound any change\n\n- `runtime/review_package_validator.py` `CATEGORIES` already accepts all thirteen categories\n  for every review phase; only the reviewer `output.md` prose restricts the junk lenses to\n  the scan phase.\n- `runtime/implementation_report_validator.py` checks declared field bullets by label and\n  non-emptiness (C4) and table columns by declared header (C4.5); adding a column or a\n  bullet changes the contract, changing a field's description does not.\n- `runtime/design_validator.py` D7.3 checks that a `none-found` row states a basis; it does\n  not check which candidate kinds the basis names.\n- Every artifact validator rejects the vendor substring, and the dot-directory path prefix\n  is stripped before that scan (C3.2).\n- `tests/test_bundled_payload.py` fails on any drift between the framework tree and the\n  mirror under `omn_agent/_bundled_payload/`; `--sync` regenerates the mirror.\n\n## Baseline measurements (2026-09-15, this worktree)\n\n- `verify_registry_coverage.py` 6/6, 37 of 37 phases dispatchable; `verify_validators.py`\n  6/6; `verify_manifests.py` 2/2; `verify_recovery.py` 41/41;\n  `verify_vertical_slice.py --run-id run-c5a8d50d3238` 10/10;\n  `verify_multi_phase.py --run-id run-c5a8d50d3238` 15/15;\n  `verify_self_hosting.py` 7/8, S8 failing on four pre-existing runs from 2026-08-27 to\n  2026-09-04 that carry no proposal (recorded as `O-005` of FC-006).\n- `python -m unittest discover -s tests`: 329 tests, OK, 855 s.\n- Module-set bytes: planner 91,711; architect 119,162; omn-dev-1-implement 76,418;\n  omn-dev-2-reviewer 85,093; omn-product-owner 73,869; omn-qa 93,035.\n- Active agents 12, skills 12 (S01 to S12), workflows 8, phases 37, commands 11.\n\n## Environmental constraint\n\nThe repository's primary checkout carries roughly 194 uncommitted changes at runtime 0.8.0\nthat this worktree's base commit does not have. Of the files this change proposes to touch,\nonly `agents/omn-dev-1-implement/identity.md` (one line) and `templates/implementation-report.md`\nhave uncommitted edits there, and `runtime/framework_runtime.py` differs by about 1,700\nlines. The change therefore avoids the runtime and the implementation-report template\nentirely, so it can be carried onto the newer base without conflict.",
+        "digest": "sha256:cdb7cb03685b91e8f79fe2c971b61d07"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/ponytail-framework-integration-bf84e0/.claude/runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md",
+        "text": "# Execution Plan \u2014 Minimum Necessary Change policy\n\n```yaml\nplan:\n  planId: SCOPE-2026-0007-execution-plan\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/mnc-feature-request.md\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:0089f08e0f80fccd37040a21394244d4\n  contextDigest: sha256:9f90eb89f94639cd8aec24f921d08586\n```\n\n## Executive Summary\n\nThis plan embeds a single necessity-and-reuse standard into the framework's existing\narchitect, implementer, and reviewer contracts so that design, implementation, and review\nalready understand the problem before choosing the simplest solution that satisfies it,\nwithout adding any new agent, phase, gate, command, or runtime mechanism. The work\ndecomposes into fourteen tasks across five execution waves, beginning with the architect's\nselection of an existing file to carry the standard. Success is a standard already\nreachable by all seven named phases, an updated reuse-survey, route-selection,\nsafety-floor, and review procedure, unchanged framework verifier and test-suite baselines,\nand a reported instruction-byte delta per module set, all closed through a change proposal\nand a release-checklist run. The highest-impact risk is `R-004`: one or more of the seven\nphases may have no existing loading path that reaches it without a runtime change, which\nthe excluded scope forbids. Two should-have items carried from the accepted scope\ndefinition \u2014 recording a new dependency as architecture-significant, and incrementing the\ncarrier skill's recorded version \u2014 are included at reduced priority, conditioned on the\ncarrier-file decision. Plan status is complete; two non-blocking open questions remain, for\nthe requester and for the tech lead.\n\n## Business Objectives\n\n- Reduce unnecessary engineering effort, tokens, review time, and defect surface spent\n  building what nothing requires, measured by the reported instruction-byte delta per\n  module set and by every framework verifier and the test suite remaining at baseline.\n  Traces to `S-001`, `S-005`, `S-017`.\n- Give a reviewer a named, written standard to raise over-engineering as a finding,\n  measured by the reviewer's procedure applying all seven questions to every change review\n  and never demanding a line-count reduction. Traces to `S-007`, `S-015`.\n- Preserve required safety, correctness, and protection levels while reducing unnecessary\n  code, so that no simplification removes or weakens validation, error handling,\n  authorization, audit, accessibility, observability, data integrity, or the tests that\n  prove the change, measured by the implementer's self-check blocking any safety-floor\n  removal and by the reviewer classifying any safety-floor breach as a correctness or\n  security finding. Traces to `S-006`.\n\n## Technical Objectives\n\n- The architect, implementer, and reviewer contracts each carry the shared standard,\n  reachable by all seven named phases without a runtime change, verified by the `T-009`\n  baseline verification and by inspection of each phase's resolved skill bindings or\n  context slice. Traces to business objective 1, `S-012`.\n- The architect's reuse survey evaluates existing components, the standard library, native\n  platform capability, and installed dependencies for every required capability, verified\n  by text review of the updated procedure. Traces to business objective 1, `S-013`.\n- The implementer selects an implementation route by the ladder and records the justifying\n  rung without a new report field, verified by text review of the updated procedure and the\n  implementation-report validator's unchanged field set. Traces to business objective 1,\n  `S-014`.\n- The implementer's self-check blocks any removal or weakening of a safety-floor item,\n  verified by text review of the updated self-check. Traces to business objective 3,\n  `S-006`.\n- The reviewer applies the seven review questions to every change review with findings\n  mapped to the existing severity categories, verified by text review of the updated\n  procedure. Traces to business objectives 2 and 3, `S-015`.\n- Every framework verifier, the test suite, and the component counts remain at their\n  recorded baseline, and the runtime module stays byte-identical to it, verified by the\n  `T-009` comparison against the `T-007` snapshot. Traces to business objectives 1 and 3,\n  `S-016`, `S-017`.\n\n## Scope\n\n### In Scope\n\n- One written standard stating the ladder, the minimum-necessary-change definition, the\n  safety floor, and the seven review questions, carried by an existing file (`S-001`,\n  `S-003`, `S-004`, `S-005`, `S-006`, `S-007`, `S-012`) \u2014 `T-001`, `T-002`\n- The standard reachable by the design, implementation, refactor-implementation,\n  quality-review, code-quality-review, structural-compliance, and repository-quality-scan\n  phases without a runtime change (`S-002`, `S-011`, `S-012`) \u2014 `T-001`\n- An extended architect reuse-survey procedure and self-check (`S-013`) \u2014 `T-003`\n- An extended implementer route-selection procedure recording the justifying rung in the\n  existing `Approach taken` field (`S-014`) \u2014 `T-004`\n- An extended implementer safety-floor self-check (`S-006`, `S-014`) \u2014 `T-005`\n- An extended reviewer procedure applying the seven review questions (`S-007`, `S-015`) \u2014\n  `T-006`\n- A pre-change baseline snapshot and a post-change verification of every framework\n  verifier, the test suite, and the component counts (`S-016`, `S-017`) \u2014 `T-007`, `T-009`\n- A reported instruction-byte delta per edited module set and for the standard (`S-017`) \u2014\n  `T-008`\n- A refreshed packaging mirror so its drift test keeps passing (`S-011`) \u2014 `T-010`\n- A change proposal linking this run's artifacts and a release-checklist run (`A-008`) \u2014\n  `T-011`\n- A recorded decision on whether the edits warrant a later contract-version increment,\n  carried from the accepted scope definition (`A-008`) \u2014 `T-012`\n- The should-have items carried from the accepted scope definition: recording a new\n  external dependency as architecture-significant, and incrementing the carrier skill's\n  recorded version if applicable (`A-007`) \u2014 `T-013`, `T-014`\n\n### Out of Scope\n\n- A new agent, skill file, workflow phase, gate, command, template section, validator\n  vocabulary, configuration surface, prompt layer, or hook. Excluded because `S-008` names\n  each of these as a non-goal and the request requires the behaviour to be carried by the\n  existing lifecycle.\n- Copying the upstream ruleset's text, intensity modes, comment markers, or commands.\n  Excluded because `S-009` states the upstream is a source of the principle only.\n- Any change to the runtime module, its version constant, any template, validator,\n  workflow specification, manifest, host registration, or gate-matrix row, other than the\n  standard's own carrier version identity. Excluded by `S-010` and `S-011`.\n- Modification of the planner and product owner contracts. Excluded by `S-018`: their\n  existing traceability rules already reject invented scope and undeclared exclusions.\n- A line-count reduction target, a maximum size for delivered code, or any review finding\n  whose substance is that the change could be shorter. Excluded by `S-006`: line count is\n  stated as not a criterion.\n- Widening the reviewer's output contract to enable the repository-quality-scan's\n  junk-detection lenses on every change review. Excluded because the seven questions route\n  into the existing finding categories, and widening the lens set is a separate,\n  undeclared change to the reviewer's output contract.\n- Raising the contract version of the architect, implementer, or reviewer. Excluded because\n  host registrations pin version 1.0.0 and a bump is a governance decision addressed by\n  `T-012`, not performed by this plan's edits.\n- The outcome-side, task-level before-and-after comparison named in the business intent.\n  Excluded because no representative task set, baseline, or owner is supplied; carried as\n  `Q-001`.\n\n### Deferred\n\n- None identified. The should-have items carried from the accepted scope definition are\n  included in scope above rather than deferred, because their entry condition already\n  holds within this run: `T-001`'s carrier-file decision is expected to resolve during this\n  plan's execution, not at a later trigger.\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | An existing file (agent module or skill file) is suitable to carry the standard without adding a new file | S-002, S-010 | T-001 cannot select a carrier; T-002's target changes or the change widens into an excluded new file | architect |\n| A-002 | The carrier file's existing loading path (skill binding, phase-required-skill list, or context-slice membership) already reaches all seven named phases without any change to the runtime | S-011, S-012 | T-001 cannot satisfy phase coverage without touching the runtime, which is excluded | architect |\n| A-003 | The implementation report's existing `Approach taken` field has capacity to also carry the ladder-rung justification | S-014 | T-004 cannot record the justification without a template change, which is out of scope | architect |\n| A-004 | The reviewer's existing severity table already maps cleanly to a correctness-or-security category and a maintainability-or-architecture category for all seven questions | S-015 | T-006 cannot classify every finding without a severity-table change | omn-dev-2-reviewer |\n| A-005 | The verifier, test-suite, and component-count figures recorded as the current baseline remain valid immediately before this plan's edits begin | S-016, S-017 | T-009's comparison is against a stale baseline and cannot attribute a mismatch to this change | omn-tech-lead |\n| A-006 | Refreshing the packaging mirror for content-only edits to an existing file is a mechanical sync step | S-011 | T-010 requires more than a mechanical refresh, possibly needing investigation outside planning authority | omn-dev-1-implement |\n| A-007 | The two should-have items carried from the accepted scope definition (dependency-significance recording, skill version increment) are intended to flow into this execution plan | plan-wide | T-013 and T-014 are removed from the task set | omn-product-owner |\n| A-008 | This change carries two governance obligations from the accepted scope definition into this plan: the self-hosting profile's change-proposal-and-checklist requirement, and the deferred contract-version-increment question for the tech lead to decide | plan-wide | T-011 and T-012 are unnecessary or miscalibrated, and the closure requirements for this run differ | omn-orchestrator, omn-tech-lead |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | T-001's survey of existing files finds none suitable to carry the standard without adding a new file | Violates the no-new-file exclusion, or the standard is under-delivered | low | T-001, T-002 | Escalate to omn-product-owner before authoring if no file qualifies | architect |\n| R-002 | requirement | The implementation report's existing `Approach taken` field is already fully occupied by other mandatory content and cannot also carry the rung justification | T-004 cannot satisfy its acceptance criteria without a template change, which is out of scope | low | T-004 | Architect confirms field capacity while authoring T-002 | architect |\n| R-003 | requirement | The reviewer's existing severity table has no clean mapping for one or more of the seven review questions | T-006 cannot classify every finding without a severity-table change | low | T-006 | Confirm category coverage before authoring T-006 | omn-dev-2-reviewer |\n| R-004 | technical | One or more of the seven named phases has no existing skill-binding or context-slice path that can carry the standard without a runtime change | Phase-coverage acceptance (S-012) cannot be met for that phase without an excluded runtime change | medium | T-001 | T-001 surveys the loading path for every one of the seven phases before selecting a carrier | architect |\n| R-005 | technical | The packaging mirror's refresh procedure does not automatically pick up content-only edits to an existing file | The mirror drift test fails, blocking closure | low | T-010 | Run the existing refresh procedure first and escalate only on failure | omn-dev-1-implement |\n| R-006 | dependency | An unrelated change lands on the recorded baseline after it was captured, so verifier and test-suite figures no longer match what this plan expects | T-009 cannot cleanly attribute a mismatch to this change | medium | T-007, T-009 | T-007 captures a fresh pre-change snapshot immediately before implementation begins | omn-tech-lead |\n| R-007 | security | An implementer or reviewer reads \"less code\" as license to relax a safety-floor item on a change that also touches a trust boundary, error handling, authorization, audit, accessibility, observability, or data-integrity path | A safety regression ships before the strengthened review catches it | low | T-005, T-006 | T-005 makes safety-floor removal a Blocking self-check failure; T-006 makes it a correctness or security finding | omn-dev-2-reviewer |\n| R-008 | delivery | The change proposal is not produced, or the release checklist is not run, before closure is attempted | The Closure Gate cannot pass even though task-level acceptance is met | medium | T-011 | T-011 explicitly packages the change proposal and runs the release-checklist verification | omn-orchestrator |\n| R-009 | requirement | omn-product-owner determines on review that the two should-have items carried from the scope definition were not intended to enter this execution plan | T-013 and T-014 are removed from the task set | low | T-013, T-014 | Confirm A-007 with omn-product-owner before design work begins | omn-product-owner |\n| R-010 | dependency | omn-tech-lead decides in T-012 that the additive module edits do warrant a contract-version increment | A follow-up governance change is required outside this plan's scope to update host registrations and gate precedent | low | T-012 | T-012 records the decision as accepted and routes any resulting bump to a separate change | omn-tech-lead |\n\n## Task Breakdown\n\n### T-001 Select the standard's carrier file\n\n- Owner: architect\n- Complexity: M (confidence: low)\n- Depends on: none\n- Traces to: S-002, S-010, S-011, S-012, A-001, A-002\n- Status: assumption-dependent (A-002)\n- Description: An existing file is selected to carry the shared necessity-and-reuse\n  standard, and the mechanism by which each of the seven named phases (solution design and\n  risk assessment, implementation, refactor implementation, quality review, code quality\n  review, structural compliance, repository quality scan) already loads that file \u2014 through\n  a phase's required-skill list, an agent's declared skill bindings, or a frozen\n  context-slice membership \u2014 is identified for each phase without any change to the\n  runtime module or its version constant.\n- Acceptance Criteria:\n  - One existing file is named as the carrier, with no new file added to the repository\n    tree\n  - For each of the seven named phases, the existing loading path that delivers the\n    carrier file to that phase is identified and recorded\n- Gate: Design Gate\n\n### T-002 Author the necessity-and-reuse standard's content\n\n- Owner: architect\n- Complexity: S (confidence: low)\n- Depends on: T-001\n- Traces to: S-001, S-003, S-004, S-005, S-006, S-007, S-012, A-001\n- Status: assumption-dependent (A-001)\n- Description: The carrier file selected by T-001 states, in one place, that understanding\n  the problem precedes the ladder; the seven rungs in order with the rule to stop at the\n  first rung that holds; the minimum-necessary-change definition, with everything outside\n  its boundary requiring a recorded justification; the safety floor naming each protected\n  concern, with line count stated as not a criterion; and the seven review questions by\n  name, with the outcome that the seventh yields a correctness or security finding and the\n  other six yield a maintainability or architecture finding.\n- Acceptance Criteria:\n  - All five required elements are present in the carrier file's text\n  - Every rule stated in the accepted scope definition's acceptance criteria for this item\n    appears with equal or stronger force, none softened\n- Gate: Design Gate\n\n### T-003 Extend the architect's reuse-survey requirements\n\n- Owner: architect\n- Complexity: S (confidence: high)\n- Depends on: T-002\n- Traces to: S-013\n- Status: ready\n- Description: The architect's reuse-survey procedure and self-check require, for every\n  required capability, candidates of all four kinds \u2014 existing components, the standard\n  library, native platform or framework capability, and already-installed dependencies \u2014\n  require a stated basis naming which kinds were searched when none is found, and require a\n  capability that no accepted statement requires to be recorded as out of scope rather than\n  surveyed or designed.\n- Acceptance Criteria:\n  - The procedure text lists all four candidate kinds for every required capability\n  - The self-check fails when a capability search omits a basis statement, or when an\n    unrequired capability is designed instead of recorded out of scope\n- Gate: Design Gate\n\n### T-004 Extend the implementer's route-selection procedure\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: low)\n- Depends on: T-002\n- Traces to: S-014, A-003\n- Status: assumption-dependent (A-003)\n- Description: The implementer's procedure requires the route for every change-set entry\n  to be chosen by the ladder, stopping at the first rung that holds, and requires the rung\n  that justified any new abstraction, file, or dependency to be recorded in the\n  implementation report's existing `Approach taken` field, without adding a new field to\n  that report.\n- Acceptance Criteria:\n  - The procedure states the stop-at-first-rung rule for every change-set entry\n  - The rung justification is recorded in the existing `Approach taken` field with no new\n    report field introduced\n- Gate: Review Gate\n\n### T-005 Extend the implementer's safety-floor self-check\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-002\n- Traces to: S-006, S-014\n- Status: ready\n- Description: The implementer's self-check carries a Blocking check that fails whenever a\n  change removes or weakens input validation at a trust boundary, error handling that\n  prevents data loss, authorization or audit paths, accessibility, required observability,\n  data integrity, or the tests that prove the change, and it states that justifying every\n  new abstraction, file, or dependency is a recorded obligation.\n- Acceptance Criteria:\n  - The self-check names every safety-floor item and marks its removal or weakening\n    Blocking\n  - The self-check text does not introduce a line-count threshold as a check condition\n- Gate: Review Gate\n\n### T-006 Extend the reviewer's procedure with the seven review questions\n\n- Owner: omn-dev-2-reviewer\n- Complexity: S (confidence: low)\n- Depends on: T-002\n- Traces to: S-007, S-015, A-004\n- Status: assumption-dependent (A-004)\n- Description: The reviewer's procedure requires the seven questions \u2014 existence, reuse,\n  dependency, abstraction, complexity, scope, safety \u2014 to be applied to every change\n  review, requires each finding to be measured against the standard rather than against\n  line count, and classifies a safety-floor breach as a correctness or security finding and\n  the other six as maintainability or architecture findings at the severity the existing\n  severity table yields.\n- Acceptance Criteria:\n  - The procedure names all seven questions and requires them on every review\n  - The procedure states that a finding is never that the change could be shorter, and\n    that the severity category set is unchanged\n- Gate: Review Gate\n\n### T-007 Capture a fresh pre-change baseline snapshot\n\n- Owner: omn-tech-lead\n- Complexity: XS (confidence: high)\n- Depends on: none\n- Traces to: S-016, S-017\n- Status: ready\n- Description: Every framework verifier, the unit test suite, and the component counts are\n  run and recorded as they stand immediately before any module edit in this plan begins, so\n  a later comparison is attributable to this change alone.\n- Acceptance Criteria:\n  - Recorded figures cover registry coverage, phase dispatchability, validators, vertical\n    slice, multi-phase, recovery, manifests, the test-suite pass count, and the five\n    component counts\n  - The snapshot is timestamped and precedes the first edit made under T-003 through T-006\n- Gate: Planning Gate\n\n### T-008 Measure added instruction volume per module set\n\n- Owner: omn-tech-lead\n- Complexity: S (confidence: high)\n- Depends on: T-003, T-004, T-005, T-006\n- Traces to: S-017\n- Status: ready\n- Description: The byte size of each agent module set edited under T-003 through T-006,\n  and of the carrier file authored under T-002, is measured before and after, and the\n  difference is recorded per module set.\n- Acceptance Criteria:\n  - A before, after, and delta byte figure is recorded for every edited module set and for\n    the carrier file\n  - Figures are attributable to a specific file, not aggregated across files\n- Gate: Verification Gate\n\n### T-009 Verify framework baselines after the change\n\n- Owner: omn-qa\n- Complexity: M (confidence: low)\n- Depends on: T-003, T-004, T-005, T-006, T-007\n- Traces to: S-016, S-017, A-005\n- Status: assumption-dependent (A-005)\n- Description: Every framework verifier, the unit test suite, and the component counts are\n  re-run after T-003 through T-006 are complete and compared against the snapshot T-007\n  recorded, and the runtime module is confirmed byte-identical to its recorded baseline.\n- Acceptance Criteria:\n  - Every verifier, the test suite, and the component counts match the T-007 snapshot\n    exactly\n  - The runtime module's digest matches its baseline and its version constant still reads\n    its recorded value\n- Gate: Verification Gate\n\n### T-010 Refresh the packaging mirror\n\n- Owner: omn-dev-1-implement\n- Complexity: XS (confidence: low)\n- Depends on: T-003, T-004, T-005, T-006\n- Traces to: A-006\n- Status: assumption-dependent (A-006)\n- Description: The packaging mirror is refreshed to reflect the edited carrier file and\n  agent modules, so the mirror's drift test passes without any file being newly added\n  outside the mirror refresh itself.\n- Acceptance Criteria:\n  - The packaging-mirror drift test passes after the refresh\n  - No file is added to the framework tree other than the mirror's own refreshed copies\n- Gate: Review Gate\n\n### T-011 Produce the framework closure package for this change\n\n- Owner: omn-documentation\n- Complexity: M (confidence: medium)\n- Depends on: T-008, T-009, T-010, T-012, T-013, T-014\n- Traces to: A-008\n- Status: ready\n- Description: A single closure package is produced: a change proposal from the\n  framework's change-proposal template, linking this run's artifacts \u2014 the scope\n  definition, this execution plan, the design, implementation, and review evidence, the\n  byte measurement, the baseline verification result, the mirror refresh confirmation, and\n  the version-bump decision \u2014 together with a run of the framework release checklist\n  against that proposal.\n- Acceptance Criteria:\n  - The change proposal links every run artifact named above by reference\n  - The release-checklist verification records a result for this change\n- Gate: Closure Gate\n\n### T-012 Decide whether the module edits warrant a contract-version increment\n\n- Owner: omn-tech-lead\n- Complexity: S (confidence: medium)\n- Depends on: T-003, T-004, T-005, T-006\n- Traces to: A-008\n- Status: ready\n- Description: Given the final edited text of the architect, implementer, and reviewer\n  modules, a decision is recorded on whether the additive edits warrant a later\n  contract-version increment, given that host registrations pin the current version and\n  gate-approval precedent keys on producing-agent version; if a bump is warranted, it is\n  recorded as a separate follow-up change, not performed here.\n- Acceptance Criteria:\n  - A decision \u2014 bump warranted, or not warranted \u2014 is recorded with its rationale\n  - If warranted, a follow-up change is named rather than performed inside this plan\n- Gate: Closure Gate\n\n### T-013 Record any new external dependency as architecture-significant\n\n- Owner: architect\n- Complexity: XS (confidence: low)\n- Depends on: T-001\n- Traces to: A-007\n- Status: assumption-dependent (A-007)\n- Description: If the design selected under T-001 or authored under T-002 introduces a new\n  external dependency, that introduction is recorded as an architecture-significant\n  decision with the reason no lower rung of the ladder held; if no new dependency is\n  introduced, this is recorded as not applicable.\n- Acceptance Criteria:\n  - An architecture-significant decision record exists naming the new dependency and the\n    unheld lower rungs, when a new external dependency is introduced\n  - An explicit not-applicable statement is recorded, when no new external dependency is\n    introduced\n- Gate: Design Gate\n\n### T-014 Increment the carrier skill's recorded version\n\n- Owner: architect\n- Complexity: XS (confidence: low)\n- Depends on: T-001\n- Traces to: A-007\n- Status: assumption-dependent (A-007)\n- Description: If the carrier file selected under T-001 is an existing skill file, its\n  recorded version is raised by one minor increment in the skill registry and in the skill\n  catalog, the two are kept in agreement, and the registry coverage verifier still resolves\n  the standard by its display name; if the carrier is not a skill file, this is recorded as\n  not applicable.\n- Acceptance Criteria:\n  - The registry record and skill catalog show the same incremented minor version and the\n    coverage verifier resolves it, when the carrier file is an existing skill file\n  - An explicit not-applicable statement is recorded, when the carrier file is not a skill\n    file\n- Gate: Design Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-002 | decision-gate | The authoring target depends on which existing file T-001 selects as carrier |\n| T-001 | T-013 | decision-gate | Whether a new dependency was introduced is only assessable once T-001 fixes the carrier and loading approach |\n| T-001 | T-014 | decision-gate | A skill-version increment applies only if T-001 selects an existing skill file as carrier |\n| T-002 | T-003 | contract | The reuse-survey rule references the authored standard's text |\n| T-002 | T-004 | contract | The route-selection procedure references the authored standard's ladder |\n| T-002 | T-005 | contract | The safety-floor self-check references the authored standard's safety-floor list |\n| T-002 | T-006 | contract | The seven-questions procedure references the authored standard's review questions |\n| T-003 | T-008 | produces-consumes | Byte measurement needs the architect module's final edited text |\n| T-004 | T-008 | produces-consumes | Byte measurement needs the implementer module's final edited text |\n| T-005 | T-008 | produces-consumes | Byte measurement needs the implementer module's final edited text |\n| T-006 | T-008 | produces-consumes | Byte measurement needs the reviewer module's final edited text |\n| T-003 | T-009 | verification | Verification confirms the edited architect module did not regress a baseline verifier |\n| T-004 | T-009 | verification | Verification confirms the edited implementer module did not regress a baseline verifier |\n| T-005 | T-009 | verification | Verification confirms the edited implementer module did not regress a baseline verifier |\n| T-006 | T-009 | verification | Verification confirms the edited reviewer module did not regress a baseline verifier |\n| T-007 | T-009 | produces-consumes | Verification compares current results against the fresh baseline T-007 captured |\n| T-003 | T-010 | produces-consumes | The mirror refresh mirrors the architect module's final edited text |\n| T-004 | T-010 | produces-consumes | The mirror refresh mirrors the implementer module's final edited text |\n| T-005 | T-010 | produces-consumes | The mirror refresh mirrors the implementer module's final edited text |\n| T-006 | T-010 | produces-consumes | The mirror refresh mirrors the reviewer module's final edited text |\n| T-003 | T-012 | contract | The version-bump decision is assessed against the architect module's final edited text |\n| T-004 | T-012 | contract | The version-bump decision is assessed against the implementer module's final edited text |\n| T-005 | T-012 | contract | The version-bump decision is assessed against the implementer module's final edited text |\n| T-006 | T-012 | contract | The version-bump decision is assessed against the reviewer module's final edited text |\n| T-008 | T-011 | produces-consumes | The change proposal records the measured byte deltas |\n| T-009 | T-011 | verification | The change proposal records the verification result against baseline |\n| T-010 | T-011 | produces-consumes | The change proposal records that the packaging mirror was refreshed |\n| T-012 | T-011 | produces-consumes | The change proposal records the version-bump decision |\n| T-013 | T-011 | produces-consumes | The change proposal records the dependency-significance outcome |\n| T-014 | T-011 | produces-consumes | The change proposal records the skill-version outcome |\n\n### 8.2 External Dependencies\n\nNone identified. Every prerequisite in this plan is owned by an agent within the\nframework's authority; no party outside the framework is required to act.\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-007\n- Wave 2: T-002, T-013, T-014\n- Wave 3: T-003, T-004, T-005, T-006\n- Wave 4: T-008, T-009, T-010, T-012\n- Wave 5: T-011\n\n## Suggested Workflow\n\nSelected workflow: `implement-feature`.\n\nSelected because: the request delivers new, product-requested behaviour into existing\nagent contracts with design, implementation, and review impact and a documented closure,\nmatching the shape of `implement-feature` rather than a defect fix, a pure investigation,\nor a standalone refactor.\n\n| Phase | Tasks |\n|---|---|\n| execution-planning | plan handoff |\n| solution-design-and-risk-assessment | T-001, T-002, T-003, T-013, T-014 |\n| implementation | T-004, T-005, T-010 |\n| quality-review | T-006, T-007, T-008, T-009, T-012 |\n| documentation-and-release-handoff | T-011 |\n\n| Gate | Required owners |\n|---|---|\n| Scope Gate | omn-product-owner, omn-business-analyst |\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer, omn-qa |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| reuse-assessment | T-001, T-003 | architect | Primary |\n| technical-approach-definition | T-002 | architect | Primary |\n| architecture-decision-authoring | T-013, T-014 | architect | Primary |\n| implementation-delivery | T-004, T-005, T-010 | omn-dev-1-implement | Primary |\n| code-review | T-006 | omn-dev-2-reviewer | Primary |\n| quality-verification | T-009 | omn-qa | Primary |\n| quality-verification | T-007, T-008 | omn-tech-lead | Secondary |\n| release-readiness | T-012 | omn-tech-lead | Primary |\n| documentation | T-011 | omn-documentation | Primary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S01 | architecture/clean-architecture-checklist.md | T-001, T-002, T-003, T-013, T-014 | Primary |\n| S09 | security/secure-engineering.md | T-005, T-006 | Secondary |\n| S07 | testing/testing-strategy.md | T-007, T-009 | Secondary |\n| S03 | dotnet/engineering-playbook.md | T-004, T-010 | Secondary |\n\n## Acceptance Criteria\n\n1. The carrier file states all five required elements of the standard and is already\n   reachable, without a runtime change, by all seven named phases. Verifies business\n   objective 1. Evidence: T-001 and T-002 outputs, confirmed at the Design Gate.\n2. The architect, implementer, and reviewer procedures apply the ladder, the safety floor,\n   and the seven review questions exactly as the standard states, with no rule softened.\n   Verifies business objectives 1, 2, and 3. Evidence: T-003, T-004, T-005, T-006 outputs,\n   confirmed at the Review Gate.\n3. Every framework verifier, the test suite, and the component counts match their recorded\n   baseline after the change, and the runtime module is unchanged. Verifies business\n   objectives 1 and 3. Evidence: T-009 verification result compared to the T-007 snapshot,\n   confirmed at the Verification Gate.\n4. The added instruction volume is reported in bytes per module set, and a change proposal\n   linking all run artifacts passes the release-checklist run. Verifies business objective\n   1. Evidence: T-008 measurement and T-011 change proposal, confirmed at the Closure Gate.\n\n## Definition of Done\n\n- [ ] Acceptance criteria 1 through 4 are verified with recorded evidence\n- [ ] Scope, Planning, Design, Review, Verification, and Closure Gates are approved with\n      owners recorded\n- [ ] Task acceptance criteria for T-001 through T-014 are satisfied or formally waived\n- [ ] Assumptions A-001 through A-008 are confirmed or converted to recorded decisions\n- [ ] Risks R-001 through R-010 are closed or accepted with named owners\n- [ ] Open Questions Q-001 and Q-002 are closed or explicitly accepted\n- [ ] The change proposal is published and the release-checklist result is recorded\n- [ ] Durable outcomes are recorded to memory per memory/memory-governance.md\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Which representative implementation tasks form the before-and-after outcome comparison the business intent describes, who runs it, against which baseline figures, and is it delivered inside this change or as a follow-up? | No | requester | plan-wide |\n| Q-002 | Is there a ceiling on added instruction bytes per module set above which the change is rejected as framework bloat, or is reporting the measured bytes sufficient? | No | requester | T-008, T-011 |",
+        "digest": "sha256:a3229d0654910e3ecc3e7a4d24ec5edd",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change this agent designs against: a change request, a feature request, or a business intent. Without one there is no requested change to design, and designing anyway would mean inventing the requirement."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+      "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md"
+    ],
+    "failures": [
+      {
+        "id": "D2.4",
+        "severity": "Correctable",
+        "quality_ref": "A1.4",
+        "requirement": "No unpermitted level-2 sections introduced; supplementary material is an appendix",
+        "detail": "unpermitted: ['Necessity and Reuse Ladder']"
+      },
+      {
+        "id": "D4.1",
+        "severity": "Blocking",
+        "quality_ref": "A5.1",
+        "requirement": "Every architectural objective traces to a statement identifier",
+        "detail": "untraced: [\"The architect's self-check (`A7.3`) states the same candidate-kind rule its procedure states, so the two cannot drift apart. Traces to the change request's architect self-check proposal.\", \"In scope (this phase's own tasks \u2014 `T-001`, `T-002`, `T-003`, `T-013`, `T-014`): selecting and extending the standard's carrier; authoring the carrier's new content; extending the architect's own reuse-survey, significance, and self-check wording; deciding the dependency-significance and skill-version questions those two tasks raise.\"]"
+      },
+      {
+        "id": "D4.3",
+        "severity": "Blocking",
+        "quality_ref": "A5.3",
+        "requirement": "Every requirement traces to a statement identifier",
+        "detail": "untraced: [\"Functional requirements: The architect's significance rule additionally names a new e\", 'Acceptance criteria: this design targets scope-definition `A-004` (phase reachabi']"
+      },
+      {
+        "id": "D5.5",
+        "severity": "Correctable",
+        "quality_ref": "A3.4",
+        "requirement": "Constraint class and force use the declared vocabularies",
+        "detail": "invalid class: ['C-005', 'C-007']; invalid force: []"
+      },
+      {
+        "id": "D7.2",
+        "severity": "Blocking",
+        "quality_ref": "A7.2",
+        "requirement": "Every reuse outcome uses the declared vocabulary",
+        "detail": "invalid: ['New external dependency for this change']"
+      },
+      {
+        "id": "D8.2",
+        "severity": "Blocking",
+        "quality_ref": "A8.3",
+        "requirement": "Every option is evaluated against every recorded criterion",
+        "detail": "unevaluated cells: {'O-004': ['C-006']}"
+      },
+      {
+        "id": "D16.1",
+        "severity": "Blocking",
+        "quality_ref": "A15.4",
+        "requirement": "Lateral closure: every referenced identifier is defined in its own register",
+        "detail": "undefined: {'A': ['A-006', 'A-014']}"
+      },
+      {
+        "id": "D16.4",
+        "severity": "Correctable",
+        "quality_ref": "A15.5",
+        "requirement": "No supplied planner task is left unaddressed by the sequencing constraints",
+        "detail": "unaddressed: ['T-007', 'T-008', 'T-011', 'T-012', 'T-013']"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-17T16:36:07Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+        "supplies": null
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+        "supplies": null
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:ea8b3b5e9812546f9b4054458bb8143e",
+    "input_digest": "sha256:25a02ca166aa92074ee2fbe8142b210d",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/mnc-feature-request.md",
+        "source_file": ".claude/runs/inputs/mnc-feature-request.md",
+        "digest": "sha256:0089f08e0f80fccd37040a21394244d4"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/mnc-change-request.md",
+        "source_file": ".claude/runs/inputs/mnc-change-request.md",
+        "digest": "sha256:1e6552a2dca51315185356ca795f7b72"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/mnc-business-intent.md",
+        "source_file": ".claude/runs/inputs/mnc-business-intent.md",
+        "digest": "sha256:9d4d342007cc5b01b3b44ab043c76bc1"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/mnc-architecture-context.md",
+        "source_file": ".claude/runs/inputs/mnc-architecture-context.md",
+        "digest": "sha256:cdb7cb03685b91e8f79fe2c971b61d07"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/ponytail-framework-integration-bf84e0/.claude/runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:a3229d0654910e3ecc3e7a4d24ec5edd"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "memory/architecture.md",
+      "runtime/README.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+      "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/review-package-*.md"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      },
+      {
+        "artifact": "review-package.md",
+        "template_ref": "templates/review-package.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "Emitted only for review-pull-request/structural-compliance, where this agent applies the structural and security lens and the findings are classified under the architecture and security categories. runtime/review_package_validator.py already contracts this agent as a permitted producer of review-package.md; the quality rules it applies to the structural lens are the ones in quality.md.",
+        "artifact_path_glob": "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/review-package-*.md",
+        "naming": "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/review-package-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-09-17T16:36:07Z"
+}

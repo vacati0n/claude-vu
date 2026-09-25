@@ -1,0 +1,95 @@
+{
+  "invocation_id": "inv-ae91e085f481-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ae91e085f481/states/scope-and-acceptance/artifacts/scope-definition.md"
+  ],
+  "structured_output": {
+    "run_id": "run-ae91e085f481",
+    "state_id": "scope-and-acceptance",
+    "agent_id": "omn-product-owner",
+    "agent_version": "1.0.0",
+    "scope_id": "SCOPE-2026-0007",
+    "feature_name": "Minimum Necessary Change policy",
+    "status": "complete",
+    "scope_verdict": "bounded",
+    "counts": {
+      "scope_items": 9,
+      "exclusions": 8,
+      "acceptance_criteria": 14,
+      "scope_decisions": 6,
+      "open_questions": 3,
+      "blocking_open_questions": 0
+    },
+    "inputs_consumed": [
+      {"type": "feature-request", "reference": "runs/inputs/mnc-feature-request.md", "digest": "sha256:0089f08e0f80fccd37040a21394244d4"},
+      {"type": "change-request", "reference": "runs/inputs/mnc-change-request.md", "digest": "sha256:1e6552a2dca51315185356ca795f7b72"},
+      {"type": "business-intent", "reference": "runs/inputs/mnc-business-intent.md", "digest": "sha256:9d4d342007cc5b01b3b44ab043c76bc1"},
+      {"type": "architecture-context", "reference": "runs/inputs/mnc-architecture-context.md", "digest": "sha256:cdb7cb03685b91e8f79fe2c971b61d07"}
+    ],
+    "input_digest": "sha256:a32ab8e7e0a3d8d7f1085b0d6f50c968",
+    "context_digest": "sha256:c5cc1c3bdd1db9b2d550e98fd7f931ed",
+    "lifecycle_transitions": [
+      {"state": "Initialization", "trigger": "manifest verified; seven modules loaded in declared order; template resolved"},
+      {"state": "ContextLoading", "trigger": "Stages 1 and 2 complete; four inputs classified; business intent present; one Stage 2 gap recorded (outcome-side success measure unspecified)"},
+      {"state": "Execution", "trigger": "Stages 3 through 8 complete; no E-INPUT-CONFLICT; no blocking question"},
+      {"state": "Completion", "trigger": "Stage 9 self-verification passed on the emitted draft"},
+      {"state": "Retirement", "trigger": "artifact and result envelope written; no gate decision recorded; no external access"}
+    ],
+    "quality_checks": {
+      "structural": {"S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass"},
+      "metadata": {"D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "SD1": "pass", "SD2": "pass", "D5": "pass", "D6": "pass"},
+      "acceptance": {"SD3": "pass", "SD4": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A7": "pass"},
+      "scope_integrity": {"SD5": "pass", "SD8": "pass", "G1": "pass", "G2": "pass", "G3": "pass", "G4": "pass", "G5": "pass"},
+      "value_alignment": {"L1": "pass", "L2": "pass", "L3": "pass", "L4": "pass", "L5": "pass"},
+      "decision": {"SD6": "pass", "D7": "pass", "D8": "pass", "D9": "pass"},
+      "authority_boundary": {"SD7": "pass", "B1": "pass", "B2": "pass", "B3": "pass", "B4": "pass", "B5": "pass", "B6": "pass"},
+      "content": {"C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass"},
+      "checks_run": 50,
+      "checks_passed": 50,
+      "checks_failed": 0,
+      "repair_passes": 0
+    },
+    "not_machine_checkable_obligations": {
+      "SN1": {
+        "obligation": "Each acceptance criterion states a threshold the business would actually accept",
+        "judgement": "discharged",
+        "detail": "Thresholds are taken from the requester's own acceptance criteria and baseline figures (verifier counts, test count, component counts, byte sizes, the seven named phases, the five named elements of the standard); no threshold was invented."
+      },
+      "SN2": {
+        "obligation": "The recorded scope matches what the requester asked for, with no silent widening",
+        "judgement": "discharged",
+        "detail": "Every in-scope item traces to the feature request or change request; the two change-request-only expectations are recorded at should-have priority under D-001; the change request's mechanism list is carried as context rather than scope; the outcome measurement is a question, not a criterion (D-005)."
+      },
+      "SN3": {
+        "obligation": "The stated business goal is the goal the requester holds, not one inferred for them",
+        "judgement": "discharged",
+        "detail": "The business goal restates the business intent's 'Outcome the business is buying' paragraph in its own terms with no mechanism added."
+      }
+    },
+    "notes": [
+      "Verdict follows the Stage 7 question set: three open questions, none blocking, eight exclusions recorded, therefore bounded / complete.",
+      "No gate decision, merge decision, or readiness claim recorded.",
+      "No command executed; no external system accessed; no file written outside permitted_writes."
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-product-owner/manifest.yaml",
+    "agents/omn-product-owner/system.md",
+    "agents/omn-product-owner/identity.md",
+    "agents/omn-product-owner/reasoning.md",
+    "agents/omn-product-owner/execution.md",
+    "agents/omn-product-owner/output.md",
+    "agents/omn-product-owner/quality.md",
+    "agents/omn-product-owner/examples.md",
+    "templates/scope-definition.md",
+    "runs/run-ae91e085f481/states/scope-and-acceptance/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-ae91e085f481/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "runs/run-ae91e085f481/states/scope-and-acceptance/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,68 @@
+{
+  "invocation_id": "inv-ae91e085f481-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ae91e085f481/states/quality-review/artifacts/review-package.md"
+  ],
+  "structured_output": {
+    "packageId": "RP-2026-0007",
+    "status": "complete",
+    "verdict": "approve-with-corrections",
+    "counts": {
+      "findingsBySeverity": {
+        "critical": 0,
+        "high": 2,
+        "medium": 1,
+        "low": 0
+      },
+      "correctionRequests": 3,
+      "openQuestions": 1
+    },
+    "qualityChecks": {
+      "total": 46,
+      "passed": 46,
+      "failed": 0,
+      "notMachineCheckable": 3,
+      "note": "31 of the 46 checks in agents/omn-dev-2-reviewer/quality.md are executed by the Validation Engine (runtime/review_package_validator.py) against the emitted artifact and its invocation envelope: PASS, 31/31, 0 blocking, 0 correctable failures, 3 declared not-machine-checkable there. The remaining reviewer-only checks (F1-F5, E1-E5, A1-A6, C6) are judged directly by this run rather than by the shared engine; all pass."
+    },
+    "validationEngine": {
+      "validator": "review_package_validator",
+      "result": "PASS",
+      "checksRun": 31,
+      "checksPassed": 31,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3
+    },
+    "notMachineCheckableObligations": {
+      "N1": "satisfied -- the full eight-file diff was read line-by-line against the accepted design's Appendix A.1-A.4 target content and Impacted Modules table; the five framework verifiers this review could run were re-executed independently rather than only read from the report, and the one reported test failure was reproduced directly. verify_recovery.py, verify_self_hosting.py --release-checklist, and the full 855-second unit suite were not independently re-run in full (recorded in Review Scope as out of scope / partially confirmed), so a high-risk issue confined to those unexamined areas could not be found by this review",
+      "N2": "satisfied -- every finding cites a written requirement (a technical-design.md module or decision identifier, a scope-definition.md acceptance criterion, or the implementer's own manifest text); none rests on line count or another unanchored preference",
+      "N3": "satisfied -- F-001 and F-002 were assigned high on first classification from the Stage 6 table in reasoning.md and were not revisited or softened to reach a particular verdict row"
+    },
+    "escalations": [
+      "F-001/CR-001 escalated to architect and omn-orchestrator via Open Question Q-001: T-006/M-009 has no role capable of performing it under the reviewer's permanent no-repository-write invariant"
+    ],
+    "boundariesDeclined": [
+      "no gate decision recorded: the Review Gate is left to omn-qa, its second owner under the Producer Exclusion Rule",
+      "no correction implemented: CR-001, CR-002, and CR-003 each state a required outcome and an owner, never a patch",
+      "no acceptance criterion, quality threshold, or declared invariant relaxed to reach approval"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-2-reviewer/system.md",
+    "agents/omn-dev-2-reviewer/identity.md",
+    "agents/omn-dev-2-reviewer/reasoning.md",
+    "agents/omn-dev-2-reviewer/execution.md",
+    "agents/omn-dev-2-reviewer/output.md",
+    "agents/omn-dev-2-reviewer/quality.md",
+    "agents/omn-dev-2-reviewer/examples.md",
+    "runs/run-ae91e085f481/states/quality-review/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-ae91e085f481/states/quality-review/artifacts/review-package.md",
+    "runs/run-ae91e085f481/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,66 @@
+{
+  "invocation_id": "inv-ae91e085f481-06-003",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ae91e085f481/states/documentation-and-release-handoff/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "knownIssuesCount": 4,
+    "publishedStatementsCount": 18,
+    "publishedStatementSources": {
+      "runs/inputs/mnc-architecture-context.md": 5,
+      "runs/run-ae91e085f481/states/quality-review/artifacts/review-package.md": 4,
+      "runs/run-ae91e085f481/states/implementation/artifacts/implementation-report.md": 5,
+      "runs/run-ae91e085f481/states/scope-and-acceptance/artifacts/scope-definition.md": 3,
+      "inline (dispatch-supplied post-review verification results, attempt 3 repair pass)": 1
+    },
+    "releaseVerdict": "released",
+    "artifactStatus": "complete",
+    "communicationBasis": "release-handoff",
+    "changeSurfaceCounts": {
+      "breaking": 0,
+      "contract": 0,
+      "operational": 0,
+      "feature": 3,
+      "fix": 0,
+      "improvement": 1,
+      "internal": 0
+    },
+    "qualityChecks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass",
+      "P1": "pass", "P2": "pass", "P3": "pass", "P4": "pass", "P5": "pass", "P6": "pass",
+      "R3": "pass", "X1": "pass", "X2": "pass", "X3": "pass", "X4": "pass",
+      "R1": "pass", "R2": "pass", "R4": "pass", "R5": "pass", "R7": "pass", "V1": "pass", "V2": "pass", "V3": "pass",
+      "K1": "pass", "K2": "pass", "K3": "pass", "K4": "pass", "K5": "pass", "K6": "pass",
+      "R6": "pass", "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+      "A7": "pass", "A8": "pass", "A9": "pass", "A10": "pass", "A11": "pass", "A12": "pass", "A13": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+    },
+    "qualityChecksRun": 60,
+    "qualityChecksPassed": 60,
+    "notMachineCheckableObligations": {
+      "N1": "pass - the artifact describes the standard rollout, M-009's now-completed delivery, and the packaging-mirror refresh exactly as recorded in review-package.md and this phase's supplied post-review verification results, with nothing added beyond what those sources establish",
+      "N2": "pass - no prior release-note.md exists for this run to carry stale content forward; nothing was carried forward unchecked",
+      "N3": "pass - every user-visible change (the reviewer's seven review questions, the implementer's ladder route-selection and safety-floor check, the architect's broadened reuse survey) is represented in Highlights at the size the Stage 5 table gives it, and no internal-only edit is padded into a user-visible section"
+    },
+    "repairNote": "attempt 3 repair pass: corrected the sole R7 finding from attempt 2's validation report by changing the version field from 'S01 v1.1.0' to the bare, recognisable version string '1.1.0' in both the metadata block and the Metadata section; the skill identity the version belongs to (S01) remains stated in the Technical Changes and Compatibility section's existing prose. No other field, section, or digest was altered."
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    "agents/omn-documentation/examples.md",
+    "runs/run-ae91e085f481/states/documentation-and-release-handoff/invocation-envelope.json"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "runs/run-ae91e085f481/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "runs/run-ae91e085f481/states/documentation-and-release-handoff/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,67 @@
+{
+  "invocation_id": "inv-ae91e085f481-03-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md"
+  ],
+  "structured_output": {
+    "repair_attempt": 2,
+    "counts": {
+      "facts": 24,
+      "assumptions": 5,
+      "constraints": 11,
+      "impactedModules": 15,
+      "options": 4,
+      "decisions": 4,
+      "risks": 6,
+      "sequencingConstraints": 8,
+      "openQuestions": 3
+    },
+    "packageStatus": "complete",
+    "recomputedOptionRanking": {
+      "evaluated": ["O-001", "O-002", "O-003", "O-004"],
+      "satisfyBothHardConstraints": ["O-001"],
+      "recomputedSelection": "O-001",
+      "statedSelection": "O-001",
+      "agree": true
+    },
+    "repairsApplied": [
+      {"finding": "D2.4", "action": "Removed the literal '## Necessity and Reuse Ladder' heading line from inside the appendix's target-content fence, replacing it with a prose lead-in naming the target heading, so the fence no longer contains an unpermitted level-2 section."},
+      {"finding": "D4.1", "action": "Added an S-013 trace to the architect self-check objective bullet; moved the 'In scope' bullet's colon so it is recognized as its own top-level item and is no longer absorbed into the Architectural objectives block."},
+      {"finding": "D4.3", "action": "Added an S-011 trace to the new-dependency significance functional requirement; rewrote the acceptance-criteria bullet to cite S-012/S-013 and to reference the scope definition's criteria by subject instead of by its own A-nnn identifiers."},
+      {"finding": "D5.5", "action": "Changed C-005 class from 'Security/Compliance' to 'Security' and C-007 class from 'Quality attribute' to 'Quality-attribute', both now in the declared vocabulary."},
+      {"finding": "D7.2", "action": "Changed the 'New external dependency for this change' reuse row's outcome from 'not required' to 'none-found' and extended its rationale to state which supplied inputs the search covered."},
+      {"finding": "D8.2", "action": "Filled O-004's previously empty C-006 cell with 'Violated' and added a footnote explaining why, so every option carries a value in every recorded criterion column."},
+      {"finding": "D16.1", "action": "Removed the bare A-006 and A-014 tokens (external scope-definition identifiers colliding with this design's own Assumptions namespace) from the acceptance-criteria bullet."},
+      {"finding": "D16.4", "action": "Added sequencing constraint P-008, binding the five previously unaddressed supplied planner tasks (T-007, T-008, T-011, T-012, T-013), and updated the Rollout sentence to read P-001 through P-008."}
+    ],
+    "qualityChecks": {
+      "checksRun": 78,
+      "checksPassed": 78,
+      "notMachineCheckable": 10,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "advisoryFailures": 0
+    }
+  },
+  "evidence_refs": [
+    "agents/architect/manifest.yaml",
+    "agents/architect/system.md",
+    "agents/architect/identity.md",
+    "agents/architect/reasoning.md",
+    "agents/architect/execution.md",
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "agents/architect/examples.md",
+    "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/invocation-envelope.json",
+    "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/validation-report.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-ae91e085f481/states/solution-design-and-risk-assessment/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,99 @@
+{
+  "invocation_id": "inv-ae91e085f481-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ae91e085f481/states/implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-0006",
+    "workflowPhase": "implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 8,
+      "testEvidenceEntries": 14,
+      "deviations": 1,
+      "residualRisks": 1,
+      "openQuestions": 1
+    },
+    "evidenceExecution": {
+      "commandsExecuted": 14,
+      "commandsPassed": 13,
+      "commandsFailed": 1,
+      "commands": [
+        "static content checks (T-001 through T-008, 8 grep-based checks over the 8 changed files) -- all 8 passed",
+        "python .claude/runtime/verify_registry_coverage.py -- 6/6 checks passed, 105/105 skill references resolved, 37/37 phases dispatchable (matches recorded baseline)",
+        "python .claude/runtime/verify_validators.py -- 6/6 checks passed (matches recorded baseline)",
+        "python .claude/runtime/verify_manifests.py -- 2/2 checks passed (matches recorded baseline)",
+        "python .claude/runtime/verify_vertical_slice.py --run-id run-c5a8d50d3238 -- 10/10 checks passed (matches recorded baseline)",
+        "python .claude/runtime/verify_multi_phase.py --run-id run-c5a8d50d3238 -- 15/15 checks passed (matches recorded baseline)",
+        "python -m unittest discover -s tests -- 329 tests, 328 passed, 1 failed (test_bundle_matches_authoritative_payload_exactly; matches the recorded 329-test baseline count with exactly one new, change-caused, out-of-scope failure)"
+      ],
+      "executionNote": "verify_recovery.py and verify_self_hosting.py --release-checklist were deliberately not run in this phase, per this run's operator guidance (reserved for the Verification and Closure Gates on this machine). The one failing command (the unit test suite) fails on exactly one sub-test, tracing to the packaging-mirror parity check; the failure is caused by this change and is recorded as deviation V-001 and residual risk R-001 rather than concealed."
+    },
+    "qualityChecks": {
+      "total": 45,
+      "passed": 45,
+      "failed": 0,
+      "notMachineCheckable": 4,
+      "note": "45 machine-and-agent-decidable checks in agents/omn-dev-1-implement/quality.md (S1-S8, D1-D6, M1-M7, E1-E4, K1-K2, V1-V3, B1-B7, A1-A3, C1-C5), all pass; N1-N4 discharged by this agent's own judgement, see notMachineCheckableObligations"
+    },
+    "validationEngine": {
+      "validator": "implementation_report_validator",
+      "decidableChecks": 32,
+      "decidablePassed": 32,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "advisoryFailures": 0,
+      "notMachineCheckable": 3,
+      "note": "PASS on the emitted artifact, executed with the invocation envelope supplied so the C7.1 digest check ran against the frozen context slice"
+    },
+    "notMachineCheckableObligations": {
+      "N1": "satisfied -- each of the 8 change-set rows was checked against the file state after the edit with a targeted grep (T-001 through T-008), confirming the row describes the change actually made at that path",
+      "N2": "satisfied -- T-001 through T-008 each target only the file and text their Covers cell names; T-009 through T-014 are described as whole-repository regression sweeps rather than targeted exercises, and their Covers cells and Test descriptions say so",
+      "N3": "satisfied -- every edit is additive prose or a version-identity field in a registry record the accepted design names; no executable code path, gate-decision path, or approval path is touched, confirmed by the unchanged git status of every other file in the repository",
+      "N4": "satisfied -- no new abstraction, file, or dependency was introduced by this change (the necessity and reuse ladder's rung 7 was never reached), so no justification obligation arises; recorded explicitly in Approach taken"
+    },
+    "designConformance": {
+      "skillContent": "D-001 and Appendix A.1 applied verbatim to skills/architecture/clean-architecture-checklist.md, including the version-identity update to 1.1.0 in registry/skills.yaml and skills/agent-skill-matrix.md (D-002)",
+      "architectModules": "Appendix A.2 through A.4 applied verbatim to agents/architect/reasoning.md (A6, A9) and agents/architect/quality.md (A7.3) (D-003)",
+      "implementerModules": "agents/omn-dev-1-implement/reasoning.md, output.md, and quality.md extended by this agent per the design's own delegation (M-006, M-007, M-008); wording authored in this phase, not specified by the design",
+      "reviewerModule": "not touched; owned by omn-dev-2-reviewer in its own phase, per the design's scope",
+      "packagingMirror": "not refreshed in this phase; omn_agent/_bundled_payload/** is outside this run's permitted writes and its sync command is a synchronisation step, not a test/build/static-analysis command -- deviation V-001, escalated via open question Q-001 to the operator"
+    },
+    "escalations": [
+      "V-001 (deferred packaging-mirror refresh) escalated via open question Q-001, blocking, owner operator"
+    ],
+    "boundariesDeclined": [
+      "no review verdict, merge decision, or release readiness claim recorded",
+      "no design revision taken: the packaging-mirror refresh this environment restricts was deferred with escalation rather than satisfied by hand-editing the mirror or running its sync command",
+      "no acceptance criterion relaxed: the packaging-mirror parity check's failure is reported as failing evidence, not suppressed or weakened"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-ae91e085f481/states/implementation/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "skills/architecture/clean-architecture-checklist.md",
+    "agents/architect/quality.md",
+    "agents/architect/reasoning.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "registry/skills.yaml",
+    "skills/agent-skill-matrix.md",
+    "runs/run-ae91e085f481/states/implementation/artifacts/implementation-report.md",
+    "runs/run-ae91e085f481/states/implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

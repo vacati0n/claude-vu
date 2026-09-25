@@ -1,0 +1,310 @@
+{
+  "invocation_id": "inv-ae91e085f481-02-003",
+  "run_id": "run-ae91e085f481",
+  "work_item_id": "run-ae91e085f481::execution-planning",
+  "idempotency_key": "sha256:35da44d9993b1f3717ba2fbb15b96c07",
+  "state_id": "execution-planning",
+  "phase_index": 2,
+  "agent_id": "planner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/planner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/planner/manifest.yaml",
+    "load_order": [
+      "agents/planner/system.md",
+      "agents/planner/identity.md",
+      "agents/planner/reasoning.md",
+      "agents/planner/execution.md",
+      "agents/planner/output.md",
+      "agents/planner/quality.md",
+      "agents/planner/examples.md"
+    ],
+    "module_digests": {
+      "agents/planner/system.md": "sha256:a26a26a95267c61a29c1dafb3b9c8e4a",
+      "agents/planner/identity.md": "sha256:37d6e6d4dc74073c46777abdd086b4de",
+      "agents/planner/reasoning.md": "sha256:6eb7dddf6dbcfb86df5f9cf2f9e3e7df",
+      "agents/planner/execution.md": "sha256:f8aaa279d8b0d06d7d1b32222b66d390",
+      "agents/planner/output.md": "sha256:cadffa959e4adea6cfe8f1a8df094a60",
+      "agents/planner/quality.md": "sha256:4bf46c7470028daff64dbfe9ac74dd6e",
+      "agents/planner/examples.md": "sha256:a0fb0394722c454920a25849c3938f8f"
+    },
+    "capabilities": [
+      "requirement-analysis",
+      "task-decomposition",
+      "dependency-analysis",
+      "execution-sequencing",
+      "complexity-estimation",
+      "risk-identification",
+      "execution-planning"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "user-story",
+      "jira-ticket",
+      "epic",
+      "product-requirement",
+      "product-context",
+      "technical-context",
+      "release-context",
+      "architecture-decision-records",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/mnc-feature-request.md",
+        "source_file": ".claude/runs/inputs/mnc-feature-request.md",
+        "text": "# Feature Request \u2014 Minimum Necessary Change policy (necessity and reuse ladder)\n\n## Source\n\nOperator request dated 2026-09-15: integrate the engineering philosophy of the upstream\nPonytail ruleset (\"lazy senior developer\": lazy about the solution, never lazy about\nunderstanding the problem) into this framework's existing agents as a native, cross-cutting\nbehaviour. The framework's own philosophy is \"code less, but make it work well\". The upstream\nruleset is the source of the principle; nothing from it is copied wholesale.\n\n## Request\n\nMake planning, architecture, implementation, and code review behave like a senior engineer\nwho understands the problem deeply, chooses the simplest solution that satisfies the real\nrequirement, and refuses to build unnecessary things. The behaviour must be embedded in the\nexisting agent lifecycle rather than added as a new agent, a new workflow phase, a new\ncommand, a new runtime mechanism, or a second orchestration layer.\n\nThe principle to embed, in order, stopping at the first rung that holds:\n\n1. Does this need to exist? If not, do not build it.\n2. Does the codebase already have it? Reuse it.\n3. Does the standard library solve it? Use it.\n4. Does the platform or framework in use solve it natively? Use it.\n5. Does an already-installed dependency solve it? Use it.\n6. Can it be written directly in a few lines at the call site? Write it there.\n7. Only then: implement the minimum code necessary, introducing new abstraction only when\n   the reason no lower rung held is recorded.\n\nThe ladder runs after the problem is understood, never instead of understanding it.\n\nTwo rules bound the ladder and are not negotiable:\n\n- Minimum necessary change = required behaviour + required safety + required integration\n  + required tests. Everything outside that boundary requires a recorded justification:\n  scope creep, opportunistic refactoring, speculative abstraction, \"while we are here\"\n  changes, unnecessary cleanup.\n- Safety floor: no simplification may remove or weaken input validation at a trust\n  boundary, error handling that prevents data loss, authorization or audit paths,\n  accessibility, required observability, data integrity, or the tests that prove the\n  change. A shorter implementation is not automatically better; line count is not a\n  criterion. If twenty lines are required, twenty lines are written.\n\nReview must be extended so a reviewer can detect over-engineering with seven questions \u2014\nexistence, reuse, dependency, abstraction, complexity, scope, safety \u2014 and must not demand\narbitrary line-count reduction.\n\n## Non-goals\n\n- No new agent, skill file, workflow phase, gate, command, template section, validator\n  vocabulary, configuration surface, prompt layer, or hook.\n- No copy of the upstream repository, its intensity modes, its comment markers, or its\n  commands.\n- No change to current agent contracts' authority, to dispatching, to existing safety\n  mechanisms, to testing obligations, or to logging and observability requirements.\n- No change to runtime behaviour: `runtime/framework_runtime.py` is not touched and\n  `RUNTIME_VERSION` stays 0.5.0.\n\n## Acceptance criteria\n\n1. One written standard states the ladder, the minimum-necessary-change definition, the\n   safety floor, and the seven review questions, and it is already loaded by the design,\n   implementation, refactor-implementation, quality-review, code-quality-review,\n   structural-compliance, and repository-quality-scan phases without any runtime change.\n2. The architect's reuse survey considers, for every required capability, the standard\n   library, the native platform or framework capability, and already-installed dependencies\n   in addition to existing components, and records a capability that no statement requires\n   as out of scope rather than designing for it.\n3. The implementer selects the route for every change-set entry by the ladder, records the\n   rung that justified any new abstraction, file, or dependency in the implementation\n   report's existing `Approach taken` field, and treats removal or weakening of a\n   safety-floor item as a blocking self-check failure.\n4. The reviewer applies the seven questions to every change review, each finding measured\n   against the written standard, never against line count; a safety-floor breach is a\n   correctness or security finding, the other six are maintainability or architecture\n   findings at the severity the existing severity table yields.\n5. Every framework verifier stays at its recorded baseline: registry coverage 6/6 with 37 of\n   37 phases dispatchable, validators 6/6, vertical slice 10/10, multi-phase 15/15, recovery\n   41/41, manifests 2/2; the `omn-agent` test suite stays at 329 passing.\n6. The component counts do not move: 12 active agents, 12 skills, 8 workflows, 37 phases,\n   11 commands. Added instruction volume is measured and reported in bytes per agent module\n   set.\n7. The planner and product owner contracts are not modified, because their existing\n   traceability rules already reject invented scope and undeclared exclusions.",
+        "digest": "sha256:0089f08e0f80fccd37040a21394244d4"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present and must express an identifiable business or user outcome."
+  },
+  "prior_validation": {
+    "attempt": 2,
+    "report": "runs/run-ae91e085f481/states/execution-planning/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md"
+    ],
+    "failures": [
+      {
+        "id": "V4.1",
+        "severity": "Blocking",
+        "quality_ref": "Q5.1",
+        "requirement": "Every task carries all eight declared fields",
+        "detail": "incomplete: {'T-013': ['Acceptance Criteria'], 'T-014': ['Acceptance Criteria']}"
+      },
+      {
+        "id": "V4.8",
+        "severity": "Blocking",
+        "quality_ref": "Q5.6",
+        "requirement": "Every task states at least one acceptance criterion",
+        "detail": "missing: ['T-013', 'T-014']"
+      },
+      {
+        "id": "V8.2",
+        "severity": "Blocking",
+        "quality_ref": "Q9.4",
+        "requirement": "Declared capabilities exist in agents/capability-matrix.md",
+        "detail": "unknown: ['Architecture and Design', 'Implementation Delivery', 'Code Review and Governance', 'Quality Verification', 'Quality Verification', 'Release Readiness and Operations', 'Documentation and Communication']"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "scope-definition",
+      "reference": "runs/run-ae91e085f481/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "produced_by": "scope-and-acceptance"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-17T16:12:12Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/execution-plan.md",
+        "digest": "sha256:4b6afb5767cda1767df4d8183bfb459a",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:9f90eb89f94639cd8aec24f921d08586",
+    "input_digest": "sha256:0089f08e0f80fccd37040a21394244d4",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/mnc-feature-request.md",
+        "source_file": ".claude/runs/inputs/mnc-feature-request.md",
+        "digest": "sha256:0089f08e0f80fccd37040a21394244d4"
+      }
+    ],
+    "unnarrowed": [
+      "templates/execution-plan.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md",
+      "runs/run-ae91e085f481/states/execution-planning/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code",
+      "review code",
+      "modify architecture",
+      "generate tests",
+      "execute workflows",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze business and technical requirements",
+        "decompose scope into executable engineering tasks",
+        "derive dependencies and implementation order",
+        "estimate complexity at planning granularity",
+        "record assumptions, risks, and open questions",
+        "produce execution-plan.md"
+      ],
+      "prohibited": [
+        "write production code",
+        "review code",
+        "modify architecture",
+        "generate tests",
+        "execute workflows",
+        "access external systems directly"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and identical context snapshot must produce an execution plan with identical section set, identical task identifiers, and identical dependency and ordering relationships.",
+      "taskIdentifierScheme": "T-<zero-padded-sequence>",
+      "orderingRule": "Topological order over declared dependencies; ties broken by ascending task identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, tool, runtime, or implementation technology."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 3,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "execution-plan.md",
+    "artifact_path": "runs/run-ae91e085f481/states/execution-planning/artifacts/execution-plan.md",
+    "template_ref": "templates/execution-plan.md",
+    "contract_ref": "agents/planner/output.md",
+    "quality_ref": "agents/planner/quality.md",
+    "validator": "plan_validator",
+    "result_envelope_path": "runs/run-ae91e085f481/states/execution-planning/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-17T16:12:12Z"
+}

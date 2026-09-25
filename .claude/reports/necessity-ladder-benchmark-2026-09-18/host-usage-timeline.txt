@@ -1,0 +1,14 @@
+2026-09-15T04:53:22Z launched before-condition implementers T1 T2 T3
+T1-before tokens=68663 tool_uses=24 duration_ms=180538
+T2-before tokens=88548 tool_uses=29 duration_ms=366410
+T3-before tokens=83048 tool_uses=30 duration_ms=293824
+T1-review-before tokens=83133 tool_uses=30 duration_ms=257813 verdict=approve-with-corrections findings=1(medium packaging: fixture pycache noise)
+T3-review-before tokens=90054 tool_uses=27 duration_ms=360705 verdict=approve-with-corrections findings=1(high correctness: UnicodeDecodeError not wrapped)
+T2-review-before tokens=103452 tool_uses=31 duration_ms=381356 verdict=approve-with-corrections findings=2(medium packaging pycache noise; medium maintainability test isolation)
+T1-after tokens=71096 tool_uses=27 duration_ms=193173 numstat: report.py 11/1, tests 25/0 (before: 11/1, 33/0); ladder rungs 2+3 recorded in Approach taken
+T3-after tokens=79197 tool_uses=30 duration_ms=254561 numstat: config.py 74, errors.py 9, tests 109 (before: 77/8/116); all validation branches preserved incl. bool-vs-int port guard
+T2-after tokens=80515 tool_uses=29 duration_ms=304323
+T1-review-after tokens=87324 tool_uses=30 duration_ms=288365 verdict=approve-with-corrections findings=1(medium standards: fixture pycache noise) [before: 1 medium packaging, same root cause]
+T3-review-after tokens=98919 tool_uses=32 duration_ms=334610 verdict=approve-with-corrections findings=1(medium standards: pycache noise)
+!! REGRESSION SIGNAL: before-T3 review found HIGH correctness (UnicodeDecodeError escapes ConfigError); after-T3 review MISSED it though defect confirmed present by direct probe. n=1 per condition - variance vs attention-dilution undetermined.
+T2-review-after tokens=100077 tool_uses=31 duration_ms=367623 verdict=approve-with-corrections findings=1(medium maintainability, EXPLICITLY CITES the ladder scope question) [before: 2 medium]
