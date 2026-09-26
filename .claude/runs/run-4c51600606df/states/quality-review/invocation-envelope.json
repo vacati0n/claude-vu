@@ -1,0 +1,452 @@
+{
+  "invocation_id": "inv-4c51600606df-05-002",
+  "run_id": "run-4c51600606df",
+  "work_item_id": "run-4c51600606df::quality-review",
+  "idempotency_key": "sha256:d0b6558fb742ed76f8b49e0d48d8fda5",
+  "state_id": "quality-review",
+  "phase_index": 5,
+  "agent_id": "omn-dev-2-reviewer",
+  "agent_version": "1.1.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-2-reviewer.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-2-reviewer/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-2-reviewer/system.md",
+      "agents/omn-dev-2-reviewer/identity.md",
+      "agents/omn-dev-2-reviewer/reasoning.md",
+      "agents/omn-dev-2-reviewer/execution.md",
+      "agents/omn-dev-2-reviewer/output.md",
+      "agents/omn-dev-2-reviewer/quality.md",
+      "agents/omn-dev-2-reviewer/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-2-reviewer/system.md": "sha256:ef234d6d8e6b74d21d099ab744ab9f60",
+      "agents/omn-dev-2-reviewer/identity.md": "sha256:725ba943cf8532dc4f666e68ca191592",
+      "agents/omn-dev-2-reviewer/reasoning.md": "sha256:f84d57686c7afa96e74cb1907e954c71",
+      "agents/omn-dev-2-reviewer/execution.md": "sha256:6c93e33bae84f6254f626f3fd1b447d7",
+      "agents/omn-dev-2-reviewer/output.md": "sha256:1b324b77d86f30d076d08768be2f9d5c",
+      "agents/omn-dev-2-reviewer/quality.md": "sha256:4d4c09812b441785acd1b03330468cc9",
+      "agents/omn-dev-2-reviewer/examples.md": "sha256:488657c9d243c3d498245922c2d92906"
+    },
+    "capabilities": [
+      "code-review",
+      "governance-enforcement",
+      "quality-verification"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "pull-request-diff",
+      "quality-scan-scope",
+      "technical-design",
+      "execution-plan",
+      "scope-definition",
+      "bug-analysis",
+      "architecture-decision-record",
+      "coding-standards",
+      "test-evidence",
+      "architecture-rules",
+      "security-criteria",
+      "standards-checklist",
+      "regression-targets",
+      "known-issues",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-06-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-06-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-06: Generate the HTML handbook from the Markdown handbook, with a drift check\n\n## Source\n\nTicket CKA-06 in the adoption backlog under `docs/` (Epic A \u2014 Verification baseline,\nDays 0\u201330). Source recommendation: R7 of the adoption review dated 2026-08-27.\nType: Story. Priority: High. Effort: M. Depends on: CKA-03, delivered as\n`.github/workflows/verify.yml`, which supplies the CI hook this ticket binds to.\n\n## Problem\n\nThe repository publishes its operator handbook twice: `docs/USER-GUIDE.md` (1051 lines of\nMarkdown) and `docs/user-guide.html` (1033 lines of hand-authored HTML with its own design\nsystem \u2014 a light/dark token palette, a chapter navigation index, a chain diagram, eyebrow\nchapter labels, stable section anchors, callout blocks with tags, and comment-highlighted\ncode samples). The two are kept in step by hand. Nothing checks that they agree, and they no\nlonger do: the Markdown carries a whole section, `5b. Branch naming templates` (lines 538 to\n616, including a token reference table, normalization and validation rules, a viewing and\nchanging section, and migration notes) that the HTML does not contain at all, and the two\nfiles order the gate-ownership material differently. Every prior delivery in this backlog has\npaid a hand-sync tax and recorded it as such in its own evidence.\n\nHand synchronization cannot be made reliable by asking contributors to try harder. The fix is\nto make one file the source and the other a build output, and to fail CI when the output is\nstale.\n\n## Request\n\nDeliver three things.\n\n1. **A renderer.** A new `tools/render_user_guide.py` that reads `docs/USER-GUIDE.md` and\n   writes `docs/user-guide.html` deterministically \u2014 same input, byte-identical output, on\n   every platform the CI matrix runs. Standard library only, consistent with the repository's\n   dependency posture for tooling.\n\n2. **A one-time two-way reconciliation of the current drift.** Section by section, every\n   piece of content that exists in exactly one of the two files is resolved: content the HTML\n   carries and the Markdown does not is merged back into the Markdown or deliberately\n   dropped, with the decision recorded; the Markdown's `5b. Branch naming templates` section\n   is rendered into the HTML. After the change, no content is present in exactly one file.\n   Design affordances the HTML carries today (navigation, anchors, callouts, chapter labels,\n   the chain diagram, code-comment highlighting) are a deliberate part of the published\n   artifact: preserving them is in scope, and how the source Markdown expresses them without\n   becoming unreadable is a design question this change must answer rather than resolve by\n   discarding them.\n\n3. **A drift check bound to CI.** A `--check` mode on the renderer that re-renders in memory,\n   compares against the committed HTML byte for byte, exits nonzero on a mismatch, and prints\n   the exact regeneration command. Wired into the existing CI workflow. The generated HTML\n   carries a visible \"generated \u2014 do not edit\" banner naming its source file and the command\n   that regenerates it. The hand-sync process note in the contributor documentation is\n   retired and replaced by the generation instruction.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- Editing `USER-GUIDE.md` without regenerating fails CI with the fix command.\n- `user-guide.html` opens with a \"generated \u2014 do not edit\" banner.\n- No content present in exactly one of the two files after reconciliation.\n\n## Constraints\n\n- Additive change only. The backlog forbids altering `record_gate_decision`, the gate matrix\n  semantics, producer exclusion, `runner._require_approval`, or any human-block path. This\n  ticket adds a build tool, regenerates a documentation artifact, and adds a CI step; it\n  changes no runtime behaviour and no gate-decision behaviour.\n- The CI hook must follow the discovery discipline CKA-03 established: the check is a step\n  over a known build output, not a curated list of files any future contributor must\n  remember to extend.\n- Determinism is a hard requirement, not an aspiration: a check that compares bytes is only\n  usable if the renderer's output does not vary with dictionary ordering, locale, line\n  endings, or the platform running it. Both CI platforms in the matrix must agree.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py` proof\n  scripts PROVEN, no change to gate-decision behaviour, and \u2014 where docs were touched \u2014\n  the HTML handbook regenerated. This ticket is the one that makes that last clause\n  mechanical rather than manual, and CKA-12 already depends on it for exactly that.\n\n## Writing constraints for every phase of this run\n\n- Every artifact validator in this framework rejects the vendor substring \"claude\" in any\n  case. Cite the backlog as \"the adoption backlog under `docs/`\" and the review as \"the\n  adoption review dated 2026-08-27\". Write framework paths without the leading dot-directory\n  prefix \u2014 `runtime/framework_runtime.py`, not the full path. Where the handbook's own\n  section 3A names an in-editor agent host, refer to it as \"the in-editor host section (3A)\".\n\n## Priority and deadline\n\nHigh priority; Phase 1 (Days 0\u201330) of the adoption plan. CKA-12 depends on this ticket for\nregenerating the handbook when it updates the exit-code tables.",
+        "digest": "sha256:5965b9107e59775c3f70f54b0b8609f7"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md",
+        "text": "```yaml\nimplementationReport:\n  reportId: IR-2026-0009\n  changeReference: CKA-06, attempt 2 of the implementation phase under rollback RB-run-4c51600606df-review-gate-01\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-06-feature-request.md\n    - type: technical-design\n      reference: runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: provisional\n  workflowPhase: implementation\n  verificationStatus: partially-verified\n  inputDigest: sha256:38c4da37a5100c375dc013d0cc46fc28\n  contextDigest: sha256:e23f9464f17bda0a3c22b515bf0de555\n```\n\n## Metadata\n\n- Report ID: IR-2026-0009\n- Change reference: CKA-06 \u2014 generate the HTML handbook from the Markdown handbook with a drift check; attempt 2 of the implementation phase, rebuilding the evidence against the Review Gate rejection recorded in the invocation envelope (finding F-001 high and the nine corrections CR-001 to CR-007 plus two record tidy-ups), superseding attempt 1 report IR-2026-0007 under rollback authorisation RB-run-4c51600606df-review-gate-01\n- Workflow phase: implementation\n- Status: provisional\n- Verification status: partially-verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: `docs/user-guide.html` is a build output of `docs/USER-GUIDE.md`: regenerating from the source reproduces the published file byte for byte, a direct edit to the published file does not survive regeneration, the page opens with a generated-do-not-edit banner naming its source and its regeneration command, and the verification workflow fails a commit that changes one of the pair without regenerating the other. The drift the two files had accumulated is resolved in both directions and every resolution is recorded, including the two authored 5a command lines the Review Gate found dropped. New in this attempt: the proof that no content is present in exactly one file after reconciliation is hermetic. It compares two frozen pages \u2014 the pre-change published page and the page as regenerated when the reconciliation closed \u2014 so it stays true while the handbook goes on being edited, which is what the two red tests on the current tree showed it could not do before. The renderer module's 73 tests with 2 failures at baseline are now 74 tests with none failing.\n- Approach taken: this attempt describes the full delivered change set as the item's current artifact \u2014 the eight files attempt 1 delivered, the two files and the edits the correction pass of 2026-09-06 added under the rollback authorisation, and this attempt's own work. The corrections, all present on the tree before this invocation and verified by it: CR-001, the two 5a command lines are merged into the source's sample with their comments and carried as record items 21 and 22, and the pre-change published page is frozen as `tests/fixtures/user-guide-pre-change.html`, identical to the committed file, so the record's completeness statement is executed against it; record tidy-up A, the masthead strapline moved from the record's section 1 to section 3 as same material in divergent wording under rule R1 citing the owner's ruling; record tidy-up B, item 45's rationale reworded to name the anchor link as the more exact route, every drop citing the owner's ratification, and the chain accessibility labels recorded as derived under the owner's ruling with no field added; item 12, the merge of the published chain's lowercase tokens reversed so the source's capitalised tokens govern under R1; CR-003, the classified normalised comparison committed as `docs/user-guide-reconciliation-diff.md` and the two source-only lead-in sentences carried as items 41 and 42; CR-004, a `--root DIR` parameter on the renderer so the failing check-mode tests run against an isolated copy and never the tracked pair; CR-005, an unrecognised heading fails the render naming its line; CR-006, both failing check-mode outcomes assert a byte-identical, mtime-identical tree; CR-007, an `escape_attribute` function for attribute context and a `take_attributes` that rejects a quote or an out-of-alphabet identifier at the source line. This attempt's own change: the equivalence class no longer reads the live page. The page as regenerated at reconciliation time is frozen as `tests/fixtures/user-guide-reconciled.html`, produced by rendering the source as it stood when the reconciliation closed. That source was reconstructed from the current source by returning the four passages the separately delivered runtime fix later edited \u2014 the rework-loop bullet on a rejected gate, the bounded-rework callout, the first-invocation paragraph of the review-comment loop, and the two troubleshooting rows on a rejected gate and on collected review comments \u2014 to the wording the committed source carries for them, in the reconciled callout and link form. The reconstruction was verified two ways before the render was frozen: its visible-text and element streams equal the pre-change fixture's streams with every recorded hunk applied at its recorded offset, zero hunks apart; and the hunks recomputed between the pre-change fixture and the render equal the recorded comparison entry by entry, 51 text and 66 element hunks with the same offsets and segments. The render differs from the live page in exactly the five lines those four passages occupy. The method is documented in the test module's docstring, and the two reconciliation records now name both fixtures and state that a later handbook edit is a new change rather than a reconciliation hunk. The live-page tests stay live: the banner, the 21-anchor baseline and closed link graph, check mode writing nothing, and the delivered page equalling a render of the delivered source.\n- Design reference: decision records D-001, D-007 and D-008 as accepted at the Design Gate; inline design decisions D-002 to D-006, D-009 and D-010; sequencing constraints P-001 to P-011; the Design Gate's conditions where they supersede the design text; and the Review Gate's rejection rationale carried in the envelope as data, whose nine corrections this attempt closes. The design's acceptance criterion on one-sided content after reconciliation is the criterion the hermetic proof serves.\n- Out of scope: the contributor-facing regeneration instruction in `README.md`, the plan's contributor-documentation task, assigned to the documentation role; the raw-markup counting rule and count, and the authoring walkthrough, owned by QA and the independent reviewer under the plan; the workflow-run demonstrations and the cross-platform determinism evidence, QA's at the Verification Gate; the closure record and release note; the commit that makes the regenerated page the committed content. Also out of scope and deliberately untouched: every runtime file and `omn_agent/` file of the separately closed runtime fix, and the handbook passage at `docs/USER-GUIDE.md` lines 752 to 753, which is follow-up item FU-012 of that fix and is sequenced separately. Leaving each is safe: each has a named owner or a separate change, and none is a precondition of the delivered pair, tool, pin, workflow step and tests being complete and self-consistent. No runtime, gate-decision, approval or human-block surface was read or written.\n\n## Change Set\n\nChange types are relative to the committed baseline, the revision the pre-change fixture is taken from. Entries this attempt wrote or changed are marked in their purpose; the others were delivered by attempt 1 and by the correction pass the rollback authorisation records, and are described as delivered.\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | `tests/fixtures/user-guide-pre-change.html` | added | Freeze the committed published page, byte for byte, as the anchor and content baseline the reconciliation is proven against, so the proof is hermetic and needs no version-control command (added by the correction pass, CR-001) | P-001; CR-001 |\n| `C-002` | `docs/user-guide-reconciliation.md` | added | Record the one-time two-way reconciliation: every item that existed in exactly one file, its resolution and rule, the Review Gate rulings, items 21 and 22 for the 5a command lines and 41 and 42 for the lead-in sentences, the owner's ratifications, and the reversal of item 12 (this attempt: the method statements name both fixtures and state that the compared pages are frozen) | Scope Gate condition on the resolution list; P-002; CR-001, CR-003, the two record tidy-ups, item 12 |\n| `C-003` | `docs/USER-GUIDE.md` | modified | Make the source of record complete and expressible: the 21 anchor identifiers and 14 internal links, the 14 callout tags, the two chain constructs and the list variant in source notation, every item the record marks merged including the two 5a command lines with their comments | D-001, D-002, D-003, D-005; P-002; CR-001 |\n| `C-004` | `tools/render_user_guide.py` | added | Render the source into the published page deterministically, emit the banner, fail the render on a duplicate anchor, a dangling internal link, an unrecognised heading or a malformed attribute value naming the source line, encode attribute values for their context, and offer check mode and the `--root` parameter | D-001, D-004, D-006, D-007, D-009, D-010; P-003, P-004, P-006, P-009; CR-004, CR-005, CR-007 |\n| `C-005` | `docs/user-guide.html` | modified | Be the build output: regenerated in full from the reconciled source, carrying the banner, the 5a command lines, the branch-naming-templates section and the same 21 anchors as before | D-001, D-007; P-004; CR-001 |\n| `C-006` | `docs/user-guide-reconciliation-diff.md` | added | Record the classified normalised comparison hunk by hunk \u2014 51 visible-text and 66 element hunks between the two fixtures, each classified against a record row, an ordering entry or a derived construct \u2014 as the reachable artifact the Design Gate required (added by the correction pass, CR-003; this attempt: the introduction names the reconciled fixture as the compared page) | Design Gate condition on the classified comparison; CR-003 |\n| `C-007` | `tests/fixtures/user-guide-reconciled.html` | added | Freeze the page as regenerated when the reconciliation closed, rendered from the reconstructed reconciled source and verified against the recorded comparison, so the equivalence proof compares two frozen pages and a later handbook edit no longer reads as an unrecorded hunk (this attempt) | P-004; the design's acceptance criterion on one-sided content after reconciliation; `V-008`, `V-009` |\n| `C-008` | `.gitattributes` | added | Pin both handbook paths against checkout-time line-ending translation, so the bytes the comparison reads on a runner are the committed bytes | D-007; Design Gate condition on the pin; P-005 |\n| `C-009` | `tests/test_render_user_guide.py` | added | Exercise the grammar and its failure paths, comment marking, attribute safety, determinism, the live published page, the hermetic equivalence between the two fixtures, check mode against an isolated copy, the record's form, the pin and the workflow binding (this attempt: the equivalence class reads the reconciled fixture instead of the live page, a test that the fixture is a renderer output, the record test requires both fixtures named, and the module docstring documents the fixture's provenance) | The acceptance criteria of the plan's renderer, resolution-list, check-mode, workflow-wiring and banner tasks; CR-001, CR-004, CR-005, CR-006, CR-007; `V-008` |\n| `C-010` | `.github/workflows/verify.yml` | modified | Run the drift check as one step inside the existing tests job, after the suite and unless the run was cancelled, over the one known build output | D-008; Design Gate condition on the workflow step; P-008 |\n| `C-011` | `tests/test_ci_workflow.py` | modified | Correct the parity class docstring that described the pair as hand-synced; the process note lives in this file and retires with the process | Design module M-006; P-010 |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | Every construct of the authoring grammar renders; a malformed source fails the render naming its line: duplicate anchor, dangling internal link, chapter without an anchor, callout without a bolded tag, unterminated fence, stranded content, and \u2014 closing CR-005 \u2014 a level-2 heading without an ordinal, a level-4 heading, a second title and a heading inside a callout; a hash that opens no heading stays prose (22 tests) | unit | `C-004` | `python -m unittest tests.test_render_user_guide.Grammar tests.test_render_user_guide.GrammarFailures` | pass |\n| `T-002` | Comment marking is keyed to the fence info string and quote-aware, so a hash inside a quoted argument value stays part of the command (6 tests) | unit | `C-004` | `python -m unittest tests.test_render_user_guide.CommentMarking` | pass |\n| `T-003` | Closing CR-007: `escape_attribute` encodes the quote delimiter while element content keeps its quotes; a chain token carrying a quote yields a well-formed label; a quote, an out-of-alphabet character or a stray token in an anchor identifier or class name fails naming its line; every attribute value in the published page is well-formed (7 tests) | unit | `C-004`, `C-005` | `python -m unittest tests.test_render_user_guide.AttributeSafety` | pass |\n| `T-004` | Two renders of the delivered source are byte-identical, the input newline form does not reach the output, the output carries no carriage return, no environment value reaches the output (4 tests) | unit | `C-003`, `C-004` | `python -m unittest tests.test_render_user_guide.Determinism` | pass |\n| `T-005` | Live page: the delivered published file equals a render of the delivered source; its declared-anchor set and its fragment-target set are exactly the 21 of the baseline; the banner, the five named reading affordances and the branch-naming-templates section are present; the regeneration command uses forward slashes only (7 tests) | contract | `C-003`, `C-004`, `C-005` | `python -m unittest tests.test_render_user_guide.PublishedHandbook` | pass |\n| `T-006` | Hermetic equivalence: the pre-change fixture is the pre-change page; the reconciled fixture is a renderer output distinct from it; both fixtures declare and link exactly the 21 baseline anchors; the two 5a command lines the pre-change page carried survive in the reconciled page as written; every visible-text hunk and every element hunk between the two fixtures is recorded in order, at its offset, with its segments and a classification that resolves to a record row, an ordering entry or a derived construct; every published-only drop is reached by a hunk (7 tests) | contract | `C-001`, `C-002`, `C-006`, `C-007` | `python -m unittest tests.test_render_user_guide.PreChangeEquivalence` | pass |\n| `T-007` | Closing CR-004 and CR-006: check mode exits zero on the tracked pair and on an agreeing isolated copy; a direct edit to the copy's output, a source-only edit and a missing output each exit nonzero naming the regeneration command; a grammar failure exits two naming the line; render mode with a root writes only that root; on every outcome the isolated tree is byte-identical and mtime-identical afterwards and the tracked pair is untouched (8 tests) | integration | `C-003`, `C-004`, `C-005` | `python -m unittest tests.test_render_user_guide.CheckMode` | pass |\n| `T-008` | The record leaves no item unresolved, cites a defined rule on every item, numbers its items from one without gaps, defines no unused rule, keeps its non-droppable items in both files, carries rows for the two 5a command lines and the two lead-in sentences, ratifies or escalates every drop, and names the regeneration and check commands, the recorded comparison and both fixtures (9 tests) | contract | `C-002`, `C-003`, `C-005`, `C-006`, `C-007` | `python -m unittest tests.test_render_user_guide.ReconciliationRecord` | pass |\n| `T-009` | Both handbook paths are pinned with `-text` in the attributes file, each exactly once (1 test) | contract | `C-008` | `python -m unittest tests.test_render_user_guide.LineEndingPin` | pass |\n| `T-010` | The drift step sits in the tests job after the unit-test step, runs unless the run was cancelled, and names one build output rather than a file list (3 tests) | contract | `C-010` | `python -m unittest tests.test_render_user_guide.WorkflowBinding` | pass |\n| `T-011` | The whole renderer module by the discovery command the dispatch requires: 74 tests, none failing, against 73 tests with 2 failing at the baseline taken before any change | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`, `C-007`, `C-008`, `C-009`, `C-010` | `python -m unittest discover -s tests -p \"test_render_user_guide.py\"` | pass |\n| `T-012` | The verification-workflow tests: six job identifiers, four stable check names, environment and permission policy, discovery discipline, and the parity assertions over the readme and both handbook files (13 tests) | regression | `C-003`, `C-005`, `C-010`, `C-011` | `python -m unittest discover -s tests -p \"test_ci_workflow.py\"` | pass |\n| `T-013` | The dependency-footprint assertion still reads the declared distribution name out of the regenerated page, and the packaging manifest and readme assertions are unaffected (3 tests) | regression | `C-003`, `C-005` | `python -m unittest tests.test_omn_agent.DependencyDeclarationTestCase` | pass |\n| `T-014` | Check mode over the tracked pair exits zero: the delivered page is byte-identical to a render of the delivered source | integration | `C-003`, `C-004`, `C-005` | `python tools/render_user_guide.py --check` | pass |\n| `T-015` | The delivered page declares exactly 21 distinct anchor identifiers: the `id` attributes extracted by the command, deduplicated with `sort -u` and counted with `wc -l`, number 21 | static | `C-005` | `grep -o 'id=\"[^\"]*\"' docs/user-guide.html` piped through `sort -u` and `wc -l` | pass |\n| `T-016` | The renderer and its test module compile | static | `C-004`, `C-009` | `python -m compileall -q tools/render_user_guide.py tests/test_render_user_guide.py` | pass |\n\n## Verification Results\n\n- Verification method: the regression baseline was taken before any file was changed \u2014 the renderer module by discovery, the verification-workflow module by discovery, check mode over the tracked pair, and the anchor count \u2014 and re-run after the change; the renderer module was then executed class by class so each evidence row names the command that produced it; the reconstruction behind the reconciled fixture was verified before the fixture was frozen by recomputing the recorded comparison from the two fixtures with the test module's own stream and hunk functions and by a line diff of the fixture against the live page; the attempt-1 report's digest was recomputed and compared with the value the envelope records.\n- Commands executed: `python tools/render_user_guide.py --check` (baseline and after, exit 0 both times); `python -m unittest discover -s tests -p \"test_render_user_guide.py\"` (baseline: 73 tests, 2 failing in the equivalence class; after: 74 tests, OK); `python -m unittest discover -s tests -p \"test_ci_workflow.py\"` (13 tests, OK, baseline and after); `grep -o 'id=\"[^\"]*\"' docs/user-guide.html | sort -u | wc -l` (21, baseline and after); `python -m unittest tests.test_render_user_guide.Grammar tests.test_render_user_guide.GrammarFailures`; `python -m unittest tests.test_render_user_guide.CommentMarking`; `python -m unittest tests.test_render_user_guide.AttributeSafety`; `python -m unittest tests.test_render_user_guide.Determinism`; `python -m unittest tests.test_render_user_guide.PublishedHandbook`; `python -m unittest tests.test_render_user_guide.PreChangeEquivalence`; `python -m unittest tests.test_render_user_guide.CheckMode`; `python -m unittest tests.test_render_user_guide.ReconciliationRecord`; `python -m unittest tests.test_render_user_guide.LineEndingPin`; `python -m unittest tests.test_render_user_guide.WorkflowBinding`; `python -m unittest tests.test_omn_agent.DependencyDeclarationTestCase`; `python -m compileall -q tools/render_user_guide.py tests/test_render_user_guide.py`; a recomputation of the attempt-1 report's digest, which is `sha256:d7e05cf486272fee5f632041b4d492f3` as the envelope records, so the superseded artifact is unchanged.\n- Result summary: 16 evidence entries executed, 16 passed, 0 failed. The renderer module went from 73 tests with 2 failures at baseline to 74 tests with 0 failures: the two failures were the equivalence class comparing the live page, which the runtime fix's four handbook edits had put 5 element hunks and 2 text hunks beyond the record, and one test was added. The workflow module is 13 of 13 before and after; the dependency-footprint class is 3 of 3; check mode exits zero before and after; the anchor count is 21 before and after. No test was disabled, skipped or weakened: the two red tests pass because their comparison now has the two frozen pages as its sides, and the 117 recorded hunks are recomputed and matched in full. The full repository suite was not executed by this invocation, per the dispatch's instruction that it is QA's at the Verification Gate.\n- Unverified areas: the full repository suite as one run, which this invocation did not execute \u2014 the operator's statement that the last full sweep was 473 tests with only these 2 failures is supplied context, not evidence produced here; byte identity of the regenerated output on the second platform of the verification matrix, which no command in this environment can execute; the behaviour of the verification workflow on a hosted run, so the demonstration that a source-only commit fails with the regeneration command in its log is not executed here; the readability verdict on the regenerated page and the contributor authoring walkthrough, which are reviews rather than checks.\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | Navigation labels are derived from the heading each entry points at rather than authored in the heading's brace attribute, so the four published labels that differed from their headings are dropped (`C-003`, `C-004`, `C-005`) | D-001's clause placing a divergent navigation label inside the heading attribute | The Design Gate's decided authored-versus-derived rule classifies navigation link text as derived presentation; both statements cannot hold over the same four labels and the decided rule is the later and more specific. The product owner ratified the drop at the Review Gate; record item 16 | not-required; decided upstream and ratified by omn-product-owner at the Review Gate |\n| `V-002` | The list variant giving the phase-cycle list its numbered-step presentation is carried by a brace attribute on its own line before the list, not at the end of a text line (`C-003`, `C-004`) | D-001's \"written at the end of that line\" | A list has no single line whose rendering the class governs; the value stays authored in the source in the same construct, at the cost of one line | not-required; a placement detail inside the accepted construct |\n| `V-003` | Byte-exact reproduction of the pre-change published file was not attempted; equivalence to it is established by the recorded, classified normalised comparison, and the published file was rewritten once as renderer output (`C-004`, `C-005`, `C-006`) | Sequencing constraint P-004 and assumption A-007 | The pre-change file carries no banner and the design requires the renderer to emit one at the top, so P-004 as written is unsatisfiable; the Design Gate replaced it with the classified-comparison form, which the correction pass made a reachable artifact under CR-003 | not-required; superseded by a Design Gate condition, recorded because the design text was not rewritten |\n| `V-004` | The regenerated published file is delivered in the working tree; no invocation of this phase created a commit (`C-005`) | The Design Gate's first condition, which ends by requiring the regenerated file to be committed | Committing is not one of the repository's test, build or static-analysis commands, and the shared working tree carries unrelated modifications a commit would sweep in; the property the condition exists for is executed by `T-005` and `T-014` | escalated to omn-orchestrator, recorded as `Q-001` |\n| `V-005` | The two chain diagrams' accessibility labels are regenerated from their token lists, so their hand-written wording is dropped (`C-003`, `C-004`, `C-005`) | Inline design decision D-005 and assumption A-005 | The design records the label as derived by default pending the product owner's ruling; attempt 1 escalated it and the owner ruled at the Review Gate that the labels are derived presentation with no field added; record items 17 and 18 cite the ruling | escalated to omn-product-owner at attempt 1 and ruled at the Review Gate; closed |\n| `V-006` | Where a published callout condensed material the source carries as a paragraph plus a list or a code sample, the source's structure governs and the callout tag attaches to the block that opens the material, so three callouts enclose less than their pre-change counterparts (`C-003`, `C-005`) | Inline design decision D-003, read against the exclusion of editorial restructuring | Reshaping the source to reproduce the published block boundaries would be editorial restructuring the accepted scope excludes; every sentence survives, only the border moved, recorded per block in the record's section 3 | not-required; inside this agent's latitude |\n| `V-007` | The published masthead strapline is superseded by the source's rather than merged (`C-003`, `C-005`) | The Design Gate's rule that fact-stating published wording merges into the source | Two straplines in one slot would render as one; attempt 1 escalated the choice and the product owner ruled at the Review Gate that the two straplines state one fact, so the item is same material in divergent wording under R1 and now sits in the record's section 3 (record tidy-up A) | escalated to omn-product-owner at attempt 1 and ruled at the Review Gate; closed |\n| `V-008` | The equivalence proof compares two frozen fixtures rather than the pre-change fixture against the live page (`C-002`, `C-006`, `C-007`, `C-009`) | The correction pass's design of the equivalence class under CR-001, and QA's Verification Gate plan, which phrases its check of the one-sided-content criterion as a re-derived visible-text diff matched hunk by hunk to the record | The criterion is a statement about one event, the reconciliation. Read against the live page it becomes a freeze of handbook content: the separately delivered runtime fix edited four passages of the handbook legitimately and the class went red, 71 against 66 element hunks and 53 against 51 text hunks, with the only repairs on offer being to amend the reconciliation record for a change that was not a reconciliation or to retire the proof. Freezing the reconciled page keeps the proof provable while the handbook moves on. Against the live page QA's re-derivation now yields those four passages' hunks in addition to the 117 recorded, so QA's plan and this design must be read together | escalated to omn-qa, recorded as `Q-002` |\n| `V-009` | The reconciled fixture is a render produced now from a reconstructed source, not a page captured when the reconciliation closed (`C-007`) | The dispatch's requirement that the fixture be the page as regenerated at reconciliation time | No copy of the source at that moment exists in the tree or in version history, so it was reconstructed from the current source by returning the four passages the runtime fix's handbook change-set row names to the committed wording in reconciled form. The reconstruction was verified two ways before the render was frozen: zero hunks between its streams and the pre-change streams with every recorded hunk applied, and the recomputed hunks equal to the recorded 117 entry by entry; the render differs from the live page in exactly the five lines those passages occupy. The method is stated in the test module's docstring | not-required; a test-design tradeoff inside this agent's latitude, verified by executed comparison and named for the reviewer in `R-007` |\n| `V-010` | The nine corrections the Review Gate required were applied to the working tree on 2026-09-06 by an out-of-band correction pass, outside any phase invocation, and this attempt verifies and accounts for them rather than having written them (`C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`, `C-009`) | The lifecycle rule that source is written inside an implementation invocation and declared by it | At the time no phase could carry the corrections: the run was stranded on a rejected gate with no executable rollback until the separately closed runtime fix landed. The rollback authorisation records that the corrections were already applied and verified on the tree, and this attempt re-verifies every one of them with the evidence rows above and states which files this invocation itself wrote | recorded in the rollback authorisation RB-run-4c51600606df-review-gate-01 issued by omn-qa; no further escalation required |\n\n## Boundary Compliance\n\n- Module boundaries preserved: the renderer reads two fixed paths under one root and writes one, executes no subprocess, opens no connection, and takes no input beyond a mode flag and the root directory; check mode writes nothing on any outcome, which `T-007` executes against an isolated copy and against the tracked pair. No runtime file, no `omn_agent/` file, no gate-decision, approval or human-block surface was read or written, and nothing of the separately closed runtime fix was touched; the handbook passage that fix's follow-up item names is untouched. The verification workflow keeps its six job identifiers, four stable check names, two-entry matrix, read-only permission and no-masking policy (`T-010`, `T-012`). The two fixtures under `tests/fixtures/` are test data read by the test module only; nothing in `tools/` or `docs/` reads them.\n- Public interface changes: `tools/render_user_guide.py` offers a default render mode, a `--check` mode whose verdict is its exit status, and a `--root DIR` parameter naming the repository root holding the pair, which defaults to the checkout the script lives in; `escape_attribute` is a new module-level function beside `escape`. The source document's authoring grammar is the contract a contributor writes against; an unrecognised heading, a quote in an identifier or class name, and a stray brace token are now render failures naming the line rather than silent prose or truncation. The published document has no hand-editing contract. No packaged interface, module boundary or dependency changed; the tool remains standard library only.\n- Data or migration impact: no data model, schema, migration or backfill. The one migration is of the published document's own bytes, once and in one direction, reversible by revert. The two fixtures are new test data; the reconciled fixture is 83016 bytes of LF-terminated UTF-8, the pre-change fixture 71295 bytes identical to the committed page.\n- Declared side effects: this invocation wrote six files \u2014 `tests/fixtures/user-guide-reconciled.html`, `tests/test_render_user_guide.py`, `docs/user-guide-reconciliation.md`, `docs/user-guide-reconciliation-diff.md`, this artifact at `runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md`, and the result envelope at `runs/run-4c51600606df/states/implementation/result-envelope.json`. The Change Set is wider than that by design: `docs/USER-GUIDE.md`, `tools/render_user_guide.py`, `docs/user-guide.html`, `.gitattributes`, `.github/workflows/verify.yml` and `tests/test_ci_workflow.py` were written by attempt 1 (invocation inv-4c51600606df-04-001) and then edited, and `tests/fixtures/user-guide-pre-change.html` was added, by the correction pass of 2026-09-06 that the rollback authorisation RB-run-4c51600606df-review-gate-01 records and that `V-010` accounts for; this invocation read and verified them and did not write them. Attempt 1's report and its `attempts/1/` evidence were not touched, which the digest recomputation confirms. Executing the test commands refreshed interpreter bytecode caches under `tests/__pycache__/` and `tools/__pycache__/`, compiler output that is not part of the change set and is named here so the difference is stated. Scratch files for the reconstruction were written only under the session's temporary directory, outside the repository. No external system, repository host or ticketing tool was contacted, and no commit was made.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | Cross-platform byte identity is asserted by construction rather than by an executed run on the second matrix platform | medium | high | The output newline is fixed by the writer, the input newline form is normalised before parsing, and both handbook paths are pinned against checkout translation; `T-004` executes the newline assertions and `T-009` the pin; the matrix run is named as an unverified area for QA |\n| `R-002` | The byte comparison cannot see a degraded page: it compares the published file against a regeneration of itself | medium | medium | The banner, the five affordances, the 21 anchors and the closed link graph are asserted structurally by `T-005`; the readability verdict is the reviewer's by the accepted scope |\n| `R-003` | The navigation index carries the full chapter titles, two of which wrap in the index grid | high | low | The grid wraps rather than truncates; the four superseded labels and the ratified rule are in the record, and reversing costs one attribute per heading |\n| `R-004` | The drift verdict is not separately named in the checks list; a contributor learns which surface failed from the run log | high | low | The step's failure output names the file, the first differing byte and line, and the exact regeneration command |\n| `R-005` | A contributor who edits the published file directly loses the edit at the next regeneration and is failed by a required check | high | medium | The banner is emitted by the renderer at the top of the page and states the source, the command and the consequence; `T-005` executes its presence and `T-007` that a direct edit does not survive; the readme instruction is follow-up work with a named owner |\n| `R-006` | The drift check blocks a merge on the ubuntu leg only while the windows check name is advisory | medium | medium | The step runs on both legs so a windows-only divergence shows red immediately; the required leg catches every divergence that is not platform-specific and the pin removes the identified platform-specific cause |\n| `R-007` | The reconciled fixture is a reconstruction: if the reconstruction were wrong the one-sided-content proof would hold against a page that never existed | low | medium | Two executed checks bound it: the reconstruction's streams equal the pre-change streams with every recorded hunk applied, zero hunks apart, and the recomputed comparison equals the recorded 117 hunks entry by entry, which `T-006` re-executes on every run; the render differs from the live page in exactly the five lines of the four passages the runtime fix's handbook change-set row names; the method is documented in the test module's docstring for the reviewer to repeat |\n| `R-008` | The equivalence proof no longer observes the live page, so a future renderer regression that dropped authored content would not surface as an unrecorded hunk there | medium | low | That class was never the live guard: the criterion it proves is a one-time event. The live guards remain \u2014 `T-005` requires the delivered page to equal a render of the delivered source and to carry the anchors, affordances and 5b section, `T-001` and `T-003` fail the render on grammar and attribute defects, and check mode fails the workflow on drift; QA's Verification Gate plan compares heading and identifier sets between the committed and working-tree pages |\n\n## Handoff Notes\n\n- Reviewer focus areas: the reconstruction behind `C-007` \u2014 the four passages returned to committed wording in the scratch source, the two verification steps, and the five-line diff between the fixture and the live page, which is where `V-009` and `R-007` land; the wording updates to the two records in `C-002` and `C-006`, read for whether they keep every completeness statement true; each closed correction at its site \u2014 CR-001 at record items 21 and 22, the source's 5a sample and `T-006`'s survival test; tidy-up A at the record's section 3 masthead row; tidy-up B at item 45 and the ratification citations on items 16 to 19 and 43 to 45; item 12 at the record's section 1 and 3; CR-003 at `C-006` and items 41 and 42; CR-004 at the `--root` parameter and `T-007`; CR-005 at the heading rule and `T-001`; CR-006 at the tree-snapshot assertions of `T-007`; CR-007 at `escape_attribute`, `take_attributes` and `T-003`; and `V-008`, since QA's own gate plan will re-derive the visible-text diff and must read it against two fixtures rather than the live page. For the assessor of this phase: attempt 2 binds idempotency key `sha256:4253e368330e942c84ac0f4dc165cefd`, a different key from attempt 1's, because the implementer agent resolves at version 1.1.0 against attempt 1's 1.0.0 \u2014 the expected payload-binding behaviour, ruled by the architect and not a defect; the run was opened under runtime 0.5.0 and this attempt ran under 0.6.0; and the host adapter file's version check names 1.0.0 while the manifest and this envelope carry 1.1.0, which was resolved by the adapter's own rule that the module set governs.\n- Follow-up work: the contributor-facing regeneration instruction in `README.md`, the documentation role's; the raw-markup counting rule and count and the authoring walkthrough, QA's and the independent reviewer's under the plan; the hosted two-leg workflow run and the cross-platform evidence, QA's at the Verification Gate; the commit that makes the regenerated page the committed content, carried by `V-004` and `Q-001`; the handbook passage at `docs/USER-GUIDE.md` lines 752 to 753, follow-up item FU-012 of the runtime fix, which is sequenced separately and was not touched; the runtime fix's closure record routed to this attempt's reviewer the choice between recording the extra hunks in the reconciliation record and retiring the fixture \u2014 this attempt took a third route and `Q-004` asks the reviewer to confirm it closes that routed item; and the host adapter file's stale version check, Architecture's to correct.\n- Documentation impact: the handbook pair is unchanged by this attempt; any future change to the handbook remains a change to `docs/USER-GUIDE.md` followed by `python tools/render_user_guide.py`, and such a change no longer requires amending the reconciliation record. The reconciliation record and the recorded comparison now name both fixtures and state that the compared pages are frozen. The test module's docstring is the documentation of how the reconciled fixture was produced and verified. The readme regeneration instruction remains the documentation role's to add.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | Who creates the commit that makes the regenerated published file and the rest of the change set the committed content, given that committing lies outside this agent's command-execution permission and the shared working tree carries unrelated modifications? | no | omn-orchestrator | `C-005` |\n| `Q-002` | Does QA accept the fixture-to-fixture proof for the one-sided-content criterion, given that its Verification Gate plan phrases the check as a re-derived visible-text diff matched hunk by hunk to the record, and that a re-derivation against the live page now yields the runtime fix's four passages beyond the 117 recorded hunks? | no | omn-qa | `C-006`, `C-007`, `C-009` |\n| `Q-003` | Is the evidence this phase can reach sufficient for the cross-platform byte-identity criterion and for the full-suite regression, or must the matrix run and the full sweep be observed before the change is judged? This invocation proves determinism on one platform, pins the checkout cause of divergence on both, and ran the targeted suites only | no | omn-qa | `C-004`, `C-005`, `C-008` |\n| `Q-004` | The runtime fix's closure record routed to this attempt's reviewer a choice between recording its handbook hunks in the reconciliation record and retiring the fixture; does freezing the reconciled page, which makes those hunks a later change rather than reconciliation hunks, close that routed item? | no | omn-dev-2-reviewer | `C-002`, `C-006`, `C-007` |",
+        "digest": "sha256:a259c356472f82d3fa52884908179895",
+        "produced_by": "implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the subject under review: an implementation report for a delivered change, a stable pull request diff for a review-pull-request run, or a quality-scan scope naming the repository boundary, exclusions, and risk threshold for a code-quality-scan run. Without one there is nothing under review, and reviewing anyway would mean assessing this agent's own choice of what to read."
+  },
+  "prior_validation": null,
+  "prior_rejection": {
+    "authorisation_id": "RB-run-4c51600606df-review-gate-01",
+    "gate": "Review Gate",
+    "target": "implementation",
+    "superseded_attempt": 1,
+    "rejected_by": "omn-qa",
+    "rejection_decided_by": "omn-qa subagent a8289bfcf0621fbfd, recorded by session operator for vuhoangcao",
+    "rejected_at": "2026-09-06T09:05:36Z",
+    "rationale": "Reject; the change returns to implementation. F-001 (high) confirmed independently by omn-qa and by the operator: the pre-change published page at HEAD:docs/user-guide.html lines 582-583 carried two authored command lines with comments in the 5a code sample - 'omn-agent pr fix-comments PROJ-42 -t ./my-repo # later: resolve the PR's review comments (see the rework loop)' and 'omn-agent update PROJ-42 -t ./my-repo # later: the ticket changed in Jira? carry the change to the PR (see the rework loop)' - that no revision of the source ever carried in that sample; both are absent from the regenerated page and the resolution record docs/user-guide-reconciliation.md has no row for them, so must-have criterion A-006 is unmet and the record's own completeness claim (lines 11-12) is false. An open high defect against an accepted criterion with no workaround yields fail regardless of the otherwise sound surrounding evidence (--check exit 0; 48 renderer tests pass; id set 21 before and after; full suite 404 OK, of which +48 are this change's tests and +14 belong to the separately completed run-79630cb5274d). The review package RP itself is sound: every finding omn-qa probed reproduced, and its correction list is complete once the product owner's rulings are folded in. Finding-by-finding: F-001 high, agree, blocking. F-002 medium, RESOLVED BY OWNER - omn-product-owner ratified the masthead drop under rule R1 as same-material-divergent-wording (the two straplines state one fact), ratified every dropped item 16,17,18,19,20,40,41,42, and ruled the two chain-diagram accessibility labels derived presentation with no field to add; only record tidy-ups remain, and item 12's source-wording change, folded into F-002 by the reviewer, was not reached by the ruling and needs a rule citation or reversal. F-003 medium, agree - the Design Gate required a RECORDED classified normalised comparison and QA had to re-derive it. F-004 medium, agree and real on a tree other sessions share - tests/test_render_user_guide.py lines 295-329 rewrite the tracked docs/user-guide.html and docs/USER-GUIDE.md in place; an interrupted run leaves a source-only sentence in the tree and --check red. F-005 medium, agree, confirmed by probe - '## Appendix' and '#### Deep' render as paragraph prose with no error (_H2 requires digit-letter-dot ordinal, _H3 requires three hashes). F-006 low, agree. F-007 low, agree, confirmed - escape leaves double quote intact, producing a malformed aria-label; for id/href the tokenizer instead silently truncates ({#tw\"o} yields id=\"tw\"), so the defect class holds though the reviewer's location list is imprecise there. NINE CORRECTIONS REQUIRED BEFORE RE-REVIEW, all owner omn-dev-1-implement: (1) CR-001 add resolution rows for both 5a command lines and their comments with a named rule, and make the completeness statement true against HEAD:docs/user-guide.html; (2) record tidy-up A - move item 16 from section 1 to section 3 as same-material-divergent-wording under R1, citing the owner's ruling; (3) record tidy-up B - reword item 42's rationale to 'the anchor link is the more exact route', not 'wrong section', and cite the owner's ratification of items 17-20 and 40-42 and the derived-label ruling; (4) item 12 - cite the rule permitting the published chain-token wording to govern, or reverse it; (5) CR-003 - commit the classified normalised comparison as a reachable artifact and add the two source-only lead-in sentences (HEAD source lines 205 and 411) to section 2; (6) CR-004 - run the mismatch and source-only check-mode tests against an isolated copy, never the tracked files; (7) CR-005 - an unrecognised heading fails the render naming its line, or architect records acceptance against D-010; (8) CR-006 - assert a byte-identical tree on both failing check-mode outcomes; (9) CR-007 - attribute-context encoding, or a render failure, for aria-label, id and href. QA's Verification Gate plan is recorded in the gate assessment: A-001/A-011 double render and byte compare; A-002 scratch-copy discard demonstration; A-005/A-008 scripted heading and id/href set comparison HEAD vs tree; A-006 re-derived normalised visible-text diff matched hunk by hunk to the record; A-007/A-009/A-012 rendered-page and authoring walkthroughs; A-013 raw-markup count with the rule recorded; A-014 text review; A-003/A-004/A-010 require an observable hosted two-leg run and are otherwise recorded as blocked.",
+    "authorised_by": "omn-qa",
+    "authorisation_decided_by": "omn-qa (Review Gate rejecter, subagent a8289bfcf0621fbfd), authorisation recorded by session operator for vuhoangcao after run-3e6f6a248b99 closed",
+    "authorisation_rationale": "Rollback authorised to rebuild implementation as attempt 2 carrying the Review Gate's nine corrections (CR-001..CR-007 plus two record tidy-ups), which are already applied on the working tree and verified (renderer --check exit 0; 21 anchors; hermetic pre-change fixture; 131 targeted tests OK). Target is implementation, not the gate's closes_state quality-review, because the correction lands in the implementation artifact; under the cone rule quality-review (attempt 1, RP with F-001 high) is superseded as well and re-reviewed as attempt 2. Issued before any decision on the Verification Gate, as the architect's CR-001 ruling requires. Operator instruction per architect ruling Q-005: attempt 2's dispatch of implementation binds a new idempotency key because the implementer agent resolves at 1.1.0 against 1.0.0 at attempt 1; this is expected bind_payload behaviour keyed on agent version, not a rollback defect, and does not indicate lost work or a replay-suppression failure - the item was pending, not terminal, at bind time. Runs recorded under runtime_version 0.5.0, including this one, remain valid under that version; attempt 2 dispatches under 0.6.0, and this run's closure record must state it was opened at 0.5.0 and closed under 0.6.0. Mechanism delivered and closed by run-3e6f6a248b99 (all four gates approved 2026-09-07).",
+    "prior_artifact": "runs/run-4c51600606df/states/quality-review/artifacts/review-package.md",
+    "prior_artifact_digest": "sha256:ca7f97a95f3a888bcb9021a7ac05bef7",
+    "supersessions": 1
+  },
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md",
+      "produced_by": "implementation"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-07T14:39:03Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8d6bd0735e4288ea81c161556faa7c18",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73660d3f373c99f824d4eb22e1c28c64",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:6c80d27d96ba7355acade02b6a08f0bd",
+    "input_digest": "sha256:6d3b23ac6351be0d29db5f4d85fd6227",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-06-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-06-feature-request.md",
+        "digest": "sha256:5965b9107e59775c3f70f54b0b8609f7"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md",
+        "digest": "sha256:a259c356472f82d3fa52884908179895"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/review-package.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md",
+      "runs/run-4c51600606df/states/quality-review/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies repository source, tests, or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the review package"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code or tests",
+      "revise the technical design rather than raising a finding against it",
+      "define, widen, or narrow product scope",
+      "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+      "record a merge or release decision",
+      "decide a gate that assesses evidence this agent produced",
+      "review a change this agent authored",
+      "approve while a critical or high finding is open, or while test evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "review an implemented change against the requirements, the accepted design, and the standards in force",
+        "survey a bounded repository scope for redundant, dead, duplicated, over-abstracted, or generated low-value code, against the maintainability standards in force",
+        "assess conformance to coding standards, architecture rules, and security criteria",
+        "judge whether the supplied evidence supports the claim it is offered for",
+        "judge whether executed tests cover the behavior the change altered",
+        "classify each defect by severity, category, and location against a named standard",
+        "issue correction requests that state a required outcome and name its owner",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "execute the repository's own verification commands to confirm reported results",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code or tests",
+        "revise the technical design rather than raising a finding against it",
+        "define, widen, or narrow product scope",
+        "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+        "record a merge or release decision",
+        "decide a gate that assesses evidence this agent produced",
+        "review a change this agent authored",
+        "approve while a critical or high finding is open, or while test evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "Independence is the whole value of this role. An agent that can change the code it assesses becomes the producer of the work it is about to judge, and the Producer Exclusion Rule then disqualifies it from the very verdict it exists to give. The review reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies repository source, tests, or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the review package"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same finding set, the same severity assignment, the same correction-request set, the same verdict, and the same declared package status.",
+      "identifierSchemes": {
+        "findings": "F-<zero-padded-sequence>",
+        "correctionRequests": "CR-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Findings are ordered by descending severity; ties break toward the lower location in lexical order. Correction requests follow the findings they address.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "review-package.md",
+    "artifact_path": "runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md",
+    "template_ref": "templates/review-package.md",
+    "contract_ref": "agents/omn-dev-2-reviewer/output.md",
+    "quality_ref": "agents/omn-dev-2-reviewer/quality.md",
+    "validator": "review_package_validator",
+    "result_envelope_path": "runs/run-4c51600606df/states/quality-review/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-07T14:39:04Z"
+}

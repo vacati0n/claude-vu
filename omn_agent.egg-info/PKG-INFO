@@ -405,3 +405,32 @@ loop only ever calls the read-only `status` command, and the flag-guard that
 rejects `--watch`/`--json`/`--no-color` without `--show`. The `--watch` loop
 itself is tested with an injected clock and iteration bound, never a real
 sleep.
+
+## Continuous integration
+
+`.github/workflows/verify.yml` runs on every pull request and on pushes to the
+default branch, on ubuntu and windows, with two surfaces located **by
+discovery, never a curated file list**: the unit-test suite above, and every
+proof script matching `verify_*.py` under `.claude/runtime/` — each verifier in
+its own job on its own runner, so a failing verifier fails CI naming itself and
+one verifier's crash or flake (including the timing-sensitive recovery proof)
+cannot change any other verifier's result. A verifier passes only when it exits
+0 **and** its own `N/N checks passed` summary shows a non-negative verdict.
+Adding a `tests/test_*.py` or `verify_*.py` file needs no CI change.
+
+Branch protection binds to four stable check names — renaming any of them is a
+contract change:
+
+| Check | Standing |
+|---|---|
+| `tests-ubuntu` | required from day one |
+| `tests-windows` | advisory week 1, required after the flip |
+| `verifiers-ubuntu-ok` | advisory week 1, required after the flip |
+| `verifiers-windows-ok` | advisory week 1, required after the flip |
+
+Advisory means *absent from the required-checks list* (failures still show
+red); `continue-on-error` is never used. The flip is a settings-only change,
+enacted only after a default-branch run shows `verify_self_hosting.py` passing
+(the pre-existing orphan run directories must be cleaned first). The workflow
+never sets `NO_COLOR`, and new verifiers must be self-contained: runnable
+alone, with no arguments, in any order.

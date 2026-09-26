@@ -1,0 +1,121 @@
+{
+  "invocation_id": "inv-34ca35504b72-03-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-34ca35504b72/states/refactor-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-0008",
+    "workflowPhase": "refactor-implementation",
+    "declaredStatus": "provisional",
+    "declaredVerificationStatus": "partially-verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 1,
+      "testEvidenceEntries": 11,
+      "deviations": 2,
+      "residualRisks": 5,
+      "openQuestions": 4
+    },
+    "executedEvidence": {
+      "evidenceEntriesExecuted": 11,
+      "evidenceEntriesPassed": 11,
+      "evidenceEntriesFailed": 0,
+      "evidenceEntriesNotRun": 0,
+      "unitTestsExecuted": 55,
+      "unitTestsPassed": 55,
+      "verificationChecksExecuted": 88,
+      "verificationChecksPassed": 86,
+      "verificationChecksFailed": 2,
+      "preExistingFailuresReproduced": [
+        "runtime/verify_multi_phase.py check M6, 14/15 before and after the change",
+        "runtime/verify_self_hosting.py check S8, 7/8 before and after the change"
+      ]
+    },
+    "stage7Determination": {
+      "matchedRow": "Every entry passed, but a named area has no evidence",
+      "verificationStatus": "partially-verified",
+      "reportStatus": "provisional",
+      "namedGap": "the accuracy of the four added descriptions against their named authorities and their summary granularity, both reserved by the accepted design to the reviewing roles; and the absence of any check in either CI-discovered verification surface that reads the changed document"
+    },
+    "qualityChecks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass",
+      "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass",
+      "D5": "pass", "D6": "pass",
+      "M1": "pass", "M5": "pass", "M7": "pass",
+      "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass",
+      "M3": "pass", "M2": "pass", "K1": "pass", "K2": "pass",
+      "M4": "pass", "V1": "pass", "V2": "pass", "V3": "pass",
+      "B1": "pass", "B2": "pass", "B3": "pass", "B4": "pass",
+      "B5": "pass", "B6": "pass",
+      "M6": "pass", "A1": "pass", "A2": "pass", "A3": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass"
+    },
+    "qualityCheckSummary": {
+      "run": 44,
+      "passed": 44,
+      "failed": 0,
+      "blockingFailures": 0,
+      "correctableFailures": 0
+    },
+    "validationEngine": {
+      "validator": "runtime/implementation_report_validator.py",
+      "invokedWithEnvelope": true,
+      "result": "PASS",
+      "checksPassed": 32,
+      "checksRun": 32,
+      "blocking": 0,
+      "correctable": 0,
+      "notMachineCheckable": 3
+    },
+    "notMachineCheckableObligations": {
+      "N1": {
+        "judgement": "discharged",
+        "detail": "The single change-set row describes the change actually made: four one-line rows added to the folder-inventory section of the orientation document and nothing else, confirmed by a per-file diff showing seven insertions, no deletions, and every hunk inside that section."
+      },
+      "N2": {
+        "judgement": "discharged",
+        "detail": "Each test-evidence row exercises the change-set entry its Covers cell names. The structural rows probe the changed document directly against values pinned before the edit; the regression rows execute the three test modules and the seven verification scripts whose verdicts constitute the design's declared regression measure; the attribution row controls the two scripts that moved by re-measuring with and without the change in place."
+      },
+      "N3": {
+        "judgement": "discharged",
+        "detail": "No business logic was touched. The change is confined to one documentation section that no registry record resolves, no validator parses, and no workflow phase consumes; the only module in the repository that names the file merely lists it as a token-cost target, and its suite passes unchanged."
+      }
+    },
+    "assumptionsReConfirmed": {
+      "directoryCount": "16 directories at the framework payload root, re-derived at implementation start; 12 documented before the change, 16 after, undocumented set empty",
+      "undocumentedSet": "domain-model, prompts, registry, runtime, identical to the set the accepted design asserts",
+      "rowAuthorities": "each added row verified against its named authority: the five specification files in the domain-specification directory, the prompt directory README, the five discovery indexes, and the runtime directory README"
+    },
+    "mirrorSync": {
+      "required": false,
+      "detail": "The bundled payload mirrors only the ten managed subdirectories declared in omn_agent/source.py plus two seed directories; the changed file is a payload-root document outside every one of them, so no mirror of it exists and no sync command was run. Payload parity was executed rather than assumed: the packaged-payload suite passes with 11 tests and the payload file count is unchanged at 267."
+    },
+    "treeContamination": {
+      "quiescent": false,
+      "detail": "A concurrent session shared the working tree throughout. Whole-repository status was recorded with its timestamp and treated as contaminated: 56 changed paths at 02:16Z, 58 at 02:30Z. The two paths that appeared were enumerated and attributed individually, one to this change and one to concurrent activity, and no verification claim rests on a whole-repository measurement.",
+      "foreignPathsDisjointFromMine": true,
+      "foreignPathAppearingDuringPhase": "proposals/framework-change-proposal-FC-011.md, recording run-79630cb5274d, written at 02:29Z by concurrent activity and not by this invocation"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-34ca35504b72/states/refactor-implementation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    ".claude/CLAUDE.md",
+    "runs/run-34ca35504b72/states/refactor-implementation/artifacts/implementation-report.md",
+    "runs/run-34ca35504b72/states/refactor-implementation/result-envelope.json"
+  ],
+  "declared_side_effects_note": "Three repository files were written, listed above; the first is the orientation document the change set names, cited here by its literal path because this envelope is machine-read and not subject to the artifact's naming convention. One further effect is disclosed rather than omitted: runtime/verify_recovery.py creates and then deletes its own injected run directories under runs/ as part of inducing the failures it proves, so executing it, as the safety net's monitoring instruction requires, caused transient writes inside this phase's write-exclusion zone. The effect is net zero: the tracked and untracked state of runs/ was enumerated before and after and is identical, with no injected directory surviving. No file under proposals/ was written by this invocation.",
+  "error_class": null,
+  "error_detail": null
+}

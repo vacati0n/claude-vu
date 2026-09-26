@@ -1,0 +1,504 @@
+{
+  "invocation_id": "inv-5df08e171670-01-001",
+  "run_id": "run-5df08e171670",
+  "work_item_id": "run-5df08e171670::scope-and-acceptance",
+  "idempotency_key": "sha256:768da83101f1ea4e1a0bd31a95c6869a",
+  "state_id": "scope-and-acceptance",
+  "phase_index": 1,
+  "agent_id": "omn-product-owner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-product-owner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-product-owner/manifest.yaml",
+    "load_order": [
+      "agents/omn-product-owner/system.md",
+      "agents/omn-product-owner/identity.md",
+      "agents/omn-product-owner/reasoning.md",
+      "agents/omn-product-owner/execution.md",
+      "agents/omn-product-owner/output.md",
+      "agents/omn-product-owner/quality.md",
+      "agents/omn-product-owner/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-product-owner/system.md": "sha256:ca10caae54f63fa52580220f1f88812f",
+      "agents/omn-product-owner/identity.md": "sha256:8a5df5e407d8c96ce1e5bb7faaa07f55",
+      "agents/omn-product-owner/reasoning.md": "sha256:ee417de8bc3f21281299d8e5f53dfdcf",
+      "agents/omn-product-owner/execution.md": "sha256:ef29a06b2807c0b3c86ba6c19c102051",
+      "agents/omn-product-owner/output.md": "sha256:da40434a6907e6912979430f12430025",
+      "agents/omn-product-owner/quality.md": "sha256:53c8887fbc5888342d68c2e7a02d6ecc",
+      "agents/omn-product-owner/examples.md": "sha256:0e1b087f304a35d8527abc9aa5f0052b"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-product-owner/system.md",
+        "agents/omn-product-owner/reasoning.md",
+        "agents/omn-product-owner/output.md",
+        "agents/omn-product-owner/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-product-owner/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-product-owner/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-product-owner/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 32663,
+      "full_bytes": 64470
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "scope-definition",
+      "acceptance-authority"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in input:architecture-context",
+      "source": "agent-manifest (Advisory)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "acceptance-intent",
+      "business-constraints",
+      "architecture-context",
+      "prior-scope-definition",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/demo-mode-feature-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-feature-request.md",
+        "text": "# Feature Request \u2014 Autonomous end-to-end demonstration capture (`/implement --demo`)\n\n## Source\n\nOperator request, 2026-09-08, extended 2026-09-12 and 2026-09-14. Type: capability addition.\nPriority: High \u2014 the capability exists to support a live product presentation, and the\nframework had no way to show itself working.\n\n## Request\n\nThe framework can execute a governed multi-agent run but cannot *show* one. Explaining it to\nsomeone who has not seen it means talking over a state table. Add a capability by which a run\nrecords itself and produces a distribution-ready demonstration film with no human editing\nstep, so that a presenter has evidence rather than assertions.\n\nThree deliverables, in the order they were asked for:\n\n1. **`/implement --demo`.** An optional flag on the existing command that turns on recording\n   for a run. Every canonical runtime event, dispatch prompt, agent result, validation\n   verdict, gate decision, and host tool call becomes a millisecond-stamped execution marker.\n   At run completion the framework compiles the presentation itself, with no further command.\n2. **Film the real application.** The first implementation drew a synthetic dashboard. That\n   was rejected: the demonstration must show Claude Desktop actually doing the work, recorded\n   from the screen, with the marker stream used to decide where to cut rather than to draw.\n3. **Explain it to a non-technical audience.** The first cut ran 35 seconds with terse\n   technical narration. The audience is older and non-technical, so the film must run for\n   several minutes, explain every step in plain language, show each spoken line on screen as\n   a caption, and be accompanied by a written script the presenter can read beforehand.\n\n## Acceptance criteria\n\n- `--demo` on `plan` records a run; without it the demo package is never imported and the\n  runtime's only cost is one file-existence check per emitted event.\n- Markers carry UTC millisecond timestamps and the exchange with each agent as observed at\n  the adapter boundary; a replayed event does not produce a second marker.\n- A recording of the Claude Desktop window can be started and stopped from the runtime, keeps\n  running while the run proceeds, and records the instant its own clock read zero.\n- The editor maps every marker onto a frame of that recording and cuts the footage against the\n  run, condensing waiting with the factor stated on screen.\n- A demonstration for a first-time audience runs to minutes, is narrated in plain language,\n  carries captions, and ships with a script and a subtitle file.\n- Footage that filmed anything other than the target window is never published.\n- A run that completes while filming stops its own camera and compiles the film once.\n- Absent optional dependencies degrade to a recorded fallback rather than a failure.\n- The existing test suite stays green and the framework verifiers continue to pass.\n\n## Constraints\n\n- Additive only. No change to gate semantics, the Producer Exclusion Rule, the state machine,\n  recovery classification, or any existing artifact contract.\n- No new mandatory dependency. Pillow, ffmpeg, OBS Studio, and every text-to-speech engine are\n  optional, and each absence must be a recorded fallback.\n- Nothing in the demo layer may raise into the run it observes.\n- Only the target window may ever be recorded, and the recording's own audio is never\n  published.",
+        "digest": "sha256:563fa9d0a3547f8f865e6410fb0f4547"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/demo-mode-change-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-change-request.md",
+        "text": "# Change Request \u2014 Demo mode (`/implement --demo`), runtime 0.8.0\n\n## Change class\n\n`capability-addition`, as classified by `config/self-hosting-profile.md` and confirmed by\n`python .claude/runtime/self_hosting.py classify --path .claude/runtime/demo/editor.py`.\nThe framework gains a runtime behaviour it did not have. Routed to `/implement` over\n`workflows/implement-feature.md`, entry phase `scope-and-acceptance`.\n\n## What changes\n\n### New: the demo package, `runtime/demo/` (14 modules, about 5,600 lines)\n\n| Module | Responsibility |\n|---|---|\n| `__init__.py` | The public surface and the three integration points; the autonomous-build claim |\n| `context.py` | `DemoContext`: the per-run switch and its options |\n| `recorder.py` | Canonical events, on-disk envelopes, and host tool hooks to execution markers |\n| `timeline.py` | Markers to presentation scenes; the three narration registers |\n| `narration.py` | Text-to-speech engine chain, delivery rate, WAV assembly |\n| `captions.py` | Spoken lines to timed cues, a subtitle file, and a script |\n| `obs_ws.py` | A standard-library obs-websocket v5 client |\n| `capture.py` | Window targeting, both capture backends, the capture manifest |\n| `capture_helper.py` | The detached process that owns a recording and watches for occlusion |\n| `overlays.py` | The presentation frame drawn around the footage |\n| `editor.py` | Edit decision list, narration fitting, the ffmpeg cut |\n| `renderer.py`, `video_builder.py`, `deck.py` | The drawn-dashboard fallback when nothing was filmed |\n\n### Modified: `runtime/framework_runtime.py`\n\n- `RUNTIME_VERSION` 0.7.0 to 0.8.0.\n- `add_request_args` gains the `--demo` parameter group (seven optional flags).\n- `plan_run` gains `enable_demo()`, called after the execution request is written and before\n  the first event, so the recording opens on the run being accepted.\n- `RunLedger.emit` gains a tap guarded by one `Path.exists()`.\n- A new `demo` subcommand: status, build, backfill, host hook, record start and stop.\n\n### Modified: registry and command contract\n\n- `registry/commands.yaml`: the `implement` record 1.0.0 to 1.1.0 (MINOR, additive parameters\n  with safe defaults, per the versioning strategy in `domain-model/command-specification.md`).\n- `commands/implement.md`: a Parameters section documenting the flag group.\n\n### Modified: CLI wrapper and documentation\n\n- `omn_agent/cli.py`, `runner.py`, `update.py`: `--demo` forwarded to the runtime.\n- `runtime/README.md`, `docs/USER-GUIDE.md` (section 5g) and its rendered HTML, `README.md`.\n\n### New: tests\n\n`tests/test_demo_mode.py`, `test_demo_capture.py`, `test_demo_pacing.py`,\n`test_demo_captions.py`, and `tests/fixtures/fake_obs.py` \u2014 1,718 lines, 92 cases.\n\n## What does not change\n\nNo workflow specification, Phase Model, gate matrix, agent contract, artifact template,\nvalidator, state transition table, recovery policy, or existing registry record other than the\n`implement` command's own version. No existing test was weakened; two were tightened where\nthis change made their former assertions wrong.\n\n## Defects found and fixed during the change\n\nEach was found by inspecting output, not by reading code:\n\n1. Window-level `gdigrab` returns black frames on a GPU-composited Electron window.\n2. ffmpeg on Windows ignores `q` on a piped stdin, so recordings were never finalised; they\n   are now Matroska and stopped with a console break.\n3. `SW_RESTORE` un-maximises a maximised window.\n4. A variable-rate capture defeats `tpad`, so every hold silently padded nothing.\n5. The ffmpeg backend films a place on the screen, so a window losing focus filmed the\n   operator's desktop. Occlusion is now watched for, recovered from, and excluded.\n6. `run_completed` fires before the closing gate is decided, so the camera stopped one beat\n   short of the final approval.\n7. The film was compiled twice, because two events both mean \"finished\".\n\n## Rollback\n\nDelete `runtime/demo/` and the four test modules, revert the three integration points in\n`framework_runtime.py`, restore `RUNTIME_VERSION` to 0.7.0, revert the `implement` record to\n1.0.0 and its specification, and revert the CLI and documentation edits. No run evidence\noutside `runs/<run>/demo/` is invalidated, because nothing else was written.",
+        "digest": "sha256:5d21bb1a8e746477e8ea85a743e94068"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/demo-mode-business-intent.md",
+        "source_file": ".claude/runs/inputs/demo-mode-business-intent.md",
+        "text": "# Business Intent \u2014 Showing the framework working\n\n## The problem this exists to solve\n\nThe framework's value is invisible. What it produces is a governed trail: artifacts, gate\ndecisions, validation reports, recovery ledgers. Every one of those is the right output for an\nauditor and the wrong output for a first meeting. Explaining the framework today means\nnarrating a state table to someone who has no reason yet to care, and the claim doing the most\nwork in that conversation \u2014 that specialist agents hand work to each other and that no agent\ncan get past a human checkpoint \u2014 is precisely the claim a table cannot demonstrate.\n\n## Target users\n\n| User | What they need |\n|---|---|\n| Presenter | To show the framework working, without spending a day editing video |\n| Prospective adopter, non-technical | To understand the shape of the process without reading the screen |\n| Prospective adopter, technical | To confirm the film is a real run and not a staged mock-up |\n| Existing team | A short reference cut of a lifecycle, for onboarding |\n\nThe second is the demanding one and drove the final design. The stated audience is older and\nnon-technical. They will listen rather than read; they will not pause and scrub; they will not\nknow what a dispatch is. A film for them must run long enough to follow, explain each step in\nordinary words, and carry captions for anyone who cannot hear it.\n\n## Business outcomes sought\n\n- A presenter can produce a distribution-ready demonstration from a real run without editing.\n- What is shown is evidence, not a mock-up: every frame is the real application, and the film\n  states how it was condensed.\n- The demonstration can be re-cut for a different audience from the same recording, because\n  recording is the expensive part and it should happen once.\n- A presenter who is not the author can deliver it, from a written script.\n\n## Non-goals\n\n- Not a monitoring or observability product. The markers exist to cut a film, not to run a\n  dashboard.\n- Not a general video editor. It edits one thing: a recording of a run, against that run.\n- Not a replacement for the final report, the completion package, or the recovery ledger.\n- Not a way to make a run look better than it was. A rejection, a retry, and a condensed wait\n  are all shown, with the condensation factor stated on screen.\n\n## Constraints the business places on the solution\n\n- A demonstration is made to be published, so nothing that was not part of the run may end up\n  in it. This is the hard constraint, and it outranks completeness of the film.\n- The capability must cost nothing when unused. A team that never runs a demonstration must\n  not pay for its existence in dependencies or in runtime.\n- No new mandatory dependency, because the framework installs into other people's repositories.\n\n## How success is judged\n\nA complete lifecycle, filmed live, cut without human editing, understandable end to end by\nsomeone meeting the framework for the first time, and verifiably free of anything that was not\npart of the run.",
+        "digest": "sha256:d7c3a27030f383417920cef88eb56166"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/demo-mode-architecture-context.md",
+        "source_file": ".claude/runs/inputs/demo-mode-architecture-context.md",
+        "text": "# Architecture Context \u2014 Where demo mode sits in the runtime\n\n## Current-state structure this change extends\n\n`runtime/framework_runtime.py` (about 5,700 lines) implements the executable subset of\n`config/runtime.md` and `config/execution-engine.md`. The components relevant here:\n\n- **Execution Context Store** (`RunLedger`). Owns `runs/<run>/events.jsonl`, an append-only\n  stream of the fifteen canonical event types in `CANONICAL_EVENTS`. Every state change in a\n  run passes through `RunLedger.emit`, which is therefore the single point at which the whole\n  progress of a run is observable.\n- **Agent Invocation Gateway** (`cmd_dispatch`). Writes the canonical Agent Invocation Envelope\n  and the dispatch prompt to `runs/<run>/states/<phase>/`, then leases to the host-subagent\n  adapter. The runtime core never talks to a model, so this boundary is the only place the\n  exchange with an agent is visible.\n- **Validation Engine** (`VALIDATORS`). Writes `validation-report.json` per phase.\n- **Task Context** (`task_context.py`) and **execution metrics** (`execution_metrics.py`),\n  added in 0.7.0, which already derive per-run documents from persisted evidence only.\n\n## The architectural fact this change rests on\n\nThe runtime already records everything a demonstration needs, in order, with timestamps, and\nalready writes the prompt and the result to disk at the moment each is complete. Nothing new\nhas to be instrumented. What was missing was a consumer of that record, and a clock that ties\nit to a picture.\n\n## Design constraints inherited from the existing architecture\n\n1. **The runtime core owns control flow; adapters own external integration.** Screen capture,\n   OBS, ffmpeg, and speech synthesis are external integrations and must sit behind the same\n   kind of boundary the model adapters sit behind, not inside the execution path.\n2. **Deliberately not implemented** (`runtime/README.md`): a metrics pipeline. Demo mode must\n   not become one by the back door. Markers exist to cut a film.\n3. **`config/execution-engine.md`**: recovery behaviour is policy-driven and failures are\n   classified, never handled at the call site. A demo failure is not a run failure and must\n   not enter that machinery at all; it is caught and logged.\n4. **Zero-bloat context** (`config/runtime.md`, Progressive Module Loading). Runtime 0.7.0 was\n   an effort to reduce what a dispatch reads. A new capability must not add to it.\n5. **The installed form.** `FW_PREFIX` exists because the framework is `.claude/` in its own\n   repository and `.omn-agent/` once installed elsewhere. Anything path-facing must derive\n   from it.\n\n## Integration surface available\n\n`RunLedger.emit` is the natural tap: one function, every event, already ordered and stamped.\nThe cost of a guard there is one `stat()` per event. `plan_run` is the natural place to arm\nthe capability, because it is where a run is materialised and where the execution request is\nwritten. `main()`'s subparser set is where an operator-facing surface is added.\n\n## Prior art in this repository to reuse rather than reinvent\n\n- `execution_metrics.py` already estimates per-dispatch context cost and is the right source\n  for the token figures a film reports.\n- `task_context.py` already parses artifacts deterministically, never by summarisation; the\n  same discipline applies to anything a marker asserts.\n- `artifact_lib.py` provides shared artifact parsing.\n- The colorized `status` tree in `framework_runtime.py` already establishes a visual\n  vocabulary for phases, gates, and their statuses.\n\n## Known environmental facts\n\n- Windows is the operator platform. OBS Studio 32.2.2 is installed with obs-websocket\n  bundled, but its server is disabled and its configuration is not writable by the agent.\n- No system ffmpeg; Pillow is present; Windows SAPI voices are available.\n- Claude Desktop is an Electron application: window class `Chrome_WidgetWin_1`, packaged under\n  WindowsApps, GPU-composited.\n\n## Risks this change must address\n\n- **Publication risk.** A screen recording may capture something that was not part of the run.\n  This is the dominant risk and the architecture must make it impossible to publish silently.\n- **Dependency risk.** Three optional external tools, each absent on some host.\n- **Evidence risk.** A film is a claim about a run. It must be derivable from the run's own\n  record, and it must state where it condensed time.",
+        "digest": "sha256:804a281170829bd910709cc9e1daa95d"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the business intent this agent bounds: a feature request for new functionality, a change request for a modification to delivered behaviour, or a business intent for an outcome stated without a proposed solution. Without one there is nothing to scope, and scoping anyway would mean inventing what the requester wants."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [],
+  "task_context": {
+    "path": "runs/run-5df08e171670/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:b275202b2a1f2b762c400ac383ffdf57",
+    "bytes": 4259,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "scope-and-acceptance",
+      "execution-planning"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {
+      "execution-planning": [
+        "scope-and-acceptance"
+      ]
+    },
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-09-14T07:20:07Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 21871,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12246,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7094,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "required",
+        "read_reason": "this artifact names the gate it is evidence for and its owners"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/scope-definition.md",
+        "digest": "sha256:9f082102c11c1de4d4b53c8252a0a9bc",
+        "supplies": "feature-request",
+        "bytes": 4067,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": "acceptance-intent",
+        "bytes": 2277,
+        "read": "on-demand",
+        "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+      }
+    ],
+    "context_digest": "sha256:c2da0750ed01891e7ded391831c7f994",
+    "input_digest": "sha256:e493e2228df8dd0ad8594c85345f19c8",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/demo-mode-feature-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-feature-request.md",
+        "digest": "sha256:563fa9d0a3547f8f865e6410fb0f4547"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/demo-mode-change-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-change-request.md",
+        "digest": "sha256:5d21bb1a8e746477e8ea85a743e94068"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/demo-mode-business-intent.md",
+        "source_file": ".claude/runs/inputs/demo-mode-business-intent.md",
+        "digest": "sha256:d7c3a27030f383417920cef88eb56166"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/demo-mode-architecture-context.md",
+        "source_file": ".claude/runs/inputs/demo-mode-architecture-context.md",
+        "digest": "sha256:804a281170829bd910709cc9e1daa95d"
+      }
+    ],
+    "unnarrowed": [],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "templates/scope-definition.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "read_on_demand": [
+      "domain-model/agent-specification.md",
+      "workflows/implement-feature.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 107697,
+    "bytes_required": 12303,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "runs/run-5df08e171670/states/scope-and-acceptance/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository modification of any kind",
+        "any command whose effect is not recorded in the artifact"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "author or revise a technical design, structure, or technology decision",
+      "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+      "write, modify, or review code, tests, migrations, or configuration",
+      "record the Scope Gate decision on this agent's own artifact",
+      "record a merge, readiness, or release decision",
+      "define the test strategy or execute validation",
+      "relax a stated regulatory, policy, or quality constraint to close the scope",
+      "record scope no supplied input supports",
+      "access external systems, ticket trackers, or stakeholders directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "decide which deliverables fall inside this change and which fall outside it",
+        "decide the relative priority of the in-scope items",
+        "decide the acceptance threshold each criterion states",
+        "decide when a stated expectation is too vague to be an acceptance criterion",
+        "decide when an adjacent request is a separate change rather than a widening of this one",
+        "record a scope decision together with the rationale that justifies it",
+        "record an unresolved ambiguity as an open question with a named owner",
+        "set the scope verdict the recorded question set supports"
+      ],
+      "prohibited": [
+        "author or revise a technical design, structure, or technology decision",
+        "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+        "write, modify, or review code, tests, migrations, or configuration",
+        "record the Scope Gate decision on this agent's own artifact",
+        "record a merge, readiness, or release decision",
+        "define the test strategy or execute validation",
+        "relax a stated regulatory, policy, or quality constraint to close the scope",
+        "record scope no supplied input supports",
+        "access external systems, ticket trackers, or stakeholders directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "This role produces one artifact and changes no repository source. Its writes are the artifact path and the result envelope path the invocation envelope names, and nothing else. A scope decision that edited the repository would be deciding the change it is supposed to bound.",
+        "scope": [
+          "runs/**/states/scope-and-acceptance/**"
+        ]
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository modification of any kind",
+          "any command whose effect is not recorded in the artifact"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical supplied inputs and an identical context snapshot must produce the same in-scope item set, the same exclusion set, the same acceptance criterion set, the same scope decision set, the same open question set, and the same scope verdict.",
+      "identifierSchemes": {
+        "scopeItems": "S-<zero-padded-sequence>",
+        "exclusions": "X-<zero-padded-sequence>",
+        "acceptanceCriteria": "A-<zero-padded-sequence>",
+        "scopeDecisions": "D-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "In-scope items are ordered by business priority; ties break toward the order the expectation appeared in the supplied inputs. Acceptance criteria are ordered by the scope item they bound, ties breaking toward derivation order. Exclusions, decisions, and questions follow the order the reasoning stage that produced them declares.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied inputs or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "scope-definition.md",
+    "artifact_path": "runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "template_ref": "templates/scope-definition.md",
+    "contract_ref": "agents/omn-product-owner/output.md",
+    "quality_ref": "agents/omn-product-owner/quality.md",
+    "validator": "scope_definition_validator",
+    "result_envelope_path": "runs/run-5df08e171670/states/scope-and-acceptance/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-14T07:20:07Z",
+  "context_budget": {
+    "modules_full_bytes": 64470,
+    "modules_core_bytes": 32663,
+    "slice_all_bytes": 107697,
+    "slice_required_bytes": 12303,
+    "inputs_bytes": 15124,
+    "upstream_full_bytes": 0,
+    "upstream_read_first_bytes": 0,
+    "task_context_bytes": 4259,
+    "fixed_bytes": 10688,
+    "legacy_estimate_bytes": 197979,
+    "progressive_estimate_bytes": 75037,
+    "legacy_estimate_tokens": 49494,
+    "progressive_estimate_tokens": 18759,
+    "savings_pct": 62.1
+  }
+}

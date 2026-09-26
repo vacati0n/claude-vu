@@ -53,16 +53,19 @@ the recovery.
 | `release_note_validator.py` | Validation Engine for `release-note.md` |
 | `review_package_validator.py` | Validation Engine for `review-package.md`, the one artifact type every review phase emits |
 | `artifact_lib.py` | Shared artifact parsing used by every validator |
+| `task_context.py` | Task Context: the compact, runtime-owned shared state a phase reads first (`runs/<run>/task-context.yaml`), the affected-area derivation, the skill-dispatch verdict, the upstream section map, and the parallel-group computation |
+| `execution_metrics.py` | Execution metrics: the per-run performance trace (`runs/<run>/execution-metrics.json`) and the per-dispatch context estimate under the legacy and the progressive rules |
 | `fixtures/` | Conforming reference artifact per type, for the validator proof. See `fixtures/README.md` |
 | `verify_vertical_slice.py` | Executable proof that one phase really executed |
 | `verify_multi_phase.py` | Executable proof that the run is a multi-phase state machine, and that re-running it changes nothing |
 | `verify_registry_coverage.py` | Coverage proof over the registered surface: command routing, Phase Model publication, phase-owner invocability, phase skills, gate decidability, and per-phase dispatchability with reasons |
 | `verify_validators.py` | Coverage proof over the Validation Engine: every artifact a Phase Model names has a validator, every validator accepts a conforming artifact, and every validator rejects a mutated one by the named check |
-| `verify_recovery.py` | Recovery proof by failure injection: a rejected artifact repaired on retry, a retry budget exhausted and bounded, and a policy violation never retried |
+| `verify_recovery.py` | Recovery proof by failure injection: a rejected artifact repaired on retry, a retry budget exhausted and bounded, a policy violation never retried, and a gate rejection rolled back under a recorded human authorisation and rebuilt with the rejected evidence kept immutable |
 | `self_hosting.py` | Executable form of `config/self-hosting-profile.md`: scope classification, change-class routing, evidence expansion, release-checklist parsing, and per-command dispatchability |
 | `change_proposal_validator.py` | Validation Engine for `framework-change-proposal.md`, the governance record of a framework-internal change. Re-reads the run the proposal names rather than trusting what it claims |
 | `verify_self_hosting.py` | Proof that the self-hosting operating mode holds: the profile routes, the evidence requirement is enforceable, every recorded change was carried by a conforming run, and no run inside the window is unaccounted for |
 | `close_legacy_run.py` | Migration utility: closes a pre-slice-3 run directory, which carries no state store and so cannot be closed by `complete`. Delete once no such run remains |
+| `demo/` | Demo mode (`--demo`, runtime 0.8.0). Telemetry: `context.py` the per-run switch, `recorder.py` the Recorder that turns events, envelopes, and host tool hooks into millisecond-stamped markers, `timeline.py` markers to scenes, `narration.py` the text-to-speech engine chain, `captions.py` the spoken lines as timed cues, subtitles, and a script. Filming the real application: `obs_ws.py` a standard-library obs-websocket client, `capture.py` window capture and the capture manifest, `capture_helper.py` the detached recorder process, `overlays.py` the presentation frame, `editor.py` the edit decision list and the ffmpeg cut. Drawing the run instead: `renderer.py`, `video_builder.py`, `deck.py`. `hooks.settings.json` is the optional host tool-hook wiring. See **Demo mode** below |
 
 Requires Python 3.10+ and `pyyaml`. No other dependency.
 
@@ -108,6 +111,21 @@ python .claude/runtime/framework_runtime.py gate --run-id <run-id> \
     --gate "Planning Gate" --decision approve \
     --owner-role omn-tech-lead --decided-by <who> --rationale "<why>"
 
+# 6b. A rejected gate is a classified rollback, and the rollback is a second human decision.
+#     `rollback` authorises it: the completed downstream cone of --target (default: the phase
+#     the gate closes) -- the target and every completed phase that hard-depends on it, the
+#     closed phase always among them -- is superseded: re-entered as a new attempt under its
+#     existing idempotency key, its committed artifact kept immutable -- and the gate is
+#     re-armed on the same work item for a fresh decision. Same owner-role and Producer
+#     Exclusion checks as `gate`; refused once a phase in range has spent its charged
+#     attempts, and refused while an approved gate stands over any phase in range (the closed
+#     phase included), since a completed gate cannot be re-armed. The rejection's envelope
+#     prints this command as its clearing action with only `--decided-by` left to fill;
+#     `next` names it first while the rejection stands, and `recovery` derives it live.
+python .claude/runtime/framework_runtime.py rollback --run-id <run-id> \
+    --gate "Planning Gate" --target execution-planning \
+    --owner-role omn-tech-lead --decided-by <who> --rationale "<why>"
+
 # 7. Inspect and prove
 python .claude/runtime/framework_runtime.py status --run-id <run-id>
 python .claude/runtime/verify_vertical_slice.py --run-id <run-id> --slice architect
@@ -126,6 +144,18 @@ python .claude/runtime/framework_runtime.py status --run-id <run-id> --compact -
 
 # Why a run is not proceeding: every classified failure, in full
 python .claude/runtime/framework_runtime.py recovery --run-id <run-id> [--open-only]
+
+# What the run cost: the execution metrics (also written at every completion and carried by
+# the final report). `--json` prints the whole document.
+python .claude/runtime/framework_runtime.py metrics --run-id <run-id>
+
+# Loading controls. `next` always lists every phase that may be dispatched alongside the one
+# it names; `dispatch --load-profile full` restores the pre-0.7.0 read-everything behaviour
+# for one dispatch; `--affected-area` declares a domain the task touches so the matching
+# domain-conditional skill is read (repeatable, additive, persisted on the run).
+python .claude/runtime/framework_runtime.py dispatch --run-id <run-id> --phase <phase> \
+    --load-profile full
+python .claude/runtime/framework_runtime.py plan --run-id <run-id> --affected-area database
 
 # Prove the registered surface and the Validation Engine, independently of any run
 python .claude/runtime/verify_registry_coverage.py
@@ -156,8 +186,8 @@ Every work item holds exactly one of seven persisted statuses:
 | `leased` | lease issued to the adapter, invocation not yet started | `Executing` |
 | `running` | invocation started, result outstanding | `Executing` |
 | `retrying` | a classified retryable failure, waiting out its backoff | `Retrying` |
-| `completed` | result accepted and committed (terminal) | `Completed` |
-| `failed` | no further automatic progress is permitted (terminal) | `Failed` |
+| `completed` | result accepted and committed (terminal, except under an authorised rollback) | `Completed` |
+| `failed` | no further automatic progress is permitted (terminal, except a rejected gate under an authorised rollback) | `Failed` |
 | `blocked` | an explicit, reasoned blocker | `Blocked` |
 
 `retrying` carries `available_at`, the instant the work item becomes dispatchable again.
@@ -178,17 +208,34 @@ a competing vocabulary; each work item persists its `queue_status` alongside its
 `Cancelled` is the one canonical state this runtime does not implement.
 
 Two transition tables govern movement, one per work type. Any pair absent from a table is
-forbidden, which is what makes the terminal statuses terminal.
+forbidden, which is what makes the terminal statuses terminal: no automatic path leaves
+`completed` or `failed`. Exactly two human-authorised pairs do, both recorded in the tables
+under their own triggers and both written only by the `rollback` command.
 
 ```
 state work item                                      gate work item
-  pending  -> leased | blocked                         pending -> blocked | completed | failed
-  leased   -> running | pending | retrying | blocked   blocked -> completed | failed | pending
-  running  -> completed | failed | retrying |
-              pending | blocked
-  retrying -> pending | blocked | failed
-  blocked  -> pending | failed
+  pending   -> leased | blocked                        pending -> blocked | completed | failed
+  leased    -> running | pending | retrying | blocked  blocked -> completed | failed | pending
+  running   -> completed | failed | retrying |         failed  -> pending   (rollback_authorised)
+               pending | blocked
+  retrying  -> pending | blocked | failed
+  blocked   -> pending | failed
+  completed -> pending   (superseded; engine-checked: requires a supersession record)
 ```
+
+`superseded` re-enters a committed phase as attempt n+1 under the same idempotency key: the
+payload digest keeps the phase-canonical artifact path, so the key names the unit of work and
+not one attempt of it. The prior `completion` block moves unmodified into the item's
+append-only `supersessions` list beside the authorisation, and attempt n+1 writes its artifact
+under `states/<phase>/artifacts/attempt-<n+1>/` -- the same filename, a different directory --
+so attempt 1's artifact is never rewritten and `verify_multi_phase.py` M12 checks every
+superseded completion exactly as it checks the current one. The per-attempt invocation,
+result, ledger, and validation files are snapshotted under `states/<phase>/attempts/<n>/`
+before the next dispatch overwrites them. `rollback_authorised` re-arms the rejected gate on
+the same work item: the rejection moves into the gate record's append-only
+`decision_history`, `decision` returns to null, and the gate blocks again for a fresh human
+decision once the rebuilt evidence lands. A gate carrying a `decision_history` is never
+auto-approved, whatever precedent other runs supply.
 
 A gate never leases and never runs: `config/execution-engine.md` requires gates to be
 explicit control states, so a gate is committed by a recorded decision, not an invocation.
@@ -208,11 +255,14 @@ A `pending` state work item may be leased only when every guard passes. A guard 
 | `G1-CAPABILITY` | Does the full chain resolve to something invocable: active record, manifest declaring this workflow and phase, host registration, resolvable phase skills, registered validator? | `block` |
 | `G2-CONTEXT` | Is a context slice declared for this phase? | `block` |
 | `G3-PREDECESSOR` | Have all hard predecessors completed? | `wait`, or `block` if one failed terminally |
-| `G4-GATE` | Does every gate closing a hard predecessor carry an approved decision? | `block`, `awaiting_human_decision` |
+| `G4-GATE` | Does every gate closing a hard predecessor carry an approved decision? | `block`, `awaiting_human_decision`; or `awaiting_recovery_task` (class `gate-rejection`, carrying the gate name) when one was rejected |
 | `G5-INPUT` | Is the owning agent's input contract satisfiable from the supplied inputs plus completed upstream artifacts? | `block` |
 
 Guards are a pure function of persisted state, so re-evaluating them produces the same
-verdicts and no additional transitions.
+verdicts and no additional transitions. A guard-raised block whose guards later fall to a
+`wait` -- which happens to a successor, and to an undecided gate, when the phase they depend on
+is superseded by a rollback -- returns the item to `pending` and resolves its envelope, so a
+stale block never holds a run and a gate is never decidable over evidence being rebuilt.
 
 ### Where the dependency graph comes from
 
@@ -263,7 +313,7 @@ matrix does not row out:
 | `request-validation-failure` | initialization | no | abort |
 | `context-integrity-failure` | hydration | no | abort |
 | `workflow-contract-violation` | validation | no | rollback |
-| `gate-rejection` | gate state | no | rollback |
+| `gate-rejection` | gate state | no | rollback -- executed by `rollback` under a recorded human authorisation |
 | `aggregation-conflict` | aggregation | no | remediate |
 | `missing-capability-failure` | resolution | no | escalate |
 | `policy-failure` | policy decision | no | escalate |
@@ -409,6 +459,41 @@ no transition, no file. That entry is the evidence that the repetition was seen 
 suppressed. `verify_multi_phase.py` check M13 re-executes the runtime against a committed
 run and proves the whole fingerprint is unchanged.
 
+## What a dispatch asks an agent to read
+
+Runtime 0.7.0 changed how much of the framework an agent reads per dispatch, not what it
+does. The policy is `config/runtime.md` (Task Context, Progressive Module Loading, Context
+Loading, Conditional Skill Dispatch); this is what the runtime emits for it.
+
+- **Task context first.** `runs/<run>/task-context.yaml` is rebuilt from persisted state at
+  every dispatch, completion, gate decision, and rollback (`task_context.py`), and written
+  only when its content changed. It carries the run's objective, scope, acceptance criteria,
+  decisions, constraints, changed files, risks, open questions, completed phases, gate
+  decisions, repository context, and parallel groups as one-line facts keyed by the source
+  artifact's own identifiers -- deterministic table parsing, never summarisation, and only
+  from artifacts the Validation Engine accepted. The dispatch prompt names it as the first
+  read after the envelope and names, per upstream artifact, the sections to read first and the
+  sections to open only on demand (`UPSTREAM_SECTIONS`).
+- **Two module tiers.** `capability_bindings.load_profile` splits the manifest's `loadOrder`
+  by declared role: core (`system.md`, `reasoning.md`, `output.md`, `quality.md`) is read in
+  full up front; on-demand (`identity.md`, `execution.md`, `examples.md`) carries a
+  `load_when` trigger and is read the moment it applies. The runtime performs the
+  Initialization checks the lifecycle modules ask for and records them under
+  `capability_bindings.contract_checks`. `--load-profile full` restores the old behaviour.
+- **Read hints on the frozen slice.** Membership and digests are unchanged; each member now
+  carries `read: required | on-demand | runtime-resolved` with a reason, and a member both
+  the base and the phase slice name is frozen once.
+- **Skill dispatch.** `skill_dispatch[]` gives every resolved code `required` or
+  `not-triggered` with its basis; domain-conditional codes follow the task context's
+  `affected_areas`, unknown never narrows, and security is always required in review and
+  validation phases.
+- **Parallel groups.** `plan` prints the topological levels of the hard-dependency graph;
+  `next` lists every phase dispatchable alongside the one it names and reports a phase that
+  could start early on a soft edge as a choice that forgoes the predecessor's artifact.
+- **Metrics.** `execution-metrics.json` and the final report's Execution Metrics section carry
+  the per-run trace, with a per-dispatch byte estimate under the legacy and the progressive
+  rules; `verify_*` scripts are unchanged.
+
 ## Run layout
 
 ```
@@ -417,10 +502,27 @@ runs/
   <run-id>/
     execution-request.json              control-plane request
     state.json                          work items, gates, ordered transition log, replays
+    task-context.yaml                   the compact shared state every phase reads first
+    execution-metrics.json              the run's performance trace
     run-ledger.json                     run status, per-phase index, recovery summary
     events.jsonl                        append-only canonical progress events
     recovery-ledger.json                append-only recovery and escalation ledger
     completion-package.md               Output Aggregator package, run-wide
+    demo/                               only when the run was planned with --demo
+      demo-context.json                 the switch and the presentation options
+      markers.jsonl                     append-only execution markers, millisecond-stamped
+      recorder.log                      what the demo layer swallowed rather than raise
+      narration/, narration.wav         per-scene voice segments and the assembled track
+      capture/                          only when the run filmed the real application
+        session.mp4                     the raw screen recording
+        capture-manifest.json           backend, window, rectangle, and the instant the
+                                        recording's own clock read zero
+      edit/                             overlay frames and the filtergraph of the last cut
+      presentation_demo.mp4|.gif|.html  the compiled presentation (see Demo mode)
+      presentation_demo.srt             the narration as subtitles
+      presentation_demo-script.md       the narration as a script, to read before presenting
+      presentation_demo-poster.png      a still, for slides
+      build-manifest.json               outputs, fallbacks and their reasons, engine, timings
     states/<phase>/
       context-snapshot.json             frozen context slice with per-file digests
       invocation-envelope.json          canonical Agent Invocation Envelope
@@ -438,6 +540,158 @@ runs/
 Runs produced before slice 3 keep the older flat layout, in which the run root held one
 phase's ledger and artifacts. `verify_vertical_slice.py` reads both.
 
+## Demo mode
+
+`plan --demo` (or `omn-agent run <KEY> --demo`) records a run for an autonomous end-to-end
+demonstration and compiles the presentation itself when the run completes. Runtime 0.8.0.
+
+The film is an edit of the real application on screen. The markers are not the picture; they
+are the **clock and the script** that decide where to cut it.
+
+```
+  RunLedger.emit ──(one stat on runs/<run>/demo/demo-context.json)──▶ demo.on_event
+                                                                            │
+      dispatch-prompt.md ─┐                                                 ▼
+      invocation-envelope ┼─ read from disk at event time ─▶  Recorder  ─▶  markers.jsonl
+      result-envelope     │                                     ▲             │
+      validation-report  ─┘        host PostToolUse hook ───────┘             │
+                                                                              │
+  demo --record-start ─▶ OBS (window capture) ─┐                              │
+                         else ffmpeg (gdigrab) ┴─▶ capture/session.mkv        │
+                                               └─▶ capture-manifest.json      │
+                                                   (t0: the recording's zero) │
+                                                                              ▼
+                                        editor: marker timestamp - t0 = frame ▼
+                                        ┌─────────────────────────────────────┐
+                                        │  head 1x │ condensed Nx │ tail 1x   │  per beat
+                                        └─────────────────────────────────────┘
+                       overlays (frame, rail, lower thirds) + narration + cards
+                                                   │
+                                                   ▼
+                                         presentation_demo.mp4
+
+  no recording ─▶ the drawn dashboard instead ─▶ mp4, else GIF, always an HTML deck
+```
+
+- **Switch.** `runs/<run>/demo/demo-context.json`. Absent by default; the runtime's only cost
+  without `--demo` is one `stat()` per emitted event, and the demo package is never imported.
+  `--demo` on a run already in flight throws the switch and backfills the events already
+  persisted; `demo --run-id <run> --backfill --build` does the same for any historical run.
+- **Markers.** One JSON object per observed fact: `marker_id`, `seq`, `timestamp` (UTC,
+  millisecond), `t_ms` since the first marker, `agent_name`, `action_type`, `phase`, `title`,
+  `payload`, `visual_snapshot_text` (the dashboard rendered as text at that instant),
+  `source` (`runtime` / `host-hook` / `backfill`), `source_event_id`. The exchange with an
+  agent is captured at the adapter boundary, which is the only place the runtime sees it: the
+  dispatch prompt (bytes, digest, excerpt, token estimate) at `invocation_started`, the result
+  envelope (status, artifact refs, structured output excerpt, the agent's own prose note) at
+  `invocation_completed`. Token figures are the runtime's context estimate (bytes / 4) and
+  are labelled as estimates; envelopes older than 0.7.0 are measured at recording time.
+- **Host tool calls.** Merge `runtime/demo/hooks.settings.json` into the host's settings to post
+  every tool call to `framework_runtime.py demo --hook`; it records a `tool_invocation`
+  marker against the run named in `runs/.active-demo` and is inert otherwise. That file
+  carries a `<framework-dir>` placeholder in its command, because a file on disk cannot know
+  whether it was installed as `.claude` or as `.omn-agent`; `demo --print-hook` prints the
+  same block with the path resolved for this tree. Unmerged, the markers carry the runtime's
+  own events and nothing the host did, which is a thinner film, not a broken one.
+- **Recording.** `plan --demo --demo-record` starts the camera as part of planning, before
+  the run's first event is emitted, so the film opens on the run being accepted rather than
+  on the first step after it; `demo --record-start` does the same for a run that already
+  exists. Either way the command returns at once and the recording keeps running, owned by a
+  detached helper, while the run proceeds.
+  `--record-stop` finalises it, and a run that completes while still filming stops its own
+  camera first. Two backends: **OBS Studio** over obs-websocket, which captures the window
+  itself through Windows Graphics Capture and is unaffected by anything in front of it, and
+  **ffmpeg gdigrab** over the window's rectangle, which needs no setup but records what is on
+  screen there, so the window is raised first and refuses to record if it will not come
+  forward. Because that backend films a *place on the screen* rather than a window, anything
+  that later comes in front of it -- or the bare desktop, if the window is minimised -- is
+  filmed instead. The recorder therefore watches which window is actually in front for the
+  whole take, tries to take the window back when it loses it, and records every span during
+  which it did not have it. The editor excludes those spans: a beat running into one is cut
+  back to where the window was still in front, a beat wholly inside one is dropped, and the
+  build manifest says how many seconds were withheld. A demo is made to be published, and
+  whatever else was on that screen would be published with it.
+  OBS is used when its WebSocket server is enabled (OBS, Tools, WebSocket Server
+  Settings); the backend actually used is named in the capture manifest. Only the target
+  window's rectangle is ever recorded, and its resolution, position, backend, and the instant
+  its clock read zero are all in `capture/capture-manifest.json`.
+- **The cut.** Every marker's video time is `timestamp - started_at`, so each beat of the run
+  has a frame. A span at or under the pace's threshold plays untouched; a longer one keeps its
+  head and tail at real speed and condenses the middle, with a badge naming the factor.
+  Nothing is fabricated and nothing is hidden. The edit decision list is written into
+  `build-manifest.json` for review.
+- **Pace and explanation.** `--demo-pace relaxed` with `--demo-explain`, the default, is for a
+  viewer meeting the framework once: every beat is held long enough to take in, waiting is
+  condensed far less, and the narration explains what each step *means* in plain language
+  instead of naming it. In that mode the script is recorded first and the picture is paced to
+  it, so the film runs to minutes rather than to a target — a two-minute run becomes a
+  five-minute explanation. A beat given more narration than it has footage is first
+  un-condensed, then slowed to a third speed, and only then held on its last frame, in that
+  order, so the picture keeps moving while there is film left to show. A concept is explained
+  the first time it appears and simply named thereafter. `--demo-pace brisk --demo-no-explain`
+  is the short highlight reel for an audience that already knows the framework.
+- **A beat with no footage of its own.** A dispatch and the response to it can be markers a
+  fraction of a second apart. In explaining mode such a beat borrows the seconds immediately
+  after it, which is the same recording and is what happened next; it never takes from a beat
+  that cannot spare them.
+- **The frame.** The capture is inset in a 1920x1080 composition: brand bar, a workflow rail
+  showing every phase and gate with the live one lit, a lower third naming the beat, a
+  progress bar, and opening and closing cards carrying the run's own numbers. All of it is
+  drawn with Pillow into one overlay track, so no ffmpeg font configuration is involved.
+- **Sound.** Narration only. The recording's own audio is never mapped into the output, so
+  whatever was playing on the machine during the take is not published. Voices are tried in
+  the order edge-tts, pyttsx3, Windows SAPI, macOS `say`, espeak-ng, and delivered a little
+  below the engine's own pace; `--demo-speech-rate` moves that between -6 and 6.
+- **Captions, three ways.** Every spoken line is also shown on screen as it is said, so the
+  film can be followed with the sound off. The timing is not guessed: the narration is
+  synthesised before the picture is cut, so each line's real duration is known, and
+  `captions.py` splits it where a reader would pause and gives each cue a share of that
+  duration in proportion to how long it takes to say. The same cues are written beside the
+  film as `presentation_demo.srt` for playing it elsewhere, and as
+  `presentation_demo-script.md`, a script a presenter can read beforehand: what is on screen
+  at each point, what is said over it, and where in the film it falls. `--demo-no-captions`
+  leaves the picture clean; the subtitle file and the script are written either way.
+- **Fallbacks, recorded.** No recording: the drawn dashboard. A failed edit: the drawn
+  dashboard. No ffmpeg: animated GIF. No Pillow: HTML deck with text frames. Every skipped
+  stage lands in `build-manifest.json` with its reason, and a demo failure of any kind is
+  logged to `demo/recorder.log`, never raised into the run.
+
+`<framework-dir>` below is this framework directory's real name: `.omn-agent` in a
+repository the installer wrote to, `.claude` in the framework's own checkout.
+
+```bash
+# film a run and let it cut itself when the run completes
+python <framework-dir>/runtime/framework_runtime.py plan --demo --demo-record \
+    --input feature-request=<path>
+#   ... drive the run in the window; the camera is already rolling ...
+python <framework-dir>/runtime/framework_runtime.py demo --run-id <run> --record-stop --build
+
+# or start the camera separately, against a run that already exists
+python <framework-dir>/runtime/framework_runtime.py demo --run-id <run> --record-start
+
+python <framework-dir>/runtime/framework_runtime.py demo --run-id <run> --snapshot   # markers so far
+python <framework-dir>/runtime/framework_runtime.py demo --run-id <run> --build --drawn   # no footage
+python <framework-dir>/runtime/framework_runtime.py demo --run-id <run> --backfill --build  # any run
+
+# re-cut the same footage for a different audience, without recording again
+python <framework-dir>/runtime/framework_runtime.py demo --run-id <run> --build \
+    --pace brisk --no-explain          # short, for people who know the framework
+python <framework-dir>/runtime/framework_runtime.py demo --run-id <run> --build \
+    --pace relaxed --speech-rate -2    # longer and slower still
+
+# print the host tool-hook wiring block with the framework directory resolved
+python <framework-dir>/runtime/framework_runtime.py demo --print-hook
+```
+
+A recording made by hand carries no start instant, so `--build --capture-offset <seconds>`
+states how far into the file the run's first marker falls and the rest follows from it.
+
+Optional dependencies: `Pillow` for every drawn pixel (present in most Python installs),
+`ffmpeg` on the PATH (or `imageio-ffmpeg`, or node's `ffmpeg-static`) for capture and for the
+cut, OBS Studio for true window capture, and one of `edge-tts` / `pyttsx3` for a voice where
+the OS offers none. None is required; each absence is a recorded fallback, though without
+ffmpeg there is no video at all and the HTML deck is the whole output.
+
 ## What is implemented
 
 Named against the components in `config/runtime.md` and `config/execution-engine.md`:
@@ -448,7 +702,8 @@ Named against the components in `config/runtime.md` and `config/execution-engine
 | Task Router | implemented | Phase Model table of the routed workflow; all 7 active workflows publish one |
 | Agent Registry Loader | implemented | record -> manifest -> module set in declared `loadOrder` |
 | Skill Registry Loader | implemented | manifest and phase-mandatory codes, registry resolution rule |
-| Context Loader | implemented | frozen, content-addressed, narrowed per phase |
+| Context Loader | implemented | frozen, content-addressed, narrowed per phase; every member carries a read hint and every resolved skill a dispatch verdict |
+| Task Context | implemented | `task-context.yaml`, rebuilt from persisted state at every transition; the first thing a dispatched agent reads |
 | Agent Invocation Gateway | implemented | canonical Agent Invocation Envelope |
 | Agent Adapter | implemented | one adapter: `host-subagent` |
 | State Engine | implemented | six persisted statuses, two transition tables, ordered transition log |
@@ -459,12 +714,12 @@ Named against the components in `config/runtime.md` and `config/execution-engine
 | Validation Engine | implemented | six artifact types, one per file the active Phase Models name: `execution-plan.md`, `technical-design.md`, `bug-analysis.md`, `investigation-report.md`, `release-note.md`, `review-package.md` |
 | Output Aggregator | implemented | run-wide completion package, provenance manifest, transition log |
 | Observability Service | partial | canonical progress events, the transition log, and the recovery ledger; no metrics pipeline |
-| Recovery Controller | implemented | every failure is classified against the matrix, the least destructive valid action is chosen, and a structured failure envelope plus a recovery-ledger entry is written. Rollback and remediation actions are *decided* but not executed: nothing rewinds a state automatically |
+| Recovery Controller | implemented | every failure is classified against the matrix, the least destructive valid action is chosen, and a structured failure envelope plus a recovery-ledger entry is written. The `rollback` action of a gate rejection is executed by the `rollback` command under a recorded human authorisation (supersession of the target phases, re-arm of the gate); remediation is decided but not executed, and nothing rewinds a state without that authorisation |
 | Retry | implemented | classified eligibility, the `Retrying` state, exponential backoff with deterministic jitter, a bounded budget split between worker loss and charged results, automatic scheduling, and a repair pass that carries the rejection back to the agent |
 | Cancellation | not implemented | no `Cancelled` state |
 | Human Escalation Service | partial | escalations are opened, classified, reasoned, closed by a recorded decision, and carry a required decision type, proposed options, and a clearing action; there is no case queue, notification, or deadline |
 | Memory Loader | not implemented | runs declare memory hydration as not requested |
-| Metrics pipeline | not implemented | |
+| Metrics pipeline | partial | `execution-metrics.json` per run, rebuilt at every completion and aggregation and by `metrics`; no cross-run store |
 
 ## The adapter boundary
 
@@ -504,9 +759,12 @@ dispatch time and writes it to `runs/<run-id>/states/<phase>/adapter-prompt.md`.
    runtime's, and a rejected artifact no longer waits for an operator. But the runtime has no
    process of its own: a deadline is evaluated when a command next reads the run, so an
    unattended run does not advance past its own backoff. `next` reports the deadline; nothing
-   fires at it. The remaining recovery actions are decided rather than executed -- a `rollback`
-   verdict blocks the work item and names the rollback target, and no state is rewound
-   automatically.
+   fires at it. The part of this gap that read "rollback is decided but not executed" is
+   closed: a gate rejection's `rollback` verdict is executed by the `rollback` command under a
+   recorded human authorisation, proven by `verify_recovery.py` Run D. What remains decided
+   rather than executed is the `remediate` action of an aggregation conflict, and the
+   `rollback` verdict of a `workflow-contract-violation`, which is raised before any phase
+   has committed and so has nothing to supersede.
 4. **No lease expiry timer.** `lease_expires_at` is carried on every work item but never set or
    enforced. A lost adapter leaves a work item `running` until an operator runs `release`, which
    is an explicit action rather than a timeout. What follows the reclaim *is* the runtime's --

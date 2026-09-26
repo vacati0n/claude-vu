@@ -12,7 +12,11 @@ The invariants pinned here:
     decision exactly like a human one, attributed to `runtime:auto-policy`;
   * severity at/above threshold, a blocking open question, an escalated deviation, an
     open defect on a QA-owned gate, a pinned gate, or a missing precedent each
-    individually hold the gate for a human.
+    individually hold the gate for a human;
+  * a gate whose sibling on the same phase stands rejected is held for a human, so no
+    approval is automated over evidence a rollback is about to rebuild;
+  * a gate re-armed after its own rejection (a non-empty `decision_history`) is held for
+    a human whatever precedent other runs supply.
 """
 
 from __future__ import annotations
@@ -338,6 +342,84 @@ class GatePolicyTestCase(unittest.TestCase):
         self.make_precedent(decision="rejected")
         ctx = self.make_run()
         self.assert_held(ctx, "no approved precedent")
+
+    def test_gate_with_decision_history_is_held_for_human(self):
+        """A gate re-armed by an authorised rollback carries its own rejection in
+        `decision_history`. Clean evidence and an approved precedent elsewhere do not
+        make the re-decision automatic: it answers a human rejection."""
+        self.make_precedent()
+        ctx = self.make_run()
+        g = ctx["store"].gate(GATE)
+        g["decision_history"] = [{"decision": "rejected", "owner_role": "omn-tech-lead",
+                                  "decided_by": "reviewer", "decided_at": "2026-09-06T00:00:00Z",
+                                  "superseded_by": "RB-run-undertest00-triage-gate-01"}]
+        ctx["store"].save()
+        self.assert_held(ctx, "never automated")
+        fields, evaluated = fr.evaluate_auto_approval(ctx, ctx["store"].item(GATE, "gate"),
+                                                      fr.load_gate_policy("auto"))
+        self.assertIsNone(fields)
+        self.assertIn("decision_history=1", evaluated[0])
+
+    def test_rejection_resolves_the_awaiting_decision_envelope_and_classifies_itself(self):
+        """A rejection settles the awaiting-decision condition: the gate-approval-required
+        envelope is resolved, the rejection's own envelope is the only open one, and the
+        gate item carries the same class the envelope does (`gate-rejection`), so no open
+        envelope prescribes an approval against a gate that stands rejected."""
+        ctx = self.make_run()
+        gate_item = ctx["store"].item(GATE, "gate")
+        held = fr.classify_for(ctx, gate_item, "gate-approval-required")
+        fr.emit_failure_envelope(ctx, gate_item, held, reason_code="approval_wait",
+                                 detail="awaiting", detected_by="test", guard="G6-GATE-EVIDENCE",
+                                 blocked_reason="awaiting_human_decision",
+                                 resulting_status=se.BLOCKED)
+        with contextlib.redirect_stdout(io.StringIO()):
+            fr.record_gate_decision(
+                ctx, gate_item, ctx["store"].gate(GATE), approved=False,
+                owner_role="omn-tech-lead", decided_by="reviewer", rationale="not yet",
+                evidence_ref="runs/run-undertest00/states/triage-and-impact")
+        entries = fr.rp.RecoveryLedger(ctx["run_dir"]).entries()
+        self.assertEqual([(e["failure_class"], e["status"]) for e in entries],
+                         [("gate-approval-required", "resolved"), ("gate-rejection", "open")])
+        self.assertIn("rejected by omn-tech-lead", entries[0]["resolution"])
+        self.assertEqual(gate_item["status"], se.FAILED)
+        self.assertEqual(gate_item["failure_class"], "gate-rejection")
+        self.assertIn("rollback", entries[1]["clearing_action"])
+        self.assertIn(f'--gate "{GATE}"', entries[1]["clearing_action"])
+        self.assertNotIn("exception", " ".join(entries[1]["proposed_options"]))
+
+    def test_gate_with_decision_history_and_precedent_would_otherwise_approve(self):
+        # The control: the same run without the history auto-approves, so the hold
+        # above is attributable to the history alone.
+        self.make_precedent()
+        ctx = self.make_run()
+        decided, _ = self.auto_decide(ctx)
+        self.assertEqual(decided, [GATE])
+
+    def test_gate_whose_sibling_stands_rejected_is_held_for_human(self):
+        """Two gates on one phase assess the same evidence. While one stands rejected the
+        other is held: an approval recorded there would survive the rollback the rejection
+        classified -- a completed gate cannot be re-armed -- and `rollback` would then refuse.
+        Clean evidence and an approved precedent do not override the hold."""
+        self.make_precedent()
+        ctx = self.make_run()
+        store = ctx["store"]
+        sibling = se.new_work_item(
+            run_id="run-undertest00", workflow_id=WORKFLOW, state_id="Sibling Gate",
+            work_type="gate", owner_agent_id=None, phase_index=1, gate="Sibling Gate",
+            artifact=None, depends_on=[{"state_id": PHASE, "kind": "hard",
+                                        "basis": "the gate closes this phase"}])
+        sibling["status"] = se.FAILED
+        sibling["failure_class"] = "gate-rejection"
+        store.add_item(sibling)
+        store.add_gate({"gate": "Sibling Gate", "closes_state": PHASE,
+                        "owner_roles": ["omn-tech-lead"], "producer_agent": PRODUCER,
+                        "decision": "rejected", "owner_role": "omn-tech-lead",
+                        "decided_by": "reviewer", "rationale": "not yet",
+                        "evidence_ref": None, "decided_at": "2026-09-06T00:00:00Z",
+                        "decision_history": []})
+        store.save()
+        self.assert_held(ctx, "Sibling Gate stands rejected")
+        self.assertIn("authorise that rollback first", self.auto_decide(ctx)[1])
 
     def test_unclean_validation_holds_for_human(self):
         self.make_precedent()

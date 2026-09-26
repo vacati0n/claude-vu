@@ -1,0 +1,116 @@
+{
+  "invocation_id": "inv-79630cb5274d-01-001",
+  "status": "completed",
+  "artifact_refs": [
+    "runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "triage",
+    "analysisId": "BA-run-79630cb5274d-triage-and-impact",
+    "defectReference": "refactor-implementation-input-contract-defect",
+    "severity": "high",
+    "reproducibility": "deterministic",
+    "status": "provisional",
+    "counts": {
+      "evidenceRecords": 24,
+      "causalSteps": 6,
+      "causalStepsByConfidence": {
+        "high": 6,
+        "medium": 0,
+        "low": 0
+      },
+      "openQuestions": 4,
+      "openQuestionsBlocking": 0
+    },
+    "statusBasis": "Stage 9 row 5: no business impact statement was supplied, so severity rests on technical impact alone and the analysis is provisional. Reproducibility is deterministic, the causal chain closes on a condition, and all three alternative accounts were eliminated against registered evidence.",
+    "severityBasis": "Stage 5 table, 'high': a primary path fails completely; a workaround exists and was verified but is not acceptable in normal use. Not 'critical': no data loss, no corruption, no security exposure, and the path is not without a workaround.",
+    "scopeDecision": "The second-order governance consequence is a separate defect, not part of this one. It reproduces in an implement run held at an undecided gate with no input-contract mismatch present, so the two have independent causes, independent fixes and independent reach. Routed through Q-002; its severity is assessed separately as high.",
+    "notMachineCheckableObligations": [
+      {
+        "id": "N1",
+        "obligation": "The stated root cause is the cause, not the symptom location",
+        "judgement": "discharged",
+        "detail": "The root cause names a contract condition, that the identifier the refactor phase 2 to phase 3 edge delivers is absent from every list the consuming agent declares, so the artifact is discarded before the menu is evaluated. The place the failure surfaced, the input guard raising a block, is registered as evidence and appears as the chain's terminal symptom row rather than as the cause. The chain was pushed past the guard, past contract resolution and past narrowing to the identifier declarations themselves, which is the level at which the condition could have been different by design."
+      },
+      {
+        "id": "N2",
+        "obligation": "No speculative conclusion appears without supporting data",
+        "judgement": "discharged",
+        "detail": "All 24 evidence records are first-hand, read or executed in this run, and all carry high confidence; no record is reported second-hand. Every causal step cites records that directly support its claim rather than merely relating to it. The reporter's asserted severity and its 'four phases across three workflows' figure were both treated as claims to test, and the second was corrected to five phases across four workflows on first-hand reading. The one forward-looking statement, the latent exposure created by widening an agent-global accepted list, is labelled latent and is explicitly bounded by the evidence showing it is not live in today's topology."
+      },
+      {
+        "id": "N3",
+        "obligation": "The declared blast radius covers every boundary the defect crosses",
+        "judgement": "discharged",
+        "detail": "The radius names the refactor phase 2 to phase 3 edge, the two phases and three gates rendered unreachable, the agent-global input-contract surface shared by three phases across three workflows, the unproduced identifier carried in both a manifest and a report template, the two governance surfaces that assert a false dispatchability claim about this phase, the persisted failure envelope whose clearing action and failure classification are both untrue of the run it describes, and the self-hosting verdict reached while a stalled run sits in the window. The radius was not narrowed toward the decided fix: it names boundaries the widening does not touch, and it names the shared agent surface that the widening reaches but the defect itself does not."
+      }
+    ],
+    "qualityChecks": {
+      "run": 69,
+      "passed": 69,
+      "failed": 0,
+      "correctedBeforeEmission": [
+        {
+          "id": "V10",
+          "detail": "E-023, the verified workaround, was registered but uncited. The repair was to the analysis rather than to the citation: the workaround and its unacceptability in normal use were added to User impact, because the existence of a workaround is what holds severity at high rather than critical under the Stage 5 table."
+        },
+        {
+          "id": "C4",
+          "detail": "Prose references to the self-hosting profile's Completion Rule clauses collided with the reserved C-nnn causal-step namespace and were rejected by the Validation Engine as malformed identifiers. The clauses are now named descriptively; no causal identifier changed."
+        }
+      ],
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass",
+        "S6": "pass", "S7": "pass", "S8": "pass", "S9": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass",
+        "D6": "pass", "D7": "pass",
+        "B2": "pass", "B3": "pass", "A1": "pass",
+        "B4": "pass", "V1": "pass", "V2": "pass", "V3": "not-applicable-pass",
+        "V4": "not-applicable-pass", "V5": "pass",
+        "B1": "pass", "V6": "pass", "V7": "pass", "V8": "pass", "V9": "pass",
+        "V10": "pass-after-repair",
+        "V11": "pass", "V12": "pass", "V13": "pass", "V14": "pass", "V15": "pass",
+        "V16": "pass",
+        "V17": "pass", "V18": "pass", "V19": "pass", "V20": "pass", "V21": "pass",
+        "V22": "pass",
+        "V23": "pass", "V24": "pass", "V25": "pass", "V26": "pass", "V27": "pass",
+        "V28": "pass",
+        "B5": "not-applicable-pass", "V29": "pass", "V30": "pass", "V31": "pass",
+        "V32": "pass", "V33": "pass",
+        "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+        "A7": "pass", "A8": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass-after-repair",
+        "C5": "pass", "C6": "pass", "C7": "pass"
+      },
+      "notes": {
+        "V3": "not applicable: reproducibility is deterministic, so no varying precondition had to be isolated. Recorded as passing vacuously rather than skipped.",
+        "V4": "not applicable: the defect reproduced, so no not-reproduced record was required.",
+        "B5": "not applicable: severity is high, not critical. The unresolved scope is nonetheless recorded as open questions."
+      }
+    },
+    "validationEngine": {
+      "validator": "bug_analysis_validator",
+      "result": "pass",
+      "checksPassed": 30,
+      "checksRun": 30,
+      "delegated": ["N1", "N2", "N3"]
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/execution.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "agents/omn-dev-1-bug-analyst/examples.md",
+    "runs/run-79630cb5274d/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-79630cb5274d/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,413 @@
+{
+  "invocation_id": "inv-79630cb5274d-05-001",
+  "run_id": "run-79630cb5274d",
+  "work_item_id": "run-79630cb5274d::closure-and-communication",
+  "idempotency_key": "sha256:6510e4fda9d4f9b489af4968ca940168",
+  "state_id": "closure-and-communication",
+  "phase_index": 5,
+  "agent_id": "omn-orchestrator",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-orchestrator.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-orchestrator/manifest.yaml",
+    "load_order": [
+      "agents/omn-orchestrator/system.md",
+      "agents/omn-orchestrator/identity.md",
+      "agents/omn-orchestrator/reasoning.md",
+      "agents/omn-orchestrator/execution.md",
+      "agents/omn-orchestrator/output.md",
+      "agents/omn-orchestrator/quality.md",
+      "agents/omn-orchestrator/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-orchestrator/system.md": "sha256:55acceff7f773ecb6bdeb02720c3aa97",
+      "agents/omn-orchestrator/identity.md": "sha256:98108a9fb596a75893501a3b1283a5e7",
+      "agents/omn-orchestrator/reasoning.md": "sha256:8324c06f20510b359378b2bee9512261",
+      "agents/omn-orchestrator/execution.md": "sha256:dbeb927d86662d0e06b98c05387f689d",
+      "agents/omn-orchestrator/output.md": "sha256:4360a823e6dbae0fc1008795afaed76f",
+      "agents/omn-orchestrator/quality.md": "sha256:93b01694f4e8a817d46b7e6599f5feb3",
+      "agents/omn-orchestrator/examples.md": "sha256:653ab4ca91cc8a04b7750b505ff71f72"
+    },
+    "capabilities": [
+      "workflow-coordination",
+      "phase-progression-control",
+      "handoff-management",
+      "escalation-routing",
+      "closure-governance",
+      "release-communication-support"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Advisory",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Advisory",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "validation-report",
+      "workflow-state",
+      "gate-evidence",
+      "implementation-report",
+      "review-package",
+      "release-note",
+      "technical-recommendation",
+      "deployment-plan",
+      "rollback-plan",
+      "known-issue-status",
+      "documentation-updates",
+      "escalation-context",
+      "closure-context",
+      "release-context",
+      "monitoring-evidence",
+      "technical-debt-record",
+      "dependency-map",
+      "prior-gate-evidence",
+      "unresolved-findings"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "validation-report",
+        "reference": "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+        "text": "# Validation Report: the refactor workflow can hand phase 2 to phase 3\n\n```yaml\nvalidationReport:\n  reportId: VR-run-79630cb5274d-regression-validation\n  validationReference: refactor-implementation-input-contract-defect / run-79630cb5274d\n  validationBasis: regression\n  sourceInputs:\n    - type: implementation-report\n      reference: runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md\n    - type: bug-analysis\n      reference: runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md\n  producedBy: omn-qa\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: pass-with-reservations\n  inputDigest: sha256:e73d04f8016a8c8140942fb5a142ee5a\n  contextDigest: sha256:e7e9d97c4c5e8ec45601189cbb0a0c1b\n```\n\n## Metadata\n\n- Validation ID: VR-run-79630cb5274d-regression-validation\n- Validator: omn-qa\n- Change under validation: a declaration-only widening of the `omn-dev-1-implement` accepted-input menu to accept `validation-report` and withdraw `test-baseline-record`, across eleven files, so that guard G5-INPUT stops blocking the `refactor` phase-2-to-phase-3 handoff.\n- Validation date: 2026-09-06\n\n## Validation Scope\n\n- In scope: whether the reported defect still reproduces through the runtime functions where the artifact was actually lost; whether the widening is additive rather than a substitution; the regression surface the analysis fixed, namely the two sibling implementation phases that share the agent-global menu, the five description surfaces that state the accepted set, the registry record and its declared version, the committed payload mirror, the per-edge declared-data-edge population across the eight active workflows, and the persisted state of the stalled refactor run whose block this change was meant to clear; and the seven framework verifier modules the change could plausibly disturb.\n- Out of scope: dispatching, advancing, or completing `run-34ca35504b72`, which this phase may not do and which the invocation that produced the change excluded; the thirteen remaining mismatched declared data edges, routed out by the analysis; the two deferred framework-wide prevention checks and the extended dispatchability verdict, deferred by the analysis; the Completion Rule phase-accounting clause, established by the analysis as an independent defect; and whether the code implementing any of this is well written, which belongs to `omn-dev-2-reviewer`.\n- Evidence examined: the implementation report and the root-cause analysis named in `sourceInputs`, each read cover to cover; and the following read at the fields and passages this validation decided on, each named so a reader can re-take the same reading: the invocation envelope for this phase; this run's event stream, run ledger, and the `fix-implementation` state ledger and invocation envelope; the working-tree and `HEAD` forms of all eleven changed files; the stalled run's state store, its `refactor-implementation` failure envelope, its run ledger and its appended events; `runtime/framework_runtime.py` at the input-narrowing, contract-resolution, term-matching, run-ledger-writing and `next` command paths; `runtime/state_engine.py` for the canonical reason-code set and the state-store filename; `runtime/validation_report_validator.py` and `runtime/artifact_contract.py` for this report's own contract; `workflows/workflow-engine.md`; and the commands recorded under Levels executed.\n\n## Test Strategy\n\n- Risk basis: the change alters an interface other agents' dispatch depends on and alters a path that decides whether work proceeds or stops, so the Stage 4 table warrants every call site exercised and exhaustive branch coverage of that decision. Both were taken: the menu was replayed at every pool shape that decides it, including the two sibling phases, the withdrawn identifier alone, a wholly foreign identifier, and an empty pool. The depth was raised further because the tree is not quiescent: a concurrent writer is modifying this repository, so whole-suite figures cannot isolate this change, and the decisive evidence had to come from checks whose subject that writer cannot reach.\n- Levels executed: unit, as contract-level replays of the runtime's own narrowing and resolution functions against both the pre-fix manifest read from `HEAD` and the working-tree manifest, plus five targeted test modules and the whole discovered suite; integration, as a read-only inspection of the stalled run's persisted state and an independent per-edge scan across all eight active workflow Phase Models; and static, as the seven framework verifier modules and a direct positive read of the five description surfaces.\n- Environment: the repository working tree on the host interpreter, running `python -m unittest`, which is the repository's declared runner; pytest is not installed for this interpreter and was not used. The environment differs from a quiescent one in the way that governs this whole report: a writer outside this invocation modified integration-workflow, tooling, documentation, adoption-backlog and test files while these checks ran, the combined tracked-and-untracked entry count moved from 55 to 56 during the first attempt and stood at 56 on both readings taken during this resumed attempt, at 2026-09-06T01:17:34Z and 2026-09-06T01:23:44Z, and the discovered suite carries a foreign test module that rewrites `docs/USER-GUIDE.md` and its rendered output in place while it runs and restores them afterwards, which is a repository write this phase is not permitted to cause and is why this attempt re-ran every targeted check but did not re-run the whole suite.\n- Not executed: end-to-end was not run, because no end-to-end path exists for a declaration change that alters no runtime module; the equivalent whole-path evidence is the stalled run's persisted state, recorded under `AC-004`. Performance was not run, because the change alters no performance-sensitive path and no baseline was supplied. Security was not run, because the change adds no credential, boundary, or data-handling surface; the one authority-boundary question it does raise is assessed under Residual Risk rather than by a security check.\n\n## Acceptance Criteria Results\n\n| ID | Criterion | Source | Method | Result | Evidence |\n|---|---|---|---|---|---|\n| `AC-001` | Replay the input-contract resolution for the consuming agent over a pool containing the refactor run-level inputs plus the validation-report identifier, and confirm both that the identifier now survives narrowing and that the resolution succeeds | `bug-analysis.md`, Validation Plan, verification steps | unit | met | own replay of `narrow_inputs` and `resolve_input_contract` against the `HEAD` manifest and the working-tree manifest: pre-fix the delivered artifact leaves zero survivors and resolution raises `[request-validation-failure] no accepted input type supplied; accepted: ['technical-design', 'bug-analysis', 'test-baseline-record']`, which is the stalled run's recorded block detail character for character; post-fix the survivor list is `['validation-report']` and resolution succeeds. The same replay over the four-item run-level pool the guard itself recorded, `change-request`, `business-intent`, `architecture-context` and `validation-report`, falls the same way: pre-fix the delivered artifact is dropped at narrowing and the three surviving run-level types satisfy nothing, so resolution raises the same message; post-fix all four survive and resolution succeeds. Every shape was replayed again on this resumed attempt at 2026-09-06T01:19:20Z with identical outcomes. Corroborated by `python -m unittest tests.test_agent_input_contracts -v` at 2026-09-06T01:17:46Z, 14 run, 14 passed |\n| `AC-002` | Confirm the change was additive rather than a substitution, by replaying the two sibling phases' contracts from their recorded supplied sets and observing that both still resolve, and confirm the menu still refuses a pool carrying none of the accepted identifiers | `bug-analysis.md`, Validation Plan, verification steps | unit | met | own replay over six pool shapes: a `technical-design` pool and a `bug-analysis` pool each still resolve, so neither sibling phase lost its input; the withdrawn `test-baseline-record` alone, a wholly foreign identifier, and an empty pool are each refused with the menu rule's own message. The refusal branch therefore still discriminates. All six shapes were replayed again on this resumed attempt at 2026-09-06T01:19:20Z with identical outcomes |\n| `AC-003` | Re-run the per-edge identifier scan and confirm the declared-data-edge mismatch count falls from fourteen to thirteen and that the edge it drops is this one | `bug-analysis.md`, Validation Plan, verification steps | integration | met | own scan over all eight active workflow Phase Models using the runtime's own `parse_phase_model`, `split_terms` and `terms_match`, run twice over the same 32 derived edges with only the consuming menu swapped between the `HEAD` and working-tree manifests: 14 mismatched edges pre-fix, 13 post-fix, and the single edge removed is `refactor` `safety-net-establishment` to `refactor-implementation`. The fourteen-to-thirteen figure the analysis stated is therefore reproduced rather than merely asserted, and the scan was re-run independently on this resumed attempt at 2026-09-06T01:20:31Z over the same 32 edges, with the same fall and the same dropped edge. That also settles the question the implementation report routed to this role, whether the property alone suffices or the population had to be recovered: the population was recovered, under the matcher the runtime itself applies |\n| `AC-004` | run the scheduler re-evaluation pass over the stalled run and confirm that the input guard passes, that the item returns to pending, and that the persisted envelope moves from open to resolved through that pass rather than by hand | `bug-analysis.md`, Validation Plan, verification steps | integration | met | read-only inspection, re-taken on this resumed attempt at 2026-09-06T01:19:00Z, of `runs/run-34ca35504b72/state.json`, the durable state store named by `state_engine.Store.FILENAME`: `refactor-implementation` reads `status: pending`, `queue_status: Ready`, with `blocked_reason`, `blocked_detail`, `blocked_by` and `failure_class` all null. Its failure envelope reads `status: resolved`, `resolved_by: runtime:state-engine`, with a recorded resolution, and the appended event `E-0038 escalation_resolved` carries `actor_type: runtime`, `actor_id: state-engine`, so the clearing was runtime-performed rather than hand-edited; this phase did not run that pass and may not write to that run, so the pass is confirmed by its persisted, runtime-attributed effects rather than by watching it execute. That the input guard now passes is confirmed independently by `AC-001` rather than inferred from the block clearing. The same run's reporting ledger still reports the item blocked; that divergence is recorded as `DF-001` and does not change this result, because the state store, not the reporting ledger, is what the scheduler reads |\n| `AC-005` | confirm the five description surfaces agree with the accepted list, and that the declared versions moved as the version position states | `bug-analysis.md`, Validation Plan, verification steps | unit | met | direct positive read of all five surfaces: the manifest menu, its minimum-satisfaction prose, the required-input list in the agent contract, the phase-ownership row in the execution lifecycle, the registry record's data dependencies, and the report template's enumeration comment each now state `technical-design`, `bug-analysis`, `validation-report` and nothing else. A repository-wide scan finds the withdrawn identifier in exactly two live places: the new test module's own literals, where it is the subject under test, and a second copy of the payload tracked under `build/` that this change did not update, recorded as `DF-006`; it appears nowhere else outside historical run evidence. Manifest and registry both read `1.1.0` and `contractVersion` stays `1.0.0`. Corroborated by `python -m unittest tests.test_manifest_scope` at 2026-09-06T01:17:55Z, 19 run, 19 passed |\n| `AC-006` | re-run the self-hosting verifier and read the two run-accounting checks together, expecting the stalled refactor run to leave the unaccounted list only once it can actually advance, and expecting the separate governance defect to stay visible in the other held run | `bug-analysis.md`, Validation Plan, verification steps | integration | blocked | `python runtime/verify_self_hosting.py`, re-run on this resumed attempt at 2026-09-06T01:22:30Z, returns 7 of 8, and `S8` names three unaccounted runs: the stalled refactor run, one foreign in-flight run, and this run. The second half of the criterion is confirmed, because the separate governance defect stays visible in the other held run. The first half cannot be settled by any check available here: the stalled run can now advance, and whether it then leaves the unaccounted list can only be observed by dispatching and completing it, which this phase may not do and which this change's scope excluded. Advancing that run to completion, or resolving the independent Completion Rule phase-accounting defect, would settle it |\n| `AC-007` | this fix should carry one check and no more. It is a contract-level test over the changed manifest, asserting that the implementer's contract resolves for a refactor pool carrying the validation-report identifier, that it still resolves for both sibling pools from their recorded supplied sets, and that it still refuses a pool carrying none of the accepted identifiers | `bug-analysis.md`, Validation Plan, regression tests added | unit | met | exactly one test module was added among the change's eleven paths, `tests/test_agent_input_contracts.py`, confirmed against the working tree; it runs 14 tests, 14 passed, at 2026-09-06T01:17:46Z, and the three named assertions are each present as their own test. The module reaches the runtime through its published functions rather than restating them, which is why its result and the own replay under `AC-001` agree without being the same measurement |\n\n## Execution Summary\n\n- Criteria validated: 7\n- Met: 6\n- Not met: 0\n- Blocked: 1\n\n## Defects\n\n| ID | Severity | Category | Location | Symptom | Reproducibility | Status |\n|---|---|---|---|---|---|---|\n| `DF-001` | medium | operational | `runs/run-34ca35504b72/run-ledger.json`, read against `runs/run-34ca35504b72/state.json` | two persisted records of the same work item disagree: the state store reads `refactor-implementation` as `pending` and `Ready` with every block field null, while the run ledger still reads `blocked`, `Blocked`, `awaiting_dependency_output`, `dependency-failure`, carries `run_status: WaitingForHuman` and a summary of one blocked phase, and stamps `updated_at` at 2026-09-04T16:06:22Z, before the clearing. the command that cleared the block writes the run ledger only on the branch that auto-decides a gate, and no gate was auto-decided in that pass, so the ledger kept its pre-clearing timestamp while the state store moved; the runtime's own source describes the run ledger as the durable record it reads for gate auto-approval precedent | always | open |\n| `DF-002` | medium | operational | `runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md`, deviation `V-003` | the recorded rationale states that the invocation envelope and the state ledger recorded agent version 1.0.0; both records read `agent_version: 1.1.0`. The report's metadata block carries `agentVersion: 1.0.0` justified on that statement, so a false claim about two machine records now sits in committed, immutable run evidence | always | open |\n| `DF-006` | low | operational | `build/lib/omn_agent/_bundled_payload/agents/omn-dev-1-implement/manifest.yaml`, and four sibling files under that same tracked copy | a second copy of the framework payload is tracked in version control and still declares the pre-change accepted menu, the withdrawn `test-baseline-record` among it, and version 1.0.0; before this change that copy was byte-identical to `omn_agent/_bundled_payload/`, and the only five files that now differ between the two copies are exactly the five this change edited. No test, verifier, or runtime path reads that copy | always | open |\n| `DF-003` | low | operational | `runs/run-79630cb5274d/events.jsonl`, event `E-0033` | the event recording the policy exception carries `reason_code: tool_failure` while its own detail describes an operator-authorized boundary crossing in which no tool failed; the canonical reason-code set offers no value for an authorized policy exception, so no accurate code was available. A reader or query filtering on reason code classifies this event as a tool failure | always | open |\n| `DF-004` | low | operational | `tests/test_agent_input_contracts.py`, module docstring, lines 27 to 29 | the docstring states a declared-data-edge population of fourteen before the fix and thirteen after, and twenty-seven producerless accepted identifiers, as unqualified fact without naming the term-matching rule that produces them; the population is rule-dependent: the same scan re-run here with exact term matching in place of the runtime's containment matcher derives 31 edges rather than 32 and measures thirteen-to-twelve, and the implementation report records its own stricter scan measuring eleven-to-ten over the same repository. The figures appear only in the docstring and in no assertion | always | open |\n| `DF-005` | low | operational | `workflows/workflow-engine.md`, line 189, SafetyNet row | the state table still names the SafetyNet output as a baseline validation record, the phrasing this change retired everywhere else, so one live specification surface continues to describe that output by a name no agent declares | always | open |\n\n## Regression Assessment\n\n- Regression scope: the two sibling implementation phases that read the same agent-global accepted menu, `implement-feature` implementation and `fix-bug` implementation; the discriminating power of the input guard for that agent, including its refusal branch; the five description surfaces that each state the accepted identifier set; the registry record, its declared version and its data dependencies; the committed payload mirror, which the suite fails on drift against; the per-edge declared-data-edge population across all eight active workflows; the persisted state of the stalled refactor run; and the seven framework verifier modules.\n- Regressions detected: none in delivered behavior. One non-behavioral divergence inside the declared regression scope was found and is recorded as `DF-006`: before this change the payload copy tracked under `build/` was byte-identical to `omn_agent/_bundled_payload/`, and the only five files that now differ between the two copies are exactly the five this change edited, so the tracked copy still declares the retired menu. No test, verifier, or runtime path reads that copy, so no delivered behavior moved with it.\n- Coverage of changed behavior: every altered decision was exercised at the point the change alters it. Both sibling pools were replayed and still resolve; the refusal branch was replayed at three shapes and still refuses; the withdrawn identifier no longer satisfies the menu; all five description surfaces were read directly and agree; the registry version and dependency list were read directly; the mirror was checked by `python -m unittest tests.test_bundled_payload` at 2026-09-06T01:18:00Z, 11 run, 11 passed, a check whose scope is `omn_agent/_bundled_payload/` alone, which is why the second tracked copy recorded as `DF-006` is invisible to it; the edge population was measured directly on both sides of the change; the stalled run's persisted state was inspected read-only. Targeted modules coupled to the changed surfaces all pass in isolation, every one of them re-run on this resumed attempt between 2026-09-06T01:17:46Z and 2026-09-06T01:18:22Z: `test_agent_input_contracts` 14, `test_manifest_scope` 19, `test_bundled_payload` 11, `test_content_contracts` 13, `test_gate_policy` 26, giving 83 isolated checks run and 83 passed. Verifier verdicts, each run from the repository root and each re-run on this resumed attempt: `verify_manifests` 2 of 2 CONFORMS at 2026-09-06T01:21:31Z, `verify_registry_coverage` 6 of 6 COVERED, `verify_validators` 6 of 6 COVERED with no failure observed on either attempt, `verify_vertical_slice` 10 of 10 PROVEN at 2026-09-06T01:21:56Z, `verify_recovery` 41 of 41 RECOVERY PROVEN at 2026-09-06T01:22:02Z, `verify_multi_phase` 14 of 15 NOT PROVEN failing only `M6`, and `verify_self_hosting` 7 of 8 NOT SELF-HOSTING at 2026-09-06T01:22:30Z failing only `S8`, which names the same three unaccounted runs on both attempts. Neither partial verdict is attributable to this change: `M6` requires one run to have traversed planning, design, and delivery phases, and this defect-fix run declares none of those phase kinds; `S8` names in-flight runs plus the independent Completion Rule defect. The change could not have produced either, because it wrote no proposal, no template, and no validator, and touched no file either verifier decides on. Separately and explicitly labelled as a contaminated measurement rather than as isolation evidence: the whole discovered suite, `python -m unittest discover -s tests`, ran 404 tests with 0 failures between 07:32:42Z and 07:47:59Z on this phase's first attempt, and was deliberately not re-run on this attempt, because that suite rewrites two documentation files in place while it runs, which is a repository write outside this phase's permitted writes. That figure has moved 342 to 399 to 404 across this run's lifetime as a writer outside this invocation added tests, so it can neither acquit nor convict this change and is recorded only for continuity. Disjointness was verified first-hand rather than assumed: `git status` at 07:13:16Z and 07:49:21Z on the first attempt, and again at 2026-09-06T01:17:34Z and 2026-09-06T01:23:44Z on this one, shows this change's eleven paths as the ten modified declaration and mirror files plus the one added test module, and every foreign entry, covering integration-workflow, tooling, documentation, adoption-backlog, proposal, other-run, and other test files, falls outside all eleven, so no foreign edit can mask a regression in this one.\n- Untested areas: whether the stalled refactor run actually completes once dispatched, which no check here reaches because advancing that run is outside this phase; the twenty-nine derived data edges the scan examined but this change does not alter, measured as a population and not exercised individually; the future workflow shape under which the widened menu would let an implementation phase run on a validation report, which no executable path reaches today because guard ordering places the predecessor and gate guards ahead of the input guard; the payload copy tracked under `build/`, which no test, verifier, or runtime path reads and which therefore no executed check exercises beyond the direct comparison recorded under `DF-006`; and the behaviour of every repository area the concurrent writer is modifying, which the whole suite exercises but does not isolate from this change.\n\n## Residual Risk\n\n- Accepted risk: the boundary crossing in which the demonstration wrote four files under a run excluded from the producing agent's write scope was accepted by the session operator through `omn-orchestrator`, recorded as a policy exception on event `E-0033`. Assessed here independently rather than inherited: the `next` command's own source performs those writes, the cleared envelope records `resolved_by: runtime:state-engine`, and the appended event carries a runtime actor, so the writes are runtime-caused and the producing agent did not author the evidence it reported. The acceptance holds, and it does not affect this regression verdict. A second operator intervention on that same phase is disclosed and is assessed here on the same footing: on its final attempt the operator corrected two frozen-snapshot metadata fields in the implementation report directly. Those two fields now read exactly what the untouched `state-ledger.json` and that phase's invocation envelope both record for the invocation that produced the report, which this validation confirmed by reading all three; the correction moved provenance into agreement with machine records and touched no result, no criterion and no claim. It does not affect this verdict either.\n- Unmitigated risk: the widened menu is agent-global, so a future workflow placing a validation phase ahead of an implementation phase would pass the input guard and surface as a poor implementation report rather than as a blocked phase; guard ordering bounds this today, but nothing pins that ordering against future change. The stale reporting ledger under `DF-001` will withhold gate auto-approval precedent for that run until some command refreshes it. Moving the registry record to 1.1.0 removes the auto-approval precedent for every gate assessing that agent's output until one gate is decided at the new version, which fails safe toward a human decision rather than away from one. The whole-suite figure cannot isolate this change, and no rerun can fix that while the concurrent writer is active. The tracked payload copy recorded as `DF-006` carries the retired menu forward for as long as it stands, and no check in this repository decides that copy, so nothing here would report it drifting again. Finally, an independence note a gate owner should weigh rather than discover: this agent produced the safety-net validation report in the stalled refactor run whose delivery this change unblocks; that artifact is a pre-change baseline, and this agent authored none of the eleven changed files and none of the evidence under validation, so producer exclusion is satisfied, but the connection is stated here rather than left implicit.\n- Monitoring required: the count of work items blocked with reason `awaiting_dependency_output` whose declared predecessors are all completed, which is this defect's exact signature; the declared-data-edge mismatch population watched as a number rather than as a verdict, and always reported together with the term-matching rule that produced it; divergence between any run's state store and its reporting ledger, which `DF-001` shows is currently unmonitored; and the per-phase dispatchable count read alongside the edge population rather than alone.\n\n## Verdict\n\n- Decision: pass-with-reservations\n- Rationale: the defect is no longer reproducible, and that finding rests on direct evidence the concurrent writer cannot reach rather than on a suite count. Replaying the runtime's own narrowing and resolution functions against the pre-fix manifest reproduces the recorded block detail character for character, and against the working tree resolves cleanly; the stalled run's state store shows the item returned to pending and Ready with every block field null and its envelope resolved by the runtime; and an independent scan reproduces the fourteen-to-thirteen edge fall, dropping exactly the refactor edge. No regression in delivered behavior appeared anywhere in the declared scope; the one divergence found inside it, `DF-006`, is a stale tracked copy of the payload that no test, verifier, or runtime path reads. Both partial verifier verdicts were shown to be pre-existing and unreachable by this change, and no critical or high defect stands open. The verdict is qualified rather than clean for one reason only: `AC-006` could not be settled here, because it turns on advancing a run this phase may not touch, and the Stage 8 table yields `pass-with-reservations` for a blocked criterion with nothing not-met.\n- Blocking defects outstanding: None identified.\n- Readiness recommendation: recommend proceeding to the Verification Gate, which `omn-dev-2-reviewer` decides because this agent produced the evidence assessed there. Three items are recommended for the gate owner's attention rather than treated as blockers: `DF-001`, because the stale reporting ledger is the record a later reader and the auto-approval precedent lookup will consult; `DF-002`, because it is a false statement about machine records sitting in immutable run evidence, correctable only by a record such as this one; and `DF-006`, because it is the single finding here that the change itself introduced, even though nothing reads the copy it left behind. All six recorded defects are medium or low, and five of the six are not caused by the change under validation.\n\n## Open Questions\n\n- `Q-001`: the declared-data-edge population is rule-dependent, and this run measured fourteen falling to thirteen using the runtime's own containment matcher while stricter matchers measure eleven-to-ten and twelve-to-eleven over the same repository. Should the framework fix one canonical rule for comparing Phase Model terms, so the population is a stable number rather than a property of whichever scan is run? Routed to `architect`, who owns that structural decision; the count itself is settled under the operative rule and is not what is being asked.\n- `Q-002`: the canonical reason-code set carries no value for an operator-authorized policy exception, which is why `DF-003` exists and why no verifier catches it. Should such a value be added, or should authorized boundary crossings be recorded by another mechanism? Routed to `architect`.\n- `Q-003`: the re-evaluation pass that clears a guard-raised block does not refresh the run's reporting ledger, leaving the divergence recorded as `DF-001`. Should that pass refresh the ledger, or should the ledger stop being read as a durable record? Routed to `architect`.\n- `Q-004`: settling `AC-006` requires the stalled refactor run to be advanced, which this phase may not do. Should that run now be dispatched, and does its advancement belong to this run's closure or to its own? Routed to `omn-orchestrator`.\n- `Q-005`: `DF-006` shows a second copy of the framework payload tracked in version control that the mirror check does not cover, so the two copies can diverge with no check deciding it. Which copy is authoritative, and should that comparison sit inside a check's scope? Routed to `omn-tech-lead`, who owns the delivery and packaging boundary.",
+        "digest": "sha256:2c9411598e85056f8ac9fb662d8acc5b",
+        "produced_by": "regression-validation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the recorded account of what the run did that this record is assembled from: a validation report for a `fix-bug` or `refactor` closure, the workflow state for a progression this record reconstructs, or the gate evidence a transition rested on. Without one there is nothing to coordinate from, and producing a record anyway would mean asserting a progression no recorded evidence establishes \u2014 which is the precise failure this role exists to prevent."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "validation-report",
+      "reference": "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+      "produced_by": "regression-validation"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-06T01:50:51Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/orchestration-result.md",
+        "digest": "sha256:17841c96b01f66de152eb2ce021960e0",
+        "supplies": null
+      },
+      {
+        "path": "templates/validation-report.md",
+        "digest": "sha256:289a25ebf7d54fb95ddf4fd44925d038",
+        "supplies": null
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": null
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:96eb2d8ad512b9d4fbb53cba86e30577",
+    "input_digest": "sha256:2c9411598e85056f8ac9fb662d8acc5b",
+    "inputs": [
+      {
+        "type": "validation-report",
+        "reference": "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+        "digest": "sha256:2c9411598e85056f8ac9fb662d8acc5b"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/orchestration-result.md",
+      "templates/validation-report.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-79630cb5274d/states/closure-and-communication/artifacts/orchestration-result.md",
+      "runs/run-79630cb5274d/states/closure-and-communication/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any deployment, rollback, merge, publication, or release action",
+        "any command that modifies source, tests, committed run evidence, or a governance record",
+        "repository history rewriting",
+        "any command whose result is not recorded in the orchestration result"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author requirements, scope, acceptance criteria, structural design, tests, or task breakdowns",
+      "take a gate decision that belongs to another role, or record one that was never taken",
+      "decide a gate that assesses evidence this agent produced",
+      "permit a phase transition whose governing gate carries no recorded decision",
+      "record a phase as complete without the gate decision and the evidence behind it",
+      "close a run carrying an unresolved critical or high escalation",
+      "perform a deployment, a rollback, a merge, or a publication action itself",
+      "record a deployment state, monitoring result, or rollback position it was not supplied",
+      "reclassify an escalation's severity, or a finding's, to reach a closure",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "reconstruct the phase progression a run actually executed, from its recorded evidence",
+        "verify that every transition a run took carries a recorded decision at the gate governing it",
+        "accept or refuse a handoff on whether the receiving phase's input contract is satisfied",
+        "record the gate decisions other roles took, naming the authority that took each one",
+        "hold a transition whose gate carries no recorded decision, and say what it is waiting for",
+        "raise and route an escalation this role cannot resolve within its own authority",
+        "record the follow-up actions, deferred scope, and technical debt delta a run leaves behind",
+        "record the deployment state, monitoring health, and rollback position supplied to it",
+        "state a closure position and recommend closure to the authority that decides it",
+        "decide a gate over evidence another role produced, where the gate matrix assigns it"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author requirements, scope, acceptance criteria, structural design, tests, or task breakdowns",
+        "take a gate decision that belongs to another role, or record one that was never taken",
+        "decide a gate that assesses evidence this agent produced",
+        "permit a phase transition whose governing gate carries no recorded decision",
+        "record a phase as complete without the gate decision and the evidence behind it",
+        "close a run carrying an unresolved critical or high escalation",
+        "perform a deployment, a rollback, a merge, or a publication action itself",
+        "record a deployment state, monitoring result, or rollback position it was not supplied",
+        "reclassify an escalation's severity, or a finding's, to reach a closure",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else in the repository, in any phase.",
+        "rationale": "A coordination record is worth what its independence is worth. This role's artifact is the evidence a Closure or Deployment Gate is decided on, and an agent that could change the code, the evidence, or another phase's artifact while accounting for the run would be reporting on work it had shaped itself. The account and the work stay in different hands."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any deployment, rollback, merge, publication, or release action",
+          "any command that modifies source, tests, committed run evidence, or a governance record",
+          "repository history rewriting",
+          "any command whose result is not recorded in the orchestration result"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same phase progression set in the same order, the same handoff set with the same acceptance states, the same escalation set with the same severities, the same follow-up action set, the same operational status, the same closure disposition, and the same declared artifact status.",
+      "identifierSchemes": {
+        "phaseProgression": "PH-<zero-padded-sequence>",
+        "handoffs": "HO-<zero-padded-sequence>",
+        "escalations": "ES-<zero-padded-sequence>",
+        "followUpActions": "FU-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Phase progression rows follow the run's dependency order, which is the order the routed workflow's Phase Model declares; a re-run may not reorder them into a different-looking progression. Handoffs follow the order of the transitions they carried. Escalations and follow-up actions are ordered by descending severity; ties break toward the lower identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied plans, evidence, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "orchestration-result.md",
+    "artifact_path": "runs/run-79630cb5274d/states/closure-and-communication/artifacts/orchestration-result.md",
+    "template_ref": "templates/orchestration-result.md",
+    "contract_ref": "agents/omn-orchestrator/output.md",
+    "quality_ref": "agents/omn-orchestrator/quality.md",
+    "validator": "orchestration_result_validator",
+    "result_envelope_path": "runs/run-79630cb5274d/states/closure-and-communication/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-06T01:50:51Z"
+}

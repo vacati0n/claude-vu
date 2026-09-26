@@ -1,0 +1,808 @@
+schema: framework.runtime/task-context.v1
+task_id: run-4c51600606df
+command: implement
+workflow: implement-feature v1.0.0
+run_status: Completed
+updated_at: '2026-09-08T09:21:50Z'
+objective: 'Ticket CKA-06 in the adoption backlog under docs/ (Epic A — Verification baseline, Days 0–30). Source recommendation:
+  R7 of the adoption review dated 2026-08-27. Type: Story. Priority: High. Effort: M. Depends on: CKA-03, delivered as .github/workflows/verify.yml,
+  which supplies the CI hook this ticket binds to. The repository publishes its operator handbook twice: docs/USER-GUIDE.md
+  (1051 lines of Markdown) and docs/user-guide.html (1033 lines of hand-authored HTML with its own design system — a light/dark
+  token palette, a chapter navigation index, a chain diagram, eyebrow chapter labels, stable section anchors, callout blocks
+  with tags, and comment-highlighted code samples). The two are...'
+inputs:
+- type: feature-request
+  reference: runs/inputs/cka-06-feature-request.md
+  digest: sha256:5965b9107e59775c3f70f54b0b8609f7
+relevant_agents:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  status: completed
+  required_skills:
+  - S02
+  - S07
+- phase: execution-planning
+  agent: planner
+  status: completed
+  required_skills:
+  - S02
+  - S01
+  - S07
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  status: completed
+  required_skills:
+  - S01
+  - S03
+  - S06
+  - S09
+- phase: implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S11
+  - S12
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S08
+- phase: documentation-and-release-handoff
+  agent: omn-documentation
+  status: completed
+  required_skills:
+  - S11
+  - S10
+  - S12
+completed_phases:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  artifact: runs/run-4c51600606df/states/scope-and-acceptance/artifacts/scope-definition.md
+  digest: sha256:4245cc550598d06c4bfd169a5f7411bc
+  validation: pass 33/33
+  attempts: 1
+- phase: execution-planning
+  agent: planner
+  artifact: runs/run-4c51600606df/states/execution-planning/artifacts/execution-plan.md
+  digest: sha256:876ebbe3cbad8a5a60a4052bcbed699c
+  validation: pass 45/45
+  attempts: 1
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  artifact: runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  digest: sha256:4da767405aa4b5a61658b3bbdbe258db
+  validation: pass 78/78
+  attempts: 2
+- phase: implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md
+  digest: sha256:87dddbeb141dd2612d0d8fa5b21cf177
+  validation: pass 32/32
+  attempts: 2
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  artifact: runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md
+  digest: sha256:51f6b57ba075ffc6b490fa752020f255
+  validation: pass 31/31
+  attempts: 2
+- phase: documentation-and-release-handoff
+  agent: omn-documentation
+  artifact: runs/run-4c51600606df/states/documentation-and-release-handoff/artifacts/release-note.md
+  digest: sha256:92da3af6a2927c4816a2b40ef5d1d9da
+  validation: pass 32/32
+  attempts: 1
+gates:
+- gate: Scope Gate
+  closes: scope-and-acceptance
+  decision: approved
+  owner_role: omn-business-analyst
+  decided_by: omn-business-analyst subagent acfda7bd565a5f491, recorded by session operator for vuhoangcao
+- gate: Planning Gate
+  closes: execution-planning
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent abe206986eea387d2, recorded by session operator for vuhoangcao
+- gate: Design Gate
+  closes: solution-design-and-risk-assessment
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent af3dbbddf93179957, recorded by session operator for vuhoangcao
+- gate: Review Gate
+  closes: quality-review
+  decision: approved
+  owner_role: omn-qa
+  decided_by: omn-qa subagent aed7a3aa8f2af4214, recorded by session operator for vuhoangcao
+- gate: Verification Gate
+  closes: quality-review
+  decision: approved
+  owner_role: omn-qa
+  decided_by: omn-qa subagent a0e4137ae303ce729, recorded by session operator for vuhoangcao
+- gate: Closure Gate
+  closes: documentation-and-release-handoff
+  decision: approved
+  owner_role: omn-orchestrator
+  decided_by: omn-orchestrator subagent a9f5a7def6752dd64, recorded by session operator for vuhoangcao
+artifacts:
+  scope-and-acceptance: runs/run-4c51600606df/states/scope-and-acceptance/artifacts/scope-definition.md
+  execution-planning: runs/run-4c51600606df/states/execution-planning/artifacts/execution-plan.md
+  solution-design-and-risk-assessment: runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  implementation: runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md
+  quality-review: runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md
+  documentation-and-release-handoff: runs/run-4c51600606df/states/documentation-and-release-handoff/artifacts/release-note.md
+parallel_groups:
+- - scope-and-acceptance
+  - execution-planning
+- - solution-design-and-risk-assessment
+- - implementation
+- - quality-review
+- - documentation-and-release-handoff
+scope:
+  in_scope:
+  - 'S-001: The published HTML handbook is a build output of the Markdown handbook: regenerating it from docs/USER-GUID...
+    | Delivers the requested renderer that "reads docs/USER-GUIDE.md and writes docs/user-guide.html", restated a... | must-have'
+  - 'S-002: A contributor who changes the Markdown handbook without regenerating the published HTML is stopped by the r...
+    | Delivers the stated acceptance expectation that editing USER-GUIDE.md without regenerating fails CI with th... | must-have'
+  - 'S-003: After this change no authored content is present in exactly one of the two handbook files: everything the M...
+    | Delivers the requested one-time two-way reconciliation of the current drift, including the Markdown''s branc... | must-have'
+  - 'S-004: The published HTML handbook keeps the reading affordances it offers today: a chapter navigation index, per-...
+    | Delivers the request''s statement that these affordances are a deliberate part of the published artifact and... | must-have'
+  - 'S-005: A reader who opens the published HTML handbook is told at the top of the page that the file is generated an...
+    | Delivers the stated acceptance expectation that the published file opens with a "generated, do not edit" ba... | must-have'
+  - 'S-006: Regenerating the handbook from the same Markdown produces the same published file every time and on every p...
+    | Delivers the stated hard requirement that determinism is not an aspiration, since a byte comparison is only... | must-have'
+  - 'S-007: The Markdown handbook stays a document a contributor reads and edits as prose, so adding a section, a callo...
+    | Delivers the request''s statement that how the source expresses the affordances without becoming unreadable... | should-have'
+  - 'S-008: Contributors are told to regenerate the published handbook, and no instruction to synchronise it by hand re...
+    | Delivers the request that the hand-synchronisation process note be retired and replaced by the generation i... | should-have'
+  - The published handbook is a build output of the source handbook, and a direct edit to it does
+  - A source change that lands without a regenerated published file is stopped by the repository's
+  - A one-time two-way reconciliation of the current drift, with every one-sided item of authored
+  - The authored-content test that separates content to merge from a derived label to regenerate,
+  - The reconciliation resolution list, persisted as a named artifact of the implementation phase
+  - The published form keeps its chapter navigation index, chapter labels, callout blocks, the
+  - Every anchor identifier the published form exposes before the change still resolves, after it,
+  - The published page opens with a banner stating that the file is generated and must not be
+  - Regeneration produces the same published file on every repeat and on every platform in the
+  - The source handbook stays a document a contributor reads and edits as prose, with a recorded
+  - Contributor-facing documentation instructs regeneration, and the statement describing the pair
+  - Evidence that the change altered no runtime or gate-decision behaviour and met the backlog's
+  - A validation strategy that carries out the verification method named against each of the
+  out_of_scope:
+  - 'X-001: Generating any other duplicated documentation pair in the repository from a single source | The request names
+    exactly one pair; every other pair has its own audience, its own content, and its own rec... | A second duplicated documentation
+    pair is identified and its divergence is shown to recur'
+  - 'X-002: Any change to runtime, gate-decision, or approval behaviour | The backlog constrains this ticket to an additive
+    change and forbids altering record_gate_decision, the gat... | Never within this change; such a change is scoped separately
+    with its own gate evidence'
+  - 'X-003: Editorial rewriting or restructuring of handbook content beyond resolving content that exists in exactly on...
+    | The request bounds the content change to resolving one-sided content; mixing editorial improvement into a r... | A content
+    review of the handbook is requested as its own change'
+  - 'X-004: Publishing or hosting the generated handbook anywhere outside the repository | Nothing in the request asks for
+    a hosted site; the published file is committed and read in place | A requirement to serve the handbook outside the repository
+    is stated'
+  - 'X-005: Making the handbook''s factual claims checkable against the tool''s actual behaviour, including the exit-code...
+    | That is the separate follow-on ticket CKA-12, which depends on this one; conflating them would make this ch... | CKA-12
+    is scoped, at which point it consumes this change''s output'
+  - 'X-006: An automated visual or structural regression check that proves the reading affordances survived a regeneration
+    | The request asks for one drift check, over bytes; a check that decides whether a page still reads well is a... | An
+    affordance regression reaches the published handbook after this change, showing r...'
+  - 'X-007: Removing the published HTML handbook from version control in favour of building it only at publish time | The
+    drift check compares against the committed file, and existing repository tests read that file from the... | A publishing
+    pipeline exists that builds and serves the handbook, and the repository tests n...'
+  - Generating any other duplicated documentation pair in the repository from a single source
+  - Any change to runtime, gate-decision, or approval behaviour (X-002). Excluded because the
+  - Editorial rewriting or restructuring of handbook content beyond resolving content that exists
+  - Publishing or hosting the generated handbook anywhere outside the repository (X-004). Excluded
+  - Making the handbook's factual claims checkable against the tool's actual behaviour, including
+  - An automated visual or structural regression check proving the reading affordances survived a
+  - Removing the published handbook from version control in favour of building it only at publish
+  - Rewriting committed change proposals and run evidence that describe the pair as hand-synced
+validation_requirements:
+  acceptance_criteria:
+  - 'A-001: Regenerating the handbook from the committed Markdown produces a file byte-identical to the committed docs/...
+    | S-001 | regenerate on a clean checkout and compare the working tree against the commit; the comparison reports zero...'
+  - 'A-002: A sentence added directly to docs/user-guide.html, and not to the Markdown, is absent from the file after r...
+    | S-001 | demonstration: insert one sentence into the published file, regenerate, and confirm the sentence is gone'
+  - 'A-003: A commit that changes docs/USER-GUIDE.md without regenerating docs/user-guide.html fails the repository''s v...
+    | S-002 | run a demonstration branch carrying a Markdown-only edit through the verification workflow; the run fails a...'
+  - 'A-004: The verification workflow passes on a commit where the Markdown and the published HTML agree | S-002 | the verification
+    workflow run on the delivery branch after regeneration completes without a drift failure'
+  - 'A-005: Every section heading present in docs/USER-GUIDE.md is present in docs/user-guide.html, including the branc...
+    | S-003 | section-by-section comparison of the two files'' heading sets, plus a content read of the branch naming temp...'
+  - 'A-006: Every item of authored prose, table, or code sample that exists today in exactly one of the two files appea...
+    | S-003 | review of the recorded resolution list against a section-by-section comparison of the two files as committe...'
+  - 'A-007: The regenerated published handbook still offers a chapter navigation index, chapter labels, callout blocks,...
+    | S-004 | reviewer walkthrough of the regenerated page against the pre-change page, item by item across the five name...'
+  - 'A-008: Every section anchor that docs/user-guide.html exposes before this change still resolves, after it, to the...
+    | S-004 | comparison of the anchor identifier sets before and after, followed by a click-through of each anchor in th...'
+  - 'A-009: The regenerated docs/user-guide.html opens with a banner that is visible when the page is rendered, states...
+    | S-005 | open the regenerated page and read the top of the rendered page, confirming all three elements are present...'
+  - 'A-010: Regenerating from the same Markdown on every operating system in the repository''s verification matrix produ...
+    | S-006 | the drift check step passing on every leg of a single verification workflow run'
+  - 'A-011: Two regenerations from the same Markdown in the same environment produce byte-identical output | S-006 | regenerate
+    twice into separate destinations and compare; the comparison reports zero differing bytes'
+  - 'A-012: A contributor can add a new section, a callout, and a code sample to docs/USER-GUIDE.md using notation alre...
+    | S-007 | authoring walkthrough: a reviewer who did not build the change adds one of each to a scratch copy, regenera...'
+  - 'A-013: The number of lines in docs/USER-GUIDE.md consisting of raw markup rather than prose is no greater after th...
+    | S-007 | count the raw-markup lines in both revisions of the file and compare the two counts'
+  - 'A-014: The repository''s contributor-facing documentation instructs a contributor to regenerate docs/user-guide.htm...
+    | S-008 | text review of every contributor-facing document that mentions the handbook pair, confirming the generation...'
+  test_focus:
+  - Byte identity under repetition in one environment and across both platform legs of a single
+  - 'The discarded-direct-edit demonstration: a sentence inserted into the published file and'
+  - 'Check-mode purity: the working tree is unchanged after both a passing and a failing check,'
+  - 'Failure-output usability: the regeneration command appears in the run log as one string a'
+  - 'The committed-assertion boundary: the four stable check names, the workflow filename, and'
+  - 'Workflow topology: the job identifier set, the four rendered check names, and the parity'
+  - 'Grammar failure paths: a duplicate anchor identifier and an internal link to an undeclared'
+  - 'The anchor baseline: all 21 identifiers of Appendix B resolve in the regenerated page to'
+  evidence:
+  - 'T-001: Every construct of the authoring grammar renders; a malformed source fails the render naming its line: dupl...
+    | unit | C-004'
+  - 'T-002: Comment marking is keyed to the fence info string and quote-aware, so a hash inside a quoted argument value...
+    | unit | C-004'
+  - 'T-003: Closing CR-007: escape_attribute encodes the quote delimiter while element content keeps its quotes; a chai...
+    | unit | C-004, C-005'
+  - 'T-004: Two renders of the delivered source are byte-identical, the input newline form does not reach the output, t...
+    | unit | C-003, C-004'
+  - 'T-005: Live page: the delivered published file equals a render of the delivered source; its declared-anchor set an...
+    | contract | C-003, C-004, C-005'
+  - 'T-006: Hermetic equivalence: the pre-change fixture is the pre-change page; the reconciled fixture is a renderer o...
+    | contract | C-001, C-002, C-006, C-007'
+  - 'T-007: Closing CR-004 and CR-006: check mode exits zero on the tracked pair and on an agreeing isolated copy; a di...
+    | integration | C-003, C-004, C-005'
+  - 'T-008: The record leaves no item unresolved, cites a defined rule on every item, numbers its items from one withou...
+    | contract | C-002, C-003, C-005, C-006, C-007'
+  - 'T-009: Both handbook paths are pinned with -text in the attributes file, each exactly once (1 test) | contract | C-008'
+  - 'T-010: The drift step sits in the tests job after the unit-test step, runs unless the run was cancelled, and names...
+    | contract | C-010'
+  - 'T-011: The whole renderer module by the discovery command the dispatch requires: 74 tests, none failing, against 7...
+    | regression | C-001, C-002, C-003, C-004, C-005, C-006, C-007, C-008, C-009, C-010'
+  - 'T-012: The verification-workflow tests: six job identifiers, four stable check names, environment and permission p...
+    | regression | C-003, C-005, C-010, C-011'
+  - 'T-013: The dependency-footprint assertion still reads the declared distribution name out of the regenerated page,...
+    | regression | C-003, C-005'
+  - 'T-014: Check mode over the tracked pair exits zero: the delivered page is byte-identical to a render of the delive...
+    | integration | C-003, C-004, C-005'
+  - 'T-015: The delivered page declares exactly 21 distinct anchor identifiers: the id attributes extracted by the comm...
+    | static | C-005'
+  - 'T-016: The renderer and its test module compile | static | C-004, C-009'
+  verification:
+  - 'Verification method: the regression baseline was taken before any file was changed — the renderer module by discovery,
+    the verification-workflow module by di...'
+  - 'Commands executed: python tools/render_user_guide.py --check (baseline and after, exit 0 both times); python -m unittest
+    discover -s tests -p "test_render_us...'
+  - 'Result summary: 16 evidence entries executed, 16 passed, 0 failed. The renderer module went from 73 tests with 2 failures
+    at baseline to 74 tests with 0 fail...'
+  - 'Unverified areas: the full repository suite as one run, which this invocation did not execute — the operator''s statement
+    that the last full sweep was 473 tes...'
+constraints:
+- 'Business constraints: High priority, Phase 1 of the adoption plan in the adoption backlog under docs/. The follow-on ticket
+  CKA-12 depends on this one for re...'
+- 'Regulatory or policy constraints: Additive change only. The backlog forbids altering record_gate_decision, the gate matrix
+  semantics, producer exclusion, run...'
+- 'Delivery constraints: The definition of done for every ticket in this backlog applies: tests/ green, all verify_.py proof
+  scripts PROVEN, no change to gate-d...'
+- 'External dependencies: .github/workflows/verify.yml, delivered by CKA-03, supplies the continuous-integration hook this
+  change binds to. The existing parity...'
+- 'Wave 1: T-001, T-009'
+- 'Wave 2: T-006, T-010'
+- 'Wave 3: T-003, T-007, T-012'
+- 'Wave 4: T-002, T-022'
+- 'Wave 5: T-005, T-015, T-017'
+- 'Wave 6: T-008, T-011, T-013, T-014, T-016, T-018'
+- 'Wave 7: T-004, T-019, T-020'
+- 'Wave 8: T-021'
+- 'C-001: structural | The source of record is docs/USER-GUIDE.md; docs/user-guide.html is its build output and is never authored...
+  | Hard'
+- 'C-002: functional | Every anchor identifier the published file exposes before the change resolves, after it, to the section
+  car... | Hard'
+- 'C-003: structural | The renderer introduces no dependency outside the standard library | Hard'
+- 'C-004: quality-attribute | Regeneration is byte-identical across repeats in one environment and across both matrix platforms,
+  line end... | Hard'
+- 'C-005: structural | The verification workflow''s job identifier set is unchanged; the drift check is a step inside the
+  existing... | Hard'
+- 'C-006: structural | The drift step is expressed over the known build output, never over a curated list of files a future
+  contri... | Hard'
+- 'C-007: compliance | The change alters no runtime, gate-decision, or approval surface the backlog forbids altering | Hard'
+- 'C-008: migration | Every string a committed test asserts in the published file survives the reconciliation; such an item
+  is re... | Hard'
+- 'C-009: functional | The published page announces at its top that it is generated, names its source file, and gives its
+  regenera... | Hard'
+- 'C-010: quality-attribute | A contributor adds a section, a callout, or a code sample to the source using notation present
+  in that file... | Negotiable'
+- 'C-011: quality-attribute | The count of raw-markup lines in the source does not rise | Negotiable'
+- 'C-012: structural | The workflow''s effective text contains neither a colour-suppression variable nor a failure-masking
+  key | Hard'
+- 'C-013: operability | The drift failure output carries the regeneration command as a string a contributor runs unmodified
+  | Hard'
+- 'C-014: security | The renderer reads only the two named handbook files and writes only the published file; check mode writes...
+  | Hard'
+- 'C-015: structural | The five named reading affordances survive regeneration | Hard'
+- 'P-001: The anchor identifier baseline is enumerated from the committed published file and fixed before any source... |
+  M-003 | none'
+- 'P-002: The source notation is defined and closed over every affordance, every baseline identifier, and every item... |
+  M-002, M-003 | P-001'
+- 'P-003: The encoding, the newline policy, the emission-ordering rule, and the checkout attribute decision are fixed... |
+  M-001, M-005 | P-002'
+- 'P-004: The renderer reproduces the committed published file byte for byte from the reconciled source before any co... |
+  M-001, M-003 | P-003'
+- 'P-005: Byte identity is proven on both matrix platforms immediately after the renderer first matches, and before t... |
+  M-001, M-005 | P-004'
+- 'P-006: Check mode exists, compares in memory, and writes nothing before the workflow invokes it | M-001 | P-004'
+- 'P-007: A demonstration that a sentence added directly to the published file is absent after regeneration is record... |
+  M-003 | P-004'
+- 'P-008: The drift step is added inside the existing tests job, with all six job identifiers and all four stable che... |
+  M-004, M-011 | P-005, P-006'
+- 'P-009: The generated-do-not-edit banner is emitted by the renderer rather than added to the published file, before... |
+  M-001, M-003 | P-004'
+- 'P-010: The contributor instruction naming the regeneration command, and the closure record that hands that command... |
+  M-007, M-006 | P-005'
+- 'P-011: Every string a committed test asserts in the published file is confirmed present in the regenerated output... |
+  M-003, M-008 | P-004'
+decisions:
+- 'D-001: Preserving the published handbook''s existing reading affordances is inside this change''s boundary; an outco...
+  | The byte comparison checks the published file against a regeneration of itself, so it cannot detect a degra... | Acceptance
+  of this change is decided partly by review, through A-007 and A-008, and...'
+- 'D-002: "No content present in exactly one of the two files" is read as covering authored prose, tables, and code s... |
+  A published HTML form always carries markup and derived labels its Markdown source does not, so a literal r... | A-006 is
+  assessed over authored content only. Derived scaffolding is assessed instea...'
+- 'D-003: The Markdown handbook is the source and the published HTML is the build output | The request states this direction,
+  and only one direction lets a byte comparison decide staleness. Treating... | An edit made directly to the published handbook
+  is lost at the next regeneration and is failed by the drift...'
+- 'D-004: Where the two files order the same material differently, the source''s existing order governs and the publis...
+  | After this change the published order is a function of the source, so preserving the published order would... | The gate-ownership
+  material moves in the published handbook from the end of the drivi...'
+- 'D-005: The change resolves each one-sided item of authored content and records the resolution, and changes no cont... |
+  The request bounds the content change to resolving one-sided content. Editorial improvement has a different... | Content
+  that both files already carry is carried through unchanged, including passag...'
+- 'D-006: Preservation of the reading affordances is accepted by human review rather than by an automated visual or s... |
+  The request asks for one drift check, over bytes. A check that decides whether a page still reads well need... | A future
+  regression in the affordances is not caught mechanically, only at review. X...'
+- 'Selected: O-001.'
+- 'Structural change: the source document gains one attribute construct, written in braces at'
+- 'Rationale: O-001 is the only option that satisfies every hard constraint while keeping'
+- 'Highest-scoring rejected alternative and why it lost: O-002, the renderer-held mapping'
+- 'Tradeoffs accepted:'
+- The source gains notation it does not carry today. F-009 establishes that the file has
+- The brace attribute is markup on an otherwise-prose line. It was chosen over a
+- 'The chapter numbering already present in the source headings becomes load-bearing: the'
+- The published page's design system moves into the renderer as a fixed shell. Changing the
+- 'D-001: Non-derivable published-form values are authored in the source, on the line they belong to, in one brace at... |
+  Yes | ADR D-001, status Proposed'
+- 'D-002: A level-2 heading whose ordinal prefix is a digit followed by a letter renders as a level-3 subsection of t... |
+  No | Inline; reproduces F-028 and keeps the section set at 9'
+- 'D-003: A callout is authored as a blockquote whose leading bolded run becomes its tag, with the brace attribute su... |
+  No | Inline; reuses the bolded lead-in of F-008 and supplies the tag text of F-007'
+- 'D-004: Comment marking inside a code sample is decided by a lexical rule keyed to the fence''s info string and awar...
+  | No | Inline; the quote-awareness clause exists to reproduce F-013'
+- 'D-005: A chain diagram is authored as a fenced block whose info string names it, with the gate-marked token writte... |
+  No | Inline; the accessibility label is derived by default, pending Q-001'
+- 'D-006: The page shell — title, style block, font stylesheet link, masthead frame, and footer frame — is held verba... |
+  No | Inline; classified as presentational scaffolding under SD-002'
+- 'D-007: Determinism is established at the renderer''s own input and output boundary — explicit encoding, an explicit...
+  | Yes | ADR D-007, status Proposed'
+- 'D-008: The drift check is a step inside the existing tests job, landing under the two platform-suffixed tests chec... |
+  Yes | ADR D-008, status Proposed'
+- 'D-009: Check mode renders into memory, reads the committed published file as bytes, compares, and writes nothing t... |
+  No | Inline; required by C-014 and S-011'
+- 'D-010: The renderer fails the build on a duplicate anchor identifier and on an internal link to an identifier no h... |
+  No | Inline; converts the internal link graph of F-003 from a review obligation into a build-time one'
+- 'V-001: Navigation labels are derived from the heading each entry points at rather than authored in the heading''s b...
+  | D-001''s clause placing a divergent navigation label inside the heading attribute | The Design Gate''s decided authored-versus-derived
+  rule classifies navigation link text as derived presentat...'
+- 'V-002: The list variant giving the phase-cycle list its numbered-step presentation is carried by a brace attribute... |
+  D-001''s "written at the end of that line" | A list has no single line whose rendering the class governs; the value stays
+  authored in the source in the...'
+- 'V-003: Byte-exact reproduction of the pre-change published file was not attempted; equivalence to it is establishe... |
+  Sequencing constraint P-004 and assumption A-007 | The pre-change file carries no banner and the design requires the renderer
+  to emit one at the top, so P-004...'
+- 'V-004: The regenerated published file is delivered in the working tree; no invocation of this phase created a comm... |
+  The Design Gate''s first condition, which ends by requiring the regenerated file to be committed | Committing is not one
+  of the repository''s test, build or static-analysis commands, and the shared w...'
+- 'V-005: The two chain diagrams'' accessibility labels are regenerated from their token lists, so their hand-written... |
+  Inline design decision D-005 and assumption A-005 | The design records the label as derived by default pending the product
+  owner''s ruling; attempt 1 escalated...'
+- 'V-006: Where a published callout condensed material the source carries as a paragraph plus a list or a code sample... |
+  Inline design decision D-003, read against the exclusion of editorial restructuring | Reshaping the source to reproduce
+  the published block boundaries would be editorial restructuring the accep...'
+- 'V-007: The published masthead strapline is superseded by the source''s rather than merged (C-003, C-005) | The Design Gate''s
+  rule that fact-stating published wording merges into the source | Two straplines in one slot would render as one; attempt
+  1 escalated the choice and the product owner ruled...'
+- 'V-008: The equivalence proof compares two frozen fixtures rather than the pre-change fixture against the live page... |
+  The correction pass''s design of the equivalence class under CR-001, and QA''s Verification Gate plan, which... | The criterion
+  is a statement about one event, the reconciliation. Read against the li...'
+- 'V-009: The reconciled fixture is a render produced now from a reconstructed source, not a page captured when the r... |
+  The dispatch''s requirement that the fixture be the page as regenerated at reconciliation time | No copy of the source at
+  that moment exists in the tree or in version history, so it was reconstructe...'
+- 'V-010: The nine corrections the Review Gate required were applied to the working tree on 2026-09-06 by an out-of-b... |
+  The lifecycle rule that source is written inside an implementation invocation and declared by it | At the time no phase
+  could carry the corrections: the run was stranded on a rejected gate with no...'
+open_questions:
+- 'Q-001: Which contributor-facing document holds the hand-synchronisation instruction this change retires? No prose... |
+  no | omn-business-analyst'
+- 'Q-002: For each item of authored prose that exists today only in the published HTML, including the masthead strapl... |
+  no | omn-business-analyst'
+- 'Q-001: Does the handbook already carry maintenance material that can hold the regeneration instruction, or must su... |
+  No | omn-documentation'
+- 'Q-002: The parity test''s docstring is contributor-facing prose inside a test file. Does correcting it belong to th...
+  | No | omn-tech-lead'
+- 'Q-003: If the recorded authored-content test would drop a string that an existing test asserts, which governs: the... |
+  No | omn-product-owner'
+- 'Q-001: Are the two chain diagrams'' accessibility labels authored content to merge into the source, or derived pres...
+  | No | omn-product-owner'
+- 'Q-002: Which executing task carries the demonstration that a direct edit to the published file does not survive re... |
+  No | planner'
+- 'Q-003: Does any consumer outside this repository link to the published file''s anchors in a form this change cannot...
+  | No | omn-product-owner'
+- 'Q-004: Does the boundary fund a mechanical assertion that the enumerated anchor identifiers are present in the pub... |
+  No | omn-product-owner'
+- 'Q-005: If the committed published file''s terminal bytes do not match the renderer''s newline policy, is a one-time...
+  | No | omn-tech-lead'
+- 'Q-006: Is the windows tests check expected to be required by the time this change lands, or does the drift check b... |
+  No | omn-tech-lead'
+- 'Q-001: Who creates the commit that makes the regenerated published file and the rest of the change set the committ... |
+  no | omn-orchestrator'
+- 'Q-002: Does QA accept the fixture-to-fixture proof for the one-sided-content criterion, given that its Verificatio... |
+  no | omn-qa'
+- 'Q-003: Is the evidence this phase can reach sufficient for the cross-platform byte-identity criterion and for the... |
+  no | omn-qa'
+- 'Q-004: The runtime fix''s closure record routed to this attempt''s reviewer a choice between recording its handbook...
+  | no | omn-dev-2-reviewer'
+- 'Q-001: Does omn-qa accept the fixture-to-fixture proof — the pre-change page against the page as regenerated at re... |
+  no | omn-qa'
+- 'Q-002: Is determinism evidence executed on one platform, together with the -text pin and the fixed newline policy,... |
+  no | omn-qa'
+- 'Q-003: Who creates the commit that makes the regenerated page and the rest of the change set the committed content... |
+  no | omn-orchestrator'
+objectives:
+- 'The published file is a pure function of the source file: regeneration reproduces the committed'
+- Regeneration is deterministic across repeated runs in one environment and across every
+- The repository's verification workflow carries a drift check that fails a stale published file
+- The source document expresses every reading affordance the published form offers, in notation a
+- The anchor identifier set the published form exposes today survives regeneration, and each
+- The published file announces, at the top of the rendered page, that it is generated, which file
+- The change adds a build tool, a regenerated documentation artifact, and a verification step,
+- 'Desired outcome: the operator handbook has one authored form, docs/USER-GUIDE.md, from'
+- 'Architectural objectives:'
+- 'The published file is a total function of the source file: no information reaches the'
+- The renderer's output is byte-stable under repetition, locale, dictionary ordering, and
+- Every value the published form carries that is not derivable from the source is moved
+- The anchor identifier set the published file exposes today becomes an authored,
+- The staleness verdict is attached to a verification surface that can block a merge, and
+- 'In scope: the source document''s notation contract, the published document''s generation'
+- 'Out of scope: any change to runtime, gate-decision, or approval behaviour (X-002); any'
+assumptions:
+- 'A-001: The renderer is a standard-library tool needing no dependency outside it, consistent with the repository''s... |
+  S-007 | The approach decision reopens, the published handbook''s stated dependency footprint no longer holds, and th...'
+- 'A-002: The repository''s verification workflow, delivered by ticket CKA-03, runs on more than one operating system... |
+  S-015, S-020 | T-016 grows to include workflow restructuring and the cross-platform criterion cannot be evidenced from a
+  s...'
+- 'A-003: The exact anchor identifier set the published handbook exposes today is established by reading the committe... |
+  S-039 | An anchor absent from the baseline is dropped without detection, and the anchor criterion passes against an...'
+- 'A-004: The framework''s artifact writing constraints apply to every artifact this run produces and are enforced by... |
+  S-022 | Nothing in the task structure changes; only the affected artifact is re-emitted'
+- 'A-005: The implementer applies the recorded authored-content test rather than re-deciding it, and routes items the... |
+  S-033, S-034, S-035 | Published wording is decided by the implementer where the Scope Gate reserved that decision, and the
+  AC-006...'
+- 'A-006: The reconciled handbook content is expressible in the source document using notation already present in tha... |
+  S-013, S-037 | The markup measure is reported as risen, the anchor criterion governs the conflict, and the notation decisi...'
+- 'A-007: The two existing tests that read the published handbook pass unchanged once the reconciliation preserves th... |
+  S-030 | Either the reconciliation must preserve content the authored-content test would drop, or those tests change...'
+- 'A-008: One regeneration command line serves every platform in the verification matrix unmodified | S-014, S-018 | T-015
+  states a per-platform command form in its acceptance criterion; no task is added or removed'
+- 'A-009: The handbook carries maintenance material that can hold the regeneration instruction, or such material can... |
+  S-040 | T-018 lands the instruction in two targets rather than three and records the third as not applicable; no ta...'
+- 'A-010: The three targets the Scope Gate named are the complete inventory of contributor-facing statements about th... |
+  S-040, SQ-001 | The text review behind AC-014 finds a further hand-synchronisation instruction after T-018 closed, and that...'
+- 'A-001: The working-tree revision of the five files read is the revision this change is applied to | The anchor baseline
+  and the committed-assertion inventory are taken from it | An anchor added after the read is absent from the baseline and
+  can be dropped undetected; the baseline must...'
+- 'A-002: The hosted windows runner presents the committed published file with the bytes that were committed, rather... |
+  The byte comparison on the windows leg compares against committed bytes | The windows leg fails permanently regardless of
+  renderer correctness, until the two handbook paths are pinn...'
+- 'A-003: A single regeneration command string, written with forward slashes, runs unmodified on both matrix platforms | One
+  command form is embedded in the banner, in the failure output, and in contributor documentation | The banner, the failure
+  output, and the documentation each state a per-platform form, and the sin...'
+- 'A-004: Every item the reconciliation merges into the source is expressible in the notation this design defines, wi... |
+  The notation is fixed before the resolution list is applied | The notation reopens after implementation has started, and
+  the raw-markup measure and the authoring walkthr...'
+- 'A-005: The two chain diagrams'' accessibility labels are derived presentation under the recorded authored-content t...
+  | Decides whether the chain construct needs an authored label slot | The chain construct gains one optional authored field,
+  one more thing a contributor may write, and the publ...'
+- 'A-006: The handbook carries no maintenance material able to hold the regeneration instruction, so the instruction... |
+  Bounds the documentation surface this design sequences against | A third target exists and the instruction lands in three
+  places rather than two'
+- 'A-007: The committed published file''s terminal byte sequence is reproducible under a single fixed newline policy i...
+  | The first regeneration must match the commit exactly for AC-001 to pass without rewriting the target | The committed published
+  file is rewritten once so its final bytes match the renderer''s policy,...'
+- 'A-008: No consumer outside this repository links to the published file''s anchors in a form this change cannot enum...
+  | Bounds the anchor-preservation obligation to the enumerated set of 21 | An external link may break even though every enumerated
+  identifier survives, and the obligation is wider th...'
+risks:
+- 'R-001: requirement | An inventoried item is not settled by the recorded authored-content test and is resolved without escalation...
+  | Published wording changes on an implementer''s judgement where the Scope Gate reserved that decision; the AC...'
+- 'R-002: requirement | The authored-content test would drop a string that the existing parity test or the dependency-footprint
+  tes... | The repository''s test suite fails, or the reconciliation reopens as a scope change after implementation sta...'
+- 'R-003: technical | Regenerated output varies with dictionary ordering, locale, line endings, or the platform running it
+  | The byte comparison the whole change rests on becomes unusable, one matrix leg fails permanently, and every...'
+- 'R-004: technical | An affordance cannot be expressed in the source document without adding markup a contributor would have
+  to... | The readability objective weakens and the raw-markup measure rises against AC-013'
+- 'R-005: technical | An anchor identifier the published file exposes today is missing from the enumerated baseline | A dropped
+  anchor passes the page verdict and breaks a link readers already use'
+- 'R-006: dependency | The verification workflow delivered by ticket CKA-03 does not accept an added step over a build output
+  with... | T-016 grows into workflow restructuring, and the cross-platform criterion cannot be evidenced from one run'
+- 'R-007: security | The reconciliation merges published-form wording that names internal detail the source document was not
+  int... | Content exposure widens without a review having judged it'
+- 'R-008: operational | A contributor who has been editing the published file directly continues to do so after the change
+  | Their edit is lost at the next regeneration and their change is failed by the drift check, with no explanat...'
+- 'R-009: operational | A reading affordance regresses in a change made after this one | Nothing catches it mechanically,
+  because the accepted boundary funds review rather than an automated afford...'
+- 'R-010: delivery | A contributor-facing statement about the handbook pair exists outside the three targets the Scope Gate
+  named | The text review behind AC-014 finds a remaining hand-synchronisation instruction after the documentation ta...'
+- 'R-011: delivery | The renderer needs capability outside the standard library | The published handbook''s stated dependency
+  footprint stops being true, the backlog''s tooling posture is bre...'
+- 'R-001: structural | The delivery revision of the published file declares an anchor identifier absent from the baseline
+  enumerat... | A dropped anchor passes the page verdict and breaks a link a reader already uses, with the anchor criterion...'
+- 'R-002: operability | The windows runner presents the committed published file with translated line endings (A-002) | The
+  windows leg of the byte comparison fails permanently regardless of renderer correctness, and the failur...'
+- 'R-003: contract | The drift step is placed where its verdict reaches only an advisory check name | The check runs, shows
+  red, and cannot block a merge, so a stale published file still reaches the default br...'
+- 'R-004: delivery | The reconciliation produces an item that the fixed notation cannot express (A-004) | The notation reopens
+  after implementation started, and the markup count and the authoring walkthrough are b...'
+- 'R-005: contract | The reconciliation drops a string a committed test asserts in the published file | The unit-test suite
+  fails on the required check, or the reconciliation reopens as a scope change after impl...'
+- 'R-006: structural | A later change renames a heading''s anchor attribute and its internal links together, so the build-time
+  link... | An identifier readers link to disappears with no mechanical signal, and X-006 keeps the check that would ca...'
+- 'R-007: operability | The drift step and the unit-test step are ordered so that a failure in either prevents the other from
+  repor... | A contributor fixes one surface, pushes, and discovers the other, paying two round trips for one commit'
+- 'R-008: migration | The committed published file''s terminal bytes do not match the renderer''s newline policy (A-007) |
+  The first regeneration differs from the commit in its final bytes, and AC-001 cannot pass without rewriting...'
+- 'R-009: security | A merged published-form sentence names internal detail the source document was not intended to carry
+  | Content exposure widens without a review having judged it, in a file with a wider audience than the page it...'
+- 'R-010: operability | A contributor who has been editing the published file directly continues to do so | Their edit is
+  lost at the next regeneration and their change is failed by a required check, with no explana...'
+- 'R-011: delivery | The chain diagrams'' accessibility labels are ruled authored content after the notation is fixed (A-005)
+  | The chain construct gains a field after the renderer is built, and the two published labels change in the i...'
+- 'R-012: structural | The purpose-built converter mis-parses a construct the source already uses, and the error surfaces
+  as a byt... | The byte comparison reports a mismatch whose cause is not where it is reported, and debugging is proportion...'
+- 'R-001: Cross-platform byte identity is asserted by construction rather than by an executed run on the second matri... |
+  medium | high'
+- 'R-002: The byte comparison cannot see a degraded page: it compares the published file against a regeneration of it... |
+  medium | medium'
+- 'R-003: The navigation index carries the full chapter titles, two of which wrap in the index grid | high | low'
+- 'R-004: The drift verdict is not separately named in the checks list; a contributor learns which surface failed fro... |
+  high | low'
+- 'R-005: A contributor who edits the published file directly loses the edit at the next regeneration and is failed b... |
+  high | medium'
+- 'R-006: The drift check blocks a merge on the ubuntu leg only while the windows check name is advisory | medium | medium'
+- 'R-007: The reconciled fixture is a reconstruction: if the reconstruction were wrong the one-sided-content proof wo... |
+  low | medium'
+- 'R-008: The equivalence proof no longer observes the live page, so a future renderer regression that dropped author... |
+  medium | low'
+- 'Accepted risk: the chain diagrams'' accessibility labels are derived from their token lists and the four navigation labels
+  from their headings, both ratified...'
+- 'Unmitigated risk: until CR-001 closes, a commit of this tree stores the source handbook with CRLF under a pin that prevents
+  the repository from ever normalis...'
+- 'Monitoring required: the first hosted workflow run after the change lands, on both legs — the drift step''s exit status
+  and the regeneration command''s presenc...'
+plan_tasks:
+- 'T-001: Inventory the one-sided content across the two published forms | depends on none'
+- 'T-002: Deliver the renderer that produces the published handbook from the source | depends on T-003, T-010'
+- 'T-003: Define the technical approach for the renderer and its drift check | depends on T-010'
+- 'T-004: Verify byte-identical regeneration across repeats and platforms | depends on T-016, T-022'
+- 'T-005: Bring the source handbook into agreement with the recorded resolution list | depends on T-002, T-007'
+- 'T-006: Resolve every inventoried one-sided item under the recorded authored-content test | depends on T-001'
+- 'T-007: Persist the reconciliation resolution list as a named implementation-phase artifact | depends on T-006'
+- 'T-008: Review the resolution list against the pre-change comparison | depends on T-005, T-007'
+- 'T-009: Enumerate the anchor identifier baseline the published handbook exposes today | depends on none'
+- 'T-010: Define the source notation for the published form''s reading affordances | depends on T-009'
+- 'T-011: Record a reviewer verdict on the regenerated published page | depends on T-005, T-009, T-017'
+- 'T-012: Define the raw-markup-line counting rule | depends on T-010'
+- 'T-013: Run the authoring walkthrough on the source notation | depends on T-005, T-010'
+- 'T-014: Report the raw-markup-line count for both revisions of the source handbook | depends on T-005, T-012'
+- 'T-015: Deliver the drift check mode | depends on T-002, T-003'
+- 'T-016: Wire the drift check into the repository''s verification workflow | depends on T-015, and on the external prerequisite
+  in 8.2'
+- 'T-017: Emit the generated-file banner at the top of the published handbook | depends on T-002'
+- 'T-018: Update contributor-facing documentation to instruct regeneration | depends on T-015'
+- 'T-019: Demonstrate the drift failure and the passing case | depends on T-016, T-022'
+- 'T-020: Confirm the change altered no runtime or gate-decision behaviour | depends on T-016, T-018'
+- 'T-021: Publish the release note and closure record | depends on T-004, T-008, T-011, T-013, T-014, T-019, T-020'
+- 'T-022: Define the validation strategy for the approved criteria | depends on T-003'
+facts:
+- 'F-001: The handbook is published as docs/USER-GUIDE.md at 1051 lines and docs/user-guide.html at 1033 lines | Feature request;
+  direct read of both files'
+- 'F-002: docs/user-guide.html declares exactly 21 distinct anchor identifiers: 9 on chapter section elements and 12... |
+  Direct read; every id attribute in the file, enumerated in Appendix B'
+- 'F-003: The same file contains 21 internal link targets whose set is equal to those 21 identifiers, so its internal... |
+  Direct read; every href beginning with a fragment marker'
+- 'F-004: No anchor identifier is the slug of its own heading text under any common slug algorithm; counter-examples... |
+  Direct read; pairwise comparison of each identifier against its heading'
+- 'F-005: The published navigation index carries 9 entries, and 4 of the 9 labels differ from the heading text they p... |
+  Direct read of the navigation block against the chapter headings'
+- 'F-006: Each published chapter carries a label reading "Chapter N", where N is the ordinal already present as a num... |
+  Direct read of both files'
+- 'F-007: The published file carries 14 callout blocks, each opening with a short tag whose text appears nowhere in t... |
+  Direct read of every callout element'
+- 'F-008: The source expresses the same asides as paragraphs opening with a bolded lead-in run; 20 such lines exist | Direct
+  read; count of lines beginning with a bolded run'
+- 'F-009: docs/USER-GUIDE.md contains no link in bracket-and-parenthesis form and no blockquote line | Direct read; pattern
+  search over the whole file returned zero matches for both'
+- 'F-010: The published file carries two chain diagrams, each a row of arrow-separated tokens with exactly one token... |
+  Direct read of both chain elements and their labels'
+- 'F-011: The source carries both chains as fenced blocks with no info string, each holding a single arrow-separated... |
+  Direct read of both fenced blocks'
+- 'F-012: The published file marks comment lines inside code samples with a dedicated span; the source expresses them... |
+  Direct read of both files'
+- 'F-013: One hash character inside a published code sample sits within a single-quoted argument value and is deliber... |
+  Direct read of the quality-scan code sample'
+- 'F-014: .github/workflows/verify.yml declares exactly six jobs: a discovery job, a tests job, two per-verifier matr... |
+  Direct read of the workflow'
+- 'F-015: The tests job renders its check name as a platform-suffixed name over a two-entry matrix covering ubuntu an... |
+  Direct read of the tests job'
+- 'F-016: tests/test_ci_workflow.py asserts that the workflow''s job identifier set equals exactly that six-element set |
+  Direct read, test_job_topology_and_stable_names'
+- 'F-017: The same module asserts that no filename matching the test-file or verifier-file patterns appears anywhere... |
+  Direct read, test_no_curated_file_list'
+- 'F-018: The same module asserts that the workflow''s comment-stripped text contains neither a colour-suppression var...
+  | Direct read, test_environment_and_permission_policy'
+- 'F-019: The workflow''s own header records that the ubuntu tests check is required from the first run, and that the... |
+  Direct read of the workflow header'
+- 'F-020: tests/test_ci_workflow.py asserts that README.md, docs/USER-GUIDE.md, and docs/user-guide.html each contain... |
+  Direct read, DocumentationParity'
+- 'F-021: tests/test_omn_agent.py asserts that docs/user-guide.html, lowercased, contains the name of the data-format... |
+  Direct read, test_user_guide_states_true_dependency_footprint'
+- 'F-022: The published installation chapter carries a paragraph stating that the installed runtime files import that... |
+  Direct read of both installation sections'
+- 'F-023: The published troubleshooting table carries a row for the unresolved-import validation finding; the source... |
+  Direct read of both troubleshooting tables'
+- 'F-024: The docstring of the parity test class in tests/test_ci_workflow.py describes the published handbook as han... |
+  Direct read, class docstring'
+- 'F-025: No proof script under the framework runtime directory reads either handbook file | Direct read; repository-wide
+  search for both handbook filenames returned only run evidence, backlog documen...'
+- 'F-026: The repository has no line-ending attributes file at its root | Direct read; repository-root glob returned no match'
+- 'F-027: The repository has no tools/ directory | Direct read; repository glob returned no match'
+- 'F-028: The source uses level-2 headings with ordinal prefixes 1 to 9 and, additionally, five lettered prefixes und... |
+  Direct read of both heading sets'
+- 'F-029: The published file opens with a title element and a style block and links an external font stylesheet; it d... |
+  Direct read of the file''s first lines'
+- 'F-030: The published footer states that the guide is versioned at docs/USER-GUIDE.md | Direct read of the footer'
+- 'F-031: The published file wraps every table in a container element and marks a subset with a numeric-table class;... |
+  Direct read of all published tables'
+- 'F-032: tests/test_omn_agent.py additionally asserts the packaging manifest''s declared dependency and the same dist...
+  | Direct read, DependencyDeclarationTestCase'
+- 'F-033: The workflow parity test extracts steps by positional index only from the discovery job and the two per-ver... |
+  Direct read, DiscoveryExpression and VerifierAssertionWrapper'
+repository_context:
+  relevant_modules:
+  - 'M-001: tools/render_user_guide.py, the handbook renderer | extension | F-027, S-005'
+  - 'M-002: docs/USER-GUIDE.md, the source handbook | contract-change | F-001, F-009, F-028'
+  - 'M-003: docs/user-guide.html, the published handbook | contract-change | F-002, F-029, F-030'
+  - 'M-004: The tests job of .github/workflows/verify.yml | extension | F-014, F-015, F-033'
+  - 'M-005: The repository line-ending attributes file | operational-impact | F-026, A-002'
+  - 'M-006: tests/test_ci_workflow.py | behavior-change | F-024, S-034'
+  - 'M-007: README.md | extension | F-032, S-014'
+  - 'M-008: tests/test_omn_agent.py dependency-footprint assertions | no-change-verified | F-021, F-032'
+  - 'M-009: The packaging manifest | no-change-verified | F-032, C-003'
+  - 'M-010: The proof-script set under the framework runtime directory | no-change-verified | F-025'
+  - 'M-011: The discovery job, the two per-verifier jobs, and the two fan-in jobs of the verification workflow | no-change-verified
+    | F-014, F-033'
+  relevant_files:
+  - tests/fixtures/user-guide-pre-change.html (added)
+  - docs/user-guide-reconciliation.md (added)
+  - docs/USER-GUIDE.md (modified)
+  - tools/render_user_guide.py (added)
+  - docs/user-guide.html (modified)
+  - docs/user-guide-reconciliation-diff.md (added)
+  - tests/fixtures/user-guide-reconciled.html (added)
+  - .gitattributes (added)
+  - tests/test_render_user_guide.py (added)
+  - .github/workflows/verify.yml (modified)
+  - tests/test_ci_workflow.py (modified)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path
+changed_files:
+- tests/fixtures/user-guide-pre-change.html (added)
+- docs/user-guide-reconciliation.md (added)
+- docs/USER-GUIDE.md (modified)
+- tools/render_user_guide.py (added)
+- docs/user-guide.html (modified)
+- docs/user-guide-reconciliation-diff.md (added)
+- tests/fixtures/user-guide-reconciled.html (added)
+- .gitattributes (added)
+- tests/test_render_user_guide.py (added)
+- .github/workflows/verify.yml (modified)
+- tests/test_ci_workflow.py (modified)
+findings:
+- 'F-001: high | correctness | docs/user-guide-reconciliation.md items 21 and 22; tests/fixtures/user-guide-pre-change.html:582-583;
+  docs/...'
+- 'F-002: medium | maintainability | docs/USER-GUIDE.md (working tree, all 1103 line ends) under the pin at .gitattributes:7'
+- 'F-003: medium | standards | docs/user-guide-reconciliation-diff.md (1331 lines); docs/user-guide-reconciliation.md section
+  2 items 41 a...'
+- 'F-004: medium | standards | docs/user-guide-reconciliation.md item 12, section 1 items 16 to 19, section 2 items 43 to
+  45, section 3 ma...'
+- 'F-005: medium | standards | tests/test_render_user_guide.py:709-830 (CheckMode)'
+- 'F-006: medium | correctness | tools/render_user_guide.py:472-475, 508-510'
+- 'F-007: low | test-adequacy | tests/test_render_user_guide.py:763-822'
+- 'F-008: low | correctness | tools/render_user_guide.py:277-284, 345-385'
+- 'F-009: low | correctness | tools/render_user_guide.py:379-381'
+- 'CR-001: F-002 | The source handbook is committed with the line-ending form every other text file in the repository carries,...
+  | no'
+- 'CR-002: F-009 | A brace-attribute token that no construct consumes fails the render naming its source line, as every other...
+  | no'
+verdicts:
+- 'Decision: approve-with-corrections'
+- 'Rationale: every one of the nine corrections the Review Gate required is closed and was verified at its site and by execution
+  — the two 5a command lines are...'
+- 'Blocking findings outstanding: None identified.'
+- 'Readiness recommendation: this reviewer recommends that the change be accepted at the Review Gate with CR-001 and CR-002
+  carried as non-blocking corrections,...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: input:feature-request
+      term: migration
+    - source: artifact:scope-and-acceptance
+      term: migration
+    - source: artifact:execution-planning
+      term: migration
+    performance:
+    - source: artifact:solution-design-and-risk-assessment
+      term: profile
+    - source: artifact:documentation-and-release-handoff
+      term: profile
+    security:
+    - source: input:feature-request
+      term: token
+    - source: artifact:scope-and-acceptance
+      term: token
+    - source: artifact:execution-planning
+      term: token
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:feature-request
+  - artifact:scope-and-acceptance
+  - artifact:execution-planning
+  - artifact:solution-design-and-risk-assessment
+  - artifact:implementation
+  - artifact:quality-review
+  - artifact:documentation-and-release-handoff
+relevant_skills:
+  scope-and-acceptance:
+    S02: required
+    S07: required
+  execution-planning:
+    S02: required
+    S01: required
+    S07: required
+  solution-design-and-risk-assessment:
+    S01: required
+    S03: required
+    S06: required
+    S09: required
+  implementation:
+    S03: required
+    S06: required
+    S10: required
+    S11: required
+    S12: required
+  quality-review:
+    S07: required
+    S09: required
+    S08: required
+  documentation-and-release-handoff:
+    S11: required
+    S10: required
+    S12: required

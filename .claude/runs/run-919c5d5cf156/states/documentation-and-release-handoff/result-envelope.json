@@ -1,0 +1,113 @@
+{
+  "invocation_id": "inv-919c5d5cf156-06-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-919c5d5cf156/states/documentation-and-release-handoff/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "artifact": "release-note.md",
+    "releaseId": "RN-2026-0006",
+    "communicationBasis": "release-handoff",
+    "declaredReleaseVerdict": "released",
+    "declaredArtifactStatus": "complete",
+    "knownIssueCount": 5,
+    "knownIssues": ["K-001", "K-002", "K-003", "K-004", "K-005"],
+    "knownIssueOrderingSource": "implementation report IR-2026-0006 Residual Risk R-001..R-004, then review package RP-2026-0006 correction requests CR-001/CR-002",
+    "publishedStatementCount": 24,
+    "publishedStatementSources": {
+      "runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md": 9,
+      "runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md": 10,
+      "runs/run-919c5d5cf156/states/scope-and-acceptance/artifacts/scope-definition.md": 4,
+      "runs/run-919c5d5cf156/state.json (gate decision and event records)": 8,
+      "this phase's own documentation review (A-009, labeled as this run's own finding)": 1
+    },
+    "changesByStage5Class": {
+      "breaking": 0,
+      "contract": 0,
+      "operational": 1,
+      "feature": 1,
+      "fix": 0,
+      "improvement": 1,
+      "internal": 1
+    },
+    "audience": "fixed from SCOPE-2026-0004's affected-users statement (framework maintainers who edit governance prose; operators and downstream agents depending on gate decidability) plus the phase's gate ownership (omn-orchestrator at the Closure Gate, omn-tech-lead as release-record recipient); recorded in the artifact as partly inferred because no stakeholder list was supplied",
+    "a009Settlement": {
+      "outcome": "no-impact",
+      "method": "documentation review comparing docs/USER-GUIDE.md and docs/user-guide.html against the four banner-carrying documents: searched both files for the four document names, the banner text, 'governance', and status-banner references (zero occurrences in either file; the four names occur under docs/ only in the adoption-backlog records), and reviewed the guide's section coverage (operator handbook: installation, commands, driving runs, branch lifecycle)",
+      "consequence": "no user-guide update required; explicit no-impact finding recorded in the artifact's Validation Summary; no follow-up returned because no update is needed"
+    },
+    "crDispositionsPersisted": {
+      "CR-001": "disposition recorded in the artifact (Support handoff notes, K-005): implementation directed into conformance with decision record D-002; family 6 now carries the third co-occurrence group (absent-owner qualifier) with qualifier-bearing fixtures, verified by read and post-fix execution per the Review Gate record (omn-qa); V-001 stands as committed",
+      "CR-002": "disposition recorded in the artifact (Support handoff notes, K-005, Backward compatibility notes): bytecode cache under tests/ regenerates per suite execution, untracked, not a repository side effect; banner edits inserted two lines per document (banner plus blank separator)"
+    },
+    "openItemsRouted": [
+      "repair of change-proposal accounting for the four pre-existing unaccounted runs (K-002) - named follow-up owned outside this change, routed via omn-orchestrator",
+      "this run's change proposal at closure (K-002) - Verification Gate closure condition, omn-orchestrator"
+    ],
+    "gateHandling": "the Closure Gate assesses this communication package, so under the Producer Exclusion Rule its decision belongs to omn-orchestrator; no gate was decided by this agent",
+    "qualityChecks": {
+      "checksRun": 60,
+      "checksPassed": 60,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass",
+        "D5": "pass - the four sourceInputs entries are the inputs read; repository files inspected as the delivered change and the two guide files examined for A-009 are described in the artifact with their examination method and are not claimed as fully-read inputs",
+        "D6": "pass - inputDigest sha256:5ede02673422f031b0588204149c96ba and contextDigest sha256:bc0fb4ee128c1855f84c63b3ea12319c copied verbatim from the invocation envelope",
+        "D7": "pass - basis release-handoff, the basis the documentation-and-release-handoff phase declares",
+        "P1": "pass", "P2": "pass - all four sourceInputs read end to end this run, including the full run state store", "P3": "pass",
+        "P4": "pass - the scope definition supports only scope-decision, criteria-definition, and audience statements",
+        "P5": "pass - F-001 and F-002 disagreements published with the delivered account and recorded in K-005 and the support notes",
+        "P6": "pass",
+        "R3": "pass - no contract change declared; compatibility field still answered",
+        "X1": "pass - Stage 5 classified no change breaking", "X2": "pass", "X3": "pass - no compatibility consequence inferred; none needed", "X4": "pass",
+        "R1": "pass", "R2": "pass - 0.1.0+cka-04 in both places",
+        "R4": "pass - verdict released, so not triggered; issues published regardless",
+        "R5": "pass - not rolled back",
+        "R7": "pass - version 0.1.0+cka-04 is valid under the pattern; CKA-04 is the identifier every upstream artifact versions this delivery under, preserved as build metadata; the artifact explains the composition",
+        "V1": "pass - Stage 8 row: every change in scope reached its target environment (Verification Gate A-001..A-008; A-009 settled in this phase)",
+        "V2": "pass - status complete agrees with that row", "V3": "pass - not provisional or blocked",
+        "K1": "pass - IR R-001..R-004 and review CR-001/CR-002 all appear", "K2": "pass", "K3": "pass", "K4": "pass", "K5": "pass - source order kept", "K6": "pass",
+        "R6": "pass", "A1": "pass", "A2": "pass - no fix published", "A3": "pass", "A4": "pass - no prior release note exists to carry from",
+        "A5": "pass - the family-6 conformance correction is published as record reconciliation, not as a user-visible change",
+        "A6": "pass",
+        "A7": "pass - every verdict quoted with omn-qa, the reviewer, or the gate record named",
+        "A8": "pass - the release owner field names the Closure Gate decider; no decision recorded as this agent's own",
+        "A9": "pass - follow-ups routed, none resolved here; the A-009 review is this phase's assigned documentation work, and its no-impact outcome required no repository change",
+        "A10": "pass", "A11": "pass - only the artifact and this envelope were written", "A12": "pass - no command executed; every fact from supplied artifacts and file reads", "A13": "pass - Closure Gate left to omn-orchestrator",
+        "C1": "pass", "C2": "pass - no security fix in this change",
+        "C3": "pass - no model, vendor, or agent-runtime name appears; paths written relative to the framework payload directory; the source review referred to as the adoption review dated 2026-08-27",
+        "C4": "pass", "C5": "pass", "C6": "pass"
+      }
+    },
+    "notMachineCheckable": {
+      "N1": "judged met - every behavior statement describes the delivered five-file change as the gates verified it, including the post-review family-6 conformance the Review Gate record establishes; nothing is described from design or plan intent alone",
+      "N2": "judged met - no prior release content existed to carry forward; the one staleness candidate (the user guide against the four banner additions) was reviewed and found unaffected, and the finding is recorded rather than assumed",
+      "N3": "judged met - the reader-visible surface is one feature (the pinned checks in CI), one improvement (the four banners), and the operational cautions; nothing internal is promoted, the additive change is not inflated, and the five known issues travel with it at full size"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    "agents/omn-documentation/examples.md",
+    "runs/run-919c5d5cf156/states/documentation-and-release-handoff/invocation-envelope.json",
+    "runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md",
+    "runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md",
+    "runs/run-919c5d5cf156/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "runs/run-919c5d5cf156/state.json",
+    "runs/run-919c5d5cf156/gates/verification-gate/failure-envelope.json",
+    "templates/release-note.md"
+  ],
+  "confidence": 0.93,
+  "declared_side_effects": [
+    "runs/run-919c5d5cf156/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "runs/run-919c5d5cf156/states/documentation-and-release-handoff/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

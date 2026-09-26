@@ -261,6 +261,89 @@ class EdgeCaseTestCase(unittest.TestCase):
         json.dumps(payload)  # must not raise
 
 
+class ReArmedGateAndSupersededStepTestCase(unittest.TestCase):
+    """A phase re-entered by an authorised rollback and the gate it re-armed render in
+    every view: the plain table and the tree name both, and the JSON view carries the
+    `rollback` block on the step and the `decision_history` on the gate."""
+
+    RUN_ID = "run-rendertest02"
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="fr-render-test-"))
+        self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
+        self.store = se.StateStore.create(
+            self.tmp / self.RUN_ID, run_id=self.RUN_ID, command_id="implement",
+            workflow_id="implement-feature", workflow_version="1.0.0",
+            runtime_version="0.5.0", input_digest="sha256:bbb", inputs=[])
+        step = se.new_work_item(
+            run_id=self.RUN_ID, workflow_id="implement-feature", state_id="implementation",
+            work_type="state", owner_agent_id="omn-dev-1-implement", phase_index=4,
+            gate=None, artifact=None, depends_on=[])
+        step.update({"status": se.PENDING, "eligible": True, "queue_status": "Ready",
+                     "attempt": 1,
+                     "supersessions": [{"authorisation_id": "RB-run-rendertest02-review-gate-01",
+                                        "gate": "Review Gate", "attempt": 1,
+                                        "completion": {"artifact_path": "x",
+                                                       "artifact_digest": "sha256:1"}}]})
+        self.store.add_item(step)
+        gate_item = se.new_work_item(
+            run_id=self.RUN_ID, workflow_id="implement-feature", state_id="Review Gate",
+            work_type="gate", owner_agent_id=None, phase_index=5, gate=None, artifact=None,
+            depends_on=[])
+        self.store.add_item(gate_item)   # pending, re-armed
+        self.store.add_gate({
+            "gate": "Review Gate", "closes_state": "quality-review",
+            "owner_roles": ["omn-dev-2-reviewer", "omn-qa"],
+            "producer_agent": "omn-dev-2-reviewer", "decision": None, "owner_role": None,
+            "decided_by": None, "rationale": None, "evidence_ref": None, "decided_at": None,
+            "decision_history": [{"decision": "rejected", "owner_role": "omn-qa",
+                                  "decided_by": "qa", "decided_at": "2026-09-06T09:05:36Z",
+                                  "superseded_by": "RB-run-rendertest02-review-gate-01"}],
+        })
+        self.store.save()
+
+    def test_table_and_tree_name_the_supersession_and_the_re_arm(self):
+        for lines in (fr.state_table(self.store), fr.render_tree(self.store, color=False)):
+            step_line = next(l for l in lines if "implementation" in l)
+            self.assertIn("attempt 1 superseded under RB-run-rendertest02-review-gate-01",
+                          step_line)
+            # the step line now also names the gate in its supersession suffix, so the
+            # gate's own row is the one without it
+            gate_line = next(l for l in lines if "Review Gate" in l and "superseded" not in l)
+            self.assertIn("omn-dev-2-reviewer, omn-qa", gate_line)
+            self.assertIn("re-armed after rejected by omn-qa", gate_line)
+
+    def test_json_carries_rollback_block_and_decision_history(self):
+        payload = fr.state_json(self.store)
+        step = next(s for ph in payload["phases"] for s in ph["steps"])
+        gate = next(g for ph in payload["phases"] for g in ph["gates"])
+        self.assertEqual(step["rollback"], {
+            "gate": "Review Gate",
+            "authorisation_id": "RB-run-rendertest02-review-gate-01",
+            "superseded_attempt": 1})
+        self.assertEqual((step["status"], step["eligible"], step["attempt"]),
+                         ("pending", True, 1))
+        self.assertEqual((gate["status"], gate["decision"]), ("pending", None))
+        self.assertEqual(gate["decision_history"], [{
+            "decision": "rejected", "owner_role": "omn-qa", "decided_by": "qa",
+            "decided_at": "2026-09-06T09:05:36Z",
+            "superseded_by": "RB-run-rendertest02-review-gate-01"}])
+        json.dumps(payload)
+
+    def test_steps_without_supersessions_carry_no_rollback_key(self):
+        plain = se.new_work_item(
+            run_id=self.RUN_ID, workflow_id="implement-feature", state_id="scope",
+            work_type="state", owner_agent_id="omn-product-owner", phase_index=1,
+            gate=None, artifact=None, depends_on=[])
+        self.store.add_item(plain)
+        payload = fr.state_json(self.store)
+        scope = next(s for ph in payload["phases"] for s in ph["steps"]
+                     if s["state_id"] == "scope")
+        self.assertNotIn("rollback", scope)
+        gate = next(g for ph in payload["phases"] for g in ph["gates"])
+        self.assertIn("decision_history", gate)
+
+
 class StateJsonTestCase(_StoreFixture):
     def test_schema_and_shape(self):
         payload = fr.state_json(self.store)

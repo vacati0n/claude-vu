@@ -1,5 +1,7 @@
 # Rule Engine Specification
 
+Status: specification — not implemented — executable counterpart: `runtime/recovery_policy.py` and the run-state model.
+
 ## Purpose
 
 Define a deterministic Rule Engine that validates outputs from every agent before output is accepted, merged, or released.

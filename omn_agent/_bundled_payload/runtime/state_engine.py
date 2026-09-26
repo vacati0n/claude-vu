@@ -44,6 +44,23 @@ canonical set from `config/progress-model.md`; blocked reasons are the open set 
 `config/task-queue.md`, which permits new reason codes provided they map onto the canonical
 lifecycle.
 
+Terminality and authorised re-entry
+-----------------------------------
+`completed` and `failed` are terminal for every automatic purpose: no scheduler, retry, or
+replay path leaves either. Exactly two human-authorised transitions do, and both are recorded
+in the tables below like any other pair so that `verify_multi_phase.py` can replay them:
+
+    state  completed -> pending   trigger `superseded`           (a rollback re-enters the phase)
+    gate   failed    -> pending   trigger `rollback_authorised`  (the rejecting gate is re-armed)
+
+`superseded` is additionally engine-checked: `transition()` refuses it unless the caller
+supplies a supersession record (`fields={"supersession": {"authorisation_id": ...}}`), and
+it moves the item's prior `completion` block, unmodified, into the append-only
+`supersessions` list together with that record. Attempt 1's artifact is therefore never
+rewritten by a re-entry; the next attempt writes elsewhere and `completion` follows it. Only
+`framework_runtime.py`'s `rollback` command constructs the record, after the owner-role and
+budget checks it shares with `gate`.
+
 `retrying` carries `available_at`: the instant the work item becomes dispatchable again.
 `config/task-queue.md` distinguishes `Retrying` from `Waiting` by history rather than by
 eligibility -- a retrying task has already executed -- so the two cannot be folded together
@@ -92,8 +109,9 @@ REASON_CODES = frozenset({
 
 # Legal transitions, per work type. Every key is (from_status, to_status); the value is the
 # trigger recorded in the transition log. Any pair absent from the table for that work type
-# is forbidden, which is what makes terminal statuses terminal: no key leaves `completed`
-# or `failed` in either table.
+# is forbidden, which is what makes terminal statuses terminal: the only keys leaving
+# `completed` or `failed` are the two authorised re-entry pairs named in `AUTHORISED_EXITS`,
+# and one of them is refused by `transition()` unless a supersession record accompanies it.
 TRANSITIONS = {
     # A state work item is executed by an agent through the invocation gateway, so it must
     # pass through a lease and an invocation before it can complete.
@@ -114,6 +132,9 @@ TRANSITIONS = {
         (RETRYING, FAILED): "retry_budget_exhausted",
         (BLOCKED, PENDING): "blocker_cleared",
         (BLOCKED, FAILED): "blocker_terminal",
+        # An authorised rollback re-enters a committed phase as a new attempt. The pair is
+        # legal only with a supersession record; see `transition()`.
+        (COMPLETED, PENDING): "superseded",
     },
     # A gate is an explicit control state, not an invocation: it is committed by a recorded
     # decision, so it never leases and never runs. `config/execution-engine.md` requires
@@ -126,7 +147,17 @@ TRANSITIONS = {
         (BLOCKED, COMPLETED): "decision_approved",
         (BLOCKED, FAILED): "decision_rejected",
         (BLOCKED, PENDING): "blocker_cleared",
+        # A rejected gate is re-armed on the same work item once a rollback is authorised.
+        # Its decision returns to null and the rejection moves into `decision_history`.
+        (FAILED, PENDING): "rollback_authorised",
     },
+}
+
+# The only transitions that leave a terminal status, per work type. `verify_multi_phase.py`
+# M4 and M13 read this rather than restating it, so the two cannot disagree.
+AUTHORISED_EXITS = {
+    "state": {(COMPLETED, PENDING): "superseded"},
+    "gate": {(FAILED, PENDING): "rollback_authorised"},
 }
 
 
@@ -243,6 +274,10 @@ def new_work_item(*, run_id: str, workflow_id: str, state_id: str, work_type: st
         "failure_detail": None,
         "guards": [],
         "completion": None,
+        # Append-only. Each entry is a prior attempt's `completion` block, moved here
+        # unmodified by an authorised `superseded` transition together with the
+        # authorisation that superseded it. Never rewritten, never pruned.
+        "supersessions": [],
         "replays": [],
         "created_at": now(),
         "updated_at": now(),
@@ -361,7 +396,12 @@ class StateStore:
         """Apply one guarded status transition and persist it.
 
         Raises `TransitionError` when the pair is absent from the table for this work type,
-        which is how terminal statuses are enforced: nothing leaves `completed` or `failed`.
+        which is how terminal statuses are enforced: nothing leaves `completed` or `failed`
+        except the two authorised re-entry pairs in `AUTHORISED_EXITS`, and the `superseded`
+        pair is refused unless `fields` carries a supersession record with a non-empty
+        `authorisation_id`. When it does, the item's prior `completion` block moves unmodified
+        into `supersessions` beside that record, so the committed evidence of the superseded
+        attempt stays on the item and attempt 1's artifact is never rewritten.
         """
         frm = item["status"]
         table = TRANSITIONS[item["work_type"]]
@@ -377,7 +417,35 @@ class StateStore:
                 f"forbidden transition {frm} -> {to_status} for {item['work_type']} work item "
                 f"{item['work_item_id']}; legal from {frm}: {legal or 'none (terminal)'}")
 
-        item.update(fields or {})
+        fields = dict(fields or {})
+        supersession = None
+        if table[(frm, to_status)] == "superseded":
+            supersession = fields.pop("supersession", None)
+            if not isinstance(supersession, dict) or not supersession.get("authorisation_id"):
+                raise TransitionError(
+                    f"transition {frm} -> {to_status} (superseded) for work item "
+                    f"{item['work_item_id']} requires a supersession record carrying an "
+                    f"authorisation_id; a committed phase is re-entered only under a "
+                    f"recorded rollback authorisation")
+        elif "supersession" in fields:
+            raise TransitionError(
+                f"a supersession record accompanies transition {frm} -> {to_status}, which "
+                f"is not the superseded pair")
+
+        if supersession is not None:
+            item.setdefault("supersessions", []).append({
+                **supersession,
+                "attempt": item.get("attempt", 0),
+                "superseded_at": now(),
+                "completion": item.get("completion"),
+            })
+            fields.setdefault("completion", None)
+            fields.setdefault("eligible", False)
+            fields.setdefault("guards", [])
+            fields.setdefault("lease_expires_at", None)
+            fields.setdefault("last_worker_id", None)
+
+        item.update(fields)
         item["status"] = to_status
         item["updated_at"] = now()
         item["queue_status"] = queue_status(item)

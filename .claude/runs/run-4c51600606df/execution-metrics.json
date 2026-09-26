@@ -1,0 +1,280 @@
+{
+  "schema": "framework.runtime/execution-metrics.v1",
+  "task_id": "run-4c51600606df",
+  "workflow": "implement-feature v1.0.0",
+  "runtime_version": "0.5.0",
+  "computed_at": "2026-09-08T06:59:12Z",
+  "total_duration": {
+    "wall_clock_seconds": 248725.0,
+    "wall_clock": "69h05m25s",
+    "agent_active_seconds": 45488.0,
+    "agent_active": "12h38m08s"
+  },
+  "phases_executed": {
+    "declared": 6,
+    "completed": 6,
+    "blocked": 0
+  },
+  "agents_executed": {
+    "invocations": 9,
+    "distinct": 6,
+    "by_agent": {
+      "omn-product-owner": 1,
+      "planner": 1,
+      "architect": 2,
+      "omn-dev-1-implement": 2,
+      "omn-dev-2-reviewer": 2,
+      "omn-documentation": 1
+    }
+  },
+  "skills_executed": {
+    "required_reads": 20,
+    "not_triggered": 0
+  },
+  "parallel_groups": {
+    "count": 5,
+    "max_width": 2,
+    "groups": [
+      [
+        "scope-and-acceptance",
+        "execution-planning"
+      ],
+      [
+        "solution-design-and-risk-assessment"
+      ],
+      [
+        "implementation"
+      ],
+      [
+        "quality-review"
+      ],
+      [
+        "documentation-and-release-handoff"
+      ]
+    ]
+  },
+  "context_loads": {
+    "members_declared": 99,
+    "members_required": 48
+  },
+  "repeated_context_loads": {
+    "files": 16,
+    "by_path": {
+      "workflows/workflow-gate-matrix.md": 3,
+      "context/product-context.md": 9,
+      "context/technical-context.md": 9,
+      "context/release-context.md": 9,
+      "templates/technical-design.md": 6,
+      "templates/architecture-decision-record.md": 2,
+      "memory/architecture.md": 2,
+      "dependency-map.md": 2,
+      "templates/implementation-report.md": 5,
+      "skills/dotnet/engineering-playbook.md": 2,
+      "skills/error-handling/error-handling-strategy.md": 3,
+      "skills/testing/testing-strategy.md": 4,
+      "skills/architecture/clean-architecture-checklist.md": 4,
+      "templates/review-package.md": 3,
+      "skills/security/secure-engineering.md": 2,
+      "skills/performance/performance-engineering.md": 2
+    }
+  },
+  "validation_runs": {
+    "passed": 8,
+    "failed": 1
+  },
+  "gate_decisions": {
+    "decided": 6,
+    "auto_policy": 0,
+    "rejected": 1
+  },
+  "tokens_or_context_estimate": {
+    "basis": "4 bytes per token; bytes the dispatch asked the agent to read, per envelope",
+    "legacy_bytes": 2056654,
+    "progressive_bytes": 944391,
+    "legacy_tokens": 514163,
+    "progressive_tokens": 236097,
+    "savings_pct": 54.1
+  },
+  "per_phase": [
+    {
+      "phase": "scope-and-acceptance",
+      "agent": "omn-product-owner",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 506.0,
+      "context_members_declared": 14,
+      "context_members_required": 6,
+      "skills": {
+        "required": 2,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 64470,
+        "modules_core_bytes": 32663,
+        "slice_all_bytes": 114384,
+        "slice_required_bytes": 12303,
+        "inputs_bytes": 5371,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 0,
+        "fixed_bytes": 32591,
+        "legacy_estimate_bytes": 216816,
+        "progressive_estimate_bytes": 82928,
+        "legacy_estimate_tokens": 54204,
+        "progressive_estimate_tokens": 20732,
+        "savings_pct": 61.8
+      }
+    },
+    {
+      "phase": "execution-planning",
+      "agent": "planner",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 812.0,
+      "context_members_declared": 12,
+      "context_members_required": 7,
+      "skills": {
+        "required": 3,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 85855,
+        "modules_core_bytes": 40271,
+        "slice_all_bytes": 106701,
+        "slice_required_bytes": 37996,
+        "inputs_bytes": 5371,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 0,
+        "fixed_bytes": 30312,
+        "legacy_estimate_bytes": 228239,
+        "progressive_estimate_bytes": 113950,
+        "legacy_estimate_tokens": 57059,
+        "progressive_estimate_tokens": 28487,
+        "savings_pct": 50.1
+      }
+    },
+    {
+      "phase": "solution-design-and-risk-assessment",
+      "agent": "architect",
+      "status": "completed",
+      "dispatches": 2,
+      "attempts_charged": 2,
+      "agent_active_seconds": 1842.0,
+      "context_members_declared": 17,
+      "context_members_required": 7,
+      "skills": {
+        "required": 4,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 108943,
+        "modules_core_bytes": 50155,
+        "slice_all_bytes": 163177,
+        "slice_required_bytes": 13151,
+        "inputs_bytes": 5371,
+        "upstream_full_bytes": 54958,
+        "upstream_read_first_bytes": 35513,
+        "task_context_bytes": 0,
+        "fixed_bytes": 96575,
+        "legacy_estimate_bytes": 429024,
+        "progressive_estimate_bytes": 200765,
+        "legacy_estimate_tokens": 107256,
+        "progressive_estimate_tokens": 50191,
+        "savings_pct": 53.2
+      }
+    },
+    {
+      "phase": "implementation",
+      "agent": "omn-dev-1-implement",
+      "status": "completed",
+      "dispatches": 2,
+      "attempts_charged": 2,
+      "agent_active_seconds": 5136.0,
+      "context_members_declared": 18,
+      "context_members_required": 9,
+      "skills": {
+        "required": 5,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 66929,
+        "modules_core_bytes": 31354,
+        "slice_all_bytes": 167135,
+        "slice_required_bytes": 19386,
+        "inputs_bytes": 5371,
+        "upstream_full_bytes": 72483,
+        "upstream_read_first_bytes": 31226,
+        "task_context_bytes": 0,
+        "fixed_bytes": 125800,
+        "legacy_estimate_bytes": 437718,
+        "progressive_estimate_bytes": 213137,
+        "legacy_estimate_tokens": 109429,
+        "progressive_estimate_tokens": 53284,
+        "savings_pct": 51.3
+      }
+    },
+    {
+      "phase": "quality-review",
+      "agent": "omn-dev-2-reviewer",
+      "status": "completed",
+      "dispatches": 2,
+      "attempts_charged": 2,
+      "agent_active_seconds": 36067.0,
+      "context_members_declared": 19,
+      "context_members_required": 10,
+      "skills": {
+        "required": 3,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 72323,
+        "modules_core_bytes": 36439,
+        "slice_all_bytes": 172089,
+        "slice_required_bytes": 24340,
+        "inputs_bytes": 5371,
+        "upstream_full_bytes": 41011,
+        "upstream_read_first_bytes": 29513,
+        "task_context_bytes": 0,
+        "fixed_bytes": 94837,
+        "legacy_estimate_bytes": 385631,
+        "progressive_estimate_bytes": 190500,
+        "legacy_estimate_tokens": 96407,
+        "progressive_estimate_tokens": 47625,
+        "savings_pct": 50.6
+      }
+    },
+    {
+      "phase": "documentation-and-release-handoff",
+      "agent": "omn-documentation",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 1125.0,
+      "context_members_declared": 19,
+      "context_members_required": 9,
+      "skills": {
+        "required": 3,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 84385,
+        "modules_core_bytes": 41472,
+        "slice_all_bytes": 173224,
+        "slice_required_bytes": 18788,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 33611,
+        "upstream_read_first_bytes": 14845,
+        "task_context_bytes": 0,
+        "fixed_bytes": 68006,
+        "legacy_estimate_bytes": 359226,
+        "progressive_estimate_bytes": 143111,
+        "legacy_estimate_tokens": 89806,
+        "progressive_estimate_tokens": 35777,
+        "savings_pct": 60.2
+      }
+    }
+  ]
+}

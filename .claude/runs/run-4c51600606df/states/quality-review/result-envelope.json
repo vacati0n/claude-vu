@@ -1,0 +1,113 @@
+{
+  "invocation_id": "inv-4c51600606df-05-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md"
+  ],
+  "structured_output": {
+    "package_id": "RP-2026-0008",
+    "review_reference": "CKA-06 (run run-4c51600606df, quality-review phase, attempt 2 under rollback RB-run-4c51600606df-review-gate-01)",
+    "attempt": 2,
+    "supersedes": {
+      "package_id": "RP-2026-0007",
+      "artifact": "runs/run-4c51600606df/states/quality-review/artifacts/review-package.md",
+      "left_untouched": true,
+      "authorisation_id": "RB-run-4c51600606df-review-gate-01"
+    },
+    "package_status": "complete",
+    "verdict": "approve-with-corrections",
+    "counts": {
+      "findings": {"critical": 0, "high": 1, "medium": 5, "low": 3, "total": 9},
+      "findings_by_status": {"open": 2, "resolved": 7, "accepted-risk": 0},
+      "open_by_severity": {"critical": 0, "high": 0, "medium": 1, "low": 1},
+      "correction_requests": 2,
+      "blocking_correction_requests": 0,
+      "open_questions": 3,
+      "blocking_open_questions": 0
+    },
+    "blocking_findings_outstanding": [],
+    "prior_corrections_verified_closed": {
+      "CR-001-5a-command-lines": "closed; verified: docs/USER-GUIDE.md:442-443, docs/user-guide.html:462-463, reconciled fixture 462-463, record items 21-22 under R2; completeness executed by PreChangeEquivalence over a pre-change fixture byte-identical to HEAD:docs/user-guide.html; recorded as resolved F-001",
+      "record-tidy-up-A": "closed; masthead row in record section 3 under R1 citing the owner's ruling (Q-001); recorded under resolved F-004",
+      "record-tidy-up-B": "closed; item 45 reads 'the anchor link is the more exact route'; items 16-19 and 43-45 cite ratification; chain labels recorded derived, no field added; recorded under resolved F-004",
+      "item-12": "closed; reversed, source's capitalised chain tokens govern under R1, regenerated chain confirmed; recorded under resolved F-004",
+      "CR-003-classified-comparison": "closed; docs/user-guide-reconciliation-diff.md with 51 text and 66 element hunks, all classified, recomputed by test; items 41-42 present; recorded as resolved F-003",
+      "CR-004-isolated-check-mode-tests": "closed; --root DIR and temporary-directory copies; tracked pair and fixtures hashed unchanged across the three test modules; recorded as resolved F-005",
+      "CR-005-unrecognised-heading": "closed; read_block raises SourceError naming the line; four GrammarFailures cases plus the prose negative; recorded as resolved F-006",
+      "CR-006-failing-outcome-purity": "closed; tree_snapshot equality on mismatch, source-only, missing-output and grammar-failure outcomes; recorded as resolved F-007",
+      "CR-007-attribute-context": "closed; escape_attribute on every attribute value; take_attributes rejects quotes, out-of-alphabet identifiers and stray tokens; recorded as resolved F-008",
+      "attempt-2-redesign": "judged sound; reconciled fixture differs from the live page in exactly the five lines of the four passages the runtime fix's handbook change-set row names, with the committed wording on the fixture's side; live checks (page == render of source, banner, 21 anchors, --check writes nothing) stayed live; A-006 proven by recomputation of 117 hunks, not asserted"
+    },
+    "new_findings": {
+      "F-002": "medium, maintainability, open: working-tree docs/USER-GUIDE.md is CRLF on all 1103 line ends under the new -text pin; HEAD and every other text file in the index are LF; no behavioural effect; CR-001 non-blocking",
+      "F-009": "low, correctness, open: take_attributes accepts key=value brace tokens that no construct consumes, silently; CR-002 non-blocking"
+    },
+    "quality_checks_run": 46,
+    "quality_checks_passed": 46,
+    "quality_checks_repaired_before_emission": [
+      {"check": "C5", "failure": "a stray token in the In-scope bullet read as a reference to an undefined Q-004 (the change account's own question); reworded to describe the account's questions by count; the entire check set was re-run and passed"}
+    ],
+    "quality_checks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass",
+      "P2": "pass", "F1": "pass", "F2": "pass", "F3": "pass", "F4": "pass", "F5": "pass",
+      "P3": "pass", "P5": "pass", "P7": "pass",
+      "P1": "pass", "P4": "pass", "P6": "pass", "R1": "pass", "R2": "pass", "R3": "pass",
+      "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass", "E5": "pass",
+      "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+    },
+    "validation_engine": {
+      "command": "python runtime/review_package_validator.py <artifact> --envelope <invocation-envelope>",
+      "result": "PASS",
+      "checks": "31/31 passed (3 declared not-machine-checkable)",
+      "blocking_failures": 0,
+      "correctable_failures": 0,
+      "digest_cross_check": "inputDigest and contextDigest matched the invocation envelope"
+    },
+    "not_machine_checkable_obligations": {
+      "N1": "judged met: every element of the change set was read in full or diffed, every prior correction verified at its site and by execution, the fixture reconstruction checked against the live page and the committed wording, and the classified comparison read entry by entry; the two new defects found are the source's line-ending form under the pin and a silently accepted brace token",
+      "N2": "judged met: every finding cites a scope criterion, a Design or Scope Gate condition, a decision record, a design constraint or a loaded playbook principle",
+      "N3": "judged met: no severity was lowered; the seven prior findings keep the severities the attempt-1 package assigned and are marked resolved on verified closure, and the two new findings take their severity from the Stage 6 table"
+    },
+    "executed_evidence": [
+      "python tools/render_user_guide.py --check -> exit 0",
+      "python -m unittest discover -s tests -p \"test_render_user_guide.py\" -> Ran 74 tests, OK",
+      "python -m unittest discover -s tests -p \"test_ci_workflow.py\" -> Ran 13 tests, OK",
+      "python -m unittest discover -s tests -p \"test_omn_agent.py\" -> Ran 45 tests, OK",
+      "python -m compileall -q tools/render_user_guide.py tests/test_render_user_guide.py -> exit 0",
+      "grep -o 'id=\"[^\"]*\"' docs/user-guide.html | sort -u -> 21, set-identical to the pre-change fixture and Appendix B; 21 fragment targets",
+      "cmp tests/fixtures/user-guide-pre-change.html <(git show HEAD:docs/user-guide.html) -> identical (sha256 cb55daeb...)",
+      "sha256 of docs/USER-GUIDE.md, docs/user-guide.html and both fixtures before and after the test runs -> unchanged",
+      "diff tests/fixtures/user-guide-reconciled.html docs/user-guide.html -> 5 lines (569, 576, 581, 736, 737), the runtime fix's four passages",
+      "git ls-files --eol docs/USER-GUIDE.md docs/user-guide.html -> i/lf w/crlf attr/-text; i/lf w/lf attr/-text",
+      "git diff HEAD --ignore-cr-at-eol --stat -- docs/USER-GUIDE.md -> 199 insertions, 147 deletions (plain: 1103/1051)",
+      "in-memory probes: live page == render(source), twice and under CRLF input; key=value brace tokens accepted silently; authoring walkthrough (chapter, callout, bash sample) rendered with nav entry, eyebrow, tag and comment marking"
+    ],
+    "claimed_not_confirmed": [
+      "operator's full-suite run on this tree: 474 tests, OK (not re-run per dispatch)",
+      "byte identity on the ubuntu leg and on a hosted runner's checkout",
+      "drift fail-and-pass demonstration on the hosted workflow",
+      "proof scripts' verdicts"
+    ],
+    "readiness_recommendation": "accept at the Review Gate with CR-001 and CR-002 non-blocking, CR-001 closing before the commit that lands the pin; omn-qa decides the gate",
+    "out_of_scope_tree_changes_noted_not_reviewed": "runtime modules and omn_agent/ mirrors of the closed runtime fix run-3e6f6a248b99, files of the completed run-79630cb5274d, the implementer-agent contract modules, registry/agents.yaml, templates/implementation-report.md, other test modules, root governance documents, backlog documents under docs/, and docs/USER-GUIDE.md:752-753 (FU-012 of the runtime fix)"
+  },
+  "evidence_refs": [
+    "agents/omn-dev-2-reviewer/system.md",
+    "agents/omn-dev-2-reviewer/identity.md",
+    "agents/omn-dev-2-reviewer/reasoning.md",
+    "agents/omn-dev-2-reviewer/execution.md",
+    "agents/omn-dev-2-reviewer/output.md",
+    "agents/omn-dev-2-reviewer/quality.md",
+    "agents/omn-dev-2-reviewer/examples.md",
+    "runs/run-4c51600606df/states/quality-review/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md",
+    "runs/run-4c51600606df/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

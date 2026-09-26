@@ -394,9 +394,12 @@ CLASS_OPTIONS = {
         "approve the gate and proceed",
         "reject the gate and roll back the evidence it assesses",
         "request additional evidence before deciding"],
+    # "approve an exception and proceed" is deliberately absent: no runtime surface records
+    # such an exception, and an option that names no executable path is a false prescription.
+    # The rollback is the executable path: `rollback` re-enters the producing phase under a
+    # recorded human authorisation and re-arms this gate for a fresh decision.
     "gate-rejection": [
-        "rebuild the rejected evidence and re-submit it to the gate",
-        "approve an exception and proceed",
+        "authorise a rollback: rebuild the rejected evidence and re-submit it to the gate",
         "abort the run"],
     "dependency-failure": [
         "recover the upstream work item that failed",

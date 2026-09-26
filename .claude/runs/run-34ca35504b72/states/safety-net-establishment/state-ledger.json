@@ -2,7 +2,7 @@
   "run_id": "run-34ca35504b72",
   "slice": "vertical-slice-6-qa-execution",
   "runtime_version": "0.5.0",
-  "status": "running",
+  "status": "completed",
   "queue_status": "Executing",
   "command_id": "refactor",
   "workflow_id": "refactor",
@@ -10,12 +10,12 @@
   "state_id": "safety-net-establishment",
   "work_item_id": "run-34ca35504b72::safety-net-establishment",
   "idempotency_key": "sha256:c3f8dd99611c2560dcaac0d662c729e0",
-  "attempt": 1,
+  "attempt": 2,
   "agent_id": "omn-qa",
   "agent_version": "1.0.0",
   "adapter": "host-subagent",
   "dispatch_mode": "native",
-  "invocation_id": "inv-34ca35504b72-02-001",
+  "invocation_id": "inv-34ca35504b72-02-002",
   "input_digest": "sha256:b81549f82159b643e7b59ab4f73ee0b9",
   "context_digest": "sha256:b5595bb4fe87f1067bbee4dd85d57c35",
   "module_load_order": [
@@ -32,6 +32,45 @@
   "result_envelope_path": "runs/run-34ca35504b72/states/safety-net-establishment/result-envelope.json",
   "validator": "validation_report_validator",
   "execution_started_at": "2026-08-27T13:10:29Z",
-  "execution_completed_at": null,
-  "validation": null
+  "execution_completed_at": "2026-09-04T16:06:21Z",
+  "validation": {
+    "result": "pass",
+    "checksRun": 31,
+    "checksPassed": 31,
+    "blockingFailures": 0,
+    "correctableFailures": 0,
+    "notMachineCheckable": 3,
+    "counts": {
+      "sections": 10,
+      "status": "complete",
+      "identifiers": {
+        "AC": 10,
+        "DF": 2,
+        "Q": 2
+      },
+      "tableRows": {
+        "Acceptance Criteria Results": 10,
+        "Defects": 2
+      },
+      "criteria": 10,
+      "defects": 2,
+      "verdict": "pass-with-reservations",
+      "validationBasis": "safety-net",
+      "results": {
+        "met": 1,
+        "not-met": 0,
+        "blocked": 9
+      },
+      "severity": {
+        "critical": 0,
+        "high": 0,
+        "medium": 1,
+        "low": 1
+      }
+    },
+    "undeclaredSideEffects": []
+  },
+  "agent_result_status": "succeeded",
+  "artifact_digest": "sha256:da3b174a7943abd43b1aabd63a3de4f3",
+  "recovery": null
 }

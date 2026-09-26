@@ -6,13 +6,19 @@ other bot findings):
 
 1. collect the feedback from the PR via ``gh``;
 2. reject the gate currently awaiting a decision, carrying the findings as
-   the rejection rationale -- the runtime classifies that as a rollback and
-   the re-dispatched phase carries the feedback forward to its owner agent;
-3. re-dispatch the fix phase (the host-subagent adapter: the host platform
+   the rejection rationale -- the runtime classifies that as ``gate-rejection``
+   with action rollback, but a rollback is a second human decision, not a
+   consequence of the first;
+3. authorise that rollback with the runtime's ``rollback`` command, as the
+   same owner role, naming the task's fix phase as the target: the runtime
+   supersedes the completed fix phase (and every completed phase between it
+   and the gated one) as a new attempt under the same idempotency key,
+   re-arms the gate, and carries the findings forward as ``prior_rejection``;
+4. re-dispatch the fix phase (the host-subagent adapter: the host platform
    runs the registered subagent, this CLI never implements code itself);
-4. on the next invocation -- after the host has run the subagent -- ingest
-   the completion, re-run the pre-PR quality gate, approve the gate on that
-   clean evidence, and push the bound branch so the PR updates.
+5. on the next invocation -- after the host has run the subagent -- ingest
+   the completion, re-run the pre-PR quality gate, approve the re-armed gate
+   on that clean evidence, and push the bound branch so the PR updates.
 
 The command is resumable: round state lives on the task (``fixComments`` in
 task-plan.json), and each invocation reads it plus live runtime state and
@@ -41,6 +47,15 @@ from .taskplan import load_task, save_task
 MAX_RATIONALE_ITEMS = 12
 MAX_RATIONALE_ITEM_LEN = 200
 MAX_RATIONALE_LEN = 4000
+
+# The code-changing phase of each routed workflow: the target a review-comment
+# rollback re-enters. A workflow absent here rolls back to the gated phase
+# itself (the runtime's default target).
+FIX_PHASE_BY_WORKFLOW = {
+    "implement-feature": "implementation",
+    "fix-bug": "fix-implementation",
+    "refactor": "refactor-implementation",
+}
 
 
 def _now() -> str:
@@ -108,6 +123,27 @@ def _awaiting_gate(status: dict) -> dict | None:
 def _dispatchable_step(status: dict) -> dict | None:
     for s in _steps(status):
         if s.get("status") == "pending" and s.get("eligible"):
+            return s
+    return None
+
+
+def _fix_phase(task: dict, status: dict) -> str | None:
+    """The task's fix phase, when the run holds it completed; None lets the
+    runtime default the rollback target to the phase the gate closes."""
+    phase = FIX_PHASE_BY_WORKFLOW.get(task.get("workflow") or "")
+    if not phase:
+        return None
+    step = next((s for s in _steps(status) if s.get("state_id") == phase), None)
+    if step is None or step.get("status") != "completed":
+        return None
+    return phase
+
+
+def _rolled_back_step(status: dict, gate: str) -> dict | None:
+    """The step a rollback past `gate` re-entered, if the runtime shows one."""
+    for s in _steps(status):
+        rb = s.get("rollback") or {}
+        if rb.get("gate") == gate and s.get("status") == "pending":
             return s
     return None
 
@@ -182,6 +218,11 @@ def cmd_pr_fix_comments(args) -> ExitCode:
         stage = state["stage"]
 
     if stage == "rejected":
+        if not state.get("rollback"):
+            early = _authorise_rollback(args, report, target, fw_dir, task,
+                                        tdir, state, run_id)
+            if early is not None:
+                return early
         return _dispatch_fix(args, report, target, fw_dir, task, tdir, state,
                              run_id, wt)
 
@@ -237,10 +278,13 @@ def _start_round(args, report, target, fw_dir, task, tdir, state, run_id,
             hint="pass --owner-role explicitly")
 
     if args.dry_run:
+        fix_phase = _fix_phase(task, status) or gate.get("closes_state") \
+            or "the gated phase"
         report.info("FC-PLAN",
                     f"round {round_no}: would reject gate "
                     f"'{gate['state_id']}' as {role} with {len(fresh)} "
-                    f"finding(s), re-dispatch the fix phase, and record the "
+                    f"finding(s), authorise a rollback to {fix_phase} as the "
+                    f"same role, re-dispatch that phase, and record the "
                     f"feedback under {tdir / 'fix-comments'}")
         report.print()
         return ExitCode.DRY_RUN
@@ -277,13 +321,69 @@ def _start_round(args, report, target, fw_dir, task, tdir, state, run_id,
     return None
 
 
+def _authorise_rollback(args, report, target, fw_dir, task, tdir, state,
+                        run_id) -> ExitCode | None:
+    """Authorise the rollback the rejection classified, as the same role that
+    rejected, targeting the task's fix phase. Returns an exit code to stop on,
+    or None once the runtime shows the fix phase re-entered and the
+    authorisation is recorded on the task."""
+    gate = state["gate"]
+    role = args.owner_role or state.get("ownerRole")
+    status = _status_json(fw_dir, target, run_id)
+    fix_phase = _fix_phase(task, status)
+    argv = ["rollback", "--run-id", run_id, "--gate", gate,
+            "--owner-role", role,
+            "--decided-by", args.decided_by or getpass.getuser(),
+            "--rationale",
+            f"review-comment fix round {state['round']}: rollback to "
+            f"{fix_phase or 'the gated phase'} authorised so the findings in "
+            f"{state.get('findingsFile') or 'the rejection'} are rebuilt against"]
+    if fix_phase:
+        argv += ["--target", fix_phase]
+    _require_approval(f"fix-comments round {state['round']}: authorise rollback "
+                      f"past gate {gate} to {fix_phase or 'the gated phase'}",
+                      tdir, args.approve, task)
+    rc, _ = _invoke(fw_dir, target, argv, report)
+    status = _status_json(fw_dir, target, run_id)
+    step = _rolled_back_step(status, gate)
+    if rc != 0 and step is None:
+        save_task(tdir, task)
+        report.error("FC-ROLLBACK",
+                     f"authorising the rollback past gate '{gate}' failed "
+                     f"(exit {rc}); the gate stays rejected and no phase is "
+                     "dispatchable",
+                     hint=f"inspect with 'omn-agent run {task['ticket']} "
+                          "--show' (the gate's failure envelope names the "
+                          "exact rollback command), then re-run fix-comments")
+        return report.finish(error_code=ExitCode.UNEXPECTED)
+    rb = (step or {}).get("rollback") or {}
+    state["rollback"] = {
+        "authorisationId": rb.get("authorisation_id"),
+        "target": (step or {}).get("state_id") or fix_phase,
+        "supersededAttempt": rb.get("superseded_attempt"),
+        "ownerRole": role,
+    }
+    save_task(tdir, task)
+    if rc != 0:
+        report.info("FC-ROLLBACK",
+                    f"the runtime already shows the rollback past '{gate}' "
+                    "authorised; continuing from it")
+    report.success("FC-ROLLBACK",
+                   f"rollback {rb.get('authorisation_id') or ''} past gate "
+                   f"'{gate}' authorised as {role}: phase "
+                   f"'{state['rollback']['target']}' re-enters as a new attempt "
+                   "carrying the findings")
+    return None
+
+
 def _dispatch_fix(args, report, target, fw_dir, task, tdir, state, run_id,
                   wt) -> ExitCode:
     status = _status_json(fw_dir, target, run_id)
     step = _dispatchable_step(status)
     if step is None:
         report.error("FC-DISPATCH",
-                     "the gate is rejected but no phase became dispatchable",
+                     "the rollback is authorised but no phase became "
+                     "dispatchable",
                      hint=f"inspect with 'omn-agent run {task['ticket']} "
                           "--show'; once a phase is pending, re-run "
                           "fix-comments")
@@ -308,7 +408,7 @@ def _dispatch_fix(args, report, target, fw_dir, task, tdir, state, run_id,
     report.success("FC-DISPATCH",
                    f"phase '{step['state_id']}' dispatched to "
                    f"{step.get('owner_agent_id') or 'its owner agent'} with "
-                   "the findings carried in the rejection")
+                   "the findings carried as the prior rejection")
     report.info("FC-WAIT",
                 f"the host must now run the dispatched subagent, which fixes "
                 f"the findings in worktree '{wt}'; when it is done, re-run "

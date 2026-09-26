@@ -1,0 +1,402 @@
+{
+  "invocation_id": "inv-4c51600606df-06-001",
+  "run_id": "run-4c51600606df",
+  "work_item_id": "run-4c51600606df::documentation-and-release-handoff",
+  "idempotency_key": "sha256:9fac025aeba6b27a9bcc450abbd65c03",
+  "state_id": "documentation-and-release-handoff",
+  "phase_index": 6,
+  "agent_id": "omn-documentation",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-documentation.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-documentation/manifest.yaml",
+    "load_order": [
+      "agents/omn-documentation/system.md",
+      "agents/omn-documentation/identity.md",
+      "agents/omn-documentation/reasoning.md",
+      "agents/omn-documentation/execution.md",
+      "agents/omn-documentation/output.md",
+      "agents/omn-documentation/quality.md",
+      "agents/omn-documentation/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-documentation/system.md": "sha256:407f35d95b5e232c7d87d7740a942844",
+      "agents/omn-documentation/identity.md": "sha256:e40e9fd9da20ae31f5af17d3cc97fcf2",
+      "agents/omn-documentation/reasoning.md": "sha256:11b286235d28b0bc358674c5b9357736",
+      "agents/omn-documentation/execution.md": "sha256:0077338ee3cbe3eee246e3556f9da205",
+      "agents/omn-documentation/output.md": "sha256:9e0c56ac978b9695f13668e209f8e2e4",
+      "agents/omn-documentation/quality.md": "sha256:972fe80aafbde6b6f8142b6dbd97e081",
+      "agents/omn-documentation/examples.md": "sha256:baead714ded57fbb1d36b103b957ee78"
+    },
+    "capabilities": [
+      "documentation",
+      "release-communication"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "validation-report",
+      "review-package",
+      "deployment-status",
+      "scope-definition",
+      "technical-design",
+      "execution-plan",
+      "bug-analysis",
+      "monitoring-health-record",
+      "final-change-summary",
+      "stakeholder-list",
+      "verification-report",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "closure-context",
+      "communication-requirements",
+      "existing-documentation",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "review-package",
+        "reference": "runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md",
+        "text": "```yaml\nreviewPackage:\n  packageId: RP-2026-0008\n  reviewReference: CKA-06 (run run-4c51600606df, quality-review phase, attempt 2 under rollback RB-run-4c51600606df-review-gate-01)\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-06-feature-request.md\n    - type: implementation-report\n      reference: runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md\n    - type: design-reference\n      reference: runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n    - type: design-reference\n      reference: runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-007.md\n    - type: design-reference\n      reference: runs/run-4c51600606df/states/scope-and-acceptance/artifacts/scope-definition.md\n    - type: design-reference\n      reference: runs/run-4c51600606df/run-ledger.json (the recorded Scope, Planning and Design Gate decisions)\n    - type: design-reference\n      reference: runs/run-4c51600606df/states/quality-review/artifacts/review-package.md (the superseded attempt-1 package, this agent's prior finding set)\n    - type: code-diff\n      reference: working-tree change set against HEAD for the eleven files the change account declares\n    - type: test-evidence\n      reference: inline\n  producedBy: omn-dev-2-reviewer\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: approve-with-corrections\n  inputDigest: sha256:6d3b23ac6351be0d29db5f4d85fd6227\n  contextDigest: sha256:6c80d27d96ba7355acade02b6a08f0bd\n```\n\n## Metadata\n\n- Review ID: RP-2026-0008\n- Reviewer: omn-dev-2-reviewer\n- Change under review: CKA-06, delivered by implementation report IR-2026-0009 (attempt 2 of the implementation phase, superseding IR-2026-0007 under rollback RB-run-4c51600606df-review-gate-01) \u2014 the handbook renderer `tools/render_user_guide.py`, the regenerated published handbook `docs/user-guide.html`, the reconciled source handbook `docs/USER-GUIDE.md`, the reconciliation record `docs/user-guide-reconciliation.md`, the recorded classified comparison `docs/user-guide-reconciliation-diff.md`, the two frozen fixtures `tests/fixtures/user-guide-pre-change.html` and `tests/fixtures/user-guide-reconciled.html`, the line-ending pin `.gitattributes`, one drift-check step in the tests job of `.github/workflows/verify.yml`, the renderer test module `tests/test_render_user_guide.py`, and the corrected parity-class docstring in `tests/test_ci_workflow.py`; this is the re-review after the Review Gate rejection of 2026-09-06, which required nine corrections before re-review; ticket CKA-06 traces to recommendation R7 of the adoption review dated 2026-08-27\n- Review date: 2026-09-08\n\n## Review Scope\n\n- In scope: the eleven files of the declared change set, each read in full or diffed against HEAD \u2014 the renderer in full (1034 lines), the test module in full (959 lines, eleven test classes), the reconciliation record in full, the recorded comparison in full (51 visible-text and 66 element hunks, every entry read), the content diff of the source handbook against HEAD, the pre-change fixture against the committed page, the reconciled fixture against the live page, the attributes file, the workflow step, the docstring; closure of each of the nine corrections the Review Gate required, verified at its site and by execution where a command reaches it; the attempt-2 redesign of the equivalence proof \u2014 whether the reconciled fixture is a faithful reconstruction of the page as regenerated at reconciliation time, whether the checks that must stay live stayed live, and whether the one-sided-content criterion A-006 is proven rather than asserted; conformance to decision records D-001, D-007 and D-008 as amended by the Design Gate's six conditions, to inline decisions D-002 to D-006, D-009 and D-010, to the fifteen design constraints, to the Scope Gate's authored-versus-derived rule and the product owner's Review Gate rulings, and to the acceptance criteria the scope routes to review (A-005, A-006, A-007, A-008, A-009, A-011, A-012); the change account's own claims (change set C-001 to C-011, evidence T-001 to T-016, deviations V-001 to V-010, risks R-001 to R-008, its four open questions, including the one addressed to this reviewer); the plan's reviewer-owned authoring walkthrough, re-executed in memory against the corrected renderer; framework paths in this package are written relative to the framework payload directory, product paths as they stand at the repository root\n- Out of scope: the full repository suite by discovery, which the dispatch instructs this review not to re-run and which the operator ran on this exact tree (474 tests, none failing) \u2014 recorded here as claimed, not confirmed; execution on the second platform of the verification matrix and on a hosted runner's checkout (criteria A-003, A-004, A-010), which no command in this environment performs, so every check here ran on one Windows host with `core.autocrlf=true`; validation of acceptance criteria and release thresholds, the proof scripts' verdicts and the definition-of-done judgement, which belong to omn-qa at the Verification Gate; the raw-markup counting rule and count (A-013, omn-qa); the contributor instruction in `README.md` (A-014, omn-documentation) and the closure record; the readability judgement on the regenerated page beyond the structural walkthrough; the separately closed runtime fix run-3e6f6a248b99 (all gates approved) and the completed run-79630cb5274d, whose files share this tree and are not attributed to this change \u2014 in particular the old \"path rule\" wording at `docs/USER-GUIDE.md:752-753`, that fix's follow-up item FU-012, is not counted here; the run's move from runtime 0.5.0 to 0.6.0 and attempt 2's new idempotency key, which the architect ruled expected payload-binding behaviour and which is not a finding; and the unrelated working-tree modifications left by concurrent runs \u2014 runtime modules, the implementer-agent contract modules, `registry/agents.yaml`, `templates/implementation-report.md`, the bundled payload mirrors under `omn_agent/`, other test modules, the root governance documents and the backlog documents under `docs/` \u2014 noted, not reviewed, and nothing in them attributed to this change\n- Evidence reviewed: the feature request; implementation report IR-2026-0009 in full; the technical design's constraints (4.3), selected approach and decisions (5.3, 5.4), operational considerations, test-strategy focus areas and Appendix B anchor baseline; decision record D-007's context, decision, alternatives and consequences; scope definition SCOPE-2026-0013 in full; the run ledger's recorded Scope, Planning and Design Gate decisions with their conditions, and the Review Gate rejection rationale carried in the envelope as data; the superseded attempt-1 package RP-2026-0007 in full, as this agent's prior finding set; `tools/render_user_guide.py` in full; `tests/test_render_user_guide.py` in full; `docs/user-guide-reconciliation.md` in full; `docs/user-guide-reconciliation-diff.md` in full, every hunk's two sides and classification read against the record; `git diff HEAD --ignore-cr-at-eol -- docs/USER-GUIDE.md` in full (199 insertions, 147 deletions) alongside the plain `git diff HEAD` figures (1103 insertions, 1051 deletions); `git diff HEAD -- .github/workflows/verify.yml tests/test_ci_workflow.py`; `.gitattributes` in full with `git check-attr text` and `git ls-files --eol` on both handbook paths; `git show HEAD:docs/user-guide.html` compared byte for byte with the pre-change fixture; the reconciled fixture compared line by line with the live page, and the differing lines compared with the committed source's wording of the same passages and with the pre-change page; the runtime fix's change-set row for the handbook and its Closure Gate event, read only to confirm which passages that fix edited; `skills/testing/testing-strategy.md` and `skills/security/secure-engineering.md` as the standards applied; the review-package template, the reviewer module set and the machine-decidable rules of `runtime/review_package_validator.py`; and the executed commands and in-memory probes recorded under Test Adequacy Assessment\n\n## Findings\n\n| ID | Severity | Category | Location | Requirement | Finding | Correction Request | Status |\n|---|---|---|---|---|---|---|---|\n| `F-001` | high | correctness | `docs/user-guide-reconciliation.md` items 21 and 22; `tests/fixtures/user-guide-pre-change.html:582-583`; `docs/USER-GUIDE.md:442-443` | Scope acceptance criterion A-006 (every item of authored prose, table or code sample present in exactly one file carries a recorded resolution); Design Gate condition restating the equivalence check | The two 5a code-sample command lines with their comments \u2014 `omn-agent pr fix-comments PROJ-42 -t ./my-repo` and `omn-agent update PROJ-42 -t ./my-repo`, each with its \"later:\" comment \u2014 were dropped from the regenerated page with no record at attempt 1 and made criterion A-006 unmet. They are now in the source's 5a sample, in the regenerated page (lines 462-463) and in the reconciled fixture, matching the pre-change page's lines 582-583 word for word (the alignment spaces before the comment differ, which the normalised comparison collapses); record items 21 and 22 resolve them as merged under rule R2 and name the gate finding; the record's completeness statement is now executed rather than asserted, by `PreChangeEquivalence` over the frozen pre-change fixture, which this review confirmed byte-identical to the committed page (sha256 cb55daeb\u2026); the mechanical check that would have caught the omission is the recorded-hunk comparison \u2014 every visible-text and element hunk between the two fixtures must appear in order, at its offset, with a classification that resolves \u2014 together with the survival test on the two lines. Closed | None identified. | resolved |\n| `F-002` | medium | maintainability | `docs/USER-GUIDE.md` (working tree, all 1103 line ends) under the pin at `.gitattributes:7` | Decision record D-007 as amended at the Design Gate \u2014 the `-text` pin exists so that the committed bytes are the bytes on every platform, and the gate accepted it against the recorded repository baseline of LF-committed files under `core.autocrlf=true`; the repository's committed convention, in which every one of the 1427 text files in the index is stored LF | The working-tree source carries CRLF on every one of its 1103 line ends while the committed revision carries LF on all 1051, so `git ls-files --eol` reports `i/lf w/crlf attr/-text` for the source against `i/lf w/lf attr/-text` for the page. The pin this change adds disables the normalisation that would otherwise restore LF at commit, so the CRLF form would be committed verbatim and the repository's own setting could never repair it afterwards. Consequences: the plain diff of the source is 1103 insertions against 1051 deletions for what is a 199-against-147 content change, so the reconciliation edit cannot be reviewed from the diff without a carriage-return-ignoring flag; the source would become the only text file in the index not stored LF; and a future edit from an LF platform risks a mixed-ending file that the pin also preserves. No behaviour is affected \u2014 the renderer normalises its input, a render of the CRLF source equals a render of the LF form (`Determinism` and this review's probe), check mode exits zero, and neither fixture nor the page carries a carriage return. Attempt 1's review observed the source at `w/lf`, so the conversion arrived with a later edit to the file; the change account states the byte form of both fixtures and of the output but not of the source | `CR-001` | open |\n| `F-003` | medium | standards | `docs/user-guide-reconciliation-diff.md` (1331 lines); `docs/user-guide-reconciliation.md` section 2 items 41 and 42 | Design Gate condition restating the equivalence check: a recorded, classified normalised comparison with no hunk left unclassified | At attempt 1 the comparison was described but not recorded and two source-only lead-in sentences were missing from section 2. The comparison now exists as a reachable artifact: 51 visible-text hunks and 66 element-and-class hunks between the two frozen fixtures, each entry carrying its offsets, both sides and one or more classifications that resolve to a record row, a section-3 wording row, an ordering entry or an enumerated derived construct; `PreChangeEquivalence` recomputes both streams with the same functions and fails on any unrecorded, misplaced, altered or unclassified hunk, and rejects the `defect` classification outright. This review read every entry against the record and found each classification honest \u2014 every pre-change segment on a minus side is either present in reworded form on the plus side, cited to a merged or rendered item, or cited to a ratified drop. The lead-in sentences are items 41 and 42, reached by hunks T-19 and E-20 and by T-25 and E-25. Closed | None identified. | resolved |\n| `F-004` | medium | standards | `docs/user-guide-reconciliation.md` item 12, section 1 items 16 to 19, section 2 items 43 to 45, section 3 masthead and 5a rows | Scope Gate condition one (the authored-versus-derived rule applied item by item, unsettled items escalated rather than decided by the implementer) | At attempt 1 the masthead strapline was dropped and the source's chain-token wording changed before the owner ruled. omn-product-owner has now ruled at the Review Gate and the record carries the rulings: the strapline is the same fact in divergent wording and sits in section 3 under R1 citing the ruling; items 16 to 19 and 43 to 45 each cite the owner's ratification of the drop, and `test_no_dropped_item_is_left_unratified` enforces that every drop is ratified or escalated; the chain accessibility labels are recorded as derived presentation under the ruling with no label field added \u2014 `chain_label` derives the text from the token list and `ChainBlock` carries tokens only; item 12 is reversed so the source's capitalised tokens govern under R1 \u2014 the regenerated chain reads `Jira \u2192 Plan \u2192 Branch (worktree) \u2192 Implement \u2192 Validate \u2192 Push \u2192 PR \u2192 Review` with the lowercase forms recorded as superseded wording; item 45's rationale reads that the anchor link is the more exact route. Closed | None identified. | resolved |\n| `F-005` | medium | standards | `tests/test_render_user_guide.py:709-830` (`CheckMode`) | `skills/testing/testing-strategy.md`, principle \"Keep tests deterministic and isolated\" | At attempt 1 two check-mode tests rewrote the tracked handbook pair in place. Every check-mode test now copies the pair into a temporary directory and drives the tool through the new `--root DIR` parameter; the mismatch, source-only, missing-output and grammar-failure tests write only inside that copy, and every test in the class asserts the tracked pair's bytes and modification times unchanged. This review hashed the tracked pair and both fixtures before and after the three test modules ran and found all four digests unchanged. Closed | None identified. | resolved |\n| `F-006` | medium | correctness | `tools/render_user_guide.py:472-475, 508-510` | Inline design decision D-010 and the design's error-handling strategy (a source file that violates the notation grammar fails the render, naming the source line) | At attempt 1 a level-2 heading without an ordinal and any level-4 heading were emitted as paragraph prose. A heading-shaped line that no heading form matched now raises `SourceError` naming its line in `read_block`, so a level-2 heading without an ordinal, a level-4 heading, a second title and a heading inside a callout each fail the render; `GrammarFailures` exercises all four with the line number asserted, plus the negative case that `#42` in prose stays prose, and `CheckMode` shows the failure exits two from the command line naming the source line. Closed | None identified. | resolved |\n| `F-007` | low | test-adequacy | `tests/test_render_user_guide.py:763-822` | Design constraint C-014 and inline decision D-009 (check mode writes nothing to the working tree on either outcome) | At attempt 1 the writes-nothing assertion covered the passing outcome only. The mismatch, source-only, missing-output and grammar-failure outcomes each snapshot the whole isolated tree \u2014 every file's bytes and modification time \u2014 before the run and assert it equal afterwards, in addition to asserting that the output was not repaired and, for the missing output, not created. Closed | None identified. | resolved |\n| `F-008` | low | correctness | `tools/render_user_guide.py:277-284, 345-385` | `skills/security/secure-engineering.md`, best practice \"output encoding\"; the design's error-handling strategy | At attempt 1 `escape` left the double quote intact in attribute position and the tokenizer truncated a quoted identifier silently. `escape_attribute` now encodes the quote and is the function used for every attribute value \u2014 `aria-label`, `id`, `href`, `class` and the stylesheet `href`; `take_attributes` rejects a double quote anywhere in the braces and an identifier or class name outside `[A-Za-z0-9][A-Za-z0-9_-]*`, naming the source line; `AttributeSafety` covers the encoding, the quoted chain token, the rejections including the truncation case the gate found, and asserts every attribute in the published page well formed. Closed | None identified. | resolved |\n| `F-009` | low | correctness | `tools/render_user_guide.py:379-381` | The design's error-handling strategy as the closed corrections (7) and (9) extended it \u2014 a brace-attribute token the grammar does not recognise fails the render naming its line \u2014 and the change account's own interface statement that a stray brace token is now a render failure rather than silence | A token of the form `key=value` inside the braces is accepted by `take_attributes` and stored under its key, but no construct reads it. In-memory renders of `{#one label=Foo}`, `{#one nav=Bar extra=1}` and `{#one 4=four}` each succeeded with the value absent from the output and no error, whereas `{#tw o}` fails as unrecognised. A contributor who writes an attribute the design once contemplated \u2014 the per-heading navigation label that V-001 dropped \u2014 receives silence instead of the failure every other malformed token now produces. No token of this form exists in the current source, a quote inside such a token is still rejected, and the value never reaches the output, so no encoding exposure follows; no test exercises the form | `CR-002` | open |\n\n## Severity Summary\n\n- Critical: 0\n- High: 1\n- Medium: 5\n- Low: 3\n\n## Standards and Architecture Conformance\n\n- Coding standards: the testing-strategy playbook (S07) and the repository's standard-library-only tooling posture (design constraint C-003) \u2014 the renderer imports `argparse`, `re`, `sys` and `pathlib` only and compiles cleanly under `compileall`; the check-mode isolation defect of attempt 1 is closed (`F-005`), the failing-outcome purity assertions are present (`F-007`), and the test module reads the repository root from its own path and writes only inside temporary directories; one gap in the notation grammar's failure discipline remains, `F-009`, and the line-ending form of the source as it would be committed departs from the repository's convention, `F-002`\n- Architecture rules: the additive-only boundary (scope exclusion X-002, design constraint C-007) \u2014 conforms: the change set touches no runtime module, registry record, workflow specification, gate matrix, approval path or gate-decision surface, confirmed by listing the changed paths against the version-control status and attributing the runtime files on the tree to the separately closed fix; decision record D-001 \u2014 conforms: the renderer holds a grammar and a fixed page shell and no document-content map, the 21 anchors, 14 callout tags, 14 internal links and one list variant are authored in the source, and the recorded departures V-001 (navigation labels derived, ratified by the owner) and V-002 (list variant on its own line) move no value into the tool; decision record D-007 as amended \u2014 conforms in the renderer and the pin: explicit encoding on every read and write, input newline normalised before parsing, output newline fixed by the writer, document-order emission, no environment value in the output, the banner's strings literal, both handbook paths pinned `-text` (`git check-attr` reports `text: unset`), and the live page byte-equal to a render of the live source under both newline forms of the input; the one departure is the source's own working-tree line endings under that pin, `F-002`; decision record D-008 with the Design Gate's step condition \u2014 conforms: one step inside the existing tests job, after the unit-test step, conditioned `${{ !cancelled() }}`, invoking the check over the one build output, with the job set, the four check names and the permission and environment policy unchanged (`WorkflowBinding` and the 13 workflow tests); inline decisions D-009 and D-010 \u2014 conform, with the unrecognised-heading and malformed-attribute failures now added to the duplicate-anchor and dangling-link failures; the Planning Gate's rulings \u2014 conform: the dependency paragraph and the `V-IMPORT` row are recorded non-droppable merges present in both files, and the parity-class docstring correction is in this change set; the Scope Gate's condition on the resolution list and the Design Gate's condition on the classified comparison \u2014 conform (`F-003`, `F-004`), with the record's completeness now executed against the frozen pre-change page (`F-001`)\n- Security criteria: the secure-engineering playbook (S09) \u2014 conforms: the renderer reads two fixed paths under one root and writes one, executes no subprocess, opens no connection and accepts no input beyond a mode flag and a root directory; the workflow step adds no secret, no permission change and no failure-masking key; every item merged from the published form into the source names public tool behaviour only; the attribute-encoding weakness of attempt 1 is closed (`F-008`) and the published page's attributes are all well formed; no credential, token or secret appears in the change or in this package; the accepted `key=value` token (`F-009`) never reaches the output and cannot carry a quote, so it is a grammar gap and not an exposure\n- Exceptions requested: None identified.\n\n## Test Adequacy Assessment\n\n- Test evidence reviewed: re-executed by this review on 2026-09-08 \u2014 `python tools/render_user_guide.py --check` (exit 0); `python -m unittest discover -s tests -p \"test_render_user_guide.py\"` (Ran 74 tests, OK, as the account's T-011 claims); `python -m unittest discover -s tests -p \"test_ci_workflow.py\"` (Ran 13 tests, OK, T-012); `python -m unittest discover -s tests -p \"test_omn_agent.py\"` (Ran 45 tests, OK, a superset of T-013's three); `python -m compileall -q tools/render_user_guide.py tests/test_render_user_guide.py` (exit 0, T-016); `grep -o 'id=\"[^\"]*\"' docs/user-guide.html` deduplicated \u2014 21 identifiers, set-identical to the pre-change fixture's 21 and to Appendix B's 21, with 21 fragment targets (T-015); `cmp` of `tests/fixtures/user-guide-pre-change.html` against `git show HEAD:docs/user-guide.html` \u2014 byte-identical; sha256 of `docs/USER-GUIDE.md`, `docs/user-guide.html` and both fixtures taken before and after the three test modules ran \u2014 all four unchanged; `diff tests/fixtures/user-guide-reconciled.html docs/user-guide.html` \u2014 exactly five differing lines (569, 576, 581, 736, 737): the rework-loop bullet, the bounded-rework callout, the first-invocation paragraph of the review-comment loop and the two troubleshooting rows on a rejected gate and on collected review comments, which is exactly the set the runtime fix's own change-set row for the handbook names; the fixture's side of the three prose lines equals the committed source's wording of those passages, and its side of the two rows equals the pre-change page's rows (no recorded hunk touches them), so the reconstruction is faithful to the reconciled source the docstring describes; `git ls-files --eol` and byte counts establishing `F-002` (1103 CRLF line ends in the working-tree source, 0 in HEAD, 0 in the page and both fixtures); in-memory probes \u2014 the live page equals a render of the live source twice over and under a CRLF rewrite of the input, the `key=value` acceptance behind `F-009`, and the plan's authoring walkthrough adding a chapter with an anchor, a callout and a bash sample to an in-memory copy of the source, which rendered with its navigation entry, eyebrow, tag and comment marking and raised the anchor count to 22 (A-012). Claimed, not confirmed: the operator's full-suite run on this tree (474 tests, none failing), which the dispatch instructs this review not to repeat; byte identity on the ubuntu leg and on a hosted runner's checkout; the drift fail-and-pass demonstration on the workflow itself; the proof scripts' verdicts\n- Coverage of changed behavior: complete for the renderer grammar and every declared failure path, now including the unrecognised heading, the quoted or out-of-alphabet identifier and the stray token; for attribute encoding; for determinism; for the banner, the anchor set, the closed link graph, the five affordances and the branch-naming section on the live page; for check mode's passing, mismatched, source-only, missing-output and grammar-failure outcomes on an isolated copy with tree-wide purity assertions; for the line-ending pin and the workflow binding; and for the reconciliation \u2014 the record's form by `ReconciliationRecord` and its completeness against the pre-change page by `PreChangeEquivalence` over the two frozen fixtures, whose 117 hunks are recomputed on every run. The checks that must stay live did stay live: the delivered page equals a render of the delivered source, the banner, the 21-anchor baseline and closed link graph, and check mode writing nothing are all asserted against the working tree. Not covered: the `key=value` brace token (`F-009`), and the line-ending form of the source file itself, which no check constrains under the pin (`F-002`)\n- Gaps requiring new tests: handed to omn-qa \u2014 a check that a `key=value` brace token fails the render or is consumed (`F-009`); a check that the source handbook carries no carriage return, so the pin can never freeze a converted file (`F-002`); the ubuntu-leg byte identity and the hosted-workflow fail-and-pass demonstration with the regeneration command visible in the log (A-003, A-004, A-010); and the discard demonstration for A-002 on a hosted checkout, which the suite reaches through the isolated-copy mismatch test and the render-equals-committed assertion\n\n## Correction Requests\n\n| ID | Addresses | Required change | Blocking | Owner |\n|---|---|---|---|---|\n| `CR-001` | `F-002` | The source handbook is committed with the line-ending form every other text file in the repository carries, so that the `-text` pin freezes the intended bytes rather than a working-tree conversion, and the change account states the source's byte form as it states the fixtures' and the output's; if a CRLF source is instead to stand, architect records that acceptance against decision record D-007 | no | omn-dev-1-implement |\n| `CR-002` | `F-009` | A brace-attribute token that no construct consumes fails the render naming its source line, as every other unrecognised token now does; or the accepted key-value form is stated in the notation grammar with the construct that consumes it; and whichever outcome is chosen is exercised by a test | no | omn-dev-1-implement |\n\n## Residual Risk\n\n- Accepted risk: the chain diagrams' accessibility labels are derived from their token lists and the four navigation labels from their headings, both ratified by omn-product-owner at the Review Gate; the masthead strapline resolved as same material in divergent wording, ruled by omn-product-owner; the drift verdict blocks on the ubuntu tests check alone with the windows check advisory until the settings-only flip, accepted by omn-tech-lead at the Design Gate; no automated check guards the reading affordances, recorded by omn-product-owner in scope decision D-006; and the equivalence proof compares two frozen pages rather than the live page, so it is a proof about the reconciliation event and not a live guard \u2014 accepted here as the correct reading of criterion A-006, with the live guards named under Coverage of changed behavior carrying the ongoing obligation\n- Unmitigated risk: until `CR-001` closes, a commit of this tree stores the source handbook with CRLF under a pin that prevents the repository from ever normalising it, and every later diff of that file inherits the noise; until `CR-002` closes, a contributor's `key=value` attribute is silently discarded; the reconciled fixture is a reconstruction, bounded by the five-line diff to the live page and by the 117 recomputed hunks but not by a captured copy of the source at reconciliation time; and the cross-platform property the whole change rests on has been executed on one platform only, with the pin and the fixed newline policy as controls rather than evidence, until omn-qa observes a hosted run on both legs\n- Monitoring required: the first hosted workflow run after the change lands, on both legs \u2014 the drift step's exit status and the regeneration command's presence in the log on a deliberate failure; `git ls-files --eol` on both handbook paths at the commit that lands the pin, so the frozen bytes are the intended ones; the anchor-set assertion (exactly 21 identifiers, link graph closed) on every future handbook change; and the reconciliation record's statement that a later handbook edit is a new change rather than a reconciliation hunk, which holds only while the two fixtures stay untouched\n\n## Verdict\n\n- Decision: approve-with-corrections\n- Rationale: every one of the nine corrections the Review Gate required is closed and was verified at its site and by execution \u2014 the two 5a command lines are back in both files with record rows and an executed completeness check, the record carries the owner's rulings and the reversed item 12, the classified comparison is a recorded artifact with 117 recomputed hunks, the check-mode tests run on an isolated copy and assert tree-wide purity, unrecognised headings and malformed attributes fail the render naming the line; the attempt-2 redesign is sound \u2014 the reconciled fixture is a faithful reconstruction, differing from the live page in exactly the runtime fix's five lines with the committed wording on its side, the live checks stayed live, and criterion A-006 is proven by recomputation rather than asserted; the high finding is resolved and no critical or high finding is open; two new findings are open, one medium \u2014 the source handbook's working-tree line endings would be committed as CRLF under the new pin \u2014 and one low \u2014 a `key=value` brace token is accepted and consumed by nothing \u2014 neither of which affects the behaviour of the delivered pair, the tool, the pin or the workflow step; test evidence was reviewed and re-executed\n- Blocking findings outstanding: None identified.\n- Readiness recommendation: this reviewer recommends that the change be accepted at the Review Gate with `CR-001` and `CR-002` carried as non-blocking corrections, `CR-001` closing before the commit that lands the pin so the frozen bytes are the intended ones; because this package is this agent's own evidence, the Review Gate decision belongs to omn-qa as the second owner the gate matrix names; the Verification Gate additionally needs the hosted two-leg run, the drift demonstration and the discard demonstration named under Test Adequacy Assessment, and QA's acceptance of the fixture-to-fixture proof for A-006 (`Q-001`)\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | Does omn-qa accept the fixture-to-fixture proof \u2014 the pre-change page against the page as regenerated at reconciliation time, both frozen \u2014 as the evidence for criterion A-006, given that its Verification Gate plan phrases the check as a re-derived visible-text diff matched to the record and a re-derivation over the live page now yields the runtime fix's four passages beyond the 117 recorded hunks? This reviewer judges the evidence sufficient for the reconciliation claim and treats the choice the runtime fix's closure record routed here \u2014 record the extra hunks or retire the fixture \u2014 as answered by the third route the implementer took; acceptance of the criterion itself is QA's | no | omn-qa | the Verification Gate's reading of `F-001` and `F-003`; the verdict is unaffected either way |\n| `Q-002` | Is determinism evidence executed on one platform, together with the `-text` pin and the fixed newline policy, sufficient for criteria A-003, A-004 and A-010, or must the hosted two-leg run be observed before the change is judged ready? | no | omn-qa | the Verification Gate; the scope this review could not execute |\n| `Q-003` | Who creates the commit that makes the regenerated page and the rest of the change set the committed content, on a tree carrying unrelated modifications from other runs, and does that commit land after `CR-001` so the source's line-ending form is settled before the pin freezes it? | no | omn-orchestrator | `F-002`, `CR-001`; the point from which the byte comparison becomes self-comparing |",
+        "digest": "sha256:dcf0050c7aa0369f42d816c6fcffc25f",
+        "produced_by": "quality-review"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was delivered: an implementation report for the change set itself, a validation report for what was proven about it, a review package for a `review-pull-request` run, or a deployment status for the `communication-and-post-release` phase, which publishes after a release has landed. Without one there is nothing to publish from, and publishing anyway would mean describing a system from this agent's own reading of what it was supposed to become."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "review-package",
+      "reference": "runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md",
+      "produced_by": "quality-review"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-08T01:03:23Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/release-note.md",
+        "digest": "sha256:a6125cac38eb2edeca7105d936d9304c",
+        "supplies": null
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73660d3f373c99f824d4eb22e1c28c64",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:c2295704025ce7e922823222b494b7d6",
+    "input_digest": "sha256:dcf0050c7aa0369f42d816c6fcffc25f",
+    "inputs": [
+      {
+        "type": "review-package",
+        "reference": "runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md",
+        "digest": "sha256:dcf0050c7aa0369f42d816c6fcffc25f"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-4c51600606df/states/documentation-and-release-handoff/artifacts/release-note.md",
+      "runs/run-4c51600606df/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "reproducing a test or validation result, which belongs to omn-qa"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author or amend a technical design, an architecture decision, or a structural constraint",
+      "define, widen, or narrow product scope or acceptance criteria",
+      "award, withhold, or restate a validation verdict as though this agent reached it",
+      "record a merge, release, or deployment decision",
+      "publish a statement the supplied evidence does not support",
+      "omit, soften, or defer a breaking change a supplied input declares",
+      "carry forward prior-release content the delivered change made false",
+      "resolve an engineering gap rather than returning it to the role that owns it",
+      "decide a gate that assesses evidence this agent produced",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "describe delivered behavior from the implementation and validation evidence supplied",
+        "draft release notes, change summaries, and closure communication packages",
+        "record usage, limitations, known issues, and troubleshooting guidance",
+        "state the compatibility consequence a declared contract change carries",
+        "identify documentation the delivered change made stale, and propose its correction",
+        "name the audience a communication was addressed to and the handoff it carries",
+        "maintain the trace from each published statement to the artifact that supports it",
+        "record an unresolved engineering question as an open question against its owning role"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author or amend a technical design, an architecture decision, or a structural constraint",
+        "define, widen, or narrow product scope or acceptance criteria",
+        "award, withhold, or restate a validation verdict as though this agent reached it",
+        "record a merge, release, or deployment decision",
+        "publish a statement the supplied evidence does not support",
+        "omit, soften, or defer a breaking change a supplied input declares",
+        "carry forward prior-release content the delivered change made false",
+        "resolve an engineering gap rather than returning it to the role that owns it",
+        "decide a gate that assesses evidence this agent produced",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else. Product documentation living in the repository is proposed as content inside the artifact and applied by the role that owns the file, so a documentation change never travels as an unreviewed write.",
+        "rationale": "This agent's authority is over what is said about a change, never over the change itself. Writing to the repository would let a publication step alter the delivered behavior it exists to describe, and the resulting document would then be accurate about a system this agent had just modified."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "reproducing a test or validation result, which belongs to omn-qa"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same published statements, the same known-issue set, the same compatibility statement, the same declared release verdict, and the same declared artifact status.",
+      "identifierSchemes": {
+        "knownIssues": "K-<zero-padded-sequence>"
+      },
+      "orderingRule": "Known issues keep the order of the source that recorded them, so a supplied defect list and the issues published from it can be read side by side.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied evidence, release context, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "release-note.md",
+    "artifact_path": "runs/run-4c51600606df/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "template_ref": "templates/release-note.md",
+    "contract_ref": "agents/omn-documentation/output.md",
+    "quality_ref": "agents/omn-documentation/quality.md",
+    "validator": "release_note_validator",
+    "result_envelope_path": "runs/run-4c51600606df/states/documentation-and-release-handoff/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-08T01:03:23Z"
+}

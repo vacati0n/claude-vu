@@ -1,0 +1,427 @@
+{
+  "invocation_id": "inv-79630cb5274d-04-002",
+  "run_id": "run-79630cb5274d",
+  "work_item_id": "run-79630cb5274d::regression-validation",
+  "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+  "state_id": "regression-validation",
+  "phase_index": 4,
+  "agent_id": "omn-qa",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-qa.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-qa/manifest.yaml",
+    "load_order": [
+      "agents/omn-qa/system.md",
+      "agents/omn-qa/identity.md",
+      "agents/omn-qa/reasoning.md",
+      "agents/omn-qa/execution.md",
+      "agents/omn-qa/output.md",
+      "agents/omn-qa/quality.md",
+      "agents/omn-qa/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-qa/system.md": "sha256:3e97eea7ec77003b26899aac0a9eddec",
+      "agents/omn-qa/identity.md": "sha256:9195b995eafd7f686fd5f97037f324fd",
+      "agents/omn-qa/reasoning.md": "sha256:424d6ef785f44f034fc61b9a3b56078c",
+      "agents/omn-qa/execution.md": "sha256:cff25dcd8fb4c7a92b261ef8c4fb130b",
+      "agents/omn-qa/output.md": "sha256:cfb5abc0ed0c9122e1e0c56be30038d3",
+      "agents/omn-qa/quality.md": "sha256:11fe13aef1252759858b98c89edc6ef9",
+      "agents/omn-qa/examples.md": "sha256:84f6d1663eea48190fce8ec74e909371"
+    },
+    "capabilities": [
+      "acceptance-validation",
+      "regression-assessment",
+      "test-strategy-definition",
+      "defect-classification",
+      "release-readiness-recommendation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Primary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "review-package",
+      "technical-design",
+      "scope-definition",
+      "bug-analysis",
+      "execution-plan",
+      "acceptance-criteria",
+      "validation-criteria",
+      "regression-targets",
+      "test-evidence",
+      "test-baseline",
+      "quality-thresholds",
+      "parity-checklist",
+      "performance-baseline",
+      "packaging-evidence",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+        "text": "# Implementation Report: the refactor workflow can hand phase 2 to phase 3\n\n```yaml\nimplementationReport:\n  reportId: IR-2026-0007\n  changeReference: refactor-implementation-input-contract-defect / run-79630cb5274d\n  sourceInputs:\n    - type: bug-analysis\n      reference: runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md\n    - type: bug-analysis\n      reference: runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  workflowPhase: fix-implementation\n  verificationStatus: partially-verified\n  inputDigest: sha256:1cdaecc6f3f2d4ebd23a2d51ec543553\n  contextDigest: sha256:52fec786241b4dce1848a7d7d04e9149\n```\n\n## Metadata\n\n- Report ID: IR-2026-0007\n- Change reference: refactor-implementation-input-contract-defect / run-79630cb5274d\n- Workflow phase: fix-implementation\n- Status: provisional\n- Verification status: partially-verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: the accepted-input menu of `omn-dev-1-implement` now declares the identifier its refactor predecessor actually publishes, so the artifact the `refactor` Phase Model routes across the phase 2 to phase 3 edge survives input narrowing and satisfies the menu rule, and guard G5-INPUT no longer blocks `refactor-implementation`. The identifier that no agent anywhere declares as an output is withdrawn from that menu in the same edit, and the five surfaces that describe this agent's inputs now state the same set the menu implements.\n- Approach taken: declaration-only. No runtime module was modified. The guard, the narrowing function and the contract resolver are unchanged; the repair comes entirely from the declarations they read. The manifest menu was widened additively, keeping `technical-design` and `bug-analysis` with their present meaning and phases, and `test-baseline-record` was removed. The manifest's minimum-satisfaction prose, the required-input list in the agent contract, the phase-ownership table in the execution lifecycle, the registry record's data dependencies and the report template's enumeration comment were each brought into agreement with that menu. The agent's own semantic-versioning block makes a backward-compatible input addition a minor step, so the manifest version and its registry record both move 1.0.0 to 1.1.0 while `contractVersion` stays at 1.0.0, because that field names the shared agent-specification revision and this change does not touch that specification. One contract-level test module was added. The committed mirror of the framework payload was refreshed by the repository's own sync command, because the suite fails on drift between the two trees.\n- Design reference: the finalized root-cause analysis at `runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md`, its Fix Strategy and its Validation Plan.\n- Out of scope: the thirteen other declared data edges that share this defect's cause; the analysis routes them as their own work and this change does not reach them. The two framework-wide prevention checks the analysis names \u2014 a per-edge producing-identifier check and an orphan-identifier check \u2014 which the analysis deferred because both fail or misreport against the repository as it stands. The extension of the per-phase dispatchability verdict to report the input-contract guard, deferred with them. The Completion Rule's phase-accounting clause, which the analysis establishes as an independent defect with an independent reach. A per-phase narrowing of an agent's accepted menu, which is a runtime and schema design decision the analysis routes to architecture. Executing the unblocked refactor phase: the phase was proven dispatchable, and dispatching or completing it was excluded by the invocation that produced this change.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | `agents/omn-dev-1-implement/manifest.yaml` | modified | Add `validation-report` to the accepted-input menu, withdraw `test-baseline-record`, restate the minimum-satisfaction prose to match the menu, and move `metadata.version` to 1.1.0 while leaving `contractVersion` at 1.0.0 | root-cause analysis Fix Strategy, accepted-input menu and version position |\n| `C-002` | `agents/omn-dev-1-implement/identity.md` | modified | Correct the required-input list: the technical design is named for feature work only, and the refactor input becomes the validation report carrying the safety-net baseline | root-cause analysis Fix Strategy, description surfaces |\n| `C-003` | `agents/omn-dev-1-implement/execution.md` | modified | Correct the Phase Ownership row for `refactor-implementation` to name the artifact the workflow actually delivers | root-cause analysis Fix Strategy, description surfaces |\n| `C-004` | `registry/agents.yaml` | modified | Add a `validation-report` data dependency at `\">=1.0.0 <2.0.0\"`, matching how the two existing data entries track their template's declared version, and move the record's version to 1.1.0 with the manifest | root-cause analysis Fix Strategy, registry record and version position |\n| `C-005` | `templates/implementation-report.md` | modified | Stop the source-input enumeration comment advertising an identifier no agent produces, and name the identifier the refactor phase now receives | root-cause analysis Fix Strategy, template enumeration |\n| `C-006` | `tests/test_agent_input_contracts.py` | added | The single regression check the analysis authorizes: a contract-level test over the changed manifest, exercising the real narrowing and resolution functions | root-cause analysis Validation Plan, regression tests added |\n| `C-007` | `omn_agent/_bundled_payload/agents/omn-dev-1-implement/execution.md` | modified | Refresh the committed payload mirror so it matches the authoritative tree | `V-001` |\n| `C-008` | `omn_agent/_bundled_payload/agents/omn-dev-1-implement/identity.md` | modified | Refresh the committed payload mirror so it matches the authoritative tree | `V-001` |\n| `C-009` | `omn_agent/_bundled_payload/agents/omn-dev-1-implement/manifest.yaml` | modified | Refresh the committed payload mirror so it matches the authoritative tree | `V-001` |\n| `C-010` | `omn_agent/_bundled_payload/registry/agents.yaml` | modified | Refresh the committed payload mirror so it matches the authoritative tree | `V-001` |\n| `C-011` | `omn_agent/_bundled_payload/templates/implementation-report.md` | modified | Refresh the committed payload mirror so it matches the authoritative tree | `V-001` |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | the defect reproduces against the pre-fix manifest: the producer's declared output set and the consumer's accepted menu are disjoint, narrowing discards the delivered validation report, resolution raises the block detail the stalled run recorded character for character, and the withdrawn identifier has no producer \u2014 asserted and observed | contract | `C-001` | inline replay of `narrow_inputs` and `resolve_input_contract` from `runtime/framework_runtime.py` over the pre-fix manifest read from git HEAD | pass |\n| `T-002` | the consumer accepts the identifier the producer emits; no accepted identifier lacks a producing agent; the withdrawn identifier is gone from the menu and no longer satisfies it; manifest and registry declare the same version; the delivered validation report survives narrowing; the refactor pool resolves; both sibling pools still resolve from their recorded supplied sets; the menu still refuses a pool carrying no accepted identifier and an empty pool | contract | `C-001`, `C-004`, `C-006`, `C-009`, `C-010` | `python -m unittest tests.test_agent_input_contracts` | pass |\n| `T-003` | the stalled refactor run clears its G5-INPUT block through the runtime's own re-evaluation pass: the work item returns from blocked to pending and becomes Ready for dispatch, its block reason, detail, failure class and blocked-by fields are nulled, the persisted failure envelope moves from open to resolved with a recorded resolution, and the recovery-ledger entry resolves | integration | `C-001`, `C-004` | `python runtime/framework_runtime.py next --run-id run-34ca35504b72` | pass |\n| `T-004` | the committed payload mirror carries no drift from the authoritative tree after the change | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-007`, `C-008`, `C-009`, `C-010`, `C-011` | `python -m unittest tests.test_bundled_payload` | pass |\n| `T-005` | the whole repository unit suite, by the discovery the repository and its integration workflow both use | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`, `C-007`, `C-008`, `C-009`, `C-010`, `C-011` | `python -m unittest discover -s tests` | pass |\n| `T-006` | every verifier module the change could plausibly affect returns the same verdict it returned before the change | static | `C-001`, `C-002`, `C-003`, `C-004`, `C-005` | `python runtime/verify_manifests.py`, `python runtime/verify_registry_coverage.py`, `python runtime/verify_validators.py`, `python runtime/verify_multi_phase.py`, `python runtime/verify_vertical_slice.py`, `python runtime/verify_recovery.py`, `python runtime/verify_self_hosting.py` | pass |\n| `T-007` | the declared-data-edge mismatch count falls by exactly one across the active workflow set, and the edge it drops is the refactor `safety-net-establishment` to `refactor-implementation` edge | contract | `C-001` | inline per-edge scan over every active workflow Phase Model using `parse_phase_model`, `split_terms` and `declared_output_artifact` from `runtime/framework_runtime.py`, replayed against the pre-fix and post-fix menus | pass |\n\n## Verification Results\n\n- Verification method: the change was measured against a baseline taken before any file was touched, and every claim above was produced by a command that was run. The baseline was the whole unit suite by discovery, plus each verifier module, plus the persisted state of the stalled refactor run. The defect was first reproduced against the pre-fix manifest through the runtime's own narrowing and resolution functions, so the fix has a witness at the point where the artifact was actually lost rather than only at the point where the symptom appeared. The suite and the verifier set were then re-run and compared against that baseline, the corrected contract was exercised by a new contract-level test module, the repair itself was demonstrated by running the runtime's re-evaluation pass over the stalled run, and the per-edge condition was measured directly rather than inferred from the phase becoming dispatchable.\n- Commands executed: `python -m unittest discover -s tests` (baseline, then again after the change); `python -m unittest tests.test_agent_input_contracts`; `python -m unittest tests.test_bundled_payload`; `python tests/test_bundled_payload.py --sync`; `python runtime/verify_manifests.py`; `python runtime/verify_registry_coverage.py`; `python runtime/verify_validators.py`; `python runtime/verify_multi_phase.py`; `python runtime/verify_vertical_slice.py`; `python runtime/verify_recovery.py`; `python runtime/verify_self_hosting.py` (each run before and after the change); `python runtime/framework_runtime.py next --run-id run-34ca35504b72`; and two inline replays over `runtime/framework_runtime.py`, one reproducing the pre-fix failure from the manifest at git HEAD and one scanning every active workflow Phase Model for declared-data-edge identifier mismatches. Repository paths are cited framework-relative, as the framework's own records cite them.\n- Result summary: 7 evidence entries executed, 7 passed, 0 failed. Underlying counts: the unit suite ran 342 tests with 0 failures before the change and 399 tests with 0 failures after it, the increase of 57 comprising the 14 tests this change adds and 43 net tests belonging to a concurrent writer described under `R-004`; the new contract module ran 14 tests, 14 passed, 0 failed; seven verifier modules executed, five returning a full pass and two returning the identical partial verdicts they returned at baseline, 14 of 15 and 7 of 8, both recorded under `R-002`; the stalled run's blocked work item count went from 1 to 0 and its dispatchable count from 0 to 1; the declared-data-edge mismatch measurement fell from 11 to 10.\n- Unverified areas: the analysis's own declared-data-edge figures of fourteen falling to thirteen were not reproduced numerically. The independent scan run here measures eleven falling to ten, because it matches Phase Model terms more strictly than the analysis's scan did; the direction, the size of the fall and the identity of the dropped edge all agree, but the absolute counts do not, so the analysis's stated numbers remain unconfirmed and are recorded under `V-002` and `Q-003`. Second, the post-change suite result cannot be attributed to this change alone: a writer outside this invocation modified test, integration-workflow, tooling and documentation files in the repository while the change was being made, so the green suite proves that this change and those changes are green together, not that this change is green in isolation. The tree was verified stable across the final suite run, and the new contract module passes on its own, but the isolation gap is real and is recorded under `R-004` and `Q-001`.\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | The committed payload mirror was refreshed, producing the five change-set entries `C-007` through `C-011`, which the accepted change does not name | root-cause analysis Fix Strategy, which enumerates five surfaces and not the mirror | The mirror is a committed copy of the framework tree and the suite fails on any drift between them; leaving it stale would have left the repository in a state whose test command another agent could not run, which the operational constraints forbid. The refresh was performed by the repository's own declared sync command rather than by hand, and it changed exactly the five mirrored files corresponding to the five authoritative edits, with no other content difference | not-required; the departure adds no behaviour and changes nothing that was accepted, and sits inside this agent's latitude to keep the repository testable |\n| `V-002` | The Validation Plan asks for confirmation that the declared-data-edge mismatch count falls from fourteen to thirteen; the measurement taken here falls from eleven to ten | root-cause analysis Validation Plan, per-edge scan re-run | The analysis's scan was not shipped as code, so it had to be re-implemented from its description in `C-001`'s verification. The re-implementation matches Phase Model terms by exact artifact name where the analysis matched by containment, which yields a smaller population. The property the plan actually tests \u2014 that exactly one edge is removed and that it is the refactor edge \u2014 was confirmed; the population size was not | not-required; the verification objective was met and the discrepancy is recorded as an unverified area rather than resolved by adopting either number |\n| `V-003` | `agentVersion` in this report records 1.0.0 while `C-001` and `C-004` ship version 1.1.0 | the output contract's metadata block | This invocation was dispatched at agent version 1.0.0, which is what its invocation envelope and its state ledger recorded, and the report is provenance for the invocation that produced it rather than for the manifest it changes. Recording 1.1.0 would claim the change was produced by a contract that did not yet exist when the run began | not-required; a recording choice inside this agent's latitude, stated here so the two numbers are not read as a contradiction |\n| `V-004` | Demonstrating `C-001` and `C-004` rewrote four files under `runs/run-34ca35504b72/`, and that path class is excluded from this agent's declared repository write scope | this agent's authority scope, `repositoryWrites.excluded` | The demonstration required by the invocation is the runtime's own re-evaluation pass over the stalled run, and it is the widened menu shipped in `C-001` and recorded in `C-004` that makes the input guard pass and so lets that pass clear the block. The pass, not this agent, performed every write: it nulled the work item's block fields, rewrote the persisted failure envelope from open to resolved, resolved the recovery-ledger entry and appended the escalation-resolved event. No file under that run was edited by hand, and no phase of it was dispatched or completed | not-required; the invocation that dispatched this phase authorized the demonstration explicitly and stated that the mutation of that run's block fields is the fix working |\n\n## Boundary Compliance\n\n- Module boundaries preserved: yes, and the change is confined to declaration surfaces. No runtime module was modified, so the input guard, the narrowing function and the contract resolver are byte-identical to their pre-change form and the repair comes entirely from the declarations they read; that is what makes the pre-fix replay in `T-001` and the post-fix test in `T-002` comparable, because only the data under them changed. The layering between an agent's manifest, its contract modules and its registry record is preserved: each was corrected in place and none was made to carry another's content. The new test module reaches the framework runtime only through its published functions.\n- Public interface changes: the accepted-input menu of `omn-dev-1-implement` gains `validation-report` and loses `test-baseline-record`; the manifest and its registry record move from version 1.0.0 to 1.1.0; `contractVersion` is unchanged at 1.0.0. The withdrawal is formally a narrowing, and it breaks no caller, because no agent declares that identifier as an output and no run has ever supplied one. The template's source-input enumeration comment changes with the menu.\n- Data or migration impact: none in any product sense. One persisted run record changed as a direct and intended consequence: the stalled refactor run's `refactor-implementation` work item returned from blocked to pending, its failure envelope moved from open to resolved, and its recovery-ledger entry resolved. That rewrite was performed by the runtime's re-evaluation pass and is recorded under `V-004`.\n- Declared side effects: the eleven change-set paths `C-001` through `C-011` and this invocation's two phase files, `runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md` and `runs/run-79630cb5274d/states/fix-implementation/result-envelope.json`. Two differences between that set and the working tree are stated rather than left to be discovered. The sync command that produced `C-007` through `C-011` regenerates the whole mirror in place, so it rewrote 267 files of which only those five differ in content from their committed form. The authorized demonstration additionally required the runtime's own re-evaluation pass, which rewrote four files under `runs/run-34ca35504b72/` (state.json, events.jsonl, recovery-ledger.json, and states/refactor-implementation/failure-envelope.json) as the operator-authorized evidence that the repair working, and those writes are not declared as this agent's side effects. The working tree carries further modifications this report does not account for, to integration-workflow, tooling, test and documentation files, which a writer outside this invocation made while it ran; they are recorded under `R-004` and `Q-001` and none of them was authored here.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | The widened menu is agent-global, so the two sibling implementation phases now accept a validation report as sole satisfaction of their menu although neither should ever see one; the guard loses its ability to distinguish an implementer holding an accepted change from one holding a validation report and nothing to implement | low today, rising with any future workflow that places a validation phase ahead of an implementation phase | a poor implementation report instead of a blocked phase, which is later and harder to read than a block | In place: guard ordering. Guard evaluation returns on the first blocking or waiting verdict and the predecessor and gate guards run ahead of the input guard, so neither sibling phase can be dispatched before its own predecessor has completed and its artifact \u2014 the design or the analysis \u2014 is in the pool. `T-002` holds both sibling pools resolving from their recorded supplied sets, and holds the menu still refusing a pool that carries no accepted identifier at all |\n| `R-002` | Two verifier modules return partial verdicts, 14 of 15 and 7 of 8, and continue to do so after the change | certain | a reader taking either verdict as a signal about this change would be misreading it | In place: both were measured at baseline before any file was touched and returned the identical verdicts and the identical failing checks afterwards, so neither is attributable to this change. The first fails on a check requiring one run to have traversed planning, design and delivery phases; the second is the separate Completion Rule defect the analysis establishes as independent, with its own cause, its own reach and its own routing |\n| `R-003` | Moving the registry record to 1.1.0 changes gate auto-approval for every phase this agent owns, because auto-approval requires a precedent matched on the producing agent's version as a prior run's state ledger recorded it, and no prior run recorded 1.1.0 | certain, until one gate is decided at the new version | the first gate assessing this agent's output at the new version cannot be auto-approved and must be decided under a human eye | In place: nothing is bypassed and no gate is weakened; the policy's own first-pass rule is doing exactly what it was written to do, and the effect ends as soon as one gate is decided cleanly at the new version. Stated here so the demand for a decision is expected rather than read as a regression |\n| `R-004` | The repository was modified during this invocation by a writer outside it, touching integration-workflow, tooling, test and documentation files, so the working tree is not solely this change's product and the post-change suite result is not isolated to this change | certain; it has already happened | a reviewer comparing the tree against this report will find changes it does not account for, and the green suite cannot by itself acquit this change alone | In place: the change set was derived from what this invocation actually wrote rather than from the tree's difference against its committed state, so the two sets are stated separately under Declared side effects. The final suite was run against a tree verified unchanged across the whole run, and the new contract module was additionally executed on its own and passed. The unattributed files are named for the reviewer and routed by `Q-001` |\n\n## Handoff Notes\n\n- Reviewer focus areas: first, `C-001`, and specifically that the withdrawal of `test-baseline-record` is genuinely safe rather than merely unreferenced \u2014 the evidence for it is that no agent manifest declares it as an output and no run has ever supplied one, and `T-002` now fails if any accepted identifier loses its producer. Second, the exposure under `R-001`, which is the price of an agent-global menu and is the one place this change trades guard strength for a working edge; the argument that guard ordering bounds it should be checked rather than accepted. Third, the version position in `C-001` and `C-004`, where a narrowing was taken as a minor step under this agent's own compatibility rules, and its consequence for gate auto-approval under `R-003`. Fourth, the boundary recorded in `V-004`, where the demonstration wrote into a run this agent's scope otherwise excludes. Fifth, the tree contamination under `R-004`, which affects what a reviewer will see when comparing this report against the repository.\n- Follow-up work: the two prevention checks and the extended dispatchability verdict that the analysis deferred, which cannot ship inside a defect repair because they fail or misreport against the repository as it stands. The thirteen remaining declared data edges whose producing identifier the consuming agent does not declare, one of which is this run's own phase 1 to phase 2 handoff. The Completion Rule's phase-accounting clause, which the analysis establishes as an independent defect. The question of whether a phase should be able to narrow its owner agent's menu to the subset that phase may accept, which would remove the `R-001` exposure at its root. None of these is started here, and none is a mitigation in place.\n- Documentation impact: the four description surfaces corrected by `C-002` through `C-005` were the documentation impact of this change and are already carried in the change set, so no surface is left describing the old menu. Nothing user-facing changes. The framework payload mirror is refreshed, so a package built from this tree carries the corrected declarations. A reader of the stalled refactor run will now find its failure envelope resolved rather than open, and no longer be directed to complete a phase that is already complete.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | A writer outside this invocation modified integration-workflow, tooling, test and documentation files in the repository while this change was being made. Whose change are they, and should this phase's verification evidence be re-taken on a quiescent tree before the gate reads it? The suite is green with both changes present, but this change is not isolated in that result. | yes | `omn-orchestrator` | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`, `C-007`, `C-008`, `C-009`, `C-010`, `C-011` |\n| `Q-002` | Moving the registry record to 1.1.0 removes the auto-approval precedent for every gate that assesses this agent's output, because precedent is matched on the producing agent's recorded version. Is a human decision on the first such gate the intended consequence of the version position, or should the position be revisited? | no | `omn-tech-lead` | `C-001`, `C-004` |\n| `Q-003` | The analysis's declared-data-edge figures of fourteen falling to thirteen were not reproduced; an independent scan measures eleven falling to ten and drops the same edge. Is the property \u2014 exactly one edge removed, and it is the refactor edge \u2014 sufficient for the gate, or must the analysis's own scan be recovered and re-run to settle the population size? | no | `omn-qa` | `C-001` |\n| `Q-004` | The report template's source-input enumeration is a comment rather than a checked vocabulary, so nothing fails if it drifts from an agent's menu again. Should that enumeration be derived from the manifests, and if so does it belong with the deferred prevention checks or ahead of them? | no | `architect` | `C-005` |",
+        "digest": "sha256:e73d04f8016a8c8140942fb5a142ee5a",
+        "produced_by": "fix-implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what changed and what it was meant to achieve: an implementation report for a delivered change, a review package for a `review-pull-request` or `release` run, or a technical design for the `safety-net-establishment` phase, which runs before any change exists. Without one there is nothing to validate against, and validating anyway would mean measuring the system against this agent's own reading of what it was supposed to do."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+      "produced_by": "fix-implementation"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-06T01:15:11Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/validation-report.md",
+        "digest": "sha256:289a25ebf7d54fb95ddf4fd44925d038",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null
+      },
+      {
+        "path": "templates/bug-analysis.md",
+        "digest": "sha256:6f1f25f536d3d80353873990835ce1bd",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:e7e9d97c4c5e8ec45601189cbb0a0c1b",
+    "input_digest": "sha256:e73d04f8016a8c8140942fb5a142ee5a",
+    "inputs": [
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+        "digest": "sha256:e73d04f8016a8c8140942fb5a142ee5a"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/logging/observability-logging.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md",
+      "templates/validation-report.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+      "runs/run-79630cb5274d/states/regression-validation/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the validation report"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "revise the technical design rather than raising a defect against it",
+      "define, widen, or narrow product scope",
+      "relax, reinterpret, or waive an acceptance criterion in order to reach a pass",
+      "judge code quality, maintainability, or standards conformance, which belongs to omn-dev-2-reviewer",
+      "decompose work into tasks, which belongs to planner",
+      "record a merge, release, or deployment decision",
+      "decide a gate that assesses evidence this agent produced",
+      "validate a change this agent authored",
+      "record a criterion as met without evidence that demonstrates it",
+      "pass while a critical or high defect stands open, or while required evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "validate delivered behavior against the acceptance criteria it was accepted under",
+        "define a validation strategy proportionate to the risk the change carries",
+        "execute the repository's own functional, integration, and regression checks",
+        "establish and strengthen a safety net of checks before a structural change proceeds",
+        "assess behavioral parity between a pre-change and post-change baseline",
+        "judge whether executed checks reach the behavior a change altered",
+        "record each defect with severity, category, location, reproducibility, and status",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "revise the technical design rather than raising a defect against it",
+        "define, widen, or narrow product scope",
+        "relax, reinterpret, or waive an acceptance criterion in order to reach a pass",
+        "judge code quality, maintainability, or standards conformance, which belongs to omn-dev-2-reviewer",
+        "decompose work into tasks, which belongs to planner",
+        "record a merge, release, or deployment decision",
+        "decide a gate that assesses evidence this agent produced",
+        "validate a change this agent authored",
+        "record a criterion as met without evidence that demonstrates it",
+        "pass while a critical or high defect stands open, or while required evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "scope": [
+          "**/*Tests/**",
+          "**/*.Tests/**",
+          "**/*Test/**",
+          "**/*.Tests.*",
+          "**/test_*.py",
+          "**/*_test.py",
+          "**/*.test.*",
+          "**/*.spec.*"
+        ],
+        "scopePhases": [
+          "refactor/safety-net-establishment"
+        ],
+        "scopePhasesRationale": "This grant is automated test files only, and only in the `safety-net-establishment` phase of refactor, where establishing the safety net is the phase's declared output. Production source is never written in any phase, and this grant does not apply outside the one phase named above.",
+        "rationale": "QA judges behavior, not code, so it does not author the change it validates. One phase is the exception the framework declares deliberately: a refactor cannot be validated at all until a safety net exists, and building that net is the phase's whole purpose. Even there the boundary holds, because a test that pins existing behavior is not the change under validation. Every other phase reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the validation report"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same criterion result set, the same defect set, the same severity assignment, the same verdict, and the same declared report status.",
+      "identifierSchemes": {
+        "acceptanceCriteria": "AC-<zero-padded-sequence>",
+        "defects": "DF-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Acceptance criteria keep the order of the source that declared them. Defects are ordered by descending severity; ties break toward the lower location in lexical order.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, criteria, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "validation-report.md",
+    "artifact_path": "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+    "template_ref": "templates/validation-report.md",
+    "contract_ref": "agents/omn-qa/output.md",
+    "quality_ref": "agents/omn-qa/quality.md",
+    "validator": "validation_report_validator",
+    "result_envelope_path": "runs/run-79630cb5274d/states/regression-validation/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-06T01:15:11Z"
+}

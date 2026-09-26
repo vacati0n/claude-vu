@@ -1,5 +1,7 @@
 # Working Memory Specification
 
+Status: specification — not implemented — executable counterpart: `runtime/recovery_policy.py` and the run-state model.
+
 ## Purpose
 
 Define a runtime Working Memory model used only during workflow execution to maintain operational context, coordination state, and action continuity.

@@ -1,0 +1,734 @@
+{
+  "invocation_id": "inv-5df08e171670-03-002",
+  "run_id": "run-5df08e171670",
+  "work_item_id": "run-5df08e171670::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:18970900d202e7f6f29afa89a9a7721e",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:33d317684aece20ce5b970f6b595c107",
+      "agents/architect/identity.md": "sha256:fc073d2135f891349e8f6639243819e3",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:eccf44aede67c91ba47cae943efb93cf",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:d9fa58935c242fb724123ea69d5eeb61",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/architect/system.md",
+        "agents/architect/reasoning.md",
+        "agents/architect/output.md",
+        "agents/architect/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/architect/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/architect/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/architect/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 50155,
+      "full_bytes": 108943
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "not-triggered",
+      "area": "database",
+      "basis": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in input:architecture-context",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "required",
+      "area": "performance",
+      "basis": "area performance triggered by 'profile' in input:change-request",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "feature-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/demo-mode-feature-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-feature-request.md",
+        "text": "# Feature Request \u2014 Autonomous end-to-end demonstration capture (`/implement --demo`)\n\n## Source\n\nOperator request, 2026-09-08, extended 2026-09-12 and 2026-09-14. Type: capability addition.\nPriority: High \u2014 the capability exists to support a live product presentation, and the\nframework had no way to show itself working.\n\n## Request\n\nThe framework can execute a governed multi-agent run but cannot *show* one. Explaining it to\nsomeone who has not seen it means talking over a state table. Add a capability by which a run\nrecords itself and produces a distribution-ready demonstration film with no human editing\nstep, so that a presenter has evidence rather than assertions.\n\nThree deliverables, in the order they were asked for:\n\n1. **`/implement --demo`.** An optional flag on the existing command that turns on recording\n   for a run. Every canonical runtime event, dispatch prompt, agent result, validation\n   verdict, gate decision, and host tool call becomes a millisecond-stamped execution marker.\n   At run completion the framework compiles the presentation itself, with no further command.\n2. **Film the real application.** The first implementation drew a synthetic dashboard. That\n   was rejected: the demonstration must show Claude Desktop actually doing the work, recorded\n   from the screen, with the marker stream used to decide where to cut rather than to draw.\n3. **Explain it to a non-technical audience.** The first cut ran 35 seconds with terse\n   technical narration. The audience is older and non-technical, so the film must run for\n   several minutes, explain every step in plain language, show each spoken line on screen as\n   a caption, and be accompanied by a written script the presenter can read beforehand.\n\n## Acceptance criteria\n\n- `--demo` on `plan` records a run; without it the demo package is never imported and the\n  runtime's only cost is one file-existence check per emitted event.\n- Markers carry UTC millisecond timestamps and the exchange with each agent as observed at\n  the adapter boundary; a replayed event does not produce a second marker.\n- A recording of the Claude Desktop window can be started and stopped from the runtime, keeps\n  running while the run proceeds, and records the instant its own clock read zero.\n- The editor maps every marker onto a frame of that recording and cuts the footage against the\n  run, condensing waiting with the factor stated on screen.\n- A demonstration for a first-time audience runs to minutes, is narrated in plain language,\n  carries captions, and ships with a script and a subtitle file.\n- Footage that filmed anything other than the target window is never published.\n- A run that completes while filming stops its own camera and compiles the film once.\n- Absent optional dependencies degrade to a recorded fallback rather than a failure.\n- The existing test suite stays green and the framework verifiers continue to pass.\n\n## Constraints\n\n- Additive only. No change to gate semantics, the Producer Exclusion Rule, the state machine,\n  recovery classification, or any existing artifact contract.\n- No new mandatory dependency. Pillow, ffmpeg, OBS Studio, and every text-to-speech engine are\n  optional, and each absence must be a recorded fallback.\n- Nothing in the demo layer may raise into the run it observes.\n- Only the target window may ever be recorded, and the recording's own audio is never\n  published.",
+        "digest": "sha256:563fa9d0a3547f8f865e6410fb0f4547"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/demo-mode-change-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-change-request.md",
+        "text": "# Change Request \u2014 Demo mode (`/implement --demo`), runtime 0.8.0\n\n## Change class\n\n`capability-addition`, as classified by `config/self-hosting-profile.md` and confirmed by\n`python .claude/runtime/self_hosting.py classify --path .claude/runtime/demo/editor.py`.\nThe framework gains a runtime behaviour it did not have. Routed to `/implement` over\n`workflows/implement-feature.md`, entry phase `scope-and-acceptance`.\n\n## What changes\n\n### New: the demo package, `runtime/demo/` (14 modules, about 5,600 lines)\n\n| Module | Responsibility |\n|---|---|\n| `__init__.py` | The public surface and the three integration points; the autonomous-build claim |\n| `context.py` | `DemoContext`: the per-run switch and its options |\n| `recorder.py` | Canonical events, on-disk envelopes, and host tool hooks to execution markers |\n| `timeline.py` | Markers to presentation scenes; the three narration registers |\n| `narration.py` | Text-to-speech engine chain, delivery rate, WAV assembly |\n| `captions.py` | Spoken lines to timed cues, a subtitle file, and a script |\n| `obs_ws.py` | A standard-library obs-websocket v5 client |\n| `capture.py` | Window targeting, both capture backends, the capture manifest |\n| `capture_helper.py` | The detached process that owns a recording and watches for occlusion |\n| `overlays.py` | The presentation frame drawn around the footage |\n| `editor.py` | Edit decision list, narration fitting, the ffmpeg cut |\n| `renderer.py`, `video_builder.py`, `deck.py` | The drawn-dashboard fallback when nothing was filmed |\n\n### Modified: `runtime/framework_runtime.py`\n\n- `RUNTIME_VERSION` 0.7.0 to 0.8.0.\n- `add_request_args` gains the `--demo` parameter group (seven optional flags).\n- `plan_run` gains `enable_demo()`, called after the execution request is written and before\n  the first event, so the recording opens on the run being accepted.\n- `RunLedger.emit` gains a tap guarded by one `Path.exists()`.\n- A new `demo` subcommand: status, build, backfill, host hook, record start and stop.\n\n### Modified: registry and command contract\n\n- `registry/commands.yaml`: the `implement` record 1.0.0 to 1.1.0 (MINOR, additive parameters\n  with safe defaults, per the versioning strategy in `domain-model/command-specification.md`).\n- `commands/implement.md`: a Parameters section documenting the flag group.\n\n### Modified: CLI wrapper and documentation\n\n- `omn_agent/cli.py`, `runner.py`, `update.py`: `--demo` forwarded to the runtime.\n- `runtime/README.md`, `docs/USER-GUIDE.md` (section 5g) and its rendered HTML, `README.md`.\n\n### New: tests\n\n`tests/test_demo_mode.py`, `test_demo_capture.py`, `test_demo_pacing.py`,\n`test_demo_captions.py`, and `tests/fixtures/fake_obs.py` \u2014 1,718 lines, 92 cases.\n\n## What does not change\n\nNo workflow specification, Phase Model, gate matrix, agent contract, artifact template,\nvalidator, state transition table, recovery policy, or existing registry record other than the\n`implement` command's own version. No existing test was weakened; two were tightened where\nthis change made their former assertions wrong.\n\n## Defects found and fixed during the change\n\nEach was found by inspecting output, not by reading code:\n\n1. Window-level `gdigrab` returns black frames on a GPU-composited Electron window.\n2. ffmpeg on Windows ignores `q` on a piped stdin, so recordings were never finalised; they\n   are now Matroska and stopped with a console break.\n3. `SW_RESTORE` un-maximises a maximised window.\n4. A variable-rate capture defeats `tpad`, so every hold silently padded nothing.\n5. The ffmpeg backend films a place on the screen, so a window losing focus filmed the\n   operator's desktop. Occlusion is now watched for, recovered from, and excluded.\n6. `run_completed` fires before the closing gate is decided, so the camera stopped one beat\n   short of the final approval.\n7. The film was compiled twice, because two events both mean \"finished\".\n\n## Rollback\n\nDelete `runtime/demo/` and the four test modules, revert the three integration points in\n`framework_runtime.py`, restore `RUNTIME_VERSION` to 0.7.0, revert the `implement` record to\n1.0.0 and its specification, and revert the CLI and documentation edits. No run evidence\noutside `runs/<run>/demo/` is invalidated, because nothing else was written.",
+        "digest": "sha256:5d21bb1a8e746477e8ea85a743e94068"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/demo-mode-business-intent.md",
+        "source_file": ".claude/runs/inputs/demo-mode-business-intent.md",
+        "text": "# Business Intent \u2014 Showing the framework working\n\n## The problem this exists to solve\n\nThe framework's value is invisible. What it produces is a governed trail: artifacts, gate\ndecisions, validation reports, recovery ledgers. Every one of those is the right output for an\nauditor and the wrong output for a first meeting. Explaining the framework today means\nnarrating a state table to someone who has no reason yet to care, and the claim doing the most\nwork in that conversation \u2014 that specialist agents hand work to each other and that no agent\ncan get past a human checkpoint \u2014 is precisely the claim a table cannot demonstrate.\n\n## Target users\n\n| User | What they need |\n|---|---|\n| Presenter | To show the framework working, without spending a day editing video |\n| Prospective adopter, non-technical | To understand the shape of the process without reading the screen |\n| Prospective adopter, technical | To confirm the film is a real run and not a staged mock-up |\n| Existing team | A short reference cut of a lifecycle, for onboarding |\n\nThe second is the demanding one and drove the final design. The stated audience is older and\nnon-technical. They will listen rather than read; they will not pause and scrub; they will not\nknow what a dispatch is. A film for them must run long enough to follow, explain each step in\nordinary words, and carry captions for anyone who cannot hear it.\n\n## Business outcomes sought\n\n- A presenter can produce a distribution-ready demonstration from a real run without editing.\n- What is shown is evidence, not a mock-up: every frame is the real application, and the film\n  states how it was condensed.\n- The demonstration can be re-cut for a different audience from the same recording, because\n  recording is the expensive part and it should happen once.\n- A presenter who is not the author can deliver it, from a written script.\n\n## Non-goals\n\n- Not a monitoring or observability product. The markers exist to cut a film, not to run a\n  dashboard.\n- Not a general video editor. It edits one thing: a recording of a run, against that run.\n- Not a replacement for the final report, the completion package, or the recovery ledger.\n- Not a way to make a run look better than it was. A rejection, a retry, and a condensed wait\n  are all shown, with the condensation factor stated on screen.\n\n## Constraints the business places on the solution\n\n- A demonstration is made to be published, so nothing that was not part of the run may end up\n  in it. This is the hard constraint, and it outranks completeness of the film.\n- The capability must cost nothing when unused. A team that never runs a demonstration must\n  not pay for its existence in dependencies or in runtime.\n- No new mandatory dependency, because the framework installs into other people's repositories.\n\n## How success is judged\n\nA complete lifecycle, filmed live, cut without human editing, understandable end to end by\nsomeone meeting the framework for the first time, and verifiably free of anything that was not\npart of the run.",
+        "digest": "sha256:d7c3a27030f383417920cef88eb56166"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/demo-mode-architecture-context.md",
+        "source_file": ".claude/runs/inputs/demo-mode-architecture-context.md",
+        "text": "# Architecture Context \u2014 Where demo mode sits in the runtime\n\n## Current-state structure this change extends\n\n`runtime/framework_runtime.py` (about 5,700 lines) implements the executable subset of\n`config/runtime.md` and `config/execution-engine.md`. The components relevant here:\n\n- **Execution Context Store** (`RunLedger`). Owns `runs/<run>/events.jsonl`, an append-only\n  stream of the fifteen canonical event types in `CANONICAL_EVENTS`. Every state change in a\n  run passes through `RunLedger.emit`, which is therefore the single point at which the whole\n  progress of a run is observable.\n- **Agent Invocation Gateway** (`cmd_dispatch`). Writes the canonical Agent Invocation Envelope\n  and the dispatch prompt to `runs/<run>/states/<phase>/`, then leases to the host-subagent\n  adapter. The runtime core never talks to a model, so this boundary is the only place the\n  exchange with an agent is visible.\n- **Validation Engine** (`VALIDATORS`). Writes `validation-report.json` per phase.\n- **Task Context** (`task_context.py`) and **execution metrics** (`execution_metrics.py`),\n  added in 0.7.0, which already derive per-run documents from persisted evidence only.\n\n## The architectural fact this change rests on\n\nThe runtime already records everything a demonstration needs, in order, with timestamps, and\nalready writes the prompt and the result to disk at the moment each is complete. Nothing new\nhas to be instrumented. What was missing was a consumer of that record, and a clock that ties\nit to a picture.\n\n## Design constraints inherited from the existing architecture\n\n1. **The runtime core owns control flow; adapters own external integration.** Screen capture,\n   OBS, ffmpeg, and speech synthesis are external integrations and must sit behind the same\n   kind of boundary the model adapters sit behind, not inside the execution path.\n2. **Deliberately not implemented** (`runtime/README.md`): a metrics pipeline. Demo mode must\n   not become one by the back door. Markers exist to cut a film.\n3. **`config/execution-engine.md`**: recovery behaviour is policy-driven and failures are\n   classified, never handled at the call site. A demo failure is not a run failure and must\n   not enter that machinery at all; it is caught and logged.\n4. **Zero-bloat context** (`config/runtime.md`, Progressive Module Loading). Runtime 0.7.0 was\n   an effort to reduce what a dispatch reads. A new capability must not add to it.\n5. **The installed form.** `FW_PREFIX` exists because the framework is `.claude/` in its own\n   repository and `.omn-agent/` once installed elsewhere. Anything path-facing must derive\n   from it.\n\n## Integration surface available\n\n`RunLedger.emit` is the natural tap: one function, every event, already ordered and stamped.\nThe cost of a guard there is one `stat()` per event. `plan_run` is the natural place to arm\nthe capability, because it is where a run is materialised and where the execution request is\nwritten. `main()`'s subparser set is where an operator-facing surface is added.\n\n## Prior art in this repository to reuse rather than reinvent\n\n- `execution_metrics.py` already estimates per-dispatch context cost and is the right source\n  for the token figures a film reports.\n- `task_context.py` already parses artifacts deterministically, never by summarisation; the\n  same discipline applies to anything a marker asserts.\n- `artifact_lib.py` provides shared artifact parsing.\n- The colorized `status` tree in `framework_runtime.py` already establishes a visual\n  vocabulary for phases, gates, and their statuses.\n\n## Known environmental facts\n\n- Windows is the operator platform. OBS Studio 32.2.2 is installed with obs-websocket\n  bundled, but its server is disabled and its configuration is not writable by the agent.\n- No system ffmpeg; Pillow is present; Windows SAPI voices are available.\n- Claude Desktop is an Electron application: window class `Chrome_WidgetWin_1`, packaged under\n  WindowsApps, GPU-composited.\n\n## Risks this change must address\n\n- **Publication risk.** A screen recording may capture something that was not part of the run.\n  This is the dominant risk and the architecture must make it impossible to publish silently.\n- **Dependency risk.** Three optional external tools, each absent on some host.\n- **Evidence risk.** A film is a claim about a run. It must be derivable from the run's own\n  record, and it must state where it condensed time.",
+        "digest": "sha256:804a281170829bd910709cc9e1daa95d"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: PLAN-2026-0014\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/demo-mode-feature-request.md\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:563fa9d0a3547f8f865e6410fb0f4547\n  contextDigest: sha256:096076ff2cb34a9c66bf3c375efd1124\n```\n\nNotation. `S-001` to `S-011` are adopted verbatim from the in-scope register of the upstream\nscope definition `SCOPE-2026-0014` (`runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md`,\ndigest `sha256:c86aec5912c479f65ef54cdaec08ac1f`); `S-012` to `S-014` normalize its Constraints\nand Dependencies section. `Q-001` to `Q-005` are that artifact's open questions, carried\nforward with the ownership corrections the Scope Gate required. `AC-nnn` denotes an acceptance\ncriterion of that artifact, `X-nnn` an exclusion, and `D-nnn` a scope decision; `A-nnn`,\n`R-nnn`, `T-nnn`, and `Q-nnn` are this plan's own registers.\n\n## Executive Summary\n\nThis plan governs a framework-internal capability addition that lets a run record itself and\ncompile a distribution-ready demonstration with no human editing step, for presenters who must\nshow the framework working to a first-time, non-technical audience. Per scope decision `D-001`\nthe capability is already built and its tests pass, so the plan decomposes the delivered change\ninto reconciliation, verification, and governance closure rather than into fresh construction.\nSuccess is a complete lifecycle run that films itself, cuts itself, and is followed end to end\nby a viewer who has never seen the framework, containing nothing that was not part of that run.\nThe work is 32 tasks across 5 execution waves, owned by eight agents, with 44 dependency edges\nand three prerequisites outside the plan's authority. The highest-impact risk is `R-003`: the\ncapture path for the live presentation is unsettled, and while it stays unsettled only the\nreduced substitute is demonstrable, which leaves `AC-008` undemonstrable; the decision that\ncloses it, `T-004`, is therefore scheduled in wave 1. Plan status is `complete`: all six open\nquestions are non-blocking, and the uncalibrated running-length threshold behind `AC-010` is\nplanned against its decidable core under assumption `A-002`.\n\n## Business Objectives\n\n- `BO-01` A first-time, non-technical viewer can follow a governed run end to end and judge it\n  as evidence rather than assertion; measured by that viewer completing the demonstration and\n  recording the outcome of the review. Traces `S-007`, `S-008`.\n- `BO-02` A presenter obtains the demonstration from the run itself, with no editing step and\n  no second command; measured by one complete recorded lifecycle yielding exactly one finished\n  demonstration. Traces `S-001`, `S-006`, `S-010`.\n- `BO-03` Material that cannot be shown to be of the run never leaves the team; measured by the\n  absence of withheld segments from any finished demonstration and by each withholding being\n  listed. Traces `S-002`.\n- `BO-04` A team that never uses the capability pays nothing for its existence; measured by an\n  unrequested run requiring no additional host tool and performing one existence check per\n  emitted event. Traces `S-003`, `S-009`.\n- `BO-05` The framework's governed delivery is unaffected by the capability's presence;\n  measured by an observed run's status, artifacts, gate decisions, and recovery outcome being\n  identical with and without recording, and by the existing suite and verifiers passing.\n  Traces `S-004`, `S-012`, `S-014`.\n- `BO-06` The framework's own change record holds for this addition; measured by the command\n  contract carrying an additive version record and by a change proposal linking this run's\n  artifacts. Traces `S-011`, `S-013`.\n\n## Technical Objectives\n\n- `TO-01` Every governed step of a recorded run is captured once, in order, stamped in UTC to\n  the millisecond, carrying the exchange observed at the agent boundary, including for a\n  replayed step; verified by reconciliation against the run's event stream and phase\n  directories. Serves `BO-01`.\n- `TO-02` Every segment of a finished demonstration is material of the application performing\n  that run, with each condensed wait carrying its factor on screen and any rejection or retry\n  shown; verified by segment-level review against the run's record. Serves `BO-01`.\n- `TO-03` The presentation layer is intelligible without prior knowledge: it runs to minutes,\n  narrates in ordinary language, shows each spoken line on screen, and ships a script and a\n  subtitle file; verified by first-time-viewer review and output inspection. Serves `BO-01`.\n- `TO-04` Recording opens at the moment the run is accepted when requested and never otherwise;\n  verified by comparing the run directories of a requested and an unrequested run of the same\n  workflow. Serves `BO-02`.\n- `TO-05` Compilation occurs exactly once, after the final gate decision, with no further\n  command; verified on one complete lifecycle run. Serves `BO-02`.\n- `TO-06` Material not shown to be of the target window, and the recording's own audio, are\n  withheld and the withholding is recorded; verified by inspecting the recording manifest\n  against the finished demonstration. Serves `BO-03`.\n- `TO-07` No fault in the recording or presentation path reaches the observed run; verified by\n  inducing a fault and comparing ledger and artifacts against an unrecorded run. Serves `BO-05`.\n- `TO-08` No optional external tool is required, and each absence yields a recorded\n  substitution rather than a failure; verified with each optional tool absent in turn. Serves\n  `BO-04`.\n- `TO-09` A second demonstration, differing in length or narration, is produced from an existing\n  recording without executing or filming the run again; verified by two differing outputs from\n  one recording. Serves `BO-02`.\n- `TO-10` The command's published contract carries the optional recording request and a version\n  record stating an additive change with safe defaults; verified by inspection against the\n  declared versioning rule. Serves `BO-06`.\n- `TO-11` The existing test suite and the framework verifiers pass over the whole change with no\n  previously passing check weakened; verified by executing them and reviewing the change for\n  weakened assertions. Serves `BO-05`.\n\n## Scope\n\n### In Scope\n\n- `S-001` An operator can ask, when a run is requested, that the run record itself, and the run\n  then proceeds exactly as it would have without the request \u2014 `T-002`, `T-003`.\n- `S-002` Nothing that was not part of the run reaches the finished demonstration; withheld\n  material is recorded \u2014 `T-006`, `T-007`.\n- `S-003` A run that was not asked to record costs nothing for the capability's existence \u2014\n  `T-008`, `T-009`.\n- `S-004` A fault anywhere in the recording or presentation path is absorbed and recorded there,\n  leaving the observed run identical to an unrecorded one \u2014 `T-010`, `T-011`, `T-012`.\n- `S-005` Every governed step of a recorded run is recorded once, in order, stamped in UTC to\n  the millisecond, carrying the agent-boundary exchange \u2014 `T-013`, `T-014`.\n- `S-006` A recorded run that reaches completion stops its own camera and compiles exactly once,\n  with no further command and no editing step \u2014 `T-014`, `T-015`.\n- `S-007` The demonstration shows the application performing the run, cut against that run's\n  record, with condensation stated on screen and rejections and retries shown \u2014 `T-004`,\n  `T-016`, `T-017`.\n- `S-008` A first-time viewer can follow the demonstration end to end: minutes long, ordinary\n  language, each spoken line on screen, arriving with a script and a subtitle file \u2014 `T-018`,\n  `T-019`, `T-020`, `T-021`, `T-022`.\n- `S-009` An absent optional external tool yields a reduced demonstration with its substitution\n  recorded, rather than a failure \u2014 `T-023`, `T-024`.\n- `S-010` A second demonstration for a different audience is produced from an existing recording\n  without executing or filming the run again \u2014 `T-025`, `T-026`, `T-027`.\n- `S-011` The recording request is discoverable from the command's published contract, whose\n  recorded version states it gained optional behaviour additively \u2014 `T-012`, `T-028`, `T-029`.\n- `S-012` The change is additive only: no gate semantics, Producer Exclusion Rule, state\n  machine, recovery classification, or existing artifact contract is altered \u2014 `T-001`, `T-012`.\n- `S-013` The change is governed by the self-hosting profile: carried by a command run and\n  carrying a change proposal that links that run's artifacts \u2014 `T-030`, `T-031`.\n- `S-014` The existing test suite and the framework verifiers pass over the delivered change\n  with no previously passing check weakened \u2014 `T-012`, `T-032`.\n\n### Out of Scope\n\n- `X-001` Telemetry, metrics, or observability built on the recorded steps \u2014 excluded by `D-005`;\n  the record is bounded to cutting a demonstration and is not an interface.\n- `X-002` A general-purpose editing capability for material other than a recording of a run \u2014\n  excluded because the capability edits one thing, a run's own recording, against that run.\n- `X-003` Replacing or altering the final report, the completion package, or the recovery\n  ledger \u2014 excluded because those remain the governed record and a demonstration is not one.\n- `X-004` Presenting a run more favourably than it happened \u2014 excluded because the material's\n  worth rests on it being the record of a real run.\n- `X-005` Making any external capture, encoding, or speech tool mandatory, or installing or\n  configuring one on the operator's machine \u2014 excluded by the no-new-mandatory-dependency\n  constraint.\n- `X-006` Any change to gate semantics, the Producer Exclusion Rule, the state machine, recovery\n  classification, or an existing artifact contract \u2014 excluded by the additive-only constraint\n  recorded as `S-012`.\n- `X-007` Recording by default, and recording from any command other than the one the request\n  names \u2014 excluded by `D-004`.\n- `X-008` Publishing, hosting, or distributing a finished demonstration, and deciding that a\n  particular one may be released \u2014 excluded because release judgement rests outside this\n  boundary; the approver is named by `Q-004`.\n\n### Deferred\n\n- A short onboarding reference cut as a deliverable distinct from `S-010` \u2014 brought into scope\n  if `T-025` decides `Q-005` against it being satisfied by `S-010`.\n- Enabling the recording application's control server on the operator platform \u2014 brought into\n  scope only as an operator-side action if `T-004` decides `Q-003` that way; configuring that\n  application remains `X-005`.\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | The change set the change-request input records is complete and is the artifact this plan governs, per `D-001` | plan-wide | The plan governs the wrong artifact; reconciliation tasks become construction tasks and the wave structure is re-derived | omn-tech-lead |\n| A-002 | Until `Q-001` and `Q-002` settle, `AC-010` is planned against its decidable core: narration of every step in ordinary language and each spoken line shown on screen, with running length uncalibrated | `S-008` | A settled threshold above what was delivered reopens the audience layer for re-pacing work | omn-product-owner |\n| A-003 | The live presentation runs on the operator platform the architecture-context names, so `Q-003` is a choice between the alternative capture path and an operator-side enablement outside this change | `S-007` | A different host changes the capture options and the reconciliation scope of `T-006` and `T-016` | omn-tech-lead |\n| A-004 | A reviewer who has not seen the framework is available to perform the `AC-010` review before the Verification Gate | `S-008` | `AC-010` cannot be decided in this run and moves to a follow-up with its own owner | omn-qa |\n| A-005 | The closure-phase work can be carried out even though the runtime's implemented surface does not execute `documentation-and-release-handoff` | plan-wide | `T-029`, `T-030`, and `T-031` have no executing owner and the Closure Gate cannot be evidenced | omn-orchestrator |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | `Q-001` or `Q-002` is unresolved when the Verification Gate is reached | `AC-010` has no pass condition and plan acceptance cannot close | medium | T-018, T-019, T-022 | Settle both before the Verification Gate through `T-018` and `T-019` | omn-product-owner |\n| R-002 | requirement | `Q-005` is unresolved when the Planning Gate is decided | The re-cut scope reopens after planning and `S-010` acceptance shifts | medium | T-025, T-026, T-027 | Decide `Q-005` in wave 1 through `T-025` | omn-product-owner |\n| R-003 | technical | `Q-003` is unresolved when the reconciliation wave starts | Only the reduced substitute is demonstrable, and `AC-008` cannot be demonstrated at all | high | T-004, T-006, T-016, T-017 | Decide the capture path in wave 1 through `T-004`, before any dependent reconciliation | omn-tech-lead |\n| R-004 | technical | A correction made during reconciliation adjusts an existing check to keep the suite green | `S-014` fails change-wide and the additive-only claim is lost | low | plan-wide | Change-wide regression evidence in `T-032` and weakened-assertion review in `T-012` | omn-dev-2-reviewer |\n| R-005 | dependency | No reviewer unfamiliar with the framework is available before the Verification Gate | The `AC-010` review cannot be performed and `BO-01` is unevidenced | medium | T-022 | Nominate the reviewer while `T-019` defines the review | omn-qa |\n| R-006 | dependency | The verification host cannot be varied to present each optional external tool absent in turn | `AC-012` cannot be demonstrated and `TO-08` is unevidenced | medium | T-024 | Agree the host variation with the verification host owner before `T-024` starts | omn-qa |\n| R-007 | security | A recorded window or a recorded agent-boundary exchange carries restricted content into a finished demonstration | Disclosure outside the team, the dominant risk `D-003` names | medium | T-006, T-007, T-016 | Publication-safety evidence in `T-007` and the named approver from `T-005` | omn-tech-lead |\n| R-008 | operational | A finished demonstration is released before `Q-004` names who may approve release | Material leaves the team with no accountable approver | medium | T-005, T-029 | Name the approver in `T-005` and record the path in `T-029` | omn-tech-lead |\n| R-009 | operational | The run reaches `documentation-and-release-handoff` and blocks at capability resolution | Closure tasks are unevidenced and the Closure Gate has nothing to decide on | medium | T-029, T-030, T-031 | Settle the closure route in `T-030` before the closure tasks start | omn-orchestrator |\n| R-010 | delivery | A reconciliation task finds a divergence needing more than a bounded correction | The run returns to `solution-design-and-risk-assessment` and waves 2 to 5 are re-derived | medium | T-002, T-006, T-008, T-010, T-013, T-015, T-016, T-020, T-023, T-026, T-028 | Fix the delivered structure in `T-001` before reconciliation, and route divergence through `T-012` | omn-tech-lead |\n\n## Task Breakdown\n\n### T-001 Record the technical design of the delivered demonstration capability\n\n- Owner: architect\n- Complexity: L (confidence: medium)\n- Depends on: none\n- Traces to: S-001, S-004, S-012\n- Status: ready\n- Description: The delivered capability's structure, its integration points with the run\n  lifecycle, and the boundary that keeps it additive are recorded as the design of record,\n  with the structural risks that boundary rests on.\n- Acceptance Criteria:\n  - The design package names every integration point between the capability and the run\n    lifecycle, and states for each how the observed run is left unchanged.\n  - The design package states the additive-only boundary of `S-012` and the evidence by which\n    a reviewer can check that no governed lifecycle behaviour was altered.\n- Gate: Design Gate\n\n### T-002 Reconcile the opt-in recording request against S-001\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-001\n- Traces to: S-001\n- Status: ready\n- Description: The delivered request path is reconciled against `S-001`, so that recording is\n  in effect from the moment a requested run is accepted and a run proceeds identically whether\n  or not it was requested, with any divergence recorded or corrected within the boundary of\n  `T-001`.\n- Acceptance Criteria:\n  - The reconciliation record shows the point at which recording begins relative to run\n    acceptance, with no divergence from `S-001` left open.\n  - The reconciliation record confirms the requested and unrequested paths differ in no step of\n    the run lifecycle.\n- Gate: none\n\n### T-003 Produce the paired-run evidence for the recording request\n\n- Owner: omn-qa\n- Complexity: S (confidence: high)\n- Depends on: T-002\n- Traces to: S-001\n- Status: ready\n- Description: Evidence exists for `AC-001` from two runs of the same workflow, one requested\n  with recording and one without, compared by their run directories.\n- Acceptance Criteria:\n  - The evidence shows the requested run recording from the moment of acceptance.\n  - The evidence shows the unrequested run holding no recording of any kind.\n- Gate: Verification Gate\n\n### T-004 Decide the capture path for the live presentation\n\n- Owner: omn-tech-lead\n- Complexity: M (confidence: low)\n- Depends on: none\n- Traces to: S-002, S-007\n- Status: assumption-dependent\n- Description: `Q-003` is settled: either the recording application's control server is enabled\n  on the operator platform, or the alternative capture path is accepted as the one the live\n  presentation uses, with the consequence for `S-007` stated either way.\n- Acceptance Criteria:\n  - The decision names the capture path the live presentation will use and the party who owns\n    the host it runs on.\n  - The decision states whether real-window material is obtainable on that path, and therefore\n    whether `AC-008` is demonstrable or is carried as an accepted gap under `D-003`.\n- Gate: Design Gate\n\n### T-005 Name the approver for releasing a finished demonstration\n\n- Owner: omn-tech-lead\n- Complexity: XS (confidence: high)\n- Depends on: none\n- Traces to: S-002\n- Status: ready\n- Description: `Q-004` is settled by naming the role that approves that a particular finished\n  demonstration may leave the team, given that distribution itself is `X-008`.\n- Acceptance Criteria:\n  - The named approver is a registered role, recorded with the condition under which approval\n    is given.\n  - The record states that approval is required before any finished demonstration is shown\n    outside the producing team.\n- Gate: Closure Gate\n\n### T-006 Reconcile the capture boundary against S-002\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-001, T-004\n- Traces to: S-002\n- Status: assumption-dependent\n- Description: The delivered capture path is reconciled against `S-002` on the path `T-004`\n  selected, so that material in which the target window was not the window on screen, and the\n  recording's own audio, are withheld and each withholding is recorded in the manifest.\n- Acceptance Criteria:\n  - The reconciliation record shows every withholding condition the capture path detects and\n    the manifest entry it writes for each.\n  - The reconciliation record confirms the recording's own audio never reaches a finished\n    demonstration.\n- Gate: none\n\n### T-007 Produce the publication-safety evidence for an obscured-window run\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-006\n- Traces to: S-002\n- Status: ready\n- Description: Evidence exists for `AC-002` from a run in which the target window was\n  deliberately obscured, inspecting the recording manifest against the finished demonstration.\n- Acceptance Criteria:\n  - The evidence shows no segment in which the target window was not the window on screen, and\n    no audio captured by the recording itself, present in the finished demonstration.\n  - The evidence shows every withheld segment listed in the recording manifest.\n- Gate: Verification Gate\n\n### T-008 Reconcile the unrequested run's cost against S-003\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-001\n- Traces to: S-003\n- Status: ready\n- Description: The cost a run pays when it did not ask to record is reconciled against `S-003`,\n  so that no additional host dependency is required and no work beyond a single existence check\n  per emitted event is performed.\n- Acceptance Criteria:\n  - The reconciliation record shows the unrequested path importing nothing from the\n    demonstration package.\n  - The reconciliation record shows exactly one existence check per emitted event and no\n    further work on that path.\n- Gate: none\n\n### T-009 Produce the unrequested-run cost evidence\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-008\n- Traces to: S-003\n- Status: ready\n- Description: Evidence exists for `AC-003` from a review of the unrequested path against its\n  stated cost, confirmed by executing a run on a host where none of the optional external tools\n  is present.\n- Acceptance Criteria:\n  - The evidence shows the run completing on a host without any optional external tool.\n  - The evidence shows the per-event cost matching the single existence check `S-003` states.\n- Gate: Verification Gate\n\n### T-010 Reconcile fault absorption against S-004\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: medium)\n- Depends on: T-001\n- Traces to: S-004\n- Status: ready\n- Description: The delivered isolation of the recording and presentation path is reconciled\n  against `S-004`, so that a fault raised anywhere in that path is absorbed and recorded there\n  and reaches no part of the observed run.\n- Acceptance Criteria:\n  - The reconciliation record names each boundary at which a fault is absorbed and the log it\n    is recorded in.\n  - The reconciliation record shows no path by which a fault in the demonstration layer can\n    alter the observed run's status, artifacts, gate decisions, or recovery outcome.\n- Gate: none\n\n### T-011 Produce the induced-fault evidence\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-010\n- Traces to: S-004\n- Status: ready\n- Description: Evidence exists for `AC-004` from a recorded run with an induced fault in the\n  recording path, compared against an unrecorded run of the same workflow.\n- Acceptance Criteria:\n  - The evidence shows identical status, artifacts, gate decisions, and recovery outcome across\n    the two runs.\n  - The evidence shows the induced fault recorded within the recording's own log.\n- Gate: Verification Gate\n\n### T-012 Assess the delivered change for governance conformance\n\n- Owner: omn-dev-2-reviewer\n- Complexity: L (confidence: medium)\n- Depends on: T-002, T-006, T-008, T-010, T-013, T-015, T-016, T-020, T-023, T-026, T-028\n- Traces to: S-004, S-011, S-012, S-014\n- Status: ready\n- Description: The delivered change, as the reconciliation tasks left it, is assessed\n  change-wide for conformance to the additive-only boundary, to the declared versioning rule,\n  and to the prohibition on weakening an existing check, with findings classified by severity.\n- Acceptance Criteria:\n  - The findings record confirms no gate semantics, Producer Exclusion Rule, state machine,\n    recovery classification, or existing artifact contract was altered.\n  - The findings record confirms the command's recorded version states an additive change with\n    safe defaults, satisfying `AC-014`.\n  - The findings record confirms no previously passing check was weakened anywhere in the\n    change, this being a change-wide assessment rather than one scoped to a single task.\n- Gate: Review Gate\n\n### T-013 Reconcile the marker record against S-005\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: medium)\n- Depends on: T-001\n- Traces to: S-005\n- Status: ready\n- Description: The delivered record of a recorded run is reconciled against `S-005`, so that\n  every runtime event, dispatch, agent result, validation verdict, gate decision, and host tool\n  call appears once, in order, stamped in UTC to the millisecond, carrying the exchange observed\n  at the agent boundary, with a replayed step producing no second entry.\n- Acceptance Criteria:\n  - The reconciliation record maps each of the six governed step kinds to the point at which it\n    is recorded.\n  - The reconciliation record shows the rule by which a replayed step is recognised and not\n    recorded twice.\n- Gate: none\n\n### T-014 Produce the completed-run reconciliation evidence\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-013, T-015\n- Traces to: S-005, S-006\n- Status: ready\n- Description: Evidence exists for `AC-006` and `AC-007` from one complete lifecycle run,\n  reconciling its recorded steps against its event stream and phase directories and observing\n  where its recording ended.\n- Acceptance Criteria:\n  - The evidence shows each governed step once, in order, stamped in UTC to the millisecond,\n    including a replayed step.\n  - The evidence shows the recording ending after the final gate decision and exactly one\n    finished demonstration produced without a further command.\n- Gate: Verification Gate\n\n### T-015 Reconcile the closure of a recorded run against S-006\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-001\n- Traces to: S-006\n- Status: ready\n- Description: The delivered closure path is reconciled against `S-006`, so that a completing\n  recorded run stops its own recording only after its last gate is decided and compiles the\n  finished demonstration exactly once.\n- Acceptance Criteria:\n  - The reconciliation record shows the signal that ends recording and its position relative to\n    the final gate decision.\n  - The reconciliation record shows the guard that prevents a second compilation when more than\n    one completion signal is emitted.\n- Gate: none\n\n### T-016 Reconcile the cut of the demonstration against S-007\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-001, T-004\n- Traces to: S-007\n- Status: assumption-dependent\n- Description: The delivered editing path is reconciled against `S-007` on the capture path\n  `T-004` selected, so that every marker maps onto a frame of the recording, each condensed wait\n  states its factor on screen, and a rejection or retry in the run's record appears in the cut.\n- Acceptance Criteria:\n  - The reconciliation record shows the mapping from a recorded step to the frame it cuts\n    against, and the fallback when a marker has no frame.\n  - The reconciliation record shows the condensation factor rendered on screen for every\n    condensed wait.\n- Gate: none\n\n### T-017 Produce the segment-level evidence that the demonstration is material of the run\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-016\n- Traces to: S-007\n- Status: ready\n- Description: Evidence exists for `AC-008` and `AC-009` from a segment-by-segment review of a\n  finished demonstration against the recorded steps of the run it was cut from, that run's\n  ledger carrying a rejection and a retry.\n- Acceptance Criteria:\n  - The evidence records, for each segment, the recorded step it corresponds to and that the\n    segment is material of the application performing the run.\n  - The evidence shows the rejection and the retry present in the demonstration, and every\n    condensed wait carrying its factor on screen.\n- Gate: Verification Gate\n\n### T-018 Decide the minimum running length that settles AC-010\n\n- Owner: omn-product-owner\n- Complexity: S (confidence: medium)\n- Depends on: none\n- Traces to: S-008\n- Status: ready\n- Description: `Q-001` is settled by stating the minimum running length a finished demonstration\n  must reach for a first-time audience, given that the inputs state only several minutes and\n  that a thirty-five second cut was rejected.\n- Acceptance Criteria:\n  - The decision states a minimum running length as a number, not as a description.\n  - The decision states whether the delivered output meets that length or requires re-pacing.\n- Gate: Scope Gate\n\n### T-019 Define the first-time-viewer review that decides AC-010\n\n- Owner: omn-qa\n- Complexity: S (confidence: medium)\n- Depends on: none\n- Traces to: S-008\n- Status: ready\n- Description: `Q-002` is settled by defining who performs the review that decides `AC-010`,\n  what the reviewer is asked, and what outcome counts as passing.\n- Acceptance Criteria:\n  - The definition names the reviewer profile, the questions asked, and the passing outcome.\n  - The definition states how the outcome is recorded as evidence for the Verification Gate.\n- Gate: Verification Gate\n\n### T-020 Reconcile the audience-facing presentation layer against S-008\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-001\n- Traces to: S-008\n- Status: assumption-dependent\n- Description: The delivered narration, caption, script, and subtitle outputs are reconciled\n  against the decidable core of `S-008` under `A-002`: every step narrated in ordinary language,\n  each spoken line shown on screen as it is spoken, and a script and subtitle file produced.\n- Acceptance Criteria:\n  - The reconciliation record shows every governed step of a recorded run carrying a narrated\n    line and a corresponding on-screen caption.\n  - The reconciliation record states the running length the delivered output produces, for\n    comparison against the threshold `T-018` sets.\n- Gate: none\n\n### T-021 Produce the inspection evidence for the presenter outputs\n\n- Owner: omn-qa\n- Complexity: XS (confidence: high)\n- Depends on: T-020\n- Traces to: S-008\n- Status: ready\n- Description: Evidence exists for `AC-011` from inspecting the output of a completed recorded\n  run for the written script and the subtitle file.\n- Acceptance Criteria:\n  - The evidence shows a written script a presenter can read beforehand present in the output.\n  - The evidence shows a subtitle file present in the output and aligned to the narrated lines.\n- Gate: Verification Gate\n\n### T-022 Conduct the first-time-viewer review of a finished demonstration\n\n- Owner: omn-qa\n- Complexity: M (confidence: low)\n- Depends on: T-018, T-019, T-020\n- Traces to: S-008\n- Status: assumption-dependent\n- Description: Evidence exists for `AC-010` from a review by a reviewer who has not seen the\n  framework, conducted as `T-019` defines and judged against the length `T-018` sets.\n- Acceptance Criteria:\n  - The review outcome is recorded against the passing condition `T-019` defined.\n  - The record states whether the demonstration met the minimum running length `T-018` set and\n    whether every step was followed in ordinary language.\n- Gate: Verification Gate\n\n### T-023 Reconcile the substitution path for absent optional tools against S-009\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: medium)\n- Depends on: T-001\n- Traces to: S-009\n- Status: ready\n- Description: The delivered degradation path is reconciled against `S-009`, so that the absence\n  of any one optional external tool yields a reduced demonstration with the substitution\n  recorded, and never a failure or a reduced output presented as material of the run.\n- Acceptance Criteria:\n  - The reconciliation record names, for each of the four optional external tools, the\n    substitution made when it is absent and where that substitution is recorded.\n  - The reconciliation record confirms a reduced output is never presented as material of the\n    run, per `D-002`.\n- Gate: none\n\n### T-024 Produce the substitution evidence with each optional tool absent in turn\n\n- Owner: omn-qa\n- Complexity: L (confidence: medium)\n- Depends on: T-023\n- Traces to: S-009\n- Status: ready\n- Description: Evidence exists for `AC-012` from a host on which each optional external tool is\n  removed in turn, inspecting the recorded substitution in each case.\n- Acceptance Criteria:\n  - The evidence shows a demonstration still produced with each of the four optional tools\n    absent in turn.\n  - The evidence shows the substitution recorded in each of those four cases.\n- Gate: Verification Gate\n\n### T-025 Decide whether the onboarding reference cut is a deliverable of this change\n\n- Owner: omn-product-owner\n- Complexity: XS (confidence: high)\n- Depends on: none\n- Traces to: S-010\n- Status: ready\n- Description: `Q-005` is settled by deciding whether the short reference cut for onboarding an\n  existing team is a requirement of this change or is satisfied by `S-010`.\n- Acceptance Criteria:\n  - The decision states one of the two outcomes and the scope consequence of it.\n  - Where the reference cut is a requirement, the decision states the deliverable it adds and\n    the criterion that would decide it.\n- Gate: Scope Gate\n\n### T-026 Reconcile re-cutting from an existing recording against S-010\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-001, T-025\n- Traces to: S-010\n- Status: ready\n- Description: The delivered path that produces a further demonstration from an existing\n  recording is reconciled against `S-010` as `T-025` bounds it, so that a second output differing\n  in length or narration is produced without executing or filming the run again.\n- Acceptance Criteria:\n  - The reconciliation record shows the inputs a second cut consumes and confirms none of them\n    requires re-running or re-filming the run.\n  - The reconciliation record states which of the differing-output dimensions, length or\n    narration, the delivered path supports.\n- Gate: none\n\n### T-027 Produce the two-cut evidence from one recording\n\n- Owner: omn-qa\n- Complexity: S (confidence: medium)\n- Depends on: T-026\n- Traces to: S-010\n- Status: ready\n- Description: Evidence exists for `AC-013` from two demonstrations produced from one existing\n  recording, differing in length or in how they are narrated.\n- Acceptance Criteria:\n  - The evidence shows two outputs from one recording that differ in length or narration.\n  - The evidence shows neither output required the run to be executed or filmed again.\n- Gate: Verification Gate\n\n### T-028 Reconcile the command's published contract against S-011\n\n- Owner: omn-dev-1-implement\n- Complexity: XS (confidence: high)\n- Depends on: T-001\n- Traces to: S-011\n- Status: ready\n- Description: The command specification and its registry record are reconciled against `S-011`,\n  so that the optional recording request is documented in the command's published parameters and\n  its recorded version states an additive change with safe defaults.\n- Acceptance Criteria:\n  - The reconciliation record shows the optional request documented in the command's parameter\n    documentation.\n  - The reconciliation record shows the registry version increment and the versioning rule it\n    was applied under.\n- Gate: none\n\n### T-029 Publish the release communication for the capability\n\n- Owner: omn-documentation\n- Complexity: S (confidence: low)\n- Depends on: T-005, T-028, T-032\n- Traces to: S-011\n- Status: assumption-dependent\n- Description: The capability's release note and user-facing documentation are published as one\n  release communication, stating the optional request, its safe default, the release-approval\n  path `T-005` named, and the verification outcome recorded in `T-032`.\n- Acceptance Criteria:\n  - The release note states the change as additive with safe defaults and cites the verification\n    evidence it rests on.\n  - The user-facing documentation describes the optional recording request and names the\n    approver required before a finished demonstration leaves the team.\n- Gate: Closure Gate\n\n### T-030 Settle how the closure-phase work is carried out\n\n- Owner: omn-orchestrator\n- Complexity: S (confidence: low)\n- Depends on: none\n- Traces to: S-013\n- Status: assumption-dependent\n- Description: `Q-006` is settled by stating how `documentation-and-release-handoff` work is\n  carried out and recorded for this run, given that the runtime's implemented surface does not\n  execute that phase.\n- Acceptance Criteria:\n  - The decision states the route by which `T-029` and `T-031` are executed and their outputs\n    recorded as run evidence.\n  - The decision states what the Closure Gate owners will decide on if the phase itself does not\n    dispatch.\n- Gate: Closure Gate\n\n### T-031 Produce the framework change proposal linking this run's artifacts\n\n- Owner: omn-documentation\n- Complexity: M (confidence: low)\n- Depends on: T-030, T-032\n- Traces to: S-013\n- Status: assumption-dependent\n- Description: The change proposal required of a framework-internal capability addition is\n  produced from `templates/framework-change-proposal.md` and links the artifacts this run\n  carried, as `config/self-hosting-profile.md` requires.\n- Acceptance Criteria:\n  - The proposal links the scope definition, this plan, the design package, the review findings,\n    and the verification evidence of this run by path.\n  - The proposal records the change class, the scope rows of the change, and the rollback the\n    change-request input states.\n- Gate: Closure Gate\n\n### T-032 Produce the change-wide regression evidence\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-012\n- Traces to: S-014\n- Status: ready\n- Description: Evidence exists for `AC-005` over the whole change: the existing test suite and\n  the framework verifiers, including the release-checklist verifier `S-013` requires, are\n  executed and their results recorded as run evidence.\n- Acceptance Criteria:\n  - The evidence shows the existing suite and the framework verifiers passing on the change as\n    reviewed, with results recorded per check.\n  - The evidence records that no previously passing check was weakened, cross-referencing the\n    finding `T-012` recorded.\n- Gate: Verification Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-002 | contract | The reconciliation binds to the integration points the design of record fixes |\n| T-001 | T-006 | contract | The capture boundary is reconciled against the structure the design records |\n| T-001 | T-008 | contract | The unrequested path's cost is reconciled against the recorded integration points |\n| T-001 | T-010 | contract | Fault absorption is reconciled against the isolation boundary the design states |\n| T-001 | T-013 | contract | The recorded step set is reconciled against the boundaries the design names |\n| T-001 | T-015 | contract | The closure signal is reconciled against the lifecycle integration the design records |\n| T-001 | T-016 | contract | The cut is reconciled against the marker-to-frame relation the design fixes |\n| T-001 | T-020 | contract | The presentation layer is reconciled against the structure the design records |\n| T-001 | T-023 | contract | The substitution path is reconciled against the optional-tool boundary the design states |\n| T-001 | T-026 | contract | The second-cut path is reconciled against the recorded inputs the design names |\n| T-001 | T-028 | contract | The published contract is reconciled against the additive boundary the design states |\n| T-004 | T-006 | decision-gate | Which capture path is used decides what withholding conditions are reconciled |\n| T-004 | T-016 | decision-gate | Which capture path is used decides whether the cut is over real-window material |\n| T-025 | T-026 | decision-gate | Whether the reference cut is a deliverable decides the second-cut scope |\n| T-002 | T-003 | verification | The evidence validates the request path the reconciliation settled |\n| T-002 | T-012 | verification | The review assesses the reconciled request path |\n| T-006 | T-007 | verification | The evidence validates the withholding behaviour the reconciliation settled |\n| T-006 | T-012 | verification | The review assesses the reconciled capture boundary |\n| T-008 | T-009 | verification | The evidence validates the unrequested-path cost the reconciliation settled |\n| T-008 | T-012 | verification | The review assesses the reconciled unrequested path |\n| T-010 | T-011 | verification | The evidence validates the fault absorption the reconciliation settled |\n| T-010 | T-012 | verification | The review assesses the reconciled isolation boundary |\n| T-013 | T-012 | verification | The review assesses the reconciled record of governed steps |\n| T-013 | T-014 | verification | The evidence reconciles the recorded steps the reconciliation settled |\n| T-015 | T-012 | verification | The review assesses the reconciled closure signal |\n| T-015 | T-014 | verification | The same completed run evidences the end of recording and the single compilation |\n| T-016 | T-012 | verification | The review assesses the reconciled cut |\n| T-016 | T-017 | verification | The evidence validates the cut the reconciliation settled |\n| T-018 | T-022 | decision-gate | The minimum running length decides what the review judges against |\n| T-019 | T-022 | decision-gate | The review definition decides how the review is conducted and what passes |\n| T-020 | T-012 | verification | The review assesses the reconciled presentation layer |\n| T-020 | T-021 | verification | The evidence inspects the outputs the reconciliation settled |\n| T-020 | T-022 | verification | The review is conducted on the presentation layer the reconciliation settled |\n| T-023 | T-012 | verification | The review assesses the reconciled substitution path |\n| T-023 | T-024 | verification | The evidence validates the substitutions the reconciliation settled |\n| T-026 | T-012 | verification | The review assesses the reconciled second-cut path |\n| T-026 | T-027 | verification | The evidence validates the second-cut path the reconciliation settled |\n| T-028 | T-012 | verification | The review assesses the command record against the versioning rule |\n| T-028 | T-029 | produces-consumes | The release communication states the published contract the reconciliation settled |\n| T-005 | T-029 | decision-gate | The release communication records the approval path the decision named |\n| T-012 | T-032 | policy-gate | The Review Gate closes corrective iteration before regression evidence is final |\n| T-032 | T-029 | produces-consumes | The release communication cites the verification evidence |\n| T-030 | T-031 | decision-gate | The closure route decides how the proposal is produced and recorded |\n| T-032 | T-031 | produces-consumes | The proposal links the verification evidence as a run artifact |\n\n### 8.2 External Dependencies\n\nThese are prerequisites outside the plan's authority. They are conditions on the named tasks and\nare not edges in 8.1, so the order in 8.3 recomputes from 8.1 alone.\n\n| Responsible party | What is needed | Blocks |\n|---|---|---|\n| Presentation host operator | Either the recording application's control server enabled on the operator platform, or written acceptance of the alternative capture path | T-004 |\n| First-time-viewer reviewer nominated by omn-product-owner | A reviewer who has not seen the framework, available before the Verification Gate | T-022 |\n| Verification host owner | A host on which each of the four optional external tools can be made absent in turn | T-024 |\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-004, T-005, T-018, T-019, T-025, T-030\n- Wave 2: T-002, T-006, T-008, T-010, T-013, T-015, T-016, T-020, T-023, T-026, T-028\n- Wave 3: T-003, T-007, T-009, T-011, T-012, T-014, T-017, T-021, T-022, T-024, T-027\n- Wave 4: T-032\n- Wave 5: T-029, T-031\n\n## Suggested Workflow\n\nSelected workflow: `implement-feature`\n\nSelected because the change adds new functionality to the framework and is already routed to\nthat workflow by the self-hosting profile, whose phases carry the design, review, verification,\nand closure evidence `S-012`, `S-013`, and `S-014` require. The plan recommends this routing and\ndoes not start it.\n\n| Phase | Tasks |\n|---|---|\n| scope-and-acceptance | T-018, T-025 |\n| execution-planning | none; this plan is that phase's output |\n| solution-design-and-risk-assessment | T-001, T-004 |\n| implementation | T-002, T-006, T-008, T-010, T-013, T-015, T-016, T-020, T-023, T-026, T-028 |\n| quality-review | T-003, T-007, T-009, T-011, T-012, T-014, T-017, T-019, T-021, T-022, T-024, T-027, T-032 |\n| documentation-and-release-handoff | T-005, T-029, T-030, T-031 |\n\n| Gate | Required owners |\n|---|---|\n| Scope Gate | omn-product-owner, omn-business-analyst |\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer, omn-qa |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| acceptance-authority | T-018, T-025 | omn-product-owner | Primary |\n| technical-approach-definition | T-001 | architect | Primary |\n| structural-risk-analysis | T-001 | architect | Primary |\n| option-evaluation | T-004 | omn-tech-lead | Primary |\n| release-readiness | T-005 | omn-tech-lead | Primary |\n| implementation-delivery | T-002, T-006, T-008, T-010, T-013, T-015, T-016, T-020, T-023, T-026, T-028 | omn-dev-1-implement | Primary |\n| validation-design | T-019 | omn-qa | Primary |\n| quality-verification | T-003, T-007, T-009, T-011, T-014, T-017, T-021, T-022, T-024, T-027, T-032 | omn-qa | Primary |\n| code-review | T-012 | omn-dev-2-reviewer | Primary |\n| governance-enforcement | T-012 | omn-dev-2-reviewer | Primary |\n| run-coordination | T-030 | omn-orchestrator | Primary |\n| documentation | T-031 | omn-documentation | Primary |\n| release-communication | T-029 | omn-documentation | Primary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S01 | skills/architecture/clean-architecture-checklist.md | T-001, T-010 | Advisory |\n| S02 | skills/business/domain-modeling.md | T-018, T-025, T-029 | Primary |\n| S07 | skills/testing/testing-strategy.md | T-003, T-007, T-009, T-011, T-014, T-017, T-019, T-021, T-022, T-024, T-027, T-032 | Primary |\n| S08 | skills/performance/performance-engineering.md | T-008, T-009 | Advisory |\n| S09 | skills/security/secure-engineering.md | T-006, T-007, T-016 | Advisory |\n| S11 | skills/logging/observability-logging.md | T-013, T-014 | Secondary |\n| S12 | skills/error-handling/error-handling-strategy.md | T-010, T-023 | Secondary |\n\n## Acceptance Criteria\n\n1. A run requested with recording records from the moment the run is accepted, and a run\n   requested without it holds no recording of any kind. Verifies `BO-02`. Evidence: the paired-run\n   record from `T-003`.\n2. A viewer who has not seen the framework follows a finished demonstration end to end, to the\n   length `T-018` sets and by the review `T-019` defines. Verifies `BO-01`. Evidence: the recorded\n   review outcome from `T-022`.\n3. Every segment of that demonstration is material of the application performing the run, with\n   each condensed wait carrying its factor on screen and a rejection and a retry shown. Verifies\n   `BO-01`. Evidence: the segment-level record from `T-017`.\n4. One complete recorded lifecycle run ends its recording after the final gate decision and\n   yields exactly one finished demonstration, arriving with a script and a subtitle file, with no\n   further command. Verifies `BO-02`. Evidence: `T-014` and `T-021`.\n5. For a run in which the target window was deliberately obscured, no withheld segment appears in\n   the finished demonstration and every withholding is listed in the manifest. Verifies `BO-03`.\n   Evidence: the manifest comparison from `T-007`.\n6. A run that did not request recording requires no tool the framework does not already require\n   and performs one existence check per emitted event. Verifies `BO-04`. Evidence: `T-009`.\n7. With each optional external tool absent in turn, a recorded run still produces a demonstration\n   and records the substitution it made. Verifies `BO-04`. Evidence: `T-024`.\n8. A second demonstration, differing in length or narration, is produced from an existing\n   recording without executing or filming the run again. Verifies `BO-02`. Evidence: `T-027`.\n9. A fault induced in the recording or presentation path leaves the observed run's status,\n   artifacts, gate decisions, and recovery outcome identical to an unrecorded run. Verifies\n   `BO-05`. Evidence: `T-011`.\n10. The existing test suite and the framework verifiers pass over the whole change with no\n    previously passing check weakened. Verifies `BO-05`. Evidence: `T-032`, with the\n    weakened-assertion finding from `T-012`.\n11. The command's published contract documents the optional recording request and its recorded\n    version states an additive change with safe defaults. Verifies `BO-06`. Evidence: the\n    conformance finding from `T-012`.\n12. The change carries a change proposal linking this run's artifacts and satisfies the framework\n    release checklist. Verifies `BO-06`. Evidence: `T-031` and the checklist result in `T-032`.\n\n## Definition of Done\n\n- [ ] Every plan acceptance criterion 1 to 12 is verified and its named evidence is recorded as\n      run evidence.\n- [ ] The Scope, Planning, Design, Review, Verification, and Closure Gates are decided by the\n      owners named in Suggested Workflow, with each decision recorded.\n- [ ] Every task's acceptance criteria are satisfied, or waived with the waiving owner recorded.\n- [ ] Assumptions `A-001` to `A-005` are confirmed by their named roles or converted to recorded\n      decisions.\n- [ ] Risks `R-001` to `R-010` are closed or accepted with their named owners recorded.\n- [ ] Open questions `Q-001` to `Q-006` are closed or explicitly accepted by their named owners.\n- [ ] The release communication is published, and the change proposal linking this run's\n      artifacts exists.\n- [ ] The framework release checklist result for this change is recorded.\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | What minimum running length settles `AC-010`, given that the inputs state only several minutes and that a thirty-five second cut was rejected? | no | omn-product-owner (reassigned from omn-business-analyst at the Scope Gate) | T-018, T-020, T-022 |\n| Q-002 | Who performs the first-time-viewer review that decides `AC-010`, and what outcome of that review counts as passing? | no | omn-qa | T-019, T-022 |\n| Q-003 | Which capture path will the live presentation use, given that the recording application's control server is disabled on the operator platform and its configuration is not writable here? | no | omn-tech-lead | T-004, T-006, T-016, T-017 |\n| Q-004 | Who approves that a particular finished demonstration may be released, given that `X-008` places distribution outside this change while publication is the dominant risk? | no | omn-tech-lead | T-005, T-029 |\n| Q-005 | Is the short reference cut for onboarding an existing team a requirement of this change, or is it satisfied by `S-010`? | no | omn-product-owner (reassigned from omn-business-analyst at the Scope Gate) | T-025, T-026, T-027 |\n| Q-006 | How is `documentation-and-release-handoff` work carried out and recorded for this run, given that the runtime's implemented surface does not execute that phase? | no | omn-orchestrator | T-029, T-030, T-031 |",
+        "digest": "sha256:16e36bbc4df40a72ba578548e1e72388",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change this agent designs against: a change request, a feature request, or a business intent. Without one there is no requested change to design, and designing anyway would mean inventing the requirement."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-5df08e171670/states/solution-design-and-risk-assessment/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md",
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-003.md",
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-004.md",
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-005.md",
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-006.md",
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-007.md",
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/technical-design.md"
+    ],
+    "failures": [
+      {
+        "id": "D3.5",
+        "severity": "Blocking",
+        "quality_ref": "A2.6",
+        "requirement": "No sign-off line is signed by the producing agent",
+        "detail": "signed: ['- Architect: not signed by the producing agent; this role is excluded from deciding this gate']"
+      },
+      {
+        "id": "D4.3",
+        "severity": "Blocking",
+        "quality_ref": "A5.3",
+        "requirement": "Every requirement traces to a statement identifier",
+        "detail": "untraced: ['Acceptance criteria: cited as `AC-001` to `AC-014` from the execution plan (diges']"
+      },
+      {
+        "id": "D5.5",
+        "severity": "Correctable",
+        "quality_ref": "A3.4",
+        "requirement": "Constraint class and force use the declared vocabularies",
+        "detail": "invalid class: []; invalid force: ['C-014']"
+      },
+      {
+        "id": "D7.1",
+        "severity": "Blocking",
+        "quality_ref": "A7.2",
+        "requirement": "Every reuse survey row states capability, candidate, outcome, and rationale",
+        "detail": "incomplete: [\"A client for the recording application's control protocol\", 'Mapping a marker stream onto footage and deciding the edit', 'A presentation frame, opening and closing cards, and lower thirds', 'Timed subtitle cues and a presenter script derived from spoken lines', 'A substitute presentation when nothing was filmed', 'A per-run capability switch with persisted options', 'Marker capture with replay de-duplication', 'A recording process that outlives the command that started it and watches its target']"
+      },
+      {
+        "id": "D7.2",
+        "severity": "Blocking",
+        "quality_ref": "A7.2",
+        "requirement": "Every reuse outcome uses the declared vocabulary",
+        "detail": "invalid: [\"A client for the recording application's control protocol\", 'Mapping a marker stream onto footage and deciding the edit', 'A presentation frame, opening and closing cards, and lower thirds', 'Timed subtitle cues and a presenter script derived from spoken lines', 'A substitute presentation when nothing was filmed', 'A per-run capability switch with persisted options', 'Marker capture with replay de-duplication', 'A recording process that outlives the command that started it and watches its target']"
+      },
+      {
+        "id": "D14.3",
+        "severity": "Correctable",
+        "quality_ref": "A14.2",
+        "requirement": "Every open decision owner resolves to a known agent",
+        "detail": "unresolvable: ['omn-tech-lead, as the accepting owner under the Producer Exclusion Rule']"
+      },
+      {
+        "id": "D16.4",
+        "severity": "Correctable",
+        "quality_ref": "A15.5",
+        "requirement": "No supplied planner task is left unaddressed by the sequencing constraints",
+        "detail": "unaddressed: ['T-002', 'T-003', 'T-005', 'T-017', 'T-018', 'T-019', 'T-020', 'T-021', 'T-022', 'T-025', 'T-029', 'T-030', 'T-031']"
+      }
+    ]
+  },
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning",
+      "artifact": "execution-plan.md",
+      "bytes": 51682,
+      "sections": {
+        "read_first": [
+          "Technical Objectives",
+          "Scope",
+          "Task Breakdown",
+          "Dependencies",
+          "Acceptance Criteria",
+          "Definition of Done",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Executive Summary",
+          "Business Objectives",
+          "Assumptions",
+          "Risks",
+          "Suggested Workflow",
+          "Required Capabilities",
+          "Traceability Matrix"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-5df08e171670/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:e1ad1e67e854631be2381f71e7f46353",
+    "bytes": 27061,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "solution-design-and-risk-assessment"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-09-14T08:09:24Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 21871,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12246,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7094,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null,
+        "bytes": 6351,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+        "supplies": null,
+        "bytes": 809,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null,
+        "bytes": 2277,
+        "read": "on-demand",
+        "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+        "supplies": null,
+        "bytes": 1066,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null,
+        "bytes": 3376,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:18366ebde0c0776ea8967dd024666131",
+        "supplies": null,
+        "bytes": 60928,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:f1246957f39ca8eb9e7e10121d72bc16",
+    "input_digest": "sha256:9e9073415ebad3696033cda9e8b1d17e",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/demo-mode-feature-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-feature-request.md",
+        "digest": "sha256:563fa9d0a3547f8f865e6410fb0f4547"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/demo-mode-change-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-change-request.md",
+        "digest": "sha256:5d21bb1a8e746477e8ea85a743e94068"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/demo-mode-business-intent.md",
+        "source_file": ".claude/runs/inputs/demo-mode-business-intent.md",
+        "digest": "sha256:d7c3a27030f383417920cef88eb56166"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/demo-mode-architecture-context.md",
+        "source_file": ".claude/runs/inputs/demo-mode-architecture-context.md",
+        "digest": "sha256:804a281170829bd910709cc9e1daa95d"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:16e36bbc4df40a72ba578548e1e72388"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "memory/architecture.md",
+      "runtime/README.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "dependency-map.md",
+      "memory/architecture.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "read_on_demand": [
+      "domain-model/agent-specification.md",
+      "runtime/README.md",
+      "workflows/implement-feature.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 176160,
+    "bytes_required": 13151,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+      "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/review-package-*.md"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-5df08e171670/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      },
+      {
+        "artifact": "review-package.md",
+        "template_ref": "templates/review-package.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "Emitted only for review-pull-request/structural-compliance, where this agent applies the structural and security lens and the findings are classified under the architecture and security categories. runtime/review_package_validator.py already contracts this agent as a permitted producer of review-package.md; the quality rules it applies to the structural lens are the ones in quality.md.",
+        "artifact_path_glob": "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/review-package-*.md",
+        "naming": "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/review-package-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-09-14T08:09:24Z",
+  "context_budget": {
+    "modules_full_bytes": 108943,
+    "modules_core_bytes": 50155,
+    "slice_all_bytes": 176160,
+    "slice_required_bytes": 13151,
+    "inputs_bytes": 15124,
+    "upstream_full_bytes": 51683,
+    "upstream_read_first_bytes": 40187,
+    "task_context_bytes": 27061,
+    "fixed_bytes": 120206,
+    "legacy_estimate_bytes": 472116,
+    "progressive_estimate_bytes": 265884,
+    "legacy_estimate_tokens": 118029,
+    "progressive_estimate_tokens": 66471,
+    "savings_pct": 43.7
+  }
+}

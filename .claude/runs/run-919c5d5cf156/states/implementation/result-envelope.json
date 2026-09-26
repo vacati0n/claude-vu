@@ -1,0 +1,98 @@
+{
+  "invocation_id": "inv-919c5d5cf156-04-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-0006",
+    "changeReference": "CKA-04",
+    "status": "complete",
+    "verificationStatus": "verified",
+    "counts": {
+      "change_set_entries": 5,
+      "test_evidence_entries": 6,
+      "deviations": 1,
+      "residual_risks": 4,
+      "open_questions": 1,
+      "blocking_open_questions": 0
+    },
+    "change_set": [
+      "tests/test_content_contracts.py (added)",
+      "working-memory.md (modified: pinned banner line only)",
+      "rule-engine.md (modified: pinned banner line only)",
+      "quality-gates.md (modified: pinned banner line only)",
+      "decision-matrix.md (modified: pinned banner line only)"
+    ],
+    "design_gate_conditions": {
+      "P-002_import_binding": "confirmed by an executed probe before fixture authoring: producer_aliases, parse_gate_matrix, parse_phase_model, and phase_gates import, and both parsers honor a redirected framework root under the hermetic temporary-tree pattern; the D-001 fallback (relocate shared logic into the runtime) was not needed",
+      "P-003_banner_coupling": "the four banner lines and the unconditional banner check landed in this one change; the banner check was demonstrated red on the pre-banner tree and green on the landed tree",
+      "P-004_zero_match_demonstration": "coercive scan executed over 84 module files in 12 agent contract directories: zero findings; six family-candidate clauses excluded by the discriminator, itemized by file, line, and discriminator part in the report's T-004 row and printed in every run",
+      "P-005_negative_fixtures": "producer-only owner row demonstrated failing in BOTH alias directions (producer architect vs sole owner omn-architect; producer omn-qa vs sole owner qa); dropped line-1 marker, removed banner line per document, and fourteen coercive fixtures (one imperative and one positive-modal per family) each demonstrated failing; unmutated fixtures yield zero findings; check 1's skipped-inert-row report prints per run (currently: none)"
+    },
+    "verification": {
+      "new_module_checks": "13/13 pass",
+      "full_suite": "python -m unittest discover -s tests -v: 342 cases, exit 0; pre-change baseline of the same command: exit 0",
+      "proof_scripts": {
+        "verify_manifests.py": "2/2 CONFORMS",
+        "verify_multi_phase.py": "14/15 NOT PROVEN (M6: the newest run is this in-flight run, delivery phase uncommitted by construction; 15/15 PROVEN demonstrated on the tree without the in-flight run evidence; residual risk R-001)",
+        "verify_recovery.py": "41/41 RECOVERY PROVEN",
+        "verify_registry_coverage.py": "6/6 COVERED",
+        "verify_self_hosting.py": "7/8 NOT SELF-HOSTING (S8: five runs unaccounted by change proposals, four predating this change, the fifth is this run whose proposal belongs to closure; same verdict on the pre-change tree; residual risk R-002)",
+        "verify_validators.py": "6/6 COVERED",
+        "verify_vertical_slice.py": "10/10 PROVEN"
+      }
+    },
+    "quality_checks": {
+      "check_set": "agents/omn-dev-1-implement/quality.md v1.0.0",
+      "total_run": 44,
+      "total_passed": 44,
+      "total_failed": 0,
+      "by_group": {
+        "structural_S1_S8": {"run": 8, "passed": 8},
+        "metadata_D1_D6": {"run": 6, "passed": 6},
+        "evidence_M1_M5_M7_E1_E4": {"run": 7, "passed": 7, "note": "E4: the two negative proof-script verdicts are pre-existing conditions, recorded as residual risks R-001 and R-002 with the pre-change attribution runs as evidence"},
+        "completion_M3_M2_K1_K2": {"run": 4, "passed": 4, "note": "K2: Stage 7 row 5 applies — every evidence entry passed and no in-scope area is without evidence — yielding verified/complete"},
+        "deviations_M4_V1_V3": {"run": 4, "passed": 4},
+        "boundary_B1_B6": {"run": 6, "passed": 6, "note": "B6: the multi-phase proof's replay check appended bookkeeping to runs/run-8f8a1ab0d16e/state.json; restored byte-identically to its committed content and declared in the report (R-004)"},
+        "authority_M6_A1_A3": {"run": 4, "passed": 4},
+        "content_C1_C5": {"run": 5, "passed": 5, "note": "one repair pass: 'Unverified areas' value normalized to the exact vocabulary 'none'; full check set re-run after repair"}
+      },
+      "rejection_rules_triggered": []
+    },
+    "not_machine_checkable_obligations": {
+      "N1": "discharged: each change-set row describes the change actually made — one new test module and exactly one banner line per root document, verified by inspection of the working-tree diff surface",
+      "N2": "discharged: T-001 through T-004 execute the checks and fixtures inside the changed module; T-003 reads the four banner lines directly; T-005 and T-006 exercise the whole change as regression and static surfaces",
+      "N3": "discharged: no runtime, gate-decision, or business-logic path was changed; the change adds tests and four prose banner lines, so no side effect in critical business logic exists"
+    },
+    "escalations_raised": [],
+    "no_gate_decision_recorded": true,
+    "no_external_access": true
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-919c5d5cf156/states/implementation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "tests/test_content_contracts.py",
+    "working-memory.md",
+    "rule-engine.md",
+    "quality-gates.md",
+    "decision-matrix.md",
+    "runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md",
+    "runs/run-919c5d5cf156/states/implementation/result-envelope.json"
+  ],
+  "transient_side_effects": [
+    "runs/run-8f8a1ab0d16e/state.json: replay bookkeeping appended by verify_multi_phase.py during proof execution; restored byte-identically to its committed content before completion",
+    "tests/ interpreter bytecode cache regenerated by test execution; removed before completion"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

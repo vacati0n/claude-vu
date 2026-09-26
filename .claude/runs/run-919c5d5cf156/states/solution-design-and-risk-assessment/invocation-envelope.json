@@ -1,0 +1,421 @@
+{
+  "invocation_id": "inv-919c5d5cf156-03-002",
+  "run_id": "run-919c5d5cf156",
+  "work_item_id": "run-919c5d5cf156::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:67fd97a4084ee14aecf0dcf691cf3d7e",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:33d317684aece20ce5b970f6b595c107",
+      "agents/architect/identity.md": "sha256:fc073d2135f891349e8f6639243819e3",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:9b9f220dee72dd93faca5d9c021d6ead",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:d9fa58935c242fb724123ea69d5eeb61",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "feature-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-04-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-04-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-04: Content-contract tests over governance prose\n\n## Source\n\nTicket CKA-04 in the adoption backlog under `docs/` (Epic A \u2014 Verification baseline,\nDays 0\u201330). Source recommendation: R5 of the ClaudeKit Adoption Review (2026-08-27).\nType: Task. Priority: High. Effort: S. Depends on: nothing (lands with or before CKA-03,\nwhich is already delivered as `.github/workflows/verify.yml`).\n\n## Request\n\nThe runtime depends on structural properties of governance prose that nothing pins today.\n`framework_runtime.py` reads gate ownership from `workflows/workflow-gate-matrix.md` and\nenforces the Producer Exclusion Rule through `producer_aliases()`; a prose edit that leaves\na gate row owned only by its producing role (through any alias) creates an undecidable gate\nand no test notices. Superseded agent specifications (`agents/architect.md`,\n`agents/planner.md`) carry their supersession marker in their first heading; a rewrite that\ndrops it silently revives a dead contract. Agent contract modules must never carry coercive\nauto-chain language (the claudekit failure mode: contract prose instructing an agent to\nproceed past approval gates automatically), and the four orphaned root governance docs\n(`working-memory.md`, `rule-engine.md`, root `quality-gates.md`, `decision-matrix.md`) are\nreceiving `Status:` banners under CKA-05 that must then be impossible to drop.\n\nDeliverable: a new `tests/test_content_contracts.py` (stdlib `unittest`, discovered by the\nCKA-03 CI test surface with no config change) asserting structure the code depends on:\n\n1. Every `workflow-gate-matrix.md` gate row names at least one owner outside\n   `producer_aliases(producer)` for the phase's producing agent \u2014 i.e. no row is\n   producer-only under the Producer Exclusion Rule's alias reading.\n2. Superseded agent files carry their status marker on line 1.\n3. The four root governance docs carry a `Status:` banner (the CKA-05 coupling: this\n   check must be authored now and must be green on the current tree \u2014 the scope decision\n   on how to satisfy that coupling belongs to scope-and-acceptance; the backlog offers\n   two admissible resolutions: land the four CKA-05 banners in this change, since CKA-05\n   is S-effort, dependency-free, and its own acceptance criterion is \"present and pinned\n   by CKA-04\", or gate the check so it activates when the first banner lands).\n4. No agent contract module under `agents/*/` matches coercive auto-chain patterns\n   (e.g. instructions to skip, bypass, or auto-approve a gate, or to proceed without\n   approval).\n\nAssert on structure (table cells, first-line markers), not sentences, so wording edits\nthat preserve structure stay free.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- Mutating a fixture gate matrix to a producer-only owner row fails a test.\n- Suite runs green against current tree once CKA-05 lands.\n\n## Constraints\n\n- Additive change only: the ticket list forbids altering `record_gate_decision`, the\n  gate matrix semantics, producer exclusion, `runner._require_approval`, or any\n  human-block path. This ticket adds tests (and, if scoped in, four status banners);\n  it changes no runtime behavior.\n- Assertions bind to structure the code reads, not to prose wording.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py`\n  proof scripts PROVEN, no change to gate-decision behavior, and where docs were\n  touched, `user-guide.html` updated to match.\n\n## Priority and deadline\n\nHigh priority; Phase 1 (Days 0\u201330) of the adoption plan. CKA-16 (anti-rationalization\ntables) later extends this suite, and CKA-05's acceptance criterion is pinned by it.",
+        "digest": "sha256:f63a8c3a43a79d5c0d1f218ebe85bbf6"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-919c5d5cf156/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-919c5d5cf156/states/execution-planning/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: CKA-04-execution-plan\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-04-feature-request.md\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:f63a8c3a43a79d5c0d1f218ebe85bbf6\n  contextDigest: sha256:9f90eb89f94639cd8aec24f921d08586\n```\n\n## Executive Summary\n\nThis plan delivers ticket CKA-04: a content-contract check suite at `tests/test_content_contracts.py` that pins the structural properties of governance prose the runtime depends on, protecting framework maintainers and every downstream consumer of decidable gates. Success is defined by the two verbatim ticket criteria: a fixture gate matrix mutated to a producer-only owner row fails a check, and the suite runs green on the change's tree with the four `Status:` banners landed. Per the gate-approved upstream scope decision, the four one-line banners on the root governance documents land inside this change and the banner check is authored unconditional. The work decomposes into eight tasks across three execution waves, beginning with the check design and the banner-text confirmation in parallel. The highest-impact risk is R-005: a coercive-language scan that fails to distinguish coercive instruction from prohibition phrasing would flag contract text that forbids bypassing gates and turn the suite red on the current tree. Plan status is complete; two non-blocking open questions, Q-001 and Q-002, require answers before design approval and banner authoring respectively.\n\n## Business Objectives\n\n1. Framework maintainers and downstream run operators are protected from silent governance decay: an edit to governance prose that breaks a structural property the runtime reads is reported as a failing check before it lands. Measured as: each pinned property's negative fixture yields at least one failing check while the corresponding current-tree content yields zero. Traces to S-003, S-004, S-005, S-006, S-014.\n2. Governance-prose maintenance stays low-friction for maintainers: wording edits that preserve pinned structure produce no check failures. Measured as: a structure-preserving reword fixture of a governed document yields zero failures. Traces to S-013, S-017.\n3. The banner outcome the input assigns to the CKA-05 coupling is in force and durable: the four root governance documents carry `Status:` banners that cannot be dropped unnoticed. Measured as: four of four banners present on the change's tree, and a banner-removal fixture yields a failing check. Traces to S-007, S-011, S-015, S-020.\n\n## Technical Objectives\n\n1. A content-contract check module exists at `tests/test_content_contracts.py` on stdlib `unittest` (both named in the input) and is discovered and executed by the existing CI verification run with zero CI configuration change. Verified by the CI run record. Traces to business objective 1 and S-008.\n2. Every gate row in `workflows/workflow-gate-matrix.md` names at least one owner outside the producing role's alias set, and that property is pinned by a check with a producer-only negative fixture. Verified by executed negative-fixture demonstration. Traces to business objective 1 and S-009.\n3. The superseded agent specifications named in the input carry their supersession status marker on line 1, and that property is pinned by a check with a marker-absent negative fixture. Verified by executed negative-fixture demonstration. Traces to business objective 1 and S-010.\n4. Each of the four root governance documents carries a one-line `Status:` banner, and banner presence is pinned by an unconditional check with a banner-removed negative fixture. Verified by executed negative-fixture demonstration plus inspection of the four documents. Traces to business objective 3 and S-011.\n5. No agent contract module under `agents/*/` matches the enumerated coercive formulations \u2014 skip, bypass, or auto-approve a gate, or proceed without approval \u2014 and that property is pinned by a check with a coercive-fixture demonstration. Verified by executed negative-fixture demonstration plus a green run over the current modules. Traces to business objective 1 and S-012.\n6. Every assertion in the suite binds to structure \u2014 table cells, first-line markers, banner lines, pattern structure \u2014 never to sentence wording. Verified by a structure-preserving reword demonstration yielding zero failures. Traces to business objective 2 and S-013.\n\n## Scope\n\n### In Scope\n\n- A content-contract check suite at `tests/test_content_contracts.py`, discovered and executed by the existing CI verification run with zero configuration change (S-008). Maps to T-001, T-002, T-006.\n- A check that no gate-matrix row is producer-only under the alias reading of the Producer Exclusion Rule (S-004, S-009, S-014). Maps to T-002.\n- A check that superseded agent specifications carry their status marker on line 1 (S-005, S-010). Maps to T-002.\n- A check that the four root governance documents carry a `Status:` banner (S-007, S-011). Maps to T-002.\n- A check that no agent contract module matches the enumerated coercive auto-chain formulations (S-006, S-012). Maps to T-001, T-002.\n- The four one-line `Status:` banners landed on `working-memory.md`, `rule-engine.md`, root `quality-gates.md`, and `decision-matrix.md` (S-007, S-011, S-015). Maps to T-003, T-004.\n- Structure-only assertion binding, demonstrated by a structure-preserving reword fixture (S-013, S-017). Maps to T-005, T-007.\n- Constraint-compliance review and CI verification evidence, including `tests/` green and all `verify_*.py` proof scripts PROVEN (S-014, S-015, S-016, S-018). Maps to T-005, T-006.\n- User documentation consistency for the touched governance documents (S-018). Maps to T-008.\n\n### Out of Scope\n\n- Any modification to gate-decision runtime behavior: `record_gate_decision`, the gate-matrix semantics, producer exclusion, `runner._require_approval`, or any human-block path. Excluded because S-016 forbids it; this change is additive only.\n- CI configuration or verification-workflow changes. Excluded because S-008 requires discovery by the existing CKA-03 test surface with no configuration change.\n- Assertions bound to sentence wording of governance prose. Excluded because S-013 and S-017 direct structure-only binding so wording edits stay free.\n- CKA-05 content beyond the presence of the four one-line `Status:` banners. Excluded because the gate-approved upstream scope decision narrows the coupling to banner presence only.\n- The anti-rationalization table checks that CKA-16 later adds to this suite. Excluded because S-020 places them in a separate, later ticket.\n\n### Deferred\n\n- Widening the coercive-pattern inventory beyond the four enumerated formulations. Enters the check's content when T-001 answers Q-001 affirmatively; it requires plan re-scoping only if the widened inventory changes which current modules match, which R-001 tracks.\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | The delivered CKA-03 CI test surface discovers a new stdlib `unittest` module under `tests/` with zero configuration change | S-002 | The suite cannot run in CI without a forbidden configuration change; T-006 fails and the constraint conflict escalates for a scope decision | omn-tech-lead |\n| A-002 | The exact banner wording confirmed under the CKA-05 definition fits the one-line `Status:` structural form the banner check asserts | S-007 | T-002 and T-004 rework: either the banner check's structural form or the banner lines change | omn-product-owner |\n| A-003 | The gate-approved upstream scope decision stands: the four banners land inside this change and the banner check is authored unconditional, with no activation gating | S-011 | T-003 and T-004 retire, the banner check gains activation gating, and the plan re-scopes | omn-product-owner (already confirmed at the Scope Gate) |\n| A-004 | The coercive-language check's acceptance threshold is the four enumerated formulations \u2014 skip, bypass, or auto-approve a gate, or proceed without approval \u2014 and design may widen the inventory without changing plan structure | S-012 | If widening changes which current agent contract modules match, T-002 fixtures and the current-tree green criterion re-scope | architect |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | The design widens the coercive-pattern inventory beyond the enumerated formulations in a way that changes which current agent contract modules match | Check fixtures and the current-tree green criterion re-scope | low | T-001, T-002 | T-001 fixes the inventory and demonstrates the current modules pass; Q-001 records the review | architect |\n| R-002 | requirement | The banner text confirmed under the CKA-05 definition does not fit the one-line structural form the banner check asserts | Banner check or banner lines rework before the change can land green | low | T-002, T-004 | T-003 confirms the text and T-001 fixes the structural form before T-004 lands the lines | omn-product-owner |\n| R-003 | requirement | The gate-approved upstream decision to land the four banners inside this change is reopened | T-003 and T-004 retire; the banner check needs activation gating; the plan re-scopes | low | T-003, T-004 | Escalate to omn-product-owner and treat as a scope change returning to the scope phase | omn-product-owner |\n| R-004 | technical | An assertion binds to sentence wording rather than structure | Wording-only edits fail checks, breaching the structure-only constraint and raising maintenance cost | medium | T-002 | T-005 reviews assertion binding; T-007 includes a structure-preserving reword demonstration | omn-dev-2-reviewer |\n| R-005 | technical | The coercive-language scan flags prohibition phrasing already present in agent contract modules, such as contract text that forbids bypassing gates | The suite is red on the current tree, failing the verbatim green criterion | medium | T-001, T-002, T-006 | The design distinguishes coercive instruction from prohibition phrasing; current-tree green is demonstrated at T-006 | architect |\n| R-006 | technical | The check's alias reading diverges from the alias semantics the runtime enforces through `producer_aliases()` | A producer-only row passes undetected, or a decidable row fails falsely; the pinned property no longer matches what the code reads | medium | T-001, T-002 | The design binds the check to the same alias source the runtime reads; the producer-only negative fixture demonstrates detection | architect |\n| R-007 | dependency | The existing CI test surface does not discover the new module without a configuration change | The suite does not run in CI, or a forbidden configuration change would be required; the constraint conflict escalates | low | T-006 | T-006 verifies discovery from the CI run record; on failure escalate to omn-tech-lead for a scope decision | omn-tech-lead |\n\n## Task Breakdown\n\n### T-001 Define the content-contract check design\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: none\n- Traces to: S-006, S-008, S-009, S-010, S-011, S-012, S-013, S-016, S-017, A-004\n- Status: ready\n- Description: An approved design exists that fixes, for each of the four checks, the structural property asserted and the negative-fixture strategy; the alias-reading source for the producer-exclusion check; the coercive-pattern inventory and its treatment of prohibition phrasing; and the one-line structural form of the `Status:` banner \u2014 all within the additive-only and zero-CI-configuration-change constraints.\n- Acceptance Criteria:\n  - The design fixes the structural property and negative-fixture approach for each of the four checks\n  - The coercive-pattern inventory is recorded, distinguishes coercive instruction from prohibition phrasing, and closes Q-001\n  - The banner structural form and the alias-reading source are stated such that the current tree, with the banners landed, passes every check\n- Gate: Design Gate\n\n### T-002 Author the content-contract check module\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-001\n- Traces to: S-006, S-008, S-009, S-010, S-011, S-012, S-013, S-014, S-016, S-017\n- Status: ready\n- Description: `tests/test_content_contracts.py` exists on stdlib `unittest`, realizes the four checks and negative fixtures the approved design fixes, binds every assertion to structure only, and modifies no file governed by the additive-only constraint and no CI configuration file.\n- Acceptance Criteria:\n  - The module exists at the requested path and implements exactly the four designed checks with their negative fixtures\n  - Mutating the fixture gate matrix to a producer-only owner row yields at least one failing check\n  - No CI configuration file and no gate-decision behavior surface is modified by the change\n- Gate: Review Gate\n\n### T-003 Confirm the banner text for the four root governance documents\n\n- Owner: omn-product-owner\n- Complexity: XS (confidence: high)\n- Depends on: none\n- Traces to: S-007, S-011, A-002\n- Status: ready\n- Description: The one-line `Status:` text each of the four root governance documents carries, per the CKA-05 definition, is confirmed and recorded, closing Q-002.\n- Acceptance Criteria:\n  - A recorded banner text exists for each of the four documents\n  - Each confirmed text is a single line beginning `Status:`\n  - Q-002 is closed with the confirmation recorded\n- Gate: none\n\n### T-004 Author the four banner lines on the root governance documents\n\n- Owner: omn-dev-1-implement\n- Complexity: XS (confidence: high)\n- Depends on: T-001, T-003\n- Traces to: S-007, S-011, S-015, A-003\n- Status: ready\n- Description: Each of `working-memory.md`, `rule-engine.md`, root `quality-gates.md`, and `decision-matrix.md` carries its confirmed one-line `Status:` banner in the structural form the banner check asserts, and no other content of those documents changes.\n- Acceptance Criteria:\n  - Four of four documents carry the confirmed banner line\n  - The banner check passes against the four documents as landed\n  - No content beyond the added banner line changes in any of the four documents\n- Gate: Review Gate\n\n### T-005 Review the change for constraint compliance\n\n- Owner: omn-dev-2-reviewer\n- Complexity: S (confidence: high)\n- Depends on: T-002, T-004\n- Traces to: S-008, S-013, S-016, S-017\n- Status: ready\n- Description: A recorded review verdict exists confirming the change is additive \u2014 no modification to `record_gate_decision`, the gate-matrix semantics, producer exclusion, `runner._require_approval`, or any human-block path \u2014 that no CI configuration file changed, and that every assertion binds to structure rather than wording.\n- Acceptance Criteria:\n  - The review record confirms no file governed by the additive-only constraint was modified\n  - The review record confirms no CI configuration file was modified\n  - The review record confirms each assertion binds to table cells, first-line markers, banner lines, or pattern structure, not sentence wording\n  - The review record confirms all four banner lines are present as inspected on the change's tree\n- Gate: Review Gate\n\n### T-006 Verify the suite runs green in the CI verification run\n\n- Owner: omn-qa\n- Complexity: S (confidence: low)\n- Depends on: T-002, T-004, T-007\n- Traces to: S-008, S-014, S-015, S-018, A-001\n- Status: assumption-dependent\n- Description: The CI run record shows the content-contract checks were discovered and executed by the existing verification run with zero configuration change; all checks pass on the change's tree with the banners landed; each negative-fixture demonstration fails as designed; and the repository definition-of-done evidence \u2014 `tests/` green and all `verify_*.py` proof scripts PROVEN \u2014 is recorded.\n- Acceptance Criteria:\n  - The CI run record shows the new checks executed without any CI configuration change\n  - Zero failing checks on the change's tree, and each negative fixture yields at least one failing check\n  - `tests/` green and all `verify_*.py` proof scripts PROVEN are recorded as evidence\n- Gate: Verification Gate\n\n### T-007 Design validation coverage for the content-contract checks\n\n- Owner: omn-qa\n- Complexity: S (confidence: high)\n- Depends on: T-001\n- Traces to: S-013, S-014, S-015, S-017, S-018\n- Status: ready\n- Description: Validation coverage exists mapping every plan acceptance criterion \u2014 negative-fixture detection for each of the four checks, current-tree green, discovery without configuration change, and structure-preserving reword freedom \u2014 to an executable verification method with named evidence.\n- Acceptance Criteria:\n  - Every plan acceptance criterion maps to a verification method and named evidence\n  - Coverage includes a structure-preserving reword demonstration for at least one governed document\n- Gate: Verification Gate\n\n### T-008 Update user documentation for the touched governance documents\n\n- Owner: omn-documentation\n- Complexity: XS (confidence: high)\n- Depends on: T-004\n- Traces to: S-018\n- Status: ready\n- Description: `user-guide.html` matches the four touched governance documents: it reflects the banner additions, or a documentation review records that no user-guide content is affected by them.\n- Acceptance Criteria:\n  - Either the updated `user-guide.html` reflects the banner additions, or a recorded review states no user-guide content is affected\n  - Release-impact notes for the governance-document touches are drafted\n- Gate: Closure Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-002 | contract | The module implements the checks, fixtures, and pattern inventory the approved design fixes |\n| T-001 | T-004 | contract | The banner lines must land in the structural form the banner check asserts, which the design fixes |\n| T-001 | T-007 | contract | Validation coverage targets the designed checks and fixtures |\n| T-002 | T-005 | verification | The review assesses the authored module against the additive-only and structure-binding constraints |\n| T-002 | T-006 | verification | The CI run verifies the authored checks |\n| T-003 | T-004 | decision-gate | Banner authoring binds to the confirmed banner text |\n| T-004 | T-005 | verification | The review assesses the banner additions for additive-only compliance and presence |\n| T-004 | T-006 | verification | Current-tree green requires the banners landed |\n| T-004 | T-008 | produces-consumes | Documentation reflects the landed banner additions |\n| T-007 | T-006 | produces-consumes | The verification run executes the designed validation coverage |\n\n### 8.2 External Dependencies\n\nNone identified. The CI test surface the input names as a prerequisite is recorded as already delivered (S-002), so no prerequisite outside the plan's authority remains pending; the residual risk that its discovery behavior does not hold is tracked as R-007 against A-001.\n\n### 8.3 Implementation Order\n\nTopological order over 8.1, ties within a wave by ascending identifier:\n\n- Wave 1: T-001, T-003\n- Wave 2: T-002, T-004, T-007\n- Wave 3: T-005, T-006, T-008\n\n## Suggested Workflow\n\nSelected workflow: `implement-feature`.\n\nSelected because: the plan delivers new verification functionality with bounded, gate-approved scope and measurable acceptance criteria, requiring design decisions, implementation, peer review, QA verification, and documentation handoff \u2014 the full phase set of that workflow.\n\n| Phase | Tasks |\n|---|---|\n| `scope-and-acceptance` | T-003 |\n| `execution-planning` | plan handoff (this artifact) |\n| `solution-design-and-risk-assessment` | T-001 |\n| `implementation` | T-002, T-004 |\n| `quality-review` | T-005, T-006, T-007 |\n| `documentation-and-release-handoff` | T-008 |\n\n| Gate | Required owners |\n|---|---|\n| Scope Gate | omn-product-owner, omn-business-analyst |\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer, omn-qa |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\nThis section recommends; the plan is handed off and no workflow is started here.\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| technical-approach-definition | T-001 | architect | Primary |\n| structural-risk-analysis | T-001 | architect | Primary |\n| acceptance-authority | T-003 | omn-product-owner | Primary |\n| implementation-delivery | T-002, T-004 | omn-dev-1-implement | Primary |\n| code-review | T-005 | omn-dev-2-reviewer | Primary |\n| governance-enforcement | T-005 | omn-dev-2-reviewer | Primary |\n| validation-design | T-007 | omn-qa | Primary |\n| quality-verification | T-006 | omn-qa | Primary |\n| documentation | T-008 | omn-documentation | Primary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S01 | architecture/clean-architecture-checklist.md | T-001 | Primary |\n| S02 | business/domain-modeling.md | T-003 | Primary |\n| S07 | testing/testing-strategy.md | T-002, T-005, T-006, T-007 | Primary |\n| S09 | security/secure-engineering.md | T-001, T-005 | Secondary |\n\n## Acceptance Criteria\n\n1. A fixture gate matrix mutated so one row's owners all fall within the producing role's alias set yields at least one failing check, while the unmutated matrix yields zero. Verifies business objective 1. Evidence: executed negative-fixture demonstration in the CI run record from T-006.\n2. Fixture copies missing the line-1 supersession marker, missing a `Status:` banner, or containing an enumerated coercive formulation each yield at least one failing check, while the current tree with the four banners landed yields zero failing checks. Verifies business objectives 1 and 3. Evidence: CI run record from T-006.\n3. The content-contract checks are discovered and executed by the existing CI verification run with no CI configuration file modified. Verifies business objective 1. Evidence: CI run record from T-006 plus the review record from T-005.\n4. A structure-preserving, wording-only edit to a governed document yields zero check failures. Verifies business objective 2. Evidence: reword demonstration defined in T-007 coverage and executed under T-006.\n5. All four root governance documents carry their one-line `Status:` banner. Verifies business objective 3. Evidence: inspection recorded in the T-005 review record.\n\n## Definition of Done\n\n- [ ] Plan acceptance criteria 1 through 5 are verified with recorded evidence\n- [ ] Planning, Design, Review, Verification, and Closure Gates are approved with owners recorded\n- [ ] Task acceptance criteria for T-001 through T-008 are satisfied or formally waived\n- [ ] A-001 through A-004 are confirmed or converted to recorded decisions\n- [ ] R-001 through R-007 are closed or accepted with named owners\n- [ ] Q-001 and Q-002 are closed or explicitly accepted\n- [ ] `tests/` green and all `verify_*.py` proof scripts PROVEN are recorded as closure evidence\n- [ ] `user-guide.html` is updated to match the touched documents, or the no-impact review is recorded\n- [ ] Documentation and release-impact notes are published\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Does the coercive auto-chain pattern inventory need to cover formulations beyond the four enumerated \u2014 skip, bypass, or auto-approve a gate, or proceed without approval \u2014 and if so, which? Carried forward from the approved scope definition; needed before the Design Gate. | No | architect | T-001, T-002 |\n| Q-002 | What one-line `Status:` text does each of the four root governance documents carry, per the CKA-05 definition? Carried forward from the approved scope definition; needed before banner authoring. | No | omn-product-owner | T-003, T-004 |\n\n## Traceability Matrix\n\nStatements are normalized from the supplied feature request in document order. Context statements assert no requirement and require no task.\n\n| Statement | Covered by |\n|---|---|\n| S-001 \u2014 ticket identity: CKA-04, Epic A (Verification baseline, Days 0\u201330), sourced from recommendation 5 of the adoption review dated 2026-08-27; type Task, priority High, effort S (context) | context; no task required |\n| S-002 \u2014 CKA-04 depends on nothing and lands with or before CKA-03, already delivered as `.github/workflows/verify.yml` (constraint) | A-001, T-006 |\n| S-003 \u2014 the runtime depends on structural properties of governance prose that nothing pins today (context) | business objective 1; T-001, T-002 |\n| S-004 \u2014 `framework_runtime.py` reads gate ownership from `workflows/workflow-gate-matrix.md` and enforces the Producer Exclusion Rule through `producer_aliases()`; a producer-only row creates an undecidable gate unnoticed (context) | T-001, T-002 |\n| S-005 \u2014 superseded agent specifications (`agents/architect.md`, `agents/planner.md`) carry their supersession marker in their first heading; a rewrite dropping it silently revives a dead contract (context) | T-002 |\n| S-006 \u2014 agent contract modules must never carry coercive auto-chain language (outcome) | T-001, T-002 |\n| S-007 \u2014 the four orphaned root governance documents receive `Status:` banners under CKA-05 that must then be impossible to drop (outcome) | T-003, T-004, A-002 |\n| S-008 \u2014 deliverable: new `tests/test_content_contracts.py` on stdlib `unittest`, discovered by the CKA-03 CI test surface with no configuration change (constraint) | T-002, T-006, A-001 |\n| S-009 \u2014 check 1: every gate-matrix gate row names at least one owner outside the producing agent's alias set (outcome) | T-002 |\n| S-010 \u2014 check 2: superseded agent files carry their status marker on line 1 (outcome) | T-002 |\n| S-011 \u2014 check 3: the four root governance documents carry a `Status:` banner; the check is authored now and green on the current tree; the coupling resolution was decided upstream (outcome) | T-002, T-003, T-004, A-003 |\n| S-012 \u2014 check 4: no agent contract module under `agents/*/` matches coercive auto-chain patterns, enumerated as skip, bypass, or auto-approve a gate, or proceed without approval (outcome) | T-001, T-002, Q-001 |\n| S-013 \u2014 assert on structure (table cells, first-line markers), not sentences, so structure-preserving wording edits stay free (constraint) | T-002, T-005, T-007 |\n| S-014 \u2014 acceptance: mutating a fixture gate matrix to a producer-only owner row fails a test (outcome) | T-002, T-006, T-007 |\n| S-015 \u2014 acceptance: suite runs green against the current tree once the banner portion lands (outcome) | T-004, T-006 |\n| S-016 \u2014 additive change only: no alteration to `record_gate_decision`, gate-matrix semantics, producer exclusion, `runner._require_approval`, or any human-block path; no runtime behavior change (constraint) | T-005; out-of-scope boundary |\n| S-017 \u2014 assertions bind to structure the code reads, not prose wording (constraint) | T-005, T-007 |\n| S-018 \u2014 definition of done: `tests/` green, all `verify_*.py` proof scripts PROVEN, no gate-decision behavior change, `user-guide.html` updated where docs were touched (constraint) | T-006, T-008 |\n| S-019 \u2014 high priority; Phase 1 (Days 0\u201330) of the adoption plan (context) | context; no task required |\n| S-020 \u2014 CKA-16 later extends this suite; CKA-05's acceptance criterion is pinned by CKA-04 (context) | business objective 3; out-of-scope boundary |",
+        "digest": "sha256:8c239149dd345b99c68d942f282d33a2",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change this agent designs against: a change request, a feature request, or a business intent. Without one there is no requested change to design, and designing anyway would mean inventing the requirement."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+      "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md",
+      "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md"
+    ],
+    "failures": [
+      {
+        "id": "D8.5",
+        "severity": "Blocking",
+        "quality_ref": "A8.6",
+        "requirement": "At least one rejected alternative is recorded with its rationale",
+        "detail": "value=''"
+      },
+      {
+        "id": "D16.1",
+        "severity": "Blocking",
+        "quality_ref": "A15.4",
+        "requirement": "Lateral closure: every referenced identifier is defined in its own register",
+        "detail": "undefined: {'Q': ['Q-002']}"
+      },
+      {
+        "id": "D16.4",
+        "severity": "Correctable",
+        "quality_ref": "A15.5",
+        "requirement": "No supplied planner task is left unaddressed by the sequencing constraints",
+        "detail": "unaddressed: ['T-001', 'T-003', 'T-005']"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-919c5d5cf156/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-04T10:24:05Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+        "supplies": null
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+        "supplies": null
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:ea8b3b5e9812546f9b4054458bb8143e",
+    "input_digest": "sha256:fd43d81cf214d0cc30a94bbd85127376",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-04-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-04-feature-request.md",
+        "digest": "sha256:f63a8c3a43a79d5c0d1f218ebe85bbf6"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-919c5d5cf156/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-919c5d5cf156/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:8c239149dd345b99c68d942f282d33a2"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "memory/architecture.md",
+      "runtime/README.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+      "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/review-package-*.md"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      },
+      {
+        "artifact": "review-package.md",
+        "template_ref": "templates/review-package.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "Emitted only for review-pull-request/structural-compliance, where this agent applies the structural and security lens and the findings are classified under the architecture and security categories. runtime/review_package_validator.py already contracts this agent as a permitted producer of review-package.md; the quality rules it applies to the structural lens are the ones in quality.md.",
+        "artifact_path_glob": "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/review-package-*.md",
+        "naming": "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/review-package-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-09-04T10:24:05Z"
+}

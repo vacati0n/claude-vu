@@ -1,0 +1,160 @@
+{
+  "invocation_id": "inv-34ca35504b72-02-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-34ca35504b72/states/safety-net-establishment/artifacts/validation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "run-34ca35504b72-safety-net-establishment-validation-report",
+    "validationBasis": "safety-net",
+    "status": "complete",
+    "verdict": "pass-with-reservations",
+    "verdictBasis": "reasoning.md Stage 8, row 'no open critical or high defect; at least one blocked, none not-met' -> pass-with-reservations / complete",
+    "criteriaByResult": {
+      "total": 10,
+      "met": 1,
+      "not-met": 0,
+      "blocked": 9
+    },
+    "defectsBySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 1,
+      "low": 1
+    },
+    "openQuestions": 2,
+    "blockingDefectsOutstanding": [],
+    "validationEngine": {
+      "validator": "validation_report_validator",
+      "result": "PASS",
+      "checksPassed": "30/30",
+      "blocking": 0,
+      "correctable": 0,
+      "notMachineCheckable": 4
+    },
+    "qualityChecks": {
+      "total": 57,
+      "passed": 57,
+      "failed": 0,
+      "structural": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass",
+        "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass"
+      },
+      "metadata": {
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass",
+        "D5": "pass", "D6": "pass", "D7": "pass"
+      },
+      "criteria": {
+        "Q2": "pass", "Q5": "pass", "A7": "pass", "A8": "pass",
+        "T1": "pass", "T2": "pass", "T3": "pass"
+      },
+      "arithmetic": {
+        "Q3": "pass", "Q7": "pass"
+      },
+      "defects": {
+        "F1": "pass", "F2": "pass", "F3": "pass",
+        "F4": "pass", "F5": "pass", "F6": "pass"
+      },
+      "verdict": {
+        "Q1": "pass", "Q4": "pass", "Q6": "pass",
+        "R1": "pass", "R2": "pass", "R3": "pass"
+      },
+      "evidence": {
+        "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass",
+        "E5": "pass", "E6": "pass", "E7": "pass"
+      },
+      "authority": {
+        "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass",
+        "A5": "pass", "A6": "pass", "A9": "pass", "A10": "pass"
+      },
+      "content": {
+        "C1": "pass", "C2": "pass", "C3": "pass",
+        "C4": "pass", "C5": "pass", "C6": "pass"
+      }
+    },
+    "repairPasses": [
+      {
+        "pass": 1,
+        "failures": ["T3", "C5", "E2"],
+        "repair": "T3: the criteria were ordered constraints-first, but the source declares assumption A-004 in its section 4.2 ahead of constraints C-001 to C-009 in section 4.3, so the family was reassigned in source-document order before emission, with A-004 as AC-001. C5: the report referenced the technical design's own Q-001 and Q-002 tokens, which collide with this report's Q family; the design's questions are now referred to by role without their tokens, and a namespacing note was added to Metadata. E2: the met criterion's evidence now names the command that produced it. No result, severity, or count was changed by any repair.",
+        "reverified": "full check set re-run; Validation Engine re-run PASS 30/30"
+      }
+    ],
+    "notMachineCheckableObligations": {
+      "N1": {
+        "obligation": "The executed test depth matches the risk the change actually carries",
+        "judgement": "discharged",
+        "detail": "The Stage 4 table's last row governs (presentation-confined, no state effect), warranting criterion-level checks only. Independent corroboration was obtained rather than assumed: the document is absent from the installer payload map (267 files) and no script under runtime/ and no module under tests/ reads it. Depth was deliberately set above that floor - all five verification scripts, the full root unittest suite, and two named test modules were executed at baseline - because constraint C-007 makes verification-script verdict parity the declared regression measure and pinning that baseline is this phase's purpose."
+      },
+      "N2": {
+        "obligation": "No criterion was recorded as met on evidence that does not demonstrate it",
+        "judgement": "discharged",
+        "detail": "Exactly one criterion reads met: AC-001, the design's assumption A-004 that the sixteen-directory count remains current. Its evidence is a direct filesystem enumeration executed in this run, differenced against the row keys parsed from the section, yielding sixteen directories, twelve documented, and an undocumented set identical to the design's asserted gap. A sceptical reader given only that enumeration reaches the same result. The other nine criteria state post-change conditions with no change in existence and are recorded blocked rather than inferred to hold; in particular AC-005 (sixteen of sixteen) was not scored not-met, because the pre-change count of twelve is the condition the change exists to correct, not a failure of it."
+      },
+      "N3": {
+        "obligation": "Every regression the change could plausibly cause was looked for",
+        "judgement": "discharged",
+        "detail": "The regression surface was fixed before examination and every element was exercised at baseline. One plausible regression was actively investigated and ruled out rather than assumed: had the orientation document been part of the installer payload, an edit without a bundle re-sync would fail the payload parity check, so the payload map was enumerated and the document confirmed absent. A second was found rather than assumed away: the parity baseline for the self-hosting script moved across three executions in this run with no edit in between, recorded as DF-001. Residual gaps are named in Untested areas rather than left silent."
+      }
+    },
+    "independence": {
+      "producerExclusion": "satisfied",
+      "detail": "The technical design under validation was authored by architect in the upstream phase scope-invariants-and-risk-profile, per the work-item owner_agent_id in the run ledger. This agent authored neither the change nor the evidence. No test file was authored this run, so the safety-net write grant was not exercised and nothing this agent wrote will be validated by it at behavioral-validation.",
+      "gate": "none declared for this phase"
+    },
+    "baselineForDownstreamParity": {
+      "orientationDocument": {
+        "bytes": 2794,
+        "sha256_32": "4372781420e4ea81327d737f8be44603",
+        "sectionOnly_sha256_32": "5ac9f9e04e4528b797624ce9173611e6",
+        "outsideSection_bytes": 1903,
+        "outsideSection_sha256_32": "415bac853e64fc049cad7a60164181e5",
+        "level2SectionList_sha256_32": "0703acbd090d2b838459a32cfe46bf3a",
+        "rowOrder_sha256_32": "6a0c112e6f2e9f0f3ef92e728c8216f4",
+        "committedBlob": "bd1f2b01f531e14aa59d8fa1d908e10f391fdfc9"
+      },
+      "directoriesAtPayloadRoot": 16,
+      "rowsDocumented": 12,
+      "undocumented": ["domain-model", "prompts", "registry", "runtime"],
+      "citedPathTokens": {"checked": 18, "resolved": 18, "unresolved": 0},
+      "installerPayloadFiles": 267,
+      "verificationScripts": {
+        "runtime/verify_registry_coverage.py": "exit 0; 6/6 checks passed -- COVERED",
+        "runtime/verify_validators.py": "exit 0; 6/6 checks passed -- COVERED",
+        "runtime/verify_recovery.py": "exit 0; 41/41 checks passed -- RECOVERY PROVEN",
+        "runtime/verify_vertical_slice.py": "exit 0; 10/10 checks passed -- PROVEN",
+        "runtime/verify_self_hosting.py": "exit 1; 7/8 checks passed -- NOT SELF-HOSTING (check S8 fails for reasons unrelated to this change; parity means this same summary line, not the script passing)"
+      },
+      "testSuites": {
+        "python -m unittest discover -s tests": "exit 0 (test count not captured; output truncated by the running pipeline)",
+        "python -m unittest tests.test_bundled_payload": "11 tests, OK",
+        "python -m unittest tests.test_content_contracts": "13 tests, OK"
+      }
+    },
+    "commandExecutionSideEffects": "Executing the repository's own unittest suite regenerated interpreter bytecode caches under tests/__pycache__/. These are Python interpreter artifacts, not authored repository content, and no repository content was modified: the orientation document's digest is unchanged from the value recorded at baseline, verified after all command execution completed.",
+    "attemptContext": "Attempt 2 of 3. Attempt 1 was charged to attempts_lost as worker-loss, leaving no attempt-1 artifact; this artifact is the first produced for this phase."
+  },
+  "evidence_refs": [
+    "agents/omn-qa/manifest.yaml",
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/identity.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/execution.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "agents/omn-qa/examples.md",
+    "runs/run-34ca35504b72/states/safety-net-establishment/invocation-envelope.json",
+    "runs/run-34ca35504b72/states/safety-net-establishment/dispatch-prompt.md",
+    "runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md",
+    "runs/run-34ca35504b72/state.json",
+    "templates/validation-report.md",
+    "workflows/refactor.md"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-34ca35504b72/states/safety-net-establishment/artifacts/validation-report.md",
+    "runs/run-34ca35504b72/states/safety-net-establishment/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

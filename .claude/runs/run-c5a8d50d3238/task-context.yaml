@@ -1,0 +1,510 @@
+schema: framework.runtime/task-context.v1
+task_id: run-c5a8d50d3238
+command: implement
+workflow: implement-feature v1.0.0
+run_status: Dispatching
+updated_at: '2026-09-14T05:23:44Z'
+objective: Add a Reviewer Agent to the AI Engineering Framework. The Reviewer Agent should review implementation plans and
+  code changes for architecture compliance, coding quality, testing strategy, security, and framework governance.
+inputs:
+- type: feature-request
+  reference: runs/inputs/reviewer-agent-feature-request.md
+  digest: sha256:91557f0e82e8fb1e387591ed315c6987
+- type: change-request
+  reference: runs/inputs/reviewer-agent-feature-request.md
+  digest: sha256:91557f0e82e8fb1e387591ed315c6987
+- type: business-intent
+  reference: runs/inputs/reviewer-agent-business-intent.md
+  digest: sha256:fd4d5ffa03c9af8589e581db435beced
+- type: architecture-context
+  reference: runs/inputs/framework-architecture-context.md
+  digest: sha256:51c90f0fa333a4e045af4e594108d0df
+relevant_agents:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  status: pending
+  required_skills:
+  - S02
+  - S07
+- phase: execution-planning
+  agent: planner
+  status: completed
+  required_skills:
+  - S02
+  - S01
+  - S07
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  status: completed
+  required_skills:
+  - S01
+  - S03
+  - S06
+  - S09
+- phase: implementation
+  agent: omn-dev-1-implement
+  status: pending
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S11
+  - S12
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  status: pending
+  required_skills:
+  - S07
+  - S09
+  - S08
+- phase: documentation-and-release-handoff
+  agent: omn-documentation
+  status: pending
+  required_skills:
+  - S11
+  - S10
+  - S12
+completed_phases:
+- phase: execution-planning
+  agent: planner
+  artifact: runs/run-c5a8d50d3238/states/execution-planning/artifacts/execution-plan.md
+  digest: sha256:f1bd944cf4888e50a197631a433e5f95
+  validation: pass 45/45
+  attempts: 1
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  artifact: runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  digest: sha256:5738e7da2aadb5aecc2fbada617b8a01
+  validation: pass 78/78
+  attempts: 4
+gates:
+- gate: Scope Gate
+  closes: scope-and-acceptance
+  decision: null
+  owner_role: null
+  decided_by: null
+- gate: Planning Gate
+  closes: execution-planning
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: claude-code (non-interactive, acting for the /implement requester)
+- gate: Design Gate
+  closes: solution-design-and-risk-assessment
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: claude-code (non-interactive, acting for the /implement requester)
+- gate: Review Gate
+  closes: quality-review
+  decision: null
+  owner_role: null
+  decided_by: null
+- gate: Verification Gate
+  closes: quality-review
+  decision: null
+  owner_role: null
+  decided_by: null
+- gate: Closure Gate
+  closes: documentation-and-release-handoff
+  decision: null
+  owner_role: null
+  decided_by: null
+artifacts:
+  execution-planning: runs/run-c5a8d50d3238/states/execution-planning/artifacts/execution-plan.md
+  solution-design-and-risk-assessment: runs/run-c5a8d50d3238/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+parallel_groups:
+- - scope-and-acceptance
+  - execution-planning
+- - solution-design-and-risk-assessment
+- - implementation
+- - quality-review
+- - documentation-and-release-handoff
+scope:
+  in_scope:
+  - The reviewer's authority scope, including its prohibitions (S-001). Covered by T-001,
+  - Review coverage of implementation plans (S-002). Covered by T-008, T-010, T-012.
+  - Review coverage of code changes (S-003). Covered by T-008, T-010, T-012.
+  - The five named review dimensions as the reviewer's required coverage (S-004, S-005,
+  - The reviewer's runtime module set and its declared self-verification checks (S-001).
+  - The review outcome artifact contract and its rendered template (S-002, S-003).
+  - Framework registration, capability ownership, and phase routing for the reviewer
+  - Validation coverage for the reviewer's outcomes and for its refusal of actions outside
+  - Documentation of the reviewer for framework consumers (S-001). Covered by T-007.
+  out_of_scope:
+  - Performing a review of any existing plan or code change as part of this work. Excluded
+  - Review dimensions beyond the five named. Excluded because the request enumerates five
+  - Changes to the framework's agent dispatch and adapter mechanism. Excluded because no
+  - Approval of any workflow gate by the reviewer. Excluded because gate approval is held by
+assumptions:
+- 'A-001: The Reviewer Agent is introduced as a distinct agent, and the ownership of the code review and governance c... |
+  S-001 | T-002, T-003, T-004, and T-005 change from authoring a distinct agent to amending an existing contract, and...'
+- 'A-002: The reviewer''s initial workflow surface is implement-feature; participation in other registered workflows i...
+  | S-002, S-003 | T-012 and T-006 expand to the additional workflows, their phases, and their gate rows'
+- 'A-003: "Implementation plans" denotes the framework''s registered execution plan artifact and "code changes" denote...
+  | S-002, S-003 | The reviewer''s declared input types and the review outcome contract change, re-scoping T-002 and T-010'
+- 'A-004: The reviewer is packaged as a manifest with a declared module set, a registry record, and matrix rows, matc... |
+  plan-wide | A packaging decision task precedes T-003, and T-003 and T-004 re-scope'
+- 'A-005: The review outcome requires a new registered template, because no registered template covers review outcomes | plan-wide
+  | T-011 is removed and the outcome binds to an existing registered template'
+- 'A-006: The five named dimensions are the complete required review coverage for the first version | S-004, S-005, S-006,
+  S-007, S-008 | The outcome contract and the validation coverage expand, re-scoping T-010, T-011, and T-014'
+- 'A-007: The reviewer produces gate evidence and never approves a gate | plan-wide | Gate ownership entries change and a
+  governance decision precedes T-005 and T-012'
+- 'A-001: "Implementation plans" in S-002 denotes the registered execution-plan artifact, and "code changes" in S-003... |
+  The reviewer''s declared input types must resolve to named framework artifacts (F-008, F-015) rather than to... | The declared
+  input types and the outcome contract change after the authority scope i...'
+- 'A-002: The five named dimensions are the complete required review coverage for the first version | The outcome contract
+  fixes one result position per dimension, so the count must be closed before the contra... | The outcome contract, its template,
+  and the validation coverage all expand, re-scoping M-009'
+- 'A-003: The reviewer''s first workflow surface is implement-feature; participation in other registered workflows is... |
+  Phase routing must name a workflow whose phase identifiers are canonical (F-009, F-010) | The impact surface expands into
+  workflows whose phase identifiers are not canonicalized, so routing cannot...'
+- 'A-004: omn-dev-2-reviewer holds no registry record because it has not been migrated to the runtime module pattern,... |
+  The ownership disposition depends on whether the existing role is live; F-005 establishes the absence of a... | The narrowing
+  disposition is unavailable, only full supersession remains, and M-017 a...'
+- 'A-005: The Validation Engine can register a validator for a third artifact type without a change to the invocation... |
+  G1-CAPABILITY requires a registered validator (F-011) and the engine covers two artifact types today (F-012) | G1-CAPABILITY
+  never passes for quality-review, so the reviewer is registered but not d...'
+- 'A-006: The framework-governance review dimension is assessed against the framework''s own registries, matrices, and...
+  | The dimension has no stated definition, and the outcome contract must state what it is assessed against | The reviewer
+  gains an additional declared input type and an external dependency, and the re...'
+- 'A-007: The review outcome is evidence assessed at a gate, not the gate decision itself | F-017 and F-018 together determine
+  whether one agent could both produce the evidence and approve the gate | Gate ownership entries change, which C-003 requires
+  be recorded as a decision naming the gate matrix owners'
+- 'A-008: The framework maintains documentation surfaces that enumerate agents and must carry an entry for a newly ad... |
+  S-015 requires discoverability on the same terms as registered roles, and the frozen context slice contains... | M-013 becomes
+  no-change-verified and P-016 narrows to release-impact notes only'
+risks:
+- 'R-001: requirement | A-001 is false: the request means extending the existing review-owning role rather than adding a distinct
+  a... | Authoring, registration, and matrix work re-scope from creation to amendment'
+- 'R-002: requirement | A-002 is false: workflows beyond the assumed surface are required in the first version | Phase and
+  gate mapping expands and resolution verification expands'
+- 'R-003: requirement | A-006 is false: a review dimension beyond the five named is required | The outcome contract, its template,
+  and validation coverage all expand'
+- 'R-004: requirement | A-003 is false: the reviewed artifacts denote something other than the registered plan artifact and
+  the imp... | Declared input types and the outcome contract change after authority scope is set'
+- 'R-005: technical | A-004 is false: the reviewer cannot be packaged with the pattern used by active registered agents |
+  A packaging decision precedes authoring, delaying T-003 and invalidating T-004 inputs'
+- 'R-006: technical | A-005 is false: an existing registered template already covers review outcomes | T-011 is redundant
+  work and produces a duplicate registered artifact'
+- 'R-007: technical | The reviewer''s authority is written to grant architecture decisions rather than conformance assessment
+  | Two agents may decide the same structural question, and architecture authority is duplicated'
+- 'R-008: dependency | The reviewer declares a skill whose registry status is unregistered in the skill catalog | Skill resolution
+  blocks, so a routed phase cannot dispatch the reviewer'
+- 'R-009: security | The reviewer''s authority is written without a constraint on reproducing restricted content found in
+  reviewe... | Secrets or restricted change content are reproduced in review outcome artifacts'
+- 'R-010: operational | Capability ownership is recorded in the matrices before T-001 records the disposition | Two Primary
+  owners for the same capability identifier leave routing ambiguous'
+- 'R-011: operational | A-007 is false: the reviewer is expected to approve a gate rather than produce evidence for it | Gate
+  ownership entries change and phase mapping is invalidated after it is recorded'
+- 'R-012: delivery | The reviewer''s registry record is created before its self-verification checks and validation coverage
+  exist | A routable agent can be dispatched while unable to pass its own quality checks'
+- 'R-001: structural | Ownership records are edited before the disposition is recorded | Two Primary owners exist for code-review
+  and governance-enforcement, so capability routing is ambiguous and...'
+- 'R-002: structural | Ownership is recorded only at column level, as the matrix records it today (F-007) | "Exactly one Primary
+  per capability identifier" is asserted but cannot be evidenced from the record, so the...'
+- 'R-003: contract | A consumer binds to the current quality-review Output Artifact wording | The derived phase-graph edge
+  into the following phase changes, or a downstream input contract stops being s...'
+- 'R-004: contract | The review outcome template is referenced by the workflow record or the reviewer''s manifest before it
+  is re... | Enforced dependency resolution rejects the record, blocking registration'
+- 'R-005: migration | The phase row changes while a run holds that work item blocked at G1-CAPABILITY | The guard re-evaluates
+  and the item moves to pending, so an in-flight run resumes into a phase whose suppor...'
+- 'R-006: security | An emitted review outcome reproduces restricted content found in reviewed material | Secrets or restricted
+  change content are distributed through an artifact that S-012 requires be consumable...'
+- 'R-007: structural | The reviewer''s declared authority is written to include architecture decisions or gate approval |
+  Two agents decide the same structural question, or a gate is approved by the producer of its evidence'
+- 'R-008: operability | A-005 is false: the Validation Engine cannot register a third artifact type without a gateway or adapter
+  ch... | G1-CAPABILITY never passes for quality-review, so the reviewer is registered but not dispatchable and the r...'
+- 'R-009: delivery | The reviewer''s registry record is created before its self-verification checks exist | A dispatchable
+  agent can be routed while unable to pass its own checks, and there is no retry or recovery p...'
+- 'R-010: contract | The phase remains mandatory for S08 while performance is not among the five dimensions | The phase''s
+  mandatory skill set and the reviewer''s declared coverage disagree; resolution still passes, so...'
+- 'R-011: contract | A-001 is false: the reviewed artifacts denote something other than the registered plan artifact and the
+  imp... | The declared input types and the outcome contract change after the authority scope is set'
+- 'R-012: contract | A-002 is false: a dimension beyond the five is required | The outcome contract, its template, and the
+  validation coverage all expand after they are authored'
+- 'R-013: operability | A-003 is false: the reviewer is required in workflows beyond implement-feature | Those workflows carry
+  no canonical phase identifiers (F-010), so routing cannot be built for them and the s...'
+- 'R-014: structural | A-004 is false: the existing review role is retired rather than unmigrated | The narrowing disposition
+  is unavailable, only O-004 remains, and M-017 and M-018 become contract changes a...'
+- 'R-015: operability | A-008 is false: the documentation surfaces do not enumerate agents, or enumerate them elsewhere |
+  Documentation of the new role lands in the wrong surface or is omitted, so S-015 discoverability is only pa...'
+- 'R-016: contract | A-006 is false: the framework-governance dimension requires an external policy source | The reviewer
+  gains an additional declared input type and an unresolved external dependency, and the none-fo...'
+- 'R-017: delivery | Registry and matrix records are created before the outcome contract is stable | Records must be re-edited
+  after run evidence referencing them is already committed and immutable (F-014)'
+plan_tasks:
+- 'T-001: Decide the ownership disposition for the existing review-owning role | depends on none'
+- 'T-002: Define the reviewer agent''s authority scope | depends on T-001, T-008'
+- 'T-003: Author the reviewer agent runtime module set | depends on T-002, T-010'
+- 'T-004: Create the framework registry records for the reviewer | depends on T-003, T-011'
+- 'T-005: Record the reviewer''s capability ownership in the framework matrices | depends on T-001, T-003'
+- 'T-006: Verify the reviewer resolves through framework routing | depends on T-004, T-005, T-012'
+- 'T-007: Document the reviewer agent for framework consumers | depends on T-006, T-014'
+- 'T-008: Approve the definitions of the artifacts subject to review | depends on none'
+- 'T-009: Approve the reviewer''s initial workflow surface | depends on none'
+- 'T-010: Define the review outcome artifact contract | depends on T-002, T-013'
+- 'T-011: Author the review outcome artifact template | depends on T-010'
+- 'T-012: Map the reviewer into the approved workflow phases | depends on T-002, T-009'
+- 'T-013: Approve the review dimension set as a bounded list | depends on none'
+- 'T-014: Design validation coverage for the reviewer agent | depends on T-003, T-011'
+constraints:
+- 'Wave 1: T-001, T-008, T-009, T-013'
+- 'Wave 2: T-002'
+- 'Wave 3: T-010, T-012'
+- 'Wave 4: T-003, T-011'
+- 'Wave 5: T-004, T-005, T-014'
+- 'Wave 6: T-006'
+- 'Wave 7: T-007'
+- 'C-001: Structural | The framework''s discovery registries are single-authority; a second authority for the same identity
+  metadat... | Hard'
+- 'C-002: Structural | Registration and governance records are contract surface; a change to one is a contract change, not
+  an impl... | Hard'
+- 'C-003: Compliance | No change to gate ownership is authorized without being recorded as a decision naming the gate matrix
+  owners | Hard'
+- 'C-004: Structural | Exactly one Primary owner exists for each capability identifier, and there is one primary owner per
+  task scope | Hard'
+- 'C-005: Structural | An agent may not approve a gate for an artifact it produced | Hard'
+- 'C-006: Structural | A capability identifier exists in agents/capability-matrix.md before any manifest, registry record,
+  or exec... | Hard'
+- 'C-007: Functional | An emitted review outcome states an explicit result for each of the five named dimensions | Hard'
+- 'C-008: Functional | The reviewer reviews implementation plans and code changes | Hard'
+- 'C-009: Structural | An agent is invocable only with an active registry record, a manifest with a resolvable load order,
+  a host... | Hard'
+- 'C-010: Security | An emitted review outcome does not reproduce restricted content found in reviewed material | Hard'
+- 'C-011: Migration | Existing routing continues to resolve during and after the change; no document naming the current review
+  ow... | Hard'
+- 'C-012: Operability | A routed phase does not start unless every phase-mandatory skill resolves as an active record in registry/s...
+  | Hard'
+- 'C-013: Quality-attribute | Coverage is expressed as a measured proportion and is not committed to at a numeric level |
+  Negotiable'
+- 'C-014: Structural | The reviewer''s declared authority does not overlap architecture decision authority, gate approval
+  authority... | Hard'
+- 'C-015: Operability | A registered validator exists for the reviewer''s output artifact before its phase can pass G1-CAPABILITY
+  | Hard'
+- 'C-016: Functional | The role is discoverable through the framework''s own discovery surfaces on the same terms as already-regist...
+  | Hard'
+- 'C-017: Functional | The change adds a role to the framework | Hard'
+- 'C-018: Functional | Exactly one accountable framework role reviews implementation plans and code changes | Hard'
+- 'C-019: Compliance | No existing role''s accountability changes without that change being surfaced as a recorded decision
+  | Hard'
+- 'P-001: The ownership disposition is recorded: exactly one Primary owner for code-review and governance-enforcement... |
+  M-004, M-012 | none'
+- 'P-002: The reviewed-artifact definitions are approved, so each reviewed phrase maps to a named framework artifact | M-001
+  | none'
+- 'P-003: The review dimension set is fixed as a bounded list with recorded exclusions | M-009 | none'
+- 'P-004: The reviewer''s authority scope is defined, with each prohibition naming the holder of the withheld authority |
+  M-001 | P-001, P-002'
+- 'P-005: The review outcome contract is defined: one result position per dimension, each finding carrying a severity... |
+  M-009 | P-003, P-004'
+- 'P-006: The gate matrix records that the reviewer produces the evidence assessed at the Review and Verification Gat... |
+  M-008 | P-004'
+- 'P-007: The review outcome template exists and holds an active record in the template registry | M-009, M-010 | P-005'
+- 'P-008: The reviewer''s runtime module set exists with a resolvable load order, declaring only skills that resolve a...
+  | M-001 | P-004, P-005'
+- 'P-009: The host registration for the reviewer exists | M-002 | P-008'
+- 'P-010: The reviewer''s agent registry record exists, satisfies the record schema, and resolves every declared depen...
+  | M-003 | P-007, P-008'
+- 'P-011: Capability ownership and skill coverage are recorded in the two matrices, consistent with the disposition | M-004,
+  M-005, M-012 | P-001, P-008'
+- 'P-012: A registered validator exists for the review outcome artifact | M-011 | P-007'
+- 'P-013: The quality-review phase row names the reviewer and the review outcome, and the workflow record declares th... |
+  M-006, M-007 | P-006, P-009, P-010, P-011, P-012'
+- 'P-014: Resolution is verified end to end: registry lookup, capability routing, skill resolution, host registration... |
+  M-003, M-004, M-005, M-006, M-011 | P-013'
+- 'P-015: The existing review-owning contract''s authority text is narrowed to match the recorded disposition | M-012 | P-001,
+  P-011'
+- 'P-016: Framework documentation surfaces carry the reviewer, with its inputs, deliverable, prohibitions, handoff ta... |
+  M-013 | P-014'
+open_questions:
+- 'Q-001: Does the Reviewer Agent assume, share, or remain subordinate to the Primary ownership of the code review an... |
+  No | omn-product-owner'
+- 'Q-002: If the recorded disposition changes the status of the existing review-owning role, which owner approves the... |
+  No | omn-tech-lead'
+- 'Q-003: Does the review outcome require a new registered template, or does an existing registered artifact already... |
+  No | architect'
+- 'Q-004: Which registered workflows beyond the approved surface require reviewer participation, and are their phase... |
+  No | omn-product-owner'
+- 'Q-001: Is omn-dev-2-reviewer unmigrated rather than retired (A-004)? | No | omn-tech-lead'
+- 'Q-002: Does agents/capability-matrix.md record capability ownership at identifier level, or only at the coarse col... |
+  No | omn-tech-lead'
+- 'Q-003: Does S08 remain phase-mandatory for quality-review once the reviewer owns it, given performance is not amon... |
+  No | omn-product-owner'
+- 'Q-004: Can the Validation Engine register a validator for a third artifact type without a change to the invocation... |
+  No | omn-tech-lead'
+- 'Q-005: Which registered workflows beyond implement-feature require reviewer participation (A-003)? | No | omn-product-owner'
+- 'Q-006: Which framework documentation surfaces enumerate agents and must carry the reviewer (A-008)? | No | omn-documentation'
+- 'Q-007: Is the framework-governance dimension assessed against the framework''s own registries and matrices, or agai...
+  | No | omn-business-analyst'
+- 'Q-008: Who accepts the Review Gate for the reviewer''s own module set, template, and registry record, given omn-dev...
+  | No | omn-tech-lead'
+- 'Q-009: Do the Design Gate owners accept D-001 through D-004, and does the product owner confirm D-001''s ownership... |
+  No | omn-tech-lead'
+objectives:
+- 'AO-1: After the change, each capability identifier in the code-review and governance'
+- 'AO-2: The review outcome is a first-class registered artifact with a fixed structure'
+- 'AO-3: The reviewer resolves through the framework''s existing discovery chain — registry'
+- 'AO-4: The reviewer''s declared authority is disjoint from architecture decision authority,'
+- 'AO-5: The reviewer''s reviewed-artifact inputs resolve to named framework artifacts rather'
+- The agent dispatch and adapter mechanism. No statement requests a change to it, and it
+- Gate ownership transfer. C-003 forbids it without an authorizing decision, and the
+- Review dimensions beyond the five named. S-004 through S-008 enumerate five and
+- Exercising the reviewer on real work. Excluded by S-018.
+- Capability registration for scope-and-acceptance, implementation, and
+- The runtime's absent retry, recovery, and cancellation surfaces (F-014). They constrain
+- Reviewer participation in fix-bug, review-pull-request, refactor, investigate, and
+facts:
+- 'F-001: The framework is composed of five component types — agents, skills, workflows, templates, commands — each w... |
+  Architecture context; registry/agents.yaml, registry/skills.yaml, registry/workflows.yaml, registry/templat...'
+- 'F-002: registry/agents.yaml holds two records, planner and architect, both at status active, each resolving to a r... |
+  registry/agents.yaml; architecture context assertion 1'
+- 'F-003: registry/agents.yaml validates with failOnUnknownFields, requireAllFields, and enforceDependencyResolution... |
+  registry/agents.yaml'
+- 'F-004: An agent becomes invocable when it holds an active registry record, a manifest with a resolvable module loa... |
+  Architecture context assertion 2'
+- 'F-005: Review responsibility today sits with omn-dev-2-reviewer: Primary for Code Review and Governance in agents/... |
+  agents/capability-matrix.md; workflows/workflow-gate-matrix.md; registry/agents.yaml; architecture context...'
+- 'F-006: agents/capability-matrix.md maps the Code Review and Governance column to the capability identifiers code-r... |
+  agents/capability-matrix.md'
+- 'F-007: agents/capability-matrix.md records ownership against eleven coarse columns rather than against the fine-gr... |
+  agents/capability-matrix.md'
+- 'F-008: The implement-feature Phase Model declares quality-review as a canonical phase owned by omn-dev-2-reviewer,... |
+  workflows/implement-feature.md'
+- 'F-009: A phase in implement-feature resolves to exactly one owner agent, and an owner agent shipping a runtime man... |
+  workflows/implement-feature.md'
+- 'F-010: The runtime executes execution-planning and solution-design-and-risk-assessment; the other four implement-f... |
+  runtime/README.md; architecture context assertion 4'
+- 'F-011: Guard G1-CAPABILITY requires an active registry record, a manifest declaring this workflow and phase, a hos... |
+  runtime/README.md'
+- 'F-012: The Validation Engine is partial and covers two artifact types, execution-plan.md and technical-design.md,... |
+  runtime/README.md'
+- 'F-013: The implement-feature phase graph derives hard edges from the Input and Output Artifact columns of the Phas... |
+  runtime/README.md'
+- 'F-014: The runtime implements no retry, no recovery pass, and no cancellation; a rejected artifact blocks with rea... |
+  runtime/README.md'
+- 'F-015: registry/templates.yaml holds three active records — execution-plan, technical-design, architecture-decisio... |
+  registry/templates.yaml'
+- 'F-016: registry/workflows.yaml declares the implement-feature record''s dependencies as planner, architect, executi...
+  | registry/workflows.yaml'
+- 'F-017: workflows/workflow-gate-matrix.md states the Producer Exclusion Rule: an agent may not approve a gate for a... |
+  workflows/workflow-gate-matrix.md'
+- 'F-018: omn-dev-2-reviewer is the sole required owner of the implement-feature Review Gate | workflows/workflow-gate-matrix.md'
+- 'F-019: skills/agent-skill-matrix.md catalogues twelve skill identifiers; S01, S02, S03, S06, S07, S08, S09, S11, a... |
+  skills/agent-skill-matrix.md'
+- 'F-020: For an agent shipping a runtime manifest the manifest skills block is authoritative for that agent''s declar...
+  | skills/agent-skill-matrix.md'
+- 'F-021: agents/capability-matrix.md records omn-architect as deprecated in favour of architect while retaining its... |
+  agents/capability-matrix.md'
+- 'F-022: dependency-map.md records the permitted dependency directions Commands to Workflows, Workflows to Agents, W... |
+  dependency-map.md'
+- 'F-023: domain-model/agent-specification.md requires an agent to declare Agent ID, Name, Domain Role, Authority Sco... |
+  domain-model/agent-specification.md'
+- 'F-024: The supplied execution plan decomposes the change into fourteen tasks T-001 through T-014 across seven wave... |
+  Supplied execution plan'
+repository_context:
+  relevant_modules:
+  - 'M-001: agents/reviewer/ runtime module set (new) | extension | F-002, F-004, F-023'
+  - 'M-002: agents/reviewer.agent.md host registration (new) | extension | F-004, F-011'
+  - 'M-003: registry/agents.yaml record set | extension | F-002, F-003'
+  - 'M-004: agents/capability-matrix.md Code Review and Governance ownership | contract-change | F-005, F-006, F-007'
+  - 'M-005: skills/agent-skill-matrix.md Agent to Skill Coverage row and Implement Feature phase row | contract-change | F-008,
+    F-019, F-020'
+  - 'M-006: workflows/implement-feature.md Phase Model quality-review row and Phase Identifier Sources table | contract-change
+    | F-008, F-009, F-013'
+  - 'M-007: registry/workflows.yaml implement-feature record dependencies | contract-change | F-016'
+  - 'M-008: workflows/workflow-gate-matrix.md Review Gate producer note | extension | F-017, F-018, A-007'
+  - 'M-009: templates/review-outcome.md (new) | extension | F-015, C-007'
+  - 'M-010: registry/templates.yaml record set | extension | F-015'
+  - 'M-011: Validation Engine validator registration for the review outcome artifact | extension | F-011, F-012, A-005'
+  - 'M-012: agents/omn-dev-2-reviewer.md declared authority scope | contract-change | F-005, A-004'
+  - 'M-013: Framework agent documentation surfaces | operational-impact | A-008'
+  - 'M-014: registry/skills.yaml record set | no-change-verified | F-019'
+  - 'M-015: dependency-map.md | no-change-verified | F-022'
+  - 'M-016: Runtime resolution chain, adapter, and phase-graph derivation in runtime/framework_runtime.py | no-change-verified
+    | F-011, F-013'
+  - 'M-017: workflows/workflow-gate-matrix.md fix-bug Fix Gate owner row | no-change-verified | F-005'
+  - 'M-018: workflows/workflow-gate-matrix.md review-pull-request Readiness Gate owner row | no-change-verified | F-005'
+  relevant_files: []
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path
+decisions:
+- 'Selected: O-001.'
+- 'Structural change: a new reviewer agent is packaged as a runtime module set with a host'
+- 'Rationale: O-001 is one of two options satisfying every hard constraint, and it carries'
+- 'Highest-scoring rejected alternative and why it lost: O-004, full supersession. It'
+- 'Tradeoffs accepted: two roles with review in their names coexist, which costs'
+- 'D-001: The Reviewer Agent is introduced as a distinct registered agent reviewer; code-review and governance-enforc... |
+  Yes | ADR D-001, status Proposed'
+- 'D-002: The reviewer is routed through the existing quality-review phase of implement-feature rather than through a... |
+  Yes | ADR D-002, status Proposed'
+- 'D-003: The review outcome is a new registered artifact with one result position per declared dimension, rather tha... |
+  Yes | ADR D-003, status Proposed'
+- 'D-004: The reviewer produces gate evidence and never approves a gate; the Review Gate owner entry is unchanged and... |
+  Yes | ADR D-004, status Proposed'
+- 'D-005: The reviewer declares only skills that already resolve as active registered records — S01 for architecture... |
+  No | Inline. It creates no component, changes no contract, and is reversible by a manifest edit. Recorded here s...'
+validation_requirements:
+  test_focus:
+  - 'Registry resolution: the reviewer''s record satisfies the record schema with every required'
+  - 'Capability routing: quality-review resolves to exactly one owner agent, and code-review'
+  - 'Skill resolution: every skill the reviewer declares and every skill the phase requires,'
+  - 'Outcome conformance: an emitted review outcome carries exactly one explicit result position'
+  - 'Authority refusal: an attempt to have the reviewer approve a gate, take an architecture'
+  - 'Restricted content: reviewed material containing restricted content yields an outcome that'
+  - 'Producer exclusion: no gate lists the reviewer as an approving owner for evidence the'
+  - 'In-flight run behaviour: a run whose quality-review work item is blocked at'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:solution-design-and-risk-assessment
+      term: migration
+    performance:
+    - source: artifact:solution-design-and-risk-assessment
+      term: performance
+    security:
+    - source: input:feature-request
+      term: security
+    - source: input:change-request
+      term: security
+    - source: input:business-intent
+      term: security
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:feature-request
+  - input:change-request
+  - input:business-intent
+  - input:architecture-context
+  - artifact:execution-planning
+  - artifact:solution-design-and-risk-assessment
+relevant_skills:
+  scope-and-acceptance:
+    S02: required
+    S07: required
+  execution-planning:
+    S02: required
+    S01: required
+    S07: required
+  solution-design-and-risk-assessment:
+    S01: required
+    S03: required
+    S06: required
+    S09: required
+  implementation:
+    S03: required
+    S06: required
+    S10: required
+    S11: required
+    S12: required
+  quality-review:
+    S07: required
+    S09: required
+    S08: required
+  documentation-and-release-handoff:
+    S11: required
+    S10: required
+    S12: required

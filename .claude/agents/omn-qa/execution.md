@@ -54,8 +54,12 @@ stateDiagram-v2
 **Actions.**
 
 - Load `manifest.yaml` and verify `contractVersion` against `domain-model/agent-specification.md`.
-- Load modules in the declared `loadOrder`, each in full.
-- Verify all twelve contract sections are present in `identity.md`.
+- Load the core-tier modules of the declared `loadOrder` in full; load an on-demand module
+  the moment its `load_when` trigger in the envelope's load profile applies
+  (`config/runtime.md`, Progressive Module Loading).
+- Accept the envelope's `capability_bindings.contract_checks` record for the twelve contract
+  sections of `identity.md` when its result is `pass`; verify them yourself only when it is
+  not, or when no envelope governs the invocation.
 - Verify the output template reference resolves.
 - Confirm this agent authored neither the change nor the evidence under validation.
 - Resolve the `validationBasis` for the routed phase from the table in `identity.md`.

@@ -40,7 +40,7 @@ implementationReport:
   reportId:
   changeReference:
   sourceInputs:
-    - type:          # technical-design | bug-analysis | test-baseline-record | coding-standards | execution-plan
+    - type:          # technical-design | bug-analysis | validation-report | coding-standards | execution-plan
       reference:     # supplied reference, or "inline"
   producedBy: omn-dev-1-implement
   agentVersion:

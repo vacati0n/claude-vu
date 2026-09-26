@@ -1,0 +1,8 @@
+# The operator handbook pair is compared byte for byte by the drift check in
+# .github/workflows/verify.yml, on both legs of its ubuntu/windows matrix.
+# Checkout-time line-ending translation would make the bytes on a runner's disk
+# differ from the bytes that were committed, so the comparison would fail on the
+# windows leg however correct the renderer is. `-text` disables that translation
+# for these two paths: committed bytes reach disk verbatim on every platform.
+docs/USER-GUIDE.md   -text
+docs/user-guide.html -text

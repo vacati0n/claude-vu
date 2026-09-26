@@ -4,10 +4,10 @@
   "command_id": "refactor",
   "workflow_id": "refactor",
   "workflow_version": "1.0.0",
-  "status": "ExecutingState",
+  "status": "Completed",
   "input_digest": "sha256:27b6c853ba4dc8d4b8b498ce1925efe5",
   "created_at": "2026-08-27T12:50:39Z",
-  "updated_at": "2026-08-27T13:10:29Z",
+  "updated_at": "2026-09-06T07:04:11Z",
   "states": {
     "scope-invariants-and-risk-profile": {
       "status": "completed",
@@ -49,68 +49,207 @@
       }
     },
     "safety-net-establishment": {
-      "status": "running",
-      "queue_status": "Executing",
+      "status": "completed",
+      "queue_status": "Completed",
       "owner_agent_id": "omn-qa",
-      "attempt": 1,
-      "attempts_lost": 0,
+      "attempt": 2,
+      "attempts_lost": 1,
       "attempts_charged": 1,
       "max_attempts": 3,
       "available_at": null,
       "idempotency_key": "sha256:c3f8dd99611c2560dcaac0d662c729e0",
       "artifact_path": "runs/run-34ca35504b72/states/safety-net-establishment/artifacts/validation-report.md",
       "blocked_reason": null,
-      "failure_class": null,
+      "failure_class": "worker-loss",
       "state_ledger": "runs/run-34ca35504b72/states/safety-net-establishment/state-ledger.json",
-      "validation": null
+      "validation": {
+        "result": "pass",
+        "checksRun": 31,
+        "checksPassed": 31,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "AC": 10,
+            "DF": 2,
+            "Q": 2
+          },
+          "tableRows": {
+            "Acceptance Criteria Results": 10,
+            "Defects": 2
+          },
+          "criteria": 10,
+          "defects": 2,
+          "verdict": "pass-with-reservations",
+          "validationBasis": "safety-net",
+          "results": {
+            "met": 1,
+            "not-met": 0,
+            "blocked": 9
+          },
+          "severity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 1,
+            "low": 1
+          }
+        },
+        "undeclaredSideEffects": []
+      }
     },
     "refactor-implementation": {
-      "status": "pending",
-      "queue_status": "Waiting",
+      "status": "completed",
+      "queue_status": "Completed",
       "owner_agent_id": "omn-dev-1-implement",
-      "attempt": 0,
+      "attempt": 1,
       "attempts_lost": 0,
-      "attempts_charged": 0,
+      "attempts_charged": 1,
       "max_attempts": 3,
       "available_at": null,
-      "idempotency_key": null,
-      "artifact_path": null,
+      "idempotency_key": "sha256:935919cf8d582e6bc1bdb57ef912e992",
+      "artifact_path": "runs/run-34ca35504b72/states/refactor-implementation/artifacts/implementation-report.md",
       "blocked_reason": null,
       "failure_class": null,
-      "state_ledger": null,
-      "validation": null
+      "state_ledger": "runs/run-34ca35504b72/states/refactor-implementation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 32,
+        "checksPassed": 32,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "provisional",
+          "identifiers": {
+            "C": 1,
+            "T": 11,
+            "V": 2,
+            "R": 5,
+            "Q": 4
+          },
+          "tableRows": {
+            "Change Set": 1,
+            "Test Evidence": 11,
+            "Deviations and Tradeoffs": 2,
+            "Residual Risk": 5
+          }
+        },
+        "undeclaredSideEffects": []
+      }
     },
     "behavioral-validation": {
-      "status": "pending",
-      "queue_status": "Waiting",
+      "status": "completed",
+      "queue_status": "Completed",
       "owner_agent_id": "omn-qa",
-      "attempt": 0,
+      "attempt": 1,
       "attempts_lost": 0,
-      "attempts_charged": 0,
+      "attempts_charged": 1,
       "max_attempts": 3,
       "available_at": null,
-      "idempotency_key": null,
-      "artifact_path": null,
+      "idempotency_key": "sha256:c4d71461f1f3a132eb542413e364baae",
+      "artifact_path": "runs/run-34ca35504b72/states/behavioral-validation/artifacts/validation-report.md",
       "blocked_reason": null,
       "failure_class": null,
-      "state_ledger": null,
-      "validation": null
+      "state_ledger": "runs/run-34ca35504b72/states/behavioral-validation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 31,
+        "checksPassed": 31,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "AC": 10,
+            "DF": 5,
+            "Q": 3
+          },
+          "tableRows": {
+            "Acceptance Criteria Results": 10,
+            "Defects": 5
+          },
+          "criteria": 10,
+          "defects": 5,
+          "verdict": "pass",
+          "validationBasis": "behavioral-parity",
+          "results": {
+            "met": 10,
+            "not-met": 0,
+            "blocked": 0
+          },
+          "severity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 5
+          }
+        },
+        "undeclaredSideEffects": []
+      }
     },
     "closure-and-debt-record": {
-      "status": "pending",
-      "queue_status": "Waiting",
+      "status": "completed",
+      "queue_status": "Completed",
       "owner_agent_id": "omn-orchestrator",
-      "attempt": 0,
-      "attempts_lost": 0,
-      "attempts_charged": 0,
+      "attempt": 2,
+      "attempts_lost": 1,
+      "attempts_charged": 1,
       "max_attempts": 3,
       "available_at": null,
-      "idempotency_key": null,
-      "artifact_path": null,
+      "idempotency_key": "sha256:58b6bcfd50a9d3c28a40f18211c7ddf7",
+      "artifact_path": "runs/run-34ca35504b72/states/closure-and-debt-record/artifacts/orchestration-result.md",
       "blocked_reason": null,
-      "failure_class": null,
-      "state_ledger": null,
-      "validation": null
+      "failure_class": "worker-loss",
+      "state_ledger": "runs/run-34ca35504b72/states/closure-and-debt-record/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 34,
+        "checksPassed": 34,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "PH": 5,
+            "HO": 4,
+            "ES": 3,
+            "FU": 11,
+            "Q": 4
+          },
+          "tableRows": {
+            "Phase Progression": 5,
+            "Handoffs": 4,
+            "Escalations": 3,
+            "Follow-Up Actions": 11
+          },
+          "phases": 5,
+          "handoffs": 4,
+          "escalations": 3,
+          "followUps": 11,
+          "disposition": "closed-with-followups",
+          "coordinationBasis": "debt-closure",
+          "progression": {
+            "complete": 4,
+            "blocked": 1,
+            "not-started": 0
+          },
+          "escalationSeverity": {
+            "critical": 0,
+            "high": 1,
+            "medium": 1,
+            "low": 1
+          }
+        },
+        "undeclaredSideEffects": []
+      }
     }
   },
   "gates": {
@@ -136,12 +275,12 @@
         "omn-dev-2-reviewer"
       ],
       "producer_agent": "omn-dev-1-implement",
-      "decision": null,
-      "owner_role": null,
-      "decided_by": null,
-      "rationale": null,
-      "evidence_ref": null,
-      "decided_at": null
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent a79b97f143b8b3030, recorded by session operator for vuhoangcao",
+      "rationale": "Approve. The change is correct and complete against the real tree: the Folder Descriptions section now describes all sixteen payload-root directories and nothing that does not exist, re-derived independently at review, with the diff confined to seven insertions in a single hunk inside the section, the twelve pre-existing rows unchanged in content and relative order, and the post-change file digest 59a93ad68e3ddacb8e4e157c2545d676 over 3215 bytes reproducing exactly. Behaviour preservation is verified rather than asserted: the memory-optimisation runtime module is confirmed the only module naming the document and it does not parse its structure, no bundled-payload mirror exists, and all seven verifiers and all three targeted test modules reproduce their baseline verdicts under independent execution at this review. Three non-blocking findings stand, one medium on evidence reproducibility and two low, none of which must close before behavioral-validation.",
+      "evidence_ref": ".claude/runs/run-34ca35504b72/states/refactor-implementation/artifacts/implementation-report.md",
+      "decided_at": "2026-09-06T02:50:24Z"
     },
     "Regression Gate": {
       "gate": "Regression Gate",
@@ -151,12 +290,12 @@
         "omn-dev-2-reviewer"
       ],
       "producer_agent": "omn-qa",
-      "decision": null,
-      "owner_role": null,
-      "decided_by": null,
-      "rationale": null,
-      "evidence_ref": null,
-      "decided_at": null
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent aed69eca7548d8e4c, recorded by session operator for vuhoangcao",
+      "rationale": "Approve. Behavioural parity is established deductively rather than statistically: the diff is seven insertions in a single hunk confined to the Folder Descriptions section, the out-of-section content is identical at both revisions under either terminator convention (1903 B / 415bac853e64fc049cad7a60164181e5 CRLF, 1864 B / b8c485295831d9aaa445899a5d2f1fb1 LF), the twelve pre-existing rows reproduce the pinned order digest 6a0c112e6f2e9f0f3ef92e728c8216f4 exactly, and the document is resolved by no registry record, parsed by no validator, consumed by no workflow phase, absent from the installer payload, and named by exactly one module - the memory-optimisation runtime module, which carries it in a prose-compression target list and never parses its structure - so the set of behaviours the edit could alter is empty. All three figures the Implementation Gate reviewer could not reproduce were reproduced first-hand at this gate, so the lowering of that finding to low rests on evidence and not on assertion, and pass is the only verdict the producing agent Stage 8 table admits with zero critical or high defects and zero criteria blocked or not-met. Five open low defects and three open questions carry to closure-and-debt-record as conditions; none blocks progression.",
+      "evidence_ref": ".claude/runs/run-34ca35504b72/states/behavioral-validation/artifacts/validation-report.md",
+      "decided_at": "2026-09-06T03:26:48Z"
     },
     "Closure Gate": {
       "gate": "Closure Gate",
@@ -166,36 +305,38 @@
         "omn-documentation"
       ],
       "producer_agent": "omn-orchestrator",
-      "decision": null,
-      "owner_role": null,
-      "decided_by": null,
-      "rationale": null,
-      "evidence_ref": null,
-      "decided_at": null
+      "decision": "approved",
+      "owner_role": "omn-documentation",
+      "decided_by": "omn-documentation subagent aaa2783181f7c999e, recorded by session operator for vuhoangcao",
+      "rationale": "Approve. The closure record reconciles exactly with the run ledger, recovery ledger and event log on phase progression, gate attribution and escalation history; it correctly records PH-005 as blocked on the undecided Closure Gate, correctly deviating from the contradicting conforming row in its own examples module, which check O5 in the output module governs over; and closed-with-followups is the right disposition, since no critical or high escalation stands open, the one blocked phase bars a bare closed, and holding a run on its own undecided gate would be circular. Approved with reservations: the upstream open question on risk R-001 unexecutable mitigation was answered in this record rather than carried to omn-tech-lead who owns it, and the runtime own run_completed event asserting that every gate was decided contradicts this record and is the defect, not the record.",
+      "evidence_ref": ".claude/runs/run-34ca35504b72/states/closure-and-debt-record/artifacts/orchestration-result.md",
+      "decided_at": "2026-09-06T07:04:10Z"
     }
   },
   "summary": {
     "run_id": "run-34ca35504b72",
-    "run_status": "ExecutingState",
+    "run_status": "Completed",
     "phases": 5,
-    "completed": 1,
+    "completed": 5,
     "blocked": 0,
     "failed": 0,
-    "pending": 3,
+    "pending": 0,
     "retrying": 0,
-    "active": 1,
-    "transitions": 13,
-    "replays_suppressed": 0
+    "active": 0,
+    "transitions": 43,
+    "replays_suppressed": 46
   },
   "recovery": {
     "ledger": "runs/run-34ca35504b72/recovery-ledger.json",
-    "classifications": 3,
+    "classifications": 11,
     "open": 0,
-    "resolved": 3,
-    "retries_scheduled": 1,
+    "resolved": 11,
+    "retries_scheduled": 3,
     "by_failure_class": {
       "output-schema-failure": 1,
-      "gate-approval-required": 2
+      "gate-approval-required": 7,
+      "worker-loss": 2,
+      "dependency-failure": 1
     },
     "retry_profile": {
       "max_attempts": 3,

@@ -42,16 +42,34 @@ Verify, and abort with error class `E-BOUNDARY` if any check fails:
 - `metadata.status` is `active`
 - `runtime.loadOrder` is present and non-empty
 
-### Step 2 — Load the module set in declared load order
+### Step 2 — Load the module set under the load profile
 
-Read every file named in `runtime.loadOrder`, in that exact order, resolved relative to
-`.claude/agents/omn-product-owner/`. Read each file in full. Do not skim, sample, or
-partially read.
+The envelope's `capability_bindings.load_profile` splits `runtime.loadOrder` into two tiers,
+derived from the `role` each module declares in the manifest; the sequence itself is the
+manifest's and is deliberately not repeated here, so that a manifest change cannot silently
+diverge from this adapter.
 
-The declared order is authoritative; it is not restated here so that a manifest change
-cannot silently diverge from this adapter.
+- **Core tier** — read each file end to end, in load order, before any work starts. Do not
+  skim, sample, or read a part of one.
+- **On-demand tier** — equally binding. Each entry carries a `load_when` trigger; read the
+  file the moment its trigger applies and obey what you find there. A prompt that says the
+  profile is `full`, or an invocation that names no envelope, puts every module in the core
+  tier.
 
-Where modules conflict, apply the precedence rule stated in the charter.
+`capability_bindings.contract_checks` records the manifest identity, version, status, load
+order, and contract-section checks the runtime already performed. When its `result` is `pass`
+those checks are not repeated; when it is not, perform them yourself before proceeding.
+
+Treat the loaded modules as binding operating instructions for this invocation:
+
+- the charter's invariants and its boundary tables are absolute
+- the contract module's scope, decision rights, and error classes bind you
+- the reasoning procedure runs stage by stage, in declared order, with none omitted
+- the lifecycle module supplies your states, internal gates, and escalation behavior
+- the output module defines artifact structure and governs over the template
+- the quality module defines the checks that must pass before you emit anything
+
+Where two modules appear to conflict, apply the precedence order stated in the charter.
 
 ### Step 3 — Load the invocation envelope
 

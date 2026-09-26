@@ -1,0 +1,215 @@
+{
+  "schema": "framework.runtime/execution-metrics.v1",
+  "task_id": "run-5df08e171670",
+  "workflow": "implement-feature v1.0.0",
+  "runtime_version": "0.8.0",
+  "computed_at": "2026-09-14T08:18:21Z",
+  "total_duration": {
+    "wall_clock_seconds": 3503.0,
+    "wall_clock": "58m23s",
+    "agent_active_seconds": 3148.0,
+    "agent_active": "52m28s"
+  },
+  "phases_executed": {
+    "declared": 6,
+    "completed": 3,
+    "blocked": 1
+  },
+  "agents_executed": {
+    "invocations": 4,
+    "distinct": 3,
+    "by_agent": {
+      "omn-product-owner": 1,
+      "planner": 1,
+      "architect": 2
+    }
+  },
+  "skills_executed": {
+    "required_reads": 13,
+    "not_triggered": 1
+  },
+  "parallel_groups": {
+    "count": 5,
+    "max_width": 2,
+    "groups": [
+      [
+        "scope-and-acceptance",
+        "execution-planning"
+      ],
+      [
+        "solution-design-and-risk-assessment"
+      ],
+      [
+        "implementation"
+      ],
+      [
+        "quality-review"
+      ],
+      [
+        "documentation-and-release-handoff"
+      ]
+    ]
+  },
+  "context_loads": {
+    "members_declared": 42,
+    "members_required": 19
+  },
+  "repeated_context_loads": {
+    "files": 8,
+    "by_path": {
+      "workflows/workflow-gate-matrix.md": 2,
+      "context/product-context.md": 4,
+      "context/technical-context.md": 4,
+      "context/release-context.md": 4,
+      "templates/technical-design.md": 2,
+      "templates/architecture-decision-record.md": 2,
+      "memory/architecture.md": 2,
+      "dependency-map.md": 2
+    }
+  },
+  "validation_runs": {
+    "passed": 3,
+    "failed": 1
+  },
+  "gate_decisions": {
+    "decided": 2,
+    "auto_policy": 0,
+    "rejected": 0
+  },
+  "tokens_or_context_estimate": {
+    "basis": "4 bytes per token; bytes the dispatch asked the agent to read, per envelope",
+    "legacy_bytes": 959354,
+    "progressive_bytes": 632909,
+    "legacy_tokens": 239838,
+    "progressive_tokens": 158227,
+    "savings_pct": 34.0
+  },
+  "per_phase": [
+    {
+      "phase": "scope-and-acceptance",
+      "agent": "omn-product-owner",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 457.0,
+      "context_members_declared": 13,
+      "context_members_required": 5,
+      "skills": {
+        "required": 3,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 64470,
+        "modules_core_bytes": 32663,
+        "slice_all_bytes": 107697,
+        "slice_required_bytes": 12303,
+        "inputs_bytes": 15124,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 49446,
+        "fixed_bytes": 55545,
+        "legacy_estimate_bytes": 242836,
+        "progressive_estimate_bytes": 165081,
+        "legacy_estimate_tokens": 60709,
+        "progressive_estimate_tokens": 41270,
+        "savings_pct": 32.0
+      }
+    },
+    {
+      "phase": "execution-planning",
+      "agent": "planner",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 1057.0,
+      "context_members_declared": 12,
+      "context_members_required": 7,
+      "skills": {
+        "required": 4,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 85855,
+        "modules_core_bytes": 40271,
+        "slice_all_bytes": 106701,
+        "slice_required_bytes": 37996,
+        "inputs_bytes": 3403,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 49446,
+        "fixed_bytes": 39950,
+        "legacy_estimate_bytes": 235909,
+        "progressive_estimate_bytes": 171066,
+        "legacy_estimate_tokens": 58977,
+        "progressive_estimate_tokens": 42766,
+        "savings_pct": 27.5
+      }
+    },
+    {
+      "phase": "solution-design-and-risk-assessment",
+      "agent": "architect",
+      "status": "completed",
+      "dispatches": 2,
+      "attempts_charged": 2,
+      "agent_active_seconds": 1634.0,
+      "context_members_declared": 17,
+      "context_members_required": 7,
+      "skills": {
+        "required": 6,
+        "not_triggered": 1
+      },
+      "context_estimate": {
+        "modules_full_bytes": 108943,
+        "modules_core_bytes": 50155,
+        "slice_all_bytes": 176160,
+        "slice_required_bytes": 13151,
+        "inputs_bytes": 15124,
+        "upstream_full_bytes": 51683,
+        "upstream_read_first_bytes": 40187,
+        "task_context_bytes": 49446,
+        "fixed_bytes": 128699,
+        "legacy_estimate_bytes": 480609,
+        "progressive_estimate_bytes": 296762,
+        "legacy_estimate_tokens": 120152,
+        "progressive_estimate_tokens": 74190,
+        "savings_pct": 38.3
+      }
+    },
+    {
+      "phase": "implementation",
+      "agent": "omn-dev-1-implement",
+      "status": "blocked",
+      "dispatches": 0,
+      "attempts_charged": 0,
+      "agent_active_seconds": null,
+      "context_members_declared": 0,
+      "context_members_required": 0,
+      "skills": null,
+      "context_estimate": null
+    },
+    {
+      "phase": "quality-review",
+      "agent": "omn-dev-2-reviewer",
+      "status": "pending",
+      "dispatches": 0,
+      "attempts_charged": 0,
+      "agent_active_seconds": null,
+      "context_members_declared": 0,
+      "context_members_required": 0,
+      "skills": null,
+      "context_estimate": null
+    },
+    {
+      "phase": "documentation-and-release-handoff",
+      "agent": "omn-documentation",
+      "status": "pending",
+      "dispatches": 0,
+      "attempts_charged": 0,
+      "agent_active_seconds": null,
+      "context_members_declared": 0,
+      "context_members_required": 0,
+      "skills": null,
+      "context_estimate": null
+    }
+  ]
+}

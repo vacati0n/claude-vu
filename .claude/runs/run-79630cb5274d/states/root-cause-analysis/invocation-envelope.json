@@ -1,0 +1,422 @@
+{
+  "invocation_id": "inv-79630cb5274d-02-001",
+  "run_id": "run-79630cb5274d",
+  "work_item_id": "run-79630cb5274d::root-cause-analysis",
+  "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+  "state_id": "root-cause-analysis",
+  "phase_index": 2,
+  "agent_id": "omn-dev-1-bug-analyst",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-1-bug-analyst.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-1-bug-analyst/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-1-bug-analyst/system.md",
+      "agents/omn-dev-1-bug-analyst/identity.md",
+      "agents/omn-dev-1-bug-analyst/reasoning.md",
+      "agents/omn-dev-1-bug-analyst/execution.md",
+      "agents/omn-dev-1-bug-analyst/output.md",
+      "agents/omn-dev-1-bug-analyst/quality.md",
+      "agents/omn-dev-1-bug-analyst/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-1-bug-analyst/system.md": "sha256:bd8045bcbde807a4e3600da265f939f9",
+      "agents/omn-dev-1-bug-analyst/identity.md": "sha256:f7661a6ca36c1e462475bcceb050a77a",
+      "agents/omn-dev-1-bug-analyst/reasoning.md": "sha256:bac6d78eda1933286fc6f79fda12ca72",
+      "agents/omn-dev-1-bug-analyst/execution.md": "sha256:672563d71fe83549e7142cbd633e2438",
+      "agents/omn-dev-1-bug-analyst/output.md": "sha256:07a3d283c7866abffd5d16a11d8f1765",
+      "agents/omn-dev-1-bug-analyst/quality.md": "sha256:7a1339ceeaf844a37720b53bc7ae1394",
+      "agents/omn-dev-1-bug-analyst/examples.md": "sha256:aacbbaafef0b4bd9adf483b97f6302d1"
+    },
+    "capabilities": [
+      "defect-triage",
+      "severity-and-blast-radius-classification",
+      "reproducibility-establishment",
+      "root-cause-analysis",
+      "evidence-chain-construction",
+      "fix-strategy-proposal",
+      "regression-scope-identification"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S03",
+        "proficiency": "Primary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Primary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "defect-report",
+      "production-issue-description",
+      "symptom-evidence",
+      "reproduction-context",
+      "business-impact-statement",
+      "impact-and-risk-data",
+      "logs",
+      "traces",
+      "code-context",
+      "environment-context",
+      "monitoring-signals",
+      "regression-targets",
+      "implementation-report",
+      "validation-report",
+      "technical-design",
+      "execution-plan",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "defect-report",
+        "reference": "runs/inputs/refactor-implementation-input-contract-defect-report.md",
+        "source_file": ".claude/runs/inputs/refactor-implementation-input-contract-defect-report.md",
+        "text": "# Defect Report: the refactor workflow cannot hand phase 2 to phase 3\n\nRouted as change class `defect-repair` by `config/self-hosting-profile.md`, whose Scope Rule\n`SR-1` places the offending file inside the framework surface.\n\n## Observed behaviour\n\n`workflows/refactor.md` declares a linear five-phase chain in which\n`refactor-implementation` depends on `safety-net-establishment`. The runtime offers a phase\nthe artifacts of its declared dependencies, under the `identifier` the producing agent's\nmanifest gives its own output (`runtime/framework_runtime.py`, `upstream_inputs`).\n\n`agents/omn-qa/manifest.yaml` declares exactly one output identifier, `validation-report`.\n`agents/omn-dev-1-implement/manifest.yaml` accepts exactly three input identifiers:\n`technical-design`, `bug-analysis`, `test-baseline-record`. The two sets are disjoint, and the\nrun-level inputs of a `refactor` run (`change-request`, `business-intent`,\n`architecture-context`) intersect neither. Guard `G5-INPUT` therefore blocks the phase:\n\n    G5-INPUT: [request-validation-failure] no accepted input type supplied;\n    accepted: ['technical-design', 'bug-analysis', 'test-baseline-record']\n\nThe third accepted identifier, `test-baseline-record`, is produced by no agent in the\nframework. It occurs in exactly two places in the whole tree: the accepted-input list in\n`agents/omn-dev-1-implement/manifest.yaml`, and one enumeration comment in\n`templates/implementation-report.md`. It reads as the name the safety-net phase's output was\nonce expected to carry.\n\nThis is observable now, not hypothetically: in `run-34ca35504b72`, phases 1 and 2 are\n`completed` with validated artifacts, and `refactor-implementation` stands `blocked` with\nrecorded reason `awaiting_dependency_output` and the guard detail quoted above.\n\n## Expected behaviour\n\nThe phase that implements a behaviour-preserving refactor should accept the artifact its own\nworkflow declares as the output of the phase it depends on. `agents/omn-dev-1-implement`\nalready states this intent in its `minimumSatisfaction` prose, which names \"a baseline\nvalidation record for a behaviour-preserving refactor\" as the third way its contract can be\nsatisfied. The manifest's accepted list does not implement that sentence.\n\n## Reproduction\n\n1. `plan --command refactor` with the three refactor inputs.\n2. Execute `scope-invariants-and-risk-profile`, approve the Invariant Gate, execute\n   `safety-net-establishment` to a validated `validation-report`.\n3. `next --run-id <run>`: `refactor-implementation` is `blocked` at `G5-INPUT`, and nothing in\n   the run is dispatchable.\n\n## Impact\n\nThe `/refactor` command cannot complete a run. Three of its five phases are unreachable through\nthe documented usage, and the two gates that assess them can never be decided.\n\nThe break is specific to this phase. The other two phases that dispatch\n`agents/omn-dev-1-implement` resolve correctly and are demonstrated by completed runs:\n`implement-feature/implementation` receives `technical-design` from\n`solution-design-and-risk-assessment`, and `fix-bug/fix-implementation` receives `bug-analysis`\nfrom `root-cause-analysis`.\n\nThere is a second-order governance consequence. Completion Rule `C-3` of\n`config/self-hosting-profile.md` accepts a phase only as executed with a validated artifact or\nblocked with a recorded reason. The scheduler records a block only on the frontier phase; a\nphase behind an unfinished predecessor receives a `wait` verdict and stays `pending`, which is\nneither accepted state. A run stalled by this defect therefore fails `C-3` permanently, and\ncheck `S8` of `verify_self_hosting.py` counts it as unaccounted with no change proposal able to\nrescue it. `run-34ca35504b72` is in exactly that condition and is the reason the framework\ncurrently reads `7/8 -- NOT SELF-HOSTING`.\n\nNo validated evidence has been lost. Both completed phases retain their artifacts and gate\ndecisions.\n\n## Severity and blast radius\n\nSeverity: high. Blast radius: every run of `/refactor`, at the transition from phase 2 to\nphase 3, plus the self-hosting verdict for as long as a run sits stalled inside the window.\n\n## Constraints on the fix\n\n- The decided direction is to widen the consumer, not to rename the producer. `omn-qa` emits\n  `validation-report` in four phases across three workflows; renaming its output identifier for\n  the sake of one consumer would change three working handoffs to repair one broken one.\n- The widening must be additive. `technical-design` and `bug-analysis` keep their meaning and\n  their phases, and the menu contract must continue to refuse a dispatch that supplies none of\n  the accepted identifiers.\n- `minimumSatisfaction` prose and the accepted list must agree after the change.\n- No agent gains a capability, a tool, or a write scope. This is an input-contract correction.\n- The enumeration comment in `templates/implementation-report.md` should stop advertising an\n  identifier no agent produces.",
+        "digest": "sha256:76384910923398dcb752564a5c3f523f"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was observed going wrong: a defect report for a raised issue, a production issue description for an incident, or symptom evidence where the failure was observed before it was written up. Without one there is no defect to analyse, and analysing anyway would mean diagnosing a fault this agent selected rather than the one that was reported."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "bug-analysis",
+      "reference": "runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md",
+      "produced_by": "triage-and-impact"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-05T05:11:52Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/bug-analysis.md",
+        "digest": "sha256:6f1f25f536d3d80353873990835ce1bd",
+        "supplies": null
+      },
+      {
+        "path": "skills/dotnet/engineering-playbook.md",
+        "digest": "sha256:35fc0c6fcd8f834c3e2528d14465e17c",
+        "supplies": null
+      },
+      {
+        "path": "skills/database/database-engineering.md",
+        "digest": "sha256:5e2aef6a9a242e9491d2bcc8be412453",
+        "supplies": null
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:2c79a73b9c3b28bc6c1e71b11f4f8b66",
+    "input_digest": "sha256:76384910923398dcb752564a5c3f523f",
+    "inputs": [
+      {
+        "type": "defect-report",
+        "reference": "runs/inputs/refactor-implementation-input-contract-defect-report.md",
+        "source_file": ".claude/runs/inputs/refactor-implementation-input-contract-defect-report.md",
+        "digest": "sha256:76384910923398dcb752564a5c3f523f"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "runtime/README.md",
+      "skills/database/database-engineering.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/performance/performance-engineering.md",
+      "templates/bug-analysis.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "runs/run-79630cb5274d/states/root-cause-analysis/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own build, test, log, and inspection commands, run read-only to establish reproduction and to obtain the first-hand evidence every causal step cites",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source, tests, or committed run evidence",
+        "any command that repairs, works around, or masks the defect under analysis",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not registered in the Evidence Register"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own build, test, log, and inspection commands, run read-only to establish reproduction and to obtain the first-hand evidence every causal step cites",
+      "external system, repository, or ticketing access",
+      "implement, repair, or refactor the corrective change, which belongs to omn-dev-1-implement",
+      "declare a root cause before reproducibility is established or recorded as not-reproduced",
+      "report a symptom location as a root cause",
+      "state a causal claim that cites no registered evidence",
+      "assign a severity from schedule, cost, or reporter pressure rather than from impact",
+      "lower a severity without evidence that lowers it",
+      "decide the Triage Gate, whose evidence this agent produces",
+      "close a defect, or record a merge, release, or deployment decision",
+      "act as the final reviewer of a fix, which belongs to omn-dev-2-reviewer",
+      "validate the fix on retest, which belongs to omn-qa",
+      "define or widen product scope, or decompose the fix into a task breakdown",
+      "revise the technical design rather than raising the defect against it",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "classify a defect's severity from observed impact and likelihood",
+        "determine the blast radius a defect reaches across module and service boundaries",
+        "establish whether a defect reproduces, and under which preconditions",
+        "execute the repository's own diagnostic commands to obtain first-hand symptom evidence",
+        "register every diagnostic artifact the analysis rests on, with a confidence rating",
+        "trace a causal chain from trigger to observed symptom, each step cited to that register",
+        "state why existing detection did not catch the defect earlier",
+        "propose a fix strategy, its alternatives, and the regression scope it puts at risk",
+        "state the verification and monitoring a fix must carry before it is trusted",
+        "record what remains undiagnosed as an open question with its blocking status"
+      ],
+      "prohibited": [
+        "implement, repair, or refactor the corrective change, which belongs to omn-dev-1-implement",
+        "declare a root cause before reproducibility is established or recorded as not-reproduced",
+        "report a symptom location as a root cause",
+        "state a causal claim that cites no registered evidence",
+        "assign a severity from schedule, cost, or reporter pressure rather than from impact",
+        "lower a severity without evidence that lowers it",
+        "decide the Triage Gate, whose evidence this agent produces",
+        "close a defect, or record a merge, release, or deployment decision",
+        "act as the final reviewer of a fix, which belongs to omn-dev-2-reviewer",
+        "validate the fix on retest, which belongs to omn-qa",
+        "define or widen product scope, or decompose the fix into a task breakdown",
+        "revise the technical design rather than raising the defect against it",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes only its own artifact and result envelope, at the paths the invocation envelope names in `constraints.permitted_writes`.",
+        "rationale": "A diagnosis is trusted because the role that produced it has no stake in the change that follows. An analyst who could edit source could repair a defect and then describe the repaired state as the diagnosis, which would leave the framework with no independent account of what went wrong. Reading source, tests, logs, traces, and prior run evidence is unrestricted within the frozen context slice; writing any of it is not."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own build, test, log, and inspection commands, run read-only to establish reproduction and to obtain the first-hand evidence every causal step cites",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source, tests, or committed run evidence",
+          "any command that repairs, works around, or masks the defect under analysis",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not registered in the Evidence Register"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same severity, the same reproducibility determination, the same evidence register, the same causal chain, the same blast radius, and the same declared analysis status.",
+      "identifierSchemes": {
+        "evidence": "E-<zero-padded-sequence>",
+        "causalSteps": "C-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Evidence records are ordered by the order in which the analysis first relied on them. Causal steps are ordered from trigger to observed symptom, which is the order the chain is read in; the ordering is causal, never chronological, where the two differ. Open questions are ordered blocking first, then by the lowest causal step they affect.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied defect, evidence, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "bug-analysis.md",
+    "artifact_path": "runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "template_ref": "templates/bug-analysis.md",
+    "contract_ref": "agents/omn-dev-1-bug-analyst/output.md",
+    "quality_ref": "agents/omn-dev-1-bug-analyst/quality.md",
+    "validator": "bug_analysis_validator",
+    "result_envelope_path": "runs/run-79630cb5274d/states/root-cause-analysis/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-05T05:11:52Z"
+}

@@ -79,9 +79,10 @@ mission:
 
 At least one of the following, expressing a change that has already been accepted:
 
-- technical design (`technical-design.md`), for feature and refactor work
+- technical design (`technical-design.md`), for feature work
 - bug analysis (`bug-analysis.md`), for a defect fix
-- baseline validation record, for a behaviour-preserving refactor
+- validation report (`validation-report.md`), for a behaviour-preserving refactor, where it
+  carries the safety-net baseline the refactor is implemented against
 
 ### Optional Inputs
 

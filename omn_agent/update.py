@@ -112,6 +112,8 @@ def _base_argv(run_id: str, args) -> list[str]:
     base = ["--run-id", run_id]
     if getattr(args, "gate_policy", None):
         base += ["--gate-policy", args.gate_policy]
+    if getattr(args, "demo", False):
+        base += ["--demo"]
     return base
 
 
@@ -397,6 +399,8 @@ def _materialize(args, report, target, fw_dir, task, tdir) -> ExitCode | None:
             "--requester", f"omn-agent:{getpass.getuser()}"]
     if getattr(args, "gate_policy", None):
         argv += ["--gate-policy", args.gate_policy]
+    if getattr(args, "demo", False):
+        argv += ["--demo"]
     rc, out = _invoke(fw_dir, target, argv, report)
     if rc == 0:
         m = RUN_ID_RE.search(out)

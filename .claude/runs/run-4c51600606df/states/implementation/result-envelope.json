@@ -1,0 +1,152 @@
+{
+  "invocation_id": "inv-4c51600606df-04-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md"
+  ],
+  "structured_output": {
+    "report_id": "IR-2026-0009",
+    "change_reference": "CKA-06",
+    "attempt": 2,
+    "supersedes": {
+      "report_id": "IR-2026-0007",
+      "artifact": "runs/run-4c51600606df/states/implementation/artifacts/implementation-report.md",
+      "artifact_digest": "sha256:d7e05cf486272fee5f632041b4d492f3",
+      "digest_recomputed_unchanged": true,
+      "authorisation_id": "RB-run-4c51600606df-review-gate-01"
+    },
+    "workflow_phase": "implementation",
+    "status": "provisional",
+    "verification_status": "partially-verified",
+    "review_status": "pending-review",
+    "counts": {
+      "change_set_entries": 11,
+      "test_evidence_entries": 16,
+      "deviations": 10,
+      "residual_risks": 8,
+      "open_questions": 4,
+      "blocking_open_questions": 0,
+      "escalated_deviations": 3
+    },
+    "identifier_ranges": {
+      "change_set": "C-001..C-011",
+      "test_evidence": "T-001..T-016",
+      "deviations": "V-001..V-010",
+      "residual_risks": "R-001..R-008",
+      "open_questions": "Q-001..Q-004"
+    },
+    "corrections_closed": {
+      "CR-001": "record items 21 and 22; the 5a sample in docs/USER-GUIDE.md; tests/fixtures/user-guide-pre-change.html; PreChangeEquivalence.test_the_5a_command_lines_the_pre_change_page_carried_survive",
+      "record-tidy-up-A": "docs/user-guide-reconciliation.md section 3 masthead row, citing the owner's ruling",
+      "record-tidy-up-B": "docs/user-guide-reconciliation.md item 45 wording; ratification citations on items 16 to 19 and 43 to 45; derived-label ruling on items 17 and 18",
+      "item-12": "docs/user-guide-reconciliation.md item 12 reversed; source chain-token wording governs under R1",
+      "CR-003": "docs/user-guide-reconciliation-diff.md; record items 41 and 42",
+      "CR-004": "tools/render_user_guide.py --root DIR; CheckMode runs failing outcomes against an isolated copy",
+      "CR-005": "tools/render_user_guide.py unrecognised-heading failure naming the line; GrammarFailures tests",
+      "CR-006": "CheckMode tree-snapshot assertions on both failing outcomes",
+      "CR-007": "tools/render_user_guide.py escape_attribute and take_attributes rejections; AttributeSafety tests",
+      "this-attempt": "hermetic equivalence proof: tests/fixtures/user-guide-reconciled.html frozen; PreChangeEquivalence compares the two fixtures; module docstring documents the reconstruction; both records name both fixtures"
+    },
+    "evidence_results": {
+      "pass": 16,
+      "fail": 0,
+      "not_run": 0,
+      "regression_baseline": {
+        "scope": "targeted suites per the dispatch; the full repository suite is QA's at the Verification Gate and was not executed",
+        "commands": [
+          "python tools/render_user_guide.py --check",
+          "python -m unittest discover -s tests -p \"test_render_user_guide.py\"",
+          "python -m unittest discover -s tests -p \"test_ci_workflow.py\"",
+          "grep -o 'id=\"[^\"]*\"' docs/user-guide.html | sort -u | wc -l"
+        ],
+        "before_change": {
+          "check_exit": 0,
+          "renderer_module": {"tests": 73, "failures": 2, "failing": ["PreChangeEquivalence.test_every_element_sequence_hunk_is_recorded_and_classified", "PreChangeEquivalence.test_every_visible_text_hunk_is_recorded_and_classified"]},
+          "ci_workflow_module": {"tests": 13, "result": "OK"},
+          "anchor_count": 21
+        },
+        "after_change": {
+          "check_exit": 0,
+          "renderer_module": {"tests": 74, "failures": 0, "result": "OK"},
+          "ci_workflow_module": {"tests": 13, "result": "OK"},
+          "anchor_count": 21
+        },
+        "delta_explained": "the two baseline failures were the equivalence class comparing the live page against the pre-change fixture after the separately delivered runtime fix edited four handbook passages (71 vs 66 element hunks, 53 vs 51 text hunks); the class now compares the pre-change fixture against the frozen reconciled fixture and passes; one test was added asserting the reconciled fixture is a renderer output",
+        "pre_existing_failures_surviving": 0
+      },
+      "fixture_reconstruction_verification": {
+        "streams_vs_recorded_hunks_applied": {"visible_text_hunks": 0, "element_hunks": 0},
+        "recomputed_vs_recorded_comparison": {"visible_text": "51/51 exact", "element": "66/66 exact"},
+        "line_diff_vs_live_page": "5 lines, all inside the four passages the runtime fix's handbook change-set row names"
+      }
+    },
+    "quality_checks": {
+      "check_set_version": "agents/omn-dev-1-implement/quality.md 1.0.0",
+      "total_run": 44,
+      "total_passed": 44,
+      "total_failed": 0,
+      "repair_passes": 1,
+      "repair_note": "the first Validation Engine pass failed M5 because an escaped pipe inside the T-015 command cell split the table row; the cell was reworded to carry no pipe character and the whole check set was re-run",
+      "validation_engine": {
+        "validator": "implementation_report_validator",
+        "envelope_cross_check": true,
+        "result": "PASS",
+        "checks_passed": "32/32",
+        "blocking_failures": 0,
+        "correctable_failures": 0,
+        "not_machine_checkable": 3
+      },
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass",
+        "M1": "pass", "M5": "pass", "M7": "pass", "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass",
+        "M3": "pass", "M2": "pass", "K1": "pass", "K2": "pass",
+        "M4": "pass", "V1": "pass", "V2": "pass", "V3": "pass",
+        "B1": "pass", "B2": "pass", "B3": "pass", "B4": "pass", "B5": "pass", "B6": "pass",
+        "M6": "pass", "A1": "pass", "A2": "pass", "A3": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass"
+      }
+    },
+    "not_machine_checkable": {
+      "N1": {
+        "obligation": "each change-set row describes the change actually made at that path",
+        "judgement": "discharged: the eleven rows were written from the files as delivered on the tree; change types are relative to the committed baseline; each row states whether this invocation, attempt 1, or the correction pass under the rollback authorisation produced the change at that path"
+      },
+      "N2": {
+        "obligation": "each test-evidence row exercises the change-set entries its Covers cell names",
+        "judgement": "discharged: every Covers cell was set from the assertions the named class or command actually makes; the two fixtures are covered by the equivalence class and the record test that requires them named; the module-by-discovery row covers every entry the module reads"
+      },
+      "N3": {
+        "obligation": "no hidden side effect was introduced into critical business logic",
+        "judgement": "discharged: no runtime, gate-decision, approval or human-block surface, no omn_agent file and nothing of the closed runtime fix was read for change or written; this invocation wrote one test fixture, one test module and two reconciliation records besides the report and this envelope; the renderer's check mode is executed as writing nothing"
+      }
+    },
+    "notes_for_assessor": [
+      "attempt 2 binds idempotency key sha256:4253e368330e942c84ac0f4dc165cefd, different from attempt 1's, because the implementer agent resolves at 1.1.0 against 1.0.0: expected payload-binding behaviour ruled by the architect, not a defect",
+      "the run was opened under runtime 0.5.0 and this attempt ran under 0.6.0",
+      "the host adapter file's version check names 1.0.0 while the manifest and envelope carry 1.1.0; resolved by the adapter's own rule that the module set governs, and recorded as follow-up for Architecture",
+      "the full repository suite was not executed by this invocation, per the dispatch; it is named as an unverified area"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-4c51600606df/states/implementation/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "tests/fixtures/user-guide-reconciled.html",
+    "tests/test_render_user_guide.py",
+    "docs/user-guide-reconciliation.md",
+    "docs/user-guide-reconciliation-diff.md",
+    "runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md",
+    "runs/run-4c51600606df/states/implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

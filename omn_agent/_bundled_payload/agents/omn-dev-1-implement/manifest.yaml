@@ -9,7 +9,7 @@ metadata:
     refactor code against the accepted design, adds or updates the automated tests that
     prove it, preserves module boundaries and coding standards, and records the change
     set, the verification evidence, and every tradeoff taken.
-  version: 1.0.0
+  version: 1.1.0
   status: active
   owner: Architecture
   contractVersion: 1.0.0
@@ -104,13 +104,14 @@ inputs:
       required: false
     - identifier: bug-analysis
       required: false
-    - identifier: test-baseline-record
+    - identifier: validation-report
       required: false
   minimumSatisfaction: >-
     At least one accepted input must be present. It supplies the accepted change this
     agent implements: a technical design for feature work, a bug analysis for a defect
-    fix, or a baseline validation record for a behaviour-preserving refactor. Without
-    one there is no accepted change, and implementing anyway would mean designing.
+    fix, or the safety-net validation report for a behaviour-preserving refactor, which
+    is the artifact the refactor workflow's own predecessor phase publishes. Without one
+    there is no accepted change, and implementing anyway would mean designing.
   optional:
     - execution-plan
     - coding-standards

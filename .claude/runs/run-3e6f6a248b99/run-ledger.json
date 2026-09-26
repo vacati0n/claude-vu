@@ -1,0 +1,357 @@
+{
+  "run_id": "run-3e6f6a248b99",
+  "runtime_version": "0.6.0",
+  "command_id": "bugfix",
+  "workflow_id": "fix-bug",
+  "workflow_version": "1.0.0",
+  "status": "Completed",
+  "input_digest": "sha256:b8e5d2d7bbd7c0582eefa4c26d355e33",
+  "created_at": "2026-09-06T09:49:30Z",
+  "updated_at": "2026-09-07T14:20:22Z",
+  "states": {
+    "triage-and-impact": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:367adb60187c10785537a276a5f2a45e",
+      "artifact_path": "runs/run-3e6f6a248b99/states/triage-and-impact/artifacts/bug-analysis.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-3e6f6a248b99/states/triage-and-impact/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 30,
+        "checksPassed": 30,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 9,
+          "status": "provisional",
+          "identifiers": {
+            "E": 19,
+            "C": 8,
+            "Q": 5
+          },
+          "tableRows": {
+            "Reproduction": 19,
+            "Root Cause Analysis": 8
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    },
+    "root-cause-analysis": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:a52584f662288deaa69d72bfd1509f9c",
+      "artifact_path": "runs/run-3e6f6a248b99/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-3e6f6a248b99/states/root-cause-analysis/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 30,
+        "checksPassed": 30,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 9,
+          "status": "provisional",
+          "identifiers": {
+            "E": 30,
+            "C": 9,
+            "Q": 7
+          },
+          "tableRows": {
+            "Reproduction": 30,
+            "Root Cause Analysis": 9
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    },
+    "fix-implementation": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-implement",
+      "attempt": 2,
+      "attempts_lost": 0,
+      "attempts_charged": 2,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:250d4cde7ab596807e781cea94ed8c9b",
+      "artifact_path": "runs/run-3e6f6a248b99/states/fix-implementation/artifacts/attempt-2/implementation-report.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-3e6f6a248b99/states/fix-implementation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 32,
+        "checksPassed": 32,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "provisional",
+          "identifiers": {
+            "C": 24,
+            "T": 13,
+            "V": 6,
+            "R": 6,
+            "Q": 4
+          },
+          "tableRows": {
+            "Change Set": 24,
+            "Test Evidence": 13,
+            "Deviations and Tradeoffs": 6,
+            "Residual Risk": 6
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 1
+    },
+    "regression-validation": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-qa",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:4fa81e92e915d11a4ed4482dbabf944c",
+      "artifact_path": "runs/run-3e6f6a248b99/states/regression-validation/artifacts/validation-report.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-3e6f6a248b99/states/regression-validation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 31,
+        "checksPassed": 31,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "provisional",
+          "identifiers": {
+            "AC": 17,
+            "DF": 3,
+            "Q": 5
+          },
+          "tableRows": {
+            "Acceptance Criteria Results": 17,
+            "Defects": 3
+          },
+          "criteria": 17,
+          "defects": 3,
+          "verdict": "pass-with-reservations",
+          "validationBasis": "regression",
+          "results": {
+            "met": 14,
+            "not-met": 0,
+            "blocked": 3
+          },
+          "severity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 3
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    },
+    "closure-and-communication": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-orchestrator",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:c08600636547a94a3b87eb0a362c5795",
+      "artifact_path": "runs/run-3e6f6a248b99/states/closure-and-communication/artifacts/orchestration-result.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-3e6f6a248b99/states/closure-and-communication/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 34,
+        "checksPassed": 34,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "PH": 5,
+            "HO": 4,
+            "ES": 8,
+            "FU": 11,
+            "Q": 0
+          },
+          "tableRows": {
+            "Phase Progression": 5,
+            "Handoffs": 4,
+            "Escalations": 8,
+            "Follow-Up Actions": 11
+          },
+          "phases": 5,
+          "handoffs": 4,
+          "escalations": 8,
+          "followUps": 11,
+          "disposition": "closed-with-followups",
+          "coordinationBasis": "closure",
+          "progression": {
+            "complete": 4,
+            "blocked": 1,
+            "not-started": 0
+          },
+          "escalationSeverity": {
+            "critical": 0,
+            "high": 1,
+            "medium": 2,
+            "low": 5
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    }
+  },
+  "gates": {
+    "Triage Gate": {
+      "gate": "Triage Gate",
+      "closes_state": "triage-and-impact",
+      "owner_roles": [
+        "omn-dev-1-bug-analyst",
+        "omn-tech-lead"
+      ],
+      "producer_agent": "omn-dev-1-bug-analyst",
+      "decision": "approved",
+      "owner_role": "omn-tech-lead",
+      "decided_by": "omn-tech-lead subagent a8c790ec607e85311, recorded by session operator for vuhoangcao",
+      "rationale": "Approve. Severity high and reproducibility deterministic rest on the analyst's own executions (E-005 synthetic one-phase store; E-012 scratch copy of the live run with its digest unchanged), not on the report's framing; every cited code path re-read and confirmed: TRANSITIONS has no exit from completed or failed, record_gate_decision moves the gate to failed without touching the producing phase or calling apply_classified_failure, G4-GATE blocks on decision == rejected, refresh never clears a guard block while the guard fails, and clearing_action prescribes release for a work item cmd_release cannot act on. The analysis refutes two report claims rather than echoing them: (1) MEDIUM - report step 4 said release --phase 'Review Gate' prints NOTHING TO RELEASE; StateStore.item defaults to work type state, so it raises TransitionError (E-011/E-012 correct); (2) LOW - dispatch replays are recorded for implementation only, and next first offers the Verification Gate and only after it is decided reports nothing dispatchable. High is the right severity under D5: the designed correction loop of every workflow is materially degraded but delivery is not stopped, since a new run remains possible, and only one run has ever recorded a rejection, so critical is not supported. Further findings, none blocking: (3) LOW - C-005 (permanent G4 block) and C-006 (release prescription) are symptom locations, not causes, and C-004's terminal tables are a correct immutability boundary, not a fault; the root-cause statement gets this right (no executor, no representation) and root-cause-analysis must keep C-004 as a constraint, not a target. (4) LOW, Q-002 decided here - the gate item's failure_class 'policy-failure' against an envelope of 'gate-rejection' is a labelling defect in the same function the fix touches; fold it in without changing decision values. (5) MEDIUM, Q-003 confirmed by code not only synthetic - project_run_status and maybe_aggregate (all state items COMPLETED) ignore gate items, so a final-gate rejection projects Completed and aggregates; in scope for root-cause-analysis to state. (6) LOW, blast-radius gaps - tests/test_gate_policy.py::test_rejected_prior_decision_is_not_precedent, the state_table/queue-status rendering and omn-agent run --show tests that meet any new status, and maybe_auto_decide_gates. CONDITIONS for root-cause-analysis: route Q-001 to architect before proposing a representation and record the answer as input (an architect decision memo has been commissioned by the operator and will be supplied); treat completed/failed terminality and M12 as invariants the fix must satisfy and say how; address finding 5 explicitly. CONDITIONS for fix-implementation: a rollback is triggered only by a recorded decision from a listed non-producing owner; the rejection, rationale, envelope and transition stay immutable; record_gate_decision decision values and the Producer Exclusion check unchanged; _require_approval untouched; a re-armed gate must NOT be decided by maybe_auto_decide_gates on cross-run precedent - the re-decision is human; every envelope's clearing action must execute successfully for its work-item type and status; add the gate-rejection scenario to runtime/verify_recovery.py, extend M13, replace the fiat stubs in tests/test_fix_comments.py and tests/test_update.py; full tests/ and every verify_*.py proven; state the disposition of run-4c51600606df (Q-005, omn-orchestrator).",
+      "evidence_ref": "runs/run-3e6f6a248b99/states/triage-and-impact",
+      "decided_at": "2026-09-06T10:10:55Z"
+    },
+    "Fix Gate": {
+      "gate": "Fix Gate",
+      "closes_state": "fix-implementation",
+      "owner_roles": [
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-dev-1-implement",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent a118b45e18514ead2, recorded by session operator for vuhoangcao",
+      "rationale": "Approve with one low non-blocking correction, on attempt 2 (artifact runs/run-3e6f6a248b99/states/fix-implementation/artifacts/attempt-2/implementation-report.md, digest fe046b7e). Every correction request from the first assessment closed BY EXECUTION: CR-001 CLOSED - rollback_preconditions (framework_runtime.py:4208-4276) iterates standing over every phase in range with no closed-phase exclusion; the approved-sibling refusal reproduced on a scratch copy of run-4c51600606df for both --target quality-review and --target implementation (exit 2, policy-failure naming the approved Verification Gate; state facts, events and ledger byte-equal apart from timestamps); pinned by RollbackPreconditionsTestCase with store equality and by Run D6a. F4 CLOSED - rollback_range = target plus completed hard_descendants(target) in descending phase order (4147-4181), budget and standing both iterate the cone; fix-bug-shaped test (test_gate_rollback.py:396-433) proves target triage-and-impact supersedes root-cause-analysis and fix-implementation, pending successor excluded, completed successor included; four contract passages state the cone. CR-002 CLOSED - rollback_clearing_action emits --decided-by <who> (1631-1657), the admissibility table exempts exactly that argument, executable() substitutes only it; D5a and D7 pass. CR-003 CLOSED - T-010 attributes M6 to the carried-at status reconstruction and Q-003 records that M6 fails on any run mid-rollback whose planning/design/delivery phase was superseded. CR-004 CLOSED - live probe of the stranded run: next exits 3 naming the rollback first with --decided-by <who> and withholding the Verification Gate; recovery --open-only derives rollback for both gate-rejection envelopes while the persisted files still read release; live_clearing_action and rollback_notice read only the store; ledger and envelope files untouched. Operator's independent probe agrees. Re-executed: verify_recovery 74/74 with D5a/D5b/D5c/D6a; discovery-form suites test_gate_rollback 34, test_gate_policy 30, test_fix_comments 16, test_update 14, test_framework_runtime_render 21 all OK; bundled parity 11 OK; render_user_guide --check exit 0. Invariants: state_engine adds exactly (COMPLETED,PENDING) superseded and (FAILED,PENDING) rollback_authorised; M12 iterates supersessions; attempt-1 digest 4b10ac71 unchanged and attempts/1 untouched; record_gate_decision decision values unchanged; no hunk touches cmd_release; Producer Exclusion text moved verbatim into require_gate_owner; omn_agent/runner.py untouched; CKA-06's files untouched (the two PreChangeEquivalence failures are hunk-count mismatches against CKA-06's fixture, disclosed as Q-001). FINDING F-001 LOW, non-blocking -> CR-005 (owner omn-dev-1-implement, carried to regression-validation and closure): framework_runtime.py:59 module docstring, :4968 rollback --target help text, and config/execution-engine.md:515 sequence diagram still state the PATH rule ('every completed phase from the target through the closed phase') where the range is now the completed downstream cone; every runtime-facing statement of the range must name the cone. DISCLOSURE: next on the live stranded run rewrote updated_at on state.json (top level, Verification Gate, documentation-and-release-handoff, Closure Gate) and nothing else - declared state-advancing by the runtime's own docstring; the operator's probe did the same. Gaps handed to omn-qa: no multi-phase run that both traverses design/delivery and carries a rollback (Q-003); the active-descendant case (Q-004) unexercised; test_run_show and test_run_e2e claimed but not re-run by the reviewer; fix_comments.py re-read only at its rollback call sites. Operator sequence for run-4c51600606df verified on a fresh scratch copy (exit 0, RB-run-4c51600606df-review-gate-01, two phases superseded, 0 open envelopes, all 8 committed artifacts byte-identical): record no decision on the Verification Gate; rollback --gate 'Review Gate' --target implementation --owner-role omn-qa; then dispatch implementation attempt 2, complete, quality-review attempt 2, and both gates on quality-review decided afresh by humans. QA must not execute it.",
+      "evidence_ref": "runs/run-3e6f6a248b99/states/fix-implementation",
+      "decided_at": "2026-09-07T11:59:18Z",
+      "decision_history": [
+        {
+          "decision": "rejected",
+          "owner_role": "omn-dev-2-reviewer",
+          "decided_by": "omn-dev-2-reviewer subagent a1ef7840df6b3eca7, recorded by session operator for vuhoangcao",
+          "rationale": "Reject: one HIGH finding blocks. Every re-executed claim held - verify_recovery 70/70 with Run D (runs dir 18 entries before and after); test_gate_rollback 24, test_gate_policy 29, test_framework_runtime_render 21, test_fix_comments 16, test_update 14 all OK in the CI discovery form; render_user_guide --check exit 0; test_bundled_payload 11 OK; test_render_user_guide fails exactly the two PreChangeEquivalence tests, a CKA-06 defect routed to that change's attempt-2 review, and CKA-06's files carry mtimes before the implementation window. On a scratch copy of run-4c51600606df (RUNS redirected outside the repository, live fingerprint unchanged) the exact operator sequence re-entered implementation, superseded quality-review, re-armed the Review Gate, moved the undecided Verification Gate and the successor from blocked to pending with every envelope resolved, and M4/M12/M13 passed. FINDINGS: F1 HIGH, BLOCKING - runtime/framework_runtime.py:4140, 'standing' excludes the closed phase, so an APPROVED SIBLING GATE closing closes_state survives the rollback; demonstrated: approve Verification Gate, then rollback --target implementation succeeds and Verification Gate stays completed/approved over superseded quality-review evidence, and once the Review Gate is re-approved G4 passes the successor on a stale approval - violates the memo's human-block invariant and the Q-007 confirmation that no decision may stand over evidence being rebuilt. F2 MEDIUM - framework_runtime.py:1650-1651, the clearing action pre-fills --decided-by with the rejecter's decider, so executed verbatim it attributes the authorisation to someone who may not have made it; the admissibility table already exempts gate's human arguments, so verbatim executability does not require the pre-fill. F3 LOW - verify_multi_phase.py:262, M6 reads the current status vector and fails on any run mid-rollback (the stranded-run copy passed M6 before rollback and failed after); T-010's attribution to the one-phase harness alone is incomplete and Q-003 is sharper than stated. F4 LOW - framework_runtime.py:4098-4114 rollback_range: a completed phase that hard-depends on the target but is not an ancestor of closes_state is not superseded; the memo's rule does not address it; design question for architect. F5 (operator finding, MEDIUM) - on the stranded run-4c51600606df with the fix on the tree, no surface names the rollback path: next offers the Verification Gate (approval over evidence whose Review Gate was rejected) and recovery --open-only echoes the persisted envelopes verbatim, still prescribing release --reason tool_failure and offering 'approve an exception'; fresh envelopes may be correct but the stranded-store case is the one the fix was built for and item 5 of the memo promised next would derive the rollback command live. CORRECTION REQUESTS, owner omn-dev-1-implement: CR-001 (F1, blocking) a rollback must not leave any approved gate standing over any phase in the supersession range, the closed phase included; the refusal (or the supersession of that gate's decision into its decision_history) changes nothing else in the store; a Run D negative or test_gate_rollback case pins it and the admissibility table agrees. CR-002 (F2) the recorded authoriser is never defaulted from the rejection; the clearing action stays admissible without naming a decider it cannot know. CR-003 (F3) correct T-010's cause statement; Q-003 records that M6 fails on any run mid-rollback. CR-004 (F5) on a run holding an open gate-rejection envelope, next must name the rollback command ahead of offering any gate decision over the rejected evidence, and recovery must derive the clearing action live for open gate-rejection envelopes rather than echoing the persisted string; the persisted envelope text itself stays untouched. F4 is routed to architect in parallel; implement its answer if it arrives before attempt 2 closes, otherwise record it as an open question. TEST ADEQUACY: strong where riskiest (terminality probed for both work types, immutability by byte comparison, key preservation, attempt-scoped write scope, class-aware clearing actions executed verbatim, auto-approval hold with a control, budget exhaustion with store equality, consumer sequence against the real status shape); gaps: F1 untested, refresh gate-branch unit-tested only with mocked guards, no multi-phase run carrying a rollback proven, run_completed-before-final-gate interaction unexercised. This rejection is itself the first live exercise of the mechanism under test: the operator will authorise the rollback of this gate into fix-implementation attempt 2.",
+          "evidence_ref": "runs/run-3e6f6a248b99/states/fix-implementation",
+          "decided_at": "2026-09-06T13:12:16Z",
+          "superseded_by": "RB-run-3e6f6a248b99-fix-gate-01",
+          "target": "fix-implementation",
+          "superseded_phases": [
+            "fix-implementation"
+          ],
+          "authorised_by": "omn-dev-2-reviewer",
+          "authorisation_decided_by": "session operator for vuhoangcao, on the Fix Gate assessment of omn-dev-2-reviewer subagent a1ef7840df6b3eca7",
+          "authorisation_rationale": "Rollback authorised to rebuild fix-implementation as attempt 2 carrying correction requests CR-001 (F1 high: approved sibling gate survives rollback), CR-002 (decider pre-fill), CR-003 (T-010/M6 attribution), CR-004 (stranded-store surfacing of the rollback path). Fix-implementation is the gate's closes_state; no intermediate phase; no sibling gate on this phase, so F1 cannot affect this rollback.",
+          "re_armed_at": "2026-09-06T13:12:17Z"
+        }
+      ]
+    },
+    "Verification Gate": {
+      "gate": "Verification Gate",
+      "closes_state": "regression-validation",
+      "owner_roles": [
+        "omn-qa",
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-qa",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent a3cabd5e43cb15ac2, recorded by session operator for vuhoangcao",
+      "rationale": "Approve. Every behavioural criterion of the fix strategy and the architect's rulings (AC-001..AC-011, AC-015..AC-017) is met on executed evidence; the reviewer re-executed test_gate_rollback 34 OK, the five touched test modules 115 OK, verify_self_hosting 7/8 with S8 alone failing on exactly run-3e6f6a248b99 and run-4c51600606df, git diff HEAD -- omn_agent/runner.py empty, state_engine.py adding exactly (COMPLETED,PENDING) superseded (engine-checked for a supersession record) and (FAILED,PENDING) rollback_authorised, 17 run-* entries with the harness run absent. Full-suite count reconciles exactly: 404 baseline + 44 from this change (34+4+3+2+1 against HEAD's 329) + 25 from CKA-06's renderer suite growing 48 to 73 = 473, with the only two failures the CKA-06 PreChangeEquivalence tests in an untracked module and fixture. RESERVATIONS: AC-012 - two components are real external limits (the CKA-06 failures; S8 waiting on the proposals closure produces) and the third, M6 failing on any run mid-rollback (DF-002), is a verifier-contract gap this change exposed, pending the architect's Q-002 answer (now ruled: extend M6 to read a non-empty supersessions list as traversal and add a Run E) - consequence: verify_multi_phase cannot prove run-4c51600606df from un-stranding until its implementation attempt 2 completes; CI does not invoke that verifier. AC-013 - the real-runtime pr fix-comments round is an unmet requirement honestly labelled, no harness exists and building one is outside QA's authority; the consumer path is proven against the stub plus the copy-B reject-then-rollback sequence and the first live round is the real proof; carried as a test gap. AC-014 - rollback on the live run is forbidden to QA and was rehearsed twice independently on byte-identical copies; this approval is what authorises the operator to perform it. FINDINGS (all low, none blocking): F-001 CR-005 confirmed open (framework_runtime.py:59-61 and :4968, config/execution-engine.md:515, both bundled mirrors still state the path rule; the four contract passages correctly state the cone). F-002 M6 semantics on a superseded phase undecided at assessment time (Q-002, since ruled). F-003 real-runtime consumer round unproven (AC-013). DISCLOSURE: the live run-4c51600606df state.json mtime 11:54:04Z predates QA's invocation (11:59:19Z); that write is the reviewer's own Fix Gate next probe and the operator's probe, updated_at only. Not re-run by the reviewer: the full 906s suite, test_render_user_guide, verify_recovery and verify_multi_phase (results stand on QA's execution and, for verify_recovery 74/74, the reviewer's own Fix Gate execution). DISPOSITION OF CR-005: low, does not block; carried into closure-and-communication, owner omn-dev-1-implement; the change proposal must record it either CLOSED - the edit confined to the three sites and mirrors, followed by the bundle sync and re-runs of test_bundled_payload and test_gate_rollback, all named in the proposal - or OPEN with omn-tech-lead's recorded acceptance; it must not be closed silently. The operator has elected to close it before closure with that re-validation record. CONDITIONS for closure-and-communication: (1) the change proposal links this run's artifacts and states the disposition of run-4c51600606df - un-stranded by the operator via rollback --gate 'Review Gate' --target implementation --owner-role omn-qa, issued BEFORE any decision on its Verification Gate - and which proposal accounts for that run under S8 (Q-004); (2) record that the stranded run's attempt-2 dispatch binds a new idempotency key because the implementer version moved 1.0.0 to 1.1.0 (Q-005, architect: intended bind_payload behaviour, not a rollback defect, item pending not terminal at bind time), so replay suppression will not tie its attempts together; (3) Q-001 (active descendant: architect ruled RELEASE via the worker-loss path, follow-up), Q-002 (M6, ruled), Q-005 (ruled) are recorded with their rulings from runs/inputs/gate-rollback-architect-qa-open-questions-ruling.md; Q-003 (CKA-06 hunks) reaches that change's attempt-2 review; (4) the go covers the fix; release readiness of the shared tree, which also carries CKA-06 and other in-flight files, is omn-tech-lead's decision.",
+      "evidence_ref": "runs/run-3e6f6a248b99/states/regression-validation",
+      "decided_at": "2026-09-07T13:57:36Z"
+    },
+    "Closure Gate": {
+      "gate": "Closure Gate",
+      "closes_state": "closure-and-communication",
+      "owner_roles": [
+        "omn-orchestrator",
+        "omn-documentation"
+      ],
+      "producer_agent": "omn-orchestrator",
+      "decision": "approved",
+      "owner_role": "omn-documentation",
+      "decided_by": "omn-documentation subagent ac47618640dc18fd0, recorded by session operator for vuhoangcao",
+      "rationale": "Approve. Every statement in the closure record testable against the ledgers is grounded: five phases; Triage Gate approved by omn-tech-lead (E-0019); Fix Gate rejected 13:12:16Z (E-0034), rollback RB-run-3e6f6a248b99-fix-gate-01 (E-0036..E-0038: completed->pending then failed->pending, decision_history populated, re_armed_at 13:12:17Z), approved on attempt 2 (E-0047); Verification Gate approved (E-0057); idempotency keys 8cd40eec and 250d4cde with equal input digest and differing context digests (E-0026/27 vs E-0039/40). The CR-005 sites now read the cone (framework_runtime.py:57-65 and :4966-4970; config/execution-engine.md:515) and the record attributes the 11/34 re-runs to the operator pass, which it may. The four delivered documents state both operator-facing facts (approved sibling gate makes the rollback refuse; authorisation is a second human decision by a listed non-producing owner) where a reader finds them: runtime/README.md:117-119, docs/USER-GUIDE.md:703-705, config/execution-engine.md:485-487, config/runtime.md:205. Post-record drift, not error: run-ledger.json shows 37 transitions, 67 events, recovery 11/1 open (this gate's envelope), runtime_version 0.6.0 after the operator's FR-07 pass, and run_status Completed with the Closure Gate null (E-0066) - FU-002 exercised live. DOCUMENTATION FINDINGS, all low or advisory, none blocking: (1) docs/USER-GUIDE.md:752-753 ('supersedes that phase and every completed phase up to the gated one') and its render docs/user-guide.html:581 still state the path rule - CR-005's search terms did not cover this phrasing; the rework-loop paragraph (:697-705) states the cone correctly; correction requires re-rendering and adds hunks to CKA-06's frozen fixture (ES-007). (2) runtime/README.md 'Idempotency and replay' (:211, :341-342, :428-430) never says that a moved context slice yields a new key at re-dispatch and that replay suppression then does not tie the attempts together; this run is the second instance (ES-006); the preservation statement is true of the rollback transition only. (3) advisory - rollback --help names the cone and the owner checks but not the approved-sibling refusal. (4) none - no document names 0.5.0; RUNTIME_VERSION 0.6.0 in source and mirror; only the proposal must carry it (template line 64, baseline rule profile line 205). (5) acceptable - README gap 3's 'decided but not executed' clause retired, retry-not-driven residue truthfully open; pre-existing inconsistency 'six persisted statuses' (:489) vs 'seven' (:166), not this fix. FOLLOW-UPS: FU-001 confirmed and extended - the proposal names CR-005 CLOSED (three sites plus mirrors; test_bundled_payload 11 OK, test_gate_rollback 34 OK), declares baseline runtime version 0.6.0 per FR-07 with its re-validation (test_bundled_payload 11, test_framework_runtime_render 21, test_gate_rollback 34), and records ES-006 as two instances of the bind_payload rule; FU-008 confirmed - the release note carries the idempotency statement in general form; FU-012 new, documentation, low - correct docs/USER-GUIDE.md:752-753 to the cone wording, re-render, --check, owner omn-dev-1-implement, sequenced with ES-007 so CKA-06's reconciliation record lists the hunks; FU-013 new, documentation, low - README 'Idempotency and replay' states that a re-dispatch after a rollback binds a new key whenever any payload component moved, this run as the example, mirrored to the bundle; FU-014 new, advisory - add the approved-sibling refusal to the rollback parser help. No command executed by the gate owner; test counts and the render check quoted from the Fix Gate rationale.",
+      "evidence_ref": "runs/run-3e6f6a248b99/states/closure-and-communication",
+      "decided_at": "2026-09-07T14:20:22Z"
+    }
+  },
+  "summary": {
+    "run_id": "run-3e6f6a248b99",
+    "run_status": "Completed",
+    "phases": 5,
+    "completed": 5,
+    "blocked": 0,
+    "failed": 0,
+    "pending": 0,
+    "retrying": 0,
+    "active": 0,
+    "transitions": 38,
+    "replays_suppressed": 0
+  },
+  "recovery": {
+    "ledger": "runs/run-3e6f6a248b99/recovery-ledger.json",
+    "classifications": 11,
+    "open": 0,
+    "resolved": 11,
+    "retries_scheduled": 0,
+    "by_failure_class": {
+      "gate-approval-required": 9,
+      "gate-rejection": 2
+    },
+    "retry_profile": {
+      "max_attempts": 3,
+      "backoff_strategy": "exponential",
+      "base_delay_seconds": 2,
+      "multiplier": 2,
+      "max_delay_seconds": 60,
+      "jitter_ratio": 0.2,
+      "circuit_breaker_threshold": 3,
+      "policy_ref": "config/runtime.md#retry-policy"
+    }
+  }
+}

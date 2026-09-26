@@ -1,0 +1,104 @@
+{
+  "invocation_id": "inv-34ca35504b72-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-34ca35504b72/states/behavioral-validation/artifacts/validation-report.md"
+  ],
+  "structured_output": {
+    "validationBasis": "behavioral-parity",
+    "reportStatus": "complete",
+    "verdict": "pass",
+    "criteriaByResult": {
+      "met": 10,
+      "not-met": 0,
+      "blocked": 0,
+      "total": 10
+    },
+    "defectsBySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 5,
+      "total": 5
+    },
+    "openQuestions": 3,
+    "blockingDefectsOutstanding": 0,
+    "validationEngine": {
+      "validator": "validation_report_validator",
+      "result": "PASS",
+      "checksRun": 31,
+      "checksPassed": 31,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3
+    },
+    "qualityChecks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass",
+      "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass",
+      "D5": "pass", "D6": "pass", "D7": "pass",
+      "Q1": "pass", "Q2": "pass", "Q3": "pass", "Q4": "pass",
+      "Q5": "pass", "Q6": "pass", "Q7": "pass",
+      "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass",
+      "A5": "pass", "A6": "pass", "A7": "pass", "A8": "pass",
+      "A9": "pass", "A10": "pass",
+      "T1": "pass", "T2": "pass", "T3": "pass",
+      "F1": "pass", "F2": "pass", "F3": "pass", "F4": "pass",
+      "F5": "pass", "F6": "pass",
+      "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass",
+      "E5": "pass", "E6": "pass", "E7": "pass",
+      "R1": "pass", "R2": "pass", "R3": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass",
+      "C5": "pass", "C6": "pass"
+    },
+    "qualityChecksRun": 57,
+    "qualityChecksPassed": 57,
+    "repairsApplied": [
+      "F4: the line-terminator defect's Symptom was rewritten to record observed behaviour after the first pass carried a diagnosed cause",
+      "E1: the Evidence examined field was rescoped so the one artifact inspected at named sites rather than read in full is described as such"
+    ],
+    "notMachineCheckableObligations": {
+      "N1": {
+        "judgement": "discharged",
+        "detail": "The Stage 4 depth table's presentation-only row sets the floor at criterion-level checks, and this run confirmed that row applies rather than inheriting it: the document is resolved by no registry record, parsed by no validator, consumed by no phase, absent from the 267-file installer payload, and named by exactly one module that never parses its structure. The run went above the floor deliberately, because constraint C-007 makes verification-script verdict parity the declared regression measure and because the shared working tree makes any whole-repository measurement untrustworthy. All seven discovered verification scripts, the two flake-prone ones twice each, and three targeted unit modules were executed, and every structural figure was recomputed from the file at both revisions rather than read from the upstream report."
+      },
+      "N2": {
+        "judgement": "discharged",
+        "detail": "Each of the ten met results rests on a check this agent executed in this run and on output that settles the criterion, not on an upstream claim. The pinned baseline figures were recomputed from first principles rather than accepted, and all five now reproduce exactly. The one place an upstream judgement is relied on, the reviewer's register and granularity approval behind AC-010, is labelled in the evidence cell as reported rather than confirmed, and the mechanically settleable half of that criterion was measured independently."
+      },
+      "N3": {
+        "judgement": "discharged",
+        "detail": "The regression surface was fixed before examination and exercised in full: seven verification scripts, three unit modules, the out-of-section bytes and heading list at both revisions, the row set and row order, every cited path token, the registered artifact validator over the upstream report, and the installer payload. One plausible regression was actively ruled out rather than assumed, the payload-mirror case. Two regressions this agent could not fully bound are named rather than absorbed: two verification scripts and one test module carry no independent pre-change baseline, and no check in either CI-discovered surface reads the document at all."
+      }
+    },
+    "conditionsFromImplementationGate": {
+      "evidenceReproducibility": "discharged: the missing conventions were recovered and restated in the artifact, and all five pinned figures reproduce exactly, including the three the gate reviewer could not match",
+      "baselineCoversFiveOfSeven": "discharged: recorded in the artifact as DF-002, in Untested areas, and in Unmitigated risk, extended to one targeted test module that is also post-change only",
+      "reMeasureUnderContamination": "discharged: sixty dirty paths enumerated path by path and confirmed disjoint from this change's three files; parity compared at summary-line granularity; the predicted validation-engine count movement over the upstream report was observed and attributed to a concurrent edit",
+      "promptsRowRouted": "discharged: recorded as DF-003 and routed to architect as Q-001, with the fix constrained to the folder or to README and row together",
+      "cSevenAmbiguity": "discharged: the operator's working interpretation was applied and recorded with its authority, the wording question was routed to architect as Q-002, and today's measurement satisfies both readings so the criterion is settled either way"
+    },
+    "disclosures": [
+      "The verification script that proves recovery creates and deletes its own injected run directories under runs/ as part of how it induces failures. It was executed twice. The runs/ listing and its digest are unchanged at seventeen entries before and after, so the net effect is zero and nothing persists.",
+      "The whole-repository unit suite was deliberately not executed, because one of its modules rewrites two generated documents in place, which would be a repository write this phase must not cause.",
+      "The artifact carries one occurrence of the framework payload directory prefix, inside the verbatim text of the criterion drawn from design constraint C-004. It is retained because checks A7 and A8 forbid rewording a criterion, and the contract engine's C3.2 scan excludes that prefix as a repository path; the scan returns zero hits."
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/identity.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/execution.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "agents/omn-qa/examples.md",
+    "runs/run-34ca35504b72/states/behavioral-validation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-34ca35504b72/states/behavioral-validation/artifacts/validation-report.md",
+    "runs/run-34ca35504b72/states/behavioral-validation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

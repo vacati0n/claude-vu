@@ -1,0 +1,335 @@
+{
+  "run_id": "run-79630cb5274d",
+  "runtime_version": "0.5.0",
+  "command_id": "bugfix",
+  "workflow_id": "fix-bug",
+  "workflow_version": "1.0.0",
+  "status": "Completed",
+  "input_digest": "sha256:5a2b487a98c5cd63924463c1649e4798",
+  "created_at": "2026-09-05T04:47:37Z",
+  "updated_at": "2026-09-06T02:13:42Z",
+  "states": {
+    "triage-and-impact": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "artifact_path": "runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-79630cb5274d/states/triage-and-impact/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 30,
+        "checksPassed": 30,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 9,
+          "status": "provisional",
+          "identifiers": {
+            "E": 24,
+            "C": 6,
+            "Q": 4
+          },
+          "tableRows": {
+            "Reproduction": 24,
+            "Root Cause Analysis": 6
+          }
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "root-cause-analysis": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "artifact_path": "runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-79630cb5274d/states/root-cause-analysis/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 30,
+        "checksPassed": 30,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 9,
+          "status": "provisional",
+          "identifiers": {
+            "E": 38,
+            "C": 6,
+            "Q": 6
+          },
+          "tableRows": {
+            "Reproduction": 38,
+            "Root Cause Analysis": 6
+          }
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "fix-implementation": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-implement",
+      "attempt": 3,
+      "attempts_lost": 0,
+      "attempts_charged": 3,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "artifact_path": "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+      "blocked_reason": null,
+      "failure_class": "output-schema-failure",
+      "state_ledger": "runs/run-79630cb5274d/states/fix-implementation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 32,
+        "checksPassed": 32,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "provisional",
+          "identifiers": {
+            "C": 11,
+            "T": 7,
+            "V": 4,
+            "R": 4,
+            "Q": 4
+          },
+          "tableRows": {
+            "Change Set": 11,
+            "Test Evidence": 7,
+            "Deviations and Tradeoffs": 4,
+            "Residual Risk": 4
+          }
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "regression-validation": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-qa",
+      "attempt": 2,
+      "attempts_lost": 1,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "artifact_path": "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+      "blocked_reason": null,
+      "failure_class": "worker-loss",
+      "state_ledger": "runs/run-79630cb5274d/states/regression-validation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 31,
+        "checksPassed": 31,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "AC": 7,
+            "DF": 6,
+            "Q": 5
+          },
+          "tableRows": {
+            "Acceptance Criteria Results": 7,
+            "Defects": 6
+          },
+          "criteria": 7,
+          "defects": 6,
+          "verdict": "pass-with-reservations",
+          "validationBasis": "regression",
+          "results": {
+            "met": 6,
+            "not-met": 0,
+            "blocked": 1
+          },
+          "severity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 2,
+            "low": 4
+          }
+        },
+        "undeclaredSideEffects": []
+      }
+    },
+    "closure-and-communication": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-orchestrator",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:6510e4fda9d4f9b489af4968ca940168",
+      "artifact_path": "runs/run-79630cb5274d/states/closure-and-communication/artifacts/orchestration-result.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-79630cb5274d/states/closure-and-communication/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 34,
+        "checksPassed": 34,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "PH": 5,
+            "HO": 4,
+            "ES": 9,
+            "FU": 7,
+            "Q": 5
+          },
+          "tableRows": {
+            "Phase Progression": 5,
+            "Handoffs": 4,
+            "Escalations": 9,
+            "Follow-Up Actions": 7
+          },
+          "phases": 5,
+          "handoffs": 4,
+          "escalations": 9,
+          "followUps": 7,
+          "disposition": "closed-with-followups",
+          "coordinationBasis": "closure",
+          "progression": {
+            "complete": 4,
+            "blocked": 1,
+            "not-started": 0
+          },
+          "escalationSeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 6,
+            "low": 3
+          }
+        },
+        "undeclaredSideEffects": []
+      }
+    }
+  },
+  "gates": {
+    "Triage Gate": {
+      "gate": "Triage Gate",
+      "closes_state": "triage-and-impact",
+      "owner_roles": [
+        "omn-dev-1-bug-analyst",
+        "omn-tech-lead"
+      ],
+      "producer_agent": "omn-dev-1-bug-analyst",
+      "decision": "approved",
+      "owner_role": "omn-tech-lead",
+      "decided_by": "omn-tech-lead subagent a7d431f249268023d, recorded by session operator for vuhoangcao",
+      "rationale": "The triage package confirms severity and reproducibility on first-hand evidence that re-derives independently: the disjoint identifier sets in agents/omn-qa/manifest.yaml and agents/omn-dev-1-implement/manifest.yaml are as recorded, the G5-INPUT block detail on run-34ca35504b72 matches the analysis character for character, and severity high is the correct row of the analyst's own rubric given a workaround that exists but is unusable in normal operation. The scope decision to route the Completion Rule consequence out as a separate defect is sound, because the phase-accounting clause in runtime/verify_self_hosting.py treats every non-completed, non-blocked-with-reason phase as unaccounted regardless of any input contract, so the two have independent causes and independent fixes. Approved with four conditions carried into root-cause-analysis, none of which changes the root cause, the severity, or the decided fix direction.",
+      "evidence_ref": ".claude/runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md",
+      "decided_at": "2026-09-05T05:11:46Z"
+    },
+    "Fix Gate": {
+      "gate": "Fix Gate",
+      "closes_state": "fix-implementation",
+      "owner_roles": [
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-dev-1-implement",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent a57260f62d891d7fd, recorded by session operator for vuhoangcao",
+      "rationale": "The fix is correct and complete against the analysis approved surface list: all five description surfaces were verified independently and now state the same accepted set {technical-design, bug-analysis, validation-report}, the widening leaves the two existing identifiers and the menu refusal behaviour intact, and the withdrawal of test-baseline-record breaks no caller - no agent manifest declares it as an output, and none of the 54 committed invocation envelopes ever supplied it. The 14-test regression module was re-run independently at 14/14 and exercises the runtime real narrowing and resolution functions rather than a restatement of them; the v1.1.0 minor bump follows the agent own written compatibility rule and contractVersion correctly stays at 1.0.0. The evidence is not isolated from a concurrent writer and the report says so honestly, but the change is declaration-only and its effects are fully observable in the contract-level tests, so the isolation gap is carried into regression-validation as a condition rather than treated as a blocker at this gate.",
+      "evidence_ref": ".claude/runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+      "decided_at": "2026-09-05T07:10:06Z"
+    },
+    "Verification Gate": {
+      "gate": "Verification Gate",
+      "closes_state": "regression-validation",
+      "owner_roles": [
+        "omn-qa",
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-qa",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent a1a3b8c1c872baf89, recorded by session operator for vuhoangcao",
+      "rationale": "Approved. The defect is independently confirmed as no longer reproducible: replaying the runtime own narrow_inputs and resolve_input_contract against the HEAD manifest reproduces the stalled run recorded block detail character for character and against the working tree resolves cleanly, run-34ca35504b72 shows refactor-implementation at pending/Ready with blocked_reason, blocked_detail, blocked_by and failure_class all null and its failure envelope resolved_by runtime:state-engine, and an independent per-edge scan drops exactly the refactor safety-net-establishment -> refactor-implementation edge. The isolated evidence is sufficient without the contaminated whole-suite figure: the change eleven paths are disjoint from every foreign working-tree entry, and the targeted modules and verifiers were re-run at this gate from the repository root with the same results (14/14, 19/19, 11/11; manifests 2/2, registry coverage 6/6 with 37/37 phases dispatchable, validators 6/6, vertical slice 10/10, recovery 41/41, multi-phase 14/15 on pre-existing M6, self-hosting 7/8 on pre-existing S8). pass-with-reservations is the verdict QA own adjudication table yields for one blocked criterion with nothing not-met and no open critical or high defect; AC-006 is unsettleable inside this phase rather than failed, and all six defects, including DF-006, the only one this change introduced, are correctly rated and are carried into closure-and-communication as conditions rather than blockers.",
+      "evidence_ref": ".claude/runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+      "decided_at": "2026-09-06T01:50:43Z"
+    },
+    "Closure Gate": {
+      "gate": "Closure Gate",
+      "closes_state": "closure-and-communication",
+      "owner_roles": [
+        "omn-orchestrator",
+        "omn-documentation"
+      ],
+      "producer_agent": "omn-orchestrator",
+      "decision": "approved",
+      "owner_role": "omn-documentation",
+      "decided_by": "omn-documentation subagent a086a18fad498a474, recorded by session operator for vuhoangcao",
+      "rationale": "Approved. Spot-checked against the run ledger, the state store and all 66 events, the closure record phase progression, its three gate attributions and its recording of PH-005 as blocked rather than anticipatorily complete all reconcile with the machine record; the seven Verification Gate conditions are discharged with substance rather than restated, and the three operator interventions are each recorded with what was done and what it costs the evidence. closed-with-followups is the correct disposition for a run carrying one unsettled criterion, six medium-and-low defects, five routed open questions and no critical or high escalation open, and status complete is honestly scoped to the account rather than to the run. Approved with two reservations recorded separately: the record quotation of the Closure Gate work item as pending/Waiting is now stale, and the examples.md O5 contradiction the producing agent found is carried in no durable record.",
+      "evidence_ref": ".claude/runs/run-79630cb5274d/states/closure-and-communication/artifacts/orchestration-result.md",
+      "decided_at": "2026-09-06T02:13:42Z"
+    }
+  },
+  "summary": {
+    "run_id": "run-79630cb5274d",
+    "run_status": "Completed",
+    "phases": 5,
+    "completed": 5,
+    "blocked": 0,
+    "failed": 0,
+    "pending": 0,
+    "retrying": 0,
+    "active": 0,
+    "transitions": 41,
+    "replays_suppressed": 48
+  },
+  "recovery": {
+    "ledger": "runs/run-79630cb5274d/recovery-ledger.json",
+    "classifications": 10,
+    "open": 0,
+    "resolved": 10,
+    "retries_scheduled": 2,
+    "by_failure_class": {
+      "gate-approval-required": 7,
+      "policy-failure": 1,
+      "output-schema-failure": 1,
+      "worker-loss": 1
+    },
+    "retry_profile": {
+      "max_attempts": 3,
+      "backoff_strategy": "exponential",
+      "base_delay_seconds": 2,
+      "multiplier": 2,
+      "max_delay_seconds": 60,
+      "jitter_ratio": 0.2,
+      "circuit_breaker_threshold": 3,
+      "policy_ref": "config/runtime.md#retry-policy"
+    }
+  }
+}

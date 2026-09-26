@@ -1,0 +1,125 @@
+{
+  "invocation_id": "inv-919c5d5cf156-03-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md"
+  ],
+  "structured_output": {
+    "designId": "CKA-04-technical-design",
+    "package_status": "complete",
+    "repair_note": {
+      "attempt": 2,
+      "repaired_checks": {
+        "D8.5 (A8.6)": "The rejected-alternative record in 5.3 used the label 'Highest-scoring rejected alternative' where the contract item is 'Highest-scoring rejected alternative and why it lost'; the item is now recorded under the full label with the same O-003 rationale (structural component for a capability the test suite already provides, lower reuse leverage, wider runtime surface, no gain in any recorded criterion). No option, evaluation cell, or selection changed.",
+        "D16.1 (A15.4)": "The token Q-002 appeared twice as a reference to the supplied plan's second open question (F-010 and the Open Decisions closure paragraph), which this package's own Q register does not and should not define; both references are reworded to 'the plan's second open question, on the banner definition', which F-010 and C-007 close. The package's Q register is unchanged: exactly one non-blocking open question, Q-001.",
+        "D16.4 (A15.5)": "Plan tasks T-001, T-003, and T-005 were unaddressed by the Binds column of the sequencing constraints. T-001 and T-003 are now bound by P-001 (Design Gate acceptance completes the plan's T-001; D-003 carries the banner text the plan's T-003 confirmed via F-010) and T-005 by P-005 (the constraint-compliance review consumes the negative-fixture demonstrations); the P-001 and P-005 reason cells and the appendix plan-task binding summary state the same bindings. All eight plan tasks T-001 through T-008 are now addressed by name in the Binds column."
+      },
+      "semantic_scope": "No fact, assumption, constraint, module, option, decision, risk, estimate, or open-question content changed beyond the three repairs above."
+    },
+    "counts": {
+      "statements": 20,
+      "facts": 11,
+      "assumptions": 4,
+      "constraints": 8,
+      "impacted_modules": 12,
+      "options": 3,
+      "decisions": 6,
+      "architecture_significant_decisions": 2,
+      "risks": 6,
+      "sequencing_constraints": 6,
+      "open_questions": 1,
+      "blocking_open_questions": 0
+    },
+    "gate_conditions": {
+      "condition_1_coercive_inventory": "closed by D-002: seven pattern families (four enumerated plus three widened) under a two-part structural discriminator (imperative/positive-modal mood filter plus clause-bounded negation guard); every current-tree prohibition and declarative instance from F-007 demonstrated excluded, by file and line, in ADR D-002",
+      "condition_2_alias_binding": "closed by D-001: check 1 imports producer_aliases (runtime/framework_runtime.py line 1265) together with parse_gate_matrix, parse_phase_model, and phase_gates; no reimplementation; plan risk R-006 retired by construction",
+      "condition_3_banner_definition": "closed by C-007/F-010/D-003: exact line 'Status: specification — not implemented' in each document preamble; counterpart cross-link asserted as preamble substring (workflows/workflow-gate-matrix.md for quality-gates.md and decision-matrix.md; runtime/recovery_policy.py for rule-engine.md and working-memory.md); banners land in this change, check unconditional"
+    },
+    "plan_question_closures": {
+      "plan_Q-001": "answered yes and closed by D-002; Design Gate acceptance tracked as this package's Q-001 (non-blocking, owner omn-tech-lead)",
+      "plan_Q-002": "closed by F-010 and C-007; referenced in the package as the plan's second open question, on the banner definition"
+    },
+    "selection_recomputation": {
+      "criteria_order": [
+        "hard-constraint satisfaction",
+        "impact surface (contract-change or dependency-change module count)",
+        "reuse leverage (capabilities satisfied by reuse-as-is or reuse-extended)",
+        "quality attributes",
+        "migration burden",
+        "operability"
+      ],
+      "ranking": [
+        {"option": "O-001", "hard_constraints": "all satisfied", "impact_surface": 0, "reuse_leverage": 6, "migration_burden": 0, "rank": 1},
+        {"option": "O-003", "hard_constraints": "all satisfied", "impact_surface": 0, "reuse_leverage": 5, "migration_burden": 0, "rank": 2},
+        {"option": "O-002", "hard_constraints": "violates C-005", "eliminated_on": "C-005", "rank": null}
+      ],
+      "recomputed_winner": "O-001",
+      "recorded_selection": "O-001",
+      "agreement": true
+    },
+    "quality_checks": {
+      "check_set_version": "agents/architect/quality.md as loaded (module digest sha256:d9fa58935c242fb724123ea69d5eeb61)",
+      "total_run": 98,
+      "total_passed": 98,
+      "total_failed": 0,
+      "by_group": {
+        "A1_structural_conformance": {"run": 8, "passed": 8},
+        "A2_boundary_compliance": {"run": 10, "passed": 10},
+        "A3_register_integrity": {"run": 6, "passed": 6},
+        "A4_model_tool_independence": {"run": 4, "passed": 4},
+        "A5_objective_requirement_integrity": {"run": 4, "passed": 4},
+        "A6_impact_analysis_quality": {"run": 6, "passed": 6},
+        "A7_reuse_discipline": {"run": 5, "passed": 5},
+        "A8_option_selection_integrity": {"run": 7, "passed": 7, "note": "A8.6 re-verified after repair: the rejected alternative O-003 is recorded under the full contract label with its rationale"},
+        "A9_contract_migration_integrity": {"run": 6, "passed": 6, "note": "A9.1-A9.5 pass vacuously: no contract-change module exists; the absence is recorded with its reason in section 6"},
+        "A10_sequencing_integrity": {"run": 7, "passed": 7},
+        "A11_risk_integrity": {"run": 5, "passed": 5},
+        "A12_estimation_integrity": {"run": 5, "passed": 5},
+        "A13_decision_record_integrity": {"run": 7, "passed": 7},
+        "A14_framework_alignment": {"run": 8, "passed": 8, "note": "A14.2 owner-resolution: all referenced agents resolve; omn-architect resolves as the recorded alias of architect per the gate matrix"},
+        "A15_traceability_closure": {"run": 5, "passed": 5, "closure_counts": {"forward_statements_mapped": 20, "backward_modules_traced": 12, "backward_decisions_traced": 6, "lateral_risks_attached": 6, "current_state_claims_verified_referenced": true}, "note": "A15.4 lateral closure re-verified: every Q token in the package resolves to the register (Q-001 only); A15.5 re-verified: T-001 through T-008 all bound in the sequencing constraints"},
+        "A16_determinism": {"run": 5, "passed": 5, "note": "A16.5: repair pass over attempt 1's artifact; no identifier was renumbered, added, or removed"}
+      },
+      "repair_passes": [
+        {
+          "attempt": 2,
+          "invocation_id": "inv-919c5d5cf156-03-002",
+          "trigger": "Validation Engine rejection of attempt 1 on D8.5 (A8.6), D16.1 (A15.4), D16.4 (A15.5)",
+          "checks_repaired": ["D8.5", "D16.1", "D16.4"],
+          "files_edited": ["runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md"],
+          "decision_records_edited": []
+        }
+      ],
+      "rejection_rules_triggered": []
+    },
+    "assumption_risk_coverage": {"A-001": "R-004", "A-002": "R-005", "A-003": "R-001", "A-004": "R-006"},
+    "handoff": {
+      "requires_design_gate_acceptance": ["technical-design.md", "architecture-decision-record-D-001.md", "architecture-decision-record-D-002.md"],
+      "design_gate_accepting_owner": "omn-tech-lead (producer exclusion: the architecture role produced the package; omn-architect and architect name one role)",
+      "decisions_remaining_proposed": ["D-001", "D-002"],
+      "plan_tasks_constrained": {"T-001": ["P-001"], "T-002": ["P-001", "P-002", "P-004", "P-005"], "T-003": ["P-001"], "T-004": ["P-001", "P-003"], "T-005": ["P-005"], "T-006": ["P-003", "P-004", "P-005"], "T-007": ["P-001", "P-005"], "T-008": ["P-006"]},
+      "no_implementation_performed": true,
+      "no_external_access": true
+    }
+  },
+  "evidence_refs": [
+    "agents/architect/system.md",
+    "agents/architect/identity.md",
+    "agents/architect/reasoning.md",
+    "agents/architect/execution.md",
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "agents/architect/examples.md",
+    "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/invocation-envelope.json",
+    "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/validation-report.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

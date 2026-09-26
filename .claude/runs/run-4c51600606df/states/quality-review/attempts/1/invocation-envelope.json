@@ -1,0 +1,436 @@
+{
+  "invocation_id": "inv-4c51600606df-05-001",
+  "run_id": "run-4c51600606df",
+  "work_item_id": "run-4c51600606df::quality-review",
+  "idempotency_key": "sha256:9c0532b6a92fbc61a63736a0a264f2b8",
+  "state_id": "quality-review",
+  "phase_index": 5,
+  "agent_id": "omn-dev-2-reviewer",
+  "agent_version": "1.1.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-2-reviewer.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-2-reviewer/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-2-reviewer/system.md",
+      "agents/omn-dev-2-reviewer/identity.md",
+      "agents/omn-dev-2-reviewer/reasoning.md",
+      "agents/omn-dev-2-reviewer/execution.md",
+      "agents/omn-dev-2-reviewer/output.md",
+      "agents/omn-dev-2-reviewer/quality.md",
+      "agents/omn-dev-2-reviewer/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-2-reviewer/system.md": "sha256:ef234d6d8e6b74d21d099ab744ab9f60",
+      "agents/omn-dev-2-reviewer/identity.md": "sha256:725ba943cf8532dc4f666e68ca191592",
+      "agents/omn-dev-2-reviewer/reasoning.md": "sha256:f84d57686c7afa96e74cb1907e954c71",
+      "agents/omn-dev-2-reviewer/execution.md": "sha256:6c93e33bae84f6254f626f3fd1b447d7",
+      "agents/omn-dev-2-reviewer/output.md": "sha256:1b324b77d86f30d076d08768be2f9d5c",
+      "agents/omn-dev-2-reviewer/quality.md": "sha256:4d4c09812b441785acd1b03330468cc9",
+      "agents/omn-dev-2-reviewer/examples.md": "sha256:488657c9d243c3d498245922c2d92906"
+    },
+    "capabilities": [
+      "code-review",
+      "governance-enforcement",
+      "quality-verification"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "pull-request-diff",
+      "quality-scan-scope",
+      "technical-design",
+      "execution-plan",
+      "scope-definition",
+      "bug-analysis",
+      "architecture-decision-record",
+      "coding-standards",
+      "test-evidence",
+      "architecture-rules",
+      "security-criteria",
+      "standards-checklist",
+      "regression-targets",
+      "known-issues",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-06-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-06-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-06: Generate the HTML handbook from the Markdown handbook, with a drift check\n\n## Source\n\nTicket CKA-06 in the adoption backlog under `docs/` (Epic A \u2014 Verification baseline,\nDays 0\u201330). Source recommendation: R7 of the adoption review dated 2026-08-27.\nType: Story. Priority: High. Effort: M. Depends on: CKA-03, delivered as\n`.github/workflows/verify.yml`, which supplies the CI hook this ticket binds to.\n\n## Problem\n\nThe repository publishes its operator handbook twice: `docs/USER-GUIDE.md` (1051 lines of\nMarkdown) and `docs/user-guide.html` (1033 lines of hand-authored HTML with its own design\nsystem \u2014 a light/dark token palette, a chapter navigation index, a chain diagram, eyebrow\nchapter labels, stable section anchors, callout blocks with tags, and comment-highlighted\ncode samples). The two are kept in step by hand. Nothing checks that they agree, and they no\nlonger do: the Markdown carries a whole section, `5b. Branch naming templates` (lines 538 to\n616, including a token reference table, normalization and validation rules, a viewing and\nchanging section, and migration notes) that the HTML does not contain at all, and the two\nfiles order the gate-ownership material differently. Every prior delivery in this backlog has\npaid a hand-sync tax and recorded it as such in its own evidence.\n\nHand synchronization cannot be made reliable by asking contributors to try harder. The fix is\nto make one file the source and the other a build output, and to fail CI when the output is\nstale.\n\n## Request\n\nDeliver three things.\n\n1. **A renderer.** A new `tools/render_user_guide.py` that reads `docs/USER-GUIDE.md` and\n   writes `docs/user-guide.html` deterministically \u2014 same input, byte-identical output, on\n   every platform the CI matrix runs. Standard library only, consistent with the repository's\n   dependency posture for tooling.\n\n2. **A one-time two-way reconciliation of the current drift.** Section by section, every\n   piece of content that exists in exactly one of the two files is resolved: content the HTML\n   carries and the Markdown does not is merged back into the Markdown or deliberately\n   dropped, with the decision recorded; the Markdown's `5b. Branch naming templates` section\n   is rendered into the HTML. After the change, no content is present in exactly one file.\n   Design affordances the HTML carries today (navigation, anchors, callouts, chapter labels,\n   the chain diagram, code-comment highlighting) are a deliberate part of the published\n   artifact: preserving them is in scope, and how the source Markdown expresses them without\n   becoming unreadable is a design question this change must answer rather than resolve by\n   discarding them.\n\n3. **A drift check bound to CI.** A `--check` mode on the renderer that re-renders in memory,\n   compares against the committed HTML byte for byte, exits nonzero on a mismatch, and prints\n   the exact regeneration command. Wired into the existing CI workflow. The generated HTML\n   carries a visible \"generated \u2014 do not edit\" banner naming its source file and the command\n   that regenerates it. The hand-sync process note in the contributor documentation is\n   retired and replaced by the generation instruction.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- Editing `USER-GUIDE.md` without regenerating fails CI with the fix command.\n- `user-guide.html` opens with a \"generated \u2014 do not edit\" banner.\n- No content present in exactly one of the two files after reconciliation.\n\n## Constraints\n\n- Additive change only. The backlog forbids altering `record_gate_decision`, the gate matrix\n  semantics, producer exclusion, `runner._require_approval`, or any human-block path. This\n  ticket adds a build tool, regenerates a documentation artifact, and adds a CI step; it\n  changes no runtime behaviour and no gate-decision behaviour.\n- The CI hook must follow the discovery discipline CKA-03 established: the check is a step\n  over a known build output, not a curated list of files any future contributor must\n  remember to extend.\n- Determinism is a hard requirement, not an aspiration: a check that compares bytes is only\n  usable if the renderer's output does not vary with dictionary ordering, locale, line\n  endings, or the platform running it. Both CI platforms in the matrix must agree.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py` proof\n  scripts PROVEN, no change to gate-decision behaviour, and \u2014 where docs were touched \u2014\n  the HTML handbook regenerated. This ticket is the one that makes that last clause\n  mechanical rather than manual, and CKA-12 already depends on it for exactly that.\n\n## Writing constraints for every phase of this run\n\n- Every artifact validator in this framework rejects the vendor substring \"claude\" in any\n  case. Cite the backlog as \"the adoption backlog under `docs/`\" and the review as \"the\n  adoption review dated 2026-08-27\". Write framework paths without the leading dot-directory\n  prefix \u2014 `runtime/framework_runtime.py`, not the full path. Where the handbook's own\n  section 3A names an in-editor agent host, refer to it as \"the in-editor host section (3A)\".\n\n## Priority and deadline\n\nHigh priority; Phase 1 (Days 0\u201330) of the adoption plan. CKA-12 depends on this ticket for\nregenerating the handbook when it updates the exit-code tables.",
+        "digest": "sha256:5965b9107e59775c3f70f54b0b8609f7"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-4c51600606df/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-4c51600606df/states/implementation/artifacts/implementation-report.md",
+        "text": "```yaml\nimplementationReport:\n  reportId: IR-2026-0007\n  changeReference: CKA-06\n  sourceInputs:\n    - type: technical-design\n      reference: runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n    - type: execution-plan\n      reference: runs/run-4c51600606df/states/execution-planning/artifacts/execution-plan.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  workflowPhase: implementation\n  verificationStatus: partially-verified\n  inputDigest: sha256:38c4da37a5100c375dc013d0cc46fc28\n  contextDigest: sha256:fbf2e953c78bf37cdf0ac7f7c01da129\n```\n\n## Metadata\n\n- Report ID: IR-2026-0007\n- Change reference: CKA-06, implementing decision records D-001, D-007 and D-008 under the six conditions the Design Gate attached to them\n- Workflow phase: implementation\n- Status: provisional\n- Verification status: partially-verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: `docs/user-guide.html` is now a build output of `docs/USER-GUIDE.md` rather than a hand-authored twin of it. Regenerating from the source reproduces the published file exactly, an edit made directly to the published file does not survive regeneration, the published page opens with a generated-do-not-edit banner naming its source and its regeneration command, and the repository's verification workflow fails a commit that changes one of the pair without regenerating the other. The drift the two files had accumulated is resolved in both directions, and every resolution is recorded in a named, reviewable file.\n- Approach taken: the values the published form carries that the source cannot derive \u2014 21 anchor identifiers, 14 callout tags, 14 internal link targets, and one list variant \u2014 are authored in the source, each on the line whose rendering it governs, using one brace-attribute construct plus three constructs the document already had available (a blockquote whose leading bolded run is its callout tag, a fenced block whose info string names a chain diagram, and the fenced code samples already present). `tools/render_user_guide.py` holds a grammar and a fixed page shell lifted verbatim from the pre-change published file, and holds no document content. Determinism is fixed at the tool's own boundary \u2014 explicit encoding on every read and write, the output newline fixed by the writer, the input newline form normalised before parsing, document-order emission, and no environment value in the output \u2014 and defended at checkout by a `.gitattributes` entry pinning both handbook paths with `-text`. Check mode renders into memory, compares against the committed bytes, writes nothing, and prints the regeneration command on a mismatch. One step in the existing tests job invokes it on both matrix legs.\n- Design reference: decision records D-001, D-007 and D-008 as accepted; design decisions D-002, D-003, D-004, D-005, D-006, D-009 and D-010 recorded inline in the design package; sequencing constraints P-001 through P-011; the design's fifteen recorded constraints; and the supplied plan's tasks for the renderer, the source reconciliation, the resolution list, the check mode, the workflow wiring and the banner, plus the part of its contributor-documentation task that lives inside a test file. The six Design Gate conditions govern where they differ from the design text, and are implemented rather than the superseded text.\n- Out of scope: the contributor-facing instruction in `README.md`, which the plan's contributor-documentation task assigns to the documentation role \u2014 this change corrects only the process note that lives inside a test file it owns; the raw-markup-line counting rule and its count, owned by QA under the plan's markup-counting-rule and markup-count tasks; the authoring walkthrough by an independent reviewer, the plan's walkthrough task; the page and resolution-list review verdicts, the plan's two review-verdict tasks; the workflow-run demonstrations and the cross-platform determinism evidence, the plan's determinism and drift-demonstration tasks; the release note and closure record, the plan's closure task. Leaving each is safe because each is a separate task with a named owner in the accepted plan, and none of them is a precondition of the change working: the delivered pair, the tool, the pin and the workflow step are complete and self-consistent without them. No runtime, gate-decision or approval surface was touched, which the accepted scope forbids altering.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | `docs/user-guide-reconciliation.md` | added | Record the one-time two-way reconciliation: every item of authored content that existed in exactly one of the two files, its resolution, and the rule clause behind it, so the reconciliation is reviewable rather than implied | Scope Gate condition SGC-5; the plan's resolution-list task; P-002 |\n| `C-002` | `docs/USER-GUIDE.md` | modified | Make the source of record complete and expressible: carry the 21 anchor identifiers and 14 internal links, the 14 callout tags, the two chain constructs and the list variant in source notation, and hold every item the resolution list marks merged | D-001, D-002, D-003, D-005; P-002; the plan's source-reconciliation task |\n| `C-003` | `tools/render_user_guide.py` | added | Render the source into the published page deterministically, emit the generated-do-not-edit banner, fail the render on a duplicate anchor or a dangling internal link, and offer the check mode the workflow calls | D-001, D-004, D-006, D-007, D-009, D-010; P-003, P-004, P-006, P-009; the plan's renderer, check-mode and banner tasks |\n| `C-004` | `docs/user-guide.html` | modified | Become the build output: regenerated in full from the reconciled source, carrying the banner, the branch-naming-templates section, and the same 21 anchors as before | D-001, D-007; P-004; the plan's renderer and source-reconciliation tasks |\n| `C-005` | `.gitattributes` | added | Pin both handbook paths against checkout-time line-ending translation, so the bytes the byte comparison reads on a runner's disk are the bytes that were committed | D-007; Design Gate condition DGC-2; P-005 |\n| `C-006` | `.github/workflows/verify.yml` | modified | Run the drift check as one step inside the existing tests job, after the suite and unless the run was cancelled, over the one known build output | D-008; Design Gate condition DGC-4; P-008; the plan's workflow-wiring task |\n| `C-007` | `tests/test_render_user_guide.py` | added | Exercise the grammar, the derived presentation, the grammar failure paths, determinism, the anchor and link baseline, the resolution record, the line-ending pin, the workflow binding, and check mode | The acceptance criteria of the plan's renderer, resolution-list, check-mode, workflow-wiring and banner tasks |\n| `C-008` | `tests/test_ci_workflow.py` | modified | Correct the parity class docstring, which described the handbook pair as hand-synced; that process note lives inside this file and is retired with the process | Design module M-006; P-010; the plan's contributor-documentation task, the part inside this file |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | Every construct of the authoring grammar renders, and a malformed source fails the render naming its line: duplicate anchor, dangling internal link, chapter with no anchor, callout with no bolded tag, unterminated fence, content stranded after the closing break | unit | `C-002`, `C-003` | `python -m unittest tests.test_render_user_guide.Grammar tests.test_render_user_guide.GrammarFailures` | pass |\n| `T-002` | Comment marking inside code samples is keyed to the fence info string and is quote-aware, so a hash inside a quoted argument value stays part of the command | unit | `C-003`, `C-004` | `python -m unittest tests.test_render_user_guide.CommentMarking` | pass |\n| `T-003` | Two renders of the same source are byte-identical, the input newline form does not reach the output, the output carries no carriage return, and no environment value reaches the output | unit | `C-003`, `C-004` | `python -m unittest tests.test_render_user_guide.Determinism` | pass |\n| `T-004` | The delivered published file equals a render of the delivered source; its declared-anchor set and its internal fragment-target set are both exactly the 21 of the recorded baseline; the banner, the five named reading affordances and the branch-naming-templates section are present | contract | `C-002`, `C-003`, `C-004` | `python -m unittest tests.test_render_user_guide.PublishedHandbook` | pass |\n| `T-005` | Check mode exits zero on an agreeing pair, reports drift with the regeneration command after a direct edit to the published file and after a source-only edit, treats a missing output as staleness, and leaves the working tree byte-for-byte and mtime unchanged | integration | `C-003`, `C-004` | `python -m unittest tests.test_render_user_guide.CheckMode` | pass |\n| `T-006` | The resolution record leaves no item unresolved, cites a defined rule clause on every item, numbers its items from one without gaps, and the non-droppable items it names are present in both delivered files | contract | `C-001`, `C-002`, `C-004` | `python -m unittest tests.test_render_user_guide.ReconciliationRecord` | pass |\n| `T-007` | Both handbook paths are pinned with `-text` in the attributes file, each exactly once | contract | `C-005` | `python -m unittest tests.test_render_user_guide.LineEndingPin` | pass |\n| `T-008` | The drift step sits in the tests job after the unit-test step, carries the not-cancelled condition rather than the always condition, and names one build output rather than a file list | contract | `C-006`, `C-007` | `python -m unittest tests.test_render_user_guide.WorkflowBinding` | pass |\n| `T-009` | The workflow's six job identifiers, four stable check names, environment and permission policy, and discovery discipline all still hold over the edited workflow, and the parity assertions still find every stable check name and the workflow filename in all three documents | regression | `C-002`, `C-004`, `C-006`, `C-008` | `python -m unittest tests.test_ci_workflow` | pass |\n| `T-010` | The dependency-footprint assertion still reads the declared distribution name out of the regenerated published file, and the packaging manifest and readme assertions are unaffected | regression | `C-002`, `C-004` | `python -m unittest tests.test_omn_agent.DependencyDeclarationTestCase` | pass |\n| `T-011` | The renderer and its test module compile under the interpreter at the packaging floor | static | `C-003`, `C-007` | `python -m compileall -q tools/render_user_guide.py tests/test_render_user_guide.py` | pass |\n| `T-012` | The whole repository suite, by the discovery command the verification workflow itself runs: the regression baseline re-run against the change | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`, `C-007`, `C-008` | `python -m unittest discover -s tests` | pass |\n\n## Verification Results\n\n- Verification method: the regression baseline was executed before any file was changed, by the same discovery command the verification workflow runs, and re-executed after the change; a new test module was added for the renderer, its check mode, the resolution record, the line-ending pin and the workflow binding, and was executed class by class so each evidence row names the command that produced it; the two committed test modules whose assertions bound what the reconciliation could drop were executed separately against the delivered pair; the pre-change published file and the regenerated one were compared under a normalisation that collapses inter-tag whitespace and sorts attributes, and every remaining difference was classified.\n- Commands executed: `python -m unittest discover -s tests` (baseline, before any change, and again after it); `python -m unittest tests.test_render_user_guide.Grammar tests.test_render_user_guide.GrammarFailures`; `python -m unittest tests.test_render_user_guide.CommentMarking`; `python -m unittest tests.test_render_user_guide.Determinism`; `python -m unittest tests.test_render_user_guide.PublishedHandbook`; `python -m unittest tests.test_render_user_guide.CheckMode`; `python -m unittest tests.test_render_user_guide.ReconciliationRecord`; `python -m unittest tests.test_render_user_guide.LineEndingPin`; `python -m unittest tests.test_render_user_guide.WorkflowBinding`; `python -m unittest tests.test_ci_workflow`; `python -m unittest tests.test_omn_agent.DependencyDeclarationTestCase`; `python -m compileall -q tools/render_user_guide.py tests/test_render_user_guide.py`; `python tools/render_user_guide.py`; `python tools/render_user_guide.py --check`.\n- Result summary: 12 evidence entries executed, 12 passed, 0 failed. The regression baseline taken before any file was changed was 342 tests, all passing; the same suite after the change is 404 tests, all passing. The 62 additional tests are 48 from the test module this change adds and 14 from a test module a concurrent framework change placed in the working tree while this run was in flight, which this change set does not contain and did not write. No test present in the baseline fails, and none was disabled, skipped or weakened.\n- Unverified areas: byte identity of the regenerated output on the windows leg of the verification matrix, which no command in this environment can execute \u2014 this run proves determinism only on the platform it ran on, and the pin and the fixed newline policy are the controls, not the evidence; the behaviour of the verification workflow itself on a real run, so the demonstration that a source-only commit fails the workflow with the regeneration command in its log, and that an agreeing pair passes it, is not executed here; the readability verdict on the regenerated page, which is a walkthrough rather than a check, including whether the navigation index still reads well now that its labels are the full chapter titles; whether a contributor who did not build the change can add a section, a callout and a code sample using the notation without consulting the builder.\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | Navigation labels are derived from the heading text each entry points at rather than authored in the heading's brace attribute, so the four published labels that differed from their headings are dropped and the index now shows the full chapter titles (`C-002`, `C-003`, `C-004`) | D-001's clause placing a divergent navigation label inside the heading attribute | The Design Gate's decided authored-versus-derived rule classifies navigation link text as derived presentation regenerated from the heading it points at, and drops its divergent wording. Both statements cannot hold over the same four labels; the decided rule is the later and the more specific, and was supplied as binding with the accepted change. Implementing it also narrows the attribute construct to the anchor identifier alone, which lowers what a contributor has to write | not-required; the rule was decided upstream, and the change keeps the value inside the source rather than moving one into the tool |\n| `V-002` | The list variant that gives the phase-cycle list its numbered-step presentation is carried by a brace attribute on its own line immediately before the list, not at the end of a text line (`C-002`, `C-003`) | D-001's \"written at the end of that line\" | A list has no single line whose rendering the class governs: putting it on the first item would place markup mid-sentence, and putting it on every item would repeat it four times. The value stays authored in the source, in the same brace construct the decision selected, and costs one line for the one construct that needs it | not-required; a placement detail inside the accepted construct, which moves no value out of the source |\n| `V-003` | Byte-exact reproduction of the pre-change published file was not attempted. Equivalence to it was established instead by a recorded, classified normalised comparison, and the published file was rewritten once as renderer output (`C-003`, `C-004`) | Sequencing constraint P-004, and assumption A-007 with the question the design routed from it | The pre-change file's first line is its title element and it carries no banner, while the design constraint on the published page's generated-file notice requires the renderer to emit a generated-do-not-edit banner at the top of the page. The two cannot both hold, so P-004 as written is unsatisfiable. The Design Gate replaced it with the classified-comparison form before this phase began, and that form is what is implemented; from the delivered content forward the comparison is exact and self-comparing, which is what the byte-identity criteria actually ask for | not-required; superseded by a Design Gate condition, recorded here because the design text was not rewritten |\n| `V-004` | The regenerated published file is delivered in the working tree; this invocation created no commit (`C-004`) | The Design Gate's first condition, which ends by requiring the regenerated file to be committed | Creating a commit is not one of the repository's test, build or static-analysis commands, which is the whole of this agent's command-execution permission, and the working tree carries unrelated modifications from other runs that a commit would sweep in. The property the condition exists to establish holds now and is executed by `T-004` and `T-005`: the delivered published file equals a render of the delivered source, and check mode exits zero against it | escalated to omn-orchestrator, recorded as `Q-001` |\n| `V-005` | The two chain diagrams' accessibility labels are regenerated from their own token lists, so their hand-written wording is dropped (`C-002`, `C-003`, `C-004`) | Inline design decision D-005 and assumption A-005 | The design records the label as derived by default, pending the ruling it routes to the product owner. Implementing the default keeps either ruling absorbable: the chain construct accepts an optional authored label without a grammar change, so a ruling of \"authored\" costs one field and no restructuring. Deciding it the other way here would have settled a published-wording question this agent may not settle | escalated to omn-product-owner, recorded as `Q-002` |\n| `V-006` | Where a published callout condensed material that the source carries as a paragraph plus a list or plus a code sample, the source's structure governs and the callout tag is attached to the block that opens the material, so three callouts now enclose less than their pre-change counterparts did (`C-002`, `C-004`) | Inline design decision D-003, read against scope decisions that exclude editorial restructuring | Reshaping the source to reproduce the published block boundaries would be editorial restructuring of the source, which the accepted scope excludes, and would make the reconciliation impossible to review against the pre-change files. Every sentence in those callouts survives; only the border around them moved | not-required; a tradeoff inside this agent's latitude, recorded per block in the resolution record |\n| `V-007` | The published masthead strapline was resolved as dropped rather than merged, because the source already carries a strapline in the same slot stating the same thing (`C-002`, `C-004`) | The Design Gate's decided rule that fact-stating published wording, the masthead strapline included, merges into the source | Merging it as written would have put two straplines in one slot, and the page renders exactly one. The source's strapline names the same product and the same audience, so no statement is lost; but the choice changes published wording, which is not this agent's to settle | escalated to omn-product-owner, recorded as `Q-003` |\n\n## Boundary Compliance\n\n- Module boundaries preserved: the renderer reads two fixed paths and writes one, executes no subprocess, opens no connection, and takes no input beyond a mode flag; check mode writes nothing on either outcome, which `T-005` executes. No runtime, gate-decision, approval or human-block surface was read or written, which is the boundary the accepted scope makes non-negotiable. The verification workflow keeps its six job identifiers, its four stable check names, its two-entry platform matrix, its read-only permission and its no-masking policy, and the added step sits in the one job whose steps no committed test extracts by position; `T-008` and `T-009` execute all of that. The published page's design system stays inside the renderer as a fixed shell lifted verbatim, so no document content entered the tool and no presentation left it.\n- Public interface changes: one new command-line surface, `tools/render_user_guide.py`, with a default render mode and a `--check` mode whose verdict is its exit status. The source document gains an authoring grammar, which is the contract a contributor now writes against; it is additive, and a heading, paragraph or fence written without the new notation still renders. The published document loses its hand-editing contract entirely. No function signature, module boundary or packaged interface changed, and no dependency outside the standard library was introduced.\n- Data or migration impact: no data model, no persisted schema, no migration and no backfill. The one migration is of the published document's own bytes, and it runs once and in one direction, from hand-authored to generated. It is reversible by reverting the change set: the pre-change content stays in version history, nothing outside the repository consumes the file, and both committed test assertions that read the file pass before and after because neither depends on how the file was produced.\n- Declared side effects: the eight files of the Change Set \u2014 `docs/user-guide-reconciliation.md`, `docs/USER-GUIDE.md`, `tools/render_user_guide.py`, `docs/user-guide.html`, `.gitattributes`, `.github/workflows/verify.yml`, `tests/test_render_user_guide.py`, `tests/test_ci_workflow.py` \u2014 plus this artifact and the result envelope beside it, both at the paths the invocation envelope names. Nothing else was written. Executing the repository's own test commands also refreshed interpreter bytecode caches under `tests/__pycache__/`, which are compiler output rather than authored files: they are not part of the change set and are not declared as writes, and they are named here so the difference is stated rather than discovered. No external system, repository host or ticketing tool was contacted.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | Cross-platform byte identity is asserted by construction rather than by an executed run on the second platform: this environment can execute only one leg of the matrix | medium | high | The output newline is fixed by the writer instead of being delegated to the platform, the input newline form is normalised before parsing, and both handbook paths are pinned against checkout translation; `T-003` executes the newline-form and carriage-return assertions and `T-007` executes the pin. The matrix run itself remains QA's evidence and is named as an unverified area |\n| `R-002` | The byte comparison cannot see a degraded page: it compares the published file against a regeneration of itself, so it would pass a page whose reading affordances had been stripped | medium | medium | The five named affordances, the banner, the 21 anchors and the closed internal link graph are asserted structurally by `T-004`, which is stronger than the byte comparison alone; the accepted scope records that the readability verdict itself is taken by review, and the classified comparison is recorded in the resolution record for that reviewer to work from |\n| `R-003` | The navigation index now carries the full chapter titles, two of which are long enough to wrap in the index grid | high | low | The index is a wrapping grid rather than a fixed-width list, so a long label wraps instead of truncating; the four superseded labels and the rule that dropped them are recorded in the resolution record, and reversing the rule costs one attribute per affected heading |\n| `R-004` | The drift verdict is not separately named in the checks list: a contributor who sees the ubuntu tests check fail learns which surface failed only from the run log | high | low | The step carries its own name inside the job and its failure output names the file, the differing byte position and the exact regeneration command, so the log answers the question in one line; the accepted design records the alternative as failing a committed assertion about the job identifier set |\n| `R-005` | A contributor who has been editing the published file directly loses that edit at the next regeneration and is failed by a required check | high | medium | The banner sits at the top of the rendered page, is emitted by the renderer rather than authored, and states the source file, the regeneration command and the consequence of a direct edit; `T-004` executes its presence and `T-005` executes that a direct edit does not survive. The contributor-facing instruction outside the page is follow-up work with a named owner |\n| `R-006` | The drift check blocks a merge on the ubuntu leg only, because the windows check name is advisory until a settings-only change this delivery does not depend on | medium | medium | The step runs on both legs, so a windows-only divergence shows red immediately even while it cannot block; the required leg catches every divergence that is not platform-specific, and the pin removes the one platform-specific cause anyone has identified |\n\n## Handoff Notes\n\n- Reviewer focus areas: the resolution record `docs/user-guide-reconciliation.md` read against the pre-change revisions of the two files, which is where every content decision in this change is exposed \u2014 in particular the seven items resolved as dropped, and the two chain accessibility labels and the masthead strapline among them, since those three change published wording and are the subject of `Q-002` and `Q-003`; the regenerated page walked against the pre-change page across the five named affordances and all 21 anchors, which no automated check can decide; the two structural changes a reader will notice, the chain diagram moving from the masthead into chapter 1 and the gate-ownership subsection moving ahead of the auto-approval subsection, both of which follow the accepted rule that the source's order governs; the source notation itself, read as a contributor rather than as a reviewer, since the accepted criteria ask whether a section, a callout and a code sample can be added without hand-writing markup; and the callout boundaries named in `V-006`, where the published form enclosed more than the source's structure supports.\n- Follow-up work: the contributor-facing regeneration instruction in `README.md`, which the plan's contributor-documentation task assigns to the documentation role and which this change deliberately did not write; the raw-markup-line counting rule and the count for both revisions of the source, the plan's markup-counting-rule and markup-count tasks, noting that the source gained brace attributes on 21 headings, 14 inline links, blockquote markers on 14 asides and one attribute line, and that the accepted ruling is that the anchor criterion governs where the two conflict and the count is reported rather than enforced; the workflow-run demonstrations and the cross-platform determinism evidence, the plan's determinism and drift-demonstration tasks; the release note and closure record, the plan's closure task, which needs the regeneration command this change fixes as `python tools/render_user_guide.py`; and the commit that makes the regenerated published file the committed content, which `V-004` and `Q-001` carry. Separately, and outside this change set: the agent contract this invocation ran against moved to a later version on disk while the run was in flight, and this run executed against the version its invocation envelope pinned; whoever assesses the phase may want that noted against the envelope's frozen digests.\n- Documentation impact: the operator handbook is now published in one authored form and one generated form, and the generated one announces that at the top of the page. Any future change to the handbook is a change to `docs/USER-GUIDE.md` followed by `python tools/render_user_guide.py`; the verification workflow fails the change otherwise, and prints that exact command. The dependent ticket that updates the exit-code tables consumes this command. The process note that described the pair as hand-synced is retired inside the test file that carried it; no other contributor-facing document in the repository carried one, which a repository-wide search over the readme, the handbook and the test modules established, and the readme's regeneration instruction remains the documentation role's to add.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | Who creates the commit that makes the regenerated published file the committed content, given that committing lies outside this agent's command-execution permission and the working tree carries unrelated modifications from other runs? | no | omn-orchestrator | `C-004` |\n| `Q-002` | Are the two chain diagrams' accessibility labels authored content to carry in the source, or derived presentation to regenerate from the token list? The derived form is implemented, per the accepted design's recorded default; the alternative costs one optional field on the chain construct | no | omn-product-owner | `C-002`, `C-003`, `C-004` |\n| `Q-003` | Is the masthead resolution correct \u2014 the published strapline dropped because the source already carries one in the same slot stating the same thing \u2014 or should the published wording be merged and the source's strapline replaced? | no | omn-product-owner | `C-002`, `C-004` |\n| `Q-004` | Is the evidence this phase can reach sufficient for the cross-platform byte-identity criterion, or must the matrix run be observed before the change is judged? This run proves determinism on one platform and pins the checkout cause of divergence on both, but executes neither leg of the matrix | no | omn-qa | `C-003`, `C-004`, `C-005` |",
+        "digest": "sha256:cc2fe72d5b09f0d7bcb01a632a71b929",
+        "produced_by": "implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the subject under review: an implementation report for a delivered change, a stable pull request diff for a review-pull-request run, or a quality-scan scope naming the repository boundary, exclusions, and risk threshold for a code-quality-scan run. Without one there is nothing under review, and reviewing anyway would mean assessing this agent's own choice of what to read."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-4c51600606df/states/implementation/artifacts/implementation-report.md",
+      "produced_by": "implementation"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-06T08:45:05Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8d6bd0735e4288ea81c161556faa7c18",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:b564a8804e136754a4f8f64399d94e16",
+    "input_digest": "sha256:46e60d51dedf84474941cb603e18f7be",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-06-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-06-feature-request.md",
+        "digest": "sha256:5965b9107e59775c3f70f54b0b8609f7"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-4c51600606df/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-4c51600606df/states/implementation/artifacts/implementation-report.md",
+        "digest": "sha256:cc2fe72d5b09f0d7bcb01a632a71b929"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/review-package.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-4c51600606df/states/quality-review/artifacts/review-package.md",
+      "runs/run-4c51600606df/states/quality-review/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies repository source, tests, or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the review package"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code or tests",
+      "revise the technical design rather than raising a finding against it",
+      "define, widen, or narrow product scope",
+      "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+      "record a merge or release decision",
+      "decide a gate that assesses evidence this agent produced",
+      "review a change this agent authored",
+      "approve while a critical or high finding is open, or while test evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "review an implemented change against the requirements, the accepted design, and the standards in force",
+        "survey a bounded repository scope for redundant, dead, duplicated, over-abstracted, or generated low-value code, against the maintainability standards in force",
+        "assess conformance to coding standards, architecture rules, and security criteria",
+        "judge whether the supplied evidence supports the claim it is offered for",
+        "judge whether executed tests cover the behavior the change altered",
+        "classify each defect by severity, category, and location against a named standard",
+        "issue correction requests that state a required outcome and name its owner",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "execute the repository's own verification commands to confirm reported results",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code or tests",
+        "revise the technical design rather than raising a finding against it",
+        "define, widen, or narrow product scope",
+        "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+        "record a merge or release decision",
+        "decide a gate that assesses evidence this agent produced",
+        "review a change this agent authored",
+        "approve while a critical or high finding is open, or while test evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "Independence is the whole value of this role. An agent that can change the code it assesses becomes the producer of the work it is about to judge, and the Producer Exclusion Rule then disqualifies it from the very verdict it exists to give. The review reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies repository source, tests, or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the review package"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same finding set, the same severity assignment, the same correction-request set, the same verdict, and the same declared package status.",
+      "identifierSchemes": {
+        "findings": "F-<zero-padded-sequence>",
+        "correctionRequests": "CR-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Findings are ordered by descending severity; ties break toward the lower location in lexical order. Correction requests follow the findings they address.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "review-package.md",
+    "artifact_path": "runs/run-4c51600606df/states/quality-review/artifacts/review-package.md",
+    "template_ref": "templates/review-package.md",
+    "contract_ref": "agents/omn-dev-2-reviewer/output.md",
+    "quality_ref": "agents/omn-dev-2-reviewer/quality.md",
+    "validator": "review_package_validator",
+    "result_envelope_path": "runs/run-4c51600606df/states/quality-review/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-06T08:45:05Z"
+}

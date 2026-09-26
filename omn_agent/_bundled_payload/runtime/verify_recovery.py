@@ -5,8 +5,8 @@
 a state machine. Neither proves anything about the paths a run takes when something goes wrong,
 because a successful run never takes them. This script induces the failures instead.
 
-Three runs, each injecting one fault at the adapter boundary, driven through the real command
-line rather than by calling functions -- what is proved is the runtime an operator uses:
+Four runs, each injecting one fault, driven through the real command line rather than by
+calling functions -- what is proved is the runtime an operator uses:
 
   Run A  a rejected artifact, repaired
          attempt 1 returns a structurally invalid plan. The Validation Engine rejects it, the
@@ -27,15 +27,28 @@ line rather than by calling functions -- what is proved is the runtime an operat
          a retry. This is the negative case: it proves the policy discriminates rather than
          retrying whatever fails.
 
+  Run D  a gate rejection, rolled back and rebuilt
+         attempt 1 is accepted and its gate is rejected by a listed non-producing owner. The
+         rejection is classified `gate-rejection` with action rollback; its envelope names the
+         `rollback` command, which this run executes verbatim. The phase is superseded --
+         re-entered as attempt 2 under its existing idempotency key, attempt 1's artifact
+         untouched at its committed path -- and the gate re-armed on the same work item with
+         the rejection in its `decision_history`. The stale successor block clears, the
+         re-dispatch carries the rejection as `prior_rejection`, attempt 2 commits at an
+         attempt-scoped path, the gate blocks again for a fresh human decision, and the
+         negatives -- producer role, unlisted role, approved sibling gate on the closed
+         phase, invalid target, exhausted
+         budget -- are each refused without touching the store.
+
 The harness stands in for the agent adapter and nothing else. It writes the artifact and the
 result envelope the adapter would have written, then hands control back to the runtime. Every
 transition, classification, and envelope this script asserts on is produced by the runtime.
 
 Each run is keyed by its own input file, so its `run_id` is derived, not assigned. A previous
 execution's run directory is removed before it is re-planned, and only ever the directories
-these three inputs derive.
+these four inputs derive.
 
-    python .claude/runtime/verify_recovery.py            # run all three
+    python .claude/runtime/verify_recovery.py            # run all four
     python .claude/runtime/verify_recovery.py --keep     # leave the run directories in place
 """
 
@@ -44,6 +57,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -56,6 +70,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import framework_runtime as fr  # noqa: E402
 import recovery_policy as rp    # noqa: E402
 import state_engine as se       # noqa: E402
+import verify_multi_phase as vmp  # noqa: E402
 
 CLAUDE = fr.CLAUDE
 RUNS = fr.RUNS
@@ -70,6 +85,7 @@ GOOD_SOURCE = (RUNS / "run-c5a8d50d3238/states/execution-planning/artifacts/"
                "execution-plan.md")
 
 PHASE = "execution-planning"
+GATE = "Planning Gate"
 INPUT_TYPE = "feature-request"
 
 
@@ -559,6 +575,523 @@ def scenario_c() -> Result:
     return r
 
 
+# --------------------------------------------------------------------------- clearing actions
+
+
+def runtime_command(action: str) -> list | None:
+    """The runtime command a clearing action names, as argv, or None for prose."""
+    if not action or "framework_runtime.py" not in action:
+        return None
+    text = action[action.index("python"):] if "python" in action else action
+    # An action may carry prose after the command (`... To reclaim it sooner: <cmd>`); the
+    # command is what runs. Placeholders in angle brackets are not executable.
+    argv = shlex.split(text.split("\n")[0], posix=True)
+    return argv
+
+
+def executable(argv: list, decided_by: str = "verify_recovery") -> list:
+    """A clearing action's argv with its one human placeholder, `--decided-by <who>`, filled.
+
+    The authoriser is the one argument the runtime cannot know, so the envelope leaves it a
+    placeholder rather than defaulting it from who rejected; executing the action as written
+    means supplying exactly that and nothing else. Any other placeholder is a harness fault.
+    """
+    out = list(argv)
+    if "--decided-by" in out and out[out.index("--decided-by") + 1] == "<who>":
+        out[out.index("--decided-by") + 1] = decided_by
+    left = [a for a in out if a.startswith("<") and a.endswith(">")]
+    assert not left, f"clearing action still carries placeholders {left}: {argv}"
+    return out
+
+
+def clearing_action_admissible(run_id: str, entry: dict) -> tuple[bool, str]:
+    """Whether an envelope's clearing action can succeed for its work item's type and status.
+
+    The admissibility table. A command is admissible only where the runtime would act on it:
+
+      release  --phase P     P is a state item that holds a lease, or is blocked by the
+                             Recovery Controller (not by a guard)
+      gate     --gate G      G is a gate item that is blocked awaiting a decision and undecided;
+                             the role, decider, and rationale are the human's judgement and
+                             may stay placeholders -- pre-filling an approval would be a
+                             prescription to approve, which no envelope may make
+      rollback --gate G      G is a gate item that is failed with decision rejected, the target
+                             is the closed phase or a completed hard predecessor, and every
+                             phase in range has a charged attempt left; the decider is the
+                             authoriser -- a second human decision the envelope cannot name --
+                             and may stay a placeholder, while the role and rationale are
+                             filled in and validated
+      prose (no command)     admissible: it names no command that can fail
+
+    A retry-class action states that nothing is required and appends `release` as an optional
+    reclaim; the prescription is the wait, so it is judged as prose.
+    """
+    state = load_state(run_id)
+    items = state["work_items"]
+    action = entry.get("clearing_action") or ""
+    if action.startswith("none required"):
+        return True, "retry: nothing required"
+    argv = runtime_command(action)
+    if argv is None:
+        return True, "prose; names no runtime command"
+    sub = argv[2] if len(argv) > 2 else None
+
+    def opt(flag):
+        return argv[argv.index(flag) + 1] if flag in argv else None
+
+    human = ({"--owner-role", "--decided-by", "--rationale"} if sub == "gate"
+             else {"--decided-by"} if sub == "rollback" else set())
+    placeholders = [a for i, a in enumerate(argv)
+                    if a.startswith("<") and a.endswith(">")
+                    and not (i > 0 and argv[i - 1] in human)]
+    if placeholders:
+        return False, f"placeholder argument {placeholders} in {argv}"
+
+    if sub == "release":
+        it = items.get(opt("--phase"))
+        if it is None:
+            return False, f"release names {opt('--phase')!r}, not a state work item"
+        ok = it["status"] in se.ACTIVE_STATUSES or (
+            it["status"] == se.BLOCKED and it.get("blocked_by") not in (None, "guard"))
+        return ok, (f"release on {it['state_id']} status={it['status']} "
+                    f"blocked_by={it.get('blocked_by')}")
+    if sub == "gate":
+        name = opt("--gate")
+        it = items.get(f"gate:{name}")
+        g = state["gates"].get(name)
+        if it is None or g is None:
+            return False, f"gate names {name!r}, not a gate work item"
+        ok = it["status"] == se.BLOCKED and g.get("decision") is None
+        return ok, f"gate on {name} status={it['status']} decision={g.get('decision')}"
+    if sub == "rollback":
+        name = opt("--gate")
+        it = items.get(f"gate:{name}")
+        g = state["gates"].get(name)
+        if it is None or g is None:
+            return False, f"rollback names {name!r}, not a gate work item"
+        if it["status"] != se.FAILED or g.get("decision") != "rejected":
+            return False, f"rollback on {name} status={it['status']} decision={g.get('decision')}"
+        target = opt("--target") or g["closes_state"]
+        store = se.StateStore.load(RUNS / run_id)
+        try:
+            phases = fr.rollback_range(store, target, g["closes_state"])
+        except ValueError:
+            return False, f"rollback target {target!r} is not in range"
+        over = [p for p in phases if se.attempts_charged(items[p]) >= items[p]["max_attempts"]]
+        if over:
+            return False, f"rollback would exceed the budget of {over}"
+        role = opt("--owner-role")
+        if role in fr.producer_aliases(g.get("producer_agent")) or (
+                g.get("owner_roles") and role not in g["owner_roles"]):
+            return False, f"rollback names role {role!r}, which may not decide {name}"
+        return True, f"rollback on {name} -> {target}, superseding {phases}"
+    return False, f"unknown subcommand {sub!r}"
+
+
+def store_content(run_id: str) -> dict:
+    """The run's state and recovery ledger with every `updated_at` removed.
+
+    Every command re-evaluates the guards and saves the store, which rewrites the timestamps
+    and nothing else; a refusal that changed no fact must leave everything else identical.
+    """
+    def strip(node):
+        if isinstance(node, dict):
+            return {k: strip(v) for k, v in node.items() if k != "updated_at"}
+        if isinstance(node, list):
+            return [strip(v) for v in node]
+        return node
+    ledger = RUNS / run_id / "recovery-ledger.json"
+    return strip({"state": load_state(run_id),
+                  "ledger": json.loads(ledger.read_text(encoding="utf-8"))
+                  if ledger.exists() else None})
+
+
+def check_clearing_actions(r: Result, cid: str, run_ids: list):
+    """Every open envelope of every run names a clearing action admissible for its item."""
+    bad, seen = [], 0
+    for run_id in run_ids:
+        for e in rp.RecoveryLedger(RUNS / run_id).entries():
+            if e.get("status") != "open":
+                continue
+            seen += 1
+            ok, why = clearing_action_admissible(run_id, e)
+            if not ok:
+                bad.append(f"{e['envelope_id']}: {why}")
+    r.add(cid, "every open envelope's clearing action is admissible for its work item's type "
+               "and status, or names no command",
+          not bad, f"{seen} open envelope(s) across {len(run_ids)} run(s) checked against "
+                   f"the admissibility table" if not bad else f"inadmissible: {bad}")
+
+
+# --------------------------------------------------------------------------- scenario D
+
+
+def gate_item_of(run_id: str) -> dict:
+    return load_state(run_id)["work_items"][f"gate:{GATE}"]
+
+
+def gate_of(run_id: str) -> dict:
+    return load_state(run_id)["gates"][GATE]
+
+
+def gate_entries(run_id: str) -> list:
+    return [e for e in rp.RecoveryLedger(RUNS / run_id).entries() if e["state_id"] == GATE]
+
+
+def scenario_d() -> Result:
+    r = Result("Run D -- a gate rejection is rolled back: the phase is superseded and rebuilt, "
+               "the gate re-armed, the evidence immutable")
+    run_id = plan(write_input(
+        "rollback", "Attempt 1 is accepted; its gate is rejected and a rollback authorised."))
+    gate_rec = gate_of(run_id)
+    producer = gate_rec["producer_agent"]
+    deciders = [o for o in gate_rec["owner_roles"]
+                if o not in fr.producer_aliases(producer)]
+    r.add("D0", "the gate closing the planning phase lists a non-producing owner",
+          bool(deciders), f"{GATE} owners {gate_rec['owner_roles']}, producer {producer!r}, "
+                          f"deciders {deciders}")
+    decider = deciders[0]
+
+    # ---- attempt 1: accepted, then rejected at the gate
+    run("dispatch", "--run-id", run_id, "--phase", PHASE)
+    act_as_adapter(run_id, artifact_text=good_artifact(run_id))
+    run("complete", "--run-id", run_id, "--phase", PHASE)
+    item1 = item_of(run_id)
+    key1 = item1["idempotency_key"]
+    art1 = CLAUDE / item1["completion"]["artifact_path"]
+    digest1 = fr.sha256_text(art1.read_text(encoding="utf-8"))
+    bytes1 = art1.read_bytes()
+    seq_before = len(load_state(run_id)["transitions"])
+    r.add("D1", "attempt 1 was accepted and committed, and its gate awaits a decision",
+          item1["status"] == se.COMPLETED and gate_item_of(run_id)["status"] == se.BLOCKED
+          and gate_item_of(run_id)["blocked_reason"] == "awaiting_human_decision",
+          f"{PHASE} completed at {item1['completion']['artifact_path']} ({digest1}); "
+          f"{GATE} {gate_item_of(run_id)['status']}/{gate_item_of(run_id)['blocked_reason']}")
+
+    rationale = "plan omits the rollback verification steps; return to planning"
+    run("gate", "--run-id", run_id, "--gate", GATE, "--decision", "reject",
+        "--owner-role", decider, "--decided-by", "verify_recovery", "--rationale", rationale)
+    gi = gate_item_of(run_id)
+    g = gate_of(run_id)
+    rejection_seq = next(t["seq"] for t in load_state(run_id)["transitions"]
+                         if t["state_id"] == GATE and t["to"] == se.FAILED)
+    env = json.loads((RUNS / run_id / "gates" / "planning-gate" /
+                      "failure-envelope.json").read_text(encoding="utf-8"))
+    r.add("D2", "the rejection left the gate failed, classified gate-rejection with action "
+                "rollback, and labelled the work item with the same class",
+          gi["status"] == se.FAILED and g["decision"] == "rejected"
+          and gi["failure_class"] == "gate-rejection"
+          and env["failure_class"] == "gate-rejection"
+          and env["classification"]["action"] == rp.ROLLBACK and env["status"] == "open",
+          f"gate {gi['status']} class={gi['failure_class']}; envelope {env['envelope_id']} "
+          f"{env['failure_class']} -> {env['classification']['action']}, "
+          f"decision needed {env['required_decision_type']}")
+    successors = [i for i in load_state(run_id)["work_items"].values()
+                  if i["work_type"] == "state" and i["status"] == se.BLOCKED
+                  and i.get("failure_class") == "gate-rejection"]
+    r.add("D3", "the successor phase blocked on the rejection with the rollback class",
+          bool(successors) and all(i["blocked_reason"] == "awaiting_recovery_task"
+                                   and i.get("blocked_by") == "guard" for i in successors),
+          ", ".join(f"{i['state_id']}={i['blocked_reason']}" for i in successors)
+          or "no successor blocked")
+    check_clearing_actions(r, "D4", [run_id])
+    successor_env = None
+    for i in successors:
+        fe = state_dir(run_id).parent / i["state_id"] / "failure-envelope.json"
+        if fe.exists():
+            successor_env = json.loads(fe.read_text(encoding="utf-8"))
+    r.add("D5", "both the gate's and the successor's envelopes name the rollback command "
+                "with the gate, and the option list offers no exception",
+          "rollback" in env["clearing_action"] and GATE in env["clearing_action"]
+          and successor_env is not None and "rollback" in successor_env["clearing_action"]
+          and GATE in successor_env["clearing_action"]
+          and not any("exception" in o for o in env["proposed_options"]),
+          f"gate: {env['clearing_action']}")
+    r.add("D5a", "the clearing action names the role that rejected but never defaults the "
+                 "authoriser from the rejection: `--decided-by` stays a placeholder",
+          f"--owner-role {decider}" in env["clearing_action"]
+          and "--decided-by <who>" in env["clearing_action"]
+          and "--decided-by verify_recovery" not in env["clearing_action"]
+          and successor_env is not None
+          and "--decided-by <who>" in successor_env["clearing_action"],
+          env["clearing_action"])
+    code, nxt0 = run("next", "--command", "implement", "--run-id", run_id, expect=None)
+    first_next = next((ln for ln in nxt0.splitlines() if ln.startswith("NEXT:")), "")
+    clear_by = [ln for ln in nxt0.splitlines() if "clear by" in ln]
+    r.add("D5b", "while the rejection stands `next` names the rollback command first, derived "
+                 "live, offers no gate decision, and every clearing action it prints is the "
+                 "rollback",
+          "authorise the rollback" in first_next and GATE in first_next
+          and f'--gate "{GATE}"' in nxt0 and "--decided-by <who>" in nxt0
+          and "record a decision" not in nxt0
+          and all("rollback" in ln for ln in clear_by),
+          f"exit {code}; {first_next[:110]}")
+    ledger_path = RUNS / run_id / rp.RecoveryLedger.FILENAME
+    ledger_bytes = ledger_path.read_bytes()
+    code, rec = run("recovery", "--run-id", run_id, "--open-only")
+    clear = [ln.strip() for ln in rec.splitlines() if ln.strip().startswith("clear by")]
+    r.add("D5c", "`recovery --open-only` derives the clearing action of every open "
+                 "gate-rejection envelope live -- `rollback` naming the gate, never "
+                 "`release` -- and leaves the ledger as written",
+          bool(clear) and any("rollback" in ln and GATE in ln for ln in clear)
+          and not any("release --run-id" in ln for ln in clear)
+          and ledger_path.read_bytes() == ledger_bytes,
+          f"{len(clear)} open envelope(s); ledger unchanged="
+          f"{ledger_path.read_bytes() == ledger_bytes}")
+
+    # ---- negatives, before the authorisation: each refused, store unchanged
+    before = store_content(run_id)
+    refusals = []
+    for label, argv in (
+            ("producer role", ["--owner-role", producer]),
+            ("unlisted role", ["--owner-role", "omn-nobody"]),
+            ("invalid target", ["--owner-role", decider, "--target", "implementation"]),
+    ):
+        code, out = run("rollback", "--run-id", run_id, "--gate", GATE, "--decided-by",
+                        "verify_recovery", *argv, expect=None)
+        refusals.append((label, code, "RUNTIME FAILURE" in out))
+    unchanged = store_content(run_id) == before
+    r.add("D6", "a producer role, an unlisted role, and an invalid target are each refused "
+                "with no store change",
+          all(code == 2 and failed for _, code, failed in refusals) and unchanged,
+          f"{[(l, c) for l, c, _ in refusals]}; state.json and recovery-ledger.json "
+          f"unchanged apart from timestamps={unchanged}")
+
+    # ---- negative: an approved sibling gate closing the rejected phase itself. Injected into
+    # the store as `record_gate_decision` would leave it, then removed byte-for-byte; the
+    # runtime must refuse to leave an approval standing over evidence it would rebuild.
+    state_path = RUNS / run_id / "state.json"
+    original = state_path.read_bytes()
+    state = json.loads(original.decode("utf-8"))
+    sibling = json.loads(json.dumps(state["work_items"][f"gate:{GATE}"]))
+    sibling.update({"state_id": "Sibling Gate", "gate": "Sibling Gate",
+                    "work_item_id": f"{run_id}::gate::Sibling Gate", "status": se.COMPLETED,
+                    "queue_status": "Completed", "blocked_reason": None,
+                    "blocked_detail": None, "blocked_by": None, "failure_class": None,
+                    "failure_detail": None})
+    state["work_items"]["gate:Sibling Gate"] = sibling
+    state["gates"]["Sibling Gate"] = {**state["gates"][GATE], "gate": "Sibling Gate",
+                                     "decision": "approved", "owner_role": decider,
+                                     "decided_by": "verify_recovery",
+                                     "rationale": "sibling approval", "decision_history": []}
+    state_path.write_text(json.dumps(state, indent=2), encoding="utf-8")
+    before_sibling = store_content(run_id)
+    code, out = run("rollback", "--run-id", run_id, "--gate", GATE, "--owner-role", decider,
+                    "--decided-by", "verify_recovery", expect=None)
+    unchanged = store_content(run_id) == before_sibling
+    state_path.write_bytes(original)
+    r.add("D6a", "an approved sibling gate closing the rejected phase itself refuses the "
+                 "rollback -- the closed phase is checked like every phase in range -- with "
+                 "no store change",
+          code == 2 and "approved gate" in out and "Sibling Gate" in out and unchanged,
+          next((ln.strip() for ln in out.splitlines() if "RUNTIME FAILURE" in ln), "")[:150]
+          + f"; store unchanged={unchanged}")
+
+    # ---- the clearing action, executed as written with the authoriser its only substitution
+    argv = runtime_command(env["clearing_action"])
+    proc = subprocess.run([PY, *executable(argv)[1:]], capture_output=True, text=True,
+                          cwd=str(CLAUDE.parent))
+    out = proc.stdout + proc.stderr
+    r.add("D7", "the envelope's clearing action, executed as written with the authoriser as "
+                "its only substitution, exits 0",
+          argv[0] == "python" and proc.returncode == 0,
+          f"`{env['clearing_action']}` -> exit {proc.returncode}; "
+          + next((ln.strip() for ln in out.splitlines() if ln.startswith("rollback")), ""))
+
+    item = item_of(run_id)
+    gi = gate_item_of(run_id)
+    g = gate_of(run_id)
+    sups = item.get("supersessions") or []
+    code, nxt = run("next", "--command", "implement", "--run-id", run_id)
+    row = next((ln for ln in nxt.splitlines() if f" {PHASE} " in ln and " state " in ln), "")
+    r.add("D8", "the phase is pending and eligible under its unchanged idempotency key, and "
+                "`next` reports it Ready",
+          item["status"] == se.PENDING and item["eligible"]
+          and item["idempotency_key"] == key1 and item["completion"] is None
+          and "pending" in row and "Ready" in row,
+          f"status={item['status']} eligible={item['eligible']} key unchanged="
+          f"{item['idempotency_key'] == key1}; `next` row: {' '.join(row.split())}")
+    r.add("D9", "the superseded completion moved unmodified into supersessions, and attempt 1's "
+                "artifact is byte-identical at its committed path",
+          len(sups) == 1 and sups[0]["completion"]["artifact_digest"] == digest1
+          and sups[0]["completion"]["artifact_path"] == item1["completion"]["artifact_path"]
+          and sups[0]["attempt"] == 1 and bool(sups[0].get("authorisation_id"))
+          and art1.read_bytes() == bytes1
+          and fr.sha256_text(art1.read_text(encoding="utf-8")) == digest1,
+          f"supersessions[0]: attempt {sups[0]['attempt'] if sups else '-'} under "
+          f"{sups[0].get('authorisation_id') if sups else '-'}, digest "
+          f"{sups[0]['completion']['artifact_digest'] if sups else '-'} == file digest "
+          f"{fr.sha256_text(art1.read_text(encoding='utf-8'))}")
+    snap = state_dir(run_id) / "attempts" / "1"
+    r.add("D10", "attempt 1's invocation, result, ledger, and validation files were snapshotted",
+          all((snap / n).exists() for n in ("invocation-envelope.json", "result-envelope.json",
+                                            "state-ledger.json", "validation-report.json")),
+          f"{sorted(p.name for p in snap.glob('*')) if snap.exists() else 'no snapshot dir'}")
+    history = g.get("decision_history") or []
+    r.add("D11", "the gate re-armed on the same work item: pending, decision null, the "
+                 "rejection first in decision_history, failure class cleared",
+          gi["status"] == se.PENDING and g["decision"] is None and gi["failure_class"] is None
+          and len(history) == 1 and history[0]["decision"] == "rejected"
+          and history[0]["owner_role"] == decider and history[0]["rationale"] == rationale
+          and history[0].get("superseded_by") == sups[0].get("authorisation_id"),
+          f"gate {gi['status']} decision={g['decision']} history="
+          f"{[(h['decision'], h['owner_role']) for h in history]}")
+    transitions = load_state(run_id)["transitions"]
+    rejection_t = next(t for t in transitions if t["seq"] == rejection_seq)
+    gate_env_now = json.loads((RUNS / run_id / "gates" / "planning-gate" /
+                               "failure-envelope.json").read_text(encoding="utf-8"))
+    r.add("D12", "the rejection's transition and envelope are untouched, and the envelope is "
+                 "resolved naming the authorisation",
+          rejection_t["from"] == se.BLOCKED and rejection_t["to"] == se.FAILED
+          and rejection_t["trigger"] == "decision_rejected"
+          and gate_env_now["envelope_id"] == env["envelope_id"]
+          and gate_env_now["status"] == "resolved"
+          and sups[0]["authorisation_id"] in (gate_env_now.get("resolution") or "")
+          and all(e["status"] == "resolved" for e in gate_entries(run_id)),
+          f"seq {rejection_seq} {rejection_t['from']}->{rejection_t['to']} "
+          f"({rejection_t['trigger']}); {gate_env_now['envelope_id']} "
+          f"{gate_env_now['status']}: {gate_env_now.get('resolution')}")
+    r.add("D13", "the two authorised transitions were recorded under their triggers, and "
+                 "nothing else left a terminal status",
+          any(t["state_id"] == PHASE and t["from"] == se.COMPLETED and t["to"] == se.PENDING
+              and t["trigger"] == "superseded" for t in transitions)
+          and any(t["state_id"] == GATE and t["from"] == se.FAILED and t["to"] == se.PENDING
+                  and t["trigger"] == "rollback_authorised" for t in transitions)
+          and any(e["event_type"] == "rollback_scheduled" for e in events_of(run_id)),
+          " ".join(f"{t['state_id']}:{t['from']}->{t['to']}({t['trigger']})"
+                   for t in transitions if t["from"] in se.TERMINAL_STATUSES))
+    successors_now = [load_state(run_id)["work_items"][i["state_id"]] for i in successors]
+    r.add("D14", "the successor's stale rollback block cleared: it waits on its predecessor "
+                 "instead, with its envelope resolved",
+          all(i["status"] == se.PENDING and not i["eligible"] and i["blocked_reason"] is None
+              for i in successors_now)
+          and all(e["status"] == "resolved"
+                  for e in rp.RecoveryLedger(RUNS / run_id).entries()
+                  if e["state_id"] in {i["state_id"] for i in successors}
+                  and e["failure_class"] == "gate-rejection"),
+          ", ".join(f"{i['state_id']}={i['status']}/{i['queue_status']}"
+                    for i in successors_now) or "no successor")
+    code, out = run("gate", "--run-id", run_id, "--gate", GATE, "--decision", "approve",
+                    "--owner-role", decider, "--decided-by", "verify_recovery",
+                    "--rationale", "premature", expect=2)
+    r.add("D15", "a decision on the re-armed gate is refused while its evidence is being "
+                 "rebuilt, and `next` does not offer it",
+          "RUNTIME FAILURE" in out and gate_of(run_id)["decision"] is None
+          and "record a decision" not in nxt,
+          next((ln.strip() for ln in out.splitlines() if "RUNTIME FAILURE" in ln), ""))
+    code, out = run("status", "--run-id", run_id, "--json")
+    view = json.loads(out[out.index("{"):])
+    step = next(s for ph in view["phases"] for s in ph["steps"] if s["state_id"] == PHASE)
+    gate_view = next(gv for ph in view["phases"] for gv in ph["gates"]
+                     if gv["state_id"] == GATE)
+    r.add("D16", "the status view carries the consumer contract: the target step pending, "
+                 "eligible, attempt 1, with a rollback block; the gate pending and undecided",
+          step["status"] == se.PENDING and step["eligible"] and step["attempt"] == 1
+          and step.get("rollback", {}).get("gate") == GATE
+          and step["rollback"]["authorisation_id"] == sups[0]["authorisation_id"]
+          and step["rollback"]["superseded_attempt"] == 1
+          and gate_view["status"] == se.PENDING and gate_view["decision"] is None
+          and gate_view["decision_history"][0]["decision"] == "rejected",
+          f"step {step['status']}/{step['eligible']}/attempt {step['attempt']} rollback="
+          f"{step.get('rollback')}; gate {gate_view['status']} decision="
+          f"{gate_view['decision']}")
+
+    # ---- attempt 2: the rejection rides along, the artifact lands attempt-scoped
+    run("dispatch", "--run-id", run_id, "--phase", PHASE)
+    envelope = json.loads((state_dir(run_id) / "invocation-envelope.json").read_text(
+        encoding="utf-8"))
+    prompt = (state_dir(run_id) / "dispatch-prompt.md").read_text(encoding="utf-8")
+    ledger2 = json.loads((state_dir(run_id) / "state-ledger.json").read_text(encoding="utf-8"))
+    pr = envelope.get("prior_rejection") or {}
+    declared = envelope["expected_output_schema"]["artifact_path"]
+    r.add("D17", "the re-dispatch carries the rejection as prior_rejection and the same key",
+          pr.get("rationale") == rationale and pr.get("gate") == GATE
+          and pr.get("superseded_attempt") == 1 and "rework pass" in prompt.lower()
+          and envelope["idempotency_key"] == key1 and item_of(run_id)["attempt"] == 2,
+          f"attempt {item_of(run_id)['attempt']}, prior_rejection by {pr.get('rejected_by')}, "
+          f"key unchanged={envelope['idempotency_key'] == key1}")
+    r.add("D18", "the declared artifact path, permitted writes, and state ledger name the "
+                 "attempt-scoped path, while attempt 1's path is untouched",
+          declared.endswith(f"/artifacts/attempt-2/execution-plan.md")
+          and declared != item1["completion"]["artifact_path"]
+          and declared in envelope["constraints"]["permitted_writes"]
+          and ledger2["artifact_path"] == declared
+          and fr.permitted_write(declared, envelope),
+          f"declared {declared}; attempt 1 at {item1['completion']['artifact_path']}")
+    code, out = run("dispatch", "--run-id", run_id, "--phase", PHASE)
+    r.add("D19", "a second dispatch of the re-entered attempt is replay-suppressed",
+          "REPLAY" in out and item_of(run_id)["attempt"] == 2,
+          next((ln.strip() for ln in out.splitlines() if ln.startswith("REPLAY")), ""))
+
+    act_as_adapter(run_id, artifact_text=good_artifact(run_id))
+    run("complete", "--run-id", run_id, "--phase", PHASE)
+    item = item_of(run_id)
+    gi = gate_item_of(run_id)
+    r.add("D20", "attempt 2 completed at the attempt path, both attempts charged, attempt 1's "
+                 "artifact still byte-identical",
+          item["status"] == se.COMPLETED and item["completion"]["artifact_path"] == declared
+          and se.attempts_charged(item) == 2 and item["attempt"] == 2
+          and art1.read_bytes() == bytes1 and len(item["supersessions"]) == 1,
+          f"completed at {item['completion']['artifact_path']}, "
+          f"{se.attempts_charged(item)} of {item['max_attempts']} charged")
+    r.add("D21", "the re-armed gate blocks again awaiting a fresh human decision",
+          gi["status"] == se.BLOCKED and gi["blocked_reason"] == "awaiting_human_decision"
+          and gate_of(run_id)["decision"] is None,
+          f"{GATE} {gi['status']}/{gi['blocked_reason']}")
+    code, out = run("next", "--command", "implement", "--run-id", run_id,
+                    "--gate-policy", "auto", expect=None)
+    r.add("D22", "under the auto-approval policy the re-armed gate is held for a human",
+          gate_of(run_id)["decision"] is None and "held for a human decision" in out
+          and "rollback" in out,
+          next((ln.strip() for ln in out.splitlines() if "held for a human" in ln), ""))
+    check_clearing_actions(r, "D23", [run_id])
+
+    # ---- the multi-phase invariants hold over the superseded run
+    checks = {c["id"]: c for c in vmp.run_checks(RUNS / run_id, replay=False).checks}
+    r.add("D24", "verify_multi_phase M4, M12, and M13 hold over the superseded run",
+          all(checks[c]["result"] == "PASS" for c in ("M3", "M4", "M12", "M13")),
+          "; ".join(f"{c}={checks[c]['result']}" for c in ("M3", "M4", "M12", "M13")))
+
+    # ---- a second rejection, then exhaustion
+    run("gate", "--run-id", run_id, "--gate", GATE, "--decision", "reject",
+        "--owner-role", decider, "--decided-by", "verify_recovery",
+        "--rationale", "still missing the verification steps")
+    env2 = json.loads((RUNS / run_id / "gates" / "planning-gate" /
+                       "failure-envelope.json").read_text(encoding="utf-8"))
+    argv = runtime_command(env2["clearing_action"])
+    proc = subprocess.run([PY, *executable(argv)[1:]], capture_output=True, text=True,
+                          cwd=str(CLAUDE.parent))
+    run("dispatch", "--run-id", run_id, "--phase", PHASE)
+    act_as_adapter(run_id, artifact_text=good_artifact(run_id))
+    run("complete", "--run-id", run_id, "--phase", PHASE)
+    run("gate", "--run-id", run_id, "--gate", GATE, "--decision", "reject",
+        "--owner-role", decider, "--decided-by", "verify_recovery",
+        "--rationale", "third rejection")
+    item = item_of(run_id)
+    r.add("D25", "a second rollback re-entered the phase as attempt 3, which was charged",
+          proc.returncode == 0 and item["attempt"] == 3 and se.attempts_charged(item) == 3
+          and len(item["supersessions"]) == 2
+          and len(gate_of(run_id)["decision_history"]) == 2,
+          f"attempt {item['attempt']}, {se.attempts_charged(item)} charged, "
+          f"{len(item['supersessions'])} supersession(s)")
+    env3 = json.loads((RUNS / run_id / "gates" / "planning-gate" /
+                       "failure-envelope.json").read_text(encoding="utf-8"))
+    before = store_content(run_id)
+    code, out = run("rollback", "--run-id", run_id, "--gate", GATE, "--owner-role", decider,
+                    "--decided-by", "verify_recovery", expect=2)
+    r.add("D26", "with the budget spent a further rollback is refused, the store is "
+                 "unchanged, and the envelope says so instead of naming the command",
+          "RUNTIME FAILURE" in out and "further attempt" in out
+          and store_content(run_id) == before
+          and runtime_command(env3["clearing_action"]) is None
+          and "no further attempt" in env3["clearing_action"],
+          next((ln.strip() for ln in out.splitlines() if "RUNTIME FAILURE" in ln), "")[:120]
+          + f"; store unchanged={store_content(run_id) == before}; envelope action: "
+          + env3["clearing_action"][:80])
+    check_clearing_actions(r, "D27", [run_id])
+    return r
+
+
 # --------------------------------------------------------------------------- policy closure
 
 
@@ -635,7 +1168,13 @@ def main():
     print(f"  retry profile: {rp.RETRY_PROFILE}")
     print(f"  conforming source artifact: .claude/"
           f"{GOOD_SOURCE.relative_to(CLAUDE).as_posix()}")
-    results = [scenario_a(), scenario_b(), scenario_c(), scenario_policy()]
+    results = [scenario_a(), scenario_b(), scenario_c(), scenario_d(), scenario_policy()]
+    admissibility = Result("Clearing actions -- every open envelope of every induced run names "
+                           "an action admissible for its work item")
+    check_clearing_actions(admissibility, "X1", [
+        run_id_for(INPUTS / f"recovery-injection-{slug}.md")
+        for slug in ("repaired", "exhausted", "policy", "rollback")])
+    results.append(admissibility)
     for res in results:
         print("\n".join(res.render()))
 
@@ -659,7 +1198,7 @@ def main():
         }, indent=2), encoding="utf-8")
 
     if not a.keep:
-        for slug in ("repaired", "exhausted", "policy"):
+        for slug in ("repaired", "exhausted", "policy", "rollback"):
             path = INPUTS / f"recovery-injection-{slug}.md"
             if path.exists():
                 reset_run(run_id_for(path), path)

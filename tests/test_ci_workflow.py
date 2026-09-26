@@ -187,7 +187,9 @@ class VerifierAssertionWrapper(unittest.TestCase):
 
 class DocumentationParity(unittest.TestCase):
     """The check-name contract is published where contributors read; the HTML
-    handbook is hand-synced with the markdown guide (definition of done)."""
+    handbook is generated from the markdown guide by
+    `python tools/render_user_guide.py`, and the drift step in this workflow
+    fails a commit that changes one without regenerating the other."""
 
     def test_check_names_documented_everywhere(self):
         for rel in ("README.md", "docs/USER-GUIDE.md", "docs/user-guide.html"):

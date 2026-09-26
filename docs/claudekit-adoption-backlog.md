@@ -12,6 +12,12 @@ human-block path. Effort: S (&le; 1 day), M (2–4 days), L (about a week).
 Goal: every PR is gated; a wheel installs standalone; guide drift is impossible.
 
 ### CKA-01 — Declare PyYAML and make `doctor` detect missing runtime deps
+- **Status:** Delivered by proposal FC-008 over run `run-efe092286625`. Verified on the
+  tree: `pyproject.toml` declares `dependencies = ["pyyaml>=6"]`; the README dependency
+  claim is corrected and now scopes "standard library only" to the CLI package alone;
+  `omn_agent/validator.py` emits the `V-IMPORT` ERROR finding naming the unresolved
+  module root. The clean-venv install and the dependency-absent `doctor`/`validate`
+  exit-3 runs were executed at that run's Verification Gate, not re-executed here.
 - **Type:** Task · **Priority:** Highest · **Effort:** S · **Source:** R1
 - **Depends on:** —
 - **Scope:** Add `pyyaml` to `dependencies` in `pyproject.toml`. Fix the
@@ -26,6 +32,12 @@ Goal: every PR is gated; a wheel installs standalone; guide drift is impossible.
   - Existing `tests/` remain green.
 
 ### CKA-02 — Ship the `.claude/` payload as package data
+- **Status:** Delivered by proposal FC-009 over run `run-e0dba6763475`. Verified on the
+  tree: `[tool.setuptools.package-data]` carries both glob patterns needed to cover the
+  payload's dotfiles, `omn_agent/_bundled_payload/` is present, and
+  `omn_agent/source.py::find_source` appends the bundled candidate as a last resort.
+  `tests/test_bundled_payload.py` (11 tests, OK) pins mirror sync. The non-editable
+  wheel install was executed at that run's Verification Gate, not re-executed here.
 - **Type:** Task · **Priority:** Highest · **Effort:** M · **Source:** R1
 - **Depends on:** —
 - **Scope:** `pyproject.toml` package-data (or `MANIFEST.in`) so a
@@ -38,6 +50,12 @@ Goal: every PR is gated; a wheel installs standalone; guide drift is impossible.
     editable install.
 
 ### CKA-03 — CI workflow gating every PR (tests + verifiers, by discovery)
+- **Status:** Delivered by proposal FC-010 over run `run-8f8a1ab0d16e`. Verified on the
+  tree: `.github/workflows/verify.yml` triggers on `pull_request` and default-branch
+  `push`, enumerates `verify_*.py` under `.claude/runtime/` by glob at CI runtime — no
+  file is named anywhere in the workflow — and fails the discovery step rather than
+  gating on an empty verifier set; the test surface runs `unittest discover` across an
+  ubuntu + windows matrix. Live red-on-break behaviour is structural here, not observed.
 - **Type:** Story · **Priority:** Highest · **Effort:** M · **Source:** R1
 - **Depends on:** CKA-01, CKA-02
 - **Scope:** New CI workflow on PRs: `python -m unittest discover -s tests`
@@ -51,6 +69,10 @@ Goal: every PR is gated; a wheel installs standalone; guide drift is impossible.
     CI config change.
 
 ### CKA-04 — Content-contract tests over governance prose
+- **Status:** Delivered by proposal FC-007 over run `run-919c5d5cf156`, the same change
+  that landed the CKA-05 banners. Verified on the tree: `tests/test_content_contracts.py`
+  runs 13/13 OK, a producer-only fixture row fails through both the prefixed and the
+  deprefixed alias, and the full suite is green (342, OK) against the current tree.
 - **Type:** Task · **Priority:** High · **Effort:** S · **Source:** R5
 - **Depends on:** — (lands with or before CKA-03)
 - **Scope:** New `tests/test_content_contracts.py` asserting structure the
@@ -64,6 +86,13 @@ Goal: every PR is gated; a wheel installs standalone; guide drift is impossible.
   - Suite runs green against current tree once CKA-05 lands.
 
 ### CKA-05 — Status banners on the four orphaned root governance docs
+- **Status:** Delivered 2026-09-04 by proposal FC-007 over run `run-919c5d5cf156`,
+  which scoped the banners in alongside CKA-04 under scope decision `D-001` so the
+  pinning check could not be authored dormant. Both acceptance criteria verified:
+  the four banners carry their counterparts, and `RootGovernanceBanners` in
+  `tests/test_content_contracts.py` pins them (13/13; full suite 342, OK).
+  The `X-004` exclusion FC-007 recorded — "CKA-05 content beyond banner presence" —
+  encloses nothing this ticket ever scoped, and is void.
 - **Type:** Task · **Priority:** High · **Effort:** S · **Source:** Phase-1 governance hygiene
 - **Depends on:** —
 - **Scope:** Add an explicit `Status: specification — not implemented` banner
@@ -74,6 +103,20 @@ Goal: every PR is gated; a wheel installs standalone; guide drift is impossible.
 - **Acceptance criteria:** each file's banner is present and pinned by CKA-04.
 
 ### CKA-06 — Generate `user-guide.html` from `USER-GUIDE.md` with a drift check
+- **Status:** Delivered by proposal FC-014 over run `run-4c51600606df` (2026-09-08), on
+  implementation attempt 2 after omn-qa rejected the Review Gate (F-001: two 5a code-sample lines
+  dropped unrecorded) and the run was rolled back under `RB-run-4c51600606df-review-gate-01` — the
+  rollback capability itself was delivered meanwhile by `/bugfix` run `run-3e6f6a248b99` (FC-013,
+  runtime 0.6.0). Verified on the tree: `tools/render_user_guide.py` renders `docs/USER-GUIDE.md`
+  deterministically and `--check` exits 0; the generated banner opens the page; all 21 anchors
+  preserved; `5b. Branch naming templates` rendered; the drift step runs inside CI's `tests` job under
+  `if: !cancelled()`; `.gitattributes` pins both handbook paths `-text`; the one-time reconciliation is
+  recorded in `docs/user-guide-reconciliation.md` (+ `-diff.md`) and proven fixture-to-fixture by
+  `tests/test_render_user_guide.py` (74 tests); full suite 474 OK; `verify_self_hosting` 8/8.
+  Acceptance: 9 of 14 criteria met on executed evidence; A-014 closed after the Verification Gate
+  (README and handbook regeneration instruction); A-013 (raw-markup count) not met, reported not
+  enforced by scope decision; A-003/A-004/A-010 blocked until the first hosted two-leg CI run
+  (monitoring owned by omn-qa). F-009 (low, `key=value` brace tokens silently accepted) carried.
 - **Type:** Story · **Priority:** High · **Effort:** M · **Source:** R7
 - **Depends on:** CKA-03 (for the CI hook)
 - **Scope:** New `tools/render_user_guide.py`; one-time two-way
@@ -247,7 +290,10 @@ safely; a third dispatchable command needs no third copy-pasted drive loop.
   `decision-matrix.md` each get an explicit decision: implement, rewrite as
   description of what exists, or retire. Complete the deferred
   `omn-architect` → `architect` reference migration in the gate matrix so
-  `producer_aliases` can shrink.
+  `producer_aliases` can shrink. Inherited from CKA-05: the `working-memory.md`
+  and `rule-engine.md` banners name "the run-state model" in prose where the
+  other two name a path; resolve it to `runtime/state_engine.py` as part of the
+  decision this ticket takes on those two documents.
 - **Acceptance criteria:**
   - Grep for the retired vocabulary (e.g. `WAIVED`, 15-minute cooldown)
     finds no live normative doc without a status banner.

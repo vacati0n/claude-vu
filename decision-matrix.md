@@ -1,5 +1,7 @@
 # Engineering Decision Matrix
 
+Status: specification — not implemented — executable counterpart: `workflows/workflow-gate-matrix.md`.
+
 This document defines deterministic decision trees for key engineering domains.
 
 ## Global Rules

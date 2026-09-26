@@ -1,0 +1,125 @@
+{
+  "invocation_id": "inv-5df08e171670-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md"
+  ],
+  "structured_output": {
+    "plan_id": "PLAN-2026-0014",
+    "plan_status": "complete",
+    "counts": {
+      "statements": 14,
+      "assumptions": 5,
+      "risks": 10,
+      "tasks": 32,
+      "dependency_edges": 44,
+      "external_dependencies": 3,
+      "waves": 5,
+      "open_questions": 6,
+      "business_objectives": 6,
+      "technical_objectives": 11,
+      "plan_acceptance_criteria": 12
+    },
+    "open_questions": [
+      {"id": "Q-001", "blocking": false, "owner": "omn-product-owner", "note": "carried forward; owner reassigned from omn-business-analyst per the Scope Gate condition"},
+      {"id": "Q-002", "blocking": false, "owner": "omn-qa", "note": "carried forward unchanged"},
+      {"id": "Q-003", "blocking": false, "owner": "omn-tech-lead", "note": "scheduled early; its decision task T-004 is in wave 1"},
+      {"id": "Q-004", "blocking": false, "owner": "omn-tech-lead", "note": "carried forward unchanged"},
+      {"id": "Q-005", "blocking": false, "owner": "omn-product-owner", "note": "carried forward; owner reassigned from omn-business-analyst per the Scope Gate condition"},
+      {"id": "Q-006", "blocking": false, "owner": "omn-orchestrator", "note": "raised by this plan: documentation-and-release-handoff is not executed by the runtime's implemented surface, recorded as a framework gap under Q9.7"}
+    ],
+    "recomputed_topological_order": {
+      "method": "topological sort over section 8.1 edges, ties by ascending task identifier; external prerequisites are held in 8.2 and are not edges",
+      "wave_1": ["T-001", "T-004", "T-005", "T-018", "T-019", "T-025", "T-030"],
+      "wave_2": ["T-002", "T-006", "T-008", "T-010", "T-013", "T-015", "T-016", "T-020", "T-023", "T-026", "T-028"],
+      "wave_3": ["T-003", "T-007", "T-009", "T-011", "T-012", "T-014", "T-017", "T-021", "T-022", "T-024", "T-027"],
+      "wave_4": ["T-032"],
+      "wave_5": ["T-029", "T-031"],
+      "matches_stated_order": true,
+      "cycles_detected": 0
+    },
+    "traceability_closure": {
+      "forward_statements_covered": "14/14",
+      "backward_tasks_traced": "32/32",
+      "lateral_assumptions_attached": "5/5",
+      "lateral_risks_attached": "10/10",
+      "lateral_edges_resolved": "44/44"
+    },
+    "scope_gate_conditions_honoured": {
+      "Q-001_and_Q-005_reassigned_to_omn-product-owner": true,
+      "A-010_planned_against_decidable_core_under_assumption_A-002": true,
+      "Q-003_scheduled_in_wave_1_via_T-004": true,
+      "A-005_treated_as_change-wide_not_task-scoped": true
+    },
+    "quality_checks": {
+      "check_set_version": "agents/planner/quality.md 1.0.0",
+      "run": 70,
+      "passed": 70,
+      "failed": 0,
+      "results": {
+        "Q1.1": "pass", "Q1.2": "pass", "Q1.3": "pass", "Q1.4": "pass", "Q1.5": "pass", "Q1.6": "pass", "Q1.7": "pass",
+        "Q2.1": "pass", "Q2.2": "pass", "Q2.3": "pass", "Q2.4": "pass", "Q2.5": "pass", "Q2.6": "pass", "Q2.7": "pass", "Q2.8": "pass",
+        "Q3.1": "pass", "Q3.2": "pass", "Q3.3": "pass", "Q3.4": "pass",
+        "Q4.1": "pass", "Q4.2": "pass", "Q4.3": "pass", "Q4.4": "pass", "Q4.5": "pass",
+        "Q5.1": "pass", "Q5.2": "pass", "Q5.3": "pass", "Q5.4": "pass", "Q5.5": "pass", "Q5.6": "pass", "Q5.7": "pass", "Q5.8": "pass", "Q5.9": "pass", "Q5.10": "pass",
+        "Q6.1": "pass", "Q6.2": "pass", "Q6.3": "pass", "Q6.4": "pass", "Q6.5": "pass", "Q6.6": "pass", "Q6.7": "pass", "Q6.8": "pass",
+        "Q7.1": "pass", "Q7.2": "pass", "Q7.3": "pass", "Q7.4": "pass", "Q7.5": "pass", "Q7.6": "pass",
+        "Q8.1": "pass", "Q8.2": "pass", "Q8.3": "pass", "Q8.4": "pass", "Q8.5": "pass",
+        "Q9.1": "pass", "Q9.2": "pass", "Q9.3": "pass", "Q9.4": "pass", "Q9.5": "pass", "Q9.6": "pass", "Q9.7": "pass",
+        "Q10.1": "pass", "Q10.2": "pass", "Q10.3": "pass", "Q10.4": "pass", "Q10.5": "pass",
+        "Q11.1": "pass", "Q11.2": "pass", "Q11.3": "pass", "Q11.4": "pass", "Q11.5": "pass"
+      },
+      "repair_passes": [
+        {
+          "pass": 1,
+          "checks": ["Q5.4", "Q5.5"],
+          "repaired": "six task titles joined two independently verifiable outcomes; the titles of T-006, T-015, T-019, T-021, T-029, and T-032 were restated as single outcomes. No identifier was reused or renumbered."
+        }
+      ]
+    },
+    "identifier_registers": {
+      "statements": "S-001..S-014",
+      "assumptions": "A-001..A-005",
+      "risks": "R-001..R-010",
+      "tasks": "T-001..T-032",
+      "open_questions": "Q-001..Q-006",
+      "note": "S-001..S-011 and Q-001..Q-005 are adopted from the upstream scope definition SCOPE-2026-0014 to preserve cross-artifact traceability; S-012..S-014 normalize its Constraints and Dependencies section; Q-006 is new"
+    },
+    "boundary_statement": "No implementation work was performed, no test was written, no architecture decision was settled, no workflow was executed, and no external system was accessed.",
+    "repository_rescan_performed": false,
+    "affected_areas_recorded": ["performance", "security"],
+    "suggested_workflow": "implement-feature"
+  },
+  "evidence_refs": [
+    "agents/planner/manifest.yaml",
+    "agents/planner/system.md",
+    "agents/planner/identity.md",
+    "agents/planner/reasoning.md",
+    "agents/planner/output.md",
+    "agents/planner/quality.md",
+    "runs/run-5df08e171670/states/execution-planning/invocation-envelope.json",
+    "runs/run-5df08e171670/task-context.yaml",
+    "runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "runs/inputs/demo-mode-feature-request.md",
+    "runs/inputs/demo-mode-change-request.md",
+    "agents/capability-matrix.md",
+    "workflows/workflow-gate-matrix.md",
+    "workflows/implement-feature.md",
+    "registry/skills.yaml",
+    "templates/execution-plan.md",
+    "context/product-context.md",
+    "context/technical-context.md",
+    "context/release-context.md",
+    "skills/business/domain-modeling.md",
+    "skills/architecture/clean-architecture-checklist.md",
+    "skills/testing/testing-strategy.md",
+    "skills/security/secure-engineering.md"
+  ],
+  "confidence": 0.84,
+  "declared_side_effects": [
+    "runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md",
+    "runs/run-5df08e171670/states/execution-planning/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

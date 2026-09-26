@@ -1,0 +1,436 @@
+{
+  "invocation_id": "inv-919c5d5cf156-05-002",
+  "run_id": "run-919c5d5cf156",
+  "work_item_id": "run-919c5d5cf156::quality-review",
+  "idempotency_key": "sha256:a3f69dac50123c3b32dc27cbd6785126",
+  "state_id": "quality-review",
+  "phase_index": 5,
+  "agent_id": "omn-dev-2-reviewer",
+  "agent_version": "1.1.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-2-reviewer.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-2-reviewer/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-2-reviewer/system.md",
+      "agents/omn-dev-2-reviewer/identity.md",
+      "agents/omn-dev-2-reviewer/reasoning.md",
+      "agents/omn-dev-2-reviewer/execution.md",
+      "agents/omn-dev-2-reviewer/output.md",
+      "agents/omn-dev-2-reviewer/quality.md",
+      "agents/omn-dev-2-reviewer/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-2-reviewer/system.md": "sha256:ef234d6d8e6b74d21d099ab744ab9f60",
+      "agents/omn-dev-2-reviewer/identity.md": "sha256:725ba943cf8532dc4f666e68ca191592",
+      "agents/omn-dev-2-reviewer/reasoning.md": "sha256:f84d57686c7afa96e74cb1907e954c71",
+      "agents/omn-dev-2-reviewer/execution.md": "sha256:6c93e33bae84f6254f626f3fd1b447d7",
+      "agents/omn-dev-2-reviewer/output.md": "sha256:1b324b77d86f30d076d08768be2f9d5c",
+      "agents/omn-dev-2-reviewer/quality.md": "sha256:4d4c09812b441785acd1b03330468cc9",
+      "agents/omn-dev-2-reviewer/examples.md": "sha256:488657c9d243c3d498245922c2d92906"
+    },
+    "capabilities": [
+      "code-review",
+      "governance-enforcement",
+      "quality-verification"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "pull-request-diff",
+      "quality-scan-scope",
+      "technical-design",
+      "execution-plan",
+      "scope-definition",
+      "bug-analysis",
+      "architecture-decision-record",
+      "coding-standards",
+      "test-evidence",
+      "architecture-rules",
+      "security-criteria",
+      "standards-checklist",
+      "regression-targets",
+      "known-issues",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-04-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-04-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-04: Content-contract tests over governance prose\n\n## Source\n\nTicket CKA-04 in the adoption backlog under `docs/` (Epic A \u2014 Verification baseline,\nDays 0\u201330). Source recommendation: R5 of the ClaudeKit Adoption Review (2026-08-27).\nType: Task. Priority: High. Effort: S. Depends on: nothing (lands with or before CKA-03,\nwhich is already delivered as `.github/workflows/verify.yml`).\n\n## Request\n\nThe runtime depends on structural properties of governance prose that nothing pins today.\n`framework_runtime.py` reads gate ownership from `workflows/workflow-gate-matrix.md` and\nenforces the Producer Exclusion Rule through `producer_aliases()`; a prose edit that leaves\na gate row owned only by its producing role (through any alias) creates an undecidable gate\nand no test notices. Superseded agent specifications (`agents/architect.md`,\n`agents/planner.md`) carry their supersession marker in their first heading; a rewrite that\ndrops it silently revives a dead contract. Agent contract modules must never carry coercive\nauto-chain language (the claudekit failure mode: contract prose instructing an agent to\nproceed past approval gates automatically), and the four orphaned root governance docs\n(`working-memory.md`, `rule-engine.md`, root `quality-gates.md`, `decision-matrix.md`) are\nreceiving `Status:` banners under CKA-05 that must then be impossible to drop.\n\nDeliverable: a new `tests/test_content_contracts.py` (stdlib `unittest`, discovered by the\nCKA-03 CI test surface with no config change) asserting structure the code depends on:\n\n1. Every `workflow-gate-matrix.md` gate row names at least one owner outside\n   `producer_aliases(producer)` for the phase's producing agent \u2014 i.e. no row is\n   producer-only under the Producer Exclusion Rule's alias reading.\n2. Superseded agent files carry their status marker on line 1.\n3. The four root governance docs carry a `Status:` banner (the CKA-05 coupling: this\n   check must be authored now and must be green on the current tree \u2014 the scope decision\n   on how to satisfy that coupling belongs to scope-and-acceptance; the backlog offers\n   two admissible resolutions: land the four CKA-05 banners in this change, since CKA-05\n   is S-effort, dependency-free, and its own acceptance criterion is \"present and pinned\n   by CKA-04\", or gate the check so it activates when the first banner lands).\n4. No agent contract module under `agents/*/` matches coercive auto-chain patterns\n   (e.g. instructions to skip, bypass, or auto-approve a gate, or to proceed without\n   approval).\n\nAssert on structure (table cells, first-line markers), not sentences, so wording edits\nthat preserve structure stay free.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- Mutating a fixture gate matrix to a producer-only owner row fails a test.\n- Suite runs green against current tree once CKA-05 lands.\n\n## Constraints\n\n- Additive change only: the ticket list forbids altering `record_gate_decision`, the\n  gate matrix semantics, producer exclusion, `runner._require_approval`, or any\n  human-block path. This ticket adds tests (and, if scoped in, four status banners);\n  it changes no runtime behavior.\n- Assertions bind to structure the code reads, not to prose wording.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py`\n  proof scripts PROVEN, no change to gate-decision behavior, and where docs were\n  touched, `user-guide.html` updated to match.\n\n## Priority and deadline\n\nHigh priority; Phase 1 (Days 0\u201330) of the adoption plan. CKA-16 (anti-rationalization\ntables) later extends this suite, and CKA-05's acceptance criterion is pinned by it.",
+        "digest": "sha256:f63a8c3a43a79d5c0d1f218ebe85bbf6"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md",
+        "text": "```yaml\nimplementationReport:\n  reportId: IR-2026-0006\n  changeReference: CKA-04\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-04-feature-request.md\n    - type: technical-design\n      reference: runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  workflowPhase: implementation\n  verificationStatus: verified\n  inputDigest: sha256:5ff465e62ddeb443d3ab92a72c98755d\n  contextDigest: sha256:fbf2e953c78bf37cdf0ac7f7c01da129\n```\n\n## Metadata\n\n- Report ID: IR-2026-0006\n- Change reference: CKA-04\n- Workflow phase: implementation\n- Status: complete\n- Verification status: verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: the four structural properties of governance prose the runtime reads \u2014 gate rows decidable outside the producer's alias set, line-1 supersession markers on superseded agent specifications, status banners on the four root governance documents, and the absence of coercive auto-chain instruction in agent contract modules \u2014 are now pinned by executable checks discovered by the existing CI test surface, and the four root governance documents carry the pinned banner those checks protect.\n- Approach taken: the accepted design's selected option as accepted \u2014 one new test module, `tests/test_content_contracts.py`, binding by import to the runtime's own readers (`producer_aliases`, `parse_gate_matrix`, `parse_phase_model`, `phase_gates` from `runtime/framework_runtime.py`), hermetic negative fixtures in temporary framework trees, a module-local seven-family coercive-pattern scan under the design's two-part structural discriminator, and the four one-line banner lines landed in the same change with the banner check unconditional (design P-003). The reader import binding was confirmed working under the hermetic temporary-root pattern by an executed probe before any fixture was authored (design P-002), so the fallback reversal condition of design decision D-001 was not needed.\n- Design reference: design decisions D-001 through D-006 of the accepted technical design (CKA-04-technical-design), delivered in the order its sequencing constraints P-002 through P-005 require.\n- Out of scope: any change to `record_gate_decision`, the gate-matrix semantics, `producer_aliases`, `runner._require_approval`, or any human-block path; any CI configuration change; any assertion bound to sentence wording; any content change to the four root documents beyond the single banner line each; the structure-preserving reword demonstration, the CI-run-record discovery evidence, and the validation coverage design, which the plan assigns to the validation phase; user-guide reconciliation, which the plan assigns to the documentation phase; and the anti-rationalization checks the backlog defers to CKA-16. Leaving these is safe because every landed check passes on the tree as landed, the change alters no runtime behavior, and each deferred item has a named downstream owner.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | `tests/test_content_contracts.py` | added | Pin the four content contracts with hermetic negative fixtures: gate decidability through the imported runtime readers, line-1 supersession markers, the unconditional banner check, and the coercive auto-chain scan | design decisions D-001, D-002, D-004, D-005, D-006 |\n| `C-002` | `working-memory.md` | modified | Add the pinned one-line status banner cross-linking `runtime/recovery_policy.py` and the run-state model to the document preamble | design decision D-003 |\n| `C-003` | `rule-engine.md` | modified | Add the pinned one-line status banner cross-linking `runtime/recovery_policy.py` and the run-state model to the document preamble | design decision D-003 |\n| `C-004` | `quality-gates.md` | modified | Add the pinned one-line status banner cross-linking `workflows/workflow-gate-matrix.md` to the document preamble | design decision D-003 |\n| `C-005` | `decision-matrix.md` | modified | Add the pinned one-line status banner cross-linking `workflows/workflow-gate-matrix.md` to the document preamble | design decision D-003 |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | Gate decidability: every Phase-Model-named gate of every active workflow resolves in the gate matrix and names an owner outside `producer_aliases(producer)`; the current tree is green with zero inert matrix rows, and the skipped-inert-row report prints in every run; a producer-only fixture row fails in both alias directions (producer `architect` with sole owner `omn-architect`, and producer `omn-qa` with sole owner `qa`); the unmutated fixture yields zero findings; a Phase-Model-named gate absent from the fixture matrix fails; an inert fixture row is reported skipped, not failed | unit | `C-001` | `python -m unittest tests.test_content_contracts.GateMatrixDecidability -v` | pass |\n| `T-002` | Superseded specifications: `agents/architect.md` and `agents/planner.md` carry a level-1 heading containing `(Superseded)` on line 1; a fixture copy with the marker dropped from line 1 fails | unit | `C-001` | `python -m unittest tests.test_content_contracts.SupersededSpecifications -v` | pass |\n| `T-003` | Root governance banners, unconditional: each of the four root documents carries a preamble line beginning with the exact banner `Status: specification \u2014 not implemented` and names its executable counterpart in the preamble; a fixture copy of each document with the banner line removed fails | unit | `C-001`, `C-002`, `C-003`, `C-004`, `C-005` | `python -m unittest tests.test_content_contracts.RootGovernanceBanners -v` | pass |\n| `T-004` | Coercive auto-chain scan: zero matches over the 84 module files under the 12 agent contract directories, with an empty scan set itself a failure; one imperative and one positive-modal fixture per family, fourteen in all, each detected under its family; the recorded prohibition and declarative forms yield zero matches. The six family-candidate clauses on the current tree, each excluded by the discriminator and itemized in every run: `agents/architect/examples.md` line 627 (mood filter and negation guard), `agents/architect/identity.md` line 192 (negation guard), `agents/architect/reasoning.md` line 219 (mood filter), `agents/omn-dev-1-implement/identity.md` line 181 (negation guard), `agents/omn-product-owner/identity.md` line 173 (negation guard), `agents/planner/identity.md` line 180 (negation guard) | unit | `C-001` | `python -m unittest tests.test_content_contracts.CoerciveAutoChainScan -v` | pass |\n| `T-005` | Full-suite regression: the complete repository test suite discovers 342 cases including the 13 added by this change and exits clean, matching the pre-change baseline run of the same command, which also exited clean | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005` | `python -m unittest discover -s tests -v` | pass |\n| `T-006` | Repository proof scripts with positive verdicts: manifest conformance 2/2 CONFORMS, recovery 41/41 RECOVERY PROVEN, registry coverage 6/6 COVERED, validator coverage 6/6 COVERED, vertical slice 10/10 PROVEN | static | `C-001`, `C-002`, `C-003`, `C-004`, `C-005` | `python runtime/verify_manifests.py; python runtime/verify_recovery.py; python runtime/verify_registry_coverage.py; python runtime/verify_validators.py; python runtime/verify_vertical_slice.py` | pass |\n\n## Verification Results\n\n- Verification method: unit and fixture checks executed through the standard-library test runner; full-suite regression compared against the pre-change baseline run of the same command; the repository's proof scripts executed as static verification. Repository paths in this report are recorded relative to the framework payload directory. Before any fixture was authored, an executed probe in a temporary tree outside the repository confirmed the four-reader import binding under the hermetic root-redirect pattern (design P-002). Attribution for the two negative proof verdicts was obtained by re-executing both proofs against the pre-change tree with the uncommitted change and the in-flight run evidence temporarily stashed, then restored intact.\n- Commands executed: `python -m unittest tests.test_content_contracts -v` (pre-banner, banner check red as expected; post-banner, 13 tests green); `python -m unittest tests.test_content_contracts.GateMatrixDecidability -v`; `python -m unittest tests.test_content_contracts.SupersededSpecifications -v`; `python -m unittest tests.test_content_contracts.RootGovernanceBanners -v`; `python -m unittest tests.test_content_contracts.CoerciveAutoChainScan -v`; `python -m unittest discover -s tests -v` (pre-change baseline and post-change, both exiting clean); `python runtime/verify_manifests.py`; `python runtime/verify_multi_phase.py`; `python runtime/verify_recovery.py`; `python runtime/verify_registry_coverage.py`; `python runtime/verify_self_hosting.py`; `python runtime/verify_validators.py`; `python runtime/verify_vertical_slice.py`; `git stash --include-untracked`, `git stash pop`, and `git checkout -- runs/run-8f8a1ab0d16e/state.json` for verdict attribution and evidence restoration.\n- Result summary: 6 recorded evidence commands executed, 6 passed, 0 failed; the new module runs 13 checks, all passing, and the full suite discovers 342 cases and exits clean against a clean pre-change baseline. Proof scripts: 7 executed, 5 with positive verdicts (recorded in `T-006`), 2 with negative verdicts \u2014 the multi-phase proof at 14/15 NOT PROVEN and the self-hosting proof at 7/8 NOT SELF-HOSTING \u2014 both attributed to pre-existing run-state conditions independent of this change and recorded as residual risks `R-001` and `R-002`: on the pre-change tree with the in-flight run evidence set aside, the multi-phase proof returns 15/15 PROVEN while the self-hosting proof still returns 7/8.\n- Unverified areas: none\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | Check 4's object and qualifier tokens accept a plain plural on their final word, so `gate` also anchors `the gates`, implemented in `C-001` | Design decision D-002's object-token inventory, which lists the tokens in the singular | Three of the six recorded prohibition instances in current contract modules write the object in the plural; exact-singular tokens would deny those clauses candidacy, weakening both the itemized exclusion demonstration and detection of a plural-phrased coercive instruction; the verb tokens, the pinned inflection rules, the mood filter, and the negation guard are untouched | not-required |\n\n## Boundary Compliance\n\n- Module boundaries preserved: the only boundary crossed is the established tests-to-runtime import boundary the design names as existing; the four reader functions are consumed read-only; no runtime module, workflow specification, registry record, gate-decision surface, or CI configuration file was modified, and the four root documents changed by exactly one banner line each.\n- Public interface changes: none. The four reader functions gain a read-only test consumer, making their names and signatures load-bearing for the suite \u2014 the accepted design's stated tradeoff, preferring a loud break over silent divergence.\n- Data or migration impact: none \u2014 the change adds one test module and four one-line document banners; no schema, stored data, or migration is touched.\n- Declared side effects: `tests/test_content_contracts.py`, `working-memory.md`, `rule-engine.md`, `quality-gates.md`, `decision-matrix.md`, `runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md`, and `runs/run-919c5d5cf156/states/implementation/result-envelope.json`. Two transient effects of permitted commands are declared and were reversed before completion: the multi-phase proof appended idempotent-replay bookkeeping to `runs/run-8f8a1ab0d16e/state.json`, which was restored to its committed content exactly (recorded as `R-004`), and the interpreter bytecode cache regenerated under `tests/` during test execution was removed.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | The multi-phase proof (`runtime/verify_multi_phase.py`) reads 14/15 NOT PROVEN while the run carrying this change is in flight: it evaluates the newest run, whose delivery phase is by construction uncommitted during this phase | high until this phase commits, low after | Definition-of-done proof evidence reads negative at the Verification Gate if the proof is executed before this phase commits | Attribution recorded here with executed evidence: on the tree without the in-flight run evidence the proof returns 15/15 PROVEN; the failing condition names only the run's own traversal state and self-resolves when this phase commits |\n| `R-002` | The self-hosting proof (`runtime/verify_self_hosting.py`) reads 7/8: five framework runs are unaccounted for by change proposals \u2014 run-34ca35504b72 and run-efe092286625 (2026-08-27), run-e0dba6763475 (2026-09-03), and run-8f8a1ab0d16e (2026-09-04), all predating this change, plus the run carrying it, whose change proposal is produced at closure | high | The self-hosting proof cannot read fully PROVEN during this run until the pre-existing accounting is repaired and this run's proposal lands at closure | Pre-existence established by executed evidence: the same 7/8 verdict holds on the pre-change tree; the proof itemizes the unaccounted set on every execution, keeping it visible; repair of the four older runs is named as follow-up work with the closure obligation for this run |\n| `R-003` | Discriminator precision over recall, the accepted design tradeoff: a coercive instruction phrased declaratively, in an unusual construction, or inside a table cell evades check 4 | low | The failure mode the check exists to catch could re-enter through phrasing the discriminator deliberately does not match | The scan itemizes every excluded family candidate in every run so drift is visible; fourteen per-family fixtures pin detection of the matched forms; the accepted design designates CKA-16 as the widening vehicle |\n| `R-004` | Executing the multi-phase proof appends idempotent-replay bookkeeping to the newest committed run's state file, so running the definition-of-done proofs dirties tracked run evidence | high whenever that proof runs while the newest run with a state store is a committed, tracked run | Tracked run evidence drifts from its committed content without any agent editing it | The appended records were restored to the committed content in this run and the effect is declared in this report; the behavior is the proof's own replay demonstration, so downstream executors are warned here to check evidence state after running it |\n\n## Handoff Notes\n\n- Reviewer focus areas: the check 4 discriminator in `tests/test_content_contracts.py` \u2014 the site carrying tradeoff `V-001` and residual risk `R-003` \u2014 including the mood filter, the negation guard, and the plural-object tokenization; the four banner lines for exactness of the pinned text, em dash included, and preamble placement per design decision D-003; the check 1 use of the imported alias arithmetic per design decision D-001.\n- Follow-up work: change-proposal accounting for the four pre-existing unaccounted framework runs named in `R-002`; this run's own change proposal at the closure phase; the validation phase's coverage design, structure-preserving reword demonstration, and CI-run-record discovery evidence; user-guide reconciliation or a recorded no-impact review for the four touched documents.\n- Documentation impact: the four root governance documents now carry status banners; published user documentation must be reconciled with them or a no-impact review recorded, per the accepted design's documentation obligation and the plan's documentation task.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | Does the Verification Gate accept the two attributed negative proof verdicts recorded in `R-001` and `R-002` \u2014 the multi-phase proof self-resolving when this phase commits, and the self-hosting proof red on four runs predating this change plus this run's closure-pending proposal \u2014 or must the pre-existing accounting be repaired before the gate decides? | no | omn-qa | none |",
+        "digest": "sha256:7a8671da11074eeca21bd5d041ac3092",
+        "produced_by": "implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the subject under review: an implementation report for a delivered change, a stable pull request diff for a review-pull-request run, or a quality-scan scope naming the repository boundary, exclusions, and risk threshold for a code-quality-scan run. Without one there is nothing under review, and reviewing anyway would mean assessing this agent's own choice of what to read."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md",
+      "produced_by": "implementation"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-04T12:04:16Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8d6bd0735e4288ea81c161556faa7c18",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:d2a44ef0a7d382b3285bf0991857fe61",
+    "input_digest": "sha256:dfa470ef65e413202266311b966ccc6b",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-04-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-04-feature-request.md",
+        "digest": "sha256:f63a8c3a43a79d5c0d1f218ebe85bbf6"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md",
+        "digest": "sha256:7a8671da11074eeca21bd5d041ac3092"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/review-package.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md",
+      "runs/run-919c5d5cf156/states/quality-review/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies repository source, tests, or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the review package"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code or tests",
+      "revise the technical design rather than raising a finding against it",
+      "define, widen, or narrow product scope",
+      "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+      "record a merge or release decision",
+      "decide a gate that assesses evidence this agent produced",
+      "review a change this agent authored",
+      "approve while a critical or high finding is open, or while test evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "review an implemented change against the requirements, the accepted design, and the standards in force",
+        "survey a bounded repository scope for redundant, dead, duplicated, over-abstracted, or generated low-value code, against the maintainability standards in force",
+        "assess conformance to coding standards, architecture rules, and security criteria",
+        "judge whether the supplied evidence supports the claim it is offered for",
+        "judge whether executed tests cover the behavior the change altered",
+        "classify each defect by severity, category, and location against a named standard",
+        "issue correction requests that state a required outcome and name its owner",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "execute the repository's own verification commands to confirm reported results",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code or tests",
+        "revise the technical design rather than raising a finding against it",
+        "define, widen, or narrow product scope",
+        "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+        "record a merge or release decision",
+        "decide a gate that assesses evidence this agent produced",
+        "review a change this agent authored",
+        "approve while a critical or high finding is open, or while test evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "Independence is the whole value of this role. An agent that can change the code it assesses becomes the producer of the work it is about to judge, and the Producer Exclusion Rule then disqualifies it from the very verdict it exists to give. The review reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies repository source, tests, or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the review package"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same finding set, the same severity assignment, the same correction-request set, the same verdict, and the same declared package status.",
+      "identifierSchemes": {
+        "findings": "F-<zero-padded-sequence>",
+        "correctionRequests": "CR-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Findings are ordered by descending severity; ties break toward the lower location in lexical order. Correction requests follow the findings they address.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "review-package.md",
+    "artifact_path": "runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md",
+    "template_ref": "templates/review-package.md",
+    "contract_ref": "agents/omn-dev-2-reviewer/output.md",
+    "quality_ref": "agents/omn-dev-2-reviewer/quality.md",
+    "validator": "review_package_validator",
+    "result_envelope_path": "runs/run-919c5d5cf156/states/quality-review/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-04T12:04:16Z"
+}

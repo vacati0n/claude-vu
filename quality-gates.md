@@ -1,5 +1,7 @@
 # Quality Gates Specification
 
+Status: specification — not implemented — executable counterpart: `workflows/workflow-gate-matrix.md`.
+
 ## Purpose
 
 Define mandatory Quality Gates for each workflow step so progression is controlled, auditable, and deterministic.

@@ -4,8 +4,12 @@
 Reuses the real-git fixture from test_branch_pr (task, isolated worktree,
 local bare origin). The runtime is replaced with a *stateful* stub that
 models the gate-reject -> rollback -> re-dispatch -> complete -> re-approve
-cycle and records every gate/dispatch/complete call, so the tests assert the
-exact sequence the command drives. PR feedback comes from a patched
+cycle in the real runtime's status shape -- a rejection leaves the gate
+`failed`/`rejected` and the fix phase `completed`; only an authorised
+`rollback` returns the phase to `pending`/eligible with a `rollback` block
+and re-arms the gate with a `decision_history` -- and records every
+gate/rollback/dispatch/complete call, so the tests assert the exact
+sequence the command drives. PR feedback comes from a patched
 git_ops.pr_review_feedback, so no gh or network is ever touched; the gh
 parsing itself is unit-tested separately with canned process output.
 """
@@ -44,41 +48,79 @@ def save(s):
     STATE.write_text(json.dumps(s))
 
 
+RUN_ID = "run-abcdef123456"
+
+
+def gate_entry(name, roles):
+    return {"state_id": name, "status": "pending", "queue_status": "Waiting",
+            "owner_agent_id": None, "eligible": False, "attempt": 0,
+            "max_attempts": 1, "blocked_reason": None, "failure_class": None,
+            "available_at": None, "decision": None, "owner_role": None,
+            "owner_roles": roles, "decision_history": []}
+
+
 def status_json(s):
+    """The real runtime's status-view shape at each stage of the cycle.
+
+    A rejection does NOT make the fix phase dispatchable: the phase stays
+    `completed` and the gate is `failed` with decision `rejected`. Only the
+    `rollback` command moves the phase to `pending`/eligible (with a
+    `rollback` block naming the gate and authorisation) and re-arms the gate
+    (`pending`, decision null, the rejection in `decision_history`).
+    """
+    attempt = s.get("attempt", 1)
     step = {"state_id": "implementation", "status": "completed",
-            "queue_status": "done", "owner_agent_id": "omn-dev-1-implement",
-            "eligible": False, "attempt": 0, "max_attempts": 3,
+            "queue_status": "Completed", "owner_agent_id": "omn-dev-1-implement",
+            "eligible": False, "attempt": attempt, "max_attempts": 3,
             "blocked_reason": None, "failure_class": None,
             "available_at": None, "reason": ""}
-    gate = {"state_id": "code-quality-gate", "status": "completed",
-            "queue_status": "done", "owner_agent_id": None, "eligible": False,
-            "attempt": 0, "max_attempts": 1, "blocked_reason": None,
-            "failure_class": None, "available_at": None, "decision": None,
-            "owner_role": None,
-            "owner_roles": ["omn-dev-2-reviewer", "omn-tech-lead"]}
+    cq = gate_entry("code-quality-gate", ["omn-dev-2-reviewer", "omn-tech-lead"])
     # The next gate in the workflow: awaiting decision once the first gate
     # is approved -- new review comments arriving then reject *this* one.
-    merge = dict(gate, state_id="merge-gate", status="pending",
-                 owner_roles=["omn-tech-lead", "omn-orchestrator"])
+    merge = gate_entry("merge-gate", ["omn-tech-lead", "omn-orchestrator"])
+    gates = {"code-quality-gate": cq, "merge-gate": merge}
+    if s.get("cq_approved"):
+        cq.update(status="completed", queue_status="Completed",
+                  decision="approved", owner_role="omn-tech-lead")
+    active = gates[s.get("active_gate", "code-quality-gate")]
+    auth = f"RB-{RUN_ID}-{active['state_id']}-01"
+    history = [{"decision": "rejected", "owner_role": s.get("rejected_role"),
+                "decided_by": "tester", "decided_at": "2026-09-06T00:00:00Z",
+                "superseded_by": auth}]
+    rollback = {"gate": active["state_id"], "authorisation_id": auth,
+                "superseded_attempt": attempt}
     stage = s["stage"]
     if stage == "awaiting-gate":
-        gate.update(status="blocked")
+        active.update(status="blocked", queue_status="Blocked",
+                      blocked_reason="awaiting_human_decision")
     elif stage == "rejected":
-        step.update(status="pending", eligible=True)
-        gate.update(decision="rejected")
+        active.update(status="failed", queue_status="Failed",
+                      decision="rejected", owner_role=s.get("rejected_role"),
+                      failure_class="gate-rejection")
+    elif stage == "rolled-back":
+        active.update(decision_history=history)
+        step.update(status="pending", queue_status="Ready", eligible=True,
+                    rollback=rollback)
     elif stage == "dispatched":
-        step.update(status="leased")
-        gate.update(decision="rejected")
+        active.update(decision_history=history)
+        step.update(status="leased", queue_status="Executing",
+                    attempt=attempt + 1, rollback=rollback)
     elif stage == "completed":
-        gate.update(status="blocked", decision=None)
+        active.update(status="blocked", queue_status="Blocked",
+                      blocked_reason="awaiting_human_decision",
+                      decision_history=history)
+        step.update(rollback=rollback)
     elif stage == "approved":
-        gate.update(decision="approved")
-        merge.update(status="blocked")
+        active.update(status="completed", queue_status="Completed",
+                      decision="approved", owner_role=s.get("approved_role"))
+        if active is cq:
+            merge.update(status="blocked", queue_status="Blocked",
+                         blocked_reason="awaiting_human_decision")
     return {"schema": "framework.runtime/status-view.v1",
-            "run_id": "run-abcdef123456", "workflow_id": "implement-feature",
+            "run_id": RUN_ID, "workflow_id": "implement-feature",
             "workflow_version": "1", "run_status": "active",
             "phases": [{"phase_index": 0, "steps": [step],
-                        "gates": [gate, merge]}],
+                        "gates": [cq, merge]}],
             "summary": {}}
 
 
@@ -102,9 +144,37 @@ def main():
         s["log"].append({"cmd": "gate", "gate": a.gate,
                          "decision": a.decision, "owner_role": a.owner_role,
                          "rationale": a.rationale})
-        s["stage"] = "rejected" if a.decision == "reject" else "approved"
+        if a.decision == "reject":
+            s["stage"] = "rejected"
+            s["active_gate"] = a.gate
+            s["rejected_role"] = a.owner_role
+        else:
+            s["stage"] = "approved"
+            s["approved_role"] = a.owner_role
+            if a.gate == "code-quality-gate":
+                s["cq_approved"] = True
         save(s)
         print(f"gate {a.gate}: {a.decision}")
+        return 0
+    if cmd == "rollback":
+        p = argparse.ArgumentParser()
+        p.add_argument("cmd")
+        for f in ("--run-id", "--gate", "--target", "--owner-role",
+                  "--decided-by", "--rationale"):
+            p.add_argument(f)
+        a = p.parse_args(args)
+        # Like the real runtime: only a gate that stands rejected can be
+        # rolled back past, and a refusal changes nothing.
+        if s.get("fail_rollback") or s["stage"] != "rejected" \
+                or a.gate != s.get("active_gate"):
+            print("RUNTIME FAILURE [request-validation-failure] "
+                  f"{a.gate} does not stand rejected", file=sys.stderr)
+            return 2
+        s["log"].append({"cmd": "rollback", "gate": a.gate, "target": a.target,
+                         "owner_role": a.owner_role, "rationale": a.rationale})
+        s["stage"] = "rolled-back"
+        save(s)
+        print(f"rollback       : RB-{RUN_ID}-{a.gate}-01")
         return 0
     if cmd == "dispatch":
         s["log"].append({"cmd": "dispatch", "args": args})
@@ -118,6 +188,7 @@ def main():
             return 3
         s["log"].append({"cmd": "complete", "args": args})
         s["stage"] = "completed"
+        s["attempt"] = s.get("attempt", 1) + 1
         save(s)
         print("completed implementation")
         return 0
@@ -167,6 +238,19 @@ class FixCommentsTestCase(GitFixtureTestCase):
     def stub_state(self) -> dict:
         p = self.fw / "runs" / "stub-state.json"
         return json.loads(p.read_text()) if p.exists() else {"log": []}
+
+    def set_stub(self, state: dict):
+        p = self.fw / "runs" / "stub-state.json"
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps(state))
+
+    def runtime_out(self, *argv) -> str:
+        import subprocess
+        import sys
+        proc = subprocess.run(
+            [sys.executable, str(self.fw / "runtime" / "framework_runtime.py"),
+             *argv], capture_output=True, text=True, cwd=str(self.repo))
+        return proc.stdout
 
     def stub_log(self, cmd=None) -> list[dict]:
         log = self.stub_state().get("log", [])
@@ -225,6 +309,16 @@ class FixCommentsTestCase(GitFixtureTestCase):
         self.assertIn("Use a constant here", rejects[0]["rationale"])
         self.assertIn("sonarqubecloud[bot]", rejects[0]["rationale"])
         self.assertIn("src/app.py:42", rejects[0]["rationale"])
+        # the rejection is followed by the rollback authorisation: same role,
+        # the task's fix phase as the target, and only then the dispatch
+        rollbacks = self.stub_log("rollback")
+        self.assertEqual(len(rollbacks), 1, out)
+        self.assertEqual(rollbacks[0]["gate"], "code-quality-gate")
+        self.assertEqual(rollbacks[0]["owner_role"], rejects[0]["owner_role"])
+        self.assertEqual(rollbacks[0]["target"], "implementation")
+        self.assertEqual([e["cmd"] for e in self.stub_log()
+                          if e["cmd"] in ("gate", "rollback", "dispatch")],
+                         ["gate", "rollback", "dispatch"])
         self.assertEqual(len(self.stub_log("dispatch")), 1)
 
         state = self.task(key)["fixComments"]
@@ -232,6 +326,11 @@ class FixCommentsTestCase(GitFixtureTestCase):
         self.assertEqual(state["round"], 1)
         self.assertEqual(state["phase"], "implementation")
         self.assertEqual(state["findings"], 2)
+        self.assertEqual(state["rollback"]["target"], "implementation")
+        self.assertEqual(state["rollback"]["authorisationId"],
+                         "RB-run-abcdef123456-code-quality-gate-01")
+        self.assertEqual(state["rollback"]["supersededAttempt"], 1)
+        self.assertIn("FC-ROLLBACK", out)
         rec = (self.fw / "tasks" / key / state["findingsFile"]).read_text()
         self.assertIn("Use a constant here", rec)
         self.assertIn("cognitive complexity", rec)
@@ -248,6 +347,49 @@ class FixCommentsTestCase(GitFixtureTestCase):
         self.assertEqual(code, ExitCode.OK, out)
         self.assertEqual(self.stub_log("gate")[0]["owner_role"],
                          "omn-orchestrator")
+        self.assertEqual(self.stub_log("rollback")[0]["owner_role"],
+                         "omn-orchestrator")
+
+    def test_rejection_alone_makes_nothing_dispatchable(self):
+        """The real runtime's shape after `gate reject`: the phase stays
+        completed and the gate stands rejected. Without the rollback no step
+        is dispatchable -- the stub encodes that rather than the old fiat."""
+        key = self.setup_pr_task()
+        self.set_stub({"stage": "rejected", "active_gate": "code-quality-gate",
+                       "rejected_role": "omn-tech-lead", "log": []})
+        status = json.loads(self.runtime_out("status", "--run-id",
+                                             "run-abcdef123456", "--json"))
+        self.assertIsNone(fix_comments._dispatchable_step(status))
+        gate = fix_comments._gates(status)[0]
+        self.assertEqual((gate["status"], gate["decision"]),
+                         ("failed", "rejected"))
+        self.assertIsNone(fix_comments._awaiting_gate(status))
+
+    def test_refused_rollback_stops_before_dispatch_and_resumes(self):
+        key = self.setup_pr_task()
+        self.set_stub({"stage": "awaiting-gate", "fail_rollback": True,
+                       "log": []})
+        with mock.patch("omn_agent.git_ops.pr_review_feedback",
+                        return_value=findings()):
+            code, out = self.fix(key, "--approve")
+        self.assertEqual(code, ExitCode.UNEXPECTED, out)
+        self.assertIn("FC-ROLLBACK", out)
+        self.assertEqual(self.stub_log("dispatch"), [])
+        state = self.task(key)["fixComments"]
+        self.assertEqual(state["stage"], "rejected")
+        self.assertNotIn("rollback", state)
+
+        # once the runtime accepts the authorisation the round resumes from
+        # the recorded rejection: no second rejection, then dispatch
+        s = self.stub_state()
+        s.pop("fail_rollback")
+        self.set_stub(s)
+        code, out = self.fix(key, "--approve")
+        self.assertEqual(code, ExitCode.OK, out)
+        self.assertEqual(len(self.stub_log("gate")), 1)
+        self.assertEqual(len(self.stub_log("rollback")), 1)
+        self.assertEqual(len(self.stub_log("dispatch")), 1)
+        self.assertEqual(self.task(key)["fixComments"]["stage"], "dispatched")
 
     def test_dry_run_changes_nothing(self):
         key = self.setup_pr_task()
@@ -256,6 +398,7 @@ class FixCommentsTestCase(GitFixtureTestCase):
             code, out = self.fix(key, "--dry-run")
         self.assertEqual(code, ExitCode.DRY_RUN, out)
         self.assertIn("would reject gate", out)
+        self.assertIn("authorise a rollback to implementation", out)
         self.assertNotIn("fixComments", self.task(key))
         self.assertEqual(self.stub_log(), [])
 
@@ -393,6 +536,13 @@ class FixCommentsTestCase(GitFixtureTestCase):
         self.assertEqual(rejects[-1]["owner_role"], "omn-orchestrator")
         self.assertIn("Please add a docstring", rejects[-1]["rationale"])
         self.assertNotIn("Use a constant here", rejects[-1]["rationale"])
+        # and authorises the rollback past that gate, as the same role, back
+        # to the task's fix phase
+        rollbacks = self.stub_log("rollback")
+        self.assertEqual(len(rollbacks), 2)
+        self.assertEqual(rollbacks[-1]["gate"], "merge-gate")
+        self.assertEqual(rollbacks[-1]["owner_role"], "omn-orchestrator")
+        self.assertEqual(rollbacks[-1]["target"], "implementation")
 
 
 class PrReviewFeedbackTestCase(unittest.TestCase):

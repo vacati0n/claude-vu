@@ -265,7 +265,13 @@ def build_parser() -> argparse.ArgumentParser:
                    help="dispatch the next (or --phase) phase to its owner agent")
     p.add_argument("--complete", action="store_true",
                    help="ingest the agent result for --phase and transition")
-    p.add_argument("--phase", help="phase name for --dispatch/--complete")
+    p.add_argument("--phase",
+                   help="phase name for --dispatch/--complete/--policy-exception")
+    p.add_argument("--policy-exception", dest="policy_exception", action="store_true",
+                   help="record a policy exception for --phase and return it to the "
+                        "queue. Clears a phase blocked on awaiting_policy_exception, "
+                        "which no other command clears. Requires --owner-role, "
+                        "--decided-by and --rationale")
     p.add_argument("--gate", help="record a human gate decision for this gate")
     p.add_argument("--gate-policy", dest="gate_policy",
                    choices=["human-required", "auto-on-clean-evidence", "human",
@@ -279,6 +285,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--owner-role", help="gate owner role being exercised")
     p.add_argument("--decided-by", help="who decided (default: current user)")
     p.add_argument("--rationale", help="rationale for the gate decision")
+    p.add_argument("--demo", action="store_true",
+                   help="record the run for an autonomous end-to-end demonstration: "
+                        "every runtime event, dispatch prompt, agent result, validation, "
+                        "gate decision and host tool call becomes a millisecond-stamped "
+                        "marker under runs/<run>/demo/, and at run completion the runtime "
+                        "compiles presentation_demo.mp4 (or .gif/.html when ffmpeg or "
+                        "Pillow are missing) by itself. Safe to add to a run in flight")
     p.add_argument("--no-fetch", action="store_true",
                    help="provider mode: skip the provider refresh and use "
                         "the inbox copy of the ticket")
@@ -341,6 +354,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--command", choices=sorted(taskplan.ROUTES),
                    help="override the automatic routing (see 'omn-agent "
                         "plan --help')")
+    p.add_argument("--demo", action="store_true",
+                   help="record the run for an autonomous demonstration: every "
+                        "runtime event, dispatch prompt, agent result, validation "
+                        "and gate decision becomes a millisecond-stamped marker "
+                        "under runs/<run>/demo/. Film the window with "
+                        "'framework_runtime.py demo --run-id <run> --record-start' "
+                        "and the run cuts its own presentation when it closes")
     p.add_argument("--gate-policy", dest="gate_policy",
                    choices=["human-required", "auto-on-clean-evidence",
                             "human", "auto"],
@@ -415,6 +435,13 @@ def build_parser() -> argparse.ArgumentParser:
                         "instead of rendering one from the flags")
     p.add_argument("--approve", action="store_true",
                    help="approve every side-effecting step non-interactively")
+    p.add_argument("--demo", action="store_true",
+                   help="record the run for an autonomous demonstration: every "
+                        "runtime event, dispatch prompt, agent result, validation "
+                        "and gate decision becomes a millisecond-stamped marker "
+                        "under runs/<run>/demo/. Film the window with "
+                        "'framework_runtime.py demo --run-id <run> --record-start' "
+                        "and the run cuts its own presentation when it closes")
     p.add_argument("--gate-policy", dest="gate_policy",
                    choices=["human-required", "auto-on-clean-evidence",
                             "human", "auto"],

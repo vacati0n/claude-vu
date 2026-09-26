@@ -1,0 +1,296 @@
+{
+  "invocation_id": "inv-4c51600606df-01-001",
+  "run_id": "run-4c51600606df",
+  "work_item_id": "run-4c51600606df::scope-and-acceptance",
+  "idempotency_key": "sha256:6138b10a043df8f4fd53bb620bfa8802",
+  "state_id": "scope-and-acceptance",
+  "phase_index": 1,
+  "agent_id": "omn-product-owner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-product-owner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-product-owner/manifest.yaml",
+    "load_order": [
+      "agents/omn-product-owner/system.md",
+      "agents/omn-product-owner/identity.md",
+      "agents/omn-product-owner/reasoning.md",
+      "agents/omn-product-owner/execution.md",
+      "agents/omn-product-owner/output.md",
+      "agents/omn-product-owner/quality.md",
+      "agents/omn-product-owner/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-product-owner/system.md": "sha256:ca10caae54f63fa52580220f1f88812f",
+      "agents/omn-product-owner/identity.md": "sha256:8a5df5e407d8c96ce1e5bb7faaa07f55",
+      "agents/omn-product-owner/reasoning.md": "sha256:ee417de8bc3f21281299d8e5f53dfdcf",
+      "agents/omn-product-owner/execution.md": "sha256:68ec1cc7479d592bd875b98ecb8546ab",
+      "agents/omn-product-owner/output.md": "sha256:da40434a6907e6912979430f12430025",
+      "agents/omn-product-owner/quality.md": "sha256:53c8887fbc5888342d68c2e7a02d6ecc",
+      "agents/omn-product-owner/examples.md": "sha256:0e1b087f304a35d8527abc9aa5f0052b"
+    },
+    "capabilities": [
+      "scope-definition",
+      "acceptance-authority"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "acceptance-intent",
+      "business-constraints",
+      "architecture-context",
+      "prior-scope-definition",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-06-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-06-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-06: Generate the HTML handbook from the Markdown handbook, with a drift check\n\n## Source\n\nTicket CKA-06 in the adoption backlog under `docs/` (Epic A \u2014 Verification baseline,\nDays 0\u201330). Source recommendation: R7 of the adoption review dated 2026-08-27.\nType: Story. Priority: High. Effort: M. Depends on: CKA-03, delivered as\n`.github/workflows/verify.yml`, which supplies the CI hook this ticket binds to.\n\n## Problem\n\nThe repository publishes its operator handbook twice: `docs/USER-GUIDE.md` (1051 lines of\nMarkdown) and `docs/user-guide.html` (1033 lines of hand-authored HTML with its own design\nsystem \u2014 a light/dark token palette, a chapter navigation index, a chain diagram, eyebrow\nchapter labels, stable section anchors, callout blocks with tags, and comment-highlighted\ncode samples). The two are kept in step by hand. Nothing checks that they agree, and they no\nlonger do: the Markdown carries a whole section, `5b. Branch naming templates` (lines 538 to\n616, including a token reference table, normalization and validation rules, a viewing and\nchanging section, and migration notes) that the HTML does not contain at all, and the two\nfiles order the gate-ownership material differently. Every prior delivery in this backlog has\npaid a hand-sync tax and recorded it as such in its own evidence.\n\nHand synchronization cannot be made reliable by asking contributors to try harder. The fix is\nto make one file the source and the other a build output, and to fail CI when the output is\nstale.\n\n## Request\n\nDeliver three things.\n\n1. **A renderer.** A new `tools/render_user_guide.py` that reads `docs/USER-GUIDE.md` and\n   writes `docs/user-guide.html` deterministically \u2014 same input, byte-identical output, on\n   every platform the CI matrix runs. Standard library only, consistent with the repository's\n   dependency posture for tooling.\n\n2. **A one-time two-way reconciliation of the current drift.** Section by section, every\n   piece of content that exists in exactly one of the two files is resolved: content the HTML\n   carries and the Markdown does not is merged back into the Markdown or deliberately\n   dropped, with the decision recorded; the Markdown's `5b. Branch naming templates` section\n   is rendered into the HTML. After the change, no content is present in exactly one file.\n   Design affordances the HTML carries today (navigation, anchors, callouts, chapter labels,\n   the chain diagram, code-comment highlighting) are a deliberate part of the published\n   artifact: preserving them is in scope, and how the source Markdown expresses them without\n   becoming unreadable is a design question this change must answer rather than resolve by\n   discarding them.\n\n3. **A drift check bound to CI.** A `--check` mode on the renderer that re-renders in memory,\n   compares against the committed HTML byte for byte, exits nonzero on a mismatch, and prints\n   the exact regeneration command. Wired into the existing CI workflow. The generated HTML\n   carries a visible \"generated \u2014 do not edit\" banner naming its source file and the command\n   that regenerates it. The hand-sync process note in the contributor documentation is\n   retired and replaced by the generation instruction.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- Editing `USER-GUIDE.md` without regenerating fails CI with the fix command.\n- `user-guide.html` opens with a \"generated \u2014 do not edit\" banner.\n- No content present in exactly one of the two files after reconciliation.\n\n## Constraints\n\n- Additive change only. The backlog forbids altering `record_gate_decision`, the gate matrix\n  semantics, producer exclusion, `runner._require_approval`, or any human-block path. This\n  ticket adds a build tool, regenerates a documentation artifact, and adds a CI step; it\n  changes no runtime behaviour and no gate-decision behaviour.\n- The CI hook must follow the discovery discipline CKA-03 established: the check is a step\n  over a known build output, not a curated list of files any future contributor must\n  remember to extend.\n- Determinism is a hard requirement, not an aspiration: a check that compares bytes is only\n  usable if the renderer's output does not vary with dictionary ordering, locale, line\n  endings, or the platform running it. Both CI platforms in the matrix must agree.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py` proof\n  scripts PROVEN, no change to gate-decision behaviour, and \u2014 where docs were touched \u2014\n  the HTML handbook regenerated. This ticket is the one that makes that last clause\n  mechanical rather than manual, and CKA-12 already depends on it for exactly that.\n\n## Writing constraints for every phase of this run\n\n- Every artifact validator in this framework rejects the vendor substring \"claude\" in any\n  case. Cite the backlog as \"the adoption backlog under `docs/`\" and the review as \"the\n  adoption review dated 2026-08-27\". Write framework paths without the leading dot-directory\n  prefix \u2014 `runtime/framework_runtime.py`, not the full path. Where the handbook's own\n  section 3A names an in-editor agent host, refer to it as \"the in-editor host section (3A)\".\n\n## Priority and deadline\n\nHigh priority; Phase 1 (Days 0\u201330) of the adoption plan. CKA-12 depends on this ticket for\nregenerating the handbook when it updates the exit-code tables.",
+        "digest": "sha256:5965b9107e59775c3f70f54b0b8609f7"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the business intent this agent bounds: a feature request for new functionality, a change request for a modification to delivered behaviour, or a business intent for an outcome stated without a proposed solution. Without one there is nothing to scope, and scoping anyway would mean inventing what the requester wants."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [],
+  "context_slice": {
+    "frozen_at": "2026-09-05T04:24:05Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/scope-definition.md",
+        "digest": "sha256:9f082102c11c1de4d4b53c8252a0a9bc",
+        "supplies": "feature-request"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "business-constraints"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": "acceptance-intent"
+      }
+    ],
+    "context_digest": "sha256:c5cc1c3bdd1db9b2d550e98fd7f931ed",
+    "input_digest": "sha256:5965b9107e59775c3f70f54b0b8609f7",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-06-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-06-feature-request.md",
+        "digest": "sha256:5965b9107e59775c3f70f54b0b8609f7"
+      }
+    ],
+    "unnarrowed": [],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-4c51600606df/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "runs/run-4c51600606df/states/scope-and-acceptance/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository modification of any kind",
+        "any command whose effect is not recorded in the artifact"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "author or revise a technical design, structure, or technology decision",
+      "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+      "write, modify, or review code, tests, migrations, or configuration",
+      "record the Scope Gate decision on this agent's own artifact",
+      "record a merge, readiness, or release decision",
+      "define the test strategy or execute validation",
+      "relax a stated regulatory, policy, or quality constraint to close the scope",
+      "record scope no supplied input supports",
+      "access external systems, ticket trackers, or stakeholders directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "decide which deliverables fall inside this change and which fall outside it",
+        "decide the relative priority of the in-scope items",
+        "decide the acceptance threshold each criterion states",
+        "decide when a stated expectation is too vague to be an acceptance criterion",
+        "decide when an adjacent request is a separate change rather than a widening of this one",
+        "record a scope decision together with the rationale that justifies it",
+        "record an unresolved ambiguity as an open question with a named owner",
+        "set the scope verdict the recorded question set supports"
+      ],
+      "prohibited": [
+        "author or revise a technical design, structure, or technology decision",
+        "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+        "write, modify, or review code, tests, migrations, or configuration",
+        "record the Scope Gate decision on this agent's own artifact",
+        "record a merge, readiness, or release decision",
+        "define the test strategy or execute validation",
+        "relax a stated regulatory, policy, or quality constraint to close the scope",
+        "record scope no supplied input supports",
+        "access external systems, ticket trackers, or stakeholders directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "This role produces one artifact and changes no repository source. Its writes are the artifact path and the result envelope path the invocation envelope names, and nothing else. A scope decision that edited the repository would be deciding the change it is supposed to bound.",
+        "scope": [
+          "runs/**/states/scope-and-acceptance/**"
+        ]
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository modification of any kind",
+          "any command whose effect is not recorded in the artifact"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical supplied inputs and an identical context snapshot must produce the same in-scope item set, the same exclusion set, the same acceptance criterion set, the same scope decision set, the same open question set, and the same scope verdict.",
+      "identifierSchemes": {
+        "scopeItems": "S-<zero-padded-sequence>",
+        "exclusions": "X-<zero-padded-sequence>",
+        "acceptanceCriteria": "A-<zero-padded-sequence>",
+        "scopeDecisions": "D-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "In-scope items are ordered by business priority; ties break toward the order the expectation appeared in the supplied inputs. Acceptance criteria are ordered by the scope item they bound, ties breaking toward derivation order. Exclusions, decisions, and questions follow the order the reasoning stage that produced them declares.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied inputs or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "scope-definition.md",
+    "artifact_path": "runs/run-4c51600606df/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "template_ref": "templates/scope-definition.md",
+    "contract_ref": "agents/omn-product-owner/output.md",
+    "quality_ref": "agents/omn-product-owner/quality.md",
+    "validator": "scope_definition_validator",
+    "result_envelope_path": "runs/run-4c51600606df/states/scope-and-acceptance/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-05T04:24:05Z"
+}

@@ -37,6 +37,8 @@ python -m omn_agent --help
 | `omn-agent plan KEY -t <repo>` | Route a ticket onto a framework workflow and render its input document | `tasks/<KEY>/` |
 | `omn-agent run KEY -t <repo>` | Drive the installed framework runtime for the task, one approved step at a time | runtime run state |
 | `omn-agent run KEY -t <repo> --show [--watch] [--json] [--no-color]` | Read-only: show run status as a colorized phase/step/gate tree (a TTY) or the plain table (piped/`--no-color`/`NO_COLOR`); `--watch` re-renders in place until Ctrl+C; `--json` prints machine-readable state instead | nothing |
+| `omn-agent run KEY -t <repo> --demo` | Record the run for an autonomous demo: every event, dispatch prompt, agent result, validation, gate decision, and (with the optional host hook) tool call becomes a millisecond-stamped marker under `runs/<run>/demo/` | `runs/<run>/demo/` |
+| `framework_runtime.py demo --run-id <run> --record-start` / `--record-stop --build` | Film the Claude Desktop window (OBS Studio when its WebSocket server is on, else ffmpeg) and cut it into `presentation_demo.mp4`: the markers' timestamps give every beat a frame, so waits are condensed with a stated speed factor and each beat is captioned. A run that completes while filming cuts itself | `runs/<run>/demo/capture/`, `presentation_demo.mp4` |
 | `omn-agent update KEY -t <repo>` | One-command change-request loop for a ticket that changed in Jira: refresh the ticket, re-plan, carry the change into the run (a changed input is a new run: the previous run is archived to the task's runHistory and a fresh one materialized), drive every phase it can, then push the result to the PR; resumable | `tickets/inbox/<KEY>.json`, `tasks/<KEY>/`, runtime run state, gate decisions, pushed branch, PR |
 | `omn-agent quality-scan [NAME] -t <repo>` | One-command repository quality scan: render the scan scope from flags (or `--scope-file`), record it as task `QS-<NAME>`, materialize and dispatch the `code-quality-scan` run to the reviewer agent, ingest the validated review package on re-run, and stop at the Quality Handoff Gate for a human tech lead; resumable, no source change ever | `tasks/QS-<NAME>/`, runtime run state |
 | `omn-agent branch KEY -t <repo>` | Create the ticket's feature branch (project-templated name) off main/master inside its own isolated worktree at `.worktrees/<ticket>-<work-type>/` | git branch + worktree, `tasks/<KEY>/task-plan.json` |
@@ -425,3 +427,10 @@ enacted only after a default-branch run shows `verify_self_hosting.py` passing
 (the pre-existing orphan run directories must be cleaned first). The workflow
 never sets `NO_COLOR`, and new verifiers must be self-contained: runnable
 alone, with no arguments, in any order.
+
+`docs/user-guide.html` is generated from `docs/USER-GUIDE.md`: edit the
+Markdown, then run `python tools/render_user_guide.py` to regenerate the
+HTML. The `tests` job also runs `python tools/render_user_guide.py --check`,
+which fails a pull request whose HTML is stale and prints the regeneration
+command above. A change made directly to `docs/user-guide.html` is discarded
+by the next regeneration.

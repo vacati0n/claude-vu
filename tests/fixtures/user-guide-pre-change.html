@@ -1,0 +1,1033 @@
+<title>Omn-Agent Handbook</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #FAFBF9;
+    --ink: #1F2E33;
+    --muted: #5C6B6E;
+    --accent: #0E7268;
+    --accent-ink: #0A5A52;
+    --warn: #A05A17;
+    --line: #DCE4E0;
+    --card: #F0F5F2;
+    --code-bg: #EAF1EE;
+    --chip-bg: #E2ECE8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #101A1D;
+      --ink: #E3EBE9;
+      --muted: #94A6A4;
+      --accent: #48BFB2;
+      --accent-ink: #6FD3C8;
+      --warn: #D99A55;
+      --line: #233236;
+      --card: #152225;
+      --code-bg: #0C1619;
+      --chip-bg: #1B2C2E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #101A1D;
+    --ink: #E3EBE9;
+    --muted: #94A6A4;
+    --accent: #48BFB2;
+    --accent-ink: #6FD3C8;
+    --warn: #D99A55;
+    --line: #233236;
+    --card: #152225;
+    --code-bg: #0C1619;
+    --chip-bg: #1B2C2E;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0 1.25rem 5rem;
+  }
+  main { max-width: 47rem; margin: 0 auto; }
+  h1, h2, h3 {
+    font-family: "Spectral", Georgia, serif;
+    font-weight: 600;
+    line-height: 1.2;
+    text-wrap: balance;
+    margin: 0;
+  }
+  h1 { font-size: 2.4rem; letter-spacing: -0.01em; }
+  h2 { font-size: 1.5rem; margin: 0 0 0.75rem; }
+  h3 { font-size: 1.1rem; margin: 1.75rem 0 0.5rem; }
+  p { margin: 0.75rem 0; max-width: 66ch; }
+  a { color: var(--accent-ink); text-decoration-color: var(--line); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  code, pre {
+    font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    font-size: 0.875em;
+  }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 3px; }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.9rem 1.1rem;
+    overflow-x: auto;
+    line-height: 1.55;
+    margin: 1rem 0;
+  }
+  pre code { background: none; padding: 0; }
+  .comment { color: var(--muted); }
+
+  /* masthead */
+  header { padding: 3.5rem 0 0; }
+  .kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    margin-bottom: 0.9rem;
+  }
+  .lede { font-size: 1.08rem; color: var(--muted); max-width: 62ch; margin-top: 1rem; }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  /* the chain */
+  .chain {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.5rem;
+    margin: 1.75rem 0 0; padding: 1rem 1.1rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+  }
+  .chain span {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem;
+    background: var(--chip-bg); border: 1px solid var(--line);
+    padding: 0.22em 0.6em; border-radius: 999px; white-space: nowrap;
+  }
+  .chain b { color: var(--accent); font-weight: 400; }
+  .chain .gate { border-color: var(--accent); color: var(--accent-ink); background: transparent; }
+
+  /* toc */
+  nav {
+    margin: 2.25rem 0 0; padding: 0; display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 0.15rem 1.5rem;
+  }
+  nav a {
+    font-size: 0.9rem; text-decoration: none; color: var(--ink);
+    padding: 0.3rem 0; border-bottom: 1px solid var(--line); display: block;
+  }
+  nav a:hover { color: var(--accent-ink); }
+  nav .n { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; color: var(--muted); margin-right: 0.5em; }
+
+  section { margin-top: 3.5rem; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.72rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    margin: 0 0 0.4rem;
+  }
+  .eyebrow::before { content: ""; display: inline-block; width: 1.6rem; height: 1px;
+    background: var(--accent); vertical-align: middle; margin-right: 0.6rem; }
+
+  /* tables */
+  .tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 6px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  th {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+    text-align: left; padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--line);
+    background: var(--card);
+  }
+  td { padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { white-space: nowrap; }
+  .num td:first-child { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+
+  /* callouts */
+  .callout {
+    border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    background: var(--card); border-radius: 0 6px 6px 0;
+    padding: 0.8rem 1.1rem; margin: 1.25rem 0; font-size: 0.95rem;
+  }
+  .callout.yours { border-left-color: var(--warn); }
+  .callout .tag {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.7rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-ink);
+    display: block; margin-bottom: 0.25rem;
+  }
+  .callout.yours .tag { color: var(--warn); }
+
+  ul, ol { padding-left: 1.3rem; max-width: 64ch; }
+  li { margin: 0.35rem 0; }
+  li::marker { color: var(--accent); }
+
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 1rem 0; }
+  .steps li {
+    counter-increment: step; position: relative; padding-left: 2.4rem; margin: 0.9rem 0;
+  }
+  .steps li::before {
+    content: counter(step); position: absolute; left: 0; top: 0.05em;
+    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem;
+    width: 1.6rem; height: 1.6rem; display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--accent); border-radius: 999px; color: var(--accent-ink);
+  }
+
+  footer {
+    margin-top: 4.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
+    font-size: 0.85rem; color: var(--muted);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+</style>
+
+<main>
+<header>
+  <p class="kicker">Omn-Agent AI Engineering Framework · Team Guide</p>
+  <h1>Omn-Agent Handbook</h1>
+  <p class="lede">Omn-Agent turns AI-assisted development from "chat with a model" into a
+  governed delivery process: <strong>specialized agents</strong> own phases of real
+  workflows, every output is <strong>validated against a contract</strong>, and progress
+  waits at <strong>human gates</strong> until someone accountable approves. The
+  <code>omn-agent</code> CLI installs it into your repository, keeps it healthy, and turns
+  Jira tickets into approval-gated runs.</p>
+
+  <div class="chain" role="img" aria-label="The framework chain: command to workflow to phase to owner agent to artifact to gate, then the next phase">
+    <span>command</span><b>→</b>
+    <span>workflow</span><b>→</b>
+    <span>phase</span><b>→</b>
+    <span>owner agent</span><b>→</b>
+    <span>artifact ✓</span><b>→</b>
+    <span class="gate">human gate</span><b>→</b>
+    <span>next phase</span>
+  </div>
+
+  <nav aria-label="Contents">
+    <a href="#model"><span class="n">1</span>The mental model</a>
+    <a href="#install"><span class="n">2</span>Installation</a>
+    <a href="#work"><span class="n">3</span>Two ways to work</a>
+    <a href="#flows"><span class="n">4</span>The flows, by intent</a>
+    <a href="#run"><span class="n">5</span>Driving a run</a>
+    <a href="#ownership"><span class="n">6</span>Yours vs. the framework's</a>
+    <a href="#health"><span class="n">7</span>Keeping it healthy</a>
+    <a href="#trouble"><span class="n">8</span>Troubleshooting</a>
+    <a href="#custom"><span class="n">9</span>Customizing</a>
+  </nav>
+</header>
+
+<section id="model">
+  <p class="eyebrow">Chapter 1</p>
+  <h2>The mental model</h2>
+  <p>Everything follows the chain above. The pieces:</p>
+  <ul>
+    <li><strong>Commands</strong> (<code>/implement</code>, <code>/bugfix</code>, …) are how you ask for
+      work. Each routes to exactly one workflow.</li>
+    <li><strong>Workflows</strong> (implement-feature, fix-bug, refactor, …) define an ordered
+      set of phases with explicit dependencies.</li>
+    <li><strong>Phases</strong> are each owned by one agent — a product owner scopes, a planner
+      plans, an architect designs, a developer implements, a reviewer reviews, QA validates.</li>
+    <li><strong>Artifacts</strong> are the phase outputs (scope-definition, execution-plan,
+      technical-design, implementation-report, …). Every artifact type has a validator; a phase
+      does not complete until its artifact passes.</li>
+    <li><strong>Gates</strong> are human decision points between phases. A gate names its owner
+      roles — and the agent that produced the evidence may never approve its own gate.</li>
+    <li><strong>A run</strong> is one request travelling through one workflow. Its state lives in
+      <code>.omn-agent/runs/</code>: state table, event stream, failure envelopes, recovery
+      ledger. Nothing is silently skipped — a phase that cannot execute is
+      <em>blocked with a recorded reason</em>, never dropped.</li>
+  </ul>
+</section>
+
+<section id="install">
+  <p class="eyebrow">Chapter 2</p>
+  <h2>Installation</h2>
+  <p><strong>Prerequisites:</strong> Python 3.10+ and a target repository — anything with
+  <code>.git</code> or a standard project marker. The <code>omn-agent</code> CLI package
+  itself uses the Python standard library only; the framework runtime files it installs
+  import <strong>PyYAML</strong>, so the distribution declares <code>pyyaml</code> as a
+  dependency and <code>pip install</code> pulls it automatically.</p>
+<pre><code><span class="comment"># from the framework repository</span>
+pip install -e .
+
+<span class="comment"># install the framework into your repo, then confirm health</span>
+omn-agent install ./my-repo
+omn-agent validate ./my-repo
+omn-agent status ./my-repo</code></pre>
+  <p><code>install</code> copies the framework payload into
+  <code>./my-repo/.omn-agent/</code>, records a content-hash manifest of every file it wrote,
+  and <strong>validates before claiming success</strong> — layout, registries, runtime
+  entrypoints (they must compile and their module-top-level imports must resolve),
+  validator references, required context, <strong>every
+  context-slice member the runtime can demand at dispatch time</strong>, broken symlinks.
+  Re-running <code>install</code> on a healthy repo is a no-op; on a damaged one it repairs
+  exactly what is missing.</p>
+  <p>Install also seeds a <strong><code>dependency-map.md</code></strong> derived from your
+  repository's own manifests (<code>.csproj</code> project references, <code>package.json</code>
+  local dependencies, <code>pyproject.toml</code> dependencies) — the boundary record agents
+  read when they assess a change's blast radius. No manifests detected? It seeds an honest
+  placeholder for you to fill in. Regenerate any time with
+  <code>omn-agent context generate dependency-map -t ./my-repo --force</code>.</p>
+  <p>Installing from a different framework checkout? Pass <code>--source &lt;path&gt;</code>.
+  Every write-capable command accepts <code>--dry-run</code> to preview the full plan without
+  touching anything (exit code 5). Every command accepts the target uniformly as
+  <code>-t</code>/<code>--target</code>; the historically positional ones (<code>init</code>,
+  <code>install</code>, <code>upgrade</code>, <code>validate</code>, <code>doctor</code>,
+  <code>status</code>) still take the bare positional too.</p>
+
+  <h3>What gets installed</h3>
+  <div class="tbl"><table>
+    <tr><th>Directory</th><th>Contents</th><th>Ownership</th></tr>
+    <tr><td><code>bootstrap/</code></td><td>descriptor + install manifest</td><td>generated — do not edit</td></tr>
+    <tr><td><code>runtime/</code></td><td>workflow engine, state machine, artifact validators</td><td>framework-managed</td></tr>
+    <tr><td><code>registry/</code></td><td>agent / workflow / skill / template / command registries</td><td>framework-managed</td></tr>
+    <tr><td><code>agents/ workflows/ templates/ skills/ commands/ config/ domain-model/ validation/</code></td><td>agent contracts, workflow specs, artifact templates, playbooks</td><td>framework-managed</td></tr>
+    <tr><td><code>context/ memory/ dependency-map.md</code></td><td>product, technical &amp; release context; architecture memory; the module dependency map</td><td><strong>yours</strong> — seeded once, never overwritten</td></tr>
+    <tr><td><code>reports/ runs/ tickets/ tasks/</code></td><td>operational output</td><td><strong>yours</strong> — never touched by the installer</td></tr>
+  </table></div>
+</section>
+
+<section id="work">
+  <p class="eyebrow">Chapter 3</p>
+  <h2>Two ways to work</h2>
+
+  <h3>A · Inside Claude Code — slash commands</h3>
+  <p>With the framework installed, ask for work with a command. It routes to its workflow and
+  the agents take over, phase by phase:</p>
+  <div class="tbl"><table>
+    <tr><th>Command</th><th>Workflow</th><th>Starts with</th><th>Lead agents</th></tr>
+    <tr><td><code>/implement</code></td><td>implement-feature</td><td>scope &amp; acceptance</td><td>product owner → planner → architect → developer</td></tr>
+    <tr><td><code>/bugfix</code></td><td>fix-bug</td><td>triage &amp; impact</td><td>bug analyst → developer → QA</td></tr>
+    <tr><td><code>/refactor</code></td><td>refactor</td><td>scope, invariants &amp; risk</td><td>architect → developer → QA</td></tr>
+    <tr><td><code>/investigate</code></td><td>investigate</td><td>problem framing</td><td>business analyst → context agent → tech lead</td></tr>
+    <tr><td><code>/research</code></td><td>research</td><td>research framing</td><td>business analyst → context agent → tech lead</td></tr>
+    <tr><td><code>/review</code></td><td>review-pull-request</td><td>code quality review</td><td>reviewer → architect → QA → tech lead</td></tr>
+    <tr><td><code>/quality-scan</code></td><td>code-quality-scan</td><td>repository quality scan</td><td>reviewer → tech lead (human gate)</td></tr>
+    <tr><td><code>/release</code></td><td>release</td><td>readiness assessment</td><td>tech lead → QA → orchestrator</td></tr>
+    <tr><td><code>/document</code></td><td>implement-feature</td><td>documentation &amp; handoff</td><td>documentation agent</td></tr>
+    <tr><td><code>/test</code></td><td>review-pull-request</td><td>test-risk validation</td><td>QA</td></tr>
+  </table></div>
+  <p><a href="#flows">Chapter 4</a> walks each of these flows end to end — phases, owners,
+  artifacts, and the gates you'll approve.</p>
+
+  <h3>B · From the terminal — tickets in, gated runs out</h3>
+<pre><code><span class="comment"># one-time: connect Jira (no secrets are ever written to disk)</span>
+export JIRA_EMAIL=you@example.com
+export JIRA_API_TOKEN=&lt;your Atlassian API token&gt;
+omn-agent mcp init jira -t ./my-repo</code></pre>
+  <p><code>mcp init jira</code> walks you through setup: it validates the repo, accepts the
+  site address with or without <code>https://</code>, tests the connection
+  (<em>"Connected to Jira as …"</em>), shows a numbered pick-list of the projects your account
+  can see — so you never need to know project keys — and asks for confirmation before writing
+  anything. With no credentials exported it still works; you just type the project keys
+  yourself. For scripts and CI, the flag-based form gives the same result:
+  <code>omn-agent mcp add jira -t ./my-repo --base-url yourteam.atlassian.net --project
+  PROJ</code>.</p>
+<pre><code><span class="comment"># pull work</span>
+omn-agent tickets sync -t ./my-repo          <span class="comment"># open tickets from your projects</span>
+omn-agent tickets pull PROJ-42 -t ./my-repo  <span class="comment"># or one specific ticket</span>
+
+<span class="comment"># route a ticket onto a workflow</span>
+omn-agent plan PROJ-42 -t ./my-repo</code></pre>
+  <p>Besides refreshing the inbox, <code>sync</code> and <code>pull</code> also release the
+  isolated worktree of any task whose ticket has closed since the last refresh — see
+  <em>Auto-cleanup</em> in chapter 5.</p>
+  <p><code>plan</code> classifies the ticket deterministically — <strong>Bug → fix-bug</strong>,
+  <em>refactor / tech-debt</em> keywords → refactor, <em>spike / research</em> → investigate,
+  everything else → implement-feature. It renders the runtime input document from the ticket
+  (<code>.omn-agent/tasks/PROJ-42/input.md</code>) and records the routing. Wrong call?
+  Override with <code>--command bugfix|implement|refactor|investigate</code>. A ticket with no
+  acceptance criteria says so explicitly in its input document — the Scope Gate is where they
+  get defined.</p>
+  <div class="callout">
+    <span class="tag">MCP</span>
+    <code>mcp add jira</code> also registers Atlassian's remote MCP server in your repo's
+    <code>.mcp.json</code> (merge-safe — existing entries are preserved), so MCP-capable agent
+    hosts can read Jira directly. The connector config stores only environment-variable
+    <em>names</em>, never credentials.
+  </div>
+  <p>Jira is not the only ticket source: <code>omn-agent mcp add msdev --org-url
+  https://dev.azure.com/yourorg --project &lt;NAME&gt;</code> connects Azure DevOps
+  (work-item reads authenticate with a PAT from <code>$AZURE_DEVOPS_PAT</code>). And the whole
+  pull → plan → run → PR pipeline collapses into one resumable command per ticket:
+  <code>omn-agent run Jira ON-115 --gate-policy auto --approve</code> (or <code>run MSDev
+  ONN-115 …</code>) — see <a href="#run-e2e">one command from ticket to PR</a>.</p>
+  <p>Not every flow needs a ticket: <code>omn-agent quality-scan</code> enters the
+  code-quality-scan workflow directly from the command line — it renders its own scope input
+  and records the scan as task <code>QS-&lt;NAME&gt;</code>
+  (<a href="#flow-quality-scan">4.7</a>).</p>
+</section>
+
+<section id="flows">
+  <p class="eyebrow">Chapter 4</p>
+  <h2>The flows: pick by what you're trying to do</h2>
+  <p>Every request enters through exactly one flow. Find yours:</p>
+  <div class="tbl"><table>
+    <tr><th>You want to…</th><th>Flow</th><th>Command</th></tr>
+    <tr><td><a href="#flow-implement">Ship a new capability or user story</a></td><td>implement-feature</td><td><code>/implement</code></td></tr>
+    <tr><td><a href="#flow-bugfix">Repair broken behavior</a></td><td>fix-bug</td><td><code>/bugfix</code></td></tr>
+    <tr><td><a href="#flow-refactor">Improve structure without changing behavior</a></td><td>refactor</td><td><code>/refactor</code></td></tr>
+    <tr><td><a href="#flow-investigate">Answer a question before committing to build</a></td><td>investigate / research</td><td><code>/investigate</code> · <code>/research</code></td></tr>
+    <tr><td><a href="#flow-review">Judge a pull request</a></td><td>review-pull-request</td><td><code>/review</code></td></tr>
+    <tr><td><a href="#flow-release">Ship a release candidate</a></td><td>release</td><td><code>/release</code></td></tr>
+    <tr><td><a href="#flow-quality-scan">Find code junk &amp; technical debt, evidence-first</a></td><td>code-quality-scan</td><td><code>/quality-scan</code></td></tr>
+  </table></div>
+  <p>All flows share the same run mechanics — materialize, dispatch, complete, gate
+  (<a href="#run">chapter 5</a>) — but differ in their phases, artifacts, and who approves.
+  Where a phase shows no gate, the run moves straight on once its artifact validates. Where a
+  gate lists two roles, remember the Producer Exclusion Rule: the agent that produced the
+  evidence never decides its own gate.</p>
+
+  <h3 id="flow-implement">4.1 · Implement a feature — <code>/implement</code></h3>
+  <p>For new capabilities, user stories, and enhancements. The longest flow: scope is agreed
+  before planning, design before code, review before verification.</p>
+  <div class="tbl"><table class="num">
+    <tr><th>#</th><th>Phase</th><th>Owner</th><th>Artifact</th><th>Gate after (owners)</th></tr>
+    <tr><td>1</td><td>scope-and-acceptance</td><td>product owner</td><td>scope-definition.md</td><td>Scope Gate (PO, BA)</td></tr>
+    <tr><td>2</td><td>execution-planning</td><td>planner</td><td>execution-plan.md</td><td>Planning Gate (tech lead, orchestrator)</td></tr>
+    <tr><td>3</td><td>solution-design-and-risk-assessment</td><td>architect</td><td>technical-design.md</td><td>Design Gate (architect, tech lead)</td></tr>
+    <tr><td>4</td><td>implementation</td><td>developer</td><td>implementation-report.md</td><td>—</td></tr>
+    <tr><td>5</td><td>quality-review</td><td>reviewer</td><td>review-package.md</td><td>Review Gate (reviewer, QA), then Verification Gate (QA)</td></tr>
+    <tr><td>6</td><td>documentation-and-release-handoff</td><td>documentation</td><td>release-note.md</td><td>Closure Gate (orchestrator, docs)</td></tr>
+  </table></div>
+<pre><code>omn-agent plan PROJ-42 -t ./my-repo      <span class="comment"># routes the ticket to implement-feature</span>
+omn-agent run  PROJ-42 -t ./my-repo      <span class="comment"># materialize the run</span>
+<span class="comment"># phases 1-3: dispatch -> agent produces the artifact -> complete -> approve the gate</span>
+omn-agent branch PROJ-42 -t ./my-repo    <span class="comment"># before implementation: branch + isolated worktree</span>
+<span class="comment"># phase 4: implementation happens inside .worktrees/proj-42-feature/</span>
+<span class="comment"># phases 5-6: review, verification, docs -- then:</span>
+omn-agent pr create PROJ-42 -t ./my-repo <span class="comment"># checks, push, open the PR</span></code></pre>
+  <p><strong>Enter with:</strong> an agreed feature request — a ticket with no acceptance
+  criteria is fine; the Scope Gate is where they get written down.
+  <strong>Done when:</strong> the Closure Gate approves — acceptance criteria verified, docs
+  and release notes updated, PR open for final review on GitHub.</p>
+
+  <h3 id="flow-bugfix">4.2 · Fix a bug — <code>/bugfix</code></h3>
+  <p>For observable defects with business impact. Evidence-first: nothing is changed until the
+  failure is reproduced and traced to its cause.</p>
+  <div class="tbl"><table class="num">
+    <tr><th>#</th><th>Phase</th><th>Owner</th><th>Artifact</th><th>Gate after (owners)</th></tr>
+    <tr><td>1</td><td>triage-and-impact</td><td>bug analyst</td><td>bug-analysis.md</td><td>Triage Gate (bug analyst, tech lead)</td></tr>
+    <tr><td>2</td><td>root-cause-analysis</td><td>bug analyst</td><td>bug-analysis.md (updated)</td><td>—</td></tr>
+    <tr><td>3</td><td>fix-implementation</td><td>developer</td><td>implementation-report.md</td><td>Fix Gate (reviewer)</td></tr>
+    <tr><td>4</td><td>regression-validation</td><td>QA</td><td>validation-report.md</td><td>Verification Gate (QA, reviewer)</td></tr>
+    <tr><td>5</td><td>closure-and-communication</td><td>orchestrator</td><td>orchestration-result.md</td><td>Closure Gate (orchestrator, docs)</td></tr>
+  </table></div>
+  <p>Same terminal sequence as 4.1 — <code>plan</code> routes Bug-type tickets here
+  automatically, and the branch is named <code>bugfix/&lt;ticket&gt;-&lt;slug&gt;</code>.
+  <strong>Enter with:</strong> a defect report with an observable symptom and reproduction
+  context (or equivalent diagnostic evidence).
+  <strong>Done when:</strong> the defect no longer reproduces, the root cause is documented
+  with evidence, and a regression test covers the failure path.</p>
+
+  <h3 id="flow-refactor">4.3 · Refactor — <code>/refactor</code></h3>
+  <p>For structural improvement where behavior must not change. Distinctive shape: behavioral
+  invariants are declared up front, and QA builds the safety net <em>before</em> any code
+  moves.</p>
+  <div class="tbl"><table class="num">
+    <tr><th>#</th><th>Phase</th><th>Owner</th><th>Artifact</th><th>Gate after (owners)</th></tr>
+    <tr><td>1</td><td>scope-invariants-and-risk-profile</td><td>architect</td><td>technical-design.md</td><td>Invariant Gate (architect, tech lead)</td></tr>
+    <tr><td>2</td><td>safety-net-establishment</td><td>QA</td><td>validation-report.md</td><td>—</td></tr>
+    <tr><td>3</td><td>refactor-implementation</td><td>developer</td><td>implementation-report.md</td><td>Implementation Gate (reviewer)</td></tr>
+    <tr><td>4</td><td>behavioral-validation</td><td>QA</td><td>validation-report.md</td><td>Regression Gate (QA, reviewer)</td></tr>
+    <tr><td>5</td><td>closure-and-debt-record</td><td>orchestrator</td><td>orchestration-result.md</td><td>Closure Gate (orchestrator, docs)</td></tr>
+  </table></div>
+  <p>Same terminal sequence as 4.1; <em>refactor / tech-debt</em> ticket keywords route here,
+  and the branch is named <code>refactor/&lt;ticket&gt;-&lt;slug&gt;</code>.
+  <strong>Enter with:</strong> a defined refactor scope, explicitly documented behavioral
+  invariants, and baseline tests or metrics.
+  <strong>Done when:</strong> invariants are proven unchanged, quality metrics improved or
+  within accepted limits, and the technical-debt delta is recorded with follow-ups.</p>
+
+  <h3 id="flow-investigate">4.4 · Investigate &amp; research — <code>/investigate</code> · <code>/research</code></h3>
+  <p>For questions that need an evidence-backed answer before anyone commits to building.
+  <strong>No code, no branch, no PR</strong> — the deliverable is a recommendation the decision
+  owner can act on. The two flows are twins: <code>/investigate</code> targets a concrete
+  problem or decision; <code>/research</code> explores a broader option space.</p>
+  <div class="tbl"><table class="num">
+    <tr><th>#</th><th>Phase (investigate / research)</th><th>Owner</th><th>Artifact</th><th>Gate after (owners)</th></tr>
+    <tr><td>1</td><td>problem-framing / research-framing</td><td>business analyst</td><td>requirement-framing.md</td><td>Framing Gate (BA, PO)</td></tr>
+    <tr><td>2</td><td>technical-discovery / technical-validation</td><td>context agent</td><td>investigation-report.md</td><td>Technical Gate (context agent, architect)</td></tr>
+    <tr><td>3</td><td>option-analysis / option-synthesis</td><td>tech lead</td><td>technical-recommendation.md</td><td>—</td></tr>
+    <tr><td>4</td><td>recommendation / recommendation-draft</td><td>tech lead</td><td>technical-recommendation.md</td><td>Recommendation Gate (tech lead, orchestrator)</td></tr>
+    <tr><td>5</td><td>publication / findings-publication</td><td>documentation</td><td>release-note.md (findings)</td><td>—</td></tr>
+  </table></div>
+  <p><strong>Enter with:</strong> a question, its decision owner, and the scope, timeline, and
+  constraints — <em>spike / research</em> ticket keywords route here.
+  <strong>Done when:</strong> the recommendation is evidence-backed and decision-ready, with
+  assumptions and risks explicit — the owner can proceed or defer with rationale.</p>
+
+  <h3 id="flow-review">4.5 · Review a pull request — <code>/review</code></h3>
+  <p>For a stable diff that carries a scope summary, a linked requirement, and test
+  evidence.</p>
+  <div class="tbl"><table class="num">
+    <tr><th>#</th><th>Phase</th><th>Owner</th><th>Artifact</th><th>Gate after (owners)</th></tr>
+    <tr><td>1</td><td>code-quality-review</td><td>reviewer</td><td>review-package.md</td><td>Code Quality Gate (reviewer, tech lead)</td></tr>
+    <tr><td>2</td><td>structural-compliance</td><td>architect</td><td>review-package.md (architecture &amp; security findings)</td><td>Architecture Gate (architect, tech lead)</td></tr>
+    <tr><td>3</td><td>test-risk-validation</td><td>QA</td><td>validation-report.md</td><td>Verification Gate (QA, reviewer)</td></tr>
+    <tr><td>4</td><td>documentation-impact</td><td>documentation</td><td>release-note.md (documentation delta)</td><td>—</td></tr>
+    <tr><td>5</td><td>merge-decision</td><td>tech lead</td><td>technical-recommendation.md</td><td>Merge Gate (tech lead, orchestrator)</td></tr>
+  </table></div>
+  <p><strong>Done when:</strong> a merge recommendation with a risk summary stands — critical
+  findings resolved, major findings resolved or formally accepted, test and documentation
+  coverage sufficient for the scope.</p>
+
+  <h3 id="flow-release">4.6 · Release — <code>/release</code></h3>
+  <p>For shipping a frozen release candidate whose implementation, review, and QA gates are
+  already complete.</p>
+  <div class="tbl"><table class="num">
+    <tr><th>#</th><th>Phase</th><th>Owner</th><th>Artifact</th><th>Gate after (owners)</th></tr>
+    <tr><td>1</td><td>readiness-assessment</td><td>tech lead</td><td>technical-recommendation.md</td><td>Readiness Gate (tech lead, QA)</td></tr>
+    <tr><td>2</td><td>artifact-packaging</td><td>reviewer</td><td>review-package.md (packaging evidence)</td><td>Artifact Gate (reviewer, tech lead)</td></tr>
+    <tr><td>3</td><td>candidate-validation</td><td>QA</td><td>validation-report.md</td><td>—</td></tr>
+    <tr><td>4</td><td>deployment-execution</td><td>orchestrator</td><td>orchestration-result.md</td><td>Deployment Gate (orchestrator, tech lead)</td></tr>
+    <tr><td>5</td><td>communication-and-post-release</td><td>documentation</td><td>release-note.md + post-release actions</td><td>Communication Gate (docs, PO)</td></tr>
+  </table></div>
+  <div class="callout">
+    <span class="tag">Coordination only</span>
+    <code>deployment-execution</code> is a <em>coordination</em> phase — the orchestrator
+    records deployment, monitoring, and rollback state supplied to it; it performs no
+    deployment itself.
+  </div>
+  <p><strong>Enter with:</strong> a frozen candidate scope and documented deployment and
+  rollback plans.
+  <strong>Done when:</strong> deployment is complete with healthy system indicators, no
+  critical blocker stands unresolved, and stakeholders have the full release
+  communication.</p>
+
+  <h3 id="flow-quality-scan">4.7 · Scan for code junk — <code>/quality-scan</code></h3>
+  <p>For a single-pass technical-debt review of a bounded repository scope: duplicated logic,
+  dead code, thin wrappers and over-abstraction, generated low-value noise, legacy drift, and
+  code whose main cost is human review load. The scan <strong>reviews and stops</strong> — it
+  modifies nothing, fixes nothing, and decides nothing; its whole lifecycle is one phase
+  ending at a human gate.</p>
+  <div class="tbl"><table class="num">
+    <tr><th>#</th><th>Phase</th><th>Owner</th><th>Artifact</th><th>Gate after (owners)</th></tr>
+    <tr><td>1</td><td>repository-quality-scan</td><td>reviewer</td><td>review-package.md (junk-detection categories)</td><td>Quality Handoff Gate (reviewer, <strong>tech lead decides</strong>)</td></tr>
+  </table></div>
+  <p>Findings use the junk-detection category set — <code>duplication</code>,
+  <code>dead-code</code>, <code>over-abstraction</code>, <code>generated-noise</code>,
+  <code>legacy-drift</code>, <code>reviewability</code> — and every finding names its file and
+  symbol, the standard it is measured against, and its stated confidence
+  (<code>confidence: high|medium|low</code> opens the finding text). Anything the evidence
+  cannot settle becomes an <strong>open question</strong> (<code>Q-nnn</code>) for a human to
+  validate, never an asserted claim. Correction requests arrive prioritized (remove, refactor,
+  split, centralize) as the tech lead's action list.</p>
+  <p><strong>Enter with:</strong> one command. <code>omn-agent quality-scan</code> renders the
+  <code>quality-scan-scope</code> input from your flags (or takes yours verbatim with
+  <code>--scope-file</code>), records the scan as task <code>QS-&lt;NAME&gt;</code>, materializes
+  the run, and dispatches the reviewer — resumable, with the same approval discipline as
+  <code>omn-agent run</code>:</p>
+<pre><code><span class="comment"># one command: scope -> task QS-BACKEND -> run -> dispatch to the reviewer</span>
+omn-agent quality-scan backend -t ./my-repo \
+    --paths src/api,src/core --exclude vendor/ \
+    --context 'pre-merge sweep for PR #42' --risk-threshold high --approve
+
+<span class="comment"># ... the host runs the dispatched reviewer subagent ...</span>
+
+<span class="comment"># resume: ingest + validate the review package, stop at the human gate</span>
+omn-agent quality-scan backend -t ./my-repo --approve
+
+<span class="comment"># the tech lead's decision, recorded like any other gate</span>
+omn-agent run QS-BACKEND -t ./my-repo --gate "Quality Handoff Gate" \
+    --decision approve --owner-role omn-tech-lead \
+    --rationale "package accepted as review of record" --approve</code></pre>
+  <div class="callout">
+    <span class="tag">A normal task</span>
+    A scan lives at <code>tasks/QS-&lt;NAME&gt;/</code>, so <code>omn-agent run QS-&lt;NAME&gt;
+    --show / --watch / --report</code> work unchanged — and a re-run with a
+    <em>changed scope archives the previous run</em> to the task's <code>runHistory</code> and
+    materializes a new one: a changed input is a new run, exactly as in
+    <code>omn-agent update</code>. Inside Claude Code, <code>/quality-scan &lt;scope&gt;</code>
+    is the same flow.
+  </div>
+  <p><strong>Done when:</strong> the validated review package is held at the Quality Handoff
+  Gate. The tech lead — a human, by default gate policy — reads it and decides: accept it as
+  the review of record, route the correction requests as cleanup work (<code>/refactor</code>
+  for structure, <code>/bugfix</code> for defects it uncovered), or reject it back for a
+  re-scan. The verdict vocabulary maps naturally: <code>approve</code> = no material junk,
+  <code>approve-with-corrections</code> = cleanup recommended, <code>reject</code> = cleanup
+  required before further review or merge.</p>
+</section>
+
+<section id="run">
+  <p class="eyebrow">Chapter 5</p>
+  <h2>Driving a run</h2>
+<pre><code>omn-agent run PROJ-42 -t ./my-repo                 <span class="comment"># step 1: materialize the run</span>
+omn-agent run PROJ-42 -t ./my-repo                 <span class="comment"># read-only: shows the next step</span>
+omn-agent run PROJ-42 -t ./my-repo --dispatch --phase scope-and-acceptance
+omn-agent run PROJ-42 -t ./my-repo --complete --phase scope-and-acceptance
+omn-agent run PROJ-42 -t ./my-repo --gate "Scope Gate" --decision approve \
+    --owner-role omn-product-owner --rationale "AC agreed with stakeholder"
+omn-agent run PROJ-42 -t ./my-repo --show          <span class="comment"># read-only: full state table</span>
+omn-agent run PROJ-42 -t ./my-repo --show --watch  <span class="comment"># read-only: live view, re-renders until Ctrl+C</span>
+omn-agent run PROJ-42 -t ./my-repo --report        <span class="comment"># read-only: who did what, when</span></code></pre>
+  <p>While agents are working, the run can be <a href="#live-view">watched live in a second
+  terminal</a> — see below.</p>
+
+  <h3>Branch &amp; Pull Request lifecycle</h3>
+  <div class="chain" role="img" aria-label="The delivery chain: Jira to plan to branch in an isolated worktree, implement, validate, push, pull request, review">
+    <span>Jira</span><b>→</b>
+    <span>plan</span><b>→</b>
+    <span>branch <em>(worktree)</em></span><b>→</b>
+    <span>implement</span><b>→</b>
+    <span>validate</span><b>→</b>
+    <span>push</span><b>→</b>
+    <span>PR</span><b>→</b>
+    <span class="gate">review</span>
+  </div>
+<pre><code>omn-agent branch PROJ-42 -t ./my-repo      <span class="comment"># feature/proj-42-&lt;slug&gt; off main, in .worktrees/proj-42-feature/</span>
+omn-agent run PROJ-42 -t ./my-repo --dispatch --phase implementation --approve
+<span class="comment"># ... implement and commit inside .worktrees/proj-42-feature/ ...</span>
+omn-agent pr precheck PROJ-42 -t ./my-repo <span class="comment"># optional: worktree guard + tests, no PR</span>
+omn-agent pr create   PROJ-42 -t ./my-repo <span class="comment"># checks, push, open the PR via gh</span>
+omn-agent pr fix-comments PROJ-42 -t ./my-repo <span class="comment"># later: resolve the PR's review comments (see the rework loop)</span>
+omn-agent update PROJ-42 -t ./my-repo      <span class="comment"># later: the ticket changed in Jira? carry the change to the PR (see the rework loop)</span></code></pre>
+  <p><code>omn-agent branch KEY</code> names the branch per the project's <strong>branch naming
+  templates</strong> (defaults: <code>feature/{ticket_id}-{short_description}</code> /
+  <code>bugfix/…</code>, fully lowercased; view or change with
+  <code>omn-agent branch-config show|set|preview</code>). The work type that picks the template
+  comes from the task's routed command — <code>implement</code>→<code>feature</code>,
+  <code>bugfix</code>→<code>bugfix</code>, <code>refactor</code>→<code>refactor</code>,
+  <code>investigate</code>→<code>chore</code> — unless overridden with <code>--type</code>.
+  The branch is created off the configured default base (falling back to <code>main</code> then
+  <code>master</code>, or an explicit <code>--base</code>, which must exist).</p>
+
+  <div class="callout">
+    <span class="tag">Worktree isolation</span>
+    <strong>Each task gets its own git worktree</strong> at
+    <code>.worktrees/&lt;ticket&gt;-&lt;work-type&gt;/</code> — the shared main checkout is
+    never switched, so any number of tasks can run concurrently without branch collisions or
+    dirty-tree conflicts. The mapping is deterministic and recorded (path, branch, base,
+    status) as <code>worktree</code> in <code>tasks/&lt;KEY&gt;/task-plan.json</code>;
+    re-running <code>branch</code> reuses the existing worktree, never creates a second one.
+    Every later step — implementation dispatch, <code>pr precheck</code>,
+    <code>pr create</code> — resolves the task's worktree from that record (never the current
+    working directory) and verifies it is on the bound branch before proceeding. A dirty main
+    checkout only draws a warning (<code>B-DIRTY-MAIN</code>): the worktree is created fresh
+    off the base, so nothing leaks. Conflicts are explicit errors — the branch checked out
+    elsewhere, the path registered to another branch, or an unregistered directory on the path
+    (<code>--force</code> reclaims only that last case).
+  </div>
+
+  <div class="callout">
+    <span class="tag">Auto-cleanup</span>
+    <strong>Worktrees clean themselves up when the ticket closes.</strong> Every
+    <code>tickets sync</code> / <code>tickets pull</code> checks the current status of each
+    ticket with an active worktree (sync re-fetches them by key — its default JQL hides closed
+    tickets) and releases the worktree of any that turn out closed (<code>T-WT-CLEAN</code>):
+    directory and registration removed, <strong>branch kept</strong>, task marked
+    <code>worktree.status: removed</code> with the reason. A worktree still holding
+    uncommitted work is kept with a warning (<code>T-WT-DIRTY</code>), never force-deleted —
+    inspect it, then <code>git worktree remove &lt;path&gt;</code> (also how to remove any
+    worktree by hand). <code>omn-agent branch KEY</code> rebinds a released task with a fresh
+    worktree if work must continue.
+  </div>
+
+  <p><code>pr precheck</code> re-confirms the worktree guard, then runs a test command
+  <em>inside the task's worktree</em> (auto-detected — <code>tests/</code>,
+  <code>pyproject.toml</code>+pytest, or <code>package.json</code> — or <code>--test-cmd</code>)
+  and records the result on the task. <code>pr create</code> runs the same checks (skip with
+  <code>--skip-checks</code>; the worktree guard still applies), pushes the branch, and opens a
+  PR via the GitHub CLI with a standardized title and body — failing safely with exact next
+  steps (or a ready-made compare URL) when <code>gh</code> is missing or unauthenticated.</p>
+
+  <div class="callout">
+    <span class="tag">Branch safety</span>
+    <code>omn-agent branch KEY</code> always prints the resolved base branch's tip commit
+    (hash, date, subject) before creating anything, and <strong>warns loudly with the actual
+    commit counts</strong> when the base is dramatically behind the repository's most recently
+    active branch — so branching off an abandoned <code>main</code> stub in a
+    <code>develop</code>-based repo can no longer happen silently. Teams whose integration
+    branch isn't <code>main</code>/<code>master</code> set it once in
+    <code>.omn-agent/config/branch-defaults.json</code>
+    (<code>{"defaultBase": "develop"}</code>) instead of passing <code>--base</code> every time;
+    an explicit <code>--base</code> still wins.
+  </div>
+
+  <div class="callout">
+    <span class="tag">Approval model</span>
+    <strong>Every side-effecting step requires approval.</strong> Materializing a run,
+    dispatching a phase, ingesting a completion, and recording a gate decision each ask for
+    confirmation on a terminal, or take <code>--approve</code> non-interactively. Without
+    approval the command exits with code 8 and executes nothing. Every approval is recorded —
+    who, when, which step — in <code>.omn-agent/tasks/&lt;KEY&gt;/approvals.jsonl</code>.
+  </div>
+
+  <p>The cycle for each phase:</p>
+  <ol class="steps">
+    <li><strong>dispatch</strong> — the runtime leases the phase and emits the agent's
+      invocation envelope and dispatch prompt under
+      <code>.omn-agent/runs/&lt;run&gt;/states/&lt;phase&gt;/</code>.</li>
+    <li>The <strong>owner agent executes</strong> (in Claude Code) and produces the phase
+      artifact.</li>
+    <li><strong>complete</strong> — the runtime validates the artifact against its contract.
+      Pass → transition; fail → a recorded failure envelope with a recovery action.</li>
+    <li><strong>gate</strong> — the named human owner approves or rejects, with a rationale.
+      The producing agent can never decide its own gate. Under the opt-in gate policy below,
+      the runtime may take this step itself when the evidence is unambiguously clean.</li>
+  </ol>
+
+  <h3 id="rework">When changes are requested: the rework loop</h3>
+  <p>An implemented ticket that comes back with change requests is not a new run — it's the
+  same run stepping backwards once, with everything recorded. Which loop you're in depends on
+  where the "no" came from:</p>
+  <ul>
+    <li><strong>The validator rejects the artifact</strong> (<code>--complete</code> fails).
+      The runtime records a failure envelope and schedules a retry within the phase's attempt
+      budget. Re-dispatching carries the previous validation findings into the agent's prompt,
+      so it repairs against the named failures instead of starting blind. Every extra pass
+      shows up in the final report's attempts column.</li>
+    <li><strong>A human rejects a gate</strong> (<code>--gate &lt;name&gt; --decision reject
+      --rationale "…"</code>). A rejection is a classified failure, not just a recorded
+      opinion: the runtime writes a failure envelope naming the phase whose evidence must be
+      rebuilt, and every successor phase blocks with the rejection and rationale visible
+      (<code>--show</code> prints <code>&lt;gate&gt; was rejected by &lt;role&gt;
+      (&lt;rationale&gt;)</code>). The envelope's clearing action states the exact release
+      command; release the phase, re-dispatch it, and the agent reworks <strong>in the same
+      worktree</strong> — new artifact, revalidation, and the same gate is decided
+      again.</li>
+    <li><strong>The GitHub PR gets "changes requested".</strong> That review lives outside the
+      run, but the task's branch and worktree stay bound in <code>task-plan.json</code>.
+      <code>omn-agent pr fix-comments KEY</code> drives this whole loop as
+      <a href="#fix-comments">one resumable command</a>. Or do it by hand: make
+      the fix in the task's worktree — re-dispatch the implementation phase if the rework
+      should travel through review and verification again — then re-run
+      <code>omn-agent pr precheck KEY</code> and push: the open PR updates on the same
+      branch.</li>
+    <li><strong>The Jira ticket itself changed</strong> — new acceptance criteria, a reworded
+      description, a scope tweak. <code>omn-agent update KEY</code> drives this whole loop as
+      <a href="#update">one resumable command</a>: it refreshes the ticket, re-plans the task,
+      rejects the awaiting gate with the change request as rationale (the same rollback
+      mechanics as a human rejection), and drives the run back to a pushed PR.</li>
+    <li><strong>The ticket was closed, then reopened with changes.</strong> Closing released
+      the worktree (branch kept — see <em>Auto-cleanup</em> above).
+      <code>omn-agent branch KEY</code> rebinds the task to a fresh worktree on the same
+      branch, and work continues where the commits left off.</li>
+  </ul>
+  <div class="callout">
+    <span class="tag">Bounded rework</span>
+    Each phase declares a retry budget, and once its charged attempts are spent,
+    <code>release</code> refuses to exceed it — the remaining options are a recovery task that
+    repairs the output outside the work item, or a corrected request on a new run. Nothing
+    loops silently forever.
+  </div>
+
+  <h3 id="fix-comments">One-command review-comment loop: <code>pr fix-comments</code></h3>
+  <p>When the open PR collects reviewer feedback — human review comments and bot findings such
+  as Sonar — the whole rework loop above is one command:</p>
+<pre><code>omn-agent pr fix-comments PROJ-42 -t ./my-repo --approve</code></pre>
+  <p>The first invocation collects the feedback via <code>gh</code> (issue comments, review
+  bodies, and inline review comments; the PR author's own replies are excluded), records it
+  under <code>tasks/&lt;KEY&gt;/fix-comments/</code>, rejects the gate currently awaiting a
+  decision with those findings as the rejection rationale — so the runtime's normal rollback
+  carries them into the fix phase's re-dispatch — and dispatches that phase to its owner agent.
+  It then stops: the host must run the dispatched subagent, which makes the fixes in the task's
+  bound worktree.</p>
+  <p>Re-running the same command afterwards finishes the round: it ingests the phase
+  completion, re-runs the pre-PR checks (<code>--test-cmd</code> supported), approves the gate
+  on that clean evidence, and pushes the bound branch so the open PR updates. Reply to and
+  resolve the review threads on GitHub, and let CI and Sonar re-scan.</p>
+  <div class="callout">
+    <span class="tag">Resumable</span>
+    The command is resumable at every step — a failed completion, failing tests, or a declined
+    approval leave the recorded round state (<code>fixComments</code> in
+    <code>task-plan.json</code>) where it was, and the next invocation continues from there. A
+    later round only picks up comments newer than the last fixed round, so already-addressed
+    feedback is never re-litigated. Side-effecting steps (gate decisions, dispatch, complete,
+    push) require approval exactly like <code>omn-agent run</code>: <code>--approve</code>, or
+    an interactive yes.
+  </div>
+
+  <h3 id="update">One-command Jira change-request loop: <code>update</code></h3>
+  <p>When the change comes from Jira rather than the PR — the ticket's description or
+  acceptance criteria changed after work started — the whole cycle is one command:</p>
+<pre><code>omn-agent update PROJ-42 -t ./my-repo --approve --gate-policy auto</code></pre>
+  <p>Each invocation performs every step it can, in order:</p>
+  <ol>
+    <li><strong>Refresh</strong> the ticket from Jira into the inbox (<code>--no-fetch</code>
+      uses the stored copy; a ticket that turns out closed stops the loop).</li>
+    <li><strong>Re-plan</strong> the task — <code>input.md</code> is regenerated only when the
+      routed input actually changed, so an unchanged ticket makes the whole command a safe
+      no-op (it reports <em>"nothing to do"</em> once the round is delivered).</li>
+    <li><strong>Carry the change into the run.</strong> No run yet → materialize one. A run is
+      recorded and the input changed — whether it's in flight or already completed → the run
+      id is archived to <code>runHistory</code> on the task and a new run starts from the
+      updated input. The runtime pins every input digest at run creation and re-verifies it
+      on every operation, so a regenerated <code>input.md</code> can never be carried into an
+      existing run: a changed input is a new run.</li>
+    <li><strong>Drive the run</strong>: dispatch each eligible phase to its owner agent
+      (auto-binding the feature branch and worktree before the implementation phase if
+      <code>omn-agent branch</code> was never run), ingest completions, and let the runtime
+      auto-decide clean-evidence gates per <code>--gate-policy</code>. The command stops where
+      the host must run a dispatched subagent, or where a gate needs a human
+      (<code>omn-agent run KEY --gate …</code>); re-running continues from live state.</li>
+    <li><strong>Deliver</strong>: when the run completes, the pre-PR quality gate runs
+      (<code>--test-cmd</code> supported) and the bound branch is pushed — updating the
+      recorded PR, or opening one (<code>--draft</code>, <code>--base</code> supported) when
+      none exists.</li>
+  </ol>
+  <div class="callout">
+    <span class="tag">Resumable</span>
+    Round state lives in <code>updateFlow</code> on <code>task-plan.json</code>; each
+    invocation reads it plus live runtime state and performs every step it can, so re-running
+    is always safe. Side-effecting steps (archiving an in-flight run, materialize, dispatch,
+    complete, push) require approval exactly like <code>omn-agent run</code>:
+    <code>--approve</code>, or an interactive yes.
+  </div>
+
+  <h3 id="run-e2e">One command from ticket to PR, any provider:
+  <code>run &lt;Provider&gt; &lt;TicketKey&gt;</code></h3>
+  <p>The same end-to-end cycle also starts directly from a ticket key — no prior
+  <code>tickets pull</code>, <code>plan</code>, or <code>branch</code> needed — and from any
+  configured ticket provider, not just Jira:</p>
+<pre><code>omn-agent run Jira  ON-115  -t ./my-repo --gate-policy auto --approve
+omn-agent run MSDev ONN-115 -t ./my-repo --gate-policy auto --approve</code></pre>
+  <p>The provider name resolves against the connectors recorded in
+  <code>.omn-agent/config/mcp.json</code> — case-insensitively, with kind aliases
+  (<code>MSDev</code>, <code>azure-devops</code>, and <code>ado</code> all find the Azure
+  DevOps connector). Configure them once:</p>
+<pre><code>omn-agent mcp add jira  -t ./my-repo --base-url yourteam.atlassian.net --project PROJ
+omn-agent mcp add msdev -t ./my-repo --org-url https://dev.azure.com/yourorg --project Platform
+export AZURE_DEVOPS_PAT=&lt;personal access token with work-item read scope&gt;</code></pre>
+  <p>MSDev tickets are addressed as <code>&lt;PREFIX&gt;-&lt;id&gt;</code> (the trailing
+  number is the Azure DevOps work item id) or as the bare id; the normalized ticket then flows
+  through exactly the machinery above. One invocation fetches the ticket through the named
+  connector, classifies and routes it (Bug → fix-bug, refactor/investigate keywords keep
+  their routing, everything else → implement-feature; <code>--command</code> overrides),
+  materializes the runtime run, binds the feature branch and isolated worktree before
+  implementation, drives dispatch/complete under the gate policy, and — when the run
+  completes — runs the pre-PR checks and pushes, creating or updating the PR
+  (<code>--test-cmd</code>, <code>--base</code>, <code>--draft</code> supported). It pauses
+  only where the host must run a dispatched subagent or a gate is genuinely held for a human
+  (the auto policy's conditions and the Producer Exclusion Rule are unchanged — see
+  <em>Gate auto-approval policy</em> below), printing each stage as it goes: provider
+  resolved, fetched, routed, branch/worktree bound, dispatched, gate auto-decided or held,
+  PR created or updated. Re-running the same command resumes from live state; the resolved
+  provider is recorded on the task (<code>provider</code> in <code>task-plan.json</code>).</p>
+  <div class="callout">
+    <span class="tag">Errors</span>
+    Unknown provider names, connectors whose kind this build doesn't implement, and tickets
+    that don't exist all fail with an actionable message naming the fix. The legacy
+    single-argument form (<code>omn-agent run KEY --show / --dispatch / --complete /
+    --gate</code>) is untouched and remains the step-level control for any task, however it
+    was started.
+  </div>
+
+  <h3>Gate auto-approval policy</h3>
+  <p>Every gate is a human decision by default. On a clean, low-severity change that can mean
+  several rubber-stamp approvals in a row, each a stop-and-wait round trip. Opt in to let the
+  <strong>runtime itself</strong> approve gates whose evidence is unambiguously clean — keeping
+  human judgement for the decisions that warrant it, and the final PR review on GitHub:</p>
+<pre><code><span class="comment"># per invocation</span>
+omn-agent run PROJ-42 -t ./my-repo --gate-policy auto
+
+<span class="comment"># or durably: .omn-agent/config/gate-policy.json</span>
+{
+  "mode": "auto-on-clean-evidence",
+  "severityThreshold": "high",
+  "pinned": { "fix-bug": { "Closure Gate": "human-required" } }
+}</code></pre>
+  <p>A decision-eligible gate auto-approves <strong>only when ALL conditions hold</strong> —
+  any one failing keeps that gate on the human path, byte-for-byte today's behavior, and the
+  run prints <em>why</em> it was held:</p>
+  <ul>
+    <li>the upstream phase's validation passed clean (no undeclared side effects);</li>
+    <li>the artifact's declared severity is <em>below</em> <code>severityThreshold</code>
+      (default <code>high</code> — so <code>critical</code>/<code>high</code> always stay
+      human);</li>
+    <li>no open question is marked <strong>Blocking</strong>, and no deviation was
+      <strong>escalated</strong>;</li>
+    <li>on QA-owned gates, no defect stands <strong>open</strong>;</li>
+    <li>this exact workflow + agent version has an <strong>approved precedent</strong> at this
+      gate — the first pass of anything unproven is never auto-approved;</li>
+    <li>the gate isn't <strong>pinned</strong> <code>human-required</code>.</li>
+  </ul>
+  <div class="callout">
+    <span class="tag">Audit trail</span>
+    An auto-decision travels the exact same code path as a human one — identical gate record,
+    transition, and ledger event — attributed to
+    <code>decidedBy: "runtime:auto-policy"</code> with every evaluated condition and threshold
+    in the record. The Producer Exclusion Rule binds the automated decider exactly as it binds
+    a human. Full spec and a worked example:
+    <code>.omn-agent/config/gate-policy.md</code>.
+  </div>
+
+  <h3>The final report: who did what, when</h3>
+  <p>When the last phase completes and the last gate is decided, the runtime <strong>prints a
+  final report</strong> and saves it at <code>.omn-agent/runs/&lt;run-id&gt;/final-report.md</code>.
+  It's rebuilt on every aggregation (so a mid-flight run has a current copy) and renderable any
+  time with <code>omn-agent run KEY --report</code>. It contains, all derived from the
+  persisted run ledger:</p>
+  <ul>
+    <li><strong>Run</strong> — command, workflow, status, start, last activity, total
+      elapsed;</li>
+    <li><strong>Agent Activity</strong> — per phase: which agent (and version), started,
+      finished, duration, attempts, validation result;</li>
+    <li><strong>Gate Decisions</strong> — decision, decider, role, decided-at, and
+      <em>Waited</em>: how long the gate held the run between evidence completing and the
+      decision landing. Auto-approved gates show <code>runtime:auto-policy (policy)</code>;</li>
+    <li><strong>Timeline</strong> — every recorded event in commit order: time, actor, event,
+      summary.</li>
+  </ul>
+
+  <h3 id="live-view">Watching a run live in the terminal</h3>
+  <p>While agents work through phases you don't have to poll by hand — <code>--show</code>
+  has a live visual mode:</p>
+<pre><code>omn-agent run PROJ-42 -t ./my-repo --show                        <span class="comment"># one snapshot</span>
+omn-agent run PROJ-42 -t ./my-repo --show --watch                <span class="comment"># live: re-renders in place until Ctrl+C</span>
+omn-agent run PROJ-42 -t ./my-repo --show --watch --interval 5   <span class="comment"># poll every 5s (default: 2)</span>
+omn-agent run PROJ-42 -t ./my-repo --show --json                 <span class="comment"># machine-readable, for dashboards/editors</span>
+omn-agent run PROJ-42 -t ./my-repo --show --no-color             <span class="comment"># force the plain table</span></code></pre>
+  <p>On a terminal, <code>--show</code> renders a <strong>colorized, phase-grouped tree</strong>
+  — phase → step → gate — with a status icon and color per row, the queue status, and the
+  reason that matters right now: a blocked step shows its blocked reason, a retrying step shows
+  <code>attempt 2 of 3 at &lt;time&gt;</code>, a pending gate lists the owner roles still to
+  decide, a decided gate shows <code>approve by &lt;role&gt;</code>. With <code>--watch</code>
+  the tree clears and redraws every interval, so a second terminal becomes a live progress
+  board for the run.</p>
+  <p>The rendering degrades gracefully everywhere: icons fall back to ASCII on a console that
+  can't encode them, the <code>NO_COLOR</code> convention and <code>--no-color</code> force
+  the plain table, and redirected output (piping to a file) gets the plain table automatically.
+  <code>--json</code> emits the same tree as structured data for external dashboards or editor
+  integrations.</p>
+  <div class="callout">
+    <span class="tag">Read-only by construction</span>
+    Every <code>--watch</code> refresh is an independent status query — the one runtime command
+    that never leases, dispatches, completes, or decides anything — so leaving it running can
+    never advance or approve the run by itself. Advancing stays with your own
+    <code>--dispatch</code> / <code>--complete</code> / <code>--gate</code> calls and their
+    approval prompts. The typical setup: terminal 1 drives the run, terminal 2 watches it.
+  </div>
+
+  <h3>Who owns which gate</h3>
+  <p>Every flow's gates and their owner roles are listed phase by phase in
+  <a href="#flows">chapter 4</a> — find your flow there for the exact sequence you'll be
+  asked to approve.</p>
+</section>
+
+<section id="ownership">
+  <p class="eyebrow">Chapter 6</p>
+  <h2>What's yours and what's the framework's</h2>
+  <p>The installer classifies <strong>every file before writing anything</strong>, using the
+  install manifest — content hashes recorded at install time:</p>
+  <div class="tbl"><table>
+    <tr><th>The file…</th><th>What happens</th></tr>
+    <tr><td>doesn't exist</td><td>created</td></tr>
+    <tr><td>matches the incoming payload</td><td>untouched</td></tr>
+    <tr><td>matches its recorded install hash</td><td>framework-managed and unmodified → safely updated</td></tr>
+    <tr><td>differs from its recorded hash</td><td><strong>you changed it → skipped, with a warning</strong></td></tr>
+    <tr><td>isn't in the manifest at all</td><td><strong>yours → never touched, in any mode</strong></td></tr>
+  </table></div>
+  <div class="callout yours">
+    <span class="tag">Your files are safe</span>
+    Edit anything you like — a framework file you modify becomes yours, and upgrades will warn
+    and step around it forever after. <code>--force</code> replaces modified files at framework
+    paths only, and always leaves the previous content at <code>&lt;file&gt;.omn-bak</code>.
+    <code>context/</code> and <code>memory/</code> are seeded once and then belong to the
+    project. If <code>.omn-agent</code> wasn't written by this tool, or its manifest is
+    unreadable or from a newer tool version, every command stops with exit 4 and changes
+    nothing.
+  </div>
+</section>
+
+<section id="health">
+  <p class="eyebrow">Chapter 7</p>
+  <h2>Keeping the installation healthy</h2>
+<pre><code>omn-agent validate ./my-repo   <span class="comment"># pass/fail against everything the bootstrap declares</span>
+omn-agent doctor   ./my-repo   <span class="comment"># validate + local drift, unknown files, backups</span>
+omn-agent status   ./my-repo   <span class="comment"># install state, tickets, tasks, runs, Jira config</span>
+omn-agent upgrade  ./my-repo --dry-run   <span class="comment"># see what an upgrade would do</span>
+omn-agent upgrade  ./my-repo   <span class="comment"># update framework-managed files only</span></code></pre>
+  <p><code>doctor</code> tells you exactly which framework files you've modified (drift), which
+  files inside framework directories are yours, and which <code>.omn-bak</code> backups are
+  lying around. Install and upgrade never report success without a full validation pass.</p>
+  <p>Validation also enumerates <strong>every file the runtime's own context-slice tables
+  reference</strong> (reported as <code>V-SLICE</code> when one is missing) — so a setup gap
+  like a missing <code>dependency-map.md</code> is named on day one, not discovered as a
+  <code>context-integrity-failure</code> several phases into a live run.</p>
+
+  <h3>Exit codes</h3>
+  <div class="tbl"><table class="num">
+    <tr><th>Code</th><th>Meaning</th></tr>
+    <tr><td>0</td><td>success</td></tr>
+    <tr><td>1</td><td>invalid target / repo not found</td></tr>
+    <tr><td>2</td><td>installation or configuration incomplete</td></tr>
+    <tr><td>3</td><td>validation failed</td></tr>
+    <tr><td>4</td><td>incompatible existing state — nothing was changed</td></tr>
+    <tr><td>5</td><td>dry-run finished — nothing was written</td></tr>
+    <tr><td>6</td><td>permission denied</td></tr>
+    <tr><td>7</td><td>unexpected error</td></tr>
+    <tr><td>8</td><td>approval required — nothing was executed</td></tr>
+  </table></div>
+
+  <h3>Continuous integration on the framework repository</h3>
+  <p>The framework's own repository gates every pull request (and default-branch push)
+  with <code>.github/workflows/verify.yml</code>: the unit-test suite plus every
+  <code>verify_*.py</code> proof script under <code>.claude/runtime/</code>, each verifier
+  in its own job on its own runner, on ubuntu and windows. Both surfaces are located by
+  discovery — adding a <code>tests/test_*.py</code> or <code>verify_*.py</code> file needs
+  no CI change — and a failing verifier fails CI naming itself.</p>
+  <p>Branch protection binds to four stable check names: <code>tests-ubuntu</code>
+  (required from day one), <code>tests-windows</code>, <code>verifiers-ubuntu-ok</code>,
+  and <code>verifiers-windows-ok</code> (advisory for the first week, then required).
+  Advisory means absent from the required-checks list — failures still show red;
+  <code>continue-on-error</code> is never used. The advisory-to-required flip is a
+  settings-only change, enacted only after a default-branch run shows
+  <code>verify_self_hosting.py</code> passing (the pre-existing orphan run directories are
+  cleaned first). The workflow never sets <code>NO_COLOR</code>, and a new verifier must
+  be runnable alone, with no arguments, in any order.</p>
+</section>
+
+<section id="trouble">
+  <p class="eyebrow">Chapter 8</p>
+  <h2>Troubleshooting</h2>
+  <div class="tbl"><table>
+    <tr><th>Symptom</th><th>Cause &amp; fix</th></tr>
+    <tr><td><code>INVALID TARGET: not a repository…</code></td><td>The directory has no repo marker. <code>git init</code> there, or <code>omn-agent init &lt;dir&gt;</code> to mark it.</td></tr>
+    <tr><td>Exit 4: <code>…no install manifest</code></td><td><code>.omn-agent</code> wasn't written by this tool. Move it aside, or restore <code>bootstrap/install-manifest.json</code> from version control, then re-run.</td></tr>
+    <tr><td><code>validate</code> exits 2</td><td>Files are missing. <code>omn-agent install</code> repairs in place.</td></tr>
+    <tr><td><code>validate</code> exits 3</td><td>A framework file is corrupt (<code>does not compile</code> / <code>does not resolve</code>). <code>omn-agent install</code> restores the framework copy; your intentional edits are still skipped — <code>doctor</code> shows which.</td></tr>
+    <tr><td><code>V-IMPORT: … imports 'yaml', which does not resolve …</code></td><td>The Python environment running <code>omn-agent</code> lacks a module the installed runtime imports at top level. Install the distribution the finding's hint names (for <code>yaml</code>: <code>pip install pyyaml</code>) into the same interpreter you run <code>omn-agent</code> with.</td></tr>
+    <tr><td><code>skip (modified by user)</code></td><td>Expected: you changed that file and it's protected. Keep your version, or <code>upgrade --force</code> to take the framework's (backup kept).</td></tr>
+    <tr><td>Jira 401 / credentials not set</td><td>Export the env vars named in <code>config/mcp.json</code> (default <code>JIRA_EMAIL</code>, <code>JIRA_API_TOKEN</code> — an Atlassian API token, not a password). Read at call time, never stored.</td></tr>
+    <tr><td>Exit 8 on <code>run</code></td><td>Normal: the step is side-effecting and wasn't approved. Re-run with <code>--approve</code>, or answer <code>y</code> at the prompt.</td></tr>
+    <tr><td>A phase shows <code>blocked</code></td><td>The state table names the reason (missing input, unregistered capability, failed validation). <code>omn-agent run &lt;KEY&gt; --show</code> prints it; the failure envelope in <code>runs/&lt;run&gt;/…</code> carries the recovery action.</td></tr>
+    <tr><td><code>V-SLICE: …dependency-map.md</code></td><td>The dependency map was deleted or never generated. <code>omn-agent context generate dependency-map -t &lt;repo&gt;</code> recreates it from your repo's manifests.</td></tr>
+    <tr><td>A gate didn't auto-approve under <code>--gate-policy auto</code></td><td>Expected: some condition failed and the run printed which (<code>held for a human decision (…)</code>). Severity at/above threshold, a blocking open question, an escalated deviation, an open QA defect, a pinned gate, or no approved precedent each hold it. Decide it by hand as usual.</td></tr>
+    <tr><td>A gate was rejected / changes requested after implementation</td><td>Expected rework loop, not a dead end. The failure envelope names the phase to rebuild and the exact release command; release, re-dispatch, and the agent reworks in the same worktree before the gate is decided again — see <a href="#rework">the rework loop</a>.</td></tr>
+    <tr><td>The open PR collected review comments (reviewers, Sonar)</td><td>One command drives the whole correction cycle: <code>omn-agent pr fix-comments KEY</code> collects the feedback, rejects the pending gate with it, and re-dispatches the fix; re-run it after the subagent to verify, close the gate, and push — see <a href="#fix-comments">the review-comment loop</a>.</td></tr>
+    <tr><td>The Jira ticket changed after work started</td><td>One command carries the change end-to-end: <code>omn-agent update KEY</code> refreshes the ticket, re-plans, rejects the awaiting gate with the change request (or starts a new run if the old one completed), drives the run, and pushes the result to the PR — see <a href="#update">the change-request loop</a>.</td></tr>
+    <tr><td>You want a fresh ticket driven to a PR in one go</td><td>One command runs the whole lifecycle from any configured provider: <code>omn-agent run Jira ON-115 --gate-policy auto --approve</code> (or <code>run MSDev ONN-115 …</code>) fetches, routes, binds the branch/worktree, drives the run, and creates or updates the PR; re-running resumes — see <a href="#run-e2e">one command from ticket to PR</a>.</td></tr>
+    <tr><td><code>branch</code>: <code>…exists but is not a registered git worktree</code></td><td>Something else created a directory at the task's worktree path. Move it aside, or <code>omn-agent branch KEY --force</code> to delete and recreate it.</td></tr>
+    <tr><td><code>branch</code>: <code>…checked out in the main working tree</code> (or another worktree)</td><td>Git allows a branch in one worktree at a time. Switch the main checkout away (<code>git checkout &lt;base&gt;</code>), or remove the stale worktree (<code>git worktree remove &lt;path&gt;</code>), then re-run.</td></tr>
+    <tr><td><code>the worktree bound to task … is missing</code></td><td>The worktree directory was deleted by hand. <code>omn-agent branch KEY</code> recreates it — the branch and its commits are unaffected.</td></tr>
+    <tr><td><code>task …'s worktree was released: ticket closed</code></td><td>The ticket closed, so sync/pull removed the worktree. If work must continue anyway, <code>omn-agent branch KEY</code> rebinds it with a fresh worktree.</td></tr>
+    <tr><td><code>T-WT-DIRTY</code> warning on every sync</td><td>A closed ticket's worktree still holds uncommitted work, so it is never auto-deleted. Inspect it, salvage or discard the changes, then <code>git worktree remove &lt;path&gt;</code> (add <code>--force</code> to discard).</td></tr>
+  </table></div>
+</section>
+
+<section id="custom">
+  <p class="eyebrow">Chapter 9</p>
+  <h2>Customizing the framework for your team</h2>
+  <ul>
+    <li><strong>Context first.</strong> The highest-leverage 30 minutes: write real content into
+      <code>context/product-context.md</code>, <code>context/technical-context.md</code>, and
+      <code>memory/architecture.md</code>. Every agent's context slice includes them. Keep
+      <code>dependency-map.md</code> current too (<code>omn-agent context generate
+      dependency-map</code>) — it's the blast-radius record root-cause analysis and design
+      phases read.</li>
+    <li><strong>Templates.</strong> Editing an artifact template under <code>templates/</code>
+      marks it yours; the validators check structure, so keep the required sections.</li>
+    <li><strong>Skills.</strong> <code>skills/</code> holds the engineering playbooks agents
+      apply — testing strategy, error handling, security. Tune them to your standards.</li>
+    <li><strong>Memory.</strong> <code>memory/decision-log.md</code>,
+      <code>known-issues.md</code>, and <code>coding-standard.md</code> are living documents —
+      the framework reads them, your team maintains them.</li>
+  </ul>
+</section>
+
+<footer>
+  Framework source: the repository's <code>.claude/</code> tree · Tool:
+  <code>omn-agent</code> 0.1.0 · Full command reference: <code>omn-agent --help</code> and the
+  repo's <code>README.md</code> · This guide is versioned at <code>docs/USER-GUIDE.md</code>.
+</footer>
+</main>

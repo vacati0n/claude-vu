@@ -1,0 +1,98 @@
+{
+  "invocation_id": "inv-4c51600606df-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-4c51600606df/states/quality-review/artifacts/review-package.md"
+  ],
+  "structured_output": {
+    "package_id": "RP-2026-0007",
+    "review_reference": "CKA-06 (run run-4c51600606df, quality-review phase)",
+    "package_status": "complete",
+    "verdict": "approve-with-corrections",
+    "counts": {
+      "findings_by_severity": {
+        "critical": 0,
+        "high": 1,
+        "medium": 4,
+        "low": 2
+      },
+      "findings_total": 7,
+      "correction_requests": 7,
+      "blocking_correction_requests": 1,
+      "open_questions": 4
+    },
+    "blocking_findings_outstanding": ["F-001"],
+    "quality_checks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass",
+      "P1": "pass", "P2": "pass", "P3": "pass", "P4": "pass", "P5": "pass", "P6": "pass", "P7": "pass",
+      "F1": "pass", "F2": "pass", "F3": "pass", "F4": "pass", "F5": "pass",
+      "R1": "pass", "R2": "pass", "R3": "pass",
+      "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass", "E5": "pass",
+      "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+    },
+    "quality_checks_run": 46,
+    "quality_checks_passed": 46,
+    "validation_engine": {
+      "module": "runtime/review_package_validator.py",
+      "command": "python runtime/review_package_validator.py runs/run-4c51600606df/states/quality-review/artifacts/review-package.md",
+      "result": "passed",
+      "checks_run": 30,
+      "checks_failed": 0,
+      "not_machine_checkable": ["N1", "N2", "N3"],
+      "repairs_during_self_verification": []
+    },
+    "not_machine_checkable_obligations": {
+      "N1": "judged discharged: all seven review lenses were applied to every file of the change set; the renderer was read in full and probed in memory for platform, locale, ordering and line-ending variance and for its declared failure modes; the reconciliation was compared independently against the pre-change published file recovered from version control, hunk by hunk, which is how the high finding (authored code-sample content dropped without a recorded resolution) was found; the areas this review could not execute (the second matrix leg, the hosted workflow run, the full suite by discovery) are named as out of scope rather than assumed sound",
+      "N2": "judged discharged: every finding anchors on a written standard - scope acceptance criterion A-006 and the Design Gate's restated equivalence condition (F-001, F-003), the Scope Gate's authored-versus-derived rule with its escalation clause (F-002), the testing-strategy playbook's isolation principle (F-004), inline design decision D-010 and the design's error-handling strategy (F-005), design constraint C-014 and inline decision D-009 (F-006), and the secure-engineering playbook's output-encoding practice (F-007); candidate observations without a governing standard - the workflow header comment not mentioning the drift step, a missing-output test printing to stdout, external links rendering as literal text - were not raised",
+      "N3": "judged discharged: no severity was lowered at any point in the run; each severity is the first matching row of the Stage 6 table and was set once, before adjudication; the verdict is the Stage 8 row for an open high finding"
+    },
+    "executed_evidence": [
+      "python -m unittest tests.test_render_user_guide tests.test_ci_workflow tests.test_omn_agent tests.test_agent_input_contracts -> Ran 120 tests, OK",
+      "python tools/render_user_guide.py --check -> exit 0 (before and after the test run)",
+      "python -m compileall -q tools/render_user_guide.py tests/test_render_user_guide.py -> exit 0",
+      "in-memory double render and carriage-return-normalised render of docs/USER-GUIDE.md -> byte-identical to the committed docs/user-guide.html (82,706 bytes, no carriage return); 21 declared identifiers == 21 fragment targets",
+      "git check-attr text docs/USER-GUIDE.md docs/user-guide.html -> text: unset for both; git ls-files --eol -> i/lf w/lf attr/-text for both; git config core.autocrlf -> true",
+      "git show HEAD:docs/user-guide.html compared with docs/user-guide.html under whitespace-collapsing normalisation -> identifier sets equal (21/21), fragment-target sets equal, every identifier on the heading carrying the same material, element-and-class sequence 1212 vs 1446 elements in 66 hunks, visible-text diff of 859 lines read and classified against the resolution list",
+      "in-memory grammar probes -> '## Appendix' and '#### Deep' emitted as paragraph prose (F-005); a chain token containing a double quote emitted a malformed aria-label attribute (F-007)",
+      "in-memory authoring walkthrough on a scratch copy of the source (one section, one callout, one code sample) -> all three rendered with navigation entry, tag and comment marking",
+      "python runtime/review_package_validator.py <artifact> -> PASS 30/30",
+      "git status / git diff HEAD --stat on the change-set paths before and after the review -> unchanged (307/821/12/4 changed lines; five untracked additions)"
+    ],
+    "claimed_not_confirmed": [
+      "implementation report T-012: python -m unittest discover -s tests -> 404 tests OK (deliberately not re-run; omn-qa at the Verification Gate)",
+      "byte identity on the ubuntu leg and on a hosted runner's checkout (criteria A-003, A-004, A-010)",
+      "the hosted-workflow drift fail-and-pass demonstration and the proof-script verdicts"
+    ],
+    "reviewer_owned_plan_tasks": {
+      "T-008 resolution-list review": "not met as delivered: two published-only code-sample lines dropped without a recorded resolution (F-001); two source-only lead-in sentences rendered but unrecorded (F-003)",
+      "T-011 page verdict": "affordances present (navigation, chapter labels, callouts, chain, comment marking); all 21 baseline anchors resolve to the section carrying the same material; banner at the top of the page naming source and command",
+      "T-013 authoring walkthrough": "met: section, callout and code sample added to a scratch copy with notation present in the file rendered without consulting the builder",
+      "T-020 forbidden-surface confirmation": "no runtime, registry, gate-matrix, approval or gate-decision surface in the change set; full-suite green and proof scripts PROVEN are claimed, not confirmed here"
+    },
+    "out_of_scope_tree_changes_noted_not_reviewed": [
+      "agents/omn-dev-1-implement/* and registry/agents.yaml and templates/implementation-report.md (run-79630cb5274d)",
+      "omn_agent/_bundled_payload/** mirrors",
+      "tests/test_agent_input_contracts.py, tests/test_content_contracts.py",
+      "root governance documents and the backlog documents under docs/"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-2-reviewer/system.md",
+    "agents/omn-dev-2-reviewer/identity.md",
+    "agents/omn-dev-2-reviewer/reasoning.md",
+    "agents/omn-dev-2-reviewer/execution.md",
+    "agents/omn-dev-2-reviewer/output.md",
+    "agents/omn-dev-2-reviewer/quality.md",
+    "agents/omn-dev-2-reviewer/examples.md",
+    "runs/run-4c51600606df/states/quality-review/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-4c51600606df/states/quality-review/artifacts/review-package.md",
+    "runs/run-4c51600606df/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

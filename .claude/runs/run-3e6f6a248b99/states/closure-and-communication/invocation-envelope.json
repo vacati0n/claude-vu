@@ -1,0 +1,414 @@
+{
+  "invocation_id": "inv-3e6f6a248b99-05-001",
+  "run_id": "run-3e6f6a248b99",
+  "work_item_id": "run-3e6f6a248b99::closure-and-communication",
+  "idempotency_key": "sha256:c08600636547a94a3b87eb0a362c5795",
+  "state_id": "closure-and-communication",
+  "phase_index": 5,
+  "agent_id": "omn-orchestrator",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-orchestrator.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-orchestrator/manifest.yaml",
+    "load_order": [
+      "agents/omn-orchestrator/system.md",
+      "agents/omn-orchestrator/identity.md",
+      "agents/omn-orchestrator/reasoning.md",
+      "agents/omn-orchestrator/execution.md",
+      "agents/omn-orchestrator/output.md",
+      "agents/omn-orchestrator/quality.md",
+      "agents/omn-orchestrator/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-orchestrator/system.md": "sha256:55acceff7f773ecb6bdeb02720c3aa97",
+      "agents/omn-orchestrator/identity.md": "sha256:98108a9fb596a75893501a3b1283a5e7",
+      "agents/omn-orchestrator/reasoning.md": "sha256:8324c06f20510b359378b2bee9512261",
+      "agents/omn-orchestrator/execution.md": "sha256:dbeb927d86662d0e06b98c05387f689d",
+      "agents/omn-orchestrator/output.md": "sha256:4360a823e6dbae0fc1008795afaed76f",
+      "agents/omn-orchestrator/quality.md": "sha256:93b01694f4e8a817d46b7e6599f5feb3",
+      "agents/omn-orchestrator/examples.md": "sha256:653ab4ca91cc8a04b7750b505ff71f72"
+    },
+    "capabilities": [
+      "workflow-coordination",
+      "phase-progression-control",
+      "handoff-management",
+      "escalation-routing",
+      "closure-governance",
+      "release-communication-support"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Advisory",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Advisory",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "validation-report",
+      "workflow-state",
+      "gate-evidence",
+      "implementation-report",
+      "review-package",
+      "release-note",
+      "technical-recommendation",
+      "deployment-plan",
+      "rollback-plan",
+      "known-issue-status",
+      "documentation-updates",
+      "escalation-context",
+      "closure-context",
+      "release-context",
+      "monitoring-evidence",
+      "technical-debt-record",
+      "dependency-map",
+      "prior-gate-evidence",
+      "unresolved-findings"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "validation-report",
+        "reference": "runs/run-3e6f6a248b99/states/regression-validation/artifacts/validation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-3e6f6a248b99/states/regression-validation/artifacts/validation-report.md",
+        "text": "```yaml\nvalidationReport:\n  reportId: VR-run-3e6f6a248b99-regression-validation-01\n  validationReference: run-3e6f6a248b99 / fix-bug / gate-rejection rollback dead end (defect report runs/inputs/gate-rejection-rollback-dead-end-defect-report.md); fix-implementation attempt 2, implementation report IR-2026-0302, approved at the Fix Gate with correction request CR-005 open\n  validationBasis: regression\n  sourceInputs:\n    - type: implementation-report\n      reference: runs/run-3e6f6a248b99/states/fix-implementation/artifacts/attempt-2/implementation-report.md\n    - type: bug-analysis\n      reference: runs/run-3e6f6a248b99/states/triage-and-impact/artifacts/bug-analysis.md\n    - type: bug-analysis\n      reference: runs/run-3e6f6a248b99/states/root-cause-analysis/artifacts/bug-analysis.md\n    - type: acceptance-criteria\n      reference: runs/inputs/gate-rejection-rollback-dead-end-defect-report.md\n    - type: architecture-context\n      reference: runs/inputs/gate-rollback-architect-decision-memo.md\n    - type: architecture-context\n      reference: runs/inputs/gate-rollback-architect-q006-q007-confirmation.md\n    - type: architecture-context\n      reference: runs/inputs/gate-rollback-architect-f4-cr001-ruling.md\n    - type: acceptance-criteria\n      reference: runs/run-3e6f6a248b99/run-ledger.json (Triage Gate and Fix Gate decisions, Fix Gate decision_history)\n    - type: test-evidence\n      reference: runs/run-4c51600606df/state.json (read only; exercised on byte-identical copies outside the repository)\n  producedBy: omn-qa\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  verdict: pass-with-reservations\n  inputDigest: sha256:39dbb2db63137cfd13ea4fd91313604a\n  contextDigest: sha256:78d88c378c3673644ed6f229f0d4e473\n```\n\n## Metadata\n\n- Validation ID: VR-run-3e6f6a248b99-regression-validation-01\n- Validator: omn-qa\n- Change under validation: the gate-rejection rollback fix of run-3e6f6a248b99 (fix-implementation attempt 2): a rejected gate is rolled back by a listed non-producing owner through the new `rollback` command, which supersedes the target's completed downstream cone as attempt n+1 while attempt n's artifact stays immutable and re-arms the gate on the same work item\n- Validation date: 2026-09-07\n\n## Validation Scope\n\n- In scope: the ten fix-strategy conditions of the root-cause analysis, its validation plan, and the architect's range and refusal rules, measured on executed checks: the two authorised state-engine exits and the refusal of every other exit from a terminal status; the `rollback` command's preconditions, refusals and store-purity on refusal; supersession of the completed downstream cone with attempt-1 artifacts byte-identical, supersessions and attempt snapshots recorded, idempotency keys preserved through the rollback; gate re-arm with `decision_history`, envelope resolution and untouched rejection records; the scheduler's return of guard-raised blocks to pending for both work types; the auto-approval hold; class-aware and live-derived clearing actions in `next` and `recovery`; the stranded run's exact operator sequence and the approved-sibling refusal, on byte-identical copies of run-4c51600606df; the regression surface named below, through the full test suite in its CI form and every verifier under runtime/; the four gaps the Fix Gate handed to this phase (a multi-phase run carrying a rollback, the active-descendant case, `test_run_show` and `test_run_e2e` re-executed, a real-runtime fix-comments round); the status of correction request CR-005.\n- Out of scope: the run-status projection and aggregator defect (run_completed fires while a final gate stands rejected), placed out of scope by the architect's decision memo and routed as a separate defect by the root-cause analysis; the two `PreChangeEquivalence` failures of tests/test_render_user_guide.py, attributed by the Fix Gate (omn-dev-2-reviewer) to the in-flight CKA-06 change's frozen handbook fixture and routed to that change's attempt-2 review; the S8 self-hosting check over the two unaccounted runs, whose change proposals are produced at closure, held out of scope by omn-orchestrator's dispatch instruction (record, do not fix); any state-changing command on the live run-4c51600606df, forbidden by the Fix Gate and the dispatch instruction, so the operator sequence was exercised only on copies; the bare (CI) form of runtime/verify_multi_phase.py, which replays commands into the most recently modified run's store and was therefore run only against a harness run created and removed in this phase; code quality of the change, which belongs to omn-dev-2-reviewer and was decided at the Fix Gate.\n- Evidence examined: the attempt-2 implementation report, both bug analyses, the defect report, the three architect inputs, the run ledger's Triage Gate and Fix Gate decisions and the Fix Gate decision_history, the live store of run-4c51600606df (read only), the diff against HEAD of runtime/state_engine.py and runtime/recovery_policy.py read in full, omn_agent/runner.py compared whole against HEAD, runtime/framework_runtime.py compared against HEAD at function level (`record_gate_decision`, `cmd_release`, `cmd_gate`, `require_gate_owner`, `producer_aliases`, `maybe_auto_decide_gates`) with `hard_descendants`, `rollback_range`, `snapshot_attempt`, `rollback_preconditions`, `cmd_rollback`, `rollback_clearing_action`, `rejected_gates`, `sibling_rejection`, `live_clearing_action`, `rollback_notice`, `next_action` and `cmd_next` read in full, the three CR-005 sites and their bundled mirrors; commands executed from the repository root: `python -m unittest discover -s tests` (CI form, 473 tests), `python -m unittest discover -s tests -p test_render_user_guide.py`, `-p test_bundled_payload.py`, `-p test_run_show.py`, `-p test_run_e2e.py`, `python tools/render_user_guide.py --check`, `python runtime/verify_manifests.py`, `verify_validators.py`, `verify_registry_coverage.py`, `verify_recovery.py --keep` followed by `verify_multi_phase.py --run-id run-3655babc5772` (the harness rollback run) and removal of the four harness runs through the harness's own `reset_run`, `verify_self_hosting.py`, `verify_vertical_slice.py --run-id run-79630cb5274d` and `--run-id run-919c5d5cf156`; the runtime's `next`, `recovery --open-only`, `gate`, `rollback` and `dispatch` subcommands driven in-process against three byte-identical copies of run-4c51600606df with the runtime's runs directory redirected to the session's temporary directory outside the repository; `verify_multi_phase.run_checks` in-process (no replay) over two of those copies; a synthetic-store probe of `rollback_preconditions`, `hard_descendants` and every bare exit from `completed` and `failed`; a source comparison of `TRANSITIONS`, `record_gate_decision`, `cmd_release`, `require_gate_owner`, `maybe_auto_decide_gates` and `_require_approval` against `git show HEAD:<path>`.\n\n## Test Strategy\n\n- Risk basis: the change alters the path that decides whether work proceeds or stops (a gate rejection now leads to an authorised re-entry), alters data written to the state store (two new transitions, supersessions, decision_history, attempt-scoped artifact paths) and alters behavior under failure (the rollback recovery class), so the Stage 4 table warrants exhaustive branch coverage of the rollback path and its refusals, a full before-and-after comparison of store state on every exercised copy, and every failure class induced through the recovery proof; it also alters an interface the consumer `omn_agent/fix_comments.py` calls, whose call sites are reachable here only through the repository's stateful stub, recorded under Not executed and Untested areas.\n- Levels executed: unit (state-engine and runtime unit modules inside the 473-test suite; synthetic-store probes; source comparison against HEAD); integration (consumer and status-surface modules `test_fix_comments`, `test_update`, `test_run_show`, `test_run_e2e`, `test_bundled_payload`); end-to-end (runtime/verify_recovery.py Runs A to D with 74 checks; runtime/verify_multi_phase.py against the harness rollback run and in-process over the stranded-run copies; the runtime's own subcommands on three copies of run-4c51600606df; the remaining five verifiers).\n- Environment: the shared working tree of the framework repository on Windows 11 with Python 3.14.0, carrying uncommitted files of the in-flight CKA-06 change (including tests/test_render_user_guide.py and its fixture) and of completed run-79630cb5274d (the implementer agent manifest at version 1.1.0 against 1.0.0 at HEAD); the CI target runs each verifier alone on a fresh checkout under Python 3.10 on ubuntu and windows, so verifier isolation and the absence of concurrent in-flight changes differ from this environment; every scratch copy of the stranded run and the harness runs lived outside the repository or were removed, and the runs directory held 17 run entries before and after.\n- Not executed: performance (no performance-sensitive path is altered and no baseline was supplied); security as an explicit level (no security-relevant handling is altered beyond the Producer Exclusion check, which is exercised functionally by the D6 checks and the synthetic-store refusals rather than by a security test); the consumer round `omn-agent pr fix-comments` against the real runtime (no harness exists, the tests drive a stateful stub, and the real command needs a ticket provider, which is external access this role may not perform); the bare CI form of runtime/verify_multi_phase.py (it replays into the latest run's store; the `--run-id` form was run against a harness run instead); `verify_multi_phase` M14 over the stranded-run copies (the replay spawns the runtime against the repository's runs directory, so it was skipped there and executed only on the harness run).\n\n## Acceptance Criteria Results\n\n| ID | Criterion | Source | Method | Result | Evidence |\n|---|---|---|---|---|---|\n| `AC-001` | the state model represents an authorised rollback as exactly two new legal transitions, a state work item from completed to pending under trigger superseded and a gate work item from failed to pending under trigger rollback_authorised, both recorded with the canonical reason code enqueued, with the engine refusing the superseded pair unless a supersession record accompanies it, so terminality (M13) is restated as terminal except for one engine-checked authorised pair and every other exit from completed or failed stays refused, with the state-engine documentation and the M13 wording updated to say so | runs/run-3e6f6a248b99/states/root-cause-analysis/artifacts/bug-analysis.md, Fix Strategy condition (1) | unit and end-to-end | met | `TRANSITIONS` working tree against `git show HEAD:runtime/state_engine.py`: state table 16 to 17 entries, gate table 6 to 7, the two added pairs exactly `(completed, pending) superseded` and `(failed, pending) rollback_authorised`, nothing removed or retriggered, `AUTHORISED_EXITS` equal to them; synthetic-store probe: 13 of 14 bare exits from a completed state item and a failed gate item refused with TransitionError, the one admitted being the gate pair, and `superseded` refused without a record; copy B of run-4c51600606df: five appended transitions (seq 34 to 38) all with reason code `enqueued`, M3 and M13 pass in-process; verify_recovery D13 and D24 pass; the state-engine docstrings and M13 wording read the two-pair rule (diff against HEAD) |\n| `AC-002` | a new rollback command is the only surface on which a rollback-authorisation is recorded, applying the same listed-owner and producer-alias checks as gate, requiring the gate item failed with decision rejected, a target equal to the closed phase or a completed hard-predecessor ancestor named explicitly rather than parsed from rationale, and budget available for every phase it will supersede, refusing when attempts charged have reached the maximum; gate's decision values, record_gate_decision's semantics, release, the Producer Exclusion Rule, and the runner's approval requirement stay as they are, and no path bypasses a rejected gate without that recorded human authorisation | root-cause-analysis bug-analysis.md, Fix Strategy condition (2) | unit and end-to-end | met | `require_gate_owner` carries the two checks formerly inline in `cmd_gate` with the same logic and the same message text (the action word parameterised, its default rendering HEAD's text) and is called by both `cmd_gate` and `rollback_preconditions`; `cmd_release` and `omn_agent/runner.py` (`_require_approval`) byte-identical to HEAD; `record_gate_decision` carries the same two decision literals `approved` and `rejected` in both revisions, its only changes the gate-rejection relabel the Triage Gate folded in and the resolution of the awaiting-decision envelope; synthetic store: the producing role and an unlisted role refused with policy-failure and the store unchanged; copy B: a rollback on a gate that no longer stands rejected refused with request-validation-failure and the store unchanged; verify_recovery D6 (producer, unlisted role, invalid target), D26 (budget spent) pass with no store change |\n| `AC-003` | committed-artifact immutability (M12) holds because attempt 1's artifact is never rewritten: attempt n plus 1 writes under an attempt-scoped directory with the same filename, the prior completion block moves unmodified into an append-only supersessions list carrying the authorisation id, the per-attempt invocation, result, ledger, and validation files are snapshotted, item-level artifact_path and completion follow the current attempt so downstream readers change nothing, and M12 iterates every supersession as well as the current completion; the idempotency key is unchanged because the payload digest keeps the canonical path, while the envelope's declared artifact path, permitted writes, and state-ledger artifact path for the new attempt must name the attempt-scoped path; the rejection rides in the new attempt's envelope as prior_rejection beside prior_validation | root-cause-analysis bug-analysis.md, Fix Strategy condition (3) | end-to-end | met | copy B after `rollback --target implementation`: all 8 files under states/*/artifacts/ byte-identical to the live run; `supersessions[0].completion` of implementation and quality-review equal to the live completion blocks; six per-attempt files snapshotted under states/<phase>/attempts/1/ for both phases; idempotency keys of both phases identical to the live store after the rollback; M12 passes in-process listing both superseded attempts; `dispatch --phase implementation` on the copy produced invocation `inv-4c51600606df-04-002` with artifact path and permitted writes naming `artifacts/attempt-2/implementation-report.md` and a `prior_rejection` block carrying the rejection rationale; this run's own attempt-1 artifact at states/fix-implementation/artifacts/implementation-report.md recomputes to the digest recorded in its supersession block (4b10ac71...), the current completion at artifacts/attempt-2/; verify_recovery D8, D9, D10, D17, D18, D20 pass. Qualification: on the copy the re-dispatch bound a new key because the implementer agent's version moved from 1.0.0 (attempt 1) to 1.1.0 on this tree and `bind_payload` keys on agent version; the same-key claim held on the harness run (D17) where the version did not move, see `Q-005` |\n| `AC-004` | the gate re-arms on the same work item with its decision returned to null and the rejected decision, role, decider, rationale, and timestamp appended to an append-only decision_history; transition seq 33, its event, and the gate-rejection envelope stay untouched, the envelope is resolved naming the authorisation, the gate item's failure_class becomes gate-rejection at rejection and is cleared at re-arm, and every completed phase from the target through the closed phase is superseded under one authorisation id and charged | root-cause-analysis bug-analysis.md, Fix Strategy condition (4) | end-to-end | met | copy B: Review Gate item pending, decision null, `decision_history` of length 1 holding the rejection (decision rejected, owner omn-qa, superseded_by RB-run-4c51600606df-review-gate-01, superseded_phases quality-review and implementation), failure_class null; transitions 1 to 33 byte-identical to the live store with seq 33 still `Review Gate blocked -> failed decision_rejected`; the copy's events.jsonl begins with the live file byte-for-byte and appends five events; envelope FE-run-4c51600606df-Review Gate-02 resolved naming the authorisation with every recorded field other than status and resolution identical to the live envelope; both superseded phases carry the one authorisation id; `record_gate_decision` now labels the gate item `gate-rejection` (diff against HEAD) and this run's own recovery ledger records two gate-rejection classifications; verify_recovery D2, D11, D12 pass |\n| `AC-005` | the scheduler moves a guard-raised block whose guards fall to wait back to pending and resolves its envelope, for state work items and for gate work items alike, so the successor loses its stale awaiting_recovery_task and an undecided gate closing a superseded phase returns to pending rather than staying decidable | root-cause-analysis bug-analysis.md, Fix Strategy condition (5) | end-to-end | met | copy B: transitions seq 37 `Verification Gate blocked -> pending blocker_cleared` and seq 38 `documentation-and-release-handoff blocked -> pending blocker_cleared`; open envelopes 5 of 11 before the rollback and 0 of 11 after; the state table shows both waiting on quality-review; verify_recovery D14 and D15 pass |\n| `AC-006` | a gate whose decision_history is non-empty is held for a human by the auto-approval path whatever precedent other runs supply, so the re-decision after a rollback is human as the Triage Gate required | root-cause-analysis bug-analysis.md, Fix Strategy condition (6) | unit and end-to-end | met | `maybe_auto_decide_gates` diff against HEAD adds the decision_history hold and the sibling-rejection hold before evaluation; tests/test_gate_policy.py runs inside the 473-test suite with no failure; verify_recovery D22 passes (the re-armed gate held under the auto-approval policy) |\n| `AC-007` | clearing_action becomes class-aware, naming the rollback command with the gate for the gate item and for any G4-blocked successor, with the guard verdict carrying the gate name as a structured field, and the gate-rejection option list drops approve an exception until an executor for it exists, so no envelope names a command that fails when executed as written | root-cause-analysis bug-analysis.md, Fix Strategy condition (7) | end-to-end | met | copy A `recovery --open-only`: option list reads authorise a rollback and abort the run only, the clearing action derived live names `rollback --gate \"Review Gate\" --target quality-review --owner-role omn-qa --decided-by <who>` with the recorded `release` string shown beside it as recorded; verify_recovery D4, D5, D5a, D5b, D5c, D7 (the clearing action executed as written with the authoriser its only substitution exits 0), D23, D27 and X1 pass |\n| `AC-008` | no migration utility: run-4c51600606df already holds the shape the command accepts, a failed gate with decision rejected and both target phases one charged attempt of three, next derives the clearing action from live state and will print it after the fix, the stale release text in the two open envelopes stays as evidence, and the operator action recorded in the memo re-enters implementation at attempt 2 carrying the nine corrections | root-cause-analysis bug-analysis.md, Fix Strategy condition (8) | end-to-end | met | copy A: `next` exits 3 and prints the rollback command first with `--decided-by <who>`, names the Verification Gate as withheld and offers no decision on it; `recovery --open-only` leaves the persisted `release` text in place and derives the rollback beside it; copy B: the operator sequence exits 0 with RB-run-4c51600606df-review-gate-01, implementation pending and eligible with attempt 2 of 3 dispatchable, `next` then names `dispatch --phase implementation`, and the attempt-2 dispatch carries the rejection rationale as prior_rejection; the live run's state.json digest 518644b7... and modification time 18:54:04 identical before and after this phase; no migration code exists in the diff against HEAD |\n| `AC-009` | the contract text follows the representation: runtime/README.md known gap 3, the state-engine docstrings and comments that assert nothing leaves completed or failed, docs/USER-GUIDE.md, and the consumer's start-of-round sequence, which must issue reject and then rollback with the same role and the task's fix phase as target, with the fiat stubs replaced by the real post-rollback status shape | root-cause-analysis bug-analysis.md, Fix Strategy condition (9) | unit and integration | met | runtime/README.md, config/execution-engine.md, config/runtime.md and docs/USER-GUIDE.md each state the completed downstream cone (one match each); the state-engine docstrings and comments read the two-pair rule (diff against HEAD); `python tools/render_user_guide.py --check` exits 0 and the docs digests are unchanged by every check run; tests/test_fix_comments.py drives a stateful stub that refuses a rollback on a gate not standing rejected and records reject then rollback then dispatch, and tests/test_update.py runs its rejected and rolled-back stages, both inside the passing part of the 473-test suite. Three statements outside this condition's list still state the superseded path rule; recorded as `DF-001` |\n| `AC-010` | the run-status projection defect is out of scope by the memo's decision and its consequence is recorded rather than fixed: with every phase completed and a final gate rejected the run projects Completed and run_completed fires, and after this fix a supersession after run_completed becomes possible, so a second run_completed or a Completed run that is later re-entered is a known risk carried in the analysis's open question | root-cause-analysis bug-analysis.md, Fix Strategy condition (10) | integration (artifact read) | met | the implementation report records the consequence as residual risk R-001 with omn-orchestrator named as the owner of the separate defect, its Out of scope names the memo's decision, and the memo's Tradeoffs accepted names the same risk; no hunk of the diff against HEAD touches `project_run_status` or `maybe_aggregate` |\n| `AC-011` | a Run D in runtime/verify_recovery.py that induces a gate rejection on the real runtime and proves the authorised rollback, the immutability of the rejected evidence, the two-attempt M12 invariant, the stale-block correction for the successor and for an undecided gate, and the negatives; an M13 extension that probes every pair from completed and from failed in both tables and accepts exactly the two new ones while refusing superseded without a record; a clearing-action executability check matching every envelope's command against an admissibility table of subcommand, work type, and status, executed verbatim for Run D; an auto-approval test that a gate with a non-empty decision_history is held for a human when another run supplies an approved precedent, beside the existing rejected-precedent test; rendering tests for a re-armed gate and a superseded step in state_table, state_json, and the show path; a permitted_write test that the attempt-scoped path is accepted while the canonical path still fixes the idempotency key; replacement of the fiat rejected stage in tests/test_fix_comments.py and tests/test_update.py with the real post-rollback status shape | root-cause-analysis bug-analysis.md, Validation Plan, Regression tests added | end-to-end and unit | met | `python runtime/verify_recovery.py --keep`: 74 of 74 checks, RECOVERY PROVEN, Run D checks D0 to D27 all pass including D6a, D7, D9, D13, D14, D15, D22 and the admissibility checks D4, D23, D27, X1; `verify_multi_phase.py --run-id run-3655babc5772` M13 detail lists completed-to-running, payload rebinding and both superseded-without-a-record refusals; tests/test_gate_rollback.py (terminality, write scope, clearing action, scheduler, range, preconditions, surfacing), tests/test_gate_policy.py, tests/test_framework_runtime_render.py, tests/test_fix_comments.py and tests/test_update.py all run inside the 473-test suite with no failure outside `DF-003` |\n| `AC-012` | the existing baseline, all tests and every verify script proven, with verify_recovery.py and verify_multi_phase.py named explicitly | root-cause-analysis bug-analysis.md, Validation Plan, Regression tests added (final clause; the Triage Gate condition full tests/ and every verify_*.py proven states the same) | unit, integration and end-to-end | blocked | executed: `python -m unittest discover -s tests` ran 473 tests in 906 s with exactly 2 failures, both tests/test_render_user_guide.py PreChangeEquivalence (66 recorded against 71 computed element hunks, 51 against 53 text hunks), reproduced by running the module alone (73 tests, the same 2 failures); baseline before this fix 404 tests OK; verify_manifests 2/2 CONFORMS, verify_validators 6/6 COVERED, verify_registry_coverage 6/6 COVERED, verify_recovery 74/74 RECOVERY PROVEN, verify_vertical_slice 10/10 PROVEN on run-919c5d5cf156 (5/10 on run-79630cb5274d, a fix-bug run with no execution-planning phase for the default planner slice), verify_self_hosting 7/8 NOT SELF-HOSTING with S8 alone failing on the unaccounted runs run-3e6f6a248b99 and run-4c51600606df, verify_multi_phase 14/15 NOT PROVEN on the harness rollback run with M6 alone failing and M14 passing. Why it cannot be settled here: the two test failures belong to an untracked test module and fixture of the in-flight CKA-06 change that pin handbook content this fix legitimately edited (`DF-003`, `Q-003`), S8 waits on change proposals that closure produces (`Q-004`), and M6 reads a superseded delivery phase as not traversed on any run mid-rollback (`DF-002`, `Q-002`). What would settle it: the suite on a tree where CKA-06's reconciliation record lists the hunks or CKA-06 is absent, the two proposals recorded, and a decision on M6's treatment of a superseded phase |\n| `AC-013` | Then run the pr fix-comments round against the real runtime rather than the stub and expect it to reach re-approval | root-cause-analysis bug-analysis.md, Validation Plan, Verification steps | integration | blocked | no harness drives `omn-agent pr fix-comments` against the real runtime: tests/test_fix_comments.py and tests/test_run_e2e.py replace runtime/framework_runtime.py with a stateful stub (its docstring says so), and the real command requires a ticket-provider transport, which is external access this role may not perform; executed instead: `test_fix_comments` (16 tests) and `test_run_e2e` (24 tests, OK when run alone) inside the suite, and the consumer's reject-then-rollback sequence against the real runtime's status shape on copy B. What would settle it: a harness that drives fix_comments against the real runtime with a fake provider transport, as tests/test_run_e2e.py already does for the provider side |\n| `AC-014` | Finally run the rollback command against run-4c51600606df as the memo records and expect implementation pending and eligible at attempt 2 with the nine corrections carried | root-cause-analysis bug-analysis.md, Validation Plan, Verification steps | end-to-end | blocked | the live run may not be changed by this role: the Fix Gate recorded that QA must not execute the operator sequence and the dispatch instruction forbids any state-changing command on it; the live store's digest and modification time are unchanged. Executed on byte-identical copy B with the runs directory redirected outside the repository: `rollback --gate \"Review Gate\" --target implementation --owner-role omn-qa --decided-by <this role's probe> --rationale <text>` exit 0, implementation pending and eligible with attempt 2 of 3 dispatchable, quality-review superseded, `next` naming implementation, and the attempt-2 dispatch carrying the Review Gate rejection rationale (which lists the corrections) as prior_rejection. What would settle it: the operator's execution on the live run after the Verification Gate, before any decision on its Verification Gate |\n| `AC-015` | the full transitive-descendant closure of target, restricted to completed items, strictly contains the memo's path and additionally catches every completed dependent the path rule misses, including ones off the closes_state ancestor chain (fix-implementation's second parent, root-cause-analysis) | runs/inputs/gate-rollback-architect-f4-cr001-ruling.md, RANGE RULE (b) | unit and end-to-end | met | `rollback_range` returns `{target} | hard_descendants(target)` restricted to completed items in descending phase order (source read); synthetic store: with p1 and p2 completed, p3 running and p4 pending, `rollback_preconditions(..., \"p1\")` returns the range p2, p1 and `hard_descendants(p1)` is p2, p3, p4; tests/test_gate_rollback.py's fix-bug-shaped case (target triage-and-impact supersedes root-cause-analysis and fix-implementation, a pending successor excluded, a completed one included) passes inside the suite; copy B: target implementation superseded quality-review and implementation and left the pending successor to the scheduler |\n| `AC-016` | refuse, no third transition: the existing standing check already refuses when an approved gate closes an intermediate phase; CR-001 is simply removing the p != closes exclusion so a sibling gate approved on closes_state itself is checked the same way, no new transition, same refusal message, same operator remedy (a shallower target, or a new run). The refusal changes nothing in the store | runs/inputs/gate-rollback-architect-f4-cr001-ruling.md, CR-001 RULE | end-to-end and unit | met | copy A: after approving the Verification Gate, `rollback --target implementation` and `rollback` with the default target both exit 2 with policy-failure naming the approved Verification Gate and the shallower-target-or-new-run remedy; store facts (statuses, attempts, keys, gate records, 34 transitions), 66 events and the ledger (4 open of 11) identical before and after both refusals; the gate transition table carries no `(completed, pending)` pair; `rollback_preconditions` iterates `standing` over every phase in range with no closed-phase exclusion (source read); verify_recovery D6a passes; the RollbackPreconditionsTestCase store-equality tests run inside the suite |\n| `AC-017` | Its Verification Gate is undecided (blocked), so rollback --gate \"Review Gate\" --target implementation is admissible under CR-001. It must be issued before any decision is recorded on the Verification Gate; an approval there first would make the rollback refuse | runs/inputs/gate-rollback-architect-f4-cr001-ruling.md, Consequence for the stranded run | end-to-end | met | copy B (Verification Gate undecided): the command exits 0 and supersedes both phases; copy A (Verification Gate approved first): the same command exits 2 with policy-failure and no store change; copy A `next` withholds the Verification Gate while the rejection stands and `recovery --open-only` derives the rollback for both gate-rejection envelopes |\n\n## Execution Summary\n\n- Criteria validated: 17\n- Met: 14\n- Not met: 0\n- Blocked: 3\n\n## Defects\n\n| ID | Severity | Category | Location | Symptom | Reproducibility | Status |\n|---|---|---|---|---|---|---|\n| `DF-001` | low | usability | config/execution-engine.md:515; runtime/framework_runtime.py:59-61 and :4968; mirrored at omn_agent/_bundled_payload/config/execution-engine.md:515 and omn_agent/_bundled_payload/runtime/framework_runtime.py:4968 | the module docstring, the `rollback --target` help text and the recovery sequence diagram state that every completed phase from the target through the closed phase is superseded, while the range executed on copy B and pinned by the unit tests is the target's completed downstream cone; the bundled mirrors carry the same text, so the correction needs a bundle re-sync (this is the Fix Gate's CR-005, confirmed open) | always | open |\n| `DF-002` | low | operational | runtime/verify_multi_phase.py:234-265 (check M6) | on a byte-identical copy of run-4c51600606df M6 passes before the rollback (14 of 15 with M14 skipped) and reports delivery=pending after it (13 of 15); on the harness rollback run run-3655babc5772 the CLI form reports 14 of 15 NOT PROVEN with M6 the only failing check while M14 passes; the verifier does not prove a run that carries an authorised rollback until the superseded phase is rebuilt, and no other check fails on such a run | always | open |\n| `DF-003` | low | integration | tests/test_render_user_guide.py:620 (PreChangeEquivalence, two tests) | in the full suite and again when the module runs alone, the two equivalence tests fail with 66 recorded against 71 computed element hunks and 51 against 53 text hunks; the test module and its fixture are untracked files of the in-flight CKA-06 change and pin the published handbook to a pre-change page, so the passages this fix edited in docs/USER-GUIDE.md count as unrecorded hunks; every other test in the 473-test suite passes and `render_user_guide.py --check` exits 0 | always | open |\n\n## Regression Assessment\n\n- Regression scope: the terminality guarantee of `completed` and `failed` for every work type and every workflow (M13, payload rebinding, replay detection); committed-artifact immutability under M12 and the completion package and provenance readers of `artifact_path`; the dispatch write scope and idempotency binding for a re-entered attempt; the scheduler's `refresh` and its guard-raised versus recovery-raised distinction shared with the validation-rejection repair path (Runs A and B); retry-budget accounting and `release`; gate auto-approval and cross-run precedent lookup; the status surfaces `state_table`, `state_json`, `status`, `run --show` and the one-command flow; the consumers `fix_comments.py` and `update.py`; the run-status projection and aggregator; the contract text in config/, runtime/README.md, the eight workflow specifications and the handbook; the bundled payload mirror; every recovery class other than gate-rejection.\n- Regressions detected: None identified.\n- Coverage of changed behavior: the two new transitions and the record requirement (unit, synthetic probe, M13 on three runs); every `rollback` refusal (gate not rejected, producer role, unlisted role, non-ancestor target, approved gate over the closed phase and over an intermediate phase, budget spent) with store equality; the cone range on the fix-bug shape, on the stranded run's shape and with a running descendant; supersession, snapshots, key preservation through rollback, attempt-scoped dispatch and replay suppression (copies A and B, D8 to D20); gate re-arm, envelope resolution and untouched rejection records (copy B, D11 to D13); the scheduler correction for both work types (copy B, D14, D15); the auto-approval hold (D22, test_gate_policy); `next` and `recovery` surfaces on a stranded store and on a fresh rejection (copy A, D5b, D5c); the consumer sequence against the stub (test_fix_comments, test_update); a second rollback and budget exhaustion (D25, D26); Runs A to C unchanged; every other verifier passing.\n- Untested areas: the consumer round against the real runtime (`AC-013`); the operator sequence on the live stranded run (`AC-014`); `verify_multi_phase` M14 replay over a multi-phase run carrying a rollback (skipped on the copies, executed only on the one-phase harness run); the CI bare forms of `verify_multi_phase.py` and `verify_vertical_slice.py`; the active-descendant case on a shape a workflow can actually produce (only a hand-set running successor on copy C was exercised, see `Q-001`); a phase that depends only softly on a superseded phase, which `hard_descendants` does not walk; the run-status projection after a supersession following run_completed (out of scope by the memo); the installed form of the runtime inside a target repository; the update consumer against the real runtime.\n\n## Residual Risk\n\n- Accepted risk: the run-status projection and aggregator consequence (run_completed while a final gate stands rejected, a supersession after run_completed) accepted by the architect in the decision memo's Tradeoffs and routed by the root-cause analysis to omn-orchestrator as a separate defect; the refusal of a rollback whose range holds an approved gate, accepted by the architect in the ruling as the correct cost of the human-block invariant; the two `PreChangeEquivalence` failures accepted as out of this change's scope by the Fix Gate (omn-dev-2-reviewer) and routed to CKA-06's review; the S8 state accepted by omn-orchestrator's dispatch instruction as pending the closure proposals.\n- Unmitigated risk: a descendant leased or running at the moment of authorisation is neither superseded nor refused and keeps consuming superseded evidence until it commits, and `next` offers its completion (copy C; `Q-001`); the attempt-2 dispatch on the live stranded run will bind a new idempotency key because the implementer agent's version moved since attempt 1, so the memo's key-preservation statement does not hold for that run as it stands (`Q-005`); `verify_multi_phase` cannot prove any run mid-rollback until its superseded phase is rebuilt (`DF-002`), so CI's bare form would fail if the most recently modified run were mid-rollback; three operator-facing statements still describe the superseded range rule (`DF-001`); the stub-only coverage of the consumers; the bare gate `failed -> pending` pair is legal at the engine level without a record, its human authorisation enforced by `cmd_rollback` alone, as the memo designed.\n- Monitoring required: any recovery ledger holding an open gate-rejection entry while no state item is pending and eligible and no gate awaits a decision (should be zero); `next` exiting 3 with awaiting_recovery_task on any run; a gate decision recorded by the policy decider on a gate with a non-empty decision_history (should never occur); run_completed emitted on a run whose gates include a rejected decision; a `complete` accepted on a phase whose hard predecessor is pending after a supersession; M6 failures on runs carrying a rollback in CI; the idempotency key of the stranded run's implementation item after the operator's attempt-2 dispatch.\n\n## Verdict\n\n- Decision: pass-with-reservations\n- Rationale: no critical or high defect stands open (three low defects, one of them the Fix Gate's CR-005 confirmed still open), no criterion is not-met, and three criteria are blocked rather than failed: the suite and verifier criterion cannot be settled on a tree that carries another in-flight change's frozen fixture and two runs whose proposals closure produces, the real-runtime consumer round has no harness this role may build, and the live stranded run may not be changed by this role; every behavioural criterion of the fix strategy and of the architect's ruling is met on executed evidence, the recovery proof passes 74 of 74, and no regression appeared across 473 tests and seven verifiers. The Stage 8 row for no open critical or high defect with at least one blocked and none not-met yields pass-with-reservations; the status is provisional because the blocked criteria wait on decisions and actions routed to other roles (identity contract, escalation response expectations).\n- Blocking defects outstanding: None identified.\n- Readiness recommendation: go, with reservations: this role recommends that the Verification Gate owner (omn-dev-2-reviewer) treat the fix as ready to proceed to closure-and-communication on the behavioural evidence, on the conditions that `DF-001` (CR-005) is corrected with a bundle re-sync before closure, that the closure phase records the change proposals S8 waits on, that the operator issues the rollback on run-4c51600606df before any decision on its Verification Gate as the ruling instructs, and that `Q-001`, `Q-002` and `Q-005` reach the architect; the gate decision itself rests with the gate owner.\n\n## Open Questions\n\n- `Q-001`: a phase in the target's downstream cone that is leased or running at the moment of authorisation is left untouched by `rollback` (copy C: with the successor hand-set to running, the rollback exited 0, the successor stayed running, and `next` then offered its `complete`), so a consumer of superseded evidence can complete on stale input; no workflow produces that shape today because successors of the closed phase are guard-blocked. Should such an active descendant refuse the authorisation, be released by it, or be left to the scheduler as implemented? Routed to `architect` (the implementation report raises the same as its fourth open question).\n- `Q-002`: `verify_multi_phase` M6 evaluates traversal from the status vector as of the run's last carry-forward and reads a superseded delivery phase as pending, so it fails on every run mid-rollback (both the multi-phase stranded-run copy and the one-phase harness run) while every other check passes (`DF-002`). Should M6 treat a phase superseded and awaiting its next attempt as traversed, and is a multi-phase run carrying a rollback to be added to the proof surface? This phase executed that shape in-process and records it as required coverage; the semantics of M6 are a verifier-contract decision. Routed to `architect`.\n- `Q-003`: the two `PreChangeEquivalence` tests of the in-flight CKA-06 change fail because this fix's handbook edits add hunks its reconciliation record does not list (`DF-003`). Who records those hunks, or is the fixture retired once CKA-06 lands, and how is the suite criterion (`AC-012`) settled on a tree shared by two in-flight changes? Routed to `omn-orchestrator`.\n- `Q-004`: verify_self_hosting S8 fails on the two unaccounted runs run-3e6f6a248b99 (this run) and run-4c51600606df (the stranded run whose rework is about to restart). This run's proposal is produced at closure; which proposal accounts for the stranded run, whose original change is CKA-06's? Routed to `omn-orchestrator`.\n- `Q-005`: on copy B the attempt-2 dispatch of implementation bound a new idempotency key because `bind_payload` keys on the agent version and the implementer agent moved from 1.0.0 (attempt 1) to 1.1.0 on this tree, although the rollback itself preserved the key and the harness proves same-key re-dispatch when the version is unchanged. Is a new key on the stranded run's attempt 2 the intended behaviour under the memo's key-preservation rule, and does it need recording in the operator instruction? Routed to `architect`.",
+        "digest": "sha256:a2ba00607b622de694ecbf796953f901",
+        "produced_by": "regression-validation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the recorded account of what the run did that this record is assembled from: a validation report for a `fix-bug` or `refactor` closure, the workflow state for a progression this record reconstructs, or the gate evidence a transition rested on. Without one there is nothing to coordinate from, and producing a record anyway would mean asserting a progression no recorded evidence establishes \u2014 which is the precise failure this role exists to prevent."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "validation-report",
+      "reference": "runs/run-3e6f6a248b99/states/regression-validation/artifacts/validation-report.md",
+      "produced_by": "regression-validation"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-07T13:57:38Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/orchestration-result.md",
+        "digest": "sha256:17841c96b01f66de152eb2ce021960e0",
+        "supplies": null
+      },
+      {
+        "path": "templates/validation-report.md",
+        "digest": "sha256:289a25ebf7d54fb95ddf4fd44925d038",
+        "supplies": null
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": null
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73660d3f373c99f824d4eb22e1c28c64",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:a32387064ade281e8030b15103233d0c",
+    "input_digest": "sha256:a2ba00607b622de694ecbf796953f901",
+    "inputs": [
+      {
+        "type": "validation-report",
+        "reference": "runs/run-3e6f6a248b99/states/regression-validation/artifacts/validation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-3e6f6a248b99/states/regression-validation/artifacts/validation-report.md",
+        "digest": "sha256:a2ba00607b622de694ecbf796953f901"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/orchestration-result.md",
+      "templates/validation-report.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-3e6f6a248b99/states/closure-and-communication/artifacts/orchestration-result.md",
+      "runs/run-3e6f6a248b99/states/closure-and-communication/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any deployment, rollback, merge, publication, or release action",
+        "any command that modifies source, tests, committed run evidence, or a governance record",
+        "repository history rewriting",
+        "any command whose result is not recorded in the orchestration result"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author requirements, scope, acceptance criteria, structural design, tests, or task breakdowns",
+      "take a gate decision that belongs to another role, or record one that was never taken",
+      "decide a gate that assesses evidence this agent produced",
+      "permit a phase transition whose governing gate carries no recorded decision",
+      "record a phase as complete without the gate decision and the evidence behind it",
+      "close a run carrying an unresolved critical or high escalation",
+      "perform a deployment, a rollback, a merge, or a publication action itself",
+      "record a deployment state, monitoring result, or rollback position it was not supplied",
+      "reclassify an escalation's severity, or a finding's, to reach a closure",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "reconstruct the phase progression a run actually executed, from its recorded evidence",
+        "verify that every transition a run took carries a recorded decision at the gate governing it",
+        "accept or refuse a handoff on whether the receiving phase's input contract is satisfied",
+        "record the gate decisions other roles took, naming the authority that took each one",
+        "hold a transition whose gate carries no recorded decision, and say what it is waiting for",
+        "raise and route an escalation this role cannot resolve within its own authority",
+        "record the follow-up actions, deferred scope, and technical debt delta a run leaves behind",
+        "record the deployment state, monitoring health, and rollback position supplied to it",
+        "state a closure position and recommend closure to the authority that decides it",
+        "decide a gate over evidence another role produced, where the gate matrix assigns it"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author requirements, scope, acceptance criteria, structural design, tests, or task breakdowns",
+        "take a gate decision that belongs to another role, or record one that was never taken",
+        "decide a gate that assesses evidence this agent produced",
+        "permit a phase transition whose governing gate carries no recorded decision",
+        "record a phase as complete without the gate decision and the evidence behind it",
+        "close a run carrying an unresolved critical or high escalation",
+        "perform a deployment, a rollback, a merge, or a publication action itself",
+        "record a deployment state, monitoring result, or rollback position it was not supplied",
+        "reclassify an escalation's severity, or a finding's, to reach a closure",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else in the repository, in any phase.",
+        "rationale": "A coordination record is worth what its independence is worth. This role's artifact is the evidence a Closure or Deployment Gate is decided on, and an agent that could change the code, the evidence, or another phase's artifact while accounting for the run would be reporting on work it had shaped itself. The account and the work stay in different hands."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any deployment, rollback, merge, publication, or release action",
+          "any command that modifies source, tests, committed run evidence, or a governance record",
+          "repository history rewriting",
+          "any command whose result is not recorded in the orchestration result"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same phase progression set in the same order, the same handoff set with the same acceptance states, the same escalation set with the same severities, the same follow-up action set, the same operational status, the same closure disposition, and the same declared artifact status.",
+      "identifierSchemes": {
+        "phaseProgression": "PH-<zero-padded-sequence>",
+        "handoffs": "HO-<zero-padded-sequence>",
+        "escalations": "ES-<zero-padded-sequence>",
+        "followUpActions": "FU-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Phase progression rows follow the run's dependency order, which is the order the routed workflow's Phase Model declares; a re-run may not reorder them into a different-looking progression. Handoffs follow the order of the transitions they carried. Escalations and follow-up actions are ordered by descending severity; ties break toward the lower identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied plans, evidence, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "orchestration-result.md",
+    "artifact_path": "runs/run-3e6f6a248b99/states/closure-and-communication/artifacts/orchestration-result.md",
+    "template_ref": "templates/orchestration-result.md",
+    "contract_ref": "agents/omn-orchestrator/output.md",
+    "quality_ref": "agents/omn-orchestrator/quality.md",
+    "validator": "orchestration_result_validator",
+    "result_envelope_path": "runs/run-3e6f6a248b99/states/closure-and-communication/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-07T13:57:38Z"
+}

@@ -1,0 +1,240 @@
+{
+  "invocation_id": "inv-79630cb5274d-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-79630cb5274d/states/closure-and-communication/artifacts/orchestration-result.md"
+  ],
+  "structured_output": {
+    "resultId": "OR-run-79630cb5274d-closure-and-communication",
+    "coordinationBasis": "closure",
+    "workflowPhase": "closure-and-communication",
+    "recordStatus": "complete",
+    "disposition": "closed-with-followups",
+    "counts": {
+      "phases": 5,
+      "complete": 4,
+      "blocked": 1,
+      "notStarted": 0,
+      "handoffs": 4,
+      "escalations": 9,
+      "followUps": 7,
+      "openQuestions": 5
+    },
+    "handoffsByAcceptance": {
+      "accepted": 4,
+      "refused": 0,
+      "pending": 0
+    },
+    "escalationsBySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 6,
+      "low": 3
+    },
+    "escalationsByStatus": {
+      "open": 0,
+      "routed": 4,
+      "resolved": 4,
+      "accepted-risk": 1
+    },
+    "followUpsBySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 3,
+      "low": 4
+    },
+    "blockingEscalationsOutstanding": [],
+    "gateFed": {
+      "gate": "Closure Gate",
+      "decidedBy": "omn-documentation",
+      "basis": "this agent produced the record that gate assesses, so the Producer Exclusion Rule moves the decision; the gate row in the run ledger and the state store both record it undecided"
+    },
+    "gateDecisionsRecorded": [
+      {
+        "gate": "Triage Gate",
+        "phase": "triage-and-impact",
+        "decision": "approved",
+        "decidedBy": "omn-tech-lead",
+        "decidedAt": "2026-09-05T05:11:46Z"
+      },
+      {
+        "gate": "Fix Gate",
+        "phase": "fix-implementation",
+        "decision": "approved",
+        "decidedBy": "omn-dev-2-reviewer",
+        "decidedAt": "2026-09-05T07:10:06Z"
+      },
+      {
+        "gate": "Verification Gate",
+        "phase": "regression-validation",
+        "decision": "approved",
+        "decidedBy": "omn-dev-2-reviewer",
+        "decidedAt": "2026-09-06T01:50:43Z"
+      },
+      {
+        "gate": "Closure Gate",
+        "phase": "closure-and-communication",
+        "decision": "none",
+        "decidedBy": null,
+        "decidedAt": null
+      }
+    ],
+    "verificationGateConditionsDischarged": {
+      "AC-006 reported unsettled and never as met, with the criterion-design matter routed": "ES-001, FU-002, Q-004",
+      "DF-002 corrected by downstream record, stating both halves, with no edit to committed run evidence": "ES-003",
+      "DF-001 raised as a runtime defect in its own right and routed to architect": "ES-002, Q-003",
+      "DF-006 deferred not dismissed, with an explicit instruction not to hand-sync the tracked build copy": "ES-007, Q-005",
+      "DF-005 recorded as needing a change of its own on a live specification surface outside this run": "FU-004",
+      "DF-003 reason-code gap routed to architect": "ES-008, Q-002",
+      "change proposal must link this run's artifacts; check S8 names this run unaccounted until it exists": "FU-001"
+    },
+    "operatorInterventionsRecorded": [
+      {
+        "reference": "ES-004",
+        "subject": "policy exception on event E-0033 covering four runtime-caused writes under a permanently excluded run directory; the operator accepted accountability and the agent re-declared only its authored writes",
+        "assessedAt": "Fix Gate and Verification Gate",
+        "assessedBy": "omn-dev-2-reviewer"
+      },
+      {
+        "reference": "ES-005",
+        "subject": "operator correction of two frozen-snapshot metadata fields after determinism check C7.1 failed; recorded with the qualification that the C7.1 pass on that attempt was operator-assisted rather than agent-deterministic",
+        "assessedAt": "Fix Gate",
+        "assessedBy": "omn-dev-2-reviewer"
+      },
+      {
+        "reference": "ES-009",
+        "subject": "regression-validation released as worker-loss and re-dispatched; attempt 2 adopted, independently re-verified and corrected the artifact in nine places, retracting a false AC-005 claim and surfacing DF-006",
+        "assessedAt": "Verification Gate",
+        "assessedBy": "omn-dev-2-reviewer"
+      }
+    ],
+    "attemptAccounting": {
+      "fix-implementation": "3 of 3 attempts consumed: attempt 1 rejected on the write-scope policy failure, attempt 2 rejected on C7.1, attempt 3 accepted at 32 of 32",
+      "regression-validation": "attempt 1 released as worker-loss and reclaimed rather than charged; attempt 2 accepted at 31 of 31",
+      "closure-and-communication": "attempt 1"
+    },
+    "evidenceIsolation": "the tree was not quiescent: a concurrent session delivered in this repository throughout and the whole-suite total moved 342 to 399 to 404, recorded by the validation as a contaminated measurement rather than as isolation evidence. The verdict this closure carries rests on 83 targeted tests passing, on contract-level replays of the runtime's own narrowing and resolution functions, and on the persisted state of the repaired run",
+    "standingVerifierConditionsNotAttributable": {
+      "verify_multi_phase": "14 of 15 on the pre-existing M6, which a fix-bug run structurally cannot satisfy because it declares no planning, design or delivery phase",
+      "verify_self_hosting": "7 of 8 on S8, which names run-79630cb5274d unaccounted until the change proposal exists, tracked as FU-001"
+    },
+    "readingCaveat": "runtime/verify_validators.py is sensitive to the working directory: 5 of 6 with a spurious V3 and F7 failure from the framework directory, 6 of 6 from the repository root. The failure seen from the wrong directory does not exist",
+    "residualAcceptedRisk": "the widened accepted menu is agent-global, so guard ordering alone prevents an implementation phase from running on a stray validation report; identified at analysis, accepted at three gates, routed to architect for root removal as ES-006",
+    "validationEngine": {
+      "validator": "orchestration_result_validator",
+      "result": "PASS",
+      "checksRun": 34,
+      "checksPassed": 34,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3
+    },
+    "qualityChecks": {
+      "run": 44,
+      "passed": 44,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "M1": "pass",
+        "M2": "pass",
+        "M3": "pass",
+        "M4": "pass",
+        "M5": "pass",
+        "O1": "pass",
+        "P1": "pass",
+        "P2": "pass",
+        "P3": "pass",
+        "P4": "pass",
+        "O5": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "O4": "pass",
+        "O3": "pass",
+        "N-COUNT": "pass",
+        "H1": "pass",
+        "H2": "pass",
+        "H3": "pass",
+        "H4": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "pass",
+        "O8": "pass",
+        "O6": "pass",
+        "O7": "pass",
+        "O9": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "T1": "pass",
+        "T2": "pass",
+        "T3": "pass",
+        "T4": "pass",
+        "T5": "pass"
+      },
+      "notes": {
+        "H4": "advisory, vacuously satisfied: no handoff was refused",
+        "E4": "each carried severity matches its source: DF-001 and DF-002 medium, DF-003, DF-004, DF-005 and DF-006 low",
+        "T1": "case-insensitive scan of the artifact for every prohibited vendor token returned zero hits",
+        "T5": "every read-only reading that informed the record is named in the Evidence examined bullet"
+      }
+    },
+    "notMachineCheckable": {
+      "N1": "declared: the run executed in the Phase Model's declared dependency order, and no phase started before its predecessor's artifact existed",
+      "N2": "declared: every escalation raised is one this role could not resolve within its own authority; ES-001 records the half this role did resolve and routes only the remainder, because dispatching a run is not an agent action",
+      "N3": "declared: no follow-up records as deferred something the run was obliged to finish; the unsettled half of AC-006 was outside the change's declared scope, and the criterion-design question is routed to the scope owner rather than absorbed into the closure",
+      "N4": "declared: the account matches the run, reconstructed from the run ledger, the state store, the event stream and the five invocation envelopes rather than transcribed from any supplied status summary"
+    },
+    "commandsExecuted": [
+      "read runs/run-79630cb5274d/run-ledger.json for the four gate rows, their decisions, authorities, rationales, evidence references and timestamps",
+      "read runs/run-79630cb5274d/state.json for work-item and gate queue status, which records gate:Closure Gate at pending and Waiting",
+      "read all 66 records of runs/run-79630cb5274d/events.jsonl, with full detail on E-0030, E-0031, E-0033, E-0038, E-0039 and E-0053",
+      "read the invocation envelopes of all five phases for their input contracts and supplied sets, which is what each handoff acceptance was decided against",
+      "read runs/run-79630cb5274d/states/fix-implementation/state-ledger.json and the V-003 row of that phase's implementation report, field by field, for the DF-002 correction",
+      "read line 189 of workflows/workflow-engine.md for DF-005",
+      "read build/lib/omn_agent/_bundled_payload/agents/omn-dev-1-implement/manifest.yaml against agents/omn-dev-1-implement/manifest.yaml for DF-006",
+      "ran runtime/orchestration_result_validator.py over this artifact with the invocation envelope, read-only, with no report file written"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-orchestrator/system.md",
+    "agents/omn-orchestrator/identity.md",
+    "agents/omn-orchestrator/reasoning.md",
+    "agents/omn-orchestrator/execution.md",
+    "agents/omn-orchestrator/output.md",
+    "agents/omn-orchestrator/quality.md",
+    "agents/omn-orchestrator/examples.md",
+    "runs/run-79630cb5274d/states/closure-and-communication/invocation-envelope.json",
+    "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+    "runs/run-79630cb5274d/run-ledger.json",
+    "runs/run-79630cb5274d/state.json",
+    "runs/run-79630cb5274d/events.jsonl",
+    "runs/run-79630cb5274d/states/triage-and-impact/invocation-envelope.json",
+    "runs/run-79630cb5274d/states/root-cause-analysis/invocation-envelope.json",
+    "runs/run-79630cb5274d/states/fix-implementation/invocation-envelope.json",
+    "runs/run-79630cb5274d/states/fix-implementation/state-ledger.json",
+    "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-79630cb5274d/states/regression-validation/invocation-envelope.json",
+    "workflows/fix-bug.md",
+    "workflows/workflow-gate-matrix.md",
+    "workflows/workflow-engine.md",
+    "templates/orchestration-result.md",
+    "runtime/orchestration_result_validator.py",
+    "agents/omn-dev-1-implement/manifest.yaml",
+    "build/lib/omn_agent/_bundled_payload/agents/omn-dev-1-implement/manifest.yaml"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-79630cb5274d/states/closure-and-communication/artifacts/orchestration-result.md",
+    "runs/run-79630cb5274d/states/closure-and-communication/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

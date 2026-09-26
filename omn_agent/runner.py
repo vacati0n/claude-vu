@@ -173,11 +173,12 @@ def cmd_run(args) -> ExitCode:
                        hint="e.g. 'omn-agent run Jira ON-115 --gate-policy "
                             "auto --approve'")
     modes = [bool(args.show), bool(args.dispatch), bool(args.complete),
-             bool(args.gate), bool(getattr(args, "report", False))]
+             bool(args.gate), bool(getattr(args, "report", False)),
+             bool(getattr(args, "policy_exception", False))]
     if sum(modes) > 1:
         raise OmnError(ExitCode.INVALID_TARGET,
                        "choose one of --show / --report / --dispatch / --complete / "
-                       "--gate")
+                       "--gate / --policy-exception")
     if (args.watch or args.json or args.no_color) and not args.show:
         raise OmnError(ExitCode.INVALID_TARGET,
                        "--watch / --json / --no-color only apply to --show")
@@ -219,6 +220,10 @@ def cmd_run(args) -> ExitCode:
          "--requester", f"omn-agent:{getpass.getuser()}"]
     if getattr(args, "gate_policy", None):
         base += ["--gate-policy", args.gate_policy]
+    if getattr(args, "demo", False):
+        # Idempotent on the runtime side: the first command that carries it throws the run's
+        # demo switch (backfilling a run already in flight); later ones find it thrown.
+        base += ["--demo"]
 
     # ---- side-effecting paths (approval required) ------------------------
     if args.dispatch:
@@ -245,6 +250,24 @@ def cmd_run(args) -> ExitCode:
                         report)
         save_task(tdir, task)
         return _finish(report, task, rc, "complete")
+
+    if getattr(args, "policy_exception", False):
+        if not args.phase:
+            raise OmnError(ExitCode.INVALID_TARGET,
+                           "--policy-exception requires --phase")
+        if not (args.owner_role and args.rationale):
+            raise OmnError(ExitCode.INVALID_TARGET,
+                           "--policy-exception requires --owner-role and --rationale")
+        _require_approval(f"policy exception on phase {args.phase}", tdir,
+                          args.approve, task)
+        argv = ["policy-exception"] + base + [
+            "--phase", args.phase,
+            "--owner-role", args.owner_role,
+            "--decided-by", args.decided_by or getpass.getuser(),
+            "--rationale", args.rationale]
+        rc, _ = _invoke(fw_dir, target, argv, report)
+        save_task(tdir, task)
+        return _finish(report, task, rc, "policy-exception")
 
     if args.gate:
         if not (args.decision and args.rationale and args.owner_role):

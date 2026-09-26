@@ -1,0 +1,152 @@
+{
+  "invocation_id": "inv-4c51600606df-03-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-007.md",
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-008.md"
+  ],
+  "structured_output": {
+    "package_status": "complete",
+    "design_id": "CKA-06-technical-design",
+    "counts": {
+      "statements": 38,
+      "facts": 33,
+      "assumptions": 8,
+      "constraints": 15,
+      "constraints_hard": 12,
+      "constraints_negotiable": 3,
+      "impacted_modules": 11,
+      "modules_contract_change": 2,
+      "modules_extension": 3,
+      "modules_operational_impact": 1,
+      "modules_behavior_change": 1,
+      "modules_no_change_verified": 4,
+      "modules_speculative": 1,
+      "reuse_survey_rows": 11,
+      "options": 5,
+      "options_eliminated": 2,
+      "decisions": 10,
+      "decisions_architecture_significant": 3,
+      "decision_records_emitted": 3,
+      "risks": 12,
+      "sequencing_constraints": 11,
+      "open_questions": 6,
+      "open_questions_blocking": 0,
+      "planner_tasks_bound": 22
+    },
+    "recomputed_option_ranking": {
+      "criteria_order": [
+        "hard-constraint satisfaction",
+        "impact surface",
+        "reuse leverage",
+        "quality attributes",
+        "migration burden",
+        "operability"
+      ],
+      "eliminated": {
+        "O-004": "violates C-002; 21 anchor identifiers and a closed internal link graph are not derivable",
+        "O-005": "violates C-001; inverts the approved source direction"
+      },
+      "survivors_ranked": ["O-001", "O-002", "O-003"],
+      "derivation": "All three survivors satisfy every hard constraint, so criterion 1 does not separate them. Criterion 2, impact surface: O-001=2, O-002=3, O-003=3. O-001 leads outright with no tie, so selection resolves at criterion 2. O-002 outranks O-003 at criterion 6, operability, the two being equal at criteria 2, 3, and 5.",
+      "recomputed_winner": "O-001",
+      "stated_selection": "O-001",
+      "agrees": true,
+      "highest_scoring_rejected_alternative": "O-002"
+    },
+    "routed_design_questions_answered": {
+      "source_notation_for_reading_affordances": "Answered. D-001 with D-002 to D-006 and D-010. One brace attribute construct on the line whose value it supplies carries the anchor identifier, the divergent navigation label, and the callout variant. Callouts are blockquotes whose leading bolded run becomes the tag, reusing the 20 bolded lead-ins already in the source. Chain diagrams are fenced blocks with a naming info string, reusing the two fences already present. Code samples keep their existing fences and info strings, with comment marking decided by a quote-aware lexical rule keyed to the info string. Chapter labels, the navigation index, numeric-table marking, and section nesting are fully derived and cost the contributor nothing.",
+      "anchor_notation": "Answered. Enumerated independently from the committed docs/user-guide.html: 21 declared identifiers, 9 chapter-level and 12 in-chapter, with 21 internal link targets forming an equal set. None is derivable from its heading under any common slug algorithm, so derivation is eliminated on a hard constraint rather than scored. The set is authored in the source as heading attributes and recorded as a fixed baseline in Appendix B; the renderer additionally fails the build on a duplicate identifier or an unresolved internal link."
+    },
+    "planning_gate_conditions": {
+      "PGC-1": "carried as C-005 and P-008; the drift check is a step inside the existing tests job and the six job identifiers are unchanged",
+      "PGC-2": "carried as D-008 and Q-006; the step lands under tests-ubuntu, required from the first run, and tests-windows, advisory until the flip; the design does not assume the flip",
+      "PGC-3": "carried as P-005; the cross-platform probe sits immediately after the renderer first matches and before the drift step is wired, with R-002 rated high likelihood",
+      "PGC-4": "carried as P-007 for the discard demonstration, with Q-002 routing task assignment to planner because task identifiers are not this agent's to create",
+      "PGC-5": "carried as C-008; both items are recorded as non-droppable merges, the dependency paragraph because a committed test asserts it and the troubleshooting row because it states a fact about tool behaviour"
+    },
+    "quality_checks": {
+      "check_set_version": "agents/architect/quality.md 1.0.0",
+      "run": 98,
+      "passed": 98,
+      "failed": 0,
+      "repair_passes": 1,
+      "repair_detail": "One repair pass on A15.5. The first emission left seven supplied planner tasks unreached by any sequencing constraint's Binds column, and the traceability appendix asserted that they carried no ordering obligation, which was wrong for the counting-rule and walkthrough tasks whose ordering the supplied plan itself records. P-002 and P-010 were widened to their true bindings and the appendix paragraph was corrected. All 22 supplied tasks are now bound.",
+      "groups": {
+        "A1_structural_conformance": "8/8 pass",
+        "A2_boundary_compliance": "10/10 pass",
+        "A3_register_integrity": "6/6 pass",
+        "A4_model_and_tool_independence": "4/4 pass",
+        "A5_objective_and_requirement_integrity": "4/4 pass",
+        "A6_impact_analysis_quality": "6/6 pass",
+        "A7_reuse_discipline": "5/5 pass",
+        "A8_option_and_selection_integrity": "7/7 pass",
+        "A9_contract_and_migration_integrity": "6/6 pass",
+        "A10_sequencing_integrity": "7/7 pass",
+        "A11_risk_integrity": "5/5 pass",
+        "A12_estimation_integrity": "5/5 pass",
+        "A13_decision_record_integrity": "7/7 pass",
+        "A14_framework_alignment": "8/8 pass",
+        "A15_traceability_closure": "5/5 pass, A15.5 after one repair pass",
+        "A16_determinism": "5/5 pass"
+      },
+      "verification_notes": [
+        "A8.5 verified by recomputation, not inspection: the criteria were re-applied to the evaluation table and the recomputed winner O-001 equals the stated selection.",
+        "A3 verified by count: 33 facts each citing the file read that establishes it, 8 assumptions each stating need, impact-if-false, and a confirming role, registers disjoint, and no current-state claim outside them.",
+        "A2.7 verified: every fact was taken by direct read of a committed file in the repository working tree. No external system, repository host, or ticketing tool was contacted.",
+        "A4.1 verified by scan: no model, vendor, provider, or agent-runtime token appears in any emitted artifact.",
+        "A2.1 verified: exactly one fenced block, the metadata block, across all four artifacts.",
+        "No implementation work was performed and no production code, test, migration, script, or configuration was written."
+      ]
+    },
+    "estimate": {
+      "overall": "L",
+      "confidence": "low",
+      "drivers": [
+        "byte-exact reproduction of an existing hand-authored page (R-012)",
+        "unconfirmed checkout line-ending behaviour on the windows leg (A-002, R-002)"
+      ]
+    },
+    "gate_handoff": {
+      "gate": "Design Gate",
+      "owners": ["omn-architect", "omn-tech-lead"],
+      "accepting_owner_under_producer_exclusion": "omn-tech-lead",
+      "records_awaiting_acceptance": ["D-001", "D-007", "D-008"]
+    }
+  },
+  "evidence_refs": [
+    "agents/architect/system.md",
+    "agents/architect/identity.md",
+    "agents/architect/reasoning.md",
+    "agents/architect/execution.md",
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "agents/architect/examples.md",
+    "agents/architect/manifest.yaml",
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/invocation-envelope.json",
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/dispatch-prompt.md",
+    "runs/inputs/cka-06-feature-request.md",
+    "runs/run-4c51600606df/states/execution-planning/artifacts/execution-plan.md",
+    "runs/run-4c51600606df/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "templates/technical-design.md",
+    "templates/architecture-decision-record.md",
+    "workflows/workflow-gate-matrix.md",
+    "docs/USER-GUIDE.md",
+    "docs/user-guide.html",
+    ".github/workflows/verify.yml",
+    "tests/test_ci_workflow.py",
+    "tests/test_omn_agent.py"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-007.md",
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-008.md",
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

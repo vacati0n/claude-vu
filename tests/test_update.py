@@ -87,7 +87,23 @@ def status_json(s):
         gate.update(status="blocked")
         run_status = "WaitingForHuman"
     elif stage == "rejected":
-        gate.update(decision="rejected")
+        # The real runtime's shape after `gate reject`: the phase stays
+        # completed and the gate stands failed/rejected. Nothing is
+        # dispatchable until a `rollback` is authorised.
+        step.update(status="completed", eligible=False)
+        gate.update(status="failed", decision="rejected",
+                    failure_class="gate-rejection")
+        run_status = "Recovering"
+    elif stage == "rolled-back":
+        # After `rollback`: the phase re-enters pending/eligible with the
+        # authorisation recorded, and the gate is re-armed and undecided.
+        step.update(status="pending", eligible=True,
+                    rollback={"gate": "code-quality-gate",
+                              "authorisation_id":
+                                  "RB-run-abcdef123456-code-quality-gate-01",
+                              "superseded_attempt": 1})
+        gate.update(status="pending", decision=None,
+                    decision_history=[{"decision": "rejected"}])
     elif stage == "dispatched":
         step.update(status="leased", eligible=False)
         run_status = "ExecutingState"
@@ -142,6 +158,16 @@ def main():
         s["stage"] = "rejected" if a.decision == "reject" else "done"
         save(s)
         print(f"gate {a.gate}: {a.decision}")
+        return 0
+    if cmd == "rollback":
+        if s["stage"] != "rejected":
+            print("RUNTIME FAILURE [request-validation-failure] the gate does "
+                  "not stand rejected", file=sys.stderr)
+            return 2
+        s["log"].append({"cmd": "rollback", "args": args})
+        s["stage"] = "rolled-back"
+        save(s)
+        print("rollback       : RB-run-abcdef123456-code-quality-gate-01")
         return 0
     if cmd == "dispatch":
         s["log"].append({"cmd": "dispatch", "args": args})
@@ -323,6 +349,36 @@ class UpdateTestCase(GitFixtureTestCase):
         self.assertEqual(len(self.stub_log("dispatch")), 1)
         self.assertNotIn("pendingRunArchive", task["updateFlow"])
         self.assertIn("U-WAIT", out)
+
+    def test_rejected_stage_is_not_dispatchable_without_rollback(self):
+        """The stub follows the real runtime: a rejection alone leaves the
+        phase completed and the gate rejected, and only `rollback` re-enters
+        the phase. `update` never rejects a gate -- a changed input archives
+        the run -- so this pins the shape the shared helpers read, not a path
+        `update` drives."""
+        from omn_agent.fix_comments import _dispatchable_step
+        key = self.setup_run_task(stage="rejected")
+        status = self.status_json()
+        self.assertIsNone(_dispatchable_step(status))
+        gate = status["phases"][0]["gates"][0]
+        self.assertEqual((gate["status"], gate["decision"]),
+                         ("failed", "rejected"))
+        self.set_stage("rolled-back")
+        status = self.status_json()
+        step = _dispatchable_step(status)
+        self.assertEqual(step["state_id"], "implementation")
+        self.assertEqual(step["rollback"]["gate"], "code-quality-gate")
+        self.assertEqual(step["rollback"]["superseded_attempt"], 1)
+        self.assertIsNone(status["phases"][0]["gates"][0]["decision"])
+
+    def status_json(self) -> dict:
+        import subprocess
+        import sys
+        proc = subprocess.run(
+            [sys.executable, str(self.fw / "runtime" / "framework_runtime.py"),
+             "status", "--run-id", "run-abcdef123456", "--json"],
+            capture_output=True, text=True, cwd=str(self.repo))
+        return json.loads(proc.stdout)
 
     def test_unchanged_ticket_is_a_noop_replan(self):
         key = self.setup_run_task(stage="dispatched", pr=True)

@@ -1,0 +1,427 @@
+{
+  "invocation_id": "inv-3e6f6a248b99-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-3e6f6a248b99/states/closure-and-communication/artifacts/orchestration-result.md"
+  ],
+  "structured_output": {
+    "coordinationBasis": "closure",
+    "disposition": "closed-with-followups",
+    "status": "complete",
+    "gateOwnerAddressed": "omn-documentation",
+    "counts": {
+      "phases": 5,
+      "complete": 4,
+      "blocked": 1,
+      "not-started": 0,
+      "handoffs": 4,
+      "handoffsAccepted": 4,
+      "handoffsRefused": 0,
+      "handoffsPending": 0,
+      "escalations": 8,
+      "followUps": 11,
+      "openQuestions": 0
+    },
+    "escalationSeverity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 2,
+      "low": 5
+    },
+    "escalationStatus": {
+      "open": 0,
+      "resolved": 5,
+      "routed": 3,
+      "accepted-risk": 0
+    },
+    "followUpStatus": {
+      "open": 10,
+      "resolved": 1,
+      "scheduled": 0,
+      "accepted-risk": 0
+    },
+    "blockingEscalationsOutstanding": [],
+    "gateDecisionsRecorded": {
+      "Triage Gate": {
+        "decision": "approved",
+        "decidedBy": "omn-tech-lead",
+        "at": "2026-09-06T10:10:55Z"
+      },
+      "Fix Gate": {
+        "decision": "approved",
+        "decidedBy": "omn-dev-2-reviewer",
+        "at": "2026-09-07T11:59:18Z",
+        "decisionHistory": [
+          {
+            "decision": "rejected",
+            "decidedBy": "omn-dev-2-reviewer",
+            "at": "2026-09-06T13:12:16Z",
+            "supersededBy": "RB-run-3e6f6a248b99-fix-gate-01",
+            "target": "fix-implementation"
+          }
+        ]
+      },
+      "Verification Gate": {
+        "decision": "approved",
+        "decidedBy": "omn-dev-2-reviewer",
+        "at": "2026-09-07T13:57:36Z"
+      },
+      "Closure Gate": {
+        "decision": null,
+        "decidedBy": null,
+        "restsWith": "omn-documentation"
+      }
+    },
+    "closureConditionsDischarged": {
+      "CR-005": "closed on inspection; edit confined to the three sites and their bundled mirrors; test_bundled_payload 11 OK and test_gate_rollback 34 OK re-run here (FU-003)",
+      "strandedRunDisposition": "ES-002: operator rollback on run-4c51600606df before any Verification Gate decision; S8 accounted by CKA-06's own proposal at its own closure (ES-008, FU-007)",
+      "idempotencyKeyStatement": "ES-006, in the ruling's words; this run's own attempt-2 key change also recorded with its cause",
+      "architectRulings": "ES-004 (active descendant: release via the worker-loss path, FU-004), ES-005 (M6 supersession-as-traversal and Run E, FU-005), ES-006 (key); CKA-06 hunk question routed as ES-007",
+      "scopeOfGo": "the fix on this tree; shared-tree release readiness routed to omn-tech-lead as ES-003",
+      "selfHostingS8": "7 of 8, S8 failing on exactly run-3e6f6a248b99 and run-4c51600606df"
+    },
+    "readOnlyCommandsExecuted": [
+      "framework_runtime.py status --run-id run-3e6f6a248b99 --compact --no-color",
+      "framework_runtime.py recovery --run-id run-3e6f6a248b99",
+      "verify_self_hosting.py (repository root)",
+      "python -m unittest discover -s tests -p test_bundled_payload.py",
+      "python -m unittest discover -s tests -p test_gate_rollback.py",
+      "orchestration_result_validator.py <artifact> --envelope <envelope>",
+      "grep (superseded path-rule wording), cmp (bundled mirrors), stat (CR-005 site mtimes), git diff --stat"
+    ],
+    "qualityChecks": {
+      "S1": {
+        "result": "pass"
+      },
+      "S2": {
+        "result": "pass"
+      },
+      "S3": {
+        "result": "pass"
+      },
+      "S4": {
+        "result": "pass"
+      },
+      "S5": {
+        "result": "pass"
+      },
+      "S6": {
+        "result": "pass"
+      },
+      "S7": {
+        "result": "pass"
+      },
+      "M1": {
+        "result": "pass"
+      },
+      "M2": {
+        "result": "pass"
+      },
+      "M3": {
+        "result": "pass"
+      },
+      "M4": {
+        "result": "pass"
+      },
+      "M5": {
+        "result": "pass"
+      },
+      "O1": {
+        "result": "pass"
+      },
+      "P1": {
+        "result": "pass"
+      },
+      "P2": {
+        "result": "pass"
+      },
+      "P3": {
+        "result": "pass"
+      },
+      "P4": {
+        "result": "pass"
+      },
+      "O5": {
+        "result": "pass"
+      },
+      "A1": {
+        "result": "pass"
+      },
+      "A2": {
+        "result": "pass"
+      },
+      "A3": {
+        "result": "pass"
+      },
+      "O4": {
+        "result": "pass"
+      },
+      "O3": {
+        "result": "pass"
+      },
+      "N-COUNT": {
+        "result": "pass",
+        "detail": "progression counts recomputed from the phase table (5/4/1/0); event, transition and recovery-ledger counts counted directly (61, 35, 10 with 0 open); every figure quoted from the validation report or a gate rationale is attributed to that source as its measurement"
+      },
+      "H1": {
+        "result": "pass"
+      },
+      "H2": {
+        "result": "pass"
+      },
+      "H3": {
+        "result": "pass"
+      },
+      "H4": {
+        "result": "pass",
+        "detail": "no refused row; nothing to name"
+      },
+      "E1": {
+        "result": "pass"
+      },
+      "E2": {
+        "result": "pass"
+      },
+      "E3": {
+        "result": "pass"
+      },
+      "E4": {
+        "result": "pass",
+        "detail": "F1 kept high; DF-001, DF-002, DF-003 and F-001, F-002, F-003 kept low; R-001 kept medium; the two escalations this role raised (ES-002, ES-003) carry severities this role assigned with the reason stated, no source having recorded one"
+      },
+      "E5": {
+        "result": "pass",
+        "detail": "advisory; the one item this role could resolve (S8 accounting for the stranded run) is recorded as resolved on this role's authority, not escalated"
+      },
+      "O8": {
+        "result": "pass"
+      },
+      "O6": {
+        "result": "pass"
+      },
+      "O7": {
+        "result": "pass"
+      },
+      "O9": {
+        "result": "pass"
+      },
+      "C1": {
+        "result": "pass"
+      },
+      "C2": {
+        "result": "pass"
+      },
+      "T1": {
+        "result": "pass"
+      },
+      "T2": {
+        "result": "pass"
+      },
+      "T3": {
+        "result": "pass"
+      },
+      "T4": {
+        "result": "pass"
+      },
+      "T5": {
+        "result": "pass"
+      }
+    },
+    "qualityChecksRun": 44,
+    "qualityChecksPassed": 44,
+    "notMachineCheckableObligations": {
+      "N1": {
+        "result": "declared",
+        "statement": "the run followed the Phase Model's dependency order; the rollback re-entered exactly the phase the rejected gate closes, nothing shallower or deeper"
+      },
+      "N2": {
+        "result": "declared",
+        "statement": "ES-002 (a rollback no agent may perform) and ES-003 (release readiness) are outside this role's authority; ES-001 and ES-004 to ES-007 were raised by other roles and are recorded with their resolutions; ES-008 is recorded as resolved by this role on coordination authority"
+      },
+      "N3": {
+        "result": "declared",
+        "statement": "no follow-up defers an obligation of this fix: the one unmet validation step (AC-013) is carried as a test gap on the Verification Gate owner's recorded disposition, and the change proposal is a post-gate obligation this phase is prohibited from writing"
+      },
+      "N4": {
+        "result": "declared",
+        "statement": "every phase state, gate decision, rollback step and handoff was read from run-ledger.json, state.json, events.jsonl, the recovery ledger and the gate envelopes, and each row names where"
+      }
+    },
+    "validationEngine": {
+      "validator": "orchestration_result_validator",
+      "result": "pass",
+      "checksRun": 34,
+      "checksPassed": 34,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3,
+      "checks": {
+        "C1.1": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C1.2": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C1.3": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C1.4": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C2.1": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C2.2": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C2.3": {
+          "result": "pass",
+          "severity": "Correctable"
+        },
+        "C2.4": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C2.5": {
+          "result": "pass",
+          "severity": "Advisory"
+        },
+        "C3.1": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C3.2": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C3.3": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C4.1": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C4.2": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C4.3": {
+          "result": "pass",
+          "severity": "Correctable"
+        },
+        "C5.1": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C5.2": {
+          "result": "pass",
+          "severity": "Correctable"
+        },
+        "C4.4": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C4.5": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C4.6": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C6.1": {
+          "result": "pass",
+          "severity": "Correctable"
+        },
+        "C6.2": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C6.3": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "C6.4": {
+          "result": "pass",
+          "severity": "Correctable"
+        },
+        "C7.1": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "N1": {
+          "result": "not-machine-checkable",
+          "severity": "Advisory"
+        },
+        "N2": {
+          "result": "not-machine-checkable",
+          "severity": "Advisory"
+        },
+        "N3": {
+          "result": "not-machine-checkable",
+          "severity": "Advisory"
+        },
+        "O1": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "O2": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "O3": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "O4": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "O5": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "O6": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "O7": {
+          "result": "pass",
+          "severity": "Blocking"
+        },
+        "O8": {
+          "result": "pass",
+          "severity": "Correctable"
+        },
+        "O9": {
+          "result": "pass",
+          "severity": "Blocking"
+        }
+      }
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-orchestrator/system.md",
+    "agents/omn-orchestrator/identity.md",
+    "agents/omn-orchestrator/reasoning.md",
+    "agents/omn-orchestrator/execution.md",
+    "agents/omn-orchestrator/output.md",
+    "agents/omn-orchestrator/quality.md",
+    "agents/omn-orchestrator/examples.md",
+    "runs/run-3e6f6a248b99/states/closure-and-communication/invocation-envelope.json"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "runs/run-3e6f6a248b99/states/closure-and-communication/artifacts/orchestration-result.md",
+    "runs/run-3e6f6a248b99/states/closure-and-communication/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

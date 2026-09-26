@@ -1,0 +1,315 @@
+{
+  "invocation_id": "inv-3e6f6a248b99-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-3e6f6a248b99/states/root-cause-analysis/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysis_basis": "root-cause",
+    "analysis_id": "BA-run-3e6f6a248b99-root-cause-analysis",
+    "supersedes": "runs/run-3e6f6a248b99/states/triage-and-impact/artifacts/bug-analysis.md",
+    "severity": "high",
+    "reproducibility": "deterministic",
+    "status": "provisional",
+    "status_basis": "reasoning.md Stage 9 row 5: business impact unquantified (Q-004); chain closed on a condition (C-009); every alternative eliminated or recorded",
+    "counts": {
+      "evidence_records": 30,
+      "causal_steps": 9,
+      "causal_steps_by_confidence": {
+        "high": 8,
+        "medium": 1,
+        "low": 0
+      },
+      "open_questions": 7,
+      "open_questions_blocking": 0,
+      "reproduction_attempts_this_phase": 3,
+      "reproduction_attempts_registered": [
+        "E-021 (two executions: one refused on working directory, one reproducing every reported outcome)",
+        "E-022"
+      ]
+    },
+    "gate_conditions": {
+      "Q-001": "settled by operator input runs/inputs/gate-rollback-architect-decision-memo.md, registered as E-020; option (a) supersession in the state model; not re-opened",
+      "Q-002": "folded into fix scope as a labelling defect in record_gate_decision; no decision value changes",
+      "Q-003": "addressed explicitly: executed probe E-022 shows a final-gate rejection projects Completed, next_action aggregate, finished true, so run_completed fires; out of scope per memo; recorded as risk and routed as a separate defect",
+      "M12_M13": "treated as invariants the fix must satisfy; Fix Strategy items 1 and 3 state how; C-004 recorded as a constraint, C-005 and C-006 as symptom locations",
+      "blast_radius_additions": "tests/test_gate_policy.py::test_rejected_prior_decision_is_not_precedent, state_table/queue-status rendering and run --show tests, maybe_auto_decide_gates all named in blast radius and regression scope; auto-approval hold for a re-armed gate stated as Fix Strategy item 6"
+    },
+    "memo_findings": {
+      "Q-006": "attempt-scoped artifact path: permitted_write, the envelope's expected artifact path, and the state-ledger artifact path derive from the canonical path that also fixes the idempotency key; must be decoupled (E-026)",
+      "Q-007": "refresh wait-branch correction must cover gate work items too, or an undecided gate closing a superseded phase stays decidable (E-023, E-024)",
+      "auto_approval": "memo silent; a gate with non-empty decision_history must be held for a human under auto-on-clean-evidence (E-025)",
+      "conflicts_with_decision": "none found; invariants M12, M13, human-block, producer exclusion verified against source"
+    },
+    "quality_checks": {
+      "S1": {
+        "result": "pass"
+      },
+      "S2": {
+        "result": "pass"
+      },
+      "S3": {
+        "result": "pass"
+      },
+      "S4": {
+        "result": "pass"
+      },
+      "S5": {
+        "result": "pass"
+      },
+      "S6": {
+        "result": "pass"
+      },
+      "S7": {
+        "result": "pass"
+      },
+      "S8": {
+        "result": "pass"
+      },
+      "S9": {
+        "result": "pass"
+      },
+      "D1": {
+        "result": "pass"
+      },
+      "D2": {
+        "result": "pass"
+      },
+      "D3": {
+        "result": "pass"
+      },
+      "D4": {
+        "result": "pass"
+      },
+      "D5": {
+        "result": "pass"
+      },
+      "D6": {
+        "result": "pass"
+      },
+      "D7": {
+        "result": "pass"
+      },
+      "B2": {
+        "result": "pass"
+      },
+      "B3": {
+        "result": "pass"
+      },
+      "A1": {
+        "result": "pass"
+      },
+      "B4": {
+        "result": "pass"
+      },
+      "V1": {
+        "result": "pass"
+      },
+      "V2": {
+        "result": "pass"
+      },
+      "V3": {
+        "result": "pass",
+        "note": "not applicable: frequency is deterministic; recorded as pass"
+      },
+      "V4": {
+        "result": "pass",
+        "note": "not applicable: frequency is deterministic; recorded as pass"
+      },
+      "V5": {
+        "result": "pass"
+      },
+      "B1": {
+        "result": "pass"
+      },
+      "V6": {
+        "result": "pass"
+      },
+      "V7": {
+        "result": "pass"
+      },
+      "V8": {
+        "result": "pass"
+      },
+      "V9": {
+        "result": "pass"
+      },
+      "V10": {
+        "result": "pass",
+        "note": "failed on first render (E-028 registered but uncited); repaired by citing it where Fix Strategy item 8 and Q-005 rest on it; full check set re-run"
+      },
+      "V11": {
+        "result": "pass"
+      },
+      "V12": {
+        "result": "pass"
+      },
+      "V13": {
+        "result": "pass"
+      },
+      "V14": {
+        "result": "pass"
+      },
+      "V15": {
+        "result": "pass"
+      },
+      "V16": {
+        "result": "pass"
+      },
+      "V17": {
+        "result": "pass"
+      },
+      "V18": {
+        "result": "pass"
+      },
+      "V19": {
+        "result": "pass"
+      },
+      "V20": {
+        "result": "pass"
+      },
+      "V21": {
+        "result": "pass"
+      },
+      "V22": {
+        "result": "pass"
+      },
+      "V23": {
+        "result": "pass"
+      },
+      "V24": {
+        "result": "pass"
+      },
+      "V25": {
+        "result": "pass"
+      },
+      "V26": {
+        "result": "pass"
+      },
+      "V27": {
+        "result": "pass"
+      },
+      "V28": {
+        "result": "pass"
+      },
+      "B5": {
+        "result": "pass",
+        "note": "not applicable: severity is high, not critical; recorded as pass"
+      },
+      "V29": {
+        "result": "pass",
+        "note": "Stage 9 row 5 fires: no business-impact statement supplied, severity rests on technical impact alone, so status is provisional; the causal chain itself is closed on a condition"
+      },
+      "V30": {
+        "result": "pass"
+      },
+      "V31": {
+        "result": "pass"
+      },
+      "V32": {
+        "result": "pass"
+      },
+      "V33": {
+        "result": "pass",
+        "note": "no question blocks and every question's answer changes no causal step, so identifier order satisfies the ordering rule"
+      },
+      "A2": {
+        "result": "pass"
+      },
+      "A3": {
+        "result": "pass"
+      },
+      "A4": {
+        "result": "pass"
+      },
+      "A5": {
+        "result": "pass"
+      },
+      "A6": {
+        "result": "pass",
+        "note": "the fix strategy records the architect's decided design as supplied input and proposes no redesign of its own"
+      },
+      "A7": {
+        "result": "pass"
+      },
+      "A8": {
+        "result": "pass"
+      },
+      "C1": {
+        "result": "pass"
+      },
+      "C2": {
+        "result": "pass"
+      },
+      "C3": {
+        "result": "pass"
+      },
+      "C4": {
+        "result": "pass"
+      },
+      "C5": {
+        "result": "pass"
+      },
+      "C6": {
+        "result": "pass"
+      },
+      "C7": {
+        "result": "pass"
+      }
+    },
+    "quality_checks_run": 69,
+    "quality_checks_passed": 69,
+    "validation_engine": {
+      "validator": "bug_analysis_validator",
+      "result": "pass",
+      "checksRun": 30,
+      "checksPassed": 30,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "counts": {
+        "sections": 9,
+        "status": "provisional",
+        "identifiers": {
+          "E": 30,
+          "C": 9,
+          "Q": 7
+        },
+        "tableRows": {
+          "Reproduction": 30,
+          "Root Cause Analysis": 9
+        }
+      }
+    },
+    "obligations": {
+      "N1": {
+        "judgement": "discharged",
+        "detail": "C-009 and the root cause statement name a missing state and a missing authorisation surface in the state model; the terminal statuses, guard G4-GATE, and the release clearing action are named as locations, not causes"
+      },
+      "N2": {
+        "judgement": "discharged",
+        "detail": "every causal step cites registered evidence read or executed in this run; supplied causes (reporter, memo) were tested against source and execution before entering the chain"
+      },
+      "N3": {
+        "judgement": "discharged",
+        "detail": "radius names eleven boundaries including persisted stranded state, the auto-approval path, the scheduler wait branch, the status surfaces, and the run-status projection"
+      }
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/execution.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "agents/omn-dev-1-bug-analyst/examples.md",
+    "runs/run-3e6f6a248b99/states/root-cause-analysis/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-3e6f6a248b99/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-3e6f6a248b99/states/root-cause-analysis/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

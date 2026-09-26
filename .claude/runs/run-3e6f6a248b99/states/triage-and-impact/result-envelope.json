@@ -1,0 +1,154 @@
+{
+  "invocation_id": "inv-3e6f6a248b99-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-3e6f6a248b99/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "triage",
+    "analysisId": "BA-run-3e6f6a248b99-triage-and-impact",
+    "defectReference": "runs/inputs/gate-rejection-rollback-dead-end-defect-report.md",
+    "severity": "high",
+    "reproducibility": "deterministic",
+    "status": "provisional",
+    "statusBasis": "Stage 9 row: business impact unquantified, severity rests on technical impact alone; the fix strategy is also conditional on a structural decision routed to architect (Q-001)",
+    "counts": {
+      "evidenceRecords": 19,
+      "causalSteps": 8,
+      "causalStepsByConfidence": {
+        "high": 7,
+        "medium": 1,
+        "low": 0
+      },
+      "evidenceByConfidence": {
+        "high": 16,
+        "medium": 2,
+        "low": 1
+      },
+      "openQuestions": 5,
+      "openQuestionsBlocking": 1
+    },
+    "reportClaimsCorrected": [
+      "release --phase \"Review Gate\" raises TransitionError (gate names are not state work items); it does not print NOTHING TO RELEASE, though it equally cannot apply",
+      "the live store records dispatch replays for implementation only; the quality-review REPLAY outcome was reproduced on a scratch copy, not evidenced in the live run"
+    ],
+    "qualityChecks": {
+      "run": 69,
+      "passed": 69,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "S9": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "D7": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "A1": "pass",
+        "B4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "V4": "pass",
+        "V5": "pass",
+        "B1": "pass",
+        "V6": "pass",
+        "V7": "pass",
+        "V8": "pass",
+        "V9": "pass",
+        "V10": "pass",
+        "V11": "pass",
+        "V12": "pass",
+        "V13": "pass",
+        "V14": "pass",
+        "V15": "pass",
+        "V16": "pass",
+        "V17": "pass",
+        "V18": "pass",
+        "V19": "pass",
+        "V20": "pass",
+        "V21": "pass",
+        "V22": "pass",
+        "V23": "pass",
+        "V24": "pass",
+        "V25": "pass",
+        "V26": "pass",
+        "V27": "pass",
+        "V28": "pass",
+        "B5": "pass",
+        "V29": "pass",
+        "V30": "pass",
+        "V31": "pass",
+        "V32": "pass",
+        "V33": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "A4": "pass",
+        "A5": "pass",
+        "A6": "pass",
+        "A7": "pass",
+        "A8": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass",
+        "C6": "pass",
+        "C7": "pass"
+      }
+    },
+    "validationEngine": {
+      "validator": "bug_analysis_validator",
+      "result": "pass",
+      "checksRun": 30,
+      "checksPassed": 30,
+      "correctableRepaired": [
+        "C6.1: progress event id E-0063 reworded so it does not read as an evidence identifier"
+      ]
+    },
+    "notMachineCheckable": {
+      "N1": {
+        "judgement": "discharged",
+        "detail": "the final step names a condition: the rollback action has no executor and no state-model representation; the symptom locations (G4-GATE, cmd_release, the completed phase) are registered as evidence, not stated as cause"
+      },
+      "N2": {
+        "judgement": "discharged",
+        "detail": "every causal step cites evidence read or executed in this run; the reporter's account is rated low and no step depends on it alone; the consumer step C-008 is medium because the consumers were read, not executed"
+      },
+      "N3": {
+        "judgement": "discharged",
+        "detail": "radius names the state model, the recovery path, the command surface, the contract text of eight workflows and two config files, both consumers and the user guide, the run-status projection, and the persisted stranded run records; the M12 boundary is named as a constraint"
+      }
+    },
+    "reproductionMethod": "runtime commands executed against a scratch copy of runs/run-4c51600606df with the RUNS constant redirected; live state.json digest identical before and after; plus a state-engine-only reproduction on a fresh scratch store",
+    "liveRunWritten": false
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/manifest.yaml",
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/execution.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "agents/omn-dev-1-bug-analyst/examples.md",
+    "runs/run-3e6f6a248b99/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-3e6f6a248b99/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-3e6f6a248b99/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

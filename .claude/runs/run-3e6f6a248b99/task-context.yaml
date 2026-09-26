@@ -1,0 +1,455 @@
+schema: framework.runtime/task-context.v1
+task_id: run-3e6f6a248b99
+command: bugfix
+workflow: fix-bug v1.0.0
+run_status: Completed
+updated_at: '2026-09-08T09:21:42Z'
+objective: 'The runtime classifies a gate rejection as a rollback (failure-classification matrix row "Gate rejection | gate
+  state | rollback | blocker marked unresolved", config/execution-engine.md; runtime/recovery_policy.py lines 104-109), and
+  every workflow specification''s Failure Recovery section promises the corresponding return — for example workflows/implement-feature.md:
+  "Return to implementation stage when review or QA fails." Nothing executes that rollback. After a rejection the gate work
+  item is failed, the phase it closes stays completed, every downstream phase is blocked by guard G4-GATE with reason awaiting_recovery_task,
+  and no runtime command can move any of them. The run can never'
+inputs:
+- type: defect-report
+  reference: runs/inputs/gate-rejection-rollback-dead-end-defect-report.md
+  digest: sha256:58254996be15ab2df9c563c83ce7e148
+relevant_agents:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S11
+  - S12
+  - S02
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S08
+  - S12
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S12
+- phase: regression-validation
+  agent: omn-qa
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S11
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  status: completed
+  required_skills:
+  - S10
+  - S11
+completed_phases:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-3e6f6a248b99/states/triage-and-impact/artifacts/bug-analysis.md
+  digest: sha256:4d2047b35d1b21ddb9dab483e9802043
+  validation: pass 30/30
+  attempts: 1
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-3e6f6a248b99/states/root-cause-analysis/artifacts/bug-analysis.md
+  digest: sha256:b9ba2e539661e39e27dacc3ea8e3dac4
+  validation: pass 30/30
+  attempts: 1
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-3e6f6a248b99/states/fix-implementation/artifacts/attempt-2/implementation-report.md
+  digest: sha256:fe046b7e591c3c3d1dcd47e9d6ac485a
+  validation: pass 32/32
+  attempts: 2
+- phase: regression-validation
+  agent: omn-qa
+  artifact: runs/run-3e6f6a248b99/states/regression-validation/artifacts/validation-report.md
+  digest: sha256:b5a700fce81383afd3902358ce349194
+  validation: pass 31/31
+  attempts: 1
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  artifact: runs/run-3e6f6a248b99/states/closure-and-communication/artifacts/orchestration-result.md
+  digest: sha256:b4f77cc6273367e2386cdde0087bbbbf
+  validation: pass 34/34
+  attempts: 1
+gates:
+- gate: Triage Gate
+  closes: triage-and-impact
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent a8c790ec607e85311, recorded by session operator for vuhoangcao
+- gate: Fix Gate
+  closes: fix-implementation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent a118b45e18514ead2, recorded by session operator for vuhoangcao
+- gate: Verification Gate
+  closes: regression-validation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent a3cabd5e43cb15ac2, recorded by session operator for vuhoangcao
+- gate: Closure Gate
+  closes: closure-and-communication
+  decision: approved
+  owner_role: omn-documentation
+  decided_by: omn-documentation subagent ac47618640dc18fd0, recorded by session operator for vuhoangcao
+artifacts:
+  triage-and-impact: runs/run-3e6f6a248b99/states/triage-and-impact/artifacts/bug-analysis.md
+  root-cause-analysis: runs/run-3e6f6a248b99/states/root-cause-analysis/artifacts/bug-analysis.md
+  fix-implementation: runs/run-3e6f6a248b99/states/fix-implementation/artifacts/attempt-2/implementation-report.md
+  regression-validation: runs/run-3e6f6a248b99/states/regression-validation/artifacts/validation-report.md
+  closure-and-communication: runs/run-3e6f6a248b99/states/closure-and-communication/artifacts/orchestration-result.md
+parallel_groups:
+- - triage-and-impact
+- - root-cause-analysis
+- - fix-implementation
+- - regression-validation
+- - closure-and-communication
+risks:
+- 'User impact: every operator who records a gate rejection on any run of any of the eight workflows: the run can neither
+  proceed, complete, nor accept the corr...'
+- 'Business impact: no business-impact statement was supplied as an input; the reporter''s own impact section (E-001) states
+  that the CKA-06 change cannot be re-...'
+- 'Technical impact: a correctness failure of the recovery contract rather than an availability fault: the classified action
+  rollback is never executed, so the...'
+- 'Blast radius: (1) the state model in runtime/state_engine.py, whose transition tables and idempotency binding apply to
+  every work type in every workflow; (2)...'
+- 'Business impact: no business-impact statement was supplied as an input to either phase; the reporter''s own impact section
+  (E-001) states that the CKA-06 chan...'
+- 'R-001: a rejection of a workflow''s final gate still projects the run Completed and emits run_completed before the... |
+  medium | a misleading completion record on such a run'
+- 'R-002: the recovery ledger''s atomic replace raised a Windows permission error once during attempt 1''s verification...
+  | low | a verifier run fails without a logic fault and leaves its scratch runs behind until the next run re-plans them'
+- 'R-003: the retry-class clearing action''s optional suffix "to reclaim it sooner" names release, which on a retrying...
+  | low | an operator following the suffix gets a no-op'
+- 'R-004: the operator action on the stranded run is proven on scratch copies of that run and on the harness run, not... |
+  low | the first live deeper-target rollback exercises the corrected range on the live store'
+- 'R-005: an approved gate over any phase in the supersession range cannot be re-armed within the two admitted transi... |
+  medium | a rework that must return past an approved gate needs a new run'
+- 'R-006: rollback_range leaves a phase in the target''s downstream cone that is not completed to the scheduler; a des...
+  | low | a running consumer of superseded evidence completes on stale input'
+- 'Accepted risk: the run-status projection and aggregator consequence (run_completed while a final gate stands rejected,
+  a supersession after run_completed) ac...'
+- 'Unmitigated risk: a descendant leased or running at the moment of authorisation is neither superseded nor refused and keeps
+  consuming superseded evidence unt...'
+- 'Monitoring required: any recovery ledger holding an open gate-rejection entry while no state item is pending and eligible
+  and no gate awaits a decision (shou...'
+decisions:
+- 'Root cause statement: the recovery contract''s rollback action has no executor and no representation in the state model:
+  the Recovery Controller decides rollb...'
+- 'Why detection failed earlier: runtime/verify_recovery.py induces only Validation Engine rejections (Runs A and B) and never
+  a gate rejection, so the one reco...'
+- 'C-001: rejection recorded | a listed non-producing gate owner recorded decision reject on the Review Gate, a gate closing
+  a phase alrea... | E-003, E-002'
+- 'C-002: gate committed as terminal | record_gate_decision moved the gate work item blocked to failed, classified the rejection
+  gate-rejection wi... | E-006, E-007, E-004'
+- 'C-003: rollback verdict has no executor | the Recovery Controller decides and never applies, and the runtime''s only mapping
+  of a recovery action onto... | E-007, E-008, E-013, E-015'
+- 'C-004: state model cannot represent a rollback | completed state items and failed gate items have no outgoing transition,
+  a completed item cannot be rebound... | E-005, E-006, E-012'
+- 'C-005: successor guard-blocked for good | on the next scheduler pass guard G4-GATE blocked the successor with awaiting_recovery_task
+  for as long as t... | E-009, E-011, E-002, E-012'
+- 'C-006: prescribed clearing command cannot apply | the envelope''s clearing action is derived from the blocked reason alone
+  and names release; release on the g... | E-010, E-011, E-004, E-012'
+- 'C-007: run stalls with nothing actionable | next offers only the other undecided gate, deciding it changes nothing, dispatch
+  on the completed phases is... | E-012, E-002'
+- 'C-008: consumer rework loop fails | the consumer commands read runtime status for a pending and eligible phase after rejecting
+  the gate, and no... | E-016, E-019, E-012'
+- 'Proposed fix: conditional on Q-001, the architect''s decision on how a committed phase is re-entered, the fix must make
+  the rollback the contract already clas...'
+- 'Alternative options: (a) represent the rollback in the state model, for example a supersession status or transition that
+  reopens a committed phase as attempt...'
+- 'Regression risk: high'
+- 'Regression scope: the terminality guarantee that every phase''s completion path relies on, checked by M13 and by the payload
+  rebinding refusal and replay dete...'
+- 'Root cause statement: the state model has no representation of the rollback the recovery contract classifies for a gate
+  rejection and the runtime has no surf...'
+- 'Why detection failed earlier: runtime/verify_recovery.py induces Validation Engine rejections (Runs A and B) and a policy
+  violation (Run C) and never a gate...'
+- 'C-002: gate committed as terminal | record_gate_decision moved the gate work item blocked to failed, classified the rejection
+  gate-rejection wi... | E-006, E-007, E-004, E-002'
+- 'C-004: state model cannot represent a rollback | completed state items and failed gate items have no outgoing transition,
+  a completed item cannot be rebound... | E-005, E-006, E-012, E-021, E-022'
+- 'C-005: successor guard-blocked for good | on the next scheduler pass guard G4-GATE blocked the successor with awaiting_recovery_task
+  for as long as t... | E-009, E-011, E-002, E-012, E-023'
+- 'C-006: prescribed clearing command cannot apply | the envelope''s clearing action is derived from the blocked reason alone
+  and names release; release on the g... | E-010, E-011, E-004, E-012, E-021'
+- 'C-007: run stalls with nothing actionable | next offers only the other undecided gate, deciding it changes nothing, dispatch
+  on the completed phases is... | E-012, E-021, E-002'
+- 'C-009: condition reached | the whole of the above follows from one missing state and one missing surface: no transition
+  leaves complet... | E-022, E-030, E-005, E-010, E-013'
+- 'Proposed fix: implement the architect''s decision (E-020) so that the rollback the contract already classifies becomes
+  executable and human-gated, satisfying...'
+- 'Alternative options: (a) supersession in the state model as decided, the smallest surface, every status change a logged
+  transition, selected by the architect...'
+- 'V-001: rollback_preconditions in C-003 refuses a rollback whose supersession range contains any phase closed by an... |
+  memo Decision (2), target rule: the closed phase or a completed hard-predecessor ancestor | attempt 1 refused only over
+  intermediate phases and escalated the reading; the Fix Gate found the exclusi...'
+- 'V-002: rollback --rationale stays optional with a generated default, and the gate-rejection clearing action pre-fi... |
+  memo Decision (4), the rollback signature and the envelope naming the command; memo Verification, execute t... | attempt
+  1 pre-filled the rejecter''s decider so the command ran as written, and the F...'
+- 'V-003: the attempt snapshot in C-003 copies the dispatch prompt, adapter prompt and context snapshot in addition t... |
+  memo Decision (1), per-attempt files copied to states/<phase>/attempts/<n>/ | unchanged from attempt 1: the three extra
+  files are per-attempt provenance the next dispatch overwrites; T-...'
+- 'V-004: the clearing action for a guard-raised G3 block over a terminally failed predecessor states prose instead o... |
+  Fix Strategy (7), no envelope names a command that fails when executed as written | unchanged from attempt 1: both cases
+  named a command that fails as written; the admissibility table C-005 a...'
+- 'V-005: the supersession range in C-003 is the target''s completed downstream cone rather than the memo''s path from...
+  | memo Decision (2) and (4), every completed phase from the target through the closed phase | the Fix Gate found the path
+  rule leaves a completed dependent off the closed phase''s ancestor chain standi...'
+- 'V-006: beyond CR-004''s literal text, next in C-003 exits 3 and withholds the scheduler''s gate offer when that gate...
+  | CR-004: next names the rollback ahead of any gate decision over the rejected evidence, recovery derives liv... | naming
+  the rollback first while still offering, or automating, an approval on the si...'
+validation_requirements:
+  test_focus:
+  - 'Verification steps: invert the reproduction. Plan a run, complete a phase closed by a two-owner gate, record reject from
+    the non-producing owner, then record...'
+  - 'Regression tests added: a third scenario in runtime/verify_recovery.py that induces a gate rejection on the real runtime
+    and proves the authorised rollback,...'
+  - 'Monitoring signals after release: the count of runs whose recovery ledger holds an open gate-rejection entry while no
+    state item is pending and eligible and...'
+  - 'Verification steps: invert the reproduction. Plan a run, complete a phase closed by a two-owner gate, record reject from
+    the non-producing owner, and confirm...'
+  - 'Regression tests added: a Run D in runtime/verify_recovery.py that induces a gate rejection on the real runtime and proves
+    the authorised rollback, the immut...'
+  evidence:
+  - 'T-001: the induced-failure proof: Runs A to C unchanged; Run D proves the rejection classified gate-rejection, the...
+    | end-to-end | C-001, C-002, C-003, C-004, C-005'
+  - 'T-002: the state engine''s exactly-two exits, record requirement and key preservation; the attempt-scoped write sco...
+    | unit | C-001, C-002, C-003, C-010'
+  - 'T-003: a gate carrying a decision history is held for a human with clean evidence and a precedent, its control aut...
+    | unit | C-003, C-011'
+  - 'T-004: the plain table, the tree and the JSON view render a re-armed gate and a superseded step, and the existing...
+    | unit | C-003, C-012'
+  - 'T-005: fix-comments issues reject, then rollback as the same role with the fix phase as target, then dispatch; a r...
+    | integration | C-009, C-013'
+  - 'T-006: the update stub''s rejected stage is not dispatchable and its rolled-back stage carries the rollback block;...
+    | integration | C-009, C-014'
+  - 'T-007: the run show path still forwards status flags and stays read-only; 14 tests | regression | C-003'
+  - 'T-008: the one-command ticket-to-PR flow for both providers still resumes and delivers; 24 tests | regression | C-003,
+    C-009'
+  - 'T-009: the bundled payload is an exact mirror of the framework payload after the sync (the sync rewrote exactly th...
+    | contract | C-006, C-007, C-008, C-017, C-018, C-019, C-020, C-021, C-022, C-023, C-024'
+  - 'T-010: verify_multi_phase against the harness''s own Run D scratch run (run-3655babc5772, kept with --keep, removed...
+    | end-to-end | C-001, C-003, C-004'
+  - 'T-011: the published handbook is regenerated from its source and the drift check exits 0 | static | C-015, C-016'
+  - 'T-012: the regression baseline taken before the first edit of this attempt: the eight targeted modules (24, 29, 16...
+    | regression | C-003, C-005, C-010, C-011'
+  - 'T-013: the stranded run''s own shape, on scratch copies of run-4c51600606df with the runtime''s runs directory redir...
+    | end-to-end | C-003'
+  verification:
+  - 'Verification method: the repository''s own unit and integration suites run per module by unittest discovery from the
+    repository root (the CI form), the two pr...'
+  - 'Commands executed: python -m unittest discover -s tests -p test_gate_rollback.py; python -m unittest discover -s tests
+    -p test_gate_policy.py; python -m unit...'
+  - 'Result summary: 13 evidence entries executed, 12 passed, 1 failed (T-010, M6 only). Unit and integration tests: 164 run
+    across the eight modules, 164 passed,...'
+  - 'Unverified areas: the multi-phase proof over a run that traverses design and delivery and also carries a rollback, because
+    M6 reads the superseded phase as p...'
+  acceptance_criteria:
+  - 'AC-001: the state model represents an authorised rollback as exactly two new legal transitions, a state work item f...
+    | runs/run-3e6f6a248b99/states/root-cause-analysis/artifacts/bug-analysis.md, Fix Strategy condition (1) | unit and end-to-end'
+  - 'AC-002: a new rollback command is the only surface on which a rollback-authorisation is recorded, applying the same...
+    | root-cause-analysis bug-analysis.md, Fix Strategy condition (2) | unit and end-to-end'
+  - 'AC-003: committed-artifact immutability (M12) holds because attempt 1''s artifact is never rewritten: attempt n plus...
+    | root-cause-analysis bug-analysis.md, Fix Strategy condition (3) | end-to-end'
+  - 'AC-004: the gate re-arms on the same work item with its decision returned to null and the rejected decision, role,...
+    | root-cause-analysis bug-analysis.md, Fix Strategy condition (4) | end-to-end'
+  - 'AC-005: the scheduler moves a guard-raised block whose guards fall to wait back to pending and resolves its envelop...
+    | root-cause-analysis bug-analysis.md, Fix Strategy condition (5) | end-to-end'
+  - 'AC-006: a gate whose decision_history is non-empty is held for a human by the auto-approval path whatever precedent...
+    | root-cause-analysis bug-analysis.md, Fix Strategy condition (6) | unit and end-to-end'
+  - 'AC-007: clearing_action becomes class-aware, naming the rollback command with the gate for the gate item and for an...
+    | root-cause-analysis bug-analysis.md, Fix Strategy condition (7) | end-to-end'
+  - 'AC-008: no migration utility: run-4c51600606df already holds the shape the command accepts, a failed gate with deci...
+    | root-cause-analysis bug-analysis.md, Fix Strategy condition (8) | end-to-end'
+  - 'AC-009: the contract text follows the representation: runtime/README.md known gap 3, the state-engine docstrings an...
+    | root-cause-analysis bug-analysis.md, Fix Strategy condition (9) | unit and integration'
+  - 'AC-010: the run-status projection defect is out of scope by the memo''s decision and its consequence is recorded rat...
+    | root-cause-analysis bug-analysis.md, Fix Strategy condition (10) | integration (artifact read)'
+  - 'AC-011: a Run D in runtime/verify_recovery.py that induces a gate rejection on the real runtime and proves the auth...
+    | root-cause-analysis bug-analysis.md, Validation Plan, Regression tests added | end-to-end and unit'
+  - 'AC-012: the existing baseline, all tests and every verify script proven, with verify_recovery.py and verify_multi_p...
+    | root-cause-analysis bug-analysis.md, Validation Plan, Regression tests added (final clause; the Triage Gate... | unit,
+    integration and end-to-end'
+  - 'AC-013: Then run the pr fix-comments round against the real runtime rather than the stub and expect it to reach re-...
+    | root-cause-analysis bug-analysis.md, Validation Plan, Verification steps | integration'
+  - 'AC-014: Finally run the rollback command against run-4c51600606df as the memo records and expect implementation pen...
+    | root-cause-analysis bug-analysis.md, Validation Plan, Verification steps | end-to-end'
+  - 'AC-015: the full transitive-descendant closure of target, restricted to completed items, strictly contains the memo...
+    | runs/inputs/gate-rollback-architect-f4-cr001-ruling.md, RANGE RULE (b) | unit and end-to-end'
+  - 'AC-016: refuse, no third transition: the existing standing check already refuses when an approved gate closes an in...
+    | runs/inputs/gate-rollback-architect-f4-cr001-ruling.md, CR-001 RULE | end-to-end and unit'
+  - 'AC-017: Its Verification Gate is undecided (blocked), so rollback --gate "Review Gate" --target implementation is a...
+    | runs/inputs/gate-rollback-architect-f4-cr001-ruling.md, Consequence for the stranded run | end-to-end'
+open_questions:
+- 'Q-001: How is a committed phase re-entered after an authorised rollback while completed stays terminal for every o... |
+  yes | architect'
+- 'Q-002: The rejected gate work item records failure_class policy-failure while its envelope and the recovery ledger... |
+  no | omn-tech-lead'
+- 'Q-003: The run-status projection reads state items only and, on a synthetic store, projected Completed alongside a... |
+  no | architect'
+- 'Q-004: What is the business cost of a stranded run and of repeating every completed phase in a new run, and does t... |
+  no | omn-product-owner'
+- 'Q-005: What becomes of run-4c51600606df and any other run already carrying a rejected gate once the fix lands: is... |
+  no | omn-orchestrator'
+- 'Q-001: How is a committed phase re-entered after an authorised rollback while completed stays terminal for every o... |
+  no | architect'
+- 'Q-003: The run-status projection and the aggregator test state items only; on a synthetic store with every phase c... |
+  no | omn-orchestrator'
+- 'Q-005: What becomes of run-4c51600606df and any other run already carrying a rejected gate once the fix lands? Set... |
+  no | omn-orchestrator'
+- 'Q-006: The memo states that an attempt-scoped artifact path with the same filename leaves the write-scope check un... |
+  no | architect'
+- 'Q-007: The memo says an undecided blocked gate closing a superseded phase returns to pending via the existing bloc... |
+  no | architect'
+- 'Q-001: The in-flight CKA-06 change pins the handbook''s visible text to a pre-change fixture and requires every dif...
+  | no | omn-orchestrator'
+- 'Q-002: Attempt 1 asked the architect to confirm the refusal of a rollback whose range contains a phase closed by a... |
+  no | architect'
+- 'Q-003: Is the multi-phase proof required over a run that both traverses design and delivery and carries a rollback... |
+  no | omn-qa'
+- 'Q-004: The ruling restricts the supersession range to completed items. A phase in the target''s downstream cone tha...
+  | no | architect'
+- 'Q-001: a phase in the target''s downstream cone that is leased or running at the moment of authorisation is left untouched
+  by rollback (copy C: with the succe...'
+- 'Q-002: verify_multi_phase M6 evaluates traversal from the status vector as of the run''s last carry-forward and reads a
+  superseded delivery phase as pending,...'
+- 'Q-003: the two PreChangeEquivalence tests of the in-flight CKA-06 change fail because this fix''s handbook edits add hunks
+  its reconciliation record does not...'
+- 'Q-004: verify_self_hosting S8 fails on the two unaccounted runs run-3e6f6a248b99 (this run) and run-4c51600606df (the stranded
+  run whose rework is about to r...'
+- 'Q-005: on copy B the attempt-2 dispatch of implementation bound a new idempotency key because bind_payload keys on the
+  agent version and the implementer agen...'
+changed_files:
+- runtime/state_engine.py (modified)
+- runtime/recovery_policy.py (modified)
+- runtime/framework_runtime.py (modified)
+- runtime/verify_multi_phase.py (modified)
+- runtime/verify_recovery.py (modified)
+- runtime/README.md (modified)
+- config/execution-engine.md (modified)
+- config/runtime.md (modified)
+- omn_agent/fix_comments.py (modified)
+- tests/test_gate_rollback.py (added)
+- tests/test_gate_policy.py (modified)
+- tests/test_framework_runtime_render.py (modified)
+- tests/test_fix_comments.py (modified)
+- tests/test_update.py (modified)
+- docs/USER-GUIDE.md (modified)
+- docs/user-guide.html (modified)
+- omn_agent/_bundled_payload/config/execution-engine.md (modified)
+- omn_agent/_bundled_payload/config/runtime.md (modified)
+- omn_agent/_bundled_payload/runtime/README.md (modified)
+- omn_agent/_bundled_payload/runtime/framework_runtime.py (modified)
+- omn_agent/_bundled_payload/runtime/recovery_policy.py (modified)
+- omn_agent/_bundled_payload/runtime/state_engine.py (modified)
+- omn_agent/_bundled_payload/runtime/verify_multi_phase.py (modified)
+- omn_agent/_bundled_payload/runtime/verify_recovery.py (modified)
+findings:
+- 'DF-001: low | usability | config/execution-engine.md:515; runtime/framework_runtime.py:59-61 and :4968; mirrored at omn_agent/_bundle...'
+- 'DF-002: low | operational | runtime/verify_multi_phase.py:234-265 (check M6)'
+- 'DF-003: low | integration | tests/test_render_user_guide.py:620 (PreChangeEquivalence, two tests)'
+verdicts:
+- 'Decision: pass-with-reservations'
+- 'Rationale: no critical or high defect stands open (three low defects, one of them the Fix Gate''s CR-005 confirmed still
+  open), no criterion is not-met, and t...'
+- 'Blocking defects outstanding: None identified.'
+- 'Readiness recommendation: go, with reservations: this role recommends that the Verification Gate owner (omn-dev-2-reviewer)
+  treat the fix as ready to proceed...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:root-cause-analysis
+      term: migration
+    - source: artifact:fix-implementation
+      term: migration
+    - source: artifact:regression-validation
+      term: migration
+    performance:
+    - source: input:defect-report
+      term: profile
+    - source: artifact:regression-validation
+      term: performance
+    - source: artifact:closure-and-communication
+      term: profile
+    security:
+    - source: artifact:fix-implementation
+      term: token
+    - source: artifact:regression-validation
+      term: security
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:defect-report
+  - artifact:triage-and-impact
+  - artifact:root-cause-analysis
+  - artifact:fix-implementation
+  - artifact:regression-validation
+  - artifact:closure-and-communication
+relevant_skills:
+  triage-and-impact:
+    S11: required
+    S12: required
+    S02: required
+  root-cause-analysis:
+    S03: required
+    S06: required
+    S08: required
+    S12: required
+  fix-implementation:
+    S03: required
+    S06: required
+    S10: required
+    S12: required
+  regression-validation:
+    S07: required
+    S09: required
+    S11: required
+  closure-and-communication:
+    S10: required
+    S11: required
+repository_context:
+  relevant_modules: []
+  relevant_files:
+  - runtime/state_engine.py (modified)
+  - runtime/recovery_policy.py (modified)
+  - runtime/framework_runtime.py (modified)
+  - runtime/verify_multi_phase.py (modified)
+  - runtime/verify_recovery.py (modified)
+  - runtime/README.md (modified)
+  - config/execution-engine.md (modified)
+  - config/runtime.md (modified)
+  - omn_agent/fix_comments.py (modified)
+  - tests/test_gate_rollback.py (added)
+  - tests/test_gate_policy.py (modified)
+  - tests/test_framework_runtime_render.py (modified)
+  - tests/test_fix_comments.py (modified)
+  - tests/test_update.py (modified)
+  - docs/USER-GUIDE.md (modified)
+  - docs/user-guide.html (modified)
+  - omn_agent/_bundled_payload/config/execution-engine.md (modified)
+  - omn_agent/_bundled_payload/config/runtime.md (modified)
+  - omn_agent/_bundled_payload/runtime/README.md (modified)
+  - omn_agent/_bundled_payload/runtime/framework_runtime.py (modified)
+  - omn_agent/_bundled_payload/runtime/recovery_policy.py (modified)
+  - omn_agent/_bundled_payload/runtime/state_engine.py (modified)
+  - omn_agent/_bundled_payload/runtime/verify_multi_phase.py (modified)
+  - omn_agent/_bundled_payload/runtime/verify_recovery.py (modified)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path

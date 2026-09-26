@@ -1,0 +1,165 @@
+{
+  "invocation_id": "inv-5df08e171670-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md"
+  ],
+  "structured_output": {
+    "scope_id": "SCOPE-2026-0014",
+    "feature_name": "Demo mode: autonomous end-to-end demonstration capture (/implement --demo)",
+    "declared_status": "complete",
+    "scope_verdict": "bounded",
+    "counts": {
+      "scope_items": 11,
+      "exclusions": 8,
+      "acceptance_criteria": 14,
+      "scope_decisions": 5,
+      "open_questions": 5,
+      "blocking_open_questions": 0
+    },
+    "identifier_ranges": {
+      "scope_items": "S-001..S-011",
+      "exclusions": "X-001..X-008",
+      "acceptance_criteria": "A-001..A-014",
+      "scope_decisions": "D-001..D-005",
+      "open_questions": "Q-001..Q-005"
+    },
+    "delivery_state": "The scope is recorded for a capability already implemented and tested; per D-001 it is stated as what the delivered change must be shown to do, and the run places that delivered change under the governance config/self-hosting-profile.md requires.",
+    "priority_distribution": {
+      "must-have": 9,
+      "should-have": 2,
+      "could-have": 0
+    },
+    "repository_rescan": {
+      "performed": true,
+      "reason": "task-context.yaml declared no relevant modules or files; existing scope-definition artifacts were scanned for the highest issued scopeId to avoid a duplicate identifier. Highest found was SCOPE-2026-0013; SCOPE-2026-0014 was issued.",
+      "scope": "read-only grep for 'scopeId: SCOPE-' under .claude/"
+    },
+    "quality_checks": {
+      "total_run": 50,
+      "total_passed": 50,
+      "total_failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "SD1": "pass",
+        "SD2": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "SD3": "pass",
+        "SD4": "pass",
+        "A4": "pass",
+        "A5": "pass",
+        "A6": "pass",
+        "A7": "pass",
+        "SD5": "pass",
+        "SD8": "pass",
+        "G1": "pass",
+        "G2": "pass",
+        "G3": "pass",
+        "G4": "pass",
+        "G5": "pass",
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pass",
+        "SD6": "pass",
+        "D7": "pass",
+        "D8": "pass",
+        "D9": "pass",
+        "SD7": "pass",
+        "B1": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "B4": "pass",
+        "B5": "pass",
+        "B6": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass"
+      },
+      "notes": {
+        "SD2": "acceptanceCriteriaCount 14 equals the 14 rows of the Acceptance Criteria table",
+        "SD5": "passes vacuously; the verdict is bounded, and five non-blocking questions are recorded regardless",
+        "SD8": "eight exclusions recorded, so the bounded verdict has a far side",
+        "D5": "featureName matches the body Feature name bullet verbatim; status is carried in the metadata block only, as examples.md shows",
+        "D6": "inputDigest and contextDigest copied verbatim from context_slice",
+        "A4": "A-010 carries the softest threshold, stated as several minutes against the rejected thirty-five second cut and qualified by Q-001 and Q-002 rather than asserted",
+        "C2": "Pillow, ffmpeg, OBS Studio, and Windows appear only in Constraints and Dependencies and trace to the supplied inputs; no model or agent-runtime name appears, and the recorded application is referred to as the target window"
+      }
+    },
+    "not_machine_checkable": {
+      "SN1": {
+        "judgement": "pass",
+        "basis": "Each criterion states a threshold drawn from the supplied acceptance statements rather than from what the delivered change happens to do. Where the requester named no threshold, as with the running length in A-010, the criterion states the floor the inputs support and Q-001 and Q-002 carry the residue rather than a number being invented."
+      },
+      "SN2": {
+        "judgement": "pass",
+        "basis": "Every in-scope item traces to a statement in the feature request or the business intent, except S-011, which traces to the change request's own record of the command contract and is marked should-have. Adjacent matters the inputs raise but do not request, being the onboarding cut, were sent to Q-005 rather than into the In Scope table."
+      },
+      "SN3": {
+        "judgement": "pass",
+        "basis": "The business goal restates the outcome the business intent states it is buying, that a presenter can show the framework with evidence rather than assertions and without a day of preparation. No mechanism and no inferred objective was added; the demanding audience requirement the requester named drove S-008 rather than being softened."
+      }
+    },
+    "gate": {
+      "name": "Scope Gate",
+      "workflow": "implement-feature",
+      "owners": [
+        "omn-product-owner",
+        "omn-business-analyst"
+      ],
+      "decision_rests_with": "omn-business-analyst",
+      "basis": "Producer Exclusion Rule, workflows/workflow-gate-matrix.md; this agent produced the evidence and records no gate decision"
+    },
+    "skills_applied": [
+      "S02",
+      "S07",
+      "S09"
+    ],
+    "affected_areas_confirmed": [
+      "performance",
+      "security"
+    ],
+    "affected_areas_note": "Performance is bounded by S-003 and A-003, the cost of the capability when it is not used. Security surfaces as publication safety rather than as credential handling: S-002, D-003, and Q-004 carry it, and no credential, token, or secret appears in the artifact."
+  },
+  "evidence_refs": [
+    "agents/omn-product-owner/manifest.yaml",
+    "agents/omn-product-owner/system.md",
+    "agents/omn-product-owner/identity.md",
+    "agents/omn-product-owner/reasoning.md",
+    "agents/omn-product-owner/output.md",
+    "agents/omn-product-owner/quality.md",
+    "agents/omn-product-owner/examples.md",
+    "runs/run-5df08e171670/states/scope-and-acceptance/invocation-envelope.json",
+    "runs/run-5df08e171670/task-context.yaml",
+    "templates/scope-definition.md",
+    "workflows/workflow-gate-matrix.md",
+    "context/product-context.md",
+    "context/technical-context.md",
+    "context/release-context.md",
+    "skills/business/domain-modeling.md",
+    "skills/testing/testing-strategy.md",
+    "skills/security/secure-engineering.md"
+  ],
+  "confidence": 0.87,
+  "declared_side_effects": [
+    "runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "runs/run-5df08e171670/states/scope-and-acceptance/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -38,14 +38,52 @@ import framework_runtime as fr   # noqa: E402
 import state_engine as se        # noqa: E402
 import verify_self_hosting as vsh  # noqa: E402
 
-# The exit criterion for this slice: a run must actually traverse planning, design, and one
-# delivery phase. A delivery phase whose owner agent has no registered capability is
-# expected to be `blocked`, not skipped and not silently absent.
-REQUIRED_PHASES = {
-    "planning": "execution-planning",
-    "design": "solution-design-and-risk-assessment",
-    "delivery": "implementation",
-}
+# The exit criterion for this slice: a run must actually traverse the chain that ends in its
+# delivery phase -- the delivery phase itself and the two hard predecessors that feed it. A
+# delivery phase whose owner agent has no registered capability is expected to be `blocked`,
+# not skipped and not silently absent.
+#
+# The chain is read from the routed workflow's Phase Model, never named here. Before runtime
+# 0.7.1 this table pinned implement-feature's phase identifiers (`execution-planning`,
+# `solution-design-and-risk-assessment`, `implementation`), so M6 failed on every other
+# workflow whether or not the run traversed its own chain. `required_phases` derives the same
+# three roles for implement-feature and the corresponding ones for every other workflow.
+DELIVERY_CAPABILITY = "implementation-delivery"
+ROLE_LABELS = ("planning", "design", "delivery")
+
+
+def required_phases(rows: list) -> dict:
+    """Role label -> phase identifier, derived from the routed Phase Model.
+
+    `delivery` is the phase whose owner agent holds the `implementation-delivery` capability in
+    `registry/agents.yaml`; a workflow with no such phase (review, investigate, research,
+    release, quality scan) delivers its last phase. `design` is the delivery phase's nearest
+    hard predecessor and `planning` is that phase's nearest hard predecessor, both read from
+    the dependency graph the runtime derives from the Phase Model with no supplied inputs, so
+    every edge is hard. A workflow shorter than the chain omits the roles it does not have.
+    """
+    if not rows:
+        return {}
+    order = [r["phase"] for r in rows]
+    capabilities = {rec["identifier"]: set(rec.get("capabilities") or [])
+                    for rec in fr.load_yaml("registry/agents.yaml").get("records") or []}
+    delivery = next((r["phase"] for r in rows
+                     if DELIVERY_CAPABILITY in capabilities.get(r.get("owner agent"), set())),
+                    order[-1])
+    deps = fr.derive_dependencies(rows, [])
+
+    def nearest_hard_predecessor(phase: str):
+        hard = [d["state_id"] for d in deps.get(phase, []) if d["kind"] == "hard"]
+        return max(hard, key=order.index) if hard else None
+
+    chain = [delivery]
+    while len(chain) < len(ROLE_LABELS):
+        up = nearest_hard_predecessor(chain[-1])
+        if up is None:
+            break
+        chain.append(up)
+    chain.reverse()
+    return dict(zip(ROLE_LABELS[len(ROLE_LABELS) - len(chain):], chain))
 
 class Result:
     def __init__(self):
@@ -179,19 +217,34 @@ def run_checks(run_dir: Path, replay: bool) -> Result:
     ordered = seqs == list(range(1, len(seqs) + 1))
     times = [t["at"] for t in transitions]
     monotonic = all(a <= b for a, b in zip(times, times[1:]))
-    escaped = []
+    # A terminal status is left only by the two authorised re-entry pairs the state engine
+    # names in `AUTHORISED_EXITS`, each recorded under its own trigger. A `superseded` exit
+    # must also have left a supersession record on the item, or the engine was bypassed.
+    escaped, authorised = [], []
     seen_terminal = {}
+    by_wid = {i["work_item_id"]: i for i in items}
     for t in transitions:
         if t["work_item_id"] in seen_terminal:
-            escaped.append(f"seq {t['seq']} moved {t['work_item_id']} out of "
-                           f"{seen_terminal[t['work_item_id']]}")
+            exits = se.AUTHORISED_EXITS.get(t["work_type"], {})
+            if exits.get((t["from"], t["to"])) == t["trigger"]:
+                authorised.append(f"seq {t['seq']}: {t['state_id']} {t['from']}->{t['to']} "
+                                  f"({t['trigger']})")
+                if t["trigger"] == "superseded" and not (
+                        by_wid.get(t["work_item_id"], {}).get("supersessions")):
+                    escaped.append(f"seq {t['seq']} superseded {t['work_item_id']} without a "
+                                   f"supersession record on the item")
+            else:
+                escaped.append(f"seq {t['seq']} moved {t['work_item_id']} out of "
+                               f"{seen_terminal[t['work_item_id']]}")
+            seen_terminal.pop(t["work_item_id"], None)
         if t["to"] in se.TERMINAL_STATUSES:
             seen_terminal[t["work_item_id"]] = t["to"]
     ok = ordered and monotonic and not escaped
     r.add("M4", "the transition log is strictly ordered and no work item leaves a terminal "
-                "status", ok,
+                "status except under an authorised rollback", ok,
           f"seq 1..{len(seqs)} contiguous={ordered}, timestamps non-decreasing={monotonic}, "
-          f"terminal escapes={escaped or 'none'}")
+          f"terminal escapes={escaped or 'none'}, authorised re-entries="
+          f"{authorised or 'none'}")
 
     # ----------------------------------------------------------------- M5 lease integrity
     # A phase may block, lose a lease, and be reclaimed any number of times; M3 already
@@ -237,15 +290,16 @@ def run_checks(run_dir: Path, replay: bool) -> Result:
         return str(v.get("status") or (by_id.get(phase) or {}).get("status") or "absent")
 
     completed = [p for p in by_id if status_then(p) == se.COMPLETED]
-    reached = {label: status_then(phase) for label, phase in REQUIRED_PHASES.items()}
-    ok = (len(completed) >= 2
-          and reached["planning"] == se.COMPLETED
-          and reached["design"] == se.COMPLETED
-          and reached["delivery"] in (se.COMPLETED, se.BLOCKED))
+    roles = required_phases(rows)
+    reached = {label: status_then(phase) for label, phase in roles.items()}
+    ok = (len(completed) >= min(2, len(roles))
+          and all(reached[label] == se.COMPLETED for label in roles if label != "delivery")
+          and reached.get("delivery") in (se.COMPLETED, se.BLOCKED))
     drift = sorted(f"{p}: recorded {status_then(p)}, now {by_id[p]['status']}"
                    for p in by_id if status_then(p) != by_id[p]["status"])
-    r.add("M6", "the run traversed planning, design, and a delivery phase", ok,
-          ", ".join(f"{k}={v}" for k, v in reached.items())
+    r.add("M6", "the run traversed the chain that ends in its delivery phase, as the routed "
+                "Phase Model declares it", ok,
+          ", ".join(f"{k}={roles[k]}:{v}" for k, v in reached.items())
           + f"; {len(completed)} phase(s) completed"
           + (f"; as of {as_of}" if as_of else "; as of current state, no ledger baseline")
           + ("; no drift since" if not drift
@@ -345,22 +399,28 @@ def run_checks(run_dir: Path, replay: bool) -> Result:
           if ok else f"blocked without reason or escalation: {silent}")
 
     # ----------------------------------------------------------------- M12 evidence
-    missing = []
+    # Every completion block the run ever committed: the current one on each item, and every
+    # one an authorised rollback moved into `supersessions`. A superseded attempt's artifact is
+    # immutable evidence exactly as a current one is; the next attempt writes elsewhere.
+    missing, committed = [], []
     for i in state_items:
-        c = i.get("completion")
-        if not c:
-            continue
-        f = CLAUDE / c["artifact_path"]
-        if not f.exists():
-            missing.append(f"{i['state_id']}: artifact absent")
-        elif fr.sha256_text(f.read_text(encoding="utf-8")) != c["artifact_digest"]:
-            missing.append(f"{i['state_id']}: artifact digest changed since commit")
+        blocks = [("current", i.get("completion"))] + [
+            (f"attempt {sup.get('attempt')} superseded under {sup.get('authorisation_id')}",
+             sup.get("completion")) for sup in (i.get("supersessions") or [])]
+        for label, c in blocks:
+            if not c:
+                continue
+            f = CLAUDE / c["artifact_path"]
+            committed.append(f"{i['state_id']} [{label}] -> {c['artifact_digest']}")
+            if not f.exists():
+                missing.append(f"{i['state_id']} [{label}]: artifact absent")
+            elif fr.sha256_text(f.read_text(encoding="utf-8")) != c["artifact_digest"]:
+                missing.append(f"{i['state_id']} [{label}]: artifact digest changed since "
+                               f"commit")
     ok = not missing
-    r.add("M12", "every committed artifact is present and unchanged since it was committed",
-          ok,
-          "; ".join(f"{i['state_id']} -> {i['completion']['artifact_digest']}"
-                    for i in state_items if i.get("completion")) or "no committed artifact"
-          if ok else f"{missing}")
+    r.add("M12", "every committed artifact, current or superseded, is present and unchanged "
+                 "since it was committed", ok,
+          "; ".join(committed) or "no committed artifact" if ok else f"{missing}")
 
     # ----------------------------------------------------------------- M13 negative paths
     # The checks above prove that what was recorded is legal. This one proves the state
@@ -408,12 +468,75 @@ def run_checks(run_dir: Path, replay: bool) -> Result:
                 lambda: probe.bind_payload(st, owner_agent_id="planner",
                                            agent_version="1.0.0",
                                            payload_digest="sha256:two"))
+
+        # Terminality, exhaustively. Every (from, to) pair out of `completed` and `failed`
+        # is probed for both work types; exactly the two authorised re-entry pairs may pass,
+        # and the state pair only when a supersession record accompanies it. Four probe
+        # items: a completed state (st, above), a failed state, a failed gate, and a
+        # completed gate.
+        st_failed = probe.add_item(se.new_work_item(
+            run_id="run-probe", workflow_id="implement-feature", state_id="pf",
+            work_type="state", owner_agent_id="planner", phase_index=2, gate=None,
+            artifact="execution-plan.md", depends_on=[]))
+        probe.transition(st_failed, se.LEASED, reason_code="leased", **common)
+        probe.transition(st_failed, se.RETRYING, reason_code="tool_failure", **common)
+        probe.transition(st_failed, se.FAILED, reason_code="terminal_failure", **common)
+        probe.transition(gt, se.FAILED, reason_code="validation_failed", **common)
+        gt_done = probe.add_item(se.new_work_item(
+            run_id="run-probe", workflow_id="implement-feature", state_id="GD",
+            work_type="gate", owner_agent_id=None, phase_index=2, gate="GD",
+            artifact=None, depends_on=[]))
+        probe.transition(gt_done, se.COMPLETED, reason_code="output_accepted", **common)
+
+        expected_exits = {("state", se.COMPLETED, se.PENDING), ("gate", se.FAILED, se.PENDING)}
+        passed_pairs, wrong = [], []
+        for label, probe_item in (("state completed", st), ("state failed", st_failed),
+                                  ("gate failed", gt), ("gate completed", gt_done)):
+            frm = probe_item["status"]
+            for to in se.STATUSES:
+                key = (probe_item["work_type"], frm, to)
+                fields = ({"supersession": {"authorisation_id": "RB-probe-01"}}
+                          if key == ("state", se.COMPLETED, se.PENDING) else None)
+                snapshot = json.dumps(probe_item, sort_keys=True)
+                try:
+                    probe.transition(probe_item, to, reason_code="enqueued", fields=fields,
+                                     **common)
+                    outcome = "allowed"
+                except se.TransitionError:
+                    outcome = "refused"
+                if key in expected_exits:
+                    if outcome == "allowed":
+                        passed_pairs.append(f"{label} -> {to}")
+                        # restore the terminal status for the remaining probes of this item
+                        probe_item.update(json.loads(snapshot))
+                        probe.save()
+                    else:
+                        wrong.append(f"{label} -> {to} refused, but it is the authorised pair")
+                elif outcome == "allowed":
+                    wrong.append(f"{label} -> {to} allowed")
+                    probe_item.update(json.loads(snapshot))
+                    probe.save()
+        refuses("completed -> pending (superseded) without a supersession record",
+                lambda: probe.transition(st, se.PENDING, reason_code="enqueued", **common))
+        refuses("completed -> pending (superseded) with a record lacking an authorisation_id",
+                lambda: probe.transition(st, se.PENDING, reason_code="enqueued",
+                                         fields={"supersession": {"gate": "G"}}, **common))
+        probed = 4 * len(se.STATUSES)
+        if wrong:
+            allowed.extend(wrong)
+        else:
+            refused.append(f"{probed - len(expected_exits)} of {probed} exits from "
+                           f"completed/failed refused across both work types; only "
+                           f"{sorted(passed_pairs)} pass")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
-    ok = not allowed
-    r.add("M13", "the state machine refuses illegal transitions", ok,
+    ok = not allowed and len(passed_pairs) == len(expected_exits)
+    r.add("M13", "the state machine refuses illegal transitions: completed and failed are "
+                 "terminal except for the two authorised re-entry pairs, and superseded is "
+                 "refused without a record", ok,
           f"{len(refused)} illegal operation(s) refused: " + "; ".join(refused)
-          if ok else f"permitted what it should refuse: {allowed}")
+          if ok else f"permitted what it should refuse: {allowed}; authorised pairs that "
+                     f"passed: {passed_pairs}")
 
     # ----------------------------------------------------------------- M14 live replay
     if not replay:

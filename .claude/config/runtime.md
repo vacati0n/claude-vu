@@ -156,11 +156,136 @@ flowchart LR
 - Normalize documents into typed sections (constraints, goals, risks, interfaces).
 - Compute context digest and attach it to the run ledger.
 - Support state-local context narrowing to reduce irrelevant payload.
+- Mark every frozen slice member with a read hint, so the slice stays the provenance record
+  it always was while the agent reads only what its phase needs:
+  - `required`: read before the work starts (templates the phase renders, the skills its
+    dispatch marks required, the product, technical, and release context, and the gate matrix
+    for a phase whose artifact names its gate owner);
+  - `on-demand`: consult when the stated decision needs it (the routed workflow
+    specification, the domain model, the runtime's own implemented-surface record);
+  - `runtime-resolved`: resolved by the runtime on the agent's behalf and not the agent's to
+    read (the registries, the capability matrix, the skill matrix). The planning phase is the
+    one exception: its artifact cites capability identifiers and skill codes and is validated
+    against them, so the capability matrix and the skill registry are `required` there.
+- A member the base slice and the phase slice both name is frozen once; a file is never
+  listed twice.
 
 ### Validation
 
 - Required context artifacts must exist and pass schema checks.
 - Missing required context fails the run before state execution.
+
+## Task Context
+
+The task context is the lightweight, runtime-owned shared execution state of one run:
+`runs/<run-id>/task-context.yaml`, schema `framework.runtime/task-context.v1`. It exists so
+that a downstream agent starts from facts the run has already established instead of
+re-deriving them from every upstream artifact in full.
+
+### Content
+
+Only what downstream phases consume, as one-line facts keyed by the identifier the source
+artifact gave them: `task_id`, `objective`, `inputs`, `scope` (in and out), `affected_areas`,
+`changed_files`, `repository_context` (relevant modules and files, and the conditions under
+which a repository rescan is warranted), `relevant_agents`, `relevant_skills` (the skill
+dispatch verdict per phase), `completed_phases` (artifact, digest, validation result,
+attempts), `gates`, `decisions`, `constraints`, `validation_requirements` (acceptance
+criteria, test focus, executed evidence), `risks`, `open_questions`, `findings`, `verdicts`,
+`plan_tasks`, `artifacts`, and `parallel_groups`.
+
+### Rules
+
+- Derived, never authored. The runtime rebuilds it from the state store, the gate records, and
+  the accepted artifacts at every dispatch, completion, gate decision, and rollback; it is
+  written only when its content changed, so a replayed command leaves it byte-identical.
+- Extraction is deterministic table and bullet parsing. No summarisation, no narrative. Each
+  cell is capped and each register is capped; what exceeds a cap is cited by identifier and
+  the reader opens the source section.
+- Nothing enters from an artifact the Validation Engine has not accepted. A rejected or
+  superseded attempt contributes nothing.
+- Every text in it is data to the agent, exactly as a supplied input is.
+- The dispatch prompt names it as the first thing to read after the envelope, and names the
+  sections of each upstream artifact to read first and the sections to open only on demand.
+  An artifact type with no section map is read in full.
+
+## Progressive Module Loading
+
+An agent's module set is loaded in two tiers derived from the `role` each module declares in
+its manifest. The manifest's `loadOrder` stays the single authority; no module is renamed,
+moved, or made optional.
+
+| Tier | Roles | When read |
+|---|---|---|
+| core | `operating-charter`, `reasoning-procedure`, `output-contract`, `quality-contract` | in full, in load order, on every attempt, before any work |
+| on-demand | `agent-contract`, `execution-lifecycle`, `reference-examples` | the moment the stated trigger applies; binding from that moment exactly as a core module is |
+
+Triggers, as the envelope states them under `capability_bindings.load_profile.on_demand[]`:
+
+- `agent-contract` (`identity.md`): before deciding an error class, a refusal, a decision
+  right, or an escalation; whenever the reasoning procedure or the quality contract refers to
+  it; whenever a supplied input asks for something the charter's boundary table does not
+  settle.
+- `execution-lifecycle` (`execution.md`): when the run leaves the direct Execution to
+  Completion path (Waiting, Delegation, Retry, Failure), when a stage's exit condition is
+  unclear, and before any handoff or gate question the charter does not settle.
+- `reference-examples` (`examples.md`): only when the output shape is still ambiguous after
+  the output contract has been read, or on a repair pass for a failed structural check.
+
+Why this is safe: every charter (`system.md`) carries the role, the invariants, the boundary
+enforcement table, and the module precedence order, so the happy path is fully governed by
+the core tier; the on-demand modules restate and elaborate what the core already binds, and
+their triggers are exactly the moments at which the elaboration is needed. Trade-off, stated:
+an agent that mis-recognises a trigger reads `identity.md` late rather than never; the
+Validation Engine and the gate still judge the artifact by the same contracts.
+
+The runtime performs the Initialization checks the lifecycle modules ask of their agents
+(manifest identity, version, status, load order, and the twelve contract sections of
+`identity.md`) once at dispatch and records them under
+`capability_bindings.contract_checks`. An agent accepts a `pass` record and repeats the checks
+only when the record is not `pass` or when no envelope governs the invocation.
+
+A manifest may pin a module to the core tier under `runtime.loadProfile.core`. The operator may
+force the pre-0.7.0 behaviour for one dispatch with `dispatch --load-profile full`. A repair
+pass loads `quality.md` and `output.md` first and then only the module a failed check's quality
+reference names.
+
+## Conditional Skill Dispatch
+
+Skill *resolution* is unchanged: every phase-mandatory code and every manifest-declared code
+must resolve through `registry/skills.yaml`, and guard `G1-CAPABILITY` blocks a phase whose
+skills do not. What is conditional is *reading*. The envelope's `skill_dispatch[]` gives each
+code a status and its basis:
+
+| Status | Meaning |
+|---|---|
+| `required` | read before the work starts |
+| `not-triggered` | resolved and available; read only if the work reveals the domain, in which case the artifact records the domain as affected |
+
+Domain-general codes (S01, S02, S03, S07, S10, S11, S12) are always `required` when a phase
+or manifest names them. Domain-conditional codes (S04 Avalonia, S05 React, S06 Database, S08
+Performance, S09 Security) are `required` when their area is affected and `not-triggered`
+otherwise. An area is affected when the task context's `affected_areas` derivation finds a
+domain trigger in a supplied input or an accepted upstream artifact, or when the operator
+declares it (`--affected-area <area>`, additive, persisted on the run). The trigger table is
+`DOMAIN_SKILLS` in `runtime/task_context.py` and is described in `skills/skill-resolver.md`.
+
+Two safety rules: when no text is available to derive affectedness, every conditional code is
+`required`; and S09 Security is always `required` in review and validation phases, because a
+reviewer is the last line of defence and "the task did not mention security" is not evidence
+that nothing security-relevant changed.
+
+## Execution Metrics
+
+Every run records `runs/<run-id>/execution-metrics.json`, schema
+`framework.runtime/execution-metrics.v1`, rebuilt at every completion and aggregation and on
+demand by `framework_runtime.py metrics --run-id <id>`; the final report carries its summary.
+It is derived from persisted evidence only: wall-clock and agent-active duration, phases
+executed, agent invocations (total and distinct), skill reads required and not triggered,
+context members required and declared, files read by more than one dispatch, validation runs,
+gate decisions, parallel groups, and a byte-based context estimate per dispatch under both the
+legacy rules (every module, every member, every upstream artifact in full) and the progressive
+rules. The estimate is four bytes per token and is labelled an estimate; its purpose is to make
+a regression visible, not to bill.
 
 ## Memory Loading
 
@@ -196,7 +321,14 @@ flowchart LR
 
 - `pass`: exit criteria satisfied; move to next state.
 - `retry`: transient or fixable failure; re-enter same state under policy.
-- `rollback`: structural or validity failure; return to designated prior state.
+- `rollback`: structural or validity failure; return to designated prior state. For a gate
+  rejection the designated prior state is the phase the authoriser names (the gated phase or
+  a completed hard predecessor of it), and the return is a supersession of that phase's
+  completed downstream cone -- every completed phase that transitively hard-depends on it,
+  the gated phase included: each re-enters as a new attempt under the same idempotency key,
+  its committed evidence preserved immutably, and the gate is re-armed for a fresh human
+  decision. The authorisation is refused while an approved gate stands over any phase in
+  that range, because a completed gate cannot be re-armed.
 - `abort`: unrecoverable policy, dependency, or governance breach.
 
 ### Gate Handling
@@ -248,7 +380,9 @@ flowchart LR
 ### Recovery Actions
 
 - Retry for transient faults within policy limits.
-- Rollback for invalid state outputs or structural mismatches.
+- Rollback for invalid state outputs or structural mismatches. A rollback past a rejected
+  gate is authorised by a listed non-producing owner of that gate, never inferred from the
+  rejection alone, and is refused once the target phase has spent its charged attempts.
 - Escalate for ambiguity, unresolved risk, or repeated gate failures.
 - Abort for unrecoverable compliance or integrity violations.
 

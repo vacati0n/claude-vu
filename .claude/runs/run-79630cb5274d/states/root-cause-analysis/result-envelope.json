@@ -1,0 +1,162 @@
+{
+  "invocation_id": "inv-79630cb5274d-02-001",
+  "status": "completed_with_findings",
+  "artifact_refs": [
+    "runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysis_basis": "root-cause",
+    "analysis_id": "BA-run-79630cb5274d-root-cause-analysis",
+    "defect_reference": "refactor-implementation-input-contract-defect",
+    "severity": "high",
+    "reproducibility": "deterministic",
+    "declared_status": "provisional",
+    "status_basis": "Stage 9 table of reasoning.md, first matching row: business impact was unquantified and severity rests on technical impact alone. No business impact statement was supplied to either diagnostic phase of this run, and Q-001 routes the question to omn-product-owner.",
+    "counts": {
+      "evidence_records": 38,
+      "evidence_records_added_this_phase": 14,
+      "causal_steps": 6,
+      "causal_steps_by_confidence": {
+        "high": 6,
+        "medium": 0,
+        "low": 0
+      },
+      "open_questions": 6,
+      "open_questions_blocking": 0,
+      "evidence_records_by_confidence": {
+        "high": 38,
+        "medium": 0,
+        "low": 0
+      }
+    },
+    "supersedes": {
+      "artifact": "runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md",
+      "produced_by_phase": "triage-and-impact",
+      "identifiers_preserved": "E-001 to E-024, C-001 to C-006, Q-001 to Q-004 carry their triage-phase meaning unchanged; E-025 to E-038 and Q-005 to Q-006 are new to this phase",
+      "facts_overturned": [
+        "the exposure bound: the triage phase held that a phase is offered only the artifacts of its declared dependencies, so no validation report could reach the two sibling phases. Overturned by E-025: the pool is the run's persisted supplied inputs concatenated with the upstream artifacts, so a run-level supplied input reaches every phase. The bound is rebuilt on guard ordering (E-027).",
+        "the permanence of the phase-accounting failure: the word permanent is withdrawn. It holds without exit only for a run that cannot advance at all, not for a gate-held or in-flight one (E-029).",
+        "the verifier count: seven of eight checks at triage, now seven of nine, the added failure being a consequence of the unaccounted-run check rather than an independent one (E-036)."
+      ]
+    },
+    "gate_conditions_discharged": [
+      {
+        "condition": "extend the fix surface beyond the manifest list, the minimumSatisfaction prose, and the report template comment",
+        "discharged": "verified each named surface first-hand and recorded them as E-034: the required-input list in agents/omn-dev-1-implement/identity.md at lines 82 to 84, the Phase Ownership table in agents/omn-dev-1-implement/execution.md at line 196, and the registry record in registry/agents.yaml at lines 177 to 205 whose data dependencies name technical-design, bug-analysis and implementation-report and no validation-report. All five description surfaces are named in Proposed fix and carried into Regression scope."
+      },
+      {
+        "condition": "take an explicit version position",
+        "discharged": "manifest metadata.version 1.0.0 to 1.1.0 and the registry record version with it, a minor step under that agent's own versioning block; contractVersion unchanged at 1.0.0 because it names the shared agent-specification revision and is read by no runtime module; the registry gains a validation-report data dependency tracking that template's declared version 1.0.0. Recorded on E-033, E-034, E-035, E-037. The withdrawal of the unproduced identifier does not force a major step because no caller exists that it could break."
+      },
+      {
+        "condition": "restate the widening's exposure bound on the correct mechanism",
+        "discharged": "the run-level supply channel is registered as E-025 and reconciled with the workaround that depends on it (E-023). After the widening an operator-supplied validation report satisfies the menu for implement-feature/implementation and fix-bug/fix-implementation, replayed and confirmed as E-026. Practical exposure stays low on guard ordering, not on the pool: guard evaluation returns on the first block or wait, the predecessor and gate guards run before the input guard, and a live run records exactly that shape (E-027); by the time either phase is eligible its own predecessor's artifact is in the pool anyway (E-017, E-025). The residual loss is the guard's discriminating power, stated as latent."
+      },
+      {
+        "condition": "drop permanently from the phase-accounting characterization and verify the other held run",
+        "discharged": "the word is withdrawn in the Impact Assessment narrative. The other held run was re-read read-only: its Planning Gate approval wait opened 2026-09-05T04:49:53Z and resolved 04:53:11Z, the gate is now completed, one phase is running and three are pending, and the phase-accounting clause still fails for it with four unaccounted items (E-029). Recorded as strengthening the independence argument that routes the governance defect out through Q-002."
+      },
+      {
+        "condition": "name the clearing mechanism and resolve the prevention-scope contradiction",
+        "discharged": "the mechanism is the scheduler re-evaluation pass in runtime/framework_runtime.py, reached from the plan, next, dispatch, gate and aggregate subcommands: it re-evaluates every non-terminal item, is permitted to clear this block because the item records it as guard-raised, calls the envelope-clearing routine which resolves the recovery-ledger entry and rewrites the persisted envelope from open to resolved, then returns the item to pending with its block fields nulled and emits an escalation-resolved event (E-028). The prevention scope is decided once, in Closure: the two framework-wide checks are deferred and routed through Q-006, because the per-edge check fails on fourteen edges today and thirteen after the fix (E-030) and the orphan check flags twenty-seven identifiers of which twenty-six are legitimate operator-supplied request types (E-032). Regression tests added states the one check that does ship, a contract-level test over the changed manifest, and points at Closure rather than restating the reasoning."
+      }
+    ],
+    "carried_forward_confirmed": [
+      "withdrawing test-baseline-record is inside this fix's scope; Q-004 is recorded as answered at the Triage Gate rather than dropped",
+      "validation-report is emitted by five phases across four workflows, not four across three (E-020)"
+    ],
+    "additional_findings": [
+      "the stale failure envelope on run-34ca35504b72 classifies the fault under an escalation trigger describing a terminally failed upstream item and proposes recovering that item first, while safety-net-establishment is completed; its clearing action directs an operator to complete an already-complete phase (E-022). Recorded in the blast radius as a persisted record written while the defect was active.",
+      "the cause is a missing constraint rather than a mis-keyed line: fourteen producer-to-consumer identifier mismatches of this exact shape stand on edges a workflow Input column itself declares, across seven of the eight active workflows; the widening removes exactly one (E-030). Routed as Q-005.",
+      "this run is itself one of the thirteen that remain: its phase 1 to phase 2 handoff artifact was discarded by narrowing and recorded as narrowed out in the event ledger, reaching this phase only through the envelope's separate upstream-artifact field (E-031).",
+      "no test in the repository suite exercises the input-contract resolution or narrowing functions, so the corrected manifest line would have no check that fails on reversion unless one ships with the fix (E-038)."
+    ],
+    "quality_checks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blocking_failures": 0,
+      "correctable_repaired": 1,
+      "repairs": [
+        "V10 failed on first render: E-014 and E-015 were registered but uncited after E-036 and E-029 superseded them. Repaired by citing each where it is actually load-bearing, in the sentence that records what it was before the later evidence overturned it. No identifier was renumbered or removed."
+      ],
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass",
+        "S6": "pass", "S7": "pass", "S8": "pass", "S9": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass",
+        "D6": "pass", "D7": "pass",
+        "B2": "pass", "B3": "pass", "A1": "pass",
+        "B4": "pass", "V1": "pass", "V2": "pass", "V3": "pass", "V4": "pass", "V5": "pass",
+        "B1": "pass", "V6": "pass", "V7": "pass", "V8": "pass", "V9": "pass", "V10": "pass",
+        "V11": "pass", "V12": "pass", "V13": "pass", "V14": "pass", "V15": "pass", "V16": "pass",
+        "V17": "pass", "V18": "pass", "V19": "pass", "V20": "pass", "V21": "pass", "V22": "pass",
+        "V23": "pass", "V24": "pass", "V25": "pass", "V26": "pass", "V27": "pass", "V28": "pass",
+        "B5": "pass", "V29": "pass", "V30": "pass", "V31": "pass", "V32": "pass", "V33": "pass",
+        "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A7": "pass", "A8": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass", "C7": "pass"
+      },
+      "validation_engine": {
+        "validator": "bug_analysis_validator",
+        "result": "PASS",
+        "checks": "30/30",
+        "blocking": 0,
+        "correctable": 0
+      }
+    },
+    "not_machine_checkable_obligations": [
+      {
+        "id": "N1",
+        "obligation": "The stated root cause is the cause, not the symptom location",
+        "judgement": "discharged. The chain's final step is the guard outcome, which is the symptom, and the root cause statement does not name it. The statement names a condition that could have been different by design: nothing binds a producing agent's declared output identifier to the identifiers the consuming agent declares. The strongest support for this being the condition rather than a location is E-030 and E-031 — the same unbound relation produces fourteen mismatches across seven workflows, one of them inside this very run, which no account resting on a single mis-keyed manifest line predicts."
+      },
+      {
+        "id": "N2",
+        "obligation": "No speculative conclusion appears without supporting data",
+        "judgement": "discharged, and one triage-phase speculation was removed under it. The claim that no validation report could reach the sibling phases was an inference, not an observation, and it was overturned by reading the pool assembly (E-025) and re-established on the guard ordering that was actually read and observed (E-027). The exposure that remains is worded as latent and is not claimed to have occurred. Every version position is tied to a read of the versioning block and of the surfaces it governs rather than to convention."
+      },
+      {
+        "id": "N3",
+        "obligation": "The declared blast radius covers every boundary the defect crosses",
+        "judgement": "discharged, and widened this phase. Beyond the workflow edge, the agent's input-contract surface, the unproduced identifier and the two false dispatchability claims, the radius now names the governance surface that describes the agent — registry record, required-input prose, phase-ownership table (E-034) — and states the persisted failure envelope as a record written while the defect was active that survives the code fix (E-022). The thirteen sibling edges are named as the cause's reach and explicitly excluded from the fix's scope rather than folded into it, so the Regression scope narrows nothing silently."
+      }
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/execution.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "agents/omn-dev-1-bug-analyst/examples.md",
+    "runs/run-79630cb5274d/states/root-cause-analysis/invocation-envelope.json",
+    "runs/inputs/refactor-implementation-input-contract-defect-report.md",
+    "runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md",
+    "agents/omn-dev-1-implement/manifest.yaml",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-qa/manifest.yaml",
+    "registry/agents.yaml",
+    "registry/templates.yaml",
+    "registry/workflows.yaml",
+    "workflows/refactor.md",
+    "templates/implementation-report.md",
+    "runtime/framework_runtime.py",
+    "runtime/verify_self_hosting.py",
+    "runtime/verify_registry_coverage.py",
+    "runtime/bug_analysis_validator.py",
+    "runtime/artifact_contract.py",
+    "runs/run-34ca35504b72/state.json",
+    "runs/run-34ca35504b72/states/refactor-implementation/failure-envelope.json",
+    "runs/run-4c51600606df/state.json",
+    "runs/run-4c51600606df/recovery-ledger.json",
+    "runs/run-79630cb5274d/events.jsonl"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-79630cb5274d/states/root-cause-analysis/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

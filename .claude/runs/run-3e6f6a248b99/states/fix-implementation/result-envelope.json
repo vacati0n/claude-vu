@@ -1,0 +1,92 @@
+{
+  "invocation_id": "inv-3e6f6a248b99-03-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-3e6f6a248b99/states/fix-implementation/artifacts/attempt-2/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-0302",
+    "attempt": 2,
+    "supersedes": "IR-2026-0301 under RB-run-3e6f6a248b99-fix-gate-01 (attempt 1 artifact immutable, digest sha256:4b10ac71f54df2a92a55ab6007ea09a7 verified unchanged)",
+    "workflowPhase": "fix-implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "counts": {
+      "changeSetEntries": 24,
+      "testEvidenceEntries": 13,
+      "deviations": 6,
+      "residualRisks": 6,
+      "openQuestions": 4
+    },
+    "correctionRequests": {
+      "CR-001": "done: `standing` no longer excludes the closed phase (rollback_preconditions); pinned by test_gate_rollback RollbackPreconditionsTestCase with store equality and verify_recovery Run D negative D6a; architect ruling: refuse, no third transition",
+      "CR-002": "done: rollback_clearing_action emits `--decided-by <who>`; admissibility table exempts it for rollback; D7/D25 substitute only that placeholder; pinned by D5a and the unit clearing-action test",
+      "CR-003": "done: T-010 cause statement corrected (M6 evaluates the status vector as of the last carry-forward, so it fails on any run mid-rollback; the harness run additionally never traverses design/delivery); recorded under Q-003",
+      "CR-004": "done: `next` prints a live-derived rollback notice first, withholds a sibling gate decision (exit 3), auto-approval holds a gate whose sibling stands rejected, `recovery` derives open gate-rejection actions live with the recorded string shown beside them, persisted envelopes untouched; reproduced pre-fix and proven post-fix on scratch copies of run-4c51600606df with RUNS redirected; pinned by D5b, D5c, RejectedGateSurfacingTestCase, and the gate-policy sibling hold test",
+      "F4": "architect ruling (b) implemented: rollback_range is the completed downstream cone of the target; pinned by the fix-bug-shaped unit test; four contract passages updated"
+    },
+    "evidence": {
+      "executed": 13,
+      "passed": 12,
+      "failed": 1,
+      "failing": ["T-010"],
+      "unitAndIntegrationTests": {"run": 164, "passed": 164, "failed": 0},
+      "verifyRecovery": "74/74 RECOVERY PROVEN; runs directory 18 entries before and after",
+      "verifyMultiPhaseOnScratchRun": "14/15 on kept Run D scratch run run-3655babc5772 (M6 fails: status vector as of last carry-forward reads the superseded phase pending, and the one-phase harness never traverses design/delivery); scratch runs removed via reset_run",
+      "renderUserGuide": "render exit 0; --check exit 0",
+      "bundledPayload": "sync then 11/11 parity tests OK",
+      "strandedRunScratchCopy": "pre-fix: next offered Verification Gate, recovery echoed release; post-fix: next exit 3 naming rollback, recovery live, F1 route refused, operator sequence superseded two phases with zero open envelopes; live run digest and mtime unchanged",
+      "baseline": "153 tests OK across eight modules and verify_recovery 70/70 before the first edit; every baseline test still passes; +11 tests, +4 checks"
+    },
+    "qualityChecks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass",
+      "M1": "pass", "M2": "pass", "M3": "pass", "M4": "pass", "M5": "pass", "M6": "pass", "M7": "pass",
+      "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass",
+      "K1": "pass", "K2": "pass",
+      "V1": "pass", "V2": "pass", "V3": "pass",
+      "B1": "pass", "B2": "pass", "B3": "pass", "B4": "pass", "B5": "pass", "B6": "pass",
+      "A1": "pass", "A2": "pass", "A3": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass"
+    },
+    "validationEngine": "implementation_report_validator with --envelope: 32/32 checks passed, 0 blocking, 0 correctable, 3 not machine-checkable; digest cross-check passed",
+    "notMachineCheckable": {
+      "N1": "discharged: each change-set row was written from the edit made at that path in attempt 1 or this attempt, and says which; the mirror rows describe the sync that produced them and which five it rewrote",
+      "N2": "discharged: each test-evidence row was matched to the files its command exercises; Run D exercises C-001 to C-005 end to end including the four new checks, the unit module exercises C-001 to C-003 and C-010, the policy suite exercises C-003 and C-011, the consumer suites exercise C-009 with C-013 and C-014, the parity test exercises the eight mirrors and three contract files by digest, the scratch-copy driver exercises C-003 on the stranded run's own shape",
+      "N3": "discharged: no hidden side effect; every new helper is pure over the store, rollback_preconditions writes nothing and raises the same classes and text, gate decision values, record_gate_decision, release, producer exclusion and the runner's approval requirement are unchanged, every status change is a logged transition, persisted envelopes are never rewritten (D5c and the unit test compare ledger bytes), and the live stranded run's state.json digest and mtime are unchanged"
+    },
+    "stage7": "an evidence entry is fail (T-010, M6 only) -> partially-verified / provisional",
+    "escalations": ["Q-001 to omn-orchestrator (non-blocking; CKA-06 handbook equivalence fixture)", "Q-002 to architect (answered by the F4/CR-001 ruling; retained)", "Q-003 to omn-qa (M6 on a run mid-rollback; multi-phase proof with a rollback)", "Q-004 to architect (an active descendant inside the supersession cone)"]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-3e6f6a248b99/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": 0.88,
+  "declared_side_effects": [
+    "runtime/framework_runtime.py",
+    "runtime/verify_recovery.py",
+    "runtime/README.md",
+    "config/execution-engine.md",
+    "config/runtime.md",
+    "tests/test_gate_rollback.py",
+    "tests/test_gate_policy.py",
+    "docs/USER-GUIDE.md",
+    "docs/user-guide.html",
+    "omn_agent/_bundled_payload/config/execution-engine.md",
+    "omn_agent/_bundled_payload/config/runtime.md",
+    "omn_agent/_bundled_payload/runtime/README.md",
+    "omn_agent/_bundled_payload/runtime/framework_runtime.py",
+    "omn_agent/_bundled_payload/runtime/verify_recovery.py",
+    "runs/run-3e6f6a248b99/states/fix-implementation/artifacts/attempt-2/implementation-report.md",
+    "runs/run-3e6f6a248b99/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

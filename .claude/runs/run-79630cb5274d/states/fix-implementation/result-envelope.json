@@ -1,0 +1,405 @@
+{
+  "invocation_id": "inv-79630cb5274d-03-003",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-0007",
+    "workflowPhase": "fix-implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 11,
+      "testEvidenceEntries": 7,
+      "deviations": 4,
+      "residualRisks": 4,
+      "openQuestions": 4
+    },
+    "evidenceExecution": {
+      "entriesExecuted": 7,
+      "entriesPassed": 7,
+      "entriesFailed": 0,
+      "entriesNotRun": 0,
+      "unitSuiteBaseline": {
+        "command": "python -m unittest discover -s tests",
+        "testsRun": 342,
+        "failures": 0,
+        "errors": 0,
+        "verdict": "OK",
+        "takenBefore": "any file was modified by this invocation"
+      },
+      "unitSuiteAfter": {
+        "command": "python -m unittest discover -s tests",
+        "testsRun": 399,
+        "failures": 0,
+        "errors": 0,
+        "verdict": "OK",
+        "delta": "+57 tests, of which 14 are this change's new contract module and the remainder belong to a writer outside this invocation (R-004)"
+      },
+      "newContractModule": {
+        "command": "python -m unittest tests.test_agent_input_contracts",
+        "testsRun": 14,
+        "failures": 0,
+        "errors": 0,
+        "verdict": "OK"
+      },
+      "verifiers": {
+        "verify_manifests": {
+          "before": "2/2 CONFORMS",
+          "after": "2/2 CONFORMS"
+        },
+        "verify_registry_coverage": {
+          "before": "6/6 COVERED",
+          "after": "6/6 COVERED"
+        },
+        "verify_validators": {
+          "before": "6/6 COVERED",
+          "after": "6/6 COVERED"
+        },
+        "verify_multi_phase": {
+          "before": "14/15 NOT PROVEN",
+          "after": "14/15 NOT PROVEN",
+          "note": "pre-existing failure of check M6; unchanged by this change"
+        },
+        "verify_vertical_slice": {
+          "before": "10/10 PROVEN",
+          "after": "10/10 PROVEN"
+        },
+        "verify_recovery": {
+          "before": "41/41 RECOVERY PROVEN",
+          "after": "41/41 RECOVERY PROVEN"
+        },
+        "verify_self_hosting": {
+          "before": "7/8 NOT SELF-HOSTING",
+          "after": "7/8 NOT SELF-HOSTING",
+          "note": "the separate Completion Rule defect the analysis routes independently; unchanged by this change"
+        }
+      },
+      "repairDemonstration": {
+        "command": "python runtime/framework_runtime.py next --run-id run-34ca35504b72",
+        "workItem": "refactor-implementation",
+        "before": {
+          "status": "blocked",
+          "blockedReason": "awaiting_dependency_output",
+          "blockedBy": "guard",
+          "failureClass": "dependency-failure",
+          "failureEnvelope": "open"
+        },
+        "after": {
+          "status": "pending",
+          "queue": "Ready",
+          "blockedReason": null,
+          "blockedDetail": null,
+          "blockedBy": null,
+          "failureClass": null,
+          "failureEnvelope": "resolved"
+        },
+        "guardCleared": "G5-INPUT"
+      },
+      "declaredDataEdgeMismatch": {
+        "before": 11,
+        "after": 10,
+        "droppedEdge": "refactor: safety-net-establishment -> refactor-implementation (validation-report)",
+        "note": "independent re-implementation of the analysis's scan; the analysis reported 14 -> 13 (see V-002, Q-003)"
+      }
+    },
+    "qualityChecks": {
+      "S1": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "S2": {
+        "result": "pass",
+        "severity": "Correctable"
+      },
+      "S3": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "S4": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "S5": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "S6": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "S7": {
+        "result": "pass",
+        "severity": "Advisory"
+      },
+      "S8": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "D1": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "D2": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "D3": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "D4": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "D5": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "D6": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "M1": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "M2": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "M3": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "M4": {
+        "result": "pass",
+        "severity": "Blocking",
+        "note": "V-004 initially cited no change-set entry; repaired before emission and the whole check set re-run, per the quality module's repair procedure"
+      },
+      "M5": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "M6": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "M7": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "E1": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "E2": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "E3": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "E4": {
+        "result": "pass",
+        "severity": "Correctable"
+      },
+      "K1": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "K2": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "V1": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "V2": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "V3": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "B1": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "B2": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "B3": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "B4": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "B5": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "B6": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "A1": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "A2": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "A3": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "C1": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "C2": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "C3": {
+        "result": "pass",
+        "severity": "Correctable"
+      },
+      "C4": {
+        "result": "pass",
+        "severity": "Blocking"
+      },
+      "C5": {
+        "result": "pass",
+        "severity": "Correctable"
+      }
+    },
+    "qualityCheckTotals": {
+      "run": 44,
+      "passed": 44,
+      "failed": 0,
+      "repairedBeforeEmission": [
+        "M4"
+      ]
+    },
+    "validationEngine": {
+      "validator": "implementation_report_validator",
+      "result": "PASS",
+      "checksPassed": 32,
+      "checksTotal": 32,
+      "blocking": 0,
+      "correctable": 0,
+      "notMachineCheckableDeclared": 3
+    },
+    "notMachineCheckableObligations": {
+      "N1": {
+        "judgement": "discharged",
+        "basis": "each change-set row was written from the edit actually applied at that path and re-read after writing; the five mirror rows describe a regeneration performed by the repository's own sync command, which changed exactly those five files in content"
+      },
+      "N2": {
+        "judgement": "discharged",
+        "basis": "T-002 exercises the manifest and registry entries it names through the runtime's real narrowing and resolution functions; T-003 exercises the same declarations through the live guard; T-004 is the drift check that decides the mirror rows; T-005 and T-006 read every changed declaration surface"
+      },
+      "N3": {
+        "judgement": "discharged",
+        "basis": "no runtime module was modified, so no business or control logic changed; the change is confined to declaration files, one new test module and the committed mirror of those declarations"
+      }
+    },
+    "designConformance": {
+      "acceptedElementsImplemented": 6,
+      "acceptedElementsDeferred": 0,
+      "deferredByTheAnalysisItself": [
+        "per-edge producing-identifier check",
+        "orphan-identifier check",
+        "extended per-phase dispatchability verdict"
+      ],
+      "note": "the three deferrals are the analysis's own, recorded under its prevention routing, and were deliberately not shipped here"
+    },
+    "boundaryDeclaration": {
+      "writesInsidePermittedScope": [
+        "agents/omn-dev-1-implement/manifest.yaml",
+        "agents/omn-dev-1-implement/identity.md",
+        "agents/omn-dev-1-implement/execution.md",
+        "registry/agents.yaml",
+        "templates/implementation-report.md",
+        "tests/test_agent_input_contracts.py",
+        "omn_agent/_bundled_payload/agents/omn-dev-1-implement/execution.md",
+        "omn_agent/_bundled_payload/agents/omn-dev-1-implement/identity.md",
+        "omn_agent/_bundled_payload/agents/omn-dev-1-implement/manifest.yaml",
+        "omn_agent/_bundled_payload/registry/agents.yaml",
+        "omn_agent/_bundled_payload/templates/implementation-report.md",
+        "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+        "runs/run-79630cb5274d/states/fix-implementation/result-envelope.json"
+      ],
+      "writesOutsideDeclaredExclusions": {
+        "paths": [
+          "runs/run-34ca35504b72/state.json",
+          "runs/run-34ca35504b72/events.jsonl",
+          "runs/run-34ca35504b72/recovery-ledger.json",
+          "runs/run-34ca35504b72/states/refactor-implementation/failure-envelope.json"
+        ],
+        "recordedAs": "V-004",
+        "authorizedBy": "the invocation that dispatched this phase, which required the repair demonstration and stated that the mutation of that run's block fields is the fix working",
+        "performedBy": "the runtime's own scheduler re-evaluation pass, not by hand; no phase of that run was dispatched or completed and no artifact of it was edited"
+      },
+      "mirrorRegenerationNote": "the sync command regenerates all 267 mirrored files in place; only the five declared above differ in content from their committed form",
+      "unattributedTreeChanges": {
+        "observed": true,
+        "detail": "a writer outside this invocation modified integration-workflow, tooling, test and documentation files in the repository while this phase ran; those files are not this change's and are not declared as its side effects",
+        "recordedAs": [
+          "R-004",
+          "Q-001"
+        ]
+      }
+    },
+    "escalations": [],
+    "openQuestionsBlocking": [
+      "Q-001"
+    ],
+    "boundariesDeclined": [
+      "no review verdict, merge decision or release readiness claim was recorded",
+      "no acceptance criterion, quality threshold or declared invariant was relaxed",
+      "no failing test was disabled, skipped or weakened",
+      "the deferred prevention checks were not implemented, because the accepted change excludes them",
+      "no phase of run-34ca35504b72 was dispatched or completed, and the runtime's complete subcommand was not run for this phase"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-79630cb5274d/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "agents/omn-dev-1-implement/manifest.yaml",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "registry/agents.yaml",
+    "templates/implementation-report.md",
+    "tests/test_agent_input_contracts.py",
+    "omn_agent/_bundled_payload/agents/omn-dev-1-implement/execution.md",
+    "omn_agent/_bundled_payload/agents/omn-dev-1-implement/identity.md",
+    "omn_agent/_bundled_payload/agents/omn-dev-1-implement/manifest.yaml",
+    "omn_agent/_bundled_payload/registry/agents.yaml",
+    "omn_agent/_bundled_payload/templates/implementation-report.md",
+    "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-79630cb5274d/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

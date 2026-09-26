@@ -8,7 +8,7 @@ Adapter: `host-subagent`  ->  host registration `.claude/agents/omn-qa.agent.md`
 | run_id | `run-34ca35504b72` |
 | work_item_id | `run-34ca35504b72::safety-net-establishment` |
 | idempotency_key | `sha256:c3f8dd99611c2560dcaac0d662c729e0` |
-| invocation_id | `inv-34ca35504b72-02-001` |
+| invocation_id | `inv-34ca35504b72-02-002` |
 | command | `/refactor` |
 | workflow | `refactor` v1.0.0 |
 | state_id (phase) | `safety-net-establishment` (phase 2) |
@@ -19,7 +19,7 @@ Adapter: `host-subagent`  ->  host registration `.claude/agents/omn-qa.agent.md`
 | Declared type | Reference | File |
 |---|---|---|
 | `architecture-context` | `runs/inputs/claude-md-folder-sync-architecture-context.md` | `.claude/runs/inputs/claude-md-folder-sync-architecture-context.md` |
-| `technical-design` | `runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md` | `D:/Project/Claude-Vu/.claude/runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md` |
+| `technical-design` | `runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md` | `D:/Project/claude-framework/.claude/runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md` |
 
 ## Upstream phase outputs
 

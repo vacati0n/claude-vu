@@ -1,0 +1,76 @@
+{
+  "run_id": "run-3e6f6a248b99",
+  "slice": "vertical-slice-6-qa-execution",
+  "runtime_version": "0.5.0",
+  "status": "completed",
+  "queue_status": "Executing",
+  "command_id": "bugfix",
+  "workflow_id": "fix-bug",
+  "workflow_version": "1.0.0",
+  "state_id": "regression-validation",
+  "work_item_id": "run-3e6f6a248b99::regression-validation",
+  "idempotency_key": "sha256:4fa81e92e915d11a4ed4482dbabf944c",
+  "attempt": 1,
+  "agent_id": "omn-qa",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "invocation_id": "inv-3e6f6a248b99-04-001",
+  "input_digest": "sha256:39dbb2db63137cfd13ea4fd91313604a",
+  "context_digest": "sha256:78d88c378c3673644ed6f229f0d4e473",
+  "module_load_order": [
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/identity.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/execution.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "agents/omn-qa/examples.md"
+  ],
+  "artifact_path": "runs/run-3e6f6a248b99/states/regression-validation/artifacts/validation-report.md",
+  "conditional_artifact_globs": [],
+  "result_envelope_path": "runs/run-3e6f6a248b99/states/regression-validation/result-envelope.json",
+  "validator": "validation_report_validator",
+  "execution_started_at": "2026-09-07T11:59:20Z",
+  "execution_completed_at": "2026-09-07T13:45:55Z",
+  "validation": {
+    "result": "pass",
+    "checksRun": 31,
+    "checksPassed": 31,
+    "blockingFailures": 0,
+    "correctableFailures": 0,
+    "notMachineCheckable": 3,
+    "counts": {
+      "sections": 10,
+      "status": "provisional",
+      "identifiers": {
+        "AC": 17,
+        "DF": 3,
+        "Q": 5
+      },
+      "tableRows": {
+        "Acceptance Criteria Results": 17,
+        "Defects": 3
+      },
+      "criteria": 17,
+      "defects": 3,
+      "verdict": "pass-with-reservations",
+      "validationBasis": "regression",
+      "results": {
+        "met": 14,
+        "not-met": 0,
+        "blocked": 3
+      },
+      "severity": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 3
+      }
+    },
+    "undeclaredSideEffects": []
+  },
+  "agent_result_status": "succeeded",
+  "artifact_digest": "sha256:b5a700fce81383afd3902358ce349194",
+  "recovery": null
+}

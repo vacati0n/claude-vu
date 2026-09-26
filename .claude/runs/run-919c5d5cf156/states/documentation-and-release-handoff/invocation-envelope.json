@@ -1,0 +1,424 @@
+{
+  "invocation_id": "inv-919c5d5cf156-06-002",
+  "run_id": "run-919c5d5cf156",
+  "work_item_id": "run-919c5d5cf156::documentation-and-release-handoff",
+  "idempotency_key": "sha256:ede85ca0a47be285417f41d4d4a206aa",
+  "state_id": "documentation-and-release-handoff",
+  "phase_index": 6,
+  "agent_id": "omn-documentation",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-documentation.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-documentation/manifest.yaml",
+    "load_order": [
+      "agents/omn-documentation/system.md",
+      "agents/omn-documentation/identity.md",
+      "agents/omn-documentation/reasoning.md",
+      "agents/omn-documentation/execution.md",
+      "agents/omn-documentation/output.md",
+      "agents/omn-documentation/quality.md",
+      "agents/omn-documentation/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-documentation/system.md": "sha256:407f35d95b5e232c7d87d7740a942844",
+      "agents/omn-documentation/identity.md": "sha256:e40e9fd9da20ae31f5af17d3cc97fcf2",
+      "agents/omn-documentation/reasoning.md": "sha256:11b286235d28b0bc358674c5b9357736",
+      "agents/omn-documentation/execution.md": "sha256:0077338ee3cbe3eee246e3556f9da205",
+      "agents/omn-documentation/output.md": "sha256:9e0c56ac978b9695f13668e209f8e2e4",
+      "agents/omn-documentation/quality.md": "sha256:972fe80aafbde6b6f8142b6dbd97e081",
+      "agents/omn-documentation/examples.md": "sha256:baead714ded57fbb1d36b103b957ee78"
+    },
+    "capabilities": [
+      "documentation",
+      "release-communication"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "validation-report",
+      "review-package",
+      "deployment-status",
+      "scope-definition",
+      "technical-design",
+      "execution-plan",
+      "bug-analysis",
+      "monitoring-health-record",
+      "final-change-summary",
+      "stakeholder-list",
+      "verification-report",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "closure-context",
+      "communication-requirements",
+      "existing-documentation",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "review-package",
+        "reference": "runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md",
+        "text": "```yaml\nreviewPackage:\n  packageId: RP-2026-0006\n  reviewReference: CKA-04 (run run-919c5d5cf156, quality-review phase)\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-04-feature-request.md\n    - type: implementation-report\n      reference: runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md\n  producedBy: omn-dev-2-reviewer\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: approve-with-corrections\n  inputDigest: sha256:dfa470ef65e413202266311b966ccc6b\n  contextDigest: sha256:d2a44ef0a7d382b3285bf0991857fe61\n```\n\n## Metadata\n\n- Review ID: RP-2026-0006\n- Reviewer: omn-dev-2-reviewer\n- Change under review: CKA-04, delivered by implementation report IR-2026-0006 \u2014 the new content-contract test module `tests/test_content_contracts.py` (13 tests pinning four structural properties of governance prose) and one pinned `Status:` banner line added to each of the four root governance documents (`working-memory.md`, `rule-engine.md`, `quality-gates.md`, `decision-matrix.md`); ticket CKA-04 traces to recommendation R5 of the adoption review dated 2026-08-27\n- Review date: 2026-09-04\n\n## Review Scope\n\n- In scope: the added test module `tests/test_content_contracts.py` in full \u2014 the check-1 gate-decidability logic and its import binding to the four runtime readers, the check-2 line-1 supersession-marker assertion, the check-3 unconditional banner assertion, the check-4 seven-family coercive-language scan with its two-part discriminator, and every positive and negative fixture; the four banner-line edits on the root governance documents, verified against the version-control diff; conformance of all of it to the accepted technical design (decisions D-001 through D-006, constraints C-001 through C-007, sequencing conditions P-002 through P-005), the accepted decision records D-001 and D-002, the bounded scope (items S-001 through S-007, exclusions X-001 through X-005), and the implementation report's own claims (change set C-001 through C-005, evidence T-001 through T-006, deviation V-001, risks R-001 through R-004); repository paths here follow the change account's convention \u2014 relative to the framework payload directory, with the four banner documents and `tests/` at the repository root\n- Out of scope: validation of acceptance criteria and release thresholds across the system, which belongs to omn-qa at the Verification Gate; the three verification demonstrations the approved plan assigns downstream \u2014 the structure-preserving reword demonstration (scope A-003, plan T-007), the CI-run-record discovery evidence (scope A-001, plan T-006), and user-guide reconciliation (scope A-009, plan T-008) \u2014 safe to exclude because each has a named owner and a gate that consumes it; re-execution of three of the account's seven proof scripts \u2014 the recovery and multi-phase proofs write beneath the repository run-evidence area, which this agent's command authority forbids, and the vertical-slice proof measures the most recently modified run, now this in-flight run, so re-execution cannot reproduce the reported measurement \u2014 their reported verdicts (41/41 recovery, 10/10 vertical slice, 14/15 multi-phase) are recorded as claimed, not confirmed; repair of the change-proposal accounting for the four pre-existing unaccounted runs, named follow-up work owned outside this change\n- Evidence reviewed: the feature request; implementation report IR-2026-0006; the accepted technical design CKA-04-technical-design; decision records D-001 and D-002; scope definition SCOPE-2026-0004; execution plan CKA-04-execution-plan; the added test module in full; the version-control diff of the four root documents (two inserted lines each: the banner and a blank separator; no other content); `workflows/workflow-gate-matrix.md`; line 1 of `agents/architect.md` and `agents/planner.md`; the reader and file-access functions in `runtime/framework_runtime.py` (`load_yaml`, `read_text`, `resolve_workflow`, `parse_phase_model`, `parse_gate_matrix`, `phase_gates`, `producer_aliases`, read at their definitions) confirming the module-global root constant is resolved at call time so the fixture root-redirect genuinely governs the reads; the run's state store and event stream confirming Scope, Planning, and Design Gate approvals (Design Gate approved by omn-tech-lead, discharging P-001); the implementation-report template as the standard for the account-accuracy finding; and the executed commands recorded under Test Adequacy Assessment\n\n## Findings\n\n| ID | Severity | Category | Location | Requirement | Finding | Correction Request | Status |\n|---|---|---|---|---|---|---|---|\n| `F-001` | medium | architecture | `tests/test_content_contracts.py:154, 226-230` | Decision record D-002 (Decision: pattern families and discriminator), accepted at the Design Gate; implementation-report contract: a deviation from the accepted design is recorded, never taken silently | The implemented check-4 inventory diverges from the accepted D-002 record in two places, only one of which the change account records. First, object and qualifier tokens accept a plain plural on their final word (the account's deviation V-001, escalation marked not-required). Second, family 6 (self-recorded approval) is implemented as verb plus object plus `as approved`/`as passed` co-occurrence, without the record's third element \u2014 the \"qualifier absent the owner's decision\" \u2014 and this divergence appears nowhere in the Deviations table. Both widenings are in the safe detection direction and the current tree shows zero matches with six itemized exclusions, but the family-6 widening enlarges the false-positive surface D-002 deliberately bounded: legitimate future instructional prose such as \"must record the gate as approved once the deciding owner approves\" would match, which is exactly the accepted-tree-red failure the design's R-001 names. The consequence is that the design owner who accepted the inventory as fixed (design assumption A-003) cannot see that the fixed inventory and the shipped inventory disagree. | `CR-001` | open |\n| `F-002` | low | standards | `runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md` (Boundary Compliance) | Implementation-report contract, Boundary Compliance: declared side effects state every write, and the change description states the handed-off tree accurately | The account declares the regenerated interpreter bytecode cache under `tests/` removed, yet the tree handed to this review carried `tests/__pycache__/test_content_contracts.cpython-314.pyc` before this review executed anything; and the account describes the four documents as \"changed by exactly one banner line each\" while the recorded diff inserts two lines per document \u2014 the banner and a blank separator. The consequence is confined to account precision: a reviewer reconciling declared side effects against the tree finds a mismatch the account does not explain. No behavioral or content defect follows; the banner lines themselves are exact, em dash included, and correctly placed in each preamble. | `CR-002` | open |\n\n## Severity Summary\n\n- Critical: 0\n- High: 0\n- Medium: 1\n- Low: 1\n\n## Standards and Architecture Conformance\n\n- Coding standards: the testing-strategy playbook (S07) and the repository's established hermetic test convention (stdlib test framework, repository root anchored from the test file's own path, temporary-tree fixtures, per the existing gate-policy suite whose convention the design's fact register records) \u2014 conforms; fixtures are mutated copies in temporary directories or in-memory text, no governance file is mutated in place, no network is touched, and the working tree was byte-identical before and after every execution this review ran\n- Architecture rules: the additive-only boundary (scope X-001, design C-001) and the accepted design's module impact map \u2014 conforms: the version-control diff shows exactly four documents modified by a banner line plus blank separator each and one test file added; no runtime module, workflow specification, registry record, gate-decision surface, or CI configuration file changed (scope X-002 also holds); the only boundary crossed is the established tests-to-runtime import boundary, read-only, exactly as decision record D-001 directs; assertions bind to table cells read through the runtime's own parsers, a line-1 marker, an exact banner constant, and pattern structure \u2014 none to sentence wording (scope X-003, design C-003) \u2014 with one open reconciliation finding (`F-001`) against the D-002 record\n- Security criteria: the secure-engineering playbook (S09) \u2014 conforms: no credential, token, or secret appears in the change or this package; scanned file content is read, never executed; the module requires no elevated access; check 4 itself adds a governance-safety control pinning the absence of coercive auto-chain instruction in agent contracts\n- Exceptions requested: None identified.\n\n## Test Adequacy Assessment\n\n- Test evidence reviewed: re-executed by this review \u2014 `python -m unittest tests.test_content_contracts -v` (13 tests, all passing; the six discriminator exclusions itemized exactly as the account's T-004 lists them, all six gate-bypass family candidates; zero inert gate-matrix rows reported); `python -m unittest discover -s tests` (342 tests, exit clean, matching the account's T-005 count, with the working tree confirmed unchanged by version-control status before and after); `python runtime/verify_manifests.py` (2/2 CONFORMS), `python runtime/verify_registry_coverage.py` (6/6 COVERED), `python runtime/verify_validators.py` (6/6 COVERED), `python runtime/verify_self_hosting.py` (7/8 NOT SELF-HOSTING, confirming the account's R-002 pre-existing attribution). Read but deliberately not re-executed, and therefore claimed rather than confirmed: the recovery proof (41/41), the vertical-slice proof (10/10), the multi-phase proof (14/15 with the account's R-001 attribution), and the account's pre-banner red-then-green demonstration and P-002 import probe, whose outcomes the landed suite now demonstrates directly\n- Coverage of changed behavior: complete for the behavior this change introduces \u2014 check 1 carries a current-tree assertion plus producer-only negative fixtures in both alias directions (prefixed and de-prefixed), an unmutated-fixture zero-findings control, a missing-gate failure, and an inert-row skip demonstration; check 2 carries the current-tree assertion plus a dropped-marker fixture; check 3 carries the current-tree assertion for all four documents plus a banner-removal fixture per document; check 4 carries the zero-match scan with an empty-scan-set guard, fourteen per-family coercive fixtures (imperative and positive-modal), and eight prohibition or declarative forms required not to match; the four banner edits are exercised by check 3 against the landed tree\n- Gaps requiring new tests: none for behavior this change altered; three demonstrations remain owned downstream and are handed to omn-qa with this assessment \u2014 the structure-preserving reword demonstration (scope A-003, plan T-007), the CI-run-record discovery evidence with zero configuration change (scope A-001, plan T-006), and the user-guide reconciliation or recorded no-impact review (scope A-009, plan T-008)\n\n## Correction Requests\n\n| ID | Addresses | Required change | Blocking | Owner |\n|---|---|---|---|---|\n| `CR-001` | `F-001` | The accepted D-002 record and the shipped check-4 inventory agree: the design owner either ratifies both widenings \u2014 the plural final-word tokens and the family-6 form without the absent-owner qualifier \u2014 as a recorded amendment to D-002, or directs the implementation back to the record's form; the change account's Deviations table then carries the family-6 divergence and its resolution alongside V-001 | no | architect |\n| `CR-002` | `F-002` | The change account's Boundary Compliance section matches the handed-off tree: the bytecode-cache declaration states that the cache regenerates on every suite execution (or the cache is cleared at handoff), and the banner-edit description states the two inserted lines per document | no | omn-dev-1-implement |\n\n## Residual Risk\n\n- Accepted risk: the discriminator's precision-over-recall tradeoff \u2014 a coercive instruction phrased declaratively, inflected into third person, or placed in a table cell evades check 4 \u2014 accepted by the design owner in D-002 with CKA-16 as the designated widening vehicle; and the load-bearing coupling of the suite to the four runtime reader names, accepted in decision record D-001 as a deliberately loud failure mode\n- Unmitigated risk: the self-hosting proof reads 7/8 \u2014 confirmed by this review's own execution \u2014 until the four pre-existing unaccounted runs are repaired and this run's change proposal lands at closure; the multi-phase proof's side effect of appending replay bookkeeping to the newest committed run's tracked state file (the account's R-004) remains a live hazard for any executor of the definition-of-done proofs; and the account's Q-001 \u2014 whether the Verification Gate accepts the two attributed negative proof verdicts \u2014 is undecided\n- Monitoring required: check 1's skipped inert-row report (currently none) and check 4's exclusion itemization (currently six candidates, all gate-bypass), both printed in every run \u2014 growth in either signals Phase Model, matrix, or contract-prose drift; and tracked run-evidence state after any multi-phase proof execution\n\n## Verdict\n\n- Decision: approve-with-corrections\n- Rationale: one medium and one low finding are open, both non-blocking record-reconciliation defects rather than behavioral ones; every property the change pins is demonstrated by executed positive and negative checks that this review re-ran independently \u2014 13 of 13 module tests and 342 of 342 suite tests passing with the working tree unchanged \u2014 and the additive-only, zero-CI-change, and structure-only-binding constraints all hold on the inspected diff\n- Blocking findings outstanding: None identified.\n- Readiness recommendation: this reviewer recommends acceptance at the Review Gate with `CR-001` and `CR-002` carried as non-blocking corrections; because this package is this agent's own evidence, the Review Gate decision belongs to omn-qa as the second owner the gate matrix names; the Verification Gate will additionally need the three downstream demonstrations named under Test Adequacy Assessment and an answer to `Q-001`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | Does the Verification Gate accept the two attributed negative proof verdicts the change account records \u2014 the multi-phase proof at 14/15, attributed to this run's own in-flight state and self-resolving at commit, and the self-hosting proof at 7/8, attributed to four runs predating this change plus this run's closure-pending proposal (the 7/8 reading independently confirmed by this review) \u2014 or must the pre-existing accounting be repaired before that gate decides? Carried forward from the change account's own open question. | no | omn-qa | the Verification Gate's reading of the definition-of-done proof evidence; no finding, and not this package's verdict |",
+        "digest": "sha256:5ede02673422f031b0588204149c96ba",
+        "produced_by": "quality-review"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was delivered: an implementation report for the change set itself, a validation report for what was proven about it, a review package for a `review-pull-request` run, or a deployment status for the `communication-and-post-release` phase, which publishes after a release has landed. Without one there is nothing to publish from, and publishing anyway would mean describing a system from this agent's own reading of what it was supposed to become."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-919c5d5cf156/states/documentation-and-release-handoff/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-919c5d5cf156/states/documentation-and-release-handoff/artifacts/release-note.md"
+    ],
+    "failures": [
+      {
+        "id": "R2",
+        "severity": "Blocking",
+        "quality_ref": "templates/release-note.md",
+        "requirement": "The version in the metadata block and in the Metadata section are the same",
+        "detail": "metadata='CKA-04' section='CKA-04 \u2014 the change identifier every upstream artifact of run run-919c5d5cf156 records this delivery under (ticket CKA-04, traced to recommendation R5 of the adoption review dated 2026-08-27); no supplied input declares a separate product version for this change.'"
+      },
+      {
+        "id": "R7",
+        "severity": "Correctable",
+        "quality_ref": "templates/release-note.md",
+        "requirement": "The version is a recognisable version string",
+        "detail": "version='CKA-04'"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "review-package",
+      "reference": "runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md",
+      "produced_by": "quality-review"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-04T15:08:54Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/release-note.md",
+        "digest": "sha256:a6125cac38eb2edeca7105d936d9304c",
+        "supplies": null
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": null
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:bc0fb4ee128c1855f84c63b3ea12319c",
+    "input_digest": "sha256:5ede02673422f031b0588204149c96ba",
+    "inputs": [
+      {
+        "type": "review-package",
+        "reference": "runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md",
+        "digest": "sha256:5ede02673422f031b0588204149c96ba"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-919c5d5cf156/states/documentation-and-release-handoff/artifacts/release-note.md",
+      "runs/run-919c5d5cf156/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "reproducing a test or validation result, which belongs to omn-qa"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author or amend a technical design, an architecture decision, or a structural constraint",
+      "define, widen, or narrow product scope or acceptance criteria",
+      "award, withhold, or restate a validation verdict as though this agent reached it",
+      "record a merge, release, or deployment decision",
+      "publish a statement the supplied evidence does not support",
+      "omit, soften, or defer a breaking change a supplied input declares",
+      "carry forward prior-release content the delivered change made false",
+      "resolve an engineering gap rather than returning it to the role that owns it",
+      "decide a gate that assesses evidence this agent produced",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "describe delivered behavior from the implementation and validation evidence supplied",
+        "draft release notes, change summaries, and closure communication packages",
+        "record usage, limitations, known issues, and troubleshooting guidance",
+        "state the compatibility consequence a declared contract change carries",
+        "identify documentation the delivered change made stale, and propose its correction",
+        "name the audience a communication was addressed to and the handoff it carries",
+        "maintain the trace from each published statement to the artifact that supports it",
+        "record an unresolved engineering question as an open question against its owning role"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author or amend a technical design, an architecture decision, or a structural constraint",
+        "define, widen, or narrow product scope or acceptance criteria",
+        "award, withhold, or restate a validation verdict as though this agent reached it",
+        "record a merge, release, or deployment decision",
+        "publish a statement the supplied evidence does not support",
+        "omit, soften, or defer a breaking change a supplied input declares",
+        "carry forward prior-release content the delivered change made false",
+        "resolve an engineering gap rather than returning it to the role that owns it",
+        "decide a gate that assesses evidence this agent produced",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else. Product documentation living in the repository is proposed as content inside the artifact and applied by the role that owns the file, so a documentation change never travels as an unreviewed write.",
+        "rationale": "This agent's authority is over what is said about a change, never over the change itself. Writing to the repository would let a publication step alter the delivered behavior it exists to describe, and the resulting document would then be accurate about a system this agent had just modified."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "reproducing a test or validation result, which belongs to omn-qa"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same published statements, the same known-issue set, the same compatibility statement, the same declared release verdict, and the same declared artifact status.",
+      "identifierSchemes": {
+        "knownIssues": "K-<zero-padded-sequence>"
+      },
+      "orderingRule": "Known issues keep the order of the source that recorded them, so a supplied defect list and the issues published from it can be read side by side.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied evidence, release context, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "release-note.md",
+    "artifact_path": "runs/run-919c5d5cf156/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "template_ref": "templates/release-note.md",
+    "contract_ref": "agents/omn-documentation/output.md",
+    "quality_ref": "agents/omn-documentation/quality.md",
+    "validator": "release_note_validator",
+    "result_envelope_path": "runs/run-919c5d5cf156/states/documentation-and-release-handoff/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-04T15:08:54Z"
+}

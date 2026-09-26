@@ -1,0 +1,670 @@
+schema: framework.runtime/task-context.v1
+task_id: run-5df08e171670
+command: implement
+workflow: implement-feature v1.0.0
+run_status: Dispatching
+updated_at: '2026-09-14T08:22:21Z'
+objective: 'Operator request, 2026-09-08, extended 2026-09-12 and 2026-09-14. Type: capability addition. Priority: High —
+  the capability exists to support a live product presentation, and the framework had no way to show itself working. The framework
+  can execute a governed multi-agent run but cannot show one. Explaining it to someone who has not seen it means talking over
+  a state table. Add a capability by which a run records itself and produces a distribution-ready demonstration film with
+  no human editing step, so that a presenter has evidence rather than assertions. Three deliverables, in the order they were
+  asked for: 1. /implement --demo. An optional flag on the existing command that turns on rec...'
+inputs:
+- type: feature-request
+  reference: runs/inputs/demo-mode-feature-request.md
+  digest: sha256:563fa9d0a3547f8f865e6410fb0f4547
+- type: change-request
+  reference: runs/inputs/demo-mode-change-request.md
+  digest: sha256:5d21bb1a8e746477e8ea85a743e94068
+- type: business-intent
+  reference: runs/inputs/demo-mode-business-intent.md
+  digest: sha256:d7c3a27030f383417920cef88eb56166
+- type: architecture-context
+  reference: runs/inputs/demo-mode-architecture-context.md
+  digest: sha256:804a281170829bd910709cc9e1daa95d
+relevant_agents:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  status: completed
+  required_skills:
+  - S02
+  - S07
+- phase: execution-planning
+  agent: planner
+  status: completed
+  required_skills:
+  - S02
+  - S01
+  - S07
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  status: completed
+  required_skills:
+  - S01
+  - S03
+  - S06
+  - S09
+- phase: implementation
+  agent: omn-dev-1-implement
+  status: pending
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S11
+  - S12
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  status: pending
+  required_skills:
+  - S07
+  - S09
+  - S08
+- phase: documentation-and-release-handoff
+  agent: omn-documentation
+  status: pending
+  required_skills:
+  - S11
+  - S10
+  - S12
+completed_phases:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  artifact: runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md
+  digest: sha256:c86aec5912c479f65ef54cdaec08ac1f
+  validation: pass 33/33
+  attempts: 1
+- phase: execution-planning
+  agent: planner
+  artifact: runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md
+  digest: sha256:49fdefb22d93e751beb03e1d2d95db24
+  validation: pass 45/45
+  attempts: 1
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  artifact: runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  digest: sha256:f279b38468e3bfa7f3b3b161eece4de0
+  validation: pass 78/78
+  attempts: 2
+gates:
+- gate: Scope Gate
+  closes: scope-and-acceptance
+  decision: approved
+  owner_role: omn-business-analyst
+  decided_by: omn-business-analyst subagent a3511899e4038408d, recorded by session operator for vuhoangcao
+- gate: Planning Gate
+  closes: execution-planning
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent a6c306330530bf26c, recorded by session operator for vuhoangcao
+- gate: Design Gate
+  closes: solution-design-and-risk-assessment
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent a307c9acb773c30c5, recorded by session operator for vuhoangcao
+- gate: Review Gate
+  closes: quality-review
+  decision: null
+  owner_role: null
+  decided_by: null
+- gate: Verification Gate
+  closes: quality-review
+  decision: null
+  owner_role: null
+  decided_by: null
+- gate: Closure Gate
+  closes: documentation-and-release-handoff
+  decision: null
+  owner_role: null
+  decided_by: null
+artifacts:
+  scope-and-acceptance: runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md
+  execution-planning: runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md
+  solution-design-and-risk-assessment: runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+parallel_groups:
+- - scope-and-acceptance
+  - execution-planning
+- - solution-design-and-risk-assessment
+- - implementation
+- - quality-review
+- - documentation-and-release-handoff
+scope:
+  in_scope:
+  - 'S-001: An operator can ask, at the moment a run is requested, that the run record itself; the run then proceeds ex...
+    | input:feature-request deliverable 1 asks for an optional recording request on the existing command | must-have'
+  - 'S-002: Nothing that was not part of the run reaches the finished demonstration: material showing anything other th...
+    | input:business-intent names publication safety the hard constraint; input:feature-request acceptance 6 forb... | must-have'
+  - 'S-003: A run that was not asked to record costs nothing for the capability''s existence: no additional dependency i...
+    | input:feature-request acceptance 1 and input:business-intent constraint that unused capability is free | must-have'
+  - 'S-004: A fault anywhere in the recording or presentation path is absorbed and recorded there, leaving the observed...
+    | input:feature-request constraints: additive only, and nothing in the demo layer may raise into the run it o... | must-have'
+  - 'S-005: Every governed step of a recorded run, being runtime event, dispatch, agent result, validation verdict, gat...
+    | input:feature-request deliverable 1 and acceptance 2 | must-have'
+  - 'S-006: A recorded run that reaches completion stops its own camera and produces the finished demonstration exactly...
+    | input:feature-request deliverable 1 and acceptance 7; input:business-intent outcome that a presenter produc... | must-have'
+  - 'S-007: The demonstration shows the application actually performing the run, cut against that run''s own record, and...
+    | input:feature-request deliverable 2 and acceptance 4; input:business-intent outcome that what is shown is e... | must-have'
+  - 'S-008: A viewer meeting the framework for the first time can follow the demonstration end to end: it runs for seve...
+    | input:feature-request deliverable 3 and acceptance 5; input:business-intent target user 2 and the outcome t... | must-have'
+  - 'S-009: Where an optional external tool the demonstration could use is absent from the host, the run still produces...
+    | input:feature-request acceptance 8 and the no-new-mandatory-dependency constraint | must-have'
+  - 'S-010: A different demonstration, for a different audience, can be produced from an existing recording without exe...
+    | input:business-intent outcome that recording is the expensive part and should happen once | should-have'
+  - 'S-011: The recording request is discoverable from the command''s own published contract, and that contract''s record...
+    | input:change-request records the command specification and registry record as part of the delivered change | should-have'
+  - S-001 An operator can ask, when a run is requested, that the run record itself, and the run
+  - S-002 Nothing that was not part of the run reaches the finished demonstration; withheld
+  - S-003 A run that was not asked to record costs nothing for the capability's existence —
+  - S-004 A fault anywhere in the recording or presentation path is absorbed and recorded there,
+  - S-005 Every governed step of a recorded run is recorded once, in order, stamped in UTC to
+  - S-006 A recorded run that reaches completion stops its own camera and compiles exactly once,
+  - S-007 The demonstration shows the application performing the run, cut against that run's
+  - 'S-008 A first-time viewer can follow the demonstration end to end: minutes long, ordinary'
+  - S-009 An absent optional external tool yields a reduced demonstration with its substitution
+  - S-010 A second demonstration for a different audience is produced from an existing recording
+  - S-011 The recording request is discoverable from the command's published contract, whose
+  - 'S-012 The change is additive only: no gate semantics, Producer Exclusion Rule, state'
+  - 'S-013 The change is governed by the self-hosting profile: carried by a command run and'
+  - S-014 The existing test suite and the framework verifiers pass over the delivered change
+  out_of_scope:
+  - 'X-001: A monitoring, metrics, or observability capability built on the recorded steps | input:business-intent non-goal
+    1; the recorded steps exist to cut a demonstration, and input:architecture-c... | a request for run telemetry is raised
+    as a change in its own right'
+  - 'X-002: A general-purpose editing capability for material other than a recording of a run | input:business-intent non-goal
+    2: it edits one thing, a recording of a run, against that run | a demand arises to assemble material that is not the record
+    of a run'
+  - 'X-003: Replacing or altering the final report, the completion package, or the recovery ledger | input:business-intent
+    non-goal 3; those remain the governed record and the demonstration is not one | a decision is taken to treat a demonstration
+    as an audit artifact'
+  - 'X-004: Presenting a run more favourably than it happened, by omitting a rejection or a retry or by hiding that tim...
+    | input:business-intent non-goal 4; the demonstration''s worth to a technical viewer rests on it being a real run | a
+    request arrives for material that does not claim to be the record of a real run'
+  - 'X-005: Making any external capture, encoding, or speech tool a requirement of the framework, or installing or conf...
+    | input:business-intent forbids a new mandatory dependency because the framework installs into other reposito... | the
+    framework adopts a mandatory media dependency as a policy decision'
+  - 'X-006: Any change to gate semantics, the Producer Exclusion Rule, the state machine, recovery classification, or a...
+    | input:feature-request constrains the change to additive only, and input:change-request records that none of... | a demonstration
+    requirement emerges that cannot be met without changing governed lif...'
+  - 'X-007: Recording by default, and recording from any command other than the one the request names | input:feature-request
+    deliverable 1 and acceptance 1 make recording an opt-in request on one command | a request is made to demonstrate a second
+    workflow'
+  - 'X-008: Publishing, hosting, or distributing a finished demonstration, and deciding that a particular one may be re...
+    | the request asks for a distribution-ready demonstration, not for a distribution path; release judgement res... | a publication
+    or distribution path is requested'
+  - X-001 Telemetry, metrics, or observability built on the recorded steps — excluded by D-005;
+  - X-002 A general-purpose editing capability for material other than a recording of a run —
+  - X-003 Replacing or altering the final report, the completion package, or the recovery
+  - X-004 Presenting a run more favourably than it happened — excluded because the material's
+  - X-005 Making any external capture, encoding, or speech tool mandatory, or installing or
+  - X-006 Any change to gate semantics, the Producer Exclusion Rule, the state machine, recovery
+  - X-007 Recording by default, and recording from any command other than the one the request
+  - X-008 Publishing, hosting, or distributing a finished demonstration, and deciding that a
+validation_requirements:
+  acceptance_criteria:
+  - 'A-001: A run requested with recording is recording from the moment the run is accepted, and a run requested withou...
+    | S-001 | demonstration of two runs of the same workflow, one requested with recording and one without, comparing the...'
+  - 'A-002: No segment in which the target window was not the window on screen, and no audio captured by the recording...
+    | S-002 | inspection of the recording manifest against the finished demonstration for a run in which the target windo...'
+  - 'A-003: A run that did not ask to record requires no tool the framework does not already require and performs one e...
+    | S-003 | review of the unrequested path against the stated cost, confirmed by executing a run on a host where none o...'
+  - 'A-004: A fault induced anywhere in the recording or presentation path leaves the observed run''s status, artifacts,...
+    | S-004 | demonstration of a recorded run with an induced recording fault, comparing its ledger and artifacts against...'
+  - 'A-005: The framework''s existing test suite and its verifiers pass on the delivered change, with no previously pass...
+    | S-004 | execution of the existing suite and the framework verifiers, plus review of the change for weakened assertions'
+  - 'A-006: Every runtime event, dispatch, agent result, validation verdict, gate decision, and host tool call of a rec...
+    | S-005 | reconciliation of a completed run''s recorded steps against its event stream and phase directories, includin...'
+  - 'A-007: A recorded run that reaches completion ends its recording only after its last gate is decided, and yields e...
+    | S-006 | demonstration of one complete lifecycle run, confirming a single finished demonstration and a recording who...'
+  - 'A-008: Every segment of a finished demonstration is material of the application performing that run, and each cond...
+    | S-007 | review of the finished demonstration against the run''s recorded steps, segment by segment'
+  - 'A-009: A demonstration produced from a run whose record contains a rejection and a retry shows both | S-007 | review
+    of a demonstration produced from a run whose ledger records a rejection and a retry'
+  - 'A-010: A finished demonstration runs for several minutes rather than under a minute, narrates every step in ordina...
+    | S-008 | review by a reviewer who has not seen the framework, against the narration script, to the threshold Q-001 a...'
+  - 'A-011: Every finished demonstration arrives with a written script a presenter can read beforehand and with a subti...
+    | S-008 | inspection of the output of a completed recorded run'
+  - 'A-012: With any one of the optional external tools absent, a recorded run still produces a demonstration and recor...
+    | S-009 | demonstration on a host with each optional tool removed in turn, inspecting the recorded substitution in ea...'
+  - 'A-013: A second demonstration, differing in length or in how it is narrated, is produced from an existing recordin...
+    | S-010 | demonstration of two differing outputs produced from one recording'
+  - 'A-014: The optional recording request appears in the command''s published parameter documentation, and the command''...
+    | S-011 | inspection of the command specification and its registry record against the framework''s declared versioning...'
+  test_focus:
+  - 'The unrequested path, measured rather than reviewed: that the package is absent from the'
+  - Fault absorption under an induced fault at each of the three absorption sites, comparing the
+  - 'Replay de-duplication: that a replayed event produces no second marker, and that marker'
+  - 'The closure behaviour: that the camera stops only after the last gate is decided and that'
+  - 'The exclusion path on a deliberately obscured run: that every occluded span appears in the'
+  - The substitution ladder with each optional tool absent in turn, confirming that each absence
+  - 'The condensation disclosure: that every condensed span carries its factor on screen and that'
+  - 'Re-cutting: two presentations differing in length or narration from one recording, with no'
+  - The three contract surfaces read together for agreement on the size of the parameter group
+constraints:
+- 'Business constraints: publication safety outranks completeness of the demonstration, so a gap is preferable to unverified
+  material; a team that never uses th...'
+- 'Regulatory or policy constraints: the change is additive only, touching no gate semantics, no Producer Exclusion Rule,
+  no state machine, no recovery classifi...'
+- 'Delivery constraints: the capability is already implemented and its tests pass, so this boundary is recorded for delivered
+  behaviour, per D-001; the operator...'
+- 'External dependencies: four optional external tools, each absent on some host and none permitted to become mandatory, being
+  an image library (Pillow), a medi...'
+- 'Wave 1: T-001, T-004, T-005, T-018, T-019, T-025, T-030'
+- 'Wave 2: T-002, T-006, T-008, T-010, T-013, T-015, T-016, T-020, T-023, T-026, T-028'
+- 'Wave 3: T-003, T-007, T-009, T-011, T-012, T-014, T-017, T-021, T-022, T-024, T-027'
+- 'Wave 4: T-032'
+- 'Wave 5: T-029, T-031'
+- 'C-001: structural | Additive only: no gate semantics, Producer Exclusion Rule, state machine, recovery classification,
+  or exist... | Hard'
+- 'C-002: operability | No new mandatory dependency, and the framework installs or configures no external tool on the operator''s
+  host | Hard'
+- 'C-003: quality-attribute | A run that did not request recording performs one existence check per emitted event and nothing
+  further, an... | Hard'
+- 'C-004: operability | Nothing in the observation layer may raise into the run it observes | Hard'
+- 'C-005: security | Only the target window may ever be recorded, the recording''s own audio is never published, and publication...
+  | Hard'
+- 'C-006: structural | External integration sits behind an adapter boundary, outside the execution path, as model adapters
+  do | Hard'
+- 'C-007: structural | The marker record exists to cut a presentation and must not become a metrics or observability pipeline,
+  nor... | Hard'
+- 'C-008: operability | A fault in the observation path is not a run failure and must not enter failure classification; it
+  is caugh... | Hard'
+- 'C-009: quality-attribute | A new capability must not add to what a dispatch reads | Hard'
+- 'C-010: structural | Anything path-facing derives from the install-prefix variable | Hard'
+- 'C-011: functional | Recording is opt-in on the one command the request names, and compilation occurs exactly once, after
+  the fi... | Hard'
+- 'C-012: migration | The command''s recorded version states an additive change with safe defaults under the declared versioning
+  rule | Hard'
+- 'C-013: functional | Delivered behaviour is judged against the acceptance criteria as written; no criterion is softened,
+  narrowe... | Hard'
+- 'C-014: quality-attribute | The presentation runs to minutes, narrates every step in ordinary language, and shows each spoken
+  line on s... | Negotiable'
+- 'C-015: functional | Every segment of a finished presentation is material of the application performing that run | Hard'
+- 'P-001: The divergence register F-019 to F-022 is reconciled against the change record and closed before any accept... |
+  M-015, M-016, M-020, M-022 | none'
+- 'P-002: The capture backend in force for the live presentation is recorded before any segment-level evidence is pro... |
+  M-007, M-008 | P-001'
+- 'P-003: The request parser, the published parameter documentation, and the registry record are brought into agreeme... |
+  M-016, M-017, M-018 | P-001'
+- 'P-004: The withheld-span exclusion is verified on a run whose target window was deliberately obscured before any p... |
+  M-008, M-009, M-011 | P-002'
+- 'P-005: The cost of the unrequested path is measured before the zero-cost property is asserted | M-001, M-016 | P-001'
+- 'P-006: Fault absorption is demonstrated against an induced fault before the recording path is exercised on a run w... |
+  M-001, M-016 | P-005'
+- 'P-007: One complete recorded lifecycle exists before the marker reconciliation and the closure behaviour are assessed |
+  M-001, M-003 | P-004, P-006'
+- 'P-008: The substitution ladder is exercised with each optional external tool absent in turn before the no-mandator... |
+  M-005, M-008, M-012, M-013, M-014 | P-007'
+- 'P-009: A second presentation is produced from the recording made at P-007, without filming or executing the run again |
+  M-004, M-011 | P-007'
+- 'P-010: The change-wide regression evidence is produced only after every reconciliation above has closed | M-016, M-021
+  | P-001, P-003, P-005, P-006, P-007, P-008, P-009'
+- 'P-011: The running-length threshold and the first-time-viewer review definition are settled before the audience-la... |
+  M-004, M-006 | none'
+decisions:
+- 'D-001: The boundary is recorded for a capability already built and tested, stated as what the delivered change mus... |
+  input:change-request describes a completed change set, the defects already found and fixed within it, and a... | downstream
+  phases verify the delivered behaviour against A-001 to A-014 rather than...'
+- 'D-002: A drawn or synthetic presentation does not satisfy S-007, and survives only as the reduced substitute S-009... |
+  the requester rejected a synthetic dashboard because the demonstration must be evidence of a real run, yet... | the two
+  requirements coexist without contradiction, and a reduced output is never pre...'
+- 'D-003: Publication safety is priced above completeness: material that cannot be shown to be of the run is withheld... |
+  input:business-intent names this the hard constraint that outranks completeness of the film, and input:arch... | A-002 can
+  be met by a demonstration with missing segments, and such a gap is not a f...'
+- 'D-004: Recording stays opt-in and confined to the single command the request names, rather than being offered acro... |
+  the request asks for an optional flag on one existing command, and the zero-cost constraint of S-003 would... | demonstrating
+  a second workflow is X-007, a separate change with its own boundary'
+- 'D-005: The recorded steps are bounded to cutting a demonstration and are not offered as a record anything else may... |
+  input:business-intent non-goal 1 and the standing decision in input:architecture-context not to build a met... | X-001 holds,
+  and no downstream phase may treat the recorded steps as an interface'
+- 'Selected: O-001.'
+- 'Structural change: one observation point at the ledger''s emit function, reached only through'
+- 'Rationale: the single emission point already carries everything a presentation needs, in'
+- 'Highest-scoring rejected alternative and why it lost: O-002. It ties O-001 on criteria 1,'
+- 'Tradeoffs accepted:'
+- A second process exists while filming, and can be orphaned if the run dies abnormally
+- The compilation claim is written before the build, so a crashed build leaves a run with no
+- On the host as configured, the preferred backend is unreachable and the encoder backend
+- The tool-hook fragment is an operator-merged configuration rather than a framework-written
+- The layer is deliberately not an interface, so nothing downstream may build on the marker
+- 'D-001: Observe the run at the single event emission point, behind a per-run switch file and a lazy import; supply... |
+  Yes | architecture-decision-record-D-001.md'
+- 'D-002: Let a process detached from the run own the recording and watch the target while the run proceeds | Yes | architecture-decision-record-D-002.md'
+- 'D-003: Select the capture backend by probing the control server at start, with the window-rectangle backend as the... |
+  Yes | architecture-decision-record-D-003.md'
+- 'D-004: Catch and log every fault inside the observation layer, and keep it out of failure classification and recov... |
+  Yes | architecture-decision-record-D-004.md'
+- 'D-005: Compile exactly once per run, claimed by an exclusive file creation made before the build, and only when th... |
+  Yes | architecture-decision-record-D-005.md'
+- 'D-006: Degrade through a recorded substitution ladder for every optional external tool, whose lowest rung draws th... |
+  Yes | architecture-decision-record-D-006.md'
+- 'D-007: Carry the operator-facing surface on the existing command''s published contract as an additive minor version...
+  | Yes | architecture-decision-record-D-007.md'
+- 'D-008: Keep the marker record private to the presentation path: no runtime interface exposes it, and no artifact c... |
+  No | inline; it is the direct application of C-007 and adds no structure'
+- 'D-009: Fix the presentation-layer choices — the three narration registers, the pacing defaults, the head-and-tail... |
+  No | inline; each is a presentation parameter and changes no boundary'
+- 'D-010: Place every file the layer writes under the run''s own directory, derived from the install-prefix variable,... |
+  No | inline; it is the direct application of C-010 and the exception is carried by D-001'
+open_questions:
+- 'Q-001: What minimum running length settles A-010, given that the inputs state only several minutes and the rejecti... |
+  no | omn-business-analyst'
+- 'Q-002: Who performs the first-time-viewer review that decides A-010, and what outcome of that review counts as pas... |
+  no | omn-qa'
+- 'Q-003: Which capture path the live presentation will use is unsettled, because the recording application''s control...
+  | no | omn-tech-lead'
+- 'Q-004: Who approves that a particular finished demonstration may be published, given that X-008 places distributio... |
+  no | omn-tech-lead'
+- 'Q-005: Is the short reference cut for onboarding an existing team a requirement of this change, or is it satisfied... |
+  no | omn-business-analyst'
+- 'Q-001: What minimum running length settles AC-010, given that the inputs state only several minutes and that a thi... |
+  no | omn-product-owner (reassigned from omn-business-analyst at the Scope Gate)'
+- 'Q-002: Who performs the first-time-viewer review that decides AC-010, and what outcome of that review counts as pa... |
+  no | omn-qa'
+- 'Q-003: Which capture path will the live presentation use, given that the recording application''s control server is...
+  | no | omn-tech-lead'
+- 'Q-004: Who approves that a particular finished demonstration may be released, given that X-008 places distribution... |
+  no | omn-tech-lead'
+- 'Q-005: Is the short reference cut for onboarding an existing team a requirement of this change, or is it satisfied... |
+  no | omn-product-owner (reassigned from omn-business-analyst at the Scope Gate)'
+- 'Q-006: How is documentation-and-release-handoff work carried out and recorded for this run, given that the runtime... |
+  no | omn-orchestrator'
+- 'Q-001: Does the operator enable the recording application''s control server for the live presentation, or does the... |
+  no | omn-tech-lead'
+- 'Q-002: Are the four divergences F-019 to F-022 bounded corrections to the change record, as A-005 judges, or do th... |
+  no | omn-tech-lead'
+- 'Q-003: What minimum running length settles the audience criterion, given that the inputs state only "several minut... |
+  no | omn-product-owner'
+- 'Q-004: Who performs the first-time-viewer review that decides the audience criterion, and what outcome counts as a... |
+  no | omn-qa'
+- 'Q-005: Who approves that a particular finished presentation may be released, given that publication and distributi... |
+  no | omn-tech-lead'
+- 'Q-006: Is the short reference cut for onboarding an existing team a deliverable of this change, or satisfied by th... |
+  no | omn-product-owner'
+- 'Q-007: How is the closure-phase work carried out and recorded, given that the runtime''s implemented surface does n...
+  | no | omn-orchestrator'
+- 'Q-008: Do the Design Gate owners accept decision records D-001 to D-007, which are emitted at status Proposed? | no | omn-tech-lead'
+objectives:
+- TO-01 Every governed step of a recorded run is captured once, in order, stamped in UTC to
+- TO-02 Every segment of a finished demonstration is material of the application performing
+- 'TO-03 The presentation layer is intelligible without prior knowledge: it runs to minutes,'
+- TO-04 Recording opens at the moment the run is accepted when requested and never otherwise;
+- TO-05 Compilation occurs exactly once, after the final gate decision, with no further
+- TO-06 Material not shown to be of the target window, and the recording's own audio, are
+- TO-07 No fault in the recording or presentation path reaches the observed run; verified by
+- TO-08 No optional external tool is required, and each absence yields a recorded
+- TO-09 A second demonstration, differing in length or narration, is produced from an existing
+- TO-10 The command's published contract carries the optional recording request and a version
+- TO-11 The existing test suite and the framework verifiers pass over the whole change with no
+- 'Desired outcome: a governed run can observe itself and, on reaching its final gate, produce'
+- 'Architectural objectives:'
+- A single observation point exists at which the whole progress of a run is visible, and no
+- The observation path is switched per run and is absent from the process image of a run
+- Every external integration the capability needs sits behind an adapter boundary outside
+- No control or error path leads from the observation layer into the run's state machine,
+- Material that cannot be shown to be of the target window is structurally excluded before
+- Compilation is a single, idempotent consequence of the run having nothing left to decide.
+- The recording and the edit are separable, so a second presentation is derivable from an
+- The capability's operator-facing surface is carried by the existing command's published
+- Delivered structure is described and judged as it is, against the acceptance criteria as
+- 'In scope: the observation package runtime/demo/, its integration sites in'
+- 'Out of scope, structurally: the workflow Phase Model, the gate matrix and its Producer'
+assumptions:
+- 'A-001: The change set the change-request input records is complete and is the artifact this plan governs, per D-001 | plan-wide
+  | The plan governs the wrong artifact; reconciliation tasks become construction tasks and the wave structure...'
+- 'A-002: Until Q-001 and Q-002 settle, AC-010 is planned against its decidable core: narration of every step in ordi... |
+  S-008 | A settled threshold above what was delivered reopens the audience layer for re-pacing work'
+- 'A-003: The live presentation runs on the operator platform the architecture-context names, so Q-003 is a choice be... |
+  S-007 | A different host changes the capture options and the reconciliation scope of T-006 and T-016'
+- 'A-004: A reviewer who has not seen the framework is available to perform the AC-010 review before the Verification... |
+  S-008 | AC-010 cannot be decided in this run and moves to a follow-up with its own owner'
+- 'A-005: The closure-phase work can be carried out even though the runtime''s implemented surface does not execute do...
+  | plan-wide | T-029, T-030, and T-031 have no executing owner and the Closure Gate cannot be evidenced'
+- 'A-001: Outside the four sites this design re-read — the package directory, the integration sites and request parse... |
+  The design of record must govern the whole delivered artifact, and only part of it was re-read | Further divergences exist;
+  the reconciliation sequencing in P-001 does not bound the correction, and...'
+- 'A-002: The capability''s delivered tests pass as the execution plan records; this design executes nothing | The design
+  justifies delivered structure rather than proposing construction, which is only sound if the str... | The design of record
+  describes behaviour that does not hold, and every acceptance reconciliation...'
+- 'A-003: The live presentation runs on the operator platform F-007 describes | The capture-path settlement in D-003 rests
+  on that host''s configuration | The available backends differ, D-003 is re-decided, and the P-002 evidence is re-produced
+  on the actual host'
+- 'A-004: Enabling the recording application''s control server through its own interface is an operator act, not a fra...
+  | D-003 keeps the preferred backend reachable without breaching C-002 | The preferred backend is unreachable within the
+  boundary, and the encoder backend becomes the only path rat...'
+- 'A-005: The four divergences F-019 to F-022 are corrections to the record rather than undelivered construction, bec... |
+  P-001 sequences a bounded reconciliation ahead of every acceptance activity | The reconciliation is construction, the wave
+  structure of the execution plan is re-derived, and R-010 of th...'
+- 'A-006: The condensation factor stated on screen and the withheld-span list in the capture manifest are, together,... |
+  C-005 and C-015 are satisfied by exclusion plus disclosure rather than by completeness | Disclosure is judged insufficient,
+  and AC-002 or AC-008 requires a structural change to the editor rather t...'
+risks:
+- 'R-001: requirement | Q-001 or Q-002 is unresolved when the Verification Gate is reached | AC-010 has no pass condition
+  and plan acceptance cannot close'
+- 'R-002: requirement | Q-005 is unresolved when the Planning Gate is decided | The re-cut scope reopens after planning and
+  S-010 acceptance shifts'
+- 'R-003: technical | Q-003 is unresolved when the reconciliation wave starts | Only the reduced substitute is demonstrable,
+  and AC-008 cannot be demonstrated at all'
+- 'R-004: technical | A correction made during reconciliation adjusts an existing check to keep the suite green | S-014 fails
+  change-wide and the additive-only claim is lost'
+- 'R-005: dependency | No reviewer unfamiliar with the framework is available before the Verification Gate | The AC-010 review
+  cannot be performed and BO-01 is unevidenced'
+- 'R-006: dependency | The verification host cannot be varied to present each optional external tool absent in turn | AC-012
+  cannot be demonstrated and TO-08 is unevidenced'
+- 'R-007: security | A recorded window or a recorded agent-boundary exchange carries restricted content into a finished demonstr...
+  | Disclosure outside the team, the dominant risk D-003 names'
+- 'R-008: operational | A finished demonstration is released before Q-004 names who may approve release | Material leaves
+  the team with no accountable approver'
+- 'R-009: operational | The run reaches documentation-and-release-handoff and blocks at capability resolution | Closure tasks
+  are unevidenced and the Closure Gate has nothing to decide on'
+- 'R-010: delivery | A reconciliation task finds a divergence needing more than a bounded correction | The run returns to
+  solution-design-and-risk-assessment and waves 2 to 5 are re-derived'
+- 'R-001: security | The target window stops being the window on screen for an interval shorter than the helper''s sampling
+  perio... | Footage that was not of the run reaches a finished presentation, breaching the constraint that outranks com...'
+- 'R-002: security | The recording''s own audio track is carried into a finished presentation by a build path that does not
+  strip it | Audio that was never part of the run is published'
+- 'R-003: delivery | A further divergence between the change record and the delivered change is found after the acceptance
+  recon... | The plan governs an incomplete artifact; reconciliation tasks become construction tasks and the wave struct...'
+- 'R-004: performance | The unrequested path is exercised and the guard is not the only cost, because a caller reaches the
+  package... | The zero-cost property fails as written and AC-003 cannot be met'
+- 'R-005: operability | The run process dies abnormally while the detached helper is filming | An orphaned recording process
+  holds the target and the capture manifest is left in a recording state'
+- 'R-006: contract | The request parser, the published parameter documentation, and the registry record are offered as evidence...
+  | AC-014 is evidenced against a contract that understates its own surface, and the additive-version claim is...'
+- 'R-007: operability | The build crashes after the compilation claim is written | The run ends with no presentation, no automatic
+  retry, and a claim file that suppresses a later attempt'
+- 'R-008: structural | A downstream consumer treats the marker record as an interface it may depend on | The layer acquires
+  a durable contract it was designed not to have, and the constraint against a metrics pip...'
+- 'R-009: security | The tool-hook fragment is merged into a host session''s settings and that session performs work unrelated
+  to... | Tool names and target excerpts from unrelated work enter a run''s marker record and may reach a presentation'
+- 'R-010: operability | The control server is enabled for the live presentation, changing the backend from the one the delivered
+  ev... | The segment-level evidence describes a capture path the presentation does not use, and the accepted gap in...'
+- 'R-011: delivery | The criterion requiring every segment to be material of the application is assessed against the rectangle
+  b... | The criterion appears satisfied when a residual remains, or is quietly reworded to match the backend, which...'
+- 'R-012: performance | A long recorded run reaches its final gate and the encode runs while the operator expects the run
+  to be fin... | The run appears to hang after its last gate decision, on a path the operator did not ask to wait for'
+- 'R-013: delivery | The existing suite or a framework verifier fails on the delivered change, or a previously passing check
+  is... | The additive-only claim is lost change-wide and the delivered capability cannot be accepted'
+- 'R-014: operability | The presentation''s honesty rests on disclosure and the disclosure is judged insufficient at review
+  | The exclusion-plus-disclosure position behind A-006 fails and the editor requires a structural change rathe...'
+plan_tasks:
+- 'T-001: Record the technical design of the delivered demonstration capability | depends on none'
+- 'T-002: Reconcile the opt-in recording request against S-001 | depends on T-001'
+- 'T-003: Produce the paired-run evidence for the recording request | depends on T-002'
+- 'T-004: Decide the capture path for the live presentation | depends on none'
+- 'T-005: Name the approver for releasing a finished demonstration | depends on none'
+- 'T-006: Reconcile the capture boundary against S-002 | depends on T-001, T-004'
+- 'T-007: Produce the publication-safety evidence for an obscured-window run | depends on T-006'
+- 'T-008: Reconcile the unrequested run''s cost against S-003 | depends on T-001'
+- 'T-009: Produce the unrequested-run cost evidence | depends on T-008'
+- 'T-010: Reconcile fault absorption against S-004 | depends on T-001'
+- 'T-011: Produce the induced-fault evidence | depends on T-010'
+- 'T-012: Assess the delivered change for governance conformance | depends on T-002, T-006, T-008, T-010, T-013, T-015, T-016,
+  T-020, T...'
+- 'T-013: Reconcile the marker record against S-005 | depends on T-001'
+- 'T-014: Produce the completed-run reconciliation evidence | depends on T-013, T-015'
+- 'T-015: Reconcile the closure of a recorded run against S-006 | depends on T-001'
+- 'T-016: Reconcile the cut of the demonstration against S-007 | depends on T-001, T-004'
+- 'T-017: Produce the segment-level evidence that the demonstration is material of the run | depends on T-016'
+- 'T-018: Decide the minimum running length that settles AC-010 | depends on none'
+- 'T-019: Define the first-time-viewer review that decides AC-010 | depends on none'
+- 'T-020: Reconcile the audience-facing presentation layer against S-008 | depends on T-001'
+- 'T-021: Produce the inspection evidence for the presenter outputs | depends on T-020'
+- 'T-022: Conduct the first-time-viewer review of a finished demonstration | depends on T-018, T-019, T-020'
+- 'T-023: Reconcile the substitution path for absent optional tools against S-009 | depends on T-001'
+- 'T-024: Produce the substitution evidence with each optional tool absent in turn | depends on T-023'
+- 'T-025: Decide whether the onboarding reference cut is a deliverable of this change | depends on none'
+- 'T-026: Reconcile re-cutting from an existing recording against S-010 | depends on T-001, T-025'
+- 'T-027: Produce the two-cut evidence from one recording | depends on T-026'
+- 'T-028: Reconcile the command''s published contract against S-011 | depends on T-001'
+- 'T-029: Publish the release communication for the capability | depends on T-005, T-028, T-032'
+- 'T-030: Settle how the closure-phase work is carried out | depends on none'
+- 'T-031: Produce the framework change proposal linking this run''s artifacts | depends on T-030, T-032'
+- 'T-032: Produce the change-wide regression evidence | depends on T-012'
+facts:
+- 'F-001: Every state change in a run passes through the ledger''s single emit function, which appends to one ordered... |
+  input:architecture-context, Current-state structure'
+- 'F-002: The invocation envelope and the dispatch prompt are written to the phase directory before the adapter is le... |
+  input:architecture-context, Current-state structure'
+- 'F-003: The Validation Engine writes one validation report per phase | input:architecture-context, Current-state structure'
+- 'F-004: The task-context and execution-metrics modules added in 0.7.0 derive per-run documents from persisted evide... |
+  input:architecture-context, Current-state structure'
+- 'F-005: The runtime already records everything a presentation needs, ordered and stamped, so nothing new had to be... |
+  input:architecture-context, The architectural fact this change rests on'
+- 'F-006: The install-prefix variable exists because the framework occupies one directory in its own repository and a... |
+  input:architecture-context, Design constraints 5'
+- 'F-007: The operator platform is Windows; the recording application 32.2.2 is installed with its control server bun... |
+  input:architecture-context, Known environmental facts'
+- 'F-008: No system encoder is installed on the operator host; an image library is present; platform speech voices ar... |
+  input:architecture-context, Known environmental facts'
+- 'F-009: The target window belongs to a GPU-composited desktop application | input:architecture-context, Known environmental
+  facts'
+- 'F-010: The delivered package runtime/demo/ holds fourteen Python modules with the responsibilities the change reco... |
+  input:change-request, What changes; read of runtime/demo/'
+- 'F-011: The package''s public surface exposes enable, event tap, status, build, backfill, record start and stop, cap...
+  | read of runtime/demo/__init__.py'
+- 'F-012: Every site in runtime/framework_runtime.py that reaches the package is guarded by one existence check on th... |
+  read of runtime/framework_runtime.py'
+- 'F-013: The event tap discards an event whose canonical identifier already produced a marker, so a replayed event d... |
+  read of runtime/demo/recorder.py'
+- 'F-014: Compilation is claimed by an exclusive file creation performed before the build, so a second finishing even... |
+  read of runtime/demo/__init__.py'
+- 'F-015: The camera stops and the film is compiled only when every phase is committed and every gate is decided, rea... |
+  read of runtime/demo/__init__.py'
+- 'F-016: Two capture backends exist, the control-server backend preferred and the encoder backend second; the encode... |
+  read of runtime/demo/capture.py'
+- 'F-017: The encoder backend raises the target and refuses to start unless the target is the foreground window, and... |
+  read of runtime/demo/capture.py, runtime/demo/capture_helper.py'
+- 'F-018: A long span keeps its head and tail at real speed and condenses only its middle, with the condensation fact... |
+  read of runtime/demo/editor.py'
+- 'F-019: The package directory also holds a delivered configuration fragment wiring host tool calls to the runtime''s...
+  | read of runtime/demo/hooks.settings.json; input:change-request, What changes'
+- 'F-020: runtime/framework_runtime.py reaches the package at four guarded sites — the ledger tap, arming during run... |
+  read of runtime/framework_runtime.py, runtime/demo/__init__.py; input:change-request, What changes'
+- 'F-021: The request parser registers ten recording arguments and the command specification documents nine, while th... |
+  read of runtime/framework_runtime.py, commands/implement.md, registry/commands.yaml; input:change-request,...'
+- 'F-022: The installable payload under omn_agent/_bundled_payload/ carries the whole delivered change including the... |
+  read of omn_agent/; input:change-request, What changes'
+- 'F-023: The delivered test set is four test modules and one control-server fixture, as the change record states | read of
+  tests/; input:change-request, What changes'
+- 'F-024: The gate matrix names omn-architect and omn-tech-lead as the Design Gate owners for this workflow, its Prod... |
+  workflows/workflow-gate-matrix.md'
+- 'F-025: The runtime and the user documentation both carry the capability, and the wrapper modules forward the reque... |
+  read of runtime/README.md, docs/USER-GUIDE.md, omn_agent/cli.py, omn_agent/runner.py, omn_agent/update.py'
+repository_context:
+  relevant_modules:
+  - 'M-001: runtime/demo/__init__.py | extension | F-011'
+  - 'M-002: runtime/demo/context.py | extension | F-011'
+  - 'M-003: runtime/demo/recorder.py | extension | F-013'
+  - 'M-004: runtime/demo/timeline.py | extension | F-018'
+  - 'M-005: runtime/demo/narration.py | extension | F-008'
+  - 'M-006: runtime/demo/captions.py | extension | F-011'
+  - 'M-007: runtime/demo/obs_ws.py | extension | F-007'
+  - 'M-008: runtime/demo/capture.py | extension | F-016'
+  - 'M-009: runtime/demo/capture_helper.py | extension | F-017'
+  - 'M-010: runtime/demo/overlays.py | extension | F-011'
+  - 'M-011: runtime/demo/editor.py | extension | F-018'
+  - 'M-012: runtime/demo/renderer.py | extension | F-010'
+  - 'M-013: runtime/demo/video_builder.py | extension | F-010'
+  - 'M-014: runtime/demo/deck.py | extension | F-010'
+  - 'M-015: runtime/demo/hooks.settings.json | operational-impact | F-019'
+  - 'M-016: runtime/framework_runtime.py | contract-change | F-012, F-020, F-021'
+  - 'M-017: commands/implement.md | contract-change | F-021'
+  - 'M-018: the implement record in registry/commands.yaml | contract-change | F-021'
+  - 'M-019: omn_agent/cli.py, omn_agent/runner.py, omn_agent/update.py | behavior-change | F-025'
+  - 'M-020: runtime/README.md, docs/USER-GUIDE.md and its rendered output, and the repository readme | operational-impact
+    | F-025, F-020'
+  - 'M-021: tests/test_demo_mode.py, test_demo_capture.py, test_demo_pacing.py, test_demo_captions.py, tests/fixtures/f...
+    | extension | F-023'
+  - 'M-022: omn_agent/_bundled_payload/ | extension | F-022'
+  - 'M-023: workflows/implement-feature.md and its Phase Model | no-change-verified | F-005'
+  - 'M-024: workflows/workflow-gate-matrix.md and its Producer Exclusion Rule | no-change-verified | F-024'
+  - 'M-025: the state transition table and recovery classification in config/execution-engine.md | no-change-verified | F-012,
+    C-008'
+  - 'M-026: the artifact templates under templates/ and their validators under runtime/ | no-change-verified | F-004'
+  - 'M-027: every command record in registry/commands.yaml other than implement | no-change-verified | F-021'
+  - 'M-028: the agent contracts under agents/ | no-change-verified | F-002'
+  relevant_files: []
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:solution-design-and-risk-assessment
+      term: migration
+    performance:
+    - source: input:change-request
+      term: profile
+    - source: artifact:scope-and-acceptance
+      term: profile
+    - source: artifact:execution-planning
+      term: profile
+    security:
+    - source: input:architecture-context
+      term: token
+    - source: artifact:execution-planning
+      term: security
+    - source: artifact:solution-design-and-risk-assessment
+      term: security
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:feature-request
+  - input:change-request
+  - input:business-intent
+  - input:architecture-context
+  - artifact:scope-and-acceptance
+  - artifact:execution-planning
+  - artifact:solution-design-and-risk-assessment
+relevant_skills:
+  scope-and-acceptance:
+    S02: required
+    S07: required
+  execution-planning:
+    S02: required
+    S01: required
+    S07: required
+  solution-design-and-risk-assessment:
+    S01: required
+    S03: required
+    S06: required
+    S09: required
+  implementation:
+    S03: required
+    S06: required
+    S10: required
+    S11: required
+    S12: required
+  quality-review:
+    S07: required
+    S09: required
+    S08: required
+  documentation-and-release-handoff:
+    S11: required
+    S10: required
+    S12: required

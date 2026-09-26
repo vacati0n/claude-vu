@@ -1,0 +1,2511 @@
+{
+  "schema": "framework.runtime/state-engine.v1",
+  "run_id": "run-79630cb5274d",
+  "runtime_version": "0.5.0",
+  "command_id": "bugfix",
+  "workflow_id": "fix-bug",
+  "workflow_version": "1.0.0",
+  "run_status": "Completed",
+  "created_at": "2026-09-05T04:47:37Z",
+  "updated_at": "2026-09-06T02:13:42Z",
+  "input_digest": "sha256:5a2b487a98c5cd63924463c1649e4798",
+  "inputs": [
+    {
+      "type": "defect-report",
+      "reference": "runs/inputs/refactor-implementation-input-contract-defect-report.md",
+      "source_file": ".claude/runs/inputs/refactor-implementation-input-contract-defect-report.md",
+      "digest": "sha256:76384910923398dcb752564a5c3f523f"
+    }
+  ],
+  "work_items": {
+    "triage-and-impact": {
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "run_id": "run-79630cb5274d",
+      "workflow_id": "fix-bug",
+      "state_id": "triage-and-impact",
+      "work_type": "state",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": true,
+      "phase_index": 1,
+      "gate": "Triage Gate",
+      "artifact": "bug-analysis.md",
+      "depends_on": [],
+      "attempt": 1,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": "host-subagent:omn-dev-1-bug-analyst",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "payload_digest": "sha256:7f8a7c7dfaf28e29fc3833b3620ae529",
+      "blocked_reason": null,
+      "blocked_detail": null,
+      "failure_class": null,
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G1-CAPABILITY",
+          "title": "owner agent is invocable for this phase",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "omn-dev-1-bug-analyst v1.0.0 resolves through agents/omn-dev-1-bug-analyst.agent.md; validator bug_analysis_validator"
+        },
+        {
+          "id": "G2-CONTEXT",
+          "title": "a context slice is declared for this phase",
+          "outcome": "pass",
+          "reason_code": "context_hydration_completed",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "15 declared member(s), including the routed workflow specification"
+        },
+        {
+          "id": "G3-PREDECESSOR",
+          "title": "hard predecessors have completed",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "hard predecessors: none"
+        },
+        {
+          "id": "G4-GATE",
+          "title": "predecessor gates are approved",
+          "outcome": "pass",
+          "reason_code": "output_accepted",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "gates on hard predecessors: none"
+        },
+        {
+          "id": "G5-INPUT",
+          "title": "the agent input contract is satisfied",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "supplied ['defect-report']; required none (menu contract)"
+        }
+      ],
+      "completion": {
+        "committed_at": "2026-09-05T05:05:39Z",
+        "artifact_path": "runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md",
+        "artifact_digest": "sha256:060f1896d41491558a608c367a6d1dcc",
+        "result_status": "completed",
+        "invocation_id": "inv-79630cb5274d-01-001",
+        "validation": {
+          "result": "pass",
+          "checksRun": 30,
+          "checksPassed": 30,
+          "blockingFailures": 0,
+          "correctableFailures": 0,
+          "notMachineCheckable": 3,
+          "counts": {
+            "sections": 9,
+            "status": "provisional",
+            "identifiers": {
+              "E": 24,
+              "C": 6,
+              "Q": 4
+            },
+            "tableRows": {
+              "Reproduction": 24,
+              "Root Cause Analysis": 6
+            }
+          },
+          "undeclaredSideEffects": []
+        }
+      },
+      "replays": [
+        {
+          "at": "2026-09-05T05:46:00Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-05T05:46:00Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-05T05:46:53Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-05T05:46:54Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-05T07:19:33Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-05T07:19:34Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-05T07:19:43Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-05T07:19:44Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:23:10Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:23:10Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:23:34Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:23:35Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:43:57Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:43:58Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:44:10Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:44:11Z",
+          "work_item_id": "run-79630cb5274d::triage-and-impact",
+          "state_id": "triage-and-impact",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+          "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+        }
+      ],
+      "created_at": "2026-09-05T04:47:38Z",
+      "updated_at": "2026-09-05T05:05:39Z",
+      "invocation_id": "inv-79630cb5274d-01-001",
+      "artifact_path": "runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md",
+      "artifact_identifier": "bug-analysis"
+    },
+    "gate:Triage Gate": {
+      "work_item_id": "run-79630cb5274d::gate::Triage Gate",
+      "run_id": "run-79630cb5274d",
+      "workflow_id": "fix-bug",
+      "state_id": "Triage Gate",
+      "work_type": "gate",
+      "owner_agent_id": null,
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": false,
+      "phase_index": 1,
+      "gate": "Triage Gate",
+      "artifact": null,
+      "depends_on": [
+        {
+          "state_id": "triage-and-impact",
+          "kind": "hard",
+          "basis": "the gate closes this phase"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": "awaiting_human_decision",
+      "blocked_detail": "G6-GATE-EVIDENCE: evidence for triage-and-impact is complete; awaiting a decision from ['omn-dev-1-bug-analyst', 'omn-tech-lead']",
+      "failure_class": "gate-approval-required",
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G6-GATE-EVIDENCE",
+          "title": "the gated phase has produced its evidence",
+          "outcome": "block",
+          "reason_code": "approval_wait",
+          "blocked_reason": "awaiting_human_decision",
+          "failure_class": "gate-approval-required",
+          "detail": "evidence for triage-and-impact is complete; awaiting a decision from ['omn-dev-1-bug-analyst', 'omn-tech-lead']"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-09-05T04:47:38Z",
+      "updated_at": "2026-09-05T05:11:46Z",
+      "blocked_by": "guard"
+    },
+    "root-cause-analysis": {
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "run_id": "run-79630cb5274d",
+      "workflow_id": "fix-bug",
+      "state_id": "root-cause-analysis",
+      "work_type": "state",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": true,
+      "phase_index": 2,
+      "gate": "none",
+      "artifact": "bug-analysis.md",
+      "depends_on": [
+        {
+          "state_id": "triage-and-impact",
+          "kind": "hard",
+          "basis": "Input column names the upstream output 'bug-analysis.md'"
+        }
+      ],
+      "attempt": 1,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": "host-subagent:omn-dev-1-bug-analyst",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "payload_digest": "sha256:0fa9c2e7477557337f8c95ec4b1ce57b",
+      "blocked_reason": null,
+      "blocked_detail": null,
+      "failure_class": null,
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G1-CAPABILITY",
+          "title": "owner agent is invocable for this phase",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "omn-dev-1-bug-analyst v1.0.0 resolves through agents/omn-dev-1-bug-analyst.agent.md; validator bug_analysis_validator"
+        },
+        {
+          "id": "G2-CONTEXT",
+          "title": "a context slice is declared for this phase",
+          "outcome": "pass",
+          "reason_code": "context_hydration_completed",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "18 declared member(s), including the routed workflow specification"
+        },
+        {
+          "id": "G3-PREDECESSOR",
+          "title": "hard predecessors have completed",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "hard predecessors: triage-and-impact"
+        },
+        {
+          "id": "G4-GATE",
+          "title": "predecessor gates are approved",
+          "outcome": "pass",
+          "reason_code": "output_accepted",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "gates on hard predecessors: Triage Gate"
+        },
+        {
+          "id": "G5-INPUT",
+          "title": "the agent input contract is satisfied",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "supplied ['defect-report']; required none (menu contract)"
+        }
+      ],
+      "completion": {
+        "committed_at": "2026-09-05T05:32:00Z",
+        "artifact_path": "runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "artifact_digest": "sha256:14cdea3cfd9e9ea4e1f8998b68ab7002",
+        "result_status": "completed_with_findings",
+        "invocation_id": "inv-79630cb5274d-02-001",
+        "validation": {
+          "result": "pass",
+          "checksRun": 30,
+          "checksPassed": 30,
+          "blockingFailures": 0,
+          "correctableFailures": 0,
+          "notMachineCheckable": 3,
+          "counts": {
+            "sections": 9,
+            "status": "provisional",
+            "identifiers": {
+              "E": 38,
+              "C": 6,
+              "Q": 6
+            },
+            "tableRows": {
+              "Reproduction": 38,
+              "Root Cause Analysis": 6
+            }
+          },
+          "undeclaredSideEffects": []
+        }
+      },
+      "replays": [
+        {
+          "at": "2026-09-05T05:46:01Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-05T05:46:02Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-05T05:46:55Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-05T05:46:56Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-05T07:19:35Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-05T07:19:35Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-05T07:19:45Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-05T07:19:45Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:23:12Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:23:13Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:23:36Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:23:37Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:43:59Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:44:00Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:44:13Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:44:14Z",
+          "work_item_id": "run-79630cb5274d::root-cause-analysis",
+          "state_id": "root-cause-analysis",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+          "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+        }
+      ],
+      "created_at": "2026-09-05T04:47:38Z",
+      "updated_at": "2026-09-05T05:32:00Z",
+      "blocked_by": null,
+      "invocation_id": "inv-79630cb5274d-02-001",
+      "artifact_path": "runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "artifact_identifier": "bug-analysis"
+    },
+    "fix-implementation": {
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "run_id": "run-79630cb5274d",
+      "workflow_id": "fix-bug",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "owner_agent_id": "omn-dev-1-implement",
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": true,
+      "phase_index": 3,
+      "gate": "Fix Gate",
+      "artifact": "implementation-report.md",
+      "depends_on": [
+        {
+          "state_id": "triage-and-impact",
+          "kind": "hard",
+          "basis": "Input column names the upstream output 'bug-analysis.md'"
+        },
+        {
+          "state_id": "root-cause-analysis",
+          "kind": "hard",
+          "basis": "Input column names the upstream output 'bug-analysis.md'"
+        }
+      ],
+      "attempt": 3,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": "host-subagent:omn-dev-1-implement",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "payload_digest": "sha256:601a38a3247c6ed30b841496c8ab0a9c",
+      "blocked_reason": null,
+      "blocked_detail": null,
+      "failure_class": "output-schema-failure",
+      "failure_detail": "validation rejected the artifact: 1 blocking and 0 correctable failure(s) ['C7.1']",
+      "guards": [
+        {
+          "id": "G1-CAPABILITY",
+          "title": "owner agent is invocable for this phase",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "omn-dev-1-implement v1.1.0 resolves through agents/omn-dev-1-implement.agent.md; validator implementation_report_validator"
+        },
+        {
+          "id": "G2-CONTEXT",
+          "title": "a context slice is declared for this phase",
+          "outcome": "pass",
+          "reason_code": "context_hydration_completed",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "18 declared member(s), including the routed workflow specification"
+        },
+        {
+          "id": "G3-PREDECESSOR",
+          "title": "hard predecessors have completed",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "hard predecessors: triage-and-impact, root-cause-analysis"
+        },
+        {
+          "id": "G4-GATE",
+          "title": "predecessor gates are approved",
+          "outcome": "pass",
+          "reason_code": "output_accepted",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "gates on hard predecessors: Triage Gate"
+        },
+        {
+          "id": "G5-INPUT",
+          "title": "the agent input contract is satisfied",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "supplied ['bug-analysis', 'bug-analysis']; required none (menu contract)"
+        }
+      ],
+      "completion": {
+        "committed_at": "2026-09-05T06:46:04Z",
+        "artifact_path": "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+        "artifact_digest": "sha256:a599a6d4e9e61392c23c6aa620129717",
+        "result_status": "succeeded",
+        "invocation_id": "inv-79630cb5274d-03-003",
+        "validation": {
+          "result": "pass",
+          "checksRun": 32,
+          "checksPassed": 32,
+          "blockingFailures": 0,
+          "correctableFailures": 0,
+          "notMachineCheckable": 3,
+          "counts": {
+            "sections": 10,
+            "status": "provisional",
+            "identifiers": {
+              "C": 11,
+              "T": 7,
+              "V": 4,
+              "R": 4,
+              "Q": 4
+            },
+            "tableRows": {
+              "Change Set": 11,
+              "Test Evidence": 7,
+              "Deviations and Tradeoffs": 4,
+              "Residual Risk": 4
+            }
+          },
+          "undeclaredSideEffects": []
+        }
+      },
+      "replays": [
+        {
+          "at": "2026-09-05T07:19:36Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-05T07:19:36Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-05T07:19:46Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-05T07:19:47Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:23:15Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:23:16Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:23:39Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:23:40Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:44:02Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:44:02Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:44:16Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:44:17Z",
+          "work_item_id": "run-79630cb5274d::fix-implementation",
+          "state_id": "fix-implementation",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+          "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+        }
+      ],
+      "created_at": "2026-09-05T04:47:38Z",
+      "updated_at": "2026-09-05T06:46:04Z",
+      "invocation_id": "inv-79630cb5274d-03-003",
+      "artifact_path": "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+      "artifact_identifier": "implementation-report",
+      "blocked_by": null
+    },
+    "gate:Fix Gate": {
+      "work_item_id": "run-79630cb5274d::gate::Fix Gate",
+      "run_id": "run-79630cb5274d",
+      "workflow_id": "fix-bug",
+      "state_id": "Fix Gate",
+      "work_type": "gate",
+      "owner_agent_id": null,
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": false,
+      "phase_index": 3,
+      "gate": "Fix Gate",
+      "artifact": null,
+      "depends_on": [
+        {
+          "state_id": "fix-implementation",
+          "kind": "hard",
+          "basis": "the gate closes this phase"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": "awaiting_human_decision",
+      "blocked_detail": "G6-GATE-EVIDENCE: evidence for fix-implementation is complete; awaiting a decision from ['omn-dev-2-reviewer']",
+      "failure_class": "gate-approval-required",
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G6-GATE-EVIDENCE",
+          "title": "the gated phase has produced its evidence",
+          "outcome": "block",
+          "reason_code": "approval_wait",
+          "blocked_reason": "awaiting_human_decision",
+          "failure_class": "gate-approval-required",
+          "detail": "evidence for fix-implementation is complete; awaiting a decision from ['omn-dev-2-reviewer']"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-09-05T04:47:38Z",
+      "updated_at": "2026-09-05T07:10:06Z",
+      "blocked_by": "guard"
+    },
+    "regression-validation": {
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "run_id": "run-79630cb5274d",
+      "workflow_id": "fix-bug",
+      "state_id": "regression-validation",
+      "work_type": "state",
+      "owner_agent_id": "omn-qa",
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": true,
+      "phase_index": 4,
+      "gate": "Verification Gate",
+      "artifact": "validation-report.md",
+      "depends_on": [
+        {
+          "state_id": "fix-implementation",
+          "kind": "hard",
+          "basis": "Input column names the upstream output 'implementation-report.md'"
+        }
+      ],
+      "attempt": 2,
+      "attempts_lost": 1,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": "host-subagent:omn-qa",
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "payload_digest": "sha256:3bfa1bd8af68656509fda769a6482f6f",
+      "blocked_reason": null,
+      "blocked_detail": null,
+      "failure_class": "worker-loss",
+      "failure_detail": "the adapter held a lease on attempt 1 and did not report: Worker loss, not an agent failure. The omn-qa subagent executing inv-79630cb5274d-04-001 was terminated when the host process exited; it had written a complete validation-report.md at 14:53 but never emitted its result envelope. No lease was held. Released by omn-orchestrator (session operator for vuhoangcao) so the phase can be re-dispatched and the agent can verify and attest its own artifact.",
+      "guards": [
+        {
+          "id": "G1-CAPABILITY",
+          "title": "owner agent is invocable for this phase",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "omn-qa v1.0.0 resolves through agents/omn-qa.agent.md; validator validation_report_validator"
+        },
+        {
+          "id": "G2-CONTEXT",
+          "title": "a context slice is declared for this phase",
+          "outcome": "pass",
+          "reason_code": "context_hydration_completed",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "18 declared member(s), including the routed workflow specification"
+        },
+        {
+          "id": "G3-PREDECESSOR",
+          "title": "hard predecessors have completed",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "hard predecessors: fix-implementation"
+        },
+        {
+          "id": "G4-GATE",
+          "title": "predecessor gates are approved",
+          "outcome": "pass",
+          "reason_code": "output_accepted",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "gates on hard predecessors: Fix Gate"
+        },
+        {
+          "id": "G5-INPUT",
+          "title": "the agent input contract is satisfied",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "supplied ['implementation-report']; required none (menu contract)"
+        }
+      ],
+      "completion": {
+        "committed_at": "2026-09-06T01:36:29Z",
+        "artifact_path": "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+        "artifact_digest": "sha256:57f46c654dcb7d3a188f259d6604e997",
+        "result_status": "succeeded",
+        "invocation_id": "inv-79630cb5274d-04-002",
+        "validation": {
+          "result": "pass",
+          "checksRun": 31,
+          "checksPassed": 31,
+          "blockingFailures": 0,
+          "correctableFailures": 0,
+          "notMachineCheckable": 3,
+          "counts": {
+            "sections": 10,
+            "status": "complete",
+            "identifiers": {
+              "AC": 7,
+              "DF": 6,
+              "Q": 5
+            },
+            "tableRows": {
+              "Acceptance Criteria Results": 7,
+              "Defects": 6
+            },
+            "criteria": 7,
+            "defects": 6,
+            "verdict": "pass-with-reservations",
+            "validationBasis": "regression",
+            "results": {
+              "met": 6,
+              "not-met": 0,
+              "blocked": 1
+            },
+            "severity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 2,
+              "low": 4
+            }
+          },
+          "undeclaredSideEffects": []
+        }
+      },
+      "replays": [
+        {
+          "at": "2026-09-06T01:44:04Z",
+          "work_item_id": "run-79630cb5274d::regression-validation",
+          "state_id": "regression-validation",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+          "detail": "phase already completed under idempotency key sha256:847907e12bc9c534a3525843c1d36342; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:44:05Z",
+          "work_item_id": "run-79630cb5274d::regression-validation",
+          "state_id": "regression-validation",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+          "detail": "completion already committed at 2026-09-06T01:36:29Z; artifact digest unchanged"
+        },
+        {
+          "at": "2026-09-06T01:44:18Z",
+          "work_item_id": "run-79630cb5274d::regression-validation",
+          "state_id": "regression-validation",
+          "action": "dispatch",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+          "detail": "phase already completed under idempotency key sha256:847907e12bc9c534a3525843c1d36342; no envelope rebuilt"
+        },
+        {
+          "at": "2026-09-06T01:44:20Z",
+          "work_item_id": "run-79630cb5274d::regression-validation",
+          "state_id": "regression-validation",
+          "action": "complete",
+          "status_at_replay": "completed",
+          "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+          "detail": "completion already committed at 2026-09-06T01:36:29Z; artifact digest unchanged"
+        }
+      ],
+      "created_at": "2026-09-05T04:47:38Z",
+      "updated_at": "2026-09-06T01:36:29Z",
+      "blocked_by": null,
+      "invocation_id": "inv-79630cb5274d-04-002",
+      "artifact_path": "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+      "artifact_identifier": "validation-report"
+    },
+    "gate:Verification Gate": {
+      "work_item_id": "run-79630cb5274d::gate::Verification Gate",
+      "run_id": "run-79630cb5274d",
+      "workflow_id": "fix-bug",
+      "state_id": "Verification Gate",
+      "work_type": "gate",
+      "owner_agent_id": null,
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": false,
+      "phase_index": 4,
+      "gate": "Verification Gate",
+      "artifact": null,
+      "depends_on": [
+        {
+          "state_id": "regression-validation",
+          "kind": "hard",
+          "basis": "the gate closes this phase"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": "awaiting_human_decision",
+      "blocked_detail": "G6-GATE-EVIDENCE: evidence for regression-validation is complete; awaiting a decision from ['omn-qa', 'omn-dev-2-reviewer']",
+      "failure_class": "gate-approval-required",
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G6-GATE-EVIDENCE",
+          "title": "the gated phase has produced its evidence",
+          "outcome": "block",
+          "reason_code": "approval_wait",
+          "blocked_reason": "awaiting_human_decision",
+          "failure_class": "gate-approval-required",
+          "detail": "evidence for regression-validation is complete; awaiting a decision from ['omn-qa', 'omn-dev-2-reviewer']"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-09-05T04:47:38Z",
+      "updated_at": "2026-09-06T01:50:43Z",
+      "blocked_by": "guard"
+    },
+    "closure-and-communication": {
+      "work_item_id": "run-79630cb5274d::closure-and-communication",
+      "run_id": "run-79630cb5274d",
+      "workflow_id": "fix-bug",
+      "state_id": "closure-and-communication",
+      "work_type": "state",
+      "owner_agent_id": "omn-orchestrator",
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": true,
+      "phase_index": 5,
+      "gate": "Closure Gate",
+      "artifact": "orchestration-result.md",
+      "depends_on": [
+        {
+          "state_id": "regression-validation",
+          "kind": "hard",
+          "basis": "Input column names the upstream output 'validation-report.md'"
+        }
+      ],
+      "attempt": 1,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": "host-subagent:omn-orchestrator",
+      "idempotency_key": "sha256:6510e4fda9d4f9b489af4968ca940168",
+      "payload_digest": "sha256:d2d9f64f0a915061f9665af45d187c32",
+      "blocked_reason": null,
+      "blocked_detail": null,
+      "failure_class": null,
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G1-CAPABILITY",
+          "title": "owner agent is invocable for this phase",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "omn-orchestrator v1.0.0 resolves through agents/omn-orchestrator.agent.md; validator orchestration_result_validator"
+        },
+        {
+          "id": "G2-CONTEXT",
+          "title": "a context slice is declared for this phase",
+          "outcome": "pass",
+          "reason_code": "context_hydration_completed",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "17 declared member(s), including the routed workflow specification"
+        },
+        {
+          "id": "G3-PREDECESSOR",
+          "title": "hard predecessors have completed",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "hard predecessors: regression-validation"
+        },
+        {
+          "id": "G4-GATE",
+          "title": "predecessor gates are approved",
+          "outcome": "pass",
+          "reason_code": "output_accepted",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "gates on hard predecessors: Verification Gate"
+        },
+        {
+          "id": "G5-INPUT",
+          "title": "the agent input contract is satisfied",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "supplied ['validation-report']; required none (menu contract)"
+        }
+      ],
+      "completion": {
+        "committed_at": "2026-09-06T02:07:38Z",
+        "artifact_path": "runs/run-79630cb5274d/states/closure-and-communication/artifacts/orchestration-result.md",
+        "artifact_digest": "sha256:a465265717172e6347ca20c890c76a07",
+        "result_status": "succeeded",
+        "invocation_id": "inv-79630cb5274d-05-001",
+        "validation": {
+          "result": "pass",
+          "checksRun": 34,
+          "checksPassed": 34,
+          "blockingFailures": 0,
+          "correctableFailures": 0,
+          "notMachineCheckable": 3,
+          "counts": {
+            "sections": 10,
+            "status": "complete",
+            "identifiers": {
+              "PH": 5,
+              "HO": 4,
+              "ES": 9,
+              "FU": 7,
+              "Q": 5
+            },
+            "tableRows": {
+              "Phase Progression": 5,
+              "Handoffs": 4,
+              "Escalations": 9,
+              "Follow-Up Actions": 7
+            },
+            "phases": 5,
+            "handoffs": 4,
+            "escalations": 9,
+            "followUps": 7,
+            "disposition": "closed-with-followups",
+            "coordinationBasis": "closure",
+            "progression": {
+              "complete": 4,
+              "blocked": 1,
+              "not-started": 0
+            },
+            "escalationSeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 6,
+              "low": 3
+            }
+          },
+          "undeclaredSideEffects": []
+        }
+      },
+      "replays": [],
+      "created_at": "2026-09-05T04:47:38Z",
+      "updated_at": "2026-09-06T02:07:38Z",
+      "blocked_by": null,
+      "invocation_id": "inv-79630cb5274d-05-001",
+      "artifact_path": "runs/run-79630cb5274d/states/closure-and-communication/artifacts/orchestration-result.md",
+      "artifact_identifier": "orchestration-result"
+    },
+    "gate:Closure Gate": {
+      "work_item_id": "run-79630cb5274d::gate::Closure Gate",
+      "run_id": "run-79630cb5274d",
+      "workflow_id": "fix-bug",
+      "state_id": "Closure Gate",
+      "work_type": "gate",
+      "owner_agent_id": null,
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": false,
+      "phase_index": 5,
+      "gate": "Closure Gate",
+      "artifact": null,
+      "depends_on": [
+        {
+          "state_id": "closure-and-communication",
+          "kind": "hard",
+          "basis": "the gate closes this phase"
+        }
+      ],
+      "attempt": 0,
+      "attempts_lost": 0,
+      "max_attempts": 3,
+      "lease_expires_at": null,
+      "available_at": null,
+      "last_worker_id": null,
+      "idempotency_key": null,
+      "payload_digest": null,
+      "blocked_reason": "awaiting_human_decision",
+      "blocked_detail": "G6-GATE-EVIDENCE: evidence for closure-and-communication is complete; awaiting a decision from ['omn-orchestrator', 'omn-documentation']",
+      "failure_class": "gate-approval-required",
+      "failure_detail": null,
+      "guards": [
+        {
+          "id": "G6-GATE-EVIDENCE",
+          "title": "the gated phase has produced its evidence",
+          "outcome": "block",
+          "reason_code": "approval_wait",
+          "blocked_reason": "awaiting_human_decision",
+          "failure_class": "gate-approval-required",
+          "detail": "evidence for closure-and-communication is complete; awaiting a decision from ['omn-orchestrator', 'omn-documentation']"
+        }
+      ],
+      "completion": null,
+      "replays": [],
+      "created_at": "2026-09-05T04:47:38Z",
+      "updated_at": "2026-09-06T02:13:42Z",
+      "blocked_by": "guard"
+    }
+  },
+  "gates": {
+    "Triage Gate": {
+      "gate": "Triage Gate",
+      "closes_state": "triage-and-impact",
+      "owner_roles": [
+        "omn-dev-1-bug-analyst",
+        "omn-tech-lead"
+      ],
+      "producer_agent": "omn-dev-1-bug-analyst",
+      "decision": "approved",
+      "owner_role": "omn-tech-lead",
+      "decided_by": "omn-tech-lead subagent a7d431f249268023d, recorded by session operator for vuhoangcao",
+      "rationale": "The triage package confirms severity and reproducibility on first-hand evidence that re-derives independently: the disjoint identifier sets in agents/omn-qa/manifest.yaml and agents/omn-dev-1-implement/manifest.yaml are as recorded, the G5-INPUT block detail on run-34ca35504b72 matches the analysis character for character, and severity high is the correct row of the analyst's own rubric given a workaround that exists but is unusable in normal operation. The scope decision to route the Completion Rule consequence out as a separate defect is sound, because the phase-accounting clause in runtime/verify_self_hosting.py treats every non-completed, non-blocked-with-reason phase as unaccounted regardless of any input contract, so the two have independent causes and independent fixes. Approved with four conditions carried into root-cause-analysis, none of which changes the root cause, the severity, or the decided fix direction.",
+      "evidence_ref": ".claude/runs/run-79630cb5274d/states/triage-and-impact/artifacts/bug-analysis.md",
+      "decided_at": "2026-09-05T05:11:46Z"
+    },
+    "Fix Gate": {
+      "gate": "Fix Gate",
+      "closes_state": "fix-implementation",
+      "owner_roles": [
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-dev-1-implement",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent a57260f62d891d7fd, recorded by session operator for vuhoangcao",
+      "rationale": "The fix is correct and complete against the analysis approved surface list: all five description surfaces were verified independently and now state the same accepted set {technical-design, bug-analysis, validation-report}, the widening leaves the two existing identifiers and the menu refusal behaviour intact, and the withdrawal of test-baseline-record breaks no caller - no agent manifest declares it as an output, and none of the 54 committed invocation envelopes ever supplied it. The 14-test regression module was re-run independently at 14/14 and exercises the runtime real narrowing and resolution functions rather than a restatement of them; the v1.1.0 minor bump follows the agent own written compatibility rule and contractVersion correctly stays at 1.0.0. The evidence is not isolated from a concurrent writer and the report says so honestly, but the change is declaration-only and its effects are fully observable in the contract-level tests, so the isolation gap is carried into regression-validation as a condition rather than treated as a blocker at this gate.",
+      "evidence_ref": ".claude/runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+      "decided_at": "2026-09-05T07:10:06Z"
+    },
+    "Verification Gate": {
+      "gate": "Verification Gate",
+      "closes_state": "regression-validation",
+      "owner_roles": [
+        "omn-qa",
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-qa",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent a1a3b8c1c872baf89, recorded by session operator for vuhoangcao",
+      "rationale": "Approved. The defect is independently confirmed as no longer reproducible: replaying the runtime own narrow_inputs and resolve_input_contract against the HEAD manifest reproduces the stalled run recorded block detail character for character and against the working tree resolves cleanly, run-34ca35504b72 shows refactor-implementation at pending/Ready with blocked_reason, blocked_detail, blocked_by and failure_class all null and its failure envelope resolved_by runtime:state-engine, and an independent per-edge scan drops exactly the refactor safety-net-establishment -> refactor-implementation edge. The isolated evidence is sufficient without the contaminated whole-suite figure: the change eleven paths are disjoint from every foreign working-tree entry, and the targeted modules and verifiers were re-run at this gate from the repository root with the same results (14/14, 19/19, 11/11; manifests 2/2, registry coverage 6/6 with 37/37 phases dispatchable, validators 6/6, vertical slice 10/10, recovery 41/41, multi-phase 14/15 on pre-existing M6, self-hosting 7/8 on pre-existing S8). pass-with-reservations is the verdict QA own adjudication table yields for one blocked criterion with nothing not-met and no open critical or high defect; AC-006 is unsettleable inside this phase rather than failed, and all six defects, including DF-006, the only one this change introduced, are correctly rated and are carried into closure-and-communication as conditions rather than blockers.",
+      "evidence_ref": ".claude/runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+      "decided_at": "2026-09-06T01:50:43Z"
+    },
+    "Closure Gate": {
+      "gate": "Closure Gate",
+      "closes_state": "closure-and-communication",
+      "owner_roles": [
+        "omn-orchestrator",
+        "omn-documentation"
+      ],
+      "producer_agent": "omn-orchestrator",
+      "decision": "approved",
+      "owner_role": "omn-documentation",
+      "decided_by": "omn-documentation subagent a086a18fad498a474, recorded by session operator for vuhoangcao",
+      "rationale": "Approved. Spot-checked against the run ledger, the state store and all 66 events, the closure record phase progression, its three gate attributions and its recording of PH-005 as blocked rather than anticipatorily complete all reconcile with the machine record; the seven Verification Gate conditions are discharged with substance rather than restated, and the three operator interventions are each recorded with what was done and what it costs the evidence. closed-with-followups is the correct disposition for a run carrying one unsettled criterion, six medium-and-low defects, five routed open questions and no critical or high escalation open, and status complete is honestly scoped to the account rather than to the run. Approved with two reservations recorded separately: the record quotation of the Closure Gate work item as pending/Waiting is now stale, and the examples.md O5 contradiction the producing agent found is carried in no durable record.",
+      "evidence_ref": ".claude/runs/run-79630cb5274d/states/closure-and-communication/artifacts/orchestration-result.md",
+      "decided_at": "2026-09-06T02:13:42Z"
+    }
+  },
+  "transitions": [
+    {
+      "seq": 1,
+      "at": "2026-09-05T04:47:46Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "work_type": "state",
+      "phase_index": 1,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 2,
+      "at": "2026-09-05T04:47:46Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "work_type": "state",
+      "phase_index": 1,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "dispatching omn-dev-1-bug-analyst v1.0.0 through agents/omn-dev-1-bug-analyst.agent.md"
+    },
+    {
+      "seq": 3,
+      "at": "2026-09-05T05:05:39Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "work_type": "state",
+      "phase_index": 1,
+      "from": "running",
+      "to": "completed",
+      "trigger": "result_accepted",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "runtime",
+      "actor_id": "validation-engine",
+      "attempt": 1,
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "artifact accepted: 30/30 checks passed"
+    },
+    {
+      "seq": 4,
+      "at": "2026-09-05T05:05:39Z",
+      "work_item_id": "run-79630cb5274d::gate::Triage Gate",
+      "state_id": "Triage Gate",
+      "work_type": "gate",
+      "phase_index": 1,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "awaiting_decision",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G6-GATE-EVIDENCE: evidence for triage-and-impact is complete; awaiting a decision from ['omn-dev-1-bug-analyst', 'omn-tech-lead']"
+    },
+    {
+      "seq": 5,
+      "at": "2026-09-05T05:05:39Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "work_type": "state",
+      "phase_index": 2,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "blocker_detected",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G4-GATE: Triage Gate closing triage-and-impact has no recorded decision; owners: ['omn-dev-1-bug-analyst', 'omn-tech-lead']"
+    },
+    {
+      "seq": 6,
+      "at": "2026-09-05T05:11:46Z",
+      "work_item_id": "run-79630cb5274d::gate::Triage Gate",
+      "state_id": "Triage Gate",
+      "work_type": "gate",
+      "phase_index": 1,
+      "from": "blocked",
+      "to": "completed",
+      "trigger": "decision_approved",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "human",
+      "actor_id": "omn-tech-lead subagent a7d431f249268023d, recorded by session operator for vuhoangcao",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "approved by omn-tech-lead: The triage package confirms severity and reproducibility on first-hand evidence that re-derives independently: the disjoint identifier sets in agents/omn-qa/manifest.yaml and agents/omn-dev-1-implement/manifest.yaml are as recorded, the G5-INPUT block detail on run-34ca35504b72 matches the analysis character for character, and severity high is the correct row of the analyst's own rubric given a workaround that exists but is unusable in normal operation. The scope decision to route the Completion Rule consequence out as a separate defect is sound, because the phase-accounting clause in runtime/verify_self_hosting.py treats every non-completed, non-blocked-with-reason phase as unaccounted regardless of any input contract, so the two have independent causes and independent fixes. Approved with four conditions carried into root-cause-analysis, none of which changes the root cause, the severity, or the decided fix direction."
+    },
+    {
+      "seq": 7,
+      "at": "2026-09-05T05:11:46Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "work_type": "state",
+      "phase_index": 2,
+      "from": "blocked",
+      "to": "pending",
+      "trigger": "blocker_cleared",
+      "reason_code": "enqueued",
+      "queue_status": "Ready",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "every guard now passes; the blocker is cleared"
+    },
+    {
+      "seq": 8,
+      "at": "2026-09-05T05:11:52Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "work_type": "state",
+      "phase_index": 2,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 9,
+      "at": "2026-09-05T05:11:52Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "work_type": "state",
+      "phase_index": 2,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "dispatching omn-dev-1-bug-analyst v1.0.0 through agents/omn-dev-1-bug-analyst.agent.md"
+    },
+    {
+      "seq": 10,
+      "at": "2026-09-05T05:32:00Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "work_type": "state",
+      "phase_index": 2,
+      "from": "running",
+      "to": "completed",
+      "trigger": "result_accepted",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "runtime",
+      "actor_id": "validation-engine",
+      "attempt": 1,
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "artifact accepted: 30/30 checks passed"
+    },
+    {
+      "seq": 11,
+      "at": "2026-09-05T05:32:16Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:60f447f0e445d24a66b3d98eb38c9c11",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 12,
+      "at": "2026-09-05T05:32:16Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:60f447f0e445d24a66b3d98eb38c9c11",
+      "detail": "dispatching omn-dev-1-implement v1.0.0 through agents/omn-dev-1-implement.agent.md"
+    },
+    {
+      "seq": 13,
+      "at": "2026-09-05T06:37:12Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "running",
+      "to": "blocked",
+      "trigger": "blocker_detected",
+      "reason_code": "validation_failed",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "recovery-controller",
+      "attempt": 1,
+      "idempotency_key": "sha256:60f447f0e445d24a66b3d98eb38c9c11",
+      "detail": "class 'policy-failure' is non-retryable at detection point 'policy decision', so the declared action 'escalate' applies without consulting the retry budget"
+    },
+    {
+      "seq": 14,
+      "at": "2026-09-05T06:38:39Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "blocked",
+      "to": "pending",
+      "trigger": "blocker_cleared",
+      "reason_code": "tool_failure",
+      "queue_status": "Ready",
+      "actor_type": "human",
+      "actor_id": "operator",
+      "attempt": 1,
+      "idempotency_key": "sha256:60f447f0e445d24a66b3d98eb38c9c11",
+      "detail": "blocker cleared for another attempt after attempt 1: Policy exception recorded by omn-orchestrator (session operator for vuhoangcao). The four writes under runs/run-34ca35504b72/ were produced by the runtime's own refresh pass, invoked as 'framework_runtime.py next', which the operator explicitly authorized in the dispatch as the demonstration that the repaired input contract clears the G5-INPUT block. They are runtime-caused scheduler writes, not agent authorship, and runs/** is a permanent write exclusion for omn-dev-1-implement that no declaration can satisfy. The operator accepts accountability for those four writes; the agent re-declares only its own authored writes on the next attempt. The artifact itself was accepted at 32/32 with 0 blocking and 0 correctable failures."
+    },
+    {
+      "seq": 15,
+      "at": "2026-09-05T06:38:46Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 2,
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 16,
+      "at": "2026-09-05T06:38:46Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 2,
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "dispatching omn-dev-1-implement v1.1.0 through agents/omn-dev-1-implement.agent.md"
+    },
+    {
+      "seq": 17,
+      "at": "2026-09-05T06:40:26Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "running",
+      "to": "retrying",
+      "trigger": "retryable_failure_classified",
+      "reason_code": "validation_failed",
+      "queue_status": "Retrying",
+      "actor_type": "runtime",
+      "actor_id": "recovery-controller",
+      "attempt": 2,
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "class 'output-schema-failure' is retryable and 1 of 3 charged attempt(s) remain, so one further attempt is scheduled after 4.642s of exponential backoff"
+    },
+    {
+      "seq": 18,
+      "at": "2026-09-05T06:41:24Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "retrying",
+      "to": "pending",
+      "trigger": "backoff_elapsed",
+      "reason_code": "enqueued",
+      "queue_status": "Waiting",
+      "actor_type": "runtime",
+      "actor_id": "recovery-controller",
+      "attempt": 2,
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "backoff elapsed at 2026-09-05T06:40:31Z; attempt 3 of 3 may now be dispatched"
+    },
+    {
+      "seq": 19,
+      "at": "2026-09-05T06:41:24Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 3,
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 20,
+      "at": "2026-09-05T06:41:24Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 3,
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "dispatching omn-dev-1-implement v1.1.0 through agents/omn-dev-1-implement.agent.md"
+    },
+    {
+      "seq": 21,
+      "at": "2026-09-05T06:46:04Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "work_type": "state",
+      "phase_index": 3,
+      "from": "running",
+      "to": "completed",
+      "trigger": "result_accepted",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "runtime",
+      "actor_id": "validation-engine",
+      "attempt": 3,
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "artifact accepted: 32/32 checks passed"
+    },
+    {
+      "seq": 22,
+      "at": "2026-09-05T06:46:04Z",
+      "work_item_id": "run-79630cb5274d::gate::Fix Gate",
+      "state_id": "Fix Gate",
+      "work_type": "gate",
+      "phase_index": 3,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "awaiting_decision",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G6-GATE-EVIDENCE: evidence for fix-implementation is complete; awaiting a decision from ['omn-dev-2-reviewer']"
+    },
+    {
+      "seq": 23,
+      "at": "2026-09-05T06:46:04Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "blocker_detected",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G4-GATE: Fix Gate closing fix-implementation has no recorded decision; owners: ['omn-dev-2-reviewer']"
+    },
+    {
+      "seq": 24,
+      "at": "2026-09-05T07:10:06Z",
+      "work_item_id": "run-79630cb5274d::gate::Fix Gate",
+      "state_id": "Fix Gate",
+      "work_type": "gate",
+      "phase_index": 3,
+      "from": "blocked",
+      "to": "completed",
+      "trigger": "decision_approved",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "human",
+      "actor_id": "omn-dev-2-reviewer subagent a57260f62d891d7fd, recorded by session operator for vuhoangcao",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "approved by omn-dev-2-reviewer: The fix is correct and complete against the analysis approved surface list: all five description surfaces were verified independently and now state the same accepted set {technical-design, bug-analysis, validation-report}, the widening leaves the two existing identifiers and the menu refusal behaviour intact, and the withdrawal of test-baseline-record breaks no caller - no agent manifest declares it as an output, and none of the 54 committed invocation envelopes ever supplied it. The 14-test regression module was re-run independently at 14/14 and exercises the runtime real narrowing and resolution functions rather than a restatement of them; the v1.1.0 minor bump follows the agent own written compatibility rule and contractVersion correctly stays at 1.0.0. The evidence is not isolated from a concurrent writer and the report says so honestly, but the change is declaration-only and its effects are fully observable in the contract-level tests, so the isolation gap is carried into regression-validation as a condition rather than treated as a blocker at this gate."
+    },
+    {
+      "seq": 25,
+      "at": "2026-09-05T07:10:06Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "blocked",
+      "to": "pending",
+      "trigger": "blocker_cleared",
+      "reason_code": "enqueued",
+      "queue_status": "Ready",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "every guard now passes; the blocker is cleared"
+    },
+    {
+      "seq": 26,
+      "at": "2026-09-05T07:10:37Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 27,
+      "at": "2026-09-05T07:10:37Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "dispatching omn-qa v1.0.0 through agents/omn-qa.agent.md"
+    },
+    {
+      "seq": 28,
+      "at": "2026-09-06T01:14:56Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "running",
+      "to": "retrying",
+      "trigger": "retryable_failure_classified",
+      "reason_code": "timeout",
+      "queue_status": "Retrying",
+      "actor_type": "runtime",
+      "actor_id": "recovery-controller",
+      "attempt": 1,
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "class 'worker-loss' is retryable and 2 of 3 charged attempt(s) remain, so one further attempt is scheduled after 1.927s of exponential backoff"
+    },
+    {
+      "seq": 29,
+      "at": "2026-09-06T01:15:10Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "retrying",
+      "to": "pending",
+      "trigger": "backoff_elapsed",
+      "reason_code": "enqueued",
+      "queue_status": "Waiting",
+      "actor_type": "runtime",
+      "actor_id": "recovery-controller",
+      "attempt": 1,
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "backoff elapsed at 2026-09-06T01:14:58Z; attempt 2 of 3 may now be dispatched"
+    },
+    {
+      "seq": 30,
+      "at": "2026-09-06T01:15:11Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 2,
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 31,
+      "at": "2026-09-06T01:15:11Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 2,
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "dispatching omn-qa v1.0.0 through agents/omn-qa.agent.md"
+    },
+    {
+      "seq": 32,
+      "at": "2026-09-06T01:36:29Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "running",
+      "to": "completed",
+      "trigger": "result_accepted",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "runtime",
+      "actor_id": "validation-engine",
+      "attempt": 2,
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "artifact accepted: 31/31 checks passed"
+    },
+    {
+      "seq": 33,
+      "at": "2026-09-06T01:36:29Z",
+      "work_item_id": "run-79630cb5274d::gate::Verification Gate",
+      "state_id": "Verification Gate",
+      "work_type": "gate",
+      "phase_index": 4,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "awaiting_decision",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G6-GATE-EVIDENCE: evidence for regression-validation is complete; awaiting a decision from ['omn-qa', 'omn-dev-2-reviewer']"
+    },
+    {
+      "seq": 34,
+      "at": "2026-09-06T01:36:29Z",
+      "work_item_id": "run-79630cb5274d::closure-and-communication",
+      "state_id": "closure-and-communication",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "blocker_detected",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G4-GATE: Verification Gate closing regression-validation has no recorded decision; owners: ['omn-qa', 'omn-dev-2-reviewer']"
+    },
+    {
+      "seq": 35,
+      "at": "2026-09-06T01:50:43Z",
+      "work_item_id": "run-79630cb5274d::gate::Verification Gate",
+      "state_id": "Verification Gate",
+      "work_type": "gate",
+      "phase_index": 4,
+      "from": "blocked",
+      "to": "completed",
+      "trigger": "decision_approved",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "human",
+      "actor_id": "omn-dev-2-reviewer subagent a1a3b8c1c872baf89, recorded by session operator for vuhoangcao",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "approved by omn-dev-2-reviewer: Approved. The defect is independently confirmed as no longer reproducible: replaying the runtime own narrow_inputs and resolve_input_contract against the HEAD manifest reproduces the stalled run recorded block detail character for character and against the working tree resolves cleanly, run-34ca35504b72 shows refactor-implementation at pending/Ready with blocked_reason, blocked_detail, blocked_by and failure_class all null and its failure envelope resolved_by runtime:state-engine, and an independent per-edge scan drops exactly the refactor safety-net-establishment -> refactor-implementation edge. The isolated evidence is sufficient without the contaminated whole-suite figure: the change eleven paths are disjoint from every foreign working-tree entry, and the targeted modules and verifiers were re-run at this gate from the repository root with the same results (14/14, 19/19, 11/11; manifests 2/2, registry coverage 6/6 with 37/37 phases dispatchable, validators 6/6, vertical slice 10/10, recovery 41/41, multi-phase 14/15 on pre-existing M6, self-hosting 7/8 on pre-existing S8). pass-with-reservations is the verdict QA own adjudication table yields for one blocked criterion with nothing not-met and no open critical or high defect; AC-006 is unsettleable inside this phase rather than failed, and all six defects, including DF-006, the only one this change introduced, are correctly rated and are carried into closure-and-communication as conditions rather than blockers."
+    },
+    {
+      "seq": 36,
+      "at": "2026-09-06T01:50:44Z",
+      "work_item_id": "run-79630cb5274d::closure-and-communication",
+      "state_id": "closure-and-communication",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "blocked",
+      "to": "pending",
+      "trigger": "blocker_cleared",
+      "reason_code": "enqueued",
+      "queue_status": "Ready",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "every guard now passes; the blocker is cleared"
+    },
+    {
+      "seq": 37,
+      "at": "2026-09-06T01:50:51Z",
+      "work_item_id": "run-79630cb5274d::closure-and-communication",
+      "state_id": "closure-and-communication",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:6510e4fda9d4f9b489af4968ca940168",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 38,
+      "at": "2026-09-06T01:50:51Z",
+      "work_item_id": "run-79630cb5274d::closure-and-communication",
+      "state_id": "closure-and-communication",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:6510e4fda9d4f9b489af4968ca940168",
+      "detail": "dispatching omn-orchestrator v1.0.0 through agents/omn-orchestrator.agent.md"
+    },
+    {
+      "seq": 39,
+      "at": "2026-09-06T02:07:38Z",
+      "work_item_id": "run-79630cb5274d::closure-and-communication",
+      "state_id": "closure-and-communication",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "running",
+      "to": "completed",
+      "trigger": "result_accepted",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "runtime",
+      "actor_id": "validation-engine",
+      "attempt": 1,
+      "idempotency_key": "sha256:6510e4fda9d4f9b489af4968ca940168",
+      "detail": "artifact accepted: 34/34 checks passed"
+    },
+    {
+      "seq": 40,
+      "at": "2026-09-06T02:07:38Z",
+      "work_item_id": "run-79630cb5274d::gate::Closure Gate",
+      "state_id": "Closure Gate",
+      "work_type": "gate",
+      "phase_index": 5,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "awaiting_decision",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G6-GATE-EVIDENCE: evidence for closure-and-communication is complete; awaiting a decision from ['omn-orchestrator', 'omn-documentation']"
+    },
+    {
+      "seq": 41,
+      "at": "2026-09-06T02:13:42Z",
+      "work_item_id": "run-79630cb5274d::gate::Closure Gate",
+      "state_id": "Closure Gate",
+      "work_type": "gate",
+      "phase_index": 5,
+      "from": "blocked",
+      "to": "completed",
+      "trigger": "decision_approved",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "human",
+      "actor_id": "omn-documentation subagent a086a18fad498a474, recorded by session operator for vuhoangcao",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "approved by omn-documentation: Approved. Spot-checked against the run ledger, the state store and all 66 events, the closure record phase progression, its three gate attributions and its recording of PH-005 as blocked rather than anticipatorily complete all reconcile with the machine record; the seven Verification Gate conditions are discharged with substance rather than restated, and the three operator interventions are each recorded with what was done and what it costs the evidence. closed-with-followups is the correct disposition for a run carrying one unsettled criterion, six medium-and-low defects, five routed open questions and no critical or high escalation open, and status complete is honestly scoped to the account rather than to the run. Approved with two reservations recorded separately: the record quotation of the Closure Gate work item as pending/Waiting is now stale, and the examples.md O5 contradiction the producing agent found is carried in no durable record."
+    }
+  ],
+  "replays": [
+    {
+      "at": "2026-09-05T05:46:00Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-05T05:46:00Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-05T05:46:01Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-05T05:46:02Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-05T05:46:53Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-05T05:46:54Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-05T05:46:55Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-05T05:46:56Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-05T07:19:33Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-05T07:19:34Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-05T07:19:35Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-05T07:19:35Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-05T07:19:36Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-05T07:19:36Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-05T07:19:43Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-05T07:19:44Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-05T07:19:45Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-05T07:19:45Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-05T07:19:46Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-05T07:19:47Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:23:10Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:23:10Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:23:12Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:23:13Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:23:15Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:23:16Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:23:34Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:23:35Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:23:36Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:23:37Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:23:39Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:23:40Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:43:57Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:43:58Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:43:59Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:44:00Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:44:02Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:44:02Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:44:04Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "phase already completed under idempotency key sha256:847907e12bc9c534a3525843c1d36342; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:44:05Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "completion already committed at 2026-09-06T01:36:29Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:44:10Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "phase already completed under idempotency key sha256:5efc588a7e7db3a83fad1bbee22a3b55; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:44:11Z",
+      "work_item_id": "run-79630cb5274d::triage-and-impact",
+      "state_id": "triage-and-impact",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:5efc588a7e7db3a83fad1bbee22a3b55",
+      "detail": "completion already committed at 2026-09-05T05:05:39Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:44:13Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "phase already completed under idempotency key sha256:d19631585b8ef0baea406e221e105567; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:44:14Z",
+      "work_item_id": "run-79630cb5274d::root-cause-analysis",
+      "state_id": "root-cause-analysis",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:d19631585b8ef0baea406e221e105567",
+      "detail": "completion already committed at 2026-09-05T05:32:00Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:44:16Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "phase already completed under idempotency key sha256:0b40c4406106568129a2c2cb3b86a4c7; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:44:17Z",
+      "work_item_id": "run-79630cb5274d::fix-implementation",
+      "state_id": "fix-implementation",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:0b40c4406106568129a2c2cb3b86a4c7",
+      "detail": "completion already committed at 2026-09-05T06:46:04Z; artifact digest unchanged"
+    },
+    {
+      "at": "2026-09-06T01:44:18Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "action": "dispatch",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "phase already completed under idempotency key sha256:847907e12bc9c534a3525843c1d36342; no envelope rebuilt"
+    },
+    {
+      "at": "2026-09-06T01:44:20Z",
+      "work_item_id": "run-79630cb5274d::regression-validation",
+      "state_id": "regression-validation",
+      "action": "complete",
+      "status_at_replay": "completed",
+      "idempotency_key": "sha256:847907e12bc9c534a3525843c1d36342",
+      "detail": "completion already committed at 2026-09-06T01:36:29Z; artifact digest unchanged"
+    }
+  ],
+  "last_aggregation": {
+    "signature": "sha256:40d0298dece9cb707cda86d6e2e47c23",
+    "at": "2026-09-06T02:13:42Z"
+  }
+}

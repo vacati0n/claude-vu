@@ -1,0 +1,470 @@
+{
+  "invocation_id": "inv-5df08e171670-02-001",
+  "run_id": "run-5df08e171670",
+  "work_item_id": "run-5df08e171670::execution-planning",
+  "idempotency_key": "sha256:d37e8037b98bfd79fe6e60ac8aef5ec5",
+  "state_id": "execution-planning",
+  "phase_index": 2,
+  "agent_id": "planner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/planner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/planner/manifest.yaml",
+    "load_order": [
+      "agents/planner/system.md",
+      "agents/planner/identity.md",
+      "agents/planner/reasoning.md",
+      "agents/planner/execution.md",
+      "agents/planner/output.md",
+      "agents/planner/quality.md",
+      "agents/planner/examples.md"
+    ],
+    "module_digests": {
+      "agents/planner/system.md": "sha256:a26a26a95267c61a29c1dafb3b9c8e4a",
+      "agents/planner/identity.md": "sha256:37d6e6d4dc74073c46777abdd086b4de",
+      "agents/planner/reasoning.md": "sha256:6eb7dddf6dbcfb86df5f9cf2f9e3e7df",
+      "agents/planner/execution.md": "sha256:7f32b111881d7d1f66d508f0653f0004",
+      "agents/planner/output.md": "sha256:cadffa959e4adea6cfe8f1a8df094a60",
+      "agents/planner/quality.md": "sha256:4bf46c7470028daff64dbfe9ac74dd6e",
+      "agents/planner/examples.md": "sha256:a0fb0394722c454920a25849c3938f8f"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/planner/system.md",
+        "agents/planner/reasoning.md",
+        "agents/planner/output.md",
+        "agents/planner/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/planner/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/planner/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/planner/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 40271,
+      "full_bytes": 85855
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "requirement-analysis",
+      "task-decomposition",
+      "dependency-analysis",
+      "execution-sequencing",
+      "complexity-estimation",
+      "risk-identification",
+      "execution-planning"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in input:architecture-context",
+      "source": "agent-manifest (Advisory)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "user-story",
+      "jira-ticket",
+      "epic",
+      "product-requirement",
+      "product-context",
+      "technical-context",
+      "release-context",
+      "architecture-decision-records",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/demo-mode-feature-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-feature-request.md",
+        "text": "# Feature Request \u2014 Autonomous end-to-end demonstration capture (`/implement --demo`)\n\n## Source\n\nOperator request, 2026-09-08, extended 2026-09-12 and 2026-09-14. Type: capability addition.\nPriority: High \u2014 the capability exists to support a live product presentation, and the\nframework had no way to show itself working.\n\n## Request\n\nThe framework can execute a governed multi-agent run but cannot *show* one. Explaining it to\nsomeone who has not seen it means talking over a state table. Add a capability by which a run\nrecords itself and produces a distribution-ready demonstration film with no human editing\nstep, so that a presenter has evidence rather than assertions.\n\nThree deliverables, in the order they were asked for:\n\n1. **`/implement --demo`.** An optional flag on the existing command that turns on recording\n   for a run. Every canonical runtime event, dispatch prompt, agent result, validation\n   verdict, gate decision, and host tool call becomes a millisecond-stamped execution marker.\n   At run completion the framework compiles the presentation itself, with no further command.\n2. **Film the real application.** The first implementation drew a synthetic dashboard. That\n   was rejected: the demonstration must show Claude Desktop actually doing the work, recorded\n   from the screen, with the marker stream used to decide where to cut rather than to draw.\n3. **Explain it to a non-technical audience.** The first cut ran 35 seconds with terse\n   technical narration. The audience is older and non-technical, so the film must run for\n   several minutes, explain every step in plain language, show each spoken line on screen as\n   a caption, and be accompanied by a written script the presenter can read beforehand.\n\n## Acceptance criteria\n\n- `--demo` on `plan` records a run; without it the demo package is never imported and the\n  runtime's only cost is one file-existence check per emitted event.\n- Markers carry UTC millisecond timestamps and the exchange with each agent as observed at\n  the adapter boundary; a replayed event does not produce a second marker.\n- A recording of the Claude Desktop window can be started and stopped from the runtime, keeps\n  running while the run proceeds, and records the instant its own clock read zero.\n- The editor maps every marker onto a frame of that recording and cuts the footage against the\n  run, condensing waiting with the factor stated on screen.\n- A demonstration for a first-time audience runs to minutes, is narrated in plain language,\n  carries captions, and ships with a script and a subtitle file.\n- Footage that filmed anything other than the target window is never published.\n- A run that completes while filming stops its own camera and compiles the film once.\n- Absent optional dependencies degrade to a recorded fallback rather than a failure.\n- The existing test suite stays green and the framework verifiers continue to pass.\n\n## Constraints\n\n- Additive only. No change to gate semantics, the Producer Exclusion Rule, the state machine,\n  recovery classification, or any existing artifact contract.\n- No new mandatory dependency. Pillow, ffmpeg, OBS Studio, and every text-to-speech engine are\n  optional, and each absence must be a recorded fallback.\n- Nothing in the demo layer may raise into the run it observes.\n- Only the target window may ever be recorded, and the recording's own audio is never\n  published.",
+        "digest": "sha256:563fa9d0a3547f8f865e6410fb0f4547"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present and must express an identifiable business or user outcome."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "scope-definition",
+      "reference": "runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "produced_by": "scope-and-acceptance",
+      "artifact": "scope-definition.md",
+      "bytes": 21176,
+      "sections": {
+        "read_first": [
+          "In Scope",
+          "Out of Scope",
+          "Acceptance Criteria",
+          "Constraints and Dependencies",
+          "Scope Decisions",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Business Context",
+          "Handoff"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-5df08e171670/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:1ef4c49bdcb0b895d92bf5fbd0f16bee",
+    "bytes": 16322,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "scope-and-acceptance",
+      "execution-planning"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-09-14T07:30:44Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 21871,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "required",
+        "read_reason": "the plan's Required Skills cite these codes"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12246,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7094,
+        "read": "required",
+        "read_reason": "the plan's Required Capabilities cite these identifiers"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "required",
+        "read_reason": "this artifact names the gate it is evidence for and its owners"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/execution-plan.md",
+        "digest": "sha256:4b6afb5767cda1767df4d8183bfb459a",
+        "supplies": null,
+        "bytes": 5348,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      }
+    ],
+    "context_digest": "sha256:096076ff2cb34a9c66bf3c375efd1124",
+    "input_digest": "sha256:563fa9d0a3547f8f865e6410fb0f4547",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/demo-mode-feature-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-feature-request.md",
+        "digest": "sha256:563fa9d0a3547f8f865e6410fb0f4547"
+      }
+    ],
+    "unnarrowed": [
+      "templates/execution-plan.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "agents/capability-matrix.md",
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "registry/skills.yaml",
+      "templates/execution-plan.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "read_on_demand": [
+      "workflows/implement-feature.md"
+    ],
+    "runtime_resolved": [
+      "registry/agents.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 106701,
+    "bytes_required": 37996,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md",
+      "runs/run-5df08e171670/states/execution-planning/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code",
+      "review code",
+      "modify architecture",
+      "generate tests",
+      "execute workflows",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze business and technical requirements",
+        "decompose scope into executable engineering tasks",
+        "derive dependencies and implementation order",
+        "estimate complexity at planning granularity",
+        "record assumptions, risks, and open questions",
+        "produce execution-plan.md"
+      ],
+      "prohibited": [
+        "write production code",
+        "review code",
+        "modify architecture",
+        "generate tests",
+        "execute workflows",
+        "access external systems directly"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and identical context snapshot must produce an execution plan with identical section set, identical task identifiers, and identical dependency and ordering relationships.",
+      "taskIdentifierScheme": "T-<zero-padded-sequence>",
+      "orderingRule": "Topological order over declared dependencies; ties broken by ascending task identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, tool, runtime, or implementation technology."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "execution-plan.md",
+    "artifact_path": "runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md",
+    "template_ref": "templates/execution-plan.md",
+    "contract_ref": "agents/planner/output.md",
+    "quality_ref": "agents/planner/quality.md",
+    "validator": "plan_validator",
+    "result_envelope_path": "runs/run-5df08e171670/states/execution-planning/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-14T07:30:44Z",
+  "context_budget": {
+    "modules_full_bytes": 85855,
+    "modules_core_bytes": 40271,
+    "slice_all_bytes": 106701,
+    "slice_required_bytes": 37996,
+    "inputs_bytes": 3403,
+    "upstream_full_bytes": 0,
+    "upstream_read_first_bytes": 0,
+    "task_context_bytes": 16322,
+    "fixed_bytes": 11775,
+    "legacy_estimate_bytes": 207734,
+    "progressive_estimate_bytes": 109767,
+    "legacy_estimate_tokens": 51933,
+    "progressive_estimate_tokens": 27441,
+    "savings_pct": 47.2
+  }
+}

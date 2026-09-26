@@ -1,0 +1,389 @@
+{
+  "invocation_id": "inv-4c51600606df-03-002",
+  "run_id": "run-4c51600606df",
+  "work_item_id": "run-4c51600606df::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:3520090ee06af1c9cdc66bc469ad1b6d",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:33d317684aece20ce5b970f6b595c107",
+      "agents/architect/identity.md": "sha256:fc073d2135f891349e8f6639243819e3",
+      "agents/architect/reasoning.md": "sha256:80894ab095455279790bb46409340ee6",
+      "agents/architect/execution.md": "sha256:9b9f220dee72dd93faca5d9c021d6ead",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:d9fa58935c242fb724123ea69d5eeb61",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "feature-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-06-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-06-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-06: Generate the HTML handbook from the Markdown handbook, with a drift check\n\n## Source\n\nTicket CKA-06 in the adoption backlog under `docs/` (Epic A \u2014 Verification baseline,\nDays 0\u201330). Source recommendation: R7 of the adoption review dated 2026-08-27.\nType: Story. Priority: High. Effort: M. Depends on: CKA-03, delivered as\n`.github/workflows/verify.yml`, which supplies the CI hook this ticket binds to.\n\n## Problem\n\nThe repository publishes its operator handbook twice: `docs/USER-GUIDE.md` (1051 lines of\nMarkdown) and `docs/user-guide.html` (1033 lines of hand-authored HTML with its own design\nsystem \u2014 a light/dark token palette, a chapter navigation index, a chain diagram, eyebrow\nchapter labels, stable section anchors, callout blocks with tags, and comment-highlighted\ncode samples). The two are kept in step by hand. Nothing checks that they agree, and they no\nlonger do: the Markdown carries a whole section, `5b. Branch naming templates` (lines 538 to\n616, including a token reference table, normalization and validation rules, a viewing and\nchanging section, and migration notes) that the HTML does not contain at all, and the two\nfiles order the gate-ownership material differently. Every prior delivery in this backlog has\npaid a hand-sync tax and recorded it as such in its own evidence.\n\nHand synchronization cannot be made reliable by asking contributors to try harder. The fix is\nto make one file the source and the other a build output, and to fail CI when the output is\nstale.\n\n## Request\n\nDeliver three things.\n\n1. **A renderer.** A new `tools/render_user_guide.py` that reads `docs/USER-GUIDE.md` and\n   writes `docs/user-guide.html` deterministically \u2014 same input, byte-identical output, on\n   every platform the CI matrix runs. Standard library only, consistent with the repository's\n   dependency posture for tooling.\n\n2. **A one-time two-way reconciliation of the current drift.** Section by section, every\n   piece of content that exists in exactly one of the two files is resolved: content the HTML\n   carries and the Markdown does not is merged back into the Markdown or deliberately\n   dropped, with the decision recorded; the Markdown's `5b. Branch naming templates` section\n   is rendered into the HTML. After the change, no content is present in exactly one file.\n   Design affordances the HTML carries today (navigation, anchors, callouts, chapter labels,\n   the chain diagram, code-comment highlighting) are a deliberate part of the published\n   artifact: preserving them is in scope, and how the source Markdown expresses them without\n   becoming unreadable is a design question this change must answer rather than resolve by\n   discarding them.\n\n3. **A drift check bound to CI.** A `--check` mode on the renderer that re-renders in memory,\n   compares against the committed HTML byte for byte, exits nonzero on a mismatch, and prints\n   the exact regeneration command. Wired into the existing CI workflow. The generated HTML\n   carries a visible \"generated \u2014 do not edit\" banner naming its source file and the command\n   that regenerates it. The hand-sync process note in the contributor documentation is\n   retired and replaced by the generation instruction.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- Editing `USER-GUIDE.md` without regenerating fails CI with the fix command.\n- `user-guide.html` opens with a \"generated \u2014 do not edit\" banner.\n- No content present in exactly one of the two files after reconciliation.\n\n## Constraints\n\n- Additive change only. The backlog forbids altering `record_gate_decision`, the gate matrix\n  semantics, producer exclusion, `runner._require_approval`, or any human-block path. This\n  ticket adds a build tool, regenerates a documentation artifact, and adds a CI step; it\n  changes no runtime behaviour and no gate-decision behaviour.\n- The CI hook must follow the discovery discipline CKA-03 established: the check is a step\n  over a known build output, not a curated list of files any future contributor must\n  remember to extend.\n- Determinism is a hard requirement, not an aspiration: a check that compares bytes is only\n  usable if the renderer's output does not vary with dictionary ordering, locale, line\n  endings, or the platform running it. Both CI platforms in the matrix must agree.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py` proof\n  scripts PROVEN, no change to gate-decision behaviour, and \u2014 where docs were touched \u2014\n  the HTML handbook regenerated. This ticket is the one that makes that last clause\n  mechanical rather than manual, and CKA-12 already depends on it for exactly that.\n\n## Writing constraints for every phase of this run\n\n- Every artifact validator in this framework rejects the vendor substring \"claude\" in any\n  case. Cite the backlog as \"the adoption backlog under `docs/`\" and the review as \"the\n  adoption review dated 2026-08-27\". Write framework paths without the leading dot-directory\n  prefix \u2014 `runtime/framework_runtime.py`, not the full path. Where the handbook's own\n  section 3A names an in-editor agent host, refer to it as \"the in-editor host section (3A)\".\n\n## Priority and deadline\n\nHigh priority; Phase 1 (Days 0\u201330) of the adoption plan. CKA-12 depends on this ticket for\nregenerating the handbook when it updates the exit-code tables.",
+        "digest": "sha256:5965b9107e59775c3f70f54b0b8609f7"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-4c51600606df/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-4c51600606df/states/execution-planning/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: CKA-06-execution-plan\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-06-feature-request.md\n    - type: product-requirement\n      reference: runs/run-4c51600606df/states/scope-and-acceptance/artifacts/scope-definition.md\n    - type: product-requirement\n      reference: run-4c51600606df Scope Gate decision, conditions SGC-1 to SGC-5\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:5965b9107e59775c3f70f54b0b8609f7\n  contextDigest: sha256:9f90eb89f94639cd8aec24f921d08586\n# Upstream identifier notation. The approved scope definition SCOPE-2026-0013 uses identifier\n# families that would collide with this plan's own registers, so its items are cited here in a\n# distinct form: scope items as SC-001 to SC-008, acceptance criteria as AC-001 to AC-014,\n# exclusions as X-001 to X-007, scope decisions as D-001 to D-006, and its two open questions as\n# SQ-001 and SQ-002. Scope Gate conditions are cited as SGC-1 to SGC-5. Every bare S-nnn, A-nnn,\n# R-nnn, T-nnn, and Q-nnn token in this artifact resolves against this plan's own registers.\n```\n\n## Executive Summary\n\nThe operator handbook becomes a single authored document, `docs/USER-GUIDE.md`, from which the\npublished `docs/user-guide.html` is generated, so that readers of either form get the same\nhandbook and a stale published form stops a change instead of surviving it. Success is that no\nitem of authored content remains present in exactly one of the two files, and that a source edit\nlanding without a regenerated published file is failed by the repository's verification workflow\nwith a runnable fix command. The work decomposes into twenty-two tasks across eight execution\nwaves, beginning in parallel with an inventory of the current one-sided content and an\nenumeration of the anchor identifiers the published file exposes today. The highest-impact risk\nis `R-003`: if regenerated output varies with ordering, locale, line endings, or platform, the\nbyte comparison the whole change rests on becomes unusable and every downstream verification\ntask loses its evidence. Two design questions are routed to `architect` rather than decided\nhere: how the source expresses the published form's reading affordances, and the anchor notation\nthat must carry the existing identifier set through regeneration. Plan status is complete; three\nopen questions are recorded, none blocking, and twelve tasks are assumption-dependent until\n`A-001` through `A-010` are confirmed.\n\n## Business Objectives\n\n- Readers of either published form get the same handbook, received by every team that reads the\n  operator handbook, measured as zero items of authored prose, table, or code sample present in\n  exactly one of the two files after the change. Traces to `S-008`, `S-011`.\n- A change that would leave the two published forms disagreeing is stopped before it reaches the\n  default branch, received by every contributor and reader of the handbook, measured as the\n  repository's verification workflow failing such a change and passing a change where the two\n  files agree. Traces to `S-002`, `S-015`, `S-018`.\n- The per-change hand-synchronisation cost that every prior delivery in the adoption backlog\n  under `docs/` has paid and recorded is removed, received by contributors who change the\n  handbook, measured as a contributor editing one file and invoking one documented regeneration\n  command, with no instruction to synchronise the two files by hand remaining in\n  contributor-facing documentation. Traces to `S-004`, `S-017`, `S-040`.\n- The follow-on ticket CKA-12 can regenerate the handbook mechanically when it updates the\n  exit-code tables, received by that ticket's delivery, measured as a documented and demonstrated\n  regeneration command being available at this change's closure. Traces to `S-023`.\n- The published handbook stays usable to the operator audience it serves, received by readers of\n  the published form, measured as reviewer confirmation that the five named reading affordances\n  and every anchor identifier the file exposes today survive regeneration. Traces to `S-012`,\n  `S-024`, `S-029`.\n\n## Technical Objectives\n\n- The published file is a pure function of the source file: regeneration reproduces the committed\n  published file exactly and discards any edit made directly to it. Verified by AC-001 and\n  AC-002. Traces to business objectives 1 and 3, and to `S-005`, `S-026`.\n- Regeneration is deterministic across repeated runs in one environment and across every\n  operating system in the repository's verification matrix, line endings included. Verified by\n  AC-010 and AC-011. Traces to business objective 2 and to `S-006`.\n- The repository's verification workflow carries a drift check that fails a stale published file\n  and reports the regeneration command as a string a contributor can run unmodified, added as a\n  step over a known build output rather than over a curated file list. Verified by AC-003 and\n  AC-004. Traces to business objective 2 and to `S-014`, `S-020`.\n- The source document expresses every reading affordance the published form offers, in notation a\n  contributor can author as prose rather than as hand-written markup. Verified by AC-007, AC-012,\n  and the reported count behind AC-013. Traces to business objectives 3 and 5, and to `S-013`.\n- The anchor identifier set the published form exposes today survives regeneration, and each\n  anchor resolves to the section carrying the same material. Verified by AC-008. Traces to\n  business objective 5 and to `S-039`.\n- The published file announces, at the top of the rendered page, that it is generated, which file\n  it comes from, and the command that regenerates it. Verified by AC-009. Traces to business\n  objective 3 and to `S-016`, `S-036`.\n- The change adds a build tool, a regenerated documentation artifact, and a verification step,\n  and alters no runtime behaviour, no gate-decision behaviour, and no dependency beyond the\n  standard library. Verified by the repository's test suite staying green, every proof script\n  reporting PROVEN, and inspection of the change set against the forbidden surfaces the backlog\n  names. Traces to business objective 4 and to `S-007`, `S-019`, `S-021`.\n\n## Scope\n\n### In Scope\n\n- The published handbook is a build output of the source handbook, and a direct edit to it does\n  not survive regeneration (SC-001; `S-004`, `S-005`, `S-026`). Covered by `T-002`, `T-003`.\n- A source change that lands without a regenerated published file is stopped by the repository's\n  verification workflow and told the exact fix command (SC-002; `S-014`, `S-015`, `S-018`).\n  Covered by `T-015`, `T-016`, `T-019`.\n- A one-time two-way reconciliation of the current drift, with every one-sided item of authored\n  content resolved and the resolution recorded (SC-003; `S-003`, `S-008`, `S-009`, `S-010`,\n  `S-011`, `S-027`, `S-028`, `S-030`). Covered by `T-001`, `T-005`, `T-006`, `T-008`.\n- The authored-content test that separates content to merge from a derived label to regenerate,\n  applied item by item, with every drop recorded and unsettled items escalated (SGC-1; `S-033`,\n  `S-034`, `S-035`, `S-036`). Covered by `T-006`.\n- The reconciliation resolution list, persisted as a named artifact of the implementation phase\n  so AC-006 has something a reviewer can read (SGC-5; `S-042`). Covered by `T-007`.\n- The published form keeps its chapter navigation index, chapter labels, callout blocks, the\n  chain diagram, and code samples whose comment lines are distinguishable from the commands\n  (SC-004; `S-012`, `S-024`, `S-029`). Covered by `T-010`, `T-011`.\n- Every anchor identifier the published form exposes before the change still resolves, after it,\n  to the section carrying the same material (SC-004, SGC-3; `S-012`, `S-039`). Covered by\n  `T-009`, `T-011`.\n- The published page opens with a banner stating that the file is generated and must not be\n  edited, naming its source file and its regeneration command (SC-005; `S-016`, `S-036`).\n  Covered by `T-017`.\n- Regeneration produces the same published file on every repeat and on every platform in the\n  verification matrix (SC-006; `S-006`). Covered by `T-004`, `T-022`.\n- The source handbook stays a document a contributor reads and edits as prose, with a recorded\n  counting rule for the raw-markup measure and the recorded precedence that the anchor criterion\n  governs where the two conflict (SC-007, SGC-2; `S-013`, `S-037`, `S-038`). Covered by `T-010`,\n  `T-012`, `T-013`, `T-014`.\n- Contributor-facing documentation instructs regeneration, and the statement describing the pair\n  as hand-synced is retired from the three named targets (SC-008, SGC-4; `S-017`, `S-040`).\n  Covered by `T-018`.\n- Evidence that the change altered no runtime or gate-decision behaviour and met the backlog's\n  definition of done (`S-019`, `S-021`). Covered by `T-020`, `T-021`.\n- A validation strategy that carries out the verification method named against each of the\n  fourteen approved criteria (`S-032`). Covered by `T-022`.\n\n### Out of Scope\n\n- Generating any other duplicated documentation pair in the repository from a single source\n  (X-001). Excluded because the request names exactly one pair and no other pair's reconciliation\n  cost has been assessed; revisited when a second pair is identified and its divergence is shown\n  to recur.\n- Any change to runtime, gate-decision, or approval behaviour (X-002). Excluded because the\n  backlog constrains this ticket to an additive change and forbids altering the gate-decision\n  surfaces it names; such a change is scoped separately with its own gate evidence.\n- Editorial rewriting or restructuring of handbook content beyond resolving content that exists\n  in exactly one file (X-003). Excluded because mixing editorial improvement into a\n  reconciliation makes the reconciliation impossible to review; revisited when a content review\n  of the handbook is requested as its own change.\n- Publishing or hosting the generated handbook anywhere outside the repository (X-004). Excluded\n  because nothing in the request asks for a hosted site; revisited when a requirement to serve\n  the handbook outside the repository is stated.\n- Making the handbook's factual claims checkable against the tool's actual behaviour, including\n  the exit-code tables (X-005). Excluded because that is the follow-on ticket CKA-12, which\n  consumes this change's output; revisited when CKA-12 is scoped.\n- An automated visual or structural regression check proving the reading affordances survived a\n  regeneration (X-006). Excluded because the request funds one drift check over bytes, and D-006\n  accepts affordance preservation by review instead; revisited if an affordance regression\n  reaches the published handbook after this change.\n- Removing the published handbook from version control in favour of building it only at publish\n  time (X-007). Excluded because the drift check compares against the committed file and existing\n  repository tests read that file from the working tree; revisited when a publishing pipeline\n  exists and those tests no longer read the file.\n- Rewriting committed change proposals and run evidence that describe the pair as hand-synced\n  (`S-041`). Excluded because the Scope Gate placed them outside AC-014's reach; they are the\n  historical record of runs that did pay the hand-synchronisation cost.\n\n### Deferred\n\nNone identified. The approved boundary records seven exclusions, each already carrying the\ncondition that would revisit it, and this plan adds no further deferral of its own: every\nin-scope item above is planned in this run rather than postponed.\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | The renderer is a standard-library tool needing no dependency outside it, consistent with the repository's dependency posture for tooling | `S-007` | The approach decision reopens, the published handbook's stated dependency footprint no longer holds, and the change stops being purely additive | architect |\n| A-002 | The repository's verification workflow, delivered by ticket CKA-03, runs on more than one operating system and accepts an added step over a build output without restructuring | `S-015`, `S-020` | `T-016` grows to include workflow restructuring and the cross-platform criterion cannot be evidenced from a single workflow run | architect |\n| A-003 | The exact anchor identifier set the published handbook exposes today is established by reading the committed file, and any set named in supplied text is indicative rather than exhaustive | `S-039` | An anchor absent from the baseline is dropped without detection, and the anchor criterion passes against an incomplete comparison | architect |\n| A-004 | The framework's artifact writing constraints apply to every artifact this run produces and are enforced by the artifact validators; a breach causes the affected artifact to be rejected and re-emitted, and adds, removes, or changes no task | `S-022` | Nothing in the task structure changes; only the affected artifact is re-emitted | omn-orchestrator |\n| A-005 | The implementer applies the recorded authored-content test rather than re-deciding it, and routes items the test does not settle to the deciding agent | `S-033`, `S-034`, `S-035` | Published wording is decided by the implementer where the Scope Gate reserved that decision, and the AC-006 evidence stops being reviewable | omn-product-owner |\n| A-006 | The reconciled handbook content is expressible in the source document using notation already present in that file, so the raw-markup measure does not rise | `S-013`, `S-037` | The markup measure is reported as risen, the anchor criterion governs the conflict, and the notation decision must record the tradeoff it took | architect |\n| A-007 | The two existing tests that read the published handbook pass unchanged once the reconciliation preserves the strings they assert | `S-030` | Either the reconciliation must preserve content the authored-content test would drop, or those tests change, and both are decisions above the implementer | omn-qa |\n| A-008 | One regeneration command line serves every platform in the verification matrix unmodified | `S-014`, `S-018` | `T-015` states a per-platform command form in its acceptance criterion; no task is added or removed | architect |\n| A-009 | The handbook carries maintenance material that can hold the regeneration instruction, or such material can be added within this change | `S-040` | `T-018` lands the instruction in two targets rather than three and records the third as not applicable; no task is added or removed | omn-documentation |\n| A-010 | The three targets the Scope Gate named are the complete inventory of contributor-facing statements about the handbook pair | `S-040`, SQ-001 | The text review behind AC-014 finds a further hand-synchronisation instruction after `T-018` closed, and that task reopens | omn-documentation |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | An inventoried item is not settled by the recorded authored-content test and is resolved without escalation before the reconciliation is applied | Published wording changes on an implementer's judgement where the Scope Gate reserved that decision; the AC-006 evidence is not reviewable | medium | T-005, T-006, T-007 | `T-006` records the test clause behind every resolution and routes unsettled items to its owner; `T-008` refuses any item left unresolved | omn-product-owner |\n| R-002 | requirement | The authored-content test would drop a string that the existing parity test or the dependency-footprint test asserts | The repository's test suite fails, or the reconciliation reopens as a scope change after implementation started | medium | T-005, T-006, T-020 | `T-006` records the asserted strings as non-droppable and escalates the conflict; `Q-003` names the authority that decides it | omn-product-owner |\n| R-003 | technical | Regenerated output varies with dictionary ordering, locale, line endings, or the platform running it | The byte comparison the whole change rests on becomes unusable, one matrix leg fails permanently, and every downstream verification task loses its evidence | medium | T-002, T-003, T-004, T-016 | `T-003` fixes the determinism decisions before the renderer is built; `T-004` evidences repeat and cross-platform identity | architect |\n| R-004 | technical | An affordance cannot be expressed in the source document without adding markup a contributor would have to hand-write | The readability objective weakens and the raw-markup measure rises against AC-013 | medium | T-010, T-012, T-014 | `T-010` records the tradeoff taken for each affordance; `T-014` reports the count rather than enforcing it, per the recorded precedence | architect |\n| R-005 | technical | An anchor identifier the published file exposes today is missing from the enumerated baseline | A dropped anchor passes the page verdict and breaks a link readers already use | medium | T-009, T-011 | `T-009` states its enumeration method and takes the set from the committed file rather than from a supplied list | architect |\n| R-006 | dependency | The verification workflow delivered by ticket CKA-03 does not accept an added step over a build output without restructuring, or its matrix does not cover both platforms | `T-016` grows into workflow restructuring, and the cross-platform criterion cannot be evidenced from one run | low | T-004, T-016, T-019 | `T-003` confirms the workflow's shape and matrix before the step is written | architect |\n| R-007 | security | The reconciliation merges published-form wording that names internal detail the source document was not intended to carry | Content exposure widens without a review having judged it | low | T-005, T-006, T-008 | `T-008` reviews every merged item against the source that carried it before the change | omn-dev-2-reviewer |\n| R-008 | operational | A contributor who has been editing the published file directly continues to do so after the change | Their edit is lost at the next regeneration and their change is failed by the drift check, with no explanation unless the page and the documentation say so | high | T-017, T-018, T-021 | `T-017` puts the notice at the top of the rendered page; `T-018` states the consequence in contributor-facing documentation | omn-documentation |\n| R-009 | operational | A reading affordance regresses in a change made after this one | Nothing catches it mechanically, because the accepted boundary funds review rather than an automated affordance check | medium | plan-wide | `T-021` records the gap as accepted and names the condition the boundary already set for funding the automated check | omn-tech-lead |\n| R-010 | delivery | A contributor-facing statement about the handbook pair exists outside the three targets the Scope Gate named | The text review behind AC-014 finds a remaining hand-synchronisation instruction after the documentation task closed | medium | T-018 | `T-018` searches contributor-facing documents rather than working from the named list alone | omn-documentation |\n| R-011 | delivery | The renderer needs capability outside the standard library | The published handbook's stated dependency footprint stops being true, the backlog's tooling posture is breached, and the approach decision reopens | low | T-002, T-003, T-020 | `T-003` carries the standard-library constraint as a design constraint and records any exception for decision rather than taking it | architect |\n\n## Task Breakdown\n\n### T-001 Inventory the one-sided content across the two published forms\n\n- Owner: omn-context-agent\n- Complexity: M (confidence: medium)\n- Depends on: none\n- Traces to: S-003, S-008, S-032\n- Status: ready\n- Description: A section-by-section comparison of the two handbook files as committed before this\n  change exists, listing every item of prose, table, or code sample present in exactly one of\n  them.\n- Acceptance Criteria:\n  - Every section of both files appears in the comparison, and the comparison states the revision\n    of each file it was taken against\n  - Each listed item names the file that carries it and the section it sits in\n  - The known divergences named in the request, the branch naming templates section and the\n    differing order of the gate-ownership material, both appear in the comparison\n- Gate: Scope Gate\n\n### T-002 Deliver the renderer that produces the published handbook from the source\n\n- Owner: omn-dev-1-implement\n- Complexity: L (confidence: low)\n- Depends on: T-003, T-010\n- Traces to: S-004, S-005, S-026, A-001\n- Status: assumption-dependent\n- Description: A tool at `tools/render_user_guide.py` reads `docs/USER-GUIDE.md` and writes\n  `docs/user-guide.html` with no manual step between them, following the approved approach and\n  the defined source notation.\n- Acceptance Criteria:\n  - Running the tool over the source file produces the published file without any manual step\n  - Two runs over the same source in the same environment produce output with zero differing\n    bytes\n  - The output carries every affordance the defined source notation expresses\n  - The tool runs with no dependency outside the standard library\n- Gate: Review Gate\n\n### T-003 Define the technical approach for the renderer and its drift check\n\n- Owner: architect\n- Complexity: L (confidence: low)\n- Depends on: T-010\n- Traces to: S-005, S-006, S-007, S-014, S-019, A-001, A-002, A-008\n- Status: assumption-dependent\n- Description: An approved approach exists stating how the published file is derived from the\n  source, how repeated and cross-platform runs are made byte-identical, how the check mode\n  compares and reports, and why the change stays additive.\n- Acceptance Criteria:\n  - The approach states the decision taken for each named determinism hazard: ordering, locale,\n    line endings, and platform\n  - The approach states how the check mode compares the regenerated content against the committed\n    published file without writing to the working tree\n  - The approach names the regeneration command form and states whether one form serves every\n    platform in the matrix\n  - The approach records that no dependency outside the standard library is introduced, or\n    records the exception for decision rather than taking it\n  - The approach records the shape and matrix of the existing verification workflow that the\n    drift step will be added to\n- Gate: Design Gate\n\n### T-004 Verify byte-identical regeneration across repeats and platforms\n\n- Owner: omn-qa\n- Complexity: S (confidence: low)\n- Depends on: T-016, T-022\n- Traces to: S-006, A-002\n- Status: assumption-dependent\n- Description: Recorded evidence exists that regeneration from the same source produces the same\n  published file twice in one environment and on every operating system in the repository's\n  verification matrix.\n- Acceptance Criteria:\n  - Two regenerations from the same source into separate destinations compare with zero differing\n    bytes\n  - The drift check step passes on every operating system leg of a single verification workflow\n    run, line endings included\n  - The evidence is recorded against the criteria it satisfies, with the workflow run identified\n- Gate: Verification Gate\n\n### T-005 Bring the source handbook into agreement with the recorded resolution list\n\n- Owner: omn-dev-1-implement\n- Complexity: L (confidence: low)\n- Depends on: T-002, T-007\n- Traces to: S-008, S-010, S-011, S-027, S-028, S-030, A-005, A-007\n- Status: assumption-dependent\n- Description: `docs/USER-GUIDE.md` carries every item the resolution list marks merged and\n  nothing the list marks dropped, and the regenerated published file carries the whole of it.\n- Acceptance Criteria:\n  - Every item the list marks merged is present in the source document\n  - Every item the list marks dropped is absent from both files\n  - The branch naming templates section appears in the regenerated published file with its token\n    reference table, its normalization and validation rules, its viewing-and-changing content,\n    and its migration notes\n  - The gate-ownership material appears in the published file in the order the source gives it\n  - No content is changed beyond the items the list names\n  - Every string the existing parity test and the existing dependency-footprint test assert is\n    still present in the published file\n- Gate: Review Gate\n\n### T-006 Resolve every inventoried one-sided item under the recorded authored-content test\n\n- Owner: omn-product-owner\n- Complexity: M (confidence: low)\n- Depends on: T-001\n- Traces to: S-009, S-033, S-034, S-035, S-036, A-005, A-007\n- Status: assumption-dependent\n- Description: Every item in the inventory carries one recorded resolution, either merged into the\n  source document or deliberately dropped, together with the clause of the recorded test that\n  produced it.\n- Acceptance Criteria:\n  - Every inventoried item carries exactly one resolution and names the test clause behind it\n  - Wording that states a fact and exists only in the published form is resolved as merged\n  - Wording that only labels or routes within the page is resolved as dropped, with the heading\n    it is regenerated from named\n  - No drop is recorded without a reason\n  - Items the recorded test does not settle are decided by this task's owner, and the decision and\n    its rationale are recorded\n  - The published form's footer source statement is recorded as folding into the generated banner\n    rather than being merged into the source document\n  - Any item whose drop would remove a string an existing test asserts is recorded as\n    non-droppable, with the conflict named\n- Gate: Scope Gate\n\n### T-007 Persist the reconciliation resolution list as a named implementation-phase artifact\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-006\n- Traces to: S-009, S-042\n- Status: ready\n- Description: The resolution list exists as a named artifact of the implementation phase, at a\n  path the change's evidence references, carrying every inventoried item with its resolution.\n- Acceptance Criteria:\n  - The artifact exists at a named path and is referenced from the change's evidence\n  - Every item from the inventory appears in it with its recorded resolution and test clause\n  - No item is left unresolved\n  - A reader who did not build the change can match each entry back to the section of the file\n    that carried it\n- Gate: Review Gate\n\n### T-008 Review the resolution list against the pre-change comparison\n\n- Owner: omn-dev-2-reviewer\n- Complexity: S (confidence: high)\n- Depends on: T-005, T-007\n- Traces to: S-009, S-035\n- Status: ready\n- Description: A recorded review verdict exists stating whether every one-sided item found before\n  the change is resolved in the delivered result.\n- Acceptance Criteria:\n  - Every item in the pre-change comparison is matched to an entry in the resolution list\n  - The reviewer confirms each merged item is present in the source document and each dropped item\n    is absent from both files\n  - The reviewer records a defect for any drop lacking a reason, and for any merged item whose\n    wording names detail the source document was not intended to carry\n  - The verdict states whether the criterion for one-sided content is met\n- Gate: Review Gate\n\n### T-009 Enumerate the anchor identifier baseline the published handbook exposes today\n\n- Owner: architect\n- Complexity: S (confidence: low)\n- Depends on: none\n- Traces to: S-012, S-039, A-003\n- Status: assumption-dependent\n- Description: The set of anchor identifiers exposed by `docs/user-guide.html` as committed before\n  this change is enumerated and recorded as the baseline the anchor criterion compares against.\n- Acceptance Criteria:\n  - The enumeration is taken from the committed published file rather than from a supplied list,\n    and states the method used to take it\n  - Chapter-level anchors and in-chapter anchors are distinguished\n  - The baseline is recorded where the page review and the notation decision can both consume it\n  - The record states that this set is fixed and must survive regeneration\n- Gate: Design Gate\n\n### T-010 Define the source notation for the published form's reading affordances\n\n- Owner: architect\n- Complexity: L (confidence: low)\n- Depends on: T-009\n- Traces to: S-012, S-013, S-024, A-006\n- Status: assumption-dependent\n- Description: An approved notation exists by which `docs/USER-GUIDE.md` expresses every reading\n  affordance the published form offers, without the source becoming a markup document.\n- Acceptance Criteria:\n  - The notation covers the chapter navigation index, chapter labels, callout blocks, the chain\n    diagram, code samples whose comment lines are distinguishable, and section anchors\n  - For each affordance the notation states whether it uses notation already present in the source\n    document or newly defined notation, and records the tradeoff where it is newly defined\n  - The notation reproduces every anchor identifier in the recorded baseline\n  - The notation answers how a contributor adds a section, a callout, and a code sample without\n    hand-writing markup\n- Gate: Design Gate\n\n### T-011 Record a reviewer verdict on the regenerated published page\n\n- Owner: omn-dev-2-reviewer\n- Complexity: M (confidence: medium)\n- Depends on: T-005, T-009, T-017\n- Traces to: S-012, S-016, S-024, S-029, S-039\n- Status: ready\n- Description: A recorded verdict exists stating whether the regenerated page still presents the\n  named reading affordances, resolves every baseline anchor to the section carrying the same\n  material, and announces its generated status.\n- Acceptance Criteria:\n  - The regenerated page is walked against the pre-change page across the chapter navigation\n    index, chapter labels, callout blocks, the chain diagram, and code-sample comment\n    distinction, with a verdict recorded per item\n  - Every anchor identifier in the recorded baseline resolves in the regenerated page to the\n    section carrying the same material, and any that does not is recorded as a defect\n  - The top of the rendered page is confirmed to state that the file is generated and must not be\n    edited, to name its source file, and to give its regeneration command\n  - The verdict states whether the affordance criterion and the anchor criterion are met\n- Gate: Review Gate\n\n### T-012 Define the raw-markup-line counting rule\n\n- Owner: omn-qa\n- Complexity: S (confidence: low)\n- Depends on: T-010\n- Traces to: S-013, S-037, S-038, A-006\n- Status: assumption-dependent\n- Description: A recorded rule exists that decides, for any line of `docs/USER-GUIDE.md`, whether\n  it counts as raw markup rather than prose, and that an independent reviewer can apply without\n  consulting its author.\n- Acceptance Criteria:\n  - The rule classifies every line of the source document into exactly one of raw markup or prose\n  - Two independent applications of the rule to the same revision produce the same count\n  - The rule is stated against the notation the approved source notation defines\n  - The record states that where the anchor-preservation criterion and the markup-count criterion\n    conflict, the anchor criterion governs and the markup count is reported rather than enforced\n- Gate: Verification Gate\n\n### T-013 Run the authoring walkthrough on the source notation\n\n- Owner: omn-dev-2-reviewer\n- Complexity: S (confidence: medium)\n- Depends on: T-005, T-010\n- Traces to: S-013\n- Status: ready\n- Description: A recorded walkthrough exists in which a reviewer who did not build the change adds\n  new content to a scratch copy of the source handbook using the defined notation and confirms it\n  renders.\n- Acceptance Criteria:\n  - One new section, one callout, and one code sample are added to a scratch copy of the source\n    document using notation already present in that file\n  - Regeneration renders all three in the published output\n  - The walkthrough records any notation the reviewer could not apply without consulting the\n    builder\n  - The verdict states whether the authoring criterion is met\n- Gate: Review Gate\n\n### T-014 Report the raw-markup-line count for both revisions of the source handbook\n\n- Owner: omn-qa\n- Complexity: XS (confidence: high)\n- Depends on: T-005, T-012\n- Traces to: S-013, S-037, S-038\n- Status: ready\n- Description: A recorded report exists giving the raw-markup-line count for the source document\n  as committed before this change and as committed after it, taken with the recorded rule.\n- Acceptance Criteria:\n  - Both counts are produced with the recorded counting rule and the revision of each is named\n  - The report states the difference between the two counts\n  - Where the count rose, the report states that the anchor-preservation criterion governs and\n    that this criterion is reported rather than enforced\n- Gate: Verification Gate\n\n### T-015 Deliver the drift check mode\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-002, T-003\n- Traces to: S-014, S-018, A-008\n- Status: assumption-dependent\n- Description: The renderer offers a mode that re-renders the published content in memory,\n  compares it against the committed published file byte for byte, and reports the outcome without\n  writing to the working tree.\n- Acceptance Criteria:\n  - A mismatch exits with a nonzero status\n  - An agreeing pair exits with a zero status\n  - The failure output contains the regeneration command as a string a contributor can run\n    unmodified\n  - The mode leaves the working tree unchanged whether it passes or fails\n- Gate: Review Gate\n\n### T-016 Wire the drift check into the repository's verification workflow\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-015, and on the external prerequisite in 8.2\n- Traces to: S-015, S-020, A-002\n- Status: assumption-dependent\n- Description: The repository's verification workflow runs the drift check as a step over the\n  known build output, on every leg of its matrix.\n- Acceptance Criteria:\n  - The step is expressed over the known build output rather than over a curated list of files a\n    future contributor must extend\n  - The step runs on every operating system leg of the workflow matrix\n  - The step's failure output, including the regeneration command, reaches the workflow run log\n  - Every assertion the existing parity test makes about the workflow still holds\n- Gate: Review Gate\n\n### T-017 Emit the generated-file banner at the top of the published handbook\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-002\n- Traces to: S-016, S-036\n- Status: ready\n- Description: The regenerated published file opens with a banner, visible when the page is\n  rendered, stating that the file is generated and must not be edited, naming its source file,\n  and giving its regeneration command.\n- Acceptance Criteria:\n  - The banner is legible at the top of the rendered page, not only present in the markup\n  - The banner names `docs/USER-GUIDE.md` as the source file\n  - The banner gives the regeneration command\n  - The published form's former footer source statement is carried by this banner and is not\n    additionally merged into the source document\n- Gate: Review Gate\n\n### T-018 Update contributor-facing documentation to instruct regeneration\n\n- Owner: omn-documentation\n- Complexity: M (confidence: low)\n- Depends on: T-015\n- Traces to: S-017, S-040, S-041, A-009, A-010\n- Status: assumption-dependent\n- Description: Contributor-facing documentation states that the published handbook is generated\n  from `docs/USER-GUIDE.md` and names the regeneration command, and no contributor-facing text\n  instructs synchronising the two files by hand.\n- Acceptance Criteria:\n  - `README.md` states that the published handbook is generated and names the regeneration command\n  - The handbook's own maintenance material carries the same instruction, or the absence of such\n    material is recorded with the instruction placed in the remaining targets\n  - The parity test's docstring no longer describes the two files as hand-synced\n  - A search of contributor-facing documents finds no remaining instruction to synchronise the two\n    files by hand, and the search's scope is recorded\n  - Committed change proposals and run evidence are unchanged\n- Gate: Review Gate\n\n### T-019 Demonstrate the drift failure and the passing case\n\n- Owner: omn-qa\n- Complexity: M (confidence: low)\n- Depends on: T-016, T-022\n- Traces to: S-018, A-002\n- Status: assumption-dependent\n- Description: Recorded evidence exists that the verification workflow fails a source-only change\n  and passes a change where the two files agree.\n- Acceptance Criteria:\n  - A demonstration branch carrying a source-only edit is run through the verification workflow,\n    the run fails, and the logged output carries the regeneration command as a runnable string\n  - The verification workflow passes on a commit where the source and the published file agree\n  - Both runs are recorded as evidence against the criteria they satisfy\n- Gate: Verification Gate\n\n### T-020 Confirm the change altered no runtime or gate-decision behaviour\n\n- Owner: omn-dev-2-reviewer\n- Complexity: S (confidence: high)\n- Depends on: T-016, T-018\n- Traces to: S-019, S-021\n- Status: ready\n- Description: A recorded verdict exists stating that the delivered change set adds a build tool,\n  a regenerated documentation artifact, a verification step, and documentation edits, and touches\n  no forbidden runtime or gate-decision surface.\n- Acceptance Criteria:\n  - The change set is checked against each runtime and gate-decision surface the backlog forbids\n    altering, with the result recorded per surface\n  - The repository's test suite is green\n  - Every proof script reports PROVEN\n  - The verdict records whether the backlog's definition of done is met\n- Gate: Review Gate\n\n### T-021 Publish the release note and closure record\n\n- Owner: omn-documentation\n- Complexity: S (confidence: high)\n- Depends on: T-004, T-008, T-011, T-013, T-014, T-019, T-020\n- Traces to: S-021, S-023\n- Status: ready\n- Description: A published record states what the change delivered, what the evidence showed, and\n  what is knowingly left unguarded.\n- Acceptance Criteria:\n  - The record states that the published handbook is now generated, names the regeneration\n    command, and states the consequence for anyone who has been editing the published file\n    directly\n  - The record names the regeneration command available to the follow-on ticket and the run that\n    demonstrated it\n  - The record carries the reported raw-markup count and the reviewer verdicts\n  - The record names the accepted gap that no automated check guards the reading affordances, with\n    the condition that would fund one\n- Gate: Closure Gate\n\n### T-022 Define the validation strategy for the approved criteria\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-003\n- Traces to: S-032\n- Status: ready\n- Description: A validation strategy exists that carries out the verification method the approved\n  scope names against each of its fourteen acceptance criteria.\n- Acceptance Criteria:\n  - Each of the fourteen approved criteria has a named check, the evidence it produces, and its\n    pass condition\n  - Criteria decided by review rather than by a mechanical check are named as such, with the\n    reviewing role identified\n  - The strategy states how cross-platform determinism evidence is drawn from a single\n    verification workflow run\n  - The strategy states how the demonstration of a failing source-only change is staged without\n    landing it on the default branch\n- Gate: Verification Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-006 | produces-consumes | The resolution decides the items the inventory lists |\n| T-006 | T-007 | produces-consumes | The persisted list records the resolutions this task decides |\n| T-007 | T-005 | produces-consumes | The reconciliation applies the items the persisted list carries |\n| T-007 | T-008 | verification | The review assesses the persisted list |\n| T-009 | T-010 | produces-consumes | The notation must reproduce the enumerated anchor identifiers |\n| T-009 | T-011 | verification | The page verdict compares against the enumerated anchor baseline |\n| T-010 | T-002 | contract | The renderer implements the defined source notation |\n| T-010 | T-003 | contract | The approach binds to the notation the source must express |\n| T-010 | T-012 | produces-consumes | The counting rule classifies lines against the defined notation |\n| T-010 | T-013 | contract | The walkthrough exercises the defined notation |\n| T-003 | T-002 | contract | The renderer binds to the approved approach |\n| T-003 | T-015 | contract | The check mode binds to the approved approach |\n| T-003 | T-022 | contract | The strategy's mechanical checks bind to the approach's determinism and check design |\n| T-002 | T-005 | produces-consumes | The reconciliation regenerates the published file with the renderer |\n| T-002 | T-015 | produces-consumes | The check mode re-renders using the renderer |\n| T-002 | T-017 | produces-consumes | The banner is emitted by the renderer |\n| T-005 | T-008 | verification | The review assesses the applied resolutions |\n| T-005 | T-011 | verification | The page verdict is taken on the regenerated page |\n| T-005 | T-013 | produces-consumes | The walkthrough starts from the reconciled source |\n| T-005 | T-014 | produces-consumes | The count is taken over the reconciled source |\n| T-017 | T-011 | verification | The page verdict includes the banner at the top of the page |\n| T-012 | T-014 | produces-consumes | The count applies the recorded counting rule |\n| T-015 | T-016 | produces-consumes | The workflow step runs the check mode |\n| T-015 | T-018 | produces-consumes | The documented command is the one the check reports |\n| T-016 | T-004 | verification | The cross-platform evidence comes from the wired workflow run |\n| T-016 | T-019 | verification | The demonstration runs the wired workflow |\n| T-016 | T-020 | verification | The confirmation assesses the delivered change set |\n| T-018 | T-020 | verification | The confirmation covers the documentation change in the same change set |\n| T-022 | T-004 | produces-consumes | The determinism checks come from the strategy |\n| T-022 | T-019 | produces-consumes | The demonstration design comes from the strategy |\n| T-004 | T-021 | produces-consumes | The closure record states what the determinism evidence showed |\n| T-008 | T-021 | produces-consumes | The closure record states what the list review found |\n| T-011 | T-021 | produces-consumes | The closure record states what the page verdict found |\n| T-013 | T-021 | produces-consumes | The closure record states what the walkthrough found |\n| T-014 | T-021 | produces-consumes | The closure record carries the reported markup count |\n| T-019 | T-021 | produces-consumes | The closure record states what the demonstration showed |\n| T-020 | T-021 | produces-consumes | The closure record carries the behaviour confirmation |\n| Owner of the repository's verification workflow, delivered by ticket CKA-03 | T-016 | external | The drift step is added to a workflow this plan does not own |\n\n### 8.2 External Dependencies\n\n| Responsible party | What is needed | Blocks |\n|---|---|---|\n| Owner of the repository's verification workflow, delivered by ticket CKA-03 | The workflow keeps a matrix covering both platforms and accepts an added step expressed over a known build output, without restructuring | T-016 |\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-009\n- Wave 2: T-006, T-010\n- Wave 3: T-003, T-007, T-012\n- Wave 4: T-002, T-022\n- Wave 5: T-005, T-015, T-017\n- Wave 6: T-008, T-011, T-013, T-014, T-016, T-018\n- Wave 7: T-004, T-019, T-020\n- Wave 8: T-021\n\n## Suggested Workflow\n\nSelected workflow: `implement-feature`.\n\nSelected because the plan delivers new functionality against an approved scope with measurable\nacceptance criteria, carries unresolved design decisions that need an approved technical\napproach, produces a change set that must be reviewed and verified, and closes with\ndocumentation and release communication.\n\n| Phase | Tasks |\n|---|---|\n| `scope-and-acceptance` | T-001, T-006 |\n| `execution-planning` | plan handoff, this artifact |\n| `solution-design-and-risk-assessment` | T-003, T-009, T-010 |\n| `implementation` | T-002, T-005, T-007, T-015, T-016, T-017, T-018 |\n| `quality-review` | T-004, T-008, T-011, T-012, T-013, T-014, T-019, T-020, T-022 |\n| `documentation-and-release-handoff` | T-021 |\n\n| Gate | Required owners |\n|---|---|\n| Scope Gate | omn-product-owner, omn-business-analyst |\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer, omn-qa |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| context-discovery | T-001 | omn-context-agent | Primary |\n| scope-definition | T-006 | omn-product-owner | Primary |\n| acceptance-authority | T-006 | omn-product-owner | Primary |\n| architecture-analysis | T-003, T-009 | architect | Primary |\n| technical-approach-definition | T-003, T-010 | architect | Primary |\n| structural-risk-analysis | T-003 | architect | Primary |\n| implementation-delivery | T-002, T-005, T-007, T-015, T-016, T-017 | omn-dev-1-implement | Primary |\n| code-review | T-008, T-011, T-013, T-020 | omn-dev-2-reviewer | Primary |\n| governance-enforcement | T-020 | omn-dev-2-reviewer | Primary |\n| quality-verification | T-004, T-014, T-019 | omn-qa | Primary |\n| validation-design | T-012, T-022 | omn-qa | Primary |\n| documentation | T-018, T-021 | omn-documentation | Primary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S02 | business/domain-modeling.md | T-001, T-006 | Primary |\n| S01 | architecture/clean-architecture-checklist.md | T-003, T-010 | Primary |\n| S07 | testing/testing-strategy.md | T-004, T-012, T-019, T-022 | Primary |\n| S12 | error-handling/error-handling-strategy.md | T-015 | Secondary |\n| S11 | logging/observability-logging.md | T-016 | Secondary |\n| S10 | git/git-collaboration.md | T-016, T-019 | Secondary |\n| S09 | security/secure-engineering.md | T-008 | Advisory |\n\n## Acceptance Criteria\n\n1. No item of authored prose, table, or code sample is present in exactly one of the two handbook\n   files after the change. Verifies business objective 1. Evidence: the persisted resolution list\n   from `T-007`, reviewed at `T-008` against the pre-change comparison from `T-001`.\n2. Regenerating the published handbook from the committed source reproduces the committed\n   published file with zero differing bytes, on every platform in the repository's verification\n   matrix and on repeated runs in one environment. Verifies business objectives 1 and 2.\n   Evidence: the determinism record from `T-004`.\n3. A change to the source handbook that lands without a regenerated published file is failed by\n   the repository's verification workflow, and the failure output carries the regeneration\n   command as a string a contributor can run unmodified; the same workflow passes where the two\n   files agree. Verifies business objective 2. Evidence: the demonstration record from `T-019`.\n4. A contributor is told, both in contributor-facing documentation and at the top of the published\n   page, that the published handbook is generated and how to regenerate it, and no\n   contributor-facing text instructs synchronising the two files by hand. Verifies business\n   objective 3. Evidence: the text review recorded at `T-018` and the page verdict at `T-011`.\n5. A documented and demonstrated regeneration command is available to the follow-on ticket CKA-12\n   at this change's closure. Verifies business objective 4. Evidence: the closure record from\n   `T-021`, naming the command and the run that demonstrated it.\n6. The published handbook still offers the chapter navigation index, chapter labels, callout\n   blocks, the chain diagram, and code samples whose comment lines are distinguishable from the\n   commands, and every anchor identifier it exposed before the change still resolves to the\n   section carrying the same material. Verifies business objective 5. Evidence: the reviewer\n   verdict from `T-011` against the anchor baseline from `T-009`.\n\n## Definition of Done\n\n- [ ] All six plan acceptance criteria are verified with recorded evidence\n- [ ] Scope, Design, Review, Verification, and Closure Gates are approved with owners recorded\n- [ ] Task acceptance criteria for `T-001` through `T-022` are satisfied or formally waived\n- [ ] `A-001` through `A-010` are confirmed or converted to recorded decisions\n- [ ] `R-001` through `R-011` are closed or accepted with named owners\n- [ ] `Q-001`, `Q-002`, and `Q-003` are closed or explicitly accepted with the decision recorded\n- [ ] The resolution list is persisted at a named path and referenced from the change's evidence\n- [ ] The repository's test suite is green and every proof script reports PROVEN\n- [ ] Documentation and release-impact notes are published\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Does the handbook already carry maintenance material that can hold the regeneration instruction, or must such material be added within this change? | No | omn-documentation | T-018 |\n| Q-002 | The parity test's docstring is contributor-facing prose inside a test file. Does correcting it belong to the documentation owner or to the implementation change set? No phase of the selected workflow assigns prose inside test files to a single owner, so the boundary is recorded rather than assumed. | No | omn-tech-lead | T-018 |\n| Q-003 | If the recorded authored-content test would drop a string that an existing test asserts, which governs: the test that asserts the string, or the resolution rule that drops it? | No | omn-product-owner | T-005, T-006 |\n\n## Traceability Matrix\n\n| Statement | Covered by |\n|---|---|\n| S-001 the handbook is published in two files, the second hand-authored with its own design system | T-001 |\n| S-002 the two forms are kept in step by hand and nothing verifies agreement | T-016, T-019 |\n| S-003 the two forms currently disagree on a whole section and on the order of the gate-ownership material | T-001, T-005 |\n| S-004 one file becomes the source and the other a build output | T-002 |\n| S-005 a renderer reads the source file and writes the published file | T-002, T-003 |\n| S-006 output is deterministic: same input, byte-identical, on every platform in the matrix | T-003, T-004 |\n| S-007 the tool uses the standard library only | T-003, A-001 |\n| S-008 a one-time two-way reconciliation resolves every one-sided piece of content section by section | T-001, T-005 |\n| S-009 published-form content is merged or deliberately dropped, with the decision recorded | T-006, T-007, T-008 |\n| S-010 the branch naming templates section is rendered into the published file | T-005 |\n| S-011 after the change no content is present in exactly one file | T-005 |\n| S-012 the published form's reading affordances are preserved | T-009, T-010, T-011 |\n| S-013 how the source expresses those affordances without becoming unreadable is answered here | T-010, T-012, T-013, T-014 |\n| S-014 a check mode re-renders in memory, compares byte for byte, exits nonzero, and prints the regeneration command | T-003, T-015 |\n| S-015 the check is wired into the existing verification workflow | T-016 |\n| S-016 the published file carries a visible generated, do-not-edit banner naming its source and command | T-011, T-017 |\n| S-017 the hand-synchronisation process note is retired and replaced by the generation instruction | T-018 |\n| S-018 editing the source without regenerating fails verification with the fix command | T-015, T-019 |\n| S-019 the change is additive and alters no runtime or gate-decision behaviour | T-003, T-020 |\n| S-020 the hook follows the dependency ticket's discovery discipline, a step over a known build output | T-016 |\n| S-021 the backlog definition of done: tests green, proof scripts PROVEN, no gate-decision change, handbook regenerated | T-020, T-021 |\n| S-022 this run's artifacts observe the recorded writing constraints | A-004 |\n| S-023 the follow-on ticket CKA-12 depends on this change | T-021 |\n| S-024 D-001, affordance preservation is inside the boundary and the byte comparison cannot decide it | T-010, T-011 |\n| S-025 D-002, one-sidedness covers authored content, not presentational markup and derived labels | T-006, A-005 |\n| S-026 D-003, the source is the Markdown and the published HTML is the build output | T-002 |\n| S-027 D-004, the source's existing order governs and the published form moves to match it | T-005 |\n| S-028 D-005, resolve one-sided content and change no content beyond that | T-005 |\n| S-029 D-006, affordance preservation is accepted by review rather than by an automated check | T-011, R-009 |\n| S-030 the existing parity and dependency-footprint tests bound what the reconciliation may drop | T-005, A-007 |\n| S-031 exclusions X-001 to X-007 bound the change | Scope, Out of Scope |\n| S-032 fourteen acceptance criteria decide this change, each naming its verification method | T-001, T-022 |\n| S-033 SGC-1, fact-stating published-form wording is authored content and merges into the source | T-006 |\n| S-034 SGC-1, label-only or route-only published-form strings are derived presentation and are dropped | T-006 |\n| S-035 SGC-1, every drop is recorded and ambiguous items escalate rather than being decided by the implementer | T-006, T-008, A-005 |\n| S-036 SGC-1, the footer source statement folds into the generated banner rather than being merged twice | T-006, T-017 |\n| S-037 SGC-2, the raw-markup-line measure is defined as a rule an independent reviewer can apply | T-012, T-014 |\n| S-038 SGC-2, the anchor criterion governs over the markup-count criterion, which is reported rather than enforced | T-012, T-014 |\n| S-039 SGC-3, anchor notation is answered explicitly over the fixed set the published file exposes today | T-009, T-010, T-011 |\n| S-040 SGC-4, the instruction is corrected in the parity test docstring, `README.md`, and the handbook's maintenance material | T-018, A-009, A-010 |\n| S-041 SGC-4, committed change proposals and run evidence are outside this criterion's reach | T-018, Scope, Out of Scope |\n| S-042 SGC-5, the resolution list is persisted as a named implementation-phase artifact | T-007 |",
+        "digest": "sha256:df306fbe0d2396291bd45a8702fbb9c4",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change this agent designs against: a change request, a feature request, or a business intent. Without one there is no requested change to design, and designing anyway would mean inventing the requirement."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-4c51600606df/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-05T05:23:05Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+        "supplies": null
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+        "supplies": null
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:ea8b3b5e9812546f9b4054458bb8143e",
+    "input_digest": "sha256:916928da1e2ad4f0df64d042bfe46181",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-06-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-06-feature-request.md",
+        "digest": "sha256:5965b9107e59775c3f70f54b0b8609f7"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-4c51600606df/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-4c51600606df/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:df306fbe0d2396291bd45a8702fbb9c4"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "memory/architecture.md",
+      "runtime/README.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-4c51600606df/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+      "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/review-package-*.md"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-4c51600606df/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      },
+      {
+        "artifact": "review-package.md",
+        "template_ref": "templates/review-package.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "Emitted only for review-pull-request/structural-compliance, where this agent applies the structural and security lens and the findings are classified under the architecture and security categories. runtime/review_package_validator.py already contracts this agent as a permitted producer of review-package.md; the quality rules it applies to the structural lens are the ones in quality.md.",
+        "artifact_path_glob": "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/review-package-*.md",
+        "naming": "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/review-package-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-09-05T05:23:05Z"
+}

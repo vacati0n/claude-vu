@@ -1,0 +1,434 @@
+{
+  "invocation_id": "inv-919c5d5cf156-04-002",
+  "run_id": "run-919c5d5cf156",
+  "work_item_id": "run-919c5d5cf156::implementation",
+  "idempotency_key": "sha256:fe4d53d6909162452dddc2e40e8dd3d8",
+  "state_id": "implementation",
+  "phase_index": 4,
+  "agent_id": "omn-dev-1-implement",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-1-implement.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-1-implement/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-1-implement/system.md",
+      "agents/omn-dev-1-implement/identity.md",
+      "agents/omn-dev-1-implement/reasoning.md",
+      "agents/omn-dev-1-implement/execution.md",
+      "agents/omn-dev-1-implement/output.md",
+      "agents/omn-dev-1-implement/quality.md",
+      "agents/omn-dev-1-implement/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-1-implement/system.md": "sha256:19e8b4ae2aad6df4dcc5eb87cc91bcf7",
+      "agents/omn-dev-1-implement/identity.md": "sha256:ebe0b5ca1ba82d21b3df7312fa4853d0",
+      "agents/omn-dev-1-implement/reasoning.md": "sha256:fb032135e8e341d27c379ed77e24ce30",
+      "agents/omn-dev-1-implement/execution.md": "sha256:15bf2b877bf250004448048ebb3a07a8",
+      "agents/omn-dev-1-implement/output.md": "sha256:fecdb2dbe3e74ede307e80b8441a0acf",
+      "agents/omn-dev-1-implement/quality.md": "sha256:7b8a9362ce6a01d63ab8a5f7761c66af",
+      "agents/omn-dev-1-implement/examples.md": "sha256:5265c7bf5b7d869c9aa34ffe83bfd547"
+    },
+    "capabilities": [
+      "implementation-delivery"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S03",
+        "proficiency": "Primary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Primary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "technical-design",
+      "bug-analysis",
+      "test-baseline-record",
+      "execution-plan",
+      "coding-standards",
+      "architecture-decision-record",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context",
+      "regression-targets",
+      "parity-checklist",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-04-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-04-feature-request.md",
+        "text": "# Feature Request \u2014 CKA-04: Content-contract tests over governance prose\n\n## Source\n\nTicket CKA-04 in the adoption backlog under `docs/` (Epic A \u2014 Verification baseline,\nDays 0\u201330). Source recommendation: R5 of the ClaudeKit Adoption Review (2026-08-27).\nType: Task. Priority: High. Effort: S. Depends on: nothing (lands with or before CKA-03,\nwhich is already delivered as `.github/workflows/verify.yml`).\n\n## Request\n\nThe runtime depends on structural properties of governance prose that nothing pins today.\n`framework_runtime.py` reads gate ownership from `workflows/workflow-gate-matrix.md` and\nenforces the Producer Exclusion Rule through `producer_aliases()`; a prose edit that leaves\na gate row owned only by its producing role (through any alias) creates an undecidable gate\nand no test notices. Superseded agent specifications (`agents/architect.md`,\n`agents/planner.md`) carry their supersession marker in their first heading; a rewrite that\ndrops it silently revives a dead contract. Agent contract modules must never carry coercive\nauto-chain language (the claudekit failure mode: contract prose instructing an agent to\nproceed past approval gates automatically), and the four orphaned root governance docs\n(`working-memory.md`, `rule-engine.md`, root `quality-gates.md`, `decision-matrix.md`) are\nreceiving `Status:` banners under CKA-05 that must then be impossible to drop.\n\nDeliverable: a new `tests/test_content_contracts.py` (stdlib `unittest`, discovered by the\nCKA-03 CI test surface with no config change) asserting structure the code depends on:\n\n1. Every `workflow-gate-matrix.md` gate row names at least one owner outside\n   `producer_aliases(producer)` for the phase's producing agent \u2014 i.e. no row is\n   producer-only under the Producer Exclusion Rule's alias reading.\n2. Superseded agent files carry their status marker on line 1.\n3. The four root governance docs carry a `Status:` banner (the CKA-05 coupling: this\n   check must be authored now and must be green on the current tree \u2014 the scope decision\n   on how to satisfy that coupling belongs to scope-and-acceptance; the backlog offers\n   two admissible resolutions: land the four CKA-05 banners in this change, since CKA-05\n   is S-effort, dependency-free, and its own acceptance criterion is \"present and pinned\n   by CKA-04\", or gate the check so it activates when the first banner lands).\n4. No agent contract module under `agents/*/` matches coercive auto-chain patterns\n   (e.g. instructions to skip, bypass, or auto-approve a gate, or to proceed without\n   approval).\n\nAssert on structure (table cells, first-line markers), not sentences, so wording edits\nthat preserve structure stay free.\n\n## Acceptance criteria (from the ticket, verbatim)\n\n- Mutating a fixture gate matrix to a producer-only owner row fails a test.\n- Suite runs green against current tree once CKA-05 lands.\n\n## Constraints\n\n- Additive change only: the ticket list forbids altering `record_gate_decision`, the\n  gate matrix semantics, producer exclusion, `runner._require_approval`, or any\n  human-block path. This ticket adds tests (and, if scoped in, four status banners);\n  it changes no runtime behavior.\n- Assertions bind to structure the code reads, not to prose wording.\n- Definition of done for every ticket in the backlog: `tests/` green, all `verify_*.py`\n  proof scripts PROVEN, no change to gate-decision behavior, and where docs were\n  touched, `user-guide.html` updated to match.\n\n## Priority and deadline\n\nHigh priority; Phase 1 (Days 0\u201330) of the adoption plan. CKA-16 (anti-rationalization\ntables) later extends this suite, and CKA-05's acceptance criterion is pinned by it.",
+        "digest": "sha256:f63a8c3a43a79d5c0d1f218ebe85bbf6"
+      },
+      {
+        "type": "technical-design",
+        "reference": "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+        "text": "```yaml\ndesign:\n  designId: CKA-04-technical-design\n  changeReference: CKA-04\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/cka-04-feature-request.md\n    - type: execution-plan\n      reference: runs/run-919c5d5cf156/states/execution-planning/artifacts/execution-plan.md\n  producedBy: architect\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  decisionRecords: [D-001, D-002]\n  consumesPlan: runs/run-919c5d5cf156/states/execution-planning/artifacts/execution-plan.md\n  inputDigest: sha256:fd43d81cf214d0cc30a94bbd85127376\n  contextDigest: sha256:ea8b3b5e9812546f9b4054458bb8143e\n```\n\n## Metadata\n\n- Feature or Change ID: CKA-04\n- Author: architect\n- Reviewers: omn-tech-lead (Design Gate accepting owner), omn-qa\n- Last Updated: 2026-09-04\n\nStatements `S-001` through `S-020` are normalized from the supplied inputs and are listed\nin the appendix beneath Sign-off. Plan task identifiers `T-001` through `T-008` belong to\nthe supplied execution plan and are cited as consumers of this design, never created here.\nWhere this package refers to identifiers inside the supplied plan, it says \"the plan's\"\nexplicitly (for example \"the plan's Q-001\") so the plan's registers and this package's\nregisters cannot be confused.\n\n## Objective\n\nDesired structural outcome: every structural property of governance prose that the runtime\nreads becomes a pinned, executable invariant in the repository test suite, bound to the\nsame code paths the runtime itself uses, so that a prose edit which breaks such a property\nfails verification before it lands.\n\nArchitectural objectives:\n\n- The gate-decidability property \u2014 no gate row resolvable only to its producer's alias set\n  \u2014 is pinned by a check that consumes the runtime's own alias and matrix readers, so the\n  pinned property and the enforced property cannot diverge. Traces to S-002, S-003, S-008,\n  S-013, S-019.\n- Governance-document status markers become machine-asserted structural invariants: the\n  line-1 supersession marker on superseded agent specifications, and the one-line `Status:`\n  banner on the four root governance documents. Traces to S-004, S-006, S-009, S-010,\n  S-020.\n- Agent contract prose acquires a machine-decidable safety invariant: absence of coercive\n  auto-chain instruction, discriminated structurally from prohibition and declarative\n  phrasing that legitimately uses the same verbs. Traces to S-005, S-011, S-018.\n- The verification surface is purely additive: one new test module, four one-line banner\n  additions, zero change to any runtime behavior surface or CI configuration, and every\n  assertion bound to structure rather than wording. Traces to S-007, S-012, S-015.\n\nIn structural scope: one new test module in the repository test suite; one banner line on\neach of the four root governance documents; a read-only import binding from the test suite\nto four existing runtime reader functions; hermetic negative fixtures.\n\nOut of structural scope: any change to `record_gate_decision`, the gate-matrix semantics,\n`producer_aliases`, `runner._require_approval`, or any human-block path (S-015); any CI\nconfiguration change (S-007); any assertion bound to sentence wording (S-012); any content\nchange to the four root documents beyond the single banner line (S-010); the\nanti-rationalization checks the backlog assigns to CKA-16 (S-017); rewiring of the\n`omn-architect` alias references in governance prose, which F-011 records as a deferred\nmigration.\n\n## Requirements Summary\n\nFunctional requirements:\n\n- A content-contract check module exists at `tests/test_content_contracts.py`, on the\n  standard-library unit-test framework, discovered by the existing CI verification surface\n  with zero configuration change (S-007).\n- Check 1: every gate row in `workflows/workflow-gate-matrix.md` names at least one owner\n  outside `producer_aliases(producer)` for the phase's producing agent (S-008).\n- Check 2: the superseded agent specifications carry their status marker on line 1 (S-009).\n- Check 3: each of the four root governance documents carries the one-line `Status:` banner\n  (S-010, S-020).\n- Check 4: no agent contract module under `agents/*/` matches the coercive auto-chain\n  pattern inventory (S-011), without flagging prohibition phrasing (S-018).\n\nNon-functional requirements:\n\n- Structure-only binding: assertions target table cells, first-line markers, banner lines,\n  and pattern structure, never sentence wording, so structure-preserving rewording stays\n  free (S-012).\n- Detection with zero false alarms on the accepted tree: each negative fixture fails at\n  least one check, and the current tree with the banners landed yields zero failures\n  (S-013, S-014).\n- Additive-only delivery with no runtime behavior change (S-015).\n\nAcceptance intent: as supplied verbatim by the ticket and carried by the approved plan \u2014\na fixture gate matrix mutated to a producer-only owner row fails a test, and the suite runs\ngreen against the tree once the banners land (S-013, S-014). The plan's acceptance criteria\n1 through 5 are cited, not restated.\n\n## Current-State Assumptions and Constraints\n\n### 4.1 Facts\n\n| ID | Fact | Established by |\n|---|---|---|\n| F-001 | `producer_aliases(agent_id)` is defined in `runtime/framework_runtime.py` (function at line 1265) and returns the identifier itself, its `omn-` prefixed form, and \u2014 when the identifier already carries the `omn-` prefix \u2014 its de-prefixed form | `runtime/framework_runtime.py`, verified in the frozen context snapshot |\n| F-002 | `workflows/workflow-gate-matrix.md` carries one three-cell table row per workflow, gate, and required-owners triple, and states the Producer Exclusion Rule, including that the rule reads through role aliases | `workflows/workflow-gate-matrix.md` |\n| F-003 | All eight active workflow specifications under `workflows/` carry a Phase Model table with the header columns Phase, Owner Agent, Participation, Input, Output Artifact, Gate, and Required Skills; a Gate cell may carry several comma-separated gate names or `none` | the eight workflow specification files; `runtime/framework_runtime.py` (`phase_gates`, line 1257) |\n| F-004 | The runtime exposes importable readers for exactly these structures: `parse_gate_matrix(workflow_id)` (line 1238) reads gate ownership from the matrix; `parse_phase_model(workflow_spec_rel)` (line 754) reads a workflow's Phase Model table; `resolve_workflow` (line 740) resolves a workflow record | `runtime/framework_runtime.py` |\n| F-005 | `agents/architect.md` and `agents/planner.md` each carry `(Superseded)` inside their line-1 level-1 heading | `agents/architect.md` line 1; `agents/planner.md` line 1 |\n| F-006 | The four root governance documents `working-memory.md`, `rule-engine.md`, `quality-gates.md`, and `decision-matrix.md` sit at the repository root, outside the framework payload directory, and currently carry no `Status:` banner | the four files, first lines inspected |\n| F-007 | Agent contract modules under `agents/*/` currently contain prohibition and declarative phrasing using the same verbs the coercive inventory targets: \"must not bypass architecture, product, security, or quality governance\" (`agents/architect/identity.md`, line 192); \"must not bypass the gates defined in `workflows/workflow-gate-matrix.md`\" (`agents/omn-dev-1-implement/identity.md`, line 181; `agents/omn-product-owner/identity.md`, line 173); \"must not bypass product, architecture, or quality gates\" (`agents/planner/identity.md`, line 180); \"Emitting `Accepted` bypasses the Design Gate and is forbidden\" (`agents/architect/reasoning.md`, line 219); \"bypasses the Design Gate, which the contract forbids bypassing\" (`agents/architect/examples.md`, line 627); \"forbids bypassing architecture decision ownership\" (`agents/omn-business-analyst/quality.md`, line 111) | the cited module files |\n| F-008 | The CI verification workflow `.github/workflows/verify.yml` runs the unit-test suite by the test framework's own discovery over `tests/`, on two platforms, and its contract text states that adding a `tests/test_*.py` file is picked up with no CI or blocking-configuration change; proof scripts matching `verify_*.py` are located by discovery, not curation | `.github/workflows/verify.yml` |\n| F-009 | The repository test convention is: standard-library unit-test modules under `tests/`, hermetic, anchoring the repository root from the test file's own path, extending the module search path with the runtime directory, and importing runtime modules directly (`framework_runtime`, `state_engine`); hermetic runs redirect the framework root to a temporary tree | `tests/test_gate_policy.py` |\n| F-010 | The Planning Gate record supplies: the requirement that this design fix the coercive-pattern inventory and demonstrate discrimination from prohibition phrasing (the plan's R-005, closing the plan's Q-001); the requirement that the alias reading bind to the importable `producer_aliases()` rather than a reimplementation (the plan's R-006); and the banner definition under CKA-05 \u2014 the exact line `Status: specification \u2014 not implemented`, each banner cross-linking its executable counterpart: `workflows/workflow-gate-matrix.md` for `quality-gates.md` and `decision-matrix.md`, and `runtime/recovery_policy.py` together with the run-state model for `rule-engine.md` and `working-memory.md` (closing the plan's second open question, on the banner definition) | Planning Gate conditions recorded in the dispatch for this phase |\n| F-011 | The gate matrix names `omn-architect` in rows whose evidence the executable agent `architect` produces, and records that the two identifiers name one role, with reference migration deferred | `workflows/workflow-gate-matrix.md` |\n\n### 4.2 Assumptions\n\n| ID | Assumption | Why needed | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | Adding one banner line to each of the four root governance documents alters no structural property any other consumer reads from them (the request describes the documents as orphaned) | The additive-only constraint C-001 must hold for the banner additions | Banner placement is reworked and the affected consumer is repaired; the check itself is unaffected | omn-dev-2-reviewer |\n| A-002 | Every gate-matrix row belonging to an active workflow is named by at least one Phase Model row of that workflow, so check 1 can resolve a producing agent for every row; a row named by no Phase Model row is inert to the runtime | Check 1 derives the producer from the Phase Model, which is the only declared producer source | Inert rows exist; check 1 records them as skipped (D-005) and the producer-only property is unpinned for those rows only | omn-tech-lead |\n| A-003 | The Design Gate accepts the seven-family coercive inventory in D-002 as the complete closure of the plan's Q-001, with further widening deferred to CKA-16 | The check's fixtures and the current-tree green criterion are authored against a fixed inventory | Inventory and fixture rework under the plan's R-001; no structural change to the approach | omn-tech-lead |\n| A-004 | `user-guide.html` exists as the user documentation surface the definition of done names, and may reference the four touched documents | C-008 requires documentation consistency for touched documents | The documentation obligation reduces to a recorded no-impact review under the plan's T-008 | omn-documentation |\n\n### 4.3 Constraints\n\n| ID | Class | Constraint | Hard or negotiable | Source |\n|---|---|---|---|---|\n| C-001 | structural | Additive change only: no alteration to `record_gate_decision`, the gate-matrix semantics, `producer_aliases`, `runner._require_approval`, or any human-block path; no runtime behavior change | Hard | S-015 |\n| C-002 | structural | The deliverable is `tests/test_content_contracts.py` on the standard-library unit-test framework, discovered by the existing CI surface with zero CI configuration change | Hard | S-007, F-008 |\n| C-003 | structural | Every assertion binds to structure \u2014 table cells, first-line markers, banner lines, pattern structure \u2014 never to sentence wording | Hard | S-012 |\n| C-004 | functional | Each negative fixture yields at least one failing check, and the current tree with the four banners landed yields zero failing checks | Hard | S-013, S-014 |\n| C-005 | structural | Check 1's alias reading is the imported `producer_aliases()` from `runtime/framework_runtime.py` \u2014 the same source the runtime reads \u2014 never a reimplementation | Hard | S-019, F-001 |\n| C-006 | functional | The coercive-language check must not flag the prohibition and declarative phrasing present in current agent contract modules | Hard | S-018, F-007 |\n| C-007 | migration | The banner is exactly the one line `Status: specification \u2014 not implemented`, placed in each document's preamble, with the document's executable counterpart cross-linked as F-010 defines | Hard | S-020, F-010 |\n| C-008 | operability | Definition-of-done evidence: test suite green, all proof scripts PROVEN, and `user-guide.html` consistent with touched documents or a recorded no-impact review | Negotiable | S-016 |\n\n## Architecture and Component Design\n\n### 5.1 Impacted Modules\n\n| ID | Module | Impact type | Basis | Interfaces affected | Confidence |\n|---|---|---|---|---|---|\n| M-001 | `tests/test_content_contracts.py` (new test module) | extension | F-009, F-008 | Test discovery surface; read-only import of four runtime readers | confirmed |\n| M-002 | `runtime/framework_runtime.py` \u2014 `producer_aliases`, `parse_gate_matrix`, `parse_phase_model`, `phase_gates` | no-change-verified | F-001, F-004 | None changed; the four functions gain a read-only test consumer | confirmed |\n| M-003 | `working-memory.md` (repository root) | extension | F-006, F-010 | One banner line added to the preamble | confirmed |\n| M-004 | `rule-engine.md` (repository root) | extension | F-006, F-010 | One banner line added to the preamble | confirmed |\n| M-005 | `quality-gates.md` (repository root) | extension | F-006, F-010 | One banner line added to the preamble | confirmed |\n| M-006 | `decision-matrix.md` (repository root) | extension | F-006, F-010 | One banner line added to the preamble | confirmed |\n| M-007 | `workflows/workflow-gate-matrix.md` | no-change-verified | F-002 | None; read by check 1 through `parse_gate_matrix` | confirmed |\n| M-008 | Workflow specifications under `workflows/` (eight Phase Model tables) | no-change-verified | F-003 | None; read by check 1 through `parse_phase_model` as the producer source | confirmed |\n| M-009 | `agents/architect.md` and `agents/planner.md` | no-change-verified | F-005 | None; line 1 read by check 2 | confirmed |\n| M-010 | Agent contract modules under `agents/*/` | no-change-verified | F-007 | None; scanned read-only by check 4 | confirmed |\n| M-011 | `.github/workflows/verify.yml` | no-change-verified | F-008 | None; the new module is picked up by existing discovery | confirmed |\n| M-012 | `user-guide.html` | extension | A-004 | Documentation reconciliation for the banner additions, or a recorded no-impact review | speculative |\n\nM-002, M-007, M-008, M-009, M-010, and M-011 are recorded as `no-change-verified` because a\nreader would reasonably expect each to change in a change about gate decidability, CI, and\ngovernance prose; each was examined and is only read, never modified (C-001, C-002). The\nboundary the design crosses is the existing tests-to-runtime import boundary, already\nestablished by F-009; no new dependency direction is introduced.\n\n### 5.2 Options Considered\n\nEvaluation criteria in fixed order: (1) hard constraint satisfaction; (2) impact surface,\ncounted as modules with contract-change or dependency-change; (3) reuse leverage, counted\nas capabilities satisfied by reuse-as-is or reuse-extended in section 7; (4) quality\nattributes C-003, C-004, C-006; (5) migration burden, counted as contract-affecting changes\nneeding a transition; (6) operability.\n\n| Option | Structural change | Hard constraints | Impact surface | Reuse leverage | Quality attributes | Migration burden | Operability | Outcome |\n|---|---|---|---|---|---|---|---|---|\n| O-001 | One test module binding by import to the runtime's own readers (`producer_aliases`, `parse_gate_matrix`, `parse_phase_model`, `phase_gates`); hermetic negative fixtures in temporary trees; structural coercive-pattern discriminator local to the module | All satisfied | 0 | 6 of 7 | C-003, C-004, C-006 satisfied by design | 0 | No new runtime or CI surface | Selected |\n| O-002 | Self-contained test module reimplementing the matrix, Phase Model, and alias parsing locally, with no runtime import | Violates C-005 | 0 | 3 of 7 | C-004 at risk: alias drift can silently unpin the property | 0 | None | Eliminated on C-005 |\n| O-003 | New runtime helper module hosting the check logic, with a thin test module delegating to it | All satisfied | 0 | 5 of 7 | Same as O-001 | 0 | Widens the runtime module set for a capability the test suite already hosts | Not selected |\n\n### 5.3 Selected Approach\n\nSelected: O-001.\n\nStructural change: one new test module, `tests/test_content_contracts.py`, following the\nestablished hermetic convention (F-009). It imports four existing runtime readers and\nasserts four properties. Check 1 resolves, for every active workflow, each Phase Model row's\nproducing agent and gate names through `parse_phase_model` and `phase_gates`, resolves the\ngate's owners through `parse_gate_matrix`, asserts that every Phase-Model-named gate is\npresent in the matrix, and asserts that the owner set minus `producer_aliases(producer)` is\nnon-empty (D-001). Check 2 asserts that line 1 of each enumerated superseded specification\nis a level-1 heading containing the `(Superseded)` token. Check 3 asserts, for each of the\nfour root documents, the presence of the exact banner line and of the counterpart reference\nin the document preamble (D-003). Check 4 scans every module file under `agents/*/` with the\nseven-family coercive inventory and its two-part structural discriminator (D-002). Negative\nfixtures are hermetic mutated copies in temporary trees (D-004). The four banner lines land\nin the same change, in the pinned form, and the banner check is unconditional (C-007, the\nscope decision already approved upstream).\n\nRationale: O-001 is the only option that satisfies C-005 while adding no structure beyond\nthe deliverable itself. It carries the highest reuse leverage, and it makes the pinned\nproperty definitionally identical to the enforced property: the check reads gate ownership,\nPhase Models, and aliases through the very functions the runtime executes, so the check and\nthe runtime cannot disagree about what the prose means.\n\nHighest-scoring rejected alternative and why it lost: O-003, hosting the check logic in a\nnew runtime helper module. It lost despite satisfying every hard constraint and keeping the\ntest module thin, because it introduces a structural component for a capability the test\nsuite already provides (section 7, hosting row), scores lower on reuse leverage, and widens\nthe runtime surface that maintainers and validators must track, for no gain in any recorded\ncriterion.\n\nTradeoffs accepted: the import binding couples the test suite to the names and signatures of\nfour runtime functions; a future rename breaks the suite loudly (R-002). That coupling is\nthe point \u2014 C-005 exists because a silent divergence is worse than a loud break. Second, the\ncoercive discriminator favors precision over recall: declarative and negated forms never\nmatch, so a coercive instruction phrased declaratively would evade check 4 (R-001 records\nthe residual; CKA-16 is the designated widening vehicle per S-017).\n\n### 5.4 Decisions\n\n| ID | Decision | Architecture-significant | Record |\n|---|---|---|---|\n| D-001 | Check 1 binds to the runtime's own readers by import \u2014 `producer_aliases`, `parse_gate_matrix`, `parse_phase_model`, `phase_gates` \u2014 with the producing agent resolved from the Phase Model Owner Agent cell; no alias or parsing logic is reimplemented | Yes | ADR D-001, status Proposed |\n| D-002 | The coercive auto-chain inventory is fixed at seven pattern families \u2014 the four enumerated formulations plus three adjacent ones \u2014 matched only under a two-part structural discriminator: an imperative-or-positive-modal mood filter and a clause-bounded negation guard | Yes | ADR D-002, status Proposed |\n| D-003 | Banner structural form: the exact line `Status: specification \u2014 not implemented` in the document preamble (before the first section heading), with the counterpart file reference asserted as a preamble substring \u2014 `workflows/workflow-gate-matrix.md` for M-005 and M-006, `runtime/recovery_policy.py` for M-003 and M-004; the accompanying \"run-state model\" phrasing from F-010 is carried as unasserted prose so the assertion stays decidable | No | Inline; the text is supplied verbatim by F-010, leaving only placement and assertion form |\n| D-004 | Negative fixtures are hermetic: mutated copies of governance files in temporary framework trees or in-memory content, reusing the established temporary-root pattern (F-009); no mutated governance file is committed | No | Inline; follows the existing test convention without structural choice |\n| D-005 | A gate-matrix row whose gate no Phase Model row names is inert to the runtime; check 1 records it as skipped with its identity, and separately asserts that every Phase-Model-named gate resolves in the matrix | No | Inline; consequence of the runtime's declared producer source (F-003, F-004) |\n| D-006 | Check 4's scan scope is exactly the module files under `agents/*/`, as the request specifies; the top-level `agents/*.md` files are covered by check 2 only | No | Inline; scope follows S-011 verbatim |\n\n## API and Data Model Impact\n\nNone identified. No module in 5.1 carries a contract-change or dependency-change impact\ntype: the change adds one test module and four one-line prose banners, and modifies no\nexternally visible interface, schema, or data model (C-001). No data migration exists.\n\nOne compatibility note is recorded for the Design Gate's attention: the import binding in\nD-001 makes the names and signatures of the four runtime readers load-bearing for the test\nsuite (M-001, M-002). This is a new inbound expectation, not a contract change \u2014 the\nfunctions themselves are unmodified \u2014 and its failure mode is a loud import or call failure\nin CI, which is the intended detection behavior. R-002 records it. Rollback position for\nthe change as a whole is stated in the Delivery Plan.\n\n## Reusable Components and Reuse Rationale\n\n| Capability | Candidate | Outcome | Rationale |\n|---|---|---|---|\n| Alias semantics for producer exclusion | `producer_aliases` in `runtime/framework_runtime.py` | reuse-as-is | F-001; C-005 mandates the same source the runtime reads; reimplementation is the divergence the plan's R-006 names |\n| Gate ownership parsing | `parse_gate_matrix` in `runtime/framework_runtime.py` | reuse-as-is | F-004; the check reads ownership exactly as the runtime does, so parse drift is impossible |\n| Phase Model and gate-cell parsing | `parse_phase_model` and `phase_gates` in `runtime/framework_runtime.py` | reuse-as-is | F-003, F-004; the producer source for check 1 is the same table the Task Router reads |\n| Test execution and CI discovery | Existing verification workflow surface | reuse-as-is | F-008; a new `tests/test_*.py` module is picked up with no CI or blocking-configuration change |\n| Hermetic fixture construction | Temporary framework-tree pattern in `tests/test_gate_policy.py` | reuse-extended | F-009; the same root-redirect approach is extended to carry mutated gate-matrix and governance-document copies |\n| Check logic hosting | The test module itself, under the `tests/` convention | reuse-as-is | F-009; the suite already hosts self-contained checks with local helpers; a new runtime helper (O-003) was evaluated and not selected |\n| Coercive-pattern scanning with mood and negation discrimination | None | none-found | Search basis: the `tests/` module set (F-009 file inventory) and the runtime module set in the frozen context (`runtime/README.md`, `runtime/framework_runtime.py`, the validator modules); no existing content-scanning or linguistic-pattern utility exists. This licenses the only new logic in the design, local to M-001 per D-002 |\n\n## Operational Considerations\n\nLogging and observability: the checks surface through the existing per-platform test check\nnames in the CI verification workflow (M-011, F-008); each check failure names the file and\nthe violated property in its assertion message so a maintainer can act without reading the\ntest source. Check 1 additionally reports any row skipped under D-005, keeping A-002's\nresidual visible (M-007).\n\nError handling strategy: failure modes are deliberately loud and early. A renamed or\nre-signatured runtime reader fails at import or call time rather than passing vacuously\n(M-002, R-002); a gate named by a Phase Model but absent from the matrix fails check 1\nexplicitly rather than being skipped (D-005); an empty scan set (no files matched under\n`agents/*/`) is itself a failure, so path drift cannot silently disable check 4 (M-010).\n\nSecurity considerations: check 4 is itself a governance-safety control \u2014 it pins the\nabsence of coercive auto-chain instruction in agent contracts, the failure mode the request\nidentifies (S-005, S-011, C-006, M-010). The suite reads repository files only, executes no\nscanned content, and requires no secrets or elevated access; the CI jobs it runs under\ncarry read-only repository permissions (F-008, M-011).\n\nPerformance considerations: no performance constraint or quality attribute is recorded for\nthis change (section 4.3); the suite performs bounded file reads and pattern matching over\na fixed document set, within the existing test-suite execution budget (C-002, M-001). No\nperformance claim beyond that is made.\n\nDeployment and operability impact: none beyond CI \u2014 the change ships no runtime behavior\n(C-001). The one durable operational obligation is documentation consistency for the four\ntouched documents (C-008, M-012).\n\n## Delivery Plan\n\n### Sequencing Constraints\n\n| ID | Constraint | Modules | Prerequisites | Reason | Binds |\n|---|---|---|---|---|---|\n| P-001 | The structural forms this design fixes \u2014 the banner line text and placement (D-003), the seven-family inventory and discriminator (D-002), and the import binding (D-001) \u2014 are accepted at the Design Gate | M-001, M-003, M-004, M-005, M-006 | none | Both the test module and the banners bind to the same fixed forms; landing either against unaccepted forms forces coordinated rework. Acceptance completes the plan's T-001, and D-003 carries the confirmed banner text the plan's T-003 established (F-010) | T-001, T-002, T-003, T-004, T-007 |\n| P-002 | The import of the four runtime readers is confirmed to work under the hermetic temporary-root pattern before the four checks and their fixtures are authored against it | M-001, M-002 | P-001 | Verification of a boundary precedes work that assumes the boundary holds; if root redirection does not govern `parse_gate_matrix` reads, the fixture strategy (D-004) changes | T-002 |\n| P-003 | The four banner lines exist on the root documents in the pinned form no later than the unconditional banner check enters the tree, in one change | M-003, M-004, M-005, M-006, M-001 | P-001 | An unconditional check without the banners is red on the tree, violating C-004 | T-004, T-006 |\n| P-004 | The coercive scan's zero-match result over the current agent contract modules is demonstrated, with the F-007 instances shown excluded by the discriminator, before the suite gates CI | M-010, M-001 | P-001, P-002 | An unproven discriminator that turns the tree red blocks every consumer of CI (C-006, C-004) | T-002, T-006 |\n| P-005 | Every negative-fixture demonstration \u2014 producer-only owner row, dropped line-1 marker, removed banner line, coercive-form fixture per family \u2014 executes and fails before green status is claimed | M-001 | P-002, P-003, P-004 | Green without demonstrated detection proves nothing; C-004 requires both halves, and the plan's T-005 review consumes these demonstrations as constraint-compliance evidence | T-005, T-006, T-007 |\n| P-006 | Documentation consistency for the four touched documents is established after the banners land | M-012 | P-003 | The documentation obligation (C-008) reconciles against landed content, not intended content | T-008 |\n\n### Test Strategy Focus Areas\n\nFor omn-qa: alias reading in both directions for check 1 (a producer-only fixture using the\n`omn-` prefixed alias of the producing agent, and one using the de-prefixed form);\ndiscriminator precision for check 4 (prohibition phrasing and declarative-consequence\nphrasing from F-007 must not match; one coercive-form fixture per family in D-002 must\nmatch); exactness of the banner assertion including the em dash in the pinned line (C-007);\nD-005 behavior (a Phase-Model-named gate absent from the matrix fails; an inert matrix row\nis reported skipped); a structure-preserving reword of one governed document yielding zero\nfailures (C-003); and CI discovery evidence taken from the run record rather than local\nexecution (C-002).\n\n### Rollout and Rollback\n\nRollout: the test module, its fixtures, and the four banner lines land as one additive\nchange, ordered by P-001 through P-005; nothing activates gradually because nothing changes\nruntime behavior (C-001).\n\nRollback: reverting the change removes the test module and the four banner lines and\nrestores the prior tree exactly; no data, contract, or runtime state is affected. Partial\nrollback of the banners alone is not viable while the unconditional check remains (P-003\ncouples them); rollback is therefore of the whole change.\n\n## Risks and Mitigations\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | structural | Prose added to an agent contract module \u2014 or an existing declarative form outside the F-007 instances \u2014 matches a coercive family despite the discriminator | The suite turns red on an accepted tree, blocking CI for unrelated changes, and eroding trust in check 4 | medium | D-002, M-010 | P-004 demonstrates current-tree zero-match with the F-007 exclusions itemized; the discriminator's mood filter and negation guard are documented in the module for maintainers; A-003 fixes the inventory so widening is deliberate, not incidental | architect |\n| R-002 | contract | A future rename or signature change of `producer_aliases`, `parse_gate_matrix`, `parse_phase_model`, or `phase_gates` | The suite fails loudly at import or call time; CI blocks until the binding is repaired | low | M-002, D-001 | Accepted coupling: the failure is explicit and local, which is the safe direction relative to silent divergence (the plan's R-006); repair is a one-point rebinding | omn-tech-lead |\n| R-003 | delivery | CI discovery behavior deviates from F-008 (path, packaging, or platform difference) and the new module is not executed | The four properties are pinned locally but unenforced in CI | low | M-011, M-001, P-005 | The plan's T-006 verifies execution from the CI run record; deviation escalates to the delivery owner as a constraint conflict against C-002 | omn-tech-lead |\n| R-004 | migration | The landed banner text or placement diverges from the pinned constant \u2014 em-dash encoding, casing, or placement outside the preamble \u2014 or the banner line disturbs structure some consumer reads (A-001 false) | The banner check is red on the tree, failing C-004, or a hidden consumer breaks | medium | M-003, M-004, M-005, M-006, P-003 | C-007 fixes one authoritative string and D-003 fixes placement; P-005 demonstrates the check against the landed lines; the plan's T-005 review inspects all four documents | omn-dev-1-implement |\n| R-005 | structural | A gate-matrix row named by no Phase Model row carries a producer-only owner set (the harmful direction of A-002) | The producer-only property is unpinned for that row; the row is inert today but could be joined by a future Phase Model edit | low | M-007, D-005 | Check 1 reports skipped rows by identity so the set is visible in every run; the matrix-presence assertion covers the opposite, decidability-breaking direction | omn-tech-lead |\n| R-006 | operability | The banners land and `user-guide.html` is not reconciled, or A-004 is false | The definition-of-done evidence C-008 is unmet at closure | low | M-012, P-006 | The plan's T-008 requires either the updated guide or a recorded no-impact review | omn-documentation |\n\nAssumption-to-risk coverage: A-001 and the banner form are carried by R-004; A-002 by\nR-005; A-003 by R-001; A-004 by R-006. The single speculative impact, M-012, is carried by\nR-006.\n\n## Estimate and Confidence\n\nOverall: `S` (confidence: medium).\n\nBreakdown:\n\n- P-001: complete with this package and its two decision records; no residual effort.\n- P-002: `XS` \u2014 confirming the import binding under the hermetic pattern; the pattern and\n  the functions are both established (F-004, F-009).\n- P-003: `XS` \u2014 four one-line additions in a pinned form.\n- P-004: `S` \u2014 the discriminator is the only genuinely new logic; its current-tree\n  demonstration carries the design's main uncertainty.\n- P-005: `S` \u2014 one negative fixture per pinned property plus one per coercive family.\n- P-006: `XS` \u2014 documentation reconciliation or a recorded no-impact review.\n\nScope assumptions: the seven-family inventory of D-002 is the accepted closure of the\nplan's Q-001 (A-003); the banner work is exactly four documents in the pinned form (C-007);\nno CKA-16 content is included (S-017); no runtime module changes (C-001).\n\nUncertainty drivers: confidence is held at medium rather than high because M-012 is\nspeculative (A-004) and because R-001 \u2014 discriminator precision against future prose \u2014 is a\nproperty of text not yet written, which no current-tree demonstration can fully retire.\n\n## Open Decisions and Escalations\n\n| ID | Question | Blocking | Owner | Affects | Consequence |\n|---|---|---|---|---|---|\n| Q-001 | Does the Design Gate accept the seven-family inventory and two-part discriminator in D-002 as the complete closure of the plan's Q-001, with further widening deferred to CKA-16? | No | omn-tech-lead | D-002, M-001 | If accepted, the check 4 fixtures and the current-tree green criterion are frozen against this inventory. If widened at the gate, the fixtures and the P-004 demonstration are reworked under the plan's R-001; the approach, module set, and other checks are unaffected. |\n\nThe plan's two open questions are closed by this design: the plan's Q-001 by D-002\n(acceptance pending as Q-001 above), and the plan's second open question \u2014 the banner\ndefinition \u2014 by C-007 and F-010, which carry the definition supplied at the Planning Gate.\nNo blocking open decision exists; package status is `complete`.\n\nDecision records D-001 and D-002 remain at status `Proposed` and require Design Gate\nacceptance before the plan's T-002 and T-004 proceed (P-001).\n\n## Sign-off\n\n- Architect: architect (producing role; excluded from accepting this package)\n- Tech Lead: omn-tech-lead (accepting owner for the Design Gate)\n- QA: omn-qa\n\nDesign Gate owners per `workflows/workflow-gate-matrix.md` are `omn-architect` and\n`omn-tech-lead`; F-011 records that `omn-architect` and `architect` name one role. Under\nthe Producer Exclusion Rule, acceptance therefore rests with `omn-tech-lead`. Lines are\nleft unsigned by the producing agent.\n\n### Appendix: Statement Register and Traceability\n\nStatements normalized from the supplied inputs in document order: S-001 through S-017 from\nthe feature request, S-018 through S-020 from the Planning Gate conditions recorded in the\ndispatch.\n\n| ID | Statement (condensed) | Kind | Covered by |\n|---|---|---|---|\n| S-001 | Ticket CKA-04, Epic A verification baseline, from recommendation R5 of the adoption review dated 2026-08-27; High, effort S; depends on nothing; lands with or before CKA-03, delivered as `.github/workflows/verify.yml` | context | C-002, F-008 |\n| S-002 | The runtime depends on structural properties of governance prose that nothing pins today | context | architectural objective 1 |\n| S-003 | Gate ownership is read from the matrix and the Producer Exclusion Rule is enforced through `producer_aliases()`; a producer-only row is an undecidable gate no test notices | context | architectural objective 1; M-002, M-007, C-005 |\n| S-004 | Superseded specifications carry the supersession marker in their first heading; a rewrite dropping it revives a dead contract | context | architectural objective 2; M-009 |\n| S-005 | Agent contract modules must never carry coercive auto-chain language | outcome | architectural objective 3; D-002 |\n| S-006 | The four orphaned root governance documents receive `Status:` banners under CKA-05 that must be impossible to drop | outcome | architectural objective 2; M-003, M-004, M-005, M-006 |\n| S-007 | Deliverable: `tests/test_content_contracts.py` on the standard-library framework, discovered with no configuration change | constraint | C-002, M-001 |\n| S-008 | Check 1: every gate row names at least one owner outside `producer_aliases(producer)` | outcome | D-001, M-001, M-007, M-008 |\n| S-009 | Check 2: superseded agent files carry their status marker on line 1 | outcome | M-001, M-009 |\n| S-010 | Check 3: the four root documents carry a `Status:` banner, authored now and green on the current tree; coupling resolution decided upstream \u2014 banners land in this change | outcome | D-003, C-007, M-003, M-004, M-005, M-006 |\n| S-011 | Check 4: no agent contract module under `agents/*/` matches coercive auto-chain patterns | outcome | D-002, D-006, M-010 |\n| S-012 | Assert on structure, not sentences | constraint | C-003 |\n| S-013 | Acceptance: a producer-only fixture mutation fails a test | outcome | C-004, P-005 |\n| S-014 | Acceptance: suite green against the current tree once the banners land | outcome | C-004, P-003, P-004 |\n| S-015 | Additive only: the five named gate-decision surfaces unaltered; no runtime behavior change | constraint | C-001 |\n| S-016 | Definition of done: tests green, proof scripts PROVEN, documentation consistency | constraint | C-008, P-006 |\n| S-017 | High priority, Phase 1; CKA-16 later extends this suite; CKA-05 acceptance pinned by CKA-04 | context | Objective out-of-scope; R-001 mitigation boundary |\n| S-018 | Gate condition: fix the complete coercive inventory and demonstrate discrimination from prohibition phrasing | constraint | C-006, D-002, P-004 |\n| S-019 | Gate condition: bind the alias reading to the importable `producer_aliases()`, not a reimplementation | constraint | C-005, D-001 |\n| S-020 | Gate condition: the banner line is `Status: specification \u2014 not implemented`, each cross-linking its executable counterpart | constraint | C-007, D-003 |\n\nPlan-task binding summary: this design constrains the plan's T-002 (checks and fixtures per\nD-001, D-002, D-004, D-005, D-006), T-004 (banner form per D-003 and C-007), T-007\n(validation coverage per the test strategy focus areas), and informs T-005 and T-006\n(constraint-compliance evidence per C-001 through C-004, bound by P-004 and P-005); the\nplan's T-001 is discharged by this package at Design Gate acceptance (P-001), and the\nplan's T-003 is discharged by F-010, whose confirmed banner text P-001 carries as D-003.\n\nClosure statement: this run performed architecture analysis and design only. No production\ncode, test, migration, script, or configuration was written; no external system was\naccessed; all context was consumed from the frozen input and context snapshot recorded in\nthe metadata block.",
+        "digest": "sha256:d821447a3c2edd9905255b67dedced06",
+        "produced_by": "solution-design-and-risk-assessment"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the accepted change this agent implements: a technical design for feature work, a bug analysis for a defect fix, or a baseline validation record for a behaviour-preserving refactor. Without one there is no accepted change, and implementing anyway would mean designing."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-919c5d5cf156/states/implementation/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md"
+    ],
+    "failures": [
+      {
+        "id": "C4.3",
+        "severity": "Correctable",
+        "quality_ref": "templates/implementation-report.md",
+        "requirement": "Fields with a declared substance floor carry more than a token answer",
+        "detail": "below floor: {'Boundary Compliance': ['Data or migration impact (1<2 words)']}"
+      }
+    ]
+  },
+  "upstream_artifacts": [
+    {
+      "type": "technical-design",
+      "reference": "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "produced_by": "solution-design-and-risk-assessment"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-04T11:22:09Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:8fa746e092c3bfabb391af87316e9350",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:7e01b6d3470d3f7df91f6d9ab5bae2fe",
+        "supplies": null
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "skills/dotnet/engineering-playbook.md",
+        "digest": "sha256:35fc0c6fcd8f834c3e2528d14465e17c",
+        "supplies": null
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8d6bd0735e4288ea81c161556faa7c18",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:fbf2e953c78bf37cdf0ac7f7c01da129",
+    "input_digest": "sha256:5ff465e62ddeb443d3ab92a72c98755d",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/cka-04-feature-request.md",
+        "source_file": ".claude/runs/inputs/cka-04-feature-request.md",
+        "digest": "sha256:f63a8c3a43a79d5c0d1f218ebe85bbf6"
+      },
+      {
+        "type": "technical-design",
+        "reference": "runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-919c5d5cf156/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+        "digest": "sha256:d821447a3c2edd9905255b67dedced06"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/technical-design.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md",
+      "runs/run-919c5d5cf156/states/implementation/result-envelope.json",
+      "**"
+    ],
+    "write_exclusions": [
+      "runs/**",
+      "proposals/**"
+    ],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose effect is not recorded in the report's verification results"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "any write matching ['runs/**', 'proposals/**']",
+      "command execution other than the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "external system, repository, or ticketing access",
+      "define or widen product scope",
+      "decide or revise the technical design rather than escalating the mismatch",
+      "approve, review, or award a readiness verdict to its own change",
+      "record a merge, release, or gate decision",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "introduce an undeclared side effect in critical business logic",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "implement the change the accepted design and analysis describe",
+        "add, modify, and remove production code inside the impacted modules the design names",
+        "add or update automated tests that exercise the change",
+        "execute the project's own test and static-analysis commands to gather evidence",
+        "record the change set, the verification evidence, and the residual risk",
+        "record a tradeoff taken inside this agent's own implementation latitude",
+        "raise a deviation record when the design cannot be implemented as accepted"
+      ],
+      "prohibited": [
+        "define or widen product scope",
+        "decide or revise the technical design rather than escalating the mismatch",
+        "approve, review, or award a readiness verdict to its own change",
+        "record a merge, release, or gate decision",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "introduce an undeclared side effect in critical business logic",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "rationale": "This is the only framework role that changes repository source. Its write scope cannot be enumerated per agent, because the files a change touches are named by the accepted design rather than by the manifest. The scope is therefore the repository, minus the evidence classes below, and every file actually written is declared in the change set and in the result envelope, where the runtime compares them.",
+        "scope": [
+          "**"
+        ],
+        "excluded": [
+          "runs/**",
+          "proposals/**"
+        ],
+        "exclusionRationale": "Committed run evidence and governance records are immutable to the agents whose work they record. A run artifact this agent could edit would let a change rewrite the evidence assessed against it."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose effect is not recorded in the report's verification results"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical context snapshot must produce the same change-set entry set, the same test-evidence set, the same deviation set, and the same declared verification status.",
+      "identifierSchemes": {
+        "changes": "C-<zero-padded-sequence>",
+        "tests": "T-<zero-padded-sequence>",
+        "deviations": "V-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Change-set entries are ordered by the sequence in which the accepted design requires them; ties break toward the lower path in lexical order. Test-evidence entries follow the change-set entries they cover.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied design, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "implementation-report.md",
+    "artifact_path": "runs/run-919c5d5cf156/states/implementation/artifacts/implementation-report.md",
+    "template_ref": "templates/implementation-report.md",
+    "contract_ref": "agents/omn-dev-1-implement/output.md",
+    "quality_ref": "agents/omn-dev-1-implement/quality.md",
+    "validator": "implementation_report_validator",
+    "result_envelope_path": "runs/run-919c5d5cf156/states/implementation/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-04T11:22:09Z"
+}

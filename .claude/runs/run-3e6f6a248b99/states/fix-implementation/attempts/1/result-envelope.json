@@ -1,0 +1,90 @@
+{
+  "invocation_id": "inv-3e6f6a248b99-03-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-3e6f6a248b99/states/fix-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-0301",
+    "workflowPhase": "fix-implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "counts": {
+      "changeSetEntries": 24,
+      "testEvidenceEntries": 13,
+      "deviations": 4,
+      "residualRisks": 5,
+      "openQuestions": 3
+    },
+    "evidence": {
+      "executed": 13,
+      "passed": 11,
+      "failed": 2,
+      "failing": ["T-010", "T-012"],
+      "unitAndIntegrationTests": {"run": 226, "passed": 224, "failed": 2},
+      "verifyRecovery": "70/70 RECOVERY PROVEN",
+      "verifyMultiPhaseOnScratchRun": "14/15 (M6 fails by construction on a one-phase harness run)",
+      "baseline": "120 tests OK across seven modules; verify_recovery 41/41; every baseline test still passes"
+    },
+    "qualityChecks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass",
+      "M1": "pass", "M2": "pass", "M3": "pass", "M4": "pass", "M5": "pass", "M6": "pass", "M7": "pass",
+      "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass",
+      "K1": "pass", "K2": "pass",
+      "V1": "pass", "V2": "pass", "V3": "pass",
+      "B1": "pass", "B2": "pass", "B3": "pass", "B4": "pass", "B5": "pass", "B6": "pass",
+      "A1": "pass", "A2": "pass", "A3": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass"
+    },
+    "validationEngine": "implementation_report_validator: 32/32 checks passed, 0 blocking, 0 correctable, 3 not machine-checkable",
+    "notMachineCheckable": {
+      "N1": "discharged: each change-set row was written from the edit made at that path; the mirror rows describe the sync that produced them",
+      "N2": "discharged: each test-evidence row was matched to the files its command exercises; verify_recovery Run D exercises C-001 to C-005 end to end, the unit module exercises C-001 to C-003 and C-010, the consumer suites exercise C-009 with C-013 and C-014, the parity test exercises the eight mirrors and the three contract files by digest",
+      "N3": "discharged: no hidden side effect; gate decision values, record_gate_decision semantics, release, producer exclusion, and the runner's approval requirement are unchanged; every status change is a logged transition; the two new transitions are the only exits from a terminal status and one is engine-checked"
+    },
+    "stage7": "an evidence entry is fail (T-010 M6 by construction, T-012 CKA-06 equivalence fixture) -> partially-verified / provisional",
+    "escalations": ["Q-001 to omn-orchestrator (blocking)", "Q-002 to architect (V-001)", "Q-003 to omn-qa"]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/execution.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/examples.md",
+    "runs/run-3e6f6a248b99/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": 0.86,
+  "declared_side_effects": [
+    "runtime/state_engine.py",
+    "runtime/recovery_policy.py",
+    "runtime/framework_runtime.py",
+    "runtime/verify_multi_phase.py",
+    "runtime/verify_recovery.py",
+    "runtime/README.md",
+    "config/execution-engine.md",
+    "config/runtime.md",
+    "omn_agent/fix_comments.py",
+    "tests/test_gate_rollback.py",
+    "tests/test_gate_policy.py",
+    "tests/test_framework_runtime_render.py",
+    "tests/test_fix_comments.py",
+    "tests/test_update.py",
+    "docs/USER-GUIDE.md",
+    "docs/user-guide.html",
+    "omn_agent/_bundled_payload/config/execution-engine.md",
+    "omn_agent/_bundled_payload/config/runtime.md",
+    "omn_agent/_bundled_payload/runtime/README.md",
+    "omn_agent/_bundled_payload/runtime/framework_runtime.py",
+    "omn_agent/_bundled_payload/runtime/recovery_policy.py",
+    "omn_agent/_bundled_payload/runtime/state_engine.py",
+    "omn_agent/_bundled_payload/runtime/verify_multi_phase.py",
+    "omn_agent/_bundled_payload/runtime/verify_recovery.py",
+    "runs/run-3e6f6a248b99/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-3e6f6a248b99/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

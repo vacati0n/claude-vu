@@ -1,0 +1,245 @@
+{
+  "schema": "framework.runtime/execution-metrics.v1",
+  "task_id": "run-34ca35504b72",
+  "workflow": "refactor v1.0.0",
+  "runtime_version": "0.5.0",
+  "computed_at": "2026-09-08T06:57:57Z",
+  "total_duration": {
+    "wall_clock_seconds": 843212.0,
+    "wall_clock": "234h13m32s",
+    "agent_active_seconds": 720258.0,
+    "agent_active": "200h04m18s"
+  },
+  "phases_executed": {
+    "declared": 5,
+    "completed": 5,
+    "blocked": 0
+  },
+  "agents_executed": {
+    "invocations": 8,
+    "distinct": 4,
+    "by_agent": {
+      "architect": 2,
+      "omn-qa": 3,
+      "omn-dev-1-implement": 1,
+      "omn-orchestrator": 2
+    }
+  },
+  "skills_executed": {
+    "required_reads": 13,
+    "not_triggered": 0
+  },
+  "parallel_groups": {
+    "count": 5,
+    "max_width": 1,
+    "groups": [
+      [
+        "scope-invariants-and-risk-profile"
+      ],
+      [
+        "safety-net-establishment"
+      ],
+      [
+        "refactor-implementation"
+      ],
+      [
+        "behavioral-validation"
+      ],
+      [
+        "closure-and-debt-record"
+      ]
+    ]
+  },
+  "context_loads": {
+    "members_declared": 87,
+    "members_required": 40
+  },
+  "repeated_context_loads": {
+    "files": 14,
+    "by_path": {
+      "context/product-context.md": 8,
+      "context/technical-context.md": 8,
+      "context/release-context.md": 8,
+      "templates/technical-design.md": 8,
+      "templates/architecture-decision-record.md": 2,
+      "memory/architecture.md": 2,
+      "dependency-map.md": 2,
+      "templates/validation-report.md": 5,
+      "skills/testing/testing-strategy.md": 4,
+      "skills/dotnet/engineering-playbook.md": 3,
+      "templates/implementation-report.md": 2,
+      "templates/orchestration-result.md": 2,
+      "skills/git/git-collaboration.md": 2,
+      "skills/logging/observability-logging.md": 2
+    }
+  },
+  "validation_runs": {
+    "passed": 5,
+    "failed": 1
+  },
+  "gate_decisions": {
+    "decided": 4,
+    "auto_policy": 0,
+    "rejected": 0
+  },
+  "tokens_or_context_estimate": {
+    "basis": "4 bytes per token; bytes the dispatch asked the agent to read, per envelope",
+    "legacy_bytes": 1748016,
+    "progressive_bytes": 725402,
+    "legacy_tokens": 437004,
+    "progressive_tokens": 181350,
+    "savings_pct": 58.5
+  },
+  "per_phase": [
+    {
+      "phase": "scope-invariants-and-risk-profile",
+      "agent": "architect",
+      "status": "completed",
+      "dispatches": 2,
+      "attempts_charged": 2,
+      "agent_active_seconds": 677.0,
+      "context_members_declared": 17,
+      "context_members_required": 7,
+      "skills": {
+        "required": 3,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 108943,
+        "modules_core_bytes": 50155,
+        "slice_all_bytes": 163133,
+        "slice_required_bytes": 13151,
+        "inputs_bytes": 7089,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 0,
+        "fixed_bytes": 44660,
+        "legacy_estimate_bytes": 323825,
+        "progressive_estimate_bytes": 115055,
+        "legacy_estimate_tokens": 80956,
+        "progressive_estimate_tokens": 28763,
+        "savings_pct": 64.5
+      }
+    },
+    {
+      "phase": "safety-net-establishment",
+      "agent": "omn-qa",
+      "status": "completed",
+      "dispatches": 2,
+      "attempts_charged": 2,
+      "agent_active_seconds": 703477.0,
+      "context_members_declared": 16,
+      "context_members_required": 7,
+      "skills": {
+        "required": 2,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 78992,
+        "modules_core_bytes": 38706,
+        "slice_all_bytes": 163955,
+        "slice_required_bytes": 16250,
+        "inputs_bytes": 2095,
+        "upstream_full_bytes": 29819,
+        "upstream_read_first_bytes": 11343,
+        "task_context_bytes": 0,
+        "fixed_bytes": 71389,
+        "legacy_estimate_bytes": 346250,
+        "progressive_estimate_bytes": 139783,
+        "legacy_estimate_tokens": 86562,
+        "progressive_estimate_tokens": 34945,
+        "savings_pct": 59.6
+      }
+    },
+    {
+      "phase": "refactor-implementation",
+      "agent": "omn-dev-1-implement",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 1455.0,
+      "context_members_declared": 18,
+      "context_members_required": 9,
+      "skills": {
+        "required": 3,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 66929,
+        "modules_core_bytes": 31354,
+        "slice_all_bytes": 167091,
+        "slice_required_bytes": 19386,
+        "inputs_bytes": 7089,
+        "upstream_full_bytes": 22211,
+        "upstream_read_first_bytes": 12075,
+        "task_context_bytes": 0,
+        "fixed_bytes": 65971,
+        "legacy_estimate_bytes": 329291,
+        "progressive_estimate_bytes": 135875,
+        "legacy_estimate_tokens": 82322,
+        "progressive_estimate_tokens": 33968,
+        "savings_pct": 58.7
+      }
+    },
+    {
+      "phase": "behavioral-validation",
+      "agent": "omn-qa",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 1390.0,
+      "context_members_declared": 18,
+      "context_members_required": 9,
+      "skills": {
+        "required": 3,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 78992,
+        "modules_core_bytes": 38706,
+        "slice_all_bytes": 170641,
+        "slice_required_bytes": 22936,
+        "inputs_bytes": 2095,
+        "upstream_full_bytes": 22540,
+        "upstream_read_first_bytes": 12371,
+        "task_context_bytes": 0,
+        "fixed_bytes": 63928,
+        "legacy_estimate_bytes": 338196,
+        "progressive_estimate_bytes": 140036,
+        "legacy_estimate_tokens": 84549,
+        "progressive_estimate_tokens": 35009,
+        "savings_pct": 58.6
+      }
+    },
+    {
+      "phase": "closure-and-debt-record",
+      "agent": "omn-orchestrator",
+      "status": "completed",
+      "dispatches": 2,
+      "attempts_charged": 2,
+      "agent_active_seconds": 13259.0,
+      "context_members_declared": 18,
+      "context_members_required": 8,
+      "skills": {
+        "required": 2,
+        "not_triggered": 0
+      },
+      "context_estimate": {
+        "modules_full_bytes": 73926,
+        "modules_core_bytes": 38697,
+        "slice_all_bytes": 177304,
+        "slice_required_bytes": 22912,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 57683,
+        "upstream_read_first_bytes": 31503,
+        "task_context_bytes": 0,
+        "fixed_bytes": 101541,
+        "legacy_estimate_bytes": 410454,
+        "progressive_estimate_bytes": 194653,
+        "legacy_estimate_tokens": 102613,
+        "progressive_estimate_tokens": 48663,
+        "savings_pct": 52.6
+      }
+    }
+  ]
+}

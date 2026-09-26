@@ -56,7 +56,9 @@ stateDiagram-v2
 
 - Load `manifest.yaml`; verify `metadata.identifier`, `metadata.version`, `metadata.status`, and
   `contractVersion` against `domain-model/agent-specification.md`.
-- Load every module in the declared `loadOrder`, each in full, in that sequence.
+- Load the core-tier modules of the declared `loadOrder` in full, in that sequence; load an
+  on-demand module the moment its `load_when` trigger in the envelope's load profile applies
+  (`config/runtime.md`, Progressive Module Loading).
 - Verify the output template reference resolves.
 - Resolve the routed workflow and phase against `supportedWorkflows`; resolve the
   `decisionBasis` and the deciding authority from the workflow-participation table in
@@ -74,7 +76,8 @@ unroutable phase, or `E-PRODUCER-EXCLUSION`.
 
 - Read the invocation envelope; map each supplied input onto an accepted or optional identifier.
 - Confirm at least one accepted input is present; otherwise raise `E-INPUT`.
-- Read every artifact the frozen context slice names, and nothing outside it.
+- Read every artifact the frozen context slice marks `required`, consult the members it marks
+  `on-demand` when the stated decision needs them, and read nothing outside the slice.
 - Run Stages 1 and 2 of `reasoning.md`: establish the decision, fix the constraints.
 - Record every input that mapped to nothing, with the reason it was unused.
 

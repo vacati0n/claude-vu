@@ -1,0 +1,195 @@
+{
+  "invocation_id": "inv-34ca35504b72-05-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-34ca35504b72/states/closure-and-debt-record/artifacts/orchestration-result.md"
+  ],
+  "structured_output": {
+    "coordinationBasis": "debt-closure",
+    "disposition": "closed-with-followups",
+    "status": "complete",
+    "gateOwnerAddressed": "omn-documentation",
+    "gateDecidedByThisRole": null,
+    "counts": {
+      "phases": 5,
+      "complete": 4,
+      "blocked": 1,
+      "notStarted": 0,
+      "handoffs": 4,
+      "handoffsAccepted": 4,
+      "handoffsRefused": 0,
+      "handoffsPending": 0,
+      "escalations": 3,
+      "followUps": 11,
+      "openQuestions": 4
+    },
+    "escalationsBySeverity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 1,
+      "low": 1
+    },
+    "escalationsByStatus": {
+      "open": 1,
+      "resolved": 2,
+      "routed": 0,
+      "accepted-risk": 0
+    },
+    "openBlockingEscalations": [],
+    "followUpsBySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 4,
+      "low": 7
+    },
+    "technicalDebtDelta": {
+      "removed": 1,
+      "added": 1,
+      "note": "removed: the orientation document's folder inventory completed from twelve of sixteen directories to sixteen of sixteen (FU-005, resolved). added: completeness now enforced at review time only, with no mechanical check in either CI-discovered verification surface (FU-006, accepted-risk)."
+    },
+    "gateDecisionsRecorded": [
+      {
+        "gate": "Invariant Gate",
+        "decision": "approved",
+        "decidedBy": "omn-tech-lead",
+        "decidedAt": "2026-08-27T13:10:13Z"
+      },
+      {
+        "gate": "Implementation Gate",
+        "decision": "approved",
+        "decidedBy": "omn-dev-2-reviewer",
+        "decidedAt": "2026-09-06T02:50:24Z"
+      },
+      {
+        "gate": "Regression Gate",
+        "decision": "approved",
+        "decidedBy": "omn-dev-2-reviewer",
+        "decidedAt": "2026-09-06T03:26:48Z"
+      },
+      {
+        "gate": "Closure Gate",
+        "decision": "none",
+        "decidedBy": null,
+        "decidedAt": null,
+        "note": "undecided; rests with omn-documentation under the Producer Exclusion Rule because this record is the evidence it assesses"
+      }
+    ],
+    "checksRun": 44,
+    "checksPassed": 44,
+    "blockingFailures": 0,
+    "correctableFailures": 0,
+    "repairAttempts": 0,
+    "checks": {
+      "S1": "pass",
+      "S2": "pass",
+      "S3": "pass",
+      "S4": "pass",
+      "S5": "pass",
+      "S6": "pass",
+      "S7": "pass",
+      "M1": "pass",
+      "M2": "pass",
+      "M3": "pass",
+      "M4": "pass",
+      "M5": "pass",
+      "O1": "pass",
+      "P1": "pass",
+      "P2": "pass",
+      "P3": "pass",
+      "P4": "pass",
+      "O5": "pass",
+      "A1": "pass",
+      "A2": "pass",
+      "A3": "pass",
+      "O4": "pass",
+      "O3": "pass",
+      "N-COUNT": "pass",
+      "H1": "pass",
+      "H2": "pass",
+      "H3": "pass",
+      "H4": "pass",
+      "E1": "pass",
+      "E2": "pass",
+      "E3": "pass",
+      "E4": "pass",
+      "E5": "pass",
+      "O8": "pass",
+      "O6": "pass",
+      "O7": "pass",
+      "O9": "pass",
+      "C1": "pass",
+      "C2": "pass",
+      "T1": "pass",
+      "T2": "pass",
+      "T3": "pass",
+      "T4": "pass",
+      "T5": "pass"
+    },
+    "checkNotes": {
+      "O5": "PH-005 is recorded blocked rather than complete because its Closure Gate carries no decision. The conforming example in examples.md marks the equivalent row complete; output.md and quality.md govern over examples.md, so the example is a known defect and was not followed.",
+      "O4": "one gated phase owned by omn-orchestrator (PH-005); Decided By is not-applicable, not omn-orchestrator.",
+      "O7": "closed-with-followups is exempt from the clean-closure rule; the one blocked phase's remaining work is carried as FU-001.",
+      "E4": "no severity was reclassified. The five phase-4 defects are carried at the low severity their source recorded; the three escalation severities are assigned here because the recovery ledger records failure classes rather than severities.",
+      "T3": "no operational value is reported. The debt-closure basis leaves all four Operational Status fields not applicable, each stating why.",
+      "T5": "two read-only commands informed this record and both are named in it: python runtime/verify_self_hosting.py and git status --porcelain."
+    },
+    "validationEngine": {
+      "validator": "orchestration_result_validator",
+      "result": "PASS",
+      "checksRun": 34,
+      "checksPassed": 34,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3,
+      "invokedWithEnvelope": true,
+      "note": "C7.1 is machine-checked only when an envelope is supplied; without one the same artifact reports 33/33 with 4 not-machine-checkable. Both are PASS."
+    },
+    "notMachineCheckableObligations": {
+      "N1": "declared. The run's order was the order the dependencies required: design, then safety net, then implementation, then behavioural validation, then closure. No phase was reordered, and the two interruptions were a lost lease and an input-contract block, neither of which changed the sequence.",
+      "N2": "declared. All three escalations are runtime and operator matters this role cannot resolve: an agent manifest repair requiring its own routed run, a stale lease reclamation, and an open recovery-ledger entry this role has no write authority to close.",
+      "N3": "declared. No follow-up defers work the run was obliged to finish. The change was delivered and validated; the eleven follow-ups are the Closure Gate decision, a standing monitoring obligation, two wording questions owned upstream, the operator's change proposal, the debt delta, and the five low defects the validation left open.",
+      "N4": "declared. The account matches the run, including the parts that do not read well: the ten-day span, the week-long stall, the input-contract block and its externally routed repair, this phase's own lost first attempt, and the contaminated tree that forced a deductive rather than measured parity argument."
+    },
+    "runHistoryRecorded": {
+      "submittedAt": "2026-08-27T12:50:39Z",
+      "staleLeaseReclaimed": "2026-09-04T15:36:54Z",
+      "inputContractBlockOpened": "2026-09-04T16:06:22Z",
+      "inputContractBlockCleared": "2026-09-05T05:55:43Z",
+      "blockingDefectRepairedUnder": "run-79630cb5274d, /bugfix, closed 2026-09-06, recorded in proposals/framework-change-proposal-FC-011.md",
+      "thisPhaseAttempt1": "inv-34ca35504b72-05-001, lost to a network error before any work; released as worker-loss, charged to attempts_lost",
+      "attemptsCharged": 1,
+      "attemptsLost": 1,
+      "maxAttempts": 3
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-orchestrator/manifest.yaml",
+    "agents/omn-orchestrator/system.md",
+    "agents/omn-orchestrator/identity.md",
+    "agents/omn-orchestrator/reasoning.md",
+    "agents/omn-orchestrator/execution.md",
+    "agents/omn-orchestrator/output.md",
+    "agents/omn-orchestrator/quality.md",
+    "agents/omn-orchestrator/examples.md",
+    "runs/run-34ca35504b72/states/closure-and-debt-record/invocation-envelope.json",
+    "runs/run-34ca35504b72/states/safety-net-establishment/artifacts/validation-report.md",
+    "runs/run-34ca35504b72/states/behavioral-validation/artifacts/validation-report.md",
+    "runs/run-34ca35504b72/run-ledger.json",
+    "runs/run-34ca35504b72/recovery-ledger.json",
+    "runs/run-34ca35504b72/events.jsonl",
+    "workflows/refactor.md",
+    "workflows/workflow-gate-matrix.md",
+    "templates/orchestration-result.md",
+    "agents/omn-dev-1-implement/manifest.yaml",
+    "proposals/framework-change-proposal-FC-011.md",
+    "runtime/orchestration_result_validator.py",
+    "runtime/artifact_contract.py"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-34ca35504b72/states/closure-and-debt-record/artifacts/orchestration-result.md",
+    "runs/run-34ca35504b72/states/closure-and-debt-record/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

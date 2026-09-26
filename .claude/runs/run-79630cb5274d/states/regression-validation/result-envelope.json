@@ -1,0 +1,269 @@
+{
+  "invocation_id": "inv-79630cb5274d-04-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "VR-run-79630cb5274d-regression-validation",
+    "validationBasis": "regression",
+    "workflowPhase": "regression-validation",
+    "reportStatus": "complete",
+    "verdict": "pass-with-reservations",
+    "criteriaByResult": {
+      "validated": 7,
+      "met": 6,
+      "not-met": 0,
+      "blocked": 1
+    },
+    "defectsBySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 2,
+      "low": 4
+    },
+    "openQuestions": 5,
+    "blockingDefectsOutstanding": [],
+    "gateFed": {
+      "gate": "Verification Gate",
+      "decidedBy": "omn-dev-2-reviewer",
+      "basis": "this agent produced the evidence that gate assesses, so producer exclusion moves the decision"
+    },
+    "attemptContinuity": {
+      "priorAttempt": "inv-79630cb5274d-04-001",
+      "priorAttemptOutcome": "host process exit; artifact written, no result envelope emitted; phase released as worker-loss",
+      "adoption": "this attempt adopted the prior attempt's artifact, re-executed its load-bearing evidence, corrected what re-execution contradicted, and re-stamped the frozen-snapshot metadata to this invocation",
+      "metadataRestamped": {
+        "inputDigest": "sha256:e73d04f8016a8c8140942fb5a142ee5a",
+        "contextDigest": "sha256:e7e9d97c4c5e8ec45601189cbb0a0c1b",
+        "source": "context_slice of the invocation envelope for inv-79630cb5274d-04-002",
+        "note": "the adopted artifact already carried both values; they were re-checked field by field against the envelope rather than assumed"
+      },
+      "correctionsMade": [
+        "AC-001 evidence: the replay was recorded over the delivered artifact alone; the four-item run-level pool the guard actually recorded is now stated separately, because that pool keeps three surviving run-level types pre-fix and four post-fix",
+        "AC-005 evidence: the claim that the withdrawn identifier appears nowhere outside historical run evidence was false and is corrected; it survives in a second tracked copy of the payload under build/, now recorded as DF-006",
+        "DF-004 symptom: the alternate edge populations attributed to stricter scans are replaced by one this attempt reproduced (31 edges, thirteen-to-twelve under exact term matching) plus the figure the implementation report itself records (eleven-to-ten), so every number in the row is either re-measured here or attributed",
+        "DF-006 added: a new low defect, the only finding this change itself introduced",
+        "Regressions detected, Verdict rationale and Readiness recommendation: reworded to account for DF-006 and for six defects rather than five",
+        "Q-005 added, routing the tracked-copy question to omn-tech-lead",
+        "Test Strategy environment, evidence timestamps and verifier verdicts: re-stamped to this attempt's re-runs; the whole-suite figure is retained as the first attempt's contaminated measurement and labelled as such",
+        "AC-004 evidence: states explicitly that this phase neither ran nor may run the re-evaluation pass, so the pass is confirmed by its persisted runtime-attributed effects",
+        "DF-001 symptom: the claim that the clearing command contains no run-ledger write is corrected to what the source shows, that the command writes the ledger only on the branch that auto-decides a gate and no gate was auto-decided in that pass; the divergence itself is unchanged and rests on the ledger's pre-clearing timestamp"
+      ]
+    },
+    "evidenceIsolation": {
+      "treeQuiescent": false,
+      "isolatedChecks": {
+        "command": "python -m unittest tests.<module>",
+        "modules": {
+          "tests.test_agent_input_contracts": {
+            "run": 14,
+            "passed": 14,
+            "at": "2026-09-06T01:17:46Z"
+          },
+          "tests.test_manifest_scope": {
+            "run": 19,
+            "passed": 19,
+            "at": "2026-09-06T01:17:55Z"
+          },
+          "tests.test_bundled_payload": {
+            "run": 11,
+            "passed": 11,
+            "at": "2026-09-06T01:18:00Z"
+          },
+          "tests.test_content_contracts": {
+            "run": 13,
+            "passed": 13,
+            "at": "2026-09-06T01:18:22Z"
+          },
+          "tests.test_gate_policy": {
+            "run": 26,
+            "passed": 26,
+            "at": "2026-09-06T01:18:17Z"
+          }
+        },
+        "totals": {
+          "run": 83,
+          "passed": 83,
+          "failed": 0
+        }
+      },
+      "ownReplays": {
+        "narrowingAndResolution": "six pool shapes against the HEAD manifest and the working-tree manifest at 2026-09-06T01:19:20Z; pre-fix refusal message matches the stalled run's recorded block detail character for character",
+        "perEdgeScan": "32 derived edges over eight active workflow Phase Models at 2026-09-06T01:20:31Z; 14 mismatched pre-fix, 13 post-fix, single dropped edge is refactor safety-net-establishment to refactor-implementation",
+        "perEdgeScanStricterRule": "31 derived edges under exact term matching; 13 mismatched pre-fix, 12 post-fix, same dropped edge",
+        "stalledRunState": "read-only at 2026-09-06T01:19:00Z; refactor-implementation pending and Ready, blocked_reason, blocked_detail, blocked_by and failure_class all null, G5-INPUT passing, failure envelope resolved by runtime:state-engine, event E-0038 carries a runtime actor"
+      },
+      "verifiers": {
+        "verify_manifests": "2/2 CONFORMS",
+        "verify_registry_coverage": "6/6 COVERED",
+        "verify_validators": "6/6 COVERED, re-run on this attempt with no failure observed",
+        "verify_vertical_slice": "10/10 PROVEN",
+        "verify_recovery": "41/41 RECOVERY PROVEN; the module injects and removes its own fixture runs and left no residue",
+        "verify_multi_phase": "14/15 NOT PROVEN, failing only M6, a pre-existing standing condition this fix-bug run cannot satisfy",
+        "verify_self_hosting": "7/8 NOT SELF-HOSTING, failing only S8, naming run-34ca35504b72, run-4c51600606df and this run"
+      },
+      "contaminatedMeasurement": {
+        "command": "python -m unittest discover -s tests",
+        "testsRun": 404,
+        "failures": 0,
+        "window": "07:32:42Z to 07:47:59Z on attempt 1 of this phase",
+        "label": "contaminated; the whole-suite total has moved 342 to 399 to 404 while a writer outside this invocation added tests",
+        "notReRunOnThisAttempt": "the discovered suite rewrites docs/USER-GUIDE.md and its rendered output in place while it runs, which is a repository write outside this phase's permitted writes, and no whole-suite figure taken over a tree another session is writing could isolate this change"
+      },
+      "disjointness": "git status at 2026-09-06T01:17:34Z and 2026-09-06T01:23:44Z shows 56 entries; the change's eleven paths are disjoint from every foreign entry, which fall under tests/ (three foreign modules), tools/, docs/, .github/, repository-root markdown, proposals and other runs"
+    },
+    "qualityChecks": {
+      "run": 57,
+      "passed": 57,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "D7": "pass",
+        "Q2": "pass",
+        "Q5": "pass",
+        "A7": "pass",
+        "A8": "pass",
+        "T1": "pass",
+        "T2": "pass",
+        "T3": "pass",
+        "Q3": "pass",
+        "Q7": "pass",
+        "F1": "pass",
+        "F2": "pass",
+        "F3": "pass",
+        "F4": "pass",
+        "F5": "pass",
+        "F6": "pass",
+        "Q1": "pass",
+        "Q4": "pass",
+        "Q6": "pass",
+        "R1": "pass",
+        "R2": "pass",
+        "R3": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "pass",
+        "E6": "pass",
+        "E7": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "A4": "pass",
+        "A5": "pass",
+        "A6": "pass",
+        "A9": "pass",
+        "A10": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass",
+        "C6": "pass"
+      },
+      "notes": {
+        "D7": "inputDigest and contextDigest compared field by field against context_slice of this invocation's envelope; the Validation Engine re-decided the same comparison as C7.1 with --envelope supplied",
+        "F5": "rows are ordered by descending severity with ties broken lexically by location, which places DF-006 among the low rows ahead of DF-003; the identifier column is therefore not monotonic, because identifiers assigned on the prior attempt are not renumbered",
+        "A1": "independence re-confirmed: this agent authored none of the eleven changed files and none of the evidence under validation; it did author the safety-net validation report of run-34ca35504b72, a pre-change baseline, and that connection is disclosed in Residual Risk",
+        "A6": "no production source, committed run record or governance record was written; the only repository writes are this phase's two declared files"
+      },
+      "engineVerdict": {
+        "validator": "runtime/validation_report_validator.py",
+        "result": "PASS",
+        "checks": "31/31 passed, 3 declared not-machine-checkable",
+        "blockingFailures": 0,
+        "correctableFailures": 0
+      }
+    },
+    "notMachineCheckable": {
+      "N1": {
+        "obligation": "the executed test depth matches the risk the change actually carries",
+        "judgement": "satisfied. The change alters an interface other agents' dispatch depends on and a path that decides whether work proceeds or stops, so the Stage 4 table warrants every call site exercised and exhaustive branch coverage of that decision. Both were taken: the menu was replayed at every pool shape that decides it, including both sibling phases, the withdrawn identifier alone, a foreign identifier and an empty pool, against both the pre-fix and post-fix declarations."
+      },
+      "N2": {
+        "obligation": "no criterion was recorded as met on evidence that does not demonstrate it",
+        "judgement": "satisfied, and enforced by correction rather than assertion. Every met row was re-derived from a command run or a record read on this attempt. Where the adopted evidence overstated what it demonstrated, AC-001's pool shape and AC-005's repository-wide scan, the row was corrected rather than left standing. AC-006 stays blocked because no check available to this phase can settle its first half."
+      },
+      "N3": {
+        "obligation": "every regression the change could plausibly cause was looked for",
+        "judgement": "satisfied, with one finding. The declared regression surface was exercised item by item rather than by suite count. Looking at the committed payload mirror as a surface rather than as a passing test is what surfaced DF-006: the tracked copy under build/ was byte-identical to the source payload before the change and now differs in exactly the five files the change edited."
+      }
+    },
+    "operatorInterventionsAssessed": [
+      {
+        "intervention": "policy exception recorded on event E-0033 for four writes under runs/run-34ca35504b72/ during fix-implementation attempt 1",
+        "independentAssessment": "the writes were performed by the runtime's own re-evaluation pass, not by the producing agent: the resolved envelope records resolved_by runtime:state-engine and event E-0038 carries actor_type runtime. The producing agent therefore did not author the evidence it reported.",
+        "affectsVerdict": false,
+        "relatedDefect": "DF-003 records that the event's reason_code tool_failure misdescribes an authorized boundary crossing"
+      },
+      {
+        "intervention": "operator corrected two frozen-snapshot metadata fields in the implementation report on the final attempt of fix-implementation",
+        "independentAssessment": "the corrected inputDigest and contextDigest now equal, character for character, the values the untouched state-ledger.json and that phase's invocation envelope both record for inv-79630cb5274d-03-003; all three were read here. The correction moved provenance into agreement with machine records and altered no result, criterion or claim.",
+        "affectsVerdict": false
+      }
+    ],
+    "defectReproducibility": {
+      "defectUnderValidation": "refactor-implementation-input-contract-defect",
+      "reproducibleBeforeFix": "yes, deterministically: the pre-fix manifest read from HEAD drops the delivered validation report at narrowing and resolution raises the block detail recorded against the stalled run, character for character",
+      "reproducibleAfterFix": "no, on either pool shape, and the stalled run's own work item is pending and Ready with every block field null"
+    },
+    "commandsExecuted": [
+      "python -m unittest tests.test_agent_input_contracts -v",
+      "python -m unittest tests.test_manifest_scope",
+      "python -m unittest tests.test_bundled_payload",
+      "python -m unittest tests.test_content_contracts",
+      "python -m unittest tests.test_gate_policy",
+      "python runtime/verify_manifests.py",
+      "python runtime/verify_registry_coverage.py",
+      "python runtime/verify_validators.py",
+      "python runtime/verify_vertical_slice.py",
+      "python runtime/verify_recovery.py",
+      "python runtime/verify_multi_phase.py",
+      "python runtime/verify_self_hosting.py",
+      "python runtime/validation_report_validator.py <artifact> --envelope <envelope>",
+      "git status --porcelain",
+      "two out-of-tree replay scripts over runtime/framework_runtime.py: narrowing and resolution over six pool shapes, and a per-edge scan over every active workflow Phase Model"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/identity.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/execution.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "agents/omn-qa/examples.md",
+    "runs/run-79630cb5274d/states/regression-validation/invocation-envelope.json",
+    "runs/run-79630cb5274d/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-79630cb5274d/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-34ca35504b72/state.json",
+    "runs/run-34ca35504b72/states/refactor-implementation/failure-envelope.json",
+    "runs/run-34ca35504b72/run-ledger.json",
+    "runs/run-34ca35504b72/events.jsonl",
+    "runs/run-79630cb5274d/events.jsonl",
+    "runs/run-79630cb5274d/states/fix-implementation/invocation-envelope.json",
+    "runs/run-79630cb5274d/states/fix-implementation/state-ledger.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-79630cb5274d/states/regression-validation/artifacts/validation-report.md",
+    "runs/run-79630cb5274d/states/regression-validation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

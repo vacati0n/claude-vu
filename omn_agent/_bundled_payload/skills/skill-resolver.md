@@ -134,6 +134,36 @@ Load additional skills only when:
 - gate criteria require a skill not initially loaded
 - orchestrator escalation explicitly requests broader analysis
 
+### Domain-conditional skill reading
+
+Resolution and reading are two decisions. Every phase-mandatory code and every code an agent
+manifest declares is *resolved* on every dispatch, exactly as above, and an unresolvable code
+still blocks the phase. Whether the resolved skill file is *read* depends on whether its domain
+is affected by the task, which the runtime derives into the task context's `affected_areas`
+and records per code in the envelope's `skill_dispatch`.
+
+| Code | Skill | Area | Read when |
+|---|---|---|---|
+| S01, S02, S03, S07, S10, S11, S12 | architecture, business, .NET, testing, git, logging, error handling | domain-general | always, when the phase or manifest names it |
+| S04 | Avalonia UI Engineering | `avalonia-ui` | the task names Avalonia, XAML, a view-model boundary, or desktop UI |
+| S05 | React Engineering | `react-frontend` | the task names React, JSX or TSX, hooks, or a frontend surface |
+| S06 | Database Engineering | `database` | the task names a database, schema or migration, an ORM, a persistence layer, or a transaction boundary |
+| S08 | Performance Engineering | `performance` | the task names latency, throughput, a benchmark, a percentile, a load test, or profiling |
+| S09 | Security Engineering | `security` | the task names authentication, authorization, secrets, credentials, permissions, encryption, injection, or another security term; **always** in review and validation phases |
+
+Rules:
+
+- An area is affected when its trigger matches a supplied input or an accepted upstream
+  artifact, or when the operator declares it with `--affected-area`. Declared areas are
+  additive and persist on the run.
+- When no text is available to derive affectedness, every conditional code is read. Unknown
+  never narrows.
+- A `not-triggered` skill stays resolved. An agent whose work reveals the domain reads it then
+  and records the domain as affected in its artifact.
+- The trigger table is data (`DOMAIN_SKILLS` in `runtime/task_context.py`); widening a
+  trigger is a runtime change, narrowing one is a governance change and needs a change
+  proposal.
+
 ## Conflict Resolution
 
 ### Conflict Types

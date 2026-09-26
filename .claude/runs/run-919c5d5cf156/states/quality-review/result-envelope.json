@@ -1,0 +1,131 @@
+{
+  "invocation_id": "inv-919c5d5cf156-05-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md"
+  ],
+  "structured_output": {
+    "package_id": "RP-2026-0006",
+    "review_reference": "CKA-04 (run run-919c5d5cf156, quality-review phase)",
+    "package_status": "complete",
+    "verdict": "approve-with-corrections",
+    "counts": {
+      "findings_by_severity": {
+        "critical": 0,
+        "high": 0,
+        "medium": 1,
+        "low": 1
+      },
+      "findings_total": 2,
+      "correction_requests": 2,
+      "open_questions": 1
+    },
+    "quality_checks": {
+      "S1": "pass",
+      "S2": "pass",
+      "S3": "pass",
+      "S4": "pass",
+      "S5": "pass",
+      "S6": "pass",
+      "S7": "pass",
+      "S8": "pass",
+      "D1": "pass",
+      "D2": "pass",
+      "D3": "pass",
+      "D4": "pass",
+      "D5": "pass",
+      "D6": "pass",
+      "P1": "pass",
+      "P2": "pass",
+      "P3": "pass",
+      "P4": "pass",
+      "P5": "pass",
+      "P6": "pass",
+      "P7": "pass",
+      "F1": "pass",
+      "F2": "pass",
+      "F3": "pass",
+      "F4": "pass",
+      "F5": "pass",
+      "R1": "pass",
+      "R2": "pass",
+      "R3": "pass",
+      "E1": "pass",
+      "E2": "pass",
+      "E3": "pass",
+      "E4": "pass",
+      "E5": "pass",
+      "A1": "pass",
+      "A2": "pass",
+      "A3": "pass",
+      "A4": "pass",
+      "A5": "pass",
+      "A6": "pass",
+      "C1": "pass",
+      "C2": "pass",
+      "C3": "pass",
+      "C4": "pass",
+      "C5": "pass",
+      "C6": "pass"
+    },
+    "validation_engine": {
+      "module": "runtime/review_package_validator.py",
+      "result": "passed",
+      "checks_run": 34,
+      "checks_failed": 0,
+      "not_machine_checkable": ["N1", "N2", "N3"],
+      "repairs_during_self_verification": [
+        "C6.2: a mention of the design's fact-register entry used a bare F-prefixed token the validator reads as an undefined finding reference; reworded, full check set re-run",
+        "F-001 location precision: line range corrected to the self-recorded-approval family definition (226-230); full check set re-run"
+      ]
+    },
+    "not_machine_checkable_obligations": {
+      "N1": "judged discharged: all seven review lenses were applied to both change items; every pinned property was re-demonstrated by executed positive and negative checks in this run (13/13 module tests, 342/342 full suite, tree byte-identical before and after); the known recall limits of check 4 are recorded as accepted risk in the package rather than left unfound",
+      "N2": "judged discharged: both findings anchor on written standards - the accepted decision record D-002 and the implementation-report contract's deviation-recording and declared-side-effects obligations; two candidate observations without a governing standard were not raised",
+      "N3": "judged discharged: no severity was lowered at any point in the run; both severities are the first matching row of the Stage 6 table and were set once"
+    },
+    "executed_evidence": [
+      "python -m unittest tests.test_content_contracts -v -> 13 tests, all pass; six discriminator exclusions itemized matching the account's T-004; zero inert gate-matrix rows",
+      "python -m unittest discover -s tests -> Ran 342 tests, OK; working tree unchanged before and after (version-control status compared)",
+      "python runtime/verify_manifests.py -> 2/2 CONFORMS",
+      "python runtime/verify_registry_coverage.py -> 6/6 COVERED",
+      "python runtime/verify_validators.py -> 6/6 COVERED",
+      "python runtime/verify_self_hosting.py -> 7/8 NOT SELF-HOSTING (confirms the account's pre-existing attribution in its R-002)",
+      "version-control status and diff -> exactly four documents modified, two inserted lines each (banner plus blank separator), one test file added, no runtime, workflow, registry, gate, or CI file touched"
+    ],
+    "claimed_not_confirmed": [
+      "recovery proof 41/41 (writes beneath the repository run-evidence area; not re-executed under this agent's command authority)",
+      "multi-phase proof 14/15 with the account's R-001 attribution (mutates tracked run evidence; not re-executed)",
+      "vertical-slice proof 10/10 (measures the most recently modified run, now this in-flight run; re-execution cannot reproduce the reported measurement)"
+    ],
+    "correction_request_owners": {
+      "CR-001": "architect",
+      "CR-002": "omn-dev-1-implement"
+    },
+    "handoffs": {
+      "review_gate_decision": "omn-qa (second owner per the gate matrix; this agent produced the evidence the gate assesses)",
+      "test_gaps_to_omn_qa": [
+        "structure-preserving reword demonstration (scope A-003, plan T-007)",
+        "CI-run-record discovery evidence with zero configuration change (scope A-001, plan T-006)"
+      ],
+      "documentation": "user-guide reconciliation or recorded no-impact review (scope A-009, plan T-008)"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-2-reviewer/system.md",
+    "agents/omn-dev-2-reviewer/identity.md",
+    "agents/omn-dev-2-reviewer/reasoning.md",
+    "agents/omn-dev-2-reviewer/execution.md",
+    "agents/omn-dev-2-reviewer/output.md",
+    "agents/omn-dev-2-reviewer/quality.md",
+    "agents/omn-dev-2-reviewer/examples.md",
+    "runs/run-919c5d5cf156/states/quality-review/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-919c5d5cf156/states/quality-review/artifacts/review-package.md",
+    "runs/run-919c5d5cf156/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

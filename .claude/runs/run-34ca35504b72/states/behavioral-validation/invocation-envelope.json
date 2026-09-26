@@ -1,0 +1,440 @@
+{
+  "invocation_id": "inv-34ca35504b72-04-001",
+  "run_id": "run-34ca35504b72",
+  "work_item_id": "run-34ca35504b72::behavioral-validation",
+  "idempotency_key": "sha256:c4d71461f1f3a132eb542413e364baae",
+  "state_id": "behavioral-validation",
+  "phase_index": 4,
+  "agent_id": "omn-qa",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-qa.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-qa/manifest.yaml",
+    "load_order": [
+      "agents/omn-qa/system.md",
+      "agents/omn-qa/identity.md",
+      "agents/omn-qa/reasoning.md",
+      "agents/omn-qa/execution.md",
+      "agents/omn-qa/output.md",
+      "agents/omn-qa/quality.md",
+      "agents/omn-qa/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-qa/system.md": "sha256:3e97eea7ec77003b26899aac0a9eddec",
+      "agents/omn-qa/identity.md": "sha256:9195b995eafd7f686fd5f97037f324fd",
+      "agents/omn-qa/reasoning.md": "sha256:424d6ef785f44f034fc61b9a3b56078c",
+      "agents/omn-qa/execution.md": "sha256:cff25dcd8fb4c7a92b261ef8c4fb130b",
+      "agents/omn-qa/output.md": "sha256:cfb5abc0ed0c9122e1e0c56be30038d3",
+      "agents/omn-qa/quality.md": "sha256:11fe13aef1252759858b98c89edc6ef9",
+      "agents/omn-qa/examples.md": "sha256:84f6d1663eea48190fce8ec74e909371"
+    },
+    "capabilities": [
+      "acceptance-validation",
+      "regression-assessment",
+      "test-strategy-definition",
+      "defect-classification",
+      "release-readiness-recommendation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Primary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "review-package",
+      "technical-design",
+      "scope-definition",
+      "bug-analysis",
+      "execution-plan",
+      "acceptance-criteria",
+      "validation-criteria",
+      "regression-targets",
+      "test-evidence",
+      "test-baseline",
+      "quality-thresholds",
+      "parity-checklist",
+      "performance-baseline",
+      "packaging-evidence",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "source_file": ".claude/runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "text": "# Architecture Context \u2014 CLAUDE.md Folder Descriptions Sync\n\nSupplied by the operator for the `scope-invariants-and-risk-profile` phase of the CLAUDE.md\nfolder-descriptions correction. The system under design is the framework in this repository;\nthe surface under change is its top-level orientation document.\n\n## Position of the changed surface\n\n`.claude/CLAUDE.md` is a documentation surface, not a resolved runtime surface: no registry\nrecord points at it, no validator parses it, and no workflow phase consumes it as an input\nartifact. It is, however, injected into every contributor session as project instructions, so\nits accuracy is a governance concern even though its content is load-bearing for humans and\nsession-context only.\n\n## Authoritative records the added descriptions must match\n\n| Folder to document | Authority on its contents |\n|---|---|\n| `domain-model/` | The five `*-specification.md` files it contains (agent, command, skill, workflow, memory) |\n| `prompts/` | `prompts/README.md` |\n| `registry/` | The five `registry/*.yaml` discovery indexes; `dependency-map.md` records their position |\n| `runtime/` | `runtime/README.md`, the current-state record of what is implemented |\n\n## Current-state properties the operator asserts\n\n1. `.claude/` contains sixteen directories; CLAUDE.md documents twelve.\n2. Every path CLAUDE.md currently cites resolves on the filesystem (verified 2026-08-27):\n   `config/self-hosting-profile.md`, `validation/framework-release-checklist.md`,\n   `runtime/verify_self_hosting.py`, `runtime/self_hosting.py`,\n   `templates/framework-change-proposal.md`.\n3. The framework's discovery registries are single-authority; CLAUDE.md describes them, it does\n   not duplicate their records.\n\n## Constraints the operator places on the design\n\n- The change must not create a second authority: descriptions summarize, they do not restate\n  registry or specification content.\n- The diff is confined to `## Folder Descriptions`. A correction that finds defects elsewhere in\n  CLAUDE.md names them for a separate routed change rather than folding them in.",
+        "digest": "sha256:36a5a86305d4a0bcfe63560e13e3c0f3"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-34ca35504b72/states/refactor-implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-34ca35504b72/states/refactor-implementation/artifacts/implementation-report.md",
+        "text": "# Implementation Report: Orientation Document Folder Descriptions Sync\n\n```yaml\nimplementationReport:\n  reportId: IR-2026-0008\n  changeReference: >-\n    folder-descriptions-sync, implemented at\n    run-34ca35504b72::refactor-implementation\n  sourceInputs:\n    - type: validation-report\n      reference: runs/run-34ca35504b72/states/safety-net-establishment/artifacts/validation-report.md\n    - type: technical-design\n      reference: runs/run-34ca35504b72/states/scope-invariants-and-risk-profile/artifacts/technical-design.md\n    - type: change-request\n      reference: runs/inputs/*-md-folder-sync-change-request.md\n    - type: business-intent\n      reference: runs/inputs/*-md-folder-sync-business-intent.md\n    - type: architecture-context\n      reference: runs/inputs/*-md-folder-sync-architecture-context.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: provisional\n  workflowPhase: refactor-implementation\n  verificationStatus: partially-verified\n  inputDigest: sha256:6339224bf55b0319426b6df9bf6bf828\n  contextDigest: sha256:8cb5fd5cf493e2c79a982b48f28b0793\n```\n\n## Metadata\n\n- Report ID: IR-2026-0008\n- Change reference: folder-descriptions-sync, implemented at run-34ca35504b72::refactor-implementation\n- Workflow phase: refactor-implementation\n- Status: provisional\n- Verification status: partially-verified\n- Review status: pending-review\n\nNaming note, continuing the convention the technical design established and the safety-net\nvalidation report followed: the changed file is called \"the orientation document\" throughout,\nand the leading token of three supplied input filenames is elided, because the file name and\nthose filenames each embed a token the model-independence rule forbids reproducing. The\nchanged file is the project-instructions document at the framework payload root, the one\ncarrying the `## Folder Descriptions` section; it is identified without being named by its\ncontent digests, `4372781420e4ea81327d737f8be44603` over 2794 bytes before the change and\n`59a93ad68e3ddacb8e4e157c2545d676` over 3215 bytes after it. Repository paths are cited\npayload-relative, without the leading payload-directory prefix, so a command recorded below as\n`python runtime/verify_recovery.py` was invoked from the repository root with that prefix\npresent. Identifiers of the `D-nnn`, `P-nnn`, `M-nnn`, `F-nnn`, `A-nnn`, `AC-nnn`, and `DF-nnn`\nfamilies belong to the upstream technical design and validation report; the `C-nnn`, `T-nnn`,\n`V-nnn`, `R-nnn`, and `Q-nnn` families in this report are this report's own namespace, so\nupstream constraints, risks, and questions carrying those prefixes are named descriptively\nhere rather than by their upstream token.\n\n## Implementation Summary\n\n- Change intent: the folder inventory in the orientation document now describes every directory at the framework payload root, sixteen of sixteen, where before it described twelve and silently omitted the framework's domain-specification, prompt-pattern, discovery-index, and executable-runtime directories.\n- Approach taken: the additive in-place extension the design selected as its option O-001, implemented as four new one-line rows inserted into the existing list at the positions a reader scanning the tree would reach them, each row authored against the folder's own named authority under design step P-001 and each pre-existing row left untouched; no other section, file, or surface was edited.\n- Design reference: design decisions D-001 and D-002, realized under sequencing steps P-001 and P-002 against impacted module M-001, with the pre-change comparison reference taken from the safety-net validation report's baseline block.\n- Out of scope: every other section of the orientation document and every other file in the repository, left unchanged because the design's diff-confinement constraint makes any edit outside the section a rejection condition; the change proposal the design's final sequencing step P-004 requires, which is a governance record under `proposals/` that this phase's write scope excludes and whose prerequisite is the verification recorded here; the discrepancy the design records about `dependency-map.md`, which the design routes as a separate change; and the accuracy and granularity judgements the design reserves to the reviewing roles, which are recorded below as unverified rather than decided here.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | the orientation document at the framework payload root, section `## Folder Descriptions` | modified | Add four one-line rows describing `domain-model/`, `prompts/`, `registry/`, and `runtime/`, completing the folder inventory at sixteen of sixteen without altering any pre-existing row | `D-001`, `D-002`, `P-002` (module `M-001`) |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | Pre-change regression baseline: every command in this table executed against the unmodified document, establishing the comparison reference; the document's own full-content digest reproduced the value the safety-net report pinned, proving the file was untouched between the two phases | regression | `C-001` | the commands of `T-002` through `T-010`, executed at 02:16Z to 02:19Z before any edit | pass |\n| `T-002` | Completeness: every directory at the framework payload root has a row, and the undocumented set is empty | static | `C-001` | inline `python` probe enumerating directory entries at the payload root and differencing them against the row keys parsed from the section | pass |\n| `T-003` | Additivity: the twelve pre-existing rows are all present, unchanged, and in their pre-change relative order | static | `C-001` | inline `python` probe re-deriving the row-key order and comparing its digest against the pinned baseline `6a0c112e6f2e9f0f3ef92e728c8216f4` | pass |\n| `T-004` | Diff confinement: the document's content outside the section is byte-identical to its pre-change content, and the level-2 section list is unchanged | static | `C-001` | inline `python` probe digesting the out-of-section content and the heading list, compared against the values pinned before the edit | pass |\n| `T-005` | The diff is purely additive and lands only inside the section: seven inserted lines, no deleted and no modified line, every hunk within the section's line range | static | `C-001` | `git diff --stat` and `git diff -U0` restricted to the changed file | pass |\n| `T-006` | Path resolvability: every backtick-quoted path token the document cites exists on the filesystem, including the four newly cited folders | static | `C-001` | inline `python` probe extracting each backtick-quoted token and testing it for existence | pass |\n| `T-007` | The governance-prose content contracts still hold over the framework's documents | regression | `C-001` | `python -m unittest tests.test_content_contracts` | pass |\n| `T-008` | Packaged-payload parity still holds, confirming the change requires no bundle re-sync | regression | `C-001` | `python -m unittest tests.test_bundled_payload` | pass |\n| `T-009` | The memory-optimization tool, the only module in the repository that names the changed document, is unaffected | regression | `C-001` | `python -m unittest tests.test_optimize_memory` | pass |\n| `T-010` | Verifier verdict parity: each of the seven verification scripts reproduces the summary line it produced before the change, including the two that fail at baseline for reasons this change did not introduce | integration | `C-001` | `python runtime/verify_manifests.py`, `python runtime/verify_registry_coverage.py`, `python runtime/verify_validators.py`, `python runtime/verify_recovery.py`, `python runtime/verify_vertical_slice.py`, `python runtime/verify_multi_phase.py`, `python runtime/verify_self_hosting.py`, each from the repository root | pass |\n| `T-011` | Attribution control for the two scripts that reported a non-baseline verdict on one measurement pass: both reproduce their baseline verdicts with the change in place, and both also pass with the pre-change content restored, so neither movement is attributable to this change | integration | `C-001` | `python runtime/verify_recovery.py` and `python runtime/verify_vertical_slice.py`, each executed with the changed content in place and again with the pre-change content temporarily restored | pass |\n\n## Verification Results\n\n- Verification method: the safety-net validation report's monitoring instruction was followed literally: the full declared regression surface was executed against the unmodified document to fix the comparison reference, the single additive edit was then made, and the identical surface was re-executed and compared at summary-line granularity, which is the granularity that report's own defect record `DF-001` establishes as the stable one. Structural conformance to the design's constraints was measured by inline probes over the document itself, each computing a digest or a set difference against a value pinned before the edit rather than against a description of it. The two scripts that moved were investigated to a cause and controlled for rather than explained away.\n- Commands executed: `python runtime/verify_manifests.py`; `python runtime/verify_registry_coverage.py`; `python runtime/verify_validators.py`; `python runtime/verify_recovery.py`; `python runtime/verify_vertical_slice.py`; `python runtime/verify_multi_phase.py`; `python runtime/verify_self_hosting.py`; `python -m unittest tests.test_content_contracts`; `python -m unittest tests.test_bundled_payload`; `python -m unittest tests.test_optimize_memory`; `git status --porcelain`; `git diff --stat` and `git diff -U0` restricted to the changed file; and inline `python` probes over the document computing its section inventory, row order, out-of-section digest, directory coverage, and path-token resolvability. Each was run from the repository root, before the edit and again after it. The full root suite was deliberately not run, because one of its modules rewrites two generated documents in place, which would be a repository write this phase must not cause.\n- Result summary: 11 evidence entries executed, 11 passed, 0 failed, 0 not-run. Underneath them, 55 unit tests executed across three modules with 55 passed and 0 failed, and 88 verification checks executed across seven scripts with 86 passed and 2 failed, both failures being the pre-existing ones the baseline recorded before the edit and reproduced unchanged after it.\n- Unverified areas: whether each of the four added descriptions is accurate against its folder's named authority, and whether each stays at summary granularity in the register of the existing rows, which no executed check settles and which the design reserves to `omn-dev-2-reviewer` and to the Invariant Gate; and whether the completed inventory stays complete, which no executed check in either verification surface the CI workflow discovers can assert, because no such check reads the changed document.\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | The insertion positions and the authored wording of the four rows in `C-001` were decided at implementation: the rows were interleaved into the existing list rather than appended, placing the domain-specification row before the contract rows it governs, the prompt-pattern row beside the reusable-knowledge rows, and the discovery-index and runtime rows after the command row, in the order a reader following the routing story meets them | Design decision D-002 and the design's negotiable placement constraint, which fix the content requirement and the insertion principle but leave the text and the position to implementation | The design states the row content as a requirement and says explicitly that the text is authored at implementation under step P-001; interleaving is what the accepted insertion principle asks for, and the pre-existing rows keep their relative order under it, which `T-003` measured rather than assumed | not-required; the latitude is granted by the design element itself, and the register and granularity judgement it leaves open is carried to the Invariant Gate as `Q-003` |\n| `V-002` | No durable automated check over the section was added alongside `C-001`, so the completeness the change establishes is re-measurable only by re-running the probes this report records, not by a check the CI workflow discovers | The design's reuse survey, which records verdict parity over the existing scripts as the regression measure and concludes that no new validation structure is required | Adding one would widen the change set past the accepted change and past the diff-confinement constraint that makes any edit outside the section a rejection condition; separately, the safety-net phase established that no path satisfies both this phase's write scope and either verification surface the CI workflow discovers, so no such check is authorable from within this phase's authority | not-required; the departure sits inside the design's own accepted tradeoff, and the underlying write-scope question is carried forward unresolved as `Q-002` |\n\n## Boundary Compliance\n\n- Module boundaries preserved: the change touches one documentation section and nothing else. The design's no-change-verified modules were each read as an authority and none was modified: the discovery-index directory, the executable-runtime directory, the domain-specification directory, and the prompt-pattern directory are described by the new rows and are untouched by them, which `T-005` confirms by showing the only changed lines in the repository attributable to this phase sit inside the section. The document remains a summary layer: each new row names what its folder holds and defers to that folder's own authority, restating no record those authorities hold.\n- Public interface changes: none. No contract, registry record, routing row, gate, validator, or workflow phase resolves the changed document, so no interface exists to change; the verification scripts that read the framework's resolved surfaces reproduce their pre-change verdicts under `T-010`.\n- Data or migration impact: none. There is no schema, no stored data, and no migration; the change is reversible by deleting the four added rows, with no behavioural or contractual effect.\n- Declared side effects: three files were written by this invocation \u2014 the orientation document at the framework payload root (`C-001`), `runs/run-34ca35504b72/states/refactor-implementation/artifacts/implementation-report.md`, and `runs/run-34ca35504b72/states/refactor-implementation/result-envelope.json`. One further effect is declared because it is real rather than because it persists: the recovery verification script creates and then deletes its own injected run directories under `runs/` as part of how it induces the failures it proves, so running it, as the safety net's monitoring instruction requires, causes transient writes inside this phase's write-exclusion zone. The effect is net zero and was verified so: the tracked and untracked state of `runs/` was enumerated before and after, and no injected directory survives. During the phase one path appeared under `proposals/` that this invocation did not write and must not be attributed to it \u2014 a change proposal recording a different run, written by concurrent activity in this shared working tree at 02:29Z.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | The inventory drifts out of date again as directories are added, because an additive manual edit carries no mechanical guarantee of completeness | medium over time | low; the same class of defect this change corrects, recurring | In place: the completeness probe of `T-002` is recorded here with its method, so any later run can re-execute it, and the count it asserts is stated in the report the Implementation Gate reads. Nothing enforces it automatically; that gap is `R-002` |\n| `R-002` | A defect introduced into the section in future goes undetected, because no check in either verification surface the CI workflow discovers reads the changed document | low | medium; the document is injected into every contributor session as authoritative instructions, so a wrong row misleads broadly | In place: nothing mechanical. The safety-net phase established that no authorable path satisfies both this phase's write scope and either discovered surface, and carried the question forward; it is restated here as `Q-002` rather than treated as closed |\n| `R-003` | The two verification scripts that fail at baseline are read as regressions of this change by a later comparison | low | low; a false attribution costs an investigation, not a defect | In place: both failures were measured before the edit and reproduced unchanged after it under `T-010`. The multi-phase script fails its `M6` check and the self-hosting script fails its `S8` check, the latter because runs in flight are unaccounted until their change proposals exist, which is a condition this phase cannot clear and does not cause |\n| `R-004` | A future parity comparison against the recovery verification script shows a difference no change caused, because that script is intermittently unstable | medium | low; it costs a re-measurement | In place: the instability was characterized rather than absorbed. It crashes in its backoff-wait helper when a queued item carries no availability timestamp, which is a timing race in the script and not a function of any document content. The verdict was reproduced on three consecutive executions after the change, and the control in `T-011` shows the same movement occurs independently of this change |\n| `R-005` | A repository-wide measurement taken during this phase is read as evidence about this change, when the working tree was shared with concurrent activity throughout | high, and already realized | low, given the controls | In place: no claim here rests on a whole-repository measurement. Whole-tree status was recorded with its timestamp and treated as contaminated; the two paths that appeared during the phase were enumerated individually and attributed, one to this change and one to concurrent activity; and every verification claim rests on per-file diffs, digests pinned before the edit, and targeted module executions |\n\n## Handoff Notes\n\n- Reviewer focus areas: the four added rows themselves, which carry the only judgement this phase could not settle \u2014 whether each description is accurate against its folder's authority, checkable against the five specification files in the domain-specification directory, the prompt directory's own README, the five discovery indexes, and the runtime directory's README; and whether each stays at summary granularity in the register of the existing twelve rows, which is the risk the design attaches to its own concern about a second authority forming. The insertion positions recorded under `V-001` are the other place independent judgement is worth spending, since the placement principle is stated but the positions were chosen here. The structural constraints need no re-derivation: `T-002` through `T-006` measured each of them against values pinned before the edit.\n- Follow-up work: the change proposal the design's step P-004 requires, which links this run's artifacts and is the governance record of the verified change, and which this phase's write scope excludes; the durable completeness check that `R-001` and `R-002` leave unmitigated, which cannot be authored until the write-scope question in `Q-002` is answered; the `dependency-map.md` discrepancy the design recorded for separate routing, which the new discovery-index row makes more visible by describing indexes that map does not mention; and the timing race in the recovery verification script characterized under `R-004`, which is a defect in that script and belongs to its own routed change.\n- Documentation impact: the change is itself the documentation correction, and it invalidates no other document. The orientation document's Architecture and Contributor Usage sections already referenced the runtime directory that its own inventory omitted; that inconsistency is now resolved by the inventory rather than by touching either section, both of which are byte-identical to their pre-change content under `T-004`. No release note, user-facing document, or generated document is affected, and none was regenerated.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | The design's verdict-parity constraint requires the verification scripts to keep their current verdicts and separately that no metric regresses. The self-hosting script still reports one unaccounted run, and the change proposal the design's step P-004 requires would remove the last such input and flip that script from failing to passing, which violates the first reading and satisfies the second. Which reading governs when the downstream phase judges parity? Raised by the safety-net phase and unresolved at this one; both baselines are recorded, so either answer is decidable without re-measurement | No | architect | `C-001` |\n| `Q-002` | This phase's write scope for test files is confined to the framework payload tree, while both verification surfaces the CI workflow discovers lie outside it, so no durable check over the changed section is authorable from within this phase's authority. Which surface should the grant name? Until it is answered, `R-001` and `R-002` stay unmitigated and `V-002` stands | No | architect | `C-001` |\n| `Q-003` | Are the four added descriptions accurate against their named authorities, and does each stay at summary granularity in the register of the existing rows without becoming a second authority beside the records it summarizes? This is the confirmation the change request asked for and the design routed away from the producing roles; this agent verified each row against its authority while authoring it, but the confirming judgement is not this agent's to record | No | omn-dev-2-reviewer | `C-001` |\n| `Q-004` | The design's step P-004 requires a change proposal under `proposals/` linking this run's artifacts, and this phase's write scope excludes that directory. Which role produces it, and at which phase, so the self-hosting profile's governance requirement is met for this run? | No | omn-orchestrator | `C-001` |",
+        "digest": "sha256:2043d0148e8669a09e1b7a5c233c0fa0",
+        "produced_by": "refactor-implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what changed and what it was meant to achieve: an implementation report for a delivered change, a review package for a `review-pull-request` or `release` run, or a technical design for the `safety-net-establishment` phase, which runs before any change exists. Without one there is nothing to validate against, and validating anyway would mean measuring the system against this agent's own reading of what it was supposed to do."
+  },
+  "prior_validation": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-34ca35504b72/states/refactor-implementation/artifacts/implementation-report.md",
+      "produced_by": "refactor-implementation"
+    }
+  ],
+  "context_slice": {
+    "frozen_at": "2026-09-06T02:50:33Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:96bb5cd08754f6068242735b8911d386",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:f93f380e7676198715c9c75d720ab82c",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "workflows/refactor.md",
+        "digest": "sha256:7a364f76b2347a77f5fb16e67c727416",
+        "supplies": "framework-context"
+      },
+      {
+        "path": "templates/validation-report.md",
+        "digest": "sha256:289a25ebf7d54fb95ddf4fd44925d038",
+        "supplies": null
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0f698e4d7d6e1762e3a2c5dbc558babb",
+        "supplies": null
+      }
+    ],
+    "context_digest": "sha256:c9d4ec98c4acfeb2217759b8d060a349",
+    "input_digest": "sha256:0cf0cd637ae2ea8ee7c10a8dfd50f289",
+    "inputs": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "source_file": ".claude/runs/inputs/claude-md-folder-sync-architecture-context.md",
+        "digest": "sha256:36a5a86305d4a0bcfe63560e13e3c0f3"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-34ca35504b72/states/refactor-implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/runs/run-34ca35504b72/states/refactor-implementation/artifacts/implementation-report.md",
+        "digest": "sha256:2043d0148e8669a09e1b7a5c233c0fa0"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/technical-design.md",
+      "templates/validation-report.md"
+    ],
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-34ca35504b72/states/behavioral-validation/artifacts/validation-report.md",
+      "runs/run-34ca35504b72/states/behavioral-validation/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the validation report"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "revise the technical design rather than raising a defect against it",
+      "define, widen, or narrow product scope",
+      "relax, reinterpret, or waive an acceptance criterion in order to reach a pass",
+      "judge code quality, maintainability, or standards conformance, which belongs to omn-dev-2-reviewer",
+      "decompose work into tasks, which belongs to planner",
+      "record a merge, release, or deployment decision",
+      "decide a gate that assesses evidence this agent produced",
+      "validate a change this agent authored",
+      "record a criterion as met without evidence that demonstrates it",
+      "pass while a critical or high defect stands open, or while required evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "validate delivered behavior against the acceptance criteria it was accepted under",
+        "define a validation strategy proportionate to the risk the change carries",
+        "execute the repository's own functional, integration, and regression checks",
+        "establish and strengthen a safety net of checks before a structural change proceeds",
+        "assess behavioral parity between a pre-change and post-change baseline",
+        "judge whether executed checks reach the behavior a change altered",
+        "record each defect with severity, category, location, reproducibility, and status",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "revise the technical design rather than raising a defect against it",
+        "define, widen, or narrow product scope",
+        "relax, reinterpret, or waive an acceptance criterion in order to reach a pass",
+        "judge code quality, maintainability, or standards conformance, which belongs to omn-dev-2-reviewer",
+        "decompose work into tasks, which belongs to planner",
+        "record a merge, release, or deployment decision",
+        "decide a gate that assesses evidence this agent produced",
+        "validate a change this agent authored",
+        "record a criterion as met without evidence that demonstrates it",
+        "pass while a critical or high defect stands open, or while required evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "scope": [
+          "**/*Tests/**",
+          "**/*.Tests/**",
+          "**/*Test/**",
+          "**/*.Tests.*",
+          "**/test_*.py",
+          "**/*_test.py",
+          "**/*.test.*",
+          "**/*.spec.*"
+        ],
+        "scopePhases": [
+          "refactor/safety-net-establishment"
+        ],
+        "scopePhasesRationale": "This grant is automated test files only, and only in the `safety-net-establishment` phase of refactor, where establishing the safety net is the phase's declared output. Production source is never written in any phase, and this grant does not apply outside the one phase named above.",
+        "rationale": "QA judges behavior, not code, so it does not author the change it validates. One phase is the exception the framework declares deliberately: a refactor cannot be validated at all until a safety net exists, and building that net is the phase's whole purpose. Even there the boundary holds, because a test that pins existing behavior is not the change under validation. Every other phase reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the validation report"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same criterion result set, the same defect set, the same severity assignment, the same verdict, and the same declared report status.",
+      "identifierSchemes": {
+        "acceptanceCriteria": "AC-<zero-padded-sequence>",
+        "defects": "DF-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Acceptance criteria keep the order of the source that declared them. Defects are ordered by descending severity; ties break toward the lower location in lexical order.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, criteria, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "validation-report.md",
+    "artifact_path": "runs/run-34ca35504b72/states/behavioral-validation/artifacts/validation-report.md",
+    "template_ref": "templates/validation-report.md",
+    "contract_ref": "agents/omn-qa/output.md",
+    "quality_ref": "agents/omn-qa/quality.md",
+    "validator": "validation_report_validator",
+    "result_envelope_path": "runs/run-34ca35504b72/states/behavioral-validation/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-09-06T02:50:33Z"
+}

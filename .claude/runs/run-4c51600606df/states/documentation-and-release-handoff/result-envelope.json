@@ -1,0 +1,157 @@
+{
+  "invocation_id": "inv-4c51600606df-06-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-4c51600606df/states/documentation-and-release-handoff/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "artifact": "release-note.md",
+    "releaseId": "RN-CKA-06-run-4c51600606df",
+    "communicationBasis": "release-handoff",
+    "declaredReleaseVerdict": "released",
+    "declaredArtifactStatus": "complete",
+    "verdictBasis": "Stage 8 table row 'every change in scope reached its target environment': the phase delivers to the repository working tree, where the implementation report (C-001 to C-011) records the full eleven-file change set present and the Verification Gate records every must-have criterion executable in that environment met. No deployment status is required by the release-handoff basis. The commit to the default branch, the hosted CI run and the pending proposal are published as known issues K-003, K-002 and K-007 and stated in Environment and Deployment considerations, not folded into the verdict.",
+    "audience": {
+      "source": "inferred",
+      "basis": "no stakeholder list supplied; inferred from the phase (Closure Gate owners) and the scope definition's Affected users",
+      "recipients": [
+        "omn-orchestrator (Closure Gate decider; commit question)",
+        "handbook contributors",
+        "readers of docs/user-guide.html",
+        "owner of follow-on ticket CKA-12",
+        "omn-qa (first-hosted-run monitoring)",
+        "omn-dev-1-implement (CR-002, FU-012)",
+        "omn-tech-lead (release decision, CKA-03 flip)",
+        "omn-product-owner (A-013)"
+      ]
+    },
+    "knownIssues": {
+      "count": 7,
+      "ordering": "review package first in its own order (F-009 finding, then its unmitigated cross-platform risk, then its Q-003 commit question), then the Verification Gate rationale in its order (A-013 not-met, attempt-3 hygiene observation, S8 accounting); K-005 sits at the review package's Review Scope mention of FU-012, which precedes its findings only as an exclusion, so it follows the gate-derived A-013 entry",
+      "ids": ["K-001", "K-002", "K-003", "K-004", "K-005", "K-006", "K-007"],
+      "allCarryImpactWorkaroundTracking": true
+    },
+    "publishedStatements": {
+      "count": 88,
+      "granularity": "sentence-level statements about delivered behaviour, validation, risk, history and handoff across the seven sections",
+      "traceBySection": {
+        "Metadata": ["run-ledger.json", "events.jsonl", "state.json", "implementation-report.md (V-004, Q-001)", "review-package.md (Q-003, Review Scope)", "scope-definition.md (X-004)"],
+        "Highlights": ["implementation-report.md (C-003, C-004, C-005, C-010, C-011, Public interface changes)", "review-package.md (F-001, F-003, F-006, F-008)", "run-ledger.json (Verification Gate A-005, A-006, A-009; Design Gate Q-006; Review Gate rulings)", "docs/user-guide-reconciliation.md (sections 1 to 4)", "scope-definition.md (D-004)"],
+        "Technical Changes and Compatibility": ["technical-design.md (D-001 to D-008, section 6, Rollout and Rollback, Appendix B)", "implementation-report.md (C-001, C-003, C-005, C-007, C-008, C-010, Public interface changes, Data or migration impact, T-009, T-012, T-013)", "review-package.md (F-006, F-008, Architecture rules)", "run-ledger.json (Design Gate conditions and Q-005; Planning Gate Q-003; Verification Gate A-002, A-008, A-009)", "scope-definition.md (X-002)", "README.md lines 429-434", "docs/USER-GUIDE.md lines 1060-1071"],
+        "Operational Notes": ["implementation-report.md (Q-001, T-005, R-004, R-008)", "review-package.md (Q-003, Review Scope, Monitoring required)", "run-ledger.json (Verification Gate)", "technical-design.md (Rollout and Rollback, section 6)", "adoption backlog under docs/ (CKA-06 Status)", "framework-change-proposal-FC-013.md (O-005)"],
+        "Validation Summary": ["run-ledger.json (Verification Gate, Review Gate and its decision_history, Design Gate)", "events.jsonl (E-0063, E-0065, E-0066, E-0084, E-0086)", "recovery-ledger.json (RB-run-4c51600606df-review-gate-01)", "review-package.md (Test Adequacy Assessment, Accepted risk, Unmitigated risk, Verdict)", "implementation-report.md (R-001)", "scope-definition.md (D-006, X-006, A-003, A-004, A-008, A-010)", "framework-change-proposal-FC-013.md (run-3e6f6a248b99 as the runtime fix)", "README.md and docs/USER-GUIDE.md (direct read for A-014)"],
+        "Known Issues": ["review-package.md (F-009, CR-002, Q-003, Review Scope, Residual Risk)", "run-ledger.json (Verification Gate rationale; Design Gate Q-006; Scope Gate condition 2)", "implementation-report.md (V-004, Q-001)", "framework-change-proposal-FC-013.md (O-005, O-010)", "adoption backlog under docs/ (CKA-06 Status)"],
+        "Communication": ["scope-definition.md (Affected users)", "adoption backlog under docs/ (CKA-12, CKA-06 Status)", "implementation-report.md (R-004, V-008, R-008)", "review-package.md (Review Scope diff figures)", "docs/user-guide-reconciliation.md (section 5)", "run-ledger.json (rollback authorisation Q-005 ruling)", "state.json and run-ledger.json (runtime versions)", "framework-change-proposal-FC-013.md (O-015)"]
+      }
+    },
+    "changesByStage5Class": {
+      "breaking": 1,
+      "contract": 3,
+      "operational": 3,
+      "feature": 3,
+      "fix": 2,
+      "improvement": 2,
+      "internal": 5,
+      "detail": {
+        "breaking": ["docs/user-guide.html loses its hand-editing contract; direct edits are discarded and fail the drift check (published in Backward compatibility notes with the required action)"],
+        "contract": ["source handbook authoring grammar (additive)", "published handbook becomes a build output", "tools/render_user_guide.py command-line surface"],
+        "operational": [".github/workflows/verify.yml drift step", ".gitattributes -text pin", "landing commit and first-hosted-run monitoring"],
+        "feature": ["renderer with --check and --root", "generated-do-not-edit banner", "CI drift step stopping a stale page"],
+        "fix": ["one-sided content drift resolved in both directions", "ordering drift resolved to the source's order"],
+        "improvement": ["published wording follows the source (labels, strapline, chain labels regenerated)", "parity docstring corrected"],
+        "internal": ["tests/fixtures/user-guide-pre-change.html", "tests/fixtures/user-guide-reconciled.html", "tests/test_render_user_guide.py", "docs/user-guide-reconciliation.md and -diff.md", "adoption backlog Status line"]
+      }
+    },
+    "compatibilityPosition": "Every consequence published is taken from the technical design's section 6 compatibility notes (architect) and the implementation report's Public interface changes; none was inferred here. No compatibility statement was escalated.",
+    "disagreementsResolved": [
+      "Implementation report (attempt 2) says the README regeneration instruction remains to be added, and the Verification Gate recorded A-014 partial with README.md lacking it; README.md lines 429-434 and docs/USER-GUIDE.md lines 1060-1071 now carry it. Published as delivered and present, with the gate-time standing and the post-gate landing both stated; not a contradiction, a later correction the gate itself sequenced.",
+      "Review package records F-002 open; the later Verification Gate records F-002 closed on confirmed evidence. Published as closed, attributed to omn-qa.",
+      "Implementation report treats the operator's 473-test full-suite figure as supplied context; omn-qa later established 474 OK at both gates. Published as 474, attributed to omn-qa."
+    ],
+    "staleContent": [
+      {"document": "tests/test_ci_workflow.py parity docstring", "status": "corrected by the change (C-011)"},
+      {"document": "README.md and docs/USER-GUIDE.md regeneration instruction", "status": "present on the tree; gate recorded it absent at 01:02:38Z; landed after as the sequenced operator-dispatched correction"},
+      {"document": "docs/USER-GUIDE.md lines 752-753", "status": "stale from the runtime fix, not this change; published as K-005, owner omn-dev-1-implement (FU-012)"},
+      {"document": "adoption backlog under docs/ (CKA-06 Status, Markdown and CSV)", "status": "accurate now; becomes stale at the Closure Gate decision; correction proposed as content in Support handoff notes (6), owner omn-orchestrator; not applied"}
+    ],
+    "openQuestions": [
+      {"question": "Who creates the commit that lands the eleven-file change set without the foreign files on the shared tree?", "routedTo": "omn-orchestrator", "attachedTo": "K-003; Deployment considerations"},
+      {"question": "Closure of CR-002 (key=value brace token) and FU-012 (handbook lines 752-753)", "routedTo": "omn-dev-1-implement", "attachedTo": "K-001, K-005"},
+      {"question": "Observation of the first hosted two-leg run settling A-003, A-004, A-010", "routedTo": "omn-qa", "attachedTo": "K-002; Monitoring and alerts; Post-release checks"},
+      {"question": "Authoring of change proposal FC-014 and the post-closure backlog Status correction", "routedTo": "omn-orchestrator", "attachedTo": "K-007; Support handoff notes (6)"},
+      {"question": "Release decision and the CKA-03 advisory-to-required flip", "routedTo": "omn-tech-lead", "attachedTo": "Release owner; K-002"}
+    ],
+    "qualityChecks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass",
+      "P1": "pass", "P2": "pass", "P3": "pass", "P4": "pass", "P5": "pass", "P6": "pass",
+      "R3": "pass", "X1": "pass", "X2": "pass", "X3": "pass", "X4": "pass",
+      "R1": "pass", "R2": "pass", "R4": "pass", "R5": "pass", "R7": "pass", "V1": "pass", "V2": "pass", "V3": "pass",
+      "K1": "pass", "K2": "pass", "K3": "pass", "K4": "pass", "K5": "pass", "K6": "pass",
+      "R6": "pass", "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+      "A7": "pass", "A8": "pass", "A9": "pass", "A10": "pass", "A11": "pass", "A12": "pass", "A13": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+    },
+    "qualityChecksRun": 60,
+    "qualityChecksPassed": 60,
+    "qualityCheckNotes": {
+      "S4": "exactly one fenced block, the metadata block; the Validation Engine's contract for this artifact permits one, so the output module's ceiling of four was not used",
+      "D5": "sourceInputs lists the sixteen inputs read in full; runtime validator modules, the agent module set, the template and the release context were read as contract and context, not as publication inputs, and are not listed; V3 is not applicable because the status is complete",
+      "C3": "the artifact was searched for every vendor token before writing; framework paths are written without the dot-directory prefix; the backlog is cited by description rather than by its file name; the handbook's in-editor host section is not quoted",
+      "A12": "no command executed; every figure is quoted from a supplied artifact or a direct read of an existing document",
+      "A13": "the Closure Gate is left undecided for omn-orchestrator; no decision is recorded or implied"
+    },
+    "notMachineCheckableObligations": {
+      "N1": "discharged: every delivered-behaviour statement traces to the attempt-2 implementation report, the attempt-2 review package or a gate rationale; intent-only sources (scope, design) supply context and the compatibility consequence only",
+      "N2": "discharged: no prior release note exists for this change, so nothing was carried forward; the four stale-content findings above were each either corrected by the change, verified present on the tree, published as a known issue, or proposed as content for the owning role",
+      "N3": "discharged: every user-visible change (renderer and check, banner, CI step, both directions of content drift, the three reorderings, the label and strapline regenerations, the docstring) is represented at its Stage 5 size; fixtures, tests, the reconciliation records and the backlog line are classified internal and not published as user-visible"
+    },
+    "lifecycle": "Initialization -> ContextLoading -> Execution -> Completion -> Retirement; no Waiting, Delegation, Retry or Failure state entered",
+    "reasoningStages": "Stages 1 to 11 executed in order; none skipped",
+    "runHistoryStated": {
+      "openedUnderRuntime": "0.5.0",
+      "closedUnderRuntime": "0.6.0",
+      "reviewGateRejected": "2026-09-06T09:05:36Z (E-0063) by omn-qa on F-001",
+      "rollback": "RB-run-4c51600606df-review-gate-01, 2026-09-07T14:21:28Z (E-0065, E-0066)",
+      "reviewGateApproved": "2026-09-08T00:55:08Z (E-0084) on attempt 2",
+      "verificationGateApproved": "2026-09-08T01:02:38Z (E-0086)",
+      "idempotencyKeys": "attempt 2 sha256:4253e368330e942c84ac0f4dc165cefd vs attempt 1 sha256:2862f1c31a6a2a1df4588f1332bf72ea, per architect ruling Q-005 in the rollback authorisation"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/manifest.yaml",
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    "agents/omn-documentation/examples.md",
+    "templates/release-note.md",
+    "runs/run-4c51600606df/states/documentation-and-release-handoff/invocation-envelope.json",
+    "runs/run-4c51600606df/states/documentation-and-release-handoff/dispatch-prompt.md",
+    "runs/run-4c51600606df/states/quality-review/artifacts/attempt-2/review-package.md",
+    "runs/run-4c51600606df/states/implementation/artifacts/attempt-2/implementation-report.md",
+    "runs/run-4c51600606df/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "runs/run-4c51600606df/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-4c51600606df/run-ledger.json",
+    "runs/run-4c51600606df/recovery-ledger.json",
+    "runs/run-4c51600606df/state.json",
+    "runs/run-4c51600606df/events.jsonl",
+    "runs/run-4c51600606df/gates/review-gate/failure-envelope.json",
+    "runs/run-4c51600606df/gates/verification-gate/failure-envelope.json",
+    "docs/user-guide-reconciliation.md",
+    "docs/user-guide-reconciliation-diff.md",
+    "docs/USER-GUIDE.md",
+    "README.md",
+    "the adoption backlog under docs/ (Markdown and CSV forms)",
+    "proposals/framework-change-proposal-FC-013.md"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-4c51600606df/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "runs/run-4c51600606df/states/documentation-and-release-handoff/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

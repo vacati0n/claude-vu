@@ -108,6 +108,18 @@ jobs:
       - name: Run the unit-test suite by discovery
         run: python -m unittest discover -s tests
 
+      # Surface 1b: the handbook drift check, over the ONE known build output.
+      # Naming a build output is not a curated file list -- no test or verifier
+      # filename appears here and adding either still needs no CI edit. It runs
+      # even when the suite above failed, so one push reports both surfaces
+      # instead of costing two round trips; `!cancelled()` rather than
+      # `always()`, because a superseded pull-request run is cancelled and must
+      # stay cancelled. The job still fails when either step fails: this masks
+      # nothing and introduces no continue-on-error.
+      - name: Check the published handbook is not stale
+        if: ${{ !cancelled() }}
+        run: python tools/render_user_guide.py --check
+
   # Surface 2: one job per discovered verifier per platform. Exit code 0 alone is not
   # a pass: the script's own final "N/N checks passed -- <verdict>" summary must show
   # all checks passed and a non-negative verdict (negative verdicts start with "NOT "

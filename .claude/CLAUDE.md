@@ -28,10 +28,17 @@ held.
 
 - `context/`: authoritative product, technical, and release context.
 - `config/`: routing, quality-gate, and runtime governance policies.
+- `domain-model/`: canonical specifications of the agent, command, skill, workflow, and
+  memory domain concepts.
 - `agents/`: role contracts and collaboration boundaries.
 - `skills/`: reusable domain and engineering knowledge.
+- `prompts/`: curated, versioned prompt patterns used by the framework's agents.
 - `workflows/`: phase-based lifecycle specifications.
 - `commands/`: command API and execution contracts.
+- `registry/`: single-authority discovery indexes, one per registered surface, that the
+  runtime resolves routing against.
+- `runtime/`: the executable runtime, holding the state engine, invocation gateway,
+  artifact validators, self-hosting classifier, and verification scripts.
 - `templates/`: standardized artifact schemas.
 - `memory/`: persistent, versioned engineering knowledge.
 - `validation/`: validation rules and checklist definitions, including the framework release

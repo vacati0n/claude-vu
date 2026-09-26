@@ -119,13 +119,24 @@ Every agent invocation uses the same envelope regardless of backing model or too
 - `run_id`
 - `state_id`
 - `agent_id`
-- `capability_bindings`
+- `capability_bindings` (carrying `load_profile`, the core and on-demand module tiers with
+  their triggers, and `contract_checks`, the Initialization checks the runtime performed)
+- `skill_dispatch` (per skill code: `required` or `not-triggered`, with its basis)
 - `input_contract`
-- `context_slice`
+- `task_context` (path, digest, and size of the run's task context, and the affected areas
+  it derived)
+- `upstream_artifacts` (each with its size and the sections to read first and on demand)
+- `parallel_group` (the phases that may be dispatched alongside this one)
+- `context_slice` (each member with a read hint: `required`, `on-demand`, `runtime-resolved`)
 - `memory_slice`
 - `constraints`
 - `timeout_profile`
 - `expected_output_schema`
+- `context_budget` (byte estimate of what the dispatch asks the agent to read, under the
+  legacy and the progressive rules)
+
+Fields added by runtime 0.7.0 are additive: an envelope consumer that reads only the original
+eleven fields reads them unchanged.
 
 ### Agent Result Envelope
 
@@ -204,6 +215,12 @@ Narrowing rules:
 - include only memory categories allowed by policy and relevance rules
 - include parent-state outputs referenced by transition dependencies
 - include unresolved risks and open escalations for the run
+- carry the run's established facts once, in the task context (`config/runtime.md`, Task
+  Context), and name for each parent-state output the sections to read first, so a state
+  does not re-derive what an accepted upstream artifact already decided
+- mark every frozen context member with a read hint and every resolved skill with a dispatch
+  verdict; a member or skill the state does not need stays in the provenance record and out
+  of the agent's reading
 
 ### Context Integrity
 
@@ -247,6 +264,29 @@ Runtime restrictions:
 - One primary agent owns one active state execution.
 - Secondary agents participate only through gates, reviews, escalation, or evidence requests.
 - An invocation may produce proposed side effects, but side effects are committed only after validation and policy approval.
+- Two state work items whose hard predecessors have all committed may hold leases at the same
+  time. The runtime already refuses to lease a phase before its hard predecessors commit and
+  refuses two writers of one artifact path, so "eligible" is exactly "safe to run alongside
+  every other eligible phase". A phase whose only unmet predecessor is soft may start early;
+  the runtime reports that it forgoes the predecessor's artifact, and the default sequence
+  waits.
+
+### Artifact Economy
+
+An artifact is judged by the Validation Engine on structure and traceability, never on
+length. Every agent therefore renders every section and row its output contract requires,
+complete, and nothing more:
+
+- state each fact once and cite it by identifier afterwards;
+- keep a table cell to one line;
+- reference a supplied input or an upstream artifact by identifier and digest rather than
+  restating it;
+- add no appendix, preamble, or narrative the output contract does not require;
+- record what was executed, decided, and left open, not the reasoning that led there, unless
+  the contract asks for the rationale.
+
+The dispatch prompt carries this policy verbatim. It narrows nothing an output contract
+requires; it removes what no contract asks for.
 
 ## Workflow Execution
 
@@ -440,7 +480,7 @@ stateDiagram-v2
 | Invocation transport failure | adapter boundary | retry | circuit breaker open |
 | Output schema failure | validation | retry or rollback | repeated malformed output |
 | Workflow contract violation | validation | rollback | second occurrence in same run |
-| Gate rejection | gate state | rollback | blocker marked unresolved |
+| Gate rejection | gate state | rollback (human-authorised supersession; see below) | repeated gate failure without deterministic remediation |
 | Aggregation conflict | aggregation | remediation then escalate | critical conflict persists |
 | Worker loss or lease expiry | queue control | retry | repeated worker loss |
 
@@ -451,6 +491,48 @@ stateDiagram-v2
 - create recovery work items when rollback or remediation is needed
 - record human-action requirements when automation cannot safely proceed
 - prevent infinite recovery loops through breaker and attempt thresholds
+
+### Rollback After a Gate Rejection
+
+A gate rejection is classified `rollback`, and the rollback is a second human decision rather
+than a consequence of the first: the rejection's failure envelope demands a
+`rollback-authorisation`, and only a listed, non-producing owner of the rejected gate may
+record one. The runtime represents an authorised rollback as **supersession in the state
+model**, never as a rewrite of committed evidence:
+
+- The authoriser names the rollback target: the phase the gate closes, or a completed hard
+  predecessor of it. Rationale text is never parsed for a target or an owner.
+- The supersession range is the target's completed downstream cone: the target and every
+  completed phase that transitively hard-depends on it. The closed phase is always in it, and
+  so is a completed dependent off the closed phase's own ancestor chain (in `fix-bug`,
+  `root-cause-analysis` when the target is `triage-and-impact`), which a walk back from the
+  closed phase would leave standing on superseded evidence. Every phase in the range is
+  superseded under one authorisation id. A superseded phase moves `completed -> pending`
+  (trigger `superseded`) and
+  keeps its idempotency key: the next attempt is the same unit of work. Its prior completion
+  record moves unmodified into the work item's append-only `supersessions` list, and the new
+  attempt writes its artifact into an attempt-scoped directory beneath the phase's artifact
+  directory, so a committed artifact is never rewritten. The rejection travels into the new
+  attempt's invocation envelope as `prior_rejection`, as data for the agent to rebuild against.
+- The rejected gate moves `failed -> pending` (trigger `rollback_authorised`) on the same work
+  item. The rejection is appended to the gate record's `decision_history`, the decision returns
+  to null, and the gate is decided again by a human once the rebuilt evidence lands; a gate
+  carrying a decision history is never auto-approved. The rejection's transition, event, and
+  envelope are preserved; the envelope is marked resolved naming the authorisation.
+- The re-entered attempt is charged against the phase's retry budget. When a phase in range
+  has no charged attempt left the authorisation is refused, which is the escalation trigger
+  "repeated gate failure without deterministic remediation".
+- No approved gate may stand over any phase in the range, the closed phase included. A
+  completed gate cannot be re-armed within the two authorised exits, so the authorisation is
+  refused and the store is left unchanged; the remedy is a shallower target, or a new run.
+  While a rejection stands, `next` names the rollback command first, derived from the live
+  store, offers no decision on another gate closing the rejected phase, and the auto-approval
+  policy holds such a gate for a human; `recovery` derives the clearing action of an open
+  gate-rejection envelope live rather than echoing the recorded text, which stays as written.
+  The clearing action names the role that rejected and leaves the authoriser a placeholder:
+  who authorises is never defaulted from who rejected.
+- These two transitions are the only exits from a terminal status, and the state engine
+  refuses `superseded` unless the supersession record accompanies it.
 
 ### Recovery Sequence
 
@@ -468,8 +550,9 @@ sequenceDiagram
   alt retry allowed
     Recovery->>Queue: Enqueue retry work item with backoff
   else rollback required
-    Recovery->>Context: Select rollback target state
-    Recovery->>Queue: Enqueue rollback recovery work item
+    Recovery->>Human: Open escalation case demanding a rollback authorisation
+    Human->>Context: Record the authorisation and the rollback target state
+    Recovery->>Queue: Supersede the target's completed downstream cone (every completed hard-dependent, gated phase included); re-arm the gate
   else human escalation required
     Recovery->>Human: Open escalation case with evidence
     Human->>Context: Record decision and remediation instructions
@@ -506,7 +589,7 @@ Each escalation case must include:
 ### Human Decision Outcomes
 
 - approve proposed path
-- reject and rollback
+- reject (a gate decision), then authorise the rollback (a second decision on the same gate)
 - request additional evidence
 - reassign agent or owner
 - abort run

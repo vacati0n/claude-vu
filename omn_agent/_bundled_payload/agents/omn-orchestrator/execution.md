@@ -57,7 +57,9 @@ stateDiagram-v2
 
 - Load `manifest.yaml`; verify `metadata.identifier`, `metadata.version`, `metadata.status`, and
   `contractVersion` against `domain-model/agent-specification.md`.
-- Load every module in the declared `loadOrder`, each in full, in that sequence.
+- Load the core-tier modules of the declared `loadOrder` in full, in that sequence; load an
+  on-demand module the moment its `load_when` trigger in the envelope's load profile applies
+  (`config/runtime.md`, Progressive Module Loading).
 - Verify the output template reference resolves.
 - Resolve the routed workflow and phase against `supportedWorkflows`; resolve the
   `coordinationBasis` and the deciding gate authority from the workflow-participation table in
