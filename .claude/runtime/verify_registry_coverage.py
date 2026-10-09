@@ -17,6 +17,14 @@ run of this script never reports coverage as capability:
       produce the evidence that gate assesses.
   C6  Per phase, the full G1-CAPABILITY chain verdict, counted rather than summarised.
 
+Two more cover the model tier declaration (`config/model-tier-policy.json`):
+
+  C7  Every phase of every active Phase Model has exactly one declared tier, no entry names a
+      phase that does not exist, and at least 3 of the 6 implement-feature phases are non-deep.
+  C8  Escalation is monotonic: over every declared tier and every recorded rejection count a
+      phase never resolves lower, rises by one tier per rejection, stops at deep, and resolves
+      identically when asked twice.
+
 Usage:
     python .claude/runtime/verify_registry_coverage.py
     python .claude/runtime/verify_registry_coverage.py --json-out coverage.json
@@ -278,6 +286,125 @@ def c6_dispatchable(res: Result):
             rows)
 
 
+# The request's named categories, resolved to phases, pinned so a quiet edit of the
+# declaration cannot move a light phase to deep or a deep phase to light unnoticed.
+PINNED_LIGHT = {("implement-feature", "scope-and-acceptance"),
+                ("investigate", "technical-discovery"),
+                ("implement-feature", "documentation-and-release-handoff"),
+                ("release", "artifact-packaging"),
+                ("code-quality-scan", "repository-quality-scan")}
+PINNED_DEEP = {("implement-feature", "solution-design-and-risk-assessment"),
+               ("fix-bug", "root-cause-analysis"),
+               ("implement-feature", "implementation"),
+               ("implement-feature", "quality-review")}
+NON_DEEP_BAR = 3
+
+
+def c7_tier_declaration(res: Result):
+    rows, problems = [], []
+    try:
+        policy = fr.load_model_tier_policy()
+    except fr.RuntimeError_ as exc:
+        policy, problems = None, [f"declaration unreadable: {exc}"]
+    else:
+        if policy is None:
+            problems.append(f"{fr.MODEL_TIER_POLICY_REL} is absent")
+    routed = {}
+    for w, r in phase_rows():
+        routed.setdefault(w["identifier"], []).append(r["phase"])
+    uncovered, stale, tier_of = [], [], {}
+    if policy is not None:
+        declared = policy["phases"]
+        for wid, phases in routed.items():
+            for ph in phases:
+                tier = (declared.get(wid) or {}).get(ph)
+                tier_of[(wid, ph)] = tier
+                if tier is None:
+                    uncovered.append(f"{wid}/{ph}")
+                rows.append({"workflow": wid, "phase": ph, "tier": tier,
+                             "host_hint": policy["hints"].get(tier) if tier else None})
+        for wid, entries in declared.items():
+            for ph in entries:
+                if ph not in routed.get(wid, []):
+                    stale.append(f"{wid}/{ph}")
+        if policy["hints"].get(fr.DEFAULT_MODEL_TIER) != fr.INHERIT_HINT:
+            problems.append(f"the {fr.DEFAULT_MODEL_TIER} hint must be the reserved value "
+                            f"{fr.INHERIT_HINT!r}, is {policy['hints'].get(fr.DEFAULT_MODEL_TIER)!r}")
+        impl = routed.get("implement-feature", [])
+        non_deep = sum(1 for ph in impl if tier_of.get(("implement-feature", ph))
+                       not in (None, "deep"))
+        if non_deep < NON_DEEP_BAR:
+            problems.append(f"implement-feature has {non_deep} of {len(impl)} non-deep "
+                            f"phase(s); the bar is {NON_DEEP_BAR}")
+        for key in sorted(PINNED_LIGHT):
+            if tier_of.get(key) != "light":
+                problems.append(f"{'/'.join(key)} must be light, is {tier_of.get(key)}")
+        for key in sorted(PINNED_DEEP):
+            if tier_of.get(key) != "deep":
+                problems.append(f"{'/'.join(key)} must be deep, is {tier_of.get(key)}")
+    if uncovered:
+        problems.append(f"phases without a declared tier: {uncovered}")
+    if stale:
+        problems.append(f"entries naming a phase that does not exist: {stale}")
+    total = sum(len(v) for v in routed.values())
+    res.add("C7", "every phase of every active Phase Model has exactly one declared tier",
+            not problems,
+            {"phases": total, "declared": total - len(uncovered), "uncovered": len(uncovered),
+             "stale_entries": len(stale)},
+            "every phase is covered, no entry is stale, the implement-feature bar and the "
+            "named categories hold" if not problems else "; ".join(problems),
+            rows)
+
+
+def c8_escalation_monotonic(res: Result):
+    hints = {"light": "h-light", "standard": "h-standard", "deep": "h-deep"}
+    policy = {"hints": hints, "phases": {"w": {"p-light": "light", "p-standard": "standard",
+                                                 "p-deep": "deep"}}}
+    tiers = fr.MODEL_TIERS
+    problems, rows, cases = [], [], 0
+    for phase, declared in (("p-light", "light"), ("p-standard", "standard"),
+                            ("p-deep", "deep"), ("p-undeclared", "standard")):
+        previous = -1
+        for total in range(0, 5):
+            for validator in range(0, total + 1):
+                rej = {"validator": validator, "gate_rollback": total - validator}
+                a = fr.resolve_model_tier(policy, "w", phase, rej)
+                b = fr.resolve_model_tier(policy, "w", phase, dict(rej))
+                cases += 1
+                got, base = tiers.index(a["tier"]), tiers.index(declared)
+                want = min(base + total, len(tiers) - 1)
+                if a != b:
+                    problems.append(f"{phase} {rej}: two resolutions differ")
+                if got < base:
+                    problems.append(f"{phase} {rej}: resolved {a['tier']}, below {declared}")
+                if got != want:
+                    problems.append(f"{phase} {rej}: resolved {a['tier']}, expected "
+                                    f"{tiers[want]}")
+                if total and base < len(tiers) - 1 and got <= base:
+                    problems.append(f"{phase} {rej}: a rejection did not raise the tier")
+                if total and not a["escalation"] and got != base:
+                    problems.append(f"{phase} {rej}: a promotion states no reason")
+                if a["host_hint"] != hints[a["tier"]]:
+                    problems.append(f"{phase} {rej}: hint does not follow the resolved tier")
+                if previous >= 0 and got < previous:
+                    problems.append(f"{phase} {rej}: a later rejection lowered the tier")
+            previous = got
+        rows.append({"phase": phase, "declared": declared,
+                     "after_1": fr.resolve_model_tier(policy, "w", phase,
+                                                      {"validator": 1})["tier"],
+                     "after_2": fr.resolve_model_tier(policy, "w", phase,
+                                                      {"gate_rollback": 2})["tier"]})
+    none = fr.resolve_model_tier(None, "w", "p-deep", {"validator": 3})
+    if none["tier"] != fr.DEFAULT_MODEL_TIER or none["host_hint"] != fr.INHERIT_HINT \
+            or none["escalation"]:
+        problems.append("an absent declaration must resolve to standard, inherit, no promotion")
+    res.add("C8", "model tier escalation is monotonic, capped at deep, and repeatable",
+            not problems, {"cases": cases, "violations": len(problems)},
+            "no case lowers a tier, every rejection raises it one step to deep, and every "
+            "resolution repeats" if not problems else "; ".join(problems[:5]),
+            rows)
+
+
 def run_checks() -> Result:
     res = Result()
     c1_commands_resolve(res)
@@ -286,6 +413,8 @@ def run_checks() -> Result:
     c4_phase_skills(res)
     c5_gates_decidable(res)
     c6_dispatchable(res)
+    c7_tier_declaration(res)
+    c8_escalation_monotonic(res)
     return res
 
 

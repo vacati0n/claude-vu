@@ -1,0 +1,267 @@
+{
+  "schema": "framework.runtime/execution-metrics.v1",
+  "task_id": "run-437e2f765e4b",
+  "workflow": "investigate v1.0.0",
+  "runtime_version": "0.9.0",
+  "computed_at": "2026-10-09T13:24:00Z",
+  "total_duration": {
+    "wall_clock_seconds": 31289.0,
+    "wall_clock": "8h41m29s",
+    "agent_active_seconds": 1634.0,
+    "agent_active": "27m14s"
+  },
+  "phases_executed": {
+    "declared": 5,
+    "completed": 5,
+    "blocked": 0
+  },
+  "agents_executed": {
+    "invocations": 5,
+    "distinct": 4,
+    "by_agent": {
+      "omn-business-analyst": 1,
+      "omn-context-agent": 1,
+      "omn-tech-lead": 2,
+      "omn-documentation": 1
+    }
+  },
+  "skills_executed": {
+    "required_reads": 32,
+    "not_triggered": 5
+  },
+  "parallel_groups": {
+    "count": 5,
+    "max_width": 1,
+    "groups": [
+      [
+        "problem-framing"
+      ],
+      [
+        "technical-discovery"
+      ],
+      [
+        "option-analysis"
+      ],
+      [
+        "recommendation"
+      ],
+      [
+        "publication"
+      ]
+    ]
+  },
+  "context_loads": {
+    "members_declared": 82,
+    "members_required": 34
+  },
+  "repeated_context_loads": {
+    "files": 8,
+    "by_path": {
+      "context/product-context.md": 5,
+      "context/technical-context.md": 5,
+      "context/release-context.md": 5,
+      "skills/business/domain-modeling.md": 2,
+      "templates/investigation-report.md": 3,
+      "skills/architecture/clean-architecture-checklist.md": 2,
+      "skills/logging/observability-logging.md": 2,
+      "templates/technical-recommendation.md": 3
+    }
+  },
+  "validation_runs": {
+    "passed": 5,
+    "failed": 0
+  },
+  "gate_decisions": {
+    "decided": 3,
+    "auto_policy": 0,
+    "rejected": 0
+  },
+  "tokens_or_context_estimate": {
+    "basis": "4 bytes per token; bytes the dispatch asked the agent to read, per envelope",
+    "legacy_bytes": 1723866,
+    "progressive_bytes": 815053,
+    "legacy_tokens": 430966,
+    "progressive_tokens": 203763,
+    "savings_pct": 52.7
+  },
+  "model_tiers": {
+    "by_tier": {
+      "light": {
+        "invocations": 3,
+        "estimated_bytes": 421732
+      },
+      "standard": {
+        "invocations": 2,
+        "estimated_bytes": 393321
+      },
+      "deep": {
+        "invocations": 0,
+        "estimated_bytes": 0
+      },
+      "untiered": {
+        "invocations": 0,
+        "estimated_bytes": 0
+      }
+    },
+    "invocations_total": 5,
+    "estimated_bytes_total": 815053,
+    "non_deep_share": 1.0
+  },
+  "per_phase": [
+    {
+      "phase": "problem-framing",
+      "agent": "omn-business-analyst",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 251.0,
+      "context_members_declared": 14,
+      "context_members_required": 6,
+      "skills": {
+        "required": 3,
+        "not_triggered": 0
+      },
+      "model_tier": "light",
+      "context_estimate": {
+        "modules_full_bytes": 66424,
+        "modules_core_bytes": 32785,
+        "slice_all_bytes": 110968,
+        "slice_required_bytes": 14505,
+        "inputs_bytes": 8516,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 10060,
+        "fixed_bytes": 53379,
+        "legacy_estimate_bytes": 239287,
+        "progressive_estimate_bytes": 119245,
+        "legacy_estimate_tokens": 59821,
+        "progressive_estimate_tokens": 29811,
+        "savings_pct": 50.2
+      }
+    },
+    {
+      "phase": "technical-discovery",
+      "agent": "omn-context-agent",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 936.0,
+      "context_members_declared": 19,
+      "context_members_required": 8,
+      "skills": {
+        "required": 5,
+        "not_triggered": 1
+      },
+      "model_tier": "light",
+      "context_estimate": {
+        "modules_full_bytes": 84939,
+        "modules_core_bytes": 45152,
+        "slice_all_bytes": 182297,
+        "slice_required_bytes": 16205,
+        "inputs_bytes": 4258,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 10060,
+        "fixed_bytes": 54130,
+        "legacy_estimate_bytes": 325624,
+        "progressive_estimate_bytes": 129805,
+        "legacy_estimate_tokens": 81406,
+        "progressive_estimate_tokens": 32451,
+        "savings_pct": 60.1
+      }
+    },
+    {
+      "phase": "option-analysis",
+      "agent": "omn-tech-lead",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 124.0,
+      "context_members_declared": 17,
+      "context_members_required": 7,
+      "skills": {
+        "required": 8,
+        "not_triggered": 2
+      },
+      "model_tier": "standard",
+      "context_estimate": {
+        "modules_full_bytes": 82323,
+        "modules_core_bytes": 38177,
+        "slice_all_bytes": 183400,
+        "slice_required_bytes": 19579,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 36095,
+        "upstream_read_first_bytes": 36095,
+        "task_context_bytes": 10060,
+        "fixed_bytes": 95135,
+        "legacy_estimate_bytes": 396953,
+        "progressive_estimate_bytes": 199046,
+        "legacy_estimate_tokens": 99238,
+        "progressive_estimate_tokens": 49761,
+        "savings_pct": 49.9
+      }
+    },
+    {
+      "phase": "recommendation",
+      "agent": "omn-tech-lead",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 119.0,
+      "context_members_declared": 16,
+      "context_members_required": 6,
+      "skills": {
+        "required": 8,
+        "not_triggered": 2
+      },
+      "model_tier": "standard",
+      "context_estimate": {
+        "modules_full_bytes": 82323,
+        "modules_core_bytes": 38177,
+        "slice_all_bytes": 178716,
+        "slice_required_bytes": 14895,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 36095,
+        "upstream_read_first_bytes": 36095,
+        "task_context_bytes": 10060,
+        "fixed_bytes": 95048,
+        "legacy_estimate_bytes": 392182,
+        "progressive_estimate_bytes": 194275,
+        "legacy_estimate_tokens": 98045,
+        "progressive_estimate_tokens": 48568,
+        "savings_pct": 50.5
+      }
+    },
+    {
+      "phase": "publication",
+      "agent": "omn-documentation",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 204.0,
+      "context_members_declared": 16,
+      "context_members_required": 7,
+      "skills": {
+        "required": 8,
+        "not_triggered": 0
+      },
+      "model_tier": "light",
+      "context_estimate": {
+        "modules_full_bytes": 86905,
+        "modules_core_bytes": 42262,
+        "slice_all_bytes": 177368,
+        "slice_required_bytes": 14813,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 27929,
+        "upstream_read_first_bytes": 27929,
+        "task_context_bytes": 10060,
+        "fixed_bytes": 77618,
+        "legacy_estimate_bytes": 369820,
+        "progressive_estimate_bytes": 172682,
+        "legacy_estimate_tokens": 92455,
+        "progressive_estimate_tokens": 43170,
+        "savings_pct": 53.3
+      }
+    }
+  ]
+}

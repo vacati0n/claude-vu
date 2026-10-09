@@ -1,0 +1,40 @@
+{
+  "invocation_id": "inv-5f4422f26c3e-04-001",
+  "status": "completed",
+  "artifact_refs": [
+    "runs/run-5f4422f26c3e/states/regression-validation/artifacts/validation-report.md"
+  ],
+  "structured_output": {
+    "criteria": {"validated": 8, "met": 8, "not_met": 0, "blocked": 0},
+    "defects_by_severity": {"critical": 0, "high": 0, "medium": 0, "low": 0},
+    "open_questions": 2,
+    "report_status": "complete",
+    "verdict": "pass",
+    "validation_basis": "regression",
+    "checks": {
+      "run": 31,
+      "passed": 31,
+      "failed": [],
+      "note": "machine-decidable subset executed by validation_report_validator; the E, T, A7, A8 and A-series checks were self-verified and hold"
+    },
+    "not_machine_checkable": {
+      "N1": "depth matches risk: unit, integration and end-to-end executed; performance and security not warranted by a change confined to a verifier reading run evidence",
+      "N2": "each met criterion rests on executed command output named in its Evidence cell; the operator-supplied suite figure was re-run rather than relied on",
+      "N3": "regression surface (shared V3 instance, 13 types, mirror, registry and manifest verifiers, full suite) exercised; untested areas listed in the report"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "runs/run-5f4422f26c3e/states/regression-validation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-5f4422f26c3e/states/regression-validation/artifacts/validation-report.md",
+    "runs/run-5f4422f26c3e/states/regression-validation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

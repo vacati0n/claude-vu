@@ -1,0 +1,219 @@
+schema: framework.runtime/task-context.v1
+task_id: run-437e2f765e4b
+command: investigate
+workflow: investigate v1.0.0
+run_status: Completed
+updated_at: '2026-10-09T13:22:31Z'
+objective: Should the framework let one implementation phase be carried out by several implementer invocations working on
+  disjoint tasks at the same time, and if so what is the least risky design? This is option B of a two-step effort to reduce
+  delivery time and token cost. Step 1 (per-phase model tier, proposal FC-016, runtime 0.9.0) is delivered. Parallel test
+  execution (tools/run_tests_parallel.py) is delivered. The investigation must decide whether a third change, parallelism
+  within the implementation phase, is justified at all. The operator, who will accept or reject a recommendation. The outcome
+  may be "do not build this". The execution plan already declares tasks in waves with dependency edge...
+inputs:
+- type: problem-statement
+  reference: runs/inputs/parallel-implementation-investigation-request.md
+  digest: sha256:d414f4dbe70887dfde75372c6a56b1e5
+- type: investigation-question
+  reference: runs/inputs/parallel-implementation-investigation-request.md
+  digest: sha256:d414f4dbe70887dfde75372c6a56b1e5
+relevant_agents:
+- phase: problem-framing
+  agent: omn-business-analyst
+  status: completed
+  required_skills:
+  - S02
+- phase: technical-discovery
+  agent: omn-context-agent
+  status: completed
+  required_skills:
+  - S01
+  - S03
+  - S06
+  - S11
+- phase: option-analysis
+  agent: omn-tech-lead
+  status: completed
+  required_skills:
+  - S01
+  - S08
+  - S09
+- phase: recommendation
+  agent: omn-tech-lead
+  status: completed
+  required_skills:
+  - S02
+  - S08
+- phase: publication
+  agent: omn-documentation
+  status: completed
+  required_skills:
+  - S10
+  - S11
+completed_phases:
+- phase: problem-framing
+  agent: omn-business-analyst
+  artifact: runs/run-437e2f765e4b/states/problem-framing/artifacts/requirement-framing.md
+  digest: sha256:269d2f46eda457a75c26643fe70ac9b1
+  validation: pass 36/36
+  attempts: 1
+- phase: technical-discovery
+  agent: omn-context-agent
+  artifact: runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md
+  digest: sha256:ec0635089fb3212b66423470956f70bc
+  validation: pass 31/31
+  attempts: 1
+- phase: option-analysis
+  agent: omn-tech-lead
+  artifact: runs/run-437e2f765e4b/states/option-analysis/artifacts/technical-recommendation.md
+  digest: sha256:27e39091b3e94cd42103ef04c9abee31
+  validation: pass 33/33
+  attempts: 1
+- phase: recommendation
+  agent: omn-tech-lead
+  artifact: runs/run-437e2f765e4b/states/recommendation/artifacts/technical-recommendation.md
+  digest: sha256:f2e34a16cc9e58d596eb8d26b2d9468c
+  validation: pass 33/33
+  attempts: 1
+- phase: publication
+  agent: omn-documentation
+  artifact: runs/run-437e2f765e4b/states/publication/artifacts/release-note.md
+  digest: sha256:25f0fc3a5366ef95a0a10cb455a536a5
+  validation: pass 32/32
+  attempts: 1
+gates:
+- gate: Framing Gate
+  closes: problem-framing
+  decision: approved
+  owner_role: omn-product-owner
+  decided_by: operator on behalf of omn-product-owner
+- gate: Technical Gate
+  closes: technical-discovery
+  decision: approved
+  owner_role: omn-architect
+  decided_by: operator on behalf of omn-architect
+- gate: Recommendation Gate
+  closes: recommendation
+  decision: approved
+  owner_role: omn-orchestrator
+  decided_by: operator on behalf of omn-orchestrator
+artifacts:
+  problem-framing: runs/run-437e2f765e4b/states/problem-framing/artifacts/requirement-framing.md
+  technical-discovery: runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md
+  option-analysis: runs/run-437e2f765e4b/states/option-analysis/artifacts/technical-recommendation.md
+  recommendation: runs/run-437e2f765e4b/states/recommendation/artifacts/technical-recommendation.md
+  publication: runs/run-437e2f765e4b/states/publication/artifacts/release-note.md
+parallel_groups:
+- - problem-framing
+- - technical-discovery
+- - option-analysis
+- - recommendation
+- - publication
+assumptions:
+- 'AS-001: The operator''s existing severity vocabulary is Blocking and Correctable, and it fills the Priority columns | The
+  severity scale in the quality contract is the only severity vocabulary in the frozen context slice | medium'
+- 'AS-002: The 1h55m baseline is the implementation-phase elapsed time recorded for run-ded114f50a46 | Stated in the supplied
+  input; the run evidence is outside the frozen slice and was not read | medium'
+- 'AS-003: The wave widths 2,1,2,1,3,1,1,2,1 describe the plan of run-ded114f50a46 and sum to its 14 tasks | Arithmetic on
+  the supplied figures: the widths sum to 14 across 9 waves; the plan itself was not read | high'
+- 'AS-004: The write-set overlap described in the input holds beyond the one run it describes | Supplied as a single observation;
+  no second run is cited | low'
+open_questions:
+- 'Q-001: The repository test-suite time inside run-ded114f50a46''s implementation phase is not supplied, so the basel...
+  | no | omn-context-agent'
+- 'Q-002: The token cost of run-ded114f50a46''s implementation phase is not supplied, so the operator''s token-cost rul...
+  | no | omn-context-agent'
+- 'Q-003: The reduction in elapsed time that counts as measurably lower is not stated | no | omn-product-owner'
+- 'Q-004: Whether the write-set overlap in supplied fact 2 holds across the plan''s tasks is unverified | no | omn-context-agent'
+- 'Q-005: Whether a dispatched agent can start further agents, and what the implementer''s declared tools allow, is un...
+  | no | omn-context-agent'
+- 'Q-006: Whether the runtime, the state engine, and the implementation-report validator assume one invocation per ph... |
+  no | omn-context-agent'
+- 'Q-007: Whether separate working copies with a merge step are feasible in this framework (supplied fact 5) is a des... |
+  no | architect'
+- 'Q-001: What does the repository history stat for commit 280d36d list, and does it match the thirteen change-set rows? |
+  no | omn-tech-lead'
+- 'Q-002: How long did suite execution and each non-test step take inside the implementation phase, and how could per... |
+  no | omn-tech-lead'
+- 'Q-003: What was the actual token use of the implementation phase, so the 25 percent rule has a measured baseline? | no
+  | omn-tech-lead'
+- 'Q-004: Can the host run an implementer dispatch in an isolated working copy, and can a dispatched agent start furt... |
+  no | architect'
+- 'Q-005: May more than one phase of one run be leased at once, given the conflicting specifications? | no | architect'
+- 'Q-006: Who would produce and own one combined implementation report under a fan-out, given one producer id per rep... |
+  no | architect'
+- 'Q-007: Does the same-file overlap and wave shape hold in other implementation runs, which a further discovery pass... |
+  no | omn-orchestrator'
+- 'Q-008: What elapsed-time reduction counts as measurably lower for an option that does not raise token cost? | no | omn-product-owner'
+- 'Q-001: What does the repository history stat for commit 280d36d list, and does it match the thirteen change-set ro... |
+  omn-tech-lead | The baseline scope; O-001, O-004'
+- 'Q-002: How long did suite execution and each non-suite step take inside the implementation phase, and what was its... |
+  omn-orchestrator | RK-001, RK-002; EC-002, EC-003, EC-004'
+- 'Q-003: Do the same-file overlap, wave shape and task durations hold in other implementation runs? | omn-orchestrator |
+  RK-003; the ceiling of O-002 and O-003'
+- 'Q-004: What elapsed-time reduction counts as measurably lower for an option that does not raise token cost? | omn-product-owner
+  | RK-005; EC-003 for O-004'
+- 'Q-005: Can the host run an implementer dispatch in an isolated working copy, and can a dispatched agent start furt... |
+  architect | O-002; EC-005'
+- 'Q-006: Who would produce and own one combined implementation report under a fan-out, given one producer id per rep... |
+  architect | RK-004; O-002; EC-001'
+- 'Q-007: May more than one phase of one run be leased at once, given the conflicting specifications? | architect | RK-004;
+  O-003; EC-001'
+objectives:
+- 'Decision to support: Whether the framework should let one implementation phase be carried out by several concurrent implementer
+  invocations, in what least ri...'
+- 'Key question: What do the runtime, the state engine, the implementation-report validator, the write-scope rules and the
+  committed evidence of run-ded114f50a4...'
+- 'Scope boundaries: Inside are the six supplied facts, the framing''s seven open questions, and the current-state, option-set
+  and measurement items the request...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:publication
+      term: database
+    security:
+    - source: input:problem-statement
+      term: token
+    - source: input:investigation-question
+      term: token
+    - source: artifact:problem-framing
+      term: token
+  not_triggered:
+  - avalonia-ui
+  - performance
+  - react-frontend
+  sources_scanned:
+  - input:problem-statement
+  - input:investigation-question
+  - artifact:problem-framing
+  - artifact:technical-discovery
+  - artifact:option-analysis
+  - artifact:recommendation
+  - artifact:publication
+relevant_skills:
+  problem-framing:
+    S02: required
+  technical-discovery:
+    S01: required
+    S03: required
+    S06: required
+    S11: required
+  option-analysis:
+    S01: required
+    S08: not-triggered
+    S09: required
+  recommendation:
+    S02: required
+    S08: not-triggered
+  publication:
+    S10: required
+    S11: required
+repository_context:
+  relevant_modules: []
+  relevant_files: []
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path

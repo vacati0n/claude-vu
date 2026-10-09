@@ -40,7 +40,7 @@ declares for it; the remaining identifier is derived from the state name in
 | `problem-framing` | `omn-business-analyst` | primary | investigation question, decision owner, scope and constraints | `requirement-framing.md` | Framing Gate | S02 |
 | `technical-discovery` | `omn-context-agent` | primary | `requirement-framing.md`, context sources, technical data access | `investigation-report.md` | Technical Gate | S01, S03, S06, S11 |
 | `option-analysis` | `omn-tech-lead` | primary | `investigation-report.md`, constraints, evaluation criteria | `technical-recommendation.md` | none | S01, S08, S09 |
-| `recommendation` | `omn-tech-lead` | primary | `technical-recommendation.md`, risk posture, effort estimates | `technical-recommendation.md` | Recommendation Gate | S02, S08 |
+| `recommendation` | `omn-tech-lead` | primary | `technical-recommendation.md`, `investigation-report.md`, risk posture, effort estimates | `technical-recommendation.md` | Recommendation Gate | S02, S08 |
 | `publication` | `omn-documentation` | primary | `technical-recommendation.md`, decision dependencies | `release-note.md`, on the `findings` communication basis | none | S10, S11 |
 
 ### Phase Identifier Sources

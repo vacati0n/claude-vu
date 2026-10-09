@@ -27,7 +27,9 @@ mutation that trips some other check would mean the validator noticed by acciden
 Conforming instances come from committed runs wherever one exists, because an artifact the
 runtime has already accepted in a real run outranks a fixture. `scope-definition.md`,
 `execution-plan.md`, `technical-design.md`, and `implementation-report.md` are read from
-`runs/`; the remainder read `runtime/fixtures/`, which `fixtures/README.md` explains.
+`runs/`; the remainder read `runtime/fixtures/`, which `fixtures/README.md` explains. Within
+that preference, the instance used is the first candidate on which the declared mutation can be
+applied, and every candidate passed over is reported; `conforming_instance` states the order.
 
     python .claude/runtime/verify_validators.py
     python .claude/runtime/verify_validators.py --json-out <path>
@@ -150,6 +152,10 @@ def overstate_a_met_count(text: str):
     return None
 
 
+# A Phase Progression identifier cell, backticked or plain, and nothing else in the cell.
+PHASE_ID_CELL = re.compile(r"^`?PH-\d{3}`?$")
+
+
 def award_itself_its_own_gate(text: str):
     """Name `omn-orchestrator` as the decider of a gate its own output is the evidence for.
 
@@ -161,13 +167,20 @@ def award_itself_its_own_gate(text: str):
     fixture. What stays constant is the shape -- a Phase Progression row this role owns, at a real
     gate, whose recorded decider is somebody else -- so the row is located and its decider column
     is overwritten in place.
+
+    The row is located by its identifier cell, under the same optional-backtick rule the shared
+    contract engine applies in `artifact_contract.defined_ids`: a cell reading `PH-005` with or
+    without backticks. The contract leaves that rendering free, and the validator accepts both,
+    so a locator that required the backticked form found no row in a conforming record that
+    rendered its identifiers plain, and `V4` reported a missing anchor for a mutation the
+    validator does reject.
     """
     for line in text.splitlines():
-        if not line.startswith("|") or "`PH-" not in line:
+        if not line.startswith("|"):
             continue
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
         # ID, Phase, Owner, Declared Output, Gate, Gate Decision, Decided By, Evidence, Progression
-        if len(cells) < 9:
+        if len(cells) < 9 or not PHASE_ID_CELL.match(cells[0]):
             continue
         owner, gate, decider = cells[2], cells[4], cells[6]
         if owner.strip("`") != "omn-orchestrator":
@@ -177,6 +190,51 @@ def award_itself_its_own_gate(text: str):
         cells[6] = "`omn-orchestrator`"
         return line, "| " + " | ".join(cells) + " |"
     return None
+
+
+# Matches the template's `- Recommended option:` spelling only; any other spelling of the label
+# finds no field and fails `V4` loudly as a missing mutation anchor.
+def recommend_an_unevaluated_option(text: str):
+    """Point the `Recommended option` field at an option identifier the report never uses.
+
+    The same reasoning as `understate_a_severity_count` applies, and this artifact type reached
+    it the same way as `disagree_about_the_severity`. The row used to be a literal pair copied
+    from the fixture: recommended option `O-002` as the anchor and `O-009` as the substitute.
+    `conforming_instance` prefers a committed run artifact over a fixture, and a real
+    investigation recommends whichever option it actually chose, so the anchor went dead as soon
+    as a run committed a report recommending `O-003`, and `V4` began reporting that the mutation
+    could not be applied at all. The substitute was fixture-bound too: a conforming report
+    evaluating nine options and recommending `O-002` would have carried the anchor and turned
+    `O-009` into another evaluated option, so the mutation would have been accepted.
+
+    The contract fixes no recommended value; it fixes only that the recommendation names an
+    evaluated option. So the edit is "name an option that was not evaluated": the first
+    three-digit option identifier on the field's line is replaced by the lowest `O-nnn` that
+    appears nowhere in the text. Every evaluated option is defined in the text, so the substitute
+    can never be one of them, whatever the instance recommends or how many options it carries.
+
+    Returns None when the field, or an option identifier on it, is missing, or when every
+    identifier from `O-001` to `O-999` is already used, so `V4` reports the absent anchor
+    rather than mutating something else.
+    """
+    field = re.search(r"^- Recommended option:[^\n]*$", text, re.M)
+    if not field:
+        return None
+    line = field.group(0)
+    named = re.search(r"\bO-\d{3}\b", line)
+    if not named:
+        return None
+    used = set(re.findall(r"\bO-\d{3}\b", text))
+    free = next((f"O-{n:03d}" for n in range(1, 1000) if f"O-{n:03d}" not in used), None)
+    if free is None:
+        return None
+    # The pair is applied with `text.replace(old, new, 1)`, which edits the first occurrence of
+    # `old` anywhere in the text. The bare line could also occur earlier inside another line, an
+    # indented `  - Recommended option: ...` for instance, and that line would be edited instead
+    # of the field. Anchoring on the preceding newline pins the edit to the matched field line:
+    # an earlier line starting with the same text would have been the regex's first match.
+    lead = "\n" if field.start() > 0 else ""
+    return lead + line, lead + line[:named.start()] + free + line[named.end():]
 
 
 # One declared mutation per artifact type: what to change, and the check that must catch it.
@@ -197,7 +255,7 @@ MUTATIONS = {
         disagree_about_the_severity, None, "B2",
         "disagreeing with the metadata block about severity"),
     "investigation-report.md": (
-        "- Recommended option: `O-002`", "- Recommended option: `O-009`", "I1",
+        recommend_an_unevaluated_option, None, "I1",
         "recommending an option the report never evaluated"),
     "release-note.md": (
         disagree_about_the_version, None, "R2",
@@ -260,8 +318,50 @@ def committed_instances(artifact: str) -> list:
     return out
 
 
+def candidate_instances(artifact: str) -> list:
+    """Every instance of this artifact type the selector may use, in the order it tries them.
+
+    Committed run artifacts come first, last to first in the order `committed_instances`
+    returns them. That order sorts run directories by identifier, which is lexical, not
+    chronological: the last-sorted run is not necessarily the most recent one. Governance
+    records follow, last to first in path order, and the fixture comes last. Each entry is
+    `(path, source, envelope_path)`; only a committed run artifact carries an envelope.
+    """
+    out = []
+    for instance in reversed(committed_instances(artifact)):
+        envelope = instance.parent.parent / "invocation-envelope.json"
+        out.append((instance, "committed run artifact",
+                    envelope if envelope.exists() else None))
+    alternate = ALTERNATE_SOURCES.get(artifact)
+    if alternate:
+        for found in reversed(sorted(CLAUDE.glob(alternate))):
+            out.append((found, "governance artifact", None))
+    fixture = FIXTURES / artifact
+    if fixture.exists():
+        out.append((fixture, "fixture", None))
+    return out
+
+
+def instance_label(path: Path) -> str:
+    """A candidate's path as reports print it: framework-relative where it can be."""
+    return path.relative_to(CLAUDE).as_posix() if CLAUDE in path.parents else str(path)
+
+
 def conforming_instance(artifact: str):
-    """A conforming instance of this artifact type, and the envelope it was produced against.
+    """The instance `V3` validates and `V4` mutates for this artifact type, with its envelope.
+
+    Returns `(instance, source, envelope_path, skipped)`. Candidates are tried in the order
+    `candidate_instances` gives, and the first one on which the declared mutation resolves an
+    anchor is taken. A candidate is skipped only for that reason; `skipped` lists every skipped
+    candidate as `{"instance", "source", "reason"}`, so a fallback is always reported and never
+    silent. When no candidate applies, `instance` is None and `skipped` names every candidate.
+
+    Selection deliberately never asks whether the validator accepts a candidate. Doing so would
+    turn a rejection `V3` must report into a quiet fallback to some other instance, so `V3`
+    validates the instance `V4` mutates and, in `main`, every candidate skipped on the way to
+    it; a rejected one still fails `V3`. Nor does
+    selection consult the mutation verdict: a validator that accepts the mutation, or rejects
+    it by the wrong check, still fails `V4` on the selected instance.
 
     The envelope matters. Some checks are cross-artifact rather than structural -- the design
     validator resolves referenced planner task identifiers against the execution plan the
@@ -269,20 +369,66 @@ def conforming_instance(artifact: str):
     fail checks the runtime passed when it accepted the artifact. A fixture has no envelope,
     which is why the digest cross-check reports `not-machine-checkable` for one.
     """
-    committed = committed_instances(artifact)
-    if committed:
-        instance = committed[-1]
-        envelope = instance.parent.parent / "invocation-envelope.json"
-        return instance, "committed run artifact", (envelope if envelope.exists() else None)
-    alternate = ALTERNATE_SOURCES.get(artifact)
-    if alternate:
-        found = sorted(CLAUDE.glob(alternate))
-        if found:
-            return found[-1], "governance artifact", None
-    fixture = FIXTURES / artifact
-    if fixture.exists():
-        return fixture, "fixture", None
-    return None, "none found", None
+    skipped = []
+    candidates = candidate_instances(artifact)
+    for instance, source, envelope in candidates:
+        text = instance.read_text(encoding="utf-8")
+        old, _new, _expect, what = resolve_mutation(artifact, text)
+        if old is not None:
+            return instance, source, envelope, skipped
+        skipped.append({"instance": instance_label(instance), "source": source,
+                        "reason": f"no mutation anchor for {what!r}"})
+    return None, ("no applicable candidate" if candidates else "none found"), None, skipped
+
+
+def resolve_mutation(artifact: str, text: str):
+    """The mutation `MUTATIONS` declares for this artifact type, resolved against one instance.
+
+    Returns `(old, new, expect_id, what)`. A callable row is asked to derive the pair from the
+    text; a literal row is used as written. `old` and `new` are both None when the mutation
+    cannot be applied to this instance, which `V4` reports as a missing anchor.
+    """
+    old, new, expect_id, what = MUTATIONS[artifact]
+    if callable(old):
+        derived = old(text)
+        old, new = derived if derived else (None, None)
+    if old is None or old not in text:
+        return None, None, expect_id, what
+    return old, new, expect_id, what
+
+
+def mutation_verdict(artifact: str, validator, text: str, envelope, workdir: Path):
+    """The `V4` verdict for one artifact type over one instance.
+
+    Applies the resolved mutation once, writes the mutated text under `workdir`, and runs
+    `validator.validate` over it. Returns `(finding, checks_failed)`: `finding` is None when the
+    validator rejected the mutated artifact by the named check, and otherwise states why `V4`
+    fails for this type; `checks_failed` lists the checks the mutated artifact failed, or None
+    when no mutation could be applied.
+    """
+    old, new, expect_id, what = resolve_mutation(artifact, text)
+    if old is None:
+        return f"{artifact}: no mutation anchor for {what!r} in this instance", None
+    path = Path(workdir) / f"mutated-{artifact}"
+    path.write_text(text.replace(old, new, 1), encoding="utf-8")
+    mrep = validator.validate(path, envelope)
+    failed = [c["id"] for c in mrep.to_dict()["checks"] if c["result"] == "fail"]
+    if mrep.passed:
+        return f"{artifact}: mutation accepted ({what})", failed
+    if expect_id not in failed:
+        return f"{artifact}: rejected, but not by {expect_id} (by {failed})", failed
+    return None, failed
+
+
+def mutation_outcome(expect_id: str, finding, checks_failed) -> str:
+    """The console's account of one type's mutation: the outcome observed, never the expected one.
+
+    Only a type with no `V4` finding was caught by its named check, so only that type is
+    reported as caught. Any other type is reported with the finding that failed it.
+    """
+    if finding is None:
+        return f"caught by {expect_id} (all: {checks_failed})"
+    return f"NOT CAUGHT by {expect_id}: {finding} (all: {checks_failed})"
 
 
 def collected_artifacts(cell: str | None) -> list:
@@ -495,12 +641,26 @@ def main():
     tmp = Path(tempfile.mkdtemp(prefix="validator-check-"))
     summaries = []
     accepted_all, rejected_all = [], []
+    skipped_all = []
     for artifact, module in sorted(fr.VALIDATORS.items()):
         mod = __import__(module)
-        instance, source, envelope_path = conforming_instance(artifact)
-        if instance is None:
+        _old, _new, expect_id, what = MUTATIONS[artifact]
+        instance, source, envelope_path, skipped = conforming_instance(artifact)
+        for s in skipped:
+            skipped_all.append(f"{artifact}: skipped {s['instance']} ({s['source']}): "
+                               f"{s['reason']}")
+        if instance is None and not skipped:
             accepted_all.append(f"{artifact}: no conforming instance available")
             continue
+        no_candidate = instance is None
+        if no_candidate:
+            # No candidate carries the mutation's shape, so `V4` fails, naming every one. `V3`
+            # still validates the first candidate tried, so a rejection is reported as well.
+            rejected_all.append(
+                f"{artifact}: no candidate carries a mutation anchor for {what!r}; tried "
+                + "; ".join(f"{s['instance']} ({s['source']}): {s['reason']}"
+                            for s in skipped))
+            instance, source, envelope_path = candidate_instances(artifact)[0]
         envelope = json.loads(envelope_path.read_text(encoding="utf-8")) \
             if envelope_path else None
         rep = mod.validate(instance, envelope)
@@ -509,26 +669,28 @@ def main():
             accepted_all.append(
                 f"{artifact}: conforming instance rejected "
                 f"{[c['id'] for c in d['checks'] if c['result'] == 'fail']}")
+        # Selection passes over a candidate only because the mutation cannot be applied to it,
+        # never because of conformance. `V3` still validates every candidate passed over, so a
+        # rejected instance fails `V3` whichever instance `V4` ends up mutating.
+        skipped_labels = {s["instance"] for s in skipped}
+        for cand, _src, cand_env_path in candidate_instances(artifact):
+            if cand == instance or instance_label(cand) not in skipped_labels:
+                continue
+            cand_env = json.loads(cand_env_path.read_text(encoding="utf-8")) \
+                if cand_env_path else None
+            crep = mod.validate(cand, cand_env)
+            if not crep.passed:
+                accepted_all.append(
+                    f"{artifact}: skipped candidate {instance_label(cand)} rejected "
+                    f"{[c['id'] for c in crep.to_dict()['checks'] if c['result'] == 'fail']}")
 
-        old, new, expect_id, what = MUTATIONS[artifact]
-        text = instance.read_text(encoding="utf-8")
-        mutated_result = None
-        if callable(old):
-            derived = old(text)
-            old, new = derived if derived else (None, None)
-        if old is None or old not in text:
-            rejected_all.append(f"{artifact}: no mutation anchor for {what!r} in this instance")
+        if no_candidate:
+            finding, mutated_result = rejected_all[-1], None
         else:
-            path = tmp / f"mutated-{artifact}"
-            path.write_text(text.replace(old, new, 1), encoding="utf-8")
-            mrep = mod.validate(path, envelope)
-            failed = [c["id"] for c in mrep.to_dict()["checks"] if c["result"] == "fail"]
-            mutated_result = failed
-            if mrep.passed:
-                rejected_all.append(f"{artifact}: mutation accepted ({what})")
-            elif expect_id not in failed:
-                rejected_all.append(
-                    f"{artifact}: rejected, but not by {expect_id} (by {failed})")
+            text = instance.read_text(encoding="utf-8")
+            finding, mutated_result = mutation_verdict(artifact, mod, text, envelope, tmp)
+            if finding:
+                rejected_all.append(finding)
 
         summaries.append({
             "artifact": artifact,
@@ -544,7 +706,8 @@ def main():
             "checksPassed": d["checksPassed"],
             "notMachineCheckable": d["notMachineCheckable"],
             "mutation": {"description": what, "expected_check": expect_id,
-                         "checks_failed": mutated_result},
+                         "checks_failed": mutated_result, "finding": finding},
+            "skipped_candidates": skipped,
             "counts": d["counts"],
         })
 
@@ -552,10 +715,15 @@ def main():
           not accepted_all,
           f"{len(summaries)} artifact type(s) validated" if not accepted_all
           else f"{accepted_all}")
+    # Skipped candidates are reported whether `V4` passes or fails, so a fallback past an
+    # instance the mutation could not be applied to is never silent.
+    skipped_detail = (f"; skipped candidates: {skipped_all}" if skipped_all
+                      else "; no candidate skipped")
     r.add("V4", "every registered validator rejects a mutated artifact, by the named check",
           not rejected_all,
-          "; ".join(f"{s['artifact']} -> {s['mutation']['expected_check']}"
-                    for s in summaries) if not rejected_all else f"{rejected_all}")
+          ("; ".join(f"{s['artifact']} -> {s['mutation']['expected_check']}"
+                     for s in summaries) if not rejected_all else f"{rejected_all}")
+          + skipped_detail)
 
     # ------------------------------------------------------------ V5 row decidability
     # `V1` asks whether every artifact a Phase Model names has a validator, and a row that names
@@ -639,8 +807,10 @@ def main():
     print("Mutation results (a validator that accepts everything decides nothing)")
     for s in summaries:
         m = s["mutation"]
-        print(f"  {s['artifact']:<26} {m['description']:<52} -> caught by "
-              f"{m['expected_check']} (all: {m['checks_failed']})")
+        print(f"  {s['artifact']:<26} {m['description']:<52} -> "
+              f"{mutation_outcome(m['expected_check'], m['finding'], m['checks_failed'])}")
+        for sk in s["skipped_candidates"]:
+            print(f"  {'':<26} skipped {sk['instance']} ({sk['source']}): {sk['reason']}")
 
     total = len(r.checks)
     passed = sum(1 for c in r.checks if c["result"] == "pass")

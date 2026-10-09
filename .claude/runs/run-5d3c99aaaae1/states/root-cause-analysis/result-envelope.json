@@ -1,0 +1,129 @@
+{
+  "invocation_id": "inv-5d3c99aaaae1-02-001",
+  "status": "completed",
+  "artifact_refs": [
+    "runs/run-5d3c99aaaae1/states/root-cause-analysis/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "root-cause",
+    "analysisId": "BA-run-5d3c99aaaae1-root-cause",
+    "defectReference": "investigate-chain-input-contracts-defect-report",
+    "supersedes": "runs/run-5d3c99aaaae1/states/triage-and-impact/artifacts/bug-analysis.md",
+    "severity": "high",
+    "reproducibility": "deterministic",
+    "status": "provisional",
+    "counts": {
+      "evidenceRecords": 36,
+      "causalSteps": 7,
+      "causalStepsByConfidence": {
+        "high": 7,
+        "medium": 0,
+        "low": 0
+      },
+      "openQuestions": 7,
+      "openQuestionsBlocking": 0
+    },
+    "statusBasis": "Stage 9 row 5: no business impact statement was supplied, so severity rests on technical impact alone (Q-003). The cause is established: reproducibility is deterministic, the chain closes on a contract-mismatch condition, and the triage phase's uneliminated alternative (repair in the guard versus in the declarations) is eliminated by E-021 and E-029.",
+    "severityBasis": "Stage 5 table, high: the investigate and research commands and both profile routes to them fail on a primary path; the only workaround needs advance knowledge and mislabels an input (E-013). Not critical: no data loss, no wrong result, no security exposure.",
+    "scope": {
+      "inScope": "investigate and research hand-offs (6 blocked of 8) and the decision-support and external-research profile rows",
+      "outOfScopeFollowUps": "7 hand-offs in implement-feature, fix-bug, review-pull-request, release; change-review and framework-release profile rows (Q-007)",
+      "operatorDecision": "scope set by the operator in the dispatching message"
+    },
+    "recommendation": {
+      "option": "per-consumer declaration repair with no runtime change: A for omn-context-agent and omn-documentation, a Phase Model Input-column addition for the omn-tech-lead recommendation rows, and problem-statement in both profile rows",
+      "entryInputs": {
+        "decision-support": "investigation-request -> problem-statement",
+        "external-research": "research-question -> problem-statement"
+      },
+      "handOffs": {
+        "problem-framing|research-framing -> technical-discovery|technical-validation": "omn-context-agent accepts requirement-framing in place of framed-objective and research-brief; v1.1.0",
+        "option-analysis|option-synthesis -> recommendation|recommendation-draft": "Input column also names investigation-report.md; omn-tech-lead unchanged",
+        "recommendation|recommendation-draft -> publication|findings-publication": "omn-documentation also accepts technical-recommendation; v1.1.0; lifecycle table names technical-recommendation.md"
+      },
+      "rejected": {
+        "A-for-tech-lead": "tech-lead would accept its own output as an evidence base in six phases; third version move; Merge and Readiness precedent reset",
+        "B-alias": "works for the context agent only; tech-lead and documentation accept nothing corresponding, so an alias mislabels",
+        "C-guard-counts-edge": "passes the guard for agents whose own first stage still refuses; G5 collapses into G3 at Input-column edges; relies on fuzzy matching; silently changes 6 out-of-scope hand-offs",
+        "D-per-phase-menus": "restates Phase Model facts in manifests; schema and runtime change; recreates the independent-declaration condition",
+        "E-profile-only": "needs mislabelled types for tech-lead and documentation"
+      }
+    },
+    "measurement": {
+      "mirror": "throwaway robocopy of the working tree without version-control data, in the session scratch directory",
+      "baseline": {"handoffs": 29, "blocked": 13, "inScopeBlocked": 6, "outOfScopeBlocked": 7},
+      "optionC": {"handoffs": 29, "blocked": 1},
+      "recommended": {"handoffs": 29, "blocked": 7, "inScopeBlocked": 0, "unchangedVerdicts": 23, "runtimeByteIdentical": true},
+      "endToEnd": "investigate and research: all 5 phases pass G5-INPUT with problem-statement only; dispatch of the last phase builds its envelope",
+      "negativeCasesStillRejected": ["investigation-request at entry", "research-question at entry", "undeclared type at context agent", "framed-objective at context agent", "technical-recommendation alone at tech-lead", "undeclared type at documentation", "empty pool at documentation"],
+      "verifiers": {"verify_manifests": "2/2 unchanged", "verify_registry_coverage": "8/8 unchanged", "verify_self_hosting": "6/8, S7 and S8 failing as before", "test_agent_input_contracts": "pass", "test_bundled_payload": "fails on the six edited files until synced"},
+      "repositoryWorkingTreeUnchanged": true
+    },
+    "notMachineCheckableObligations": [
+      {
+        "id": "N1",
+        "obligation": "The stated root cause is the cause, not the symptom location",
+        "judgement": "discharged",
+        "detail": "The statement names a contract mismatch between consumer input contracts and the Phase Model edges that feed them, not the guard line where the block surfaces; the guard was shown to behave as documented."
+      },
+      {
+        "id": "N2",
+        "obligation": "No speculative conclusion appears without supporting data",
+        "judgement": "discharged",
+        "detail": "Every count and verdict was measured in a mirror with the runtime's own functions and commands; unobserved limits (real agent behaviour, validators on real artifacts, consumer copies) are open questions Q-004 and Q-007."
+      },
+      {
+        "id": "N3",
+        "obligation": "The declared blast radius covers every boundary the defect crosses",
+        "judgement": "discharged with gaps recorded",
+        "detail": "Extended to host registrations, gate precedent, registry data dependencies, and the stalled run's re-evaluation; the main checkout, the build copy, and consumer copies were not observed and are named as such."
+      }
+    ],
+    "qualityChecks": {
+      "run": 69,
+      "passed": 69,
+      "failed": 0,
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass", "S9": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass",
+        "B2": "pass", "B3": "pass", "A1": "pass",
+        "B4": "pass", "V1": "pass", "V2": "pass", "V3": "pass", "V4": "pass", "V5": "pass",
+        "B1": "pass", "V6": "pass", "V7": "pass", "V8": "pass", "V9": "pass", "V10": "pass",
+        "V11": "pass", "V12": "pass", "V13": "pass", "V14": "pass", "V15": "pass", "V16": "pass",
+        "V17": "pass", "V18": "pass", "V19": "pass", "V20": "pass", "V21": "pass", "V22": "pass",
+        "V23": "pass", "V24": "pass", "V25": "pass", "V26": "pass", "V27": "pass", "V28": "pass",
+        "B5": "pass", "V29": "pass", "V30": "pass", "V31": "pass", "V32": "pass", "V33": "pass",
+        "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A7": "pass", "A8": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass", "C7": "pass"
+      },
+      "correctedBeforeEmission": [
+        {
+          "id": "V10",
+          "detail": "E-016 was registered but uncited; it is cited where the analysis relies on it for the read-only claim, beside E-035."
+        }
+      ]
+    },
+    "validationEngine": {
+      "validator": "bug_analysis_validator",
+      "result": "pass",
+      "checksPassed": 30,
+      "checksRun": 30,
+      "delegated": ["N1", "N2", "N3"]
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "runs/run-5d3c99aaaae1/states/root-cause-analysis/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-5d3c99aaaae1/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-5d3c99aaaae1/states/root-cause-analysis/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

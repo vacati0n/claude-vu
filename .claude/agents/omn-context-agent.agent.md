@@ -15,7 +15,7 @@ adapter, not a contract. It carries no discovery behavior of its own.
 | Property | Value |
 |---|---|
 | agent id | `omn-context-agent` |
-| version | `1.0.0` |
+| version | `1.1.0` |
 | status | `active` |
 | authoritative contract | `.claude/agents/omn-context-agent/manifest.yaml` and its declared module set |
 | registry record | `.claude/registry/agents.yaml`, record `omn-context-agent` |
@@ -42,7 +42,7 @@ Read `.claude/agents/omn-context-agent/manifest.yaml`.
 Verify, and abort with error class `E-BOUNDARY` if any check fails:
 
 - `metadata.identifier` is `omn-context-agent`
-- `metadata.version` is `1.0.0`
+- `metadata.version` is `1.1.0`
 - `metadata.status` is `active`
 - `runtime.loadOrder` is present and non-empty
 
@@ -79,10 +79,11 @@ Where two modules appear to conflict, apply the precedence order stated in the c
 
 Two things must hold before you read any source.
 
-**The question.** An accepted input must supply what this discovery is for: a framed objective, a
-research brief, or the raw question behind either. If none is supplied, stop and report the run
-blocked. There is no default question, and choosing one here would make this agent the author of
-the objective it then reports against.
+**The question.** An accepted input must supply what this discovery is for: the requirement
+framing the framing phase published, a framed objective, a research brief, or the raw question
+behind any of them. If none is supplied, stop and report the run blocked. There is no default
+question, and choosing one here would make this agent the author of the objective it then reports
+against.
 
 **The basis.** Resolve the discovery basis for the routed phase from the workflow-participation
 table in the contract module. It is recorded in the artifact's metadata block and tells a later

@@ -77,7 +77,9 @@ publication itself.
 **Actions.**
 
 - Load the delivered account: an implementation report, a validation report, a review package,
-  or, for `communication-and-post-release`, the deployment status.
+  for `communication-and-post-release` the deployment status, or, for `publication` and
+  `findings-publication`, the technical recommendation; of two, the gated final one governs and
+  the option-phase draft is context only, per Required Inputs in `identity.md`.
 - Load every supplied evidence source, and record which supplied which fact.
 - Load the stakeholder list, communication requirements, and existing documentation where
   supplied.
@@ -201,8 +203,8 @@ the authority; this table binds the lifecycle above to it.
 | Workflow | Phase | Delivered account consumed | Assessed at | Decided by |
 |---|---|---|---|---|
 | `implement-feature` | `documentation-and-release-handoff` | `implementation-report.md`, `review-package.md` | Closure Gate | `omn-orchestrator` |
-| `investigate` | `publication` | `investigation-report.md` | none | not applicable |
-| `research` | `findings-publication` | `investigation-report.md` | none | not applicable |
+| `investigate` | `publication` | `technical-recommendation.md` from `recommendation` | none | not applicable |
+| `research` | `findings-publication` | `technical-recommendation.md` from `recommendation-draft` | none | not applicable |
 | `review-pull-request` | `documentation-impact` | `validation-report.md` | none | not applicable |
 | `release` | `communication-and-post-release` | deployment status, final change summary | Communication Gate | `omn-product-owner` |
 

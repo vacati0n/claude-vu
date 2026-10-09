@@ -1,0 +1,92 @@
+{
+  "invocation_id": "inv-437e2f765e4b-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-437e2f765e4b/states/publication/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "run_id": "run-437e2f765e4b",
+    "work_item_id": "run-437e2f765e4b::publication",
+    "artifact_status": "provisional",
+    "release_verdict": "partial",
+    "verdict_note": "Placeholder: no change was delivered to an environment and the releaseVerdict enum has no value for a findings publication. Open question routed to omn-orchestrator.",
+    "published_from": "runs/run-437e2f765e4b/states/recommendation/artifacts/technical-recommendation.md (REC-run-437e2f765e4b-002, digest sha256:0149cc2bf98e290e8e7975e9dc15386e)",
+    "not_published_from": "runs/run-437e2f765e4b/states/option-analysis/artifacts/technical-recommendation.md (REC-run-437e2f765e4b-001, provisional, digest sha256:9e637b852c4080d61d62b7019a0cb98b)",
+    "communication_basis": "findings",
+    "known_issue_count": 8,
+    "known_issue_sources": "K-001..K-006 from REC-002 Risk and Blocker Register RK-001..RK-006; K-007 from REC-002 Open Questions Q-001; K-008 from task-context assumption AS-002 (no tracking reference)",
+    "published_statements": {
+      "count": 19,
+      "all_traced_to": "REC-run-437e2f765e4b-002 or task-context.yaml, except K-008 (task-context) and the Stage 8 verdict placeholder"
+    },
+    "changes_by_stage5_class": {
+      "breaking": 0,
+      "contract": 0,
+      "operational": 0,
+      "feature": 0,
+      "fix": 0,
+      "improvement": 0,
+      "internal": 0
+    },
+    "checks": {
+      "run": 60,
+      "passed_by_self_check": 60,
+      "machine_validation": "not run; no command tool available; release_note_validator.py must be run by the operator with --envelope",
+      "list": {
+        "S1-S8": "pass",
+        "D1-D7": "pass",
+        "P1-P6": "pass",
+        "R3": "pass (not applicable: no contract change declared)",
+        "X1-X4": "pass (not applicable: no breaking change classified)",
+        "R1": "pass",
+        "R2": "pass",
+        "R4": "pass (K-001..K-008 recorded)",
+        "R5": "pass (not applicable: not rolled-back)",
+        "R7": "pass",
+        "V1": "flagged: the Stage 8 table yields no verdict for a findings publication with no deployment status; partial is a placeholder (see verdict_note)",
+        "V2": "flagged: status provisional set against the placeholder verdict; the same flag applies",
+        "V3": "pass (K-008 and the Support handoff open question)",
+        "K1-K6": "pass",
+        "R6": "pass",
+        "A1-A6": "pass",
+        "A7-A13": "pass",
+        "C1-C6": "pass"
+      }
+    },
+    "not_machine_checkable_obligations": {
+      "N1": "met: describes the delivered state, which is no change delivered and a recommendation recorded",
+      "N2": "not applicable: existing-documentation was not supplied, so no stale prior-release content was identified",
+      "N3": "met: no user-visible change exists; Highlights states none identified and nothing is overstated"
+    },
+    "friction": [
+      "identity.md has no Required Inputs rule for choosing between two technical-recommendation artifacts; the choice was made from the manifest minimumSatisfaction and REC-002 being the artifact the predecessor phase handed over and the Recommendation Gate approved.",
+      "technical-recommendation is not a declared sourceInputs type; recorded as final-change-summary.",
+      "Stage 8 yields no releaseVerdict for a findings publication; the enum cannot express the state.",
+      "agentVersion: manifest and envelope say 1.1.0, identity.md says 1.0.0; 1.1.0 used.",
+      "The security skill S09 was triggered by the word 'token', which here means LLM token cost, not a security surface; no security content was published.",
+      "Context files were read from the main checkout path, not the worktree path, because the run path resolved only under the worktree."
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    "runs/run-437e2f765e4b/states/publication/invocation-envelope.json",
+    "runs/run-437e2f765e4b/task-context.yaml",
+    "runs/run-437e2f765e4b/states/recommendation/artifacts/technical-recommendation.md",
+    "runs/run-437e2f765e4b/states/option-analysis/artifacts/technical-recommendation.md",
+    "templates/release-note.md",
+    "templates/technical-recommendation.md",
+    "config/execution-engine.md"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-437e2f765e4b/states/publication/artifacts/release-note.md",
+    "runs/run-437e2f765e4b/states/publication/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

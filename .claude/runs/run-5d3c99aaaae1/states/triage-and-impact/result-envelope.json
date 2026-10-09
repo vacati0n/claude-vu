@@ -1,0 +1,100 @@
+{
+  "invocation_id": "inv-5d3c99aaaae1-01-001",
+  "status": "completed",
+  "artifact_refs": [
+    "runs/run-5d3c99aaaae1/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "triage",
+    "analysisId": "BA-run-5d3c99aaaae1-triage",
+    "defectReference": "investigate-chain-input-contracts-defect-report",
+    "severity": "high",
+    "reproducibility": "deterministic",
+    "status": "provisional",
+    "counts": {
+      "evidenceRecords": 16,
+      "causalSteps": 7,
+      "causalStepsByConfidence": {
+        "high": 7,
+        "medium": 0,
+        "low": 0
+      },
+      "openQuestions": 5,
+      "openQuestionsBlocking": 0
+    },
+    "statusBasis": "Stage 9 row 5: no business impact statement was supplied, so severity rests on technical impact alone. Reproducibility is deterministic and the chain closes on a condition; one alternative (guard versus manifests as the place of repair) is not eliminated and is recorded as Q-001.",
+    "severityBasis": "Stage 5 table, high: a primary path (four workflows' hand-offs and four profile routes) fails; a workaround exists but needs advance knowledge and mislabels an input, so it is not acceptable in normal use. Not critical: no data loss, no wrong result, no security exposure.",
+    "measurement": {
+      "handoffsTotal": 29,
+      "handoffsBlockedOnIdentifier": 13,
+      "byWorkflow": {
+        "implement-feature": "5/2",
+        "refactor": "4/0",
+        "investigate": "4/3",
+        "code-quality-scan": "0/0",
+        "fix-bug": "4/1 (rescued by the supplied entry type)",
+        "research": "4/3",
+        "review-pull-request": "4/2",
+        "release": "4/2"
+      },
+      "profileRowsRejectedByEntryAgent": 4,
+      "profileRowsTotal": 7
+    },
+    "notMachineCheckableObligations": [
+      {
+        "id": "N1",
+        "obligation": "The stated root cause is the cause, not the symptom location",
+        "judgement": "discharged",
+        "detail": "The statement names a missing mapping between producer and consumer identifiers, a design-level condition, not the guard line where the block surfaces."
+      },
+      {
+        "id": "N2",
+        "obligation": "No speculative conclusion appears without supporting data",
+        "judgement": "discharged",
+        "detail": "Every count was measured in this run; limits (only G5-INPUT measured, verifier not run, 37-phase claim untested, downstream completion simulated in a mirror) are open questions, not conclusions."
+      },
+      {
+        "id": "N3",
+        "obligation": "The declared blast radius covers every boundary the defect crosses",
+        "judgement": "discharged with gaps recorded",
+        "detail": "Extended beyond the report to six workflows and four profile rows; the main checkout, the bundled payload, and consumer copies were not observed and are named as such."
+      }
+    ],
+    "qualityChecks": {
+      "run": 55,
+      "passed": 55,
+      "failed": 0,
+      "correctedBeforeEmission": [
+        {
+          "id": "V10",
+          "detail": "Three registered records (E-001, E-015, E-016) were uncited; they were cited where the analysis relied on them rather than removed."
+        }
+      ]
+    },
+    "validationEngine": {
+      "validator": "bug_analysis_validator",
+      "result": "pass",
+      "checksPassed": 30,
+      "checksRun": 30,
+      "delegated": [
+        "N1",
+        "N2",
+        "N3"
+      ]
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "runs/run-5d3c99aaaae1/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-5d3c99aaaae1/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-5d3c99aaaae1/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,670 @@
+{
+  "invocation_id": "inv-5f4422f26c3e-05-001",
+  "run_id": "run-5f4422f26c3e",
+  "work_item_id": "run-5f4422f26c3e::closure-and-communication",
+  "idempotency_key": "sha256:a9488ba2e865a7bfd6ba6a01b5906787",
+  "state_id": "closure-and-communication",
+  "phase_index": 5,
+  "agent_id": "omn-orchestrator",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-orchestrator.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-orchestrator/manifest.yaml",
+    "load_order": [
+      "agents/omn-orchestrator/system.md",
+      "agents/omn-orchestrator/identity.md",
+      "agents/omn-orchestrator/reasoning.md",
+      "agents/omn-orchestrator/execution.md",
+      "agents/omn-orchestrator/output.md",
+      "agents/omn-orchestrator/quality.md",
+      "agents/omn-orchestrator/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-orchestrator/system.md": "sha256:55acceff7f773ecb6bdeb02720c3aa97",
+      "agents/omn-orchestrator/identity.md": "sha256:98108a9fb596a75893501a3b1283a5e7",
+      "agents/omn-orchestrator/reasoning.md": "sha256:8324c06f20510b359378b2bee9512261",
+      "agents/omn-orchestrator/execution.md": "sha256:679a8b4be8a2184baaac7e8ed0e13fc5",
+      "agents/omn-orchestrator/output.md": "sha256:4360a823e6dbae0fc1008795afaed76f",
+      "agents/omn-orchestrator/quality.md": "sha256:93b01694f4e8a817d46b7e6599f5feb3",
+      "agents/omn-orchestrator/examples.md": "sha256:653ab4ca91cc8a04b7750b505ff71f72"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-orchestrator/system.md",
+        "agents/omn-orchestrator/reasoning.md",
+        "agents/omn-orchestrator/output.md",
+        "agents/omn-orchestrator/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-orchestrator/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-orchestrator/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-orchestrator/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 39453,
+      "full_bytes": 75179
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "workflow-coordination",
+      "phase-progression-control",
+      "handoff-management",
+      "escalation-routing",
+      "closure-governance",
+      "release-communication-support"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Advisory",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Advisory",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "required",
+      "area": "performance",
+      "basis": "area performance triggered by 'performance' in artifact:regression-validation",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'security' in artifact:regression-validation",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Advisory)"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "required",
+      "area": "database",
+      "basis": "area database triggered by 'migration' in artifact:fix-implementation",
+      "source": "agent-manifest (Advisory)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "validation-report",
+      "workflow-state",
+      "gate-evidence",
+      "implementation-report",
+      "review-package",
+      "release-note",
+      "technical-recommendation",
+      "deployment-plan",
+      "rollback-plan",
+      "known-issue-status",
+      "documentation-updates",
+      "escalation-context",
+      "closure-context",
+      "release-context",
+      "monitoring-evidence",
+      "technical-debt-record",
+      "dependency-map",
+      "prior-gate-evidence",
+      "unresolved-findings"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "validation-report",
+        "reference": "runs/run-5f4422f26c3e/states/regression-validation/artifacts/validation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-5f4422f26c3e/states/regression-validation/artifacts/validation-report.md",
+        "text": "```yaml\nvalidationReport:\n  reportId: VR-2026-1010\n  validationReference: run-5f4422f26c3e / fix-bug / verify-validators-v4-instance-selection (defect report runs/inputs/verify-validators-v4-instance-selection-defect-report.md)\n  validationBasis: regression\n  sourceInputs:\n    - type: implementation-report\n      reference: runs/run-5f4422f26c3e/states/fix-implementation/artifacts/implementation-report.md\n    - type: acceptance-criteria\n      reference: inline\n  producedBy: omn-qa\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: pass\n  inputDigest: sha256:9f9ea2a9686914263e18c96ae4e7a066\n  contextDigest: sha256:f156a71bc88d83d55f5e9fda06d2f8e2\n```\n\n## Metadata\n\n- Validation ID: VR-2026-1010\n- Validator: omn-qa\n- Change under validation: V4 of runtime/verify_validators.py selects, per artifact type, the first committed instance on which the declared mutation resolves, and locates the orchestration gate row with or without backticks (IR-2026-1010)\n- Validation date: 2026-10-09\n\n## Validation Scope\n\n- In scope: the eight operator-supplied acceptance criteria for the V4 repair: the verifier result from the repository root, reproduction of the pre-fix failure, the mutation test module, V4 decisiveness and V3 validation of the selected and skipped instances, the row locator on both renderings, the standalone regression targets and the mirror, the full unit suite, and the write-scope constraints.\n- Out of scope: the main checkout and hosted CI (never observed, routed to omn-qa follow-up by the root-cause analysis); the orchestration contract's identifier rendering (architect); the working-location rejection of the change proposal from inside the framework directory (omn-tech-lead); code quality, which belongs to omn-dev-2-reviewer; verify_vertical_slice, verify_multi_phase and verify_recovery, excluded by the operator.\n- Evidence examined: implementation-report IR-2026-1010 (digest sha256:9f9ea2a9686914263e18c96ae4e7a066, read as a claim source); task-context.yaml of this run; runtime/verify_validators.py and tests/test_verify_validators_mutations.py (read at the sites named); executed commands CMD-1 to CMD-14 listed under Acceptance Criteria Results.\n\n## Test Strategy\n\n- Risk basis: the change alters a path that decides whether a coverage check passes or fails (V4 and its shared V3 instance), so every branch of selection is pinned by test, the verifier is executed on the real tree, the original verifier is replayed to reproduce the defect, and the full suite is executed for the regression surface.\n- Levels executed: unit, integration, end-to-end\n- Environment: the worktree of this run on Windows, run from the repository root and from inside the framework directory; the pre-fix verifier was loaded from a scratch directory outside the repository and executed against this tree; the hosted CI environment differs and was not observed.\n- Not executed: performance and security levels, because the change reads run evidence and writes only temporary copies, with no performance-sensitive or security-relevant handling; verify_vertical_slice, verify_multi_phase and verify_recovery, excluded by operator instruction.\n\n## Acceptance Criteria Results\n\nThe Source of every row is the operator dispatch for this phase. Commands: CMD-1 `python runtime/verify_validators.py` (framework directory, from the repository root); CMD-2 the original verifier from `git show HEAD:runtime/verify_validators.py` executed from a scratch directory against this tree through a loader that sets its location to the repository runtime directory; CMD-3 `python tests/test_verify_validators_mutations.py`; CMD-4 the same module run from inside the framework directory with the classes MutationConsoleLine and SkippedCandidateUnderV3; CMD-5 the verbose run of seven named tests; CMD-6 a scratch script calling award_itself_its_own_gate on the selected record and on a backticked variant; CMD-7 `python runtime/verify_registry_coverage.py`; CMD-8 `python runtime/verify_manifests.py`; CMD-9 `python -m unittest tests.test_bundled_payload`; CMD-10 `cmp` of the verifier and its mirror; CMD-11 `git status --short` and `git diff --stat`; CMD-12 `python tools/run_tests_parallel.py` (re-run in this phase); CMD-13 `git checkout --` of the two run-c5a8d50d3238 files after the suite; CMD-14 `git status --short` after CMD-13.\n\n| ID | Criterion | Source | Method | Result | Evidence |\n|---|---|---|---|---|---|\n| AC-001 | `python runtime/verify_validators.py` from the repo root reports 6/6 COVERED and the orchestration-result.md row reads 'caught by O4 (all: [O4])' with no candidate skipped | operator dispatch | end-to-end | met | CMD-1 printed \"6/6 checks passed -- COVERED\", V4 detail ending \"no candidate skipped\", and the row \"caught by O4 (all: ['O4'])\" |\n| AC-002 | the pre-fix behaviour is reproduced: the original verifier from git HEAD (a baseline predating BOTH repairs) gives 5/6 on this tree | operator dispatch | end-to-end | met | CMD-2 printed V4 FAIL naming investigation-report.md and orchestration-result.md (\"no mutation anchor ... in this instance\"), console line \"caught by O4 (all: None)\", and \"5/6 checks passed -- NOT COVERED\"; the baseline predates both repairs, and the implementer's account is a supporting claim only |\n| AC-003 | tests/test_verify_validators_mutations.py passes 26 of 26 from the repo root and the working-directory-sensitive classes also pass when run from inside the framework directory | operator dispatch | unit | met | CMD-3 printed \"Ran 26 tests ... OK\"; CMD-4 from inside the framework directory printed \"Ran 3 tests ... OK\" |\n| AC-004 | V4 is still decisive and V3 still validates the instance V4 uses and every skipped candidate: tests pin each and pass | operator dispatch | unit | met | CMD-5 ran ok: InstanceSelection.test_accept_all_validator_still_fails_v4_after_selection, MutationVerdict.test_validator_accepting_the_mutation_fails, MutationVerdict.test_missing_anchor_fails_without_running_the_validator (V4 decisive), SkippedCandidateUnderV3.test_rejected_unanchored_last_candidate_fails_v3_while_v4_uses_the_older (V3 on skipped and used), RealTreeSelection (13 types) |\n| AC-005 | the locator accepts identifiers with and without backticks, shown on the real closure record and on a backticked record | operator dispatch | unit | met | CMD-6: selected record is the closure record of run-d8937789961e, contains no backticked PH identifier, locator found the row; a backticked variant and the backticked fixture also found; PlainRenderedOrchestrationRows (2 tests) ok in CMD-5 |\n| AC-006 | regression targets standalone and non-mutating: verify_registry_coverage 8/8, verify_manifests 2/2, `python -m unittest tests.test_bundled_payload`, and the mirror byte-identical (`cmp`) | operator dispatch | integration | met | CMD-7 \"8/8 checks passed -- COVERED\"; CMD-8 \"2/2 checks passed -- CONFORMS\"; CMD-9 \"Ran 11 tests ... OK\"; CMD-10 printed MIRROR_IDENTICAL with no difference; CMD-11 after them shows no new tracked change |\n| AC-007 | the full unit suite via `python tools/run_tests_parallel.py` was run by the operator at 668 of 668 on this exact tree; cited as operator-supplied | operator dispatch | unit | met | the operator figure is reported, not relied on; CMD-12, re-run here, printed \"26/26 modules passed, 668 of 668 discovered tests ran\"; CMD-13 restored the two run-c5a8d50d3238 files and CMD-14 shows only the expected paths |\n| AC-008 | constraints held: no validator, template, fixture or committed run evidence changed, and only verify_validators.py, its mirror and the new test file differ | operator dispatch | integration | met | CMD-11 and CMD-14: tracked changes are runtime/verify_validators.py and its bundled mirror only (430 insertions, 90 deletions); the test file is untracked and new; the remaining untracked paths are the proposals, run inputs and run directories of the repair runs; no validator, template, fixture or committed run file shows as modified |\n\n## Execution Summary\n\n- Criteria validated: 8\n- Met: 8\n- Not met: 0\n- Blocked: 0\n\n## Defects\n\nNone identified.\n\n## Regression Assessment\n\n- Regression scope: V3 acceptance of the selected instance and all 13 artifact types through the shared selector; the mutation verdict per type; the validator coverage verifier's console and JSON output; the bundled payload mirror; the registry and manifest verifiers; every other module of the unit suite.\n- Regressions detected: None identified.\n- Coverage of changed behavior: the locator on plain and backticked rows, candidate ordering and skip reporting, the no-candidate failure branch, V3 on the first candidate tried, and the console outcome line are each reached by named tests (CMD-3, CMD-5) and by the real-tree run (CMD-1); the end-to-end defect is reproduced before the change (CMD-2) and absent after it (CMD-1).\n- Untested areas: the main checkout and hosted CI run evidence; a future instance type with no applicable candidate beyond the synthetic cases the tests build; the count-based derivations on instances other than the ones committed today; the verifier invoked from inside the framework directory for the change proposal type, a separate defect owned elsewhere.\n\n## Residual Risk\n\n- Accepted risk: None identified.\n- Unmitigated risk: the fallback lets V4 pass on an older instance while a newer one goes unmutated (R-001 of the implementation report, medium likelihood); every skip is printed and stored in the JSON summary, so the risk depends on a reader inspecting that line; no role has accepted it.\n- Monitoring required: the V4 detail on each release verification: any text naming a skipped candidate or no applicable candidate, and any real-tree selection test failure naming a type and its candidates.\n\n## Verdict\n\n- Decision: pass\n- Rationale: all eight criteria are met on executed checks, no defect is open, and no criterion is blocked, so the adjudication table yields pass with status complete; the original verifier reproduces the defect and the repaired verifier clears it with no regression in the 668 tests.\n- Blocking defects outstanding: None identified.\n- Readiness recommendation: the evidence supports recommending that the Verification Gate owner, a role other than this validator, approve this phase; the gate decision and any merge rest with that owner.\n\n## Open Questions\n\n- Q-001: Should the orchestration contract fix identifier rendering, or must verifiers keep locating rows by meaning as the repaired locator now does? Routes to architect.\n- Q-002: Does the same 6/6 result hold on the main checkout and hosted CI with their run evidence, which this validation did not observe? Routes to omn-tech-lead.",
+        "digest": "sha256:385a32686df2ba6347cf459f66e5b850",
+        "produced_by": "regression-validation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the recorded account of what the run did that this record is assembled from: a validation report for a `fix-bug` or `refactor` closure, the workflow state for a progression this record reconstructs, or the gate evidence a transition rested on. Without one there is nothing to coordinate from, and producing a record anyway would mean asserting a progression no recorded evidence establishes \u2014 which is the precise failure this role exists to prevent."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "validation-report",
+      "reference": "runs/run-5f4422f26c3e/states/regression-validation/artifacts/validation-report.md",
+      "produced_by": "regression-validation",
+      "artifact": "validation-report.md",
+      "bytes": 10688,
+      "sections": {
+        "read_first": [
+          "Acceptance Criteria Results",
+          "Defects",
+          "Verdict",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Validation Scope",
+          "Test Strategy",
+          "Execution Summary",
+          "Regression Assessment",
+          "Residual Risk"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-5f4422f26c3e/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:169c84fcc38a7468a22bb5006473e74d",
+    "bytes": 17714,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "database",
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "closure-and-communication"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-09T10:09:22Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 22496,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context",
+        "bytes": 7553,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/orchestration-result.md",
+        "digest": "sha256:17841c96b01f66de152eb2ce021960e0",
+        "supplies": null,
+        "bytes": 7123,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/validation-report.md",
+        "digest": "sha256:289a25ebf7d54fb95ddf4fd44925d038",
+        "supplies": null,
+        "bytes": 5711,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null,
+        "bytes": 1252,
+        "read": "required",
+        "read_reason": "skill S10 is required for this phase"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73bd155e6b8344e48a8c66266be118cf",
+        "supplies": null,
+        "bytes": 61682,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:79e91f27356ab19fdd381a23fb72b3bf",
+    "input_digest": "sha256:385a32686df2ba6347cf459f66e5b850",
+    "inputs": [
+      {
+        "type": "validation-report",
+        "reference": "runs/run-5f4422f26c3e/states/regression-validation/artifacts/validation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-5f4422f26c3e/states/regression-validation/artifacts/validation-report.md",
+        "digest": "sha256:385a32686df2ba6347cf459f66e5b850"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/orchestration-result.md",
+      "templates/validation-report.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/orchestration-result.md",
+      "templates/validation-report.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/fix-bug.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 178531,
+    "bytes_required": 16843,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-5f4422f26c3e/states/closure-and-communication/artifacts/orchestration-result.md",
+      "runs/run-5f4422f26c3e/states/closure-and-communication/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any deployment, rollback, merge, publication, or release action",
+        "any command that modifies source, tests, committed run evidence, or a governance record",
+        "repository history rewriting",
+        "any command whose result is not recorded in the orchestration result"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author requirements, scope, acceptance criteria, structural design, tests, or task breakdowns",
+      "take a gate decision that belongs to another role, or record one that was never taken",
+      "decide a gate that assesses evidence this agent produced",
+      "permit a phase transition whose governing gate carries no recorded decision",
+      "record a phase as complete without the gate decision and the evidence behind it",
+      "close a run carrying an unresolved critical or high escalation",
+      "perform a deployment, a rollback, a merge, or a publication action itself",
+      "record a deployment state, monitoring result, or rollback position it was not supplied",
+      "reclassify an escalation's severity, or a finding's, to reach a closure",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "reconstruct the phase progression a run actually executed, from its recorded evidence",
+        "verify that every transition a run took carries a recorded decision at the gate governing it",
+        "accept or refuse a handoff on whether the receiving phase's input contract is satisfied",
+        "record the gate decisions other roles took, naming the authority that took each one",
+        "hold a transition whose gate carries no recorded decision, and say what it is waiting for",
+        "raise and route an escalation this role cannot resolve within its own authority",
+        "record the follow-up actions, deferred scope, and technical debt delta a run leaves behind",
+        "record the deployment state, monitoring health, and rollback position supplied to it",
+        "state a closure position and recommend closure to the authority that decides it",
+        "decide a gate over evidence another role produced, where the gate matrix assigns it"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author requirements, scope, acceptance criteria, structural design, tests, or task breakdowns",
+        "take a gate decision that belongs to another role, or record one that was never taken",
+        "decide a gate that assesses evidence this agent produced",
+        "permit a phase transition whose governing gate carries no recorded decision",
+        "record a phase as complete without the gate decision and the evidence behind it",
+        "close a run carrying an unresolved critical or high escalation",
+        "perform a deployment, a rollback, a merge, or a publication action itself",
+        "record a deployment state, monitoring result, or rollback position it was not supplied",
+        "reclassify an escalation's severity, or a finding's, to reach a closure",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else in the repository, in any phase.",
+        "rationale": "A coordination record is worth what its independence is worth. This role's artifact is the evidence a Closure or Deployment Gate is decided on, and an agent that could change the code, the evidence, or another phase's artifact while accounting for the run would be reporting on work it had shaped itself. The account and the work stay in different hands."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any deployment, rollback, merge, publication, or release action",
+          "any command that modifies source, tests, committed run evidence, or a governance record",
+          "repository history rewriting",
+          "any command whose result is not recorded in the orchestration result"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same phase progression set in the same order, the same handoff set with the same acceptance states, the same escalation set with the same severities, the same follow-up action set, the same operational status, the same closure disposition, and the same declared artifact status.",
+      "identifierSchemes": {
+        "phaseProgression": "PH-<zero-padded-sequence>",
+        "handoffs": "HO-<zero-padded-sequence>",
+        "escalations": "ES-<zero-padded-sequence>",
+        "followUpActions": "FU-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Phase progression rows follow the run's dependency order, which is the order the routed workflow's Phase Model declares; a re-run may not reorder them into a different-looking progression. Handoffs follow the order of the transitions they carried. Escalations and follow-up actions are ordered by descending severity; ties break toward the lower identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied plans, evidence, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "orchestration-result.md",
+    "artifact_path": "runs/run-5f4422f26c3e/states/closure-and-communication/artifacts/orchestration-result.md",
+    "template_ref": "templates/orchestration-result.md",
+    "contract_ref": "agents/omn-orchestrator/output.md",
+    "quality_ref": "agents/omn-orchestrator/quality.md",
+    "validator": "orchestration_result_validator",
+    "result_envelope_path": "runs/run-5f4422f26c3e/states/closure-and-communication/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-09T10:09:22Z",
+  "model_tier": {
+    "tier": "light",
+    "host_hint": "haiku",
+    "basis": "declared light for fix-bug/closure-and-communication in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 75179,
+    "modules_core_bytes": 39453,
+    "slice_all_bytes": 178531,
+    "slice_required_bytes": 16843,
+    "inputs_bytes": 0,
+    "upstream_full_bytes": 10689,
+    "upstream_read_first_bytes": 5688,
+    "task_context_bytes": 17714,
+    "fixed_bytes": 18543,
+    "legacy_estimate_bytes": 282942,
+    "progressive_estimate_bytes": 98241,
+    "legacy_estimate_tokens": 70735,
+    "progressive_estimate_tokens": 24560,
+    "savings_pct": 65.3
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "invocation_id": "inv-ded114f50a46-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ded114f50a46/states/implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "report_id": "IR-2026-0010",
+    "change_reference": "run-ded114f50a46, per-phase model tier in the dispatch envelope",
+    "workflow_phase": "implementation",
+    "status": "complete",
+    "verification_status": "verified",
+    "review_status": "pending-review",
+    "counts": {
+      "change_set_entries": 13,
+      "test_evidence_entries": 13,
+      "deviations": 1,
+      "residual_risks": 4,
+      "open_questions": 0,
+      "blocking_open_questions": 0,
+      "escalated_deviations": 0
+    },
+    "identifier_ranges": {
+      "change_set": "C-001..C-013",
+      "test_evidence": "T-001..T-013",
+      "deviations": "V-001..V-001",
+      "residual_risks": "R-001..R-004",
+      "open_questions": "none"
+    },
+    "evidence_results": {
+      "pass": 13,
+      "fail": 0,
+      "not_run": 0,
+      "regression_baseline": {
+        "taken": "on an unmodified copy of the tree before the first edit",
+        "suite_before": {"command": "python -m unittest discover -s tests", "tests": 595, "result": "OK"},
+        "suite_after": {"command": "python -m unittest discover -s tests", "tests": 638, "result": "OK"},
+        "verifiers_before": {
+          "verify_manifests": "2/2",
+          "verify_multi_phase": "14/15, failing check M6",
+          "verify_recovery": "73/74, failing check X1",
+          "verify_registry_coverage": "6/6",
+          "verify_self_hosting": "7/8, failing check S8",
+          "verify_validators": "6/6",
+          "verify_vertical_slice": "10/10"
+        },
+        "verifiers_after": {
+          "verify_manifests": "2/2",
+          "verify_multi_phase": "14/15, failing check M6",
+          "verify_recovery": "73/74, failing check X1",
+          "verify_registry_coverage": "8/8",
+          "verify_self_hosting": "7/8, failing check S8",
+          "verify_validators": "6/6",
+          "verify_vertical_slice": "10/10"
+        },
+        "comparison": "by pass or fail per check, not by check count; no check changed verdict; the two added coverage checks pass",
+        "pre_existing_failures_surviving": 3
+      }
+    },
+    "quality_checks": {
+      "check_set_version": "agents/omn-dev-1-implement/quality.md 1.0.0",
+      "total_run": 45,
+      "total_passed": 45,
+      "total_failed": 0,
+      "repair_passes": 0,
+      "validator": "python .claude/runtime/implementation_report_validator.py <artifact> --envelope <invocation-envelope>: PASS, 32/32, 0 blocking, 0 correctable"
+    },
+    "not_machine_checkable": {
+      "N1": "judged: each change-set row describes the change actually made at that path; the mirror rows are written by the synchronisation command and say so",
+      "N2": "judged: each test-evidence row exercises the change-set entries its Covers cell names; the documentation rows are covered by the declaration class test that reads the two governance documents",
+      "N3": "judged: no hidden side effect; the resolver is pure, the only new reads are one optional config file and the existing recovery ledger, and the only new writes are the additive envelope record and event detail",
+      "N4": "judged: the one new file is justified by the no-existing-carrier rung of the necessity and reuse ladder and stated in Approach taken; no new abstraction layer or dependency was introduced"
+    },
+    "operator_resolutions_honoured": [
+      "host alias values live in config/model-tier-policy.json only, none in runtime logic",
+      "verifier baselines compared by pass or fail per check, not by check count",
+      "no operator override switch designed or added",
+      "execution-planning resolves to standard; scope-and-acceptance and documentation-and-release-handoff resolve to light"
+    ],
+    "runtime_version": {"from": "0.8.0", "to": "0.9.0"}
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "runs/run-ded114f50a46/states/implementation/invocation-envelope.json"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    ".claude/config/model-tier-policy.json",
+    ".claude/runtime/framework_runtime.py",
+    ".claude/runtime/execution_metrics.py",
+    ".claude/runtime/verify_registry_coverage.py",
+    "tests/test_model_tier.py",
+    ".claude/config/runtime.md",
+    ".claude/config/execution-engine.md",
+    "omn_agent/_bundled_payload/config/execution-engine.md",
+    "omn_agent/_bundled_payload/config/model-tier-policy.json",
+    "omn_agent/_bundled_payload/config/runtime.md",
+    "omn_agent/_bundled_payload/runtime/execution_metrics.py",
+    "omn_agent/_bundled_payload/runtime/framework_runtime.py",
+    "omn_agent/_bundled_payload/runtime/verify_registry_coverage.py",
+    ".claude/runs/run-ded114f50a46/states/implementation/artifacts/implementation-report.md",
+    ".claude/runs/run-ded114f50a46/states/implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

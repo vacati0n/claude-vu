@@ -122,7 +122,7 @@ RUNS = CLAUDE / "runs"
 # installed runtime names paths that actually exist on disk.
 FW_PREFIX = CLAUDE.name
 
-RUNTIME_VERSION = "0.8.0"
+RUNTIME_VERSION = "0.9.0"
 
 SLICES = {
     "scope-and-acceptance": "vertical-slice-4-product-owner-execution",
@@ -3057,6 +3057,11 @@ def cmd_dispatch(args):
                             f"{item['payload_digest']}, but the supplied context derives "
                             f"{payload_digest}; release the lease before re-dispatching")
 
+    # The tier is resolved before the lease is bound, so a declaration that cannot be read
+    # fails the dispatch as a policy failure with nothing yet written for this attempt.
+    model_tier = resolve_model_tier(load_model_tier_policy(), c["workflow"]["identifier"],
+                                    phase, count_tier_rejections(run_dir, item))
+
     key = store.bind_payload(item, owner_agent_id=agent_id,
                              agent_version=c["agent"]["record"]["version"],
                              payload_digest=payload_digest)
@@ -3238,6 +3243,7 @@ def cmd_dispatch(args):
             "conditional_artifacts": conditional,
         },
         "built_at": now(),
+        "model_tier": model_tier,
     }
     # What this dispatch asks the agent to read, under both the legacy and the progressive
     # rules, so the saving is measurable per dispatch and not only per run.
@@ -3286,7 +3292,9 @@ def cmd_dispatch(args):
                         f"through host registration {envelope['host_registration']}",
                 reason_code="execution_started",
                 details={"invocation_id": invocation_id,
-                         "transition": f"{rec['from']} -> {rec['to']}"},
+                         "transition": f"{rec['from']} -> {rec['to']}",
+                         "model_tier": model_tier["tier"],
+                         "escalated": bool(model_tier["escalation"])},
                 work_item_id=item["work_item_id"])
 
     write_state_ledger(store, ctx, phase, envelope, c)
@@ -3300,6 +3308,9 @@ def cmd_dispatch(args):
           f"{len(store.state_items())}]  status={item['status']}")
     print(f"agent              : {agent_id} v{envelope['agent_version']} "
           f"(adapter: host-subagent, mode: {args.dispatch_mode})")
+    print(f"model tier         : {model_tier['tier']}  (host hint: {model_tier['host_hint']})"
+          + ("  ESCALATED: " + model_tier["escalation"]["reason"]
+             if model_tier["escalation"] else ""))
     print(f"inputs             : {[s['type'] for s in narrowed]}"
           + (f"  (narrowed out: {dropped})" if dropped else ""))
     if prior_rejection:
@@ -3587,11 +3598,21 @@ governed by your own module set.
                          f"what you write: {pg['dispatchable_now']}. Do not wait for them and "
                          f"do not read their unfinished artifacts.\n")
 
+    mt = envelope.get("model_tier")
+    tier_line = ""
+    if mt:
+        tier_line = (f"Model tier: `{mt['tier']}`, host hint `{mt['host_hint']}`"
+                     + (f" (promoted: {mt['escalation']['reason']})" if mt.get("escalation")
+                        else "")
+                     + (". Pass the hint as the per-dispatch model override."
+                        if mt["host_hint"] != INHERIT_HINT
+                        else ". The hint is `inherit`: pass no model override.") + "\n")
+
     return f"""# Agent Dispatch: {envelope['agent_id']} v{envelope['agent_version']}
 
 Runtime: `{FW_PREFIX}/runtime/framework_runtime.py` v{RUNTIME_VERSION}
 Adapter: `host-subagent`  ->  host registration `{FW_PREFIX}/{envelope['host_registration']}`
-
+{tier_line}
 | Field | Value |
 |---|---|
 | run_id | `{envelope['run_id']}` |
@@ -4241,6 +4262,122 @@ def cmd_complete(args):
     print()
     print("\n".join(state_table(store)))
     return 0 if accepted else 1
+
+
+# ------------------------------------------------------------------ model tier policy
+#
+# A tier is advice. `config/model-tier-policy.json` declares, per workflow and phase, which
+# class of model should execute the phase (`light`, `standard`, `deep`) and one opaque host
+# hint per tier. The runtime never calls a model and never reads a hint's value: it copies the
+# hint into the invocation envelope, and the dispatching session passes it to the host as a
+# per-dispatch override (`inherit` means pass none). Resolution is a pure derivation from the
+# declaration plus recorded run state -- the recovery ledger and the work item's supersessions
+# -- so a dispatch built in a fresh session agrees with one built in the same session.
+
+MODEL_TIER_POLICY_REL = "config/model-tier-policy.json"
+MODEL_TIERS = ("light", "standard", "deep")
+DEFAULT_MODEL_TIER = "standard"
+INHERIT_HINT = "inherit"
+VALIDATION_REJECTION_REASON = "validation_failed"
+
+
+def load_model_tier_policy() -> dict | None:
+    """The tier declaration, or None when the file is absent.
+
+    An absent file is not an error: every phase then resolves to `standard` and inherits the
+    host model, which is the behaviour before the declaration existed. A file that exists but
+    cannot be read, names an unknown tier, or lacks a hint for a tier is a policy failure
+    rather than a silent fallback, because a team that wrote a declaration meant it to apply.
+    """
+    p = CLAUDE / MODEL_TIER_POLICY_REL
+    if not p.exists():
+        return None
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise RuntimeError_("policy-failure", f"{MODEL_TIER_POLICY_REL} is unreadable: {exc}")
+    if not isinstance(data, dict):
+        raise RuntimeError_("policy-failure", f"{MODEL_TIER_POLICY_REL} is not a JSON object")
+    hints = data.get("hints")
+    if not isinstance(hints, dict) or set(hints) != set(MODEL_TIERS) or not all(
+            isinstance(v, str) and v.strip() for v in hints.values()):
+        raise RuntimeError_("policy-failure",
+                            f"{MODEL_TIER_POLICY_REL}: 'hints' must map exactly the tiers "
+                            f"{list(MODEL_TIERS)} to non-empty host hint strings")
+    if hints[DEFAULT_MODEL_TIER] != INHERIT_HINT:
+        raise RuntimeError_("policy-failure",
+                            f"{MODEL_TIER_POLICY_REL}: the {DEFAULT_MODEL_TIER} hint is "
+                            f"reserved as {INHERIT_HINT!r}, because a phase with no entry "
+                            f"resolves to {DEFAULT_MODEL_TIER} and must inherit the host model")
+    phases = data.get("phases")
+    if not isinstance(phases, dict) or not all(
+            isinstance(v, dict) for v in phases.values()):
+        raise RuntimeError_("policy-failure",
+                            f"{MODEL_TIER_POLICY_REL}: 'phases' must map workflow ids to "
+                            f"{{phase: tier}} objects")
+    for wid, entries in phases.items():
+        for phase, tier in entries.items():
+            if tier not in MODEL_TIERS:
+                raise RuntimeError_("policy-failure",
+                                    f"{MODEL_TIER_POLICY_REL}: {wid}/{phase} names unknown "
+                                    f"tier {tier!r}; tiers: {list(MODEL_TIERS)}")
+    return {"hints": dict(hints), "phases": phases}
+
+
+def count_tier_rejections(run_dir: Path, item: dict) -> dict:
+    """Recorded rejections of this phase that earn a promotion.
+
+    Two kinds, both read from state the runtime already persists and never from memory: a
+    validator rejection, ledgered under the phase's own state id with reason code
+    `validation_failed`, and a gate rejection that was rolled back, recorded as one entry in
+    the work item's append-only `supersessions`. A transport failure produced nothing to judge,
+    carries another reason code, and never counts; a gate rejection with no rollback never
+    reached this phase's work item.
+    """
+    validator = sum(1 for e in rp.RecoveryLedger(run_dir).entries()
+                    if e.get("state_id") == item["state_id"]
+                    and e.get("reason_code") == VALIDATION_REJECTION_REASON)
+    return {"validator": validator,
+            "gate_rollback": len(item.get("supersessions") or [])}
+
+
+def resolve_model_tier(policy: dict | None, workflow_id: str, phase: str,
+                       rejections: dict | None = None) -> dict:
+    """Pure: the `model_tier` record for one dispatch.
+
+    Promotion is one tier per recorded rejection, capped at `deep`, and never downward. With
+    no declaration file there is nothing to promote to: the phase inherits the host model.
+    """
+    if policy is None:
+        return {"tier": DEFAULT_MODEL_TIER, "host_hint": INHERIT_HINT,
+                "basis": f"no {MODEL_TIER_POLICY_REL}: the phase inherits the host model",
+                "escalation": {}}
+    declared = (policy["phases"].get(workflow_id) or {}).get(phase)
+    if declared is None:
+        declared = DEFAULT_MODEL_TIER
+        basis = (f"{workflow_id}/{phase} has no entry in {MODEL_TIER_POLICY_REL}: "
+                 f"{DEFAULT_MODEL_TIER}")
+    else:
+        basis = f"declared {declared} for {workflow_id}/{phase} in {MODEL_TIER_POLICY_REL}"
+    rej = rejections or {}
+    validator, rollback = int(rej.get("validator", 0)), int(rej.get("gate_rollback", 0))
+    total = validator + rollback
+    idx = min(MODEL_TIERS.index(declared) + total, len(MODEL_TIERS) - 1)
+    tier = MODEL_TIERS[idx]
+    escalation = {}
+    if tier != declared:
+        escalation = {
+            "from": declared, "to": tier,
+            "validator_rejections": validator, "gate_rollbacks": rollback,
+            "reason": (f"{validator} validator rejection(s) and {rollback} gate rejection(s) "
+                       f"with rollback recorded for this phase; promoted from {declared} "
+                       f"to {tier}"),
+        }
+    elif total and declared == MODEL_TIERS[-1]:
+        basis += (f"; {MODEL_TIERS[-1]} is the ceiling, so {total} recorded "
+                  f"rejection(s) do not raise it")
+    return {"tier": tier, "host_hint": policy["hints"][tier], "basis": basis,
+            "escalation": escalation}
 
 
 # ------------------------------------------------------------------ gate auto-approval policy

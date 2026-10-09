@@ -1,0 +1,69 @@
+{
+  "invocation_id": "inv-ded114f50a46-06-002",
+  "status": "complete",
+  "artifact_refs": [
+    ".claude/runs/run-ded114f50a46/states/documentation-and-release-handoff/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "run_id": "run-ded114f50a46",
+    "work_item_id": "run-ded114f50a46::documentation-and-release-handoff",
+    "attempt": 2,
+    "communication_basis": "release-handoff",
+    "artifact_status": "complete",
+    "release_verdict": "released",
+    "release_verdict_basis": "operator instruction for attempt 2: the change is delivered and verified, so releaseVerdict released with status complete; verdict is the operator's, not derived by this agent",
+    "audience": "inferred (no stakeholder list or communication requirement supplied): framework operators dispatching implement-feature runs and the owners named in Known Issues",
+    "known_issues": {"count": 8, "ids": ["K-001", "K-002", "K-003", "K-004", "K-005", "K-006", "K-007", "K-008"], "resolved": ["K-001", "K-002", "K-003"]},
+    "published_statements": {"count": 28, "traced_to_sources": 28, "note": "field-level statements; each cites its source inline; operator-supplied facts are attributed to the operator"},
+    "changes_by_stage5_class": {"feature": 1, "improvement": 1, "contract": 1, "operational": 1, "breaking": 0, "fix": 0, "internal": 0},
+    "repair": {
+      "cleared": ["R1"],
+      "changes": [
+        "releaseVerdict withheld -> released; status blocked -> complete",
+        "K-001 to K-003 restated as resolved (post-review correction pass, operator-verified)",
+        "retired the open-question issue about which tree produced 642 and the issue about verdict vocabulary; the former is answered by the operator (642 is the corrected tree, reviewer's 638 pre-correction), the latter by the operator's verdict instruction; no compaction needed, remaining identifiers K-001 to K-008 are contiguous",
+        "Metadata release date, Validation Summary test status, and Communication notes updated to match the verdict; added the light-to-standard escalation of this phase as observed evidence"
+      ]
+    },
+    "quality_checks_run": 61,
+    "quality_checks_passed": 61,
+    "quality_checks_failed": [],
+    "quality_check_notes": [
+      "All checks are self-judged; no validator was run (no command execution permitted to this agent). The operator validates.",
+      "P5: the review package records F-001 to F-003 as open while the operator reports them closed; the delivered account (closed) is published and the disagreement is recorded in K-001 to K-003 tracking and in the support handoff notes.",
+      "V1: the verdict was set by operator instruction, not by the Stage 8 table; recorded here rather than presented as derived.",
+      "R4, R5, X1-X4 not applicable: verdict is released and no breaking change is in the supplied evidence."
+    ],
+    "not_machine_checkable_obligations": {
+      "N1": "judged met: every published field cites the review-package, implementation-report, invocation envelope, or the operator's stated facts",
+      "N2": "judged met: no prior-release document was supplied; no stale content carried forward",
+      "N3": "judged met: Highlights sized to Stage 5 classes; no internal-only work published as user-visible"
+    },
+    "open_questions": [
+      "Owner and tracking for pre-existing verifier failures X1 and S8 (K-004). Owner: omn-tech-lead.",
+      "Q-004 per-dispatch tier switch is unresolved (K-007). Owner: omn-product-owner.",
+      "Q-001 pinned category sets as a second tier assignment under A-003 (K-008). Owner: omn-qa.",
+      "Whether the reviewer will record closure of F-001 to F-003 in the review package; the note relies on the operator's verification. Owner: omn-dev-2-reviewer."
+    ],
+    "commands_executed": [],
+    "repository_writes": [
+      ".claude/runs/run-ded114f50a46/states/documentation-and-release-handoff/artifacts/release-note.md",
+      ".claude/runs/run-ded114f50a46/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "validator_handoff": "operator to run release_note_validator.py with --envelope .claude/runs/run-ded114f50a46/states/documentation-and-release-handoff/invocation-envelope.json; this agent has no command tool"
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    ".claude/runs/run-ded114f50a46/states/documentation-and-release-handoff/invocation-envelope.json"
+  ],
+  "confidence": 0.85,
+  "declared_side_effects": [
+    ".claude/runs/run-ded114f50a46/states/documentation-and-release-handoff/artifacts/release-note.md",
+    ".claude/runs/run-ded114f50a46/states/documentation-and-release-handoff/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

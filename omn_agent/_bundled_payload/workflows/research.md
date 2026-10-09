@@ -39,7 +39,7 @@ ships a runtime manifest, so every remaining identifier is derived from the stat
 | `research-framing` | `omn-business-analyst` | primary | research question, decision scope, constraints and stakeholders | `requirement-framing.md` | Framing Gate | S02 |
 | `technical-validation` | `omn-context-agent` | primary | `requirement-framing.md`, technical sources, business evidence | `investigation-report.md` | Technical Validity Gate | S01, S03, S06, S11 |
 | `option-synthesis` | `omn-tech-lead` | primary | `investigation-report.md`, risk and effort criteria | `technical-recommendation.md` | none | S01, S08, S09 |
-| `recommendation-draft` | `omn-tech-lead` | primary | `technical-recommendation.md`, risk posture, implementation impact | `technical-recommendation.md` | Recommendation Gate | S02, S08 |
+| `recommendation-draft` | `omn-tech-lead` | primary | `technical-recommendation.md`, `investigation-report.md`, risk posture, implementation impact | `technical-recommendation.md` | Recommendation Gate | S02, S08 |
 | `findings-publication` | `omn-documentation` | primary | `technical-recommendation.md`, evidence references | `release-note.md`, on the `findings` communication basis | none | S10, S11 |
 
 ### Phase Identifier Sources

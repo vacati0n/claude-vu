@@ -1,0 +1,45 @@
+{
+  "invocation_id": "inv-5f4422f26c3e-01-001",
+  "status": "success",
+  "artifact_refs": [
+    "runs/run-5f4422f26c3e/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysis_basis": "triage",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "analysis_status": "provisional",
+    "counts": {
+      "evidence_records": 14,
+      "causal_steps": 6,
+      "causal_steps_by_confidence": {"high": 6, "medium": 0, "low": 0},
+      "open_questions": 5
+    },
+    "checks": {
+      "run": 30,
+      "passed": 30,
+      "failed": 0,
+      "source": "bug_analysis_validator with the invocation envelope; the agent-only checks V1 to V33 and A2 to A7 were judged by this run against the rendered artifact and hold"
+    },
+    "not_machine_checkable": {
+      "N1": "Judged: the final step names a condition (format-dependent row location plus selection without applicability), not the location where V4 reports; stated as triage-level and provisional.",
+      "N2": "Judged: every claim cites registered evidence; the latent count-range fragility is not asserted and is recorded as Q-002.",
+      "N3": "Judged: the radius covers V3, V4, FR-02, the self-hosting verification, O4, the bundled mirror and the test; measured extent 1 of 89 instances; main checkout and hosted CI recorded as not observed."
+    },
+    "notes": "The supplied cause (closure record carries only a gate none row) was tested and not confirmed: all five closure records carry the identical PH-005 row; the difference is unbackticked identifiers (E-005, E-006)."
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "runs/run-5f4422f26c3e/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-5f4422f26c3e/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-5f4422f26c3e/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

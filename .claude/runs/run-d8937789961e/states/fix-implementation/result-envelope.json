@@ -1,0 +1,70 @@
+{
+  "invocation_id": "inv-d8937789961e-03-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-d8937789961e/states/fix-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-1009",
+    "workflowPhase": "fix-implementation",
+    "status": "complete",
+    "verificationStatus": "verified",
+    "counts": {
+      "changeSetEntries": 3,
+      "testEvidenceEntries": 5,
+      "deviations": 3,
+      "residualRisks": 2,
+      "openQuestions": 0
+    },
+    "evidence": {
+      "executed": 5,
+      "passed": 5,
+      "failed": 0,
+      "baselineSuite": "25/25 modules, 642 of 642 tests passed (python tools/run_tests_parallel.py, before any edit)",
+      "postChangeSuite": "26/26 modules, 656 of 656 tests passed (python tools/run_tests_parallel.py)",
+      "newTestsPreFix": "14 run against the HEAD verifier in a scratch harness: 2 failures (both witnesses, by assertion), 24 errors (new functions absent)",
+      "newTestsPostFix": "14 of 14 pass",
+      "verifyValidatorsBefore": "5/6 NOT COVERED (V4: no mutation anchor for investigation-report.md)",
+      "verifyValidatorsAfter": "6/6 COVERED; investigation-report.md committed instance caught by I1 (failed C6.2, I1)",
+      "artifactValidator": "implementation_report_validator with --envelope: PASS 32/32",
+      "runEvidenceRestored": "run-c5a8d50d3238 state.json and task-context.yaml restored with git checkout after each suite run"
+    },
+    "qualityChecks": {
+      "run": 45,
+      "passed": 45,
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass",
+        "M1": "pass", "M5": "pass", "M7": "pass", "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass",
+        "M3": "pass", "M2": "pass", "K1": "pass", "K2": "pass",
+        "M4": "pass", "V1": "pass", "V2": "pass", "V3": "pass",
+        "B1": "pass", "B2": "pass", "B3": "pass", "B4": "pass", "B5": "pass", "B6": "pass", "B7": "pass",
+        "M6": "pass", "A1": "pass", "A2": "pass", "A3": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass"
+      }
+    },
+    "obligations": {
+      "N1": "discharged: each change-set row describes the change at that path, checked against git diff",
+      "N2": "discharged: each test row exercises the entries its Covers cell names (T-004 covers the mirror through the parity tests in the suite)",
+      "N3": "discharged: no business logic touched; the verifier only reads evidence and writes mutated copies to a temporary directory",
+      "N4": "discharged: Approach taken names rung 2 for the derivation function, rung 7 for the two extracted functions and the new test file; no dependency added"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "runs/run-d8937789961e/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runtime/verify_validators.py",
+    "tests/test_verify_validators_mutations.py",
+    "omn_agent/_bundled_payload/runtime/verify_validators.py",
+    "runs/run-d8937789961e/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-d8937789961e/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

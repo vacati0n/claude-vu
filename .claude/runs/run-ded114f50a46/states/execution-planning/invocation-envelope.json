@@ -1,0 +1,469 @@
+{
+  "invocation_id": "inv-ded114f50a46-02-001",
+  "run_id": "run-ded114f50a46",
+  "work_item_id": "run-ded114f50a46::execution-planning",
+  "idempotency_key": "sha256:b151484a79dfd58a0d07428cd9ddf3dd",
+  "state_id": "execution-planning",
+  "phase_index": 2,
+  "agent_id": "planner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/planner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/planner/manifest.yaml",
+    "load_order": [
+      "agents/planner/system.md",
+      "agents/planner/identity.md",
+      "agents/planner/reasoning.md",
+      "agents/planner/execution.md",
+      "agents/planner/output.md",
+      "agents/planner/quality.md",
+      "agents/planner/examples.md"
+    ],
+    "module_digests": {
+      "agents/planner/system.md": "sha256:a26a26a95267c61a29c1dafb3b9c8e4a",
+      "agents/planner/identity.md": "sha256:37d6e6d4dc74073c46777abdd086b4de",
+      "agents/planner/reasoning.md": "sha256:6eb7dddf6dbcfb86df5f9cf2f9e3e7df",
+      "agents/planner/execution.md": "sha256:7f32b111881d7d1f66d508f0653f0004",
+      "agents/planner/output.md": "sha256:cadffa959e4adea6cfe8f1a8df094a60",
+      "agents/planner/quality.md": "sha256:4bf46c7470028daff64dbfe9ac74dd6e",
+      "agents/planner/examples.md": "sha256:a0fb0394722c454920a25849c3938f8f"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/planner/system.md",
+        "agents/planner/reasoning.md",
+        "agents/planner/output.md",
+        "agents/planner/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/planner/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/planner/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/planner/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 40931,
+      "full_bytes": 86851
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "requirement-analysis",
+      "task-decomposition",
+      "dependency-analysis",
+      "execution-sequencing",
+      "complexity-estimation",
+      "risk-identification",
+      "execution-planning"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "not-triggered",
+      "area": "security",
+      "basis": "area security is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "agent-manifest (Advisory)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "user-story",
+      "jira-ticket",
+      "epic",
+      "product-requirement",
+      "product-context",
+      "technical-context",
+      "release-context",
+      "architecture-decision-records",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/model-tier-feature-request.md",
+        "source_file": ".claude/runs/inputs/model-tier-feature-request.md",
+        "text": "# Feature Request \u2014 Per-Phase Model Tier in the Dispatch Envelope\n\n## Request\n\nLet the framework declare, per workflow phase, which class of model should execute it, and carry\nthat declaration in the dispatch envelope the runtime hands to the host. Today all twelve agent\nentrypoints declare `model: inherit`, the envelope has no model field, and every phase therefore\nruns on whatever model the operator's session happens to use, however light the phase is.\n\n## Why now\n\nA single implement-feature run costs about 510K estimated context tokens across nine agent\ninvocations. Runtime 0.7 cut what each agent reads. It did nothing about which model reads it.\nSeveral phases are read-and-summarise work (scope definition, technical discovery, documentation\nhand-off, artifact packaging, repository scan) that a smaller model can perform; others\n(solution design, root-cause analysis, implementation, quality review) need the strongest model.\nThe framework's gates and validators decide correctness mechanically, so a cheaper tier is safe\nonly if a failing phase is promoted rather than retried at the same tier.\n\n## Expected outcome\n\n- A single authoritative declaration of each phase's tier (`light`, `standard`, `deep`) and of the\n  mapping from tier to a host model hint, readable by the runtime and verifiable.\n- `dispatch` emits a `model_tier` object in the envelope (additive field): the resolved tier, the\n  host model hint, and the basis for the choice.\n- Escalation: a phase whose artifact was rejected by its validator on a prior attempt, or whose\n  gate was rejected and rolled back, is dispatched one tier higher on the next attempt, and the\n  envelope records that it was escalated and why. `deep` never escalates further.\n- A phase with no declaration resolves to `standard`'s behaviour of inheriting the host model, so\n  no existing run, replay, or verifier changes outcome.\n- `execution-metrics.json` reports invocations and estimated context bytes by tier.\n\n## Constraints on the request\n\n- Additive only: the original envelope fields, the Phase Model tables, gates, validators, artifact\n  contracts, and agent module text are unchanged. Workflow tables are machine-parsed, so a column\n  is not added to them.\n- The runtime never calls a model; it names a tier and the host chooses. The change must not\n  introduce a model call or a vendor SDK dependency.\n- Tier assignment is configuration, not agent text, so it must not be duplicated into agent modules.\n- Parallel execution of phases is out of scope and is a separate later change.",
+        "digest": "sha256:7fa529598e6e925362f09ed43c4a4a9e"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present and must express an identifiable business or user outcome."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "scope-definition",
+      "reference": "runs/run-ded114f50a46/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "produced_by": "scope-and-acceptance",
+      "artifact": "scope-definition.md",
+      "bytes": 15104,
+      "sections": {
+        "read_first": [
+          "In Scope",
+          "Out of Scope",
+          "Acceptance Criteria",
+          "Constraints and Dependencies",
+          "Scope Decisions",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Business Context",
+          "Handoff"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-ded114f50a46/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:b3c0482c32e0539fd99ef7e17e5ae14d",
+    "bytes": 14538,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "performance"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "scope-and-acceptance",
+      "execution-planning"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-08T12:29:57Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 22496,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "required",
+        "read_reason": "the plan's Required Skills cite these codes"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "required",
+        "read_reason": "the plan's Required Capabilities cite these identifiers"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "required",
+        "read_reason": "this artifact names the gate it is evidence for and its owners"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/execution-plan.md",
+        "digest": "sha256:4b6afb5767cda1767df4d8183bfb459a",
+        "supplies": null,
+        "bytes": 5548,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      }
+    ],
+    "context_digest": "sha256:62e7676afa2df10b3af32629f294e88a",
+    "input_digest": "sha256:7fa529598e6e925362f09ed43c4a4a9e",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/model-tier-feature-request.md",
+        "source_file": ".claude/runs/inputs/model-tier-feature-request.md",
+        "digest": "sha256:7fa529598e6e925362f09ed43c4a4a9e"
+      }
+    ],
+    "unnarrowed": [
+      "templates/execution-plan.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "agents/capability-matrix.md",
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "registry/skills.yaml",
+      "templates/execution-plan.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "read_on_demand": [
+      "workflows/implement-feature.md"
+    ],
+    "runtime_resolved": [
+      "registry/agents.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 107635,
+    "bytes_required": 38277,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md",
+      "runs/run-ded114f50a46/states/execution-planning/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code",
+      "review code",
+      "modify architecture",
+      "generate tests",
+      "execute workflows",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze business and technical requirements",
+        "decompose scope into executable engineering tasks",
+        "derive dependencies and implementation order",
+        "estimate complexity at planning granularity",
+        "record assumptions, risks, and open questions",
+        "produce execution-plan.md"
+      ],
+      "prohibited": [
+        "write production code",
+        "review code",
+        "modify architecture",
+        "generate tests",
+        "execute workflows",
+        "access external systems directly"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and identical context snapshot must produce an execution plan with identical section set, identical task identifiers, and identical dependency and ordering relationships.",
+      "taskIdentifierScheme": "T-<zero-padded-sequence>",
+      "orderingRule": "Topological order over declared dependencies; ties broken by ascending task identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, tool, runtime, or implementation technology."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "execution-plan.md",
+    "artifact_path": "runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md",
+    "template_ref": "templates/execution-plan.md",
+    "contract_ref": "agents/planner/output.md",
+    "quality_ref": "agents/planner/quality.md",
+    "validator": "plan_validator",
+    "result_envelope_path": "runs/run-ded114f50a46/states/execution-planning/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-08T12:29:57Z",
+  "context_budget": {
+    "modules_full_bytes": 86851,
+    "modules_core_bytes": 40931,
+    "slice_all_bytes": 107635,
+    "slice_required_bytes": 38277,
+    "inputs_bytes": 2553,
+    "upstream_full_bytes": 0,
+    "upstream_read_first_bytes": 0,
+    "task_context_bytes": 14538,
+    "fixed_bytes": 11975,
+    "legacy_estimate_bytes": 209014,
+    "progressive_estimate_bytes": 108274,
+    "legacy_estimate_tokens": 52253,
+    "progressive_estimate_tokens": 27068,
+    "savings_pct": 48.2
+  }
+}

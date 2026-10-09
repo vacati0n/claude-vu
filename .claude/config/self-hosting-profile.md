@@ -65,8 +65,8 @@ resolves to exactly one command. The first row whose Selector holds decides.
 
 | Change Class | Selector | Command | Primary Workflow | Required Inputs | Entry Phase |
 |---|---|---|---|---|---|
-| `decision-support` | The change cannot be specified yet: current-state behaviour or the option set is unknown | `/investigate` | `investigate` | `investigation-request` | `problem-framing` |
-| `external-research` | The change depends on evidence that does not exist inside this repository | `/research` | `research` | `research-question` | `research-framing` |
+| `decision-support` | The change cannot be specified yet: current-state behaviour or the option set is unknown | `/investigate` | `investigate` | `problem-statement` | `problem-framing` |
+| `external-research` | The change depends on evidence that does not exist inside this repository | `/research` | `research` | `problem-statement` | `research-framing` |
 | `defect-repair` | A registered capability behaves other than its contract declares | `/bugfix` | `fix-bug` | `defect-report` | `triage-and-impact` |
 | `structure-preserving-change` | Structure or wording changes; no contract, routing, or runtime behaviour changes | `/refactor` | `refactor` | `change-request`, `business-intent`, `architecture-context` | `scope-invariants-and-risk-profile` |
 | `capability-addition` | The framework gains a capability, a contract, a registry record, or a runtime behaviour it did not have | `/implement` | `implement-feature` | `feature-request`, `change-request`, `business-intent`, `architecture-context` | `scope-and-acceptance` |

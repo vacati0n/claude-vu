@@ -1,0 +1,78 @@
+{
+  "run_id": "run-5f4422f26c3e",
+  "slice": "phase:root-cause-analysis",
+  "runtime_version": "0.9.0",
+  "status": "completed",
+  "queue_status": "Executing",
+  "command_id": "bugfix",
+  "workflow_id": "fix-bug",
+  "workflow_version": "1.0.0",
+  "state_id": "root-cause-analysis",
+  "work_item_id": "run-5f4422f26c3e::root-cause-analysis",
+  "idempotency_key": "sha256:280f38b8e3121b9a6b1499e4bb264c7d",
+  "attempt": 1,
+  "agent_id": "omn-dev-1-bug-analyst",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "invocation_id": "inv-5f4422f26c3e-02-001",
+  "input_digest": "sha256:baeb1ae26b580213f84ddc74c1193155",
+  "context_digest": "sha256:a88575c76fff3cf25d7bf5c9ee10d8b8",
+  "module_load_order": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/execution.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "agents/omn-dev-1-bug-analyst/examples.md"
+  ],
+  "artifact_path": "runs/run-5f4422f26c3e/states/root-cause-analysis/artifacts/bug-analysis.md",
+  "conditional_artifact_globs": [],
+  "result_envelope_path": "runs/run-5f4422f26c3e/states/root-cause-analysis/result-envelope.json",
+  "validator": "bug_analysis_validator",
+  "load_profile_mode": "progressive",
+  "context_budget": {
+    "modules_full_bytes": 99953,
+    "modules_core_bytes": 52647,
+    "slice_all_bytes": 175711,
+    "slice_required_bytes": 11497,
+    "inputs_bytes": 3764,
+    "upstream_full_bytes": 0,
+    "upstream_read_first_bytes": 0,
+    "task_context_bytes": 7316,
+    "fixed_bytes": 13402,
+    "legacy_estimate_bytes": 292830,
+    "progressive_estimate_bytes": 88626,
+    "legacy_estimate_tokens": 73207,
+    "progressive_estimate_tokens": 22156,
+    "savings_pct": 69.7
+  },
+  "execution_started_at": "2026-10-09T09:18:30Z",
+  "execution_completed_at": "2026-10-09T09:28:43Z",
+  "validation": {
+    "result": "pass",
+    "checksRun": 30,
+    "checksPassed": 30,
+    "blockingFailures": 0,
+    "correctableFailures": 0,
+    "notMachineCheckable": 3,
+    "counts": {
+      "sections": 9,
+      "status": "complete",
+      "identifiers": {
+        "E": 19,
+        "C": 6,
+        "Q": 4
+      },
+      "tableRows": {
+        "Reproduction": 19,
+        "Root Cause Analysis": 6
+      }
+    },
+    "undeclaredSideEffects": []
+  },
+  "agent_result_status": "success",
+  "artifact_digest": "sha256:62de79c05667d0c08ad76fba49bda8bd",
+  "recovery": null
+}

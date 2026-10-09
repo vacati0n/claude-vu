@@ -1,0 +1,306 @@
+{
+  "schema": "framework.runtime/execution-metrics.v1",
+  "task_id": "run-ded114f50a46",
+  "workflow": "implement-feature v1.0.0",
+  "runtime_version": "0.8.0",
+  "computed_at": "2026-10-08T16:01:27Z",
+  "total_duration": {
+    "wall_clock_seconds": 16949.0,
+    "wall_clock": "4h42m29s",
+    "agent_active_seconds": 10831.0,
+    "agent_active": "3h00m31s"
+  },
+  "phases_executed": {
+    "declared": 6,
+    "completed": 6,
+    "blocked": 0
+  },
+  "agents_executed": {
+    "invocations": 7,
+    "distinct": 6,
+    "by_agent": {
+      "omn-product-owner": 1,
+      "planner": 1,
+      "architect": 1,
+      "omn-dev-1-implement": 1,
+      "omn-dev-2-reviewer": 1,
+      "omn-documentation": 2
+    }
+  },
+  "skills_executed": {
+    "required_reads": 36,
+    "not_triggered": 4
+  },
+  "parallel_groups": {
+    "count": 5,
+    "max_width": 2,
+    "groups": [
+      [
+        "scope-and-acceptance",
+        "execution-planning"
+      ],
+      [
+        "solution-design-and-risk-assessment"
+      ],
+      [
+        "implementation"
+      ],
+      [
+        "quality-review"
+      ],
+      [
+        "documentation-and-release-handoff"
+      ]
+    ]
+  },
+  "context_loads": {
+    "members_declared": 97,
+    "members_required": 47
+  },
+  "repeated_context_loads": {
+    "files": 13,
+    "by_path": {
+      "workflows/workflow-gate-matrix.md": 2,
+      "context/product-context.md": 7,
+      "context/technical-context.md": 7,
+      "context/release-context.md": 7,
+      "templates/technical-design.md": 3,
+      "templates/implementation-report.md": 4,
+      "skills/error-handling/error-handling-strategy.md": 3,
+      "skills/testing/testing-strategy.md": 2,
+      "skills/architecture/clean-architecture-checklist.md": 2,
+      "templates/review-package.md": 3,
+      "templates/release-note.md": 2,
+      "skills/logging/observability-logging.md": 2,
+      "skills/git/git-collaboration.md": 2
+    }
+  },
+  "validation_runs": {
+    "passed": 6,
+    "failed": 1
+  },
+  "gate_decisions": {
+    "decided": 6,
+    "auto_policy": 0,
+    "rejected": 0
+  },
+  "tokens_or_context_estimate": {
+    "basis": "4 bytes per token; bytes the dispatch asked the agent to read, per envelope",
+    "legacy_bytes": 1982990,
+    "progressive_bytes": 1147466,
+    "legacy_tokens": 495747,
+    "progressive_tokens": 286866,
+    "savings_pct": 42.1
+  },
+  "model_tiers": {
+    "by_tier": {
+      "light": {
+        "invocations": 1,
+        "estimated_bytes": 0
+      },
+      "standard": {
+        "invocations": 1,
+        "estimated_bytes": 179760
+      },
+      "deep": {
+        "invocations": 1,
+        "estimated_bytes": 206004
+      },
+      "untiered": {
+        "invocations": 4,
+        "estimated_bytes": 761702
+      }
+    },
+    "invocations_total": 7,
+    "estimated_bytes_total": 1147466,
+    "non_deep_share": 0.667
+  },
+  "per_phase": [
+    {
+      "phase": "scope-and-acceptance",
+      "agent": "omn-product-owner",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 121.0,
+      "context_members_declared": 13,
+      "context_members_required": 5,
+      "skills": {
+        "required": 2,
+        "not_triggered": 1
+      },
+      "model_tier": null,
+      "context_estimate": {
+        "modules_full_bytes": 65622,
+        "modules_core_bytes": 33326,
+        "slice_all_bytes": 108553,
+        "slice_required_bytes": 12425,
+        "inputs_bytes": 6395,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 46998,
+        "fixed_bytes": 46871,
+        "legacy_estimate_bytes": 227441,
+        "progressive_estimate_bytes": 146015,
+        "legacy_estimate_tokens": 56860,
+        "progressive_estimate_tokens": 36503,
+        "savings_pct": 35.8
+      }
+    },
+    {
+      "phase": "execution-planning",
+      "agent": "planner",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 326.0,
+      "context_members_declared": 12,
+      "context_members_required": 7,
+      "skills": {
+        "required": 3,
+        "not_triggered": 1
+      },
+      "model_tier": null,
+      "context_estimate": {
+        "modules_full_bytes": 86851,
+        "modules_core_bytes": 40931,
+        "slice_all_bytes": 107635,
+        "slice_required_bytes": 38277,
+        "inputs_bytes": 2553,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 46998,
+        "fixed_bytes": 39370,
+        "legacy_estimate_bytes": 236409,
+        "progressive_estimate_bytes": 168129,
+        "legacy_estimate_tokens": 59102,
+        "progressive_estimate_tokens": 42032,
+        "savings_pct": 28.9
+      }
+    },
+    {
+      "phase": "solution-design-and-risk-assessment",
+      "agent": "architect",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 904.0,
+      "context_members_declared": 17,
+      "context_members_required": 7,
+      "skills": {
+        "required": 5,
+        "not_triggered": 2
+      },
+      "model_tier": null,
+      "context_estimate": {
+        "modules_full_bytes": 110389,
+        "modules_core_bytes": 51235,
+        "slice_all_bytes": 177861,
+        "slice_required_bytes": 13364,
+        "inputs_bytes": 6395,
+        "upstream_full_bytes": 23310,
+        "upstream_read_first_bytes": 15756,
+        "task_context_bytes": 46998,
+        "fixed_bytes": 82826,
+        "legacy_estimate_bytes": 400781,
+        "progressive_estimate_bytes": 216574,
+        "legacy_estimate_tokens": 100195,
+        "progressive_estimate_tokens": 54143,
+        "savings_pct": 46.0
+      }
+    },
+    {
+      "phase": "implementation",
+      "agent": "omn-dev-1-implement",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 6930.0,
+      "context_members_declared": 18,
+      "context_members_required": 9,
+      "skills": {
+        "required": 8,
+        "not_triggered": 0
+      },
+      "model_tier": null,
+      "context_estimate": {
+        "modules_full_bytes": 68877,
+        "modules_core_bytes": 32716,
+        "slice_all_bytes": 185125,
+        "slice_required_bytes": 22905,
+        "inputs_bytes": 6395,
+        "upstream_full_bytes": 43865,
+        "upstream_read_first_bytes": 18250,
+        "task_context_bytes": 46998,
+        "fixed_bytes": 103720,
+        "legacy_estimate_bytes": 407982,
+        "progressive_estimate_bytes": 230984,
+        "legacy_estimate_tokens": 101995,
+        "progressive_estimate_tokens": 57746,
+        "savings_pct": 43.4
+      }
+    },
+    {
+      "phase": "quality-review",
+      "agent": "omn-dev-2-reviewer",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 2193.0,
+      "context_members_declared": 19,
+      "context_members_required": 10,
+      "skills": {
+        "required": 10,
+        "not_triggered": 0
+      },
+      "model_tier": "deep",
+      "context_estimate": {
+        "modules_full_bytes": 74352,
+        "modules_core_bytes": 37917,
+        "slice_all_bytes": 190079,
+        "slice_required_bytes": 27859,
+        "inputs_bytes": 6395,
+        "upstream_full_bytes": 15366,
+        "upstream_read_first_bytes": 10056,
+        "task_context_bytes": 46998,
+        "fixed_bytes": 76779,
+        "legacy_estimate_bytes": 362971,
+        "progressive_estimate_bytes": 206004,
+        "legacy_estimate_tokens": 90742,
+        "progressive_estimate_tokens": 51501,
+        "savings_pct": 43.2
+      }
+    },
+    {
+      "phase": "documentation-and-release-handoff",
+      "agent": "omn-documentation",
+      "status": "completed",
+      "dispatches": 2,
+      "attempts_charged": 2,
+      "agent_active_seconds": 357.0,
+      "context_members_declared": 18,
+      "context_members_required": 9,
+      "skills": {
+        "required": 8,
+        "not_triggered": 0
+      },
+      "model_tier": "standard",
+      "context_estimate": {
+        "modules_full_bytes": 85749,
+        "modules_core_bytes": 42233,
+        "slice_all_bytes": 181227,
+        "slice_required_bytes": 19007,
+        "inputs_bytes": 1469,
+        "upstream_full_bytes": 12517,
+        "upstream_read_first_bytes": 3609,
+        "task_context_bytes": 46998,
+        "fixed_bytes": 66444,
+        "legacy_estimate_bytes": 347406,
+        "progressive_estimate_bytes": 179760,
+        "legacy_estimate_tokens": 86851,
+        "progressive_estimate_tokens": 44940,
+        "savings_pct": 48.3
+      }
+    }
+  ]
+}

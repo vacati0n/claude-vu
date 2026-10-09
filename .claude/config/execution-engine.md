@@ -134,9 +134,11 @@ Every agent invocation uses the same envelope regardless of backing model or too
 - `expected_output_schema`
 - `context_budget` (byte estimate of what the dispatch asks the agent to read, under the
   legacy and the progressive rules)
+- `model_tier` (resolved tier, host model hint, basis, and the escalation record when the phase
+  was promoted after a recorded rejection; see `config/runtime.md`, Model Tiers)
 
-Fields added by runtime 0.7.0 are additive: an envelope consumer that reads only the original
-eleven fields reads them unchanged.
+Fields added by runtime 0.7.0, and `model_tier` added by runtime 0.9.0, are additive: an
+envelope consumer that reads only the original eleven fields reads them unchanged.
 
 ### Agent Result Envelope
 

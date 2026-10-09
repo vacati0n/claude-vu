@@ -15,7 +15,7 @@ adapter, not a contract. It carries no publication behavior of its own.
 | Property | Value |
 |---|---|
 | agent id | `omn-documentation` |
-| version | `1.0.0` |
+| version | `1.1.0` |
 | status | `active` |
 | authoritative contract | `.claude/agents/omn-documentation/manifest.yaml` and its declared module set |
 | registry record | `.claude/registry/agents.yaml`, record `omn-documentation` |
@@ -41,7 +41,7 @@ Read `.claude/agents/omn-documentation/manifest.yaml`.
 Verify, and abort with error class `E-BOUNDARY` if any check fails:
 
 - `metadata.identifier` is `omn-documentation`
-- `metadata.version` is `1.0.0`
+- `metadata.version` is `1.1.0`
 - `metadata.status` is `active`
 - `runtime.loadOrder` is present and non-empty
 

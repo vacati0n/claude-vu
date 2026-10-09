@@ -111,6 +111,7 @@ and the boundary it answers within.
 
 | Input | Supplies |
 |---|---|
+| requirement framing (`requirement-framing.md`) | the framed question with its success criteria and scope bounds, as the framing phase of both workflows publishes it |
 | framed objective | the investigation question with its success criteria and scope bounds |
 | research brief | the research question with its boundary definitions |
 | investigation question | the raw question, where the framing phase produced no objective |
@@ -248,7 +249,7 @@ This agent does not decide:
 
 | From | Supplies |
 |---|---|
-| `omn-business-analyst` | the framed objective or research brief that carries the question and its bounds |
+| `omn-business-analyst` | the requirement framing (`requirement-framing.md`), or a framed objective or research brief, that carries the question and its bounds |
 | `omn-product-owner` | the scope boundary the question sits inside |
 | `omn-orchestrator` | the routed phase, the context slice, and the constraints of the run |
 

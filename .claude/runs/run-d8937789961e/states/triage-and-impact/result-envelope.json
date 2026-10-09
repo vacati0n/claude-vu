@@ -1,0 +1,158 @@
+{
+  "invocation_id": "inv-d8937789961e-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-d8937789961e/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysis_basis": "triage",
+    "counts": {
+      "evidence_records": 11,
+      "causal_steps": 6,
+      "causal_steps_by_confidence": {
+        "high": 6,
+        "medium": 0,
+        "low": 0
+      },
+      "open_questions": 2
+    },
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "status": "provisional",
+    "checks": {
+      "S1": "pass",
+      "S2": "pass",
+      "S3": "pass",
+      "S4": "pass",
+      "S5": "pass",
+      "S6": "pass",
+      "S7": "pass",
+      "S8": "pass",
+      "S9": "pass",
+      "D1": "pass",
+      "D2": "pass",
+      "D3": "pass",
+      "D4": "pass",
+      "D5": "pass",
+      "D6": "pass",
+      "D7": "pass",
+      "B1": "pass",
+      "B2": "pass",
+      "B3": "pass",
+      "B4": "pass",
+      "B5": "pass",
+      "A1": "pass",
+      "V1": "pass",
+      "V2": "pass",
+      "V3": "pass",
+      "V4": "pass",
+      "V5": "pass",
+      "V6": "pass",
+      "V7": "pass",
+      "V8": "pass",
+      "V9": "pass",
+      "V10": "pass",
+      "V11": "pass",
+      "V12": "pass",
+      "V13": "pass",
+      "V14": "pass",
+      "V15": "pass",
+      "V16": "pass",
+      "V17": "pass",
+      "V18": "pass",
+      "V19": "pass",
+      "V20": "pass",
+      "V21": "pass",
+      "V22": "pass",
+      "V23": "pass",
+      "V24": "pass",
+      "V25": "pass",
+      "V26": "pass",
+      "V27": "pass",
+      "V28": "pass",
+      "V29": "pass",
+      "V30": "pass",
+      "V31": "pass",
+      "V32": "pass",
+      "V33": "pass",
+      "A2": "pass",
+      "A3": "pass",
+      "A4": "pass",
+      "A5": "pass",
+      "A6": "pass",
+      "A7": "pass",
+      "A8": "pass",
+      "C1": "pass",
+      "C2": "pass",
+      "C3": "pass",
+      "C4": "pass",
+      "C5": "pass",
+      "C6": "pass",
+      "C7": "pass"
+    },
+    "checks_run": 69,
+    "checks_passed": 69,
+    "validator": {
+      "name": "bug_analysis_validator",
+      "result": "PASS",
+      "passed": 30,
+      "total": 30,
+      "not_machine_checkable": 3
+    },
+    "not_machine_checkable": {
+      "N1": "Judged: the last step names a condition (a value-pinned anchor against a value-free contract, with an unchecked selector), not the V4 line where it surfaced.",
+      "N2": "Judged: every causal claim cites a first-hand command or file read; the only supplied-input evidence (E-010) backs no step.",
+      "N3": "Judged: radius names the V4 check, FR-02 and self-hosting verification, the I1 mutation proof, and latent reach to six literal types; main checkout and hosted CI recorded as not observed."
+    },
+    "other_literal_anchor_types": {
+      "investigation-report.md": "literal '- Recommended option: `O-002`'; committed instance run-437e2f765e4b exists and lacks it (FAILS now); contract is value-free",
+      "implementation-report.md": "literal '- Review status: pending-review'; 13 committed, all contain; validator M6 pins the value, so durable",
+      "scope-definition.md": "literal '  acceptanceCriteriaCount: '; 10 committed, all contain; template-required field, durable",
+      "requirement-framing.md": "literal '  requirementCount: '; 1 committed (run-437e2f765e4b) contains; template-required field, durable",
+      "execution-plan.md": "literal '\n## Risks\n'; 12 committed, all contain; mandatory heading, durable",
+      "technical-design.md": "literal '\n## Sign-off\n'; 14 committed, all contain; mandatory heading, durable",
+      "framework-change-proposal.md": "literal '/run-ledger.json'; no committed run artifact, governance source: 17 proposals, all contain (selected FC-017)",
+      "derived_not_literal": [
+        "bug-analysis.md",
+        "release-note.md",
+        "review-package.md",
+        "validation-report.md",
+        "technical-recommendation.md",
+        "orchestration-result.md"
+      ]
+    },
+    "claims_in_defect_report": {
+      "confirmed": [
+        "5/6 NOT COVERED, V4 fails for investigation-report.md with the stated detail",
+        "selected instance is run-437e2f765e4b investigation report, recommending O-003 vs literal O-002",
+        "committed_instances/conforming_instance behave as described, last committed in sorted run order",
+        "mutation literal as described",
+        "no tracked runtime/template file modified vs HEAD",
+        "FR-02 is the verifier command"
+      ],
+      "refuted": [
+        "implementation-report literal hidden only by luck: its value is pinned by validator M6, all 13 instances contain it"
+      ],
+      "unconfirmed": [
+        "6/6 before run-437e2f765e4b (inferred: fixture fallback contains the literal; not re-run without altering evidence)",
+        "run identifiers are content hashes"
+      ]
+    },
+    "blockers": []
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "templates/bug-analysis.md",
+    "runs/run-d8937789961e/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-d8937789961e/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-d8937789961e/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

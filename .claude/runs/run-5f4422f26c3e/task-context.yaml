@@ -1,0 +1,336 @@
+schema: framework.runtime/task-context.v1
+task_id: run-5f4422f26c3e
+command: bugfix
+workflow: fix-bug v1.0.0
+run_status: Completed
+updated_at: '2026-10-09T10:13:04Z'
+objective: 'The previous repair of V4 (run run-d8937789961e, proposal FC-018) fixed the investigation-report row. python runtime/verify_validators.py
+  from the repository root still reports 5 of 6 checks and NOT COVERED, now for a different artifact type. V4 fails for orchestration-result.md
+  with: no mutation anchor for "deciding the gate its own coordination record is the evidence for" in this instance. The instance
+  is the closure record that the previous repair run itself committed. conforming_instance returns the last committed instance
+  of the type, in sorted run-directory order. The newest committed orchestration result is the closure record of run run-d8937789961e.
+  A closure record cannot carry i...'
+inputs:
+- type: defect-report
+  reference: runs/inputs/verify-validators-v4-instance-selection-defect-report.md
+  digest: sha256:baeb1ae26b580213f84ddc74c1193155
+relevant_agents:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S11
+  - S12
+  - S02
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S08
+  - S12
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S12
+- phase: regression-validation
+  agent: omn-qa
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S11
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  status: completed
+  required_skills:
+  - S10
+  - S11
+completed_phases:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-5f4422f26c3e/states/triage-and-impact/artifacts/bug-analysis.md
+  digest: sha256:0e812c7054e46ff60473d733e1b49731
+  validation: pass 30/30
+  attempts: 1
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-5f4422f26c3e/states/root-cause-analysis/artifacts/bug-analysis.md
+  digest: sha256:62de79c05667d0c08ad76fba49bda8bd
+  validation: pass 30/30
+  attempts: 1
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-5f4422f26c3e/states/fix-implementation/artifacts/implementation-report.md
+  digest: sha256:47591b61f29cfd1f9169295fda890644
+  validation: pass 32/32
+  attempts: 1
+- phase: regression-validation
+  agent: omn-qa
+  artifact: runs/run-5f4422f26c3e/states/regression-validation/artifacts/validation-report.md
+  digest: sha256:116d97664f77f0132ea9759e25f904af
+  validation: pass 31/31
+  attempts: 1
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  artifact: runs/run-5f4422f26c3e/states/closure-and-communication/artifacts/orchestration-result.md
+  digest: sha256:8fa8178007c036d91a643e0cea29bccb
+  validation: pass 34/34
+  attempts: 1
+gates:
+- gate: Triage Gate
+  closes: triage-and-impact
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: operator on behalf of omn-tech-lead
+- gate: Fix Gate
+  closes: fix-implementation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent, recorded by session operator
+- gate: Verification Gate
+  closes: regression-validation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: operator on behalf of omn-dev-2-reviewer
+- gate: Closure Gate
+  closes: closure-and-communication
+  decision: approved
+  owner_role: omn-documentation
+  decided_by: operator on behalf of omn-documentation
+artifacts:
+  triage-and-impact: runs/run-5f4422f26c3e/states/triage-and-impact/artifacts/bug-analysis.md
+  root-cause-analysis: runs/run-5f4422f26c3e/states/root-cause-analysis/artifacts/bug-analysis.md
+  fix-implementation: runs/run-5f4422f26c3e/states/fix-implementation/artifacts/implementation-report.md
+  regression-validation: runs/run-5f4422f26c3e/states/regression-validation/artifacts/validation-report.md
+  closure-and-communication: runs/run-5f4422f26c3e/states/closure-and-communication/artifacts/orchestration-result.md
+parallel_groups:
+- - triage-and-impact
+- - root-cause-analysis
+- - fix-implementation
+- - regression-validation
+- - closure-and-communication
+risks:
+- 'User impact: Operators and omn-qa running the release checklist cannot obtain a clean FR-02 result; no end user or product
+  behavior is touched. Affected: eve...'
+- 'Business impact: No business impact statement was supplied; severity rests on technical impact alone, and the report''s
+  statement that FR-02 fails is recorded...'
+- 'Technical impact: A false negative in a coverage check, failing closed: V4 reports orchestration-result.md as unproven
+  although its validator rejects the mut...'
+- 'Blast radius: The V4 and V3 checks of the verifier, which share the one selected instance for all 13 types; the FR-02 gate
+  of the release checklist and the s...'
+- 'Business impact: From the supplied report''s impact section (E-014), corroborated first-hand: FR-02 is mandatory and every
+  release must pass its quality gates...'
+- 'Technical impact: A false negative in a coverage check, failing closed: V4 reports orchestration-result.md unproven although
+  its validator rejects the mutati...'
+- 'Blast radius: The V3 and V4 checks of the verifier, which share one selected instance per type for all 13 types; the verifier''s
+  console summary and JSON repo...'
+- 'R-001: A fallback lets V4 pass on an older instance while the last-sorted one goes unmutated, and FR-02 consumers... |
+  medium | V4 proves the validator on a different record than the newest-looking one'
+- 'R-002: The real-tree test in C-002 depends on committed evidence, so a future type with no applicable candidate fa... |
+  low | a suite failure naming the type and its candidates'
+- 'Accepted risk: None identified.'
+- 'Unmitigated risk: the fallback lets V4 pass on an older instance while a newer one goes unmutated (R-001 of the implementation
+  report, medium likelihood); ev...'
+- 'Monitoring required: the V4 detail on each release verification: any text naming a skipped candidate or no applicable candidate,
+  and any real-tree selection...'
+decisions:
+- 'Root cause statement: The orchestration mutation locates its target row by a backticked identifier rendering that the artifact
+  contract leaves free, and the...'
+- 'Why detection failed earlier: No check exercised the selector against the committed instances of every type, so the one-instance-per-type
+  assumption was neve...'
+- 'C-001: Trigger: new run evidence | The previous repair run committed a closure record that renders its phase and owner
+  cells without backticks... | E-005, E-008'
+- 'C-002: Format-dependent locator | The derivation selects the owned row only if the text contains the backticked phase identifier,
+  a rendering... | E-005, E-007'
+- 'C-003: No anchor on this instance | The row that anchors the four other records, PH-005 with gate Closure Gate, is not
+  found in this record, th... | E-005, E-006'
+- 'C-004: Selection without applicability | The selector returns the newest committed instance and neither tests the mutation
+  against it nor tries olde... | E-002, E-004'
+- 'C-005: V4 records a gap | resolve_mutation returns no anchor, mutation_verdict returns a finding, and V4 fails without
+  ever exercisin... | E-003, E-001'
+- 'C-006: Symptom | V4 fails, the run reports 5 of 6 NOT COVERED, and FR-02 cannot pass | E-001, E-013'
+- 'Proposed fix: V4 must use, for each type, an instance that is conforming and to which the declared mutation applies, trying
+  committed instances newest to old...'
+- 'Alternative options: Normalise the rendering by requiring backticked identifiers in the orchestration contract; it removes
+  this trigger but changes a validat...'
+- 'Regression risk: medium'
+- 'Regression scope: V3 acceptance of the selected instance, connected through the shared selector; the mutation verdict for
+  all 13 types, since each now resolv...'
+- 'Root cause statement: V4 binds each artifact type to one instance chosen by run-identifier sort order without testing that
+  the declared mutation applies to i...'
+- 'Why detection failed earlier: No check ran the selector against every committed instance; the existing test module checks
+  each row on its fixture and passes...'
+- 'C-001: Trigger: new run evidence | run-d8937789961e committed a conforming closure record rendering identifier and owner
+  cells without backtic... | E-005, E-008, E-015'
+- 'C-002: Locator contract mismatch | The derivation accepts only backticked phase identifiers, while the shared contract
+  engine and the validato... | E-005, E-007'
+- 'C-003: No anchor on this instance | The PH-005 row that anchors the four other records is skipped in this one although
+  its gate, decision and d... | E-005, E-006'
+- 'C-004: Selection without applicability | The selector returns the last-sorted candidate with no applicability test and
+  no fallback, so any conformin... | E-002, E-004, E-017'
+- 'C-005: V4 records a gap | resolve_mutation yields no anchor, mutation_verdict returns a finding with checks None, and V4
+  fails withou... | E-003, E-001'
+- 'C-006: Symptom | V4 fails, the run reports 5 of 6 NOT COVERED, FR-02 cannot pass, and the console line misreports the type
+  a... | E-001, E-010, E-013'
+- 'Proposed fix: Remove both conditions, with no change to validators, templates, fixtures or run evidence. First, the orchestration
+  row locator must identify t...'
+- 'Alternative options: Selection only clears today''s failure by mutating an older record and silently stops exercising plain-rendered
+  records, the format the n...'
+- 'Regression scope: V3 acceptance, which shares the selected instance; the V4 verdict for all 13 types through the changed
+  selection (today identical per E-016...'
+- 'V-001: When no candidate carries the mutation, the loop in C-001 fails V4 naming every candidate and still runs V3... |
+  Fix Strategy: V4 fails naming every candidate; V3 validates the instance V4 uses | V4 uses no instance in that case, and
+  skipping V3 for the type would let a rejection go unreported; validat...'
+- 'V-002: The full suite was not run before the first edit to C-001 and C-002; the pre-change reference is the module... |
+  Reasoning Stage 2: execute the covering suite before changing anything | The covering suite for the impacted module is the
+  verifier itself and its test module, both run first; the...'
+- 'V-003: Four of the new tests in C-002 fail on the pre-fix verifier by the missing function or four-value return sh... |
+  Validation Plan: each test fails before the fix and passes after | Those tests pin the new contract (fallback to the fixture,
+  none naming every candidate, a non-conforming ca...'
+- 'V-004: The existing every-row sweep in C-002 now unpacks four values from the selector | Fix Strategy regression scope:
+  the existing test unpacks the selector''s result | The return shape changed by design; the sweep''s assertions are unchanged'
+validation_requirements:
+  test_focus:
+  - 'Verification steps: Repeat the reproduction on unchanged run evidence and expect V4 to pass with orchestration-result.md
+    caught by O4; present the selector a...'
+  - 'Regression tests added: Tests under tests that fail before the fix and pass after: newest instance without the anchor
+    with an older one that has it; no candi...'
+  - 'Monitoring signals after release: V4 detail text containing no mutation anchor, or any pair of type and instance reported
+    without an anchor by the sweep, on...'
+  - 'Verification steps: Repeat the reproduction on unchanged run evidence and expect 6/6, with orchestration-result.md selected
+    from run-d8937789961e, caught by...'
+  - 'Regression tests added: In tests/test_verify_validators_mutations.py, each failing before the fix (E-019) and passing
+    after: plain-rendered orchestration row...'
+  - 'Monitoring signals after release: V4 detail naming a skipped candidate or no applicable candidate on any release verification;
+    FR-02 failing after a run comm...'
+  evidence:
+  - 'T-001: Bug witnesses against the pre-fix verifier (a copy of the working-tree file taken before any edit) and then...
+    | regression | C-001, C-002'
+  - 'T-002: The test module, 25 tests: plain-rendered record conforms and its mutation fails O4 only; locator ignores a...
+    | unit | C-001, C-002'
+  - 'T-003: Reproduction on unchanged run evidence: V1 to V6 pass, 6/6 COVERED; orchestration-result.md selected from r...
+    | end-to-end | C-001'
+  - 'T-004: Bundle sync refreshed 285 files; the mirror is byte-identical to the authoritative verifier and is the only...
+    | static | C-003'
+  - 'T-005: Regression suite after the change: 26 of 26 modules, 667 of 667 tests, including the bundled payload parity...
+    | regression | C-001, C-002, C-003'
+  verification:
+  - 'Verification method: module-level baseline before any edit (verifier 5/6 NOT COVERED with V4 failing on orchestration-result.md;
+    test module 15 of 15); the n...'
+  - 'Commands executed: python <fw>/runtime/verify_validators.py (before and after, plus --json-out); python tests/test_verify_validators_mutations.py
+    (before and...'
+  - 'Result summary: 5 evidence entries executed, 5 passed, 0 failed. Pre-fix harness: 25 tests, 5 failures and 8 errors (9
+    new tests plus 4 subtests of the adapt...'
+  - 'Unverified areas: none'
+  acceptance_criteria:
+  - 'AC-001: python runtime/verify_validators.py from the repo root reports 6/6 COVERED and the orchestration-result.md...
+    | operator dispatch | end-to-end'
+  - 'AC-002: the pre-fix behaviour is reproduced: the original verifier from git HEAD (a baseline predating BOTH repairs...
+    | operator dispatch | end-to-end'
+  - 'AC-003: tests/test_verify_validators_mutations.py passes 26 of 26 from the repo root and the working-directory-sens...
+    | operator dispatch | unit'
+  - 'AC-004: V4 is still decisive and V3 still validates the instance V4 uses and every skipped candidate: tests pin eac...
+    | operator dispatch | unit'
+  - 'AC-005: the locator accepts identifiers with and without backticks, shown on the real closure record and on a backt...
+    | operator dispatch | unit'
+  - 'AC-006: regression targets standalone and non-mutating: verify_registry_coverage 8/8, verify_manifests 2/2, python...
+    | operator dispatch | integration'
+  - 'AC-007: the full unit suite via python tools/run_tests_parallel.py was run by the operator at 668 of 668 on this ex...
+    | operator dispatch | unit'
+  - 'AC-008: constraints held: no validator, template, fixture or committed run evidence changed, and only verify_valida...
+    | operator dispatch | integration'
+open_questions:
+- 'Q-001: Should the orchestration contract fix identifier rendering, or must every verifier locate rows by meaning;... |
+  no | architect'
+- 'Q-002: Do the count-based derivations (review package counts 1 to 9, options evaluated 2 to 39, met 0 to 39) leave... |
+  no | omn-dev-1-implement'
+- 'Q-003: The V3 failure for the change proposal type when run from inside the framework directory is a separate defe... |
+  no | omn-tech-lead'
+- 'Q-004: The main checkout and hosted CI were not observed; does the failure reproduce there with their run evidence | no
+  | omn-qa'
+- 'Q-005: No business impact statement was supplied; confirm medium against release cost | no | omn-product-owner'
+- 'Q-001: Should the orchestration contract fix identifier rendering, or must verifiers keep matching the engine''s op...
+  | no | architect'
+- 'Q-002: Do the count-based derivations (review counts 1 to 9, options 2 to 39, met 0 to 39) miss a conforming bound... |
+  no | omn-dev-1-implement'
+- 'Q-003: The F7 rejection of the change proposal from inside the framework directory is a separate working-location... |
+  no | omn-tech-lead'
+- 'Q-001: Should the orchestration contract fix identifier rendering, or must verifiers keep locating rows by meaning as the
+  repaired locator now does? Routes t...'
+- 'Q-002: Does the same 6/6 result hold on the main checkout and hosted CI with their run evidence, which this validation
+  did not observe? Routes to omn-tech-lead.'
+- 'Q-001: Should the orchestration contract fix identifier rendering, or must verifiers keep locating rows by meaning as the
+  repaired locator now does? Owner: a...'
+- 'Q-002: Does the 6/6 result hold on the main checkout and on hosted CI, which this run did not observe? Owner: omn-qa.'
+changed_files:
+- runtime/verify_validators.py (modified)
+- tests/test_verify_validators_mutations.py (modified)
+- omn_agent/_bundled_payload/runtime/verify_validators.py (modified)
+verdicts:
+- 'Decision: pass'
+- 'Rationale: all eight criteria are met on executed checks, no defect is open, and no criterion is blocked, so the adjudication
+  table yields pass with status c...'
+- 'Blocking defects outstanding: None identified.'
+- 'Readiness recommendation: the evidence supports recommending that the Verification Gate owner, a role other than this validator,
+  approve this phase; the gate...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:fix-implementation
+      term: migration
+    performance:
+    - source: artifact:regression-validation
+      term: performance
+    security:
+    - source: artifact:regression-validation
+      term: security
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:defect-report
+  - artifact:triage-and-impact
+  - artifact:root-cause-analysis
+  - artifact:fix-implementation
+  - artifact:regression-validation
+  - artifact:closure-and-communication
+relevant_skills:
+  triage-and-impact:
+    S11: required
+    S12: required
+    S02: required
+  root-cause-analysis:
+    S03: required
+    S06: required
+    S08: required
+    S12: required
+  fix-implementation:
+    S03: required
+    S06: required
+    S10: required
+    S12: required
+  regression-validation:
+    S07: required
+    S09: required
+    S11: required
+  closure-and-communication:
+    S10: required
+    S11: required
+repository_context:
+  relevant_modules: []
+  relevant_files:
+  - runtime/verify_validators.py (modified)
+  - tests/test_verify_validators_mutations.py (modified)
+  - omn_agent/_bundled_payload/runtime/verify_validators.py (modified)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path

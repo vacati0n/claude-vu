@@ -1,0 +1,680 @@
+{
+  "invocation_id": "inv-5f4422f26c3e-02-001",
+  "run_id": "run-5f4422f26c3e",
+  "work_item_id": "run-5f4422f26c3e::root-cause-analysis",
+  "idempotency_key": "sha256:280f38b8e3121b9a6b1499e4bb264c7d",
+  "state_id": "root-cause-analysis",
+  "phase_index": 2,
+  "agent_id": "omn-dev-1-bug-analyst",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-1-bug-analyst.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-1-bug-analyst/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-1-bug-analyst/system.md",
+      "agents/omn-dev-1-bug-analyst/identity.md",
+      "agents/omn-dev-1-bug-analyst/reasoning.md",
+      "agents/omn-dev-1-bug-analyst/execution.md",
+      "agents/omn-dev-1-bug-analyst/output.md",
+      "agents/omn-dev-1-bug-analyst/quality.md",
+      "agents/omn-dev-1-bug-analyst/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-1-bug-analyst/system.md": "sha256:bd8045bcbde807a4e3600da265f939f9",
+      "agents/omn-dev-1-bug-analyst/identity.md": "sha256:f7661a6ca36c1e462475bcceb050a77a",
+      "agents/omn-dev-1-bug-analyst/reasoning.md": "sha256:bac6d78eda1933286fc6f79fda12ca72",
+      "agents/omn-dev-1-bug-analyst/execution.md": "sha256:96e6d4255abc83f3439243f81876e0a7",
+      "agents/omn-dev-1-bug-analyst/output.md": "sha256:07a3d283c7866abffd5d16a11d8f1765",
+      "agents/omn-dev-1-bug-analyst/quality.md": "sha256:7a1339ceeaf844a37720b53bc7ae1394",
+      "agents/omn-dev-1-bug-analyst/examples.md": "sha256:aacbbaafef0b4bd9adf483b97f6302d1"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-dev-1-bug-analyst/system.md",
+        "agents/omn-dev-1-bug-analyst/reasoning.md",
+        "agents/omn-dev-1-bug-analyst/output.md",
+        "agents/omn-dev-1-bug-analyst/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-dev-1-bug-analyst/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-dev-1-bug-analyst/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-dev-1-bug-analyst/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 52647,
+      "full_bytes": 99953
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "defect-triage",
+      "severity-and-blast-radius-classification",
+      "reproducibility-establishment",
+      "root-cause-analysis",
+      "evidence-chain-construction",
+      "fix-strategy-proposal",
+      "regression-scope-identification"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S03",
+        "proficiency": "Primary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Primary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "not-triggered",
+      "area": "database",
+      "basis": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "not-triggered",
+      "area": "performance",
+      "basis": "area performance is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Primary)"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "not-triggered",
+      "area": "security",
+      "basis": "area security is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "defect-report",
+      "production-issue-description",
+      "symptom-evidence",
+      "reproduction-context",
+      "business-impact-statement",
+      "impact-and-risk-data",
+      "logs",
+      "traces",
+      "code-context",
+      "environment-context",
+      "monitoring-signals",
+      "regression-targets",
+      "implementation-report",
+      "validation-report",
+      "technical-design",
+      "execution-plan",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "defect-report",
+        "reference": "runs/inputs/verify-validators-v4-instance-selection-defect-report.md",
+        "source_file": ".claude/runs/inputs/verify-validators-v4-instance-selection-defect-report.md",
+        "text": "# Defect Report \u2014 verify_validators V4 still fails: instance selection ignores whether the mutation applies\n\n## Summary\n\nThe previous repair of V4 (run `run-d8937789961e`, proposal FC-018) fixed the investigation-report\nrow. `python runtime/verify_validators.py` from the repository root still reports 5 of 6 checks and\n`NOT COVERED`, now for a different artifact type. V4 fails for `orchestration-result.md` with:\nno mutation anchor for \"deciding the gate its own coordination record is the evidence for\" in this\ninstance. The instance is the closure record that the previous repair run itself committed.\n\n## Observed behaviour\n\n- `conforming_instance` returns the last committed instance of the type, in sorted run-directory order.\n- The newest committed orchestration result is the closure record of run `run-d8937789961e`.\n  A closure record cannot carry its own gate decision, so its only owned row names gate `none`, and\n  the derived mutation `award_itself_its_own_gate` finds no row to mutate and returns no anchor.\n- V4 then reports the type as uncovered even though the validator rejects the mutation on every\n  instance that does carry a gate row (the earlier fix-bug and refactor closure records).\n\n## Expected behaviour\n\nV4 verdicts must not depend on which run committed an artifact last. For each artifact type V4\nshould use an instance that is conforming and to which the declared mutation applies, trying the\ncommitted instances from newest to oldest, then the governance artifact, then the fixture, and should\nfail only when none of them can carry the mutation, naming every candidate that was tried.\n\n## Reproduction\n\n1. From the repository root run `python runtime/verify_validators.py`; V4 fails as above.\n2. Read `conforming_instance` and `committed_instances` in `runtime/verify_validators.py`: they take\n   `committed[-1]` without testing the mutation against it.\n\n## Evidence and history (verify; do not trust blindly)\n\n- The previous triage concluded that only the investigation-report row was fragile and that the six\n  derived rows were lightly fragile. This defect refutes that for the orchestration-result row, so\n  the earlier conclusion that no fallback to another instance was needed does not hold.\n- The investigation-report derivation added by the previous repair (`recommend_an_unevaluated_option`,\n  `resolve_mutation`, `mutation_verdict`) is correct and must be kept.\n- Both defects have the same root cause: selection of one instance per type without checking that the\n  mutation applies to it. Fixing the selection fixes the class, so any other type that has a\n  committed instance without its anchor is covered by the same change.\n\n## Severity and impact\n\nMedium. It makes check FR-02 of the framework release checklist fail whenever the newest committed\ninstance of a type lacks the anchor, which any ordinary closure or review record can cause.\n\n## Constraints\n\n- Do not weaken V4: a validator that accepts a mutation, or rejects it by the wrong check, must still\n  fail V4, and a type for which no candidate instance can carry the mutation must still fail loudly.\n- Keep the instance conforming: V3 (the conforming instance passes its validator) must still be\n  checked against the instance V4 uses.\n- Do not modify, delete or re-generate committed run evidence, and do not change any registered\n  validator, template or fixture.\n- Add automated regression tests in `tests/` that fail before the fix and pass after: at least a\n  newest instance lacking the anchor with an older instance that has it, and the case where no\n  candidate can carry the mutation.\n- Report, for each of the 13 registered types, how many committed instances exist and how many lack\n  the anchor, so the true extent of the fragility is known.",
+        "digest": "sha256:baeb1ae26b580213f84ddc74c1193155"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was observed going wrong: a defect report for a raised issue, a production issue description for an incident, or symptom evidence where the failure was observed before it was written up. Without one there is no defect to analyse, and analysing anyway would mean diagnosing a fault this agent selected rather than the one that was reported."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "bug-analysis",
+      "reference": "runs/run-5f4422f26c3e/states/triage-and-impact/artifacts/bug-analysis.md",
+      "produced_by": "triage-and-impact",
+      "artifact": "bug-analysis.md",
+      "bytes": 15434,
+      "sections": {
+        "read_first": [
+          "Symptom Summary",
+          "Impact Assessment",
+          "Root Cause Analysis",
+          "Fix Strategy",
+          "Validation Plan",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Reproduction",
+          "Closure"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-5f4422f26c3e/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:e09610f4fc505247e5c5bd4fd47bb9ea",
+    "bytes": 7316,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "root-cause-analysis"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-09T09:18:30Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 22496,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context",
+        "bytes": 7553,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/bug-analysis.md",
+        "digest": "sha256:6f1f25f536d3d80353873990835ce1bd",
+        "supplies": null,
+        "bytes": 3732,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/dotnet/engineering-playbook.md",
+        "digest": "sha256:35fc0c6fcd8f834c3e2528d14465e17c",
+        "supplies": null,
+        "bytes": 1507,
+        "read": "required",
+        "read_reason": "skill S03 is required for this phase"
+      },
+      {
+        "path": "skills/database/database-engineering.md",
+        "digest": "sha256:5e2aef6a9a242e9491d2bcc8be412453",
+        "supplies": null,
+        "bytes": 1260,
+        "read": "on-demand",
+        "read_reason": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain"
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null,
+        "bytes": 1266,
+        "read": "on-demand",
+        "read_reason": "area performance is not affected by this task; the skill stays resolved and is read only if the work reveals the domain"
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null,
+        "bytes": 1333,
+        "read": "required",
+        "read_reason": "skill S12 is required for this phase"
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null,
+        "bytes": 3376,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73bd155e6b8344e48a8c66266be118cf",
+        "supplies": null,
+        "bytes": 61682,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:a88575c76fff3cf25d7bf5c9ee10d8b8",
+    "input_digest": "sha256:baeb1ae26b580213f84ddc74c1193155",
+    "inputs": [
+      {
+        "type": "defect-report",
+        "reference": "runs/inputs/verify-validators-v4-instance-selection-defect-report.md",
+        "source_file": ".claude/runs/inputs/verify-validators-v4-instance-selection-defect-report.md",
+        "digest": "sha256:baeb1ae26b580213f84ddc74c1193155"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "runtime/README.md",
+      "skills/database/database-engineering.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/performance/performance-engineering.md",
+      "templates/bug-analysis.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "dependency-map.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "templates/bug-analysis.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "skills/database/database-engineering.md",
+      "skills/performance/performance-engineering.md",
+      "workflows/fix-bug.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 175711,
+    "bytes_required": 11497,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-5f4422f26c3e/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "runs/run-5f4422f26c3e/states/root-cause-analysis/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own build, test, log, and inspection commands, run read-only to establish reproduction and to obtain the first-hand evidence every causal step cites",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source, tests, or committed run evidence",
+        "any command that repairs, works around, or masks the defect under analysis",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not registered in the Evidence Register"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own build, test, log, and inspection commands, run read-only to establish reproduction and to obtain the first-hand evidence every causal step cites",
+      "external system, repository, or ticketing access",
+      "implement, repair, or refactor the corrective change, which belongs to omn-dev-1-implement",
+      "declare a root cause before reproducibility is established or recorded as not-reproduced",
+      "report a symptom location as a root cause",
+      "state a causal claim that cites no registered evidence",
+      "assign a severity from schedule, cost, or reporter pressure rather than from impact",
+      "lower a severity without evidence that lowers it",
+      "decide the Triage Gate, whose evidence this agent produces",
+      "close a defect, or record a merge, release, or deployment decision",
+      "act as the final reviewer of a fix, which belongs to omn-dev-2-reviewer",
+      "validate the fix on retest, which belongs to omn-qa",
+      "define or widen product scope, or decompose the fix into a task breakdown",
+      "revise the technical design rather than raising the defect against it",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "classify a defect's severity from observed impact and likelihood",
+        "determine the blast radius a defect reaches across module and service boundaries",
+        "establish whether a defect reproduces, and under which preconditions",
+        "execute the repository's own diagnostic commands to obtain first-hand symptom evidence",
+        "register every diagnostic artifact the analysis rests on, with a confidence rating",
+        "trace a causal chain from trigger to observed symptom, each step cited to that register",
+        "state why existing detection did not catch the defect earlier",
+        "propose a fix strategy, its alternatives, and the regression scope it puts at risk",
+        "state the verification and monitoring a fix must carry before it is trusted",
+        "record what remains undiagnosed as an open question with its blocking status"
+      ],
+      "prohibited": [
+        "implement, repair, or refactor the corrective change, which belongs to omn-dev-1-implement",
+        "declare a root cause before reproducibility is established or recorded as not-reproduced",
+        "report a symptom location as a root cause",
+        "state a causal claim that cites no registered evidence",
+        "assign a severity from schedule, cost, or reporter pressure rather than from impact",
+        "lower a severity without evidence that lowers it",
+        "decide the Triage Gate, whose evidence this agent produces",
+        "close a defect, or record a merge, release, or deployment decision",
+        "act as the final reviewer of a fix, which belongs to omn-dev-2-reviewer",
+        "validate the fix on retest, which belongs to omn-qa",
+        "define or widen product scope, or decompose the fix into a task breakdown",
+        "revise the technical design rather than raising the defect against it",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes only its own artifact and result envelope, at the paths the invocation envelope names in `constraints.permitted_writes`.",
+        "rationale": "A diagnosis is trusted because the role that produced it has no stake in the change that follows. An analyst who could edit source could repair a defect and then describe the repaired state as the diagnosis, which would leave the framework with no independent account of what went wrong. Reading source, tests, logs, traces, and prior run evidence is unrestricted within the frozen context slice; writing any of it is not."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own build, test, log, and inspection commands, run read-only to establish reproduction and to obtain the first-hand evidence every causal step cites",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source, tests, or committed run evidence",
+          "any command that repairs, works around, or masks the defect under analysis",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not registered in the Evidence Register"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same severity, the same reproducibility determination, the same evidence register, the same causal chain, the same blast radius, and the same declared analysis status.",
+      "identifierSchemes": {
+        "evidence": "E-<zero-padded-sequence>",
+        "causalSteps": "C-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Evidence records are ordered by the order in which the analysis first relied on them. Causal steps are ordered from trigger to observed symptom, which is the order the chain is read in; the ordering is causal, never chronological, where the two differ. Open questions are ordered blocking first, then by the lowest causal step they affect.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied defect, evidence, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "bug-analysis.md",
+    "artifact_path": "runs/run-5f4422f26c3e/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "template_ref": "templates/bug-analysis.md",
+    "contract_ref": "agents/omn-dev-1-bug-analyst/output.md",
+    "quality_ref": "agents/omn-dev-1-bug-analyst/quality.md",
+    "validator": "bug_analysis_validator",
+    "result_envelope_path": "runs/run-5f4422f26c3e/states/root-cause-analysis/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-09T09:18:30Z",
+  "model_tier": {
+    "tier": "deep",
+    "host_hint": "opus",
+    "basis": "declared deep for fix-bug/root-cause-analysis in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 99953,
+    "modules_core_bytes": 52647,
+    "slice_all_bytes": 175711,
+    "slice_required_bytes": 11497,
+    "inputs_bytes": 3764,
+    "upstream_full_bytes": 0,
+    "upstream_read_first_bytes": 0,
+    "task_context_bytes": 7316,
+    "fixed_bytes": 13402,
+    "legacy_estimate_bytes": 292830,
+    "progressive_estimate_bytes": 88626,
+    "legacy_estimate_tokens": 73207,
+    "progressive_estimate_tokens": 22156,
+    "savings_pct": 69.7
+  }
+}

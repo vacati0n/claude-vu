@@ -10,7 +10,7 @@ metadata:
     its confidence, and its staleness, names the contradictions and the gaps instead of
     smoothing them over, derives the courses the evidence admits, and states how far a
     decision may rely on what was found.
-  version: 1.0.0
+  version: 1.1.0
   status: active
   owner: Architecture
   contractVersion: 1.0.0
@@ -111,6 +111,8 @@ authorityScope:
 
 inputs:
   accepted:
+    - identifier: requirement-framing
+      required: false
     - identifier: framed-objective
       required: false
     - identifier: research-brief
@@ -121,11 +123,13 @@ inputs:
       required: false
   minimumSatisfaction: >-
     At least one accepted input must be present. It supplies the question this discovery answers
-    and the boundary it answers within: a framed objective for the `technical-discovery` phase of
-    investigate, a research brief for the `technical-validation` phase of research, or the raw
-    investigation or research question where the framing phase produced none. Without one there
-    is no question, and gathering evidence anyway would mean answering whichever question this
-    agent happened to find interesting.
+    and the boundary it answers within: the requirement framing the framing phase publishes, which
+    is the artifact the predecessor phase of both `technical-discovery` in investigate and
+    `technical-validation` in research hands over; a framed objective for the `technical-discovery`
+    phase of investigate or a research brief for the `technical-validation` phase of research; or
+    the raw investigation or research question where the framing phase produced none. Without one
+    there is no question, and gathering evidence anyway would mean answering whichever question
+    this agent happened to find interesting.
   optional:
     - context-sources
     - technical-data-access
