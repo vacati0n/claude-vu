@@ -1,0 +1,331 @@
+schema: framework.runtime/task-context.v1
+task_id: run-d8937789961e
+command: bugfix
+workflow: fix-bug v1.0.0
+run_status: Completed
+updated_at: '2026-10-09T09:08:37Z'
+objective: 'python runtime/verify_validators.py, run from the repository root, reports 5 of 6 checks and NOT COVERED. Check
+  V4, "every registered validator rejects a mutated artifact, by the named check", fails for one artifact type. Before run
+  run-437e2f765e4b committed its first real investigation report, the same command reported 6 of 6. No validator, template
+  or verifier source file changed between the two results, so the change in outcome comes from run evidence alone. The failure
+  detail names the artifact investigation-report.md and reads: no mutation anchor for "recommending an option the report never
+  evaluated". V4 depends on which artifacts runs happen to have committed. It should not. For e...'
+inputs:
+- type: defect-report
+  reference: runs/inputs/verify-validators-v4-anchor-defect-report.md
+  digest: sha256:1ef34a52237bc465ce0df969d097a321
+relevant_agents:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S11
+  - S12
+  - S02
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S08
+  - S12
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S12
+- phase: regression-validation
+  agent: omn-qa
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S11
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  status: completed
+  required_skills:
+  - S10
+  - S11
+completed_phases:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-d8937789961e/states/triage-and-impact/artifacts/bug-analysis.md
+  digest: sha256:e19541d73acee3fe947bd1b50f58d22a
+  validation: pass 30/30
+  attempts: 1
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-d8937789961e/states/root-cause-analysis/artifacts/bug-analysis.md
+  digest: sha256:9ac30a255453aab6734dcae722db7964
+  validation: pass 30/30
+  attempts: 1
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-d8937789961e/states/fix-implementation/artifacts/implementation-report.md
+  digest: sha256:8c3d3b28f75744bf1c8515c2a9469bd8
+  validation: pass 32/32
+  attempts: 1
+- phase: regression-validation
+  agent: omn-qa
+  artifact: runs/run-d8937789961e/states/regression-validation/artifacts/validation-report.md
+  digest: sha256:9c09a0eb3d1e22d1d4aabd6d02dcbb9f
+  validation: pass 31/31
+  attempts: 1
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  artifact: runs/run-d8937789961e/states/closure-and-communication/artifacts/orchestration-result.md
+  digest: sha256:aab9d21286c10f748cf1682bce3267da
+  validation: pass 34/34
+  attempts: 1
+gates:
+- gate: Triage Gate
+  closes: triage-and-impact
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: operator on behalf of omn-tech-lead
+- gate: Fix Gate
+  closes: fix-implementation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent, recorded by session operator
+- gate: Verification Gate
+  closes: regression-validation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: operator on behalf of omn-dev-2-reviewer
+- gate: Closure Gate
+  closes: closure-and-communication
+  decision: approved
+  owner_role: omn-documentation
+  decided_by: operator on behalf of omn-documentation
+artifacts:
+  triage-and-impact: runs/run-d8937789961e/states/triage-and-impact/artifacts/bug-analysis.md
+  root-cause-analysis: runs/run-d8937789961e/states/root-cause-analysis/artifacts/bug-analysis.md
+  fix-implementation: runs/run-d8937789961e/states/fix-implementation/artifacts/implementation-report.md
+  regression-validation: runs/run-d8937789961e/states/regression-validation/artifacts/validation-report.md
+  closure-and-communication: runs/run-d8937789961e/states/closure-and-communication/artifacts/orchestration-result.md
+parallel_groups:
+- - triage-and-impact
+- - root-cause-analysis
+- - fix-implementation
+- - regression-validation
+- - closure-and-communication
+risks:
+- 'User impact: Operators and omn-qa running the release checklist see FR-02 fail and cannot obtain a clean release verification;
+  no end user or product behavio...'
+- 'Business impact: No business impact statement was supplied; severity rests on technical impact alone, and the defect report''s
+  own statement that release veri...'
+- 'Technical impact: A false negative in a coverage check: V4 reports a validator as unproven when the validator was never
+  shown to fail. No data is corrupted a...'
+- 'Blast radius: The V4 check of the validator coverage verifier; the FR-02 gate of the framework release checklist and the
+  self-hosting release verification th...'
+- 'Business impact: From the defect report''s impact statement (E-010), corroborated first-hand: FR-02 is mandatory (E-009)
+  and every release must pass its quali...'
+- 'Technical impact: A false negative in a coverage check: V4 reports the investigation validator unproven although it rejects
+  the mutation (E-019). A second la...'
+- 'Blast radius: The V4 check of the validator coverage verifier; the FR-02 gate of the release checklist and the self-hosting
+  release verification that runs it...'
+- 'R-001: The scope-definition and requirement-framing rows still substitute the count 99, so a real artifact carryin... |
+  low | V4 fails loudly for that type, a false negative in the coverage check, not a silent pass'
+- 'R-002: Four subtests of the every-row sweep depend on whichever committed instance the selector returns (V-001) | low |
+  a future committed artifact lacking a contract-pinned anchor would fail the suite as well as the verifier'
+- 'Accepted risk: None identified.'
+- 'Unmitigated risk: the count rows substituting 99 would be accepted for an artifact carrying a count of 99, making V4 fail
+  loudly rather than silently, carrie...'
+- 'Monitoring required: V4 detail text containing no mutation anchor or mutation accepted on any release verification; the
+  release checklist FR-02 failing after...'
+decisions:
+- 'Root cause statement: The mutation anchor for the investigation report is pinned to one option identifier that the artifact
+  contract leaves free, while the i...'
+- 'Why detection failed earlier: No check tested the verifier''s own selection against varied instances; no test under tests
+  references the verifier (E-011), and...'
+- 'C-001: Trigger: new run evidence | Run-437e2f765e4b committed the first real investigation report, recommending O-003 |
+  E-003, E-004'
+- 'C-002: Instance selection | The selector takes the last committed instance and no longer consults the fixture, so the only
+  committed re... | E-002, E-004'
+- 'C-003: Pinned anchor | The investigation-report mutation searches for the line naming O-002, a value taken from the fixture,
+  not f... | E-002, E-003'
+- 'C-004: Contract is value-free | The validator accepts any evaluated option as recommended, so O-003 is a conforming value
+  and the instance... | E-005, E-001'
+- 'C-005: V4 records the gap | The literal is absent from the selected text, so V4 records no mutation anchor and fails without
+  exercising... | E-002, E-001'
+- 'C-006: Symptom | V4 fails, the run reports 5 of 6 NOT COVERED, and FR-02 fails | E-001, E-009'
+- 'Proposed fix: The investigation-report mutation must be derived from the instance under test, as the six other derived
+  types are, so that it works for any ev...'
+- 'Alternative options: Make the selector prefer the last instance that carries the anchor and fall back to the fixture otherwise;
+  it is smaller but lets V4 sil...'
+- 'Regression risk: medium'
+- 'Regression scope: The investigation validator rule I1, reached because the derived substitute must be an unevaluated option
+  or the rejection is attributed to...'
+- 'Root cause statement: The investigation-report mutation row encodes two values copied from the fixture, recommended option
+  O-002 as anchor and O-009 as subst...'
+- 'Why detection failed earlier: No test exercises the verifier against varied instances (E-011, E-021); the row was only
+  ever run against the fixture, where it...'
+- 'C-001: Trigger: new run evidence | Run-437e2f765e4b committed the first real investigation report, evaluating O-001 to
+  O-004 and recommending... | E-003, E-014'
+- 'C-002: Instance selection | The selector returns the last committed instance in content-hash order and no longer consults
+  the fixture;... | E-002, E-004, E-012, E-019'
+- 'C-003: Pinned anchor and substitute | Both values of the row are fixture values: an O-003 report has no anchor, and a conforming
+  nine-option repo... | E-002, E-014, E-016'
+- 'C-004: Contract is value-free | I1 with C6.2 and C6.4 fixes only that the recommendation lies within O-001 to O-00n; the
+  committed report c... | E-005, E-015, E-017, E-001'
+- 'C-005: V4 records the gap | The literal is absent from the selected text, so V4 records no mutation anchor without running
+  the validator | E-002, E-001, E-019'
+- 'Proposed fix: The investigation-report row must derive its mutation from the instance under test, as the six callable rows
+  do, keeping check I1 and its descr...'
+- 'Alternative options: Fall back to another instance or the fixture when the anchor is missing: smaller, but it does not
+  cure the accepted-mutation case (E-016...'
+- 'Regression scope: V4 for investigation-report.md, through the derived substitute, which also trips C6.2 as the literal
+  did; V3 and V4 for all thirteen regist...'
+- 'V-001: The every-row sweep in C-002 uses the fixture where one exists and otherwise the instance conforming_instan... |
+  Validation Plan: every MUTATIONS row must resolve against its fixture | Those four types have no fixture under runtime/fixtures,
+  so a fixture-only sweep would skip them; using the...'
+- 'V-002: The two witness tests in C-002 apply the row through a test-local reading of the MUTATIONS table rule rathe... |
+  Validation Plan: the first two tests fail before the fix and pass after | Calling the new function alone would fail on the
+  pre-fix file by a missing attribute rather than by the def...'
+- 'V-003: recommend_an_unevaluated_option in C-001 also returns None when the bullet carries no three-digit option id... |
+  Fix Strategy: substitute one backticked three-digit id; None on a missing field or no free id | A bullet with no id gives
+  nothing to substitute, and V4 then reports the missing anchor loudly as for...'
+validation_requirements:
+  test_focus:
+  - 'Verification steps: Repeat the reproduction on unchanged run evidence and expect V4 to pass with the investigation report
+    caught by I1; then offer the select...'
+  - 'Regression tests added: A test under tests, run by python -m unittest discover -s tests, that fails before the fix and
+    passes after: it supplies an investiga...'
+  - 'Monitoring signals after release: V4 detail text containing no mutation anchor on any release verification; FR-02 failing
+    after a new run commits an artifact...'
+  - 'Verification steps: Repeat the reproduction on unchanged run evidence and expect 6/6 COVERED with investigation-report.md
+    caught by I1 from the committed ins...'
+  - 'Regression tests added: A new test file under tests (for example test_verify_validators_mutations.py) importing the verifier,
+    building instances in a tempora...'
+  - 'Monitoring signals after release: V4 detail text containing no mutation anchor or mutation accepted on any release verification;
+    FR-02 failing after a new ru...'
+  evidence:
+  - 'T-001: Bug witness: a conforming report recommending O-003 gets an applicable mutation rejected by I1, and a confo...
+    | regression | C-001, C-002'
+  - 'T-002: The new file, 14 tests: lowest free id (O-004, O-006, O-010), only the first of two named ids replaced, sin...
+    | unit | C-001, C-002'
+  - 'T-003: Reproduction on unchanged run evidence: V1 to V6 pass, 6/6 COVERED, the committed investigation report caug...
+    | end-to-end | C-001'
+  - 'T-004: Bundle sync refreshed 285 files and changed only the verifier mirror; the parity tests ran inside the suite...
+    | contract | C-003'
+  - 'T-005: Regression baseline: before any edit 25 of 25 modules, 642 of 642 tests passed; after the change 26 of 26 m...
+    | regression | C-001, C-002, C-003'
+  verification:
+  - 'Verification method: the pre-change baseline of the verifier (5/6 NOT COVERED, V4 failing on the investigation report)
+    and of the full suite by the repositor...'
+  - 'Commands executed: python <fw>/runtime/verify_validators.py (before and after); python tools/run_tests_parallel.py (before
+    and after); git show HEAD:<fw>/run...'
+  - 'Result summary: 5 evidence entries executed, 5 passed, 0 failed. Pre-fix run of the new file: 14 tests, 2 failures (the
+    two witnesses, by assertion) and 24 e...'
+  - 'Unverified areas: none'
+  acceptance_criteria:
+  - 'AC-001: For every registered artifact type it should find a conforming instance that carries the text the mutation...
+    | defect report, Expected behaviour | end-to-end'
+  - 'AC-002: The fix needs an automated regression test that fails before the fix and passes after, in the repository''s...
+    | defect report, Constraints | unit'
+  - 'AC-003: Do not weaken V4: it must still fail when a validator does not reject its mutation. | defect report, Constraints
+    | unit'
+  - 'AC-004: Do not modify, delete or re-generate any committed run evidence, including run-437e2f765e4b. | defect report,
+    Constraints | integration'
+  - 'AC-005: Do not change any registered validator, template or the mutation intent of any table row. | defect report, Constraints
+    | integration'
+  - 'AC-006: The other verifiers stay at their baselines when run standalone and non-mutating: registry coverage 8 of 8...
+    | operator dispatch, regression targets | integration'
+  - 'AC-007: The bundle parity test passes. | operator dispatch, regression targets | integration'
+  - 'AC-008: The full unit suite passes with no regression against the 657 of 657 the operator recorded on this tree. | operator
+    dispatch, regression targets | unit'
+open_questions:
+- 'Q-001: The root-cause-analysis phase must confirm the chain by re-running the probe against a varied second invest... |
+  no | omn-dev-1-bug-analyst'
+- 'Q-002: No business impact statement was supplied; whether release verification being blocked changes priority is f... |
+  no | omn-product-owner'
+- 'Q-001: Answered in this phase and retained so identifiers are not renumbered: the chain held against varied instan... |
+  no | omn-dev-1-bug-analyst'
+- 'Q-002: Whether release verification being blocked raises the priority of this fix is a product decision, not a sev... |
+  no | omn-product-owner'
+- 'Q-003: The main checkout and a hosted CI run were not observed; omn-qa should run FR-02 there after the fix | no | omn-qa'
+- 'Q-004: The two count rows substitute 99; a real count of 99 would make the mutation accepted and V4 fail loudly, a... |
+  no | omn-tech-lead'
+- 'Q-001: Whether the count rows that substitute 99 should be made derived is for omn-tech-lead; it does not alter this verdict.
+  Separately, the implementation...'
+- 'Q-001: Closure Gate decision on PH-005 is pending with omn-documentation; the disposition stays held until it is recorded.'
+- 'Q-002: known-issue-status is declared as an input to PH-005 but was not supplied; the release-impact communication cannot
+  cite it (owner omn-documentation).'
+- 'Q-003: The business impact of the defect is not stated, so whether blocked release verification changes its priority is
+  open (owner omn-product-owner).'
+changed_files:
+- runtime/verify_validators.py (modified)
+- tests/test_verify_validators_mutations.py (added)
+- omn_agent/_bundled_payload/runtime/verify_validators.py (modified)
+verdicts:
+- 'Decision: pass'
+- 'Rationale: no defect was found, all eight criteria were met by commands executed in this run, and the Stage 8 table row
+  for no open critical or high defect a...'
+- 'Blocking defects outstanding: None identified.'
+- 'Readiness recommendation: recommend that the gate owner advance the Verification Gate for this change, and that the main
+  checkout and hosted CI observations...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:fix-implementation
+      term: migration
+    performance:
+    - source: artifact:root-cause-analysis
+      term: profile
+    - source: artifact:regression-validation
+      term: performance
+    security:
+    - source: artifact:fix-implementation
+      term: token
+    - source: artifact:regression-validation
+      term: security
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:defect-report
+  - artifact:triage-and-impact
+  - artifact:root-cause-analysis
+  - artifact:fix-implementation
+  - artifact:regression-validation
+  - artifact:closure-and-communication
+relevant_skills:
+  triage-and-impact:
+    S11: required
+    S12: required
+    S02: required
+  root-cause-analysis:
+    S03: required
+    S06: required
+    S08: required
+    S12: required
+  fix-implementation:
+    S03: required
+    S06: required
+    S10: required
+    S12: required
+  regression-validation:
+    S07: required
+    S09: required
+    S11: required
+  closure-and-communication:
+    S10: required
+    S11: required
+repository_context:
+  relevant_modules: []
+  relevant_files:
+  - runtime/verify_validators.py (modified)
+  - tests/test_verify_validators_mutations.py (added)
+  - omn_agent/_bundled_payload/runtime/verify_validators.py (modified)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path

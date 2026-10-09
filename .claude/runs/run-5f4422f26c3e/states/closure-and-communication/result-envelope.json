@@ -1,0 +1,61 @@
+{
+  "invocation_id": "inv-5f4422f26c3e-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5f4422f26c3e/states/closure-and-communication/artifacts/orchestration-result.md"
+  ],
+  "structured_output": {
+    "coordinationBasis": "closure",
+    "disposition": "held",
+    "status": "complete",
+    "held_by": "PH-005 Closure Gate (owner omn-documentation) has no recorded decision; ES-001 routes it to the run's operator",
+    "counts": {
+      "phases": 5,
+      "complete": 4,
+      "blocked": 1,
+      "not_started": 0,
+      "handoffs": 4,
+      "handoffs_accepted": 4,
+      "escalations": 1,
+      "escalations_by_severity": {"critical": 0, "high": 0, "medium": 1, "low": 0},
+      "follow_ups": 3,
+      "open_questions": 2
+    },
+    "gate_owner_addressed": "omn-documentation",
+    "checks": {
+      "run": 34,
+      "passed": 34,
+      "failed": [],
+      "not_run": [],
+      "tool": "runtime/orchestration_result_validator.py --envelope",
+      "validator_result": "PASS",
+      "blocking_failed": 0,
+      "correctable_failed": 0,
+      "note": "validator covers the O-series and structural checks; quality.md checks self-verified against the artifact"
+    },
+    "not_machine_checkable": {
+      "N1": "sequence matches the dependencies of fix-bug (dispatch order follows the workflow phase table)",
+      "N2": "ES-001 is the only escalation; it is outside this role's authority (Closure Gate decider)",
+      "N3": "FU-001 to FU-003 record the deferred work; no obligated fix-bug deliverable is recorded as deferred except FU-003 (release note entries)",
+      "N4": "the account matches the run's recorded evidence as read in evidence_refs"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-orchestrator/system.md",
+    "agents/omn-orchestrator/identity.md",
+    "agents/omn-orchestrator/reasoning.md",
+    "agents/omn-orchestrator/execution.md",
+    "agents/omn-orchestrator/output.md",
+    "agents/omn-orchestrator/quality.md",
+    "templates/orchestration-result.md",
+    "workflows/fix-bug.md",
+    "runs/run-5f4422f26c3e/states/closure-and-communication/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-5f4422f26c3e/states/closure-and-communication/artifacts/orchestration-result.md",
+    "runs/run-5f4422f26c3e/states/closure-and-communication/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,269 @@
+{
+  "schema": "framework.runtime/execution-metrics.v1",
+  "task_id": "run-d8937789961e",
+  "workflow": "fix-bug v1.0.0",
+  "runtime_version": "0.9.0",
+  "computed_at": "2026-10-09T09:08:39Z",
+  "total_duration": {
+    "wall_clock_seconds": 3892.0,
+    "wall_clock": "1h04m52s",
+    "agent_active_seconds": 2717.0,
+    "agent_active": "45m17s"
+  },
+  "phases_executed": {
+    "declared": 5,
+    "completed": 5,
+    "blocked": 0
+  },
+  "agents_executed": {
+    "invocations": 5,
+    "distinct": 4,
+    "by_agent": {
+      "omn-dev-1-bug-analyst": 2,
+      "omn-dev-1-implement": 1,
+      "omn-qa": 1,
+      "omn-orchestrator": 1
+    }
+  },
+  "skills_executed": {
+    "required_reads": 37,
+    "not_triggered": 8
+  },
+  "parallel_groups": {
+    "count": 5,
+    "max_width": 1,
+    "groups": [
+      [
+        "triage-and-impact"
+      ],
+      [
+        "root-cause-analysis"
+      ],
+      [
+        "fix-implementation"
+      ],
+      [
+        "regression-validation"
+      ],
+      [
+        "closure-and-communication"
+      ]
+    ]
+  },
+  "context_loads": {
+    "members_declared": 85,
+    "members_required": 39
+  },
+  "repeated_context_loads": {
+    "files": 10,
+    "by_path": {
+      "context/product-context.md": 5,
+      "context/technical-context.md": 5,
+      "context/release-context.md": 5,
+      "templates/bug-analysis.md": 4,
+      "skills/logging/observability-logging.md": 4,
+      "skills/error-handling/error-handling-strategy.md": 3,
+      "skills/dotnet/engineering-playbook.md": 2,
+      "templates/implementation-report.md": 2,
+      "skills/testing/testing-strategy.md": 2,
+      "templates/validation-report.md": 2
+    }
+  },
+  "validation_runs": {
+    "passed": 5,
+    "failed": 0
+  },
+  "gate_decisions": {
+    "decided": 4,
+    "auto_policy": 0,
+    "rejected": 0
+  },
+  "tokens_or_context_estimate": {
+    "basis": "4 bytes per token; bytes the dispatch asked the agent to read, per envelope",
+    "legacy_bytes": 1635643,
+    "progressive_bytes": 746448,
+    "legacy_tokens": 408910,
+    "progressive_tokens": 186612,
+    "savings_pct": 54.4
+  },
+  "model_tiers": {
+    "by_tier": {
+      "light": {
+        "invocations": 1,
+        "estimated_bytes": 148019
+      },
+      "standard": {
+        "invocations": 2,
+        "estimated_bytes": 291074
+      },
+      "deep": {
+        "invocations": 2,
+        "estimated_bytes": 307355
+      },
+      "untiered": {
+        "invocations": 0,
+        "estimated_bytes": 0
+      }
+    },
+    "invocations_total": 5,
+    "estimated_bytes_total": 746448,
+    "non_deep_share": 0.6
+  },
+  "per_phase": [
+    {
+      "phase": "triage-and-impact",
+      "agent": "omn-dev-1-bug-analyst",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 226.0,
+      "context_members_declared": 15,
+      "context_members_required": 7,
+      "skills": {
+        "required": 6,
+        "not_triggered": 3
+      },
+      "model_tier": "standard",
+      "context_estimate": {
+        "modules_full_bytes": 99953,
+        "modules_core_bytes": 52647,
+        "slice_all_bytes": 109242,
+        "slice_required_bytes": 9236,
+        "inputs_bytes": 3501,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 18231,
+        "fixed_bytes": 53248,
+        "legacy_estimate_bytes": 265944,
+        "progressive_estimate_bytes": 136863,
+        "legacy_estimate_tokens": 66486,
+        "progressive_estimate_tokens": 34215,
+        "savings_pct": 48.5
+      }
+    },
+    {
+      "phase": "root-cause-analysis",
+      "agent": "omn-dev-1-bug-analyst",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 572.0,
+      "context_members_declared": 18,
+      "context_members_required": 7,
+      "skills": {
+        "required": 6,
+        "not_triggered": 3
+      },
+      "model_tier": "deep",
+      "context_estimate": {
+        "modules_full_bytes": 99953,
+        "modules_core_bytes": 52647,
+        "slice_all_bytes": 175711,
+        "slice_required_bytes": 11497,
+        "inputs_bytes": 3501,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 18231,
+        "fixed_bytes": 56295,
+        "legacy_estimate_bytes": 335460,
+        "progressive_estimate_bytes": 142171,
+        "legacy_estimate_tokens": 83865,
+        "progressive_estimate_tokens": 35542,
+        "savings_pct": 57.6
+      }
+    },
+    {
+      "phase": "fix-implementation",
+      "agent": "omn-dev-1-implement",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 1068.0,
+      "context_members_declared": 18,
+      "context_members_required": 9,
+      "skills": {
+        "required": 6,
+        "not_triggered": 2
+      },
+      "model_tier": "deep",
+      "context_estimate": {
+        "modules_full_bytes": 68877,
+        "modules_core_bytes": 32716,
+        "slice_all_bytes": 178107,
+        "slice_required_bytes": 16419,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 29715,
+        "upstream_read_first_bytes": 16027,
+        "task_context_bytes": 18231,
+        "fixed_bytes": 81791,
+        "legacy_estimate_bytes": 358490,
+        "progressive_estimate_bytes": 165184,
+        "legacy_estimate_tokens": 89622,
+        "progressive_estimate_tokens": 41296,
+        "savings_pct": 53.9
+      }
+    },
+    {
+      "phase": "regression-validation",
+      "agent": "omn-qa",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 556.0,
+      "context_members_declared": 18,
+      "context_members_required": 9,
+      "skills": {
+        "required": 9,
+        "not_triggered": 0
+      },
+      "model_tier": "standard",
+      "context_estimate": {
+        "modules_full_bytes": 80377,
+        "modules_core_bytes": 39471,
+        "slice_all_bytes": 182214,
+        "slice_required_bytes": 20526,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 13158,
+        "upstream_read_first_bytes": 8530,
+        "task_context_bytes": 18231,
+        "fixed_bytes": 67453,
+        "legacy_estimate_bytes": 343202,
+        "progressive_estimate_bytes": 154211,
+        "legacy_estimate_tokens": 85800,
+        "progressive_estimate_tokens": 38552,
+        "savings_pct": 55.1
+      }
+    },
+    {
+      "phase": "closure-and-communication",
+      "agent": "omn-orchestrator",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 295.0,
+      "context_members_declared": 16,
+      "context_members_required": 7,
+      "skills": {
+        "required": 10,
+        "not_triggered": 0
+      },
+      "model_tier": "light",
+      "context_estimate": {
+        "modules_full_bytes": 75179,
+        "modules_core_bytes": 39453,
+        "slice_all_bytes": 178531,
+        "slice_required_bytes": 16843,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 10500,
+        "upstream_read_first_bytes": 5155,
+        "task_context_bytes": 18231,
+        "fixed_bytes": 68337,
+        "legacy_estimate_bytes": 332547,
+        "progressive_estimate_bytes": 148019,
+        "legacy_estimate_tokens": 83136,
+        "progressive_estimate_tokens": 37004,
+        "savings_pct": 55.5
+      }
+    }
+  ]
+}

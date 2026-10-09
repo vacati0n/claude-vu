@@ -1,0 +1,685 @@
+{
+  "invocation_id": "inv-d8937789961e-03-001",
+  "run_id": "run-d8937789961e",
+  "work_item_id": "run-d8937789961e::fix-implementation",
+  "idempotency_key": "sha256:c1dbdbbdc28facde17392d7be29eb8f8",
+  "state_id": "fix-implementation",
+  "phase_index": 3,
+  "agent_id": "omn-dev-1-implement",
+  "agent_version": "1.1.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-1-implement.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-1-implement/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-1-implement/system.md",
+      "agents/omn-dev-1-implement/identity.md",
+      "agents/omn-dev-1-implement/reasoning.md",
+      "agents/omn-dev-1-implement/execution.md",
+      "agents/omn-dev-1-implement/output.md",
+      "agents/omn-dev-1-implement/quality.md",
+      "agents/omn-dev-1-implement/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-1-implement/system.md": "sha256:19e8b4ae2aad6df4dcc5eb87cc91bcf7",
+      "agents/omn-dev-1-implement/identity.md": "sha256:e02fb41e9c00f1f9270808c8b7981a20",
+      "agents/omn-dev-1-implement/reasoning.md": "sha256:b3abda4d594df1d4346a95a41645c5ef",
+      "agents/omn-dev-1-implement/execution.md": "sha256:e74dc23cc6f165cab07858a0267584d1",
+      "agents/omn-dev-1-implement/output.md": "sha256:bccf4d0c7e2f92084148bcffe4e3b512",
+      "agents/omn-dev-1-implement/quality.md": "sha256:729e61431bb8ad9247e0a2afad953ba0",
+      "agents/omn-dev-1-implement/examples.md": "sha256:5265c7bf5b7d869c9aa34ffe83bfd547"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-dev-1-implement/system.md",
+        "agents/omn-dev-1-implement/reasoning.md",
+        "agents/omn-dev-1-implement/output.md",
+        "agents/omn-dev-1-implement/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-dev-1-implement/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-dev-1-implement/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-dev-1-implement/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 32716,
+      "full_bytes": 68877
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "implementation-delivery"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S03",
+        "proficiency": "Primary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Primary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "not-triggered",
+      "area": "database",
+      "basis": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Advisory)"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "not-triggered",
+      "area": "security",
+      "basis": "area security is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "agent-manifest (Advisory)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "technical-design",
+      "bug-analysis",
+      "validation-report",
+      "execution-plan",
+      "coding-standards",
+      "architecture-decision-record",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context",
+      "regression-targets",
+      "parity-checklist",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-d8937789961e/states/triage-and-impact/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-d8937789961e/states/triage-and-impact/artifacts/bug-analysis.md",
+        "text": "```yaml\nbugAnalysis:\n  analysisId: BA-run-d8937789961e-triage\n  defectReference: verify-validators-v4-anchor\n  sourceInputs:\n    - type: defect-report\n      reference: runs/inputs/verify-validators-v4-anchor-defect-report.md\n  producedBy: omn-dev-1-bug-analyst\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  severity: medium\n  reproducibility: deterministic\n  inputDigest: sha256:1ef34a52237bc465ce0df969d097a321\n  contextDigest: sha256:af95bb67d09092740f15c6736e259409\n```\n\n## Metadata\n\n- Bug ID: verify-validators-v4-anchor\n- Reporter: operator, through a supplied defect report\n- Severity: medium\n- Status: provisional\n\n## Symptom Summary\n\n- Observed behavior: The validator coverage verifier, run from the repository root, ends at 5 of 6 checks passed and reports NOT COVERED. Check V4 fails with one finding: investigation-report.md has no mutation anchor in the selected instance. Every other artifact type passes V3 and V4.\n- Expected behavior: Per the defect report, V4 should not depend on which artifacts runs happened to commit; for every registered type it should find an instance carrying the text its mutation needs, and still prove the validator rejects the mutated artifact by the named check.\n- First observed date: Unknown; no later than this run, and after run-437e2f765e4b began on 2026-10-09, since that run committed the investigation report that triggers it.\n- Affected environments: Known affected: this worktree, run from its repository root. Known unaffected: none observed. Not observed: the main checkout, a hosted CI run, any other worktree.\n\n## Reproduction\n\n- Preconditions: The run evidence directory holds exactly one committed investigation report, from run-437e2f765e4b, whose recommended option is O-003. Run from the repository root with no environment changes.\n- Steps to reproduce: From the repository root run python runtime/verify_validators.py. Read the line for check V4 and the final summary line. Expect FAIL for V4 naming investigation-report.md and the summary 5/6 checks passed, NOT COVERED. Repeating the run gave the same result every time.\n- Reproduction frequency: deterministic\n- Evidence: Evidence Register below; the reproduction is E-001, observed three times with identical output.\n\n### Evidence Register\n\n| ID | Evidence | Source | Confidence |\n|---|---|---|---|\n| `E-001` | The verifier run three times from the repository root: V4 FAIL with one finding, no mutation anchor for investigation-report.md; V1, V2, V3, V5, V6 PASS; summary 5/6 NOT COVERED; mutation results for the other twelve types caught by their named check | Command: python runtime/verify_validators.py | high |\n| `E-002` | The MUTATIONS table pins the investigation-report mutation to the literal recommended-option line naming O-002, replaced by O-009; committed_instances collects accepted artifacts of the type from every run state in sorted order; conforming_instance returns the last committed one and consults the fixture only when none is committed; V4 records a rejection when the literal is absent from the selected text | File read: runtime/verify_validators.py, MUTATIONS table, committed_instances, conforming_instance, V3/V4 loop | high |\n| `E-003` | The only committed investigation report (run-437e2f765e4b, technical-discovery) has the recommended-option line naming O-003; the fixture has it naming O-002 | Files read: run-437e2f765e4b investigation-report.md; runtime/fixtures/investigation-report.md | high |\n| `E-004` | Read-only probe importing the verifier: for each of the seven literal-anchored types the count of committed instances, how many contain the literal, and which is selected (last in sorted run order); the probe wrote nothing under the repository | Command: probe script held in the session scratchpad, importing verify_validators | high |\n| `E-005` | Rule I1 passes when the recommended option names any option the report evaluated; the template says only an option identifier from the table above; the contract does not fix a value | Files read: runtime/investigation_report_validator.py, templates/investigation-report.md | high |\n| `E-006` | The implementation-report validator accepts only the review status pending-review (rule M6), so its literal is pinned by the contract; the scope-definition and requirement-framing literals are count field names the templates require; the plan and design literals are mandatory section headings | Files read: runtime/implementation_report_validator.py, templates/scope-definition.md, templates/requirement-framing.md, MUTATIONS table | high |\n| `E-007` | Tracked files under runtime and templates show no modification against the last commit; the new run directory and proposal FC-017 are untracked | Command: git status and git diff against HEAD | high |\n| `E-008` | Six artifact types already derive their mutation from the instance, and their docstrings record that an earlier literal went dead for the same reason when a real run replaced the fixture (bug-analysis, release-note, count mutations) | File read: runtime/verify_validators.py, derivation functions | high |\n| `E-009` | The release checklist makes FR-02 the verifier command above, mandatory, owned by omn-qa | File read: validation/framework-release-checklist.md | high |\n| `E-010` | The supplied defect report states: 6 of 6 before run-437e2f765e4b; run identifiers are content hashes; the implementation-report literal has the same latent fragility; severity medium; no source changed between the two results | Supplied input: runs/inputs/verify-validators-v4-anchor-defect-report.md | low |\n| `E-011` | No test file under tests references the verifier; confirmed by search of the tests directory | Command: file search of tests for verify_validators | high |\n\n## Impact Assessment\n\n- User impact: Operators and omn-qa running the release checklist see FR-02 fail and cannot obtain a clean release verification; no end user or product behavior is touched. Affected: every framework change verified while this run evidence exists.\n- Business impact: No business impact statement was supplied; severity rests on technical impact alone, and the defect report's own statement that release verification is blocked is recorded as context (E-010, E-009).\n- Technical impact: A false negative in a coverage check: V4 reports a validator as unproven when the validator was never shown to fail. No data is corrupted and no validator behavior changed. A latent second effect: the verifier outcome is a function of run history rather than of validator behavior.\n- Blast radius: The V4 check of the validator coverage verifier; the FR-02 gate of the framework release checklist and the self-hosting release verification that runs it; the investigation validator's mutation proof (I1). Persisted bad data: none written; committed run evidence is read-only here and is not at fault. Latent reach, under the same selection rule: six other literal-anchored types, listed in the Regression scope, none of which fail now. Environments not observed: main checkout, hosted CI.\n\n## Root Cause Analysis\n\n- Root cause statement: The mutation anchor for the investigation report is pinned to one option identifier that the artifact contract leaves free, while the instance selector prefers the last committed run artifact without checking that it carries the anchor, so any genuine report recommending a different option leaves V4 with nothing to mutate.\n- Why detection failed earlier: No check tested the verifier's own selection against varied instances; no test under tests references the verifier (E-011), and the same defect had already occurred and been fixed for other types one at a time by making each mutation derived, without sweeping the remaining literals (E-008).\n\n### Causal Chain\n\n| ID | Step | Claim | Evidence | Confidence |\n|---|---|---|---|---|\n| `C-001` | Trigger: new run evidence | Run-437e2f765e4b committed the first real investigation report, recommending O-003 | `E-003`, `E-004` | high |\n| `C-002` | Instance selection | The selector takes the last committed instance and no longer consults the fixture, so the only committed report becomes the sole sample | `E-002`, `E-004` | high |\n| `C-003` | Pinned anchor | The investigation-report mutation searches for the line naming O-002, a value taken from the fixture, not from the contract | `E-002`, `E-003` | high |\n| `C-004` | Contract is value-free | The validator accepts any evaluated option as recommended, so O-003 is a conforming value and the instance is not at fault | `E-005`, `E-001` | high |\n| `C-005` | V4 records the gap | The literal is absent from the selected text, so V4 records no mutation anchor and fails without exercising the validator | `E-002`, `E-001` | high |\n| `C-006` | Symptom | V4 fails, the run reports 5 of 6 NOT COVERED, and FR-02 fails | `E-001`, `E-009` | high |\n\n## Fix Strategy\n\n- Proposed fix: The investigation-report mutation must be derived from the instance under test, as the six other derived types are, so that it works for any evaluated recommendation and substitutes an option identifier the report never evaluated; V4 must still fail when the validator accepts the mutation or rejects it by a different check; the other literal-anchored types are assessed in the same change and altered only where their literal is not pinned by their contract. No committed run evidence, validator, or template is altered.\n- Alternative options: Make the selector prefer the last instance that carries the anchor and fall back to the fixture otherwise; it is smaller but lets V4 silently test a fixture while real instances go unmutated, and so weakens the proof. Or require the fixture sample always; it removes the dependence on run history but stops V4 testing real artifacts, which the earlier selection rule chose deliberately.\n- Regression risk: medium\n- Regression scope: The investigation validator rule I1, reached because the derived substitute must be an unevaluated option or the rejection is attributed to the wrong check; the other six literal types (implementation-report review status, scope-definition criteria count, requirement-framing requirement count, execution-plan Risks heading, technical-design Sign-off heading, change-proposal ledger link), each connected through the same MUTATIONS table and selector; V3 acceptance of the selected instances, which share the selector; the self-hosting release verification and FR-02, which consume the verifier summary; the bundled payload mirror of the verifier, connected by the payload sync test.\n\n## Validation Plan\n\n- Verification steps: Repeat the reproduction on unchanged run evidence and expect V4 to pass with the investigation report caught by I1; then offer the selector instances recommending different options and expect V4 to hold for each; confirm it still fails when a validator is made to accept the mutation, so that the cause (a value-pinned anchor) and not merely the symptom is shown removed.\n- Regression tests added: A test under tests, run by python -m unittest discover -s tests, that fails before the fix and passes after: it supplies an investigation report recommending an option other than O-002 and asserts the mutation can be applied and is rejected by I1; plus a test that a validator accepting the mutation still fails V4; plus a sweep asserting every table row can be applied to an instance varying its free values.\n- Monitoring signals after release: V4 detail text containing no mutation anchor on any release verification; FR-02 failing after a new run commits an artifact of any registered type.\n\n## Closure\n\n- Resolution summary: None identified.\n- Linked PR and release: None identified.\n- Prevention actions: Add the test under tests that exercises the verifier against varied instances (E-011), and require every new mutation row to be derived from the instance unless its literal is pinned by the artifact contract.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected steps |\n|---|---|---|---|---|\n| `Q-001` | The root-cause-analysis phase must confirm the chain by re-running the probe against a varied second investigation instance, and decide which of the six latent literals, if any, need derivation; the defect report's statements that the verifier passed 6 of 6 beforehand and that run identifiers are content hashes were not confirmed here | no | omn-dev-1-bug-analyst | `C-002`, `C-003` |\n| `Q-002` | No business impact statement was supplied; whether release verification being blocked changes priority is for the product owner | no | omn-product-owner | none |",
+        "digest": "sha256:2708a40065cb80151302f423c76df234",
+        "produced_by": "triage-and-impact"
+      },
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-d8937789961e/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-d8937789961e/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "text": "```yaml\nbugAnalysis:\n  analysisId: BA-run-d8937789961e-root-cause\n  defectReference: verify-validators-v4-anchor\n  sourceInputs:\n    - type: defect-report\n      reference: runs/inputs/verify-validators-v4-anchor-defect-report.md\n  producedBy: omn-dev-1-bug-analyst\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  severity: medium\n  reproducibility: deterministic\n  inputDigest: sha256:1ef34a52237bc465ce0df969d097a321\n  contextDigest: sha256:a88575c76fff3cf25d7bf5c9ee10d8b8\n```\n\n## Metadata\n\n- Bug ID: verify-validators-v4-anchor\n- Reporter: operator, through a supplied defect report\n- Severity: medium\n- Status: complete\n\n## Symptom Summary\n\n- Observed behavior: The validator coverage verifier, run from the repository root, ends at 5 of 6 checks passed and reports NOT COVERED; check V4 fails with one finding, no mutation anchor for investigation-report.md in the selected instance, while every other artifact type passes V3 and V4 (E-001).\n- Expected behavior: Per the defect report, V4 should not depend on which artifacts runs happened to commit; for every registered type it should find an instance carrying what its mutation needs and still prove the validator rejects the mutated artifact by the named check.\n- First observed date: Unknown; after run-437e2f765e4b committed its investigation report on 2026-10-09; the last recorded clean result is the coverage report of 2026-08-18 (E-013).\n- Affected environments: Known affected: this worktree, run from its repository root. Known unaffected: none observed. Not observed: the main checkout, a hosted CI run, any other worktree.\n\n## Reproduction\n\n- Preconditions: The run evidence holds exactly one committed investigation report, from run-437e2f765e4b, which evaluates O-001 to O-004 and recommends O-003; tracked runtime and template files unchanged against the last commit; run from the repository root.\n- Steps to reproduce: From the repository root run python runtime/verify_validators.py. Read the V4 line and the final summary line. Expect FAIL for V4 naming investigation-report.md with no mutation anchor, and the summary 5/6 checks passed, NOT COVERED. Repeated in this phase with the same result; triage observed it three times.\n- Reproduction frequency: deterministic\n- Evidence: Evidence Register below; the reproduction is E-001, re-run in this phase, and its in-memory counterpart is E-019.\n\n### Evidence Register\n\n| ID | Evidence | Source | Confidence |\n|---|---|---|---|\n| `E-001` | Verifier from the repository root: V4 FAIL, one finding, no mutation anchor for investigation-report.md; V1, V2, V3, V5, V6 PASS; the selected investigation report passes V3 at 31 of 31; summary 5/6 NOT COVERED | Command: python runtime/verify_validators.py, re-run this phase | high |\n| `E-002` | The MUTATIONS row pins the investigation-report mutation to the recommended-option line naming O-002, replaced by one naming O-009; committed_instances collects accepted artifacts in sorted run order; conforming_instance returns the last and consults the fixture only when none is committed; V4 records no anchor when the literal is absent | File read: runtime/verify_validators.py, MUTATIONS, committed_instances, conforming_instance, V3/V4 loop | high |\n| `E-003` | The committed investigation report (run-437e2f765e4b, technical-discovery) recommends O-003; the fixture recommends O-002 and evaluates O-001 to O-003 | Files read: that report; runtime/fixtures/investigation-report.md | high |\n| `E-004` | Probe over the seven literal-anchored types: execution-plan 12 of 12 committed carry the anchor, implementation-report 13 of 13, scope-definition 10 of 10, technical-design 14 of 14, requirement-framing 1 of 1, change proposal from the governance source carries it, investigation-report 0 of 1 | Command: read-only probe in the session scratchpad importing verify_validators | high |\n| `E-005` | Rule I1 passes when every option id named in the recommended-option field is defined in the Options Evaluated section; the template fixes no value | Files read: runtime/investigation_report_validator.py, templates/investigation-report.md | high |\n| `E-006` | The implementation-report validator accepts only review status pending-review (M6), so that literal is pinned by the contract; the plan Risks and design Sign-off literals are mandatory headings of their templates | Files read: runtime/implementation_report_validator.py, templates/execution-plan.md, templates/technical-design.md | high |\n| `E-007` | git diff against the last commit shows no change under runtime or templates; run-437e2f765e4b, this run, and FC-017 are untracked | Command: git status and git diff --stat HEAD | high |\n| `E-008` | Six artifact types already derive their mutation from the instance, and their docstrings record that earlier literals went dead the same way when a real run replaced the fixture | File read: runtime/verify_validators.py, derivation functions | high |\n| `E-009` | The release checklist makes FR-02 the verifier command, mandatory, owned by omn-qa | File read: validation/framework-release-checklist.md | high |\n| `E-010` | The defect report states: 6 of 6 before run-437e2f765e4b; run identifiers are content hashes; release verification is blocked; severity medium | Supplied input: runs/inputs/verify-validators-v4-anchor-defect-report.md | low |\n| `E-011` | No test file under tests references verify_validators; confirmed by search of the tests directory this phase | Command: content search of tests | high |\n| `E-012` | A run identifier is run- followed by the first 12 hex digits of a sha256 over command, workflow, and input digest, so sorted run order is content-hash order | File read: runtime/framework_runtime.py, make_run_id | high |\n| `E-013` | The coverage report of 2026-08-18 (runtime 0.4.0) records pass, with the investigation report taken from the fixture and its mutation failing C6.2 and I1; git tracks no committed investigation report; the verifier, validator, fixture, and template were last changed in one commit | Files read: reports/validator-coverage-2026-08-18.json; command: git ls-files and git log | medium |\n| `E-014` | Probe: the committed report evaluates O-001 to O-004 and recommends O-003, so the literal is absent; on the fixture the literal mutation is rejected with C6.2 and I1 | Command: read-only probe in the session scratchpad | high |\n| `E-015` | The shared engine requires option ids in three-digit form (C6.1), every referenced id defined (C6.2), and defined ids contiguous from 001 (C6.4); I1 reads only three-digit ids | File read: runtime/artifact_contract.py, C6 block, defined_ids, referenced_ids | high |\n| `E-016` | Probe: a conforming copy of the committed report widened to nine options and recommending O-002 is accepted, carries the literal anchor, and the literal mutation is accepted, because its substitute O-009 is an evaluated option | Command: read-only probe in the session scratchpad, copies only | high |\n| `E-017` | Probe: on conforming copies recommending O-002 of three options, O-005 of five, O-009 of nine, and naming O-003 and O-004 together, substituting the lowest three-digit id absent from the text yields O-004, O-006, O-010, O-005, each rejected with C6.2 and I1 | Command: read-only probe in the session scratchpad, copies only | high |\n| `E-018` | Probe: single-option copies (only O-003; only O-001) are rejected unmutated by C4.5, two rows minimum; the same rule yields O-005 and O-002, absent from the text, and I1 fails | Command: read-only probe in the session scratchpad, copies only | high |\n| `E-019` | In-memory probe on unchanged evidence: as shipped 5/6; with the row replaced by the derivation 6/6 COVERED, investigation report caught by I1; with a validator accepting everything V4 FAILs as mutation accepted; with I1 suppressed V4 FAILs as rejected but not by I1; git status unchanged afterwards | Command: read-only probe in the session scratchpad running main() with module state replaced in process | high |\n| `E-020` | The self-hosting profile requires its second evidence row, the run ledger link, so the change-proposal literal is pinned; the scope-definition and requirement-framing templates require the count fields their literals anchor on | Files read: config/self-hosting-profile.md, templates/scope-definition.md, templates/requirement-framing.md | high |\n| `E-021` | Mutation resolution and the V4 verdict are inline in main(), so no function exposes them to a test; existing tests import runtime scripts by inserting the runtime directory into the module path | Files read: runtime/verify_validators.py main(); tests/test_model_tier.py | high |\n| `E-022` | The bundled payload mirror holds a byte-identical copy of the verifier | Command: file comparison against omn_agent/_bundled_payload/runtime/verify_validators.py | high |\n| `E-023` | Release context requires each release to pass the quality gates | File read: context/release-context.md | high |\n\n## Impact Assessment\n\n- User impact: Operators and omn-qa running the release checklist see FR-02 fail and cannot obtain a clean release verification; no end user or product behavior is touched. Affected: every framework change verified while this run evidence exists.\n- Business impact: From the defect report's impact statement (E-010), corroborated first-hand: FR-02 is mandatory (E-009) and every release must pass its quality gates (E-023), so no framework release can record a clean FR-02 while the defect stands; no product or end-user consequence.\n- Technical impact: A false negative in a coverage check: V4 reports the investigation validator unproven although it rejects the mutation (E-019). A second latent effect: a conforming report evaluating nine or more options and recommending O-002 makes the same row produce an accepted mutation (E-016).\n- Blast radius: The V4 check of the validator coverage verifier; the FR-02 gate of the release checklist and the self-hosting release verification that runs it; the investigation validator's mutation proof (I1). Persisted bad data: none; committed run evidence is conforming and not at fault. Latent reach under the same selection rule: the six other literal-anchored types, all contract-pinned (E-004, E-006, E-020). Not observed: main checkout, hosted CI.\n\n## Root Cause Analysis\n\n- Root cause statement: The investigation-report mutation row encodes two values copied from the fixture, recommended option O-002 as anchor and O-009 as substitute, instead of the contract invariant that a recommendation must name an evaluated option, so whether V4 can apply the mutation and whether the substitute is unevaluated both depend on which instance the selector returns, an assumption that broke when the selector, as designed, returned a conforming report recommending O-003.\n- Why detection failed earlier: No test exercises the verifier against varied instances (E-011, E-021); the row was only ever run against the fixture, where it passed (E-013); and the same defect had been fixed one type at a time by deriving each mutation without sweeping the remaining literals (E-008).\n\n### Causal Chain\n\n| ID | Step | Claim | Evidence | Confidence |\n|---|---|---|---|---|\n| `C-001` | Trigger: new run evidence | Run-437e2f765e4b committed the first real investigation report, evaluating O-001 to O-004 and recommending O-003 | `E-003`, `E-014` | high |\n| `C-002` | Instance selection | The selector returns the last committed instance in content-hash order and no longer consults the fixture; it is not the cause, since unchanged it yields 6 of 6 once the row is derived | `E-002`, `E-004`, `E-012`, `E-019` | high |\n| `C-003` | Pinned anchor and substitute | Both values of the row are fixture values: an O-003 report has no anchor, and a conforming nine-option report recommending O-002 has one but its substitute is evaluated | `E-002`, `E-014`, `E-016` | high |\n| `C-004` | Contract is value-free | I1 with C6.2 and C6.4 fixes only that the recommendation lies within O-001 to O-00n; the committed report conforms, and an id outside that set is rejected for every varied instance | `E-005`, `E-015`, `E-017`, `E-001` | high |\n| `C-005` | V4 records the gap | The literal is absent from the selected text, so V4 records no mutation anchor without running the validator | `E-002`, `E-001`, `E-019` | high |\n| `C-006` | Symptom | V4 fails, the run reports 5 of 6 NOT COVERED, and FR-02 fails | `E-001`, `E-009` | high |\n\n## Fix Strategy\n\n- Proposed fix: The investigation-report row must derive its mutation from the instance under test, as the six callable rows do, keeping check I1 and its description: in runtime/verify_validators.py a new derivation function (for example recommend_an_unevaluated_option) locates the recommended-option field bullet and substitutes one backticked three-digit id, the lowest O-nnn appearing nowhere in the text, which for a conforming report is O-(n+1) and can never be evaluated because defined ids are a subset of ids in the text (E-015, E-017); the single-option case is non-conforming but still yields an absent id that I1 rejects (E-018); the function returns nothing when the field is missing or no id is free, so V4 fails loudly (E-019). Derive only: committed_instances and conforming_instance stay unchanged, with no fallback. Mutation resolution and the V4 verdict move out of main() into module functions main() calls with unchanged behavior, so a test can import them (E-021). No validator, template, fixture, or run evidence changes; the six other literal rows need no derivation now (E-004, E-006, E-020).\n- Alternative options: Fall back to another instance or the fixture when the anchor is missing: smaller, but it does not cure the accepted-mutation case (E-016), leaves real instances unmutated, and keeps the outcome a function of hash order (E-012); combined with derivation it adds nothing, since derivation fails only on an instance V3 already rejects. Or always mutate the fixture: removes history dependence but stops V4 proving the validator on real artifacts. Or mutate every committed instance: strongest proof, but widens V3 to older artifacts and changes the verifier's scope.\n- Regression risk: medium\n- Regression scope: V4 for investigation-report.md, through the derived substitute, which also trips C6.2 as the literal did; V3 and V4 for all thirteen registered types, through the loop extracted from main(); the summaries and json-out record of schema validator-coverage.v1, through the same loop; FR-02 and the self-hosting release verification, which consume the verifier summary; the bundled payload mirror, through the payload parity test (E-022).\n\n## Validation Plan\n\n- Verification steps: Repeat the reproduction on unchanged run evidence and expect 6/6 COVERED with investigation-report.md caught by I1 from the committed instance; then run the new test file, which drives the derived row over varied instances, so the value-pinned anchor and substitute, not merely the symptom, are shown removed; then python -m unittest discover -s tests.\n- Regression tests added: A new test file under tests (for example test_verify_validators_mutations.py) importing the verifier, building instances in a temporary directory from runtime/fixtures/investigation-report.md: recommendation changed to O-003 must yield an applicable mutation rejected by I1; a conforming nine-option copy recommending O-002 must be rejected by I1; a single-option copy must get an id absent from its text; a copy without the field must yield none; the V4 verdict must report a finding for a stub validator accepting the mutation and for one rejecting by another check; every MUTATIONS row must resolve against its fixture. The first two fail before the fix and pass after.\n- Monitoring signals after release: V4 detail text containing no mutation anchor or mutation accepted on any release verification; FR-02 failing after a new run commits an artifact of any registered type.\n\n## Closure\n\n- Resolution summary: None identified.\n- Linked PR and release: None identified.\n- Prevention actions: The new test file exercising mutation rows against varied instances (E-011, E-021), and a rule that a new mutation row is derived from the instance unless its literal is pinned by the artifact contract.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected steps |\n|---|---|---|---|---|\n| `Q-001` | Answered in this phase and retained so identifiers are not renumbered: the chain held against varied instances (E-016 to E-019), no other literal row needs derivation (E-004, E-006, E-020), and both unconfirmed triage claims hold (E-012, E-013) | no | omn-dev-1-bug-analyst | `C-002`, `C-003` |\n| `Q-002` | Whether release verification being blocked raises the priority of this fix is a product decision, not a severity fact | no | omn-product-owner | none |\n| `Q-003` | The main checkout and a hosted CI run were not observed; omn-qa should run FR-02 there after the fix | no | omn-qa | none |\n| `Q-004` | The two count rows substitute 99; a real count of 99 would make the mutation accepted and V4 fail loudly, a residual outside this defect | no | omn-tech-lead | none |",
+        "digest": "sha256:99a2668727bc540dd8dec83479cfe237",
+        "produced_by": "root-cause-analysis"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the accepted change this agent implements: a technical design for feature work, a bug analysis for a defect fix, or the safety-net validation report for a behaviour-preserving refactor, which is the artifact the refactor workflow's own predecessor phase publishes. Without one there is no accepted change, and implementing anyway would mean designing."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "bug-analysis",
+      "reference": "runs/run-d8937789961e/states/triage-and-impact/artifacts/bug-analysis.md",
+      "produced_by": "triage-and-impact",
+      "artifact": "bug-analysis.md",
+      "bytes": 12579,
+      "sections": {
+        "read_first": [
+          "Symptom Summary",
+          "Impact Assessment",
+          "Root Cause Analysis",
+          "Fix Strategy",
+          "Validation Plan",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Reproduction",
+          "Closure"
+        ]
+      }
+    },
+    {
+      "type": "bug-analysis",
+      "reference": "runs/run-d8937789961e/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "produced_by": "root-cause-analysis",
+      "artifact": "bug-analysis.md",
+      "bytes": 17134,
+      "sections": {
+        "read_first": [
+          "Symptom Summary",
+          "Impact Assessment",
+          "Root Cause Analysis",
+          "Fix Strategy",
+          "Validation Plan",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Reproduction",
+          "Closure"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-d8937789961e/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:9729d85cbf47afdba752c48aa6b15c99",
+    "bytes": 10569,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "performance"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "fix-implementation"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-09T08:17:26Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 22496,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context",
+        "bytes": 7553,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null,
+        "bytes": 5825,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/bug-analysis.md",
+        "digest": "sha256:6f1f25f536d3d80353873990835ce1bd",
+        "supplies": null,
+        "bytes": 3732,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/dotnet/engineering-playbook.md",
+        "digest": "sha256:35fc0c6fcd8f834c3e2528d14465e17c",
+        "supplies": null,
+        "bytes": 1507,
+        "read": "required",
+        "read_reason": "skill S03 is required for this phase"
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null,
+        "bytes": 1333,
+        "read": "required",
+        "read_reason": "skill S12 is required for this phase"
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null,
+        "bytes": 1265,
+        "read": "required",
+        "read_reason": "skill S07 is required for this phase"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73bd155e6b8344e48a8c66266be118cf",
+        "supplies": null,
+        "bytes": 61682,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:ca90fe0d7fe9988b21eeb8702bf15cb6",
+    "input_digest": "sha256:e78a855b3ad23c913416a59c84f40c2a",
+    "inputs": [
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-d8937789961e/states/triage-and-impact/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-d8937789961e/states/triage-and-impact/artifacts/bug-analysis.md",
+        "digest": "sha256:2708a40065cb80151302f423c76df234"
+      },
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-d8937789961e/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-d8937789961e/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "digest": "sha256:99a2668727bc540dd8dec83479cfe237"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/logging/observability-logging.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/logging/observability-logging.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/fix-bug.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 178107,
+    "bytes_required": 16419,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-d8937789961e/states/fix-implementation/artifacts/implementation-report.md",
+      "runs/run-d8937789961e/states/fix-implementation/result-envelope.json",
+      "**"
+    ],
+    "write_exclusions": [
+      "runs/**",
+      "proposals/**"
+    ],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose effect is not recorded in the report's verification results"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "any write matching ['runs/**', 'proposals/**']",
+      "command execution other than the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "external system, repository, or ticketing access",
+      "define or widen product scope",
+      "decide or revise the technical design rather than escalating the mismatch",
+      "approve, review, or award a readiness verdict to its own change",
+      "record a merge, release, or gate decision",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "introduce an undeclared side effect in critical business logic",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "implement the change the accepted design and analysis describe",
+        "add, modify, and remove production code inside the impacted modules the design names",
+        "add or update automated tests that exercise the change",
+        "execute the project's own test and static-analysis commands to gather evidence",
+        "record the change set, the verification evidence, and the residual risk",
+        "record a tradeoff taken inside this agent's own implementation latitude",
+        "raise a deviation record when the design cannot be implemented as accepted"
+      ],
+      "prohibited": [
+        "define or widen product scope",
+        "decide or revise the technical design rather than escalating the mismatch",
+        "approve, review, or award a readiness verdict to its own change",
+        "record a merge, release, or gate decision",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "introduce an undeclared side effect in critical business logic",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "rationale": "This is the only framework role that changes repository source. Its write scope cannot be enumerated per agent, because the files a change touches are named by the accepted design rather than by the manifest. The scope is therefore the repository, minus the evidence classes below, and every file actually written is declared in the change set and in the result envelope, where the runtime compares them.",
+        "scope": [
+          "**"
+        ],
+        "excluded": [
+          "runs/**",
+          "proposals/**"
+        ],
+        "exclusionRationale": "Committed run evidence and governance records are immutable to the agents whose work they record. A run artifact this agent could edit would let a change rewrite the evidence assessed against it."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose effect is not recorded in the report's verification results"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical context snapshot must produce the same change-set entry set, the same test-evidence set, the same deviation set, and the same declared verification status.",
+      "identifierSchemes": {
+        "changes": "C-<zero-padded-sequence>",
+        "tests": "T-<zero-padded-sequence>",
+        "deviations": "V-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Change-set entries are ordered by the sequence in which the accepted design requires them; ties break toward the lower path in lexical order. Test-evidence entries follow the change-set entries they cover.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied design, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "implementation-report.md",
+    "artifact_path": "runs/run-d8937789961e/states/fix-implementation/artifacts/implementation-report.md",
+    "template_ref": "templates/implementation-report.md",
+    "contract_ref": "agents/omn-dev-1-implement/output.md",
+    "quality_ref": "agents/omn-dev-1-implement/quality.md",
+    "validator": "implementation_report_validator",
+    "result_envelope_path": "runs/run-d8937789961e/states/fix-implementation/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-09T08:17:26Z",
+  "model_tier": {
+    "tier": "deep",
+    "host_hint": "opus",
+    "basis": "declared deep for fix-bug/fix-implementation in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 68877,
+    "modules_core_bytes": 32716,
+    "slice_all_bytes": 178107,
+    "slice_required_bytes": 16419,
+    "inputs_bytes": 0,
+    "upstream_full_bytes": 29715,
+    "upstream_read_first_bytes": 16027,
+    "task_context_bytes": 10569,
+    "fixed_bytes": 13706,
+    "legacy_estimate_bytes": 290405,
+    "progressive_estimate_bytes": 89437,
+    "legacy_estimate_tokens": 72601,
+    "progressive_estimate_tokens": 22359,
+    "savings_pct": 69.2
+  }
+}
