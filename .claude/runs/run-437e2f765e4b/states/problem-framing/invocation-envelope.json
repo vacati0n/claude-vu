@@ -1,0 +1,502 @@
+{
+  "invocation_id": "inv-437e2f765e4b-01-001",
+  "run_id": "run-437e2f765e4b",
+  "work_item_id": "run-437e2f765e4b::problem-framing",
+  "idempotency_key": "sha256:725d09327f2e3a4640d2e83e6e396119",
+  "state_id": "problem-framing",
+  "phase_index": 1,
+  "agent_id": "omn-business-analyst",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-business-analyst.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-business-analyst/manifest.yaml",
+    "load_order": [
+      "agents/omn-business-analyst/system.md",
+      "agents/omn-business-analyst/identity.md",
+      "agents/omn-business-analyst/reasoning.md",
+      "agents/omn-business-analyst/execution.md",
+      "agents/omn-business-analyst/output.md",
+      "agents/omn-business-analyst/quality.md",
+      "agents/omn-business-analyst/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-business-analyst/system.md": "sha256:ee8e6177ffb8fe97e35814fa5093d13f",
+      "agents/omn-business-analyst/identity.md": "sha256:cc9958ca34848047f593edbf3ce3e442",
+      "agents/omn-business-analyst/reasoning.md": "sha256:eeb8d7cbd68222feff0eb212ca7f5f35",
+      "agents/omn-business-analyst/execution.md": "sha256:7628597e67877aedf58b21fa0e4bca29",
+      "agents/omn-business-analyst/output.md": "sha256:cbff17cf2255330b6bd01b1dfcbc2976",
+      "agents/omn-business-analyst/quality.md": "sha256:913246bbdc6dba5b1bfa1f2732e3cf1f",
+      "agents/omn-business-analyst/examples.md": "sha256:6e3210b84ab6d0d8937fd33ff52cd0a9"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-business-analyst/system.md",
+        "agents/omn-business-analyst/reasoning.md",
+        "agents/omn-business-analyst/output.md",
+        "agents/omn-business-analyst/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-business-analyst/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-business-analyst/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-business-analyst/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 32785,
+      "full_bytes": 66424
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "requirement-analysis",
+      "problem-framing",
+      "requirement-clarification",
+      "outcome-alignment",
+      "acceptance-intent-definition"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "business-intent",
+      "problem-statement",
+      "requirement-input",
+      "product-context",
+      "scope-definition",
+      "technical-context",
+      "stakeholder-map",
+      "business-constraints",
+      "regulatory-constraints",
+      "success-measures",
+      "domain-glossary",
+      "prior-framing",
+      "investigation-question",
+      "research-question",
+      "decision-scope"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "problem-statement",
+        "reference": "runs/inputs/parallel-implementation-investigation-request.md",
+        "source_file": ".claude/runs/inputs/parallel-implementation-investigation-request.md",
+        "text": "# Investigation Request \u2014 Fan-Out Inside the Implementation Phase\n\n## Question\n\nShould the framework let one implementation phase be carried out by several implementer\ninvocations working on disjoint tasks at the same time, and if so what is the least risky\ndesign? This is option B of a two-step effort to reduce delivery time and token cost. Step 1\n(per-phase model tier, proposal FC-016, runtime 0.9.0) is delivered. Parallel test execution\n(`tools/run_tests_parallel.py`) is delivered. The investigation must decide whether a third\nchange, parallelism within the implementation phase, is justified at all.\n\n## Decision owner\n\nThe operator, who will accept or reject a recommendation. The outcome may be \"do not build this\".\n\n## Why the question exists\n\nThe execution plan already declares tasks in waves with dependency edges, so independent tasks\nare known. The implementation phase today is one invocation of one agent. In the most recent\nimplement-feature run (run-ded114f50a46) that phase took 1h55m of the run's 3h00m agent-active\ntime, the largest single share.\n\n## Facts supplied (verify each; do not trust them blindly)\n\n1. The most recent plan had 14 tasks in 9 waves of widths 2,1,2,1,3,1,1,2,1. The best case is a\n   critical path of 9 against 14 serial steps, about 1.5 times faster, before any coordination cost.\n2. Most of those tasks edited the same runtime source file, so task-level write sets may overlap far\n   more than the dependency edges suggest.\n3. The implementer agent's declared tools are Read, Glob, Grep, Edit, Write and Bash. It has no\n   tool to start another agent. A host session dispatches agents; a dispatched agent generally\n   cannot dispatch further agents.\n4. The runtime models one phase as one work item with one lease, one invocation, one idempotency key\n   and one result envelope. Phase artifacts are validated by one registered validator, and the\n   write scope in the envelope is a single set of permitted patterns.\n5. Concurrent edits in one working tree are unsafe. Isolation would need separate working copies and\n   a merge step.\n6. A large share of the phase's wall clock was running the repository's own test suite, which is\n   now addressed separately.\n\n## What the investigation must establish\n\n- Current state: what the runtime, state engine and implementation-report validator assume about\n  one invocation per phase, with evidence from the source.\n- The feasible option set, including at least: (a) do nothing, (b) a host-level fan-out that\n  dispatches several implementer invocations under one phase and merges their reports, (c)\n  splitting implementation into several declared phases in the workflow Phase Model, (d) reducing\n  implementation time by other means such as task batching or smaller context, measured.\n- For each option: what must change (runtime, envelope, validator, contracts), write-scope\n  partitioning and conflict handling, how attribution and traceability survive, what an honest\n  speedup estimate is using the measured wave widths and the overlap in fact 2, and the risk to\n  the framework's independence and gate rules.\n- A recommendation, including the case for not building it, with the evidence that would change it.\n\n## Constraints\n\n- Gates, validators, artifact contracts and the one-owner-per-phase accountability rule must not be\n  weakened to make parallelism fit.\n- The runtime must not call a model.\n- Findings must be grounded in files read and commands run, with confidence marked.\n\n## Operator decisions that resolve the framing questions\n\nThese are decisions by the operator, supplied as part of the request so the framing does not\nhave to carry them as open questions.\n\n- Baseline and measure: the baseline is the implementation-phase elapsed wall-clock time of\n  run-ded114f50a46, which was 1h55m, for the same task set. Success means a measurably lower\n  elapsed time with the time spent running the repository test suite excluded from both sides.\n- Token cost: token-cost neutrality is not required. An option that raises the phase's token cost\n  by more than 25 percent over that baseline is rejected unless its elapsed-time gain exceeds\n  40 percent.\n- Priority scale: use the framework's existing severity vocabulary; no new scale is introduced.",
+        "digest": "sha256:d414f4dbe70887dfde75372c6a56b1e5"
+      },
+      {
+        "type": "investigation-question",
+        "reference": "runs/inputs/parallel-implementation-investigation-request.md",
+        "source_file": ".claude/runs/inputs/parallel-implementation-investigation-request.md",
+        "text": "# Investigation Request \u2014 Fan-Out Inside the Implementation Phase\n\n## Question\n\nShould the framework let one implementation phase be carried out by several implementer\ninvocations working on disjoint tasks at the same time, and if so what is the least risky\ndesign? This is option B of a two-step effort to reduce delivery time and token cost. Step 1\n(per-phase model tier, proposal FC-016, runtime 0.9.0) is delivered. Parallel test execution\n(`tools/run_tests_parallel.py`) is delivered. The investigation must decide whether a third\nchange, parallelism within the implementation phase, is justified at all.\n\n## Decision owner\n\nThe operator, who will accept or reject a recommendation. The outcome may be \"do not build this\".\n\n## Why the question exists\n\nThe execution plan already declares tasks in waves with dependency edges, so independent tasks\nare known. The implementation phase today is one invocation of one agent. In the most recent\nimplement-feature run (run-ded114f50a46) that phase took 1h55m of the run's 3h00m agent-active\ntime, the largest single share.\n\n## Facts supplied (verify each; do not trust them blindly)\n\n1. The most recent plan had 14 tasks in 9 waves of widths 2,1,2,1,3,1,1,2,1. The best case is a\n   critical path of 9 against 14 serial steps, about 1.5 times faster, before any coordination cost.\n2. Most of those tasks edited the same runtime source file, so task-level write sets may overlap far\n   more than the dependency edges suggest.\n3. The implementer agent's declared tools are Read, Glob, Grep, Edit, Write and Bash. It has no\n   tool to start another agent. A host session dispatches agents; a dispatched agent generally\n   cannot dispatch further agents.\n4. The runtime models one phase as one work item with one lease, one invocation, one idempotency key\n   and one result envelope. Phase artifacts are validated by one registered validator, and the\n   write scope in the envelope is a single set of permitted patterns.\n5. Concurrent edits in one working tree are unsafe. Isolation would need separate working copies and\n   a merge step.\n6. A large share of the phase's wall clock was running the repository's own test suite, which is\n   now addressed separately.\n\n## What the investigation must establish\n\n- Current state: what the runtime, state engine and implementation-report validator assume about\n  one invocation per phase, with evidence from the source.\n- The feasible option set, including at least: (a) do nothing, (b) a host-level fan-out that\n  dispatches several implementer invocations under one phase and merges their reports, (c)\n  splitting implementation into several declared phases in the workflow Phase Model, (d) reducing\n  implementation time by other means such as task batching or smaller context, measured.\n- For each option: what must change (runtime, envelope, validator, contracts), write-scope\n  partitioning and conflict handling, how attribution and traceability survive, what an honest\n  speedup estimate is using the measured wave widths and the overlap in fact 2, and the risk to\n  the framework's independence and gate rules.\n- A recommendation, including the case for not building it, with the evidence that would change it.\n\n## Constraints\n\n- Gates, validators, artifact contracts and the one-owner-per-phase accountability rule must not be\n  weakened to make parallelism fit.\n- The runtime must not call a model.\n- Findings must be grounded in files read and commands run, with confidence marked.\n\n## Operator decisions that resolve the framing questions\n\nThese are decisions by the operator, supplied as part of the request so the framing does not\nhave to carry them as open questions.\n\n- Baseline and measure: the baseline is the implementation-phase elapsed wall-clock time of\n  run-ded114f50a46, which was 1h55m, for the same task set. Success means a measurably lower\n  elapsed time with the time spent running the repository test suite excluded from both sides.\n- Token cost: token-cost neutrality is not required. An option that raises the phase's token cost\n  by more than 25 percent over that baseline is rejected unless its elapsed-time gain exceeds\n  40 percent.\n- Priority scale: use the framework's existing severity vocabulary; no new scale is introduced.",
+        "digest": "sha256:d414f4dbe70887dfde75372c6a56b1e5"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the intent being framed: a business intent for a feature or change, a problem statement for an `investigate` run, or a requirement input where requirements already exist in draft. Without one there is nothing to frame, and framing anyway would mean recording this agent's own reading of what the business wanted."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [],
+  "task_context": {
+    "path": "runs/run-437e2f765e4b/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:fdfa2c7a0eba327fe17092c7cbadb5c0",
+    "bytes": 3195,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "problem-framing"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-09T04:41:06Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 22496,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "required",
+        "read_reason": "this artifact names the gate it is evidence for and its owners"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/investigate.md",
+        "digest": "sha256:7b2215cf0221ab3228b5c037ad9e87ff",
+        "supplies": "framework-context",
+        "bytes": 7829,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/requirement-framing.md",
+        "digest": "sha256:6352ff745e45c9c62128706335d38346",
+        "supplies": null,
+        "bytes": 4855,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null,
+        "bytes": 2277,
+        "read": "on-demand",
+        "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+      },
+      {
+        "path": "skills/business/domain-modeling.md",
+        "digest": "sha256:256460c4d60b91f95985534e36f997db",
+        "supplies": null,
+        "bytes": 1414,
+        "read": "required",
+        "read_reason": "skill S02 is required for this phase"
+      }
+    ],
+    "context_digest": "sha256:60f5fa83b6fea5d72b27e1e770411d31",
+    "input_digest": "sha256:3bd27e57003656f495ec9fa1a02df521",
+    "inputs": [
+      {
+        "type": "problem-statement",
+        "reference": "runs/inputs/parallel-implementation-investigation-request.md",
+        "source_file": ".claude/runs/inputs/parallel-implementation-investigation-request.md",
+        "digest": "sha256:d414f4dbe70887dfde75372c6a56b1e5"
+      },
+      {
+        "type": "investigation-question",
+        "reference": "runs/inputs/parallel-implementation-investigation-request.md",
+        "source_file": ".claude/runs/inputs/parallel-implementation-investigation-request.md",
+        "digest": "sha256:d414f4dbe70887dfde75372c6a56b1e5"
+      }
+    ],
+    "unnarrowed": [
+      "domain-model/agent-specification.md",
+      "skills/business/domain-modeling.md",
+      "templates/requirement-framing.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/business/domain-modeling.md",
+      "templates/requirement-framing.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "read_on_demand": [
+      "domain-model/agent-specification.md",
+      "workflows/investigate.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 110377,
+    "bytes_required": 14505,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-437e2f765e4b/states/problem-framing/artifacts/requirement-framing.md",
+      "runs/run-437e2f765e4b/states/problem-framing/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every input this agent reasons over is supplied through the invocation envelope or read from the frozen context slice.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any repository modification",
+        "any command whose result would enter the framing without a recorded basis"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, modify, or review production code or tests",
+      "define the technical approach, structure, or architecture decision, which belongs to architect",
+      "record or supersede an architecture decision record",
+      "decompose work into tasks, estimates, or a sequence, which belongs to planner",
+      "state an implementation mechanism as though it were a business rule",
+      "record a requirement the supplied inputs do not support",
+      "finalize two requirements that contradict each other",
+      "omit a known edge case from the requirement set",
+      "set an acceptance threshold or design a verification method, which belongs to omn-product-owner and omn-qa",
+      "decide a gate that assesses evidence this agent produced",
+      "declare release readiness, a delivery date, or a merge decision",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze a supplied business intent and state the problem it is meant to solve",
+        "decompose an intent into functional and non-functional requirements",
+        "align every requirement to a declared target outcome",
+        "state the acceptance intent a requirement must later be verified against",
+        "draw and record the boundary of the framing, with a revisit trigger per exclusion",
+        "record an assumption with the basis it rests on and the impact of it being wrong",
+        "record an ambiguity as an open question with its owner",
+        "lower the framing verdict where the inputs do not support a complete framing",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, modify, or review production code or tests",
+        "define the technical approach, structure, or architecture decision, which belongs to architect",
+        "record or supersede an architecture decision record",
+        "decompose work into tasks, estimates, or a sequence, which belongs to planner",
+        "state an implementation mechanism as though it were a business rule",
+        "record a requirement the supplied inputs do not support",
+        "finalize two requirements that contradict each other",
+        "omit a known edge case from the requirement set",
+        "set an acceptance threshold or design a verification method, which belongs to omn-product-owner and omn-qa",
+        "decide a gate that assesses evidence this agent produced",
+        "declare release readiness, a delivery date, or a merge decision",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and result envelope at the paths the invocation envelope names, and nothing else in the repository.",
+        "rationale": "Framing is an act of statement, not of change. Every requirement this agent records is read and acted on by a later phase, so writing repository content here would make the agent an author of the work its own framing governs."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every input this agent reasons over is supplied through the invocation envelope or read from the frozen context slice.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any repository modification",
+          "any command whose result would enter the framing without a recorded basis"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same outcome set, the same requirement set, the same requirement types, the same acceptance intent set, the same assumption and open-question sets, and the same framing verdict, in the same order.",
+      "identifierSchemes": {
+        "targetOutcomes": "O-<zero-padded-sequence>",
+        "requirements": "R-<zero-padded-sequence>",
+        "acceptanceIntent": "AI-<zero-padded-sequence>",
+        "framingBoundaries": "B-<zero-padded-sequence>",
+        "assumptions": "AS-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Target outcomes keep the order the supplied intent states them in. Requirements are ordered by the outcome they serve, then by priority descending; ties break toward the lower requirement text in lexical order. Acceptance intent follows the order of the requirement it bounds.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied intent, context, or requirement input."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "requirement-framing.md",
+    "artifact_path": "runs/run-437e2f765e4b/states/problem-framing/artifacts/requirement-framing.md",
+    "template_ref": "templates/requirement-framing.md",
+    "contract_ref": "agents/omn-business-analyst/output.md",
+    "quality_ref": "agents/omn-business-analyst/quality.md",
+    "validator": "requirement_framing_validator",
+    "result_envelope_path": "runs/run-437e2f765e4b/states/problem-framing/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-09T04:41:06Z",
+  "model_tier": {
+    "tier": "light",
+    "host_hint": "haiku",
+    "basis": "declared light for investigate/problem-framing in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 66424,
+    "modules_core_bytes": 32785,
+    "slice_all_bytes": 110377,
+    "slice_required_bytes": 14505,
+    "inputs_bytes": 8516,
+    "upstream_full_bytes": 0,
+    "upstream_read_first_bytes": 0,
+    "task_context_bytes": 3195,
+    "fixed_bytes": 14567,
+    "legacy_estimate_bytes": 199884,
+    "progressive_estimate_bytes": 73568,
+    "legacy_estimate_tokens": 49971,
+    "progressive_estimate_tokens": 18392,
+    "savings_pct": 63.2
+  }
+}

@@ -1,0 +1,624 @@
+{
+  "invocation_id": "inv-437e2f765e4b-02-001",
+  "run_id": "run-437e2f765e4b",
+  "work_item_id": "run-437e2f765e4b::technical-discovery",
+  "idempotency_key": "sha256:26c172cb48c49b27a2a9d3d27b5d0944",
+  "state_id": "technical-discovery",
+  "phase_index": 2,
+  "agent_id": "omn-context-agent",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-context-agent.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-context-agent/manifest.yaml",
+    "load_order": [
+      "agents/omn-context-agent/system.md",
+      "agents/omn-context-agent/identity.md",
+      "agents/omn-context-agent/reasoning.md",
+      "agents/omn-context-agent/execution.md",
+      "agents/omn-context-agent/output.md",
+      "agents/omn-context-agent/quality.md",
+      "agents/omn-context-agent/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-context-agent/system.md": "sha256:c27f2a8a872fedb8a70bfca1682dd202",
+      "agents/omn-context-agent/identity.md": "sha256:1c5d85d43e30852134646afd28e2a975",
+      "agents/omn-context-agent/reasoning.md": "sha256:8f14be7451e5e4f98dfe85926eb2b03f",
+      "agents/omn-context-agent/execution.md": "sha256:40bbca8fb76afcc0380fd9eeee28a345",
+      "agents/omn-context-agent/output.md": "sha256:7685d12254fc0d98f31b954555166a12",
+      "agents/omn-context-agent/quality.md": "sha256:d05a1b2031cbdec74ddf4f0a0b87af60",
+      "agents/omn-context-agent/examples.md": "sha256:e51e1ed4236a861db00078ea8413709a"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-context-agent/system.md",
+        "agents/omn-context-agent/reasoning.md",
+        "agents/omn-context-agent/output.md",
+        "agents/omn-context-agent/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-context-agent/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-context-agent/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-context-agent/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 45129,
+      "full_bytes": 84584
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "context-reconstruction",
+      "evidence-consolidation",
+      "confidence-assessment",
+      "dependency-and-impact-mapping",
+      "contradiction-and-gap-identification",
+      "technical-discovery-support"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Advisory",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Advisory",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "not-triggered",
+      "area": "database",
+      "basis": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "framed-objective",
+      "research-brief",
+      "investigation-question",
+      "research-question",
+      "context-sources",
+      "technical-data-access",
+      "business-evidence",
+      "technical-facts",
+      "current-state-context",
+      "discovery-request",
+      "dependency-map",
+      "architecture-context",
+      "prior-findings",
+      "incident-record",
+      "constraints",
+      "evaluation-criteria",
+      "decision-reference"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "investigation-question",
+        "reference": "runs/inputs/parallel-implementation-investigation-request.md",
+        "source_file": ".claude/runs/inputs/parallel-implementation-investigation-request.md",
+        "text": "# Investigation Request \u2014 Fan-Out Inside the Implementation Phase\n\n## Question\n\nShould the framework let one implementation phase be carried out by several implementer\ninvocations working on disjoint tasks at the same time, and if so what is the least risky\ndesign? This is option B of a two-step effort to reduce delivery time and token cost. Step 1\n(per-phase model tier, proposal FC-016, runtime 0.9.0) is delivered. Parallel test execution\n(`tools/run_tests_parallel.py`) is delivered. The investigation must decide whether a third\nchange, parallelism within the implementation phase, is justified at all.\n\n## Decision owner\n\nThe operator, who will accept or reject a recommendation. The outcome may be \"do not build this\".\n\n## Why the question exists\n\nThe execution plan already declares tasks in waves with dependency edges, so independent tasks\nare known. The implementation phase today is one invocation of one agent. In the most recent\nimplement-feature run (run-ded114f50a46) that phase took 1h55m of the run's 3h00m agent-active\ntime, the largest single share.\n\n## Facts supplied (verify each; do not trust them blindly)\n\n1. The most recent plan had 14 tasks in 9 waves of widths 2,1,2,1,3,1,1,2,1. The best case is a\n   critical path of 9 against 14 serial steps, about 1.5 times faster, before any coordination cost.\n2. Most of those tasks edited the same runtime source file, so task-level write sets may overlap far\n   more than the dependency edges suggest.\n3. The implementer agent's declared tools are Read, Glob, Grep, Edit, Write and Bash. It has no\n   tool to start another agent. A host session dispatches agents; a dispatched agent generally\n   cannot dispatch further agents.\n4. The runtime models one phase as one work item with one lease, one invocation, one idempotency key\n   and one result envelope. Phase artifacts are validated by one registered validator, and the\n   write scope in the envelope is a single set of permitted patterns.\n5. Concurrent edits in one working tree are unsafe. Isolation would need separate working copies and\n   a merge step.\n6. A large share of the phase's wall clock was running the repository's own test suite, which is\n   now addressed separately.\n\n## What the investigation must establish\n\n- Current state: what the runtime, state engine and implementation-report validator assume about\n  one invocation per phase, with evidence from the source.\n- The feasible option set, including at least: (a) do nothing, (b) a host-level fan-out that\n  dispatches several implementer invocations under one phase and merges their reports, (c)\n  splitting implementation into several declared phases in the workflow Phase Model, (d) reducing\n  implementation time by other means such as task batching or smaller context, measured.\n- For each option: what must change (runtime, envelope, validator, contracts), write-scope\n  partitioning and conflict handling, how attribution and traceability survive, what an honest\n  speedup estimate is using the measured wave widths and the overlap in fact 2, and the risk to\n  the framework's independence and gate rules.\n- A recommendation, including the case for not building it, with the evidence that would change it.\n\n## Constraints\n\n- Gates, validators, artifact contracts and the one-owner-per-phase accountability rule must not be\n  weakened to make parallelism fit.\n- The runtime must not call a model.\n- Findings must be grounded in files read and commands run, with confidence marked.\n\n## Operator decisions that resolve the framing questions\n\nThese are decisions by the operator, supplied as part of the request so the framing does not\nhave to carry them as open questions.\n\n- Baseline and measure: the baseline is the implementation-phase elapsed wall-clock time of\n  run-ded114f50a46, which was 1h55m, for the same task set. Success means a measurably lower\n  elapsed time with the time spent running the repository test suite excluded from both sides.\n- Token cost: token-cost neutrality is not required. An option that raises the phase's token cost\n  by more than 25 percent over that baseline is rejected unless its elapsed-time gain exceeds\n  40 percent.\n- Priority scale: use the framework's existing severity vocabulary; no new scale is introduced.",
+        "digest": "sha256:d414f4dbe70887dfde75372c6a56b1e5"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the question this discovery answers and the boundary it answers within: a framed objective for the `technical-discovery` phase of investigate, a research brief for the `technical-validation` phase of research, or the raw investigation or research question where the framing phase produced none. Without one there is no question, and gathering evidence anyway would mean answering whichever question this agent happened to find interesting."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "requirement-framing",
+      "reference": "runs/run-437e2f765e4b/states/problem-framing/artifacts/requirement-framing.md",
+      "produced_by": "problem-framing",
+      "artifact": "requirement-framing.md",
+      "bytes": 15395,
+      "sections": null
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-437e2f765e4b/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:984051dc0921a1857242fdcd3f8ce22b",
+    "bytes": 5498,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "technical-discovery"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-09T04:45:21Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 22496,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/investigate.md",
+        "digest": "sha256:7b2215cf0221ab3228b5c037ad9e87ff",
+        "supplies": "framework-context",
+        "bytes": 7829,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/investigation-report.md",
+        "digest": "sha256:5747680d9de64e65ae4d2d13569624ae",
+        "supplies": null,
+        "bytes": 3681,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8e4f9ca28ad1bb63d8368998cb67cc5a",
+        "supplies": null,
+        "bytes": 4862,
+        "read": "required",
+        "read_reason": "skill S01 is required for this phase"
+      },
+      {
+        "path": "skills/dotnet/engineering-playbook.md",
+        "digest": "sha256:35fc0c6fcd8f834c3e2528d14465e17c",
+        "supplies": null,
+        "bytes": 1507,
+        "read": "required",
+        "read_reason": "skill S03 is required for this phase"
+      },
+      {
+        "path": "skills/database/database-engineering.md",
+        "digest": "sha256:5e2aef6a9a242e9491d2bcc8be412453",
+        "supplies": null,
+        "bytes": 1260,
+        "read": "on-demand",
+        "read_reason": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null,
+        "bytes": 2277,
+        "read": "on-demand",
+        "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null,
+        "bytes": 3376,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73bd155e6b8344e48a8c66266be118cf",
+        "supplies": null,
+        "bytes": 61682,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:43c615b6413ef5ac476d8f316eefa3cf",
+    "input_digest": "sha256:d414f4dbe70887dfde75372c6a56b1e5",
+    "inputs": [
+      {
+        "type": "investigation-question",
+        "reference": "runs/inputs/parallel-implementation-investigation-request.md",
+        "source_file": ".claude/runs/inputs/parallel-implementation-investigation-request.md",
+        "digest": "sha256:d414f4dbe70887dfde75372c6a56b1e5"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/database/database-engineering.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/logging/observability-logging.md",
+      "templates/investigation-report.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "dependency-map.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/logging/observability-logging.md",
+      "templates/investigation-report.md"
+    ],
+    "read_on_demand": [
+      "domain-model/agent-specification.md",
+      "runtime/README.md",
+      "skills/database/database-engineering.md",
+      "workflows/investigate.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 181684,
+    "bytes_required": 16183,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md",
+      "runs/run-437e2f765e4b/states/technical-discovery/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Evidence is gathered by reading sources, not by executing them. A behavior that can only be established by running something is recorded as a gap and routed to the role whose phase may run it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies the repository or committed run evidence",
+        "executing the system under discovery in order to observe it"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "present an inference as an observation",
+      "record an observation with no named source",
+      "represent an unsupported assumption as fact",
+      "retain an outdated reference after a verified update",
+      "reconcile two disagreeing sources by choosing the more convenient one",
+      "raise a confidence level that the evidence does not carry",
+      "produce technical design, architecture decisions, code, tests, or migrations",
+      "decompose work into tasks or sequence delivery, which belongs to planner",
+      "define, widen, or narrow product scope, which belongs to omn-product-owner",
+      "select the architectural option, which belongs to architect at the Technical Gate",
+      "decide delivery direction, merge, or release",
+      "decide a gate that assesses evidence this agent produced",
+      "modify governance ownership, committed run evidence, or a governance record",
+      "write any repository file other than its own artifact and result envelope",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "reconstruct the current product, technical, and delivery state from its sources",
+        "read the repository, its specifications, its committed run evidence, and supplied context",
+        "record each observation against the source it was read from",
+        "mark the confidence and the staleness of every observation",
+        "name a stale assumption a source still carries, and say what supersedes it",
+        "name a contradiction between two sources without resolving it by preference",
+        "record a question the available evidence cannot answer as a gap",
+        "maintain the dependency and impact picture the change touches",
+        "derive the courses of action the evidence admits, each cited to the evidence",
+        "state which course the evidence favors, as a reading rather than a decision",
+        "declare the confidence a decision may place in this report"
+      ],
+      "prohibited": [
+        "present an inference as an observation",
+        "record an observation with no named source",
+        "represent an unsupported assumption as fact",
+        "retain an outdated reference after a verified update",
+        "reconcile two disagreeing sources by choosing the more convenient one",
+        "raise a confidence level that the evidence does not carry",
+        "produce technical design, architecture decisions, code, tests, or migrations",
+        "decompose work into tasks or sequence delivery, which belongs to planner",
+        "define, widen, or narrow product scope, which belongs to omn-product-owner",
+        "select the architectural option, which belongs to architect at the Technical Gate",
+        "decide delivery direction, merge, or release",
+        "decide a gate that assesses evidence this agent produced",
+        "modify governance ownership, committed run evidence, or a governance record",
+        "write any repository file other than its own artifact and result envelope",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. The only files this agent writes are the artifact path and the result envelope path the invocation envelope names.",
+        "rationale": "The role exists to state what is true now. An agent that also changed the repository would be reading, in part, its own work, and every observation drawn from a file it had just edited would carry a confidence the source cannot support. Reading is unrestricted inside the frozen context slice; writing is confined to the report."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Evidence is gathered by reading sources, not by executing them. A behavior that can only be established by running something is recorded as a gap and routed to the role whose phase may run it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies the repository or committed run evidence",
+          "executing the system under discovery in order to observe it"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same observation set, the same confidence and staleness marking, the same contradiction and gap set, the same options, the same recommendation, and the same declared report status and confidence.",
+      "identifierSchemes": {
+        "evidence": "E-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Observations keep the order their sources were read in, which is the source order Stage 3 of the reasoning procedure fixes. Options are ordered by descending evidential support, counted as the number of distinct observations cited; ties break toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to a source this report cites."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "investigation-report.md",
+    "artifact_path": "runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md",
+    "template_ref": "templates/investigation-report.md",
+    "contract_ref": "agents/omn-context-agent/output.md",
+    "quality_ref": "agents/omn-context-agent/quality.md",
+    "validator": "investigation_report_validator",
+    "result_envelope_path": "runs/run-437e2f765e4b/states/technical-discovery/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-09T04:45:21Z",
+  "model_tier": {
+    "tier": "light",
+    "host_hint": "haiku",
+    "basis": "declared light for investigate/technical-discovery in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 84584,
+    "modules_core_bytes": 45129,
+    "slice_all_bytes": 181684,
+    "slice_required_bytes": 16183,
+    "inputs_bytes": 4258,
+    "upstream_full_bytes": 0,
+    "upstream_read_first_bytes": 0,
+    "task_context_bytes": 5498,
+    "fixed_bytes": 13707,
+    "legacy_estimate_bytes": 284233,
+    "progressive_estimate_bytes": 84775,
+    "legacy_estimate_tokens": 71058,
+    "progressive_estimate_tokens": 21193,
+    "savings_pct": 70.2
+  }
+}

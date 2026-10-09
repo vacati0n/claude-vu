@@ -1,0 +1,106 @@
+{
+  "invocation_id": "inv-437e2f765e4b-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md"
+  ],
+  "structured_output": {
+    "report_status": "provisional",
+    "report_confidence": "medium",
+    "discovery_basis": "current-state-discovery",
+    "counts": {
+      "observations_by_confidence": {"high": 30, "medium": 15, "low": 0},
+      "observations_by_staleness": {"current": 30, "as_of_date": 7, "unknown": 8},
+      "options": 4,
+      "contradictions": 4,
+      "stale_assumptions": 2,
+      "gaps": 9,
+      "open_questions": 8
+    },
+    "sources_read": [
+      "runs/inputs/parallel-implementation-investigation-request.md",
+      "runs/run-437e2f765e4b/states/problem-framing/artifacts/requirement-framing.md",
+      "runs/run-437e2f765e4b/task-context.yaml",
+      "workflows/implement-feature.md",
+      "config/execution-engine.md",
+      "config/runtime.md",
+      "config/task-queue.md",
+      "runtime/state_engine.py",
+      "runtime/framework_runtime.py",
+      "runtime/recovery_policy.py",
+      "runtime/artifact_contract.py",
+      "runtime/artifact_lib.py",
+      "runtime/execution_metrics.py",
+      "runtime/implementation_report_validator.py",
+      "runtime/investigation_report_validator.py",
+      "agents/omn-dev-1-implement/manifest.yaml",
+      "agents/omn-dev-1-implement.agent.md",
+      "templates/implementation-report.md",
+      "runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md",
+      "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-ded114f50a46/states/implementation/invocation-envelope.json",
+      "runs/run-ded114f50a46/states/implementation/artifacts/implementation-report.md",
+      "runs/run-ded114f50a46/states/implementation/result-envelope.json",
+      "runs/run-ded114f50a46/events.jsonl",
+      "runs/run-ded114f50a46/execution-metrics.json",
+      "proposals/framework-change-proposal-FC-016.md",
+      "tools/run_tests_parallel.py",
+      "README.md",
+      "omn_agent/*.py (search for merge)"
+    ],
+    "sources_unreachable": [
+      {
+        "source": "repository history stat for commit 280d36d",
+        "expected_to_supply": "the real changed-file list of the delivered change",
+        "reason": "command execution is not permitted for this agent; recorded as a gap and an open question"
+      },
+      {
+        "source": "host documentation on isolated working copies and nested dispatch",
+        "expected_to_supply": "whether an implementer can run in an isolated working copy per dispatch and whether a dispatched agent can start agents",
+        "reason": "not in the repository; recorded as a gap and an open question"
+      }
+    ],
+    "scope_not_examined": [
+      "implementation reports and plans of runs other than run-ded114f50a46",
+      "omn_agent dispatch and task-flow code beyond the README description",
+      "per-command and per-task timing inside the implementation phase (not recorded in run evidence)"
+    ],
+    "checks": {
+      "note": "self-assessed by reading; the validator was not run because command execution is not permitted; the operator runs investigation_report_validator.py with --envelope",
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass", "S9": "pass", "S10": "pass", "S11": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass",
+      "I1": "pass", "I2": "pass", "I3": "pass", "I4": "pass", "I5": "pass", "I6": "pass",
+      "X1": "pass", "X2": "pass", "X3": "pass", "X4": "pass", "X5": "pass", "X6": "pass", "X7": "pass",
+      "X8": "pass", "X9": "pass", "X10": "pass", "X11": "pass",
+      "X12": "pass", "X13": "pass", "X14": "pass", "X15": "pass", "X16": "pass", "X17": "pass",
+      "X18": "pass", "X19": "pass", "X20": "pass", "X21": "pass",
+      "X22": "pass", "X23": "pass", "X24": "pass", "X25": "pass", "X26": "pass",
+      "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A7": "pass", "A8": "pass", "A9": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass",
+      "total_run": 70,
+      "total_passed": 70,
+      "total_failed": 0,
+      "repair_passes": 1
+    },
+    "not_machine_checkable": {
+      "N1": "judged: every observation restates what the cited lines state; the derived task-to-file join and the timing reading are placed in Context as labelled inferences, not in the Evidence table",
+      "N2": "judged: stale assumptions named are the framing's unread-baseline and unread-plan assumptions (superseded by the plan and metrics reads) and the host registration's implementer version",
+      "N3": "judged: each Evidence row was tested against whether a source states it; counts, ceilings and joins were removed from Evidence and carried as inference in Context, Options and Gaps"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-context-agent/system.md",
+    "agents/omn-context-agent/identity.md",
+    "agents/omn-context-agent/reasoning.md",
+    "agents/omn-context-agent/output.md",
+    "agents/omn-context-agent/quality.md",
+    "runs/run-437e2f765e4b/states/technical-discovery/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md",
+    "runs/run-437e2f765e4b/states/technical-discovery/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

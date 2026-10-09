@@ -1,0 +1,671 @@
+{
+  "invocation_id": "inv-437e2f765e4b-03-001",
+  "run_id": "run-437e2f765e4b",
+  "work_item_id": "run-437e2f765e4b::option-analysis",
+  "idempotency_key": "sha256:e1c39353f1ff76a46143453f4c39b923",
+  "state_id": "option-analysis",
+  "phase_index": 3,
+  "agent_id": "omn-tech-lead",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-tech-lead.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-tech-lead/manifest.yaml",
+    "load_order": [
+      "agents/omn-tech-lead/system.md",
+      "agents/omn-tech-lead/identity.md",
+      "agents/omn-tech-lead/reasoning.md",
+      "agents/omn-tech-lead/execution.md",
+      "agents/omn-tech-lead/output.md",
+      "agents/omn-tech-lead/quality.md",
+      "agents/omn-tech-lead/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-tech-lead/system.md": "sha256:6038f55901ab88363fea0bd8424ddbaa",
+      "agents/omn-tech-lead/identity.md": "sha256:a55283884005db780d91f3581b136061",
+      "agents/omn-tech-lead/reasoning.md": "sha256:cad59936729d8e960f56e6b371d6939b",
+      "agents/omn-tech-lead/execution.md": "sha256:fa3278fa8c0d614c59d4f0b4b1613f78",
+      "agents/omn-tech-lead/output.md": "sha256:4dbc0bc4a54346a01d9092a945c9a78c",
+      "agents/omn-tech-lead/quality.md": "sha256:9c4cb18b5f73e43c8c1553d511e6c2b8",
+      "agents/omn-tech-lead/examples.md": "sha256:154473d65200bcd38e405d55f516953a"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-tech-lead/system.md",
+        "agents/omn-tech-lead/reasoning.md",
+        "agents/omn-tech-lead/output.md",
+        "agents/omn-tech-lead/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-tech-lead/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-tech-lead/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-tech-lead/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 38177,
+      "full_bytes": 82323
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "feasibility-assessment",
+      "option-evaluation",
+      "tradeoff-analysis",
+      "sequencing-judgement",
+      "delivery-risk-assessment",
+      "readiness-recommendation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S03",
+        "proficiency": "Primary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Primary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "not-triggered",
+      "area": "performance",
+      "basis": "area performance is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in input:problem-statement",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Primary)"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Primary)"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Primary)"
+    },
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Primary)"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "not-triggered",
+      "area": "database",
+      "basis": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "investigation-report",
+      "review-package",
+      "validation-report",
+      "technical-design",
+      "implementation-report",
+      "scope-definition",
+      "execution-plan",
+      "bug-analysis",
+      "evaluation-criteria",
+      "technical-options",
+      "workflow-constraints",
+      "implementation-context",
+      "readiness-criteria",
+      "release-checklist",
+      "risk-profile",
+      "capacity-constraints",
+      "dependency-map",
+      "prior-gate-evidence",
+      "unresolved-findings"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "investigation-report",
+        "reference": "runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md",
+        "text": "```yaml\ninvestigation:\n  investigationId: INV-run-437e2f765e4b-001\n  decisionReference: \"runs/inputs/parallel-implementation-investigation-request.md: operator decision on fan-out inside the implementation phase\"\n  sourceInputs:\n    - type: investigation-question\n      reference: runs/inputs/parallel-implementation-investigation-request.md\n    - type: framed-objective\n      reference: runs/run-437e2f765e4b/states/problem-framing/artifacts/requirement-framing.md\n  producedBy: omn-context-agent\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  confidence: medium\n  inputDigest: sha256:d414f4dbe70887dfde75372c6a56b1e5\n  contextDigest: sha256:43c615b6413ef5ac476d8f316eefa3cf\n```\n\n## Metadata\n\n- Investigation ID: INV-run-437e2f765e4b-001\n- Owner: omn-context-agent\n- Requested by: The operator\n- Decision deadline: Not stated in the request (`E-002`); the Technical Gate and the Recommendation Gate of this run carry the decision forward.\n\n## Objective\n\n- Decision to support: Whether the framework should let one implementation phase be carried out by several concurrent implementer invocations, in what least risky form, or whether it should not be built.\n- Key question: What do the runtime, the state engine, the implementation-report validator, the write-scope rules and the committed evidence of run-ded114f50a46 establish about the feasibility, the honest speedup and the governance risk of fan-out inside the implementation phase?\n- Scope boundaries: Inside are the six supplied facts, the framing's seven open questions, and the current-state, option-set and measurement items the request asks for. Outside are designing any option (architect), decomposing or sequencing tasks (planner), scope and the measurably-lower threshold (omn-product-owner), and running any command or reading host documentation that is not in the repository (this agent executes nothing).\n\n## Context\n\n- Relevant systems and components: The state engine (`runtime/state_engine.py`: work items, leases, idempotency key, completion) and the invocation gateway (`runtime/framework_runtime.py`: dispatch, envelope, complete, write-scope check) per `E-008`, `E-009`, `E-015`, `E-021`; the artifact validators keyed by artifact name (`E-012`, `E-026`, `E-028`); the implementer's registration and manifest (`E-023`, `E-024`); the implement-feature Phase Model (`E-004`); and the committed evidence of run-ded114f50a46 (`E-029` to `E-041`). The host, not the runtime, starts agents (`E-018`).\n- Related incidents or prior findings: Change proposal FC-016 and the delivered per-phase tier change are the run under study (`E-042`); the parallel test runner is the delivered lever for suite time (`E-043`). No earlier investigation of fan-out was read.\n- Constraints and assumptions: Established constraints (supplied by the operator, `E-002`): gates, validators, artifact contracts and one-owner-per-phase accountability are not weakened; the runtime does not call a model; the baseline is the 1h55m implementation phase with suite time excluded from both sides; the 25 percent token rule and 40 percent gain exception apply. Assumptions, labelled as such: (1) the task-to-file join below is derived by reading `E-030`, `E-032` and `E-035` together, because no source records task-level file attribution; (2) the ceiling reading treats task durations as equal, because `E-031` gives only complexity labels; (3) one run is the whole basis, so generalisation of any overlap figure is an assumption.\n  - Supplied fact 1 (14 tasks, 9 waves, ceiling near 1.5): verified as arithmetic (`E-029`, 14 tasks in 9 waves, 14 over 9 is about 1.56); qualified for the phase, because only 6 of the 14 tasks belong to the implementation phase (`E-030`), and their longest dependency chain is 4 (`E-031`), so the in-phase unweighted ceiling is 6 over 4, 1.5, a one-third cut.\n  - Supplied fact 2 (most tasks edit one runtime file): refuted as worded. By the derived join, 3 of the 14 tasks and 3 of the 6 in-phase tasks (plan tasks T-006, T-009, T-014) are tied to `runtime/framework_runtime.py` (`E-032`, `E-035`). The overlap is real but adds one colliding pair beyond what the dependency edges already order, because T-006 precedes T-009 and T-014 (`E-031`). Confidence medium (derived join).\n  - Supplied fact 3 (implementer tools, no dispatch tool): verified for the declared tools (`E-024`); unverified for the host's general behaviour, which no repository source states.\n  - Supplied fact 4 (one work item, lease, invocation, key, result envelope, validator, one permitted set): verified (`E-008`, `E-009`, `E-012`, `E-015`, `E-017`, `E-021`); the permitted set is one list of patterns on one envelope, not a single pattern.\n  - Supplied fact 5 (concurrent edits in one tree unsafe, needs separate copies and a merge): unverified as a general claim. What the repository shows is that nothing makes concurrent edits safe (`E-011`, `E-020`), a per-task worktree convention exists (`E-044`), and no code combines sibling branches (`E-045`); the need for a merge step is an inference.\n  - Supplied fact 6 (large share of phase time was the suite): unverified as a measurement (`E-041`); consistent with at least two full-suite runs inside the phase (`E-037`) and a stated serial suite cost near 26 minutes (`E-043`).\n  - Framing question on suite time inside the phase: not established (gap). On token cost: only a read estimate exists (`E-039`, `E-041`). On overlap across the plan: answered for one run (`E-032`, `E-035`), not beyond it. On whether a dispatched agent can start agents: declared tools verified (`E-024`), host behaviour open. On one-invocation assumptions in source: answered (`E-008` to `E-028`). On working copies and a merge step: repository convention and absence of merge code recorded (`E-044`, `E-045`); feasibility stays with architect. On the measurably-lower threshold: open with omn-product-owner.\n  - Derived task-to-file join (inference): T-003 with the policy file; T-006, T-009, T-014 with `runtime/framework_runtime.py`; T-010 with `runtime/execution_metrics.py`; T-011 with `runtime/verify_registry_coverage.py`. Of 15 in-phase task pairs, 3 share a file; of the 5 pairs the plan's edges leave unordered, 4 have disjoint primary write sets and 1 (T-009 with T-014) collides. Tasks with a write set disjoint from every other in-phase task: 3 of 6 (T-003, T-010, T-011). All six share the one test file, the documents and the mirror, which the implementation report records as written in the same invocation (`E-035`, `E-036`).\n  - Timing reading (inference): the phase took 6930 seconds in one dispatch (`E-038`, `E-039`); two full-suite runs at the stated 26 minutes would be about 52 minutes, roughly 45 percent of the phase, but the stated figure is not a measurement of this run and carries `E-043`'s marking.\n\n## Evidence\n\n| ID | Source | Observation | Confidence | Staleness |\n|---|---|---|---|---|\n| `E-001` | `runs/inputs/parallel-implementation-investigation-request.md`, lines 23-38 (Facts supplied 1 to 6) | Six facts are supplied: 14 tasks in 9 waves of widths 2,1,2,1,3,1,1,2,1; most tasks edit one runtime file; the implementer declares Read, Glob, Grep, Edit, Write and Bash; one work item, lease, invocation, idempotency key and result envelope per phase; concurrent edits in one tree are unsafe; a large share of phase time was the test suite. | high | current |\n| `E-002` | `runs/inputs/parallel-implementation-investigation-request.md`, lines 40-76 (required findings, Constraints, Operator decisions) | Gates, validators, artifact contracts and one-owner-per-phase accountability must not be weakened and the runtime must not call a model; the baseline is the run-ded114f50a46 implementation phase at 1h55m with test-suite time excluded from both sides; an option raising phase token cost over 25 percent is rejected unless its elapsed-time gain exceeds 40 percent; no decision deadline is stated. | high | current |\n| `E-003` | `runs/run-437e2f765e4b/states/problem-framing/artifacts/requirement-framing.md`, lines 115-117 and 121-129 | The framing assumes the run evidence behind the 1h55m baseline and the plan were not read, rates generalisation of the overlap low, and lists seven non-blocking open questions: five routed to omn-context-agent, one to omn-product-owner, one to architect. | high | current |\n| `E-004` | `workflows/implement-feature.md`, Phase Model table, lines 39-44 | The six phases run in order; implementation has owner omn-dev-1-implement, output implementation-report.md and gate none; quality-review (owner omn-dev-2-reviewer, Review Gate and Verification Gate) follows it. | high | current |\n| `E-005` | `config/execution-engine.md`, Invocation Policies, lines 266-274 | One primary agent owns one active state execution; two state work items whose hard predecessors have committed may hold leases at the same time; the runtime is said to refuse two writers of one artifact path. | high | current |\n| `E-006` | `config/execution-engine.md` line 298 and `config/runtime.md` line 363 | Both state that only one workflow state is active at a time for a single run. | high | current |\n| `E-007` | `config/task-queue.md`, lines 117-123 and 301 | An executing task has one active lease and is owned by one worker; a task in Ready may be leased by only one worker. | high | current |\n| `E-008` | `runtime/state_engine.py`, functions `work_item_id` and `idempotency_key`, lines 176-198 | The work item identifier is run id plus state id; the idempotency key is a digest of run id, state id, owner agent, agent version and payload digest, with attempt excluded; no invocation or sub-task part enters either. | high | current |\n| `E-009` | `runtime/state_engine.py`, TRANSITIONS lines 115-127 and `new_work_item` lines 242-284 | A state work item follows one lease and invocation path (pending, leased, running, completed or failed, with retrying and blocked) and carries one attempt counter, one lease expiry, one worker, one idempotency key and one completion block; the table has no partial-completion status. | high | current |\n| `E-010` | `runtime/state_engine.py`, `bind_payload`, lines 492-516 | Binding a different payload to a work item already in a terminal status is refused: a committed result may not be re-attributed to different inputs. | high | current |\n| `E-011` | `runtime/state_engine.py` `save`, lines 347-351, and a search of `runtime/*.py` | `save` rewrites the whole state file through a temporary file and a replace; a search of the runtime Python files for flock, msvcrt, fcntl, threading, Lock(, filelock, O_EXCL and mutex found no match. | high | current |\n| `E-012` | `runtime/framework_runtime.py`, VALIDATORS, lines 154-172 | Validation is keyed by artifact file name, one validator module per artifact type; implementation-report.md maps to implementation_report_validator. | high | current |\n| `E-013` | `runtime/framework_runtime.py`, `declared_output_artifact` and `resolve_phase`, lines 898-952 | One owner agent and one output artifact are read per Phase Model row; an output cell naming zero or several .md files is returned whole and the phase blocks at the output contract. | high | current |\n| `E-014` | `runtime/framework_runtime.py`, `evaluate_state_guards`, lines 2142-2261 | The guards are capability, context slice, hard predecessors, predecessor gates and input contract; none reads another phase's lease, a write set or an overlap. | high | current |\n| `E-015` | `runtime/framework_runtime.py`, `cmd_dispatch`, lines 3023-3032, 3161 and 3252-3253 | One dispatch builds one canonical artifact path, one result envelope path, one payload digest (context digest, input digest, agent version, artifact path), one invocation id of the form run, phase index and attempt, and one envelope file for the phase. | high | current |\n| `E-016` | `runtime/framework_runtime.py`, `cmd_dispatch`, lines 3043-3058 | A dispatch of a phase already leased or running under an unchanged payload is recorded as a replay and suppressed; under a changed payload it raises a context-integrity failure. | high | current |\n| `E-017` | `runtime/framework_runtime.py`, `cmd_dispatch`, lines 3100-3109 and 3219-3220 | permitted_writes is the artifact path, the result path, conditional artifact patterns and, where the manifest allows repository writes, the manifest scope; write_exclusions come from the manifest excluded list; both are single lists on the phase's one envelope. | high | current |\n| `E-018` | `runtime/framework_runtime.py`, `cmd_dispatch`, lines 3332-3333 | After a dispatch the runtime reports AWAITING_ADAPTER and states that the host must dispatch the registered subagent; the runtime does not start the agent. | high | current |\n| `E-019` | `runtime/framework_runtime.py` line 123 and `build_dispatch_prompt`, lines 3704-3706 | The dispatch prompt prints every permitted write prefixed with the framework directory name, so a repository-wide entry reads in the prompt as limited to that directory. | high | current |\n| `E-020` | `runtime/framework_runtime.py`, `permitted_write` lines 3989-4007 and `cmd_complete` lines 4132-4140 | Enforcement compares the paths the agent declares in its result envelope against permitted_write (explicit artifact paths first, then exclusions, then permitted patterns); an undeclared path fails the check; `cmd_complete` as read has no step that lists changed files in the working tree. | high | current |\n| `E-021` | `runtime/framework_runtime.py`, `cmd_complete`, lines 4010-4031, 4107-4127 and 4167-4178 | Completion reads one state ledger, one envelope, one artifact and one result envelope, runs one validator, and commits one completion block through one running-to-completed transition; without a phase argument it requires exactly one active work item (lines 4017-4022). | high | current |\n| `E-022` | `runtime/recovery_policy.py`, `classify_validation_outcome`, lines 290-310 | A rejection with undeclared side effects is classified policy-failure; any other rejection is output-schema-failure. | high | current |\n| `E-023` | `agents/omn-dev-1-implement/manifest.yaml`, lines 12 and 74-99 | Version 1.1.0; repository writes allowed with scope `**` and exclusions `runs/**` and `proposals/**`; command execution allowed for the repository's own test, build and static-analysis commands. | high | current |\n| `E-024` | `agents/omn-dev-1-implement.agent.md`, lines 4, 18, 88-91 and 111-119, and a search of the twelve host registrations | Tools are Read, Glob, Grep, Edit, Write and Bash with no dispatch tool; the version row reads 1.0.0; an invocation with no envelope leaves no persisted evidence; the frontmatter keys matched are name, tools and model, and a search for an isolation key matched none. | high | current |\n| `E-025` | `templates/implementation-report.md`, lines 5-6, 57-62 and 113 | One report per phase, produced by omn-dev-1-implement, with one Report ID, one Workflow phase, status and verification status; Review status is always pending-review; Declared side effects reads every write this invocation made. | high | current |\n| `E-026` | `runtime/implementation_report_validator.py`, CONTRACT, lines 58-71 | The contract permits one producer id, omn-dev-1-implement, one metadata block with a single report id, status, workflow phase, verification status and one digest pair, and identifier families C, T, V, R and Q. | high | current |\n| `E-027` | `runtime/implementation_report_validator.py`, `semantic_checks`, lines 155-232 | M1 requires every change-set row to be covered by a test row of the same report; M2 requires the metadata block and the Metadata section to agree; M3 requires a complete report to carry no failing or not-run result and verified status; M6 requires pending-review and no readiness claim. | high | current |\n| `E-028` | `runtime/artifact_contract.py`, `run_contract`, lines 411-450 | Identifiers must be unique, defined and ascending from 001 without gaps; metadata digests must equal the input_digest and context_digest of the one invocation envelope supplied. | high | current |\n| `E-029` | `runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md`, section 8.3, lines 302-312 | The implementation order lists waves of 2,1,2,1,3,1,1,2,1 tasks: 14 tasks in 9 waves. | medium | unknown |\n| `E-030` | `runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md`, Suggested Workflow, lines 314-327 | Plan tasks T-003, T-006, T-009, T-010, T-011 and T-014 are assigned to the implementation phase; T-001, T-002 and T-008 to design; T-004, T-005 and T-007 to quality-review; T-012 and T-013 to documentation. | medium | unknown |\n| `E-031` | `runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md`, edges lines 270-293 and complexity lines 113, 152, 191, 204, 217 and 256 | Among the six implementation tasks the edges are T-003 to T-006; T-006 to T-009, T-010 and T-014; T-003 and T-009 to T-011; complexity labels are T-003 S, T-006 M, T-009 M, T-010 S, T-011 M, T-014 XS; no durations are stated. | medium | unknown |\n| `E-032` | `runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/technical-design.md`, lines 141-148 and 265-271 | M-001 is `runtime/framework_runtime.py`, M-002 the policy file, M-003 `runtime/execution_metrics.py`, M-004 `runtime/verify_registry_coverage.py`; the sequencing rows pair T-003 with M-002; T-006 with M-001 and M-002; T-009 with M-001 (and the read-only M-009 and M-010); T-010 with M-003; T-011 with M-004 and M-002; T-014 with M-001. | medium | as of 2026-10-08 |\n| `E-033` | `runs/run-ded114f50a46/events.jsonl` line 41 and `states/implementation/invocation-envelope.json` lines 253-270 | The implementation phase was supplied five inputs (feature request, change request, business intent, architecture context, technical design); execution-plan is an accepted input type and was not supplied. | medium | as of 2026-10-08 |\n| `E-034` | `runs/run-ded114f50a46/states/implementation/invocation-envelope.json`, constraints, lines 594-602 | permitted_writes were the artifact path, the result envelope path and `**`; write_exclusions were `runs/**` and `proposals/**`. | medium | as of 2026-10-08 |\n| `E-035` | `runs/run-ded114f50a46/states/implementation/artifacts/implementation-report.md`, Change Set, lines 44-58 | Thirteen change-set rows: seven authoritative files (policy file, `runtime/framework_runtime.py`, `runtime/execution_metrics.py`, `runtime/verify_registry_coverage.py`, `tests/test_model_tier.py`, two governance documents) and six mirror files; design refs are P-001 for the policy file, P-002 P-003 P-004 P-007 for the runtime file, P-005 for metrics, P-006 for the verifier, P-008 for the test file, P-009 for the documents, and P-010 for the mirrors, written by the synchronisation command. | medium | unknown |\n| `E-036` | `runs/run-ded114f50a46/states/implementation/artifacts/implementation-report.md`, Test Evidence, lines 64-76 | Each of the first seven test rows lists the single file `tests/test_model_tier.py` among the change-set rows it covers; the ninth runs the whole suite, 595 tests before and 638 after. | medium | unknown |\n| `E-037` | `runs/run-ded114f50a46/states/implementation/artifacts/implementation-report.md` lines 80-82 and `states/implementation/result-envelope.json` lines 34-58 | A whole-suite baseline (595 tests) was taken on an unmodified copy before any edit and the suite was re-run after (638 tests); seven verifiers were run before and after; the mirror synchronisation command and its parity test were also run. | medium | unknown |\n| `E-038` | `runs/run-ded114f50a46/events.jsonl`, lines 43-45 | One implementer invocation (inv-ded114f50a46-04-001) started at 2026-10-08T12:50:35Z, returned succeeded at 14:46:05Z, and its report validated 32 of 32 checks. | medium | as of 2026-10-08 |\n| `E-039` | `runs/run-ded114f50a46/execution-metrics.json`, lines 7-12, 87-94 and 212-241 | Run agent-active time is 10831 seconds (3h00m31s); the implementation phase is 6930 seconds (1h55m30s) in one dispatch with one charged attempt; its estimated read per dispatch is 230984 bytes, 57746 tokens at 4 bytes per token, a count of bytes the dispatch asked the agent to read. | medium | as of 2026-10-08 |\n| `E-040` | `runs/run-ded114f50a46/execution-metrics.json`, parallel_groups, lines 34-55 | The run has five parallel groups; only scope-and-acceptance and execution-planning share a group; the maximum width is 2. | medium | as of 2026-10-08 |\n| `E-041` | Search of `runs/run-ded114f50a46/` (implementation state directory, final-report.md, completion-package.md, run-ledger.json) for token, usage, duration and elapsed terms, and `execution-metrics.json` lines 87-94 | No measured token usage and no per-command or test-suite duration for the implementation phase appear; the only token figure is the read estimate. | medium | as of 2026-10-08 |\n| `E-042` | `proposals/framework-change-proposal-FC-016.md`, lines 43-55 and 86-87 | The proposal lists six framework files as in scope and the test file and the bundled mirror as outside the framework root; it states the implementation phase changed 13 files with the suite moving from 595 to 638 tests, and that a post-review correction pass by the implementer took the suite to 642. | medium | unknown |\n| `E-043` | `tools/run_tests_parallel.py`, docstring lines 4-9 | The file states the serial suite takes about 26 minutes, mostly a handful of modules that each build a git fixture, and that the runner splits modules into chunks run in separate processes; the figure is tied to no run or date. | medium | unknown |\n| `E-044` | `README.md`, lines 158-170, 226-231 and 280 | Each task lifecycle owns exactly one worktree under a ticket-named path, recorded in the task plan, so different tasks run concurrently; dispatch of the implementation phase requires that worktree and the host runs the subagent in it. | high | current |\n| `E-045` | Search of `omn_agent/*.py` for the word merge | The matches are configuration and JSON-file merging (`omn_agent/branch_config.py`, `omn_agent/mcp.py`) and span merging in the bundled demo code; no function combines the branches or worktrees of two sibling workers. | high | current |\n\n## Options Evaluated\n\n| ID | Option | Benefits | Risks | Effort | Evidence |\n|---|---|---|---|---|---|\n| `O-001` | A host session starts several implementer invocations for one implementation work item, each carrying a subset of the plan's tasks, and one implementation report results. | The in-phase dependency chain is 4 of 6 tasks, an unweighted ceiling of 1.5 (a one-third cut) before coordination cost (`E-029`, `E-030`, `E-031`); 4 of the 5 dependency-unordered in-phase pairs have disjoint primary write sets, so up to 3 tasks could run at once (`E-031`, `E-032`, `E-035`); the host, not the runtime, starts agents, so no runtime model call arises (`E-018`). | Governance and structure: the specifications give one primary agent per active state execution, one active state per run and one worker per executing task (`E-005`, `E-006`, `E-007`); gates sit at quality-review and the phase has none (`E-004`), so reviewer independence is unchanged in form, but no source says who produces or owns one combined report, and the validator permits one producer id and one digest pair (`E-026`, `E-028`). Write scope: one permitted list per envelope, repository-wide for the implementer minus run evidence and proposals (`E-017`, `E-023`, `E-034`), and a declared write outside it is a policy failure that rejects the whole report (`E-022`); enforcement compares only declared paths, there is no overlap guard and no lock on the state file (`E-011`, `E-014`, `E-020`), and the prompt renders the repository-wide entry as directory-limited (`E-019`); three tasks share `runtime/framework_runtime.py` and all share one test file, the documents and the mirror (`E-032`, `E-035`, `E-036`). Failure: there is no partial-completion status, one attempt counter and one result envelope (`E-009`, `E-021`), so one failed invocation has no representation short of failing the phase attempt. Repeat invocation: a second dispatch under an unchanged payload is suppressed as a replay, and a host call outside the runtime leaves no persisted evidence (`E-016`, `E-024`). Attribution: report rows cite design refs, not task ids (`E-035`). Report rules: coverage, contiguous ids, agreement and completion checks assume one report (`E-025`, `E-027`, `E-028`). Elapsed time: the phase also wrote tests, documents and the mirror that the plan assigns elsewhere and that stay serial (`E-030`, `E-035`); the off-chain tasks are labelled S and XS (`E-031`); test time is excluded from both sides (`E-002`) but unmeasured, and coordination cost is unmeasured (`E-041`), so no net gain is established and the ceiling stays under the 40 percent exception. Token: each added invocation adds a read estimate of 57746 tokens (`E-039`), one extra is +100 percent on that proxy against the 25 percent rule (`E-002`); actual usage is unrecorded (`E-041`). Concurrent edits: no repository mechanism makes them safe, a per-task worktree convention exists and no code combines sibling branches (`E-011`, `E-044`, `E-045`); host isolation is a gap. | No figure is supported by the evidence; the surfaces shown keyed to one invocation per phase are the work item and key, envelope, result envelope, completion, report template and validator (`E-008`, `E-009`, `E-015`, `E-021`, `E-025`, `E-026`). | `E-002`, `E-004`, `E-005`, `E-006`, `E-007`, `E-008`, `E-009`, `E-011`, `E-014`, `E-015`, `E-016`, `E-017`, `E-018`, `E-019`, `E-020`, `E-021`, `E-022`, `E-023`, `E-024`, `E-025`, `E-026`, `E-027`, `E-028`, `E-029`, `E-030`, `E-031`, `E-032`, `E-034`, `E-035`, `E-036`, `E-039`, `E-041`, `E-044`, `E-045` |\n| `O-002` | The implement-feature Phase Model declares more than one implementation phase, each with one owner agent and one output artifact. | Matches one owner and one artifact per phase (`E-013`, `E-014`); the implementation-report validator already serves three implementation phases across workflows and is keyed by artifact name (`E-012`, `E-025`); the one-invocation rules stay untouched. | Elapsed gain needs more than one phase leased at once, and the specifications disagree on that (`E-005`, `E-006`), while the guards neither check nor forbid it (`E-014`); the run shows only two phases ever sharing a group (`E-040`); each added phase needs its own report with its own digests, ids and change-to-test coverage, and the gate layout is not defined for it (`E-004`, `E-027`, `E-028`); plan waves cross phase boundaries, so wave widths do not map to phases (`E-029`, `E-030`); each added phase repeats a read of about 57746 estimated tokens (`E-039`). Write scope, failure and attribution are per phase and so are already single; the same-file overlap would be split across phases rather than removed. | No figure is supported by the evidence; the surfaces shown are the Phase Model, the gate matrix and the per-phase reports (`E-004`, `E-012`). | `E-004`, `E-005`, `E-006`, `E-012`, `E-013`, `E-014`, `E-025`, `E-027`, `E-028`, `E-029`, `E-030`, `E-039`, `E-040` |\n| `O-003` | Keep one implementer invocation, first record per-command timing and actual token use for the phase, then pursue the levers the evidence names: suite execution time, repeated full-suite runs, and per-dispatch read volume. | Closes the two measurement gaps that block pricing any option (`E-041`); suite time has a delivered lever and a stated 26-minute serial figure (`E-043`); the phase ran the whole suite and seven verifiers twice (`E-037`) and each dispatch asks for about 230984 bytes of reading without the plan as an input (`E-033`, `E-039`); no gate, validator or contract changes and the runtime makes no model call. | The gain is unquantified because only the phase total and a read estimate exist (`E-039`, `E-041`); two 26-minute full runs would be about 45 percent of the phase but that figure is unmeasured for this run (`E-037`, `E-043`); the fan-out ceiling of one third in-phase may still exceed what these levers deliver (`E-029`, `E-030`, `E-031`); all figures come from one run. Attribution, write scope, repeat invocation and failure are unchanged from today. Token rule: no invocation is added, so the 25 percent rule is not engaged (`E-002`). | The evidence supports no effort figure. | `E-002`, `E-029`, `E-030`, `E-031`, `E-033`, `E-037`, `E-039`, `E-041`, `E-043` |\n| `O-004` | Keep one implementer invocation per implementation phase and take no further change. | Every validator, gate and contract holds as written (`E-004`, `E-026`, `E-028`); the phase behaviour is directly observable: one invocation, 1h55m30s, 32 of 32 checks (`E-038`, `E-039`); no merge mechanism is needed (`E-045`). | The phase stays the largest single share, 6930 of 10831 agent-active seconds (`E-039`), with its test share unmeasured (`E-041`). | None; the evidence supports no figure. | `E-004`, `E-026`, `E-028`, `E-038`, `E-039`, `E-041`, `E-045` |\n\n## Recommendation\n\n- Recommended option: `O-003`\n- Rationale: As a reading of the evidence and not a decision, the evidence favours this course and does not favour building a fan-out or a phase split now. The six tasks in the implementation phase are six of fourteen planned (`E-030`) and their longest dependency chain is four (`E-031`), so the unweighted ceiling of a fan-out is one third (`E-029`, `E-031`), under the 40 percent gain the operator sets as the price of raising token cost by more than 25 percent (`E-002`). Any gain also cannot be priced, because neither suite time nor token use is recorded (`E-041`). The phase ran the whole suite twice (`E-037`) at a stated serial cost near 26 minutes each (`E-043`), and each dispatch reads an estimated 57746 tokens without the plan (`E-033`, `E-039`); these levers are named and measurable. The remaining reasons against the fan-out and the phase split are recorded in the Risks cells of the first two options.\n- Preconditions: Per-command timing and actual token use for the implementation phase are recorded for at least one further run; the single-run basis for overlap and timing is widened to other implementation runs; the changed-file list is confirmed against repository history.\n- Risks requiring monitoring: The test-suite share of the phase, which is unmeasured; the per-dispatch read volume; whether more than one phase may be leased at once, on which the specifications disagree; and any attempt to describe the overlap figure as general from one run.\n\n## Next Steps\n\n- Immediate actions: architect to assess these findings at the Technical Gate; omn-tech-lead to weigh the options in option analysis and to arrange the repository history stat for commit 280d36d, suite timing and per-command timing and token recording for the phase through a role permitted to execute commands.\n- Decision owner and deadline: architect decides the Technical Gate under producer exclusion, the operator accepts or rejects the final recommendation; no deadline is stated in the request.\n- Follow-up validation: compare the history stat for commit 280d36d with the thirteen change-set rows; measure test and non-test time and actual token use in the next implementation-phase run; read the plans and reports of other implementation runs to test whether same-file overlap holds beyond one run; confirm from host documentation whether an isolated working copy per dispatch and nested dispatch exist.\n\n## Contradictions and Gaps\n\nContradictions:\n\n- `E-005` and `E-006` disagree on whether more than one state of one run may be leased at once. Standing: `E-014` and `E-021` show the code neither checks nor forbids concurrent leases across phases, which is consistent with `E-005` without proving it; no source settles it.\n- `E-019` and `E-034` disagree on the write scope an implementer reads: the envelope grants `**` and the prompt prints it limited to the framework directory. Standing; the real run wrote tests and mirror files outside that directory (`E-035`), consistent with the envelope.\n- `E-030` and `E-035` are two accurate statements about different things, a target state and a current state: the plan assigns documents and mirror refresh to the documentation phase and verification to quality-review, while the implementation report's one invocation wrote the documents, the mirror and the test file. Standing as a difference between plan and record; it means the in-phase work was larger than the six planned tasks.\n- `E-023` and `E-024` disagree on the implementer version: the manifest reads 1.1.0 and the host registration reads 1.0.0 and demands that value at bootstrap. Stale assumption in `E-024`, superseded by the manifest (`E-023`), which is the authoritative contract; not material to the question.\n- Stale assumptions named: the framing assumes the 1h55m baseline evidence and the plan were not read (`E-003`); superseded by `E-039` (6930 seconds) and `E-029` (14 tasks, 9 waves), which were read in this run.\n\nGaps:\n\n- The history stat for commit 280d36d was not obtained (no command may be run here); the changed-file list rests on `E-035` and `E-042` and could differ, since the post-review correction pass (`E-042`) may sit in the commit. Closed by running the stat and comparing it with the thirteen rows.\n- The suite time inside the implementation phase and per-task durations are not recorded (`E-041`); closed by instrumented timing in a later run.\n- Actual token use of the phase is not recorded; only a read estimate exists (`E-039`, `E-041`); closed by recorded usage for the phase.\n- Whether the host can run an implementer in an isolated working copy per dispatch, and whether a dispatched agent can start agents, is stated in no repository source read (`E-024`, `E-044`); closed by host documentation or a trial by a role permitted to execute.\n- The coordination cost of any fan-out has no measurement; closed by a trial.\n- Who would produce and own one combined implementation report is defined by no contract (`E-026`); a design question routed to architect.\n- Only run-ded114f50a46 was read; the other committed implementation reports were not examined, so overlap beyond one run is unexamined; closed by reading them.\n- The elapsed-time reduction that counts as measurably lower is not stated for options that do not raise token cost (`E-002`); owned by omn-product-owner.\n- Unexamined: the `omn_agent` dispatch and task-flow code beyond the README description (`E-044`).\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | What does the repository history stat for commit 280d36d list, and does it match the thirteen change-set rows? | no | omn-tech-lead | `E-035`, `E-042`, supplied fact 2 |\n| `Q-002` | How long did suite execution and each non-test step take inside the implementation phase, and how could per-command and per-task timing be recorded? | no | omn-tech-lead | `E-041`, `O-003`, `O-001` |\n| `Q-003` | What was the actual token use of the implementation phase, so the 25 percent rule has a measured baseline? | no | omn-tech-lead | `E-039`, `E-041`, `O-001`, `O-003` |\n| `Q-004` | Can the host run an implementer dispatch in an isolated working copy, and can a dispatched agent start further agents? | no | architect | supplied facts 3 and 5, `O-001` |\n| `Q-005` | May more than one phase of one run be leased at once, given the conflicting specifications? | no | architect | `E-005`, `E-006`, `O-002` |\n| `Q-006` | Who would produce and own one combined implementation report under a fan-out, given one producer id per report and producer exclusion at gates? | no | architect | `E-026`, `O-001` |\n| `Q-007` | Does the same-file overlap and wave shape hold in other implementation runs, which a further discovery pass over their plans and reports would settle? | no | omn-orchestrator | supplied fact 2, `E-029`, `E-035` |\n| `Q-008` | What elapsed-time reduction counts as measurably lower for an option that does not raise token cost? | no | omn-product-owner | `E-002`, `O-003`, `O-004` |",
+        "digest": "sha256:6e659dd518a400560696fed736e0c4c5",
+        "produced_by": "technical-discovery"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the established position this decision rests on: an investigation report for an `investigate` or `research` run, a review package for a `review-pull-request` merge decision, a validation report or review package for a `release` readiness assessment, or a technical design where the structural approach is what the options differ over. Without one there is no evidence base, and recommending anyway would mean deciding delivery on this agent's own reading of a situation nobody established."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "investigation-report",
+      "reference": "runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md",
+      "produced_by": "technical-discovery",
+      "artifact": "investigation-report.md",
+      "bytes": 36094,
+      "sections": null
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-437e2f765e4b/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:53289d9093ce51fac0b618e8ae576494",
+    "bytes": 7554,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "option-analysis"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-09T05:01:01Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 22496,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/investigate.md",
+        "digest": "sha256:7b2215cf0221ab3228b5c037ad9e87ff",
+        "supplies": "framework-context",
+        "bytes": 7829,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/technical-recommendation.md",
+        "digest": "sha256:b97aba385fcd11d9854b4ebbc1a22509",
+        "supplies": null,
+        "bytes": 8229,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/investigation-report.md",
+        "digest": "sha256:5747680d9de64e65ae4d2d13569624ae",
+        "supplies": null,
+        "bytes": 3681,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8e4f9ca28ad1bb63d8368998cb67cc5a",
+        "supplies": null,
+        "bytes": 4862,
+        "read": "required",
+        "read_reason": "skill S01 is required for this phase"
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null,
+        "bytes": 1266,
+        "read": "on-demand",
+        "read_reason": "area performance is not affected by this task; the skill stays resolved and is read only if the work reveals the domain"
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null,
+        "bytes": 1236,
+        "read": "required",
+        "read_reason": "skill S09 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73bd155e6b8344e48a8c66266be118cf",
+        "supplies": null,
+        "bytes": 61682,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:7e89d49a7c72f558eb49a242951bda58",
+    "input_digest": "sha256:6e659dd518a400560696fed736e0c4c5",
+    "inputs": [
+      {
+        "type": "investigation-report",
+        "reference": "runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-437e2f765e4b/states/technical-discovery/artifacts/investigation-report.md",
+        "digest": "sha256:6e659dd518a400560696fed736e0c4c5"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "templates/investigation-report.md",
+      "templates/technical-recommendation.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/security/secure-engineering.md",
+      "templates/investigation-report.md",
+      "templates/technical-recommendation.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "skills/performance/performance-engineering.md",
+      "workflows/investigate.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 182787,
+    "bytes_required": 19557,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-437e2f765e4b/states/option-analysis/artifacts/technical-recommendation.md",
+      "runs/run-437e2f765e4b/states/option-analysis/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "read-only inspection of repository and run state \u2014 history, dependency structure, prior gate evidence, and the framework's own verification output \u2014 run to ground an effort, sequencing, or readiness position in something other than assertion",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies source, tests, committed run evidence, or a governance record",
+        "repository history rewriting, publishing, merging, or release actions",
+        "any command whose result is not recorded in the recommendation"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than read-only inspection of repository and run state \u2014 history, dependency structure, prior gate evidence, and the framework's own verification output \u2014 run to ground an effort, sequencing, or readiness position in something other than assertion",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author the structural design, the module boundaries, or a decision record, which belong to architect",
+      "define, widen, or narrow product scope, which belongs to omn-product-owner",
+      "set or reinterpret an acceptance criterion",
+      "decompose work into tasks, which belongs to planner",
+      "execute the validation whose result it weighs, which belongs to omn-qa",
+      "record a gate decision as taken, in any phase",
+      "decide a gate that assesses evidence this agent produced",
+      "recommend a direction that weakens a quality gate to protect a schedule",
+      "recommend an unqualified proceed while a critical or high blocker stands open",
+      "recommend an option the artifact did not evaluate against the declared criteria",
+      "state an effort or risk position the recorded evidence does not support",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "judge whether a proposed direction is deliverable under the constraints in force",
+        "fix the evaluation criteria a set of options is judged against, before scoring them",
+        "evaluate named options against those criteria and state the tradeoff each carries",
+        "state the sequencing, dependency, and capacity consequences of each option",
+        "record the risks and blockers that stand between a direction and delivery",
+        "estimate effort at the granularity the declared effort scale permits",
+        "recommend one option, or record that the decision is deferred and say what defers it",
+        "recommend a readiness position, with the conditions a conditional one rests on",
+        "name the authority that decides the gate this artifact is evidence for",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author the structural design, the module boundaries, or a decision record, which belong to architect",
+        "define, widen, or narrow product scope, which belongs to omn-product-owner",
+        "set or reinterpret an acceptance criterion",
+        "decompose work into tasks, which belongs to planner",
+        "execute the validation whose result it weighs, which belongs to omn-qa",
+        "record a gate decision as taken, in any phase",
+        "decide a gate that assesses evidence this agent produced",
+        "recommend a direction that weakens a quality gate to protect a schedule",
+        "recommend an unqualified proceed while a critical or high blocker stands open",
+        "recommend an option the artifact did not evaluate against the declared criteria",
+        "state an effort or risk position the recorded evidence does not support",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else in the repository, in any phase.",
+        "rationale": "A recommendation is worth what its independence is worth. An agent that could change the code, the design, or the criteria while judging the direction would be recommending on its own work, and every gate over this artifact would be assessing evidence its producer had shaped twice over."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "read-only inspection of repository and run state \u2014 history, dependency structure, prior gate evidence, and the framework's own verification output \u2014 run to ground an effort, sequencing, or readiness position in something other than assertion",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies source, tests, committed run evidence, or a governance record",
+          "repository history rewriting, publishing, merging, or release actions",
+          "any command whose result is not recorded in the recommendation"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same criteria set, the same option set, the same tradeoff assessment, the same risk and blocker set with the same severities, the same recommended option, the same readiness position, and the same declared artifact status.",
+      "identifierSchemes": {
+        "evaluationCriteria": "EC-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "risksAndBlockers": "RK-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Evaluation criteria are ordered by descending priority; ties keep the order of the source that declared them. Options keep the order they were supplied or discovered in, so that a re-run cannot reorder them into a different-looking comparison. Risks and blockers are ordered by descending severity; ties break toward the lower identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied options, constraints, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-recommendation.md",
+    "artifact_path": "runs/run-437e2f765e4b/states/option-analysis/artifacts/technical-recommendation.md",
+    "template_ref": "templates/technical-recommendation.md",
+    "contract_ref": "agents/omn-tech-lead/output.md",
+    "quality_ref": "agents/omn-tech-lead/quality.md",
+    "validator": "technical_recommendation_validator",
+    "result_envelope_path": "runs/run-437e2f765e4b/states/option-analysis/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-09T05:01:01Z",
+  "model_tier": {
+    "tier": "standard",
+    "host_hint": "inherit",
+    "basis": "declared standard for investigate/option-analysis in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 82323,
+    "modules_core_bytes": 38177,
+    "slice_all_bytes": 182787,
+    "slice_required_bytes": 19557,
+    "inputs_bytes": 0,
+    "upstream_full_bytes": 36095,
+    "upstream_read_first_bytes": 36095,
+    "task_context_bytes": 7554,
+    "fixed_bytes": 19620,
+    "legacy_estimate_bytes": 320825,
+    "progressive_estimate_bytes": 121003,
+    "legacy_estimate_tokens": 80206,
+    "progressive_estimate_tokens": 30250,
+    "savings_pct": 62.3
+  }
+}

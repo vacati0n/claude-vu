@@ -1,0 +1,42 @@
+{
+  "invocation_id": "inv-437e2f765e4b-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-437e2f765e4b/states/recommendation/artifacts/technical-recommendation.md"
+  ],
+  "structured_output": {
+    "decisionBasis": "recommendation",
+    "recommendedOption": "O-004",
+    "readinessDecision": "proceed-with-conditions",
+    "status": "complete",
+    "criteriaApplied": 5,
+    "optionsEvaluated": 4,
+    "risksRecorded": 6,
+    "blockingItemsOpen": 0,
+    "severityCounts": {"critical": 0, "high": 0, "medium": 5, "low": 1},
+    "decidingAuthority": "omn-orchestrator",
+    "checksRun": 33,
+    "checksPassed": 33,
+    "blockingFailures": [],
+    "correctableRepairs": [],
+    "notMachineCheckable": ["NMC1", "NMC2", "NMC3", "NMC4"],
+    "commandsRun": ["python runtime/technical_recommendation_validator.py <artifact> --envelope <envelope>: PASS 33/33"],
+    "escalations": [],
+    "openQuestions": ["Q-001", "Q-002", "Q-003", "Q-004", "Q-005", "Q-006", "Q-007"]
+  },
+  "evidence_refs": [
+    "agents/omn-tech-lead/manifest.yaml",
+    "agents/omn-tech-lead/system.md",
+    "agents/omn-tech-lead/reasoning.md",
+    "agents/omn-tech-lead/output.md",
+    "agents/omn-tech-lead/quality.md",
+    "runs/run-437e2f765e4b/states/recommendation/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-437e2f765e4b/states/recommendation/artifacts/technical-recommendation.md",
+    "runs/run-437e2f765e4b/states/recommendation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}
