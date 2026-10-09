@@ -36,6 +36,12 @@ SCHEMA = "framework.runtime/execution-metrics.v1"
 FILENAME = "execution-metrics.json"
 BYTES_PER_TOKEN = 4
 
+# Tier names in promotion order, and the bucket for records that predate the model tier field.
+# The tier policy itself lives in `framework_runtime.py`; this module only groups by what the
+# persisted envelopes and events already say, so it names no hint and imports nothing from it.
+TIERS = ("light", "standard", "deep")
+UNTIERED = "untiered"
+
 CORE_MODULE_ROLES = ("operating-charter", "reasoning-procedure", "output-contract",
                      "quality-contract")
 
@@ -174,6 +180,37 @@ def estimate_dispatch_budget(envelope: dict, claude_root: Path,
     }
 
 
+def tier_summary(events: list, per_phase: list) -> dict:
+    """Invocations and estimated context bytes grouped by model tier.
+
+    Invocations are counted from `invocation_started` events, whose detail carries the tier the
+    dispatch resolved; an event that predates the field lands in `untiered`. Bytes are each
+    phase's progressive estimate, taken from the tier of that phase's latest envelope, and a
+    phase whose envelope predates the field also lands in `untiered`, so the per-tier values
+    sum to the run totals. `non_deep_share` is over tiered invocations only, and is None while
+    there are none.
+    """
+    names = TIERS + (UNTIERED,)
+    by_tier = {t: {"invocations": 0, "estimated_bytes": 0} for t in names}
+    for e in events:
+        if e.get("event_type") != "invocation_started":
+            continue
+        tier = (e.get("details_ref") or {}).get("model_tier")
+        by_tier[tier if tier in TIERS else UNTIERED]["invocations"] += 1
+    for p in per_phase:
+        tier = p.get("model_tier")
+        by_tier[tier if tier in TIERS else UNTIERED]["estimated_bytes"] += \
+            (p.get("context_estimate") or {}).get("progressive_estimate_bytes", 0)
+    tiered = sum(by_tier[t]["invocations"] for t in TIERS)
+    non_deep = tiered - by_tier["deep"]["invocations"]
+    return {
+        "by_tier": by_tier,
+        "invocations_total": sum(v["invocations"] for v in by_tier.values()),
+        "estimated_bytes_total": sum(v["estimated_bytes"] for v in by_tier.values()),
+        "non_deep_share": round(non_deep / tiered, 3) if tiered else None,
+    }
+
+
 def compute(run_dir: Path, claude_root: Path, *, store=None, events: list | None = None,
             upstream_sections: dict | None = None, now: str | None = None,
             read_hint=None) -> dict:
@@ -217,8 +254,10 @@ def compute(run_dir: Path, claude_root: Path, *, store=None, events: list | None
         budget = None
         skills = None
         members = []
+        phase_tier = None
         if env_path.exists():
             env = json.loads(env_path.read_text(encoding="utf-8"))
+            phase_tier = (env.get("model_tier") or {}).get("tier")
             members = [(m["path"], m.get("read") or (read_hint(m["path"], sid) if read_hint
                                                      else "required"))
                        for m in (env.get("context_slice") or {}).get("members") or []]
@@ -243,6 +282,7 @@ def compute(run_dir: Path, claude_root: Path, *, store=None, events: list | None
             "context_members_declared": len(members),
             "context_members_required": sum(1 for _, r in members if r == "required"),
             "skills": skills,
+            "model_tier": phase_tier,
             "context_estimate": budget,
         })
 
@@ -325,6 +365,7 @@ def compute(run_dir: Path, claude_root: Path, *, store=None, events: list | None
             "progressive_tokens": progressive // BYTES_PER_TOKEN,
             "savings_pct": round(100 * (1 - progressive / legacy), 1) if legacy else 0.0,
         },
+        "model_tiers": tier_summary(events, per_phase),
         "per_phase": per_phase,
     }
 
@@ -361,4 +402,11 @@ def summary_lines(data: dict) -> list:
         f"| context estimate, progressive rules | ~{est['progressive_tokens']:,} tokens "
         f"({est['savings_pct']}% less) |",
     ]
+    mt = data.get("model_tiers")
+    if mt:
+        share = mt["non_deep_share"]
+        lines.append("| invocations by tier (light / standard / deep / untiered) | "
+                     + " / ".join(str(mt["by_tier"][t]["invocations"])
+                                  for t in TIERS + (UNTIERED,))
+                     + (f"; non-deep share {share:.0%}" if share is not None else "") + " |")
     return lines

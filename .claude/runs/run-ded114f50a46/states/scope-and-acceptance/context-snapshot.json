@@ -1,0 +1,163 @@
+{
+  "frozen_at": "2026-10-08T11:19:06Z",
+  "members": [
+    {
+      "path": "registry/agents.yaml",
+      "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+      "supplies": "framework-context",
+      "bytes": 22496,
+      "read": "runtime-resolved",
+      "read_reason": "agent routing and versions are resolved by the runtime"
+    },
+    {
+      "path": "registry/workflows.yaml",
+      "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+      "supplies": "framework-context",
+      "bytes": 9242,
+      "read": "runtime-resolved",
+      "read_reason": "the workflow is already routed; the phase is in the envelope"
+    },
+    {
+      "path": "registry/skills.yaml",
+      "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+      "supplies": "framework-context",
+      "bytes": 17318,
+      "read": "runtime-resolved",
+      "read_reason": "the phase's skills are resolved in skill_dispatch"
+    },
+    {
+      "path": "registry/templates.yaml",
+      "digest": "sha256:50db8f41ad96e89197090292726311a8",
+      "supplies": "framework-context",
+      "bytes": 12274,
+      "read": "runtime-resolved",
+      "read_reason": "the output template is named in expected_output_schema"
+    },
+    {
+      "path": "agents/capability-matrix.md",
+      "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+      "supplies": "framework-context",
+      "bytes": 7175,
+      "read": "runtime-resolved",
+      "read_reason": "capability ownership is resolved by the runtime"
+    },
+    {
+      "path": "skills/agent-skill-matrix.md",
+      "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+      "supplies": "framework-context",
+      "bytes": 17261,
+      "read": "runtime-resolved",
+      "read_reason": "the phase's skills are resolved in skill_dispatch"
+    },
+    {
+      "path": "workflows/workflow-gate-matrix.md",
+      "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+      "supplies": "framework-context",
+      "bytes": 6687,
+      "read": "required",
+      "read_reason": "this artifact names the gate it is evidence for and its owners"
+    },
+    {
+      "path": "context/product-context.md",
+      "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+      "supplies": "framework-context",
+      "bytes": 525,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "context/technical-context.md",
+      "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+      "supplies": "framework-context",
+      "bytes": 554,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "context/release-context.md",
+      "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+      "supplies": "framework-context",
+      "bytes": 470,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "workflows/implement-feature.md",
+      "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+      "supplies": "framework-context",
+      "bytes": 8085,
+      "read": "on-demand",
+      "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+    },
+    {
+      "path": "templates/scope-definition.md",
+      "digest": "sha256:9f082102c11c1de4d4b53c8252a0a9bc",
+      "supplies": "feature-request",
+      "bytes": 4189,
+      "read": "required",
+      "read_reason": "an artifact template this phase renders or reads"
+    },
+    {
+      "path": "domain-model/agent-specification.md",
+      "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+      "supplies": "acceptance-intent",
+      "bytes": 2277,
+      "read": "on-demand",
+      "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+    }
+  ],
+  "context_digest": "sha256:6a1ac11b59924eceec1c6184befe245a",
+  "input_digest": "sha256:1a5d5bd8ac684410b76f88bce2701855",
+  "inputs": [
+    {
+      "type": "feature-request",
+      "reference": "runs/inputs/model-tier-feature-request.md",
+      "source_file": ".claude/runs/inputs/model-tier-feature-request.md",
+      "digest": "sha256:7fa529598e6e925362f09ed43c4a4a9e"
+    },
+    {
+      "type": "change-request",
+      "reference": "runs/inputs/model-tier-change-request.md",
+      "source_file": ".claude/runs/inputs/model-tier-change-request.md",
+      "digest": "sha256:cc12348b7459a93afcff425dcab01868"
+    },
+    {
+      "type": "business-intent",
+      "reference": "runs/inputs/model-tier-business-intent.md",
+      "source_file": ".claude/runs/inputs/model-tier-business-intent.md",
+      "digest": "sha256:881f72a81f6bb67c8d59aa810a52b72a"
+    },
+    {
+      "type": "architecture-context",
+      "reference": "runs/inputs/model-tier-architecture-context.md",
+      "source_file": ".claude/runs/inputs/model-tier-architecture-context.md",
+      "digest": "sha256:5b63babf1eef069a473dd7e74480120c"
+    }
+  ],
+  "unnarrowed": [],
+  "read_policy": "config/runtime.md#context-loading",
+  "read_required": [
+    "context/product-context.md",
+    "context/release-context.md",
+    "context/technical-context.md",
+    "templates/scope-definition.md",
+    "workflows/workflow-gate-matrix.md"
+  ],
+  "read_on_demand": [
+    "domain-model/agent-specification.md",
+    "workflows/implement-feature.md"
+  ],
+  "runtime_resolved": [
+    "agents/capability-matrix.md",
+    "registry/agents.yaml",
+    "registry/skills.yaml",
+    "registry/templates.yaml",
+    "registry/workflows.yaml",
+    "skills/agent-skill-matrix.md"
+  ],
+  "bytes_total": 108553,
+  "bytes_required": 12425,
+  "excluded": [
+    "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+  ]
+}

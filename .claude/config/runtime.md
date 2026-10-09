@@ -287,6 +287,51 @@ legacy rules (every module, every member, every upstream artifact in full) and t
 rules. The estimate is four bytes per token and is labelled an estimate; its purpose is to make
 a regression visible, not to bill.
 
+## Model Tiers
+
+A phase declares the class of model that should execute it. The runtime never calls a model;
+it names a tier and a host hint in the invocation envelope, and the dispatching session passes
+the hint to the host as the per-dispatch model override. Entrypoint declarations stay
+`model: inherit`, and no tier appears in agent module text or in a Phase Model table.
+
+**Declaration.** `config/model-tier-policy.json` is the one carrier. `phases` maps each workflow
+identifier to `{phase: tier}`, where the tier is `light` (read-and-summarise and template-fill
+work), `standard` (bounded-judgement analysis and validation), or `deep` (structural design,
+root cause, implementation, review judgement). `hints` maps each of the three tiers to one
+opaque host alias string, which the runtime copies verbatim and never branches on; the reserved
+value `inherit` means pass no override. The file is shipped in the managed `config/` directory,
+and `verify_registry_coverage.py` check `C7` fails on a phase with no declared tier, on an
+entry naming a phase that does not exist, and when fewer than 3 of the 6 implement-feature
+phases are non-deep. An absent file resolves every phase to `standard` with `inherit` and never
+promotes one, because with no file there is no hint for a higher tier. With the file present, a
+phase with no entry resolves to `standard`, and it inherits the host model only because the
+`standard` hint is reserved as `inherit`: the loader and `C7` reject any other value for it. A
+file that exists but is unreadable, names an unknown tier, or lacks a hint fails
+the dispatch as a `policy-failure`. There is no per-dispatch switch to disable or override a
+tier: removing the file is the only off position.
+
+**Envelope field.** Every invocation envelope carries `model_tier`:
+`{tier, host_hint, basis, escalation}`. `basis` states why the tier was chosen, and
+`escalation` is empty unless the phase was promoted, in which case it carries `from`, `to`,
+the two rejection counts, and `reason`. The `invocation_started` event carries `model_tier` and
+`escalated` in its detail, and the dispatch prompt and console output state the tier and hint.
+The field is additive and deterministic from run state; it does not enter the payload digest.
+
+**Escalation.** A rejected cheaper attempt is never retried at the same tier. At dispatch the
+runtime counts two recorded rejections of the phase: validator rejections, which are recovery
+ledger entries under the phase's own state id with reason code `validation_failed`, and gate
+rejections that were rolled back, which are entries in the work item's `supersessions`. The
+phase resolves one tier higher per recorded rejection, capped at `deep`, and a tier is never
+lowered. A transport failure, which produced nothing to judge, and a gate rejection with no
+rollback do not count. Because both counts are read from persisted state, a dispatch built in a
+fresh session resolves exactly as one built in the same session. `C8` checks monotonicity.
+
+**Metrics.** `execution-metrics.json` carries `model_tiers`: invocations and estimated context
+bytes for `light`, `standard`, `deep`, and `untiered` (records that predate the field), whose
+values sum to the run totals, plus `non_deep_share` of tiered invocations. Each `per_phase` row
+carries its `model_tier`. A tier is advice only: no gate, validator, or acceptance rule changes
+with it, and the figures count what was advised, not what the host ran.
+
 ## Memory Loading
 
 ### Memory Categories

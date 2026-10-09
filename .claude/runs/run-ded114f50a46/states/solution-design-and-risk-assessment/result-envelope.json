@@ -1,0 +1,112 @@
+{
+  "invocation_id": "inv-ded114f50a46-03-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md"
+  ],
+  "structured_output": {
+    "package_status": "complete",
+    "counts": {
+      "facts": 21,
+      "assumptions": 3,
+      "constraints": 13,
+      "impacted_modules": 15,
+      "options": 6,
+      "decisions": 5,
+      "architecture_significant_decisions": 2,
+      "risks": 9,
+      "sequencing_constraints": 10,
+      "open_questions": 4,
+      "blocking_open_questions": 0,
+      "reuse_survey_rows": 18,
+      "decision_records": 2
+    },
+    "recomputed_option_ranking": {
+      "criteria_order": [
+        "hard constraint satisfaction",
+        "impact surface (contract-change or dependency-change modules)",
+        "reuse leverage",
+        "quality attribute satisfaction",
+        "migration burden",
+        "operability"
+      ],
+      "ranking": ["O-001", "O-003"],
+      "eliminated": {
+        "O-002": ["C-002"],
+        "O-004": ["C-001", "C-007"],
+        "O-005": ["C-003"],
+        "O-006": ["C-006"]
+      },
+      "decided_at": "impact surface: O-001 = 2 (M-001, M-003), O-003 = 3 (M-001, M-003, registry record schema)",
+      "recorded_selection": "O-001",
+      "selection_follows_from_table": true
+    },
+    "operator_resolutions_applied": {
+      "success_bar": "at least 3 of 6 implement-feature phases non-deep",
+      "implement_feature_tiers": {
+        "light": ["scope-and-acceptance", "documentation-and-release-handoff"],
+        "standard": ["execution-planning"],
+        "deep": ["solution-design-and-risk-assessment", "implementation", "quality-review"]
+      },
+      "non_deep_phases": 3,
+      "total_phase_mapping": {"light": 14, "standard": 14, "deep": 9, "total": 37},
+      "host_hint_form": "opaque host alias string per tier held in the declaration; standard = reserved value inherit; runtime copies verbatim"
+    },
+    "quality_checks": {
+      "basis": "agent self-verification by reading against quality.md and design_validator.py rules; design_validator.py was NOT executed (no command tool)",
+      "run": 98,
+      "passed": 98,
+      "failed": 0,
+      "results": {
+        "A1.1": "pass", "A1.2": "pass", "A1.3": "pass", "A1.4": "pass", "A1.5": "pass", "A1.6": "pass", "A1.7": "pass", "A1.8": "pass",
+        "A2.1": "pass", "A2.2": "pass", "A2.3": "pass", "A2.4": "pass", "A2.5": "pass", "A2.6": "pass", "A2.7": "pass", "A2.8": "pass", "A2.9": "pass", "A2.10": "pass",
+        "A3.1": "pass", "A3.2": "pass", "A3.3": "pass", "A3.4": "pass", "A3.5": "pass", "A3.6": "pass",
+        "A4.1": "pass", "A4.2": "pass", "A4.3": "pass", "A4.4": "pass",
+        "A5.1": "pass", "A5.2": "pass", "A5.3": "pass", "A5.4": "pass",
+        "A6.1": "pass", "A6.2": "pass", "A6.3": "pass", "A6.4": "pass", "A6.5": "pass", "A6.6": "pass",
+        "A7.1": "pass", "A7.2": "pass", "A7.3": "pass", "A7.4": "pass", "A7.5": "pass",
+        "A8.1": "pass", "A8.2": "pass", "A8.3": "pass", "A8.4": "pass", "A8.5": "pass", "A8.6": "pass", "A8.7": "pass",
+        "A9.1": "pass", "A9.2": "pass", "A9.3": "pass", "A9.4": "pass", "A9.5": "pass", "A9.6": "pass",
+        "A10.1": "pass", "A10.2": "pass", "A10.3": "pass", "A10.4": "pass", "A10.5": "pass", "A10.6": "pass", "A10.7": "pass",
+        "A11.1": "pass", "A11.2": "pass", "A11.3": "pass", "A11.4": "pass", "A11.5": "pass",
+        "A12.1": "pass", "A12.2": "pass", "A12.3": "pass", "A12.4": "pass", "A12.5": "pass",
+        "A13.1": "pass", "A13.2": "pass", "A13.3": "pass", "A13.4": "pass", "A13.5": "pass", "A13.6": "pass", "A13.7": "pass",
+        "A14.1": "pass", "A14.2": "pass", "A14.3": "pass", "A14.4": "pass", "A14.5": "pass", "A14.6": "pass", "A14.7": "pass", "A14.8": "pass",
+        "A15.1": "pass", "A15.2": "pass", "A15.3": "pass", "A15.4": "pass", "A15.5": "pass",
+        "A16.1": "pass", "A16.2": "pass", "A16.3": "pass", "A16.4": "pass", "A16.5": "pass"
+      },
+      "repair_passes": 1,
+      "repair_detail": "one in-place repair: a prose paragraph that the validator's label parser would have absorbed into the Tradeoffs accepted block was moved under its own level-4 heading"
+    },
+    "closure_counts": {
+      "forward_statements_mapped": 9,
+      "backward_modules_traced": 15,
+      "backward_decisions_traced": 5,
+      "lateral_risks_attached": 9,
+      "lateral_plan_steps_resolved": 10,
+      "lateral_records_resolved": 2
+    },
+    "rescans": "none; repository files were read only at the sites the task context and the architecture context name",
+    "implementation_work_performed": false,
+    "external_systems_accessed": false
+  },
+  "evidence_refs": [
+    "agents/architect/manifest.yaml",
+    "agents/architect/system.md",
+    "agents/architect/reasoning.md",
+    "agents/architect/output.md",
+    "agents/architect/quality.md",
+    "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+    "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md",
+    "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

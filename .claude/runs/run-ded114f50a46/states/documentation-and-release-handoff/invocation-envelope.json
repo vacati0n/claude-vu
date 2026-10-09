@@ -1,0 +1,683 @@
+{
+  "invocation_id": "inv-ded114f50a46-06-002",
+  "run_id": "run-ded114f50a46",
+  "work_item_id": "run-ded114f50a46::documentation-and-release-handoff",
+  "idempotency_key": "sha256:0efd2f50ee463588df7a34feb1231f2d",
+  "state_id": "documentation-and-release-handoff",
+  "phase_index": 6,
+  "agent_id": "omn-documentation",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-documentation.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-documentation/manifest.yaml",
+    "load_order": [
+      "agents/omn-documentation/system.md",
+      "agents/omn-documentation/identity.md",
+      "agents/omn-documentation/reasoning.md",
+      "agents/omn-documentation/execution.md",
+      "agents/omn-documentation/output.md",
+      "agents/omn-documentation/quality.md",
+      "agents/omn-documentation/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-documentation/system.md": "sha256:407f35d95b5e232c7d87d7740a942844",
+      "agents/omn-documentation/identity.md": "sha256:e40e9fd9da20ae31f5af17d3cc97fcf2",
+      "agents/omn-documentation/reasoning.md": "sha256:11b286235d28b0bc358674c5b9357736",
+      "agents/omn-documentation/execution.md": "sha256:3ef9d35e66bec480500c97906c9d51de",
+      "agents/omn-documentation/output.md": "sha256:9e0c56ac978b9695f13668e209f8e2e4",
+      "agents/omn-documentation/quality.md": "sha256:972fe80aafbde6b6f8142b6dbd97e081",
+      "agents/omn-documentation/examples.md": "sha256:baead714ded57fbb1d36b103b957ee78"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-documentation/system.md",
+        "agents/omn-documentation/reasoning.md",
+        "agents/omn-documentation/output.md",
+        "agents/omn-documentation/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-documentation/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-documentation/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-documentation/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 42233,
+      "full_bytes": 85749
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "documentation",
+      "release-communication"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'security' in artifact:solution-design-and-risk-assessment",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "validation-report",
+      "review-package",
+      "deployment-status",
+      "scope-definition",
+      "technical-design",
+      "execution-plan",
+      "bug-analysis",
+      "monitoring-health-record",
+      "final-change-summary",
+      "stakeholder-list",
+      "verification-report",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "closure-context",
+      "communication-requirements",
+      "existing-documentation",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/model-tier-architecture-context.md",
+        "source_file": ".claude/runs/inputs/model-tier-architecture-context.md",
+        "text": "# Architecture Context \u2014 Per-Phase Model Tier\n\n- The runtime core never talks to a model (`runtime/framework_runtime.py` header). It builds the\n  canonical envelope and hands it to an adapter. A tier is therefore advice carried in the envelope.\n- Envelope fields added in 0.7.0 are additive; a consumer reading only the original eleven fields\n  reads them unchanged. `model_tier` follows the same rule.\n- All twelve `agents/*.agent.md` entrypoints declare `model: inherit`. The host (Claude Code) accepts\n  a per-dispatch model override on subagent invocation, which is how a tier hint becomes effective;\n  the entrypoint frontmatter stays `inherit`.\n- Workflow Phase Model tables are parsed by the Task Router; adding a column would change a parsed\n  contract, so tier data lives outside them, keyed by workflow and phase.\n- Replay checks (M14) require artifacts written by `write_run_ledger` to be stable when content is\n  unchanged; any new field must be deterministic from run state.\n- Rejected attempts are recorded in the run's recovery ledger and attempt counters; escalation must\n  derive from that recorded state, not from in-memory state.\n- Keep loading policy in runtime and `config/`, never in agent modules (`verify_vertical_slice` C10).\n- `runtime/README.md` is large and read by agents; new documentation goes in `config/runtime.md`.\n- Edit `.claude/`, then `python tests/test_bundled_payload.py --sync`; never hand-edit `omn_agent/_bundled_payload/`.",
+        "digest": "sha256:5b63babf1eef069a473dd7e74480120c"
+      },
+      {
+        "type": "review-package",
+        "reference": "runs/run-ded114f50a46/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-ded114f50a46/states/quality-review/artifacts/review-package.md",
+        "text": "```yaml\nreviewPackage:\n  packageId: RP-2026-0009\n  reviewReference: run-ded114f50a46 quality-review, per-phase model tier in the dispatch envelope (IR-2026-0010)\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/model-tier-feature-request.md\n    - type: change-request\n      reference: runs/inputs/model-tier-change-request.md\n    - type: business-intent\n      reference: runs/inputs/model-tier-business-intent.md\n    - type: architecture-context\n      reference: runs/inputs/model-tier-architecture-context.md\n    - type: implementation-report\n      reference: runs/run-ded114f50a46/states/implementation/artifacts/implementation-report.md\n    - type: design-reference\n      reference: runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n    - type: code-diff\n      reference: working-tree change set against HEAD for the thirteen paths the change account declares\n    - type: test-evidence\n      reference: inline\n  producedBy: omn-dev-2-reviewer\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: approve-with-corrections\n  inputDigest: sha256:2f957a695c8848e0db7db11e297e8647\n  contextDigest: sha256:7c56e10872c3a10df579c4c56767bfbe\n```\n\n## Metadata\n\n- Review ID: RP-2026-0009\n- Reviewer: omn-dev-2-reviewer\n- Change under review: run-ded114f50a46, implementation report IR-2026-0010 (digest sha256:538f1c74a4178bc1d543d1375ccfc087), change-set entries C-001 to C-013: the tier declaration `.claude/config/model-tier-policy.json`, the loader, rejection counter, resolver and envelope record in `.claude/runtime/framework_runtime.py`, per-tier metrics in `.claude/runtime/execution_metrics.py`, checks C7 and C8 in `.claude/runtime/verify_registry_coverage.py`, `tests/test_model_tier.py`, the two governance documents, and the bundled mirror\n- Review date: 2026-10-08\n\n## Review Scope\n\n- In scope: every path of the change set C-001 to C-013, read as the working-tree diff against HEAD plus the two untracked files, measured against technical design decisions D-001 to D-005, constraints C-001 to C-013, the Phase-to-Tier Mapping, deviation V-001, and acceptance criteria A-001 to A-021; with specific checks on escalation derived only from recorded state, monotonicity and the deep ceiling, additivity of the envelope field and replay stability (M14), default behaviour with the declaration absent, mirror parity, decisiveness of C7 and C8, and the absence of any agent module or Phase Model edit\n- Out of scope: host-side application of the hint (the runtime cannot observe it; recorded as residual risk R-002 of the change account), formal acceptance-criteria validation (owned by omn-qa), and the pre-existing verifier failures X1 and S8, which were attributed rather than reviewed as defects of this change; no repository path outside the change set was found modified (`git status` and a recursive comparison of HEAD against the working tree list only the thirteen declared paths plus this run's own evidence)\n- Evidence reviewed: the full `git diff` of the ten modified paths; `.claude/config/model-tier-policy.json` and `tests/test_model_tier.py` in full; the technical design (sha256:4df24c0b76d46462bbabede130e926b5 per the change account) in full; the implementation report in full; the four supplied inputs; `cmd_complete`, `record_gate_decision`, the transport-failure branch, and `RecoveryLedger` source read to confirm what the rejection counter reads; the implementer's baseline verifier transcript for verify_multi_phase; and the results of the commands listed under Test Adequacy Assessment, all run on exported copies of HEAD and of the working tree outside the repository\n\n## Findings\n\n| ID | Severity | Category | Location | Requirement | Finding | Correction Request | Status |\n|---|---|---|---|---|---|---|---|\n| `F-001` | medium | maintainability | `.claude/runtime/framework_runtime.py:4301` | Design D-001 (reserved `inherit` value for the standard tier) and hard constraint C-005 (a phase with no declaration inherits the host model) | `load_model_tier_policy` accepts any non-empty string as the standard hint, and C7 does not check it either, so an edited declaration silently makes undeclared phases and absent-entry phases stop inheriting; the guarantee rests only on a unit test of the shipped file, not on the load boundary installed copies pass through | `CR-001` | open |\n| `F-002` | low | standards | `.claude/config/runtime.md:305` | Acceptance criterion A-020 and statement S-008 (the governance documentation states the escalation rule); deviation V-001 | The Model Tiers section says one tier higher per recorded rejection without stating the V-001 exception that an absent declaration file never promotes, and says a phase with no entry resolves to `inherit`, which holds only while the standard hint is `inherit` (see F-001); documented and implemented behaviour diverge on the absent-file path | `CR-002` | open |\n| `F-003` | low | test-adequacy | `tests/test_model_tier.py:387` | Testing Strategy S07 (map tests directly to acceptance criteria) and design Test Strategy Focus Areas items 2 and 4 | The suite does not compare original envelope fields against a pre-change envelope (A-006 only asserts presence and four values), does not drive gate-rejection promotion through a real `rollback` command (A-009, acknowledged as R-004), and does not assert the `inherit` branch of the prompt tier line; this review confirmed all three by execution, so the gap is regression protection, not present behaviour | `CR-003` | open |\n\n## Severity Summary\n\n- Critical: 0\n- High: 0\n- Medium: 1\n- Low: 2\n\n## Standards and Architecture Conformance\n\n- Coding standards: necessity and reuse ladder of S01 applied to every change-set entry; the one new file is justified by the design's reuse table, the loader reuses the `load_gate_policy` optional-file pattern, metrics and verifier extend existing modules, no new dependency or abstraction; the C7 pinned category sets are a second statement of nine tier assignments, made by design D-005 and raised as Q-001 rather than as a finding; conforms apart from F-001\n- Architecture rules: design D-001 to D-005 and constraints C-001 to C-013; the declaration matches the Phase-to-Tier Mapping row for row (37 phases, 14 light, 14 standard, 9 deep); the resolver is pure and reads only the recovery ledger (state id plus reason code `validation_failed`) and the work item's `supersessions`, gate rejections ledger under the gate's own state id and transport failures under `tool_failure`, so neither counts; promotion is one tier per rejection, capped at deep, never lowered; the envelope gains one top-level field and the payload digest and idempotency key do not read it; no agent module, entrypoint, Phase Model table, gate matrix, validator, template or registry file changed; conforms apart from F-001\n- Security criteria: Security Engineering S09; the declaration holds alias strings only, no credential or secret; the runtime makes no model call and adds no vendor dependency; hints are copied into the envelope and prompt verbatim from a file in the managed framework directory, which carries the same trust as runtime code; a tampered declaration changes which reader handles a phase but not which validator or gate decides it (design R-009, pinned by C7); conforms\n- Exceptions requested: None identified.\n\n## Test Adequacy Assessment\n\n- Test evidence reviewed: confirmed by this run, each on exported copies of HEAD and of the working tree outside the repository: `python -m unittest tests.test_model_tier tests.test_bundled_payload -v` ran 54 tests OK; `python -m unittest discover -s tests` ran 595 OK on HEAD and 638 OK on the changed tree; `python .claude/runtime/verify_registry_coverage.py` 6/6 on HEAD and 8/8 on the changed tree; `verify_manifests.py` 2/2, `verify_validators.py` 6/6, `verify_vertical_slice.py` 10/10, `verify_multi_phase.py` 15/15 including M14 on both trees; `verify_recovery.py` 73/74 on both trees failing only X1, on placeholder arguments in the clearing action of its own injected policy-violation run run-d8870619db82; `verify_self_hosting.py` failing only S8 on both trees, on run-5df08e171670 at HEAD and additionally on this in-progress run on the changed tree; byte comparison of the six mirrored paths found zero differences; `plan` plus `dispatch` of the same request on both runtimes produced envelopes that differ only by the added `model_tier` field and by the timestamp-derived `built_at`, `frozen_at` and task-context digest; `verify_recovery.py --keep` on the changed copy showed execution-planning promoted standard to deep after one validator rejection and after a real gate rejection with rollback, with `escalated` true on the event; claimed but not reproduced: the change account's statement that multi-phase M6 fails, since the implementer's own baseline transcript shows M6 failing on this run while implementation was still running and it now passes, so it was run state, not code\n- Coverage of changed behavior: C-001 by T-001 and C7; C-002 resolver, loader and counter by T-002, T-003, T-004 and T-007, escalation from recorded state confirmed end to end for validator rejection and gate rollback; C-003 by T-005 and T-007; C-004 by T-006 including a failing flat resolver, so C8 is decisive rather than tautological, and C7 fails on a removed entry, a stale entry, an absent file and a breached bar; C-005 is the suite; C-006 and C-007 by T-001; C-008 to C-013 by T-008 and the byte comparison; every change-set entry is cited by at least one executed check\n- Gaps requiring new tests: handed to omn-qa: an automated field-by-field comparison of the original envelope fields against a pre-change envelope (A-006), gate-rejection promotion through a real `rollback` command (A-009), the `inherit` branch of the prompt tier line, and a load-time rejection of a non-`inherit` standard hint once CR-001 lands (F-003, F-001)\n\n## Correction Requests\n\n| ID | Addresses | Required change | Blocking | Owner |\n|---|---|---|---|---|\n| `CR-001` | `F-001` | A declaration whose standard tier does not carry the reserved `inherit` value is refused at load time or reported by the release verifier, so that C-005 holds for every installed declaration and not only for the shipped one | no | omn-dev-1-implement |\n| `CR-002` | `F-002` | The Model Tiers section of `config/runtime.md` states that an absent declaration never promotes (V-001) and that a phase with no entry takes the standard tier's hint, and the mirror is refreshed by the synchronisation command | no | omn-dev-1-implement |\n| `CR-003` | `F-003` | Executed tests cover A-006 against a pre-change envelope, A-009 through a real rollback, and the `inherit` prompt branch | no | omn-qa |\n\n## Residual Risk\n\n- Accepted risk: None identified.\n- Unmitigated risk: tiers are advice; the saving depends on the dispatching session passing the hint as the per-dispatch override, which the runtime cannot observe (change account R-002); a first-attempt rejection of execution-planning drops a run below 3 of 6 non-deep invocations (change account R-003); until CR-001 lands an edited standard hint breaks inheritance for undeclared phases (F-001)\n- Monitoring required: `non_deep_share` in `execution-metrics.json` of each implement-feature run; self-hosting S8 must account for run-ded114f50a46 through its change proposal at closure, while run-5df08e171670 remains a pre-existing unaccounted run; recovery X1 stays pre-existing and unrelated to this change\n\n## Verdict\n\n- Decision: approve-with-corrections\n- Rationale: no critical or high finding exists, test evidence was reviewed and reproduced, the full declared scope was examined, and one medium and two low findings remain open, so the Stage 8 table yields approve-with-corrections with status complete\n- Blocking findings outstanding: None identified.\n- Readiness recommendation: recommend that the Review Gate owner proceed, with CR-001 to CR-003 carried as non-blocking corrections; the gate decision belongs to the owner named in `workflows/workflow-gate-matrix.md`, not to this review\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | Do the PINNED_LIGHT and PINNED_DEEP sets in `.claude/runtime/verify_registry_coverage.py`, required by design D-005, count as a second tier assignment under acceptance criterion A-003, or as verification of the one declaration | no | omn-qa | acceptance of A-003; no finding or verdict here |",
+        "digest": "sha256:18ab9b1b2c709373abce882f66a4e236",
+        "produced_by": "quality-review"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was delivered: an implementation report for the change set itself, a validation report for what was proven about it, a review package for a `review-pull-request` run, or a deployment status for the `communication-and-post-release` phase, which publishes after a release has landed. Without one there is nothing to publish from, and publishing anyway would mean describing a system from this agent's own reading of what it was supposed to become."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-ded114f50a46/states/documentation-and-release-handoff/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-ded114f50a46/states/documentation-and-release-handoff/artifacts/release-note.md"
+    ],
+    "failures": [
+      {
+        "id": "R1",
+        "severity": "Blocking",
+        "quality_ref": "templates/release-note.md",
+        "requirement": "releaseVerdict is one of released, partial, rolled-back",
+        "detail": "releaseVerdict='withheld'"
+      }
+    ]
+  },
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "review-package",
+      "reference": "runs/run-ded114f50a46/states/quality-review/artifacts/review-package.md",
+      "produced_by": "quality-review",
+      "artifact": "review-package.md",
+      "bytes": 12516,
+      "sections": {
+        "read_first": [
+          "Findings",
+          "Correction Requests",
+          "Verdict",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Review Scope",
+          "Severity Summary",
+          "Standards and Architecture Conformance",
+          "Test Adequacy Assessment",
+          "Residual Risk"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-ded114f50a46/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:72c520aba9c53e66f9718faca35613a5",
+    "bytes": 45736,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "database",
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "documentation-and-release-handoff"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-08T15:59:53Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 22496,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/release-note.md",
+        "digest": "sha256:a6125cac38eb2edeca7105d936d9304c",
+        "supplies": null,
+        "bytes": 2548,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null,
+        "bytes": 5292,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null,
+        "bytes": 5825,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null,
+        "bytes": 1252,
+        "read": "required",
+        "read_reason": "skill S10 is required for this phase"
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null,
+        "bytes": 1333,
+        "read": "required",
+        "read_reason": "skill S12 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73bd155e6b8344e48a8c66266be118cf",
+        "supplies": null,
+        "bytes": 61682,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:54658dbc51ce3d1c2ac9ad1d35f7aaf6",
+    "input_digest": "sha256:2c9da3d54ddd61b2fdb37a93cc66bea7",
+    "inputs": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/model-tier-architecture-context.md",
+        "source_file": ".claude/runs/inputs/model-tier-architecture-context.md",
+        "digest": "sha256:5b63babf1eef069a473dd7e74480120c"
+      },
+      {
+        "type": "review-package",
+        "reference": "runs/run-ded114f50a46/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-ded114f50a46/states/quality-review/artifacts/review-package.md",
+        "digest": "sha256:18ab9b1b2c709373abce882f66a4e236"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/implement-feature.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 181227,
+    "bytes_required": 19007,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-ded114f50a46/states/documentation-and-release-handoff/artifacts/release-note.md",
+      "runs/run-ded114f50a46/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "reproducing a test or validation result, which belongs to omn-qa"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author or amend a technical design, an architecture decision, or a structural constraint",
+      "define, widen, or narrow product scope or acceptance criteria",
+      "award, withhold, or restate a validation verdict as though this agent reached it",
+      "record a merge, release, or deployment decision",
+      "publish a statement the supplied evidence does not support",
+      "omit, soften, or defer a breaking change a supplied input declares",
+      "carry forward prior-release content the delivered change made false",
+      "resolve an engineering gap rather than returning it to the role that owns it",
+      "decide a gate that assesses evidence this agent produced",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "describe delivered behavior from the implementation and validation evidence supplied",
+        "draft release notes, change summaries, and closure communication packages",
+        "record usage, limitations, known issues, and troubleshooting guidance",
+        "state the compatibility consequence a declared contract change carries",
+        "identify documentation the delivered change made stale, and propose its correction",
+        "name the audience a communication was addressed to and the handoff it carries",
+        "maintain the trace from each published statement to the artifact that supports it",
+        "record an unresolved engineering question as an open question against its owning role"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author or amend a technical design, an architecture decision, or a structural constraint",
+        "define, widen, or narrow product scope or acceptance criteria",
+        "award, withhold, or restate a validation verdict as though this agent reached it",
+        "record a merge, release, or deployment decision",
+        "publish a statement the supplied evidence does not support",
+        "omit, soften, or defer a breaking change a supplied input declares",
+        "carry forward prior-release content the delivered change made false",
+        "resolve an engineering gap rather than returning it to the role that owns it",
+        "decide a gate that assesses evidence this agent produced",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else. Product documentation living in the repository is proposed as content inside the artifact and applied by the role that owns the file, so a documentation change never travels as an unreviewed write.",
+        "rationale": "This agent's authority is over what is said about a change, never over the change itself. Writing to the repository would let a publication step alter the delivered behavior it exists to describe, and the resulting document would then be accurate about a system this agent had just modified."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "reproducing a test or validation result, which belongs to omn-qa"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same published statements, the same known-issue set, the same compatibility statement, the same declared release verdict, and the same declared artifact status.",
+      "identifierSchemes": {
+        "knownIssues": "K-<zero-padded-sequence>"
+      },
+      "orderingRule": "Known issues keep the order of the source that recorded them, so a supplied defect list and the issues published from it can be read side by side.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied evidence, release context, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "release-note.md",
+    "artifact_path": "runs/run-ded114f50a46/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "template_ref": "templates/release-note.md",
+    "contract_ref": "agents/omn-documentation/output.md",
+    "quality_ref": "agents/omn-documentation/quality.md",
+    "validator": "release_note_validator",
+    "result_envelope_path": "runs/run-ded114f50a46/states/documentation-and-release-handoff/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-08T15:59:53Z",
+  "model_tier": {
+    "tier": "standard",
+    "host_hint": "inherit",
+    "basis": "declared light for implement-feature/documentation-and-release-handoff in config/model-tier-policy.json",
+    "escalation": {
+      "from": "light",
+      "to": "standard",
+      "validator_rejections": 1,
+      "gate_rollbacks": 0,
+      "reason": "1 validator rejection(s) and 0 gate rejection(s) with rollback recorded for this phase; promoted from light to standard"
+    }
+  },
+  "context_budget": {
+    "modules_full_bytes": 85749,
+    "modules_core_bytes": 42233,
+    "slice_all_bytes": 181227,
+    "slice_required_bytes": 19007,
+    "inputs_bytes": 1469,
+    "upstream_full_bytes": 12517,
+    "upstream_read_first_bytes": 3609,
+    "task_context_bytes": 45736,
+    "fixed_bytes": 64107,
+    "legacy_estimate_bytes": 345069,
+    "progressive_estimate_bytes": 176161,
+    "legacy_estimate_tokens": 86267,
+    "progressive_estimate_tokens": 44040,
+    "savings_pct": 48.9
+  }
+}

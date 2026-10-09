@@ -1,0 +1,701 @@
+schema: framework.runtime/task-context.v1
+task_id: run-ded114f50a46
+command: implement
+workflow: implement-feature v1.0.0
+run_status: Completed
+updated_at: '2026-10-08T16:01:24Z'
+objective: 'Let the framework declare, per workflow phase, which class of model should execute it, and carry that declaration
+  in the dispatch envelope the runtime hands to the host. Today all twelve agent entrypoints declare model: inherit, the envelope
+  has no model field, and every phase therefore runs on whatever model the operator''s session happens to use, however light
+  the phase is. A single implement-feature run costs about 510K estimated context tokens across nine agent invocations. Runtime
+  0.7 cut what each agent reads. It did nothing about which model reads it. Several phases are read-and-summarise work (scope
+  definition, technical discovery, documentation hand-off, artifact packaging, reposi...'
+inputs:
+- type: feature-request
+  reference: runs/inputs/model-tier-feature-request.md
+  digest: sha256:7fa529598e6e925362f09ed43c4a4a9e
+- type: change-request
+  reference: runs/inputs/model-tier-change-request.md
+  digest: sha256:cc12348b7459a93afcff425dcab01868
+- type: business-intent
+  reference: runs/inputs/model-tier-business-intent.md
+  digest: sha256:881f72a81f6bb67c8d59aa810a52b72a
+- type: architecture-context
+  reference: runs/inputs/model-tier-architecture-context.md
+  digest: sha256:5b63babf1eef069a473dd7e74480120c
+relevant_agents:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  status: completed
+  required_skills:
+  - S02
+  - S07
+- phase: execution-planning
+  agent: planner
+  status: completed
+  required_skills:
+  - S02
+  - S01
+  - S07
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  status: completed
+  required_skills:
+  - S01
+  - S03
+  - S06
+  - S09
+- phase: implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S11
+  - S12
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S08
+- phase: documentation-and-release-handoff
+  agent: omn-documentation
+  status: completed
+  required_skills:
+  - S11
+  - S10
+  - S12
+completed_phases:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  artifact: runs/run-ded114f50a46/states/scope-and-acceptance/artifacts/scope-definition.md
+  digest: sha256:2192e617e31ff84cd3d3c9be3c94ac51
+  validation: pass 33/33
+  attempts: 1
+- phase: execution-planning
+  agent: planner
+  artifact: runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md
+  digest: sha256:192d19c54dee33cf3862fc2e039a01c2
+  validation: pass 45/45
+  attempts: 1
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  artifact: runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  digest: sha256:ecd222389a24384723e2e6c8188ff0f2
+  validation: pass 78/78
+  attempts: 1
+- phase: implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-ded114f50a46/states/implementation/artifacts/implementation-report.md
+  digest: sha256:405a9b7a18e251da5ccf6ae37ecc422f
+  validation: pass 32/32
+  attempts: 1
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  artifact: runs/run-ded114f50a46/states/quality-review/artifacts/review-package.md
+  digest: sha256:b6d143abd99816413616faf7cc3b82e2
+  validation: pass 31/31
+  attempts: 1
+- phase: documentation-and-release-handoff
+  agent: omn-documentation
+  artifact: runs/run-ded114f50a46/states/documentation-and-release-handoff/artifacts/release-note.md
+  digest: sha256:c9fb6b106bd7ef149a6a345b9538268b
+  validation: pass 32/32
+  attempts: 2
+gates:
+- gate: Scope Gate
+  closes: scope-and-acceptance
+  decision: approved
+  owner_role: omn-business-analyst
+  decided_by: operator on behalf of omn-business-analyst
+- gate: Planning Gate
+  closes: execution-planning
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: operator on behalf of omn-tech-lead
+- gate: Design Gate
+  closes: solution-design-and-risk-assessment
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: operator on behalf of omn-tech-lead
+- gate: Review Gate
+  closes: quality-review
+  decision: approved
+  owner_role: omn-qa
+  decided_by: operator on behalf of omn-qa
+- gate: Verification Gate
+  closes: quality-review
+  decision: approved
+  owner_role: omn-qa
+  decided_by: operator on behalf of omn-qa
+- gate: Closure Gate
+  closes: documentation-and-release-handoff
+  decision: approved
+  owner_role: omn-orchestrator
+  decided_by: operator on behalf of omn-orchestrator
+artifacts:
+  scope-and-acceptance: runs/run-ded114f50a46/states/scope-and-acceptance/artifacts/scope-definition.md
+  execution-planning: runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md
+  solution-design-and-risk-assessment: runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  implementation: runs/run-ded114f50a46/states/implementation/artifacts/implementation-report.md
+  quality-review: runs/run-ded114f50a46/states/quality-review/artifacts/review-package.md
+  documentation-and-release-handoff: runs/run-ded114f50a46/states/documentation-and-release-handoff/artifacts/release-note.md
+parallel_groups:
+- - scope-and-acceptance
+  - execution-planning
+- - solution-design-and-risk-assessment
+- - implementation
+- - quality-review
+- - documentation-and-release-handoff
+scope:
+  in_scope:
+  - 'S-001: Every dispatchable phase has exactly one declared tier (light, standard, or deep), and each tier maps to on...
+    | Feature request, Expected outcome bullet 1; architecture context on tier data living outside workflow tables | must-have'
+  - 'S-002: Every dispatch envelope carries an additive model tier record stating the resolved tier, the host model hin...
+    | Feature request, Expected outcome bullet 2; architecture context on additive fields | must-have'
+  - 'S-003: A phase whose prior attempt was rejected by its validator, or whose gate was rejected and rolled back, is d...
+    | Feature request, Expected outcome bullet 3; business intent success bullet 3 | must-have'
+  - 'S-004: A phase with no declaration resolves to inheriting the host model, and no existing run, replay, or verifier...
+    | Feature request, Expected outcome bullet 4; business intent success bullet 2 | must-have'
+  - 'S-005: The run''s execution metrics report invocations and estimated context bytes by tier | Feature request, Expected
+    outcome bullet 5; business intent success bullet 1 | must-have'
+  - 'S-006: The framework''s own verification detects a dispatchable phase with no declared tier and detects an escalati...
+    | Change request, Surfaces row on verifiers; feature request, "readable by the runtime and verifiable" (D-001) | must-have'
+  - 'S-007: The framework''s distributed copy carries the same tier behaviour as the authoritative copy | Change request,
+    Surfaces row on the bundled payload mirror (D-003) | should-have'
+  - 'S-008: The envelope field and the escalation rule are documented in the runtime governance documentation | Change request,
+    Surfaces row on execution-engine and runtime documentation | should-have'
+  - 'S-009: The runtime version increments to identify the release that carries tiering | Change request, Surfaces row on
+    the runtime (RUNTIME_VERSION increments) | should-have'
+  - 'S-001: One declared tier per dispatchable phase and one host hint per tier, in a single authoritative declaration outside
+    agent text. Tasks T-001, T-002, T-0...'
+  - 'S-002: An additive tier record in every dispatch envelope: resolved tier, host hint, basis. Tasks T-006, T-007.'
+  - 'S-003: One-tier promotion after a validator rejection or a gate rejection with rollback, recorded with its reason, with
+    no escalation above deep. Tasks T-008...'
+  - 'S-004: A phase with no declaration inherits the host model, and no existing run, replay, or verifier changes outcome.
+    Tasks T-005, T-006.'
+  - 'S-005: Execution metrics report invocations and estimated context bytes by tier. Task T-010.'
+  - 'S-006: Framework verification detects a dispatchable phase with no declared tier and a non-monotonic escalation. Task
+    T-011.'
+  - 'S-007: The distributed copy carries the same tier behaviour as the authoritative copy. Task T-012.'
+  - 'S-008: The envelope field and escalation rule are documented in runtime governance documentation. Task T-013.'
+  - 'S-009: The runtime version value increments. Task T-014.'
+  out_of_scope:
+  - 'X-001: Running phases concurrently | Feature request and business intent both name it a separate later change | A separate
+    change request for parallel phase execution is supplied'
+  - 'X-002: Choosing vendors or model identifiers inside runtime logic, any model call by the runtime, and any vendor S...
+    | Business intent non-goal; architecture context that the runtime only names a tier and the host chooses | A supplied
+    input asks the runtime itself to invoke a model'
+  - 'X-003: Changes to agent module text, workflow Phase Model tables, the gate matrix, validators, templates, or artif...
+    | Change request "Not touched"; feature request "Additive only" | A supplied input names one of these as a deliverable'
+  - 'X-004: Changing which phases exist, who owns them, or what they must produce | Business intent non-goal | A supplied
+    input requests a change to a workflow''s phase set'
+  - 'X-005: Editing the agent entrypoint model declarations, which stay as they are | Architecture context: the host override
+    makes the hint effective while entrypoint declarations stay unchanged | The host stops accepting a per-dispatch override'
+  - 'X-006: Lowering a phase''s tier after success or on any signal other than a recorded rejection | Inputs specify promotion
+    only; demotion is not requested (D-002) | A supplied input requests demotion or adaptive tiering'
+  - 'X-002: Vendor or model identifiers in runtime logic, any model call by the runtime, any vendor SDK dependency; the runtime
+    only names a tier and the host cho...'
+  - 'X-003: Changes to agent module text, Phase Model tables, the gate matrix, validators, templates, or artifact contracts;
+    the request is additive only.'
+  - 'X-004: Changing which phases exist, who owns them, or what they produce; not requested.'
+  - 'X-005: Editing agent entrypoint model declarations; the host override makes the hint effective while they stay unchanged.'
+validation_requirements:
+  acceptance_criteria:
+  - 'A-001: 100 percent of dispatchable phases across the active workflows resolve to exactly one tier from light, stan...
+    | S-001 | Framework verifier run reports zero uncovered dispatchable phases'
+  - 'A-002: The phases the request names as light (scope definition, technical discovery, documentation hand-off, artif...
+    | S-001 | Review of the declaration against the request''s named lists'
+  - 'A-003: Each of the three tiers maps to exactly one host model hint, and tier assignment is stated in exactly one a...
+    | S-001 | Review of the declaration and a search of the framework for any second tier assignment'
+  - 'A-004: Zero tier assignments appear in agent module text | S-001 | Text search of the agent module files returns zero
+    matches'
+  - 'A-005: Every dispatched envelope of an implement-feature run carries a model tier record with non-empty tier, host...
+    | S-002 | Inspection of every envelope produced by dispatching all phases of one run'
+  - 'A-006: The original envelope fields are present and unchanged in name and value compared with the same run state b...
+    | S-002 | Field-by-field comparison of an envelope against a pre-change envelope for the same run state'
+  - 'A-007: The change adds zero model invocations and zero vendor SDK dependencies | S-002 | Review of the change set and
+    the dependency declarations'
+  - 'A-008: After a validator rejection at attempt N of a light or standard phase, attempt N+1 resolves exactly one tie...
+    | S-003 | Dispatch of a phase after a recorded validator rejection, with envelope inspection'
+  - 'A-009: After a gate rejection and rollback of a light or standard phase, the next attempt resolves exactly one tie...
+    | S-003 | Dispatch of a phase after a recorded gate rejection and rollback, with envelope inspection'
+  - 'A-010: A deep phase after any rejection stays at deep, and its envelope does not record a tier above deep | S-003 | Dispatch
+    of a deep phase after a recorded rejection, with envelope inspection'
+  - 'A-011: Zero rejected light or standard attempts are retried at the same tier | S-003 | Review of the attempt and tier
+    history of a run containing rejections'
+  - 'A-012: The tier resolved after a rejection is identical whether dispatch happens in the same session or a fresh on...
+    | S-003 | Comparison of two dispatches of the same phase, one in-session and one from recorded state alone'
+  - 'A-013: A phase with no declaration resolves to inheriting the host model and its envelope records no escalation un...
+    | S-004 | Dispatch of a phase absent from the declaration, with envelope inspection'
+  - 'A-014: Every existing framework verifier, including the replay stability check, returns the same result as its rec...
+    | S-004 | Run of all verifiers compared with the recorded baseline results'
+  - 'A-015: The execution metrics list invocations and estimated context bytes for each tier, and the per-tier values s...
+    | S-005 | Comparison of the per-tier figures with the run totals for a completed run'
+  - 'A-016: The execution metrics state the share of invocations at a non-deep tier as a figure, and for an implement-f...
+    | S-005 | Reading the execution metrics of a completed implement-feature run'
+  - 'A-017: The verifier returns failure when one dispatchable phase is removed from the declaration | S-006 | Verifier run
+    against a declaration with one phase removed'
+  - 'A-018: The verifier returns failure when an escalation resolves to the same or a lower tier than the prior attempt |
+    S-006 | Verifier run against an escalation record that does not rise'
+  - 'A-019: The distributed copy differs from the authoritative copy in zero files | S-007 | Run of the payload synchronisation
+    check reports zero differences'
+  - 'A-020: The runtime governance documentation states the envelope field, its three parts, the escalation rule, and t...
+    | S-008 | Review of the documentation against that four-item list and of the README size before and after'
+  - 'A-021: The runtime version value after the change is greater than the value before it | S-009 | Comparison of the version
+    value before and after'
+  test_focus:
+  - Coverage fails when one phase entry is removed, when an entry names a phase that no longer exists, and when a tier has
+    no hint; implement-feature shows at le...
+  - 'Escalation for each rejection kind: one tier up after a validator rejection, one tier up after a gate rejection with
+    rollback, deep stays deep, a transport f...'
+  - A dispatch built from recorded state alone in a fresh session yields the same tier, hint, and reason as the in-session
+    dispatch.
+  - Field-by-field comparison of original envelope fields against a pre-change envelope for the same run state, and every
+    existing verifier including replay stab...
+  - Per-tier metrics sum to the run totals for a completed implement-feature run, with historical runs landing in the untiered
+    bucket.
+  - An absent declaration file inherits everywhere; a malformed file fails dispatch with a policy failure.
+  - Zero tier assignments in agent module text and zero model identifiers in runtime logic.
+  evidence:
+  - 'T-001: declaration covers all 37 phases, standard inherits, 3 of 6 implement-feature phases non-deep, operator tie...
+    | contract | C-001, C-002, C-005, C-006, C-007'
+  - 'T-002: absent file loads as none; unreadable file, unknown tier, missing or blank hint each fail as a policy failure
+    | unit | C-002, C-005'
+  - 'T-003: one-tier promotion per rejection kind with stated reason, deep ceiling, never lowered, undeclared phase esc...
+    | unit | C-002, C-005'
+  - 'T-004: only validator rejections under the phase and supersessions count; transport failures, other phases, and ga...
+    | integration | C-002, C-005'
+  - 'T-005: per-tier invocations and bytes sum to the run totals, untiered bucket, empty share when nothing is tiered | unit
+    | C-003, C-005'
+  - 'T-006: coverage check fails on a removed entry, a stale entry, a missing file, and a breached non-deep bar; monoto...
+    | contract | C-001, C-004, C-005'
+  - 'T-007: real command line against a copy of the tree: complete tier record, original envelope fields unchanged, eve...
+    | end-to-end | C-001, C-002, C-003, C-005'
+  - 'T-008: the bundled payload equals the authoritative tree after synchronisation | contract | C-008, C-009, C-010, C-011,
+    C-012, C-013'
+  - 'T-009: regression baseline: the whole repository suite, 595 tests before the change, 638 after | regression | C-001,
+    C-002, C-003, C-004, C-005, C-006, C-007, C-008, C-009, C-010, C-011, C-012, C-013'
+  - 'T-010: registry coverage verifier, 8 of 8 checks including the two new ones (6 of 6 before the change) | static | C-001,
+    C-002, C-004'
+  - 'T-011: manifest conformance verifier, 2 of 2, unchanged | static | C-002'
+  - 'T-012: artifact validator verifier, 6 of 6, unchanged | static | C-002'
+  - 'T-013: vertical slice verifier, 10 of 10, unchanged, including no loading policy in agent modules | static | C-002, C-003'
+  verification:
+  - 'Verification method: the baseline was taken on an unmodified copy of the tree before any edit (suite 595 tests OK; verifier
+    verdicts recorded per check), the...'
+  - 'Commands executed: python -m unittest discover -s tests; python -m unittest tests.test_model_tier and its seven test
+    classes individually; python -m unittest...'
+  - 'Result summary: executed 13 evidence rows, passed 13, failed 0. Suite 638 tests OK after the change against 595 OK before
+    it. Verifier verdicts per check mat...'
+  - 'Unverified areas: none'
+constraints:
+- 'Business constraints: Cost must fall without weakening any gate, validator, or acceptance rule; a phase''s tier is advice
+  and correctness is still decided mec...'
+- 'Regulatory or policy constraints: Additive only, so the original envelope fields, Phase Model tables, gates, validators,
+  artifact contracts, and agent module...'
+- 'Delivery constraints: The authoritative framework tree is edited first and the distributed copy is refreshed by the synchronisation
+  command, never by hand; t...'
+- 'External dependencies: The host must accept a per-dispatch model override for a tier hint to take effect (architecture
+  context); this framework does not cont...'
+- 'Wave 1: T-001, T-008'
+- 'Wave 2: T-002'
+- 'Wave 3: T-003, T-004'
+- 'Wave 4: T-006'
+- 'Wave 5: T-009, T-010, T-014'
+- 'Wave 6: T-011'
+- 'Wave 7: T-007'
+- 'Wave 8: T-005, T-013'
+- 'Wave 9: T-012'
+- 'C-001: structural | A tier is declared per workflow and phase, once, in one location outside agent text | hard'
+- 'C-002: structural | Phase Model tables and the gate matrix keep their parsed shape; no column is added | hard'
+- 'C-003: structural | The runtime names a tier and a hint; it never calls a model, embeds a model identifier in logic, or
+  adds a... | hard'
+- 'C-004: migration | The envelope change is additive: original fields keep name and value, and the new record is deterministic
+  f... | hard'
+- 'C-005: migration | A phase with no declaration inherits the host model, and no existing run, replay, or verifier changes
+  outcome | hard'
+- 'C-006: functional | Escalation is promotion-only, capped at deep, derived from recorded state, and identical in-session
+  and fro... | hard'
+- 'C-007: structural | Agent module text, entrypoint declarations, validators, templates, and artifact contracts are unchanged
+  | hard'
+- 'C-008: quality-attribute | At least 3 of the 6 implement-feature phases resolve to a non-deep tier | hard'
+- 'C-009: operability | Documentation goes to config/runtime.md and config/execution-engine.md, and runtime/README.md is not
+  enlarged | negotiable'
+- 'C-010: migration | The authoritative tree is edited first and the distributed copy is refreshed only by the payload synchronis...
+  | hard'
+- 'C-011: quality-attribute | Artifacts written by write_run_ledger stay stable when content is unchanged | hard'
+- 'C-012: functional | Execution metrics report invocations and estimated context bytes by tier, and the per-tier values sum
+  to th... | hard'
+- 'C-013: compliance | A tier is advice: no gate, validator, or acceptance rule is weakened and correctness stays decided
+  mechanic... | hard'
+- 'P-001: The declaration structure, hint form, and phase-to-tier assignments are fixed and the file exists before an... |
+  M-002 | none'
+- 'P-002: The escalation rule, naming the recorded state read for each rejection kind, the deep ceiling, and the reas... |
+  M-009, M-010 | none'
+- 'P-003: Tier resolution and the additive model_tier record exist in the runtime before escalation, metrics, or docu... |
+  M-001, M-002 | P-001'
+- 'P-004: Promotion-only escalation extends the resolver, reading the ledger and the supersessions list without chang... |
+  M-001, M-009, M-010 | P-002, P-003'
+- 'P-005: Per-tier metrics read the record and the event detail after the record shape is fixed | M-003 | P-003'
+- 'P-006: The coverage and monotonicity checks are added after the declaration exists and after escalation exists | M-004,
+  M-002 | P-001, P-004'
+- 'P-007: The runtime version value rises in the same change set that first emits the record | M-001 | P-003'
+- 'P-008: Additivity, escalation equality across sessions, and every existing verifier at its baseline are verified o... |
+  M-001, M-003, M-004, M-008 | P-004, P-005, P-006, P-007'
+- 'P-009: The field and rule are documented after the verified behaviour is known | M-005, M-006, M-014 | P-008'
+- 'P-010: The mirror is refreshed last, by the synchronisation command only | M-007 | P-009'
+decisions:
+- 'D-001: Verification of declaration coverage and escalation monotonicity is in scope as S-006 | The feature request requires
+  the declaration to be verifiable, and a tier that cannot be checked could sile... | Delivery includes a framework-level
+  check, not only runtime behaviour'
+- 'D-002: Escalation is promotion-only; lowering a tier is excluded as X-006 | The inputs state promotion on rejection and
+  never request demotion; adding it would widen the request | Tiers can only rise within an attempt sequence, so risk to quality
+  is bounded'
+- 'D-003: Distributed-copy parity (S-007) and documentation (S-008) are should-have, not must-have | The change request lists
+  them as surfaces, but the business success measures are met by runtime behaviour,... | If cut, installed copies and documentation
+  lag while the runtime outcome is still delivered'
+- 'D-004: The host model hint is scoped as configuration advice only, with its form left open in Q-002 | The business intent
+  bars choosing vendors or model identifiers inside the runtime while the feature request... | The delivered mapping cannot
+  embed runtime logic that selects a model'
+- 'Selected: O-001'
+- 'Structural change: one shipped declaration file (M-002) is read by the runtime (M-001) at dispatch. A pure resolver turns
+  declared tier plus recorded rejecti...'
+- 'Rationale: it is the only viable option with the smallest impact surface (2 against 3 for O-003), it reuses the optional-file
+  loader precedent, the recovery...'
+- 'Highest-scoring rejected alternative and why it lost: O-003 ranks second; it satisfies the hard constraints but adds a
+  third contract change to the workflow...'
+- 'Tradeoffs accepted:'
+- A new data file is introduced, because no existing carrier holds phase-keyed data outside the parsed tables (see the reuse
+  section).
+- Host hint strings live in configuration data, so changing the host's accepted values means editing that file, not runtime
+  logic (C-003).
+- A hint is effective only if the dispatching session passes it on (A-001), so the runtime proves what it advised, not what
+  ran.
+- Execution planning is placed at standard, leaving exactly 3 of 6 implement-feature phases non-deep, with no margin for a
+  first-attempt rejection of a standar...
+- 'Form of the host model hint (D-001): an opaque host alias string held in the declaration, one per tier. The standard tier
+  carries the reserved value inherit,...'
+- 'Phase-to-tier mapping (D-003): the mapping table after the decisions table below.'
+- 'D-001: Carry tier data in one shipped data file under config/, keyed by workflow and phase, with one opaque host h... |
+  Yes | architecture-decision-record-D-001.md'
+- 'D-002: Resolve the tier at dispatch as a pure derivation from the declaration and recorded run state: one tier of... |
+  Yes | architecture-decision-record-D-002.md'
+- 'D-003: Assign tiers by work kind: light for read-and-summarise and template-fill phases, standard for bounded-judg... |
+  No | none; recorded inline'
+- 'D-004: Metrics add a by-tier table of invocations counted from invocation_started events and estimated bytes taken... |
+  No | none; recorded inline'
+- 'D-005: Add two checks to the existing coverage verifier (declaration coverage including the 3-of-6 bar and the req... |
+  No | none; recorded inline'
+- 'V-001: With no declaration file the resolver returns standard and inherit and never promotes; with the file presen... |
+  D-001, D-002 | the design states both an absent file resolving to inherit and an undeclared phase promoting from standard;...'
+open_questions:
+- 'Q-001: What minimum share of an implement-feature run''s invocations must be non-deep for the business to call this...
+  | no | omn-business-analyst'
+- 'Q-002: In what form is the host model hint declared, given the non-goal against model identifiers inside the runtime? |
+  no | architect'
+- 'Q-003: Which tier does each phase the request does not name receive, and which phase identifiers do the request''s... |
+  no | architect'
+- 'Q-001: Which phase identifiers across active workflows do the request''s named categories (technical discovery, art...
+  | no | architect'
+- 'Q-002: In what form is the host model hint declared, given that the runtime may not embed model identifiers? | no | architect'
+- 'Q-001: Does the operator accept execution planning at standard, giving exactly 3 of 6 non-deep with no margin, or... |
+  no | omn-business-analyst'
+- 'Q-002: Which two host alias values does the declaration use for the light and deep hints | no | omn-tech-lead'
+- 'Q-003: Does the recorded baseline of the registry coverage verifier count its checks, so that adding two reads as... |
+  no | omn-qa'
+- 'Q-004: Is a per-dispatch operator switch to disable or override tiering wanted | no | omn-product-owner'
+- 'Q-001: Do the PINNED_LIGHT and PINNED_DEEP sets in .claude/runtime/verify_registry_coverage.py, required by design... |
+  no | omn-qa'
+objectives:
+- 'TO-1: One authoritative declaration assigns exactly one tier to every dispatchable phase and one host hint to each tier,
+  with no tier assignment in agent mod...'
+- 'TO-2: The envelope carries an additive tier record (tier, host hint, basis) that is deterministic from run state, with
+  original fields unchanged and no model...'
+- 'TO-3: Escalation is promotion-only, derived from recorded rejection state, capped at deep, and identical in-session and
+  from recorded state alone; verified b...'
+- 'TO-4: Execution metrics report invocations and estimated context bytes per tier, summing to the run totals; verified by
+  comparison with a completed run. Trac...'
+- 'TO-5: The distributed copy equals the authoritative copy, the runtime version value rises, and the governance documentation
+  states the field and rule; verifi...'
+- 'Desired outcome: one authoritative data carrier assigns a tier to every workflow phase; dispatch resolves the tier from
+  that carrier and from recorded run st...'
+- 'Architectural objectives:'
+- One data carrier, keyed by workflow and phase and separate from the Phase Model tables and from agent text, holds every
+  tier assignment and one host hint per...
+- Tier resolution is a pure derivation from that carrier plus recorded run state, so an in-session dispatch and a fresh-session
+  dispatch agree (S-002, S-003).
+- The invocation envelope boundary gains one additive record and the original fields keep name and value (S-002, S-004).
+- Per-tier accounting derives from the event stream and envelopes the runtime already persists (S-005).
+- Declaration coverage and escalation monotonicity are checkable at the existing registry-coverage verification surface (S-006).
+- The distributed copy equals the authoritative tree, the version value identifies the change, and the rules are stated in
+  the runtime governance documents (S-...
+- 'In scope:'
+- The tier declaration file, the resolver and loader in the runtime, the envelope record, the event detail, and the dispatch
+  prompt line (S-001, S-002, S-003,...
+- Per-tier execution metrics, two verification checks, governance documentation, version increment, and mirror refresh (S-005,
+  S-006, S-007, S-008, S-009).
+- 'Out of scope:'
+- 'X-001: concurrent phase execution, a separate later change.'
+- 'X-002: model identifiers in runtime logic, any model call, any vendor dependency.'
+- 'X-003 and X-005: agent module text, entrypoint model declarations, Phase Model tables, the gate matrix, validators, templates,
+  artifact contracts.'
+- 'X-004: which phases exist, who owns them, and what they produce.'
+- 'X-006: lowering a tier after success or adaptive tiering.'
+- 'An operator switch to disable or override a tier for one dispatch: no statement requires it, so it is raised as Q-004 and
+  not designed.'
+assumptions:
+- 'A-001: Statements S-001 to S-009 adopt the identifiers of the approved scope items one-to-one; upstream acceptance... |
+  plan-wide | Trace between this plan and the scope definition breaks'
+- 'A-002: Upstream question UQ-001 is resolved: success is at least 3 of 6 implement-feature phases dispatched at a n... |
+  S-005 | The measure in BO-1 and the T-002 constraint change'
+- 'A-003: The host accepts a per-dispatch model override, so a tier hint can take effect | S-002 | The hint is advisory only
+  and BO-1 savings do not materialise'
+- 'A-004: Recorded run state (recovery ledger, attempt counters) distinguishes a validator rejection from a gate reje... |
+  S-003 | Escalation cannot be derived from recorded state; T-008 and T-009 gain a recording task'
+- 'A-005: omn-documentation can perform the distributed-copy refresh in the closing phase | S-007 | T-012 is reassigned to
+  another owner'
+- 'A-006: The existing verification surface can host the new checks without changing any existing verifier result | S-006
+  | T-011 splits into a surface change and a check addition'
+- 'A-001: The dispatching session reads the tier record or the prompt line and passes the hint as the per-dispatch ov... |
+  Only this step makes a tier effective, since the runtime never calls a model | The hint is advisory, cost does not fall,
+  and metrics count declared tiers rather than models run'
+- 'A-002: The success bar of at least 3 of 6 implement-feature phases non-deep, supplied by the operator, stands as t... |
+  The scope artifact left the minimum share open, and the mapping decision D-003 is sized to it | The tier of the planning
+  phase and of other phases in D-003 changes'
+- 'A-003: The host accepts one cheaper hint value and one strongest hint value that the implementer can name in the d... |
+  The declaration needs two concrete values besides the reserved inherit value | The light or deep tier has no effective hint
+  and falls back to inherit behaviour'
+risks:
+- 'R-001: requirement | execution-planning is assigned deep, or a named-light phase is assigned standard | Fewer than 3 of
+  6 phases non-deep; BO-1 unmet'
+- 'R-002: requirement | Request categories (technical discovery, artifact packaging, repository scan, root-cause analysis)
+  map ambi... | A dispatchable phase is left undeclared or mis-tiered'
+- 'R-003: technical | Recorded rejection state is insufficient to reproduce an escalation in a fresh session | Escalation
+  differs between sessions; UAC-012 fails'
+- 'R-004: technical | A new envelope field or metric changes an artifact the replay check compares | An existing verifier
+  leaves its baseline'
+- 'R-005: dependency | The host stops accepting a per-dispatch model override | Tier hint has no effect; cost does not fall'
+- 'R-006: dependency | The distributed copy is hand-edited, or the authoritative tree changes after the refresh | Parity check
+  reports differences'
+- 'R-007: operational | Cheaper tiers produce more rejected attempts | Promotion cost offsets the saving'
+- 'R-001: delivery | A standard implement-feature phase, such as execution planning, is rejected on its first attempt and
+  promot... | The non-deep share of a run falls below 3 of 6 invocations although the declared tiers meet the bar'
+- 'R-002: operability | The dispatching session does not pass the hint, or the host stops accepting the override, or a named
+  alias... | Tiers are advisory, cost does not fall, and metrics count advice rather than models run'
+- 'R-003: contract | A new envelope field, event detail, or metrics key changes an artifact the replay check or another verifier...
+  | An existing verifier leaves its recorded baseline'
+- 'R-004: structural | The rejection count reads the wrong ledger entries, such as transport failures or gate-state entries,
+  or a... | Escalation differs from the rule or between sessions'
+- 'R-005: migration | The mirror is hand-edited, or the authoritative tree changes after the refresh | The parity check reports
+  differing files'
+- 'R-006: operability | Cheaper tiers produce more rejected attempts | Promotion invocations offset the saving'
+- 'R-007: structural | A phase is added or renamed in a Phase Model without a declaration entry | The phase silently inherits
+  and the cost lever lapses unnoticed'
+- 'R-008: delivery | Adding two checks to the coverage verifier changes a recorded count that a baseline comparison reads
+  as drift | A release verification reports a false regression'
+- 'R-009: security | A wrong or tampered declaration assigns a cheaper tier to a deep phase | A weaker reader produces more
+  rejected attempts, though validators and gates still decide correctness'
+- 'R-001: Three verifier checks fail on the changed tree: multi-phase M6, recovery X1, and self-hosting S8 | high | low'
+- 'R-002: A hint is effective only if the dispatching session passes it as the per-dispatch override, so tiers can be... |
+  medium | medium'
+- 'R-003: Execution planning sits at standard with exactly 3 of 6 implement-feature phases non-deep, so a first-attem... |
+  medium | low'
+- 'R-004: The gate-rejection promotion path was verified through the real state engine record and the counter, not th... |
+  low | low'
+- 'Accepted risk: None identified.'
+- 'Unmitigated risk: tiers are advice; the saving depends on the dispatching session passing the hint as the per-dispatch
+  override, which the runtime cannot obs...'
+- 'Monitoring required: non_deep_share in execution-metrics.json of each implement-feature run; self-hosting S8 must account
+  for run-ded114f50a46 through its ch...'
+plan_tasks:
+- 'T-001: Decide the tier declaration structure | depends on none'
+- 'T-002: Decide the tier of each dispatchable phase | depends on T-001'
+- 'T-003: Create the tier declaration | depends on T-001, T-002'
+- 'T-004: Design verification evidence for the tier change | depends on T-002, T-008'
+- 'T-005: Verify the tier change against the scope acceptance criteria | depends on T-004, T-007'
+- 'T-006: Implement tier resolution with the additive envelope record | depends on T-003'
+- 'T-007: Review the tier change set against the additivity constraint | depends on T-009, T-010, T-011, T-014'
+- 'T-008: Decide the escalation derivation rule | depends on none'
+- 'T-009: Implement promotion-only escalation | depends on T-006, T-008'
+- 'T-010: Implement per-tier execution metrics | depends on T-006'
+- 'T-011: Implement the tier verification checks | depends on T-003, T-009'
+- 'T-012: Refresh the distributed copy | depends on T-005, T-013'
+- 'T-013: Document the tier governance rules | depends on T-007, T-009'
+- 'T-014: Increment the runtime version | depends on T-006'
+facts:
+- 'F-001: All twelve agent entrypoints declare model: inherit and the invocation envelope has no model field | feature-request
+  input, Request section; agents/.agent.md frontmatter'
+- 'F-002: Envelope fields added since 0.7.0 are additive: a consumer reading only the original eleven fields reads th... |
+  architecture-context input; config/execution-engine.md, Agent Invocation Envelope'
+- 'F-003: The runtime core never invokes a model; it builds the envelope and hands it to an adapter, so a tier is adv... |
+  architecture-context input; runtime/framework_runtime.py header and cmd_dispatch'
+- 'F-004: Phase Model tables are machine-parsed by section heading and header-keyed columns; the 8 active workflows p... |
+  runtime/framework_runtime.py parse_phase_model; workflows/.md; architecture-context input'
+- 'F-005: One agent owns phases of unlike weight: omn-dev-2-reviewer owns quality-review and artifact-packaging, omn-... |
+  Phase Model tables of the eight workflow specifications'
+- 'F-006: load_gate_policy is the precedent for a runtime-read JSON file under config/: an absent file keeps prior be... |
+  runtime/framework_runtime.py load_gate_policy; config/gate-policy.md; omn_agent/source.py MANAGED_DIRS'
+- 'F-007: Registry workflow records reject unknown fields, and registry/workflows.yaml is a member of every phase''s f...
+  | registry/workflows.yaml automation.validation; invocation envelope context_slice.members'
+- 'F-008: The recovery ledger is append-only per run, one entry per classified failure carrying state_id, failure_cla... |
+  runtime/recovery_policy.py RecoveryLedger; runtime/framework_runtime.py emit_failure_envelope'
+- 'F-009: A validator rejection is ledgered under the phase''s state_id with reason code validation_failed; a missing... |
+  runtime/framework_runtime.py cmd_complete; runtime/recovery_policy.py FAILURE_POLICIES'
+- 'F-010: An authorised rollback appends the superseded attempt to the append-only supersessions list of the phase''s... |
+  runtime/state_engine.py header; runtime/framework_runtime.py record_gate_decision'
+- 'F-011: Every dispatch appends an invocation_started event for the phase to the append-only event stream, and execu... |
+  runtime/framework_runtime.py cmd_dispatch; runtime/execution_metrics.py compute'
+- 'F-012: The per-phase invocation envelope is rewritten at each dispatch, a rollback re-entry snapshots the prior at... |
+  runtime/framework_runtime.py cmd_dispatch and snapshot_attempt; runtime/execution_metrics.py'
+- 'F-013: The registry coverage verifier iterates every workflow and phase row of the active Phase Models and is the... |
+  runtime/verify_registry_coverage.py; validation/framework-release-checklist.md'
+- 'F-014: The runtime version value is 0.8.0, and 0.7.0 and 0.8.0 each added fields additively | runtime/framework_runtime.py
+  RUNTIME_VERSION; config/execution-engine.md'
+- 'F-015: runtime/README.md is 61682 bytes and a frozen context member read by agents, while config/runtime.md alread... |
+  invocation envelope context_slice.members; config/runtime.md; architecture-context input'
+- 'F-016: The authoritative tree is edited first and omn_agent/_bundled_payload/ is a mirror refreshed by the payload... |
+  architecture-context input; tests/test_bundled_payload.py; pyproject.toml'
+- 'F-017: The host accepts a per-dispatch model override on subagent invocation, which is how a tier hint becomes eff... |
+  architecture-context input'
+- 'F-018: The dispatch prompt and the dispatch console output are the surfaces by which the dispatching session learn... |
+  runtime/framework_runtime.py build_dispatch_prompt and cmd_dispatch'
+- 'F-019: The tests/ directory carries runtime-behaviour tests including tests/test_gate_policy.py and tests/test_lea... |
+  tests/ directory listing'
+- 'F-020: Dispatch derives a payload digest from the context digest, input digest, agent version, and canonical artif... |
+  runtime/framework_runtime.py cmd_dispatch'
+- 'F-021: Artifact validators are keyed by artifact type, not by phase or tier | runtime/framework_runtime.py VALIDATORS'
+repository_context:
+  relevant_modules:
+  - 'M-001: runtime/framework_runtime.py | contract-change | F-002, F-003, F-011, F-012, F-018'
+  - 'M-002: config/model-tier-policy.json (new file) | extension | F-004, F-005, F-006'
+  - 'M-003: runtime/execution_metrics.py | contract-change | F-011, F-012'
+  - 'M-004: runtime/verify_registry_coverage.py | extension | F-013'
+  - 'M-005: config/runtime.md | extension | F-015'
+  - 'M-006: config/execution-engine.md | extension | F-002'
+  - 'M-007: omn_agent/_bundled_payload/ | extension | F-016'
+  - 'M-008: tests/ (new model-tier test file beside tests/test_gate_policy.py) | extension | F-019'
+  - 'M-009: runtime/recovery_policy.py | no-change-verified | F-008, F-009'
+  - 'M-010: runtime/state_engine.py | no-change-verified | F-010'
+  - 'M-011: workflows/ Phase Model tables of the eight workflow specifications and workflows/workflow-gate-matrix.md | no-change-verified
+    | F-004'
+  - 'M-012: registry/workflows.yaml | no-change-verified | F-007, F-020'
+  - 'M-013: agents/.agent.md entrypoints and agents/ module sets | no-change-verified | F-001, F-017'
+  - 'M-014: runtime/README.md | no-change-verified | F-015'
+  - 'M-015: runtime/ artifact validators, including runtime/design_validator.py | no-change-verified | F-021'
+  relevant_files:
+  - .claude/config/model-tier-policy.json (added)
+  - .claude/runtime/framework_runtime.py (modified)
+  - .claude/runtime/execution_metrics.py (modified)
+  - .claude/runtime/verify_registry_coverage.py (modified)
+  - tests/test_model_tier.py (added)
+  - .claude/config/runtime.md (modified)
+  - .claude/config/execution-engine.md (modified)
+  - omn_agent/_bundled_payload/config/execution-engine.md (modified)
+  - omn_agent/_bundled_payload/config/model-tier-policy.json (added)
+  - omn_agent/_bundled_payload/config/runtime.md (modified)
+  - omn_agent/_bundled_payload/runtime/execution_metrics.py (modified)
+  - omn_agent/_bundled_payload/runtime/framework_runtime.py (modified)
+  - omn_agent/_bundled_payload/runtime/verify_registry_coverage.py (modified)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path
+changed_files:
+- .claude/config/model-tier-policy.json (added)
+- .claude/runtime/framework_runtime.py (modified)
+- .claude/runtime/execution_metrics.py (modified)
+- .claude/runtime/verify_registry_coverage.py (modified)
+- tests/test_model_tier.py (added)
+- .claude/config/runtime.md (modified)
+- .claude/config/execution-engine.md (modified)
+- omn_agent/_bundled_payload/config/execution-engine.md (modified)
+- omn_agent/_bundled_payload/config/model-tier-policy.json (added)
+- omn_agent/_bundled_payload/config/runtime.md (modified)
+- omn_agent/_bundled_payload/runtime/execution_metrics.py (modified)
+- omn_agent/_bundled_payload/runtime/framework_runtime.py (modified)
+- omn_agent/_bundled_payload/runtime/verify_registry_coverage.py (modified)
+findings:
+- 'F-001: medium | maintainability | .claude/runtime/framework_runtime.py:4301'
+- 'F-002: low | standards | .claude/config/runtime.md:305'
+- 'F-003: low | test-adequacy | tests/test_model_tier.py:387'
+- 'CR-001: F-001 | A declaration whose standard tier does not carry the reserved inherit value is refused at load time or
+  repo... | no'
+- 'CR-002: F-002 | The Model Tiers section of config/runtime.md states that an absent declaration never promotes (V-001) and
+  t... | no'
+- 'CR-003: F-003 | Executed tests cover A-006 against a pre-change envelope, A-009 through a real rollback, and the inherit
+  pr... | no'
+verdicts:
+- 'Decision: approve-with-corrections'
+- 'Rationale: no critical or high finding exists, test evidence was reviewed and reproduced, the full declared scope was examined,
+  and one medium and two low fi...'
+- 'Blocking findings outstanding: None identified.'
+- 'Readiness recommendation: recommend that the Review Gate owner proceed, with CR-001 to CR-003 carried as non-blocking corrections;
+  the gate decision belongs...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:solution-design-and-risk-assessment
+      term: migration
+    - source: artifact:implementation
+      term: migration
+    - source: artifact:documentation-and-release-handoff
+      term: database
+    performance:
+    - source: input:change-request
+      term: profile
+    - source: artifact:scope-and-acceptance
+      term: performance
+    - source: artifact:execution-planning
+      term: performance
+    security:
+    - source: artifact:solution-design-and-risk-assessment
+      term: security
+    - source: artifact:quality-review
+      term: security
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:feature-request
+  - input:change-request
+  - input:business-intent
+  - input:architecture-context
+  - artifact:scope-and-acceptance
+  - artifact:execution-planning
+  - artifact:solution-design-and-risk-assessment
+  - artifact:implementation
+  - artifact:quality-review
+  - artifact:documentation-and-release-handoff
+relevant_skills:
+  scope-and-acceptance:
+    S02: required
+    S07: required
+  execution-planning:
+    S02: required
+    S01: required
+    S07: required
+  solution-design-and-risk-assessment:
+    S01: required
+    S03: required
+    S06: required
+    S09: required
+  implementation:
+    S03: required
+    S06: required
+    S10: required
+    S11: required
+    S12: required
+  quality-review:
+    S07: required
+    S09: required
+    S08: required
+  documentation-and-release-handoff:
+    S11: required
+    S10: required
+    S12: required

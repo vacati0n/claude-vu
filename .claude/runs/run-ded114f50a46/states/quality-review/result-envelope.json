@@ -1,0 +1,89 @@
+{
+  "invocation_id": "inv-ded114f50a46-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ded114f50a46/states/quality-review/artifacts/review-package.md"
+  ],
+  "structured_output": {
+    "package_id": "RP-2026-0009",
+    "review_reference": "run-ded114f50a46 quality-review, per-phase model tier in the dispatch envelope (IR-2026-0010)",
+    "attempt": 1,
+    "package_status": "complete",
+    "verdict": "approve-with-corrections",
+    "counts": {
+      "findings": {"critical": 0, "high": 0, "medium": 1, "low": 2, "total": 3},
+      "findings_by_status": {"open": 3, "resolved": 0, "accepted-risk": 0},
+      "open_by_severity": {"critical": 0, "high": 0, "medium": 1, "low": 2},
+      "correction_requests": 3,
+      "blocking_correction_requests": 0,
+      "open_questions": 1,
+      "blocking_open_questions": 0
+    },
+    "blocking_findings_outstanding": [],
+    "findings": {
+      "F-001": "medium, maintainability, open: load_model_tier_policy accepts any non-empty standard hint, so C-005 (undeclared phase inherits) is not enforced at load or by C7; CR-001 non-blocking",
+      "F-002": "low, standards, open: config/runtime.md Model Tiers omits the V-001 absent-file no-promotion rule and overstates inherit for phases with no entry; CR-002 non-blocking",
+      "F-003": "low, test-adequacy, open: no automated A-006 pre-change envelope comparison, no real-rollback promotion test (A-009), inherit prompt branch unasserted; all confirmed by this review's execution; CR-003 non-blocking"
+    },
+    "focus_checks": {
+      "escalation_from_recorded_state_monotonic_capped": "confirmed: counter reads recovery-ledger entries (state_id == phase, reason_code validation_failed) and work-item supersessions only; gate rejections ledger under the gate state id, transport failures under tool_failure; resolver one tier per rejection, min() cap at deep, never lower; end-to-end promotion observed for validator rejection and real gate rollback",
+      "additive_envelope_and_replay": "confirmed: same request dispatched on HEAD and changed runtimes differs only by model_tier plus timestamp-derived fields; idempotency_key and context_budget equal; verify_multi_phase M14 passes on both trees",
+      "policy_file_absent": "confirmed: resolves standard/inherit, never promotes (V-001), tested by T-003 and a real dispatch in T-007",
+      "mirror_parity": "confirmed: six mirrored paths byte-identical; tests.test_bundled_payload OK",
+      "verifier_decisiveness": "confirmed: C8 fails on a flat resolver, C7 fails on removed, stale, absent and below-bar declarations; not tautological",
+      "agent_modules_or_phase_model_touched": "none: recursive comparison of HEAD against the working tree lists only the thirteen declared paths plus this run's evidence",
+      "pre_existing_verifier_failures": "X1 and S8 fail identically on an export of HEAD (S8 additionally lists this in-progress run on the changed tree); M6 passes on both trees now, and the implementer's baseline transcript shows its earlier failure was this run's implementation phase still running, so run state, not code"
+    },
+    "quality_checks_run": 46,
+    "quality_checks_passed": 46,
+    "quality_checks_repaired_before_emission": [],
+    "quality_checks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass",
+      "P2": "pass", "F1": "pass", "F2": "pass", "F3": "pass", "F4": "pass", "F5": "pass",
+      "P3": "pass", "P5": "pass", "P7": "pass",
+      "P1": "pass", "P4": "pass", "P6": "pass", "R1": "pass", "R2": "pass", "R3": "pass",
+      "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass", "E5": "pass",
+      "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+    },
+    "validation_engine": {
+      "command": "python .claude/runtime/review_package_validator.py <artifact> --envelope <invocation-envelope>",
+      "result": "PASS",
+      "checks": "31/31 passed (3 declared not-machine-checkable)",
+      "blocking_failures": 0,
+      "correctable_failures": 0
+    },
+    "not_machine_checkable_obligations": {
+      "N1": "judged met: every change-set path was diffed or read in full, the rejection counter was traced to the ledger writers, and escalation, additivity, absent-file behaviour, mirror parity and verifier decisiveness were confirmed by execution; no high-risk defect was found",
+      "N2": "judged met: each finding cites a design decision, hard constraint, acceptance criterion or the S07 playbook",
+      "N3": "judged met: severities were set once from the Stage 6 table and not adjusted"
+    },
+    "executed_evidence": [
+      "git diff and git status on the worktree; git archive HEAD and a tar of the working tree exported to scratch copies outside the repository; diff -rq between them",
+      "python -m unittest tests.test_model_tier tests.test_bundled_payload -v (changed copy) -> Ran 54 tests, OK",
+      "python -m unittest discover -s tests -> HEAD copy Ran 595 OK; changed copy Ran 638 OK",
+      "verify_registry_coverage.py -> HEAD 6/6, changed 8/8",
+      "verify_manifests.py 2/2, verify_validators.py 6/6, verify_vertical_slice.py 10/10, verify_multi_phase.py 15/15 -> both copies",
+      "verify_recovery.py -> both copies 73/74, X1 only",
+      "verify_self_hosting.py -> both copies S8 only",
+      "cmp of six authoritative vs bundled paths -> identical",
+      "framework_runtime.py plan + dispatch of one request on both runtimes in fresh scratch copies -> envelopes differ only by model_tier and timestamp-derived fields",
+      "verify_recovery.py --keep (changed copy) -> execution-planning promoted standard to deep after a validator rejection and after a real gate rollback"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-2-reviewer/system.md",
+    "agents/omn-dev-2-reviewer/reasoning.md",
+    "agents/omn-dev-2-reviewer/output.md",
+    "agents/omn-dev-2-reviewer/quality.md",
+    "runs/run-ded114f50a46/states/quality-review/invocation-envelope.json"
+  ],
+  "confidence": 0.85,
+  "declared_side_effects": [
+    ".claude/runs/run-ded114f50a46/states/quality-review/artifacts/review-package.md",
+    ".claude/runs/run-ded114f50a46/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

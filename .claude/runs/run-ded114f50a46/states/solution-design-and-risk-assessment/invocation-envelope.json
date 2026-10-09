@@ -1,0 +1,668 @@
+{
+  "invocation_id": "inv-ded114f50a46-03-001",
+  "run_id": "run-ded114f50a46",
+  "work_item_id": "run-ded114f50a46::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:40e947b2353b3b2f90ab314b00ad267e",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:33d317684aece20ce5b970f6b595c107",
+      "agents/architect/identity.md": "sha256:fc073d2135f891349e8f6639243819e3",
+      "agents/architect/reasoning.md": "sha256:1b050c733dde6e76cac3bd0882b5ceea",
+      "agents/architect/execution.md": "sha256:eccf44aede67c91ba47cae943efb93cf",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:ce1c8f09d9d185400063ec43b073d0c7",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/architect/system.md",
+        "agents/architect/reasoning.md",
+        "agents/architect/output.md",
+        "agents/architect/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/architect/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/architect/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/architect/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 51235,
+      "full_bytes": 110389
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "not-triggered",
+      "area": "database",
+      "basis": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "not-triggered",
+      "area": "security",
+      "basis": "area security is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "required",
+      "area": "performance",
+      "basis": "area performance triggered by 'profile' in input:change-request",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "feature-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/model-tier-feature-request.md",
+        "source_file": ".claude/runs/inputs/model-tier-feature-request.md",
+        "text": "# Feature Request \u2014 Per-Phase Model Tier in the Dispatch Envelope\n\n## Request\n\nLet the framework declare, per workflow phase, which class of model should execute it, and carry\nthat declaration in the dispatch envelope the runtime hands to the host. Today all twelve agent\nentrypoints declare `model: inherit`, the envelope has no model field, and every phase therefore\nruns on whatever model the operator's session happens to use, however light the phase is.\n\n## Why now\n\nA single implement-feature run costs about 510K estimated context tokens across nine agent\ninvocations. Runtime 0.7 cut what each agent reads. It did nothing about which model reads it.\nSeveral phases are read-and-summarise work (scope definition, technical discovery, documentation\nhand-off, artifact packaging, repository scan) that a smaller model can perform; others\n(solution design, root-cause analysis, implementation, quality review) need the strongest model.\nThe framework's gates and validators decide correctness mechanically, so a cheaper tier is safe\nonly if a failing phase is promoted rather than retried at the same tier.\n\n## Expected outcome\n\n- A single authoritative declaration of each phase's tier (`light`, `standard`, `deep`) and of the\n  mapping from tier to a host model hint, readable by the runtime and verifiable.\n- `dispatch` emits a `model_tier` object in the envelope (additive field): the resolved tier, the\n  host model hint, and the basis for the choice.\n- Escalation: a phase whose artifact was rejected by its validator on a prior attempt, or whose\n  gate was rejected and rolled back, is dispatched one tier higher on the next attempt, and the\n  envelope records that it was escalated and why. `deep` never escalates further.\n- A phase with no declaration resolves to `standard`'s behaviour of inheriting the host model, so\n  no existing run, replay, or verifier changes outcome.\n- `execution-metrics.json` reports invocations and estimated context bytes by tier.\n\n## Constraints on the request\n\n- Additive only: the original envelope fields, the Phase Model tables, gates, validators, artifact\n  contracts, and agent module text are unchanged. Workflow tables are machine-parsed, so a column\n  is not added to them.\n- The runtime never calls a model; it names a tier and the host chooses. The change must not\n  introduce a model call or a vendor SDK dependency.\n- Tier assignment is configuration, not agent text, so it must not be duplicated into agent modules.\n- Parallel execution of phases is out of scope and is a separate later change.",
+        "digest": "sha256:7fa529598e6e925362f09ed43c4a4a9e"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/model-tier-change-request.md",
+        "source_file": ".claude/runs/inputs/model-tier-change-request.md",
+        "text": "# Change Request \u2014 Per-Phase Model Tier\n\n## Change class\n\n`capability-addition` per `config/self-hosting-profile.md` Routing Table: the framework gains a\nregistry record and a runtime behaviour it did not have.\n\nClassification evidence: `python .claude/runtime/self_hosting.py route --intent capability-addition`\nreturns `/implement` over `implement-feature` at `scope-and-acceptance`.\n\n## Surfaces this change is expected to touch\n\n| Surface | Nature of change |\n|---|---|\n| `registry/` or `config/` | One authoritative tier declaration and tier-to-host-hint mapping (carrier chosen in design) |\n| `runtime/framework_runtime.py` | Resolve tier at dispatch, emit additive `model_tier` envelope field, escalation on prior rejection; `RUNTIME_VERSION` increments |\n| `runtime/execution_metrics.py` | Report invocations and bytes by tier |\n| `config/execution-engine.md`, `config/runtime.md` | Document the envelope field and escalation rule |\n| `runtime/verify_*.py`, `tests/` | Verify the declaration covers every dispatchable phase and that escalation is monotonic |\n| `omn_agent/_bundled_payload/**` | Mirror refresh via `python tests/test_bundled_payload.py --sync` |\n\n## Not touched\n\nAgent module text, workflow Phase Model tables, gate matrix, validators, templates.",
+        "digest": "sha256:cc12348b7459a93afcff425dcab01868"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/model-tier-business-intent.md",
+        "source_file": ".claude/runs/inputs/model-tier-business-intent.md",
+        "text": "# Business Intent \u2014 Per-Phase Model Tier\n\n## Problem\n\nDelivery runs spend the strongest, most expensive model on every phase, including phases whose work\nis reading, summarising, and filling a template. Cost per run is high and gives the operator no lever\nshort of changing the whole session's model, which would degrade the phases that need depth.\n\n## Intent\n\nMake cost proportional to difficulty without weakening governance: route light phases to a cheaper\nmodel, keep deep phases on the strongest, and promote automatically when a cheaper attempt fails its\nvalidator or gate.\n\n## Success\n\n- A measurable share of a representative implement-feature run's agent invocations are dispatched at\n  a non-deep tier, reported by the runtime's own metrics.\n- No gate, validator, or acceptance rule is weakened; every verifier remains at its recorded baseline.\n- A rejected cheaper attempt is never retried at the same tier.\n\n## Non-goals\n\n- Choosing vendors or model identifiers inside the runtime.\n- Changing which phases exist, who owns them, or what they must produce.\n- Running phases concurrently.",
+        "digest": "sha256:881f72a81f6bb67c8d59aa810a52b72a"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/model-tier-architecture-context.md",
+        "source_file": ".claude/runs/inputs/model-tier-architecture-context.md",
+        "text": "# Architecture Context \u2014 Per-Phase Model Tier\n\n- The runtime core never talks to a model (`runtime/framework_runtime.py` header). It builds the\n  canonical envelope and hands it to an adapter. A tier is therefore advice carried in the envelope.\n- Envelope fields added in 0.7.0 are additive; a consumer reading only the original eleven fields\n  reads them unchanged. `model_tier` follows the same rule.\n- All twelve `agents/*.agent.md` entrypoints declare `model: inherit`. The host (Claude Code) accepts\n  a per-dispatch model override on subagent invocation, which is how a tier hint becomes effective;\n  the entrypoint frontmatter stays `inherit`.\n- Workflow Phase Model tables are parsed by the Task Router; adding a column would change a parsed\n  contract, so tier data lives outside them, keyed by workflow and phase.\n- Replay checks (M14) require artifacts written by `write_run_ledger` to be stable when content is\n  unchanged; any new field must be deterministic from run state.\n- Rejected attempts are recorded in the run's recovery ledger and attempt counters; escalation must\n  derive from that recorded state, not from in-memory state.\n- Keep loading policy in runtime and `config/`, never in agent modules (`verify_vertical_slice` C10).\n- `runtime/README.md` is large and read by agents; new documentation goes in `config/runtime.md`.\n- Edit `.claude/`, then `python tests/test_bundled_payload.py --sync`; never hand-edit `omn_agent/_bundled_payload/`.",
+        "digest": "sha256:5b63babf1eef069a473dd7e74480120c"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: PLAN-run-ded114f50a46\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/model-tier-feature-request.md\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:7fa529598e6e925362f09ed43c4a4a9e\n  contextDigest: sha256:62e7676afa2df10b3af32629f294e88a\n```\n\n## Executive Summary\n\nThis plan delivers a per-phase model tier for the framework's operators: each dispatchable phase is declared light, standard, or deep in one authoritative place, and each dispatch envelope carries an additive tier record. A rejected light or standard attempt is promoted one tier on the next attempt and never retried at the same tier. Success means at least 3 of the 6 implement-feature phases are dispatched at a non-deep tier, as reported by the run's own metrics, with every existing verifier at its recorded baseline (A-002). The work is 14 tasks in 9 execution waves: 3 design decisions, 6 implementation tasks, 3 verification tasks, and 2 documentation or handoff tasks. The highest-impact risk is R-001: the 3-of-6 target is reachable only if `execution-planning`, which the request does not name, is assigned a non-deep tier. The plan status is complete; no blocking open question exists.\n\n## Business Objectives\n\n- BO-1: Lower the cost of an implement-feature run for operators by dispatching at least 3 of its 6 phases at a non-deep tier, measured by the non-deep invocation share in the run's execution metrics. Traces to S-001, S-005, A-002.\n- BO-2: Keep correctness mechanically decided while cost falls, for gate owners and downstream agents, measured by every verifier returning its recorded baseline result and zero rejected light or standard attempts retried at the same tier. Traces to S-003, S-004.\n- BO-3: Give operators visibility and a documented lever over per-phase tiering, measured by a tier record in every envelope, per-tier figures in metrics, and the rules stated in runtime governance documentation. Traces to S-002, S-005, S-008.\n\n## Technical Objectives\n\n- TO-1: One authoritative declaration assigns exactly one tier to every dispatchable phase and one host hint to each tier, with no tier assignment in agent module text; verified by a coverage check that fails when a phase is removed. Traces to BO-1.\n- TO-2: The envelope carries an additive tier record (tier, host hint, basis) that is deterministic from run state, with original fields unchanged and no model invocation or vendor dependency added; verified by field comparison and replay stability. Traces to BO-2, BO-3.\n- TO-3: Escalation is promotion-only, derived from recorded rejection state, capped at deep, and identical in-session and from recorded state alone; verified by a monotonicity check. Traces to BO-2.\n- TO-4: Execution metrics report invocations and estimated context bytes per tier, summing to the run totals; verified by comparison with a completed run. Traces to BO-1, BO-3.\n- TO-5: The distributed copy equals the authoritative copy, the runtime version value rises, and the governance documentation states the field and rule; verified by the synchronisation check, a version comparison, and a documentation review. Traces to BO-3.\n\n## Scope\n\n### In Scope\n\n- S-001: One declared tier per dispatchable phase and one host hint per tier, in a single authoritative declaration outside agent text. Tasks T-001, T-002, T-003, T-004, T-005.\n- S-002: An additive tier record in every dispatch envelope: resolved tier, host hint, basis. Tasks T-006, T-007.\n- S-003: One-tier promotion after a validator rejection or a gate rejection with rollback, recorded with its reason, with no escalation above deep. Tasks T-008, T-009.\n- S-004: A phase with no declaration inherits the host model, and no existing run, replay, or verifier changes outcome. Tasks T-005, T-006.\n- S-005: Execution metrics report invocations and estimated context bytes by tier. Task T-010.\n- S-006: Framework verification detects a dispatchable phase with no declared tier and a non-monotonic escalation. Task T-011.\n- S-007: The distributed copy carries the same tier behaviour as the authoritative copy. Task T-012.\n- S-008: The envelope field and escalation rule are documented in runtime governance documentation. Task T-013.\n- S-009: The runtime version value increments. Task T-014.\n\n### Out of Scope\n\n- X-002: Vendor or model identifiers in runtime logic, any model call by the runtime, any vendor SDK dependency; the runtime only names a tier and the host chooses.\n- X-003: Changes to agent module text, Phase Model tables, the gate matrix, validators, templates, or artifact contracts; the request is additive only.\n- X-004: Changing which phases exist, who owns them, or what they produce; not requested.\n- X-005: Editing agent entrypoint model declarations; the host override makes the hint effective while they stay unchanged.\n\n### Deferred\n\n- X-001: Concurrent phase execution; brought into scope by a separate change request for parallel phase execution.\n- X-006: Lowering a tier after success or adaptive tiering; brought into scope by a supplied input requesting demotion.\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | Statements S-001 to S-009 adopt the identifiers of the approved scope items one-to-one; upstream acceptance criteria are cited as UAC-nnn and upstream questions as UQ-nnn | plan-wide | Trace between this plan and the scope definition breaks | omn-product-owner |\n| A-002 | Upstream question UQ-001 is resolved: success is at least 3 of 6 implement-feature phases dispatched at a non-deep tier (supplied by the invoking operator, not by a revised scope artifact) | S-005 | The measure in BO-1 and the T-002 constraint change | omn-business-analyst |\n| A-003 | The host accepts a per-dispatch model override, so a tier hint can take effect | S-002 | The hint is advisory only and BO-1 savings do not materialise | omn-tech-lead |\n| A-004 | Recorded run state (recovery ledger, attempt counters) distinguishes a validator rejection from a gate rejection with rollback and persists across sessions | S-003 | Escalation cannot be derived from recorded state; T-008 and T-009 gain a recording task | architect |\n| A-005 | omn-documentation can perform the distributed-copy refresh in the closing phase | S-007 | T-012 is reassigned to another owner | omn-tech-lead |\n| A-006 | The existing verification surface can host the new checks without changing any existing verifier result | S-006 | T-011 splits into a surface change and a check addition | architect |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | `execution-planning` is assigned deep, or a named-light phase is assigned standard | Fewer than 3 of 6 phases non-deep; BO-1 unmet | medium | T-002, T-005 | T-002 acceptance requires at least 3 of 6 non-deep; T-005 reads the metric | architect |\n| R-002 | requirement | Request categories (technical discovery, artifact packaging, repository scan, root-cause analysis) map ambiguously to phase identifiers | A dispatchable phase is left undeclared or mis-tiered | medium | T-002, T-011 | T-002 records the mapping; T-011 fails on any uncovered phase | architect |\n| R-003 | technical | Recorded rejection state is insufficient to reproduce an escalation in a fresh session | Escalation differs between sessions; UAC-012 fails | medium | T-008, T-009 | T-008 decides the state read; T-005 compares in-session and fresh dispatch | architect |\n| R-004 | technical | A new envelope field or metric changes an artifact the replay check compares | An existing verifier leaves its baseline | medium | T-005, T-006, T-010 | T-006 and T-010 acceptance require deterministic output; T-005 runs all verifiers | omn-dev-1-implement |\n| R-005 | dependency | The host stops accepting a per-dispatch model override | Tier hint has no effect; cost does not fall | low | T-006 | Accepted; the record remains advisory and the architecture records the host dependency | omn-tech-lead |\n| R-006 | dependency | The distributed copy is hand-edited, or the authoritative tree changes after the refresh | Parity check reports differences | medium | T-012 | T-012 runs last and its acceptance requires zero differences | omn-documentation |\n| R-007 | operational | Cheaper tiers produce more rejected attempts | Promotion cost offsets the saving | low | T-009, T-010 | T-010 reports per-tier invocations so the effect is visible | omn-tech-lead |\n\n## Task Breakdown\n\n### T-001 Decide the tier declaration structure\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: none\n- Traces to: S-001, S-004\n- Status: ready\n- Description: The location, keying by workflow and phase, and form of the host hint of the single tier declaration are recorded as a decision (resolves Q-002), with no model identifier required in runtime logic.\n- Acceptance Criteria:\n  - The decision names one authoritative location outside agent text and workflow tables\n  - The decision states the form of the host hint and the behaviour for an undeclared phase\n- Gate: Design Gate\n\n### T-002 Decide the tier of each dispatchable phase\n\n- Owner: architect\n- Complexity: M (confidence: low)\n- Depends on: T-001\n- Traces to: S-001, A-002\n- Status: assumption-dependent\n- Description: Every dispatchable phase of every active workflow is assigned exactly one tier, with the request's named categories mapped to phase identifiers (resolves Q-001).\n- Acceptance Criteria:\n  - Each phase has exactly one tier and the request's light and deep lists resolve as named\n  - At least 3 of the 6 implement-feature phases are assigned a non-deep tier\n- Gate: Design Gate\n\n### T-003 Create the tier declaration\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-001, T-002\n- Traces to: S-001\n- Status: ready\n- Description: The authoritative declaration exists, containing T-002's assignments and one host hint per tier, in the location T-001 decided, with no tier text in agent modules.\n- Acceptance Criteria:\n  - A text search of agent module files for tier assignments returns zero matches\n  - A search of the framework finds tier assignment stated in exactly one location\n- Gate: none\n\n### T-004 Design verification evidence for the tier change\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-002, T-008\n- Traces to: S-001, S-002, S-003, S-004, S-005\n- Status: ready\n- Description: A validation design maps each scope acceptance criterion UAC-001 to UAC-021 to a named evidence procedure, including rejection scenarios for light, standard, and deep phases.\n- Acceptance Criteria:\n  - Every UAC-nnn is mapped to one procedure and one expected result\n  - Escalation scenarios cover validator rejection, gate rejection with rollback, and a deep phase\n- Gate: Verification Gate\n\n### T-005 Verify the tier change against the scope acceptance criteria\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-004, T-007\n- Traces to: S-001, S-002, S-003, S-004\n- Status: ready\n- Description: The T-004 procedures are executed and their results recorded, including all existing verifiers against their recorded baselines and the in-session versus fresh-session escalation comparison.\n- Acceptance Criteria:\n  - Every UAC-nnn has recorded evidence with a pass or fail result\n  - All existing verifiers, including replay stability, match their recorded baselines\n- Gate: Verification Gate\n\n### T-006 Implement tier resolution with the additive envelope record\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-003\n- Traces to: S-002, S-004, A-003\n- Status: assumption-dependent\n- Description: Every dispatch envelope carries a tier record with non-empty tier, host hint, and basis, derived deterministically from run state; an undeclared phase resolves to inheriting the host model.\n- Acceptance Criteria:\n  - Every envelope of one implement-feature run carries a complete tier record\n  - Original envelope fields are unchanged in name and value against a pre-change envelope\n- Gate: none\n\n### T-007 Review the tier change set against the additivity constraint\n\n- Owner: omn-dev-2-reviewer\n- Complexity: M (confidence: medium)\n- Depends on: T-009, T-010, T-011, T-014\n- Traces to: S-002\n- Status: ready\n- Description: The change set is reviewed and a readiness verdict recorded stating that it adds zero model invocations, zero vendor dependencies, and no edits to the surfaces excluded by X-003 and X-005.\n- Acceptance Criteria:\n  - The review package states the verdict against each exclusion\n  - Findings of critical or major severity are resolved or formally accepted\n- Gate: Review Gate\n\n### T-008 Decide the escalation derivation rule\n\n- Owner: architect\n- Complexity: M (confidence: low)\n- Depends on: none\n- Traces to: S-003, S-004, A-004\n- Status: assumption-dependent\n- Description: The recorded state that triggers promotion after a validator rejection or a gate rejection with rollback is named, with the deep ceiling and the reason format, so that the result is independent of session.\n- Acceptance Criteria:\n  - The decision names the recorded state read for both rejection kinds\n  - The decision states that deep never rises and no tier is ever lowered\n- Gate: Design Gate\n\n### T-009 Implement promotion-only escalation\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-006, T-008\n- Traces to: S-003, A-004\n- Status: assumption-dependent\n- Description: After a recorded rejection, the next attempt of a light or standard phase resolves exactly one tier higher and its envelope records the escalation and reason; a deep phase stays deep.\n- Acceptance Criteria:\n  - A dispatch after each rejection kind shows one tier higher with a reason naming the rejection\n  - A dispatch from recorded state alone yields the same tier as an in-session dispatch\n- Gate: none\n\n### T-010 Implement per-tier execution metrics\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-006\n- Traces to: S-005\n- Status: ready\n- Description: Execution metrics list invocations and estimated context bytes for each tier and the non-deep invocation share as a figure.\n- Acceptance Criteria:\n  - Per-tier values sum to the run totals for a completed run\n  - The non-deep share for an implement-feature run is at least 3 of 6 invocations\n- Gate: none\n\n### T-011 Implement the tier verification checks\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: low)\n- Depends on: T-003, T-009\n- Traces to: S-006, A-006\n- Status: assumption-dependent\n- Description: Framework verification fails when a dispatchable phase has no declared tier and when an escalation resolves to the same or a lower tier than the prior attempt.\n- Acceptance Criteria:\n  - The check fails against a declaration with one phase removed\n  - The check fails against an escalation record that does not rise\n- Gate: none\n\n### T-012 Refresh the distributed copy\n\n- Owner: omn-documentation\n- Complexity: S (confidence: low)\n- Depends on: T-005, T-013\n- Traces to: S-007, A-005\n- Status: assumption-dependent\n- Description: The distributed copy is refreshed from the final authoritative tree by the payload synchronisation command, never by hand.\n- Acceptance Criteria:\n  - The synchronisation check reports zero differing files\n  - No distributed file is edited outside the synchronisation command\n- Gate: Closure Gate\n\n### T-013 Document the tier governance rules\n\n- Owner: omn-documentation\n- Complexity: S (confidence: medium)\n- Depends on: T-007, T-009\n- Traces to: S-008\n- Status: ready\n- Description: The runtime governance documentation states the envelope field, its three parts, the escalation rule, and the deep ceiling, and the runtime README is not enlarged.\n- Acceptance Criteria:\n  - A review finds all four items stated in the governance documentation\n  - The runtime README size is not greater than before the change\n- Gate: Closure Gate\n\n### T-014 Increment the runtime version\n\n- Owner: omn-dev-1-implement\n- Complexity: XS (confidence: high)\n- Depends on: T-006\n- Traces to: S-009\n- Status: ready\n- Description: The runtime version value after the change is greater than the value before it.\n- Acceptance Criteria:\n  - The version value after the change is greater than the recorded value before it\n  - No file other than the version declaration changes as part of this task\n- Gate: none\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-002 | contract | Assignments are keyed in the structure T-001 decides |\n| T-001 | T-003 | contract | The declaration takes the form T-001 decides |\n| T-002 | T-003 | produces-consumes | The declaration holds T-002's assignments |\n| T-002 | T-004 | contract | Evidence procedures bind to the decided assignments |\n| T-008 | T-004 | contract | Escalation scenarios bind to the decided rule |\n| T-003 | T-006 | produces-consumes | Resolution reads the declaration |\n| T-006 | T-009 | contract | Escalation extends the tier resolution |\n| T-008 | T-009 | decision-gate | Escalation scope depends on the decided rule |\n| T-006 | T-010 | produces-consumes | Metrics read the tier record |\n| T-003 | T-011 | produces-consumes | The coverage check reads the declaration |\n| T-009 | T-011 | contract | The monotonicity check binds to the escalation record |\n| T-006 | T-014 | produces-consumes | The version identifies the release that first emits the tier record |\n| T-009 | T-007 | verification | Review covers the escalation change |\n| T-010 | T-007 | verification | Review covers the metrics change |\n| T-011 | T-007 | verification | Review covers the verification change |\n| T-014 | T-007 | verification | Review covers the version change |\n| T-004 | T-005 | produces-consumes | Execution uses the evidence design |\n| T-007 | T-005 | verification | Verification runs against the reviewed change set |\n| T-009 | T-013 | produces-consumes | Documented behaviour must match implemented behaviour |\n| T-007 | T-013 | verification | Documentation describes the reviewed change set |\n| T-005 | T-012 | produces-consumes | The copy is taken from the verified authoritative tree |\n| T-013 | T-012 | produces-consumes | The copy includes the final documentation |\n| Host platform owner | T-006 | external | The hint takes effect only if the host accepts a per-dispatch override |\n\n### 8.2 External Dependencies\n\n| Responsible party | What is needed | Blocks |\n|---|---|---|\n| Host platform owner | Acceptance of a per-dispatch model override | T-006 (effectiveness only; matching risk R-005) |\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-008\n- Wave 2: T-002\n- Wave 3: T-003, T-004\n- Wave 4: T-006\n- Wave 5: T-009, T-010, T-014\n- Wave 6: T-011\n- Wave 7: T-007\n- Wave 8: T-005, T-013\n- Wave 9: T-012\n\n## Suggested Workflow\n\nSelected workflow: implement-feature\n\nSelected because: the plan delivers new framework functionality, which maps to `implement-feature`; this run is already executing it.\n\n| Phase | Tasks |\n|---|---|\n| scope-and-acceptance | none (completed upstream) |\n| execution-planning | none (this plan) |\n| solution-design-and-risk-assessment | T-001, T-002, T-008 |\n| implementation | T-003, T-006, T-009, T-010, T-011, T-014 |\n| quality-review | T-004, T-005, T-007 |\n| documentation-and-release-handoff | T-012, T-013 |\n\n| Gate | Required owners |\n|---|---|\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer, omn-qa |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| technical-approach-definition | T-001, T-002, T-008 | architect | Primary |\n| implementation-delivery | T-003, T-006, T-009, T-010, T-011, T-014 | omn-dev-1-implement | Primary |\n| validation-design | T-004 | omn-qa | Primary |\n| quality-verification | T-005 | omn-qa | Primary |\n| code-review | T-007 | omn-dev-2-reviewer | Primary |\n| documentation | T-013 | omn-documentation | Primary |\n| release-readiness | T-012 | omn-documentation | Secondary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S01 | skills/architecture/clean-architecture-checklist.md | T-001, T-002, T-008 | Primary |\n| S02 | skills/business/domain-modeling.md | T-001, T-002 | Secondary |\n| S03 | skills/dotnet/engineering-playbook.md | T-003, T-006, T-009, T-010, T-011, T-014 | Primary |\n| S07 | skills/testing/testing-strategy.md | T-004, T-005 | Primary |\n| S08 | skills/performance/performance-engineering.md | T-007, T-010 | Secondary |\n| S10 | skills/git/git-collaboration.md | T-012 | Advisory |\n\n## Acceptance Criteria\n\n1. BO-1: The coverage check reports zero uncovered dispatchable phases and at least 3 of the 6 implement-feature phases resolve non-deep. Evidence: T-005 record for UAC-001, UAC-002, and UAC-016.\n2. BO-1, BO-3: Execution metrics list invocations and estimated context bytes per tier, summing to the run totals. Evidence: metrics of a completed run, UAC-015.\n3. BO-2: After a rejection, a light or standard phase resolves exactly one tier higher with a stated reason, a deep phase stays deep, and the result is identical across sessions. Evidence: envelope inspection, UAC-008 to UAC-012.\n4. BO-2: Every existing verifier, including replay stability, returns its recorded baseline result, and an undeclared phase inherits the host model. Evidence: verifier runs, UAC-013 and UAC-014.\n5. BO-3: Every envelope of an implement-feature run carries a complete tier record and its original fields are unchanged. Evidence: field-by-field comparison, UAC-005 and UAC-006.\n6. BO-2: The change adds zero model invocations, zero vendor dependencies, and zero tier assignments in agent text. Evidence: review verdict from T-007 and text search, UAC-004 and UAC-007.\n7. BO-3: The governance documentation states the four required items, the runtime version value rises, and the distributed copy differs in zero files. Evidence: documentation review, version comparison, synchronisation check, UAC-019 to UAC-021.\n\n## Definition of Done\n\n- [ ] All plan acceptance criteria are verified with recorded evidence\n- [ ] All mandatory gates are approved with owners recorded\n- [ ] Task acceptance criteria are satisfied or formally waived\n- [ ] Assumptions are confirmed or converted to recorded decisions\n- [ ] Risks are closed or accepted with named owners\n- [ ] Open questions are closed or explicitly accepted\n- [ ] Documentation and release-impact notes are published\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Which phase identifiers across active workflows do the request's named categories (technical discovery, artifact packaging, repository scan, root-cause analysis) map to, and which tier does each unnamed phase receive? | no | architect | T-002, T-011 |\n| Q-002 | In what form is the host model hint declared, given that the runtime may not embed model identifiers? | no | architect | T-001, T-003 |",
+        "digest": "sha256:a4d47093b87c9a92d7633e067111091d",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change this agent designs against: a change request, a feature request, or a business intent. Without one there is no requested change to design, and designing anyway would mean inventing the requirement."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning",
+      "artifact": "execution-plan.md",
+      "bytes": 23309,
+      "sections": {
+        "read_first": [
+          "Technical Objectives",
+          "Scope",
+          "Task Breakdown",
+          "Dependencies",
+          "Acceptance Criteria",
+          "Definition of Done",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Executive Summary",
+          "Business Objectives",
+          "Assumptions",
+          "Risks",
+          "Suggested Workflow",
+          "Required Capabilities",
+          "Traceability Matrix"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-ded114f50a46/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:7b30e912302a34ce8b1176bb469129f0",
+    "bytes": 21289,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "performance"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "solution-design-and-risk-assessment"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-08T12:35:27Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 22496,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null,
+        "bytes": 6564,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+        "supplies": null,
+        "bytes": 809,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null,
+        "bytes": 2277,
+        "read": "on-demand",
+        "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+        "supplies": null,
+        "bytes": 1066,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null,
+        "bytes": 3376,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73bd155e6b8344e48a8c66266be118cf",
+        "supplies": null,
+        "bytes": 61682,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:0cf589d87741618e90104e90710f8162",
+    "input_digest": "sha256:040b2777c92658f6406de4d87a19c7a7",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/model-tier-feature-request.md",
+        "source_file": ".claude/runs/inputs/model-tier-feature-request.md",
+        "digest": "sha256:7fa529598e6e925362f09ed43c4a4a9e"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/model-tier-change-request.md",
+        "source_file": ".claude/runs/inputs/model-tier-change-request.md",
+        "digest": "sha256:cc12348b7459a93afcff425dcab01868"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/model-tier-business-intent.md",
+        "source_file": ".claude/runs/inputs/model-tier-business-intent.md",
+        "digest": "sha256:881f72a81f6bb67c8d59aa810a52b72a"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/model-tier-architecture-context.md",
+        "source_file": ".claude/runs/inputs/model-tier-architecture-context.md",
+        "digest": "sha256:5b63babf1eef069a473dd7e74480120c"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-ded114f50a46/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:a4d47093b87c9a92d7633e067111091d"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "memory/architecture.md",
+      "runtime/README.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "dependency-map.md",
+      "memory/architecture.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "read_on_demand": [
+      "domain-model/agent-specification.md",
+      "runtime/README.md",
+      "workflows/implement-feature.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 177861,
+    "bytes_required": 13364,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+      "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/review-package-*.md"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      },
+      {
+        "artifact": "review-package.md",
+        "template_ref": "templates/review-package.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "Emitted only for review-pull-request/structural-compliance, where this agent applies the structural and security lens and the findings are classified under the architecture and security categories. runtime/review_package_validator.py already contracts this agent as a permitted producer of review-package.md; the quality rules it applies to the structural lens are the ones in quality.md.",
+        "artifact_path_glob": "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/review-package-*.md",
+        "naming": "runs/run-ded114f50a46/states/solution-design-and-risk-assessment/artifacts/review-package-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-10-08T12:35:27Z",
+  "context_budget": {
+    "modules_full_bytes": 110389,
+    "modules_core_bytes": 51235,
+    "slice_all_bytes": 177861,
+    "slice_required_bytes": 13364,
+    "inputs_bytes": 6395,
+    "upstream_full_bytes": 23310,
+    "upstream_read_first_bytes": 15756,
+    "task_context_bytes": 21289,
+    "fixed_bytes": 14073,
+    "legacy_estimate_bytes": 332028,
+    "progressive_estimate_bytes": 122112,
+    "legacy_estimate_tokens": 83007,
+    "progressive_estimate_tokens": 30528,
+    "savings_pct": 63.2
+  }
+}

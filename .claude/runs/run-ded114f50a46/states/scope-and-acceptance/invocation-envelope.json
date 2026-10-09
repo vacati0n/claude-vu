@@ -1,0 +1,503 @@
+{
+  "invocation_id": "inv-ded114f50a46-01-001",
+  "run_id": "run-ded114f50a46",
+  "work_item_id": "run-ded114f50a46::scope-and-acceptance",
+  "idempotency_key": "sha256:aa446d2ae004aca1d496acdec3a9d7b4",
+  "state_id": "scope-and-acceptance",
+  "phase_index": 1,
+  "agent_id": "omn-product-owner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-product-owner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-product-owner/manifest.yaml",
+    "load_order": [
+      "agents/omn-product-owner/system.md",
+      "agents/omn-product-owner/identity.md",
+      "agents/omn-product-owner/reasoning.md",
+      "agents/omn-product-owner/execution.md",
+      "agents/omn-product-owner/output.md",
+      "agents/omn-product-owner/quality.md",
+      "agents/omn-product-owner/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-product-owner/system.md": "sha256:ca10caae54f63fa52580220f1f88812f",
+      "agents/omn-product-owner/identity.md": "sha256:8a5df5e407d8c96ce1e5bb7faaa07f55",
+      "agents/omn-product-owner/reasoning.md": "sha256:ee417de8bc3f21281299d8e5f53dfdcf",
+      "agents/omn-product-owner/execution.md": "sha256:ef29a06b2807c0b3c86ba6c19c102051",
+      "agents/omn-product-owner/output.md": "sha256:da40434a6907e6912979430f12430025",
+      "agents/omn-product-owner/quality.md": "sha256:53c8887fbc5888342d68c2e7a02d6ecc",
+      "agents/omn-product-owner/examples.md": "sha256:0e1b087f304a35d8527abc9aa5f0052b"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-product-owner/system.md",
+        "agents/omn-product-owner/reasoning.md",
+        "agents/omn-product-owner/output.md",
+        "agents/omn-product-owner/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-product-owner/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-product-owner/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-product-owner/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 33326,
+      "full_bytes": 65622
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "scope-definition",
+      "acceptance-authority"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "not-triggered",
+      "area": "security",
+      "basis": "area security is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "agent-manifest (Advisory)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "acceptance-intent",
+      "business-constraints",
+      "architecture-context",
+      "prior-scope-definition",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/model-tier-feature-request.md",
+        "source_file": ".claude/runs/inputs/model-tier-feature-request.md",
+        "text": "# Feature Request \u2014 Per-Phase Model Tier in the Dispatch Envelope\n\n## Request\n\nLet the framework declare, per workflow phase, which class of model should execute it, and carry\nthat declaration in the dispatch envelope the runtime hands to the host. Today all twelve agent\nentrypoints declare `model: inherit`, the envelope has no model field, and every phase therefore\nruns on whatever model the operator's session happens to use, however light the phase is.\n\n## Why now\n\nA single implement-feature run costs about 510K estimated context tokens across nine agent\ninvocations. Runtime 0.7 cut what each agent reads. It did nothing about which model reads it.\nSeveral phases are read-and-summarise work (scope definition, technical discovery, documentation\nhand-off, artifact packaging, repository scan) that a smaller model can perform; others\n(solution design, root-cause analysis, implementation, quality review) need the strongest model.\nThe framework's gates and validators decide correctness mechanically, so a cheaper tier is safe\nonly if a failing phase is promoted rather than retried at the same tier.\n\n## Expected outcome\n\n- A single authoritative declaration of each phase's tier (`light`, `standard`, `deep`) and of the\n  mapping from tier to a host model hint, readable by the runtime and verifiable.\n- `dispatch` emits a `model_tier` object in the envelope (additive field): the resolved tier, the\n  host model hint, and the basis for the choice.\n- Escalation: a phase whose artifact was rejected by its validator on a prior attempt, or whose\n  gate was rejected and rolled back, is dispatched one tier higher on the next attempt, and the\n  envelope records that it was escalated and why. `deep` never escalates further.\n- A phase with no declaration resolves to `standard`'s behaviour of inheriting the host model, so\n  no existing run, replay, or verifier changes outcome.\n- `execution-metrics.json` reports invocations and estimated context bytes by tier.\n\n## Constraints on the request\n\n- Additive only: the original envelope fields, the Phase Model tables, gates, validators, artifact\n  contracts, and agent module text are unchanged. Workflow tables are machine-parsed, so a column\n  is not added to them.\n- The runtime never calls a model; it names a tier and the host chooses. The change must not\n  introduce a model call or a vendor SDK dependency.\n- Tier assignment is configuration, not agent text, so it must not be duplicated into agent modules.\n- Parallel execution of phases is out of scope and is a separate later change.",
+        "digest": "sha256:7fa529598e6e925362f09ed43c4a4a9e"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/model-tier-change-request.md",
+        "source_file": ".claude/runs/inputs/model-tier-change-request.md",
+        "text": "# Change Request \u2014 Per-Phase Model Tier\n\n## Change class\n\n`capability-addition` per `config/self-hosting-profile.md` Routing Table: the framework gains a\nregistry record and a runtime behaviour it did not have.\n\nClassification evidence: `python .claude/runtime/self_hosting.py route --intent capability-addition`\nreturns `/implement` over `implement-feature` at `scope-and-acceptance`.\n\n## Surfaces this change is expected to touch\n\n| Surface | Nature of change |\n|---|---|\n| `registry/` or `config/` | One authoritative tier declaration and tier-to-host-hint mapping (carrier chosen in design) |\n| `runtime/framework_runtime.py` | Resolve tier at dispatch, emit additive `model_tier` envelope field, escalation on prior rejection; `RUNTIME_VERSION` increments |\n| `runtime/execution_metrics.py` | Report invocations and bytes by tier |\n| `config/execution-engine.md`, `config/runtime.md` | Document the envelope field and escalation rule |\n| `runtime/verify_*.py`, `tests/` | Verify the declaration covers every dispatchable phase and that escalation is monotonic |\n| `omn_agent/_bundled_payload/**` | Mirror refresh via `python tests/test_bundled_payload.py --sync` |\n\n## Not touched\n\nAgent module text, workflow Phase Model tables, gate matrix, validators, templates.",
+        "digest": "sha256:cc12348b7459a93afcff425dcab01868"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/model-tier-business-intent.md",
+        "source_file": ".claude/runs/inputs/model-tier-business-intent.md",
+        "text": "# Business Intent \u2014 Per-Phase Model Tier\n\n## Problem\n\nDelivery runs spend the strongest, most expensive model on every phase, including phases whose work\nis reading, summarising, and filling a template. Cost per run is high and gives the operator no lever\nshort of changing the whole session's model, which would degrade the phases that need depth.\n\n## Intent\n\nMake cost proportional to difficulty without weakening governance: route light phases to a cheaper\nmodel, keep deep phases on the strongest, and promote automatically when a cheaper attempt fails its\nvalidator or gate.\n\n## Success\n\n- A measurable share of a representative implement-feature run's agent invocations are dispatched at\n  a non-deep tier, reported by the runtime's own metrics.\n- No gate, validator, or acceptance rule is weakened; every verifier remains at its recorded baseline.\n- A rejected cheaper attempt is never retried at the same tier.\n\n## Non-goals\n\n- Choosing vendors or model identifiers inside the runtime.\n- Changing which phases exist, who owns them, or what they must produce.\n- Running phases concurrently.",
+        "digest": "sha256:881f72a81f6bb67c8d59aa810a52b72a"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/model-tier-architecture-context.md",
+        "source_file": ".claude/runs/inputs/model-tier-architecture-context.md",
+        "text": "# Architecture Context \u2014 Per-Phase Model Tier\n\n- The runtime core never talks to a model (`runtime/framework_runtime.py` header). It builds the\n  canonical envelope and hands it to an adapter. A tier is therefore advice carried in the envelope.\n- Envelope fields added in 0.7.0 are additive; a consumer reading only the original eleven fields\n  reads them unchanged. `model_tier` follows the same rule.\n- All twelve `agents/*.agent.md` entrypoints declare `model: inherit`. The host (Claude Code) accepts\n  a per-dispatch model override on subagent invocation, which is how a tier hint becomes effective;\n  the entrypoint frontmatter stays `inherit`.\n- Workflow Phase Model tables are parsed by the Task Router; adding a column would change a parsed\n  contract, so tier data lives outside them, keyed by workflow and phase.\n- Replay checks (M14) require artifacts written by `write_run_ledger` to be stable when content is\n  unchanged; any new field must be deterministic from run state.\n- Rejected attempts are recorded in the run's recovery ledger and attempt counters; escalation must\n  derive from that recorded state, not from in-memory state.\n- Keep loading policy in runtime and `config/`, never in agent modules (`verify_vertical_slice` C10).\n- `runtime/README.md` is large and read by agents; new documentation goes in `config/runtime.md`.\n- Edit `.claude/`, then `python tests/test_bundled_payload.py --sync`; never hand-edit `omn_agent/_bundled_payload/`.",
+        "digest": "sha256:5b63babf1eef069a473dd7e74480120c"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the business intent this agent bounds: a feature request for new functionality, a change request for a modification to delivered behaviour, or a business intent for an outcome stated without a proposed solution. Without one there is nothing to scope, and scoping anyway would mean inventing what the requester wants."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [],
+  "task_context": {
+    "path": "runs/run-ded114f50a46/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:231409b240083788f6cd83d988f862db",
+    "bytes": 4207,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "performance"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "scope-and-acceptance",
+      "execution-planning"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {
+      "execution-planning": [
+        "scope-and-acceptance"
+      ]
+    },
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-08T11:19:06Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:a474a66cc2356628e9b2f1d28f077cf0",
+        "supplies": "framework-context",
+        "bytes": 22496,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:585438f9105001c86b15b76bedf4ff6d",
+        "supplies": "framework-context",
+        "bytes": 9242,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "required",
+        "read_reason": "this artifact names the gate it is evidence for and its owners"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/scope-definition.md",
+        "digest": "sha256:9f082102c11c1de4d4b53c8252a0a9bc",
+        "supplies": "feature-request",
+        "bytes": 4189,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": "acceptance-intent",
+        "bytes": 2277,
+        "read": "on-demand",
+        "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+      }
+    ],
+    "context_digest": "sha256:6a1ac11b59924eceec1c6184befe245a",
+    "input_digest": "sha256:1a5d5bd8ac684410b76f88bce2701855",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/model-tier-feature-request.md",
+        "source_file": ".claude/runs/inputs/model-tier-feature-request.md",
+        "digest": "sha256:7fa529598e6e925362f09ed43c4a4a9e"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/model-tier-change-request.md",
+        "source_file": ".claude/runs/inputs/model-tier-change-request.md",
+        "digest": "sha256:cc12348b7459a93afcff425dcab01868"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/model-tier-business-intent.md",
+        "source_file": ".claude/runs/inputs/model-tier-business-intent.md",
+        "digest": "sha256:881f72a81f6bb67c8d59aa810a52b72a"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/model-tier-architecture-context.md",
+        "source_file": ".claude/runs/inputs/model-tier-architecture-context.md",
+        "digest": "sha256:5b63babf1eef069a473dd7e74480120c"
+      }
+    ],
+    "unnarrowed": [],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "templates/scope-definition.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "read_on_demand": [
+      "domain-model/agent-specification.md",
+      "workflows/implement-feature.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 108553,
+    "bytes_required": 12425,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-ded114f50a46/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "runs/run-ded114f50a46/states/scope-and-acceptance/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository modification of any kind",
+        "any command whose effect is not recorded in the artifact"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "author or revise a technical design, structure, or technology decision",
+      "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+      "write, modify, or review code, tests, migrations, or configuration",
+      "record the Scope Gate decision on this agent's own artifact",
+      "record a merge, readiness, or release decision",
+      "define the test strategy or execute validation",
+      "relax a stated regulatory, policy, or quality constraint to close the scope",
+      "record scope no supplied input supports",
+      "access external systems, ticket trackers, or stakeholders directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "decide which deliverables fall inside this change and which fall outside it",
+        "decide the relative priority of the in-scope items",
+        "decide the acceptance threshold each criterion states",
+        "decide when a stated expectation is too vague to be an acceptance criterion",
+        "decide when an adjacent request is a separate change rather than a widening of this one",
+        "record a scope decision together with the rationale that justifies it",
+        "record an unresolved ambiguity as an open question with a named owner",
+        "set the scope verdict the recorded question set supports"
+      ],
+      "prohibited": [
+        "author or revise a technical design, structure, or technology decision",
+        "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+        "write, modify, or review code, tests, migrations, or configuration",
+        "record the Scope Gate decision on this agent's own artifact",
+        "record a merge, readiness, or release decision",
+        "define the test strategy or execute validation",
+        "relax a stated regulatory, policy, or quality constraint to close the scope",
+        "record scope no supplied input supports",
+        "access external systems, ticket trackers, or stakeholders directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "This role produces one artifact and changes no repository source. Its writes are the artifact path and the result envelope path the invocation envelope names, and nothing else. A scope decision that edited the repository would be deciding the change it is supposed to bound.",
+        "scope": [
+          "runs/**/states/scope-and-acceptance/**"
+        ]
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository modification of any kind",
+          "any command whose effect is not recorded in the artifact"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical supplied inputs and an identical context snapshot must produce the same in-scope item set, the same exclusion set, the same acceptance criterion set, the same scope decision set, the same open question set, and the same scope verdict.",
+      "identifierSchemes": {
+        "scopeItems": "S-<zero-padded-sequence>",
+        "exclusions": "X-<zero-padded-sequence>",
+        "acceptanceCriteria": "A-<zero-padded-sequence>",
+        "scopeDecisions": "D-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "In-scope items are ordered by business priority; ties break toward the order the expectation appeared in the supplied inputs. Acceptance criteria are ordered by the scope item they bound, ties breaking toward derivation order. Exclusions, decisions, and questions follow the order the reasoning stage that produced them declares.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied inputs or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "scope-definition.md",
+    "artifact_path": "runs/run-ded114f50a46/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "template_ref": "templates/scope-definition.md",
+    "contract_ref": "agents/omn-product-owner/output.md",
+    "quality_ref": "agents/omn-product-owner/quality.md",
+    "validator": "scope_definition_validator",
+    "result_envelope_path": "runs/run-ded114f50a46/states/scope-and-acceptance/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-08T11:19:06Z",
+  "context_budget": {
+    "modules_full_bytes": 65622,
+    "modules_core_bytes": 33326,
+    "slice_all_bytes": 108553,
+    "slice_required_bytes": 12425,
+    "inputs_bytes": 6395,
+    "upstream_full_bytes": 0,
+    "upstream_read_first_bytes": 0,
+    "task_context_bytes": 4207,
+    "fixed_bytes": 10810,
+    "legacy_estimate_bytes": 191380,
+    "progressive_estimate_bytes": 67163,
+    "legacy_estimate_tokens": 47845,
+    "progressive_estimate_tokens": 16790,
+    "savings_pct": 64.9
+  }
+}
