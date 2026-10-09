@@ -33,7 +33,7 @@ investigation:
   investigationId:
   decisionReference:
   sourceInputs:
-    - type:          # investigation-question | research-question | framed-objective | research-brief | context-sources | technical-data-access | business-evidence
+    - type:          # requirement-framing | investigation-question | research-question | framed-objective | research-brief | context-sources | technical-data-access | business-evidence
       reference:     # supplied reference, or "inline"
   producedBy: omn-context-agent
   agentVersion:

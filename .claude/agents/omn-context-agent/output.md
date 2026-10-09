@@ -83,9 +83,9 @@ populated.
 | `inputDigest` | from the frozen snapshot in the invocation envelope |
 | `contextDigest` | from the frozen snapshot in the invocation envelope |
 
-`sourceInputs` uses the declared type vocabulary: `investigation-question`, `research-question`,
-`framed-objective`, `research-brief`, `context-sources`, `technical-data-access`,
-`business-evidence`. It lists what was read, not what was available. An input listed but unread is a
+`sourceInputs` uses the declared type vocabulary: `requirement-framing`, `investigation-question`,
+`research-question`, `framed-objective`, `research-brief`, `context-sources`,
+`technical-data-access`, `business-evidence`. It lists what was read, not what was available. An input listed but unread is a
 false claim about the basis of this report.
 
 `confidence` is the report-level confidence from the Stage 10 table in `reasoning.md`. It is not an

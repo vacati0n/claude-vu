@@ -81,7 +81,8 @@ populated.
 claim about the basis of everything published below it.
 
 Declared `type` values are `deployment-status`, `monitoring-health-record`,
-`final-change-summary`, `stakeholder-list`, and `verification-report`. An input of another kind is
+`final-change-summary`, `stakeholder-list`, `verification-report`, and
+`technical-recommendation`. An input of another kind is
 recorded under the declared type that describes what it supplied.
 
 ## Section Contracts

@@ -112,9 +112,17 @@ At least one of the following must be present. Each supplies an account of what 
 | `validation-report.md` | what was proven about the delivered behavior, and what was not |
 | `review-package.md` | the findings, severities, and residual risk a review established |
 | `deployment-status` | what actually reached which environment, and its monitoring health |
+| `technical-recommendation.md` | what an investigation or research run concluded, and the evidence and risk behind it |
 
 `deployment-status` alone satisfies the minimum only in `communication-and-post-release`, which
-by construction publishes after the release has landed.
+by construction publishes after the release has landed. `technical-recommendation.md` is the
+account the two `findings` phases publish from: what a run concluded is the delivered result of
+an investigation, so publishing it is publishing what happened, not what was intended.
+Where more than one is delivered, the one produced by `recommendation` or `recommendation-draft`
+governs and is the statement published; the one produced by `option-analysis` or
+`option-synthesis` is a superseded draft, read as context only and never published as a second
+recommendation. Where only that draft is delivered, no recommendation is published and the
+missing final recommendation is recorded as an open question.
 
 ### Optional Inputs
 
@@ -259,7 +267,7 @@ Applied in order. The first that fires decides.
 | `omn-qa` | validated behavior, known issues, limitations, and unvalidated scope |
 | `omn-dev-2-reviewer` | findings, severities, and residual risk still open at publication |
 | `omn-orchestrator` | deployment status, monitoring health, and the closure context |
-| `omn-tech-lead` | the release decision, its conditions, and the readiness position behind it |
+| `omn-tech-lead` | the release decision, its conditions, and the readiness position behind it; for the `findings` phases, the recommendation an investigation or research run concluded with |
 | `architect` | structural intent and the compatibility consequence of a contract change |
 | `omn-product-owner` | the scope boundary and the audience a change was accepted for |
 

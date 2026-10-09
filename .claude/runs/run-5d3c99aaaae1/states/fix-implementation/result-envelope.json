@@ -1,0 +1,183 @@
+{
+  "invocation_id": "inv-5d3c99aaaae1-03-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5d3c99aaaae1/states/fix-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-1011",
+    "workflowPhase": "fix-implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 31,
+      "testEvidenceEntries": 11,
+      "deviations": 3,
+      "residualRisks": 5,
+      "openQuestions": 5
+    },
+    "evidenceExecution": {
+      "entriesExecuted": 11,
+      "entriesPassed": 11,
+      "entriesFailed": 0,
+      "entriesNotRun": 0,
+      "unitSuiteBaseline": {
+        "command": "python tools/run_tests_parallel.py",
+        "modules": "26/26",
+        "tests": "668 of 668",
+        "verdict": "OK",
+        "takenBefore": "any file was modified by this invocation"
+      },
+      "unitSuiteAfter": {
+        "command": "python tools/run_tests_parallel.py",
+        "modules": "27/27",
+        "tests": "688 of 688",
+        "verdict": "OK",
+        "delta": "+20 tests, all from tests/test_investigate_research_handoffs.py"
+      },
+      "newContractModule": {
+        "command": "python -m unittest tests.test_investigate_research_handoffs -v",
+        "beforeFix": "20 of 20 tests fail (28 failures with subtests, 0 errors) against the pre-edit copy",
+        "afterFix": "20 of 20 pass"
+      },
+      "perEdgeCensus": {
+        "handOffs": 29,
+        "blockedBefore": 13,
+        "blockedAfter": 7
+      },
+      "verifiers": {
+        "verify_manifests": {
+          "before": "2/2 CONFORMS",
+          "after": "2/2 CONFORMS"
+        },
+        "verify_registry_coverage": {
+          "before": "8/8 COVERED",
+          "after": "8/8 COVERED"
+        },
+        "verify_validators": {
+          "before": "6/6 COVERED",
+          "after": "6/6 COVERED"
+        },
+        "verify_self_hosting": {
+          "before": "6/8 NOT SELF-HOSTING",
+          "after": "6/8 NOT SELF-HOSTING",
+          "note": "S7 fails on run-437e2f765e4b (publication pending); S8 fails on run-5d3c99aaaae1 (no proposal yet) and run-5df08e171670; identical before and after"
+        },
+        "verify_multi_phase run-437e2f765e4b --no-replay": {
+          "before": "13/15",
+          "after": "13/15",
+          "note": "M6 pre-existing stalled chain; M14 skipped by --no-replay"
+        }
+      },
+      "runEvidence": "every file under runs other than this run's own is digest-identical before and after; run-c5a8d50d3238 state.json and task-context.yaml restored with git checkout after each suite run"
+    },
+    "qualityChecks": {
+      "S1": "pass",
+      "S2": "pass",
+      "S3": "pass",
+      "S4": "pass",
+      "S5": "pass",
+      "S6": "pass",
+      "S7": "pass",
+      "S8": "pass",
+      "D1": "pass",
+      "D2": "pass",
+      "D3": "pass",
+      "D4": "pass",
+      "D5": "pass",
+      "D6": "pass",
+      "M1": "pass",
+      "M5": "pass",
+      "M7": "pass",
+      "E1": "pass",
+      "E2": "pass",
+      "E3": "pass",
+      "E4": "pass",
+      "M3": "pass",
+      "M2": "pass",
+      "K1": "pass",
+      "K2": "pass",
+      "M4": "pass",
+      "V1": "pass",
+      "V2": "pass",
+      "V3": "pass",
+      "B1": "pass",
+      "B2": "pass",
+      "B3": "pass",
+      "B4": "pass",
+      "B5": "pass",
+      "B6": "pass",
+      "B7": "pass",
+      "M6": "pass",
+      "A1": "pass",
+      "A2": "pass",
+      "A3": "pass",
+      "C1": "pass",
+      "C2": "pass",
+      "C3": "pass",
+      "C4": "pass",
+      "C5": "pass"
+    },
+    "notMachineCheckable": {
+      "N1": "discharged: each change-set row describes the edit made at that path, confirmed against git diff",
+      "N2": "discharged: each test row's Covers cell names entries its command exercises",
+      "N3": "discharged: no runtime, validator or gate code changed; declarations only",
+      "N4": "discharged: the one new file, the test module, is justified at ladder rung 7 in Approach taken; no new abstraction or dependency"
+    },
+    "deviationsFromOperatorBrief": [
+      "V-001 additive context-agent menu (per directive)",
+      "V-002 command specifications name prose inputs, not edited",
+      "V-003 profile identity version not moved"
+    ],
+    "openItems": [
+      "Q-005 implementer host registration states 1.0.0 against its 1.1.0 manifest (separate defect, not fixed)"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "runs/run-5d3c99aaaae1/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "agents/omn-context-agent/manifest.yaml",
+    "agents/omn-context-agent/identity.md",
+    "agents/omn-context-agent/output.md",
+    "agents/omn-context-agent/execution.md",
+    "agents/omn-context-agent.agent.md",
+    "templates/investigation-report.md",
+    "agents/omn-documentation/manifest.yaml",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation.agent.md",
+    "registry/agents.yaml",
+    "workflows/investigate.md",
+    "workflows/research.md",
+    "registry/workflows.yaml",
+    "config/self-hosting-profile.md",
+    "tests/test_investigate_research_handoffs.py",
+    "omn_agent/_bundled_payload/agents/omn-context-agent.agent.md",
+    "omn_agent/_bundled_payload/agents/omn-context-agent/execution.md",
+    "omn_agent/_bundled_payload/agents/omn-context-agent/identity.md",
+    "omn_agent/_bundled_payload/agents/omn-context-agent/manifest.yaml",
+    "omn_agent/_bundled_payload/agents/omn-context-agent/output.md",
+    "omn_agent/_bundled_payload/agents/omn-documentation.agent.md",
+    "omn_agent/_bundled_payload/agents/omn-documentation/execution.md",
+    "omn_agent/_bundled_payload/agents/omn-documentation/identity.md",
+    "omn_agent/_bundled_payload/agents/omn-documentation/manifest.yaml",
+    "omn_agent/_bundled_payload/config/self-hosting-profile.md",
+    "omn_agent/_bundled_payload/registry/agents.yaml",
+    "omn_agent/_bundled_payload/registry/workflows.yaml",
+    "omn_agent/_bundled_payload/templates/investigation-report.md",
+    "omn_agent/_bundled_payload/workflows/investigate.md",
+    "omn_agent/_bundled_payload/workflows/research.md",
+    "runs/run-5d3c99aaaae1/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-5d3c99aaaae1/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

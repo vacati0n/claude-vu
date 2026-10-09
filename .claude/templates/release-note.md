@@ -27,7 +27,7 @@ releaseNote:
   releaseId:
   version:
   sourceInputs:
-    - type:          # deployment-status | monitoring-health-record | final-change-summary | stakeholder-list | verification-report
+    - type:          # deployment-status | monitoring-health-record | final-change-summary | stakeholder-list | verification-report | technical-recommendation
       reference:     # supplied reference, or "inline"
   producedBy: omn-documentation
   agentVersion:

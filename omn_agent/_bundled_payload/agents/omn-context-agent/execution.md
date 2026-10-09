@@ -74,7 +74,8 @@ producer conflict.
 
 **Actions.**
 
-- Load the question: the framed objective, the research brief, or the raw question.
+- Load the question: the requirement framing the framing phase published, the framed objective,
+  the research brief, or the raw question.
 - Load every supplied source, and record which supplied what.
 - Enumerate and order the sources per Stage 3 of `reasoning.md`, before reading any of them.
 - Record every named source that cannot be read, with what it was expected to supply.
@@ -199,8 +200,8 @@ the authority; this table binds the lifecycle above to it.
 
 | Workflow | Phase | Question consumed | Emits | Assessed at | Decided by |
 |---|---|---|---|---|---|
-| `investigate` | `technical-discovery` | framed objective with success criteria and scope bounds | `investigation-report.md` | Technical Gate | `architect` |
-| `research` | `technical-validation` | research brief with boundary definitions | `investigation-report.md` | Technical Validity Gate | `architect` |
+| `investigate` | `technical-discovery` | `requirement-framing.md`: framed objective with success criteria and scope bounds | `investigation-report.md` | Technical Gate | `architect` |
+| `research` | `technical-validation` | `requirement-framing.md`: research brief with boundary definitions | `investigation-report.md` | Technical Validity Gate | `architect` |
 
 At both phases this agent produces the evidence the gate assesses, so the Producer Exclusion Rule
 in `workflows/workflow-gate-matrix.md` moves the decision to the second owner named in the final

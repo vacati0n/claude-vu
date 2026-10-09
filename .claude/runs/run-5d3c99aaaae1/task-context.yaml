@@ -1,0 +1,444 @@
+schema: framework.runtime/task-context.v1
+task_id: run-5d3c99aaaae1
+command: bugfix
+workflow: fix-bug v1.0.0
+run_status: Completed
+updated_at: '2026-10-09T13:16:41Z'
+objective: No run of the investigate workflow can complete under the runtime without operator-performed work. Between consecutive
+  phases, the runtime offers the upstream artifact to the next agent under the producing agent's own output identifier, and
+  the consuming agent's manifest does not list that identifier as an accepted input. The next phase then blocks at guard G5-INPUT
+  with "no accepted input type supplied". The same agents own the phases of the research workflow, which is expected to fail
+  the same way. Separately, the self-hosting profile routes /investigate with an input type that no agent declares. runtime/framework_runtime.py,
+  function upstream_inputs, offers each completed upstream arti...
+inputs:
+- type: defect-report
+  reference: runs/inputs/investigate-chain-input-contracts-defect-report.md
+  digest: sha256:90c7b5a6aa846a07964a3815823ec9f2
+relevant_agents:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S11
+  - S12
+  - S02
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S08
+  - S12
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S12
+- phase: regression-validation
+  agent: omn-qa
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S11
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  status: completed
+  required_skills:
+  - S10
+  - S11
+completed_phases:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-5d3c99aaaae1/states/triage-and-impact/artifacts/bug-analysis.md
+  digest: sha256:20e9e2f0a249bebcfc0ddbfc00d62336
+  validation: pass 30/30
+  attempts: 1
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-5d3c99aaaae1/states/root-cause-analysis/artifacts/bug-analysis.md
+  digest: sha256:1d90ad7606b5c965dbf7e822420881d0
+  validation: pass 30/30
+  attempts: 1
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-5d3c99aaaae1/states/fix-implementation/artifacts/implementation-report.md
+  digest: sha256:729d6437f12d23f88b107bd101be4d90
+  validation: pass 32/32
+  attempts: 1
+- phase: regression-validation
+  agent: omn-qa
+  artifact: runs/run-5d3c99aaaae1/states/regression-validation/artifacts/validation-report.md
+  digest: sha256:0dce7e45eb737743a8ed2a98ad1f8174
+  validation: pass 31/31
+  attempts: 1
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  artifact: runs/run-5d3c99aaaae1/states/closure-and-communication/artifacts/orchestration-result.md
+  digest: sha256:f5fc4b975f2f22008e029b0e70533ff2
+  validation: pass 34/34
+  attempts: 1
+gates:
+- gate: Triage Gate
+  closes: triage-and-impact
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: operator on behalf of omn-tech-lead
+- gate: Fix Gate
+  closes: fix-implementation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent, recorded by session operator
+- gate: Verification Gate
+  closes: regression-validation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: operator on behalf of omn-dev-2-reviewer
+- gate: Closure Gate
+  closes: closure-and-communication
+  decision: approved
+  owner_role: omn-documentation
+  decided_by: operator on behalf of omn-documentation
+artifacts:
+  triage-and-impact: runs/run-5d3c99aaaae1/states/triage-and-impact/artifacts/bug-analysis.md
+  root-cause-analysis: runs/run-5d3c99aaaae1/states/root-cause-analysis/artifacts/bug-analysis.md
+  fix-implementation: runs/run-5d3c99aaaae1/states/fix-implementation/artifacts/implementation-report.md
+  regression-validation: runs/run-5d3c99aaaae1/states/regression-validation/artifacts/validation-report.md
+  closure-and-communication: runs/run-5d3c99aaaae1/states/closure-and-communication/artifacts/orchestration-result.md
+parallel_groups:
+- - triage-and-impact
+- - root-cause-analysis
+- - fix-implementation
+- - regression-validation
+- - closure-and-communication
+risks:
+- 'User impact: An operator running the investigate, research, review-pull-request, or release command cannot finish the run
+  without foreknowledge of the guard:...'
+- 'Business impact: No business impact statement was supplied; severity rests on technical impact alone and the question is
+  routed to the product owner.'
+- 'Technical impact: Correctness of the framework''s own contract: 13 of 29 declared hand-offs are undispatchable under G5-INPUT
+  although the framework declares...'
+- 'Blast radius: The runtime guard and upstream hand-off path; the agent manifests and registry records of planner, architect,
+  context-agent, tech-lead, documen...'
+- 'User impact: An operator running investigate or research cannot finish the run without foreknowledge of the guard: both
+  always stop at 3 hand-offs, and both...'
+- 'Technical impact: Correctness of the framework''s own contract: 13 of 29 declared hand-offs and 4 of 7 profile rows are
+  undispatchable although every phase is...'
+- 'Blast radius: The G5-INPUT guard and the hand-off path; the input contracts of context-agent, tech-lead, and documentation
+  as consumers in scope, and of plan...'
+- 'R-001: Any next over run-437e2f765e4b would now return its blocked recommendation to pending and rewrite that run''...
+  | medium | medium'
+- 'R-002: Documentation''s menu is agent-global, so a technical-recommendation in the pool of its implement-feature, r...
+  | low | low'
+- 'R-003: The version moves reset gate auto-approval precedent for investigate and research gates and for gates asses... |
+  medium | low'
+- 'R-004: S8 fails on run-5df08e171670 and on this run until its change proposal exists; S7 fails on run-437e2f765e4b... |
+  high | low'
+- 'R-005: The implementer host registration states 1.0.0 and instructs an abort against its 1.1.0 manifest, and nothi... |
+  medium | medium'
+- 'Accepted risk: None identified.'
+- 'Unmitigated risk: DF-001 carries forward with no acceptance and no owner assigned; the seven known-gap hand-offs keep failing
+  at G5-INPUT for implement-featu...'
+- 'Monitoring required: the census and tests/test_investigate_research_handoffs.py, whose known-gap lists can only shrink;
+  the first real investigate or researc...'
+decisions:
+- 'Root cause statement: Producer output identifiers and consumer accepted-input identifiers are declared independently with
+  no authoritative mapping from a Pha...'
+- 'Why detection failed earlier: Manifest, registry, and Phase Model verifiers check each agent or table alone and no check
+  composes a Phase Model edge with the...'
+- 'C-001: Independent declarations | Each manifest declares its output and accepted identifiers on its own, and the Phase
+  Model Input column nam... | E-004, E-011'
+- 'C-002: Offer under producer name | The runtime offers the upstream artifact under the producing manifest''s output identifier,
+  or the file stem | E-002'
+- 'C-003: Guard narrows and requires a listed type | G5-INPUT discards types the consumer does not declare and, for a menu
+  contract, requires one accepted type;... | E-003'
+- 'C-004: Mismatch at 13 edges | For 13 of 29 consecutive hand-offs the offered identifier is absent from the consumer''s
+  accepted list, in o... | E-005, E-011, E-014'
+- 'C-005: Supplied inputs rescue only some chains | Entry-supplied types survive into later pools and rescue fix-bug, refactor,
+  and some implement-feature edge... | E-006, E-009, E-013'
+- 'C-006: Profile entry mismatch | Four of seven profile rows name a sole entry input the entry agent rejects, an independent
+  instance of the... | E-007, E-012'
+- 'C-007: Observed block | The consuming phase blocks at G5-INPUT with the accepted list in its reason, its successors stay
+  pending, a... | E-008, E-010'
+- 'Proposed fix: Make every Phase Model hand-off deliver the upstream artifact under an identifier the consuming agent accepts,
+  for all 13 mismatched edges and...'
+- 'Alternative options: Declare the upstream identifiers in each consuming manifest, which changes agent versions and registry
+  records and widens each accepted...'
+- 'Regression risk: high'
+- 'Regression scope: Every workflow whose hand-offs are changed, because guard G5-INPUT is shared by all phases; the sibling
+  pools already passing, such as refa...'
+- 'Root cause statement: The consuming agents'' accepted-input contracts, which each agent enforces again in its own first
+  reasoning stage, were declared without...'
+- 'Why detection failed earlier: Registry coverage check C6 evaluates only the capability and context guards and never G5-INPUT;
+  verify_manifests reads only wri...'
+- 'C-001: Independent declarations | Each consumer''s accepted list is its own reasoning contract and was written without
+  the Phase Model: the co... | E-004, E-011, E-021, E-022, E-023, E-024, E-025'
+- 'C-002: Offer under producer name | The runtime offers the upstream artifact under the producing manifest''s output identifier;
+  delivery uses th... | E-002, E-026'
+- 'C-003: Guard narrows and requires a listed type | G5-INPUT discards types the consumer does not declare and requires one
+  accepted type; optional-only types d... | E-003, E-015'
+- 'C-004: Mismatch at 13 edges | 13 of 29 hand-offs offer an identifier the consumer does not accept, 6 of them in investigate
+  and research;... | E-005, E-014, E-018, E-028'
+- 'C-005: Supplied inputs rescue only some chains | Entry types persist into later pools and rescue fix-bug and refactor,
+  but no entry type of investigate or r... | E-006, E-009, E-013'
+- 'C-006: Profile entry mismatch | Two in-scope rows name investigation-request, declared by nothing, and research-question,
+  optional only to... | E-007, E-012, E-027'
+- 'C-007: Observed block | The consuming phase blocks at G5-INPUT with the accepted list in its reason, its successors stay
+  pending, a... | E-008, E-010, E-027'
+- 'Proposed fix: Make each in-scope consumer''s contract state the artifact its Phase Model edge delivers, in the place that
+  consumer''s own contract already poin...'
+- 'Alternative options: (A for all three consumers) also add technical-recommendation to tech-lead''s menu: tech-lead would
+  accept its own output as an evidence...'
+- 'Regression risk: medium'
+- 'Regression scope: Documentation''s three other phases (implement-feature documentation-and-release-handoff, review-pull-request
+  documentation-impact, release...'
+- 'V-001: requirement-framing was added beside framed-objective and research-brief instead of replacing them (C-001,... |
+  root-cause Fix Strategy, context agent accepts requirement-framing in place of the two producerless identif... | Operator
+  directive: removal narrows a contract and is left to a follow-up; both ident...'
+- 'V-002: The command specifications for /investigate and /research name prose inputs (an investigation or research q... |
+  operator directive to keep router, verifier, registry and command specifications consistent | The business analyst contract
+  defines problem-statement as the question an investigate or research run...'
+- 'V-003: The self-hosting profile identity stays at version 1.0.0 although two Routing Table rows changed (C-015) | profile
+  identity version | Neither the analysis nor the operator names a profile version move; no verifier or loader keys on it'
+validation_requirements:
+  test_focus:
+  - 'Verification steps: In a scratch mirror, repeat the reproduction with the same single entry type per workflow and confirm
+    that every consecutive hand-off of...'
+  - 'Regression tests added: A per-edge test over every active workflow that composes the Phase Model edge, the producer''s
+    output identifier, and the consumer''s a...'
+  - 'Monitoring signals after release: Any run whose work item is blocked at G5-INPUT with the reason awaiting a dependency
+    output after its predecessor completed...'
+  - 'Verification steps: In a throwaway mirror of the repaired tree, repeat the reproduction with problem-statement as the
+    only supplied input: every phase of inv...'
+  - 'Regression tests added: One new contract module, run without a model, failing before the repair and passing after: a
+    per-edge test over every active workflow...'
+  - 'Monitoring signals after release: Work items blocked at G5-INPUT with reason awaiting_dependency_output whose predecessors
+    are all completed, expected zero f...'
+  evidence:
+  - 'T-001: Witness: the new module run against a copy of the working tree taken before any edit reports all 20 tests f...
+    | regression | C-001, C-005, C-007, C-010, C-011, C-012, C-013, C-014, C-015, C-016'
+  - 'T-002: The new module on the repaired tree: both chains pass G5-INPUT at all five phases from problem-statement al...
+    | contract | C-001, C-002, C-003, C-004, C-005, C-006, C-007, C-008, C-009, C-010, C-011, C-012, C-013, C-014, C-015,
+    C-016'
+  - 'T-003: Task Router: the dependency graph of every active workflow, before against after, differs only by the edge...
+    | contract | C-012, C-013, C-014'
+  - 'T-004: Per-edge census over all 29 consecutive hand-offs with the runtime''s own contract functions: blocked count...
+    | contract | C-001, C-007, C-011, C-012, C-013'
+  - 'T-005: Scratch mirror of the repaired tree outside the repository: plan, next, dispatch and gate drive investigate...
+    | end-to-end | C-001, C-004, C-005, C-007, C-009, C-011, C-012, C-013, C-014, C-015'
+  - 'T-006: The router names problem-statement for decision-support and external-research and reports workflow version...
+    | contract | C-014, C-015'
+  - 'T-007: Manifest, registry coverage and validator verifiers return full passes, as at baseline: 2/2, 8/8, 6/6 | static
+    | C-001, C-007, C-011, C-012, C-013, C-014'
+  - 'T-008: Self-hosting verifier returns the same 6/8 verdict as baseline, S2 passing for every routing row; S7 and S8...
+    | static | C-014, C-015'
+  - 'T-009: The stalled run run-437e2f765e4b still loads pinned at investigate v1.0.0 with the same state table; multi-...
+    | regression | C-001, C-007, C-011, C-012, C-014'
+  - 'T-010: The payload mirror carries no drift after the sync; the refactor-handoff contract module still passes | regression
+    | C-017, C-018, C-019, C-020, C-021, C-022, C-023, C-024, C-025, C-026, C-027, C-028, C-029, C-030, C-031'
+  - 'T-011: Whole unit suite, baseline before any edit and again after | regression | C-001, C-002, C-003, C-004, C-005, C-006,
+    C-007, C-008, C-009, C-010, C-011, C-012, C-013, C-014, C-015, C-...'
+  verification:
+  - 'Verification method: a byte copy of the working tree was taken before any edit and the whole suite, the four verifiers,
+    the stalled run''s status and the per-...'
+  - 'Commands executed: python tools/run_tests_parallel.py (before and after); python -m unittest tests.test_investigate_research_handoffs
+    -v (pre-edit copy and r...'
+  - 'Result summary: 11 evidence entries executed, 11 passed, 0 failed. New module: 20 of 20 fail before, 20 of 20 pass after.
+    Census: 13 of 29 blocked before, 7...'
+  - 'Unverified areas: whether the real context, tech-lead and documentation agents accept the renamed inputs in their own
+    first reasoning stage and whether their...'
+  acceptance_criteria:
+  - 'AC-001: every phase of investigate and of research passes G5-INPUT with problem-statement as the only supplied inpu...
+    | operator acceptance criterion 1 (task statement) | end-to-end'
+  - 'AC-002: the number of blocked hand-offs across all workflows falls from 13 to 7 and the 7 remaining are exactly the...
+    | operator acceptance criterion 2 (task statement) | integration'
+  - 'AC-003: the guard still rejects: an input type nobody declares, optional-only types and empty pools at the changed...
+    | operator acceptance criterion 3 (task statement) | unit'
+  - 'AC-004: tests/test_investigate_research_handoffs.py (22 tests) passes, and fails on the reconstructed pre-fix tree...
+    | operator acceptance criterion 4 (task statement) | unit'
+  - 'AC-005: standalone non-mutating verifiers: verify_manifests 2/2, verify_registry_coverage 8/8, verify_validators 6/...
+    | operator acceptance criterion 5 (task statement) | integration'
+  - 'AC-006: existing run evidence untouched: framework_runtime.py status --run-id run-437e2f765e4b works read-only; git...
+    | operator acceptance criterion 6 (task statement) | integration'
+  - 'AC-007: versions: manifest, registry/agents.yaml and host registration agree at 1.1.0 for both agents; mirror byte-...
+    | operator acceptance criterion 7 (task statement) | unit'
+  - 'AC-008: the full unit suite run by the operator (690 discovered, 687 pass, 3 FAIL, all in tests/test_demo_capture.p...
+    | operator acceptance criterion 8 (task statement) | unit'
+open_questions:
+- 'Q-001: Where should the mapping live: consuming manifests, a runtime alias, the Phase Model, or a combination, and... |
+  no | architect'
+- 'Q-002: Is relying on persisting entry-supplied types to rescue later phases an intended design, or an accident the... |
+  no | architect'
+- 'Q-003: What is the business impact of undispatchable investigate, research, review, and release commands; none was... |
+  no | omn-product-owner'
+- 'Q-004: Only guard G5-INPUT was measured; whether other guards, validators, and gates then pass for every repaired... |
+  no | omn-qa'
+- 'Q-005: What becomes of the committed stalled investigate run, which fails the completion rule while it remains; th... |
+  no | omn-tech-lead'
+- 'Q-001: Confirm the placement recommended here, contract-side for the context agent and documentation and Input-col... |
+  no | architect'
+- 'Q-004: Only G5-INPUT and envelope construction were observed; whether the real agents accept the renamed inputs in... |
+  no | omn-qa'
+- 'Q-007: The seven out-of-scope hand-offs and the change-review and framework-release rows need their own per-consum... |
+  no | omn-tech-lead'
+- 'Q-002: Is relying on persisting entry-supplied types to rescue later phases an intended design, or an accident to... |
+  no | architect'
+- 'Q-003: What is the business impact of undispatchable investigate and research commands; none was supplied, so the... |
+  no | omn-product-owner'
+- 'Q-005: What becomes of run-437e2f765e4b: once repaired, any re-evaluation returns its recommendation phase to pend... |
+  no | omn-tech-lead'
+- 'Q-006: The implementer''s host registration states version 1.0.0 and instructs an abort against its 1.1.0 manifest;...
+  | no | omn-tech-lead'
+- 'Q-001: Should framed-objective and research-brief, which no agent produces, now be withdrawn from the context agen... |
+  no | architect'
+- 'Q-002: Should the /investigate and /research command specifications name the problem-statement input type the prof... |
+  no | omn-tech-lead'
+- 'Q-003: Should the self-hosting profile identity version move for the two changed Routing Table rows | no | omn-tech-lead'
+- 'Q-004: Is run-437e2f765e4b resumed, which rewrites its recorded block, or retired | no | omn-tech-lead'
+- 'Q-005: The implementer host registration''s 1.0.0 version against its 1.1.0 manifest is a separate defect to route | no
+  | omn-tech-lead'
+- 'Q-001: Which role owns the demo capture incompatibility with ffmpeg 9.0.2 (DF-001), and should it be fixed in the filter
+  invocation or by pinning the tool ve...'
+- 'Q-002: Should the first real investigate or research run be observed before the known-gap follow-ups are scheduled, given
+  that no model-driven phase has yet...'
+- 'Q-001: Will omn-documentation record a Closure Gate decision on this record, and does it accept FU-001 to FU-007 as deferrable
+  at closure? Owner: omn-documen...'
+- 'Q-002: Should framed-objective and research-brief, which no agent produces, be withdrawn from the context agent''s accepted
+  inputs, or kept? Owner: architect.'
+- 'Q-003: The closure-and-communication failure envelope reads resolved ("every guard now passes") while the Closure Gate
+  has no decision. This record follows t...'
+- 'Q-004: Which role owns DF-001? The validation report routes it to omn-tech-lead and recommends omn-dev-1-bug-analyst. Owner:
+  omn-tech-lead.'
+changed_files:
+- <fw>/agents/omn-context-agent/manifest.yaml (modified)
+- <fw>/agents/omn-context-agent/identity.md (modified)
+- <fw>/agents/omn-context-agent/output.md (modified)
+- <fw>/agents/omn-context-agent/execution.md (modified)
+- <fw>/agents/omn-context-agent.agent.md (modified)
+- <fw>/templates/investigation-report.md (modified)
+- <fw>/agents/omn-documentation/manifest.yaml (modified)
+- <fw>/agents/omn-documentation/identity.md (modified)
+- <fw>/agents/omn-documentation/execution.md (modified)
+- <fw>/agents/omn-documentation.agent.md (modified)
+- <fw>/registry/agents.yaml (modified)
+- <fw>/workflows/investigate.md (modified)
+- <fw>/workflows/research.md (modified)
+- <fw>/registry/workflows.yaml (modified)
+- <fw>/config/self-hosting-profile.md (modified)
+- tests/test_investigate_research_handoffs.py (added)
+- omn_agent/_bundled_payload/agents/omn-context-agent.agent.md (modified)
+- omn_agent/_bundled_payload/agents/omn-context-agent/execution.md (modified)
+- omn_agent/_bundled_payload/agents/omn-context-agent/identity.md (modified)
+- omn_agent/_bundled_payload/agents/omn-context-agent/manifest.yaml (modified)
+- omn_agent/_bundled_payload/agents/omn-context-agent/output.md (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation.agent.md (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation/execution.md (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation/identity.md (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation/manifest.yaml (modified)
+- omn_agent/_bundled_payload/config/self-hosting-profile.md (modified)
+- omn_agent/_bundled_payload/registry/agents.yaml (modified)
+- omn_agent/_bundled_payload/registry/workflows.yaml (modified)
+- omn_agent/_bundled_payload/templates/investigation-report.md (modified)
+- omn_agent/_bundled_payload/workflows/investigate.md (modified)
+- omn_agent/_bundled_payload/workflows/research.md (modified)
+findings:
+- 'DF-001: medium | operational | tests/test_demo_capture.py EndToEndEditTestCase (three tests) and the demo edit step that
+  invokes ffmpeg'
+verdicts:
+- 'Decision: pass'
+- 'Rationale: every one of the eight criteria is met by an executed check, no critical or high defect is open, and no criterion
+  is blocked or not met, so the ad...'
+- 'Blocking defects outstanding: None identified.'
+- 'Readiness recommendation: recommend that the gate owner treat the repair as validated for the Verification Gate and route
+  DF-001 as a separate defect to omn-...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:fix-implementation
+      term: migration
+    performance:
+    - source: input:defect-report
+      term: profile
+    - source: artifact:triage-and-impact
+      term: profile
+    - source: artifact:root-cause-analysis
+      term: profile
+    security:
+    - source: artifact:regression-validation
+      term: security
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:defect-report
+  - artifact:triage-and-impact
+  - artifact:root-cause-analysis
+  - artifact:fix-implementation
+  - artifact:regression-validation
+  - artifact:closure-and-communication
+relevant_skills:
+  triage-and-impact:
+    S11: required
+    S12: required
+    S02: required
+  root-cause-analysis:
+    S03: required
+    S06: required
+    S08: required
+    S12: required
+  fix-implementation:
+    S03: required
+    S06: required
+    S10: required
+    S12: required
+  regression-validation:
+    S07: required
+    S09: required
+    S11: required
+  closure-and-communication:
+    S10: required
+    S11: required
+repository_context:
+  relevant_modules: []
+  relevant_files:
+  - <fw>/agents/omn-context-agent/manifest.yaml (modified)
+  - <fw>/agents/omn-context-agent/identity.md (modified)
+  - <fw>/agents/omn-context-agent/output.md (modified)
+  - <fw>/agents/omn-context-agent/execution.md (modified)
+  - <fw>/agents/omn-context-agent.agent.md (modified)
+  - <fw>/templates/investigation-report.md (modified)
+  - <fw>/agents/omn-documentation/manifest.yaml (modified)
+  - <fw>/agents/omn-documentation/identity.md (modified)
+  - <fw>/agents/omn-documentation/execution.md (modified)
+  - <fw>/agents/omn-documentation.agent.md (modified)
+  - <fw>/registry/agents.yaml (modified)
+  - <fw>/workflows/investigate.md (modified)
+  - <fw>/workflows/research.md (modified)
+  - <fw>/registry/workflows.yaml (modified)
+  - <fw>/config/self-hosting-profile.md (modified)
+  - tests/test_investigate_research_handoffs.py (added)
+  - omn_agent/_bundled_payload/agents/omn-context-agent.agent.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-context-agent/execution.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-context-agent/identity.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-context-agent/manifest.yaml (modified)
+  - omn_agent/_bundled_payload/agents/omn-context-agent/output.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation.agent.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation/execution.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation/identity.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation/manifest.yaml (modified)
+  - omn_agent/_bundled_payload/config/self-hosting-profile.md (modified)
+  - omn_agent/_bundled_payload/registry/agents.yaml (modified)
+  - omn_agent/_bundled_payload/registry/workflows.yaml (modified)
+  - omn_agent/_bundled_payload/templates/investigation-report.md (modified)
+  - omn_agent/_bundled_payload/workflows/investigate.md (modified)
+  - omn_agent/_bundled_payload/workflows/research.md (modified)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path

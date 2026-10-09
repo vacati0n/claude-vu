@@ -1,0 +1,75 @@
+{
+  "invocation_id": "inv-5d3c99aaaae1-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5d3c99aaaae1/states/closure-and-communication/artifacts/orchestration-result.md"
+  ],
+  "structured_output": {
+    "coordinationBasis": "closure",
+    "disposition": "held",
+    "status": "complete",
+    "counts": {
+      "phases": 5,
+      "complete": 4,
+      "blocked": 1,
+      "not_started": 0,
+      "handoffs": 4,
+      "handoffs_accepted": 3,
+      "handoffs_refused": 1,
+      "handoffs_pending": 0,
+      "escalations": 2,
+      "followups": 7,
+      "open_questions": 4
+    },
+    "escalations_by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 2,
+      "low": 0
+    },
+    "gate_owner_addressed": "omn-documentation",
+    "checks": {
+      "validator": {
+        "tool": "runtime/orchestration_result_validator.py",
+        "result": "pass",
+        "run": 34,
+        "passed": 34,
+        "not_machine_checkable": 3,
+        "first_run": "fail, 1 blocking: C6.2 undefined identifier Q-005 (task-context reference); repaired by removing the external reference; second run pass"
+      },
+      "quality_contract_self_check": {
+        "structural_S1_to_S7": "pass",
+        "metadata_M1_to_M5": "pass",
+        "progression_P1_to_P4": "pass",
+        "authority_A1_to_A3_O4": "pass",
+        "arithmetic_O3_N-COUNT": "pass",
+        "handoff_H1_to_H3": "pass",
+        "escalation_followup_E1_to_E4_O8": "pass",
+        "position_O6_O7_O9_C1_C2": "pass",
+        "content_T1_to_T4": "pass",
+        "T5_read_only_commands_named": "pass (Evidence examined names the run status output and the files read)",
+        "not_machine_checkable_declared": ["N1", "N2", "N3", "N4"]
+      }
+    },
+    "read_only_commands": [
+      "python .claude/runtime/framework_runtime.py status --run-id run-5d3c99aaaae1",
+      "python .claude/runtime/orchestration_result_validator.py <artifact> --envelope <invocation-envelope>"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-orchestrator/system.md",
+    "agents/omn-orchestrator/identity.md",
+    "agents/omn-orchestrator/reasoning.md",
+    "agents/omn-orchestrator/execution.md",
+    "agents/omn-orchestrator/output.md",
+    "agents/omn-orchestrator/quality.md",
+    "runs/run-5d3c99aaaae1/states/closure-and-communication/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-5d3c99aaaae1/states/closure-and-communication/artifacts/orchestration-result.md",
+    "runs/run-5d3c99aaaae1/states/closure-and-communication/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

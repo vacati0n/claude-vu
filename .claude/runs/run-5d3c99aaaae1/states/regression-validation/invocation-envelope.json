@@ -1,0 +1,689 @@
+{
+  "invocation_id": "inv-5d3c99aaaae1-04-001",
+  "run_id": "run-5d3c99aaaae1",
+  "work_item_id": "run-5d3c99aaaae1::regression-validation",
+  "idempotency_key": "sha256:5ba4775e0076307e25d63254dc09e3f3",
+  "state_id": "regression-validation",
+  "phase_index": 4,
+  "agent_id": "omn-qa",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-qa.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-qa/manifest.yaml",
+    "load_order": [
+      "agents/omn-qa/system.md",
+      "agents/omn-qa/identity.md",
+      "agents/omn-qa/reasoning.md",
+      "agents/omn-qa/execution.md",
+      "agents/omn-qa/output.md",
+      "agents/omn-qa/quality.md",
+      "agents/omn-qa/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-qa/system.md": "sha256:3e97eea7ec77003b26899aac0a9eddec",
+      "agents/omn-qa/identity.md": "sha256:9195b995eafd7f686fd5f97037f324fd",
+      "agents/omn-qa/reasoning.md": "sha256:424d6ef785f44f034fc61b9a3b56078c",
+      "agents/omn-qa/execution.md": "sha256:9f14ad3e34cd7fee4743f6f3587fc6ac",
+      "agents/omn-qa/output.md": "sha256:cfb5abc0ed0c9122e1e0c56be30038d3",
+      "agents/omn-qa/quality.md": "sha256:11fe13aef1252759858b98c89edc6ef9",
+      "agents/omn-qa/examples.md": "sha256:84f6d1663eea48190fce8ec74e909371"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-qa/system.md",
+        "agents/omn-qa/reasoning.md",
+        "agents/omn-qa/output.md",
+        "agents/omn-qa/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-qa/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-qa/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-qa/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 39471,
+      "full_bytes": 80377
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "acceptance-validation",
+      "regression-assessment",
+      "test-strategy-definition",
+      "defect-classification",
+      "release-readiness-recommendation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Primary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "security is always read in review and validation phases",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "required",
+      "area": "performance",
+      "basis": "area performance triggered by 'profile' in input:defect-report",
+      "source": "agent-manifest (Primary)"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "required",
+      "area": "database",
+      "basis": "area database triggered by 'migration' in artifact:fix-implementation",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "review-package",
+      "technical-design",
+      "scope-definition",
+      "bug-analysis",
+      "execution-plan",
+      "acceptance-criteria",
+      "validation-criteria",
+      "regression-targets",
+      "test-evidence",
+      "test-baseline",
+      "quality-thresholds",
+      "parity-checklist",
+      "performance-baseline",
+      "packaging-evidence",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-5d3c99aaaae1/states/fix-implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-5d3c99aaaae1/states/fix-implementation/artifacts/implementation-report.md",
+        "text": "# Implementation Report: investigate and research hand each phase's artifact to the next\n\n```yaml\nimplementationReport:\n  reportId: IR-2026-1011\n  changeReference: investigate-chain-input-contracts-defect-report / run-5d3c99aaaae1\n  sourceInputs:\n    - type: bug-analysis\n      reference: runs/run-5d3c99aaaae1/states/triage-and-impact/artifacts/bug-analysis.md\n    - type: bug-analysis\n      reference: runs/run-5d3c99aaaae1/states/root-cause-analysis/artifacts/bug-analysis.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: provisional\n  workflowPhase: fix-implementation\n  verificationStatus: partially-verified\n  inputDigest: sha256:2f35d56562119ffa7aa9b843912cfb2b\n  contextDigest: sha256:ca90fe0d7fe9988b21eeb8702bf15cb6\n```\n\n## Metadata\n\n- Report ID: IR-2026-1011\n- Change reference: investigate-chain-input-contracts-defect-report / run-5d3c99aaaae1\n- Workflow phase: fix-implementation\n- Status: provisional\n- Verification status: partially-verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: every phase of `investigate` and `research` now passes guard G5-INPUT once its predecessor's artifact is committed, with `problem-statement` as the only supplied input, and both self-hosting profile rows that route to these workflows name an entry type the entry agent accepts; an input type no consumer declares is still refused, and the seven hand-offs outside this repair still block exactly as before.\n- Approach taken: declaration-only, per the root-cause analysis Fix Strategy as refined by the operator. No runtime module, validator, gate or template contract changed. The context agent's accepted menu gained `requirement-framing` additively and documentation's gained `technical-recommendation`; every surface stating either contract (minimum-satisfaction prose, contract module, lifecycle phase table, source-input vocabulary, report template comment, host registration, registry data dependencies) moved with it. Both agents move 1.0.0 to 1.1.0 in manifest, registry record and host registration with `contractVersion` held, following the earlier refactor-handoff repair. Tech-lead is unchanged: the `recommendation` and `recommendation-draft` Input cells also name `investigation-report.md`, so the Task Router derives one extra edge from discovery and routes the evidence base tech-lead already accepts; both workflows move 1.0.0 to 1.1.0 as an additive change. The two profile rows name `problem-statement`. One new test module was added at ladder rung 7, because no existing module composes a Phase Model edge with producer and consumer contracts (the refactor-handoff module covers one consumer only); it reuses the runtime's own loaders, guard functions and router and adds no dependency. The bundled payload was refreshed by its own sync command.\n- Design reference: the finalized root-cause analysis `runs/run-5d3c99aaaae1/states/root-cause-analysis/artifacts/bug-analysis.md` (digest `sha256:e261befdea3413b2c786fdf766a4eaad`), Fix Strategy and Validation Plan, with the triage analysis (digest `sha256:88972d03e6aa522dbdd6ed395e89410b`) as context, and the operator directives of this invocation.\n- Out of scope: the seven other blocked hand-offs (implement-feature execution-planning and solution-design-and-risk-assessment, fix-bug root-cause-analysis, review-pull-request structural-compliance and merge-decision, release artifact-packaging and communication-and-post-release) and the change-review and framework-release profile rows, held as known gaps by the new census tests; withdrawing `framed-objective` and `research-brief`, deferred by operator directive; the stalled run run-437e2f765e4b, which was read but never re-evaluated; the implementer host registration version drift; the stale build copy under `build/lib`, which the earlier repair also left alone; documentation's release-note source-input vocabulary, which never listed accepted inputs; any runtime, validator or gate change.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | `<fw>/agents/omn-context-agent/manifest.yaml` | modified | Accept `requirement-framing` additively, restate minimum satisfaction, version 1.0.0 to 1.1.0 | root-cause Fix Strategy, context agent hand-off; `V-001` |\n| `C-002` | `<fw>/agents/omn-context-agent/identity.md` | modified | Name the requirement framing in the required-input table and the business-analyst upstream row | root-cause Fix Strategy, identity text |\n| `C-003` | `<fw>/agents/omn-context-agent/output.md` | modified | Add `requirement-framing` to the source-input type vocabulary | root-cause Fix Strategy, sourceInputs vocabulary |\n| `C-004` | `<fw>/agents/omn-context-agent/execution.md` | modified | Context Loading and Phase Ownership name the requirement framing both phases consume | root-cause Fix Strategy, lifecycle text |\n| `C-005` | `<fw>/agents/omn-context-agent.agent.md` | modified | Host registration version 1.1.0 twice; its question check names the requirement framing | root-cause Fix Strategy, host registration version |\n| `C-006` | `<fw>/templates/investigation-report.md` | modified | Source-input type comment names `requirement-framing` | root-cause Fix Strategy, report template comment |\n| `C-007` | `<fw>/agents/omn-documentation/manifest.yaml` | modified | Accept `technical-recommendation` for the two findings phases, restate minimum satisfaction, version 1.1.0 | root-cause Fix Strategy, documentation hand-off |\n| `C-008` | `<fw>/agents/omn-documentation/identity.md` | modified | Required-input row and tech-lead upstream row for the recommendation the findings phases publish | root-cause Fix Strategy, identity text |\n| `C-009` | `<fw>/agents/omn-documentation/execution.md` | modified | Context Loading names the recommendation; Phase Ownership names `technical-recommendation.md` for both findings phases | root-cause Fix Strategy, lifecycle table |\n| `C-010` | `<fw>/agents/omn-documentation.agent.md` | modified | Host registration version 1.1.0 twice | root-cause Fix Strategy, host registration version |\n| `C-011` | `<fw>/registry/agents.yaml` | modified | Both records at 1.1.0; data dependencies `requirement-framing` and `technical-recommendation` at \">=1.0.0 <2.0.0\" | root-cause Fix Strategy, registry data dependencies |\n| `C-012` | `<fw>/workflows/investigate.md` | modified | `recommendation` Input cell also names `investigation-report.md` | root-cause Fix Strategy, tech-lead Input column |\n| `C-013` | `<fw>/workflows/research.md` | modified | `recommendation-draft` Input cell also names `investigation-report.md` | root-cause Fix Strategy, tech-lead Input column |\n| `C-014` | `<fw>/registry/workflows.yaml` | modified | `investigate` and `research` move 1.0.0 to 1.1.0 with a one-line additive note | root-cause Fix Strategy, workflow versions |\n| `C-015` | `<fw>/config/self-hosting-profile.md` | modified | decision-support and external-research rows name `problem-statement` | root-cause Fix Strategy, entry inputs; `V-002`, `V-003` |\n| `C-016` | `tests/test_investigate_research_handoffs.py` | added | Twenty contract tests: both chains, six named hand-offs, Task Router edges, boundary pairs, profile routes, known-gap census, version agreement | root-cause Validation Plan, regression tests |\n| `C-017` | `omn_agent/_bundled_payload/agents/omn-context-agent.agent.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-018` | `omn_agent/_bundled_payload/agents/omn-context-agent/execution.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-019` | `omn_agent/_bundled_payload/agents/omn-context-agent/identity.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-020` | `omn_agent/_bundled_payload/agents/omn-context-agent/manifest.yaml` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-021` | `omn_agent/_bundled_payload/agents/omn-context-agent/output.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-022` | `omn_agent/_bundled_payload/agents/omn-documentation.agent.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-023` | `omn_agent/_bundled_payload/agents/omn-documentation/execution.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-024` | `omn_agent/_bundled_payload/agents/omn-documentation/identity.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-025` | `omn_agent/_bundled_payload/agents/omn-documentation/manifest.yaml` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-026` | `omn_agent/_bundled_payload/config/self-hosting-profile.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-027` | `omn_agent/_bundled_payload/registry/agents.yaml` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-028` | `omn_agent/_bundled_payload/registry/workflows.yaml` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-029` | `omn_agent/_bundled_payload/templates/investigation-report.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-030` | `omn_agent/_bundled_payload/workflows/investigate.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n| `C-031` | `omn_agent/_bundled_payload/workflows/research.md` | modified | Payload mirror refreshed by the sync command | root-cause Fix Strategy, bundled payload sync |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | Witness: the new module run against a copy of the working tree taken before any edit reports all 20 tests failing (28 failures counting subtests, 0 errors, 0 passing) | regression | `C-001`, `C-005`, `C-007`, `C-010`, `C-011`, `C-012`, `C-013`, `C-014`, `C-015`, `C-016` | `python -m unittest tests.test_investigate_research_handoffs -v` in the pre-edit copy | pass |\n| `T-002` | The new module on the repaired tree: both chains pass G5-INPUT at all five phases from `problem-statement` alone; the six named hand-offs carry the delivered identifier through narrowing; boundary pairs still refuse undeclared, optional-only and empty pools; census equals the seven known gaps and two profile rows; versions agree | contract | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`, `C-007`, `C-008`, `C-009`, `C-010`, `C-011`, `C-012`, `C-013`, `C-014`, `C-015`, `C-016` | `python -m unittest tests.test_investigate_research_handoffs -v` | pass |\n| `T-003` | Task Router: the dependency graph of every active workflow, before against after, differs only by the edge technical-discovery to recommendation, the edge technical-validation to recommendation-draft, and the two version strings; every edge stays hard | contract | `C-012`, `C-013`, `C-014` | inline scratch script calling `parse_phase_model` and `derive_dependencies` over both trees, outputs diffed | pass |\n| `T-004` | Per-edge census over all 29 consecutive hand-offs with the runtime's own contract functions: blocked count falls from 13 to 7, and the 7 are exactly the out-of-scope edges | contract | `C-001`, `C-007`, `C-011`, `C-012`, `C-013` | inline scratch script over both trees using `derive_dependencies`, `narrow_inputs`, `resolve_input_contract` | pass |\n| `T-005` | Scratch mirror of the repaired tree outside the repository: `plan`, `next`, `dispatch` and `gate` drive investigate and research from `problem-statement`; every phase passes G5-INPUT and each envelope supplies the expected identifier; plans with `investigation-request` or `research-question` still block at entry | end-to-end | `C-001`, `C-004`, `C-005`, `C-007`, `C-009`, `C-011`, `C-012`, `C-013`, `C-014`, `C-015` | `python <fw>/runtime/framework_runtime.py plan`, `next`, `dispatch`, `gate` in the mirror via a scratch driver | pass |\n| `T-006` | The router names `problem-statement` for decision-support and external-research and reports workflow version 1.1.0 | contract | `C-014`, `C-015` | `python <fw>/runtime/self_hosting.py route --intent decision-support`; same for external-research | pass |\n| `T-007` | Manifest, registry coverage and validator verifiers return full passes, as at baseline: 2/2, 8/8, 6/6 | static | `C-001`, `C-007`, `C-011`, `C-012`, `C-013`, `C-014` | `python <fw>/runtime/verify_manifests.py`; `verify_registry_coverage.py`; `verify_validators.py` | pass |\n| `T-008` | Self-hosting verifier returns the same 6/8 verdict as baseline, S2 passing for every routing row; S7 and S8 fail on the same runs as before | static | `C-014`, `C-015` | `python <fw>/runtime/verify_self_hosting.py`, before and after | pass |\n| `T-009` | The stalled run run-437e2f765e4b still loads pinned at investigate v1.0.0 with the same state table; multi-phase verifier without replay returns the same 13/15 as baseline; every file under runs other than this run's own is byte-identical before and after | regression | `C-001`, `C-007`, `C-011`, `C-012`, `C-014` | `python <fw>/runtime/framework_runtime.py status --run-id run-437e2f765e4b`; `python <fw>/runtime/verify_multi_phase.py --run-id run-437e2f765e4b --no-replay`; file digest comparison | pass |\n| `T-010` | The payload mirror carries no drift after the sync; the refactor-handoff contract module still passes | regression | `C-017`, `C-018`, `C-019`, `C-020`, `C-021`, `C-022`, `C-023`, `C-024`, `C-025`, `C-026`, `C-027`, `C-028`, `C-029`, `C-030`, `C-031` | `python tests/test_bundled_payload.py --sync`; `python -m unittest tests.test_bundled_payload tests.test_agent_input_contracts` | pass |\n| `T-011` | Whole unit suite, baseline before any edit and again after | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`, `C-007`, `C-008`, `C-009`, `C-010`, `C-011`, `C-012`, `C-013`, `C-014`, `C-015`, `C-016`, `C-017`, `C-018`, `C-019`, `C-020`, `C-021`, `C-022`, `C-023`, `C-024`, `C-025`, `C-026`, `C-027`, `C-028`, `C-029`, `C-030`, `C-031` | `python tools/run_tests_parallel.py` | pass |\n\n## Verification Results\n\n- Verification method: a byte copy of the working tree was taken before any edit and the whole suite, the four verifiers, the stalled run's status and the per-edge census were recorded as the baseline. The new module was proven against that copy to fail in every test, then run on the repaired tree. The Task Router graph and census were diffed across both trees, and both chains were driven end to end in a throwaway mirror outside the repository with phase completion simulated in the mirror's own run record. Committed run evidence was digest-compared before and after every step.\n- Commands executed: `python tools/run_tests_parallel.py` (before and after); `python -m unittest tests.test_investigate_research_handoffs -v` (pre-edit copy and repaired tree); `python -m unittest tests.test_bundled_payload tests.test_agent_input_contracts`; `python tests/test_bundled_payload.py --sync`; `python <fw>/runtime/verify_manifests.py`, `verify_registry_coverage.py`, `verify_validators.py`, `verify_self_hosting.py` (before and after); `python <fw>/runtime/verify_multi_phase.py --run-id run-437e2f765e4b --no-replay` (before and after); `python <fw>/runtime/framework_runtime.py status --run-id run-437e2f765e4b` (before and after); `python <fw>/runtime/self_hosting.py route --intent decision-support` and `--intent external-research`; mirror-only `plan`, `next`, `dispatch`, `gate`; scratch census and graph scripts; `git checkout` of the two run-c5a8d50d3238 files the suite rewrites, then `git status`.\n- Result summary: 11 evidence entries executed, 11 passed, 0 failed. New module: 20 of 20 fail before, 20 of 20 pass after. Census: 13 of 29 blocked before, 7 after. Suite: 668 of 668 passed in 26 modules before; 688 of 688 passed in 27 modules after, the 20 added tests being the new module. Verifiers: 2/2, 8/8, 6/6 and 6/8 both before and after.\n- Unverified areas: whether the real context, tech-lead and documentation agents accept the renamed inputs in their own first reasoning stage and whether their validators pass on real artifacts was not observed, because no model was invoked; the mirror used one-line stand-in artifacts. Gate auto-approval precedent after the version moves was not exercised.\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | `requirement-framing` was added beside `framed-objective` and `research-brief` instead of replacing them (`C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`); the analysis's negative tests for those two identifiers were not written | root-cause Fix Strategy, context agent accepts requirement-framing in place of the two producerless identifiers | Operator directive: removal narrows a contract and is left to a follow-up; both identifiers stay accepted and stay producerless | raised as `Q-001` to architect |\n| `V-002` | The command specifications for `/investigate` and `/research` name prose inputs (an investigation or research question, decision owner, constraints), not the identifier the profile now names (`C-015`); they were not edited | operator directive to keep router, verifier, registry and command specifications consistent | The business analyst contract defines `problem-statement` as the question an investigate or research run is opened for, so the two agree in meaning; editing the command specifications would widen scope | raised as `Q-002` to omn-tech-lead |\n| `V-003` | The self-hosting profile identity stays at version 1.0.0 although two Routing Table rows changed (`C-015`) | profile identity version | Neither the analysis nor the operator names a profile version move; no verifier or loader keys on it | raised as `Q-003` to omn-tech-lead |\n\n## Boundary Compliance\n\n- Module boundaries preserved: only declarations changed; the runtime's guard, narrowing, contract resolver, dependency derivation, validators and gates are byte-identical; the tech-lead manifest is untouched.\n- Public interface changes: two agent contracts widen additively (context agent accepts `requirement-framing`, documentation accepts `technical-recommendation`), both agents and both workflows move to 1.1.0, two Input cells gain one artifact, two profile rows name `problem-statement`; no identifier was removed.\n- Data or migration impact: none to data. Existing runs keep the workflow version they were planned at; run-437e2f765e4b still loads pinned at investigate v1.0.0 and was not re-evaluated.\n- Declared side effects: the 31 change-set paths `C-001` to `C-031`, plus this report and `runs/run-5d3c99aaaae1/states/fix-implementation/result-envelope.json`. The full suite rewrote `runs/run-c5a8d50d3238/state.json` and `task-context.yaml` both at baseline and after; both were restored with `git checkout` and `git status` then showed no change under any existing run. Scratch copies and the mirror lived outside the repository.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | Any `next` over run-437e2f765e4b would now return its blocked recommendation to pending and rewrite that run's evidence; until resolved it keeps self-hosting S7 failing | medium | medium | No scheduler command was run against it; its disposition is `Q-004` |\n| `R-002` | Documentation's menu is agent-global, so a `technical-recommendation` in the pool of its implement-feature, review-pull-request or release phase would now satisfy it | low | low | Census shows no such pool today: those phases' blocked or passing verdicts are unchanged |\n| `R-003` | The version moves reset gate auto-approval precedent for investigate and research gates and for gates assessing documentation output | medium | low | Gates fall back to human decision, the stricter path; recorded for the gate owners |\n| `R-004` | S8 fails on run-5df08e171670 and on this run until its change proposal exists; S7 fails on run-437e2f765e4b; all three predate this change | high | low | Baseline verifier output shows the same failures; proposals are outside this agent's write scope |\n| `R-005` | The implementer host registration states 1.0.0 and instructs an abort against its 1.1.0 manifest, and nothing checks it; the new version test covers only the two agents changed here | medium | medium | Not fixed here by directive; routed as `Q-005` |\n\n## Handoff Notes\n\n- Reviewer focus areas: `C-001` and `C-007` with `V-001` (additive menus, producerless identifiers kept); `C-012` and `C-013`, the one added dependency edge each (`T-003`); `C-015` with `V-002` and `V-003`; `C-016`, whose census lists must only shrink; `R-001` for the stalled run.\n- Follow-up work: the seven known-gap hand-offs and the change-review and framework-release profile rows, each removing its entry from the census lists in `C-016`; withdrawing `framed-objective` and `research-brief`; a host-registration version check across all agents; the change proposal for this run.\n- Documentation impact: the runtime guide and catalogue pages that list agent or workflow versions, or the profile's routing inputs, should show 1.1.0 and `problem-statement`; the build copy under `build/lib` is stale.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | Should `framed-objective` and `research-brief`, which no agent produces, now be withdrawn from the context agent's menu, and under which version | no | architect | `C-001`, `C-002`, `C-003`, `C-005`, `C-006` |\n| `Q-002` | Should the `/investigate` and `/research` command specifications name the `problem-statement` input type the profile now routes | no | omn-tech-lead | `C-015` |\n| `Q-003` | Should the self-hosting profile identity version move for the two changed Routing Table rows | no | omn-tech-lead | `C-015` |\n| `Q-004` | Is run-437e2f765e4b resumed, which rewrites its recorded block, or retired | no | omn-tech-lead | `C-001`, `C-007`, `C-012` |\n| `Q-005` | The implementer host registration's 1.0.0 version against its 1.1.0 manifest is a separate defect to route | no | omn-tech-lead | `C-016` |",
+        "digest": "sha256:3721ed3ac1443e21319a17206baaa68d",
+        "produced_by": "fix-implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what changed and what it was meant to achieve: an implementation report for a delivered change, a review package for a `review-pull-request` or `release` run, or a technical design for the `safety-net-establishment` phase, which runs before any change exists. Without one there is nothing to validate against, and validating anyway would mean measuring the system against this agent's own reading of what it was supposed to do."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-5d3c99aaaae1/states/fix-implementation/artifacts/implementation-report.md",
+      "produced_by": "fix-implementation",
+      "artifact": "implementation-report.md",
+      "bytes": 22644,
+      "sections": {
+        "read_first": [
+          "Implementation Summary",
+          "Change Set",
+          "Test Evidence",
+          "Verification Results",
+          "Deviations and Tradeoffs",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Boundary Compliance",
+          "Residual Risk",
+          "Handoff Notes"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-5d3c99aaaae1/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:64f5c0dc502b98282680612282a2ff0a",
+    "bytes": 21697,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "database",
+        "performance"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "regression-validation"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-09T12:54:55Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:1961ffd5b447ec39cac35462546aa708",
+        "supplies": "framework-context",
+        "bytes": 22733,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:84e98748204581ef06f3e434c600f794",
+        "supplies": "framework-context",
+        "bytes": 9569,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context",
+        "bytes": 7553,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/validation-report.md",
+        "digest": "sha256:289a25ebf7d54fb95ddf4fd44925d038",
+        "supplies": null,
+        "bytes": 5711,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null,
+        "bytes": 5825,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/bug-analysis.md",
+        "digest": "sha256:6f1f25f536d3d80353873990835ce1bd",
+        "supplies": null,
+        "bytes": 3732,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null,
+        "bytes": 1265,
+        "read": "required",
+        "read_reason": "skill S07 is required for this phase"
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null,
+        "bytes": 1236,
+        "read": "required",
+        "read_reason": "skill S09 is required for this phase"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73bd155e6b8344e48a8c66266be118cf",
+        "supplies": null,
+        "bytes": 61682,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:c716697f95e877dda4684d7265aaafe0",
+    "input_digest": "sha256:3721ed3ac1443e21319a17206baaa68d",
+    "inputs": [
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-5d3c99aaaae1/states/fix-implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/subagent-token-optimization-9dd9d9/.claude/runs/run-5d3c99aaaae1/states/fix-implementation/artifacts/implementation-report.md",
+        "digest": "sha256:3721ed3ac1443e21319a17206baaa68d"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/logging/observability-logging.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md",
+      "templates/validation-report.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/logging/observability-logging.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md",
+      "templates/validation-report.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/fix-bug.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 182778,
+    "bytes_required": 20526,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-5d3c99aaaae1/states/regression-validation/artifacts/validation-report.md",
+      "runs/run-5d3c99aaaae1/states/regression-validation/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the validation report"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "revise the technical design rather than raising a defect against it",
+      "define, widen, or narrow product scope",
+      "relax, reinterpret, or waive an acceptance criterion in order to reach a pass",
+      "judge code quality, maintainability, or standards conformance, which belongs to omn-dev-2-reviewer",
+      "decompose work into tasks, which belongs to planner",
+      "record a merge, release, or deployment decision",
+      "decide a gate that assesses evidence this agent produced",
+      "validate a change this agent authored",
+      "record a criterion as met without evidence that demonstrates it",
+      "pass while a critical or high defect stands open, or while required evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "validate delivered behavior against the acceptance criteria it was accepted under",
+        "define a validation strategy proportionate to the risk the change carries",
+        "execute the repository's own functional, integration, and regression checks",
+        "establish and strengthen a safety net of checks before a structural change proceeds",
+        "assess behavioral parity between a pre-change and post-change baseline",
+        "judge whether executed checks reach the behavior a change altered",
+        "record each defect with severity, category, location, reproducibility, and status",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "revise the technical design rather than raising a defect against it",
+        "define, widen, or narrow product scope",
+        "relax, reinterpret, or waive an acceptance criterion in order to reach a pass",
+        "judge code quality, maintainability, or standards conformance, which belongs to omn-dev-2-reviewer",
+        "decompose work into tasks, which belongs to planner",
+        "record a merge, release, or deployment decision",
+        "decide a gate that assesses evidence this agent produced",
+        "validate a change this agent authored",
+        "record a criterion as met without evidence that demonstrates it",
+        "pass while a critical or high defect stands open, or while required evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "scope": [
+          "**/*Tests/**",
+          "**/*.Tests/**",
+          "**/*Test/**",
+          "**/*.Tests.*",
+          "**/test_*.py",
+          "**/*_test.py",
+          "**/*.test.*",
+          "**/*.spec.*"
+        ],
+        "scopePhases": [
+          "refactor/safety-net-establishment"
+        ],
+        "scopePhasesRationale": "This grant is automated test files only, and only in the `safety-net-establishment` phase of refactor, where establishing the safety net is the phase's declared output. Production source is never written in any phase, and this grant does not apply outside the one phase named above.",
+        "rationale": "QA judges behavior, not code, so it does not author the change it validates. One phase is the exception the framework declares deliberately: a refactor cannot be validated at all until a safety net exists, and building that net is the phase's whole purpose. Even there the boundary holds, because a test that pins existing behavior is not the change under validation. Every other phase reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the validation report"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same criterion result set, the same defect set, the same severity assignment, the same verdict, and the same declared report status.",
+      "identifierSchemes": {
+        "acceptanceCriteria": "AC-<zero-padded-sequence>",
+        "defects": "DF-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Acceptance criteria keep the order of the source that declared them. Defects are ordered by descending severity; ties break toward the lower location in lexical order.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, criteria, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "validation-report.md",
+    "artifact_path": "runs/run-5d3c99aaaae1/states/regression-validation/artifacts/validation-report.md",
+    "template_ref": "templates/validation-report.md",
+    "contract_ref": "agents/omn-qa/output.md",
+    "quality_ref": "agents/omn-qa/quality.md",
+    "validator": "validation_report_validator",
+    "result_envelope_path": "runs/run-5d3c99aaaae1/states/regression-validation/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-09T12:54:55Z",
+  "model_tier": {
+    "tier": "standard",
+    "host_hint": "inherit",
+    "basis": "declared standard for fix-bug/regression-validation in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 80377,
+    "modules_core_bytes": 39471,
+    "slice_all_bytes": 182778,
+    "slice_required_bytes": 20526,
+    "inputs_bytes": 0,
+    "upstream_full_bytes": 22781,
+    "upstream_read_first_bytes": 18066,
+    "task_context_bytes": 21697,
+    "fixed_bytes": 15827,
+    "legacy_estimate_bytes": 301763,
+    "progressive_estimate_bytes": 115587,
+    "legacy_estimate_tokens": 75440,
+    "progressive_estimate_tokens": 28896,
+    "savings_pct": 61.7
+  }
+}
