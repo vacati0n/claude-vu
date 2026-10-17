@@ -1,5 +1,7 @@
 # Handbook reconciliation: how the one-sided content was resolved
 
+> **Historical record.** This file records a one-time event and is kept as it was. The handbook it describes still documented the `omn-agent` command-line wrapper and the `omn-` agent prefix, both since retired; the current handbook is `docs/USER-GUIDE.md`.
+
 `docs/user-guide.html` is now a build output of `docs/USER-GUIDE.md`. Before that
 change the two files were kept in step by hand and had drifted: each carried
 authored content the other did not, and the two ordered some of the same material
