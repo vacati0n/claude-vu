@@ -85,8 +85,8 @@ jobs:
           print("discovered " + str(len(names)) + " verifiers: " + ", ".join(names))
 
   # Surface 1: the unit-test suite, by unittest's own discovery, per platform.
-  # Python is provisioned at the packaging floor declared in pyproject.toml, and the
-  # package is installed first so the declared pyyaml dependency is present.
+  # Python is provisioned at the runtime's floor (3.10), and the runtime's one
+  # dependency, PyYAML, is installed first.
   tests:
     name: tests-${{ matrix.platform }}
     strategy:
@@ -103,8 +103,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
-      - name: Install the package and its declared dependencies
-        run: python -m pip install .
+      - name: Install the runtime's dependency
+        run: python -m pip install "pyyaml>=6"
       - name: Run the unit-test suite by discovery
         run: python -m unittest discover -s tests
 
@@ -138,8 +138,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
-      - name: Install the package and its declared dependencies
-        run: python -m pip install .
+      - name: Install the runtime's dependency
+        run: python -m pip install "pyyaml>=6"
       - name: Run the verifier and assert its passing verdict
         env:
           VERIFIER: ${{ matrix.verifier }}
@@ -180,8 +180,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
-      - name: Install the package and its declared dependencies
-        run: python -m pip install .
+      - name: Install the runtime's dependency
+        run: python -m pip install "pyyaml>=6"
       - name: Run the verifier and assert its passing verdict
         env:
           VERIFIER: ${{ matrix.verifier }}
