@@ -25,7 +25,8 @@ Define durable memory quality and update discipline.
 Lessons from earlier runs are governed memory written by the runtime, not by hand.
 
 - Source: recorded run evidence only (validation failures and gate rejections), harvested by
-  `runtime/knowledge.py` into `memory/lessons/lessons.store.json`; evidence free text is never
+  `runtime/knowledge.py` into the lesson bundle `memory/lessons/` (one OKF v0.2 concept
+  document per lesson, plus a derived `index.md` and `log.md`); evidence free text is never
   copied.
 - Lifecycle: `candidate` on first harvest, `active` when approved, `retired` when retired. Every
   approve, retire, and annotate action needs an actor and a rationale and appends one history

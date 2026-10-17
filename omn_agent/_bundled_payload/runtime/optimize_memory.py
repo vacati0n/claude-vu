@@ -303,11 +303,28 @@ def _rel(p: Path) -> str:
         return p.resolve().as_posix()
 
 
+def _framework_parts(p: Path) -> tuple:
+    """The path's segments relative to the framework root, else the repository root.
+
+    A path under neither keeps its absolute segments, so a denial over it can only widen.
+    """
+    resolved = p.resolve()
+    for base in (CLAUDE, REPO):
+        try:
+            return resolved.relative_to(base).parts
+        except ValueError:
+            continue
+    return resolved.parts
+
+
 def _denied(p: Path) -> str:
     parts = {seg.lower() for seg in p.parts}
     hit = parts & DENIED_SEGMENTS
     if hit:
         return f"denied path segment: {sorted(hit)[0]}/"
+    segments = [seg.lower() for seg in _framework_parts(p)]
+    if any(a == "memory" and b == "lessons" for a, b in zip(segments, segments[1:])):
+        return "denied path: memory/lessons/ is the lesson bundle, written only by the knowledge loop"
     if p.name.lower() in DENIED_NAMES:
         return f"denied filename: {p.name} is generated or machine-parsed"
     return ""

@@ -20,10 +20,12 @@ decisions, implementation, review, and release.
 
 ## Lessons
 
-`lessons/lessons.store.json` holds the lesson category: lessons from earlier runs, harvested
-mechanically from recorded run evidence by `runtime/knowledge.py` and keyed by a semantic
-fingerprint. Unlike the documents beside it, the store is machine-maintained JSON: it is never
-edited by hand, never rewritten by the memory optimizer, and never shipped to installed copies.
+`lessons/` holds the lesson category: lessons from earlier runs, harvested mechanically from
+recorded run evidence by `runtime/knowledge.py` and keyed by a semantic fingerprint. It is an
+Open Knowledge Format (OKF) v0.2 bundle: one concept document per lesson (`L-<10 hex>.md`), a
+derived `index.md`, and a derived change log `log.md`. Unlike the documents beside it, the bundle
+is machine-maintained: it is never edited by hand, never rewritten by the memory optimizer, and
+never shipped to installed copies.
 A lesson moves through `candidate`, `active`, and `retired`; it is eligible for later dispatches
 when active, or when a candidate recurs in at least two distinct runs (the threshold in
 `config/knowledge-policy.json`). Whether a run is shown lessons is recorded once, at plan time:

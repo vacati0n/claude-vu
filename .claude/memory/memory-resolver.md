@@ -214,6 +214,9 @@ Writeback constraints:
 
 The lesson category is resolved per dispatch, not per workflow, by `runtime/knowledge.py`:
 
+- Store: the lesson bundle `memory/lessons/`, one OKF v0.2 concept document per lesson; every
+  document is read, and `index.md` and `log.md` are never read back.
+
 - A dispatch receives lessons only when its run's plan-time record says hydration is on. The
   default is on for runs planned after runtime 0.10.0; the plan flag `--no-lesson-hydration`
   records off; a run without a record never receives lessons.

@@ -1,0 +1,755 @@
+{
+  "invocation_id": "inv-79276e78d773-05-001",
+  "run_id": "run-79276e78d773",
+  "work_item_id": "run-79276e78d773::quality-review",
+  "idempotency_key": "sha256:8f57160db94ab632e16193393494a0f6",
+  "state_id": "quality-review",
+  "phase_index": 5,
+  "agent_id": "omn-dev-2-reviewer",
+  "agent_version": "1.1.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-2-reviewer.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-2-reviewer/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-2-reviewer/system.md",
+      "agents/omn-dev-2-reviewer/identity.md",
+      "agents/omn-dev-2-reviewer/reasoning.md",
+      "agents/omn-dev-2-reviewer/execution.md",
+      "agents/omn-dev-2-reviewer/output.md",
+      "agents/omn-dev-2-reviewer/quality.md",
+      "agents/omn-dev-2-reviewer/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-2-reviewer/system.md": "sha256:ef234d6d8e6b74d21d099ab744ab9f60",
+      "agents/omn-dev-2-reviewer/identity.md": "sha256:725ba943cf8532dc4f666e68ca191592",
+      "agents/omn-dev-2-reviewer/reasoning.md": "sha256:ca41f86059574239b5a83fdbac8554b8",
+      "agents/omn-dev-2-reviewer/execution.md": "sha256:7a6a432d0e0b51444e99b0c98f62ae0e",
+      "agents/omn-dev-2-reviewer/output.md": "sha256:1b324b77d86f30d076d08768be2f9d5c",
+      "agents/omn-dev-2-reviewer/quality.md": "sha256:4d4c09812b441785acd1b03330468cc9",
+      "agents/omn-dev-2-reviewer/examples.md": "sha256:488657c9d243c3d498245922c2d92906"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-dev-2-reviewer/system.md",
+        "agents/omn-dev-2-reviewer/reasoning.md",
+        "agents/omn-dev-2-reviewer/output.md",
+        "agents/omn-dev-2-reviewer/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-dev-2-reviewer/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-dev-2-reviewer/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-dev-2-reviewer/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 37917,
+      "full_bytes": 74352
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "code-review",
+      "governance-enforcement",
+      "quality-verification"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "security is always read in review and validation phases",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "required",
+      "area": "performance",
+      "basis": "area performance triggered by 'profile' in input:change-request",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "required",
+      "area": "database",
+      "basis": "area database triggered by 'migration' in input:feature-request",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "pull-request-diff",
+      "quality-scan-scope",
+      "technical-design",
+      "execution-plan",
+      "scope-definition",
+      "bug-analysis",
+      "architecture-decision-record",
+      "coding-standards",
+      "test-evidence",
+      "architecture-rules",
+      "security-criteria",
+      "standards-checklist",
+      "regression-targets",
+      "known-issues",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/okf-lessons-feature-request.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-feature-request.md",
+        "text": "# Feature Request \u2014 Lesson Store as an Open Knowledge Format Bundle\n\n## Request\n\nStore the framework's harvested lessons in the Open Knowledge Format (OKF) v0.2, published at\nhttps://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md, instead of the\nsingle JSON document `memory/lessons/lessons.store.json` introduced by FC-022.\n\nToday every lesson lives in one framework-private JSON file (schema `framework.memory/lessons.v1`).\nOnly `runtime/knowledge.py` can read it. It carries no provenance or trust metadata that a third\nparty would understand, and it cannot be browsed, linked or reviewed as documents. OKF is an open,\nvendor-neutral format built for this: a directory of markdown concept documents with YAML\nfrontmatter, plus reserved `index.md` and `log.md` files.\n\n## Expected outcome\n\n1. **Bundle.** The lesson store becomes an OKF bundle directory under `memory/lessons/`. The\n   bundle has one markdown concept document per lesson, a root `index.md` that declares\n   `okf_version: \"0.2\"`, and a `log.md` change log.\n2. **Concept documents.** Each lesson document's YAML frontmatter carries the following:\n   - non-empty `type`, `title`, `description` and `tags`;\n   - `sources` (SPEC \u00a75.1): one entry per run artifact the lesson was harvested from. Each entry\n     has a required `resource`;\n   - `generated` (\u00a75.2): `{by, at}`, where `by` is an actor of the form `<producer>/<version>`;\n   - `verified` (\u00a75.3) where the lesson has been confirmed. An operator approval uses a\n     `human:<id>` actor, and a machine confirmation uses a `process:<id>` actor;\n   - `status` (\u00a75.4): `draft`, `stable` or `deprecated`, mapped from the governance state\n     (`candidate`, `active`, `retired`);\n   - `stale_after` (\u00a75.5) where it applies;\n   - every other lesson field, kept as a producer extension key so that nothing FC-022 records is\n     lost.\n\n   Every timestamp is ISO 8601 with a UTC offset, and every actor follows \u00a77.\n3. **Same loop.** These parts read and write the bundle: harvest, governance (approve, retire,\n   annotate), recall, effectiveness and the aggregation step. For the same lessons, the rendered\n   prompt section (`render_section`) is byte-for-byte unchanged, including the CR-005\n   neutralisation. Re-harvesting unchanged evidence leaves the bundle byte-identical.\n4. **Conformance check.** The framework's verification tooling gains a deterministic check of the\n   bundle against OKF \u00a711, which can also be run standalone. The check confirms three things:\n   - every non-reserved `.md` has parseable YAML frontmatter;\n   - every frontmatter block has a non-empty `type`;\n   - the reserved files follow \u00a78 and \u00a79 when they are present.\n5. **Migration.** The 42 existing lessons are migrated into the bundle with their governance\n   history intact, and the JSON store is removed.\n\n## Constraints\n\n- No run evidence under `runs/` is edited.\n- Only the standard library is used; there is no third-party YAML dependency.\n- The bundle stays out of the installed payload and the bundled mirror, as the JSON store did.\n- The memory optimiser must not rewrite the bundle.",
+        "digest": "sha256:68967bc015098f6c332ca509f1a73b76"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/okf-lessons-change-request.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-change-request.md",
+        "text": "# Change Request \u2014 Lesson Store as an Open Knowledge Format Bundle\n\n## Change class\n\nThe change class is `capability-addition`, per the Routing Table in `config/self-hosting-profile.md`.\nThe framework gains two things it did not have: a new storage contract for lessons (an OKF v0.2\nbundle) and a conformance-check capability.\n\nClassification evidence:\n- `python .claude/runtime/self_hosting.py classify --path` returns framework-internal (`SR-1`) for\n  both `runtime/knowledge.py` and `memory/lessons/lessons.store.json`.\n- `python .claude/runtime/self_hosting.py route --intent capability-addition` returns\n  `/implement` over `implement-feature` v1.0.0 at `scope-and-acceptance`.\n\n## Surfaces this change is expected to touch\n\n| Surface | Nature of change |\n|---|---|\n| `runtime/knowledge.py` | Bundle reader and writer, frontmatter serialiser and parser, migration, OKF \u00a711 conformance check, command line |\n| `runtime/` (verifier; the carrier is chosen in design) | Standalone deterministic OKF conformance verifier |\n| `validation/framework-release-checklist.md` | Possibly an advisory item that runs the conformance verifier |\n| `memory/lessons/` | The JSON store is replaced by the bundle: `index.md`, `log.md`, and one concept document per lesson |\n| `memory/README.md`, `memory/memory-governance.md`, `memory/memory-resolver.md`, `config/runtime.md` | Describe the bundle |\n| `runtime/optimize_memory.py` | Possibly: keep the bundle out of the optimiser |\n| `omn_agent/source.py` | The installer exclusion covers the bundle |\n| `tests/test_knowledge.py` | Tests for bundle round trip, idempotency, migration and conformance |\n| `omn_agent/_bundled_payload/**` | Mirror refreshed with `python tests/test_bundled_payload.py --sync` |\n\n## Not touched\n\nThe change does not touch gates, artifact validators, Phase Model tables, agent module text, or run\nevidence under `runs/`.",
+        "digest": "sha256:8421834b6a46a2a11175f90e398440c1"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/okf-lessons-business-intent.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-business-intent.md",
+        "text": "# Business Intent \u2014 Lesson Store as an Open Knowledge Format Bundle\n\n## Problem\n\nThe framework's lessons hold what it has learned about what goes wrong in runs, and they are\nlocked in a private JSON schema. Three things follow from that:\n- operators cannot read the lessons as documents;\n- other tools cannot consume them;\n- nothing in the file tells an outside reader who produced a lesson or who confirmed it.\n\n## Intent\n\nStore the framework's learned knowledge in an open, vendor-neutral knowledge format, so that it is\nportable and can be reviewed. The change must not lose any governance or behaviour that the\nknowledge loop has today.\n\n## Success\n\n- The lesson store is a conformant OKF v0.2 bundle, and a deterministic check proves it.\n- Each lesson states, in the format's own terms, where it came from (`sources`, `generated`) and\n  how far it can be trusted (`verified`, `status`).\n- At dispatch, agents are shown exactly the same lesson text as before.\n- No gate, validator, or acceptance rule is weakened, and every verifier stays at its recorded\n  baseline.\n\n## Non-goals\n\n- Publishing the bundle outside the repository, or shipping it to installed copies.\n- Changing which lessons are harvested, when they become eligible, or how they are ranked.\n- Converting any other `memory/` document to OKF.",
+        "digest": "sha256:cb8d061443933d4978cd60b68fbb7d80"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/okf-lessons-architecture-context.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-architecture-context.md",
+        "text": "# Architecture Context \u2014 Lesson Store as an Open Knowledge Format Bundle\n\n## The current store\n\n- `runtime/knowledge.py` (FC-022) owns the store through three pieces:\n  - `load_store(root)` returns the document `{schema, lessons: [...]}`, or None.\n  - `write_store(root, data)` writes canonical bytes atomically, through a temporary file and\n    `os.replace`, and only when the bytes differ.\n  - `StoreLock` is an exclusive lock file, `memory/lessons/lessons.store.lock`.\n\n  Harvest, governance, recall, effectiveness, the report and the aggregation step all go through\n  `load_store` and `write_store`. If their dict interface stays the same, every caller stays\n  unchanged.\n- A lesson record has a closed field list (`LESSON_FIELDS`):\n  - `lesson_id`: `L-` plus 10 hex characters of the fingerprint digest;\n  - `fingerprint`, `kind`, `artifact_type`, `check_id`, `check_description`, `check_severity`,\n    `gate`, `phases`, `occurrences`, `distinct_runs`, `first_seen`, `last_seen`;\n  - `evidence`: run-relative references such as `runs/<run>/events.jsonl#E-0029`;\n  - `evidence_state`, `status`, `owner`, `rationale`, `remedy`;\n  - `history`: governance actions, each with an actor and a time.\n\n  Timestamps have the form `YYYY-MM-DDTHH:MM:SSZ`.\n- `render_section` builds the bounded, labelled prompt section from lesson records, and\n  neutralises every field (CR-005). It must receive the same records as before.\n\n## OKF v0.2 essentials\n\n- **Files.** `index.md` and `log.md` are reserved. Every other `.md` is a concept document.\n- **Frontmatter.** It is delimited by `---`, and `type` is the only required key. Consumers must\n  preserve unknown keys.\n- **Provenance and trust fields:**\n  - `sources` entries require `resource`;\n  - `generated` requires `by`;\n  - `verified` is a list of `{by, at}`, and a bare map counts as one entry;\n  - `status` defaults to `stable`;\n  - `stale_after` is an absolute instant.\n- **Actors** take one of three forms: `<producer>/<version>`, `human:<id>` or `process:<id>`.\n- **index.md.** A root `index.md` may carry only one frontmatter key, `okf_version: \"0.2\"`. Its\n  body is `# Heading` sections of `* [Title](url) - desc` entries.\n- **log.md.** It starts with `# Title`, followed by `## YYYY-MM-DD` groups, newest first. Entries\n  have the form `* **Creation|Update|Deprecation**: ...`.\n- **\u00a711 conformance:**\n  - every non-reserved `.md` has parseable frontmatter;\n  - every frontmatter block has a non-empty `type`;\n  - the reserved files follow \u00a78 and \u00a79.\n\n## Constraints from the codebase\n\n- The standard library has no YAML parser. The change needs a deterministic writer, and a parser\n  for the subset that the writer emits. The conformance check must parse the frontmatter it judges.\n- `omn_agent/source.py` excludes paths by fnmatch on the name of each path part\n  (`EXCLUDE_PATTERNS`, today `lessons.store.*`). That pattern does not cover a bundle of `index.md`,\n  `log.md` and `L-*.md` files, and generic names such as `index.md` cannot be excluded by name\n  alone.\n- `runtime/optimize_memory.py` rewrites `memory/*.md` to reduce token cost. It skips three kinds of\n  file: denied path segments, denied names, and files that declare themselves generated.\n- The memory directory is excluded from the context slice (`memory/*`), so the bundle's documents\n  are not slice members.\n- Tests in `tests/test_knowledge.py` reference `STORE_REL`, the JSON file name, and the\n  `lessons.store.*` exclusion. The backward-compatibility tests compare a dispatch by the 0.9.0\n  runtime with a current one.\n- `change_proposal_validator.py` F9 validates release checklist items per proposal, and requires\n  only the mandatory items. A new mandatory item would therefore invalidate every recorded proposal.\n\n## Authoring rules\n\n- Artifact validators reject the substring of the host vendor name (check `C3.2`), so write paths\n  without the dot-directory prefix.\n- Never edit `runs/` evidence.\n- Edit the framework directory, then run `python tests/test_bundled_payload.py --sync`.",
+        "digest": "sha256:8859dd1736058635fdf5470ac277b2dc"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-79276e78d773/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/hopeful-einstein-00bc6a/.claude/runs/run-79276e78d773/states/implementation/artifacts/implementation-report.md",
+        "text": "```yaml\nimplementationReport:\n  reportId: IR-2026-1014\n  changeReference: run-79276e78d773 implement-feature, lesson store migrated from the JSON document to an OKF v0.2 bundle\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/okf-lessons-feature-request.md\n    - type: change-request\n      reference: runs/inputs/okf-lessons-change-request.md\n    - type: business-intent\n      reference: runs/inputs/okf-lessons-business-intent.md\n    - type: architecture-context\n      reference: runs/inputs/okf-lessons-architecture-context.md\n    - type: technical-design\n      reference: runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: complete\n  workflowPhase: implementation\n  verificationStatus: verified\n  inputDigest: sha256:2ad43fce633baecfb9f82eb8e578f2ad\n  contextDigest: sha256:71b01b435a6f92e7b8bf1d1a67c8c50d\n```\n\n# Implementation Report: Lesson Store as an OKF v0.2 Bundle\n\n## Metadata\n\n- Report ID: IR-2026-1014\n- Change reference: run-79276e78d773, phase implementation, technical design sha256:1f1c57e1efe3d5b22877d3f54fd9fefb with records D-001 to D-006\n- Workflow phase: implementation\n- Status: complete\n- Verification status: verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: the 43 governed lessons now live in memory/lessons as an OKF v0.2 bundle (one concept document per lesson, a derived index.md and log.md) that passes the \u00a711 check, the JSON store is gone, and every caller above load_store and write_store, render_section included, behaves byte for byte as before.\n- Approach taken: O-002 as designed. A new lesson-agnostic module (C-001) carries the frontmatter subset and the \u00a711 check; the store boundary in C-002 maps records to documents through it, and the verifier (C-003) imports only C-001. Both new files sit on the extend-is-impossible rung of the ladder in skills/architecture/clean-architecture-checklist.md: no YAML writer exists in the runtime, the standard library has none, and the installed YAML package is excluded by the design constraint against third-party dependencies, so the design's reuse table records none-found; the atomic write, StoreLock, neutralise, and the digest helper are reused. No dependency was added. Exclusions (C-005, C-006) landed before any bundle file existed (P-004), the live migrate ran only after both suites passed, and the mirror was synced after the last framework edit.\n- Design reference: technical-design.md sections 5.3 and 5.4, decisions D-001 to D-012, sequencing P-004 to P-012, API and Data Model Impact, Test Strategy Focus Areas\n- Out of scope: runtime/README.md and every other context-slice member (A-008, M-020); KNOWLEDGE_CHANGE_SET and REFERENCE_COMMIT in the knowledge tests (frozen); committed run evidence and proposals; the release note, change proposal, and release checklist run (P-014, later phases); verify_multi_phase.py, verify_vertical_slice.py, verify_recovery.py and the full release-checklist run, held back by operator instruction because they mutate committed runs and are run by the operator; render_section and every loop function above the store boundary, which the design leaves unchanged.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | runtime/okf.py | added | Standard-library OKF v0.2 frontmatter subset writer and parser, document split and join, and the \u00a711 conformance check | D-001, D-007, D-009; P-005 |\n| `C-002` | runtime/knowledge.py | modified | Lesson store becomes the bundle: document mapping, index and log derivation, four-step write, lesson_id guard, bundle digest, store-migration-pending refusal, migrate subcommand | D-002, D-003, D-004, D-005, D-008; P-006 |\n| `C-003` | runtime/verify_okf_bundle.py | added | Advisory verifier over a bundle path, default memory/lessons, text or JSON output, exit 0 pass or absent, 1 fail, 2 missing path | D-009; P-007 |\n| `C-004` | runtime/framework_runtime.py | modified | RUNTIME_VERSION raised from 0.10.0 to 0.11.0 | D-011; P-008 |\n| `C-005` | runtime/optimize_memory.py | modified | Optimiser denies any path whose segments hold memory followed by lessons, with a reason naming the lesson bundle | D-006; P-004 |\n| `C-006` | omn_agent/source.py | modified | EXCLUDE_PATHS holds memory/lessons and _walk skips that path; the lessons.store.* name pattern is retired | D-006; P-004 |\n| `C-007` | validation/framework-release-checklist.md | modified | Advisory item FR-13 owned by omn-qa names the verifier, with its advisory reason under Obligations | D-010; P-007 |\n| `C-008` | config/runtime.md | modified | Store and lifecycle paragraph describes the bundle, reserved files, write order, digest, migration, verifier, and the path exclusions | D-012; P-011 |\n| `C-009` | memory/README.md | modified | Lessons paragraph names the bundle in place of the JSON store | D-012; P-011 |\n| `C-010` | memory/memory-governance.md | modified | Lesson Category source bullet names the bundle | D-012; P-011 |\n| `C-011` | memory/memory-resolver.md | modified | Lesson Resolution gains a store bullet naming the bundle | D-012; P-011 |\n| `C-012` | memory/lessons/lessons.store.json | removed | JSON store removed by the verified migrate after a record-for-record comparison of 43 lessons | D-005; P-009, P-010 |\n| `C-013` | memory/lessons/index.md | added | Derived root index: okf_version frontmatter, Lessons heading, 43 link entries in fingerprint order | D-008; P-009 |\n| `C-014` | memory/lessons/log.md | added | Derived change log: 43 Creation entries under date headings, newest first | D-008; P-009 |\n| `C-015` | memory/lessons/L-0c65ee3df9.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-016` | memory/lessons/L-14a79151cb.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-017` | memory/lessons/L-16562ce500.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-018` | memory/lessons/L-1a032fb882.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-019` | memory/lessons/L-2120d10ba2.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-020` | memory/lessons/L-22390c2ab0.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-021` | memory/lessons/L-22847e61b4.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-022` | memory/lessons/L-32cc91b20e.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-023` | memory/lessons/L-3999fb5c73.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-024` | memory/lessons/L-4001c21edb.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-025` | memory/lessons/L-41c5dd8f64.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-026` | memory/lessons/L-4619b980fc.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-027` | memory/lessons/L-479b3eeb81.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-028` | memory/lessons/L-48df21734d.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-029` | memory/lessons/L-4a60ec1bdb.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-030` | memory/lessons/L-51be31d9d4.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-031` | memory/lessons/L-54d9e5c9d8.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-032` | memory/lessons/L-58915e88ef.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-033` | memory/lessons/L-58d9ae3d2e.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-034` | memory/lessons/L-606ac5af7f.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-035` | memory/lessons/L-6701578f8b.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-036` | memory/lessons/L-6af13c8ccc.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-037` | memory/lessons/L-6e77db508d.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-038` | memory/lessons/L-750011a2d2.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-039` | memory/lessons/L-7589a73850.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-040` | memory/lessons/L-764bff2fee.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-041` | memory/lessons/L-78c060dbd9.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-042` | memory/lessons/L-7f80924b57.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-043` | memory/lessons/L-86e0622785.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-044` | memory/lessons/L-9b5801a992.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-045` | memory/lessons/L-9f498451bb.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-046` | memory/lessons/L-a1c32dc2c2.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-047` | memory/lessons/L-a6553862f3.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-048` | memory/lessons/L-a73334458a.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-049` | memory/lessons/L-ae8d96f7c5.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-050` | memory/lessons/L-b3ac2f97e3.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-051` | memory/lessons/L-bfdb9bc126.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-052` | memory/lessons/L-cf715d2dd9.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-053` | memory/lessons/L-d1d17da655.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-054` | memory/lessons/L-d5b14c79b4.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-055` | memory/lessons/L-d7942f3a5a.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-056` | memory/lessons/L-d84ea03af4.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-057` | memory/lessons/L-de4ac3f115.md | added | Lesson concept document written by the verified migrate | D-002; P-009 |\n| `C-058` | tests/test_knowledge.py | modified | Existing suite moved to the bundle: path-scoped copy-ignore, store helper, idempotency file set, lock name, optimiser, dispatch, fail-open, exclusion, boundary, documentation, and version checks | Test Strategy Focus Areas; P-010 |\n| `C-059` | tests/test_okf_bundle.py | added | New suite: subset round-trip and hostile fixtures, document mapping, index, log, fault injection, conformance, verifier exits, migration and refusal | Test Strategy Focus Areas; V-003 |\n| `C-060` | omn_agent/_bundled_payload/config/runtime.md | modified | Mirror of config/runtime.md refreshed by the sync step | P-012 |\n| `C-061` | omn_agent/_bundled_payload/memory/README.md | modified | Mirror of memory/README.md refreshed by the sync step | P-012 |\n| `C-062` | omn_agent/_bundled_payload/memory/memory-governance.md | modified | Mirror of memory/memory-governance.md refreshed by the sync step | P-012 |\n| `C-063` | omn_agent/_bundled_payload/memory/memory-resolver.md | modified | Mirror of memory/memory-resolver.md refreshed by the sync step | P-012 |\n| `C-064` | omn_agent/_bundled_payload/runtime/framework_runtime.py | modified | Mirror of runtime/framework_runtime.py refreshed by the sync step | P-012 |\n| `C-065` | omn_agent/_bundled_payload/runtime/knowledge.py | modified | Mirror of runtime/knowledge.py refreshed by the sync step | P-012 |\n| `C-066` | omn_agent/_bundled_payload/runtime/okf.py | added | Mirror of runtime/okf.py refreshed by the sync step | P-012 |\n| `C-067` | omn_agent/_bundled_payload/runtime/optimize_memory.py | modified | Mirror of runtime/optimize_memory.py refreshed by the sync step | P-012 |\n| `C-068` | omn_agent/_bundled_payload/runtime/verify_okf_bundle.py | added | Mirror of runtime/verify_okf_bundle.py refreshed by the sync step | P-012 |\n| `C-069` | omn_agent/_bundled_payload/validation/framework-release-checklist.md | modified | Mirror of validation/framework-release-checklist.md refreshed by the sync step | P-012 |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | Frontmatter subset round-trip and hostile fixtures, document mapping against every record shape, index, log, render parity, fault injection at each write step and at the removal, seeded \u00a711 defects, verifier exits 0, 1, 2 and repeat output, migration with forced mismatch, store-migration-pending refusal: 29 tests | integration | `C-001`, `C-002`, `C-003`, `C-059` | `PYTHONPATH=. python tests/test_okf_bundle.py` | pass |\n| `T-002` | Knowledge loop suite on the bundle: harvest, idempotent file set, governance, lock, optimiser denial, dispatch hydration, fail-open, aggregation, payload exclusion, module boundary, documentation, version 0.11.0: 51 tests | regression | `C-002`, `C-004`, `C-005`, `C-006`, `C-008`, `C-009`, `C-010`, `C-011`, `C-058` | `PYTHONPATH=. python tests/test_knowledge.py` | pass |\n| `T-003` | Bundled payload mirrors the framework tree after the sync: 11 tests | regression | `C-006`, `C-060`, `C-061`, `C-062`, `C-063`, `C-064`, `C-065`, `C-066`, `C-067`, `C-068`, `C-069` | `PYTHONPATH=. python tests/test_bundled_payload.py` | pass |\n| `T-004` | Memory optimiser suite unchanged by the new denial rule: 31 tests | regression | `C-005` | `PYTHONPATH=. python tests/test_optimize_memory.py` | pass |\n| `T-005` | Sync refreshes 289 payload files and mirrors nothing under memory/lessons | static | `C-006`, `C-060`, `C-061`, `C-062`, `C-063`, `C-064`, `C-065`, `C-066`, `C-067`, `C-068`, `C-069` | `PYTHONPATH=. python tests/test_bundled_payload.py --sync` | pass |\n| `T-006` | Validator coverage verdict equals the pre-change baseline, 6 of 6 | regression | `C-004` | `python runtime/verify_validators.py` | pass |\n| `T-007` | Registry coverage verdict equals the pre-change baseline, 8 of 8 | regression | `C-004` | `python runtime/verify_registry_coverage.py` | pass |\n| `T-008` | Live migration: 43 records written, read back, compared record for record, JSON store removed; a re-run reports no legacy store | integration | `C-002`, `C-012`, `C-013`, `C-014`, `C-015`, `C-016`, `C-017`, `C-018`, `C-019`, `C-020`, `C-021`, `C-022`, `C-023`, `C-024`, `C-025`, `C-026`, `C-027`, `C-028`, `C-029`, `C-030`, `C-031`, `C-032`, `C-033`, `C-034`, `C-035`, `C-036`, `C-037`, `C-038`, `C-039`, `C-040`, `C-041`, `C-042`, `C-043`, `C-044`, `C-045`, `C-046`, `C-047`, `C-048`, `C-049`, `C-050`, `C-051`, `C-052`, `C-053`, `C-054`, `C-055`, `C-056`, `C-057` | `python runtime/knowledge.py migrate` | pass |\n| `T-009` | Live bundle conforms: 43 documents, 2 reserved files, 0 findings, identical output on two runs; a missing path exits 2 | contract | `C-001`, `C-003`, `C-013`, `C-014`, `C-015`, `C-016`, `C-017`, `C-018`, `C-019`, `C-020`, `C-021`, `C-022`, `C-023`, `C-024`, `C-025`, `C-026`, `C-027`, `C-028`, `C-029`, `C-030`, `C-031`, `C-032`, `C-033`, `C-034`, `C-035`, `C-036`, `C-037`, `C-038`, `C-039`, `C-040`, `C-041`, `C-042`, `C-043`, `C-044`, `C-045`, `C-046`, `C-047`, `C-048`, `C-049`, `C-050`, `C-051`, `C-052`, `C-053`, `C-054`, `C-055`, `C-056`, `C-057` | `python runtime/verify_okf_bundle.py` | pass |\n| `T-010` | Live list reads 43 lessons from the bundle | integration | `C-002`, `C-015`, `C-016`, `C-017`, `C-018`, `C-019`, `C-020`, `C-021`, `C-022`, `C-023`, `C-024`, `C-025`, `C-026`, `C-027`, `C-028`, `C-029`, `C-030`, `C-031`, `C-032`, `C-033`, `C-034`, `C-035`, `C-036`, `C-037`, `C-038`, `C-039`, `C-040`, `C-041`, `C-042`, `C-043`, `C-044`, `C-045`, `C-046`, `C-047`, `C-048`, `C-049`, `C-050`, `C-051`, `C-052`, `C-053`, `C-054`, `C-055`, `C-056`, `C-057` | `python runtime/knowledge.py list` | pass |\n| `T-011` | Live recall shows 2 of 2 eligible lessons for execution-planning with the unchanged prompt section | integration | `C-002`, `C-015`, `C-016`, `C-017`, `C-018`, `C-019`, `C-020`, `C-021`, `C-022`, `C-023`, `C-024`, `C-025`, `C-026`, `C-027`, `C-028`, `C-029`, `C-030`, `C-031`, `C-032`, `C-033`, `C-034`, `C-035`, `C-036`, `C-037`, `C-038`, `C-039`, `C-040`, `C-041`, `C-042`, `C-043`, `C-044`, `C-045`, `C-046`, `C-047`, `C-048`, `C-049`, `C-050`, `C-051`, `C-052`, `C-053`, `C-054`, `C-055`, `C-056`, `C-057` | `python runtime/knowledge.py recall --phase execution-planning --artifact execution-plan.md` | pass |\n| `T-012` | Per-lesson and whole-set render bytes, recall over 8 phase and artifact pairs, records, and effectiveness equal the pre-change baseline byte for byte | regression | `C-002`, `C-015`, `C-016`, `C-017`, `C-018`, `C-019`, `C-020`, `C-021`, `C-022`, `C-023`, `C-024`, `C-025`, `C-026`, `C-027`, `C-028`, `C-029`, `C-030`, `C-031`, `C-032`, `C-033`, `C-034`, `C-035`, `C-036`, `C-037`, `C-038`, `C-039`, `C-040`, `C-041`, `C-042`, `C-043`, `C-044`, `C-045`, `C-046`, `C-047`, `C-048`, `C-049`, `C-050`, `C-051`, `C-052`, `C-053`, `C-054`, `C-055`, `C-056`, `C-057` | `python capture.py runtime . after.json` then `cmp baseline.json after.json` | pass |\n| `T-013` | Hashes of 1308 run-evidence files outside the carrying run equal the pre-change snapshot | regression | `C-002`, `C-012` | `python runhash.py runs run-79276e78d773 runs-after.json` then `cmp runs-before.json runs-after.json` | pass |\n| `T-014` | The release checklist parses with FR-13 advisory, owner omn-qa, naming the verifier | static | `C-007` | `python runtime/self_hosting.py checklist` | pass |\n\n## Verification Results\n\n- Verification method: the regression baseline (both knowledge-related suites, both coverage verifiers, the optimiser suite, a byte capture of render, recall, records and effectiveness, a copy of the store, and run-evidence hashes) was captured read-only before any edit and re-run on the final tree; new tests run against temporary roots only; the live migrate, verifier, list and recall ran on the migrated tree. Runtime script commands are written as run from the framework directory; the first, migrating migrate run and verify_validators.py ran from the repository root through the framework directory, tests ran from the repository root, and capture.py and runhash.py are scratch scripts held outside the repository.\n- Commands executed: PYTHONPATH=. python tests/test_okf_bundle.py; PYTHONPATH=. python tests/test_knowledge.py; PYTHONPATH=. python tests/test_bundled_payload.py; PYTHONPATH=. python tests/test_optimize_memory.py; PYTHONPATH=. python tests/test_bundled_payload.py --sync; python runtime/verify_validators.py; python runtime/verify_registry_coverage.py; python runtime/knowledge.py migrate; python runtime/verify_okf_bundle.py; python runtime/knowledge.py list; python runtime/knowledge.py recall --phase execution-planning --artifact execution-plan.md; python capture.py runtime . after.json then cmp baseline.json after.json; python runhash.py runs run-79276e78d773 runs-after.json then cmp runs-before.json runs-after.json; python runtime/self_hosting.py checklist\n- Result summary: executed 14, passed 14, failed 0 (122 unit tests across four suites; parity and run-evidence comparisons identical)\n- Unverified areas: none\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | migrate with no JSON store present returns status no-legacy-store and exits 0 without writing (`C-002`) | D-005 states no behaviour for an absent JSON store | A re-run after a completed migration must be harmless; T-008 shows the second run reports the unchanged bundle digest | not-required |\n| `V-002` | The lock-contention aggregation test asserts the bundle directory holds only lessons.lock instead of no directory (`C-058`) | Test Strategy Focus Areas, aggregation absence checks | D-003 places the lock inside memory/lessons, so a held lock creates the directory; the assertion still proves nothing else was written | not-required |\n| `V-003` | New bundle tests sit in a new module beside the moved suite (`C-059`) | Test Strategy Focus Areas name tests/test_knowledge.py as carrier | Keeps the frozen backward-compatibility suite unchanged in shape; the operator authorised a new test module | not-required |\n| `V-004` | write_store renders every file before the first write but leaves the lock to its callers (harvest, govern, migrate), as before the change (`C-002`) | D-003 reads write_store, under the lock | A lock taken inside write_store would deadlock its locked callers; every writer path still holds the lock, shown by the lock tests in T-002 | not-required |\n\n## Boundary Compliance\n\n- Module boundaries preserved: C-001 imports the standard library only, C-003 the standard library and C-001, C-002 the standard library, state_engine and C-001; nothing imports framework_runtime, all asserted by the module boundary tests in T-002.\n- Public interface changes: knowledge.py replaces STORE_REL with BUNDLE_REL (memory/lessons), moves LOCK_REL to memory/lessons/lessons.lock, keeps LEGACY_STORE_REL for migrate, removes canonical_bytes and store_path, adds migrate, bundle_digest and bundle_exists, and adds error classes store-unwritable, store-migration-pending and migration-mismatch; load_store and write_store keep their signatures and in-memory shape; recall and harvest report store memory/lessons with the bundle digest; omn_agent/source.py gains EXCLUDE_PATHS; RUNTIME_VERSION is 0.11.0.\n- Data or migration impact: one-time forward migration of 43 lessons, all candidate with empty history, verified record for record before the JSON store was removed; reversal is a revert that restores the tracked JSON file and drops the bundle; no run evidence, envelope, ledger or harvest record was rewritten (T-013).\n- Declared side effects: the 69 Change Set files plus runs/run-79276e78d773/states/implementation/artifacts/implementation-report.md and runs/run-79276e78d773/states/implementation/result-envelope.json; nothing else was written in the repository. runtime/okf.py already existed untracked in the working tree when this invocation began and was replaced wholesale by C-001. The migrate briefly created and removed memory/lessons/lessons.lock.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | Another checkout pulling the change keeps a JSON-only store until its operator runs migrate | medium | Recall withholds lessons there and aggregation records the harvest as failed, both naming store-migration-pending | Refusal and fail-open are tested in T-001; config/runtime.md names the one-time migrate |\n| `R-002` | An interrupted write leaves documents ahead of index.md and log.md until the next write | low | Index or log briefly disagrees with the documents; nothing reads them back | Reserved files are pure functions of the records and every file stays its prior or new version, shown by fault injection in T-001 |\n| `R-003` | Recall and harvest now parse one document per lesson instead of one file | low | Dispatch and aggregation time grow linearly with lesson count | Elapsed time stays recorded in knowledge-harvest.json; writes skip unchanged files |\n| `R-004` | verify_validators.py check F7 recomputes proposal scope paths relative to the working directory, so run from inside the framework directory it reports 5 of 6 | low | A run from the wrong directory reads as a regression | Pre-existing and unrelated to this change; from the repository root the verdict equals the baseline (T-006) |\n\n## Handoff Notes\n\n- Reviewer focus areas: the write order, orphan removal and migrate comparison in C-002 (V-001, V-004, R-002); the parser acceptance and refusals in C-001; the path exclusions in C-005 and C-006; the changed aggregation assertion in C-058 (V-002).\n- Follow-up work: the operator runs the full suite and the release checklist, including verify_multi_phase.py with --run-id, verify_vertical_slice.py and verify_recovery.py, and records FR-13; the change proposal and release note cite this evidence (P-014); a later change may retire the store-migration-pending branch once no JSON-only checkout remains.\n- Documentation impact: config/runtime.md, memory/README.md, memory/memory-governance.md and memory/memory-resolver.md updated in C-008 to C-011 and mirrored; runtime/README.md left unchanged as the design requires; the release note must tell operators of other checkouts to run migrate once.\n\n## Open Questions\n\nNone identified.",
+        "digest": "sha256:0f6d1b7c09dc77b74a0976cfafca5df9",
+        "produced_by": "implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the subject under review: an implementation report for a delivered change, a stable pull request diff for a review-pull-request run, or a quality-scan scope naming the repository boundary, exclusions, and risk threshold for a code-quality-scan run. Without one there is nothing under review, and reviewing anyway would mean assessing this agent's own choice of what to read."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-79276e78d773/states/implementation/artifacts/implementation-report.md",
+      "produced_by": "implementation",
+      "artifact": "implementation-report.md",
+      "bytes": 25434,
+      "sections": {
+        "read_first": [
+          "Implementation Summary",
+          "Change Set",
+          "Test Evidence",
+          "Verification Results",
+          "Deviations and Tradeoffs",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Boundary Compliance",
+          "Residual Risk",
+          "Handoff Notes"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-79276e78d773/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:c4251fda4873a6e9ea6e04157eb61c6d",
+    "bytes": 67171,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "database",
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "quality-review"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-17T12:45:37Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:3300717f35d0b29badb0d146de6af8da",
+        "supplies": "framework-context",
+        "bytes": 22733,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:84e98748204581ef06f3e434c600f794",
+        "supplies": "framework-context",
+        "bytes": 9569,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:15b32b7dc6a6e5c3c47fac6809f1df7a",
+        "supplies": "framework-context",
+        "bytes": 12345,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null,
+        "bytes": 5292,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null,
+        "bytes": 5825,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null,
+        "bytes": 6564,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null,
+        "bytes": 1265,
+        "read": "required",
+        "read_reason": "skill S07 is required for this phase"
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null,
+        "bytes": 1236,
+        "read": "required",
+        "read_reason": "skill S09 is required for this phase"
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null,
+        "bytes": 1266,
+        "read": "required",
+        "read_reason": "skill S08 is required for this phase"
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8e4f9ca28ad1bb63d8368998cb67cc5a",
+        "supplies": null,
+        "bytes": 4862,
+        "read": "required",
+        "read_reason": "skill S01 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0fe5a799cafdd70db8744b0287682ffe",
+        "supplies": null,
+        "bytes": 62800,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:dbb6d6ebe90100e36dc74083b2321673",
+    "input_digest": "sha256:e9e4b6d6d164a98a1648f8e99ddf8fa2",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/okf-lessons-feature-request.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-feature-request.md",
+        "digest": "sha256:68967bc015098f6c332ca509f1a73b76"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/okf-lessons-change-request.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-change-request.md",
+        "digest": "sha256:8421834b6a46a2a11175f90e398440c1"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/okf-lessons-business-intent.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-business-intent.md",
+        "digest": "sha256:cb8d061443933d4978cd60b68fbb7d80"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/okf-lessons-architecture-context.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-architecture-context.md",
+        "digest": "sha256:8859dd1736058635fdf5470ac277b2dc"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-79276e78d773/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/hopeful-einstein-00bc6a/.claude/runs/run-79276e78d773/states/implementation/artifacts/implementation-report.md",
+        "digest": "sha256:0f6d1b7c09dc77b74a0976cfafca5df9"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/review-package.md",
+      "templates/technical-design.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/review-package.md",
+      "templates/technical-design.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/implement-feature.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 191832,
+    "bytes_required": 27859,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": true,
+    "reason": "lessons from earlier runs hydrated per this run's knowledge_loop record (recorded at plan time)",
+    "store": "memory/lessons",
+    "store_digest": "sha256:c605eff29d802a01367a0497dee76c94",
+    "threshold": 2,
+    "matched": 0,
+    "lessons": []
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-79276e78d773/states/quality-review/artifacts/review-package.md",
+      "runs/run-79276e78d773/states/quality-review/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies repository source, tests, or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the review package"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code or tests",
+      "revise the technical design rather than raising a finding against it",
+      "define, widen, or narrow product scope",
+      "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+      "record a merge or release decision",
+      "decide a gate that assesses evidence this agent produced",
+      "review a change this agent authored",
+      "approve while a critical or high finding is open, or while test evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "review an implemented change against the requirements, the accepted design, and the standards in force",
+        "survey a bounded repository scope for redundant, dead, duplicated, over-abstracted, or generated low-value code, against the maintainability standards in force",
+        "assess conformance to coding standards, architecture rules, and security criteria",
+        "judge whether the supplied evidence supports the claim it is offered for",
+        "judge whether executed tests cover the behavior the change altered",
+        "classify each defect by severity, category, and location against a named standard",
+        "issue correction requests that state a required outcome and name its owner",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "execute the repository's own verification commands to confirm reported results",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code or tests",
+        "revise the technical design rather than raising a finding against it",
+        "define, widen, or narrow product scope",
+        "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+        "record a merge or release decision",
+        "decide a gate that assesses evidence this agent produced",
+        "review a change this agent authored",
+        "approve while a critical or high finding is open, or while test evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "Independence is the whole value of this role. An agent that can change the code it assesses becomes the producer of the work it is about to judge, and the Producer Exclusion Rule then disqualifies it from the very verdict it exists to give. The review reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies repository source, tests, or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the review package"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same finding set, the same severity assignment, the same correction-request set, the same verdict, and the same declared package status.",
+      "identifierSchemes": {
+        "findings": "F-<zero-padded-sequence>",
+        "correctionRequests": "CR-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Findings are ordered by descending severity; ties break toward the lower location in lexical order. Correction requests follow the findings they address.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "review-package.md",
+    "artifact_path": "runs/run-79276e78d773/states/quality-review/artifacts/review-package.md",
+    "template_ref": "templates/review-package.md",
+    "contract_ref": "agents/omn-dev-2-reviewer/output.md",
+    "quality_ref": "agents/omn-dev-2-reviewer/quality.md",
+    "validator": "review_package_validator",
+    "result_envelope_path": "runs/run-79276e78d773/states/quality-review/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-17T12:45:37Z",
+  "model_tier": {
+    "tier": "deep",
+    "host_hint": "opus",
+    "basis": "declared deep for implement-feature/quality-review in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 74352,
+    "modules_core_bytes": 37917,
+    "slice_all_bytes": 191832,
+    "slice_required_bytes": 27859,
+    "inputs_bytes": 10348,
+    "upstream_full_bytes": 25435,
+    "upstream_read_first_bytes": 20144,
+    "task_context_bytes": 67171,
+    "fixed_bytes": 13439,
+    "legacy_estimate_bytes": 315406,
+    "progressive_estimate_bytes": 176878,
+    "legacy_estimate_tokens": 78851,
+    "progressive_estimate_tokens": 44219,
+    "savings_pct": 43.9
+  }
+}

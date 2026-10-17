@@ -49,11 +49,14 @@ REQUIRED_SOURCE_FILES = (
     "registry/workflows.yaml",
 )
 
-# `lessons.store.*` keeps a framework checkout's harvested lesson store and its lock file
-# (memory/lessons/, written by runtime/knowledge.py) out of the installer, the bundle sync,
-# and the bundle tests alike: one repository's lessons are never shipped to another.
-EXCLUDE_PATTERNS = ("__pycache__", "*.pyc", "*.pyo", ".DS_Store", "*.omn-bak", "*.tmp-omn",
-                    "lessons.store.*")
+EXCLUDE_PATTERNS = ("__pycache__", "*.pyc", "*.pyo", ".DS_Store", "*.omn-bak", "*.tmp-omn")
+
+# `memory/lessons` keeps a framework checkout's harvested lesson bundle, its documents, its
+# reserved index and log, and its lock file (all written by runtime/knowledge.py) out of the
+# installer, the bundle sync, and the bundle tests alike: one repository's lessons are never
+# shipped to another. The exclusion is by source-relative path, not by file name, because the
+# bundle's reserved files share their names with files that must ship (memory/index.md).
+EXCLUDE_PATHS = ("memory/lessons",)
 
 # Payload copy bundled inside this package (declared as package data in
 # pyproject.toml), the last-resort source candidate: it is what lets a
@@ -121,7 +124,10 @@ def _walk(root: Path, base: Path) -> dict[str, Path]:
             continue
         if any(_excluded(part) for part in path.relative_to(base).parts[:-1]):
             continue
-        out[path.relative_to(base).as_posix()] = path
+        rel = path.relative_to(base).as_posix()
+        if any(rel == p or rel.startswith(p + "/") for p in EXCLUDE_PATHS):
+            continue
+        out[rel] = path
     return out
 
 

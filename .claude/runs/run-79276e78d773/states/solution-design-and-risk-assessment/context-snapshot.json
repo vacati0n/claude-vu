@@ -1,0 +1,212 @@
+{
+  "frozen_at": "2026-10-17T11:53:58Z",
+  "members": [
+    {
+      "path": "registry/agents.yaml",
+      "digest": "sha256:3300717f35d0b29badb0d146de6af8da",
+      "supplies": "framework-context",
+      "bytes": 22733,
+      "read": "runtime-resolved",
+      "read_reason": "agent routing and versions are resolved by the runtime"
+    },
+    {
+      "path": "registry/workflows.yaml",
+      "digest": "sha256:84e98748204581ef06f3e434c600f794",
+      "supplies": "framework-context",
+      "bytes": 9569,
+      "read": "runtime-resolved",
+      "read_reason": "the workflow is already routed; the phase is in the envelope"
+    },
+    {
+      "path": "registry/skills.yaml",
+      "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+      "supplies": "framework-context",
+      "bytes": 17318,
+      "read": "runtime-resolved",
+      "read_reason": "the phase's skills are resolved in skill_dispatch"
+    },
+    {
+      "path": "registry/templates.yaml",
+      "digest": "sha256:15b32b7dc6a6e5c3c47fac6809f1df7a",
+      "supplies": "framework-context",
+      "bytes": 12345,
+      "read": "runtime-resolved",
+      "read_reason": "the output template is named in expected_output_schema"
+    },
+    {
+      "path": "agents/capability-matrix.md",
+      "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+      "supplies": "framework-context",
+      "bytes": 7175,
+      "read": "runtime-resolved",
+      "read_reason": "capability ownership is resolved by the runtime"
+    },
+    {
+      "path": "skills/agent-skill-matrix.md",
+      "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+      "supplies": "framework-context",
+      "bytes": 17261,
+      "read": "runtime-resolved",
+      "read_reason": "the phase's skills are resolved in skill_dispatch"
+    },
+    {
+      "path": "workflows/workflow-gate-matrix.md",
+      "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+      "supplies": "framework-context",
+      "bytes": 6687,
+      "read": "on-demand",
+      "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+    },
+    {
+      "path": "context/product-context.md",
+      "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+      "supplies": "framework-context",
+      "bytes": 525,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "context/technical-context.md",
+      "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+      "supplies": "framework-context",
+      "bytes": 554,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "context/release-context.md",
+      "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+      "supplies": "framework-context",
+      "bytes": 470,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "workflows/implement-feature.md",
+      "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+      "supplies": "framework-context",
+      "bytes": 8085,
+      "read": "on-demand",
+      "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+    },
+    {
+      "path": "templates/technical-design.md",
+      "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+      "supplies": null,
+      "bytes": 6564,
+      "read": "required",
+      "read_reason": "an artifact template this phase renders or reads"
+    },
+    {
+      "path": "templates/architecture-decision-record.md",
+      "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+      "supplies": null,
+      "bytes": 809,
+      "read": "required",
+      "read_reason": "an artifact template this phase renders or reads"
+    },
+    {
+      "path": "domain-model/agent-specification.md",
+      "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+      "supplies": null,
+      "bytes": 2277,
+      "read": "on-demand",
+      "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+    },
+    {
+      "path": "memory/architecture.md",
+      "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+      "supplies": null,
+      "bytes": 1066,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "dependency-map.md",
+      "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+      "supplies": null,
+      "bytes": 3376,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "runtime/README.md",
+      "digest": "sha256:0fe5a799cafdd70db8744b0287682ffe",
+      "supplies": null,
+      "bytes": 62800,
+      "read": "on-demand",
+      "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+    }
+  ],
+  "context_digest": "sha256:7dc594ecd8e764b25cbc1e8aaab42fac",
+  "input_digest": "sha256:160718068b2d75a7e7d71628f2c09025",
+  "inputs": [
+    {
+      "type": "feature-request",
+      "reference": "runs/inputs/okf-lessons-feature-request.md",
+      "source_file": ".claude/runs/inputs/okf-lessons-feature-request.md",
+      "digest": "sha256:68967bc015098f6c332ca509f1a73b76"
+    },
+    {
+      "type": "change-request",
+      "reference": "runs/inputs/okf-lessons-change-request.md",
+      "source_file": ".claude/runs/inputs/okf-lessons-change-request.md",
+      "digest": "sha256:8421834b6a46a2a11175f90e398440c1"
+    },
+    {
+      "type": "business-intent",
+      "reference": "runs/inputs/okf-lessons-business-intent.md",
+      "source_file": ".claude/runs/inputs/okf-lessons-business-intent.md",
+      "digest": "sha256:cb8d061443933d4978cd60b68fbb7d80"
+    },
+    {
+      "type": "architecture-context",
+      "reference": "runs/inputs/okf-lessons-architecture-context.md",
+      "source_file": ".claude/runs/inputs/okf-lessons-architecture-context.md",
+      "digest": "sha256:8859dd1736058635fdf5470ac277b2dc"
+    },
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-79276e78d773/states/execution-planning/artifacts/execution-plan.md",
+      "source_file": "D:/Project/claude-framework/.claude/worktrees/hopeful-einstein-00bc6a/.claude/runs/run-79276e78d773/states/execution-planning/artifacts/execution-plan.md",
+      "digest": "sha256:59f88d997f3412736e39dead4ab23afa"
+    }
+  ],
+  "unnarrowed": [
+    "dependency-map.md",
+    "domain-model/agent-specification.md",
+    "memory/architecture.md",
+    "runtime/README.md",
+    "templates/architecture-decision-record.md",
+    "templates/technical-design.md"
+  ],
+  "read_policy": "config/runtime.md#context-loading",
+  "read_required": [
+    "context/product-context.md",
+    "context/release-context.md",
+    "context/technical-context.md",
+    "dependency-map.md",
+    "memory/architecture.md",
+    "templates/architecture-decision-record.md",
+    "templates/technical-design.md"
+  ],
+  "read_on_demand": [
+    "domain-model/agent-specification.md",
+    "runtime/README.md",
+    "workflows/implement-feature.md",
+    "workflows/workflow-gate-matrix.md"
+  ],
+  "runtime_resolved": [
+    "agents/capability-matrix.md",
+    "registry/agents.yaml",
+    "registry/skills.yaml",
+    "registry/templates.yaml",
+    "registry/workflows.yaml",
+    "skills/agent-skill-matrix.md"
+  ],
+  "bytes_total": 179614,
+  "bytes_required": 13364,
+  "excluded": [
+    "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+  ]
+}
