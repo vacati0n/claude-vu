@@ -489,7 +489,10 @@ class BuildRoutingTestCase(unittest.TestCase):
         self.assertIn("html", result["outputs"])
 
     def test_an_edit_without_a_recording_reports_instead_of_raising(self):
-        m = ded.edit(self.run_dir, quiet=True)
+        # Pillow and ffmpeg are checked before the manifest; stand them in so
+        # the missing recording is what this run reports.
+        with mock.patch.object(ded.overlays, "has_pil", return_value=True),                 mock.patch.object(ded, "find_ffmpeg", return_value=("ffmpeg", "stub")):
+            m = ded.edit(self.run_dir, quiet=True)
         self.assertTrue(m["errors"])
         self.assertFalse(m["outputs"])
         self.assertIn("no capture manifest", m["errors"][0])

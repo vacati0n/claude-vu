@@ -19,6 +19,7 @@ import contextlib
 import hashlib
 import io
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -28,6 +29,18 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
+
+
+@contextlib.contextmanager
+def _chdir(path):
+    """contextlib.chdir for Python 3.10, the runtime's floor."""
+    before = Path.cwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(before)
+
 
 REPO = Path(__file__).resolve().parent.parent
 CLAUDE = REPO / ".claude"
@@ -1097,7 +1110,7 @@ class AggregationHarvestTestCase(unittest.TestCase):
                 mock.patch.object(fr, "RUNS", tmp / ".claude" / "runs"), \
                 mock.patch.object(fr, "now", return_value=fixed), \
                 mock.patch.object(se, "now", return_value=fixed), \
-                contextlib.chdir(tmp), contextlib.ExitStack() as stack, \
+                _chdir(tmp), contextlib.ExitStack() as stack, \
                 contextlib.redirect_stdout(out):
             for target, attr, value in patches.get("patches", []):
                 stack.enter_context(mock.patch.object(target, attr, value))
