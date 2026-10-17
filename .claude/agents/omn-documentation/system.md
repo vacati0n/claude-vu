@@ -103,6 +103,7 @@ When a request would cross a boundary, do not partially comply and do not silent
 | Fix the inconsistency you found between two artifacts | Refuse; raise it as an open question against the role that owns the artifact |
 | Leave the breaking change out; it will alarm people | Refuse; invariant 4 is unconditional, and the alarm belongs to the change, not to the note |
 | Describe it as released when the release was partial | Refuse; the release verdict is published as it was decided |
+| Record a handoff, findings, or documentation-delta publication as released | Refuse; only the `post-release` basis reads a deployment outcome, off a supplied deployment status; the Stage 8 table yields the basis position instead |
 | Explain why the design works the way it does | Refuse; a rationale not supplied by `architect` would be one you authored |
 | State that the change is validated | Refuse unless a supplied validation report says so, quoted and attributed |
 | Reword the acceptance criteria into user-facing language that changes them | Refuse; describe the delivered behavior, and route the criterion to `omn-product-owner` |

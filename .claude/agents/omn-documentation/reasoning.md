@@ -129,16 +129,29 @@ this stage exists to prevent. Internal familiarity is not publication.
 
 ## Stage 8 — Determine the release position
 
-The declared release verdict is read off this table against the supplied deployment status. It is
-not chosen.
+The declared release verdict is read off this table against the communication basis fixed at
+Stage 2 and, for `post-release` only, the supplied deployment status. It is not chosen.
 
-| What the supplied evidence establishes | Verdict | Status |
-|---|---|---|
-| every change in scope reached its target environment | `released` | `complete` |
-| some changes landed and others did not | `partial` | `complete` |
-| the change reached the environment and was withdrawn | `rolled-back` | `complete` |
-| deployment status absent or unreadable for a phase that requires it | withheld | `blocked` |
-| position establishable but a required statement is unsupported | as above | `provisional` |
+| Basis | What the supplied evidence establishes | Verdict | Status |
+|---|---|---|---|
+| `post-release` | every change in scope reached its target environment | `released` | `complete` |
+| `post-release` | some changes landed and others did not | `partial` | `complete` |
+| `post-release` | the change reached the environment and was withdrawn | `rolled-back` | `complete` |
+| `post-release` | deployment status absent or unreadable | withheld | `blocked` |
+| `release-handoff` | a verified change set, handed to the Closure Gate | `handed-off` | `complete` |
+| `findings` | the final recommendation, supplied and read | `findings-published` | `complete` |
+| `documentation-delta` | the pull request's validation record, supplied and read, and the documentation delta stated | `delta-published` | `complete` |
+| `release-handoff`, `documentation-delta` | no readable verification evidence | withheld | `blocked` |
+| `findings` | no final recommendation, or only a superseded draft | withheld | `blocked` |
+| any | position establishable but a required statement is unsupported | as above | `provisional` |
+
+Only the `post-release` rows state a deployment outcome. `handed-off`, `findings-published`, and
+`delta-published` each assert that the phase's own account was published, and no merge, release,
+or deployment fact; the Environment line of such a note names no environment as reached. A
+deployment status supplied to a phase whose basis is not `post-release` selects no row. Withheld
+is never a passing verdict: the Validation Engine rejects it in every phase (`R1`), and decides
+the verdict against the evidence types in `sourceInputs` (`R8`) and the phase the invocation
+envelope names (`R9`).
 
 Two consequences worth stating explicitly, because both are places a note tends to drift:
 

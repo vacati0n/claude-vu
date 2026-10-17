@@ -1,0 +1,186 @@
+{
+  "invocation_id": "inv-f94564cb61ce-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-f94564cb61ce/states/closure-and-communication/artifacts/orchestration-result.md"
+  ],
+  "structured_output": {
+    "run_id": "run-f94564cb61ce",
+    "work_item_id": "run-f94564cb61ce::closure-and-communication",
+    "artifact": "orchestration-result.md",
+    "artifact_path": "runs/run-f94564cb61ce/states/closure-and-communication/artifacts/orchestration-result.md",
+    "coordinationBasis": "closure",
+    "disposition": "held",
+    "artifact_status": "provisional",
+    "held_by": [],
+    "closure_gate": {
+      "gate": "Closure Gate",
+      "phase": "PH-005 closure-and-communication",
+      "decision": "none",
+      "assigned_decider": "omn-documentation",
+      "recorded_by_this_role": false
+    },
+    "counts": {
+      "phases_coordinated": 5,
+      "complete": 4,
+      "blocked": 1,
+      "not_started": 0,
+      "handoffs": 4,
+      "handoffs_accepted": 4,
+      "handoffs_refused": 0,
+      "handoffs_pending": 0,
+      "escalations": 2,
+      "escalations_by_severity": {
+        "critical": 0,
+        "high": 1,
+        "medium": 1,
+        "low": 0
+      },
+      "follow_ups": 5,
+      "open_questions": 4,
+      "escalations_open_blocking": 0
+    },
+    "gate_owner_addressed": "omn-documentation",
+    "upstream_conditions": {
+      "verification_gate_condition_1_AC-008": "met: held run run-c9fb8d5bbb32 documentation phase attempt 2 (inv-c9fb8d5bbb32-06-002) completed through the runtime; validation 34/34; R1, R8, R9, C3.2 pass; module digests match this worktree",
+      "verification_gate_condition_2_AC-011": "open: FC-021 not yet authored, to be authored before the Closure Gate is decided (FU-001)",
+      "verification_gate_condition_3_R-002": "met: omn-tech-lead accepted R-002 (consult subagent abfed4f59e37b54d6, recorded by session operator); to be recorded in FC-021",
+      "triage_Q-003_C3.2": "settled in attempt 2 by omitting the branch name; C3.2 unchanged; held note C3.2 pass in its validation-report.json"
+    },
+    "checks": {
+      "mechanical_validator": {
+        "tool": "runtime/orchestration_result_validator.py --envelope",
+        "run": 34,
+        "passed": 34,
+        "note": "3 declared not-machine-checkable (N1, N2, N3) counted by the validator as passed",
+        "results": {
+          "C1.1": "pass",
+          "C1.2": "pass",
+          "C1.3": "pass",
+          "C1.4": "pass",
+          "C2.1": "pass",
+          "C2.2": "pass",
+          "C2.3": "pass",
+          "C2.4": "pass",
+          "C2.5": "pass",
+          "C3.1": "pass",
+          "C3.2": "pass",
+          "C3.3": "pass",
+          "C4.1": "pass",
+          "C4.2": "pass",
+          "C4.3": "pass",
+          "C4.4": "pass",
+          "C4.5": "pass",
+          "C4.6": "pass",
+          "C5.1": "pass",
+          "C5.2": "pass",
+          "C6.1": "pass",
+          "C6.2": "pass",
+          "C6.3": "pass",
+          "C6.4": "pass",
+          "C7.1": "pass",
+          "N1": "not-machine-checkable",
+          "N2": "not-machine-checkable",
+          "N3": "not-machine-checkable",
+          "O1": "pass",
+          "O2": "pass",
+          "O3": "pass",
+          "O4": "pass",
+          "O5": "pass",
+          "O6": "pass",
+          "O7": "pass",
+          "O8": "pass",
+          "O9": "pass"
+        }
+      },
+      "quality_contract_manual": {
+        "run": 36,
+        "passed": 36,
+        "results": {
+          "S1": "pass",
+          "S2": "pass",
+          "S3": "pass",
+          "S4": "pass",
+          "S5": "pass",
+          "S6": "pass",
+          "S7": "pass",
+          "M1": "pass",
+          "M2": "pass",
+          "M3": "pass",
+          "M4": "pass",
+          "M5": "pass",
+          "P1": "pass",
+          "P2": "pass",
+          "P3": "pass",
+          "P4": "pass",
+          "A1": "pass",
+          "A2": "pass",
+          "A3": "pass",
+          "H1": "pass",
+          "H2": "pass",
+          "H3": "pass",
+          "H4": "pass",
+          "E1": "pass",
+          "E2": "pass",
+          "E3": "pass",
+          "E4": "pass",
+          "E5": "pass",
+          "C1": "pass",
+          "C2": "pass",
+          "T1": "pass",
+          "T2": "pass",
+          "T3": "pass",
+          "T4": "pass",
+          "T5": "pass",
+          "N-COUNT": "pass"
+        }
+      },
+      "not_machine_checkable_obligations_declared": [
+        "N1",
+        "N2",
+        "N3",
+        "N4"
+      ],
+      "repair_attempts": 0
+    },
+    "read_only_commands": [
+      "python reads of run state.json, events.jsonl (run-c9fb8d5bbb32 E-0067 to E-0081), task-context.yaml, and recorded JSON",
+      "sha256 comparison of the held run attempt-2 module digests against this worktree and the main checkout",
+      "runtime/orchestration_result_validator.py run on the draft artifact, with envelope (twice)",
+      "runtime/verify_validators.py run in default and isolated (-I) interpreter modes (re-run: 5/6 in both modes)"
+    ],
+    "unsettled": [
+      "FU-001 high: FC-021 not authored; closure condition (2) and the precondition for the Closure Gate decision",
+      "Q-003: verify_validators reads 5/6 NOT COVERED on this tree in both modes; operator reports 6/6 under -I; FC-022 is not in proposals/ at check time; not settled",
+      "ES-002 medium / FU-003: pre-existing runtime defect (run_completed before a Closure Gate decision), owner omn-tech-lead, open item in FC-021",
+      "Q-001: known issue status not supplied",
+      "Q-002: CR-003 identifier used for two different changes",
+      "Q-004: held run documentation note provisional on untracked operator-relayed follow-ups; cites FC-022"
+    ],
+    "cleanup": "bytecode caches written by validator runs (gitignored .claude/**/__pycache__) removed; scratch JSON from the first validator run removed",
+    "held_on": [
+      "PH-005 Closure Gate undecided (decider omn-documentation)",
+      "Verification Gate condition (2): FC-021 not yet authored (FU-001)"
+    ],
+    "escalations_status": {
+      "ES-001": "resolved (R-002 accepted by omn-tech-lead, operator relay)",
+      "ES-002": "routed to omn-tech-lead, medium, pre-existing runtime defect"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-orchestrator/system.md",
+    "agents/omn-orchestrator/identity.md",
+    "agents/omn-orchestrator/reasoning.md",
+    "agents/omn-orchestrator/execution.md",
+    "agents/omn-orchestrator/output.md",
+    "agents/omn-orchestrator/quality.md",
+    "runs/run-f94564cb61ce/states/closure-and-communication/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-f94564cb61ce/states/closure-and-communication/artifacts/orchestration-result.md",
+    "runs/run-f94564cb61ce/states/closure-and-communication/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -412,7 +412,7 @@ keyed by artifact type rather than by phase, so it also carries one type no phas
 | `technical-design.md` | `design_validator.py` | `implement-feature/solution-design-and-risk-assessment`, `refactor/scope-invariants-and-risk-profile` |
 | `bug-analysis.md` | `bug_analysis_validator.py` | `fix-bug/root-cause-analysis` |
 | `investigation-report.md` | `investigation_report_validator.py` | `investigate/technical-discovery`, `research/technical-validation` |
-| `release-note.md` | `release_note_validator.py` | `release/communication-and-post-release` |
+| `release-note.md` | `release_note_validator.py` | `implement-feature/documentation-and-release-handoff`, `investigate/publication`, `research/findings-publication`, `review-pull-request/documentation-impact`, `release/communication-and-post-release` |
 | `review-package.md` | `review_package_validator.py` | `implement-feature/quality-review`, `review-pull-request/code-quality-review`, `code-quality-scan/repository-quality-scan` |
 | `implementation-report.md` | `implementation_report_validator.py` | `implement-feature/implementation`, `fix-bug/fix-implementation`, `refactor/refactor-implementation` |
 | `framework-change-proposal.md` | `change_proposal_validator.py` | no phase; a governance artifact validated outside any run |
@@ -437,6 +437,18 @@ one artifact type.
 and the same artifact with one declared mutation is rejected *by the named check*. A validator
 that accepts everything and a validator that rejects everything both report a result, and
 neither is a decision.
+
+`release_note_validator.py` decides the release position against evidence, not membership.
+omn-documentation 1.2.0 keys it on the phase's communication basis: only
+`communication-and-post-release` states a deployment outcome (`released`, `partial`,
+`rolled-back`), read off a supplied deployment status, and the other four phases publish
+`handed-off`, `findings-published`, or `delta-published`. `R8` requires the evidence type each
+position is read off among `sourceInputs`; `R9` maps the invocation envelope's `state_id` to its
+basis and is declared not-machine-checkable only when no envelope is supplied, on the runtime
+path and on the validator's own `--envelope` command line alike. A committed note produced by an
+earlier omn-documentation version is set aside by `verify_validators.py` as produced under a
+superseded contract and reported by count (`SUPERSEDED_CONTRACTS`); the validator exempts nothing,
+and such notes stay as recorded.
 
 ## Idempotency and replay
 

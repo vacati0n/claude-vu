@@ -1,0 +1,690 @@
+{
+  "invocation_id": "inv-f94564cb61ce-03-001",
+  "run_id": "run-f94564cb61ce",
+  "work_item_id": "run-f94564cb61ce::fix-implementation",
+  "idempotency_key": "sha256:9a8c7aae603706cd07cbc98728a6b245",
+  "state_id": "fix-implementation",
+  "phase_index": 3,
+  "agent_id": "omn-dev-1-implement",
+  "agent_version": "1.1.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-1-implement.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-1-implement/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-1-implement/system.md",
+      "agents/omn-dev-1-implement/identity.md",
+      "agents/omn-dev-1-implement/reasoning.md",
+      "agents/omn-dev-1-implement/execution.md",
+      "agents/omn-dev-1-implement/output.md",
+      "agents/omn-dev-1-implement/quality.md",
+      "agents/omn-dev-1-implement/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-1-implement/system.md": "sha256:19e8b4ae2aad6df4dcc5eb87cc91bcf7",
+      "agents/omn-dev-1-implement/identity.md": "sha256:e02fb41e9c00f1f9270808c8b7981a20",
+      "agents/omn-dev-1-implement/reasoning.md": "sha256:b3abda4d594df1d4346a95a41645c5ef",
+      "agents/omn-dev-1-implement/execution.md": "sha256:e74dc23cc6f165cab07858a0267584d1",
+      "agents/omn-dev-1-implement/output.md": "sha256:bccf4d0c7e2f92084148bcffe4e3b512",
+      "agents/omn-dev-1-implement/quality.md": "sha256:729e61431bb8ad9247e0a2afad953ba0",
+      "agents/omn-dev-1-implement/examples.md": "sha256:5265c7bf5b7d869c9aa34ffe83bfd547"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-dev-1-implement/system.md",
+        "agents/omn-dev-1-implement/reasoning.md",
+        "agents/omn-dev-1-implement/output.md",
+        "agents/omn-dev-1-implement/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-dev-1-implement/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-dev-1-implement/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-dev-1-implement/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 32716,
+      "full_bytes": 68877
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "implementation-delivery"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S03",
+        "proficiency": "Primary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Primary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "not-triggered",
+      "area": "database",
+      "basis": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Advisory)"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in artifact:triage-and-impact",
+      "source": "agent-manifest (Advisory)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "technical-design",
+      "bug-analysis",
+      "validation-report",
+      "execution-plan",
+      "coding-standards",
+      "architecture-decision-record",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context",
+      "regression-targets",
+      "parity-checklist",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/knowledge-management-2d49d4/.claude/runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md",
+        "text": "```yaml\nbugAnalysis:\n  analysisId: BA-run-f94564cb61ce-triage-and-impact\n  defectReference: runs/inputs/release-handoff-verdict-defect-report.md\n  sourceInputs:\n    - type: defect-report\n      reference: runs/inputs/release-handoff-verdict-defect-report.md\n    - type: code-context\n      reference: agents/omn-documentation/reasoning.md\n    - type: code-context\n      reference: agents/omn-documentation/output.md\n    - type: code-context\n      reference: agents/omn-documentation/quality.md\n    - type: code-context\n      reference: agents/omn-documentation/identity.md\n    - type: code-context\n      reference: agents/omn-documentation/execution.md\n    - type: code-context\n      reference: agents/omn-documentation/manifest.yaml\n    - type: code-context\n      reference: templates/release-note.md\n    - type: code-context\n      reference: runtime/release_note_validator.py\n    - type: code-context\n      reference: runtime/artifact_contract.py\n    - type: code-context\n      reference: runtime/orchestration_result_validator.py\n    - type: code-context\n      reference: workflows/implement-feature.md\n    - type: code-context\n      reference: workflows/fix-bug.md\n    - type: code-context\n      reference: workflows/refactor.md\n    - type: code-context\n      reference: workflows/investigate.md\n    - type: code-context\n      reference: workflows/research.md\n    - type: code-context\n      reference: workflows/release.md\n    - type: code-context\n      reference: workflows/review-pull-request.md\n    - type: symptom-evidence\n      reference: runs/*/states/*/artifacts/release-note.md\n    - type: symptom-evidence\n      reference: runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/result-envelope.json\n    - type: symptom-evidence\n      reference: runs/*/gates/closure-gate/failure-envelope.json\n  producedBy: omn-dev-1-bug-analyst\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  severity: high\n  reproducibility: deterministic\n  inputDigest: sha256:dfa126ab657c3125805bdade2076fa7a\n  contextDigest: sha256:f35d4b31201916991fcce2c388d3951a\n```\n\n## Metadata\n\n- Bug ID: runs/inputs/release-handoff-verdict-defect-report.md\n- Reporter: the framework operator, acting as omn-orchestrator for held run run-c9fb8d5bbb32 (`E-001`)\n- Severity: high\n- Status: provisional\n\n## Symptom Summary\n\n- Observed behavior: the documentation-and-release-handoff phase of implement-feature either emits a release note the Validation Engine rejects (`withheld`, R1 fail) or emits `released` for a change its own Environment line says was never deployed, and the validator accepts it (`E-008`, `E-009`, `E-011`).\n- Expected behavior: a phase whose workflow has no deployment step can read a truthful release position off Stage 8 that asserts no deployment fact and that the validator, output contract, quality check, and template accept, with deploying phases unchanged; stated by the defect report (`E-001`) and implied by the Stage 8 rule that the verdict is read, not chosen (`E-002`).\n- First observed date: the earliest recorded note carrying a deployment verdict with no deployment evidence is dated 2026-08-28 (run-efe092286625 `released`, run-09099de97613 `partial`); the blocking form was first observed 2026-10-17 in run-c9fb8d5bbb32 (`E-010`, `E-013`).\n- Affected environments: known affected are implement-feature documentation-and-release-handoff (9 recorded notes) and investigate publication (1 note); known unaffected are fix-bug and refactor, which have no omn-documentation-owned phase; not observed are research findings-publication and review-pull-request documentation-impact (no recorded notes, same contract gap by reading) and release communication-and-post-release (no recorded run) (`E-006`, `E-007`, `E-010`).\n\n## Reproduction\n\n- Preconditions: a release-note.md produced by the documentation-and-release-handoff phase of an implement-feature run, with no deployment-status among its sourceInputs; run-c9fb8d5bbb32 supplies one with verdict `withheld`, run-efe092286625 one with verdict `released`.\n- Steps to reproduce: from the worktree root run `python .claude/runtime/release_note_validator.py .claude/runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/artifacts/release-note.md` and read R1 (expect FAIL, exit 1); then run the same command against `.claude/runs/run-efe092286625/states/documentation-and-release-handoff/artifacts/release-note.md` and read the result (expect PASS, exit 0) while that note's Environment line states nothing was deployed; then read Stage 8 of `agents/omn-documentation/reasoning.md` and confirm no row applies to a phase that is not supplied a deployment status.\n- Reproduction frequency: deterministic\n- Evidence: see the Evidence Register below; attempts are `E-008` and `E-009`.\n\n### Evidence Register\n\n| ID | Evidence | Source | Confidence |\n|---|---|---|---|\n| `E-001` | Reporter account: the held run, two operator rulings for `released` declined by the agent, three precedents, operator constraints not to rewrite earlier run evidence and to leave release-workflow phases unchanged | supplied input runs/inputs/release-handoff-verdict-defect-report.md, sha256:dfa126ab657c3125805bdade2076fa7a | low |\n| `E-002` | Stage 8 table defines `released` as every change in scope reached its target environment, `partial`, `rolled-back`, and withheld/`blocked` only for deployment status absent \"for a phase that requires it\"; no row covers a phase not supplied one; the table is read against the supplied deployment status and is not chosen | agents/omn-documentation/reasoning.md lines 130-150 | high |\n| `E-003` | releaseVerdict vocabulary is `released`, `partial`, `rolled-back` in the output contract, the Blocking check R1, and the template; V1/V2 bind verdict and status to the Stage 8 row | agents/omn-documentation/output.md line 76, quality.md lines 89-98, templates/release-note.md line 36 | high |\n| `E-004` | The validator hard-codes the same three values and R1 tests membership only; no check relates the verdict to any deployment-status input or to the note's Environment text | runtime/release_note_validator.py lines 32 and 91-102 | high |\n| `E-005` | The only admissible evidence for a landed, partly landed, or rolled-back release is the supplied deployment status; deployment-status alone satisfies the input minimum only in communication-and-post-release; execution.md lists deployment status as consumed only by the release phase | agents/omn-documentation/identity.md lines 112-117 and 225, execution.md lines 78-81 and 203-209, manifest.yaml lines 112-124 | high |\n| `E-006` | omn-documentation owns exactly five phases; inputs per Phase Model: implement-feature documentation-and-release-handoff takes verification report and change summary; investigate publication takes technical-recommendation and decision dependencies; research findings-publication takes technical-recommendation and evidence references; review-pull-request documentation-impact takes validation-report and release implications; release communication-and-post-release takes deployment status with monitoring health record, final change summary, stakeholder list; all five emit release-note.md | workflows/implement-feature.md line 44, investigate.md line 44, research.md line 43, review-pull-request.md line 41, release.md line 39; manifest.yaml supportedWorkflows lines 150-165 | high |\n| `E-007` | fix-bug and refactor have no omn-documentation-owned phase; their closure phases are owned by omn-orchestrator and emit orchestration-result.md; omn-documentation only co-owns their Closure Gate | workflows/fix-bug.md Phase Model and line 117, workflows/refactor.md Phase Model and line 132 | high |\n| `E-008` | Two runs of the validator over the run-c9fb8d5bbb32 note each exit 1 with R1 FAIL releaseVerdict='withheld'; identical output both times | command run in this analysis: release_note_validator.py on run-c9fb8d5bbb32 documentation-and-release-handoff release-note.md | high |\n| `E-009` | Varied precondition: the validator over the run-efe092286625 note (verdict `released`, no deployment-status input, Environment says not merged, released, or deployed) exits 0 with result PASS | command run in this analysis: release_note_validator.py on run-efe092286625 documentation-and-release-handoff release-note.md | high |\n| `E-010` | Survey of all 10 recorded notes under runs/*/states/*/artifacts/release-note.md: 0 of 10 list a deployment-status input; `released` 7 (all implement-feature: 4c51600606df, 8f8a1ab0d16e, 919c5d5cf156, ae91e085f481, ded114f50a46, e0dba6763475, efe092286625); `partial` 2 (09099de97613 implement-feature, 437e2f765e4b investigate); withheld 1 (c9fb8d5bbb32 implement-feature); `rolled-back` 0; validator exits 0 for 9 and 1 for c9fb8d5bbb32 | sourceInputs and releaseVerdict read from each note; workflow read from each run's state.json; validator run on each in this analysis | high |\n| `E-011` | Each of the 7 `released` notes states in its Environment or Deployment considerations line that nothing was deployed (working tree, pending merge, no deployment environment named); ded114f50a46 records that `released` followed an operator instruction with no deployment status supplied | Environment and Deployment considerations lines of the 7 notes listed in `E-010` | high |\n| `E-012` | The 2 `partial` notes record no partial deployment: 09099de97613 says the change is inert on landing, 437e2f765e4b declares `partial` a placeholder; FC-020 open item O-006 records the findings-publication gap, routed to architect, Open | the two notes; proposals/framework-change-proposal-FC-020.md line 180 | high |\n| `E-013` | Held run envelope: status escalation_required, error class context-absent, verdict withheld, artifact blocked, 60 checks run, 59 pass, R1 failed; records that an orchestrator ruling to record `released` was not applied and that the Validation Engine was not run; run state is ExecutingState | runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/result-envelope.json; runs/run-c9fb8d5bbb32/state.json | high |\n| `E-014` | The same validator runs as `E-008` also fail Blocking check C3.2 on the held note: a vendor token in the worktree branch name cited in its Environment line; this failure is independent of the verdict | command run in this analysis, as `E-008`; runtime/artifact_contract.py lines 288-293 | high |\n| `E-015` | All 8 implement-feature precedent runs carrying a non-withheld note record their Closure Gate escalation resolved; run-efe092286625 records the Closure Gate approved by omn-orchestrator over the `released` note | runs/*/gates/closure-gate/failure-envelope.json status fields; runs/run-efe092286625/final-report.md and events.jsonl | high |\n| `E-016` | Confirmed absence: no test asserts the verdict vocabulary against the phase's communication basis; the only test importing the validator contains no releaseVerdict, R1, or withheld reference; the validator fixture carries `released` and passes | grep over tests/; tests/test_investigate_research_handoffs.py; runtime/fixtures/release-note.md and validator run on it | high |\n| `E-017` | The bundled payload mirrors the same three-value vocabulary in the validator, output contract, and template | omn_agent/_bundled_payload/runtime/release_note_validator.py line 32, agents/omn-documentation/output.md line 76, templates/release-note.md line 36 | high |\n| `E-018` | No other runtime module reads releaseVerdict; the orchestration-result validator keeps its own deployment-state vocabulary, including `not-attempted`, separate from the release note | grep over runtime/*.py; runtime/orchestration_result_validator.py lines 50-73 | high |\n\n## Impact Assessment\n\n- User impact: every operator closing an implement-feature run, including every framework self-hosting change routed through /implement, and every investigate run's publication, gets either a blocked final phase or a release record asserting a deployment that did not happen; 10 of 10 recorded notes are affected (`E-010`).\n- Business impact: no business impact statement was supplied; the defect report's Impact section states the governance-integrity consequence qualitatively and is recorded as reported (`E-001`); severity rests on technical impact alone, routed as `Q-002`.\n- Technical impact: correctness of the governance record: 7 persisted `released` and 2 placeholder `partial` notes state a release position their own evidence contradicts, and 1 run is held unable to close; no crash and no runtime availability loss (`E-008`, `E-010`, `E-011`, `E-012`, `E-013`).\n- Blast radius: the omn-documentation contract (Stage 8, output contract, quality R1/V1/V2, Required Evidence table); the release-note template; runtime/release_note_validator.py; the bundled payload mirror of all three; four phases never supplied a deployment status (implement-feature documentation-and-release-handoff, investigate publication, research findings-publication, review-pull-request documentation-impact); the implement-feature Closure Gate, which accepted the misstated notes; persisted bad data in 9 recorded notes plus the blocked note of held run run-c9fb8d5bbb32 (`E-003`, `E-004`, `E-005`, `E-006`, `E-010`, `E-011`, `E-012`, `E-013`, `E-015`, `E-017`).\n\n## Root Cause Analysis\n\n- Root cause statement: the release-verdict contract assumes every phase that publishes release-note.md publishes after a deployment (its only verdicts are deployment outcomes and their only admissible evidence is a supplied deployment status), while four of the five phases omn-documentation owns are by construction never supplied one, so those phases have no verdict that is both truthful and accepted.\n- Why detection failed earlier: R1 in the validator tests only membership in the three-value vocabulary, quality check V1 (verdict per Stage 8) is decided only by the producing agent, no test relates verdict to phase basis or to a deployment-status input, and the Closure Gate approved `released` notes whose Environment lines contradicted the verdict (`E-004`, `E-015`, `E-016`).\n\n### Causal Chain\n\n| ID | Step | Claim | Evidence | Confidence |\n|---|---|---|---|---|\n| `C-001` | phase inputs | four of five omn-documentation phases are never supplied a deployment status, because deployment belongs only to the release workflow; supplying one to implement-feature is excluded since that workflow has no deployment step | `E-006`, `E-007` | high |\n| `C-002` | verdict rule | Stage 8 defines every verdict against a supplied deployment status and gives withheld only to a phase that requires one, so a phase that does not has no row; reading `released` as a verified handoff is excluded because `released` means reaching the target environment | `E-002`, `E-005` | high |\n| `C-003` | vocabulary | output contract, R1, template, and validator, mirrored in the bundled payload, admit only the three deployment outcomes, so no value expresses a handoff that was not deployed | `E-003`, `E-004`, `E-017` | high |\n| `C-004` | faithful path | an agent applying Stage 8 as written emits withheld with status blocked, which R1 rejects every time, so the phase cannot pass and the run holds | `E-008`, `E-013` | high |\n| `C-005` | accepted path | R1 checks vocabulary membership only, so `released` or `partial` without deployment evidence passes, which is why 9 notes persist a release position their own evidence contradicts and the Closure Gate approved them | `E-009`, `E-010`, `E-011`, `E-012`, `E-015` | high |\n\n## Fix Strategy\n\n- Proposed fix: for each phase whose workflow declares no deployment step, Stage 8 must yield a release position keyed on the phase's communication basis rather than on missing evidence, asserting no deployment fact, accepted consistently by output contract, R1, V1/V2, template, validator, and bundled mirror; the release phase's verdicts, rows, and R4/R5 rules stay unchanged; the 9 persisted notes are left as recorded per the operator constraint (`E-001`), and the change record must name them as carrying a verdict the corrected contract would not yield; conditional on the vocabulary decision in `Q-001`; local containment meanwhile is the existing hold on run-c9fb8d5bbb32.\n- Alternative options: (a) one basis-neutral value for every non-deploying phase versus (b) distinct values per basis (release-handoff, findings, documentation-delta), which also closes FC-020 O-006 but widens the vocabulary; (c) make withheld a legal non-blocking verdict for non-deploying phases, which keeps the vocabulary small but overloads a value that today means blocked; rejected direction: supplying a synthetic deployment-status to implement-feature, which `C-001` excludes.\n- Regression risk: medium\n- Regression scope: release communication-and-post-release (shares the vocabulary, R1, R4, R5, and the validator); the validator fixture and tests/test_investigate_research_handoffs.py (import the validator); the bundled payload mirror (must stay identical to the authoritative tree); the implement-feature Closure Gate and the omn-orchestrator closure path (consume the note's verdict and status); re-validation of the 10 recorded notes (shared validator, now judged against a changed vocabulary); no other runtime module reads releaseVerdict, so the orchestration-result deployment-state vocabulary is outside the scope (`E-018`).\n\n## Validation Plan\n\n- Verification steps: invert the reproduction: a non-deploying-phase note carrying the new position and no deployment-status input passes the validator; that same position on a release communication-and-post-release note is rejected, and a `released` note there still requires its deployment status; Stage 8 read against each of the five Phase Models yields exactly one row per phase, so the condition in `C-002` is gone rather than the R1 symptom masked.\n- Regression tests added: a test per omn-documentation phase asserting which verdicts the validator accepts for that phase's basis; a test that `released`, `partial`, and `rolled-back` with R4/R5 behave unchanged for the release phase; a test that the bundled payload vocabulary equals the authoritative one.\n- Monitoring signals after release: count of new release notes whose verdict is a deployment outcome while their sourceInputs carry no deployment-status; expected value 0, any non-zero value indicates recurrence; also count of documentation-and-release-handoff phases ending blocked on R1, expected 0.\n\n## Closure\n\n- Resolution summary: None identified. Unresolved; closure is decided at the fix-bug Closure Gate, not here.\n- Linked PR and release: None identified. No corrective change exists yet.\n- Prevention actions: tie the verdict check to the phase's declared inputs or communication basis in the Validation Engine rather than to vocabulary membership alone, and require the Closure Gate to cross-check the verdict against the note's Environment line (`E-004`, `E-015`, `E-016`).\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected steps |\n|---|---|---|---|---|\n| `Q-001` | Which release position the non-deploying phases read off Stage 8: one value, one per communication basis, or a legal withheld, and whether it subsumes FC-020 O-006; a contract-vocabulary decision with structural reach across five phases | yes | architect | `C-002`, `C-003` |\n| `Q-002` | No business impact statement was supplied; severity rests on technical impact alone; confirm the governance-integrity impact the defect report states qualitatively | no | omn-product-owner | none |\n| `Q-003` | Run run-c9fb8d5bbb32 also fails Blocking check C3.2 on its Environment line, a separate defect independent of the verdict, so correcting the verdict contract alone will not let that held run pass validation (`E-014`) | no | omn-orchestrator | `C-004` |\n| `Q-004` | Where the account of the 9 persisted notes whose verdict the corrected contract would not yield is recorded, given the constraint that run evidence is not rewritten | no | omn-tech-lead | `C-005` |",
+        "digest": "sha256:f902dcda2b9ee3ef30f1f5a402eb9991",
+        "produced_by": "triage-and-impact"
+      },
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/knowledge-management-2d49d4/.claude/runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "text": "```yaml\nbugAnalysis:\n  analysisId: BA-run-f94564cb61ce-root-cause-analysis\n  defectReference: runs/inputs/release-handoff-verdict-defect-report.md\n  sourceInputs:\n    - type: defect-report\n      reference: runs/inputs/release-handoff-verdict-defect-report.md\n    - type: impact-and-risk-data\n      reference: runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md\n    - type: impact-and-risk-data\n      reference: runs/run-f94564cb61ce/state.json\n    - type: impact-and-risk-data\n      reference: runs/run-f94564cb61ce/task-context.yaml\n    - type: architecture-context\n      reference: architect-ruling-Q-001.md (architect consult a96e516fa44073324, session scratchpad, outside the repository)\n    - type: code-context\n      reference: agents/omn-documentation/reasoning.md\n    - type: code-context\n      reference: agents/omn-documentation/output.md\n    - type: code-context\n      reference: agents/omn-documentation/quality.md\n    - type: code-context\n      reference: agents/omn-documentation/identity.md\n    - type: code-context\n      reference: agents/omn-documentation/manifest.yaml\n    - type: code-context\n      reference: agents/omn-documentation.agent.md\n    - type: code-context\n      reference: templates/release-note.md\n    - type: code-context\n      reference: registry/agents.yaml\n    - type: code-context\n      reference: registry/templates.yaml\n    - type: code-context\n      reference: runtime/release_note_validator.py\n    - type: code-context\n      reference: runtime/artifact_contract.py\n    - type: code-context\n      reference: runtime/artifact_lib.py\n    - type: code-context\n      reference: runtime/framework_runtime.py\n    - type: code-context\n      reference: runtime/verify_validators.py\n    - type: code-context\n      reference: runtime/close_legacy_run.py\n    - type: code-context\n      reference: runtime/README.md\n    - type: code-context\n      reference: runtime/fixtures/release-note.md\n    - type: code-context\n      reference: workflows/implement-feature.md\n    - type: code-context\n      reference: workflows/investigate.md\n    - type: code-context\n      reference: workflows/research.md\n    - type: code-context\n      reference: workflows/review-pull-request.md\n    - type: code-context\n      reference: workflows/release.md\n    - type: code-context\n      reference: workflows/fix-bug.md\n    - type: code-context\n      reference: workflows/refactor.md\n    - type: code-context\n      reference: tests/test_knowledge.py\n    - type: code-context\n      reference: tests/fixtures/knowledge/baseline-0.9.0/baseline.json\n    - type: code-context\n      reference: tests/test_bundled_payload.py\n    - type: code-context\n      reference: omn_agent/_bundled_payload/runtime/release_note_validator.py\n    - type: code-context\n      reference: proposals/framework-change-proposal-FC-020.md\n    - type: symptom-evidence\n      reference: runs/*/states/*/artifacts/release-note.md\n    - type: symptom-evidence\n      reference: runs/*/states/*/invocation-envelope.json\n    - type: symptom-evidence\n      reference: runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/result-envelope.json\n    - type: symptom-evidence\n      reference: runs/run-c9fb8d5bbb32/states/quality-review/artifacts/review-package.md\n    - type: symptom-evidence\n      reference: runs/*/gates/closure-gate/failure-envelope.json\n  producedBy: omn-dev-1-bug-analyst\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  severity: high\n  reproducibility: deterministic\n  inputDigest: sha256:dfa126ab657c3125805bdade2076fa7a\n  contextDigest: sha256:576abeed3e57800a2e83f0313e986f82\n```\n\n## Metadata\n\n- Bug ID: runs/inputs/release-handoff-verdict-defect-report.md\n- Reporter: the framework operator, acting as omn-orchestrator for held run run-c9fb8d5bbb32 (`E-001`)\n- Severity: high\n- Status: provisional\n\n## Symptom Summary\n\n- Observed behavior: the documentation-and-release-handoff phase of implement-feature either emits a release note the Validation Engine rejects (`withheld`, R1 fail) or emits `released` for a change its own Environment line says was never deployed, and the validator accepts it; re-observed first-hand in this run (`E-008`, `E-009`, `E-011`).\n- Expected behavior: a phase whose workflow has no deployment step can read a truthful release position off Stage 8 that asserts no deployment fact and that the validator, output contract, quality check, and template accept, with deploying phases unchanged; stated by the defect report (`E-001`), implied by the Stage 8 rule that the verdict is read, not chosen (`E-002`), and bound by the Triage Gate scope and conditions (`E-032`).\n- First observed date: the earliest note carrying a deployment verdict with no deployment evidence is dated 2026-08-28 (run-efe092286625 `released`, run-09099de97613 `partial`); the blocking form was first observed 2026-10-17 in run-c9fb8d5bbb32; ongoing (`E-010`, `E-013`).\n- Affected environments: known affected are implement-feature documentation-and-release-handoff (9 notes) and investigate publication (1 note); known unaffected are fix-bug and refactor, which have no omn-documentation-owned phase; not observed are research findings-publication and review-pull-request documentation-impact (no recorded notes, same contract gap by reading) and release communication-and-post-release (no recorded run) (`E-006`, `E-007`, `E-010`).\n\n## Reproduction\n\n- Preconditions: a release-note.md produced by the documentation-and-release-handoff phase of an implement-feature run, with no deployment-status among its sourceInputs; run-c9fb8d5bbb32 supplies one with verdict `withheld`, run-efe092286625 one with verdict `released`; the contract files are unmodified on this branch (`E-028`).\n- Steps to reproduce: from the repository root run `python .claude/runtime/release_note_validator.py .claude/runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/artifacts/release-note.md` and read R1 (expect FAIL, exit 1); run the same command on `.claude/runs/run-efe092286625/states/documentation-and-release-handoff/artifacts/release-note.md` with `--envelope` pointing at that state's invocation-envelope.json (expect PASS, exit 0) while that note's Environment line states nothing was deployed; then read Stage 8 of `agents/omn-documentation/reasoning.md` and confirm no row applies to a phase not supplied a deployment status.\n- Reproduction frequency: deterministic\n- Evidence: register below; attempts are `E-008` and `E-009`, re-run in this invocation; the task context names no relevant files, so sites were located from the defect report, the triage register, and the architect ruling, which is the recorded reason for the wider read.\n\n### Evidence Register\n\n| ID | Evidence | Source | Confidence |\n|---|---|---|---|\n| `E-001` | Reporter account: held run, two operator rulings for `released` declined by the agent, three precedents, constraints not to rewrite earlier run evidence and to leave release-workflow phases unchanged | supplied input runs/inputs/release-handoff-verdict-defect-report.md, sha256:dfa126ab657c3125805bdade2076fa7a | low |\n| `E-002` | Stage 8 reads the verdict \"against the supplied deployment status\"; rows are `released` (reached target environment), `partial`, `rolled-back`, and withheld/`blocked` only \"for a phase that requires it\"; no row covers a phase not supplied one; Stage 2 already records the communication basis | agents/omn-documentation/reasoning.md lines 129-150 and line 41 | high |\n| `E-003` | releaseVerdict vocabulary is `released`, `partial`, `rolled-back` in the output contract (line 76) and template (line 36); R1 (line 92) requires one of them; V1/V2 bind verdict and status to the Stage 8 row; `None identified.` in Known Issues only for `released` (output.md line 53) | agents/omn-documentation/output.md, quality.md lines 92-98, templates/release-note.md | high |\n| `E-004` | The validator hard-codes VERDICTS to the three values (line 32) and R1 tests membership only (lines 99-102); R4 needs_issue is partial/rolled-back (line 131); no check relates verdict to any input type or to Environment text | runtime/release_note_validator.py | high |\n| `E-005` | Required Evidence: \"A release landed, partly landed, or was rolled back\" needs \"the supplied deployment status\" (line 225); deployment-status alone satisfies the minimum only in communication-and-post-release; manifest accepted inputs are implementation-report, validation-report, review-package, deployment-status, technical-recommendation, with verification-report optional | agents/omn-documentation/identity.md lines 105-120 and 225; manifest.yaml inputs block | high |\n| `E-006` | Phase Model inputs: documentation-and-release-handoff takes verification report and change summary; publication and findings-publication take technical-recommendation.md; documentation-impact takes validation-report.md; only communication-and-post-release takes deployment status; all five emit release-note.md; each phase id appears in exactly one workflow | workflows/implement-feature.md line 44, investigate.md line 44, research.md line 43, review-pull-request.md line 41, release.md line 39 | high |\n| `E-007` | fix-bug and refactor name omn-documentation only as Closure Gate co-owner; neither has an omn-documentation-owned phase | workflows/fix-bug.md lines 17, 117, 123; workflows/refactor.md lines 18, 132, 138 | high |\n| `E-008` | Validator over the run-c9fb8d5bbb32 note exits 1: R1 FAIL releaseVerdict='withheld' (plus C3.2, see `E-014`); same outcome as the two triage runs | command run in this invocation: release_note_validator.py on the run-c9fb8d5bbb32 note | high |\n| `E-009` | Varied precondition: validator with envelope over the run-efe092286625 note (`released`, no deployment-status input) exits 0, 32/32 checks pass | command run in this invocation: release_note_validator.py with --envelope on the run-efe092286625 note | high |\n| `E-010` | Survey of all 10 notes: 0 list deployment-status; `released` 7 (4c51600606df, 8f8a1ab0d16e, 919c5d5cf156, ae91e085f481, ded114f50a46, e0dba6763475, efe092286625); `partial` 2 (09099de97613, 437e2f765e4b); withheld 1 (c9fb8d5bbb32); every envelope carries a state_id | metadata of each note and state_id of each invocation-envelope.json, read in this invocation | high |\n| `E-011` | Each `released` note's Environment or Deployment considerations line states nothing was deployed (working tree, pending merge or commit, no deployment environment named) | Environment and Deployment considerations lines of the 7 notes in `E-010`, read in this invocation | high |\n| `E-012` | The 2 `partial` notes record no partial deployment (09099de97613 inert on landing; 437e2f765e4b \"No change reached an environment\"); FC-020 O-006 records the findings-publication gap, routed to architect, Open | the two notes; proposals/framework-change-proposal-FC-020.md line 180 | high |\n| `E-013` | Held run: result envelope status escalation_required, error class context-absent, verdict withheld; run state ExecutingState | runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/result-envelope.json; runs/run-c9fb8d5bbb32/state.json | high |\n| `E-014` | The `E-008` run also fails Blocking C3.2 on the held note (a vendor token in the branch name its Environment line cites); independent of the verdict | command run in this invocation, as `E-008`; runtime/artifact_contract.py lines 288-293 | high |\n| `E-015` | Closure Gate failure envelopes of all 8 implement-feature precedent runs with a non-withheld note read status resolved | runs/*/gates/closure-gate/failure-envelope.json status fields, read in this invocation | high |\n| `E-016` | Confirmed absence: no test source references releaseVerdict, R1, or withheld (only stale compiled caches match); the fixture carries `released` with a deployment-status input and passes 31/31 | grep over tests/; runtime/fixtures/release-note.md and validator run on it in this invocation | high |\n| `E-017` | The bundled payload validator keeps the same three-value VERDICTS at line 32 | omn_agent/_bundled_payload/runtime/release_note_validator.py | high |\n| `E-018` | Confirmed absence: no runtime module other than the release-note validator references releaseVerdict | grep over runtime/*.py in this invocation | high |\n| `E-019` | Architect ruling on `Q-001`: one value per basis (`handed-off`, `findings-published`, `delta-published`), release family unchanged, withheld never passing; R8 on sourceInputs types; R9 on envelope state_id; Stage 8 rekeyed on basis; minor bumps; superseded-contract skip in verify_validators | architect-ruling-Q-001.md, consult a96e516fa44073324, sha256:51f4a7e216c5d21de44b93fedb5f2fba (supplied account) | low |\n| `E-020` | Ruling claims confirmed: validate(path, envelope) at line 170; runtime passes the envelope at framework_runtime.py line 4169, close_legacy_run.py line 68, verify_validators lines 414/666/681; envelopes carry no basis field; C7.1 degrades to Advisory not-machine-checkable without an envelope; C1.3 hard-checks schemaVersion | runtime/release_note_validator.py; framework_runtime.py; close_legacy_run.py; verify_validators.py; artifact_contract.py lines 227-231, 441-454 | high |\n| `E-021` | Ruling gap: semantic_checks(rep, contract) receives no envelope; the shared cli calls extra(rep, contract) only; Report holds no envelope; no validator's semantic step reads one; so R9 cannot see state_id, and the CLI --envelope path would not reach it, without new plumbing | runtime/release_note_validator.py lines 91, 170-176; artifact_contract.py lines 476-493; artifact_lib.py lines 42-67 | high |\n| `E-022` | Ruling error: V3 candidate order puts efe092286625 first (9 committed notes, then the fixture; selected efe092286625, none skipped); but main() re-validates every skipped candidate and fails V3 on a rejection, and the docstring says a rejected one still fails V3, so a selection-only agent_version skip still fails V3 | command run in this invocation listing candidate_instances and conforming_instance; verify_validators.py lines 321-372, 666-686 | high |\n| `E-023` | verify_validators today: 6/6 checks passed, COVERED, exit 0; release-note mutation caught by R2 | command run in this invocation: runtime/verify_validators.py | high |\n| `E-024` | Versions: omn-documentation manifest, host registration (line 18 table, line 44 bootstrap check), and registry record at 1.1.0; template and its registry record at 1.1.0; envelopes of the 9 notes record agent_version 1.0.0 (8) and 1.1.0 (437e2f765e4b); the runtime raises workflow-contract-violation when manifest and registry versions differ | manifest.yaml line 13; agents/omn-documentation.agent.md; registry/agents.yaml line 431; registry/templates.yaml line 217; template line 8; framework_runtime.py lines 974-976 | high |\n| `E-025` | Ruling refinement: the 8 implement-feature notes list `verification-report`; 437e2f765e4b lists its recommendation as `final-change-summary`; documentation-impact's input is validation-report.md and `validation-report` is an accepted manifest identifier, so R8 sets naming only `verification-report` would reject a faithful note | sourceInputs of the 10 notes; `E-005`; `E-006`; output.md line 86 | high |\n| `E-026` | Ruling incomplete: guarded_slice_member_digests pins registry/agents.yaml, registry/templates.yaml, templates/release-note.md, and runtime/README.md (also fix-touched); the baseline dispatch slice includes both registries; one test compares live digests, two compare the full normalised envelope and idempotency key | tests/fixtures/knowledge/baseline-0.9.0/baseline.json; tests/test_knowledge.py lines 676-764 | high |\n| `E-027` | BackwardCompatibilityTestCase passes 6/6 today, so any failure after the fix is caused by the fix's edits to pinned files | command run in this invocation: unittest tests.test_knowledge.BackwardCompatibilityTestCase | high |\n| `E-028` | CR-003 (from F-003) is open in run-c9fb8d5bbb32, owner omn-dev-1-implement, requiring the pre-change guarantee to survive unrelated edits and any frozen check to state how it is re-baselined; K-005 repeats it; the knowledge-loop test files are untracked and the fix-touched files are unmodified on this branch | review-package.md lines 44 and 74; release-note.md line 63 of that run; git status in this invocation | high |\n| `E-029` | Bundled payload mirrors every fix-touched file; its parity test already fails 2 of 11 before any fix: file-set drift on memory/lessons/lessons.store.json, and find_source resolving to the main checkout from this worktree | omn_agent/_bundled_payload listing; command run in this invocation: tests/test_bundled_payload.py | high |\n| `E-030` | FC-020 O-007: registered agents may read contract text from the main checkout, so a contract change is unexercised by them before landing; R-003 records that an agent version bump resets gate auto-approval precedent | proposals/framework-change-proposal-FC-020.md lines 142, 149, 181 | high |\n| `E-031` | Validator README table lists only release/communication-and-post-release as served by release_note_validator.py | runtime/README.md line 415 | high |\n| `E-032` | Triage Gate approved by omn-tech-lead: scope all four non-deploying phases; release verdicts, rows, R4/R5 unchanged; withheld never passing; settle O-006; R1/validator test verdict against basis or deployment-status input; release regression tests; mirror parity; Q-003 out of scope; Q-004 via proposal; Q-002 non-blocking | runs/run-f94564cb61ce/state.json gates Triage Gate rationale | high |\n\n## Impact Assessment\n\n- User impact: every operator closing an implement-feature run, including every framework self-hosting change routed through /implement, and every investigate publication, gets either a blocked final phase or a release record asserting a deployment that did not happen; 10 of 10 recorded notes are affected (`E-010`, `E-011`).\n- Business impact: no business impact statement was supplied; the defect report states the governance-integrity consequence qualitatively and it is recorded as reported (`E-001`); severity rests on technical impact alone (`Q-002`).\n- Technical impact: correctness of the governance record: 7 `released` and 2 placeholder `partial` notes state a release position their own evidence contradicts, and 1 run is held unable to close; no crash, no availability loss, and no security exposure (the triggering token is the vendor-name token of `E-014`, not a credential) (`E-008`, `E-012`, `E-013`).\n- Blast radius: the omn-documentation contract (Stage 8, output contract, quality R1/V1/V2, Required Evidence); the release-note template; the release-note validator and the validator coverage verifier that selects committed notes; the bundled payload mirror; four phases never supplied a deployment status; the implement-feature Closure Gate, which accepted the misstated notes; persisted bad data in 9 notes plus the blocked note of run-c9fb8d5bbb32 (`E-003`, `E-004`, `E-006`, `E-010`, `E-015`, `E-017`, `E-022`).\n\n## Root Cause Analysis\n\n- Root cause statement: the release-verdict contract assumes every phase that publishes release-note.md publishes after a deployment (its only verdicts are deployment outcomes and their only admissible evidence is a supplied deployment status), while four of the five phases omn-documentation owns are by construction never supplied one, so those phases have no verdict that is both truthful and accepted, and the validator's membership-only R1 lets an untruthful one through.\n- Why detection failed earlier: R1 tests only membership in the three-value vocabulary; V1 (verdict per Stage 8) is decided only by the producing agent; no test relates verdict to phase basis or to a deployment-status input (`E-016`); verify_validators V3 validated a misstated note as its conforming release-note instance (`E-022`, `E-023`); and the Closure Gate approved `released` notes whose Environment lines contradicted the verdict (`E-004`, `E-015`).\n\n### Causal Chain\n\n| ID | Step | Claim | Evidence | Confidence |\n|---|---|---|---|---|\n| `C-001` | phase inputs | four of five omn-documentation phases are never supplied a deployment status because deployment belongs only to the release workflow; supplying a synthetic one to implement-feature is excluded | `E-006`, `E-007` | high |\n| `C-002` | verdict rule | Stage 8 reads every verdict off a supplied deployment status and gives withheld only to a phase that requires one, so a non-deploying phase has no row; reading `released` as a verified handoff is excluded by its definition | `E-002`, `E-005` | high |\n| `C-003` | vocabulary | output contract, R1, template, and validator, mirrored in the bundle, admit only the three deployment outcomes, so no value expresses a handoff that was not deployed | `E-003`, `E-004`, `E-017` | high |\n| `C-004` | faithful path | an agent applying Stage 8 as written emits withheld with status blocked, which R1 rejects every time, so the phase cannot pass and the run holds | `E-008`, `E-013` | high |\n| `C-005` | accepted path | R1 checks membership only, so `released` or `partial` without deployment evidence passes, which is why 9 notes persist a position their own evidence contradicts and the Closure Gate approved them | `E-009`, `E-010`, `E-011`, `E-012`, `E-015` | high |\n\n## Fix Strategy\n\n- Proposed fix: adopt the architect ruling on `Q-001` (`E-019`) as amended by the four corrections in `E-021`, `E-022`, `E-025`, and `E-026`, so that the following conditions hold after the change:\n  - Stage 8 is read against the communication basis fixed at Stage 2 and, for `post-release` only, the supplied deployment status; `release-handoff` yields `handed-off`, `findings` yields `findings-published`, `documentation-delta` yields `delta-published`, each asserting no merge, release, or deployment fact; withheld with `blocked` remains for absent required evidence and is never a passing verdict; a deployment status supplied to a non-post-release phase selects no row (`E-002`, `E-032`).\n  - the output contract, R1 text, template vocabulary and Known Issues guidance, Required Evidence table, and validator all state the same six-value vocabulary; `None identified.` in Known Issues is permitted for `released` and the three new values; the release rows, R4, and R5 behave exactly as before (`E-003`, `E-004`, `E-032`).\n  - the Validation Engine decides the verdict against evidence, not membership: a Blocking rule fails `released`, `partial`, or `rolled-back` without a deployment-status input, and fails each new value without its basis evidence, where the accepted type sets include the manifest's accepted identifiers (`validation-report` beside `verification-report` for `handed-off` and `delta-published`; `technical-recommendation` for `findings-published`) (`E-025`); a second rule maps envelope state_id to basis, Blocking when an envelope is present and the state_id is missing or unknown, Advisory not-machine-checkable only when no envelope is supplied (`E-020`).\n  - the envelope reaches that second rule on both the runtime acceptance path and the validator's own command-line `--envelope` path, without altering the shared command-line hook the other validators use (`E-021`).\n  - validator coverage verification stays green without any exemption inside the validator: committed notes whose envelope records an omn-documentation version below 1.2.0 are reported by count as produced under a superseded contract and are excluded from both instance selection and the skipped-candidate re-validation, while a rejected note produced at 1.2.0 or later still fails V3; the verifier's documented selection rule changes with it (`E-022`, `Q-006`).\n  - versions agree: omn-documentation 1.2.0 in its manifest, host registration (table and bootstrap check), and registry record; release-note template 1.2.0 in the template and its registry record; schemaVersion stays 1.0.0 because C1.3 hard-checks it; the registry edit is unavoidable because the runtime rejects a manifest/registry mismatch (`E-020`, `E-024`); the README validator table names all five served phases (`E-031`).\n  - the bundled payload is identical to the authoritative tree for every touched file; because the parity test already fails for unrelated reasons, the sync must not sweep unrelated knowledge-branch files into the bundle without that branch owner's decision (`E-029`, `Q-007`).\n  - persisted bad data stays as recorded (`E-001`, `E-032`): the change proposal lists the 9 notes with their expected re-validation (all fail the deployment-evidence rule; with their committed envelope the basis rule expects `handed-off` for the 8 implement-feature notes and `findings-published` for 437e2f765e4b), records FC-020 O-006 closed, and no run evidence or Closure Gate decision is edited; run-c9fb8d5bbb32 needs a re-dispatch yielding `handed-off`, which also needs `Q-003` settled and is exposed to FC-020 O-007 until landing (`E-014`, `E-030`).\n  - the knowledge branch's pinned digests are not re-baselined by the implementer; the fix is expected to fail three of six BackwardCompatibilityTestCase tests, which are reported in the implementation report as a known consequence pending the omn-tech-lead decision in `Q-005` (`E-026`, `E-027`, `E-028`).\n- Alternative options: rejected with the ruling: one basis-neutral value (states nothing the evidence shows), withheld as a non-blocking value (gate-excluded, `E-032`), a synthetic deployment-status for implement-feature (excluded by `C-001`), a new required basis metadata field (fails C1.1 on all history and forces a schemaVersion bump), a basis field in the envelope (moves payload and replay surfaces), and an agentVersion exemption inside the validator (accepts positions the contract never yielded); for coverage verification, validating historical notes against a per-version vocabulary keeps `released`-without-deployment accepted and is rejected; for the pins, see `Q-005`.\n- Regression risk: medium\n- Regression scope: release communication-and-post-release (shares the vocabulary, R1, R4, R5, and the validator); the runtime acceptance path and close_legacy_run (both pass the envelope, so the basis rule becomes Blocking there); verify_validators V3/V4 for every artifact type (shared candidate selection and skipped-candidate re-validation); the validator fixture and tests/test_investigate_research_handoffs.py (import the validator); tests/test_knowledge.py BackwardCompatibilityTestCase (pins four fix-touched files); tests/test_bundled_payload.py (mirror parity, already failing 2 of 11); gate auto-approval precedent for omn-documentation (keyed on agent version, `E-030`); implement-feature Closure Gate and the omn-orchestrator closure path (consume verdict and status); the orchestration-result deployment-state vocabulary is outside scope (`E-018`).\n\n## Validation Plan\n\n- Verification steps: invert the reproduction: the run-c9fb8d5bbb32 note's preconditions with verdict `handed-off` and a verification input pass with that state's envelope, while the run-efe092286625 note with its envelope now fails on the deployment-evidence and basis rules, showing the `C-005` condition is gone rather than R1 merely widened; withheld fails in every phase; a release-phase note with `released` and deployment-status passes exactly as the fixture does today, R4/R5 unchanged, and `handed-off` on that phase fails the basis rule; the command-line `--envelope` path reports the basis rule as decided, not not-machine-checkable; Stage 8 read against each of the five Phase Models yields exactly one row for the evidence present (`C-002` removed); verify_validators exits 0 reporting 9 superseded-contract candidates; the 9 notes re-validate as the change proposal predicts.\n- Regression tests added: per omn-documentation phase, with and without an envelope, which verdicts pass; release phase unchanged including R4 and R5; withheld fails everywhere; a deployment verdict without deployment-status fails outside release; type-set acceptance including `validation-report`; the phase-to-basis table agrees with the output contract Deliverable table; the envelope reaches the basis rule through the command line; verify_validators reports superseded candidates and still fails V3 on a rejected note produced at 1.2.0; bundled-payload vocabulary parity.\n- Monitoring signals after release: count of new notes whose verdict is a deployment outcome while sourceInputs carry no deployment-status, expected 0; count of omn-documentation phases ending blocked on R1 or the new rules, expected 0 where evidence is present; verify_validators superseded-candidate count, expected to stay at 9, where growth means a note was produced under the old contract (FC-020 O-007).\n\n## Closure\n\n- Resolution summary: None identified. Unresolved; closure is decided at the fix-bug Closure Gate, not here.\n- Linked PR and release: None identified. No corrective change exists yet.\n- Prevention actions: tie the verdict check to the phase basis and declared inputs in the Validation Engine rather than to vocabulary membership; require a pinned-digest test to state its re-baseline rule before a framework change lands over it (`Q-005`); have the Closure Gate cross-check the verdict against the note's Environment line (`E-004`, `E-015`, `E-016`, `E-026`).\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected steps |\n|---|---|---|---|---|\n| `Q-005` | CR-003 pins: the fix must edit four pinned files, so land CR-003 first, re-baseline the four digests and the 0.9.0 dispatch baseline under a recorded decision naming this run, or land the fix where the knowledge loop is absent; needed before the Fix Gate | yes | omn-tech-lead | none |\n| `Q-001` | Answered: architect ruling `E-019` (one value per basis; subsumes FC-020 O-006), accepted with corrections `E-021`, `E-022`, `E-025`, `E-026`; recorded per Triage Gate condition 1 | no | architect | `C-002`, `C-003` |\n| `Q-003` | Run run-c9fb8d5bbb32 also fails C3.2 on its Environment line (`E-014`); out of scope per the Triage Gate; the re-dispatched note must not cite the branch name verbatim | no | omn-orchestrator | `C-004` |\n| `Q-004` | Answered by the Triage Gate: the change proposal lists the 9 notes and their expected re-validation; run evidence is never edited | no | omn-tech-lead | `C-005` |\n| `Q-002` | No business impact statement was supplied; severity rests on technical impact alone; confirm the governance-integrity impact the report states qualitatively | no | omn-product-owner | none |\n| `Q-006` | The superseded-contract exclusion changes verify_validators' documented rule that every skipped rejected candidate fails V3 (`E-022`); confirm this amendment to the ruling | no | architect | none |\n| `Q-007` | The bundle sync would also mirror memory/lessons/lessons.store.json, and find_source fails inside this nested worktree (`E-029`); decide whether the sync may run whole or only for fix-touched files | no | omn-tech-lead | none |",
+        "digest": "sha256:1e9b135e23d17f7d36a81df95519e9f0",
+        "produced_by": "root-cause-analysis"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the accepted change this agent implements: a technical design for feature work, a bug analysis for a defect fix, or the safety-net validation report for a behaviour-preserving refactor, which is the artifact the refactor workflow's own predecessor phase publishes. Without one there is no accepted change, and implementing anyway would mean designing."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "bug-analysis",
+      "reference": "runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md",
+      "produced_by": "triage-and-impact",
+      "artifact": "bug-analysis.md",
+      "bytes": 19964,
+      "sections": {
+        "read_first": [
+          "Symptom Summary",
+          "Impact Assessment",
+          "Root Cause Analysis",
+          "Fix Strategy",
+          "Validation Plan",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Reproduction",
+          "Closure"
+        ]
+      }
+    },
+    {
+      "type": "bug-analysis",
+      "reference": "runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "produced_by": "root-cause-analysis",
+      "artifact": "bug-analysis.md",
+      "bytes": 30940,
+      "sections": {
+        "read_first": [
+          "Symptom Summary",
+          "Impact Assessment",
+          "Root Cause Analysis",
+          "Fix Strategy",
+          "Validation Plan",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Reproduction",
+          "Closure"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-f94564cb61ce/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:a8e5f4a081c835a9ed47ebaeaafbe05b",
+    "bytes": 12278,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "fix-implementation"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-17T04:40:12Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:1961ffd5b447ec39cac35462546aa708",
+        "supplies": "framework-context",
+        "bytes": 22733,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:84e98748204581ef06f3e434c600f794",
+        "supplies": "framework-context",
+        "bytes": 9569,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context",
+        "bytes": 7553,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null,
+        "bytes": 5825,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/bug-analysis.md",
+        "digest": "sha256:6f1f25f536d3d80353873990835ce1bd",
+        "supplies": null,
+        "bytes": 3732,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/dotnet/engineering-playbook.md",
+        "digest": "sha256:35fc0c6fcd8f834c3e2528d14465e17c",
+        "supplies": null,
+        "bytes": 1507,
+        "read": "required",
+        "read_reason": "skill S03 is required for this phase"
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null,
+        "bytes": 1333,
+        "read": "required",
+        "read_reason": "skill S12 is required for this phase"
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null,
+        "bytes": 1265,
+        "read": "required",
+        "read_reason": "skill S07 is required for this phase"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73bd155e6b8344e48a8c66266be118cf",
+        "supplies": null,
+        "bytes": 61682,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:850b48df6ab3cc41c8f0e1fe7fb61411",
+    "input_digest": "sha256:ee54571a8bdd7313d36ff6b821da59dd",
+    "inputs": [
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/knowledge-management-2d49d4/.claude/runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md",
+        "digest": "sha256:f902dcda2b9ee3ef30f1f5a402eb9991"
+      },
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/knowledge-management-2d49d4/.claude/runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "digest": "sha256:1e9b135e23d17f7d36a81df95519e9f0"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/logging/observability-logging.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/logging/observability-logging.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/fix-bug.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 178671,
+    "bytes_required": 16419,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": true,
+    "reason": "lessons from earlier runs hydrated per this run's knowledge_loop record (recorded at plan time)",
+    "store": "memory/lessons/lessons.store.json",
+    "store_digest": "sha256:2384c006f914e2a6ec0eecde9e21173f",
+    "threshold": 2,
+    "matched": 0,
+    "lessons": []
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md",
+      "runs/run-f94564cb61ce/states/fix-implementation/result-envelope.json",
+      "**"
+    ],
+    "write_exclusions": [
+      "runs/**",
+      "proposals/**"
+    ],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose effect is not recorded in the report's verification results"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "any write matching ['runs/**', 'proposals/**']",
+      "command execution other than the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "external system, repository, or ticketing access",
+      "define or widen product scope",
+      "decide or revise the technical design rather than escalating the mismatch",
+      "approve, review, or award a readiness verdict to its own change",
+      "record a merge, release, or gate decision",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "introduce an undeclared side effect in critical business logic",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "implement the change the accepted design and analysis describe",
+        "add, modify, and remove production code inside the impacted modules the design names",
+        "add or update automated tests that exercise the change",
+        "execute the project's own test and static-analysis commands to gather evidence",
+        "record the change set, the verification evidence, and the residual risk",
+        "record a tradeoff taken inside this agent's own implementation latitude",
+        "raise a deviation record when the design cannot be implemented as accepted"
+      ],
+      "prohibited": [
+        "define or widen product scope",
+        "decide or revise the technical design rather than escalating the mismatch",
+        "approve, review, or award a readiness verdict to its own change",
+        "record a merge, release, or gate decision",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "introduce an undeclared side effect in critical business logic",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "rationale": "This is the only framework role that changes repository source. Its write scope cannot be enumerated per agent, because the files a change touches are named by the accepted design rather than by the manifest. The scope is therefore the repository, minus the evidence classes below, and every file actually written is declared in the change set and in the result envelope, where the runtime compares them.",
+        "scope": [
+          "**"
+        ],
+        "excluded": [
+          "runs/**",
+          "proposals/**"
+        ],
+        "exclusionRationale": "Committed run evidence and governance records are immutable to the agents whose work they record. A run artifact this agent could edit would let a change rewrite the evidence assessed against it."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose effect is not recorded in the report's verification results"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical context snapshot must produce the same change-set entry set, the same test-evidence set, the same deviation set, and the same declared verification status.",
+      "identifierSchemes": {
+        "changes": "C-<zero-padded-sequence>",
+        "tests": "T-<zero-padded-sequence>",
+        "deviations": "V-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Change-set entries are ordered by the sequence in which the accepted design requires them; ties break toward the lower path in lexical order. Test-evidence entries follow the change-set entries they cover.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied design, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "implementation-report.md",
+    "artifact_path": "runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md",
+    "template_ref": "templates/implementation-report.md",
+    "contract_ref": "agents/omn-dev-1-implement/output.md",
+    "quality_ref": "agents/omn-dev-1-implement/quality.md",
+    "validator": "implementation_report_validator",
+    "result_envelope_path": "runs/run-f94564cb61ce/states/fix-implementation/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-17T04:40:12Z",
+  "model_tier": {
+    "tier": "deep",
+    "host_hint": "opus",
+    "basis": "declared deep for fix-bug/fix-implementation in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 68877,
+    "modules_core_bytes": 32716,
+    "slice_all_bytes": 178671,
+    "slice_required_bytes": 16419,
+    "inputs_bytes": 0,
+    "upstream_full_bytes": 50906,
+    "upstream_read_first_bytes": 23394,
+    "task_context_bytes": 12278,
+    "fixed_bytes": 13706,
+    "legacy_estimate_bytes": 312160,
+    "progressive_estimate_bytes": 98513,
+    "legacy_estimate_tokens": 78040,
+    "progressive_estimate_tokens": 24628,
+    "savings_pct": 68.4
+  }
+}

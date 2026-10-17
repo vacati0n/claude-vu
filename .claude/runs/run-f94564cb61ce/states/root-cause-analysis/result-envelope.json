@@ -1,0 +1,95 @@
+{
+  "invocation_id": "inv-f94564cb61ce-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "root-cause",
+    "workflow": "fix-bug",
+    "phase": "root-cause-analysis",
+    "supersedes": "runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md (sha256:acd46741a54ea5eca2db33cecaa19dc2); identifiers E-001..E-018, C-001..C-005, Q-001..Q-004 kept, not renumbered",
+    "severity": "high",
+    "reproducibility": "deterministic",
+    "declaredStatus": "provisional",
+    "counts": {
+      "evidenceRecords": 32,
+      "causalSteps": 5,
+      "causalStepsByConfidence": {"high": 5, "medium": 0, "low": 0},
+      "evidenceByConfidence": {"high": 30, "medium": 0, "low": 2},
+      "openQuestions": 7,
+      "openQuestionsBlocking": 1,
+      "openQuestionsAnswered": ["Q-001", "Q-004"]
+    },
+    "statusBasis": "Stage 9 row 'business impact was unquantified and severity rests on technical impact alone' is the first match (Q-002); reproducibility deterministic, chain closes on a contract-mismatch condition, alternatives eliminated (agent misapplication by E-002/E-011, workflow should supply deployment-status by E-006/E-007, validator-only defect by E-002), no dependent step below high.",
+    "severityBasis": "Stage 5 high: the closing path of every implement-feature run either fails (blocked on R1) or produces wrong results (a deployment verdict the evidence contradicts); publishing released is not an acceptable workaround; no data loss, security exposure, or crash. Unchanged from triage; reporter severity not used as a basis.",
+    "reproducibilityBasis": "Re-run in this invocation: validator over the run-c9fb8d5bbb32 note exits 1 with R1 FAIL (E-008); varied precondition, run-efe092286625 released note with its envelope, exits 0 (E-009); contract text unmodified on this branch (E-028).",
+    "triageGateCondition1": {
+      "q001Answer": "architect ruling, consult a96e516fa44073324, recorded as E-019 (sha256:51f4a7e216c5d21de44b93fedb5f2fba): one value per communication basis (handed-off, findings-published, delta-published), release family unchanged, withheld never passing, R8 on sourceInputs types, R9 on envelope state_id, minor bumps to 1.2.0",
+      "claimsVerifiedCorrect": [
+        "validate(path, envelope) signature, release_note_validator.py line 170",
+        "runtime passes the envelope at framework_runtime.py line 4169; also verify_validators lines 414/666/681 and close_legacy_run.py line 68",
+        "envelopes carry state_id and no communication-basis field; the five phase ids are unique across workflows",
+        "C7.1 Advisory not-machine-checkable pattern without envelope; C1.3 hard-checks schemaVersion 1.0.0",
+        "output.md lines 53 and 76, quality.md R1 line 92, template line 36 and version 1.1.0, README line 415, agent.md lines 18 and 44, registry records at 1.1.0",
+        "verify_validators candidate order puts run-efe092286625 first; 9 committed notes plus the fixture; fixture is released with deployment-status and passes",
+        "all 9 committed note envelopes record agent_version below 1.2.0; 437e2f765e4b records its recommendation as final-change-summary",
+        "baseline.json pins registry/agents.yaml, registry/templates.yaml, templates/release-note.md",
+        "FC-020 O-006 and O-007 recorded as stated"
+      ],
+      "claimsFoundWrongOrIncomplete": [
+        "E-021 gap: semantic_checks(rep, contract) and the shared cli extra(rep, contract) hook never receive the envelope, so R9 is unreachable without new plumbing, and the CLI --envelope path would silently leave it not-machine-checkable",
+        "E-022 wrong: a selection-only agent_version skip does not keep V3 green, because main() re-validates every skipped candidate and fails V3 on rejection; the claim that the skip is within the docstring rule is incorrect, since the docstring says a rejected skipped candidate still fails V3",
+        "E-025 refinement: R8 type sets naming only verification-report would reject a faithful handed-off or delta-published note recording its input under the accepted manifest identifier validation-report",
+        "E-026 incomplete: runtime/README.md is a fourth pinned file the fix edits; besides the guarded-digest test, the two dispatch-baseline tests compare the full envelope whose slice includes both registries, so three of six BackwardCompatibilityTestCase tests are expected to fail (not executed; executing requires editing pinned files)"
+      ]
+    },
+    "cr003Handling": "Q-005, blocking, owner omn-tech-lead, needed before the Fix Gate: land CR-003 first, re-baseline the four guarded digests and the 0.9.0 dispatch baseline under a recorded decision naming this run, or land the fix where the knowledge loop is absent. The implementer must not edit baseline.json or BackwardCompatibilityTestCase; the suite passes 6/6 today (E-027).",
+    "preExistingFailures": [
+      "tests/test_bundled_payload.py fails 2 of 11 before any fix: file-set drift on memory/lessons/lessons.store.json, and find_source resolving to the main checkout from this nested worktree (E-029, Q-007)",
+      "run-c9fb8d5bbb32 note fails C3.2 independently of the verdict (E-014, Q-003)"
+    ],
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "repairedBeforeEmission": [],
+      "validationEngine": "bug_analysis_validator with this envelope: PASS 30/30 (3 declared not-machine-checkable)",
+      "byGroup": {
+        "structural": {"S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass", "S9": "pass"},
+        "metadata": {"D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass"},
+        "agreement": {"B2": "pass", "B3": "pass", "A1": "pass"},
+        "reproduction": {"B4": "pass", "V1": "pass", "V2": "pass", "V3": "pass (not applicable; deterministic)", "V4": "pass (not applicable; deterministic)", "V5": "pass"},
+        "evidence": {"B1": "pass", "V6": "pass", "V7": "pass", "V8": "pass", "V9": "pass", "V10": "pass"},
+        "causalChain": {"V11": "pass", "V12": "pass", "V13": "pass", "V14": "pass", "V15": "pass", "V16": "pass"},
+        "impactAndSeverity": {"V17": "pass", "V18": "pass", "V19": "pass", "V20": "pass", "V21": "pass", "V22": "pass"},
+        "fixStrategy": {"V23": "pass", "V24": "pass", "V25": "pass", "V26": "pass (not applicable; chain closed)", "V27": "pass", "V28": "pass"},
+        "statusAndQuestions": {"B5": "pass (not applicable; not critical)", "V29": "pass", "V30": "pass", "V31": "pass", "V32": "pass", "V33": "pass"},
+        "authority": {"A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A7": "pass", "A8": "pass"},
+        "content": {"C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass", "C7": "pass"}
+      }
+    },
+    "notMachineCheckable": {
+      "N1": "discharged: the root cause names a contract mismatch (deployment-only verdict vocabulary and evidence rule against phases never supplied a deployment status, plus a membership-only R1), not the R1 line where the symptom surfaces",
+      "N2": "discharged: every step cites high-confidence first-hand evidence; the architect ruling enters only as E-019 (low) and its factual claims were verified separately (E-020 to E-026)",
+      "N3": "discharged: radius covers the contract, template, validator, coverage verifier, bundle mirror, four non-deploying phases, the Closure Gate, and the 10 persisted notes"
+    },
+    "outputContractNote": "output.md forbids file-level instructions in Proposed fix, so the fix strategy is stated as end-state conditions per contract surface; file and line locations are carried in the Evidence Register"
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "runs/run-f94564cb61ce/states/root-cause-analysis/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-f94564cb61ce/states/root-cause-analysis/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

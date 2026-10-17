@@ -1,0 +1,452 @@
+schema: framework.runtime/task-context.v1
+task_id: run-f94564cb61ce
+command: bugfix
+workflow: fix-bug v1.0.0
+run_status: Completed
+updated_at: '2026-10-17T06:10:46Z'
+objective: omn-documentation is registered to own documentation-and-release-handoff, the last phase of implement-feature.
+  That phase declares its inputs as "verification report, change summary" on the release-handoff communication basis and has
+  no deployment step. Deployment belongs to the separate release workflow. The agent's release-verdict contract, however,
+  only describes deployment outcomes. A handoff whose change has been verified in the run's working tree but not deployed
+  has no truthful verdict that the validator accepts, so the phase cannot produce a passing artifact without misstating what
+  happened, and an implement-feature run cannot close honestly. agents/omn-documentation/reasoning.md,...
+inputs:
+- type: defect-report
+  reference: runs/inputs/release-handoff-verdict-defect-report.md
+  digest: sha256:dfa126ab657c3125805bdade2076fa7a
+relevant_agents:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S11
+  - S12
+  - S02
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S08
+  - S12
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S12
+- phase: regression-validation
+  agent: omn-qa
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S11
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  status: completed
+  required_skills:
+  - S10
+  - S11
+completed_phases:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md
+  digest: sha256:acd46741a54ea5eca2db33cecaa19dc2
+  validation: pass 30/30
+  attempts: 1
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md
+  digest: sha256:f67c7959b90999c26009391872a0d474
+  validation: pass 30/30
+  attempts: 1
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md
+  digest: sha256:f489210c177596d87b0dc7ff193ebb18
+  validation: pass 32/32
+  attempts: 1
+- phase: regression-validation
+  agent: omn-qa
+  artifact: runs/run-f94564cb61ce/states/regression-validation/artifacts/validation-report.md
+  digest: sha256:7b5054861fca7992164fa15644917693
+  validation: pass 31/31
+  attempts: 1
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  artifact: runs/run-f94564cb61ce/states/closure-and-communication/artifacts/orchestration-result.md
+  digest: sha256:5ede985ef70214f23e5a590bb5d2b32f
+  validation: pass 34/34
+  attempts: 1
+gates:
+- gate: Triage Gate
+  closes: triage-and-impact
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent a7f51b28255cabbd2, recorded by session operator for vuhoangcao
+- gate: Fix Gate
+  closes: fix-implementation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent a72fae474c55ebf68 (independent of the implementer), recorded by session operator
+    for vuhoangcao
+- gate: Verification Gate
+  closes: regression-validation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent a72fae474c55ebf68 (did not produce the evidence; omn-qa did), recorded by session
+    operator for vuhoangcao
+- gate: Closure Gate
+  closes: closure-and-communication
+  decision: approved
+  owner_role: omn-documentation
+  decided_by: omn-documentation subagent ae01f3b6680787eed (did not produce the evidence; omn-orchestrator did), recorded
+    by session operator for vuhoangcao
+artifacts:
+  triage-and-impact: runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md
+  root-cause-analysis: runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md
+  fix-implementation: runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md
+  regression-validation: runs/run-f94564cb61ce/states/regression-validation/artifacts/validation-report.md
+  closure-and-communication: runs/run-f94564cb61ce/states/closure-and-communication/artifacts/orchestration-result.md
+parallel_groups:
+- - triage-and-impact
+- - root-cause-analysis
+- - fix-implementation
+- - regression-validation
+- - closure-and-communication
+risks:
+- 'User impact: every operator closing an implement-feature run, including every framework self-hosting change routed through
+  /implement, and every investigate...'
+- 'Business impact: no business impact statement was supplied; the defect report''s Impact section states the governance-integrity
+  consequence qualitatively and...'
+- 'Technical impact: correctness of the governance record: 7 persisted released and 2 placeholder partial notes state a release
+  position their own evidence cont...'
+- 'Blast radius: the omn-documentation contract (Stage 8, output contract, quality R1/V1/V2, Required Evidence table); the
+  release-note template; runtime/releas...'
+- 'Business impact: no business impact statement was supplied; the defect report states the governance-integrity consequence
+  qualitatively and it is recorded as...'
+- 'Technical impact: correctness of the governance record: 7 released and 2 placeholder partial notes state a release position
+  their own evidence contradicts, a...'
+- 'Blast radius: the omn-documentation contract (Stage 8, output contract, quality R1/V1/V2, Required Evidence); the release-note
+  template; the release-note val...'
+- 'R-001: Registered agents may read contract text from the main checkout (FC-020 O-007), so a re-dispatch of run-c9f... |
+  medium | the held run would again emit withheld or a deployment verdict'
+- 'R-002: The omn-documentation version bump resets gate auto-approval precedent keyed on agent version (FC-020 R-003) | high
+  | the next omn-documentation gates need explicit decisions'
+- 'R-003: verify_validators V3 fails on the framework-change-proposal F7 scope-row check for FC-020, identical before... |
+  high | the coverage verifier reports NOT COVERED regardless of this fix'
+- 'R-004: test_demo_capture fails 3 tests because the installed ffmpeg rejects an option, identical at baseline (T-00... |
+  high | the full suite exits 1 on this host'
+- 'R-005: Without an envelope R9 is not machine-checkable, so a release-phase note carrying handed-off and a verifica... |
+  low | an operator validating by hand could accept a wrong basis'
+- 'R-006: The held run''s note still fails C3.2 on a vendor token in its Environment line after a handed-off re-dispat...
+  | high | run-c9fb8d5bbb32 cannot close until that is settled'
+- 'Accepted risk: the held run-c9fb8d5bbb32 note still fails C3.2, accepted as out of scope by omn-tech-lead at the Triage
+  Gate and routed to omn-orchestrator.'
+- 'Unmitigated risk: the omn-documentation version bump resets gate auto-approval precedent keyed on agent version, so its
+  next gates need explicit decisions (i...'
+- 'Monitoring required: count of new release notes whose verdict is released, partial, or rolled-back while sourceInputs carry
+  no deployment-status, expected 0;...'
+decisions:
+- 'Root cause statement: the release-verdict contract assumes every phase that publishes release-note.md publishes after a
+  deployment (its only verdicts are dep...'
+- 'Why detection failed earlier: R1 in the validator tests only membership in the three-value vocabulary, quality check V1
+  (verdict per Stage 8) is decided only...'
+- 'C-001: phase inputs | four of five omn-documentation phases are never supplied a deployment status, because deployment
+  belongs on... | E-006, E-007'
+- 'C-002: verdict rule | Stage 8 defines every verdict against a supplied deployment status and gives withheld only to a phase
+  that... | E-002, E-005'
+- 'C-003: vocabulary | output contract, R1, template, and validator, mirrored in the bundled payload, admit only the three
+  deploym... | E-003, E-004, E-017'
+- 'C-004: faithful path | an agent applying Stage 8 as written emits withheld with status blocked, which R1 rejects every
+  time, so th... | E-008, E-013'
+- 'C-005: accepted path | R1 checks vocabulary membership only, so released or partial without deployment evidence passes,
+  which is w... | E-009, E-010, E-011, E-012, E-015'
+- 'Proposed fix: for each phase whose workflow declares no deployment step, Stage 8 must yield a release position keyed on
+  the phase''s communication basis rathe...'
+- 'Alternative options: (a) one basis-neutral value for every non-deploying phase versus (b) distinct values per basis (release-handoff,
+  findings, documentation...'
+- 'Regression risk: medium'
+- 'Regression scope: release communication-and-post-release (shares the vocabulary, R1, R4, R5, and the validator); the validator
+  fixture and tests/test_investi...'
+- 'Why detection failed earlier: R1 tests only membership in the three-value vocabulary; V1 (verdict per Stage 8) is decided
+  only by the producing agent; no tes...'
+- 'C-001: phase inputs | four of five omn-documentation phases are never supplied a deployment status because deployment belongs
+  onl... | E-006, E-007'
+- 'C-002: verdict rule | Stage 8 reads every verdict off a supplied deployment status and gives withheld only to a phase that
+  requir... | E-002, E-005'
+- 'C-003: vocabulary | output contract, R1, template, and validator, mirrored in the bundle, admit only the three deployment
+  outco... | E-003, E-004, E-017'
+- 'C-005: accepted path | R1 checks membership only, so released or partial without deployment evidence passes, which is why
+  9 notes... | E-009, E-010, E-011, E-012, E-015'
+- 'Proposed fix: adopt the architect ruling on Q-001 (E-019) as amended by the four corrections in E-021, E-022, E-025, and
+  E-026, so that the following conditi...'
+- Stage 8 is read against the communication basis fixed at Stage 2 and, for post-release only, the supplied deployment status;
+  release-handoff yields handed-of...
+- the output contract, R1 text, template vocabulary and Known Issues guidance, Required Evidence table, and validator all
+  state the same six-value vocabulary;...
+- 'the Validation Engine decides the verdict against evidence, not membership: a Blocking rule fails released, partial, or
+  rolled-back without a deployment-stat...'
+- the envelope reaches that second rule on both the runtime acceptance path and the validator's own command-line --envelope
+  path, without altering the shared c...
+- 'validator coverage verification stays green without any exemption inside the validator: committed notes whose envelope
+  records an omn-documentation version b...'
+- 'versions agree: omn-documentation 1.2.0 in its manifest, host registration (table and bootstrap check), and registry record;
+  release-note template 1.2.0 in t...'
+- the bundled payload is identical to the authoritative tree for every touched file; because the parity test already fails
+  for unrelated reasons, the sync must...
+- 'persisted bad data stays as recorded (E-001, E-032): the change proposal lists the 9 notes with their expected re-validation
+  (all fail the deployment-evidenc...'
+- the knowledge branch's pinned digests are not re-baselined by the implementer; the fix is expected to fail three of six
+  BackwardCompatibilityTestCase tests,...
+- 'Alternative options: rejected with the ruling: one basis-neutral value (states nothing the evidence shows), withheld as
+  a non-blocking value (gate-excluded,...'
+- 'Regression scope: release communication-and-post-release (shares the vocabulary, R1, R4, R5, and the validator); the runtime
+  acceptance path and close_legacy...'
+- 'V-001: R8 fails an absent or malformed sourceInputs list and a verdict outside the vocabulary, but does not reject... |
+  architect ruling section 2, "absent/malformed/out-of-vocabulary list fails" | the RCA fix condition states R8 only against
+  verdict evidence, and recorded notes legitimately list archite...'
+- 'V-002: validation-report added to the declared sourceInputs types in the output contract and the template comment... |
+  architect ruling section 1, list review evidence as verification-report | the RCA requires R8 to accept validation-report;
+  a contract that the validator accepts but the output contr...'
+- 'V-003: The release-note registry description and the template usage line rewritten to name the five phases, beyond... |
+  RCA fix condition 6, version bump only for the registry record | both stated the release phase alone, which the change makes
+  false; the registry file is edited by this chan...'
+- 'V-004: verify_validators reports a summary envelope through instance_label rather than relative_to (C-008) | RCA fix condition
+  5 | the old form raised for an envelope outside the framework tree, which the new verifier tests construct; out...'
+validation_requirements:
+  test_focus:
+  - 'Verification steps: invert the reproduction: a non-deploying-phase note carrying the new position and no deployment-status
+    input passes the validator; that s...'
+  - 'Regression tests added: a test per omn-documentation phase asserting which verdicts the validator accepts for that phase''s
+    basis; a test that released, parti...'
+  - 'Monitoring signals after release: count of new release notes whose verdict is a deployment outcome while their sourceInputs
+    carry no deployment-status; expec...'
+  - 'Verification steps: invert the reproduction: the run-c9fb8d5bbb32 note''s preconditions with verdict handed-off and a
+    verification input pass with that state''...'
+  - 'Regression tests added: per omn-documentation phase, with and without an envelope, which verdicts pass; release phase
+    unchanged including R4 and R5; withheld...'
+  - 'Monitoring signals after release: count of new notes whose verdict is a deployment outcome while sourceInputs carry no
+    deployment-status, expected 0; count o...'
+  evidence:
+  - 'T-001: Defect witness: the new module run against an unmodified HEAD copy of the framework tree fails 24 of 29 tes...
+    | regression | C-001, C-002, C-003, C-004, C-005, C-006, C-007, C-008, C-009, C-010, C-011, C-012, C-013, C-027'
+  - 'T-002: The same module on the fixed tree: every assertion of T-001 holds | regression | C-001, C-002, C-003, C-004, C-005,
+    C-006, C-007, C-008, C-009, C-010, C-011, C-012, C-013, C-027'
+  - 'T-003: Regression baseline before any edit: 739 tests, 27 of 28 modules; only test_demo_capture fails (3, ffmpeg o...
+    | regression | C-001 to C-027 (comparator)'
+  - 'T-004: Full suite after the change: 767 tests, 28 of 29 modules; the same 3 test_demo_capture failures and nothing...
+    | regression | C-001 to C-027'
+  - 'T-005: BackwardCompatibilityTestCase on the combined tree (CR-003 landed, this change present): 6 of 6 pass | regression
+    | C-006, C-011, C-012, C-013'
+  - 'T-006: Release fixture with no envelope passes 32/32, R9 declared not-machine-checkable | regression | C-006, C-007'
+  - 'T-007: Each of the 9 superseded notes, with its own envelope, fails exactly R8 and R9; the held note fails C3.2, R...
+    | regression | C-007'
+  - 'T-008: Reproduction inverted: the held-run note with releaseVerdict handed-off and its envelope passes R1, R8, R9;...
+    | regression | C-007'
+  - 'T-009: Existing suites that import the validator or the verifier: test_verify_validators_mutations 26/26, test_inv...
+    | regression | C-007, C-008'
+  - 'T-010: Verifier baseline before any edit: 5 of 6; V3 fails only on framework-change-proposal F7 (FC-020 scope rows) |
+    regression | C-008'
+  - 'T-011: Verifier after the change: 5 of 6, V3 fails only on the same F7; release-note validated on the fixture, 9 c...
+    | integration | C-007, C-008'
+  - 'T-012: Manifest and registry verifiers accept the 1.2.0 versions: 2/2 CONFORMS and 8/8 COVERED | static | C-009, C-010,
+    C-011, C-012'
+  - 'T-013: Bundle parity 11/11 after sync; bundle diff holds only the 13 mirrors and no memory/lessons path | contract |
+    C-014, C-015, C-016, C-017, C-018, C-019, C-020, C-021, C-022, C-023, C-024, C-025, C-026'
+  verification:
+  - 'Verification method: the new module was run first against an unmodified HEAD copy to witness the defect, then on the
+    fixed tree; the full suite and the valid...'
+  - 'Commands executed: PYTHONPATH=. python -W ignore tools/run_tests_parallel.py (before and after); PYTHONPATH=. python
+    -W ignore -m unittest tests.test_release...'
+  - 'Result summary: 13 evidence entries executed, 9 passed, 4 failed; T-001 fails by design as the defect witness; T-003
+    and T-004 fail only on the 3 environment...'
+  - 'Unverified areas: the runtime acceptance path end to end (a dispatched omn-documentation phase completed through framework_runtime)
+    was not executed, only th...'
+  acceptance_criteria:
+  - 'AC-001: SCOPE: cover all four non-deploying omn-documentation phases (implement-feature documentation-and-release-h...
+    | state.json Triage Gate rationale | unit'
+  - 'AC-002: keep release communication-and-post-release verdicts, rows and R4/R5 unchanged | state.json Triage Gate rationale
+    | unit'
+  - 'AC-003: withheld never a passing verdict | state.json Triage Gate rationale | unit'
+  - 'AC-004: settle FC-020 O-006 in the same change | state.json Triage Gate rationale | unit'
+  - 'AC-005: CONDITIONS: R1 and the validator test the verdict against the phase''s basis or declared deployment-status i...
+    | state.json Triage Gate rationale | unit'
+  - 'AC-006: release behaviour protected by regression tests | state.json Triage Gate rationale | unit'
+  - 'AC-007: contract/template/validator mirror parity enforced | state.json Triage Gate rationale | unit'
+  - 'AC-008: the envelope reaches that second rule on both the runtime acceptance path and the validator''s own command-l...
+    | root-cause bug-analysis, Fix Strategy | integration'
+  - 'AC-009: validator coverage verification stays green without any exemption inside the validator: committed notes who...
+    | root-cause bug-analysis, Fix Strategy | integration'
+  - 'AC-010: versions agree: omn-documentation 1.2.0 in its manifest, host registration (table and bootstrap check), and...
+    | root-cause bug-analysis, Fix Strategy | unit'
+  - 'AC-011: persisted bad data stays as recorded (E-001, E-032): the change proposal lists the 9 notes with their expec...
+    | root-cause bug-analysis, Fix Strategy | integration'
+  - 'AC-012: invert the reproduction: the run-c9fb8d5bbb32 note''s preconditions with verdict handed-off and a verificati...
+    | root-cause bug-analysis, Validation Plan | integration'
+  - 'AC-013: BackwardCompatibilityTestCase 6/6 on the combined tree (fix applied, CR-003 landed). | omn-tech-lead ruling on
+    the CR-003 pins, Fix Gate condition 1 | unit'
+  - 'AC-014: CR-002 (unguarded envelope JSON in verify_validators) fixed post-review by the operator with a test | state.json
+    Fix Gate rationale | unit'
+  - 'AC-015: architecture-context added to declared sourceInputs types | state.json Fix Gate rationale | unit'
+open_questions:
+- 'Q-001: Which release position the non-deploying phases read off Stage 8: one value, one per communication basis, o... |
+  yes | architect'
+- 'Q-002: No business impact statement was supplied; severity rests on technical impact alone; confirm the governance... |
+  no | omn-product-owner'
+- 'Q-003: Run run-c9fb8d5bbb32 also fails Blocking check C3.2 on its Environment line, a separate defect independent... |
+  no | omn-orchestrator'
+- 'Q-004: Where the account of the 9 persisted notes whose verdict the corrected contract would not yield is recorded... |
+  no | omn-tech-lead'
+- 'Q-005: CR-003 pins: the fix must edit four pinned files, so land CR-003 first, re-baseline the four digests and th... |
+  yes | omn-tech-lead'
+- 'Q-001: Answered: architect ruling E-019 (one value per basis; subsumes FC-020 O-006), accepted with corrections E-... |
+  no | architect'
+- 'Q-003: Run run-c9fb8d5bbb32 also fails C3.2 on its Environment line (E-014); out of scope per the Triage Gate; the... |
+  no | omn-orchestrator'
+- 'Q-004: Answered by the Triage Gate: the change proposal lists the 9 notes and their expected re-validation; run ev... |
+  no | omn-tech-lead'
+- 'Q-006: The superseded-contract exclusion changes verify_validators'' documented rule that every skipped rejected ca...
+  | no | architect'
+- 'Q-007: The bundle sync would also mirror memory/lessons/lessons.store.json, and find_source fails inside this nest... |
+  no | omn-tech-lead'
+- 'Q-001: The change proposal under proposals/, outside this agent''s writes, must list the 9 superseded notes and the...
+  | no | omn-orchestrator'
+- 'Q-002: Confirm the superseded-contract exclusion in the verifier, R8 not rejecting out-of-list entry types, and va... |
+  no | architect'
+- 'Q-001: Who produces the change proposal that lists the 9 superseded notes with their R8/R9 re-validation and records FC-020
+  O-006 closed, which AC-011 needs,...'
+- 'Q-002: Is the runtime acceptance path for AC-008 to be exercised before landing (a scratch-tree completion of an omn-documentation
+  phase), or accepted on the...'
+- 'Q-001: The fix-bug Phase Model lists known issue status as an input of this phase, and none was supplied; HO-004 is accepted
+  on the validation report alone....'
+- 'Q-002: The identifier CR-003 names two different changes in the record: the BackwardCompatibilityTestCase pins ruled by
+  omn-tech-lead and landed (AC-013), an...'
+- 'Q-003: verify_validators.py result is not settled. Earlier in this run it gave 6/6 COVERED in default mode and 5/6 NOT
+  COVERED under python -I. On the re-run...'
+- 'Q-004: The held run''s documentation note is status provisional. Its provisional_reason relies on an operator relay for
+  the CR-003 re-review follow-ups K-005,...'
+changed_files:
+- agents/omn-documentation/reasoning.md (modified)
+- agents/omn-documentation/identity.md (modified)
+- agents/omn-documentation/output.md (modified)
+- agents/omn-documentation/quality.md (modified)
+- agents/omn-documentation/system.md (modified)
+- templates/release-note.md (modified)
+- runtime/release_note_validator.py (modified)
+- runtime/verify_validators.py (modified)
+- agents/omn-documentation.agent.md (modified)
+- agents/omn-documentation/manifest.yaml (modified)
+- registry/agents.yaml (modified)
+- registry/templates.yaml (modified)
+- runtime/README.md (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation.agent.md (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation/identity.md (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation/manifest.yaml (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation/output.md (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation/quality.md (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation/reasoning.md (modified)
+- omn_agent/_bundled_payload/agents/omn-documentation/system.md (modified)
+- omn_agent/_bundled_payload/registry/agents.yaml (modified)
+- omn_agent/_bundled_payload/registry/templates.yaml (modified)
+- omn_agent/_bundled_payload/runtime/README.md (modified)
+- omn_agent/_bundled_payload/runtime/release_note_validator.py (modified)
+- omn_agent/_bundled_payload/runtime/verify_validators.py (modified)
+- omn_agent/_bundled_payload/templates/release-note.md (modified)
+- tests/test_release_verdict.py (added)
+verdicts:
+- 'Decision: pass-with-reservations'
+- 'Rationale: no defect was found and no criterion is not-met, but AC-008 (runtime acceptance path not executed) and AC-011
+  (change proposal not yet produced) a...'
+- 'Blocking defects outstanding: None identified.'
+- 'Readiness recommendation: recommend that the Verification Gate owner, omn-dev-2-reviewer, treat the fix as validated against
+  regression, with the two reserva...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:fix-implementation
+      term: migration
+    - source: artifact:regression-validation
+      term: database
+    performance:
+    - source: artifact:regression-validation
+      term: performance
+    security:
+    - source: artifact:triage-and-impact
+      term: token
+    - source: artifact:root-cause-analysis
+      term: token
+    - source: artifact:fix-implementation
+      term: token
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:defect-report
+  - artifact:triage-and-impact
+  - artifact:root-cause-analysis
+  - artifact:fix-implementation
+  - artifact:regression-validation
+  - artifact:closure-and-communication
+relevant_skills:
+  triage-and-impact:
+    S11: required
+    S12: required
+    S02: required
+  root-cause-analysis:
+    S03: required
+    S06: required
+    S08: required
+    S12: required
+  fix-implementation:
+    S03: required
+    S06: required
+    S10: required
+    S12: required
+  regression-validation:
+    S07: required
+    S09: required
+    S11: required
+  closure-and-communication:
+    S10: required
+    S11: required
+repository_context:
+  relevant_modules: []
+  relevant_files:
+  - agents/omn-documentation/reasoning.md (modified)
+  - agents/omn-documentation/identity.md (modified)
+  - agents/omn-documentation/output.md (modified)
+  - agents/omn-documentation/quality.md (modified)
+  - agents/omn-documentation/system.md (modified)
+  - templates/release-note.md (modified)
+  - runtime/release_note_validator.py (modified)
+  - runtime/verify_validators.py (modified)
+  - agents/omn-documentation.agent.md (modified)
+  - agents/omn-documentation/manifest.yaml (modified)
+  - registry/agents.yaml (modified)
+  - registry/templates.yaml (modified)
+  - runtime/README.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation.agent.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation/identity.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation/manifest.yaml (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation/output.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation/quality.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation/reasoning.md (modified)
+  - omn_agent/_bundled_payload/agents/omn-documentation/system.md (modified)
+  - omn_agent/_bundled_payload/registry/agents.yaml (modified)
+  - omn_agent/_bundled_payload/registry/templates.yaml (modified)
+  - omn_agent/_bundled_payload/runtime/README.md (modified)
+  - omn_agent/_bundled_payload/runtime/release_note_validator.py (modified)
+  - omn_agent/_bundled_payload/runtime/verify_validators.py (modified)
+  - omn_agent/_bundled_payload/templates/release-note.md (modified)
+  - tests/test_release_verdict.py (added)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path
