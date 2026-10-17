@@ -3,7 +3,7 @@
 ## Usage
 
 Canonical artifact template for `implementation-report.md`, produced by agent
-`omn-dev-1-implement` in three phases that emit the same artifact type:
+`dev-1-implement` in three phases that emit the same artifact type:
 
 | Workflow | Phase |
 |---|---|
@@ -26,8 +26,8 @@ Identifier schemes: change-set entries `C-nnn`, test evidence `T-nnn`, deviation
 residual risks `R-nnn`, open questions `Q-nnn`. All zero-padded to three digits and
 ascending from 001.
 
-The binding behavioural contract is the module set under `agents/omn-dev-1-implement/`, and
-`agents/omn-dev-1-implement/output.md` governs where this template and that module disagree.
+The binding behavioural contract is the module set under `agents/dev-1-implement/`, and
+`agents/dev-1-implement/output.md` governs where this template and that module disagree.
 Four of its rules are enforced mechanically and are worth restating here: every change-set
 entry carries test evidence, a deviation from the accepted design is recorded rather than
 taken silently, a report claiming completion carries no failing verification, and the
@@ -42,7 +42,7 @@ implementationReport:
   sourceInputs:
     - type:          # technical-design | bug-analysis | validation-report | coding-standards | execution-plan
       reference:     # supplied reference, or "inline"
-  producedBy: omn-dev-1-implement
+  producedBy: dev-1-implement
   agentVersion:
   schemaVersion: 1.0.0
   status:            # complete | provisional | blocked

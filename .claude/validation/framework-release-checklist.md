@@ -26,18 +26,18 @@ with the evidence the deciding role relied on, never with an unsupported asserti
 
 | ID | Requirement | Obligation | Owner Role | Verification |
 |---|---|---|---|---|
-| `FR-01` | Every active command resolves to an active workflow, every active workflow publishes a Phase Model, and every phase owner is host-invocable | mandatory | omn-tech-lead | `python .claude/runtime/verify_registry_coverage.py` |
-| `FR-02` | Every artifact type a Phase Model names has a registered validator, and every registered validator accepts a conforming artifact and rejects a mutated one | mandatory | omn-qa | `python .claude/runtime/verify_validators.py` |
-| `FR-03` | Failure classification, bounded retry, and failure envelopes still behave as the recovery policy declares | mandatory | omn-qa | `python .claude/runtime/verify_recovery.py` |
-| `FR-04` | Previously proven run evidence still verifies after the change, so no committed proof was invalidated | mandatory | omn-qa | `python .claude/runtime/verify_vertical_slice.py --run-id run-c5a8d50d3238` |
-| `FR-05` | The self-hosting profile resolves, the change-proposal contract is registered, and every recorded framework change validates against it | mandatory | omn-orchestrator | `python .claude/runtime/verify_self_hosting.py` |
-| `FR-06` | The change is carried by a run of the command the profile routes it to, with a change proposal linking that run's artifacts | mandatory | omn-orchestrator | `python .claude/runtime/verify_self_hosting.py` |
+| `FR-01` | Every active command resolves to an active workflow, every active workflow publishes a Phase Model, and every phase owner is host-invocable | mandatory | tech-lead | `python .claude/runtime/verify_registry_coverage.py` |
+| `FR-02` | Every artifact type a Phase Model names has a registered validator, and every registered validator accepts a conforming artifact and rejects a mutated one | mandatory | qa | `python .claude/runtime/verify_validators.py` |
+| `FR-03` | Failure classification, bounded retry, and failure envelopes still behave as the recovery policy declares | mandatory | qa | `python .claude/runtime/verify_recovery.py` |
+| `FR-04` | Previously proven run evidence still verifies after the change, so no committed proof was invalidated | mandatory | qa | `python .claude/runtime/verify_vertical_slice.py --run-id run-c5a8d50d3238` |
+| `FR-05` | The self-hosting profile resolves, the change-proposal contract is registered, and every recorded framework change validates against it | mandatory | orchestrator | `python .claude/runtime/verify_self_hosting.py` |
+| `FR-06` | The change is carried by a run of the command the profile routes it to, with a change proposal linking that run's artifacts | mandatory | orchestrator | `python .claude/runtime/verify_self_hosting.py` |
 | `FR-07` | The `RUNTIME_VERSION` constant in `runtime/framework_runtime.py` is raised when runtime behaviour changed, and left alone when it did not | mandatory | architect | inspection |
-| `FR-08` | Documentation matches delivered behaviour: `runtime/README.md`, the folder descriptions in `README.md`, and any catalog the change touched | mandatory | omn-documentation | inspection |
-| `FR-09` | Every capability claim the change makes is backed by executable evidence under `runs/` or `reports/`, and every gap is recorded rather than omitted | mandatory | omn-dev-2-reviewer | inspection |
-| `FR-10` | Rollback is stated: what reverting this change requires, and what evidence would be invalidated by reverting it | mandatory | omn-tech-lead | inspection |
-| `FR-11` | The multi-phase state machine still proves out end to end | advisory | omn-qa | `python .claude/runtime/verify_multi_phase.py --run-id run-c5a8d50d3238` |
-| `FR-12` | A release note draft exists where the change alters behaviour a consumer of the framework depends on | advisory | omn-documentation | inspection |
+| `FR-08` | Documentation matches delivered behaviour: `runtime/README.md`, the folder descriptions in `README.md`, and any catalog the change touched | mandatory | documentation | inspection |
+| `FR-09` | Every capability claim the change makes is backed by executable evidence under `runs/` or `reports/`, and every gap is recorded rather than omitted | mandatory | dev-2-reviewer | inspection |
+| `FR-10` | Rollback is stated: what reverting this change requires, and what evidence would be invalidated by reverting it | mandatory | tech-lead | inspection |
+| `FR-11` | The multi-phase state machine still proves out end to end | advisory | qa | `python .claude/runtime/verify_multi_phase.py --run-id run-c5a8d50d3238` |
+| `FR-12` | A release note draft exists where the change alters behaviour a consumer of the framework depends on | advisory | documentation | inspection |
 
 ## Obligations
 
@@ -53,9 +53,9 @@ an item that cannot be run everywhere must not silently become a blocker that is
 ## Owner Roles
 
 Every Owner Role is an agent identifier the framework already carries, and each holds the item
-matching its own contract: readiness and delivery risk with `omn-tech-lead`, verification with
-`omn-qa`, structural judgment with `architect`, evidence sufficiency with `omn-dev-2-reviewer`,
-documentation with `omn-documentation`, and run closure with `omn-orchestrator`.
+matching its own contract: readiness and delivery risk with `tech-lead`, verification with
+`qa`, structural judgment with `architect`, evidence sufficiency with `dev-2-reviewer`,
+documentation with `documentation`, and run closure with `orchestrator`.
 
 An item's owner may not be the role that produced the evidence the item assesses. That is the
 Producer Exclusion Rule of `workflows/workflow-gate-matrix.md`, applied to the checklist: where

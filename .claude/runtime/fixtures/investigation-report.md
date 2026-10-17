@@ -7,7 +7,7 @@ investigation:
       reference: inline
     - type: context-sources
       reference: inline
-  producedBy: omn-context-agent
+  producedBy: context-agent
   agentVersion: 1.0.0
   schemaVersion: 1.0.0
   status: complete

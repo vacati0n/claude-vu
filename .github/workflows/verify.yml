@@ -3,8 +3,8 @@
 # Two verification surfaces, both located BY DISCOVERY, never a curated file list:
 #   1. The unit-test suite: `python -m unittest discover -s tests` from the repo root.
 #   2. Every proof script matching `verify_*.py` under `.claude/runtime/` (the framework
-#      payload runtime directory -- the bundled mirror under omn_agent/_bundled_payload
-#      and build output are outside the discovery scope by construction). Each verifier
+#      payload runtime directory -- build output is outside the discovery scope by
+#      construction). Each verifier
 #      runs in ITS OWN JOB on a fresh runner with a fresh checkout: no execution order
 #      exists between verifiers, and one verifier's crash or flake (including the
 #      timing-sensitive recovery proof, whose crash leaves injected runs behind in its

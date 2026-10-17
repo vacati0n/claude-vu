@@ -82,12 +82,12 @@ def _synthetic_run(tmp: Path, run_id: str = "run-demo00000001") -> Path:
     state = run_dir / "states" / "scope-and-acceptance"
     (state / "artifacts").mkdir(parents=True)
     (state / "dispatch-prompt.md").write_text(
-        "# Agent Dispatch: omn-product-owner v1.0.0\n\n| Field | Value |\n|---|---|\n"
+        "# Agent Dispatch: product-owner v1.0.0\n\n| Field | Value |\n|---|---|\n"
         "| run_id | `x` |\n\n## Instruction to the agent\n\nExecute your bootstrap "
         "procedure, then do your own work.\n\n1. Read the envelope.\n", encoding="utf-8")
     (state / "invocation-envelope.json").write_text(json.dumps({
         "invocation_id": "inv-1", "run_id": run_id, "state_id": "scope-and-acceptance",
-        "agent_id": "omn-product-owner", "agent_version": "1.0.0",
+        "agent_id": "product-owner", "agent_version": "1.0.0",
         "timeout_profile": {"attempt": 1},
         "capability_bindings": {"load_order": ["a", "b", "c"], "load_profile": {"core": ["a"]}},
         "skill_dispatch": [{"skillCode": "S01", "status": "required"},
@@ -123,11 +123,11 @@ def _events(run_id: str) -> list:
         ev(1, "run_initialized", "scope-and-acceptance", "execution-coordinator",
            "run accepted for /implement -> implement-feature across 2 phase(s)"),
         ev(2, "work_item_enqueued", "scope-and-acceptance", "task-router",
-           "state work item 1/2 routed to owner agent omn-product-owner",
-           {"work_type": "state", "owner_agent_id": "omn-product-owner"}),
+           "state work item 1/2 routed to owner agent product-owner",
+           {"work_type": "state", "owner_agent_id": "product-owner"}),
         ev(3, "work_item_enqueued", "Scope Gate", "task-router",
            "gate work item 'Scope Gate' enqueued to close phase scope-and-acceptance",
-           {"work_type": "gate", "owner_roles": ["omn-business-analyst"]}),
+           {"work_type": "gate", "owner_roles": ["business-analyst"]}),
         ev(4, "work_item_enqueued", "execution-planning", "task-router",
            "state work item 2/2 routed to owner agent planner",
            {"work_type": "state", "owner_agent_id": "planner"}),
@@ -137,9 +137,9 @@ def _events(run_id: str) -> list:
            "invocation envelope built and leased", {"idempotency_key": "k", "adapter": "host"},
            ts="12:00:01"),
         ev(7, "invocation_started", "scope-and-acceptance", "invocation-gateway",
-           "dispatching agent omn-product-owner v1.0.0 through host registration x",
+           "dispatching agent product-owner v1.0.0 through host registration x",
            {"invocation_id": "inv-1"}, ts="12:00:01"),
-        ev(8, "invocation_completed", "scope-and-acceptance", "omn-product-owner",
+        ev(8, "invocation_completed", "scope-and-acceptance", "product-owner",
            "agent returned status 'succeeded' with 1 artifact ref(s)", actor_type="agent",
            ts="12:04:30"),
         ev(9, "validation_passed", "scope-and-acceptance", "validation-engine",
@@ -151,8 +151,8 @@ def _events(run_id: str) -> list:
            "completion package and provenance manifest persisted for 1/2 completed phase(s)",
            ts="12:04:31"),
         ev(12, "escalation_resolved", "Scope Gate", "ba-human",
-           "Scope Gate approved by omn-business-analyst (evidence: scope-and-acceptance)",
-           {"gate": "Scope Gate", "owner_role": "omn-business-analyst",
+           "Scope Gate approved by business-analyst (evidence: scope-and-acceptance)",
+           {"gate": "Scope Gate", "owner_role": "business-analyst",
             "decided_by": "ba-human", "rationale": "Scope is bounded."},
            actor_type="human", ts="12:30:00"),
         ev(13, "escalation_resolved", "execution-planning", "state-engine",
@@ -162,7 +162,7 @@ def _events(run_id: str) -> list:
 
 class DemoSwitchTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-demo-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-demo-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.run_dir = _synthetic_run(self.tmp)
 
@@ -201,7 +201,7 @@ class DemoSwitchTestCase(unittest.TestCase):
 
 class RecorderTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-demo-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-demo-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.run_dir = _synthetic_run(self.tmp)
         demo.enable(self.run_dir, options={"narration": "off"})
@@ -237,7 +237,7 @@ class RecorderTestCase(unittest.TestCase):
         self.assertEqual(lease["payload"]["core_modules"], 1)
         start = markers["E-0007"]
         self.assertEqual(start["action_type"], "prompt_exchange")
-        self.assertEqual(start["agent_name"], "omn-product-owner")
+        self.assertEqual(start["agent_name"], "product-owner")
         self.assertTrue(start["payload"]["prompt_digest"].startswith("sha256:"))
         self.assertIn("Execute your bootstrap procedure", start["payload"]["prompt_excerpt"])
         self.assertNotIn("| Field |", start["payload"]["prompt_excerpt"])
@@ -291,13 +291,13 @@ class RecorderTestCase(unittest.TestCase):
                    "tool_response": {"ok": True}}
         m = demo.ingest_host_hook(self.tmp / "runs", payload)
         self.assertEqual(m["action_type"], "tool_invocation")
-        self.assertEqual(m["agent_name"], "host:omn-product-owner")
+        self.assertEqual(m["agent_name"], "host:product-owner")
         self.assertEqual(m["phase"], "scope-and-acceptance")
         self.assertEqual(m["payload"]["tool_name"], "Read")
         self.assertNotIn("SECRET", json.dumps(m))
         (self.tmp / "runs" / ".active-demo").unlink()
         with mock.patch.dict(os.environ, {}, clear=False):
-            os.environ.pop("OMN_DEMO_RUN_ID", None)
+            os.environ.pop("FRAMEWORK_DEMO_RUN_ID", None)
             self.assertIsNone(demo.ingest_host_hook(self.tmp / "runs", payload))
 
     def test_backfill_reconstructs_markers_from_events_once(self):
@@ -313,7 +313,7 @@ class RecorderTestCase(unittest.TestCase):
 
 class TimelineTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-demo-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-demo-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.run_dir = _synthetic_run(self.tmp)
         demo.enable(self.run_dir, options={"narration": "off"})
@@ -362,7 +362,7 @@ class TimelineTestCase(unittest.TestCase):
 
 class BuilderTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-demo-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-demo-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.run_dir = _synthetic_run(self.tmp)
         demo.enable(self.run_dir, options={"narration": "off", "target_seconds": 6, "fps": 4,
@@ -443,7 +443,7 @@ class BuilderTestCase(unittest.TestCase):
     def _emit_completed(self):
         ledger = fr.RunLedger(self.run_dir)
         with mock.patch.object(dvb, "find_ffmpeg", return_value=(None, "no ffmpeg (test)")), \
-                mock.patch.dict(os.environ, {"OMN_DEMO_TTS": "off"}):
+                mock.patch.dict(os.environ, {"FRAMEWORK_DEMO_TTS": "off"}):
             return _capture(ledger.emit, "run_completed", state_id="execution-planning",
                             actor_type="runtime", actor_id="execution-coordinator",
                             summary="every workflow phase completed",
@@ -473,7 +473,7 @@ class BuilderTestCase(unittest.TestCase):
 
 class CliTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-demo-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-demo-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.run_dir = _synthetic_run(self.tmp)
         self._runs = fr.RUNS
@@ -523,8 +523,8 @@ class CliTestCase(unittest.TestCase):
         self.assertIn("demo marker M-000001 recorded", out)
 
     def test_print_hook_resolves_the_framework_directory_and_matches_the_shipped_file(self):
-        # `runtime/demo/hooks.settings.json` cannot know whether it was installed as
-        # `.claude` or as `.omn-agent`, so it ships a `<framework-dir>` placeholder and
+        # `runtime/demo/hooks.settings.json` cannot know the name of the directory it was
+        # copied into, so it ships a `<framework-dir>` placeholder and
         # `--print-hook` resolves it. The two must stay one block: an operator who merges
         # the file by hand and an operator who pipes the command must wire up the same hook.
         rc, out = _capture(fr.cmd_demo, self._args(run_id=None, print_hook=True))
@@ -541,32 +541,6 @@ class CliTestCase(unittest.TestCase):
         resolved = json.loads(
             json.dumps(shipped["hooks"]).replace("<framework-dir>", fr.FW_PREFIX))
         self.assertEqual(printed["hooks"], resolved)
-
-    def test_omn_agent_run_accepts_and_forwards_the_flag(self):
-        from omn_agent import cli, runner
-        ns = cli.build_parser().parse_args(["run", "PROJ-1", "--demo", "--approve"])
-        self.assertTrue(ns.demo)
-        self.assertFalse(cli.build_parser().parse_args(["run", "PROJ-1"]).demo)
-        # the runtime argv the CLI wrapper builds for a planned task carries the switch
-        calls = []
-
-        def fake_invoke(fw_dir, target, argv, report):
-            calls.append(argv)
-            return 0, "run_id : run-0123456789ab"
-        task = {"ticket": "PROJ-1", "command": "implement", "inputFile": "runs/inputs/x.md",
-                "inputType": "feature-request"}
-        with mock.patch.object(runner, "_invoke", side_effect=fake_invoke), \
-                mock.patch.object(runner, "resolve_target", return_value=self.tmp), \
-                mock.patch.object(runner, "framework_root", return_value=self.tmp), \
-                mock.patch.object(runner, "load_task", return_value=(dict(task), self.tmp)), \
-                mock.patch.object(runner, "save_task"), \
-                mock.patch.object(runner, "_require_approval"), \
-                mock.patch.object(runner, "_finish", return_value=0):
-            ns = cli.build_parser().parse_args(["run", "PROJ-1", "--demo", "--approve"])
-            runner.cmd_run(ns)
-        self.assertEqual(len(calls), 1)
-        self.assertEqual(calls[0][0], "plan")
-        self.assertIn("--demo", calls[0])
 
     def test_plan_flag_is_declared_on_every_request_parser(self):
         parser = fr.argparse.ArgumentParser()

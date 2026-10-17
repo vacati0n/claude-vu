@@ -12,9 +12,9 @@ their Output Artifact column:
 
 | Workflow | Phase | Producer | Coordination basis |
 |---|---|---|---|
-| `fix-bug` | `closure-and-communication` | `omn-orchestrator` | `closure` |
-| `refactor` | `closure-and-debt-record` | `omn-orchestrator` | `debt-closure` |
-| `release` | `deployment-execution` | `omn-orchestrator` | `deployment` |
+| `fix-bug` | `closure-and-communication` | `orchestrator` | `closure` |
+| `refactor` | `closure-and-debt-record` | `orchestrator` | `debt-closure` |
+| `release` | `deployment-execution` | `orchestrator` | `deployment` |
 
 They are one artifact type. Each is a phase-by-phase progression record over a defined
 coordination scope, carrying the handoffs it accepted, the escalations it raised, and the
@@ -45,7 +45,7 @@ An orchestration result quotes the gate evidence and command output it read, so 
 permitted here. The prohibition this template keeps is the one every agent contract shares: no
 model, vendor, or provider is named.
 
-The binding behavioural contract is the module set under `agents/omn-orchestrator/` —
+The binding behavioural contract is the module set under `agents/orchestrator/` —
 `output.md` for structure and `quality.md` for the checks. Five coordination rules are enforced
 mechanically: no phase is recorded as complete without a gate decision and the evidence behind
 it, no progression count may drift from the table it summarises, no gate over this role's own
@@ -62,7 +62,7 @@ orchestrationResult:
   sourceInputs:
     - type:            # validation-report | review-package | implementation-report | release-note | deployment-plan | rollback-plan | known-issue-status | documentation-updates | gate-evidence | workflow-state
       reference:       # supplied reference, or "inline"
-  producedBy:          # omn-orchestrator
+  producedBy:          # orchestrator
   agentVersion:
   schemaVersion: 1.0.0
   status:              # complete | provisional | blocked
@@ -89,7 +89,7 @@ orchestrationResult:
 <!-- One row per phase this run enqueued, in the run's dependency order. Gate Decision and
      Decided By carry the recorded decision, never one taken here. A phase recorded `complete`
      whose gate is not `none` must name both the decision and the evidence for it. Decided By
-     may not be `omn-orchestrator` on any row whose Owner is `omn-orchestrator`. -->
+     may not be `orchestrator` on any row whose Owner is `orchestrator`. -->
 
 | ID | Phase | Owner | Declared Output | Gate | Gate Decision | Decided By | Evidence | Progression |
 |---|---|---|---|---|---|---|---|---|

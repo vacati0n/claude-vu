@@ -378,7 +378,7 @@ omn-agent quality-scan backend -t ./my-repo --approve
 
 # the tech lead's decision, recorded like any other gate
 omn-agent run QS-BACKEND -t ./my-repo --gate "Quality Handoff Gate" \
-    --decision approve --owner-role omn-tech-lead \
+    --decision approve --owner-role tech-lead \
     --rationale "package accepted as review of record" --approve
 ```
 
@@ -407,7 +407,7 @@ omn-agent run PROJ-42 -t ./my-repo                 # read-only: shows the next s
 omn-agent run PROJ-42 -t ./my-repo --dispatch --phase scope-and-acceptance
 omn-agent run PROJ-42 -t ./my-repo --complete --phase scope-and-acceptance
 omn-agent run PROJ-42 -t ./my-repo --gate "Scope Gate" --decision approve \
-    --owner-role omn-product-owner --rationale "AC agreed with stakeholder"
+    --owner-role product-owner --rationale "AC agreed with stakeholder"
 omn-agent run PROJ-42 -t ./my-repo --show          # read-only: full state table
 omn-agent run PROJ-42 -t ./my-repo --show --watch  # read-only: live view, re-renders until Ctrl+C
 omn-agent run PROJ-42 -t ./my-repo --report        # read-only: who did what, when
@@ -943,7 +943,7 @@ What it contains, all derived from the persisted run ledger (never asserted):
   as the decider, so human and policy decisions are distinguishable in one
   column.
 - **Timeline** — every recorded event in commit order: time, actor
-  (`agent:omn-qa`, `human:operator`, `runtime:validation-engine`, …), event
+  (`agent:qa`, `human:operator`, `runtime:validation-engine`, …), event
   type, and summary.
 
 ## 5e. Watching a run live in the terminal {#live-view}

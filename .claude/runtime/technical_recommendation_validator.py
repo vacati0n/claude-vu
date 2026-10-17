@@ -5,9 +5,9 @@ Mechanically checks a produced `technical-recommendation.md` against the contrac
 governs it:
 
   - `.claude/templates/technical-recommendation.md`  rendered form, section and field labels
-  - `.claude/agents/omn-tech-lead/identity.md`       behavioural contract for the decision lens
-  - `.claude/agents/omn-tech-lead/output.md`         structural contract this artifact renders to
-  - `.claude/agents/omn-tech-lead/quality.md`        the tech lead's own self-verification checks
+  - `.claude/agents/tech-lead/identity.md`       behavioural contract for the decision lens
+  - `.claude/agents/tech-lead/output.md`         structural contract this artifact renders to
+  - `.claude/agents/tech-lead/quality.md`        the tech lead's own self-verification checks
 
 One artifact type carries every technical leadership output the framework asks for: both
 `investigate` decision phases, both `research` decision phases, the `review-pull-request` merge
@@ -38,11 +38,11 @@ TEMPLATE = "templates/technical-recommendation.md"
 # The tech lead's authoritative contract is a module set, not a single file. Each check below
 # names the module that actually states the rule it enforces, so a failure points at the document
 # that decides it rather than at the agent in general.
-CONTRACT_REF = "agents/omn-tech-lead/identity.md"
-OUTPUT_REF = "agents/omn-tech-lead/output.md"
-QUALITY_REF = "agents/omn-tech-lead/quality.md"
+CONTRACT_REF = "agents/tech-lead/identity.md"
+OUTPUT_REF = "agents/tech-lead/output.md"
+QUALITY_REF = "agents/tech-lead/quality.md"
 
-PRODUCER = "omn-tech-lead"
+PRODUCER = "tech-lead"
 
 BASES = ("option-analysis", "recommendation", "merge-decision", "release-readiness")
 DECISIONS = ("proceed", "proceed-with-conditions", "do-not-proceed", "deferred")

@@ -10,8 +10,8 @@ Run directly only for debugging:
 
     python -m demo.capture_helper --run-dir <framework-dir>/runs/<run-id>
 
-where `<framework-dir>` is this framework directory's real name: `.omn-agent` in a
-repository the installer wrote to, `.claude` in the framework's own checkout.
+where `<framework-dir>` is this framework directory's real name, `.claude` in the
+framework's own checkout.
 """
 
 from __future__ import annotations

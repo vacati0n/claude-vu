@@ -10,11 +10,11 @@ file in its Output Artifact column:
 
 | Workflow | Phase | Name in the Phase Model | Producer |
 |---|---|---|---|
-| `implement-feature` | `quality-review` | `review-package.md` | `omn-dev-2-reviewer` |
-| `review-pull-request` | `code-quality-review` | `review-package.md` | `omn-dev-2-reviewer` |
+| `implement-feature` | `quality-review` | `review-package.md` | `dev-2-reviewer` |
+| `review-pull-request` | `code-quality-review` | `review-package.md` | `dev-2-reviewer` |
 | `review-pull-request` | `structural-compliance` | `review-package.md` | `architect` |
-| `code-quality-scan` | `repository-quality-scan` | `review-package.md` | `omn-dev-2-reviewer` |
-| `release` | `artifact-packaging` | `review-package.md` | `omn-dev-2-reviewer` |
+| `code-quality-scan` | `repository-quality-scan` | `review-package.md` | `dev-2-reviewer` |
+| `release` | `artifact-packaging` | `review-package.md` | `dev-2-reviewer` |
 
 They are one artifact type. Each is a severity-classified findings set over a defined review
 scope, closing with a readiness decision, and the Validation Engine
@@ -32,7 +32,7 @@ Unlike a plan or a design, a review package may quote the code it reviews, so fe
 and diff excerpts are permitted here. The prohibition this template does keep is the one
 every agent contract shares: no model, vendor, or provider is named.
 
-The binding behavioural contracts are the module set under `agents/omn-dev-2-reviewer/` —
+The binding behavioural contracts are the module set under `agents/dev-2-reviewer/` —
 `output.md` for structure and `quality.md` for the checks — and, for the structural lens,
 `agents/architect/quality.md`. Three reviewer rules are enforced mechanically: a
 critical or high finding cannot be approved away, a severity count cannot drift from the
@@ -47,7 +47,7 @@ reviewPackage:
   sourceInputs:
     - type:          # code-diff | pull-request-diff | test-evidence | design-reference | standards-checklist | architecture-rules | security-criteria | build-inputs
       reference:     # supplied reference, or "inline"
-  producedBy:        # omn-dev-2-reviewer | architect
+  producedBy:        # dev-2-reviewer | architect
   agentVersion:
   schemaVersion: 1.0.0
   status:            # complete | provisional | blocked

@@ -42,7 +42,8 @@ from pathlib import Path
 import yaml
 
 from artifact_lib import (
-    VENDOR_TOKENS, Check, Report, parse_all_tables, split_sections, strip_comments, strip_md,
+    VENDOR_TOKENS, Check, Report, canonical_agent_id, parse_all_tables, split_sections,
+    strip_comments, strip_md,
 )
 
 # --------------------------------------------------------------------------- declarations
@@ -221,7 +222,7 @@ def run_contract(contract: ArtifactContract, artifact_path: Path,
     produced = str(meta.get("producedBy") or "")
     add("C1.2", contract.template_ref, "Blocking",
         f"producedBy is an agent contracted to emit {contract.artifact}",
-        "pass" if produced in contract.producers else "fail",
+        "pass" if canonical_agent_id(produced) in contract.producers else "fail",
         f"producedBy={produced!r}; contracted producers: {list(contract.producers)}")
 
     add("C1.3", contract.template_ref, "Blocking",

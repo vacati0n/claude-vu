@@ -10,19 +10,15 @@ Deliver new functionality that satisfies business scope, architectural standards
 
 ## Participating Agents
 - planner
-- omn-product-owner
-- omn-business-analyst
-- omn-architect
-- omn-tech-lead
-- omn-dev-1-implement
-- omn-dev-2-reviewer
-- omn-qa
-- omn-documentation
-- omn-orchestrator
-
-> Architecture participation is owned by `architect` (`agents/architect/`). The
-> `omn-architect` entries in this specification name the same role and are pending
-> reference migration.
+- product-owner
+- business-analyst
+- architect
+- tech-lead
+- dev-1-implement
+- dev-2-reviewer
+- qa
+- documentation
+- orchestrator
 
 ## Phase Model
 
@@ -36,23 +32,23 @@ identifier is the one that manifest already declares, and this table reproduces 
 
 | Phase | Owner Agent | Participation | Input | Output Artifact | Gate | Required Skills |
 |---|---|---|---|---|---|---|
-| `scope-and-acceptance` | `omn-product-owner` | primary | feature request, acceptance intent, business constraints | `scope-definition.md` | Scope Gate | S02, S07 |
+| `scope-and-acceptance` | `product-owner` | primary | feature request, acceptance intent, business constraints | `scope-definition.md` | Scope Gate | S02, S07 |
 | `execution-planning` | `planner` | primary | `scope-definition.md`, or an accepted planner input type | `execution-plan.md` | Planning Gate | S02, S01, S07 |
 | `solution-design-and-risk-assessment` | `architect` | primary | `execution-plan.md`, technical constraints, risk targets | `technical-design.md` | Design Gate | S01, S03, S06, S09 |
-| `implementation` | `omn-dev-1-implement` | primary | `technical-design.md`, coding standards, test baseline | `implementation-report.md` | none | S03, S06, S10, S11, S12 |
-| `quality-review` | `omn-dev-2-reviewer` | primary | `implementation-report.md`, code diff, design references | `review-package.md` | Review Gate, Verification Gate | S07, S09, S08 |
-| `documentation-and-release-handoff` | `omn-documentation` | primary | verification report, change summary | `release-note.md`, on the `release-handoff` communication basis | Closure Gate | S11, S10, S12 |
+| `implementation` | `dev-1-implement` | primary | `technical-design.md`, coding standards, test baseline | `implementation-report.md` | none | S03, S06, S10, S11, S12 |
+| `quality-review` | `dev-2-reviewer` | primary | `implementation-report.md`, code diff, design references | `review-package.md` | Review Gate, Verification Gate | S07, S09, S08 |
+| `documentation-and-release-handoff` | `documentation` | primary | verification report, change summary | `release-note.md`, on the `release-handoff` communication basis | Closure Gate | S11, S10, S12 |
 
 ### Phase Identifier Sources
 
 | Phase | Identifier source |
 |---|---|
-| `scope-and-acceptance` | Declared by `agents/omn-product-owner/manifest.yaml`, `supportedWorkflows[implement-feature].phase`. |
+| `scope-and-acceptance` | Declared by `agents/product-owner/manifest.yaml`, `supportedWorkflows[implement-feature].phase`. |
 | `execution-planning` | Declared by `agents/planner/manifest.yaml`, `supportedWorkflows[implement-feature].phase`. |
 | `solution-design-and-risk-assessment` | Declared by `agents/architect/manifest.yaml`, `supportedWorkflows[implement-feature].phase`. |
-| `implementation` | Declared by `agents/omn-dev-1-implement/manifest.yaml`, `supportedWorkflows[implement-feature].phase`. |
-| `quality-review` | Declared by `agents/omn-dev-2-reviewer/manifest.yaml`, `supportedWorkflows[implement-feature].phase`. |
-| `documentation-and-release-handoff` | Derived from the Execution Order step and the Skill Matrix phase name, and now declared by `agents/omn-documentation/manifest.yaml`, `supportedWorkflows[implement-feature].phase`. |
+| `implementation` | Declared by `agents/dev-1-implement/manifest.yaml`, `supportedWorkflows[implement-feature].phase`. |
+| `quality-review` | Declared by `agents/dev-2-reviewer/manifest.yaml`, `supportedWorkflows[implement-feature].phase`. |
+| `documentation-and-release-handoff` | Derived from the Execution Order step and the Skill Matrix phase name, and now declared by `agents/documentation/manifest.yaml`, `supportedWorkflows[implement-feature].phase`. |
 
 ### Resolution Rules
 
@@ -94,13 +90,13 @@ Prose form of the Phase Model above. The identifiers in parentheses are canonica
 6. QA verification and release documentation handoff (`documentation-and-release-handoff`).
 
 ## Deliverables
-- Scope definition (`templates/scope-definition.md`) produced by `omn-product-owner`,
+- Scope definition (`templates/scope-definition.md`) produced by `product-owner`,
   carrying the bounded scope, the explicit non-goals, and the acceptance criteria.
 - Execution plan (`templates/execution-plan.md`) produced by `planner`.
 - Technical design package (`templates/technical-design.md`) produced by `architect`,
   with architecture decision records at status Proposed where decisions are significant.
 - Implemented code and test evidence.
-- Review package (`templates/review-package.md`) produced by `omn-dev-2-reviewer`,
+- Review package (`templates/review-package.md`) produced by `dev-2-reviewer`,
   carrying the severity-classified findings, the correction requests, and the verdict.
 - Release note draft and operational notes.
 
@@ -114,23 +110,23 @@ Prose form of the Phase Model above. The identifiers in parentheses are canonica
 - Return to `execution-planning` when task decomposition or dependencies are invalidated.
 - Return to design stage when structural risks are discovered.
 - Return to implementation stage when review or QA fails.
-- Escalate unresolved blockers to omn-orchestrator and omn-tech-lead.
+- Escalate unresolved blockers to orchestrator and tech-lead.
 
 ## Approval Gates
 
 Gate names are the canonical ones in `workflows/workflow-gate-matrix.md`, which is the
 authority the runtime reads for gate ownership.
 
-- Scope Gate: omn-product-owner and omn-business-analyst.
-- Planning Gate: omn-tech-lead and omn-orchestrator, on evidence produced by planner.
-- Design Gate: omn-architect and omn-tech-lead.
-- Review Gate: omn-dev-2-reviewer and omn-qa.
-- Verification Gate: omn-qa.
-- Closure Gate: omn-orchestrator and omn-documentation.
+- Scope Gate: product-owner and business-analyst.
+- Planning Gate: tech-lead and orchestrator, on evidence produced by planner.
+- Design Gate: architect and tech-lead.
+- Review Gate: dev-2-reviewer and qa.
+- Verification Gate: qa.
+- Closure Gate: orchestrator and documentation.
 
 Earlier revisions of this specification named a single `Quality Gate` for review and QA. The
 Phase Model has always routed the two gates the gate matrix owns, `Review Gate` and
-`Verification Gate`, and this list now names them. The Review Gate carries omn-qa as a second
-owner because omn-dev-2-reviewer produces the findings that gate assesses, and the Producer
+`Verification Gate`, and this list now names them. The Review Gate carries qa as a second
+owner because dev-2-reviewer produces the findings that gate assesses, and the Producer
 Exclusion Rule forbids approving one's own output.
 

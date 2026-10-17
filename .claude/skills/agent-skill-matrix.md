@@ -68,7 +68,7 @@ skills named above.
   release-communication phase in the tables below.
 - S04 and S05 are registered on the third ground: no routed phase declares either as mandatory,
   and no agent manifest declares them, but this matrix records Secondary coverage of both for
-  `omn-dev-1-implement`, `omn-qa`, and `omn-documentation`, each of which holds an active
+  `dev-1-implement`, `qa`, and `documentation`, each of which holds an active
   registry record. They are platform-specific skills, so a routed phase requiring them is a
   property of the product under change rather than of the framework's own workflows;
   registration makes them resolvable in advance of that phase rather than after it.
@@ -86,15 +86,15 @@ manifest wins for agent-scoped resolution and the delta is recorded below.
 | Agent | Matrix non-advisory coverage not declared in manifest | Disposition |
 |---|---|---|
 | planner | none | Aligned |
-| omn-product-owner | none | Aligned |
-| omn-business-analyst | none | Aligned |
-| omn-context-agent | none | Aligned |
-| omn-dev-2-reviewer | none | Aligned |
-| omn-tech-lead | none | Aligned |
+| product-owner | none | Aligned |
+| business-analyst | none | Aligned |
+| context-agent | none | Aligned |
+| dev-2-reviewer | none | Aligned |
+| tech-lead | none | Aligned |
 | architect | S03, S07, S11 | Manifest is intentionally narrower. Architect produces no code, tests, or telemetry, so these remain matrix-level coverage for review and escalation support, not declared dependencies. Elevation requires an architect contract change. |
-| omn-dev-1-implement | S02, S04, S05, S08 | Manifest is intentionally narrower. S02 and S08 remain matrix-level coverage: the implementer works to a design that already fixes the domain vocabulary and the performance objective. S04 and S05 apply only when the change under implementation targets an Avalonia or React surface, which no phase of any active workflow does today. Elevation requires a manifest change. |
-| omn-qa | S04, S05, S10 | Manifest is intentionally narrower. S10 remains matrix-level coverage because QA validates behavior rather than change isolation. S04 and S05 apply only to a UI surface under validation, as above. |
-| omn-documentation | S04, S05 | Manifest is intentionally narrower, on the same platform-specific ground as above. |
+| dev-1-implement | S02, S04, S05, S08 | Manifest is intentionally narrower. S02 and S08 remain matrix-level coverage: the implementer works to a design that already fixes the domain vocabulary and the performance objective. S04 and S05 apply only when the change under implementation targets an Avalonia or React surface, which no phase of any active workflow does today. Elevation requires a manifest change. |
+| qa | S04, S05, S10 | Manifest is intentionally narrower. S10 remains matrix-level coverage because QA validates behavior rather than change isolation. S04 and S05 apply only to a UI surface under validation, as above. |
+| documentation | S04, S05 | Manifest is intentionally narrower, on the same platform-specific ground as above. |
 
 The S04 and S05 rows above are the matrix coverage that registers those two skills on the third
 ground. Because the manifest governs agent-scoped resolution, registering them left every one of
@@ -112,19 +112,18 @@ declared manifest dependency.
 
 | Agent | S01 | S02 | S03 | S04 | S05 | S06 | S07 | S08 | S09 | S10 | S11 | S12 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| omn-orchestrator | Secondary | Secondary | Advisory | Advisory | Advisory | Advisory | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary |
-| omn-context-agent | Advisory | Secondary | Advisory | Advisory | Advisory | Advisory | Advisory | Advisory | Advisory | Advisory | Secondary | Secondary |
-| omn-product-owner | Advisory | Primary | Advisory | Advisory | Advisory | Advisory | Secondary | Advisory | Advisory | Advisory | Advisory | Advisory |
-| omn-business-analyst | Advisory | Primary | Advisory | Advisory | Advisory | Advisory | Secondary | Advisory | Advisory | Advisory | Advisory | Secondary |
+| orchestrator | Secondary | Secondary | Advisory | Advisory | Advisory | Advisory | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary |
+| context-agent | Advisory | Secondary | Advisory | Advisory | Advisory | Advisory | Advisory | Advisory | Advisory | Advisory | Secondary | Secondary |
+| product-owner | Advisory | Primary | Advisory | Advisory | Advisory | Advisory | Secondary | Advisory | Advisory | Advisory | Advisory | Advisory |
+| business-analyst | Advisory | Primary | Advisory | Advisory | Advisory | Advisory | Secondary | Advisory | Advisory | Advisory | Advisory | Secondary |
 | planner | Advisory | Primary | Advisory | Advisory | Advisory | Advisory | Secondary | Advisory | Advisory | Advisory | Advisory | Advisory |
 | architect | Primary | Secondary | Secondary | Advisory | Advisory | Secondary | Secondary | Secondary | Secondary | Advisory | Secondary | Secondary |
-| omn-architect | Primary | Secondary | Secondary | Advisory | Advisory | Secondary | Secondary | Secondary | Secondary | Advisory | Secondary | Secondary |
-| omn-tech-lead | Secondary | Secondary | Primary | Advisory | Advisory | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary |
-| omn-dev-1-implement | Secondary | Secondary | Primary | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary | Primary |
-| omn-dev-1-bug-analyst | Secondary | Secondary | Primary | Advisory | Advisory | Secondary | Secondary | Secondary | Secondary | Advisory | Primary | Primary |
-| omn-dev-2-reviewer | Secondary | Secondary | Secondary | Advisory | Advisory | Secondary | Primary | Secondary | Primary | Secondary | Secondary | Secondary |
-| omn-qa | Advisory | Secondary | Secondary | Secondary | Secondary | Secondary | Primary | Secondary | Secondary | Secondary | Secondary | Secondary |
-| omn-documentation | Advisory | Secondary | Secondary | Secondary | Secondary | Advisory | Secondary | Advisory | Advisory | Advisory | Secondary | Secondary |
+| tech-lead | Secondary | Secondary | Primary | Advisory | Advisory | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary |
+| dev-1-implement | Secondary | Secondary | Primary | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary | Secondary | Primary |
+| dev-1-bug-analyst | Secondary | Secondary | Primary | Advisory | Advisory | Secondary | Secondary | Secondary | Secondary | Advisory | Primary | Primary |
+| dev-2-reviewer | Secondary | Secondary | Secondary | Advisory | Advisory | Secondary | Primary | Secondary | Primary | Secondary | Secondary | Secondary |
+| qa | Advisory | Secondary | Secondary | Secondary | Secondary | Secondary | Primary | Secondary | Secondary | Secondary | Secondary | Secondary |
+| documentation | Advisory | Secondary | Secondary | Secondary | Secondary | Advisory | Secondary | Advisory | Advisory | Advisory | Secondary | Secondary |
 
 ## Workflow Participation by Phase
 
@@ -144,12 +143,12 @@ that is the table the Task Router reads.
 
 | Phase ID | Phase | Primary Agents | Required Skills |
 |---|---|---|---|
-| `scope-and-acceptance` | Scope and Acceptance | omn-product-owner, omn-business-analyst | S02, S07 |
+| `scope-and-acceptance` | Scope and Acceptance | product-owner, business-analyst | S02, S07 |
 | `execution-planning` | Execution Planning | planner | S02, S01, S07 |
-| `solution-design-and-risk-assessment` | Solution Design | architect, omn-tech-lead | S01, S03, S06, S09 |
-| `implementation` | Implementation | omn-dev-1-implement | S03, S06, S10, S11, S12 |
-| `quality-review` | Quality Review | omn-dev-2-reviewer, omn-qa | S07, S09, S08 |
-| `documentation-and-release-handoff` | Documentation and Release Handoff | omn-documentation, omn-orchestrator | S11, S10, S12 |
+| `solution-design-and-risk-assessment` | Solution Design | architect, tech-lead | S01, S03, S06, S09 |
+| `implementation` | Implementation | dev-1-implement | S03, S06, S10, S11, S12 |
+| `quality-review` | Quality Review | dev-2-reviewer, qa | S07, S09, S08 |
+| `documentation-and-release-handoff` | Documentation and Release Handoff | documentation, orchestrator | S11, S10, S12 |
 
 Every phase-mandatory skill in this table is registered, so each row resolves against
 `registry/skills.yaml`. Every row also resolves at capability level: each owner agent holds an
@@ -162,11 +161,11 @@ authority on it.
 
 | Phase ID | Phase | Primary Agents | Required Skills |
 |---|---|---|---|
-| `triage-and-impact` | Triage and Impact | omn-dev-1-bug-analyst, omn-tech-lead | S11, S12, S02 |
-| `root-cause-analysis` | Root Cause Analysis | omn-dev-1-bug-analyst, omn-tech-lead | S03, S06, S08, S12 |
-| `fix-implementation` | Fix Implementation | omn-dev-1-implement | S03, S06, S10, S12 |
-| `regression-validation` | Regression Validation | omn-qa, omn-dev-2-reviewer | S07, S09, S11 |
-| `closure-and-communication` | Closure and Communication | omn-orchestrator, omn-documentation | S10, S11 |
+| `triage-and-impact` | Triage and Impact | dev-1-bug-analyst, tech-lead | S11, S12, S02 |
+| `root-cause-analysis` | Root Cause Analysis | dev-1-bug-analyst, tech-lead | S03, S06, S08, S12 |
+| `fix-implementation` | Fix Implementation | dev-1-implement | S03, S06, S10, S12 |
+| `regression-validation` | Regression Validation | qa, dev-2-reviewer | S07, S09, S11 |
+| `closure-and-communication` | Closure and Communication | orchestrator, documentation | S10, S11 |
 
 ### Investigate
 
@@ -176,51 +175,51 @@ reconstruction. It is registered accordingly.
 
 | Phase ID | Phase | Primary Agents | Required Skills |
 |---|---|---|---|
-| `problem-framing` | Problem Framing | omn-business-analyst, omn-product-owner, planner | S02 |
-| `technical-discovery` | Technical Discovery | omn-context-agent, architect | S01, S03, S06, S11 |
-| `option-analysis` | Option Analysis | omn-tech-lead, architect | S01, S08, S09 |
-| `recommendation` | Recommendation | omn-tech-lead, omn-orchestrator | S02, S08 |
-| `publication` | Publication | omn-documentation, omn-orchestrator | S10, S11 |
+| `problem-framing` | Problem Framing | business-analyst, product-owner, planner | S02 |
+| `technical-discovery` | Technical Discovery | context-agent, architect | S01, S03, S06, S11 |
+| `option-analysis` | Option Analysis | tech-lead, architect | S01, S08, S09 |
+| `recommendation` | Recommendation | tech-lead, orchestrator | S02, S08 |
+| `publication` | Publication | documentation, orchestrator | S10, S11 |
 
 ### Research
 
 | Phase ID | Phase | Primary Agents | Required Skills |
 |---|---|---|---|
-| `research-framing` | Research Framing | omn-business-analyst, omn-product-owner | S02 |
-| `technical-validation` | Technical Validation | omn-context-agent, architect | S01, S03, S06, S11 |
-| `option-synthesis` | Option Synthesis | omn-tech-lead, architect | S01, S08, S09 |
-| `recommendation-draft` | Recommendation Draft | omn-tech-lead, omn-orchestrator | S02, S08 |
-| `findings-publication` | Findings Publication | omn-documentation, omn-product-owner | S10, S11 |
+| `research-framing` | Research Framing | business-analyst, product-owner | S02 |
+| `technical-validation` | Technical Validation | context-agent, architect | S01, S03, S06, S11 |
+| `option-synthesis` | Option Synthesis | tech-lead, architect | S01, S08, S09 |
+| `recommendation-draft` | Recommendation Draft | tech-lead, orchestrator | S02, S08 |
+| `findings-publication` | Findings Publication | documentation, product-owner | S10, S11 |
 
 ### Refactor
 
 | Phase ID | Phase | Primary Agents | Required Skills |
 |---|---|---|---|
-| `scope-invariants-and-risk-profile` | Refactor Scope and Invariants | architect, omn-tech-lead, planner | S01, S02, S07 |
-| `safety-net-establishment` | Safety Net | omn-qa, omn-dev-1-implement | S07, S03 |
-| `refactor-implementation` | Safe Implementation | omn-dev-1-implement | S03, S06, S12 |
-| `behavioral-validation` | Validation and Review | omn-qa, omn-dev-2-reviewer | S07, S08, S09 |
-| `closure-and-debt-record` | Finalization | omn-orchestrator, omn-documentation | S10, S11 |
+| `scope-invariants-and-risk-profile` | Refactor Scope and Invariants | architect, tech-lead, planner | S01, S02, S07 |
+| `safety-net-establishment` | Safety Net | qa, dev-1-implement | S07, S03 |
+| `refactor-implementation` | Safe Implementation | dev-1-implement | S03, S06, S12 |
+| `behavioral-validation` | Validation and Review | qa, dev-2-reviewer | S07, S08, S09 |
+| `closure-and-debt-record` | Finalization | orchestrator, documentation | S10, S11 |
 
 ### Review Pull Request
 
 | Phase ID | Phase | Primary Agents | Required Skills |
 |---|---|---|---|
-| `code-quality-review` | Code Quality Review | omn-dev-2-reviewer, omn-tech-lead | S03, S07, S09 |
-| `structural-compliance` | Architecture and Security Review | architect, omn-tech-lead | S01, S06, S09 |
-| `test-risk-validation` | Test and Risk Validation | omn-qa, omn-dev-2-reviewer | S07, S08, S11 |
-| `documentation-impact` | Documentation Impact | omn-documentation | S10, S11 |
-| `merge-decision` | Merge Decision | omn-tech-lead, omn-orchestrator | S07, S09, S10 |
+| `code-quality-review` | Code Quality Review | dev-2-reviewer, tech-lead | S03, S07, S09 |
+| `structural-compliance` | Architecture and Security Review | architect, tech-lead | S01, S06, S09 |
+| `test-risk-validation` | Test and Risk Validation | qa, dev-2-reviewer | S07, S08, S11 |
+| `documentation-impact` | Documentation Impact | documentation | S10, S11 |
+| `merge-decision` | Merge Decision | tech-lead, orchestrator | S07, S09, S10 |
 
 ### Release
 
 | Phase ID | Phase | Primary Agents | Required Skills |
 |---|---|---|---|
-| `readiness-assessment` | Readiness Assessment | omn-tech-lead, omn-qa | S07, S08, S09 |
-| `artifact-packaging` | Artifact Packaging | omn-dev-2-reviewer, omn-tech-lead | S10, S11, S12 |
-| `candidate-validation` | Candidate Validation | omn-qa, omn-dev-2-reviewer | S07, S08, S11 |
-| `deployment-execution` | Deployment Execution | omn-orchestrator, omn-tech-lead | S11, S08, S12 |
-| `communication-and-post-release` | Release Communication and Post-release | omn-documentation, omn-product-owner, omn-context-agent | S02, S11 |
+| `readiness-assessment` | Readiness Assessment | tech-lead, qa | S07, S08, S09 |
+| `artifact-packaging` | Artifact Packaging | dev-2-reviewer, tech-lead | S10, S11, S12 |
+| `candidate-validation` | Candidate Validation | qa, dev-2-reviewer | S07, S08, S11 |
+| `deployment-execution` | Deployment Execution | orchestrator, tech-lead | S11, S08, S12 |
+| `communication-and-post-release` | Release Communication and Post-release | documentation, product-owner, context-agent | S02, S11 |
 
 ### Coverage of Earlier Groupings
 

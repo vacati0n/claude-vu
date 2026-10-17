@@ -4,9 +4,9 @@
 Mechanically checks a produced `review-package.md` against the contract set that governs it:
 
   - `.claude/templates/review-package.md`             rendered form, section and field labels
-  - `.claude/agents/omn-dev-2-reviewer/identity.md`   behavioural contract for the quality lens
-  - `.claude/agents/omn-dev-2-reviewer/output.md`     structural contract this artifact renders to
-  - `.claude/agents/omn-dev-2-reviewer/quality.md`    the reviewer's own self-verification checks
+  - `.claude/agents/dev-2-reviewer/identity.md`   behavioural contract for the quality lens
+  - `.claude/agents/dev-2-reviewer/output.md`     structural contract this artifact renders to
+  - `.claude/agents/dev-2-reviewer/quality.md`    the reviewer's own self-verification checks
   - `.claude/agents/architect/quality.md`             severity scale for the structural lens
 
 One artifact type carries every review output the framework asks for: the
@@ -36,9 +36,9 @@ TEMPLATE = "templates/review-package.md"
 # The reviewer's authoritative contract is a module set, not a single file. Each check below
 # names the module that actually states the rule it enforces, so a failure points at the
 # document that decides it rather than at the agent in general.
-CONTRACT_REF = "agents/omn-dev-2-reviewer/identity.md"
-OUTPUT_REF = "agents/omn-dev-2-reviewer/output.md"
-QUALITY_REF = "agents/omn-dev-2-reviewer/quality.md"
+CONTRACT_REF = "agents/dev-2-reviewer/identity.md"
+OUTPUT_REF = "agents/dev-2-reviewer/output.md"
+QUALITY_REF = "agents/dev-2-reviewer/quality.md"
 
 VERDICTS = ("approve", "approve-with-corrections", "reject")
 FINDING_STATUSES = ("open", "resolved", "accepted-risk")
@@ -56,7 +56,7 @@ CONTRACT = ac.ArtifactContract(
     artifact="review-package.md",
     # Two producers, because `review-pull-request/structural-compliance` is owned by the
     # architecture role while every other review phase is owned by the reviewer.
-    producers=("omn-dev-2-reviewer", "architect"),
+    producers=("dev-2-reviewer", "architect"),
     metadata_key="reviewPackage",
     metadata_fields=("packageId", "reviewReference", "sourceInputs", "producedBy",
                      "agentVersion", "schemaVersion", "status", "verdict", "inputDigest",

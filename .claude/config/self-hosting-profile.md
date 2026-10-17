@@ -169,7 +169,7 @@ self-hosting means the framework decides the route, holds the gates, and keeps t
 | Title | Change proposals and their governance evidence are point-in-time records, not live assertions |
 | Date | 2026-08-19 |
 | Status | Accepted |
-| Decided by | `omn-tech-lead` (accepting owner), recorded by operator |
+| Decided by | `tech-lead` (accepting owner), recorded by operator |
 | Arises from | Reconciliation finding `A-1`, `reports/wave-1-reconciliation-report-2026-08-19.md` |
 
 ### Context

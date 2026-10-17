@@ -7,7 +7,7 @@ releaseNote:
       reference: inline
     - type: final-change-summary
       reference: inline
-  producedBy: omn-documentation
+  producedBy: documentation
   agentVersion: 1.0.0
   schemaVersion: 1.0.0
   status: complete
@@ -21,7 +21,7 @@ releaseNote:
 - Version: 0.4.0
 - Release date and time: 2026-08-18 09:00 UTC
 - Environment: shared runtime host
-- Release owner: omn-orchestrator
+- Release owner: orchestrator
 
 ## Highlights
 

@@ -80,7 +80,7 @@ def _markers() -> list:
                 payload={"work_type": "state", "owner_agent_id": "planner", "index": 1}),
         _marker(3, 0.3, "work_item_enqueued", phase="p1",
                 payload={"work_type": "gate", "gate": "Scope Gate",
-                         "owner_roles": ["omn-qa"]}),
+                         "owner_roles": ["qa"]}),
         _marker(4, 4, "dispatch", phase="p1", title="Dispatch: p1",
                 payload={"agent_id": "planner", "prompt_tokens_est": 12000}),
         _marker(5, 10, "prompt_exchange", phase="p1", agent="planner",
@@ -177,7 +177,7 @@ class ObsWebSocketTestCase(unittest.TestCase):
 
 class CaptureManifestTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-cap-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-cap-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.run_dir = _run(self.tmp, _markers())
 
@@ -215,7 +215,7 @@ class CaptureManifestTestCase(unittest.TestCase):
 
 class EditDecisionTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-cap-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-cap-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.markers = _markers()
         self.run_dir = _run(self.tmp, self.markers)
@@ -252,10 +252,10 @@ class EditDecisionTestCase(unittest.TestCase):
         captions have to be readable."""
         markers = self.markers + [
             _marker(8, 95.2, "gate_awaiting", phase="p1", title="Scope Gate awaits",
-                    payload={"gate": "Scope Gate", "owner_roles": ["omn-qa"]}),
+                    payload={"gate": "Scope Gate", "owner_roles": ["qa"]}),
             _marker(9, 95.3, "gate_decision", phase="p1", title="Scope Gate approved",
                     payload={"gate": "Scope Gate", "decision": "approved",
-                             "owner_role": "omn-qa", "decided_by": "sam"}),
+                             "owner_role": "qa", "decided_by": "sam"}),
             _marker(10, 95.45, "aggregation", title="package", payload={"completed": 1,
                                                                         "phases": 2}),
         ]
@@ -337,7 +337,7 @@ class OverlayTestCase(unittest.TestCase):
                                             "owner": "planner", "gates": ["Scope Gate"],
                                             "attempt": 1}],
                                 "gates": {"Scope Gate": {"status": "awaiting",
-                                                         "owner_roles": ["omn-qa"]}},
+                                                         "owner_roles": ["qa"]}},
                                 "command_id": "implement"}}
         img = dov.beat_overlay(scene, run_id="run-x", command="implement",
                                capture_size=(1280, 720), fraction=0.4, speed=12.0)
@@ -383,7 +383,7 @@ class FinishAndOcclusionTestCase(unittest.TestCase):
     """When the run is done, and what of the recording may be shown."""
 
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-cap-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-cap-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.run_dir = _run(self.tmp, _markers())
 
@@ -445,7 +445,7 @@ class FinishAndOcclusionTestCase(unittest.TestCase):
 
 class BuildRoutingTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-cap-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-cap-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.run_dir = _run(self.tmp, _markers())
 
@@ -513,7 +513,7 @@ class FakeObsBackendTestCase(unittest.TestCase):
         self.server.start()
         self.server.ready.wait(5)
         self.addCleanup(self.server.sock.close)
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-obs-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-obs-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.run_dir = _run(self.tmp, _markers())
         self.cfg = {"enabled": True, "port": self.server.port, "password": "pw",
@@ -606,7 +606,7 @@ class EndToEndEditTestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.tmp = Path(tempfile.mkdtemp(prefix="omn-cap-e2e-"))
+        cls.tmp = Path(tempfile.mkdtemp(prefix="fw-cap-e2e-"))
         cls.video = _synthetic_capture(cls.tmp / "capture.mp4", seconds=100)
 
     @classmethod
@@ -614,7 +614,7 @@ class EndToEndEditTestCase(unittest.TestCase):
         shutil.rmtree(cls.tmp, ignore_errors=True)
 
     def setUp(self):
-        self.work = Path(tempfile.mkdtemp(prefix="omn-cap-run-"))
+        self.work = Path(tempfile.mkdtemp(prefix="fw-cap-run-"))
         self.addCleanup(shutil.rmtree, self.work, ignore_errors=True)
         self.run_dir = _run(self.work, _markers())
         _capture_manifest(self.run_dir, self.video, duration=100)

@@ -65,7 +65,7 @@ def _state(store, state_id, phase_index, depends_on=(), owner="planner"):
         depends_on=[{"state_id": d, "kind": "hard", "basis": "test"} for d in depends_on]))
 
 
-def _gate(store, name, phase_index, closes, owners=("omn-tech-lead",), producer="planner"):
+def _gate(store, name, phase_index, closes, owners=("tech-lead",), producer="planner"):
     item = store.add_item(se.new_work_item(
         run_id=RUN_ID, workflow_id="implement-feature", state_id=name, work_type="gate",
         owner_agent_id=None, phase_index=phase_index, gate=name, artifact=None,
@@ -89,7 +89,7 @@ def _complete(store, item, artifact_path="runs/x/a.md", digest="sha256:aaa"):
 
 class StateEngineTerminalityTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-rollback-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-rollback-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.store = _store(self.tmp)
 
@@ -210,15 +210,15 @@ class WriteScopeTestCase(unittest.TestCase):
 
 class ClearingActionTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-rollback-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-rollback-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.store = _store(self.tmp)
         self.phase = _state(self.store, "execution-planning", 1)
         _complete(self.store, self.phase)
         self.gate = _gate(self.store, "Planning Gate", 1, "execution-planning",
-                          owners=("planner", "omn-tech-lead"))
+                          owners=("planner", "tech-lead"))
         g = self.store.gate("Planning Gate")
-        g.update({"decision": "rejected", "owner_role": "omn-tech-lead",
+        g.update({"decision": "rejected", "owner_role": "tech-lead",
                   "decided_by": "Vu Cao", "rationale": "no"})
         self.ctx = {"store": self.store, "run_dir": self.tmp / RUN_ID,
                     "ledger": fr.RunLedger(self.tmp / RUN_ID)}
@@ -230,7 +230,7 @@ class ClearingActionTestCase(unittest.TestCase):
         self.assertIn("framework_runtime.py rollback", action)
         self.assertIn('--gate "Planning Gate"', action)
         self.assertIn("--target execution-planning", action)
-        self.assertIn("--owner-role omn-tech-lead", action)
+        self.assertIn("--owner-role tech-lead", action)
         # the authoriser is a second human decision: never defaulted from who rejected
         self.assertIn("--decided-by <who>", action)
         self.assertNotIn("Vu Cao", action)
@@ -286,7 +286,7 @@ class RefreshWaitCorrectionTestCase(unittest.TestCase):
     both work types, and its envelope is resolved."""
 
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-rollback-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-rollback-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.store = _store(self.tmp)
         self.run_dir = self.tmp / RUN_ID
@@ -366,7 +366,7 @@ class RollbackRangeTestCase(unittest.TestCase):
     """The range is the target's completed downstream cone (architect ruling on F4)."""
 
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-rollback-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-rollback-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.store = _store(self.tmp)
         chain = [("scope", 1, ()), ("planning", 2, ("scope",)), ("design", 3, ("planning",)),
@@ -441,38 +441,38 @@ class RollbackPreconditionsTestCase(unittest.TestCase):
     writes nothing."""
 
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-rollback-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-rollback-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.store = _store(self.tmp)
-        _complete(self.store, _state(self.store, "implementation", 1, owner="omn-dev-1-implement"))
+        _complete(self.store, _state(self.store, "implementation", 1, owner="dev-1-implement"))
         _complete(self.store, _state(self.store, "quality-review", 2,
-                                     depends_on=("implementation",), owner="omn-dev-2-reviewer"))
+                                     depends_on=("implementation",), owner="dev-2-reviewer"))
         _state(self.store, "handoff", 3, depends_on=("quality-review",))
         self.review = _gate(self.store, "Review Gate", 2, "quality-review",
-                            owners=("omn-dev-2-reviewer", "omn-qa"), producer="omn-dev-2-reviewer")
-        self.store.gate("Review Gate").update({"decision": "rejected", "owner_role": "omn-qa",
+                            owners=("dev-2-reviewer", "qa"), producer="dev-2-reviewer")
+        self.store.gate("Review Gate").update({"decision": "rejected", "owner_role": "qa",
                                                "decided_by": "qa", "rationale": "no"})
         self.store.transition(self.review, se.FAILED, reason_code="validation_failed", **COMMON)
         self.verification = _gate(self.store, "Verification Gate", 2, "quality-review",
-                                  owners=("omn-qa",), producer="omn-dev-2-reviewer")
+                                  owners=("qa",), producer="dev-2-reviewer")
 
     def test_an_undecided_sibling_gate_admits_the_rollback(self):
-        pre = fr.rollback_preconditions(self.store, "Review Gate", "omn-qa", None)
+        pre = fr.rollback_preconditions(self.store, "Review Gate", "qa", None)
         self.assertEqual(pre["phases"], ["quality-review"])
         self.assertEqual(pre["target"], "quality-review")
-        pre = fr.rollback_preconditions(self.store, "Review Gate", "omn-qa", "implementation")
+        pre = fr.rollback_preconditions(self.store, "Review Gate", "qa", "implementation")
         self.assertEqual(pre["phases"], ["quality-review", "implementation"])
 
     def test_an_approved_sibling_gate_on_the_closed_phase_refuses_with_no_store_change(self):
         self.store.gate("Verification Gate").update({"decision": "approved",
-                                                     "owner_role": "omn-qa",
+                                                     "owner_role": "qa",
                                                      "decided_by": "qa", "rationale": "fine"})
         self.store.transition(self.verification, se.COMPLETED, reason_code="output_accepted",
                               **COMMON)
         before = json.dumps(self.store.data, sort_keys=True)
         for target in (None, "implementation"):
             with self.assertRaises(fr.RuntimeError_) as raised:
-                fr.rollback_preconditions(self.store, "Review Gate", "omn-qa", target)
+                fr.rollback_preconditions(self.store, "Review Gate", "qa", target)
             message = str(raised.exception)
             self.assertIn("[policy-failure]", message)
             self.assertIn("approved gate ['Verification Gate']", message)
@@ -481,24 +481,24 @@ class RollbackPreconditionsTestCase(unittest.TestCase):
 
     def test_an_approved_gate_on_an_intermediate_phase_is_refused_the_same_way(self):
         design_gate = _gate(self.store, "Design Gate", 1, "implementation",
-                            owners=("architect",), producer="omn-dev-1-implement")
+                            owners=("architect",), producer="dev-1-implement")
         self.store.gate("Design Gate").update({"decision": "approved"})
         self.store.transition(design_gate, se.COMPLETED, reason_code="output_accepted", **COMMON)
         with self.assertRaises(fr.RuntimeError_) as raised:
-            fr.rollback_preconditions(self.store, "Review Gate", "omn-qa", "implementation")
+            fr.rollback_preconditions(self.store, "Review Gate", "qa", "implementation")
         self.assertIn("approved gate ['Design Gate']", str(raised.exception))
         # the closed phase alone is still admissible: the approved gate is outside the range
-        self.assertEqual(fr.rollback_preconditions(self.store, "Review Gate", "omn-qa",
+        self.assertEqual(fr.rollback_preconditions(self.store, "Review Gate", "qa",
                                                    None)["phases"], ["quality-review"])
 
     def test_the_other_refusals_still_hold_and_write_nothing(self):
         before = json.dumps(self.store.data, sort_keys=True)
         with self.assertRaises(fr.RuntimeError_):   # the producer may not authorise
-            fr.rollback_preconditions(self.store, "Review Gate", "omn-dev-2-reviewer", None)
+            fr.rollback_preconditions(self.store, "Review Gate", "dev-2-reviewer", None)
         with self.assertRaises(fr.RuntimeError_):   # a non-ancestor target
-            fr.rollback_preconditions(self.store, "Review Gate", "omn-qa", "handoff")
+            fr.rollback_preconditions(self.store, "Review Gate", "qa", "handoff")
         with self.assertRaises(fr.RuntimeError_):   # a gate that does not stand rejected
-            fr.rollback_preconditions(self.store, "Verification Gate", "omn-qa", None)
+            fr.rollback_preconditions(self.store, "Verification Gate", "qa", None)
         self.assertEqual(json.dumps(self.store.data, sort_keys=True), before)
 
 
@@ -509,22 +509,22 @@ class RejectedGateSurfacingTestCase(unittest.TestCase):
     case, where the persisted envelope still prescribes `release`."""
 
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-rollback-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-rollback-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.store = _store(self.tmp)
         self.run_dir = self.tmp / RUN_ID
-        _complete(self.store, _state(self.store, "implementation", 1, owner="omn-dev-1-implement"))
+        _complete(self.store, _state(self.store, "implementation", 1, owner="dev-1-implement"))
         _complete(self.store, _state(self.store, "quality-review", 2,
-                                     depends_on=("implementation",), owner="omn-dev-2-reviewer"))
+                                     depends_on=("implementation",), owner="dev-2-reviewer"))
         self.successor = _state(self.store, "handoff", 3, depends_on=("quality-review",))
         self.review = _gate(self.store, "Review Gate", 2, "quality-review",
-                            owners=("omn-dev-2-reviewer", "omn-qa"), producer="omn-dev-2-reviewer")
-        self.store.gate("Review Gate").update({"decision": "rejected", "owner_role": "omn-qa",
+                            owners=("dev-2-reviewer", "qa"), producer="dev-2-reviewer")
+        self.store.gate("Review Gate").update({"decision": "rejected", "owner_role": "qa",
                                                "decided_by": "qa",
                                                "rationale": "nine corrections"})
         self.store.transition(self.review, se.FAILED, reason_code="validation_failed", **COMMON)
         self.verification = _gate(self.store, "Verification Gate", 2, "quality-review",
-                                  owners=("omn-qa",), producer="omn-dev-2-reviewer")
+                                  owners=("qa",), producer="dev-2-reviewer")
         self.store.transition(self.verification, se.BLOCKED, reason_code="policy_block",
                               fields={"blocked_reason": "awaiting_human_decision",
                                       "blocked_by": "guard", "blocked_detail": "x"}, **COMMON)
@@ -550,9 +550,9 @@ class RejectedGateSurfacingTestCase(unittest.TestCase):
         self.assertIn("framework_runtime.py rollback", command)
         self.assertIn('--gate "Review Gate"', command)
         self.assertIn("--target quality-review", command)
-        self.assertIn("--owner-role omn-qa", command)
+        self.assertIn("--owner-role qa", command)
         self.assertIn("--decided-by <who>", command)
-        self.assertIn("rejected by omn-qa: nine corrections", lines[2])
+        self.assertIn("rejected by qa: nine corrections", lines[2])
         self.assertIn("['Verification Gate'] also close quality-review", lines[3])
         self.assertIn("no decision is offered", lines[3])
 
@@ -622,15 +622,15 @@ class RejectedGateSurfacingTestCase(unittest.TestCase):
 
 class StatusViewTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-rollback-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-rollback-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.store = _store(self.tmp)
         self.phase = _state(self.store, "implementation", 1)
         _complete(self.store, self.phase)
         self.gate = _gate(self.store, "Review Gate", 1, "implementation",
-                          owners=("omn-dev-2-reviewer", "omn-qa"), producer="omn-dev-1-implement")
+                          owners=("dev-2-reviewer", "qa"), producer="dev-1-implement")
         g = self.store.gate("Review Gate")
-        g.update({"decision": "rejected", "owner_role": "omn-qa", "decided_by": "qa",
+        g.update({"decision": "rejected", "owner_role": "qa", "decided_by": "qa",
                   "decided_at": "2026-09-06T09:05:36Z", "rationale": "nine corrections"})
         self.store.transition(self.gate, se.FAILED, reason_code="validation_failed", **COMMON)
         # the authorised rollback, as `cmd_rollback` records it
@@ -639,7 +639,7 @@ class StatusViewTestCase(unittest.TestCase):
             fields={"supersession": {"authorisation_id": "RB-x-review-gate-01",
                                      "gate": "Review Gate", "target": "implementation"}},
             **COMMON)
-        g["decision_history"].append({"decision": "rejected", "owner_role": "omn-qa",
+        g["decision_history"].append({"decision": "rejected", "owner_role": "qa",
                                       "decided_by": "qa", "decided_at": "2026-09-06T09:05:36Z",
                                       "superseded_by": "RB-x-review-gate-01"})
         g.update({"decision": None, "owner_role": None, "decided_by": None, "rationale": None,
@@ -664,10 +664,10 @@ class StatusViewTestCase(unittest.TestCase):
     def test_plain_table_and_tree_name_the_supersession_and_the_re_arm(self):
         table = "\n".join(fr.state_table(self.store))
         self.assertIn("superseded under RB-x-review-gate-01", table)
-        self.assertIn("re-armed after rejected by omn-qa", table)
+        self.assertIn("re-armed after rejected by qa", table)
         tree = "\n".join(fr.render_tree(self.store, color=False))
         self.assertIn("superseded under RB-x-review-gate-01", tree)
-        self.assertIn("re-armed after rejected by omn-qa", tree)
+        self.assertIn("re-armed after rejected by qa", tree)
 
     def test_completion_package_lists_the_superseded_attempt(self):
         ctx = {"store": self.store, "run_dir": self.tmp / RUN_ID,
@@ -677,7 +677,7 @@ class StatusViewTestCase(unittest.TestCase):
         self.assertIn("RB-x-review-gate-01", package)
         self.assertIn("sha256:aaa", package)
         report = fr.build_final_report(ctx)
-        self.assertIn("re-armed after 1 prior decision(s): rejected by omn-qa", report)
+        self.assertIn("re-armed after 1 prior decision(s): rejected by qa", report)
 
 
 if __name__ == "__main__":

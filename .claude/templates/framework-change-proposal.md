@@ -35,7 +35,7 @@ frameworkChangeProposal:
   runId:             # the run carrying this change
   profileRef: config/self-hosting-profile.md
   profileVersion: 1.0.0
-  producedBy:        # omn-orchestrator | operator
+  producedBy:        # orchestrator | operator
   agentVersion:
   schemaVersion: 1.0.0
   status:            # complete | provisional | blocked

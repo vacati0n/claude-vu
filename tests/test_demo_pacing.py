@@ -82,10 +82,10 @@ class ExplainNarrationTestCase(unittest.TestCase):
     def test_every_beat_carries_a_plain_language_explanation(self):
         markers = _markers() + [
             _marker(8, 96, "gate_awaiting", phase="p1", payload={"gate": "Scope Gate",
-                                                                 "owner_roles": ["omn-qa"]}),
+                                                                 "owner_roles": ["qa"]}),
             _marker(9, 100, "gate_decision", phase="p1",
                     payload={"gate": "Scope Gate", "decision": "approved",
-                             "owner_role": "omn-qa", "decided_by": "sam",
+                             "owner_role": "qa", "decided_by": "sam",
                              "rationale": "Scope is bounded."}),
             _marker(10, 110, "retry", phase="p1",
                     payload={"failure_class": "output-schema-failure", "action": "retry"}),

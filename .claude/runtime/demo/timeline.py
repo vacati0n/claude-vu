@@ -51,7 +51,7 @@ def _spoken_agent(name: str | None) -> str:
     for prefix in ("runtime:", "human:", "host:"):
         if n.startswith(prefix):
             n = n[len(prefix):]
-    n = n.replace("omn-", "").replace("-", " ")
+    n = n.replace("-", " ")
     words = {"dev 1 implement": "implementation developer", "dev 2 reviewer": "reviewer",
              "dev 1 bug analyst": "bug analyst", "qa": "Q A"}
     return words.get(n, n)

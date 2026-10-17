@@ -19,7 +19,7 @@ corrected.
 | Required | Always | One per architecture-significant decision |
 | Emitted status | n/a | `Proposed` only |
 | Producer | `architect` | `architect` |
-| Consumers | `omn-tech-lead`, implementation agents, `omn-dev-2-reviewer`, `omn-qa`, `planner` | Design Gate owners, `omn-documentation` |
+| Consumers | `tech-lead`, implementation agents, `dev-2-reviewer`, `qa`, `planner` | Design Gate owners, `documentation` |
 | Schema version | 1.0.0 | 1.0.0 |
 
 ## Structural Rules
@@ -90,7 +90,7 @@ the impact surface and is never empty when the change touches a shared boundary.
 each traced to a statement identifier.
 
 **Rules.** A requirement with no statement trace is invented scope. Where acceptance intent
-was supplied by `planner` or `omn-product-owner`, it is cited rather than restated.
+was supplied by `planner` or `product-owner`, it is cited rather than restated.
 
 ### 4. Current-State Assumptions and Constraints
 
@@ -205,11 +205,11 @@ quality attribute rather than asserting an expectation.
 | Reason | The structural necessity creating the order |
 | Binds | Planner `T-nnn` this constrains, when an execution plan was supplied |
 
-Followed by test strategy focus areas for `omn-qa`, and the rollout and rollback strategy.
+Followed by test strategy focus areas for `qa`, and the rollout and rollback strategy.
 
 **Rules.** These are constraints, not tasks. No `T-nnn` identifier is created here. A step
 ordered by preference rather than structural necessity is removed. Milestones and schedules
-belong to `omn-tech-lead` and do not appear.
+belong to `tech-lead` and do not appear.
 
 ### 10. Risks and Mitigations
 
@@ -241,7 +241,7 @@ or per-plan-step breakdown, the scope assumptions the estimate rests on, and the
 driving uncertainty.
 
 **Rules.** Effort is expressed as a complexity level, never as duration; scheduling belongs
-to `omn-tech-lead`. Confidence is `low` wherever the estimate depends on a speculative
+to `tech-lead`. Confidence is `low` wherever the estimate depends on a speculative
 impact or an unconfirmed assumption. An `XL` estimate requires a corresponding open decision
 stating what must resolve first.
 

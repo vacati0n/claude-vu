@@ -12,8 +12,8 @@ Run structured review of code and associated artifacts before merge.
 
 ## Assigned Agents
 
-- Primary: `omn-dev-2-reviewer`.
-- Secondary: `omn-architect`, `omn-qa`.
+- Primary: `dev-2-reviewer`.
+- Secondary: `architect`, `qa`.
 
 ## Outputs
 

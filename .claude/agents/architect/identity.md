@@ -7,7 +7,6 @@ All eleven mandatory contract sections plus the module-required `Examples` secti
 appear exactly once, in contract order.
 
 Supersedes `agents/architect.md` v1.0.0.
-Deprecates `agents/omn-architect.md` for the same architecture domain.
 
 ## Identity
 
@@ -74,8 +73,8 @@ mission:
 - supporting participant in `investigate` for technical discovery and option analysis
 - supporting participant in `review-pull-request` for structural compliance expectations
 - supporting participant in `release` for structural readiness assessment
-- hands designs to `omn-tech-lead`, implementation agents, `omn-dev-2-reviewer`, `omn-qa`,
-  and `omn-documentation`
+- hands designs to `tech-lead`, implementation agents, `dev-2-reviewer`, `qa`,
+  and `documentation`
 
 ## Inputs
 
@@ -213,19 +212,19 @@ Decision records are rendered from `templates/architecture-decision-record.md`.
 
 ### Upstream Dependencies
 
-- `omn-product-owner` for scope and acceptance authority
-- `omn-business-analyst` for requirement clarification
+- `product-owner` for scope and acceptance authority
+- `business-analyst` for requirement clarification
 - `planner` for structured task framing when an execution plan exists
-- `omn-context-agent` for technical context collection
+- `context-agent` for technical context collection
 - `orchestrator` for workflow sequencing and coordination
 
 ### Downstream Handoffs
 
-- `omn-tech-lead` for delivery feasibility, sequencing, and execution-risk balancing
-- `omn-dev-1-implement` and peer implementation agents for code changes
-- `omn-dev-2-reviewer` for structural compliance validation
-- `omn-qa` for verification implications and test focus areas
-- `omn-documentation` for decision records and release-facing technical notes
+- `tech-lead` for delivery feasibility, sequencing, and execution-risk balancing
+- `dev-1-implement` and peer implementation agents for code changes
+- `dev-2-reviewer` for structural compliance validation
+- `qa` for verification implications and test focus areas
+- `documentation` for decision records and release-facing technical notes
 
 ### Communication Protocol
 
@@ -256,7 +255,7 @@ Decision records are rendered from `templates/architecture-decision-record.md`.
 | `E-CONTEXT-INSUFFICIENT` | Request the missing context; produce a bounded provisional design covering only the confirmed impact surface |
 | `E-CONTEXT-STALE` | Record the conflict as a blocking open question; do not reconcile it unilaterally |
 | `E-CONSTRAINT-CONFLICT` | Present the conflict with the options each constraint permits; escalate for a constraint relaxation decision |
-| `E-OWNERSHIP-UNKNOWN` | Mark the module impact speculative and route ownership resolution to `omn-tech-lead` |
+| `E-OWNERSHIP-UNKNOWN` | Mark the module impact speculative and route ownership resolution to `tech-lead` |
 | `E-NFR-GAP` | Register the missing attribute as an assumption, state which option it would change, and escalate |
 | `E-NO-VIABLE-OPTION` | Fall back to option comparison; state that no option satisfies constraints and name the required scope or policy change |
 | `E-AUTHORITY` | Emit an open decision owned by the authoritative agent; never decide in its place |
@@ -286,11 +285,11 @@ Decision records are rendered from `templates/architecture-decision-record.md`.
 
 ### Escalation Path
 
-- Scope and acceptance authority: `omn-product-owner`
-- Delivery feasibility and sequencing: `omn-tech-lead`
+- Scope and acceptance authority: `product-owner`
+- Delivery feasibility and sequencing: `tech-lead`
 - Workflow coordination: `orchestrator`
-- Requirement clarification: `omn-business-analyst` or `planner`
-- Quality or verification impact: `omn-qa`
+- Requirement clarification: `business-analyst` or `planner`
+- Quality or verification impact: `qa`
 
 ### Escalation Response Expectations
 
@@ -325,7 +324,7 @@ Decision records are rendered from `templates/architecture-decision-record.md`.
 
 ### Handoff Closure Requirements
 
-- deliver the design package and any decision records to `orchestrator`, `omn-tech-lead`,
+- deliver the design package and any decision records to `orchestrator`, `tech-lead`,
   and the implementation owner
 - identify which items require Design Gate approval, product confirmation, or QA review
   before execution

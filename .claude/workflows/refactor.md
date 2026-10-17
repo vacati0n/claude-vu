@@ -10,17 +10,13 @@ Improve internal code quality and maintainability while preserving externally ob
 
 ## Participating Agents
 - planner
-- omn-tech-lead
-- omn-architect
-- omn-dev-1-implement
-- omn-dev-2-reviewer
-- omn-qa
-- omn-documentation
-- omn-orchestrator
-
-> Architecture participation is owned by `architect` (`agents/architect/`). The
-> `omn-architect` entries in this specification name the same role and are pending
-> reference migration.
+- tech-lead
+- architect
+- dev-1-implement
+- dev-2-reviewer
+- qa
+- documentation
+- orchestrator
 
 ## Phase Model
 
@@ -37,24 +33,24 @@ which is the state-machine form of this same workflow.
 | Phase | Owner Agent | Participation | Input | Output Artifact | Gate | Required Skills |
 |---|---|---|---|---|---|---|
 | `scope-invariants-and-risk-profile` | `architect` | primary | change request, behavioral invariants, baseline metrics, architecture context | `technical-design.md` | Invariant Gate | S01, S02, S07 |
-| `safety-net-establishment` | `omn-qa` | primary | `technical-design.md`, existing tests, quality thresholds | `validation-report.md` | none | S07, S03 |
-| `refactor-implementation` | `omn-dev-1-implement` | primary | `validation-report.md`, coding standards | `implementation-report.md` | Implementation Gate | S03, S06, S12 |
-| `behavioral-validation` | `omn-qa` | primary | `implementation-report.md`, parity checklist, performance checks | `validation-report.md` | Regression Gate | S07, S08, S09 |
-| `closure-and-debt-record` | `omn-orchestrator` | primary | `validation-report.md`, documentation updates | `orchestration-result.md`, carrying the closure summary with technical debt delta and follow-up actions | Closure Gate | S10, S11 |
+| `safety-net-establishment` | `qa` | primary | `technical-design.md`, existing tests, quality thresholds | `validation-report.md` | none | S07, S03 |
+| `refactor-implementation` | `dev-1-implement` | primary | `validation-report.md`, coding standards | `implementation-report.md` | Implementation Gate | S03, S06, S12 |
+| `behavioral-validation` | `qa` | primary | `implementation-report.md`, parity checklist, performance checks | `validation-report.md` | Regression Gate | S07, S08, S09 |
+| `closure-and-debt-record` | `orchestrator` | primary | `validation-report.md`, documentation updates | `orchestration-result.md`, carrying the closure summary with technical debt delta and follow-up actions | Closure Gate | S10, S11 |
 
 ### Phase Identifier Sources
 
 | Phase | Identifier source |
 |---|---|
 | `scope-invariants-and-risk-profile` | Declared by `agents/architect/manifest.yaml`, `supportedWorkflows[refactor].phase`. |
-| `safety-net-establishment` | Declared by `agents/omn-qa/manifest.yaml`, `supportedWorkflows[refactor].phase`, first of two refactor phases this agent owns. |
-| `refactor-implementation` | Declared by `agents/omn-dev-1-implement/manifest.yaml`, `supportedWorkflows[refactor].phase`. |
-| `behavioral-validation` | Declared by `agents/omn-qa/manifest.yaml`, `supportedWorkflows[refactor].phase`, second of two refactor phases this agent owns. |
-| `closure-and-debt-record` | Declared by `agents/omn-orchestrator/manifest.yaml`, `supportedWorkflows[refactor].phase`. |
+| `safety-net-establishment` | Declared by `agents/qa/manifest.yaml`, `supportedWorkflows[refactor].phase`, first of two refactor phases this agent owns. |
+| `refactor-implementation` | Declared by `agents/dev-1-implement/manifest.yaml`, `supportedWorkflows[refactor].phase`. |
+| `behavioral-validation` | Declared by `agents/qa/manifest.yaml`, `supportedWorkflows[refactor].phase`, second of two refactor phases this agent owns. |
+| `closure-and-debt-record` | Declared by `agents/orchestrator/manifest.yaml`, `supportedWorkflows[refactor].phase`. |
 
 ### Ownership Reconciliation
 
-- `workflows/workflow-engine.md` names `omn-tech-lead` as owner of its `ScopeInvariants`
+- `workflows/workflow-engine.md` names `tech-lead` as owner of its `ScopeInvariants`
   state. The workflow record in `registry/workflows.yaml` and the architect manifest both
   assign scope, invariants, and risk profile to `architect`, and a manifest is a machine
   authority while that state table is prose. The Phase Model therefore routes `architect`,
@@ -80,9 +76,9 @@ which is the state-machine form of this same workflow.
   owner agent has no registered capability is not skipped: it is blocked with a recorded
   reason and reported as an open escalation.
 - Every phase of this workflow is dispatchable today. `scope-invariants-and-risk-profile`
-  resolves through `architect`, the two validation phases through `omn-qa`,
-  `refactor-implementation` through `omn-dev-1-implement`, and `closure-and-debt-record`
-  through the `omn-orchestrator` record, its runtime module set, and the registered validator
+  resolves through `architect`, the two validation phases through `qa`,
+  `refactor-implementation` through `dev-1-implement`, and `closure-and-debt-record`
+  through the `orchestrator` record, its runtime module set, and the registered validator
   for `orchestration-result.md`. Each owner holds an active record in `registry/agents.yaml`, a
   runtime module set declaring this workflow and phase, a host registration, resolvable
   phase-mandatory skills, and a declared context slice. A phase that waits does so on its
@@ -117,23 +113,23 @@ Prose form of the Phase Model above. The identifiers in parentheses are canonica
 ## Failure Recovery
 - Revert offending changes when invariants fail.
 - Expand tests when hidden coupling is discovered.
-- Escalate architecture-level concerns to omn-architect.
+- Escalate architecture-level concerns to architect.
 
 ## Approval Gates
 
 Gate names are the canonical ones in `workflows/workflow-gate-matrix.md`, which is the
 authority the runtime reads for gate ownership.
 
-- Invariant Gate: omn-architect and omn-tech-lead. Named `Scope Gate` in earlier revisions
+- Invariant Gate: architect and tech-lead. Named `Scope Gate` in earlier revisions
   of this specification.
-- Implementation Gate: omn-dev-2-reviewer.
-- Regression Gate: omn-qa and omn-dev-2-reviewer. Named `Validation Gate` in earlier
+- Implementation Gate: dev-2-reviewer.
+- Regression Gate: qa and dev-2-reviewer. Named `Validation Gate` in earlier
   revisions of this specification.
-- Closure Gate: omn-orchestrator and omn-documentation.
+- Closure Gate: orchestrator and documentation.
 
 The Producer Exclusion Rule applies twice here. `architect` produces the design package
-assessed at the Invariant Gate, so acceptance rests with omn-tech-lead. `omn-qa` produces
+assessed at the Invariant Gate, so acceptance rests with tech-lead. `qa` produces
 the parity evidence assessed at the Regression Gate, so acceptance rests with
-omn-dev-2-reviewer. `omn-orchestrator` produces the closure summary, so the Closure Gate
-decision rests with omn-documentation.
+dev-2-reviewer. `orchestrator` produces the closure summary, so the Closure Gate
+decision rests with documentation.
 

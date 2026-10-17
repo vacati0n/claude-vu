@@ -9,7 +9,7 @@ requirementFraming:
       reference: inline
     - type: product-context
       reference: context/product-context.md
-  producedBy: omn-business-analyst
+  producedBy: business-analyst
   agentVersion: 1.0.0
   schemaVersion: 1.0.0
   status: complete
@@ -23,7 +23,7 @@ requirementFraming:
 
 - Subject: Bulk refund handling for partially fulfilled orders
 - Requested by: commerce operations lead
-- Decision owner: omn-product-owner
+- Decision owner: product-owner
 - Workflow phase: problem-framing
 - Framing date: 2026-08-19
 
@@ -79,11 +79,11 @@ requirementFraming:
 
 | ID | Question | Blocking | Owner | Needed By |
 |---|---|---|---|---|
-| `Q-001` | Should a partial refund be permitted while a line is in transit but not yet delivered? | no | omn-product-owner | Scope Gate |
+| `Q-001` | Should a partial refund be permitted while a line is in transit but not yet delivered? | no | product-owner | Scope Gate |
 
 ## Handoff
 
-- Downstream owner: omn-context-agent, for technical discovery against the current order and refund model
+- Downstream owner: context-agent, for technical discovery against the current order and refund model
 - Gate: Framing Gate
 - Evidence for the gate: five requirements, each traced to a declared outcome and bounded by an acceptance intent, with two assumptions carrying their basis
-- Deferred to downstream: refund thresholds and approval limits to omn-product-owner, the refund and reconciliation mechanism to architect
+- Deferred to downstream: refund thresholds and approval limits to product-owner, the refund and reconciliation mechanism to architect

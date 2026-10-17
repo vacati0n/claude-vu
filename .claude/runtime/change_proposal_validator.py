@@ -30,7 +30,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import artifact_contract as ac  # noqa: E402
 import framework_runtime as fr  # noqa: E402
 import self_hosting as sh  # noqa: E402
-from artifact_lib import Check, strip_md  # noqa: E402
+from artifact_lib import Check, canonical_agent_id, strip_md  # noqa: E402
+
+# Verification scripts a committed proposal names that were later removed on purpose. A
+# proposal is an audit record and is never edited in place, so F10 reads a script listed here
+# as accounted for rather than as a command the proposal could not have run.
+REMOVED_SCRIPTS = {
+    # removed with the CLI wrapper package and its bundled payload mirror
+    "tests/test_bundled_payload.py",
+}
 
 TEMPLATE = "templates/framework-change-proposal.md"
 GD001_EFFECTIVE = "2026-08-19"   # config/self-hosting-profile.md#point-in-time-evidence-rule
@@ -52,7 +60,7 @@ CONTRACT = ac.ArtifactContract(
     # because 33 of the framework's 36 phases still block at capability registration, so the
     # human carrying a blocked phase is the honest author of the record for it. The permission
     # narrows as agents register; it is not a permanent second producer.
-    producers=("omn-orchestrator", "operator"),
+    producers=("orchestrator", "operator"),
     metadata_key="frameworkChangeProposal",
     metadata_fields=("proposalId", "changeClass", "routedCommand", "routedWorkflow", "runId",
                      "profileRef", "profileVersion", "producedBy", "agentVersion",
@@ -417,7 +425,7 @@ def semantic_checks(rep, contract):  # noqa: C901 - one check per profile rule, 
         owners = fr.parse_gate_matrix(routed_workflow)
         for row in gate_rows:
             gate = _cell(headers, row, "Gate").strip("`")
-            role = _cell(headers, row, "Owner Role").strip("`")
+            role = canonical_agent_id(_cell(headers, row, "Owner Role").strip("`"))
             if gate not in owners:
                 bad_gates.append(f"{gate!r} is not a gate of {routed_workflow}")
             elif role not in owners[gate]:
@@ -455,7 +463,8 @@ def semantic_checks(rep, contract):  # noqa: C901 - one check per profile rule, 
         if not cmd or cmd.lower() == "inspection":
             continue
         script = next((tok for tok in cmd.split() if tok.endswith(".py")), None)
-        if script and not (fr.CLAUDE.parent / script.replace("\\", "/")).exists():
+        script = script and script.replace("\\", "/")
+        if script and script not in REMOVED_SCRIPTS and not (fr.CLAUDE.parent / script).exists():
             unrunnable.append(cmd)
     add("F10", TEMPLATE, "Correctable",
         "Every verification row names a command that exists, or declares inspection",
