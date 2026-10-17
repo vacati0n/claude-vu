@@ -8,11 +8,20 @@ Mechanically checks a produced `release-note.md` against the contract set that g
                                              constraints
   - `.claude/context/release-context.md`     the release facts a note must not contradict
 
-Scope boundary: `R1` to `R5` are the rules in the agent contract that are decidable by
-inspecting the artifact. Whether the note describes what actually shipped is not decidable
-from the note alone; what is decidable is internal consistency -- a declared contract change
-carries a compatibility statement, a rolled-back release carries a recorded issue, and the
-version is one fact rather than two.
+Scope boundary: `R1` to `R9` are the rules in the agent contract that are decidable by
+inspecting the artifact and the invocation envelope. Whether the note describes what actually
+shipped is not decidable from the note alone; what is decidable is internal consistency -- a
+declared contract change carries a compatibility statement, a rolled-back release carries a
+recorded issue, and the version is one fact rather than two -- and whether the release position
+is one the evidence and the phase can yield.
+
+The release position is keyed on the phase's communication basis (Stage 8 of
+`agents/omn-documentation/reasoning.md`). Only the `post-release` basis reads a deployment
+outcome, off a supplied deployment status; the other three publish a position that asserts no
+merge, release, or deployment fact. `R8` decides the position against the evidence types the
+note lists in `sourceInputs`; `R9` decides it against the phase the invocation envelope names,
+and is declared not-machine-checkable only when no envelope is supplied. Withheld is never a
+passing verdict.
 """
 
 from __future__ import annotations
@@ -29,7 +38,45 @@ from artifact_lib import Check, strip_md  # noqa: E402
 TEMPLATE = "templates/release-note.md"
 CONTRACT_REF = "agents/omn-documentation.md"
 
-VERDICTS = ("released", "partial", "rolled-back")
+STAGE8_REF = "agents/omn-documentation/reasoning.md#stage-8--determine-the-release-position"
+
+# The contract version that introduced the basis-keyed release position. A note an earlier
+# version produced was read off the superseded deployment-only table; `verify_validators`
+# reads this to tell such a note apart, and this validator never exempts one.
+CURRENT_CONTRACT_VERSION = (1, 2, 0)
+
+# Phase -> communication basis, as the output contract's Deliverable table and the agent
+# contract's Workflow Participation table state it. Phase identifiers are unique across the
+# five workflows, so the envelope's `state_id` names the basis.
+PHASE_BASIS = {
+    "documentation-and-release-handoff": "release-handoff",
+    "publication": "findings",
+    "findings-publication": "findings",
+    "documentation-impact": "documentation-delta",
+    "communication-and-post-release": "post-release",
+}
+
+# Basis -> the release positions Stage 8 can yield for it when its evidence is present.
+VERDICT_OF_BASIS = {
+    "release-handoff": ("handed-off",),
+    "findings": ("findings-published",),
+    "documentation-delta": ("delta-published",),
+    "post-release": ("released", "partial", "rolled-back"),
+}
+VERDICTS = ("released", "partial", "rolled-back", "handed-off", "findings-published",
+            "delta-published")
+
+# Verdict -> the `sourceInputs` types, any one of which is the evidence that position needs.
+# `validation-report` sits beside `verification-report` because it is the identifier the
+# agent's manifest accepts for the same account.
+VERDICT_EVIDENCE = {
+    "released": ("deployment-status",),
+    "partial": ("deployment-status",),
+    "rolled-back": ("deployment-status",),
+    "handed-off": ("verification-report", "validation-report"),
+    "findings-published": ("technical-recommendation",),
+    "delta-published": ("verification-report", "validation-report"),
+}
 ISSUE_TABLE = ("ID", "Issue", "Impact", "Workaround", "Tracking")
 
 CONTRACT = ac.ArtifactContract(
@@ -88,8 +135,24 @@ CONTRACT = ac.ArtifactContract(
 )
 
 
-def semantic_checks(rep, contract):
-    """The release-specific rules in `agents/omn-documentation.md`."""
+def source_input_types(meta: dict):
+    """The `type` of every `sourceInputs` entry, or None when the list is absent or malformed."""
+    entries = meta.get("sourceInputs")
+    if not isinstance(entries, list) or not entries:
+        return None
+    types = []
+    for entry in entries:
+        if not isinstance(entry, dict) or not str(entry.get("type") or "").strip():
+            return None
+        types.append(str(entry["type"]).strip().lower())
+    return types
+
+
+def semantic_checks(rep, contract, envelope: dict | None = None):
+    """The release-specific rules of the omn-documentation contract.
+
+    `envelope` is the invocation envelope, when one is supplied. Only `R9` reads it.
+    """
     meta = getattr(rep, "meta", {}) or {}
     body_of = getattr(rep, "body_of", {}) or {}
 
@@ -145,6 +208,44 @@ def semantic_checks(rep, contract):
         f"rollback criteria={rollback!r} for a rolled-back release" if not ok
         else "rollback criteria stated")
 
+    # R8 -- the position is read off evidence, not chosen. A deployment outcome needs the
+    # deployment status; each non-deploying position needs the account its basis publishes.
+    types = source_input_types(meta)
+    needed = VERDICT_EVIDENCE.get(verdict)
+    if types is None:
+        ok, detail = False, "sourceInputs is absent or an entry carries no type"
+    elif needed is None:
+        ok, detail = False, f"no evidence rule for releaseVerdict={verdict!r}"
+    else:
+        ok = any(t in needed for t in types)
+        detail = (f"releaseVerdict={verdict!r} needs a sourceInputs entry of type "
+                  f"{' or '.join(needed)}; listed: {sorted(set(types))}")
+    add("R8", STAGE8_REF, "Blocking",
+        "The release position is supported by the evidence type it is read off",
+        "pass" if ok else "fail", detail)
+
+    # R9 -- the position belongs to the phase. The envelope names the phase; without one the
+    # rule is declared rather than guessed, as the digest cross-check is.
+    basis = None
+    if envelope is None:
+        add("R9", STAGE8_REF, "Advisory",
+            "The release position is one the phase's communication basis yields",
+            "not-machine-checkable", "no envelope supplied")
+    else:
+        state_id = envelope.get("state_id")
+        basis = PHASE_BASIS.get(state_id)
+        if basis is None:
+            ok, detail = False, (f"envelope state_id={state_id!r} is not a phase that "
+                                 f"publishes release-note.md")
+        else:
+            allowed = VERDICT_OF_BASIS[basis]
+            ok = verdict in allowed
+            detail = (f"phase {state_id!r} has basis {basis!r}, which yields "
+                      f"{', '.join(allowed)}; releaseVerdict={verdict!r}")
+        add("R9", STAGE8_REF, "Blocking",
+            "The release position is one the phase's communication basis yields",
+            "pass" if ok else "fail", detail)
+
     # R6 -- a note is stakeholder communication, so the audience is named.
     comms = ac.parse_field_bullets(body_of.get("Communication", ""))
     notified = comms.get("stakeholders notified", "")
@@ -154,6 +255,7 @@ def semantic_checks(rep, contract):
         f"stakeholders notified={notified!r}")
 
     rep.counts["releaseVerdict"] = verdict
+    rep.counts["communicationBasis"] = basis
     rep.counts["knownIssues"] = len(rows)
     rep.counts["version"] = meta_version or None
     # A version string is provenance, so a note that carries one that is not a version at all
@@ -169,11 +271,23 @@ def semantic_checks(rep, contract):
 
 def validate(artifact_path, envelope: dict | None = None):
     rep = ac.run_contract(CONTRACT, Path(artifact_path), envelope)
-    return semantic_checks(rep, CONTRACT)
+    return semantic_checks(rep, CONTRACT, envelope)
 
 
-def main():
-    return ac.cli(CONTRACT, extra=semantic_checks)
+def main(argv=None):
+    # The shared command line hands its `extra` hook the report and the contract only, so the
+    # envelope `R9` reads is taken from the same `--envelope` argument here, leaving the hook
+    # every other validator uses unchanged.
+    import argparse
+    import json
+
+    ap = argparse.ArgumentParser(add_help=False)
+    ap.add_argument("--envelope")
+    known, _rest = ap.parse_known_args(argv)
+    env = (json.loads(Path(known.envelope).read_text(encoding="utf-8"))
+           if known.envelope else None)
+    return ac.cli(CONTRACT, extra=lambda rep, contract: semantic_checks(rep, contract, env),
+                  argv=argv)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,142 @@
+{
+  "invocation_id": "inv-f94564cb61ce-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-f94564cb61ce/states/regression-validation/artifacts/validation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "VR-run-f94564cb61ce-regression-validation",
+    "validationBasis": "regression",
+    "status": "provisional",
+    "verdict": "pass-with-reservations",
+    "counts": {
+      "criteria": {
+        "total": 15,
+        "met": 13,
+        "not-met": 0,
+        "blocked": 2
+      },
+      "defects": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 0
+      },
+      "openQuestions": 2
+    },
+    "blockedCriteria": {
+      "AC-008": "runtime acceptance path traced (framework_runtime.py lines 4072, 4169) but not executed end to end; command-line --envelope path confirmed; artifact_contract.py unchanged",
+      "AC-011": "change proposal listing the 9 superseded notes and FC-020 O-006 closed not yet produced (closure deliverable); the 9 notes re-validate as predicted and no run evidence was edited"
+    },
+    "validatorRun": "runtime/validation_report_validator.py with --envelope: PASS 31/31 (3 not-machine-checkable)",
+    "commandsExecuted": {
+      "PYTHONPATH=. python -W ignore tests/test_release_verdict.py": "29/29 OK",
+      "PYTHONPATH=. python -W ignore tests/test_bundled_payload.py": "11/11 OK",
+      "PYTHONPATH=. python -W ignore tests/test_knowledge.py": "49/49 OK",
+      "PYTHONPATH=. python -W ignore -m unittest tests.test_knowledge.BackwardCompatibilityTestCase": "6/6 OK",
+      "python runtime/verify_validators.py": "exit 0, 6/6 COVERED, 9 release-note candidates superseded",
+      "python runtime/verify_manifests.py": "exit 0, 2/2 CONFORMS",
+      "python runtime/verify_registry_coverage.py": "exit 0, 8/8 COVERED",
+      "PYTHONPATH=. python -W ignore tools/run_tests_parallel.py": "exit 1: 28/29 modules, 768 tests; only test_demo_capture (3 tests, ffmpeg filter_complex_script unsupported, known pre-existing)",
+      "release_note_validator.py on scratch copy of held run-c9fb8d5bbb32 note (handed-off) --envelope its own envelope": "33/34; only C3.2 fails; R1, R8, R9 pass",
+      "release_note_validator.py on the 9 recorded notes --envelope their own envelopes": "each fails exactly R8 and R9; 437e2f765e4b expects findings-published",
+      "scratch probe over validate(): 23 constructed cases across five phases, release R4/R5": "23/23 as expected",
+      "HEAD validator (git show HEAD) over efe092286625 and the held-note copy": "defect witnessed: released note passed, handed-off rejected by R1"
+    },
+    "regressionsDetected": 0,
+    "observations": [
+      "verify_validators now reports 6/6 COVERED; the implementation report recorded 5/6 with a framework-change-proposal F7 failure (its R-003), which no longer reproduces on this tree",
+      "full suite discovers 768 tests against the 767 reported at fix-implementation, consistent with the post-review guard test"
+    ],
+    "qualityChecks": {
+      "run": 57,
+      "passed": 57,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "D7": "pass",
+        "Q2": "pass",
+        "Q5": "pass",
+        "A7": "pass",
+        "A8": "pass",
+        "T1": "pass",
+        "T2": "pass",
+        "T3": "pass",
+        "Q3": "pass",
+        "Q7": "pass",
+        "F1": "pass",
+        "F2": "pass",
+        "F3": "pass",
+        "F4": "pass",
+        "F5": "pass",
+        "F6": "pass",
+        "Q1": "pass",
+        "Q4": "pass",
+        "Q6": "pass",
+        "R1": "pass",
+        "R2": "pass",
+        "R3": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "pass",
+        "E6": "pass",
+        "E7": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "A4": "pass",
+        "A5": "pass",
+        "A6": "pass",
+        "A9": "pass",
+        "A10": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass",
+        "C6": "pass"
+      },
+      "notes": {
+        "A7": "AC-009's citation token for an upstream open question was replaced by its subject so check C5 holds; the criterion wording is otherwise verbatim",
+        "R2": "Stage 8 row is pass-with-reservations/complete; status is provisional under identity.md precedence (environment-unavailable recovery for AC-008, pending Q-002)"
+      }
+    },
+    "notMachineCheckable": {
+      "N1": "met: Blocking-rule paths exercised exhaustively per phase and verdict; interface call sites executed or traced and named; no data or security handling altered",
+      "N2": "met: every met row cites a command run in this phase whose output shows the criterion; AC-008 and AC-011 held at blocked where only tracing or downstream artifacts would settle them",
+      "N3": "met: RCA regression scope exercised via the full suite, verifiers, release-phase probe and superseded-note re-validation; unreached paths named in Untested areas"
+    },
+    "independence": "omn-qa authored neither the change (omn-dev-1-implement, operator post-review corrections) nor the evidence under validation",
+    "loadedModules": "core tier plus identity.md (on-demand trigger: Stage 2 and D5 refer to it); execution.md and examples.md not triggered",
+    "scratchOutsideRepository": "held-note copies, probe.py, HEAD validator copy, and logs in the session scratchpad; no repository file, lesson store, or other run evidence modified (git status identical before and after; held-note and lesson-store digests unchanged)"
+  },
+  "evidence_refs": [
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/identity.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "runs/run-f94564cb61ce/states/regression-validation/invocation-envelope.json"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "runs/run-f94564cb61ce/states/regression-validation/artifacts/validation-report.md",
+    "runs/run-f94564cb61ce/states/regression-validation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

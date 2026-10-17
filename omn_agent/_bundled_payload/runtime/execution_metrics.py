@@ -275,6 +275,12 @@ def compute(run_dir: Path, claude_root: Path, *, store=None, events: list | None
         if ledger_path.exists() and budget is None:
             ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
             budget = ledger.get("context_budget")
+        # Lessons from earlier runs shown to each dispatch of this phase, read from the
+        # `lessons_shown` detail of its `invocation_started` events; an event without the key
+        # (every dispatch of a run planned before runtime 0.10.0) counts zero.
+        hydrated = [{"invocation_id": (e.get("details_ref") or {}).get("invocation_id"),
+                     "lessons": len((e.get("details_ref") or {}).get("lessons_shown") or [])}
+                    for e in invocations if e["state_id"] == sid]
         per_phase.append({
             "phase": sid, "agent": i["owner_agent_id"], "status": i["status"],
             "dispatches": len(starts), "attempts_charged": i.get("attempt", 0),
@@ -284,6 +290,8 @@ def compute(run_dir: Path, claude_root: Path, *, store=None, events: list | None
             "skills": skills,
             "model_tier": phase_tier,
             "context_estimate": budget,
+            "lessons_hydrated": sum(h["lessons"] for h in hydrated),
+            "lessons_hydrated_by_invocation": hydrated,
         })
 
     # Repeated context loads: a slice member declared for more than one dispatch is a file
@@ -366,6 +374,7 @@ def compute(run_dir: Path, claude_root: Path, *, store=None, events: list | None
             "savings_pct": round(100 * (1 - progressive / legacy), 1) if legacy else 0.0,
         },
         "model_tiers": tier_summary(events, per_phase),
+        "lessons_hydrated_total": sum(p["lessons_hydrated"] for p in per_phase),
         "per_phase": per_phase,
     }
 

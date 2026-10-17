@@ -1,0 +1,694 @@
+{
+  "invocation_id": "inv-f94564cb61ce-04-001",
+  "run_id": "run-f94564cb61ce",
+  "work_item_id": "run-f94564cb61ce::regression-validation",
+  "idempotency_key": "sha256:e88f7d4f9716a1395ecaebaef1acdda6",
+  "state_id": "regression-validation",
+  "phase_index": 4,
+  "agent_id": "omn-qa",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-qa.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-qa/manifest.yaml",
+    "load_order": [
+      "agents/omn-qa/system.md",
+      "agents/omn-qa/identity.md",
+      "agents/omn-qa/reasoning.md",
+      "agents/omn-qa/execution.md",
+      "agents/omn-qa/output.md",
+      "agents/omn-qa/quality.md",
+      "agents/omn-qa/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-qa/system.md": "sha256:3e97eea7ec77003b26899aac0a9eddec",
+      "agents/omn-qa/identity.md": "sha256:9195b995eafd7f686fd5f97037f324fd",
+      "agents/omn-qa/reasoning.md": "sha256:424d6ef785f44f034fc61b9a3b56078c",
+      "agents/omn-qa/execution.md": "sha256:9f14ad3e34cd7fee4743f6f3587fc6ac",
+      "agents/omn-qa/output.md": "sha256:cfb5abc0ed0c9122e1e0c56be30038d3",
+      "agents/omn-qa/quality.md": "sha256:11fe13aef1252759858b98c89edc6ef9",
+      "agents/omn-qa/examples.md": "sha256:84f6d1663eea48190fce8ec74e909371"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-qa/system.md",
+        "agents/omn-qa/reasoning.md",
+        "agents/omn-qa/output.md",
+        "agents/omn-qa/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-qa/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-qa/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-qa/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 39471,
+      "full_bytes": 80377
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "acceptance-validation",
+      "regression-assessment",
+      "test-strategy-definition",
+      "defect-classification",
+      "release-readiness-recommendation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Primary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "security is always read in review and validation phases",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "not-triggered",
+      "area": "performance",
+      "basis": "area performance is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "agent-manifest (Primary)"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "required",
+      "area": "database",
+      "basis": "area database triggered by 'migration' in artifact:fix-implementation",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "review-package",
+      "technical-design",
+      "scope-definition",
+      "bug-analysis",
+      "execution-plan",
+      "acceptance-criteria",
+      "validation-criteria",
+      "regression-targets",
+      "test-evidence",
+      "test-baseline",
+      "quality-thresholds",
+      "parity-checklist",
+      "performance-baseline",
+      "packaging-evidence",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/knowledge-management-2d49d4/.claude/runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md",
+        "text": "```yaml\nimplementationReport:\n  reportId: IR-2026-1013\n  changeReference: run-f94564cb61ce fix-bug, defect runs/inputs/release-handoff-verdict-defect-report.md\n  sourceInputs:\n    - type: bug-analysis\n      reference: runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md\n    - type: bug-analysis\n      reference: runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md\n    - type: architecture-decision-record\n      reference: architect ruling on the release-vocabulary question (operator-supplied file, session scratchpad, outside the repository)\n    - type: change-request\n      reference: omn-tech-lead ruling on the CR-003 pins and the bundle sync (operator-supplied file, session scratchpad, outside the repository)\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: provisional\n  workflowPhase: fix-implementation\n  verificationStatus: partially-verified\n  inputDigest: sha256:ee54571a8bdd7313d36ff6b821da59dd\n  contextDigest: sha256:850b48df6ab3cc41c8f0e1fe7fb61411\n```\n\n## Metadata\n\n- Report ID: IR-2026-1013\n- Change reference: run-f94564cb61ce fix-bug, defect runs/inputs/release-handoff-verdict-defect-report.md\n- Workflow phase: fix-implementation\n- Status: provisional\n- Verification status: partially-verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: each of the four non-deploying omn-documentation phases now has a truthful release position that the Validation Engine accepts (`handed-off`, `findings-published`, `delta-published`), the release phase keeps `released`, `partial`, `rolled-back` with R4 and R5 unchanged, withheld fails everywhere, and the validator decides the verdict against evidence (R8 on `sourceInputs` types, R9 on the envelope `state_id`) instead of vocabulary membership, so a deployment verdict with no deployment status no longer passes.\n- Approach taken: implemented the root-cause-analysis fix strategy, which adopts the architect ruling on the vocabulary question as corrected by that analysis's evidence entries on envelope plumbing, verifier re-validation, the `validation-report` type set, and the four pinned files; Stage 8 rekeyed on basis; R8/R9 added inside the existing `semantic_checks` (rung 2, reusing the shared contract engine) with an optional `envelope` parameter, and the command-line path reads `--envelope` in the validator's own `main` so `artifact_contract.cli` is untouched (rung 6); verify_validators gains one `SUPERSEDED_CONTRACTS` table and two small functions beside the existing candidate selector (rung 7: no existing selector rule could exclude by contract version, and the analysis forbids an exemption inside the validator); the only new file is the regression test module, required because the knowledge test files are frozen to this phase; bundle mirrored with `PYTHONPATH=. python tests/test_bundled_payload.py --sync`; no dependency added.\n- Design reference: root-cause-analysis bug-analysis (sha256:1e9b135e23d17f7d36a81df95519e9f0) Fix Strategy, eight conditions; triage bug-analysis (sha256:f902dcda2b9ee3ef30f1f5a402eb9991); architect ruling sections 1 to 6; Triage Gate rationale in state.json; omn-tech-lead ruling on the CR-003 pins and the bundle sync.\n- Out of scope: the 9 recorded notes and the held run-c9fb8d5bbb32 note stay as recorded (run evidence is immutable and outside this agent's writes); the change proposal that lists them and records FC-020 O-006 closed lives under proposals/, which this agent may not write (Q-002); the C3.2 vendor-token failure of the held note is out of scope per the Triage Gate; tests/test_knowledge.py and tests/fixtures/knowledge/ were not touched; the orchestration-result deployment-state vocabulary is untouched because no other module reads releaseVerdict; the module Status lines that still read version 1.0.0 were left as the 1.1.0 bump left them.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | agents/omn-documentation/reasoning.md | modified | Stage 8 table keyed on communication basis, one complete row per non-deploying basis, withheld rows per basis, deployment status selects no row outside post-release | RCA fix condition 1; architect ruling section 3 |\n| `C-002` | agents/omn-documentation/identity.md | modified | Required Evidence rows for the three new positions and a quality-summary bullet for the basis rule | RCA fix condition 2 (Required Evidence table) |\n| `C-003` | agents/omn-documentation/output.md | modified | Release position column in the Deliverable table, six-value releaseVerdict row, Known Issues `None identified.` rule, evidence-type rule, Environment guidance, `validation-report` declared type | RCA fix condition 2; evidence entry on the type set |\n| `C-004` | agents/omn-documentation/quality.md | modified | R1 text names six values and withheld never passes; new Blocking R8 and R9 rows | RCA fix conditions 2 and 3 |\n| `C-005` | agents/omn-documentation/system.md | modified | Boundary row refusing to record a non-deploying publication as released | architect ruling section 5 (recommended charter row) |\n| `C-006` | templates/release-note.md | modified | Template 1.2.0: usage names the five phases, six-value verdict comment, `validation-report` type, Known Issues comment | RCA fix conditions 2 and 6 |\n| `C-007` | runtime/release_note_validator.py | modified | Six-value VERDICTS, PHASE_BASIS, VERDICT_OF_BASIS, VERDICT_EVIDENCE, Blocking R8, R9 (Advisory only without an envelope), envelope reaches R9 via validate and the own command line, communicationBasis count | RCA fix conditions 2, 3, 4 |\n| `C-008` | runtime/verify_validators.py | modified | Committed notes produced below omn-documentation 1.2.0 are reported as superseded and excluded from selection and re-validation; documented selection rule updated; envelope label robust to out-of-tree paths | RCA fix condition 5 |\n| `C-009` | agents/omn-documentation.agent.md | modified | Host registration version table and bootstrap check at 1.2.0 | RCA fix condition 6 |\n| `C-010` | agents/omn-documentation/manifest.yaml | modified | metadata.version 1.2.0 | RCA fix condition 6 |\n| `C-011` | registry/agents.yaml | modified | omn-documentation record at 1.2.0, required because the runtime rejects a manifest/registry mismatch | RCA fix condition 6 |\n| `C-012` | registry/templates.yaml | modified | release-note record at 1.2.0, description names the five phases and the basis rule | RCA fix condition 6; `V-003` |\n| `C-013` | runtime/README.md | modified | Validator table names all five served phases; paragraph on R8, R9, and the superseded-contract rule | RCA fix condition 6 |\n| `C-014` | omn_agent/_bundled_payload/agents/omn-documentation.agent.md | modified | Mirror of `C-009` | RCA fix condition 7 |\n| `C-015` | omn_agent/_bundled_payload/agents/omn-documentation/identity.md | modified | Mirror of `C-002` | RCA fix condition 7 |\n| `C-016` | omn_agent/_bundled_payload/agents/omn-documentation/manifest.yaml | modified | Mirror of `C-010` | RCA fix condition 7 |\n| `C-017` | omn_agent/_bundled_payload/agents/omn-documentation/output.md | modified | Mirror of `C-003` | RCA fix condition 7 |\n| `C-018` | omn_agent/_bundled_payload/agents/omn-documentation/quality.md | modified | Mirror of `C-004` | RCA fix condition 7 |\n| `C-019` | omn_agent/_bundled_payload/agents/omn-documentation/reasoning.md | modified | Mirror of `C-001` | RCA fix condition 7 |\n| `C-020` | omn_agent/_bundled_payload/agents/omn-documentation/system.md | modified | Mirror of `C-005` | RCA fix condition 7 |\n| `C-021` | omn_agent/_bundled_payload/registry/agents.yaml | modified | Mirror of `C-011` | RCA fix condition 7 |\n| `C-022` | omn_agent/_bundled_payload/registry/templates.yaml | modified | Mirror of `C-012` | RCA fix condition 7 |\n| `C-023` | omn_agent/_bundled_payload/runtime/README.md | modified | Mirror of `C-013` | RCA fix condition 7 |\n| `C-024` | omn_agent/_bundled_payload/runtime/release_note_validator.py | modified | Mirror of `C-007` | RCA fix condition 7 |\n| `C-025` | omn_agent/_bundled_payload/runtime/verify_validators.py | modified | Mirror of `C-008` | RCA fix condition 7 |\n| `C-026` | omn_agent/_bundled_payload/templates/release-note.md | modified | Mirror of `C-006` | RCA fix condition 7 |\n| `C-027` | tests/test_release_verdict.py | added | 29 regression tests: per-phase positions with and without envelope, withheld everywhere, R8 type sets, R9 incl. command line, release phase R4/R5, contract agreement, versions, bundle parity, superseded selection and V3 | RCA Validation Plan, regression tests added |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | Defect witness: the new module run against an unmodified HEAD copy of the framework tree fails 24 of 29 tests; only the withheld and four release-phase regressions pass | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`, `C-007`, `C-008`, `C-009`, `C-010`, `C-011`, `C-012`, `C-013`, `C-027` | `PYTHONPATH=. python -W ignore -m unittest tests.test_release_verdict` (in a git-archive HEAD copy) | fail |\n| `T-002` | The same module on the fixed tree: every assertion of `T-001` holds | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`, `C-007`, `C-008`, `C-009`, `C-010`, `C-011`, `C-012`, `C-013`, `C-027` | `PYTHONPATH=. python -W ignore -m unittest tests.test_release_verdict` | pass |\n| `T-003` | Regression baseline before any edit: 739 tests, 27 of 28 modules; only test_demo_capture fails (3, ffmpeg option unsupported) | regression | `C-001` to `C-027` (comparator) | `PYTHONPATH=. python -W ignore tools/run_tests_parallel.py` | fail |\n| `T-004` | Full suite after the change: 767 tests, 28 of 29 modules; the same 3 test_demo_capture failures and nothing else; test_knowledge 49/49 | regression | `C-001` to `C-027` | `PYTHONPATH=. python -W ignore tools/run_tests_parallel.py` | fail |\n| `T-005` | BackwardCompatibilityTestCase on the combined tree (CR-003 landed, this change present): 6 of 6 pass | regression | `C-006`, `C-011`, `C-012`, `C-013` | `PYTHONPATH=. python -W ignore -m unittest tests.test_knowledge.BackwardCompatibilityTestCase -v` | pass |\n| `T-006` | Release fixture with no envelope passes 32/32, R9 declared not-machine-checkable | regression | `C-006`, `C-007` | `python -W ignore runtime/release_note_validator.py runtime/fixtures/release-note.md` | pass |\n| `T-007` | Each of the 9 superseded notes, with its own envelope, fails exactly R8 and R9; the held note fails C3.2, R1, R8, R9; the investigate note's R9 expects findings-published | regression | `C-007` | `python -W ignore runtime/release_note_validator.py <note> --envelope <its invocation-envelope.json>` over all 10 notes | pass |\n| `T-008` | Reproduction inverted: the held-run note with releaseVerdict handed-off and its envelope passes R1, R8, R9; only C3.2 remains | regression | `C-007` | `python -W ignore runtime/release_note_validator.py <scratch copy> --envelope runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/invocation-envelope.json` | pass |\n| `T-009` | Existing suites that import the validator or the verifier: test_verify_validators_mutations 26/26, test_investigate_research_handoffs 22/22 | regression | `C-007`, `C-008` | `PYTHONPATH=. python -W ignore tools/run_tests_parallel.py` (module lines) | pass |\n| `T-010` | Verifier baseline before any edit: 5 of 6; V3 fails only on framework-change-proposal F7 (FC-020 scope rows) | regression | `C-008` | `python -W ignore runtime/verify_validators.py` | fail |\n| `T-011` | Verifier after the change: 5 of 6, V3 fails only on the same F7; release-note validated on the fixture, 9 candidates reported superseded, V4 caught by R2 | integration | `C-007`, `C-008` | `python -W ignore runtime/verify_validators.py` | fail |\n| `T-012` | Manifest and registry verifiers accept the 1.2.0 versions: 2/2 CONFORMS and 8/8 COVERED | static | `C-009`, `C-010`, `C-011`, `C-012` | `python -W ignore runtime/verify_manifests.py`; `python -W ignore runtime/verify_registry_coverage.py` | pass |\n| `T-013` | Bundle parity 11/11 after sync; bundle diff holds only the 13 mirrors and no memory/lessons path | contract | `C-014`, `C-015`, `C-016`, `C-017`, `C-018`, `C-019`, `C-020`, `C-021`, `C-022`, `C-023`, `C-024`, `C-025`, `C-026` | `PYTHONPATH=. python -W ignore -m unittest tests.test_bundled_payload`; `git status --short --untracked-files=all omn_agent/` | pass |\n\n## Verification Results\n\n- Verification method: the new module was run first against an unmodified HEAD copy to witness the defect, then on the fixed tree; the full suite and the validator coverage verifier were run before any edit and again after, and compared; the 10 recorded notes were re-validated with their own envelopes; runtime verifiers were run from the framework directory; verify_multi_phase and verify_vertical_slice were not run, because they mutate the run they select.\n- Commands executed: `PYTHONPATH=. python -W ignore tools/run_tests_parallel.py` (before and after); `PYTHONPATH=. python -W ignore -m unittest tests.test_release_verdict` (pre-edit tree: 23 of 28 failed; HEAD copy: 24 of 29 failed; fixed tree: 29/29); `PYTHONPATH=. python -W ignore -m unittest tests.test_knowledge.BackwardCompatibilityTestCase -v`; `PYTHONPATH=. python -W ignore -m unittest tests.test_bundled_payload`; `PYTHONPATH=. python tests/test_bundled_payload.py --sync`; `python -W ignore runtime/verify_validators.py` (before and after); `python -W ignore runtime/release_note_validator.py` over the fixture, the 10 notes, and the inverted held note; `python -W ignore runtime/verify_manifests.py`; `python -W ignore runtime/verify_registry_coverage.py`.\n- Result summary: 13 evidence entries executed, 9 passed, 4 failed; `T-001` fails by design as the defect witness; `T-003` and `T-004` fail only on the 3 environmental test_demo_capture failures present at baseline; `T-010` and `T-011` fail only on the framework-change-proposal F7 failure present at baseline; no failure is attributable to this change; CR-003 has landed in tests/test_knowledge.py, and BackwardCompatibilityTestCase passes 6/6 and test_knowledge 49/49 on the combined tree with this change present (`T-004`, `T-005`).\n- Unverified areas: the runtime acceptance path end to end (a dispatched omn-documentation phase completed through framework_runtime) was not executed, only the same validate(path, envelope) call it makes; verify_multi_phase and verify_vertical_slice were not run; a re-dispatch of run-c9fb8d5bbb32 under the 1.2.0 contract was not exercised, and registered agents may still read the main checkout's contract text (`R-001`).\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | R8 fails an absent or malformed sourceInputs list and a verdict outside the vocabulary, but does not reject entries whose type is outside the declared list (`C-007`) | architect ruling section 2, \"absent/malformed/out-of-vocabulary list fails\" | the RCA fix condition states R8 only against verdict evidence, and recorded notes legitimately list `architecture-context`; a per-entry type ban would be a new restriction no accepted condition names | raised as `Q-002` to architect |\n| `V-002` | `validation-report` added to the declared sourceInputs types in the output contract and the template comment (`C-003`, `C-006`) | architect ruling section 1, list review evidence as `verification-report` | the RCA requires R8 to accept `validation-report`; a contract that the validator accepts but the output contract does not declare would disagree with itself | raised as `Q-002` to architect |\n| `V-003` | The release-note registry description and the template usage line rewritten to name the five phases, beyond the version bump (`C-006`, `C-012`) | RCA fix condition 6, version bump only for the registry record | both stated the release phase alone, which the change makes false; the registry file is edited by this change in any case | not-required |\n| `V-004` | verify_validators reports a summary envelope through `instance_label` rather than `relative_to` (`C-008`) | RCA fix condition 5 | the old form raised for an envelope outside the framework tree, which the new verifier tests construct; output is unchanged for in-tree paths | not-required |\n\n## Boundary Compliance\n\n- Module boundaries preserved: the shared command-line hook `artifact_contract.cli` and every other validator are unchanged; the envelope reaches R9 through the release-note validator's own `validate` and `main`; the superseded rule lives in the verifier and is read from the validator's `CURRENT_CONTRACT_VERSION`, so the validator exempts nothing; schemaVersion stays 1.0.0 and no workflow file changed.\n- Public interface changes: `release_note_validator.semantic_checks` gains an optional `envelope` parameter and `main` an optional `argv`; new module constants PHASE_BASIS, VERDICT_OF_BASIS, VERDICT_EVIDENCE, CURRENT_CONTRACT_VERSION; verify_validators gains SUPERSEDED_CONTRACTS, superseded_reason, superseded_candidates, committed_with_envelopes and a `superseded_candidates` key per summary; omn-documentation contract and release-note template move to 1.2.0 with three new verdict values.\n- Data or migration impact: none on stored data; the 9 recorded notes and the held note now fail R8 and R9 on re-validation and are reported as superseded by the verifier, and no run evidence was edited.\n- Declared side effects: `C-001` to `C-027`, plus runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md and runs/run-f94564cb61ce/states/fix-implementation/result-envelope.json; scratch copies used for `T-001` and `T-008` sit in the session scratchpad outside the repository.\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | Registered agents may read contract text from the main checkout (FC-020 O-007), so a re-dispatch of run-c9fb8d5bbb32 before landing could still read the old Stage 8 | medium | the held run would again emit withheld or a deployment verdict | none in this change; the superseded-candidate count in verify_validators would grow past 9 if a note is produced under the old contract |\n| `R-002` | The omn-documentation version bump resets gate auto-approval precedent keyed on agent version (FC-020 R-003) | high | the next omn-documentation gates need explicit decisions | none; an expected consequence of the bump |\n| `R-003` | verify_validators V3 fails on the framework-change-proposal F7 scope-row check for FC-020, identical before and after this change (`T-010`, `T-011`) | high | the coverage verifier reports NOT COVERED regardless of this fix | baseline evidence recorded; not caused by this change |\n| `R-004` | test_demo_capture fails 3 tests because the installed ffmpeg rejects an option, identical at baseline (`T-003`, `T-004`) | high | the full suite exits 1 on this host | baseline evidence recorded; environmental |\n| `R-005` | Without an envelope R9 is not machine-checkable, so a release-phase note carrying handed-off and a verification record passes a bare command-line run | low | an operator validating by hand could accept a wrong basis | the runtime acceptance path, close_legacy_run, and verify_validators all pass the envelope; R9 reports not-machine-checkable explicitly |\n| `R-006` | The held run's note still fails C3.2 on a vendor token in its Environment line after a handed-off re-dispatch (`T-008`) | high | run-c9fb8d5bbb32 cannot close until that is settled | out of scope per the Triage Gate; routed to omn-orchestrator by the analysis |\n\n## Handoff Notes\n\n- Reviewer focus areas: R8 and R9 in runtime/release_note_validator.py and the command-line envelope path (`C-007`, `V-001`, `R-005`); the superseded-contract exclusion in runtime/verify_validators.py and its documented rule (`C-008`, `V-004`); the Stage 8 table against the five Phase Models (`C-001`); the `validation-report` type addition (`V-002`); the four pinned files edited under the tech-lead ruling (`C-006`, `C-011`, `C-012`, `C-013`).\n- Follow-up work: the change proposal listing the 9 superseded notes with their `T-007` re-validation and recording FC-020 O-006 closed (`Q-001`); re-dispatch of run-c9fb8d5bbb32 to yield handed-off once C3.2 is settled; the architect confirmation of the superseded-contract amendment and of `V-001`/`V-002` (`Q-002`); settling the FC-020 F7 scope rows (`R-003`).\n- Documentation impact: omn-documentation contract 1.2.0 and release-note template 1.2.0 are the new documentation; runtime/README.md updated; the bundled payload mirrors all of it; any operator guidance that tells an implement-feature run to record `released` is now false.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | The change proposal under proposals/, outside this agent's writes, must list the 9 superseded notes and their re-validation and record FC-020 O-006 closed; who produces it in this run | no | omn-orchestrator | `C-007`, `C-008` |\n| `Q-002` | Confirm the superseded-contract exclusion in the verifier, R8 not rejecting out-of-list entry types, and `validation-report` as a declared sourceInputs type | no | architect | `C-003`, `C-006`, `C-007`, `C-008` |",
+        "digest": "sha256:a2c468d47bb30a0f283259f0b4a9e4d3",
+        "produced_by": "fix-implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what changed and what it was meant to achieve: an implementation report for a delivered change, a review package for a `review-pull-request` or `release` run, or a technical design for the `safety-net-establishment` phase, which runs before any change exists. Without one there is nothing to validate against, and validating anyway would mean measuring the system against this agent's own reading of what it was supposed to do."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md",
+      "produced_by": "fix-implementation",
+      "artifact": "implementation-report.md",
+      "bytes": 21379,
+      "sections": {
+        "read_first": [
+          "Implementation Summary",
+          "Change Set",
+          "Test Evidence",
+          "Verification Results",
+          "Deviations and Tradeoffs",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Boundary Compliance",
+          "Residual Risk",
+          "Handoff Notes"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-f94564cb61ce/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:9f158b530185c5d8ce6beb4a42e7ea05",
+    "bytes": 21538,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "database",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "regression-validation"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-17T05:22:40Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:3300717f35d0b29badb0d146de6af8da",
+        "supplies": "framework-context",
+        "bytes": 22733,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:84e98748204581ef06f3e434c600f794",
+        "supplies": "framework-context",
+        "bytes": 9569,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:15b32b7dc6a6e5c3c47fac6809f1df7a",
+        "supplies": "framework-context",
+        "bytes": 12345,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b061856f6c5a930a63015a1ca598594a",
+        "supplies": "framework-context",
+        "bytes": 7553,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/validation-report.md",
+        "digest": "sha256:289a25ebf7d54fb95ddf4fd44925d038",
+        "supplies": null,
+        "bytes": 5711,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null,
+        "bytes": 5825,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/bug-analysis.md",
+        "digest": "sha256:6f1f25f536d3d80353873990835ce1bd",
+        "supplies": null,
+        "bytes": 3732,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null,
+        "bytes": 1265,
+        "read": "required",
+        "read_reason": "skill S07 is required for this phase"
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null,
+        "bytes": 1236,
+        "read": "required",
+        "read_reason": "skill S09 is required for this phase"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0fe5a799cafdd70db8744b0287682ffe",
+        "supplies": null,
+        "bytes": 62800,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:9978ebb5cb624a7226773a03f0b6ee13",
+    "input_digest": "sha256:a2c468d47bb30a0f283259f0b4a9e4d3",
+    "inputs": [
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/knowledge-management-2d49d4/.claude/runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md",
+        "digest": "sha256:a2c468d47bb30a0f283259f0b4a9e4d3"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/logging/observability-logging.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md",
+      "templates/validation-report.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/logging/observability-logging.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md",
+      "templates/validation-report.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/fix-bug.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 183967,
+    "bytes_required": 20526,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": true,
+    "reason": "lessons from earlier runs hydrated per this run's knowledge_loop record (recorded at plan time)",
+    "store": "memory/lessons/lessons.store.json",
+    "store_digest": "sha256:2384c006f914e2a6ec0eecde9e21173f",
+    "threshold": 2,
+    "matched": 0,
+    "lessons": []
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-f94564cb61ce/states/regression-validation/artifacts/validation-report.md",
+      "runs/run-f94564cb61ce/states/regression-validation/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the validation report"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "revise the technical design rather than raising a defect against it",
+      "define, widen, or narrow product scope",
+      "relax, reinterpret, or waive an acceptance criterion in order to reach a pass",
+      "judge code quality, maintainability, or standards conformance, which belongs to omn-dev-2-reviewer",
+      "decompose work into tasks, which belongs to planner",
+      "record a merge, release, or deployment decision",
+      "decide a gate that assesses evidence this agent produced",
+      "validate a change this agent authored",
+      "record a criterion as met without evidence that demonstrates it",
+      "pass while a critical or high defect stands open, or while required evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "validate delivered behavior against the acceptance criteria it was accepted under",
+        "define a validation strategy proportionate to the risk the change carries",
+        "execute the repository's own functional, integration, and regression checks",
+        "establish and strengthen a safety net of checks before a structural change proceeds",
+        "assess behavioral parity between a pre-change and post-change baseline",
+        "judge whether executed checks reach the behavior a change altered",
+        "record each defect with severity, category, location, reproducibility, and status",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "revise the technical design rather than raising a defect against it",
+        "define, widen, or narrow product scope",
+        "relax, reinterpret, or waive an acceptance criterion in order to reach a pass",
+        "judge code quality, maintainability, or standards conformance, which belongs to omn-dev-2-reviewer",
+        "decompose work into tasks, which belongs to planner",
+        "record a merge, release, or deployment decision",
+        "decide a gate that assesses evidence this agent produced",
+        "validate a change this agent authored",
+        "record a criterion as met without evidence that demonstrates it",
+        "pass while a critical or high defect stands open, or while required evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "scope": [
+          "**/*Tests/**",
+          "**/*.Tests/**",
+          "**/*Test/**",
+          "**/*.Tests.*",
+          "**/test_*.py",
+          "**/*_test.py",
+          "**/*.test.*",
+          "**/*.spec.*"
+        ],
+        "scopePhases": [
+          "refactor/safety-net-establishment"
+        ],
+        "scopePhasesRationale": "This grant is automated test files only, and only in the `safety-net-establishment` phase of refactor, where establishing the safety net is the phase's declared output. Production source is never written in any phase, and this grant does not apply outside the one phase named above.",
+        "rationale": "QA judges behavior, not code, so it does not author the change it validates. One phase is the exception the framework declares deliberately: a refactor cannot be validated at all until a safety net exists, and building that net is the phase's whole purpose. Even there the boundary holds, because a test that pins existing behavior is not the change under validation. Every other phase reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and verification commands, run to produce the evidence this agent's criterion results and regression assessment rest on",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the validation report"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same criterion result set, the same defect set, the same severity assignment, the same verdict, and the same declared report status.",
+      "identifierSchemes": {
+        "acceptanceCriteria": "AC-<zero-padded-sequence>",
+        "defects": "DF-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Acceptance criteria keep the order of the source that declared them. Defects are ordered by descending severity; ties break toward the lower location in lexical order.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, criteria, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "validation-report.md",
+    "artifact_path": "runs/run-f94564cb61ce/states/regression-validation/artifacts/validation-report.md",
+    "template_ref": "templates/validation-report.md",
+    "contract_ref": "agents/omn-qa/output.md",
+    "quality_ref": "agents/omn-qa/quality.md",
+    "validator": "validation_report_validator",
+    "result_envelope_path": "runs/run-f94564cb61ce/states/regression-validation/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-17T05:22:40Z",
+  "model_tier": {
+    "tier": "standard",
+    "host_hint": "inherit",
+    "basis": "declared standard for fix-bug/regression-validation in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 80377,
+    "modules_core_bytes": 39471,
+    "slice_all_bytes": 183967,
+    "slice_required_bytes": 20526,
+    "inputs_bytes": 0,
+    "upstream_full_bytes": 21515,
+    "upstream_read_first_bytes": 15503,
+    "task_context_bytes": 21538,
+    "fixed_bytes": 15827,
+    "legacy_estimate_bytes": 301686,
+    "progressive_estimate_bytes": 112865,
+    "legacy_estimate_tokens": 75421,
+    "progressive_estimate_tokens": 28216,
+    "savings_pct": 62.6
+  }
+}

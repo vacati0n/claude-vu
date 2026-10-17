@@ -15,19 +15,23 @@ One artifact per run: `release-note.md`, written at the artifact path the phase 
 
 One artifact type carries every publication output the framework asks for:
 
-| Workflow | Phase | Communication basis |
-|---|---|---|
-| `implement-feature` | `documentation-and-release-handoff` | `release-handoff` |
-| `investigate` | `publication` | `findings` |
-| `research` | `findings-publication` | `findings` |
-| `review-pull-request` | `documentation-impact` | `documentation-delta` |
-| `release` | `communication-and-post-release` | `post-release` |
+| Workflow | Phase | Communication basis | Release position |
+|---|---|---|---|
+| `implement-feature` | `documentation-and-release-handoff` | `release-handoff` | `handed-off` |
+| `investigate` | `publication` | `findings` | `findings-published` |
+| `research` | `findings-publication` | `findings` | `findings-published` |
+| `review-pull-request` | `documentation-impact` | `documentation-delta` | `delta-published` |
+| `release` | `communication-and-post-release` | `post-release` | `released` \| `partial` \| `rolled-back` |
 
 Each is a statement of what was delivered, what it means for its audience, and what is still
 known to be wrong. The basis records which question the artifact answered. The structure does not
 change with it; what changes is which sections carry the weight. A `documentation-delta`
 publication puts its substance in Technical Changes and Compatibility, a `post-release` one in
 Operational Notes and Known Issues, and a `release-handoff` one in Communication.
+
+The release position is the one the Stage 8 table of `reasoning.md` yields for the basis when its
+evidence is present. Only `post-release` reads a deployment outcome, off the supplied deployment
+status; the other three positions assert no merge, release, or deployment fact.
 
 ## Structural Contract
 
@@ -50,8 +54,9 @@ Sections are never omitted and never left empty. A section with nothing to repor
 with nothing known outstanding rather than dropping the section and leaving a reader to infer
 why it is missing.
 
-`None identified.` in `Known Issues` is permitted only where the release verdict is `released`. A
-release that did not fully land has something to say about why, and check `R4` decides it.
+`None identified.` in `Known Issues` is permitted only where the release verdict is `released`,
+`handed-off`, `findings-published`, or `delta-published`. A release that did not fully land has
+something to say about why, and check `R4` decides it.
 
 ### Fenced blocks
 
@@ -73,7 +78,7 @@ populated.
 | `agentVersion` | semantic version of this agent |
 | `schemaVersion` | `1.0.0` |
 | `status` | `complete` \| `provisional` \| `blocked` |
-| `releaseVerdict` | `released` \| `partial` \| `rolled-back` |
+| `releaseVerdict` | `released` \| `partial` \| `rolled-back` \| `handed-off` \| `findings-published` \| `delta-published` |
 | `inputDigest` | from the frozen snapshot in the invocation envelope |
 | `contextDigest` | from the frozen snapshot in the invocation envelope |
 
@@ -81,9 +86,14 @@ populated.
 claim about the basis of everything published below it.
 
 Declared `type` values are `deployment-status`, `monitoring-health-record`,
-`final-change-summary`, `stakeholder-list`, `verification-report`, and
-`technical-recommendation`. An input of another kind is
+`final-change-summary`, `stakeholder-list`, `verification-report`, `validation-report`,
+`technical-recommendation`, and `architecture-context`. An input of another kind is
 recorded under the declared type that describes what it supplied.
+
+The release position is read off one of these, and check `R8` decides that it was listed:
+`released`, `partial`, and `rolled-back` need `deployment-status`; `handed-off` and
+`delta-published` need `verification-report` or `validation-report`; `findings-published` needs
+`technical-recommendation`.
 
 ## Section Contracts
 
@@ -93,7 +103,7 @@ recorded under the declared type that describes what it supplied.
 |---|---|
 | `Version` | the version this note describes; equals metadata `version` exactly |
 | `Release date and time` | when the release or closure event occurred |
-| `Environment` | where it landed |
+| `Environment` | where it landed; for a position that asserts no deployment, where the published account stands, naming no environment as reached |
 | `Release owner` | the role accountable for the release |
 
 `Version` and metadata `version` are one fact stated twice. Check `R2` compares them, because a

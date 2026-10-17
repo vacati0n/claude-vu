@@ -1,0 +1,97 @@
+{
+  "invocation_id": "inv-c9fb8d5bbb32-06-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "run_id": "run-c9fb8d5bbb32",
+    "work_item_id": "run-c9fb8d5bbb32::documentation-and-release-handoff",
+    "attempt": 2,
+    "artifact": "release-note.md",
+    "artifact_status": "provisional",
+    "release_verdict": "handed-off",
+    "release_verdict_basis": "reasoning.md 1.2.0 Stage 8 row: release-handoff | a verified change set, handed to the Closure Gate | handed-off | complete; status lowered to provisional by the row: any | position establishable but a required statement is unsupported | as above | provisional",
+    "provisional_reason": "The CR-003 scoped re-review outcome and its three follow-ups (K-005, K-013, K-014) are supported only by the operator relay in this dispatch; no run artifact records them or gives them tracking. The run-f94564cb61ce Fix Gate record and validation report confirm the re-review occurred and BackwardCompatibilityTestCase 6/6, but not the follow-ups.",
+    "communication_basis": "release-handoff",
+    "audience_source": "inferred from the phase; no stakeholder list or communication requirement supplied",
+    "known_issues_count": 14,
+    "published_statements": {
+      "field_statements": 19,
+      "known_issue_rows": 14,
+      "traced_to": [
+        "runs/run-c9fb8d5bbb32/states/quality-review/artifacts/review-package.md",
+        "runs/run-c9fb8d5bbb32/state.json gates Review Gate and Verification Gate",
+        "runs/run-c9fb8d5bbb32/task-context.yaml",
+        "runs/inputs/knowledge-loop-architecture-context.md",
+        "runs/run-f94564cb61ce/states/regression-validation/artifacts/validation-report.md",
+        "runs/run-f94564cb61ce/state.json gate Fix Gate",
+        "proposals/framework-change-proposal-FC-020.md O-005",
+        "inline operator relay (CR-003 re-review follow-ups; operator rulings on Environment, closure condition (1) owner, FC-022, rollback)"
+      ]
+    },
+    "changes_by_stage5_class": {
+      "breaking": 0,
+      "contract": 1,
+      "operational": 2,
+      "feature": 1,
+      "fix": 0,
+      "improvement": 0,
+      "internal": 1
+    },
+    "repair": {
+      "prior_failures_cleared": ["C3.2", "R1", "R8", "R9"],
+      "changes": [
+        "releaseVerdict withheld -> handed-off, re-derived from the 1.2.0 Stage 8 release-handoff row; status blocked -> provisional",
+        "Environment line no longer quotes the branch name; it reads this run's worktree branch",
+        "agentVersion 1.1.0 -> 1.2.0; contextDigest updated to the attempt-2 envelope",
+        "facts updated per the dispatch: CR-003 resolved with corrections (follow-ups K-005, K-013, K-014), full suite 768 tests, K-006 tracked as FC-020 O-005, change proposal and checklist FC-022, architecture-context open question dropped (now a declared type)"
+      ],
+      "identifier_mapping": "K-001 to K-004 and K-006 to K-012 keep their subjects; K-005 previously carried the pre-change identity test fragility (review CR-003), now resolved, and carries the first re-review follow-up; K-013 and K-014 are new"
+    },
+    "checks": {
+      "run": 60,
+      "passed": 60,
+      "failed": [],
+      "groups": {
+        "structural_S1_S8": "8 of 8 pass",
+        "metadata_D1_D7": "7 of 7 pass",
+        "traceability_P1_P6": "6 of 6 pass; the operator relay is listed inline in sourceInputs and attributed, and the status is provisional for it",
+        "compatibility_R3_X1_X4": "5 of 5 pass",
+        "release_position_R1_R2_R4_R5_R7_R8_R9_V1_V2_V3": "10 of 10 pass",
+        "known_issues_K1_K6": "6 of 6 pass; absent tracking recorded for K-005, K-010, K-011, K-013, K-014 with open questions",
+        "content_audience_R6_A1_A6": "7 of 7 pass",
+        "authority_A7_A13": "7 of 7 pass",
+        "security_C1_C6": "6 of 6 pass; no vendor token in the artifact (searched)"
+      },
+      "self_verified_not_executed": "The Validation Engine was not run: this agent's command execution is not allowed and no shell was available to it. Results are the agent's own judgement against quality.md."
+    },
+    "not_machine_checkable_obligations": {
+      "N1": "judged met: delivered behaviour is described from the review package, gate records, and the run-f94564cb61ce validation record",
+      "N2": "judged met: no prior-release documentation was supplied; the superseded CR-003 subject from attempt 1 is retired and recorded",
+      "N3": "judged met: one feature, sized at its Stage 5 class; internal tests and fixtures are not published as user-visible"
+    },
+    "open_questions_routed": [
+      "omn-orchestrator: record the CR-003 scoped re-review outcome and follow-ups, and tracking for K-010, in FC-022",
+      "omn-tech-lead: no lock-recovery procedure for K-011; no rollback trigger stated",
+      "omn-dev-1-implement: the three CR-003 follow-ups (K-005, K-013, K-014)"
+    ],
+    "gates_recorded": "none; the Closure Gate is omn-orchestrator's"
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    "runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

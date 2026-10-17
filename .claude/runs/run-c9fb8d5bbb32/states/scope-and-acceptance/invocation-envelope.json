@@ -1,0 +1,510 @@
+{
+  "invocation_id": "inv-c9fb8d5bbb32-01-001",
+  "run_id": "run-c9fb8d5bbb32",
+  "work_item_id": "run-c9fb8d5bbb32::scope-and-acceptance",
+  "idempotency_key": "sha256:e2b79cc5d31493c0a0cfb30d6d34b793",
+  "state_id": "scope-and-acceptance",
+  "phase_index": 1,
+  "agent_id": "omn-product-owner",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-product-owner.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-product-owner/manifest.yaml",
+    "load_order": [
+      "agents/omn-product-owner/system.md",
+      "agents/omn-product-owner/identity.md",
+      "agents/omn-product-owner/reasoning.md",
+      "agents/omn-product-owner/execution.md",
+      "agents/omn-product-owner/output.md",
+      "agents/omn-product-owner/quality.md",
+      "agents/omn-product-owner/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-product-owner/system.md": "sha256:ca10caae54f63fa52580220f1f88812f",
+      "agents/omn-product-owner/identity.md": "sha256:8a5df5e407d8c96ce1e5bb7faaa07f55",
+      "agents/omn-product-owner/reasoning.md": "sha256:ee417de8bc3f21281299d8e5f53dfdcf",
+      "agents/omn-product-owner/execution.md": "sha256:ef29a06b2807c0b3c86ba6c19c102051",
+      "agents/omn-product-owner/output.md": "sha256:da40434a6907e6912979430f12430025",
+      "agents/omn-product-owner/quality.md": "sha256:53c8887fbc5888342d68c2e7a02d6ecc",
+      "agents/omn-product-owner/examples.md": "sha256:0e1b087f304a35d8527abc9aa5f0052b"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-product-owner/system.md",
+        "agents/omn-product-owner/reasoning.md",
+        "agents/omn-product-owner/output.md",
+        "agents/omn-product-owner/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-product-owner/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-product-owner/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-product-owner/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 33326,
+      "full_bytes": 65622
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "scope-definition",
+      "acceptance-authority"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S02",
+        "proficiency": "Primary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S02",
+        "registryIdentifier": "domain-modeling",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in input:architecture-context",
+      "source": "agent-manifest (Advisory)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "acceptance-intent",
+      "business-constraints",
+      "architecture-context",
+      "prior-scope-definition",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/knowledge-loop-feature-request.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-feature-request.md",
+        "text": "# Feature Request \u2014 Knowledge Management Loop: Learn From Run Evidence\n\n## Request\n\nGive the framework a closed knowledge loop, so that what one run learns the hard way reaches the\nagents of later runs without an operator carrying it by hand. Today the loop is open:\n\n- Every rejected artifact is recorded (`validation_failed` events in `runs/<run>/events.jsonl`, each\n  naming the failing check IDs; 29 across 24 runs on disk). Gate rejections and rollbacks are\n  recorded too (`rollback_scheduled` events, `gate-rejection` entries in `recovery-ledger.json`).\n- None of that reaches a later dispatch. Every invocation envelope carries\n  `memory_slice: {hydrated: false, reason: \"memory hydration not requested by this run\"}`, and the\n  context slice excludes `memory/*`. `memory/memory-resolver.md` and `config/runtime.md`\n  (\"Memory Loading\", \"Writeback Policy\") specify hydration and fingerprint-keyed upsert, but no\n  runtime code implements either.\n- As a result the same mechanical rejection recurs run after run (for example the vendor-string\n  check `C3.2` and the scope check `C7.1`), and the operator keeps private notes to warn agents.\n\n## Expected outcome\n\n1. **Harvest.** A runtime capability that reads recorded run evidence (events, recovery ledgers,\n   validation reports) and distils it into *lessons*: one lesson per recurring failure pattern,\n   keyed by a deterministic semantic fingerprint (artifact type + check ID, or gate + phase), with\n   occurrence count, distinct-run count, first and last seen, the check's own description, and\n   references to the evidence. Re-harvesting unchanged evidence is idempotent (fingerprint upsert).\n2. **Govern.** Lessons live in a governed store under `memory/` with a status lifecycle\n   (`candidate`, `active`, `retired`), an owner, and a rationale. A lesson becomes eligible for\n   hydration when it is explicitly approved, or automatically when it recurs in at least a\n   configured number of distinct runs. An operator can approve, retire, or annotate a lesson\n   (add a human-written remedy) from the CLI. Nothing is deleted; retired lessons keep history.\n3. **Recall.** `dispatch` hydrates the lessons relevant to the phase being dispatched \u2014 matched by\n   the phase's output artifact and phase identifier \u2014 into the envelope's `memory_slice` and into a\n   short \"Lessons from earlier runs\" section of the dispatch prompt, ranked and capped so the\n   prompt grows by a bounded amount.\n4. **Measure.** The loop reports whether it is working: for each lesson, how often the same failure\n   recurred in a dispatch that had already been shown the lesson. Execution metrics record lessons\n   hydrated per invocation.\n5. **Close the loop automatically.** Harvest runs when a run aggregates, so a run's lessons are\n   available to the next run with no operator step.\n\n## Acceptance intent\n\n- A phase whose artifact type has an eligible lesson receives it in both envelope and prompt.\n- A run planned before this change, or a run planned with hydration switched off, dispatches\n  byte-identically to today (no replay, verifier, or idempotency key changes outcome).\n- Harvesting the current `runs/` produces lessons for the recorded `C3.2`- and `C7.1`-type failures.\n- Harvesting twice over unchanged evidence produces an identical store.\n\n## Constraints\n\n- Additive only: gates, validators, artifact contracts, Phase Model tables, and agent module text\n  are unchanged. The runtime never calls a model; lessons are derived mechanically from evidence.\n- Standard library only; no vector store, embedding, or network dependency.",
+        "digest": "sha256:e7a9416b2344d53a4264e32b5a976681"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/knowledge-loop-change-request.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-change-request.md",
+        "text": "# Change Request \u2014 Knowledge Management Loop\n\n## Change class\n\n`capability-addition` per `config/self-hosting-profile.md` Routing Table: the framework gains a\nruntime behaviour (harvest, govern, recall) and a governed memory category it did not have.\n\nClassification evidence: `python .claude/runtime/self_hosting.py route --intent capability-addition`\nreturns `/implement` over `implement-feature` at `scope-and-acceptance`;\n`self_hosting.py classify` on `runtime/framework_runtime.py` and on `memory/README.md` both return\nframework-internal (`SR-1`).\n\n## Surfaces this change is expected to touch\n\n| Surface | Nature of change |\n|---|---|\n| `runtime/` (new module, carrier chosen in design) | Harvest, fingerprint upsert, lifecycle, recall, effectiveness accounting; CLI |\n| `runtime/framework_runtime.py` | Populate `memory_slice` and a prompt section at dispatch for runs that opted in; trigger harvest on aggregation; `RUNTIME_VERSION` increments |\n| `runtime/execution_metrics.py` | Lessons hydrated per invocation |\n| `memory/` | New governed lessons store; `README.md`, `memory-governance.md`, `memory-resolver.md` describe the category |\n| `config/runtime.md` | Memory Loading and Writeback Policy describe the implemented behaviour and the opt-in rule |\n| `tests/`, `runtime/verify_*.py` | Unit tests for harvest idempotency, eligibility, recall ranking, and backward compatibility |\n| `omn_agent/_bundled_payload/**` | Mirror refresh via `python tests/test_bundled_payload.py --sync` |\n\n## Not touched\n\nGates, validators, templates of existing artifacts, Phase Model tables, agent module text.",
+        "digest": "sha256:a4f1eff2640769f1d7f81506a3e8c22a"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/knowledge-loop-business-intent.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-business-intent.md",
+        "text": "# Business Intent \u2014 Knowledge Management Loop\n\n## Problem\n\nThe framework forgets. Each run's agents start with the same context as the first run ever did,\nso mechanical mistakes that a validator already caught in earlier runs are repeated, each costing a\ncharged attempt (three per phase), a retry dispatch, and operator time. The only memory of these\nlessons is the operator's private notes, which other operators and installed copies do not have.\n\n## Intent\n\nMake the framework measurably better with use: every rejection a run records becomes knowledge the\nnext run's agents see before they write, with governance so that only recurring or approved lessons\nare shown and stale ones can be retired.\n\n## Success\n\n- Lessons are harvested from existing run evidence without operator authoring.\n- A phase whose artifact has a recorded recurring failure is told about it at dispatch.\n- The framework can report, per lesson, whether the failure recurred after agents were warned \u2014\n  the evidence that learning is happening.\n- No gate, validator, or acceptance rule is weakened; every verifier stays at its recorded baseline.\n\n## Non-goals\n\n- Model fine-tuning, embeddings, or any model call by the runtime.\n- Automatically changing validators, templates, or agent text from lessons.\n- Harvesting from sources other than recorded run evidence (chat transcripts, external tickets).",
+        "digest": "sha256:8080b0e9b989554fc66c2318118d5612"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/knowledge-loop-architecture-context.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-architecture-context.md",
+        "text": "# Architecture Context \u2014 Knowledge Management Loop\n\n- The runtime core never talks to a model (`runtime/framework_runtime.py` header). It builds the\n  canonical envelope and hands it to an adapter. Lessons are therefore data carried in the envelope\n  and rendered into the dispatch prompt.\n- The envelope already reserves `memory_slice` (today `{hydrated: false, reason: ...}`) and the\n  context slice records `excluded: memory/*`. `config/runtime.md` says memory hydration is opt-in per\n  run. Envelope additions since 0.7.0 are additive; `model_tier` (0.9.0) is the latest precedent.\n- The idempotency key (`cmd_dispatch`) names the unit of work and must survive a rollback; replay\n  checks (`verify_multi_phase` M12 and M14) re-run commands against committed run\n  `run-c5a8d50d3238` and require stable output. A run whose `execution-request.json` predates the\n  opt-in must therefore dispatch exactly as today.\n- Evidence sources on disk: `runs/<run>/events.jsonl` (`validation_failed` carries\n  `details_ref.failures`, a list of check IDs, and `details_ref.report`; `rollback_scheduled` carries\n  gate and target), `runs/<run>/recovery-ledger.json` (`failure_class`, `guard`, `reason_code`), and\n  `runs/<run>/states/<phase>/validation-report.json` (each check's `id`, `description`, `severity`;\n  the file is overwritten by later attempts, so descriptions resolve from any report of the same\n  artifact type). Gate-approval waits (`approval_wait`) are normal flow, not lessons.\n- `runs/` and `proposals/` are excluded from the bundled payload and from implementer writes; the\n  lesson store must therefore live under `memory/`, and harvest must tolerate a repository with no\n  `runs/` (an installed copy).\n- `runtime/optimize_memory.py` rewrites `memory/*.md` for token cost; a machine-maintained store\n  must not be mangled by it (check its scan rules).\n- Keep loading policy in runtime and `config/`, never in agent modules (`verify_vertical_slice` C10).\n- `runtime/README.md` is large and read by agents; new documentation goes in `config/runtime.md`\n  and the `memory/` documents.\n- Edit the framework directory, then `python tests/test_bundled_payload.py --sync`; never hand-edit\n  `omn_agent/_bundled_payload/`. The full unit suite takes about 26 minutes.\n- Artifact validators reject the substring of the host vendor name (check `C3.2`); write paths\n  without the dot-directory prefix.",
+        "digest": "sha256:c96206f6e1e68bb201f8b712cc108369"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the business intent this agent bounds: a feature request for new functionality, a change request for a modification to delivered behaviour, or a business intent for an outcome stated without a proposed solution. Without one there is nothing to scope, and scoping anyway would mean inventing what the requester wants."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [],
+  "task_context": {
+    "path": "runs/run-c9fb8d5bbb32/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:51605dbac00223aba4d0acde9f896778",
+    "bytes": 4277,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "scope-and-acceptance",
+      "execution-planning"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {
+      "execution-planning": [
+        "scope-and-acceptance"
+      ]
+    },
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-09T14:41:20Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:1961ffd5b447ec39cac35462546aa708",
+        "supplies": "framework-context",
+        "bytes": 22733,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:84e98748204581ef06f3e434c600f794",
+        "supplies": "framework-context",
+        "bytes": 9569,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "required",
+        "read_reason": "this artifact names the gate it is evidence for and its owners"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/scope-definition.md",
+        "digest": "sha256:9f082102c11c1de4d4b53c8252a0a9bc",
+        "supplies": "feature-request",
+        "bytes": 4189,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": "acceptance-intent",
+        "bytes": 2277,
+        "read": "on-demand",
+        "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+      }
+    ],
+    "context_digest": "sha256:d261b4f8b4cedf6df4bd4c96cc1eb2cd",
+    "input_digest": "sha256:0291dd44e6a7a797463e20a80755817c",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/knowledge-loop-feature-request.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-feature-request.md",
+        "digest": "sha256:e7a9416b2344d53a4264e32b5a976681"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/knowledge-loop-change-request.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-change-request.md",
+        "digest": "sha256:a4f1eff2640769f1d7f81506a3e8c22a"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/knowledge-loop-business-intent.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-business-intent.md",
+        "digest": "sha256:8080b0e9b989554fc66c2318118d5612"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/knowledge-loop-architecture-context.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-architecture-context.md",
+        "digest": "sha256:c96206f6e1e68bb201f8b712cc108369"
+      }
+    ],
+    "unnarrowed": [],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "templates/scope-definition.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "read_on_demand": [
+      "domain-model/agent-specification.md",
+      "workflows/implement-feature.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 109117,
+    "bytes_required": 12425,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-c9fb8d5bbb32/states/scope-and-acceptance/artifacts/scope-definition.md",
+      "runs/run-c9fb8d5bbb32/states/scope-and-acceptance/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository modification of any kind",
+        "any command whose effect is not recorded in the artifact"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "author or revise a technical design, structure, or technology decision",
+      "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+      "write, modify, or review code, tests, migrations, or configuration",
+      "record the Scope Gate decision on this agent's own artifact",
+      "record a merge, readiness, or release decision",
+      "define the test strategy or execute validation",
+      "relax a stated regulatory, policy, or quality constraint to close the scope",
+      "record scope no supplied input supports",
+      "access external systems, ticket trackers, or stakeholders directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "decide which deliverables fall inside this change and which fall outside it",
+        "decide the relative priority of the in-scope items",
+        "decide the acceptance threshold each criterion states",
+        "decide when a stated expectation is too vague to be an acceptance criterion",
+        "decide when an adjacent request is a separate change rather than a widening of this one",
+        "record a scope decision together with the rationale that justifies it",
+        "record an unresolved ambiguity as an open question with a named owner",
+        "set the scope verdict the recorded question set supports"
+      ],
+      "prohibited": [
+        "author or revise a technical design, structure, or technology decision",
+        "decompose the scope into tasks, waves, estimates, or a delivery sequence",
+        "write, modify, or review code, tests, migrations, or configuration",
+        "record the Scope Gate decision on this agent's own artifact",
+        "record a merge, readiness, or release decision",
+        "define the test strategy or execute validation",
+        "relax a stated regulatory, policy, or quality constraint to close the scope",
+        "record scope no supplied input supports",
+        "access external systems, ticket trackers, or stakeholders directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "This role produces one artifact and changes no repository source. Its writes are the artifact path and the result envelope path the invocation envelope names, and nothing else. A scope decision that edited the repository would be deciding the change it is supposed to bound.",
+        "scope": [
+          "runs/**/states/scope-and-acceptance/**"
+        ]
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none; the boundary is derived from supplied inputs and the frozen context slice, and no part of it is established by executing anything",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository modification of any kind",
+          "any command whose effect is not recorded in the artifact"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical supplied inputs and an identical context snapshot must produce the same in-scope item set, the same exclusion set, the same acceptance criterion set, the same scope decision set, the same open question set, and the same scope verdict.",
+      "identifierSchemes": {
+        "scopeItems": "S-<zero-padded-sequence>",
+        "exclusions": "X-<zero-padded-sequence>",
+        "acceptanceCriteria": "A-<zero-padded-sequence>",
+        "scopeDecisions": "D-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "In-scope items are ordered by business priority; ties break toward the order the expectation appeared in the supplied inputs. Acceptance criteria are ordered by the scope item they bound, ties breaking toward derivation order. Exclusions, decisions, and questions follow the order the reasoning stage that produced them declares.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied inputs or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "scope-definition.md",
+    "artifact_path": "runs/run-c9fb8d5bbb32/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "template_ref": "templates/scope-definition.md",
+    "contract_ref": "agents/omn-product-owner/output.md",
+    "quality_ref": "agents/omn-product-owner/quality.md",
+    "validator": "scope_definition_validator",
+    "result_envelope_path": "runs/run-c9fb8d5bbb32/states/scope-and-acceptance/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-09T14:41:20Z",
+  "model_tier": {
+    "tier": "light",
+    "host_hint": "haiku",
+    "basis": "declared light for implement-feature/scope-and-acceptance in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 65622,
+    "modules_core_bytes": 33326,
+    "slice_all_bytes": 109117,
+    "slice_required_bytes": 12425,
+    "inputs_bytes": 8979,
+    "upstream_full_bytes": 0,
+    "upstream_read_first_bytes": 0,
+    "task_context_bytes": 4277,
+    "fixed_bytes": 10810,
+    "legacy_estimate_bytes": 194528,
+    "progressive_estimate_bytes": 69817,
+    "legacy_estimate_tokens": 48632,
+    "progressive_estimate_tokens": 17454,
+    "savings_pct": 64.1
+  }
+}

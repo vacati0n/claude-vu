@@ -1,0 +1,705 @@
+{
+  "invocation_id": "inv-c9fb8d5bbb32-06-002",
+  "run_id": "run-c9fb8d5bbb32",
+  "work_item_id": "run-c9fb8d5bbb32::documentation-and-release-handoff",
+  "idempotency_key": "sha256:3caaea5ef471a7ebf17281067a20f23b",
+  "state_id": "documentation-and-release-handoff",
+  "phase_index": 6,
+  "agent_id": "omn-documentation",
+  "agent_version": "1.2.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-documentation.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-documentation/manifest.yaml",
+    "load_order": [
+      "agents/omn-documentation/system.md",
+      "agents/omn-documentation/identity.md",
+      "agents/omn-documentation/reasoning.md",
+      "agents/omn-documentation/execution.md",
+      "agents/omn-documentation/output.md",
+      "agents/omn-documentation/quality.md",
+      "agents/omn-documentation/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-documentation/system.md": "sha256:4e71e507b904998ddee1b673971dd2ed",
+      "agents/omn-documentation/identity.md": "sha256:f542a0ce21283d9bb3c2e80612b283ae",
+      "agents/omn-documentation/reasoning.md": "sha256:21c2b06db283206cca1efe0a7d21f72b",
+      "agents/omn-documentation/execution.md": "sha256:935d4866feec31680640e647446fcbb4",
+      "agents/omn-documentation/output.md": "sha256:a97dc33c33344552e60138b4f2a9923a",
+      "agents/omn-documentation/quality.md": "sha256:d329cae4f9a635367385cd1be066f64d",
+      "agents/omn-documentation/examples.md": "sha256:baead714ded57fbb1d36b103b957ee78"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-documentation/system.md",
+        "agents/omn-documentation/reasoning.md",
+        "agents/omn-documentation/output.md",
+        "agents/omn-documentation/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-documentation/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-documentation/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-documentation/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 45565,
+      "full_bytes": 90936
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "documentation",
+      "release-communication"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in input:architecture-context",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "validation-report",
+      "review-package",
+      "deployment-status",
+      "technical-recommendation",
+      "scope-definition",
+      "technical-design",
+      "execution-plan",
+      "bug-analysis",
+      "monitoring-health-record",
+      "final-change-summary",
+      "stakeholder-list",
+      "verification-report",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "closure-context",
+      "communication-requirements",
+      "existing-documentation",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/knowledge-loop-architecture-context.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-architecture-context.md",
+        "text": "# Architecture Context \u2014 Knowledge Management Loop\n\n- The runtime core never talks to a model (`runtime/framework_runtime.py` header). It builds the\n  canonical envelope and hands it to an adapter. Lessons are therefore data carried in the envelope\n  and rendered into the dispatch prompt.\n- The envelope already reserves `memory_slice` (today `{hydrated: false, reason: ...}`) and the\n  context slice records `excluded: memory/*`. `config/runtime.md` says memory hydration is opt-in per\n  run. Envelope additions since 0.7.0 are additive; `model_tier` (0.9.0) is the latest precedent.\n- The idempotency key (`cmd_dispatch`) names the unit of work and must survive a rollback; replay\n  checks (`verify_multi_phase` M12 and M14) re-run commands against committed run\n  `run-c5a8d50d3238` and require stable output. A run whose `execution-request.json` predates the\n  opt-in must therefore dispatch exactly as today.\n- Evidence sources on disk: `runs/<run>/events.jsonl` (`validation_failed` carries\n  `details_ref.failures`, a list of check IDs, and `details_ref.report`; `rollback_scheduled` carries\n  gate and target), `runs/<run>/recovery-ledger.json` (`failure_class`, `guard`, `reason_code`), and\n  `runs/<run>/states/<phase>/validation-report.json` (each check's `id`, `description`, `severity`;\n  the file is overwritten by later attempts, so descriptions resolve from any report of the same\n  artifact type). Gate-approval waits (`approval_wait`) are normal flow, not lessons.\n- `runs/` and `proposals/` are excluded from the bundled payload and from implementer writes; the\n  lesson store must therefore live under `memory/`, and harvest must tolerate a repository with no\n  `runs/` (an installed copy).\n- `runtime/optimize_memory.py` rewrites `memory/*.md` for token cost; a machine-maintained store\n  must not be mangled by it (check its scan rules).\n- Keep loading policy in runtime and `config/`, never in agent modules (`verify_vertical_slice` C10).\n- `runtime/README.md` is large and read by agents; new documentation goes in `config/runtime.md`\n  and the `memory/` documents.\n- Edit the framework directory, then `python tests/test_bundled_payload.py --sync`; never hand-edit\n  `omn_agent/_bundled_payload/`. The full unit suite takes about 26 minutes.\n- Artifact validators reject the substring of the host vendor name (check `C3.2`); write paths\n  without the dot-directory prefix.",
+        "digest": "sha256:c96206f6e1e68bb201f8b712cc108369"
+      },
+      {
+        "type": "review-package",
+        "reference": "runs/run-c9fb8d5bbb32/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/knowledge-management-2d49d4/.claude/runs/run-c9fb8d5bbb32/states/quality-review/artifacts/review-package.md",
+        "text": "```yaml\nreviewPackage:\n  packageId: RP-2026-0010\n  reviewReference: run-c9fb8d5bbb32 -- implement-feature/quality-review over implementation report IR-2026-1012 (knowledge management loop - harvest, govern, recall, measure)\n  sourceInputs:\n    - type: implementation-report\n      reference: runs/run-c9fb8d5bbb32/states/implementation/artifacts/implementation-report.md\n    - type: feature-request\n      reference: runs/inputs/knowledge-loop-feature-request.md\n    - type: change-request\n      reference: runs/inputs/knowledge-loop-change-request.md\n    - type: business-intent\n      reference: runs/inputs/knowledge-loop-business-intent.md\n    - type: architecture-context\n      reference: runs/inputs/knowledge-loop-architecture-context.md\n  producedBy: omn-dev-2-reviewer\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: provisional\n  verdict: approve-with-corrections\n  inputDigest: sha256:fb49450897844aaf1fdf1834c0b5874a\n  contextDigest: sha256:42cfeeae782dbdd32a3a5e96c46abe3b\n```\n\n## Metadata\n\n- Review ID: RP-2026-0010\n- Reviewer: omn-dev-2-reviewer\n- Change under review: run-c9fb8d5bbb32 -- change set `C-001` to `C-026` of implementation report IR-2026-1012 (digest sha256:010c4b4a1a38dc896177cd68150d89a8): new runtime/knowledge.py, config/knowledge-policy.json, memory/lessons/lessons.store.json, tests/test_knowledge.py and its 0.9.0 baseline fixtures; changes to runtime/framework_runtime.py, runtime/execution_metrics.py, config/runtime.md, three memory/ documents, omn_agent/source.py, and the bundled mirror\n- Review date: 2026-10-09\n\n## Review Scope\n\n- In scope: the delivered change against the accepted design and the eight Design Gate conditions recorded in the run's state.json: payload-digest and idempotency-key isolation, pre-change and flag-off dispatch identity, harvest isolation and lock bounds in maybe_aggregate, harvest idempotency, prompt-injection hygiene of rendered lesson text, fingerprint, eligibility, ranking, cap, and effectiveness attribution, payload exclusion of the store from mirror and installer, test adequacy and maintainability of tests/test_knowledge.py, and the declared side effects of the implementation phase\n- Out of scope: acceptance validation of A-001 to A-023 (owned by omn-qa); the change proposal and release checklist (P-013, documentation phase); the full unit suite and verify_multi_phase, deliberately not run here because the operator runs the suite separately and the verifier mutates the run it selects; technical-design.md was consulted by targeted extract of its 5.3 rules rather than read end to end; the fixture captures C-002 to C-007 were judged through the test that consumes them, not line by line; verify_multi_phase's default run selection is pre-existing code outside the change set (raised as `Q-002`)\n- Evidence reviewed: implementation report IR-2026-1012 in full; runtime/knowledge.py in full; the full diffs of runtime/framework_runtime.py, runtime/execution_metrics.py, omn_agent/source.py, config/runtime.md, and the three memory/ documents; tests/test_knowledge.py BackwardCompatibilityTestCase and EffectivenessTestCase in full plus its complete test outline; tests/fixtures/knowledge/baseline-0.9.0/baseline.json; the Design Gate record; the implementation result envelope; installer seed and exclusion code in omn_agent/source.py and omn_agent/installer.py; six commands run in this review and listed under Test Adequacy Assessment\n\n## Findings\n\n| ID | Severity | Category | Location | Requirement | Finding | Correction Request | Status |\n|---|---|---|---|---|---|---|---|\n| `F-001` | medium | standards | runs/run-c9fb8d5bbb32/states/implementation/result-envelope.json | config/runtime.md: side effects must be declared; undeclared side effects are rejected | declared_side_effects omits the writes the default-target verifier made to this run (6 replay entries in runs/run-c9fb8d5bbb32/state.json, a regenerated task-context.yaml) that the report itself discloses (R-003, Q-003), so run evidence now carries entries no envelope accounts for | `CR-001` | open |\n| `F-002` | medium | test-adequacy | runtime/knowledge.py:816-831 | S07 map tests to acceptance criteria; reasoning Stage 5 every changed behaviour needs an exercising check; S-008 per-lesson report | the gate-lesson branch of the effectiveness report (latest dispatch at or before detected_at, string timestamp compare) is exercised by no test; EffectivenessTestCase covers only a check lesson, so half of the attribution rule ships unverified | `CR-002` | open |\n| `F-003` | medium | maintainability | tests/test_knowledge.py:656-744 | S07 test behaviour, not implementation details; keep tests isolated | BackwardCompatibilityTestCase pins 45 slice-member file digests and a frozen 0.9.0 envelope whose context_digest covers the registries, so any later unrelated edit to a registry, template, workflow, or skill fails this suite; the hazard compounds with every framework change and invites blind re-baselining that would also erase the guarantee | `CR-003` | open |\n| `F-004` | low | standards | runtime/framework_runtime.py:3326-3328 | Design Gate condition (1): any difference beyond the closed list and the flag-off reason is escalated | a flag-off dispatch adds lessons_shown: [] to invocation_started detail, a second difference from the baseline that the test asserts as expected rather than one escalated to omn-tech-lead; no consumer is affected (metrics count zero) | `CR-004` | open |\n| `F-005` | low | security | runtime/knowledge.py:762-764 | Design C-012 and D-008: rendered lesson text is labelled data within a bound of two lines per lesson | render_section neutralises description, remedy, key, and artifact type but writes lesson_id and kind raw, and load_store validates no record field; a malformed store record (reproduced here with a newline in lesson_id) emits an unlabelled heading line and breaks the A-017 bound; reachable only by editing the runtime-owned store | `CR-005` | open |\n\n## Severity Summary\n\n- Critical: 0\n- High: 0\n- Medium: 3\n- Low: 2\n\n## Standards and Architecture Conformance\n\n- Coding standards: S01 necessity and reuse ladder - conforms, one new module and one policy file each justified, reuse of memory_slice, invocation_started detail, maybe_aggregate, EXCLUDE_PATTERNS, and the atomic-replace pattern, standard library only; S12 error handling - conforms, aggregation step catches everything and records status and error class, dispatch fails open with the class named; S07 testing - two gaps, `F-002` and `F-003`\n- Architecture rules: D-001 one-way dependency conforms (knowledge.py imports only the standard library and state_engine, confirmed by code read and the passing ModuleBoundaryTestCase); D-004 conforms, memory_slice and lessons_shown are computed after replay detection and payload binding and the key is unchanged in the passing pre-change and flag-off tests; D-005 conforms, mirror holds no store and EXCLUDE_PATTERNS covers store, lock, and temp file; D-006 conforms, harvest runs last, lock tried once (timeout 0), outcome in knowledge-harvest.json; Design Gate conditions (2), (3), (5), (6), (7) conform, (1) see `F-004`, (4) and (8) see `Q-001`\n- Security criteria: S09 and design C-012 - store holds a closed field list and the planted-marker test passes; remedy is screened for credentials (refusal reproduced here), capped at 200, one line, quoted, and labelled as data, and a hostile remedy reproduced here stayed on one quoted line; one hardening gap, `F-005`; no network, model, or secret path introduced\n- Exceptions requested: None identified.\n\n## Test Adequacy Assessment\n\n- Test evidence reviewed: confirmed here - (1) PYTHONPATH=. python -W ignore tests/test_knowledge.py: 47 of 47 OK in 272 s, git status and the store and run-state digests identical before and after; (2) PYTHONPATH=. python -W ignore tests/test_bundled_payload.py: 11 of 11 OK; (3) python runtime/knowledge.py --root <temp copy> harvest --json twice: 25 runs, 70 occurrences, 7 unresolved, 39 lessons, created 0, updated 0, store_written false, store digest unchanged, 0.47 s and 0.29 s; (4) annotate, recall, harvest, report on the temp copy: hostile remedy rendered on one quoted labelled line, credential-like remedy refused with exit 2, re-harvest kept remedy and history; (5) render_section with a crafted lesson_id: one lesson rendered across four physical lines including an injected heading; (6) cmp of the eight authoritative files against the mirror: identical, and no lessons.store file under omn_agent; claimed and not confirmed here - T-001 baseline capture, T-019, T-021 to T-029\n- Coverage of changed behavior: harvest, fingerprints, skip rules, idempotency, governance, lock contention, eligibility and threshold, recall ranking and cap, rendering bound, dispatch hydration on, off, fail-open and pre-change, aggregation harvest success, forced failure and contention, metrics counts, payload exclusion, module boundaries, and documentation terms are each exercised by an executed test; effectiveness is exercised for check lessons only\n- Gaps requiring new tests: gate-lesson effectiveness attribution including the equal-timestamp boundary (`F-002`); rendering of a store record with malformed lesson_id or kind (`F-005`); maybe_aggregate's force-refresh branch, which returns before the harvest step, has no test and no stated expected behaviour; handed to omn-qa\n\n## Correction Requests\n\n| ID | Addresses | Required change | Blocking | Owner |\n|---|---|---|---|---|\n| `CR-001` | `F-001` | The run record carries an owned disposition of the verifier-written replay entries and task-context regeneration in this run, without rewriting committed evidence | no | omn-orchestrator |\n| `CR-002` | `F-002` | An executed test proves the gate-lesson effectiveness attribution for a shown dispatch, an unshown latest dispatch, and a rejection at the same second as the dispatch | no | omn-dev-1-implement |\n| `CR-003` | `F-003` | The pre-change identity guarantee is tested in a form that survives unrelated framework edits, and any retained frozen check states when and how it is re-baselined | no | omn-dev-1-implement |\n| `CR-004` | `F-004` | The flag-off event-detail difference is either removed or recorded as accepted by omn-tech-lead under Design Gate condition (1) | no | omn-tech-lead |\n| `CR-005` | `F-005` | No store record, however malformed, can emit an unlabelled line or exceed two lines per lesson in the prompt section | no | omn-dev-1-implement |\n\n## Residual Risk\n\n- Accepted risk: fail-open recall withholding lessons on a corrupt store, full harvest at every knowledge-loop aggregation, and the unchanged memory/* exclusion text beside a hydrated memory_slice, each accepted by omn-tech-lead at the Design Gate\n- Unmitigated risk: a stale lock left by a hard-killed writer makes every later aggregation harvest record skipped with no console or ledger signal, so the loop can stop closing unnoticed; the single tracked store is rewritten by every knowledge-loop aggregation in any worktree, so parallel branches will conflict on it and governance history must be merged by hand (`Q-003`); verify_multi_phase without --run-id still mutates the latest run, including an in-flight one (`Q-002`)\n- Monitoring required: status and elapsed_seconds in runs/<run>/knowledge-harvest.json after each aggregation (skipped or failed status, or elapsed growth beyond the 0.3 to 0.5 s measured over 25 runs); merge conflicts on memory/lessons/lessons.store.json; the knowledge.py report ratio once hydrated runs accumulate\n\n## Verdict\n\n- Decision: approve-with-corrections\n- Rationale: Stage 8 row five applies: no critical or high finding is open, three medium and two low findings are open, and part of the scope, the in-place replay verifier and the full unit suite, was not examined in this review\n- Blocking findings outstanding: None identified.\n- Readiness recommendation: recommended to omn-qa, which decides the Review Gate as its second owner because this agent produced the evidence the gate assesses: proceed once `Q-001` confirms the full unit suite passes on the final tree and settles condition (8), with `CR-001` to `CR-005` tracked as non-blocking corrections\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | Does the operator's full unit-suite run pass on the final tree, and is M14 on temporary copies (T-023) accepted for Design Gate conditions (4) and (8), or must M14 and the plain bundle test be re-run from the main checkout after landing? | yes | omn-qa | verdict status provisional to complete |\n| `Q-002` | Should verify_multi_phase without --run-id refuse or skip an in-flight run, since it writes replay entries into the run it selects? | no | omn-tech-lead | `F-001` recurrence |\n| `Q-003` | How are concurrent branch and worktree rewrites of the single tracked lesson store, and its governance history, to be reconciled on merge under D-002? | no | architect | residual risk, D-002 |",
+        "digest": "sha256:0c018b737fe2814a720ba140dc5c5b6d",
+        "produced_by": "quality-review"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was delivered: an implementation report for the change set itself, a validation report for what was proven about it, a review package for a `review-pull-request` run, a deployment status for the `communication-and-post-release` phase, which publishes after a release has landed, or a technical recommendation for the `publication` phase of investigate and the `findings-publication` phase of research, which publish on the `findings` basis what an investigation concluded and is the artifact both phases' predecessor hands over. Without one there is nothing to publish from, and publishing anyway would mean describing a system from this agent's own reading of what it was supposed to become."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/artifacts/release-note.md"
+    ],
+    "failures": [
+      {
+        "id": "C3.2",
+        "severity": "Blocking",
+        "quality_ref": "domain-model/agent-specification.md",
+        "requirement": "No model, vendor, or provider named",
+        "detail": "found: ['claude']"
+      },
+      {
+        "id": "R1",
+        "severity": "Blocking",
+        "quality_ref": "templates/release-note.md",
+        "requirement": "releaseVerdict is one of released, partial, rolled-back, handed-off, findings-published, delta-published",
+        "detail": "releaseVerdict='withheld'"
+      },
+      {
+        "id": "R8",
+        "severity": "Blocking",
+        "quality_ref": "agents/omn-documentation/reasoning.md#stage-8--determine-the-release-position",
+        "requirement": "The release position is supported by the evidence type it is read off",
+        "detail": "no evidence rule for releaseVerdict='withheld'"
+      },
+      {
+        "id": "R9",
+        "severity": "Blocking",
+        "quality_ref": "agents/omn-documentation/reasoning.md#stage-8--determine-the-release-position",
+        "requirement": "The release position is one the phase's communication basis yields",
+        "detail": "phase 'documentation-and-release-handoff' has basis 'release-handoff', which yields handed-off; releaseVerdict='withheld'"
+      }
+    ]
+  },
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "review-package",
+      "reference": "runs/run-c9fb8d5bbb32/states/quality-review/artifacts/review-package.md",
+      "produced_by": "quality-review",
+      "artifact": "review-package.md",
+      "bytes": 13001,
+      "sections": {
+        "read_first": [
+          "Findings",
+          "Correction Requests",
+          "Verdict",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Review Scope",
+          "Severity Summary",
+          "Standards and Architecture Conformance",
+          "Test Adequacy Assessment",
+          "Residual Risk"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-c9fb8d5bbb32/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:4c1de2362b058014ec8bc1baec65c38a",
+    "bytes": 69770,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "database",
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "documentation-and-release-handoff"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-17T05:42:11Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:3300717f35d0b29badb0d146de6af8da",
+        "supplies": "framework-context",
+        "bytes": 22733,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:84e98748204581ef06f3e434c600f794",
+        "supplies": "framework-context",
+        "bytes": 9569,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:15b32b7dc6a6e5c3c47fac6809f1df7a",
+        "supplies": "framework-context",
+        "bytes": 12345,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/release-note.md",
+        "digest": "sha256:03660e609eceae3e2fb16ae8d5b1b281",
+        "supplies": null,
+        "bytes": 3294,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null,
+        "bytes": 5292,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null,
+        "bytes": 5825,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null,
+        "bytes": 1252,
+        "read": "required",
+        "read_reason": "skill S10 is required for this phase"
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null,
+        "bytes": 1333,
+        "read": "required",
+        "read_reason": "skill S12 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0fe5a799cafdd70db8744b0287682ffe",
+        "supplies": null,
+        "bytes": 62800,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:598693b3d4e606388ca8c2715f151cf0",
+    "input_digest": "sha256:9b906060954b5108ac8fbda3117b016e",
+    "inputs": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/knowledge-loop-architecture-context.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-architecture-context.md",
+        "digest": "sha256:c96206f6e1e68bb201f8b712cc108369"
+      },
+      {
+        "type": "review-package",
+        "reference": "runs/run-c9fb8d5bbb32/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/knowledge-management-2d49d4/.claude/runs/run-c9fb8d5bbb32/states/quality-review/artifacts/review-package.md",
+        "digest": "sha256:0c018b737fe2814a720ba140dc5c5b6d"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/implement-feature.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 183726,
+    "bytes_required": 19753,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/artifacts/release-note.md",
+      "runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "reproducing a test or validation result, which belongs to omn-qa"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author or amend a technical design, an architecture decision, or a structural constraint",
+      "define, widen, or narrow product scope or acceptance criteria",
+      "award, withhold, or restate a validation verdict as though this agent reached it",
+      "record a merge, release, or deployment decision",
+      "publish a statement the supplied evidence does not support",
+      "omit, soften, or defer a breaking change a supplied input declares",
+      "carry forward prior-release content the delivered change made false",
+      "resolve an engineering gap rather than returning it to the role that owns it",
+      "decide a gate that assesses evidence this agent produced",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "describe delivered behavior from the implementation and validation evidence supplied",
+        "draft release notes, change summaries, and closure communication packages",
+        "record usage, limitations, known issues, and troubleshooting guidance",
+        "state the compatibility consequence a declared contract change carries",
+        "identify documentation the delivered change made stale, and propose its correction",
+        "name the audience a communication was addressed to and the handoff it carries",
+        "maintain the trace from each published statement to the artifact that supports it",
+        "record an unresolved engineering question as an open question against its owning role"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author or amend a technical design, an architecture decision, or a structural constraint",
+        "define, widen, or narrow product scope or acceptance criteria",
+        "award, withhold, or restate a validation verdict as though this agent reached it",
+        "record a merge, release, or deployment decision",
+        "publish a statement the supplied evidence does not support",
+        "omit, soften, or defer a breaking change a supplied input declares",
+        "carry forward prior-release content the delivered change made false",
+        "resolve an engineering gap rather than returning it to the role that owns it",
+        "decide a gate that assesses evidence this agent produced",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else. Product documentation living in the repository is proposed as content inside the artifact and applied by the role that owns the file, so a documentation change never travels as an unreviewed write.",
+        "rationale": "This agent's authority is over what is said about a change, never over the change itself. Writing to the repository would let a publication step alter the delivered behavior it exists to describe, and the resulting document would then be accurate about a system this agent had just modified."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "reproducing a test or validation result, which belongs to omn-qa"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same published statements, the same known-issue set, the same compatibility statement, the same declared release verdict, and the same declared artifact status.",
+      "identifierSchemes": {
+        "knownIssues": "K-<zero-padded-sequence>"
+      },
+      "orderingRule": "Known issues keep the order of the source that recorded them, so a supplied defect list and the issues published from it can be read side by side.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied evidence, release context, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "release-note.md",
+    "artifact_path": "runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "template_ref": "templates/release-note.md",
+    "contract_ref": "agents/omn-documentation/output.md",
+    "quality_ref": "agents/omn-documentation/quality.md",
+    "validator": "release_note_validator",
+    "result_envelope_path": "runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-17T05:42:11Z",
+  "model_tier": {
+    "tier": "standard",
+    "host_hint": "inherit",
+    "basis": "declared light for implement-feature/documentation-and-release-handoff in config/model-tier-policy.json",
+    "escalation": {
+      "from": "light",
+      "to": "standard",
+      "validator_rejections": 1,
+      "gate_rollbacks": 0,
+      "reason": "1 validator rejection(s) and 0 gate rejection(s) with rollback recorded for this phase; promoted from light to standard"
+    }
+  },
+  "context_budget": {
+    "modules_full_bytes": 90936,
+    "modules_core_bytes": 45565,
+    "slice_all_bytes": 183726,
+    "slice_required_bytes": 19753,
+    "inputs_bytes": 2401,
+    "upstream_full_bytes": 13002,
+    "upstream_read_first_bytes": 5015,
+    "task_context_bytes": 69770,
+    "fixed_bytes": 66526,
+    "legacy_estimate_bytes": 356591,
+    "progressive_estimate_bytes": 209030,
+    "legacy_estimate_tokens": 89147,
+    "progressive_estimate_tokens": 52257,
+    "savings_pct": 41.4
+  }
+}

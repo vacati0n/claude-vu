@@ -1,0 +1,340 @@
+{
+  "run_id": "run-f94564cb61ce",
+  "runtime_version": "0.10.0",
+  "command_id": "bugfix",
+  "workflow_id": "fix-bug",
+  "workflow_version": "1.0.0",
+  "status": "Completed",
+  "input_digest": "sha256:ec2dff136122d1c04d06ac65a6ffb8c2",
+  "created_at": "2026-10-17T04:02:33Z",
+  "updated_at": "2026-10-17T06:10:46Z",
+  "states": {
+    "triage-and-impact": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:6deba5d79323b035fca535aefba9287a",
+      "artifact_path": "runs/run-f94564cb61ce/states/triage-and-impact/artifacts/bug-analysis.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-f94564cb61ce/states/triage-and-impact/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 30,
+        "checksPassed": 30,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 9,
+          "status": "provisional",
+          "identifiers": {
+            "E": 18,
+            "C": 5,
+            "Q": 4
+          },
+          "tableRows": {
+            "Reproduction": 18,
+            "Root Cause Analysis": 5
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    },
+    "root-cause-analysis": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:9fd7cad3456740460ef9357fa1e16695",
+      "artifact_path": "runs/run-f94564cb61ce/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-f94564cb61ce/states/root-cause-analysis/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 30,
+        "checksPassed": 30,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 9,
+          "status": "provisional",
+          "identifiers": {
+            "E": 32,
+            "C": 5,
+            "Q": 7
+          },
+          "tableRows": {
+            "Reproduction": 32,
+            "Root Cause Analysis": 5
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    },
+    "fix-implementation": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-implement",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:9a8c7aae603706cd07cbc98728a6b245",
+      "artifact_path": "runs/run-f94564cb61ce/states/fix-implementation/artifacts/implementation-report.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-f94564cb61ce/states/fix-implementation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 32,
+        "checksPassed": 32,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "provisional",
+          "identifiers": {
+            "C": 27,
+            "T": 13,
+            "V": 4,
+            "R": 6,
+            "Q": 2
+          },
+          "tableRows": {
+            "Change Set": 27,
+            "Test Evidence": 13,
+            "Deviations and Tradeoffs": 4,
+            "Residual Risk": 6
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    },
+    "regression-validation": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-qa",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:e88f7d4f9716a1395ecaebaef1acdda6",
+      "artifact_path": "runs/run-f94564cb61ce/states/regression-validation/artifacts/validation-report.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-f94564cb61ce/states/regression-validation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 31,
+        "checksPassed": 31,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "provisional",
+          "identifiers": {
+            "AC": 15,
+            "DF": 0,
+            "Q": 2
+          },
+          "tableRows": {
+            "Acceptance Criteria Results": 15
+          },
+          "criteria": 15,
+          "defects": 0,
+          "verdict": "pass-with-reservations",
+          "validationBasis": "regression",
+          "results": {
+            "met": 13,
+            "not-met": 0,
+            "blocked": 2
+          },
+          "severity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    },
+    "closure-and-communication": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-orchestrator",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:3be02924e2af0a4cad284baee888910f",
+      "artifact_path": "runs/run-f94564cb61ce/states/closure-and-communication/artifacts/orchestration-result.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-f94564cb61ce/states/closure-and-communication/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 34,
+        "checksPassed": 34,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "provisional",
+          "identifiers": {
+            "PH": 5,
+            "HO": 4,
+            "ES": 2,
+            "FU": 5,
+            "Q": 4
+          },
+          "tableRows": {
+            "Phase Progression": 5,
+            "Handoffs": 4,
+            "Escalations": 2,
+            "Follow-Up Actions": 5
+          },
+          "phases": 5,
+          "handoffs": 4,
+          "escalations": 2,
+          "followUps": 5,
+          "disposition": "held",
+          "coordinationBasis": "closure",
+          "progression": {
+            "complete": 4,
+            "blocked": 1,
+            "not-started": 0
+          },
+          "escalationSeverity": {
+            "critical": 0,
+            "high": 1,
+            "medium": 1,
+            "low": 0
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    }
+  },
+  "gates": {
+    "Triage Gate": {
+      "gate": "Triage Gate",
+      "closes_state": "triage-and-impact",
+      "owner_roles": [
+        "omn-dev-1-bug-analyst",
+        "omn-tech-lead"
+      ],
+      "producer_agent": "omn-dev-1-bug-analyst",
+      "decision": "approved",
+      "owner_role": "omn-tech-lead",
+      "decided_by": "omn-tech-lead subagent a7f51b28255cabbd2, recorded by session operator for vuhoangcao",
+      "rationale": "Approve. Severity high and deterministic reproducibility confirmed (E-008/E-009 re-run: R1 FAIL on c9fb8d5bbb32 withheld, PASS on efe092286625 released; E-010 survey 10/10 notes). Q-001 is a fix-design decision, not a triage precondition: root-cause-analysis resolves it with architect consulted, before fix-implementation. SCOPE: cover all four non-deploying omn-documentation phases (implement-feature documentation-and-release-handoff, investigate publication, research findings-publication, review-pull-request documentation-impact); keep release communication-and-post-release verdicts, rows and R4/R5 unchanged; withheld never a passing verdict; settle FC-020 O-006 in the same change. CONDITIONS: R1 and the validator test the verdict against the phase's basis or declared deployment-status input, so a deployment verdict without deployment-status fails outside release; release behaviour protected by regression tests; contract/template/validator mirror parity enforced. Q-003 out of scope (C3.2 correct; route to omn-orchestrator; re-dispatched note must not cite the branch name verbatim). Q-004: proposal lists the 9 historical notes (7 released, 2 partial) and their expected re-validation result; never edit run evidence. Q-002 non-blocking.",
+      "evidence_ref": "runs/run-f94564cb61ce/states/triage-and-impact",
+      "decided_at": "2026-10-17T04:17:43Z",
+      "decision_history": []
+    },
+    "Fix Gate": {
+      "gate": "Fix Gate",
+      "closes_state": "fix-implementation",
+      "owner_roles": [
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-dev-1-implement",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent a72fae474c55ebf68 (independent of the implementer), recorded by session operator for vuhoangcao",
+      "rationale": "Approve-with-corrections. Independent re-run: test_release_verdict 29/29 (24/29 fail on HEAD copy, defect witnessed; withheld + 4 release tests pass on both); bundled_payload 11/11; BackwardCompatibilityTestCase 6/6 (cond.1); verify_validators 6/6 COVERED, 9 superseded reported; verify_manifests 2/2. PHASE_BASIS matches the five Phase Models; R8/R9 correct, R9 Blocking with envelope on runtime and --envelope paths; R2-R5 logic untouched; withheld fails R1 everywhere; Stage 8 yields handed-off for the held note (re-validated: only C3.2 remains). Versions 1.2.0 consistent; mirrors byte-identical; only slice members touched are within the 4 permitted (cond.3). Cond.2 confirmed by the CR-003 scoped re-review (subagent af4c676e89a89cd5d): forced hydration of a pre-change run fails the identity test, with and without a lesson store. Review findings: CR-002 (unguarded envelope JSON in verify_validators) fixed post-review by the operator with a test, 29/29; CR-001 (V-001) and RCA Q-006 ruled by the architect: V-001 stands, superseded exclusion confirmed, V-002 confirmed, architecture-context added to declared sourceInputs types; CR-003 (superseded-count monitoring wording) carried to the change proposal.",
+      "evidence_ref": "runs/run-f94564cb61ce/states/fix-implementation",
+      "decided_at": "2026-10-17T05:22:22Z",
+      "decision_history": []
+    },
+    "Verification Gate": {
+      "gate": "Verification Gate",
+      "closes_state": "regression-validation",
+      "owner_roles": [
+        "omn-qa",
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-qa",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent a72fae474c55ebf68 (did not produce the evidence; omn-qa did), recorded by session operator for vuhoangcao",
+      "rationale": "Approve. omn-qa evidence independently re-checked: validation-report PASS 31/31 with envelope; test_release_verdict 29/29 (incl. post-review CR-002 guard test); bundled_payload OK; verify_validators 6/6 COVERED, 9 superseded; 4 post-review-edited files mirror-identical. Verdict pass-with-reservations correctly follows 13 met/0 not-met/2 blocked/0 defects; HEAD-validator witness shows the defect gone, not R1 widened; release-phase R4/R5 and verdicts unchanged (23-case probe); 9 notes fail exactly R8+R9 as predicted. Q-002: traced runtime path plus executed validate(path, envelope) with real committed envelopes is acceptable: framework_runtime.py:4169 makes that identical call and the envelope hand-over is unchanged by this fix. CLOSURE CONDITIONS: (1) AC-008 - held run-c9fb8d5bbb32 documentation phase re-dispatched and completed via framework_runtime, agent_version 1.2.0, releaseVerdict handed-off, R9 Blocking pass in the runtime's report, agent confirmed to read this worktree's 1.2.0 Stage 8 (FC-020 O-007); (2) AC-011 - FC-021 lists the 9 notes with R8+R9 re-validation and expected positions (8 handed-off, run-437e2f765e4b findings-published), closes FC-020 O-006, carries CR-003 wording, edits no run evidence; (3) omn-tech-lead accepts or decides R-002 (auto-approval precedent reset by the 1.2.0 bump).",
+      "evidence_ref": "runs/run-f94564cb61ce/states/regression-validation",
+      "decided_at": "2026-10-17T05:41:29Z",
+      "decision_history": []
+    },
+    "Closure Gate": {
+      "gate": "Closure Gate",
+      "closes_state": "closure-and-communication",
+      "owner_roles": [
+        "omn-orchestrator",
+        "omn-documentation"
+      ],
+      "producer_agent": "omn-orchestrator",
+      "decision": "approved",
+      "owner_role": "omn-documentation",
+      "decided_by": "omn-documentation subagent ae01f3b6680787eed (did not produce the evidence; omn-orchestrator did), recorded by session operator for vuhoangcao",
+      "rationale": "Approve; explicit decision under R-002, no precedent carried. Closure record held/provisional, 34/34, held only because FC-021 did not exist and this gate was undecided; it stated the record supports closed-with-followups once both settle, which they now do. Verification Gate condition (1) AC-008 met: run-c9fb8d5bbb32 attempt 2 (inv-c9fb8d5bbb32-06-002, omn-documentation 1.2.0) succeeded, handed-off, 34/34, R1/R8/R9/C3.2 pass. (2) AC-011 met: FC-021 (validator 38/38, re-run by the operator) lists the 9 superseded notes with expected positions (8 handed-off, run-437e2f765e4b findings-published), closes FC-020 O-006 as O-009, carries the Fix Gate CR-003 wording distinct from FC-022's CR-003, edits no run evidence. (3) met: FC-021 quotes omn-tech-lead's R-002 acceptance (O-006). Orchestrator items carried into FC-021 with owners: ES-002/FU-003 O-001 (omn-tech-lead, pre-existing early run_completed), Q-003 O-002 (omn-qa, pre-existing cwd-dependent verify_validators), FU-002 O-011, FU-004 O-008, FU-005 O-005. Q-002 answered in FC-021's CR-003 paragraph; Q-004 tracked in FC-022 O-005..O-007; Q-001 answered here: no separate known-issue record needed. FR-03 X1 and FR-05 S8 pre-existing.",
+      "evidence_ref": "runs/run-f94564cb61ce/states/closure-and-communication",
+      "decided_at": "2026-10-17T06:10:45Z",
+      "decision_history": []
+    }
+  },
+  "summary": {
+    "run_id": "run-f94564cb61ce",
+    "run_status": "Completed",
+    "phases": 5,
+    "completed": 5,
+    "blocked": 0,
+    "failed": 0,
+    "pending": 0,
+    "retrying": 0,
+    "active": 0,
+    "transitions": 29,
+    "replays_suppressed": 0
+  },
+  "recovery": {
+    "ledger": "runs/run-f94564cb61ce/recovery-ledger.json",
+    "classifications": 7,
+    "open": 0,
+    "resolved": 7,
+    "retries_scheduled": 0,
+    "by_failure_class": {
+      "gate-approval-required": 7
+    },
+    "retry_profile": {
+      "max_attempts": 3,
+      "backoff_strategy": "exponential",
+      "base_delay_seconds": 2,
+      "multiplier": 2,
+      "max_delay_seconds": 60,
+      "jitter_ratio": 0.2,
+      "circuit_breaker_threshold": 3,
+      "policy_ref": "config/runtime.md#retry-policy"
+    }
+  }
+}

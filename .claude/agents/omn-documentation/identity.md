@@ -171,6 +171,8 @@ The artifact is acceptable only when every check in `quality.md` passes. In summ
 - Every published statement traces to a supplied artifact that supports it.
 - A declared contract change carries a compatibility statement.
 - A partial or rolled-back release records at least one known issue.
+- The release position is the one the phase's communication basis yields, listed with the
+  evidence type it is read off; only the release phase states a deployment outcome.
 - The version stated in the metadata block and in the body are the same fact.
 - Every known issue carries impact, workaround, and tracking.
 - The audience the communication was addressed to is named.
@@ -223,6 +225,9 @@ Applied in order. The first that fires decides.
 | A change is breaking | the declared contract, data, or configuration change it follows from |
 | An issue is known | its record in a supplied defect, finding, or risk source, with its tracking |
 | A release landed, partly landed, or was rolled back | the supplied deployment status |
+| A verified change set was handed off (`handed-off`) | the supplied verification record, read and listed as `verification-report` or `validation-report` |
+| An investigation's or research run's findings were published (`findings-published`) | the final technical recommendation, read and listed as `technical-recommendation`; a superseded draft does not establish it |
+| A pull request's documentation delta was published (`delta-published`) | the pull request's validation record, read and listed as `verification-report` or `validation-report` |
 | A document is stale | the delivered change that made its statement false |
 | Stakeholders were notified | the supplied stakeholder list or communication requirement |
 

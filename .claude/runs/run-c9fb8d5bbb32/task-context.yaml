@@ -1,0 +1,981 @@
+schema: framework.runtime/task-context.v1
+task_id: run-c9fb8d5bbb32
+command: implement
+workflow: implement-feature v1.0.0
+run_status: Completed
+updated_at: '2026-10-17T05:52:51Z'
+objective: 'Give the framework a closed knowledge loop, so that what one run learns the hard way reaches the agents of later
+  runs without an operator carrying it by hand. Today the loop is open: Every rejected artifact is recorded (validation_failed
+  events in runs/<run>/events.jsonl, each naming the failing check IDs; 29 across 24 runs on disk). Gate rejections and rollbacks
+  are recorded too (rollback_scheduled events, gate-rejection entries in recovery-ledger.json). None of that reaches a later
+  dispatch. Every invocation envelope carries memory_slice: {hydrated: false, reason: "memory hydration not requested by this
+  run"}, and the context slice excludes memory/. memory/memory-resolver.md and config/...'
+inputs:
+- type: feature-request
+  reference: runs/inputs/knowledge-loop-feature-request.md
+  digest: sha256:e7a9416b2344d53a4264e32b5a976681
+- type: change-request
+  reference: runs/inputs/knowledge-loop-change-request.md
+  digest: sha256:a4f1eff2640769f1d7f81506a3e8c22a
+- type: business-intent
+  reference: runs/inputs/knowledge-loop-business-intent.md
+  digest: sha256:8080b0e9b989554fc66c2318118d5612
+- type: architecture-context
+  reference: runs/inputs/knowledge-loop-architecture-context.md
+  digest: sha256:c96206f6e1e68bb201f8b712cc108369
+relevant_agents:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  status: completed
+  required_skills:
+  - S02
+  - S07
+- phase: execution-planning
+  agent: planner
+  status: completed
+  required_skills:
+  - S02
+  - S01
+  - S07
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  status: completed
+  required_skills:
+  - S01
+  - S03
+  - S06
+  - S09
+- phase: implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S11
+  - S12
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S08
+- phase: documentation-and-release-handoff
+  agent: omn-documentation
+  status: completed
+  required_skills:
+  - S11
+  - S10
+  - S12
+completed_phases:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  artifact: runs/run-c9fb8d5bbb32/states/scope-and-acceptance/artifacts/scope-definition.md
+  digest: sha256:7bca33ce5e27316b26b53f78e44cbb11
+  validation: pass 33/33
+  attempts: 1
+- phase: execution-planning
+  agent: planner
+  artifact: runs/run-c9fb8d5bbb32/states/execution-planning/artifacts/execution-plan.md
+  digest: sha256:f7b983f2b054a51228d4f944fbbc9dc5
+  validation: pass 45/45
+  attempts: 2
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  artifact: runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  digest: sha256:10a31c17fce24e7808b9c56d259cba5b
+  validation: pass 78/78
+  attempts: 1
+- phase: implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-c9fb8d5bbb32/states/implementation/artifacts/implementation-report.md
+  digest: sha256:a225f9f3cfa8ad3001920558ff095623
+  validation: pass 32/32
+  attempts: 1
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  artifact: runs/run-c9fb8d5bbb32/states/quality-review/artifacts/review-package.md
+  digest: sha256:b9c9b555568d92b56369357d96233e6f
+  validation: pass 31/31
+  attempts: 1
+- phase: documentation-and-release-handoff
+  agent: omn-documentation
+  artifact: runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/artifacts/release-note.md
+  digest: sha256:bd493295c8546efa7515a622819b39e6
+  validation: pass 34/34
+  attempts: 2
+gates:
+- gate: Scope Gate
+  closes: scope-and-acceptance
+  decision: approved
+  owner_role: omn-business-analyst
+  decided_by: omn-business-analyst subagent a388e16432c4b259a, recorded by session operator for vuhoangcao
+- gate: Planning Gate
+  closes: execution-planning
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent a6a9c34fdb734c718, recorded by session operator for vuhoangcao
+- gate: Design Gate
+  closes: solution-design-and-risk-assessment
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent a420de05818ded756, recorded by session operator for vuhoangcao
+- gate: Review Gate
+  closes: quality-review
+  decision: approved
+  owner_role: omn-qa
+  decided_by: omn-qa subagent a190b939114c47c28, recorded by session operator for vuhoangcao
+- gate: Verification Gate
+  closes: quality-review
+  decision: approved
+  owner_role: omn-qa
+  decided_by: omn-qa subagent a190b939114c47c28, recorded by session operator for vuhoangcao
+- gate: Closure Gate
+  closes: documentation-and-release-handoff
+  decision: approved
+  owner_role: omn-orchestrator
+  decided_by: omn-orchestrator subagent a39e7398e7362675a, recorded by session operator for vuhoangcao
+artifacts:
+  scope-and-acceptance: runs/run-c9fb8d5bbb32/states/scope-and-acceptance/artifacts/scope-definition.md
+  execution-planning: runs/run-c9fb8d5bbb32/states/execution-planning/artifacts/execution-plan.md
+  solution-design-and-risk-assessment: runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  implementation: runs/run-c9fb8d5bbb32/states/implementation/artifacts/implementation-report.md
+  quality-review: runs/run-c9fb8d5bbb32/states/quality-review/artifacts/review-package.md
+  documentation-and-release-handoff: runs/run-c9fb8d5bbb32/states/documentation-and-release-handoff/artifacts/release-note.md
+parallel_groups:
+- - scope-and-acceptance
+  - execution-planning
+- - solution-design-and-risk-assessment
+- - implementation
+- - quality-review
+- - documentation-and-release-handoff
+scope:
+  in_scope:
+  - 'S-001: Operators see one lesson per recurring failure pattern in recorded run evidence (validation failures, gate...
+    | Feature request, expected outcome 1 (harvest) | must-have'
+  - 'S-002: Re-harvesting unchanged evidence leaves the lesson record unchanged, and new evidence for a known pattern a...
+    | Feature request, expected outcome 1 (idempotent upsert) and acceptance intent 4 | must-have'
+  - 'S-003: Operators approve, retire, or annotate a lesson from the command line; the lesson keeps its owner, rational...
+    | Feature request, expected outcome 2 (govern); D-006 for the optional remedy | must-have'
+  - 'S-004: A lesson is eligible for hydration when it is approved, or automatically when it recurs in at least two dis...
+    | Feature request, expected outcome 2; D-002 | must-have'
+  - 'S-005: Each dispatch of a phase is shown the eligible lessons recorded against that phase, at most five, in its me...
+    | Feature request, expected outcome 3 and acceptance intent 1; D-003, D-009 | must-have'
+  - 'S-006: A run planned before this change, or planned with hydration switched off, dispatches exactly as it does today
+    | Feature request, acceptance intent 2; architecture context (replay checks) | must-have'
+  - 'S-007: A run planned after this change is hydrated by default, its plan records that choice, and a plan flag switc...
+    | Session operator direction (c); D-001 | must-have'
+  - 'S-008: For each lesson, the framework reports how often its failure recurred in dispatches that had already been s...
+    | Feature request, expected outcome 4; business intent, success | must-have'
+  - 'S-009: Lessons from a completed run are available to the next dispatch with no separate operator step | Feature request,
+    expected outcome 5 | must-have'
+  - 'S-010: Each invocation''s execution metrics record how many lessons were hydrated into it | Feature request, expected
+    outcome 4 | should-have'
+  - 'S-011: The memory and runtime-policy documents describe the lesson category, its lifecycle, its eligibility rule,...
+    | Change request, surfaces table (memory/, config/runtime.md) | should-have'
+  - One lesson per recurring failure pattern with its counts, dates, description, and evidence references (SC-001; S-004,
+    S-015, S-023, S-029, S-030). Covered by...
+  - Idempotent re-harvest with fingerprint upsert (SC-002; S-005, S-016). Covered by T-002, T-003.
+  - Operator approve, retire, and annotate commands with owner, rationale, history, and no deletion (SC-003; S-006, S-008,
+    S-024, S-031). Covered by T-002, T-004.
+  - Eligibility by approval or by recurrence in at least two distinct runs; retired lessons never eligible (SC-004; S-007,
+    S-021). Covered by T-005.
+  - Phase-scoped hydration of at most five lessons into the memory slice and a bounded prompt section (SC-005; S-009, S-013,
+    S-022, S-026, S-027). Covered by T-0...
+  - Unchanged dispatch for runs planned before the change or with hydration off (SC-006; S-014, S-025). Covered by T-013,
+    T-014, T-015.
+  - Hydration on by default for runs planned after the change, recorded in the plan, with an off flag (SC-007; S-020). Covered
+    by T-013, T-017.
+  - Per-lesson effectiveness report (SC-008; S-010). Covered by T-008, T-009.
+  - Harvest on run aggregation with no operator step (SC-009; S-012). Covered by T-011, T-012.
+  - Lessons-hydrated count in execution metrics (SC-010; S-011). Covered by T-010.
+  - Memory and runtime-policy documents describe the implemented loop (SC-011; S-028). Covered by T-020.
+  - 'Self-hosting delivery: runtime version increment, mirror refresh, change proposal, release checklist (S-032). Covered
+    by T-021, T-022, T-023, T-024.'
+  - Validation of all twenty-three scope criteria (S-033). Covered by T-025, T-026, T-027, T-015.
+  - Additive-only and no-model constraints confirmed on the delivered change set (S-017, S-018, S-019). Covered by T-016.
+  out_of_scope:
+  - 'X-001: Any model call, embedding, vector store, or network dependency in harvest, recall, or measurement | The runtime
+    never calls a model and uses the standard library only (feature request constraints; business i... | A change request
+    proposing model-assisted harvesting, with its own constraint review'
+  - 'X-002: Automatic change to validators, artifact templates, gate rules, or agent module text derived from a lesson | Business
+    intent non-goal; lessons inform agents and operators only | A change request citing approved lessons and a gate decision
+    on the proposed change'
+  - 'X-003: Harvesting from sources other than recorded run evidence, such as chat transcripts, external tickets, or op...
+    | Business intent non-goal | A change request naming the new source and its evidence format'
+  - 'X-004: Gate-approval waits recorded as lessons | Normal flow, not failure (architecture context; D-005) | A change request
+    showing that an approval-wait pattern is a defect'
+  - 'X-005: Hydrating runs planned before this change, and backfilling their plans | Those runs must dispatch byte-identically
+    (D-007) | An owner decision to backfill a named run, recorded in a change request'
+  - 'X-006: Changes to gates, validators, artifact contracts, Phase Model tables, and agent module text | Additive-only constraint
+    (feature request) | A separate change request for each affected surface'
+  - 'X-007: Automatic retirement of lessons | Retirement is an operator action (S-003) | Evidence that a lesson''s failure
+    stopped recurring across a set of runs, proposed in a change request'
+  - 'X-008: Deletion of lesson records | Nothing is deleted; retired lessons keep their history (feature request) | A change
+    request defining a retention policy'
+  - 'X-009: Graphical, hosted, or web reporting of lesson effectiveness | The feature request requires a command-line report
+    only | An operator request for a dashboard'
+  - Model calls, embeddings, vector stores, or network dependencies (X-001). Excluded by the standard-library and no-model
+    constraint (S-018, S-019).
+  - Automatic change to validators, templates, gate rules, or agent module text from a lesson (X-002). Excluded because lessons
+    inform agents and operators only.
+  - Harvesting from sources other than recorded run evidence (X-003). Excluded by the business intent non-goal.
+  - Gate-approval waits as lessons (X-004). Excluded because approval waits are normal flow (S-023).
+  - Hydrating or backfilling runs planned before the change (X-005). Excluded because those runs must dispatch unchanged (S-025).
+  - Changes to gates, validators, artifact contracts, Phase Model tables, or agent module text (X-006). Excluded by the additive-only
+    constraint (S-017).
+  - Automatic retirement of lessons (X-007). Excluded because retirement is an operator action.
+  - Deletion of lesson records (X-008). Excluded because retired lessons keep their history.
+  - Graphical, hosted, or web reporting (X-009). Excluded because a command-line report is required only.
+validation_requirements:
+  acceptance_criteria:
+  - 'A-001: Harvesting the recorded runs yields at least one lesson keyed by check C3.2 and at least one keyed by check...
+    | S-001 | Unit test over a copy of recorded run evidence, plus command output listing both lessons with all six fields'
+  - 'A-002: One rollback_scheduled event for gate G and target phase P, recorded in two distinct runs, yields exactly o...
+    | S-001 | Unit test over a two-run fixture'
+  - 'A-003: Harvesting a repository with no runs directory exits with status 0 and reports zero lessons | S-001 | Unit test
+    invoking the harvest command against a directory without a runs directory, checking exit status a...'
+  - 'A-004: A lesson record holds only check identifier, check description, artifact or gate-and-phase key, counts, fir...
+    | S-001 | Unit test with a planted credential-like string in fixture events, searching every store file for it'
+  - 'A-005: Two consecutive harvests of unchanged evidence produce store files with identical bytes, compared file by file
+    | S-002 | Unit test hashing every store file after each harvest'
+  - 'A-006: Adding one validation_failed event for an existing fingerprint and harvesting once raises that lesson''s occ...
+    | S-002 | Unit test on a fixture before and after appending one event'
+  - 'A-007: Each approve, retire, and annotate command changes only the status or remedy field of the named lesson, app...
+    | S-003 | Unit test counting lessons and history entries before and after each command'
+  - 'A-008: A harvest run after an approval or annotation leaves the status, owner, rationale, and remedy of that lesso...
+    | S-003 | Unit test that approves and annotates a lesson, harvests again, and compares the four fields'
+  - 'A-009: Running the memory optimization tool over a store holding lesson records leaves every lesson record byte-id...
+    | S-003 | Unit test running the optimizer on a fixture store and comparing lesson files'
+  - 'A-010: A lesson without a remedy is shown with its check description and no remedy line; a lesson with a remedy sh...
+    | S-003 | Unit test on the rendered lessons section for both kinds of lesson'
+  - 'A-011: A candidate lesson with distinct-run count 2 is eligible for hydration, and a candidate lesson with distinc...
+    | S-004 | Unit test over fixture lessons with counts 1 and 2'
+  - 'A-012: An active lesson is eligible at distinct-run count 1, and a retired lesson is ineligible at every count | S-004
+    | Unit test over active and retired fixture lessons'
+  - 'A-013: With the threshold set to 3, a candidate lesson at distinct-run count 2 is ineligible; with the threshold s...
+    | S-004 | Unit test that changes the threshold value and re-evaluates eligibility'
+  - 'A-014: For a dispatch of phase P, an eligible lesson recorded against P appears in the memory slice with hydrated...
+    | S-005 | Unit test on an opted-in dispatch fixture, checking the slice fields and the prompt text'
+  - 'A-015: A lesson recorded against another phase, or whose artifact type differs from the output of phase P, appears...
+    | S-005 | Unit test with one non-matching lesson in the fixture'
+  - 'A-016: With seven eligible lessons for one phase, exactly five are hydrated, namely those with the five highest di...
+    | S-005 | Unit test over seven fixture lessons with distinct counts'
+  - 'A-017: With five hydrated lessons, the "Lessons from earlier runs" section has at most eleven lines: one heading a...
+    | S-005 | Unit test counting lines in the rendered section'
+  - 'A-018: For a run planned before the change or with hydration switched off, the dispatch envelope and prompt are by...
+    | S-006 | Unit test against the stored baseline, plus the existing replay checks M12 and M14'
+  - 'A-019: A plan created after the change records hydration as on; a plan with the flag set off yields a memory slice...
+    | S-007 | Unit test on two plan fixtures, plus plan command output'
+  - 'A-020: The effectiveness report lists, per lesson, the dispatches that were shown the lesson and the later recurre...
+    | S-008 | Unit test on the fixture, plus report command output'
+  - 'A-021: A lesson already recorded in one run that recurs in a newly aggregated run is eligible for the next dispatc...
+    | S-009 | Unit test that aggregates the fixture run, then dispatches the next phase and inspects its memory slice'
+  - 'A-022: The execution metrics of each invocation carry a lessons-hydrated count equal to the lessons in its memory...
+    | S-010 | Unit test on hydrated and unhydrated metrics fixtures'
+  - 'A-023: The memory README, memory governance, memory resolver, and runtime configuration documents each name the le...
+    | S-011 | Unit test that searches each document for the required terms'
+  test_focus:
+  - 'Carrier: tests/test_knowledge.py (M-012), following tests/test_model_tier.py; every test builds a temporary framework
+    root and copies any recorded evidence i...'
+  - 'AC-001: harvest over a copy of runs/; pass when lessons exist for check C3.2 on scope-definition.md (2 distinct runs)
+    and for C7.1 on scope-definition.md and...'
+  - 'AC-002: two-run fixture, one gate-rejection for gate G closing phase P in each; pass when exactly one gate lesson with
+    distinct runs 2.'
+  - 'AC-003: root without runs/; pass when exit 0, zero lessons reported, no store written.'
+  - 'AC-004: a credential-like marker planted in event summaries, report details, and ledger resolutions; pass when no store
+    file contains it.'
+  - 'AC-005: two harvests; pass when every store file digest is equal.'
+  - 'AC-006: append one validation_failed for an existing fingerprint; pass when occurrences rise by one and last_seen moves.'
+  - 'AC-007 and AC-008: approve, retire, annotate, then harvest; pass when lesson count is constant, one history entry is
+    added per command, and status, owner, ra...'
+  - 'AC-009: run the optimizer''s discovery and classification over a fixture memory directory holding the store; pass when
+    the store is classified non-Markdown an...'
+  - 'AC-010 and AC-017: render with and without remedy, and with five lessons; pass when the remedy line appears only with
+    a remedy and the section is at most ele...'
+  - 'AC-011 to AC-013: eligibility over candidate counts 1 and 2, active at 1, retired at any count, and threshold 3 set through
+    a fixture policy file.'
+  - 'AC-014 to AC-016: dispatch a knowledge-loop fixture run; pass when a matching eligible lesson is in memory_slice and
+    the prompt, a non-matching phase or arti...'
+  - 'AC-018: dispatch the pre-change fixture under 0.10.0 and compare with the P-002 baseline after normalising the closed
+    list (A-002); pass when envelope and pr...'
+  - 'AC-019: plan a new run with and without the flag; pass when the record reads on and off and the off dispatch names the
+    flag in its reason; the flag against a...'
+  - 'AC-020: fixture with three shown dispatches (run X attempts 1 and 2, run Y attempt 1) and one validation_failed after
+    run X attempt 1; pass when the report g...'
+  - 'AC-021: aggregate a knowledge-loop fixture run, then dispatch the next phase with no harvest command; pass when the recurring
+    lesson is hydrated.'
+  - 'AC-022: pass when lessons_hydrated equals the shown count per invocation, and is zero for a pre-change fixture.'
+  - 'AC-023: pass when the four documents of M-008 to M-011 name the category, lifecycle, eligibility rule, default, and off
+    flag.'
+  - 'Beyond the criteria: a forced harvest exception leaves aggregation outputs equal to a run without the step and records
+    status failed; a store file placed in...'
+  evidence:
+  - 'T-001: Unmodified 0.9.0 baseline: two dispatches of one invocation on two temporary roots; same key; differ only i...
+    | regression | C-001, C-002, C-003, C-004, C-005, C-006, C-007'
+  - 'T-002: Regression baseline before any edit and after the exclusion entry: bundle parity, packaging, source fallbac...
+    | regression | C-008'
+  - 'T-003: HarvestRecordedEvidenceTestCase (5): copy of recorded runs yields C3.2 on scope-definition.md over 2 or mor...
+    | unit | C-009, C-010, C-025'
+  - 'T-004: GateLessonTestCase (1): gate G closing phase P rejected in two runs is one lesson with distinct_runs 2; app...
+    | unit | C-010'
+  - 'T-005: EmptyRootTestCase (1): no runs directory exits 0, reports zero lessons, writes nothing | unit | C-010'
+  - 'T-006: NoEvidenceTextTestCase (1): credential-shaped marker planted in event summaries and details, report details...
+    | unit | C-010'
+  - 'T-007: IdempotencyTestCase (4): byte-identical re-harvest; one appended event raises occurrences by one and moves...
+    | unit | C-010'
+  - 'T-008: GovernanceTestCase (4): approve, annotate, retire change one field and append one entry, survive harvest; u...
+    | unit | C-010'
+  - 'T-009: OptimizerIsolationTestCase (1): optimizer discovery skips the store, classifies it not-markdown, bytes unch...
+    | unit | C-010'
+  - 'T-010: EligibilityTestCase (3): candidate at 1 and 2, active at 1, retired at any count, threshold 3 then 2 from t...
+    | unit | C-009, C-010'
+  - 'T-011: RenderTestCase (1): remedy line only with a remedy and unchanged; five lessons render at most eleven lines;...
+    | unit | C-010'
+  - 'T-012: DispatchHydrationTestCase (9): real CLI; record on; seven eligible yield the five highest in tie order; non...
+    | integration | C-009, C-010, C-011, C-012'
+  - 'T-013: BackwardCompatibilityTestCase (6): pre-change fixture under 0.10.0 equals the 0.9.0 envelope, prompt, conso...
+    | regression | C-001, C-002, C-003, C-004, C-005, C-006, C-007, C-011, C-012'
+  - 'T-014: EffectivenessTestCase (1): three shown dispatches and one later recurrence report 3 and 1, plus one unwarned |
+    unit | C-010'
+  - 'T-015: AggregationHarvestTestCase (4): aggregation harvest makes a recurrence eligible for the next dispatch with...
+    | integration | C-010, C-011'
+  - 'T-016: PayloadExclusionTestCase (2): store, lock, and temp file absent from enumerate_seeds; bundle holds no store |
+    unit | C-008, C-017, C-018, C-019, C-020, C-021, C-022, C-023, C-024'
+  - 'T-017: ModuleBoundaryTestCase (2): runtime/knowledge.py imports only the standard library and state_engine; execut...
+    | static | C-010, C-012'
+  - 'T-018: DocumentationTestCase (2): the four documents name lesson, candidate, active, retired, two distinct runs, -...
+    | static | C-011, C-013, C-014, C-015, C-016'
+  - 'T-019: Model-tier regression suite (47 tests) on the final tree, live store present | regression | C-011, C-012'
+  - 'T-020: Bundle parity after the mirror sync, with this checkout''s package (11 tests) | regression | C-008, C-017, C-018,
+    C-019, C-020, C-021, C-022, C-023, C-024'
+  - 'T-021: Bundle tests as literally instructed: the tests directory on sys.path resolves the main checkout''s installe...
+    | regression | C-008'
+  - 'T-022: Replay verifier against committed run run-c5a8d50d3238 in place: M0 to M13 pass including M12; M14 fails be...
+    | regression | C-011'
+  - 'T-023: Same unmodified verifier on temporary copies holding committed run run-c5a8d50d3238: final tree 15/15 with...
+    | regression | C-011'
+  - 'T-024: Replay verifier with default selection, which chose this in-flight run: 14/15, M12 and M14 pass, M6 fails b...
+    | regression | C-011'
+  - 'T-025: Vertical slice verification (10 checks) | regression | C-011'
+  - 'T-026: Registry coverage verification (8 checks) | regression | C-009, C-011'
+  - 'T-027: Prompt-rendering regression suite (21 tests) | regression | C-011'
+  - 'T-028: Lean-dispatch and metrics regression suite (21 tests) | regression | C-011, C-012'
+  - 'T-029: Memory optimizer regression suite (31 tests) | regression | C-014, C-015, C-016'
+  - 'T-030: Live harvest: 25 runs, 70 occurrences, 39 lessons written; second harvest unchanged with the same store dig...
+    | integration | C-010, C-026'
+  verification:
+  - 'Verification method: framework paths in commands are written without the framework directory prefix, and every command
+    ran from the repository root unless a...'
+  - 'Commands executed: python capture_baseline.py . tests/fixtures/knowledge/baseline-0.9.0; PYTHONPATH=. python tests/test_bundled_payload.py
+    (before, after the...'
+  - 'Result summary: 30 evidence entries executed, 27 passed, 3 failed (T-021, T-022, T-024); tests/test_knowledge.py 47 of
+    47, test_model_tier 47 of 47, bundle t...'
+  - 'Unverified areas: M14 in place against committed run run-c5a8d50d3238 (blocked by the file lock, proven only on copies);
+    the plain-invocation bundle test and...'
+constraints:
+- 'Business constraints: Additive only. Gates, validators, artifact contracts, Phase Model tables, and agent module text stay
+  unchanged, and no verifier loses i...'
+- 'Regulatory or policy constraints: No regulatory constraint is stated in the supplied inputs. The architecture context records
+  that config/runtime.md makes me...'
+- 'Delivery constraints: Standard library only, with no network, embedding, or vector store dependency (feature request).
+  The change is framework-internal and i...'
+- 'External dependencies: Recorded run evidence under the runs directory (validation events, recovery ledgers, validation
+  reports). An installed copy has no run...'
+- 'Wave 1: T-001, T-013'
+- 'Wave 2: T-002, T-017'
+- 'Wave 3: T-003, T-005, T-006, T-011'
+- 'Wave 4: T-004, T-008, T-012'
+- 'Wave 5: T-025'
+- 'Wave 6: T-014'
+- 'Wave 7: T-007, T-021'
+- 'Wave 8: T-009, T-010, T-019, T-020'
+- 'Wave 9: T-022, T-026'
+- 'Wave 10: T-015, T-016, T-027'
+- 'Wave 11: T-018, T-024'
+- 'Wave 12: T-023'
+- 'C-001: functional | One lesson per fingerprint: artifact type plus check ID, or gate plus target phase; approval waits
+  are neve... | hard'
+- 'C-002: functional | Unchanged evidence yields a byte-identical store | hard'
+- 'C-003: functional | Statuses candidate, active, retired; approve, retire, annotate change only status or remedy and append
+  one... | hard'
+- 'C-004: functional | Eligible when active, or candidate with distinct runs at or above the threshold (default 2); retired
+  never | hard'
+- 'C-005: functional | Recall matches phase identifier and output artifact type, caps at five, ranks by distinct runs with
+  determi... | hard'
+- 'C-006: migration | Pre-change and flag-off runs dispatch byte-identically after the closed normalisation list; idempotency
+  key... | hard'
+- 'C-007: migration | No context-slice member file is edited, so no context digest moves (F-004) | hard'
+- 'C-008: structural | Lesson data and the hydration record never enter context_slice, input_contract, or any payload-digest
+  compo... | hard'
+- 'C-009: structural | Gates, validators, artifact contracts (the execution-plan contract included), Phase Model tables, agent
+  mod... | hard'
+- 'C-010: structural | Standard library only; no model call; no network | hard'
+- 'C-011: structural | The hydration choice is recorded per run at plan time in run state, never inferred at dispatch; no
+  record m... | hard'
+- 'C-012: security | A lesson record holds a closed field list with no free text taken from evidence; operator remedy is bounded...
+  | hard'
+- 'C-013: operability | A harvest failure at aggregation never fails or corrupts aggregation | hard'
+- 'C-014: operability | The store lives under memory/, outside the optimizer scan, and harvest tolerates a repository with
+  no runs/ | hard'
+- 'C-015: operability | This repository''s lessons never ship to installed copies; the payload-sync tests stay unchanged |
+  hard'
+- 'C-016: operability | Loading policy stays in runtime and config/; documentation goes to config/runtime.md and memory/ documents,...
+  | hard'
+- 'C-017: quality-attribute | Harvest cost stays proportional to recorded evidence; no budget is stated | negotiable'
+- 'C-018: operability | Self-hosting delivery: mirror refreshed by its sync procedure only, change proposal, release checklist
+  | hard'
+- 'C-019: compliance | Artifacts of this change write framework paths without the dot-directory prefix | hard'
+- 'C-020: functional | A per-lesson report counts dispatches shown the lesson and later recurrences | hard'
+- 'C-021: functional | Execution metrics carry a lessons-hydrated count per invocation | hard'
+- 'C-022: functional | Harvest runs at aggregation with no operator step | hard'
+- 'C-023: operability | RUNTIME_VERSION moves from 0.9.0 to 0.10.0 | negotiable'
+- 'C-024: quality-attribute | The loop is unit-testable and maintainable apart from the dispatch runtime | negotiable'
+- 'C-025: functional | A validation strategy with unit tests in repository-root tests/ follows the tests/test_model_tier.py
+  precedent | hard'
+- 'P-001: Store, recall, attribution, aggregation, run-record, and validation contracts in this package and its recor... |
+  M-001, M-002, M-004, M-005 | none'
+- 'P-002: A dispatch baseline (envelope, prompt, key) of a pre-change fixture run is captured from the unmodified 0.9... |
+  M-002, M-003, M-013 | P-001'
+- 'P-003: The exclusion entry exists in M-006 before any store file appears in the authoritative tree | M-006, M-004 | P-001'
+- 'P-004: Store, harvest, governance, and eligibility exist in M-001 against the contract | M-001, M-004, M-005 | P-001, P-003'
+- 'P-005: The run record and plan flag exist in M-002 | M-002, M-005 | P-001, P-002'
+- 'P-006: Dispatch hydration, the prompt section, and lessons_shown exist in M-002 | M-002, M-001 | P-002, P-004, P-005'
+- 'P-007: Metrics count in M-003 and the report in M-001 read lessons_shown | M-003, M-001 | P-006'
+- 'P-008: The isolated harvest step exists at the end of maybe_aggregate | M-002, M-001 | P-004, P-005'
+- 'P-009: RUNTIME_VERSION reads 0.10.0 | M-002 | P-002'
+- 'P-010: Documents describe the delivered behaviour, including the default, the off flag, and fail-open recall | M-008, M-009,
+  M-010, M-011 | P-004, P-006, P-008'
+- 'P-011: The mirror is refreshed by its sync procedure after the last framework edit | M-007 | P-006, P-007, P-008, P-009,
+  P-010'
+- 'P-012: Unit tests in M-012, the full suite, and the verifiers pass on the final tree, including M12 and M14 unmodi... |
+  M-012, M-014, M-021 | P-011'
+- 'P-013: The change proposal and release checklist cite the verification evidence | M-002, M-007 | P-012'
+decisions:
+- 'D-001: Hydration is on by default for runs planned after this change; each plan records its choice, and a plan fla... |
+  Session operator direction (c). Expected outcomes 3 and 5 require lessons to reach later runs with no opera... | Runs planned
+  after the change may receive lessons, and the opt-in default in the run...'
+- 'D-002: A candidate lesson becomes eligible automatically at two distinct runs | Session operator direction (a). Recurrence
+  across runs is the evidence the feature request names; two is th... | A failure seen in one run is never shown automatically;
+  a failure seen in two runs is'
+- 'D-003: At most five lessons are hydrated into one dispatch | Session operator direction (b). The feature request requires
+  the prompt to grow by a bounded amount | Eligible lessons beyond five for one phase are not shown in that dispatch'
+- 'D-004: Under the cap, the lessons with the highest distinct-run count are selected, and ties resolve deterministic... |
+  Recurrence is the strongest evidence in the eligibility rule, so it also orders the cap | When more than five lessons are
+  eligible, those recurring in fewer runs are dropped first'
+- 'D-005: Gate-approval waits are not lessons | Session operator direction (d). The architecture context classes approval
+  waits as normal flow | No lesson is created from an approval wait, however often it recurs'
+- 'D-006: The human-written remedy on a lesson is optional | Session operator direction (e). The business intent requires
+  lessons to arise without operator authoring | A lesson without a remedy is shown with its check description alone'
+- 'D-007: Runs planned before the change never hydrate, and their plans are not backfilled | Session operator direction (c).
+  The feature request requires byte-identical dispatch for those runs | Earlier runs keep today''s dispatch output and idempotency
+  key'
+- 'D-008: The "Lessons from earlier runs" section is bounded at one heading line and two lines per hydrated lesson | The feature
+  request requires bounded prompt growth; the numeric bound is an acceptance threshold this phase... | At five lessons the
+  section is at most eleven lines (A-017)'
+- 'D-009: A lesson reaches only the phase whose output artifact type and phase identifier it was recorded against | The feature
+  request, expected outcome 3, matches lessons by output artifact and phase identifier | A lesson recorded against one phase
+  is not shown to another phase, even when an artifact type is shared'
+- 'Selected: O-001.'
+- 'Structural change:'
+- 'Module (D-001). runtime/knowledge.py, standard library plus the state_engine digest helper, imports nothing from framework_runtime.py.
+  Command line: harvest,...'
+- Store (D-002). One file, memory/lessons/lessons.store.json, schema id framework.memory/lessons.v1, top-level keys schema
+  and lessons. Lesson record, closed l...
+- Fingerprints. check:artifact-type:check-id for validation failures; gate:gate-name:phase-id for gate rejections.
+- 'Harvest rule (D-013). Occurrence sources: each check ID of a validation_failed event, with artifact type resolved through
+  that run''s state.json; each gate-re...'
+- Upsert. Evidence fields are recomputed from scratch on every harvest; governance fields (status, owner, rationale, remedy,
+  history) carry over by fingerprint...
+- Serialisation. UTF-8, LF, sorted keys, two-space indent, ASCII escapes, trailing newline, lessons ordered by fingerprint,
+  no timestamp of the harvest itself;...
+- Governance. approve (candidate or retired to active), retire (candidate or active to retired), annotate (sets remedy, status
+  unchanged); each requires an act...
+- Run record (D-003). At run creation only, execution-request.json gains knowledge_loop with hydration on or off and a basis.
+  The default comes from the policy...
+- 'Dispatch (D-004, D-007). After replay detection and payload binding, the runtime reads the record. No record: today''s
+  literal memory_slice, no prompt section...'
+- 'Prompt section (D-007). Present only when at least one lesson is shown. Heading line: Lessons from earlier runs, labelled
+  recorded evidence, data not instruc...'
+- 'Aggregation (D-006). At the end of maybe_aggregate, after every aggregation output is written, and only for runs carrying
+  a knowledge_loop record: a full har...'
+- 'Effectiveness (D-008). Shown dispatch: an invocation_started event whose lessons_shown names the lesson. Recurrence after
+  shown: for a check lesson, a valida...'
+- Metrics (D-009). Each per_phase row gains lessons_hydrated and lessons_hydrated_by_invocation; the document gains a run
+  total; counts read lessons_shown, and...
+- Policy (D-010). config/knowledge-policy.json carries schema, hydration_default (on), auto_eligible_distinct_runs (2), default_owner
+  (omn-tech-lead). The cap...
+- Payload exclusion (D-005). EXCLUDE_PATTERNS gains lessons.store., covering the store and its lock in the installer, the
+  bundle sync, and the bundle tests at...
+- 'Rationale: O-001 is the only top-scoring option (5.2); it keeps the one-way dependency M-002 to M-001, lets M-012 test
+  the loop over temporary roots, and con...'
+- 'Highest-scoring rejected alternative and why it lost: O-002 ties O-001 on hard constraints, impact surface, and reuse,
+  but places the loop inside the dispatc...'
+- 'Tradeoffs accepted:'
+- The context slice excluded text keeps reading that memory hydration is not requested even on hydrated runs, because changing
+  it would move the context digest...
+- Full harvest over all runs at each knowledge-loop aggregation, accepting linear cost for simplicity and idempotency (C-017,
+  A-003).
+- 'Fail-open recall: a corrupt store silently withholds lessons for a dispatch rather than blocking delivery; the reason is
+  recorded in memory_slice.'
+- Pre-change runs, this run included, are harvested only by the operator command, never by their own aggregation.
+- One new installer exclusion entry in M-006, outside the surfaces the change request listed, to satisfy C-015.
+- 'D-001: Dedicated standard-library module M-001 with its own command line; M-002 depends on it one-way (O-001) | yes | architecture-decision-record-D-001.md'
+- 'D-002: Single JSON lesson store M-004 with closed record, fingerprints, canonical serialisation, rebuild plus gove... |
+  yes | architecture-decision-record-D-002.md'
+- 'D-003: Run-level knowledge_loop record in execution-request.json at creation; policy default; --no-lesson-hydratio... |
+  yes | architecture-decision-record-D-003.md'
+- 'D-004: Lessons travel only in memory_slice, an optional prompt section, and lessons_shown; never in any payload-di... |
+  yes | architecture-decision-record-D-004.md'
+- 'D-005: lessons.store. joins EXCLUDE_PATTERNS in M-006 (O-001) | yes | architecture-decision-record-D-005.md'
+- 'D-006: Isolated full harvest as the last step of maybe_aggregate, for knowledge-loop runs only, outcome in knowled... |
+  no | inline, 5.3 Aggregation'
+- 'D-007: Recall eligibility, matching, ranking, cap, rendering, and fail-open behaviour (O-001) | no | inline, 5.3 Dispatch
+  and Prompt section'
+- 'D-008: Effectiveness attribution rule over invocation and validation evidence (O-001) | no | inline, 5.3 Effectiveness'
+- 'D-009: Additive lessons_hydrated fields in execution metrics (O-001) | no | inline, 5.3 Metrics'
+- 'D-010: Policy file keys, fixed cap, absent and unreadable behaviour (O-001) | no | inline, 5.3 Policy'
+- 'D-011: AC-018 baseline captured from unmodified 0.9.0, closed list derived by two dispatches of one invocation plu... |
+  no | inline, 9 Test Strategy'
+- 'D-012: RUNTIME_VERSION 0.10.0, set only after the baseline exists (O-001) | no | inline, P-009'
+- 'D-013: Harvest evidence rules: sources, skips, ID pattern, description resolution (O-001) | no | inline, 5.3 Harvest rule'
+- 'V-001: Gate lessons are keyed by the phase the gate closes (evidence_bundle_ref.closes_state), and only the gate w... |
+  D-013 gate fingerprint, scope A-002 "target phase" | The design''s test strategy states "gate G closing phase P"; counting
+  the successor envelope would double ea...'
+- 'V-002: knowledge-harvest.json also carries schema, run_id, at, retained, occurrences, unresolved, store_written, s... |
+  D-006 outcome fields | Additive diagnostics; no ledger event and no aggregation output changes'
+- 'V-003: A run recorded on with no matching lesson gets hydrated true with matched 0 and an empty list; a missing st... |
+  D-007 dispatch shape | The design does not fix the zero-match shape; flag-off and pre-change paths stay as specified'
+- 'V-004: A remedy over 200 characters is refused rather than truncated; actor and rationale are collapsed to one lin... |
+  D-002 governance remedy screening | Refusal never alters operator text silently; caps keep the store to one-line fields'
+- 'V-005: The bundle sync and the bundle tests were run with PYTHONPATH=. rather than the literal plain command, and... |
+  P-011 sync procedure | The plain command resolves the main checkout''s package, which lacks the exclusion and would mirror
+  the live...'
+open_questions:
+- 'Q-001: What reduction in recurrence, if any, must lessons achieve before the business treats the loop as effective... |
+  no | omn-business-analyst, on behalf of the requester'
+- 'Q-002: Is the change of default from opt-in to on, for runs planned after this change (D-001), accepted as a chang... |
+  no | omn-tech-lead, as delivery and runtime policy owner'
+- 'Q-001: Should the lesson store harvested from this repository''s runs ship to installed copies through the bundled... |
+  No | omn-tech-lead'
+- 'Q-002: Is AC-018 byte identity judged after normalising build timestamps and the runtime version stamp, which alre... |
+  No | omn-product-owner'
+- 'Q-003: implement-feature has no phase before implementation that omn-qa owns; T-025 is mapped to solution-design-a... |
+  No | omn-tech-lead'
+- 'Q-001: For flag-off runs, is the AC-019 reason text the one permitted difference from the AC-018 baseline? | no | omn-product-owner'
+- 'Q-002: Should a pre-change run''s own aggregation also harvest? | no | omn-tech-lead'
+- 'Q-003: What recurrence reduction, if any, must the report show before the loop counts as effective? | no | omn-business-analyst'
+- 'Q-004: Is omn-tech-lead the default owner of harvested lessons (A-006)? | no | omn-tech-lead'
+- 'Q-005: Accept the records for D-001 to D-005, emitted at Proposed; implementation waits on them | no | omn-tech-lead'
+- 'Q-001: Is M14 on temporary copies of the final tree (T-023) accepted for the replay obligation, or must it be re-r... |
+  no | omn-qa'
+- 'Q-002: Should the bundle tests and the sync be re-run from the main checkout once its package carries the exclusio... |
+  no | omn-tech-lead'
+- 'Q-003: Do the 6 replay entries the default-target verifier recorded in this run''s state.json stand as runtime-reco...
+  | no | omn-orchestrator'
+- 'Q-004: The design''s open decisions were implemented at their stated defaults (flag-off reason is the one permitted...
+  | no | omn-product-owner'
+- 'Q-001: Does the operator''s full unit-suite run pass on the final tree, and is M14 on temporary copies (T-023) acce...
+  | yes | omn-qa'
+- 'Q-002: Should verify_multi_phase without --run-id refuse or skip an in-flight run, since it writes replay entries... |
+  no | omn-tech-lead'
+- 'Q-003: How are concurrent branch and worktree rewrites of the single tracked lesson store, and its governance hist... |
+  no | architect'
+objectives:
+- 'Harvest is deterministic and idempotent: one lesson per fingerprint, and unchanged evidence yields a byte-identical store.
+  Verified by AC-002, AC-005, AC-006...'
+- A lesson record carries only its declared fields, so free text from evidence never reaches the store or a prompt. Verified
+  by AC-004 and the review in T-019....
+- Eligibility is a function of lesson status, distinct-run count, and a configured threshold alone. Verified by AC-011, AC-012,
+  AC-013. Traces to business obje...
+- Recall is phase-scoped, capped at five, ordered by distinct-run count with deterministic ties, and renders a bounded prompt
+  section. Verified by AC-014, AC-0...
+- Dispatch output and idempotency key are unchanged for runs planned before the change and for runs whose plan switches hydration
+  off. Verified by AC-018, AC-0...
+- Harvest runs on run aggregation and tolerates a repository without a runs directory. Verified by AC-021, AC-003. Traces
+  to business objective 1 and to S-012,...
+- Effectiveness accounting attributes each later recurrence to the dispatches that were shown the lesson, and metrics record
+  the hydrated count. Verified by AC...
+- The lesson store is unaffected by the memory optimization tool. Verified by AC-009. Traces to business objective 2 and to
+  S-031.
+- The change uses no model call and no dependency beyond the standard library, and alters no gate, validator, artifact contract,
+  Phase Model table, or agent mo...
+- 'Desired outcome: Recorded run evidence becomes governed lessons that later dispatches of the matching phase receive as
+  data, while every run planned before t...'
+- 'Architectural objectives:'
+- One new runtime boundary, runtime/knowledge.py, owns harvest, store, governance, eligibility, recall selection, and effectiveness
+  accounting, depends only on...
+- A deterministic, governed lesson store contract lives under memory/, outside the memory optimizer's scan and outside the
+  shipped payload (S-002, S-003, S-004...
+- A run-level hydration record is fixed once at plan time in run state, and an absent record means a pre-change run that never
+  hydrates (S-011, S-029, S-032).
+- Lessons reach a dispatch only through memory_slice, an optional bounded prompt section, and one invocation_started detail
+  key, none of which enters the paylo...
+- Harvest attaches to run aggregation as an isolated post-step that cannot fail or alter aggregation (S-010, S-034).
+- Effectiveness and per-invocation counts derive from append-only invocation evidence (S-008, S-009).
+- Governance actions are operator commands over an append-only history, and nothing is deleted (S-005, S-006, S-018).
+- 'In scope: harvest, store, governance, eligibility, recall at dispatch, run-level record and plan flag, aggregation hook,
+  effectiveness report, metrics count,...'
+- 'Out of scope:'
+- Model calls, embeddings, vector stores, network access (S-020; X-001).
+- Automatic change to validators, templates, gate rules, or agent module text from a lesson (S-020; X-002).
+- Evidence sources other than recorded run evidence (S-020; X-003); approval waits as lessons (S-023; X-004).
+- Hydrating or backfilling runs planned before the change (S-011; X-005).
+- Any change to gates, validators, artifact contracts including the execution-plan contract, Phase Model tables, or agent
+  module text (S-013, S-032; X-006).
+- Automatic retirement, deletion of lesson records, graphical reporting (S-006; X-007, X-008, X-009).
+- Any edit to a context-slice member file, including runtime/README.md and the registries (S-026, S-030).
+- Any change to context_slice content or to input_contract for any run (S-030).
+- Incremental harvest; deferred until evidence shows the full harvest is too costly (S-010).
+assumptions:
+- 'A-001: The evidence fields the architecture context names (failing check IDs and report reference on validation fa... |
+  S-001, S-004 | Harvest needs per-shape handling for older runs; T-001 lists the variants and T-003 grows'
+- 'A-002: The recorded C3.2 and C7.1 failures each resolve to an artifact type from the evidence on disk | S-015 | AC-001
+  cannot be met over recorded evidence and the scope owner must restate it'
+- 'A-003: A run''s plan can record the hydration choice so that a plan lacking the record identifies a run planned bef...
+  | S-020, S-025 | Pre-change detection needs another signal; T-013 and T-017 change'
+- 'A-004: Replay checks M12 and M14 replay a run planned before the change, so they stay on the unhydrated path | S-014 |
+  Replay baselines would change, breaching S-017; T-015 fails'
+- 'A-005: The default change from opt-in to on for runs planned after the change (SQ-002) is accepted at the Scope Gate |
+  S-020 | Hydration defaults off; T-013, T-017, T-018, T-020 change their stated default'
+- 'A-006: Harvesting all recorded runs at each aggregation costs little enough that no incremental harvest is needed;... |
+  S-012 | T-011 must define an incremental harvest and T-012 grows'
+- 'A-007: A dispatch baseline can be captured from the runtime as committed before the change, for the phases AC-018... |
+  S-014 | AC-018 needs a different reference and T-014 changes'
+- 'A-008: Updating config/runtime.md and the memory/ documents is not a change to a gate, validator, artifact contrac... |
+  S-017, S-028 | T-020 needs a separate change request'
+- 'A-009: AC-018 byte identity is judged after normalising the fields that already vary per dispatch today: build tim... |
+  S-014, S-032 | The version increment in T-021 breaks AC-018 as literally worded; see Q-002'
+- 'A-010: The bundled payload mirror carries memory/ contents, so a store committed under memory/ reaches installed c... |
+  S-006, S-032 | Installed copies receive no lessons and T-022 acceptance changes; see Q-001'
+- 'A-001: Every run whose events record a validation failure also holds a state.json mapping that state_id to its out... |
+  Check lessons are keyed by artifact type, which events do not carry (F-010) | Failures in runs without the mapping are skipped
+  and counted unresolved; lesson counts drop'
+- 'A-002: The fields that differ between two dispatches of one invocation under 0.9.0 are built_at, context_slice.fro... |
+  Fixes the closed normalisation list for AC-018 | The list grows only by an omn-tech-lead decision; the baseline comparison
+  changes'
+- 'A-003: A full harvest over the 25 recorded runs at each knowledge-loop aggregation costs little enough that no inc... |
+  No harvest budget is stated | An incremental cursor is needed and D-006 changes'
+- 'A-004: No installer path other than _walk copies memory/ files | Payload exclusion relies on the EXCLUDE_PATTERNS filter
+  alone | The store could reach installs another way; D-005 changes'
+- 'A-005: No existing test pins exact execution-metrics keys or exact dispatch bytes for a fixture this change moves... |
+  The metrics change is additive | A pinned test needs a recorded update; delivery effort grows'
+- 'A-006: omn-tech-lead is the default owner of a harvested lesson, following the ownership pattern of memory/archite... |
+  A lesson needs an owner at creation | The default owner value in the policy changes'
+- 'A-007: Acceptance treats the flag-off memory_slice.reason required by AC-019 as the one permitted difference from... |
+  AC-018 and AC-019 both name flag-off runs | The flag-off reason reverts to the pre-change text'
+risks:
+- 'R-001: requirement | SQ-002 is rejected at the Scope Gate (A-005 false) | Hydration defaults off; plan-flag semantics and
+  documentation change after design'
+- 'R-002: requirement | Recorded C3.2 or C7.1 failures do not resolve to an artifact type (A-002 false) | AC-001 cannot be
+  met over recorded evidence'
+- 'R-003: requirement | A failure recurs in a retry of the same phase and run that was shown the lesson | The effectiveness
+  report over- or under-counts recurrence and misleads the business'
+- 'R-004: requirement | The documentation update is judged a change to a governed contract (A-008 false) | T-020 waits on
+  a separate change request and AC-023 slips'
+- 'R-005: technical | Older runs record evidence in a different shape (A-001 false) | Lessons are missed or miscounted'
+- 'R-006: technical | A dispatch or plan change alters the envelope, prompt, or idempotency key of a run planned before the
+  chang... | Replay checks fail and a verifier loses its baseline, breaching the additive-only constraint'
+- 'R-007: technical | Harvest output varies with ordering, timestamps, or platform line endings | AC-005 fails and every harvest
+  rewrites the store'
+- 'R-008: security | Free text from evidence carrying a credential-like string reaches the store or a prompt | Sensitive content
+  is persisted and shown to later agents'
+- 'R-009: security | Operator-written remedy text or a check description is read by an agent as an instruction | Later agents
+  act on injected directions'
+- 'R-010: operational | Harvest fails during run aggregation | Run aggregation is blocked or its outputs are corrupted'
+- 'R-011: operational | Harvest cost grows with the number of recorded runs (A-006 false) | Every aggregation slows'
+- 'R-012: operational | The memory optimization tool or a later scan rule rewrites the lesson store | Lesson records are mangled'
+- 'R-013: delivery | The runtime version increment changes the version stamp in pre-change dispatch output (A-009 false) |
+  AC-018 fails as literally worded'
+- 'R-014: delivery | The bundled mirror is not refreshed after the last framework edit | The bundled payload test fails and
+  a suite run of about 26 minutes is repeated'
+- 'R-001: contract | A knowledge-loop branch leaks into the absent-record path (a key, a prompt line, a console line, a detail
+  key) | Pre-change dispatch differs from the baseline; AC-018 fails'
+- 'R-002: contract | An edit touches a context-slice member such as runtime/README.md or a registry | Context digest and the
+  key of every pre-change item move'
+- 'R-003: migration | Baseline capture finds a differing field outside A-002 | The closed list needs an owner decision before
+  AC-018 can pass'
+- 'R-004: contract | Acceptance reads AC-018 as strict identity for flag-off runs (A-007 false) | AC-019 and AC-018 cannot
+  both pass as worded'
+- 'R-005: structural | Older runs lack the state.json mapping or carry other evidence shapes (A-001 false) | Lessons are missed
+  or miscounted'
+- 'R-006: security | Evidence free text or a credential-like string reaches the store or a prompt | Sensitive content persists
+  and is shown to later agents'
+- 'R-007: security | Remedy or description text is read as an instruction or breaks the line budget | Later agents act on
+  injected text, or the section exceeds its bound'
+- 'R-008: operability | Concurrent harvest and governance writes in a shared tree | An operator action is lost or the store
+  is corrupted'
+- 'R-009: operability | The harvest step raises or half-writes at aggregation | Aggregation fails or its outputs differ'
+- 'R-010: performance | Harvest cost grows with recorded runs (A-003 false) | Every knowledge-loop aggregation slows'
+- 'R-011: operability | The exclusion entry is missing when a store exists, or another installer path copies memory/ (A-004
+  false) | This repository''s lessons ship in the bundle or installs'
+- 'R-012: delivery | A test pins exact metrics keys or dispatch bytes (A-005 false) | The suite fails and is rerun'
+- 'R-013: delivery | A check expects the C7.1 lessons to hydrate automatically | They split by artifact type into two one-run
+  lessons below the threshold (F-010), so the check fails'
+- 'R-014: structural | An agent reads the unchanged context-slice exclusion text beside a hydrated memory_slice | The agent
+  ignores or doubts the shown lessons'
+- 'R-015: operability | The policy file is unreadable when a run is created | Run creation fails as a policy-failure'
+- 'R-001: In this worktree a tracked run file is locked between runtime child processes (WinError 5 on os.replace; a... |
+  high | The replay check reads as failing in this checkout although the code passes it'
+- 'R-002: A plain bundle test or plain --sync run from this worktree resolves the main checkout''s package, which lack...
+  | medium | This repository''s lessons could reach the bundle if synced that way before landing'
+- 'R-003: The default-target verifier run recorded 6 runtime replay entries in this run''s state.json and regenerated... |
+  medium | Run evidence of run-c9fb8d5bbb32 carries entries a verifier added'
+- 'R-004: The slice-member digest guard pins 45 files to the 0.9.0 baseline | high | Any later deliberate edit to one of them
+  fails BackwardCompatibilityTestCase until re-baselined'
+- 'R-005: A lock file left by a hard-killed writer blocks harvest and governance | low | Aggregation harvests record skipped;
+  governance fails'
+- 'R-006: run-308f4d0ee447 has no state.json, so its 7 check occurrences cannot resolve an artifact type | high | Those 7
+  occurrences are not counted in any lesson'
+- 'Accepted risk: fail-open recall withholding lessons on a corrupt store, full harvest at every knowledge-loop aggregation,
+  and the unchanged memory/ exclusion...'
+- 'Unmitigated risk: a stale lock left by a hard-killed writer makes every later aggregation harvest record skipped with no
+  console or ledger signal, so the loo...'
+- 'Monitoring required: status and elapsed_seconds in runs/<run>/knowledge-harvest.json after each aggregation (skipped or
+  failed status, or elapsed growth beyo...'
+plan_tasks:
+- 'T-001: Inventory the recorded run evidence the harvest reads | depends on none'
+- 'T-002: Define the lesson store contract | depends on T-001'
+- 'T-003: Deliver lesson harvest with fingerprint upsert | depends on T-002'
+- 'T-004: Deliver the lesson governance commands | depends on T-002, T-003'
+- 'T-005: Deliver hydration eligibility evaluation | depends on T-002'
+- 'T-006: Define the recall selection contract | depends on T-002'
+- 'T-007: Deliver lesson hydration at dispatch | depends on T-005, T-006, T-013, T-014, T-017'
+- 'T-008: Define the lesson effectiveness attribution rule | depends on T-002, T-006'
+- 'T-009: Deliver the lesson effectiveness report | depends on T-003, T-007, T-008'
+- 'T-010: Record lessons hydrated in execution metrics | depends on T-007'
+- 'T-011: Define harvest at run aggregation | depends on T-002'
+- 'T-012: Deliver harvest at run aggregation | depends on T-003, T-011'
+- 'T-013: Define how a run''s plan records its hydration choice | depends on none'
+- 'T-014: Capture the pre-change dispatch baseline | depends on T-013, T-025'
+- 'T-015: Verify unchanged behaviour for runs planned before the change | depends on T-014, T-022, T-026'
+- 'T-016: Review the change set against the additive-only constraint | depends on T-022'
+- 'T-017: Deliver the plan-time hydration choice | depends on T-013'
+- 'T-018: Publish the release note | depends on T-020, T-027'
+- 'T-019: Review lesson content flow for exposure | depends on T-003, T-004, T-007'
+- 'T-020: Document the lesson category in the governing documents | depends on T-004, T-005, T-007, T-017'
+- 'T-021: Increment the runtime version | depends on T-014'
+- 'T-022: Refresh the bundled payload mirror | depends on T-003, T-004, T-005, T-007, T-009, T-010, T-012, T-017, T...'
+- 'T-023: Confirm the framework release checklist passes | depends on T-024'
+- 'T-024: Author the framework change proposal | depends on T-015, T-016, T-019, T-027'
+- 'T-025: Define the validation strategy for the twenty-three scope criteria | depends on T-002, T-006, T-008, T-011, T-013'
+- 'T-026: Deliver the unit tests that carry the validation strategy | depends on T-003, T-004, T-005, T-007, T-009, T-010,
+  T-012, T-014, T...'
+- 'T-027: Record verification evidence for the scope criteria | depends on T-026'
+facts:
+- 'F-001: Every envelope carries memory_slice as the literal {hydrated: false, reason: "memory hydration not requeste... |
+  runtime/framework_runtime.py cmd_dispatch and build_context_slice; this invocation envelope'
+- 'F-002: The payload digest is computed from context digest, input digest, agent version, and canonical artifact pat... |
+  runtime/framework_runtime.py cmd_dispatch; runtime/state_engine.py idempotency_key and bind_payload'
+- 'F-003: A dispatch of a completed item is replay-suppressed before any envelope is built; an active item re-dispatc... |
+  runtime/framework_runtime.py cmd_dispatch'
+- 'F-004: The context digest digests every slice member''s content: the base set (four registries, capability and skil...
+  | runtime/framework_runtime.py CONTEXT_SLICE_BASE, CONTEXT_SLICE_PHASE, build_context_slice'
+- 'F-005: execution-request.json is written once, at run creation, carrying runtime_version and no hydration key; an... |
+  runtime/framework_runtime.py plan_run and stored_command'
+- 'F-006: The dispatch prompt carries the line naming the runtime version, and renders a prior rejection rationale as... |
+  runtime/framework_runtime.py build_dispatch_prompt'
+- 'F-007: Envelope built_at and context_slice.frozen_at are set from the clock at each dispatch | runtime/framework_runtime.py
+  cmd_dispatch and build_context_slice'
+- 'F-008: maybe_aggregate runs from the complete, gate, and aggregate commands, returns early when the status-vector... |
+  runtime/framework_runtime.py maybe_aggregate'
+- 'F-009: M12 re-digests every committed artifact; M14 replays plan, dispatch, and complete against the committed run... |
+  runtime/verify_multi_phase.py fingerprint, M12, M14'
+- 'F-010: 30 validation_failed events sit in 18 of 25 runs with an event stream; 4 carry an empty failures list; chec... |
+  runs//events.jsonl, read for this design'
+- 'F-011: validation-report.json lists every check with id, severity, description, and a per-check detail, and record... |
+  runs/run-919c5d5cf156/states/scope-and-acceptance/validation-report.json'
+- 'F-012: rollback_scheduled occurs 3 times in run-3e6f6a248b99 and run-4c51600606df, carrying gate, target, and supe... |
+  runs/run-3e6f6a248b99 events.jsonl and recovery-ledger.json; runs//recovery-ledger.json'
+- 'F-013: The memory optimizer discovers only .md files and classifies any other suffix as not a markdown document | runtime/optimize_memory.py
+  discover and classify'
+- 'F-014: memory is a seed directory; _walk skips names matching EXCLUDE_PATTERNS; the bundle test mirrors managed pl... |
+  omn_agent/source.py; tests/test_bundled_payload.py'
+- 'F-015: execution_metrics.compute builds per_phase rows from envelopes and invocation_started and validation events... |
+  runtime/execution_metrics.py; runtime/framework_runtime.py cmd_dispatch'
+- 'F-016: The model tier precedent ships a managed policy file, adds an additive envelope field outside the payload d... |
+  config/runtime.md, Model Tiers'
+- 'F-017: config/runtime.md Writeback Policy requires ownership and rationale metadata and fingerprint-keyed upsert;... |
+  config/runtime.md, Memory Loading; runtime/.py search'
+- 'F-018: RUNTIME_VERSION is 0.9.0 | runtime/framework_runtime.py'
+- 'F-019: StateStore.save writes a temporary file and replaces the target with os.replace | runtime/state_engine.py'
+- 'F-020: memory/ holds ten Markdown documents and no machine-maintained store | memory/ directory listing'
+- 'F-021: Seed directories are created from the source only when missing and are never updated or overwritten by the... |
+  omn_agent/source.py, SEED_DIRS'
+- 'F-022: runtime/ holds one validator per artifact, including plan_validator.py and design_validator.py; tests/ hold... |
+  runtime/ and tests/ directory listings'
+- 'F-023: Agent module text carries no loading policy, and verify_vertical_slice check C10 keeps it so | architecture context
+  input'
+- 'F-024: The runtime under change is Python; execution_metrics.py and design_validator.py import yaml, an installed... |
+  runtime/execution_metrics.py; context/technical-context.md'
+repository_context:
+  relevant_modules:
+  - 'M-001: runtime/knowledge.py (new) | extension | F-017, F-010, F-012'
+  - 'M-002: runtime/framework_runtime.py | contract-change | F-001, F-002, F-005, F-006, F-008, F-018'
+  - 'M-003: runtime/execution_metrics.py | contract-change | F-015'
+  - 'M-004: memory/lessons/lessons.store.json (new store) | extension | F-020, F-013'
+  - 'M-005: config/knowledge-policy.json (new) | extension | F-016'
+  - 'M-006: omn_agent/source.py | behavior-change | F-014, F-021, A-004'
+  - 'M-007: omn_agent/_bundled_payload/ mirror | operational-impact | F-014'
+  - 'M-008: config/runtime.md | behavior-change | F-017, F-016'
+  - 'M-009: memory/README.md | behavior-change | F-020'
+  - 'M-010: memory/memory-governance.md | behavior-change | F-020'
+  - 'M-011: memory/memory-resolver.md | behavior-change | F-017'
+  - 'M-012: tests/test_knowledge.py (new) | extension | F-022'
+  - 'M-013: runtime/state_engine.py | no-change-verified | F-002, F-019'
+  - 'M-014: runtime/verify_multi_phase.py | no-change-verified | F-009'
+  - 'M-015: runtime/optimize_memory.py | no-change-verified | F-013'
+  - 'M-016: runtime/plan_validator.py and the other artifact validators | no-change-verified | F-022'
+  - 'M-017: runtime/README.md | no-change-verified | F-004'
+  - 'M-018: registry YAML indexes (agents, workflows, skills, templates) | no-change-verified | F-004'
+  - 'M-019: workflows/implement-feature.md Phase Model | no-change-verified | F-004'
+  - 'M-020: agent module sets under agents/ | no-change-verified | F-023'
+  - 'M-021: tests/test_bundled_payload.py | no-change-verified | F-014'
+  relevant_files:
+  - tests/fixtures/knowledge/baseline-0.9.0/baseline.json (added)
+  - tests/fixtures/knowledge/baseline-0.9.0/dispatch-prompt.md (added)
+  - tests/fixtures/knowledge/baseline-0.9.0/dispatch-stdout.txt (added)
+  - tests/fixtures/knowledge/baseline-0.9.0/envelope.json (added)
+  - tests/fixtures/knowledge/baseline-0.9.0/pre-change-run/events.jsonl (added)
+  - tests/fixtures/knowledge/baseline-0.9.0/pre-change-run/execution-request.json (added)
+  - tests/fixtures/knowledge/baseline-0.9.0/pre-change-run/state.json (added)
+  - omn_agent/source.py (modified)
+  - config/knowledge-policy.json (added)
+  - runtime/knowledge.py (added)
+  - runtime/framework_runtime.py (modified)
+  - runtime/execution_metrics.py (modified)
+  - config/runtime.md (modified)
+  - memory/README.md (modified)
+  - memory/memory-governance.md (modified)
+  - memory/memory-resolver.md (modified)
+  - omn_agent/_bundled_payload/config/knowledge-policy.json (added)
+  - omn_agent/_bundled_payload/config/runtime.md (modified)
+  - omn_agent/_bundled_payload/memory/README.md (modified)
+  - omn_agent/_bundled_payload/memory/memory-governance.md (modified)
+  - omn_agent/_bundled_payload/memory/memory-resolver.md (modified)
+  - omn_agent/_bundled_payload/runtime/execution_metrics.py (modified)
+  - omn_agent/_bundled_payload/runtime/framework_runtime.py (modified)
+  - omn_agent/_bundled_payload/runtime/knowledge.py (added)
+  - tests/test_knowledge.py (added)
+  - memory/lessons/lessons.store.json (added)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path
+changed_files:
+- tests/fixtures/knowledge/baseline-0.9.0/baseline.json (added)
+- tests/fixtures/knowledge/baseline-0.9.0/dispatch-prompt.md (added)
+- tests/fixtures/knowledge/baseline-0.9.0/dispatch-stdout.txt (added)
+- tests/fixtures/knowledge/baseline-0.9.0/envelope.json (added)
+- tests/fixtures/knowledge/baseline-0.9.0/pre-change-run/events.jsonl (added)
+- tests/fixtures/knowledge/baseline-0.9.0/pre-change-run/execution-request.json (added)
+- tests/fixtures/knowledge/baseline-0.9.0/pre-change-run/state.json (added)
+- omn_agent/source.py (modified)
+- config/knowledge-policy.json (added)
+- runtime/knowledge.py (added)
+- runtime/framework_runtime.py (modified)
+- runtime/execution_metrics.py (modified)
+- config/runtime.md (modified)
+- memory/README.md (modified)
+- memory/memory-governance.md (modified)
+- memory/memory-resolver.md (modified)
+- omn_agent/_bundled_payload/config/knowledge-policy.json (added)
+- omn_agent/_bundled_payload/config/runtime.md (modified)
+- omn_agent/_bundled_payload/memory/README.md (modified)
+- omn_agent/_bundled_payload/memory/memory-governance.md (modified)
+- omn_agent/_bundled_payload/memory/memory-resolver.md (modified)
+- omn_agent/_bundled_payload/runtime/execution_metrics.py (modified)
+- omn_agent/_bundled_payload/runtime/framework_runtime.py (modified)
+- omn_agent/_bundled_payload/runtime/knowledge.py (added)
+- tests/test_knowledge.py (added)
+- memory/lessons/lessons.store.json (added)
+findings:
+- 'F-001: medium | standards | runs/run-c9fb8d5bbb32/states/implementation/result-envelope.json'
+- 'F-002: medium | test-adequacy | runtime/knowledge.py:816-831'
+- 'F-003: medium | maintainability | tests/test_knowledge.py:656-744'
+- 'F-004: low | standards | runtime/framework_runtime.py:3326-3328'
+- 'F-005: low | security | runtime/knowledge.py:762-764'
+- 'CR-001: F-001 | The run record carries an owned disposition of the verifier-written replay entries and task-context regener...
+  | no'
+- 'CR-002: F-002 | An executed test proves the gate-lesson effectiveness attribution for a shown dispatch, an unshown latest
+  d... | no'
+- 'CR-003: F-003 | The pre-change identity guarantee is tested in a form that survives unrelated framework edits, and any
+  reta... | no'
+- 'CR-004: F-004 | The flag-off event-detail difference is either removed or recorded as accepted by omn-tech-lead under Desig...
+  | no'
+- 'CR-005: F-005 | No store record, however malformed, can emit an unlabelled line or exceed two lines per lesson in the promp...
+  | no'
+verdicts:
+- 'Decision: approve-with-corrections'
+- 'Rationale: Stage 8 row five applies: no critical or high finding is open, three medium and two low findings are open, and
+  part of the scope, the in-place rep...'
+- 'Blocking findings outstanding: None identified.'
+- 'Readiness recommendation: recommended to omn-qa, which decides the Review Gate as its second owner because this agent produced
+  the evidence the gate assesses...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:solution-design-and-risk-assessment
+      term: database
+    - source: artifact:implementation
+      term: migration
+    - source: artifact:documentation-and-release-handoff
+      term: database
+    performance:
+    - source: input:change-request
+      term: profile
+    - source: artifact:scope-and-acceptance
+      term: profile
+    - source: artifact:execution-planning
+      term: performance
+    security:
+    - source: input:architecture-context
+      term: token
+    - source: artifact:scope-and-acceptance
+      term: credential
+    - source: artifact:execution-planning
+      term: token
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:feature-request
+  - input:change-request
+  - input:business-intent
+  - input:architecture-context
+  - artifact:scope-and-acceptance
+  - artifact:execution-planning
+  - artifact:solution-design-and-risk-assessment
+  - artifact:implementation
+  - artifact:quality-review
+  - artifact:documentation-and-release-handoff
+relevant_skills:
+  scope-and-acceptance:
+    S02: required
+    S07: required
+  execution-planning:
+    S02: required
+    S01: required
+    S07: required
+  solution-design-and-risk-assessment:
+    S01: required
+    S03: required
+    S06: required
+    S09: required
+  implementation:
+    S03: required
+    S06: required
+    S10: required
+    S11: required
+    S12: required
+  quality-review:
+    S07: required
+    S09: required
+    S08: required
+  documentation-and-release-handoff:
+    S11: required
+    S10: required
+    S12: required

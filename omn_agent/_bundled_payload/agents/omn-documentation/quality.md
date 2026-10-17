@@ -18,7 +18,7 @@ Checks are grouped by concern. Each carries a severity:
 
 The Validation Engine re-runs the machine-decidable subset independently, in
 `runtime/release_note_validator.py`. The structural, field, vocabulary, and identifier checks
-execute there as `C1` to `C7` by the shared contract engine; the checks numbered `R1` to `R7`
+execute there as `C1` to `C7` by the shared contract engine; the checks numbered `R1` to `R9`
 below are this agent's own semantic rules and execute there too. Where a check appears in both,
 the two are the same rule, and the Validation Engine's verdict is the one that decides whether
 the phase advances.
@@ -89,17 +89,21 @@ the change but not the consequence, the statement stays unpublished.
 
 | ID | Check | Severity |
 |---|---|---|
-| `R1` | `releaseVerdict` is `released`, `partial`, or `rolled-back` | Blocking |
+| `R1` | `releaseVerdict` is `released`, `partial`, `rolled-back`, `handed-off`, `findings-published`, or `delta-published`; withheld never passes | Blocking |
 | `R2` | The version in the metadata block and in the Metadata section are the same | Blocking |
 | `R4` | A partial or rolled-back release records at least one known issue | Blocking |
 | `R5` | A rolled-back release states the criteria the rollback was taken under | Blocking |
 | `R7` | The version is a recognisable version string | Correctable |
+| `R8` | The release position is supported by the evidence type it is read off: a deployment outcome lists `deployment-status`, `handed-off` and `delta-published` list `verification-report` or `validation-report`, `findings-published` lists `technical-recommendation` | Blocking |
+| `R9` | The release position is one the communication basis of the phase the invocation envelope names yields; declared not-machine-checkable only when no envelope is supplied | Blocking |
 | `V1` | The release verdict is the one the Stage 8 table of `reasoning.md` yields | Blocking |
 | `V2` | The declared status agrees with the same table row that set the verdict | Blocking |
 | `V3` | A `provisional` or `blocked` artifact records at least one open question | Blocking |
 
 `V1` is the rule that stops a verdict from being chosen first and justified afterwards. The table
-decides; the artifact records what it decided.
+decides; the artifact records what it decided. `R8` and `R9` are its machine-decidable part: a
+deployment outcome with no deployment status, or a position the phase's basis cannot yield, is
+rejected by the Validation Engine rather than left to this agent's own reading.
 
 ## Known issue checks
 

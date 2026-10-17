@@ -18,9 +18,23 @@ decisions, implementation, review, and release.
 - Avoid transient execution details and unresolved assumptions.
 - Link significant updates to decision or release artifacts.
 
+## Lessons
+
+`lessons/lessons.store.json` holds the lesson category: lessons from earlier runs, harvested
+mechanically from recorded run evidence by `runtime/knowledge.py` and keyed by a semantic
+fingerprint. Unlike the documents beside it, the store is machine-maintained JSON: it is never
+edited by hand, never rewritten by the memory optimizer, and never shipped to installed copies.
+A lesson moves through `candidate`, `active`, and `retired`; it is eligible for later dispatches
+when active, or when a candidate recurs in at least two distinct runs (the threshold in
+`config/knowledge-policy.json`). Whether a run is shown lessons is recorded once, at plan time:
+on by default, off with the plan flag `--no-lesson-hydration`. `config/runtime.md`, "Lessons",
+is the authority.
+
 ## Ownership
 
 - Product Owner and Business Analyst: business rules and glossary.
 - Architect and Tech Lead: architecture and technology stack.
 - QA and Reviewer: known issues and quality-related updates.
 - Orchestrator: memory consistency and lifecycle governance.
+- Tech Lead (default owner in `config/knowledge-policy.json`): lessons -- approval, retirement,
+  and operator remedies.

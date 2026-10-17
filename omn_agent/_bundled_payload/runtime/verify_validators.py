@@ -31,6 +31,13 @@ runtime has already accepted in a real run outranks a fixture. `scope-definition
 that preference, the instance used is the first candidate on which the declared mutation can be
 applied, and every candidate passed over is reported; `conforming_instance` states the order.
 
+A committed instance produced under a contract its validator now supersedes is not a candidate
+at all. `SUPERSEDED_CONTRACTS` names, per artifact type, the producing agent and the contract
+version that changed what a conforming instance may say; an instance whose envelope records an
+earlier version of that agent is reported by count as superseded and neither selected nor
+re-validated. The validator itself exempts nothing: an instance produced at or after that
+version is validated as before, and a rejected one still fails `V3`.
+
     python .claude/runtime/verify_validators.py
     python .claude/runtime/verify_validators.py --json-out <path>
 """
@@ -48,6 +55,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import artifact_contract as ac  # noqa: E402
 import framework_runtime as fr  # noqa: E402
+import release_note_validator as rnv  # noqa: E402
 
 CLAUDE = fr.CLAUDE
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
@@ -292,6 +300,63 @@ ALTERNATE_SOURCES = {
 }
 
 
+# Artifact type -> (producing agent, first contract version a conforming instance is judged
+# under, why an earlier one is set aside). `release-note.md`: omn-documentation 1.2.0 keyed the
+# release position on the phase's communication basis, so a note an earlier version produced
+# carries a position the corrected contract would not yield (fix-bug run run-f94564cb61ce). Those
+# notes stay as recorded; they are run evidence, and are counted here rather than validated.
+SUPERSEDED_CONTRACTS = {
+    "release-note.md": ("omn-documentation", rnv.CURRENT_CONTRACT_VERSION,
+                        "produced under the superseded release-position contract"),
+}
+
+
+def version_tuple(text) -> tuple | None:
+    parts = str(text or "").strip().split(".")
+    return tuple(int(p) for p in parts) if len(parts) == 3 and all(
+        p.isdigit() for p in parts) else None
+
+
+def superseded_reason(artifact: str, envelope_path) -> str | None:
+    """Why a committed instance is set aside as produced under a superseded contract, or None.
+
+    Decided from the instance's own invocation envelope: the agent it names and the version it
+    records. An instance with no envelope, another producing agent, or no readable version is
+    not superseded, so it is validated as any other candidate is.
+    """
+    rule = SUPERSEDED_CONTRACTS.get(artifact)
+    if rule is None or envelope_path is None or not Path(envelope_path).exists():
+        return None
+    agent_id, minimum, why = rule
+    try:
+        env = json.loads(Path(envelope_path).read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, ValueError):
+        return None   # unreadable: validated like any candidate, so a failure is reported
+    if not isinstance(env, dict):
+        return None
+    version = version_tuple(env.get("agent_version"))
+    if env.get("agent_id") != agent_id or version is None or version >= minimum:
+        return None
+    return (f"{why}: {agent_id} {env.get('agent_version')} is below "
+            f"{'.'.join(map(str, minimum))}")
+
+
+def committed_with_envelopes(artifact: str) -> list:
+    return [(instance, instance.parent.parent / "invocation-envelope.json")
+            for instance in reversed(committed_instances(artifact))]
+
+
+def superseded_candidates(artifact: str) -> list:
+    """Committed instances `candidate_instances` leaves out, as `{"instance", "source", "reason"}`."""
+    out = []
+    for instance, envelope in committed_with_envelopes(artifact):
+        reason = superseded_reason(artifact, envelope)
+        if reason:
+            out.append({"instance": instance_label(instance),
+                        "source": "committed run artifact", "reason": reason})
+    return out
+
+
 class Report:
     def __init__(self):
         self.checks = []
@@ -325,11 +390,14 @@ def candidate_instances(artifact: str) -> list:
     returns them. That order sorts run directories by identifier, which is lexical, not
     chronological: the last-sorted run is not necessarily the most recent one. Governance
     records follow, last to first in path order, and the fixture comes last. Each entry is
-    `(path, source, envelope_path)`; only a committed run artifact carries an envelope.
+    `(path, source, envelope_path)`; only a committed run artifact carries an envelope. A
+    committed instance `superseded_reason` sets aside is not listed; `superseded_candidates`
+    reports it instead.
     """
     out = []
-    for instance in reversed(committed_instances(artifact)):
-        envelope = instance.parent.parent / "invocation-envelope.json"
+    for instance, envelope in committed_with_envelopes(artifact):
+        if superseded_reason(artifact, envelope):
+            continue
         out.append((instance, "committed run artifact",
                     envelope if envelope.exists() else None))
     alternate = ALTERNATE_SOURCES.get(artifact)
@@ -368,6 +436,10 @@ def conforming_instance(artifact: str):
     envelope supplied, for instance -- so validating a run artifact without its envelope would
     fail checks the runtime passed when it accepted the artifact. A fixture has no envelope,
     which is why the digest cross-check reports `not-machine-checkable` for one.
+
+    A committed instance produced under a superseded contract (`SUPERSEDED_CONTRACTS`) is never
+    a candidate, so it is neither selected nor re-validated; `main` reports it by count. That
+    is a contract-version rule, decided from the instance's envelope, not a conformance one.
     """
     skipped = []
     candidates = candidate_instances(artifact)
@@ -642,9 +714,13 @@ def main():
     summaries = []
     accepted_all, rejected_all = [], []
     skipped_all = []
+    superseded_all = {}
     for artifact, module in sorted(fr.VALIDATORS.items()):
         mod = __import__(module)
         _old, _new, expect_id, what = MUTATIONS[artifact]
+        superseded = superseded_candidates(artifact)
+        if superseded:
+            superseded_all[artifact] = superseded
         instance, source, envelope_path, skipped = conforming_instance(artifact)
         for s in skipped:
             skipped_all.append(f"{artifact}: skipped {s['instance']} ({s['source']}): "
@@ -698,8 +774,7 @@ def main():
             "conforming_instance": instance.relative_to(CLAUDE).as_posix()
             if CLAUDE in instance.parents else str(instance),
             "instance_source": source,
-            "envelope": envelope_path.relative_to(CLAUDE).as_posix()
-            if envelope_path else None,
+            "envelope": instance_label(envelope_path) if envelope_path else None,
             "phases_served": declared.get(artifact, []),
             "result": d["result"],
             "checksRun": d["checksRun"],
@@ -708,13 +783,19 @@ def main():
             "mutation": {"description": what, "expected_check": expect_id,
                          "checks_failed": mutated_result, "finding": finding},
             "skipped_candidates": skipped,
+            "superseded_candidates": superseded,
             "counts": d["counts"],
         })
 
+    # Instances produced under a superseded contract are counted, never validated, so setting
+    # them aside is reported whether `V3` passes or fails.
+    superseded_detail = "".join(
+        f"; {len(v)} {k} candidate(s) produced under a superseded contract, not validated"
+        for k, v in sorted(superseded_all.items()))
     r.add("V3", "every registered validator accepts a conforming artifact of its type",
           not accepted_all,
-          f"{len(summaries)} artifact type(s) validated" if not accepted_all
-          else f"{accepted_all}")
+          (f"{len(summaries)} artifact type(s) validated" if not accepted_all
+           else f"{accepted_all}") + superseded_detail)
     # Skipped candidates are reported whether `V4` passes or fails, so a fallback past an
     # instance the mutation could not be applied to is never silent.
     skipped_detail = (f"; skipped candidates: {skipped_all}" if skipped_all
@@ -811,6 +892,8 @@ def main():
               f"{mutation_outcome(m['expected_check'], m['finding'], m['checks_failed'])}")
         for sk in s["skipped_candidates"]:
             print(f"  {'':<26} skipped {sk['instance']} ({sk['source']}): {sk['reason']}")
+        for sk in s["superseded_candidates"]:
+            print(f"  {'':<26} superseded {sk['instance']}: {sk['reason']}")
 
     total = len(r.checks)
     passed = sum(1 for c in r.checks if c["result"] == "pass")
