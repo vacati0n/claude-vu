@@ -1,0 +1,675 @@
+{
+  "invocation_id": "inv-c9fb8d5bbb32-03-001",
+  "run_id": "run-c9fb8d5bbb32",
+  "work_item_id": "run-c9fb8d5bbb32::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:afbb3a03c793f0ffd6039ac7e7e48f4a",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:33d317684aece20ce5b970f6b595c107",
+      "agents/architect/identity.md": "sha256:fc073d2135f891349e8f6639243819e3",
+      "agents/architect/reasoning.md": "sha256:1b050c733dde6e76cac3bd0882b5ceea",
+      "agents/architect/execution.md": "sha256:eccf44aede67c91ba47cae943efb93cf",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:ce1c8f09d9d185400063ec43b073d0c7",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/architect/system.md",
+        "agents/architect/reasoning.md",
+        "agents/architect/output.md",
+        "agents/architect/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/architect/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/architect/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/architect/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 51235,
+      "full_bytes": 110389
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "not-triggered",
+      "area": "database",
+      "basis": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in input:architecture-context",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "required",
+      "area": "performance",
+      "basis": "area performance triggered by 'profile' in input:change-request",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "feature-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/knowledge-loop-feature-request.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-feature-request.md",
+        "text": "# Feature Request \u2014 Knowledge Management Loop: Learn From Run Evidence\n\n## Request\n\nGive the framework a closed knowledge loop, so that what one run learns the hard way reaches the\nagents of later runs without an operator carrying it by hand. Today the loop is open:\n\n- Every rejected artifact is recorded (`validation_failed` events in `runs/<run>/events.jsonl`, each\n  naming the failing check IDs; 29 across 24 runs on disk). Gate rejections and rollbacks are\n  recorded too (`rollback_scheduled` events, `gate-rejection` entries in `recovery-ledger.json`).\n- None of that reaches a later dispatch. Every invocation envelope carries\n  `memory_slice: {hydrated: false, reason: \"memory hydration not requested by this run\"}`, and the\n  context slice excludes `memory/*`. `memory/memory-resolver.md` and `config/runtime.md`\n  (\"Memory Loading\", \"Writeback Policy\") specify hydration and fingerprint-keyed upsert, but no\n  runtime code implements either.\n- As a result the same mechanical rejection recurs run after run (for example the vendor-string\n  check `C3.2` and the scope check `C7.1`), and the operator keeps private notes to warn agents.\n\n## Expected outcome\n\n1. **Harvest.** A runtime capability that reads recorded run evidence (events, recovery ledgers,\n   validation reports) and distils it into *lessons*: one lesson per recurring failure pattern,\n   keyed by a deterministic semantic fingerprint (artifact type + check ID, or gate + phase), with\n   occurrence count, distinct-run count, first and last seen, the check's own description, and\n   references to the evidence. Re-harvesting unchanged evidence is idempotent (fingerprint upsert).\n2. **Govern.** Lessons live in a governed store under `memory/` with a status lifecycle\n   (`candidate`, `active`, `retired`), an owner, and a rationale. A lesson becomes eligible for\n   hydration when it is explicitly approved, or automatically when it recurs in at least a\n   configured number of distinct runs. An operator can approve, retire, or annotate a lesson\n   (add a human-written remedy) from the CLI. Nothing is deleted; retired lessons keep history.\n3. **Recall.** `dispatch` hydrates the lessons relevant to the phase being dispatched \u2014 matched by\n   the phase's output artifact and phase identifier \u2014 into the envelope's `memory_slice` and into a\n   short \"Lessons from earlier runs\" section of the dispatch prompt, ranked and capped so the\n   prompt grows by a bounded amount.\n4. **Measure.** The loop reports whether it is working: for each lesson, how often the same failure\n   recurred in a dispatch that had already been shown the lesson. Execution metrics record lessons\n   hydrated per invocation.\n5. **Close the loop automatically.** Harvest runs when a run aggregates, so a run's lessons are\n   available to the next run with no operator step.\n\n## Acceptance intent\n\n- A phase whose artifact type has an eligible lesson receives it in both envelope and prompt.\n- A run planned before this change, or a run planned with hydration switched off, dispatches\n  byte-identically to today (no replay, verifier, or idempotency key changes outcome).\n- Harvesting the current `runs/` produces lessons for the recorded `C3.2`- and `C7.1`-type failures.\n- Harvesting twice over unchanged evidence produces an identical store.\n\n## Constraints\n\n- Additive only: gates, validators, artifact contracts, Phase Model tables, and agent module text\n  are unchanged. The runtime never calls a model; lessons are derived mechanically from evidence.\n- Standard library only; no vector store, embedding, or network dependency.",
+        "digest": "sha256:e7a9416b2344d53a4264e32b5a976681"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/knowledge-loop-change-request.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-change-request.md",
+        "text": "# Change Request \u2014 Knowledge Management Loop\n\n## Change class\n\n`capability-addition` per `config/self-hosting-profile.md` Routing Table: the framework gains a\nruntime behaviour (harvest, govern, recall) and a governed memory category it did not have.\n\nClassification evidence: `python .claude/runtime/self_hosting.py route --intent capability-addition`\nreturns `/implement` over `implement-feature` at `scope-and-acceptance`;\n`self_hosting.py classify` on `runtime/framework_runtime.py` and on `memory/README.md` both return\nframework-internal (`SR-1`).\n\n## Surfaces this change is expected to touch\n\n| Surface | Nature of change |\n|---|---|\n| `runtime/` (new module, carrier chosen in design) | Harvest, fingerprint upsert, lifecycle, recall, effectiveness accounting; CLI |\n| `runtime/framework_runtime.py` | Populate `memory_slice` and a prompt section at dispatch for runs that opted in; trigger harvest on aggregation; `RUNTIME_VERSION` increments |\n| `runtime/execution_metrics.py` | Lessons hydrated per invocation |\n| `memory/` | New governed lessons store; `README.md`, `memory-governance.md`, `memory-resolver.md` describe the category |\n| `config/runtime.md` | Memory Loading and Writeback Policy describe the implemented behaviour and the opt-in rule |\n| `tests/`, `runtime/verify_*.py` | Unit tests for harvest idempotency, eligibility, recall ranking, and backward compatibility |\n| `omn_agent/_bundled_payload/**` | Mirror refresh via `python tests/test_bundled_payload.py --sync` |\n\n## Not touched\n\nGates, validators, templates of existing artifacts, Phase Model tables, agent module text.",
+        "digest": "sha256:a4f1eff2640769f1d7f81506a3e8c22a"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/knowledge-loop-business-intent.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-business-intent.md",
+        "text": "# Business Intent \u2014 Knowledge Management Loop\n\n## Problem\n\nThe framework forgets. Each run's agents start with the same context as the first run ever did,\nso mechanical mistakes that a validator already caught in earlier runs are repeated, each costing a\ncharged attempt (three per phase), a retry dispatch, and operator time. The only memory of these\nlessons is the operator's private notes, which other operators and installed copies do not have.\n\n## Intent\n\nMake the framework measurably better with use: every rejection a run records becomes knowledge the\nnext run's agents see before they write, with governance so that only recurring or approved lessons\nare shown and stale ones can be retired.\n\n## Success\n\n- Lessons are harvested from existing run evidence without operator authoring.\n- A phase whose artifact has a recorded recurring failure is told about it at dispatch.\n- The framework can report, per lesson, whether the failure recurred after agents were warned \u2014\n  the evidence that learning is happening.\n- No gate, validator, or acceptance rule is weakened; every verifier stays at its recorded baseline.\n\n## Non-goals\n\n- Model fine-tuning, embeddings, or any model call by the runtime.\n- Automatically changing validators, templates, or agent text from lessons.\n- Harvesting from sources other than recorded run evidence (chat transcripts, external tickets).",
+        "digest": "sha256:8080b0e9b989554fc66c2318118d5612"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/knowledge-loop-architecture-context.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-architecture-context.md",
+        "text": "# Architecture Context \u2014 Knowledge Management Loop\n\n- The runtime core never talks to a model (`runtime/framework_runtime.py` header). It builds the\n  canonical envelope and hands it to an adapter. Lessons are therefore data carried in the envelope\n  and rendered into the dispatch prompt.\n- The envelope already reserves `memory_slice` (today `{hydrated: false, reason: ...}`) and the\n  context slice records `excluded: memory/*`. `config/runtime.md` says memory hydration is opt-in per\n  run. Envelope additions since 0.7.0 are additive; `model_tier` (0.9.0) is the latest precedent.\n- The idempotency key (`cmd_dispatch`) names the unit of work and must survive a rollback; replay\n  checks (`verify_multi_phase` M12 and M14) re-run commands against committed run\n  `run-c5a8d50d3238` and require stable output. A run whose `execution-request.json` predates the\n  opt-in must therefore dispatch exactly as today.\n- Evidence sources on disk: `runs/<run>/events.jsonl` (`validation_failed` carries\n  `details_ref.failures`, a list of check IDs, and `details_ref.report`; `rollback_scheduled` carries\n  gate and target), `runs/<run>/recovery-ledger.json` (`failure_class`, `guard`, `reason_code`), and\n  `runs/<run>/states/<phase>/validation-report.json` (each check's `id`, `description`, `severity`;\n  the file is overwritten by later attempts, so descriptions resolve from any report of the same\n  artifact type). Gate-approval waits (`approval_wait`) are normal flow, not lessons.\n- `runs/` and `proposals/` are excluded from the bundled payload and from implementer writes; the\n  lesson store must therefore live under `memory/`, and harvest must tolerate a repository with no\n  `runs/` (an installed copy).\n- `runtime/optimize_memory.py` rewrites `memory/*.md` for token cost; a machine-maintained store\n  must not be mangled by it (check its scan rules).\n- Keep loading policy in runtime and `config/`, never in agent modules (`verify_vertical_slice` C10).\n- `runtime/README.md` is large and read by agents; new documentation goes in `config/runtime.md`\n  and the `memory/` documents.\n- Edit the framework directory, then `python tests/test_bundled_payload.py --sync`; never hand-edit\n  `omn_agent/_bundled_payload/`. The full unit suite takes about 26 minutes.\n- Artifact validators reject the substring of the host vendor name (check `C3.2`); write paths\n  without the dot-directory prefix.",
+        "digest": "sha256:c96206f6e1e68bb201f8b712cc108369"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-c9fb8d5bbb32/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/knowledge-management-2d49d4/.claude/runs/run-c9fb8d5bbb32/states/execution-planning/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: run-c9fb8d5bbb32-knowledge-loop-execution-plan\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/knowledge-loop-feature-request.md\n    - type: product-requirement\n      reference: runs/run-c9fb8d5bbb32/states/scope-and-acceptance/artifacts/scope-definition.md\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:e7a9416b2344d53a4264e32b5a976681\n  contextDigest: sha256:2945ec39a62c55e1f979d25b41ca92b0\n# Upstream identifier notation. The approved scope definition SCOPE-2026-0001 (digest\n# sha256:7bca33ce5e27316b26b53f78e44cbb11) uses identifier families that collide with this\n# plan's registers, so its items are cited in a distinct form: scope items SC-001 to SC-011,\n# acceptance criteria AC-001 to AC-023, exclusions X-001 to X-009, decisions D-001 to D-009,\n# open questions SQ-001 and SQ-002. Every bare S-nnn, A-nnn, R-nnn, T-nnn, Q-nnn token in this\n# artifact resolves against this plan's own registers.\n# Affected areas from the task context: performance, security (S08 and S09 cited in 10.2).\n# Repository reads: the paths named by the architecture context were confirmed present, and the\n# scan rule of runtime/optimize_memory.py was read (Markdown files only). No wider rescan.\n```\n\n## Executive Summary\n\nThe framework gains a closed knowledge loop: failures recorded in run evidence become governed lessons that later dispatches of the matching phase are shown, for the operators and agents of later runs. Success is that a phase whose output has an eligible lesson receives it in its envelope and prompt with no operator step, that runs planned before the change dispatch exactly as today, and that a per-lesson report shows whether the failure recurred after agents were warned. The work decomposes into twenty-seven tasks across twelve execution waves, opening with an inventory of the recorded evidence and the decision on how a run's plan records its hydration choice. The highest-impact risk is `R-006`: a dispatch or plan change that alters the envelope, prompt, or idempotency key of a run planned before the change would fail the replay checks and break the additive-only constraint. Six design-phase tasks, among them the store, recall, plan-choice, and aggregation decisions, are routed to `architect` rather than decided here. Plan status is complete; three open questions are recorded, none blocking, and eleven tasks are assumption-dependent until `A-001` through `A-010` are confirmed.\n\n## Business Objectives\n\n1. Agents of later runs are shown the failure patterns earlier runs recorded against their phase before they write, without an operator carrying them by hand; received by operators and dispatched agents; measured as a recorded `C3.2` or `C7.1` failure reaching the next dispatch of its phase with no operator step. Traces to `S-002`, `S-003`, `S-009`, `S-012`, `S-013`.\n2. Operators control which lessons agents see, and no lesson history is lost; received by operators; measured as only approved or recurring lessons being shown, retired lessons never being shown, and no lesson record ever being removed. Traces to `S-006`, `S-007`, `S-008`.\n3. The framework shows whether its learning works; received by operators and the requester; measured as a per-lesson count of dispatches shown the lesson and of later recurrences of its failure. Traces to `S-010`, `S-011`.\n4. Existing runs, gates, and verifiers keep their behaviour; received by every operator of an existing run; measured as runs planned before the change dispatching unchanged and every verifier staying at its recorded baseline. Traces to `S-014`, `S-017`.\n\n## Technical Objectives\n\n- Harvest is deterministic and idempotent: one lesson per fingerprint, and unchanged evidence yields a byte-identical store. Verified by AC-002, AC-005, AC-006. Traces to business objectives 1 and 2, and to `S-004`, `S-005`, `S-016`.\n- A lesson record carries only its declared fields, so free text from evidence never reaches the store or a prompt. Verified by AC-004 and the review in `T-019`. Traces to business objectives 1 and 2, and to `S-029`.\n- Eligibility is a function of lesson status, distinct-run count, and a configured threshold alone. Verified by AC-011, AC-012, AC-013. Traces to business objective 2 and to `S-007`, `S-021`.\n- Recall is phase-scoped, capped at five, ordered by distinct-run count with deterministic ties, and renders a bounded prompt section. Verified by AC-014, AC-015, AC-016, AC-017, AC-010. Traces to business objective 1 and to `S-009`, `S-022`, `S-026`, `S-027`.\n- Dispatch output and idempotency key are unchanged for runs planned before the change and for runs whose plan switches hydration off. Verified by AC-018, AC-019, and the replay checks M12 and M14. Traces to business objective 4 and to `S-014`, `S-020`, `S-025`.\n- Harvest runs on run aggregation and tolerates a repository without a runs directory. Verified by AC-021, AC-003. Traces to business objective 1 and to `S-012`, `S-030`.\n- Effectiveness accounting attributes each later recurrence to the dispatches that were shown the lesson, and metrics record the hydrated count. Verified by AC-020, AC-022. Traces to business objective 3 and to `S-010`, `S-011`.\n- The lesson store is unaffected by the memory optimization tool. Verified by AC-009. Traces to business objective 2 and to `S-031`.\n- The change uses no model call and no dependency beyond the standard library, and alters no gate, validator, artifact contract, Phase Model table, or agent module text. Verified by the review in `T-016`. Traces to business objective 4 and to `S-017`, `S-018`, `S-019`.\n\n## Scope\n\n### In Scope\n\n- One lesson per recurring failure pattern with its counts, dates, description, and evidence references (SC-001; `S-004`, `S-015`, `S-023`, `S-029`, `S-030`). Covered by `T-001`, `T-002`, `T-003`.\n- Idempotent re-harvest with fingerprint upsert (SC-002; `S-005`, `S-016`). Covered by `T-002`, `T-003`.\n- Operator approve, retire, and annotate commands with owner, rationale, history, and no deletion (SC-003; `S-006`, `S-008`, `S-024`, `S-031`). Covered by `T-002`, `T-004`.\n- Eligibility by approval or by recurrence in at least two distinct runs; retired lessons never eligible (SC-004; `S-007`, `S-021`). Covered by `T-005`.\n- Phase-scoped hydration of at most five lessons into the memory slice and a bounded prompt section (SC-005; `S-009`, `S-013`, `S-022`, `S-026`, `S-027`). Covered by `T-006`, `T-007`.\n- Unchanged dispatch for runs planned before the change or with hydration off (SC-006; `S-014`, `S-025`). Covered by `T-013`, `T-014`, `T-015`.\n- Hydration on by default for runs planned after the change, recorded in the plan, with an off flag (SC-007; `S-020`). Covered by `T-013`, `T-017`.\n- Per-lesson effectiveness report (SC-008; `S-010`). Covered by `T-008`, `T-009`.\n- Harvest on run aggregation with no operator step (SC-009; `S-012`). Covered by `T-011`, `T-012`.\n- Lessons-hydrated count in execution metrics (SC-010; `S-011`). Covered by `T-010`.\n- Memory and runtime-policy documents describe the implemented loop (SC-011; `S-028`). Covered by `T-020`.\n- Self-hosting delivery: runtime version increment, mirror refresh, change proposal, release checklist (`S-032`). Covered by `T-021`, `T-022`, `T-023`, `T-024`.\n- Validation of all twenty-three scope criteria (`S-033`). Covered by `T-025`, `T-026`, `T-027`, `T-015`.\n- Additive-only and no-model constraints confirmed on the delivered change set (`S-017`, `S-018`, `S-019`). Covered by `T-016`.\n\n### Out of Scope\n\n- Model calls, embeddings, vector stores, or network dependencies (X-001). Excluded by the standard-library and no-model constraint (`S-018`, `S-019`).\n- Automatic change to validators, templates, gate rules, or agent module text from a lesson (X-002). Excluded because lessons inform agents and operators only.\n- Harvesting from sources other than recorded run evidence (X-003). Excluded by the business intent non-goal.\n- Gate-approval waits as lessons (X-004). Excluded because approval waits are normal flow (`S-023`).\n- Hydrating or backfilling runs planned before the change (X-005). Excluded because those runs must dispatch unchanged (`S-025`).\n- Changes to gates, validators, artifact contracts, Phase Model tables, or agent module text (X-006). Excluded by the additive-only constraint (`S-017`).\n- Automatic retirement of lessons (X-007). Excluded because retirement is an operator action.\n- Deletion of lesson records (X-008). Excluded because retired lessons keep their history.\n- Graphical, hosted, or web reporting (X-009). Excluded because a command-line report is required only.\n\n### Deferred\n\n- A numeric recurrence-reduction target that the effectiveness report is judged against (SQ-001). Brought into scope when the requester states a target through `omn-business-analyst`; until then the report records recurrence without a pass threshold.\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | The evidence fields the architecture context names (failing check IDs and report reference on validation failures, gate and target on rollbacks, check descriptions in validation reports) are present in every run on disk, older runs included | `S-001`, `S-004` | Harvest needs per-shape handling for older runs; `T-001` lists the variants and `T-003` grows | architect |\n| A-002 | The recorded `C3.2` and `C7.1` failures each resolve to an artifact type from the evidence on disk | `S-015` | AC-001 cannot be met over recorded evidence and the scope owner must restate it | architect |\n| A-003 | A run's plan can record the hydration choice so that a plan lacking the record identifies a run planned before the change | `S-020`, `S-025` | Pre-change detection needs another signal; `T-013` and `T-017` change | architect |\n| A-004 | Replay checks M12 and M14 replay a run planned before the change, so they stay on the unhydrated path | `S-014` | Replay baselines would change, breaching `S-017`; `T-015` fails | omn-qa |\n| A-005 | The default change from opt-in to on for runs planned after the change (SQ-002) is accepted at the Scope Gate | `S-020` | Hydration defaults off; `T-013`, `T-017`, `T-018`, `T-020` change their stated default | omn-tech-lead |\n| A-006 | Harvesting all recorded runs at each aggregation costs little enough that no incremental harvest is needed; no budget is stated | `S-012` | `T-011` must define an incremental harvest and `T-012` grows | architect |\n| A-007 | A dispatch baseline can be captured from the runtime as committed before the change, for the phases AC-018 compares | `S-014` | AC-018 needs a different reference and `T-014` changes | omn-qa |\n| A-008 | Updating `config/runtime.md` and the `memory/` documents is not a change to a gate, validator, artifact contract, Phase Model table, or agent module text | `S-017`, `S-028` | `T-020` needs a separate change request | omn-tech-lead |\n| A-009 | AC-018 byte identity is judged after normalising the fields that already vary per dispatch today: build timestamps and the runtime version stamp | `S-014`, `S-032` | The version increment in `T-021` breaks AC-018 as literally worded; see `Q-002` | omn-product-owner |\n| A-010 | The bundled payload mirror carries `memory/` contents, so a store committed under `memory/` reaches installed copies | `S-006`, `S-032` | Installed copies receive no lessons and `T-022` acceptance changes; see `Q-001` | omn-tech-lead |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | SQ-002 is rejected at the Scope Gate (`A-005` false) | Hydration defaults off; plan-flag semantics and documentation change after design | low | T-013, T-017, T-018, T-020 | `T-013` records the default as one decision point so either answer is a single change | omn-tech-lead |\n| R-002 | requirement | Recorded `C3.2` or `C7.1` failures do not resolve to an artifact type (`A-002` false) | AC-001 cannot be met over recorded evidence | low | T-001, T-027 | `T-001` confirms both before design closes; the scope owner restates AC-001 if not | omn-product-owner |\n| R-003 | requirement | A failure recurs in a retry of the same phase and run that was shown the lesson | The effectiveness report over- or under-counts recurrence and misleads the business | medium | T-008, T-009 | `T-008` defines the attribution rule for retries, rollbacks, and later runs | architect |\n| R-004 | requirement | The documentation update is judged a change to a governed contract (`A-008` false) | `T-020` waits on a separate change request and AC-023 slips | low | T-020 | `T-016` checks the change set against the additive-only surfaces and records the verdict | omn-tech-lead |\n| R-005 | technical | Older runs record evidence in a different shape (`A-001` false) | Lessons are missed or miscounted | medium | T-001, T-002, T-003 | `T-001` inventories shapes per run before the store contract is fixed | architect |\n| R-006 | technical | A dispatch or plan change alters the envelope, prompt, or idempotency key of a run planned before the change (`A-003`, `A-004`, `A-007` false) | Replay checks fail and a verifier loses its baseline, breaching the additive-only constraint | medium | T-007, T-013, T-014, T-015, T-017 | `T-013` defines pre-change detection, `T-014` captures the baseline, `T-015` verifies | architect |\n| R-007 | technical | Harvest output varies with ordering, timestamps, or platform line endings | AC-005 fails and every harvest rewrites the store | medium | T-002, T-003, T-012 | `T-002` fixes the serialisation rules; AC-005 is tested in `T-026` | architect |\n| R-008 | security | Free text from evidence carrying a credential-like string reaches the store or a prompt | Sensitive content is persisted and shown to later agents | medium | T-002, T-003, T-007, T-019 | `T-002` restricts records to declared fields; `T-019` reviews the flow; AC-004 tests it | omn-dev-2-reviewer |\n| R-009 | security | Operator-written remedy text or a check description is read by an agent as an instruction | Later agents act on injected directions | low | T-004, T-006, T-007, T-019 | `T-006` defines rendering of lesson text as data; `T-019` reviews it | architect |\n| R-010 | operational | Harvest fails during run aggregation | Run aggregation is blocked or its outputs are corrupted | low | T-011, T-012 | `T-011` defines how a harvest failure is isolated from aggregation | architect |\n| R-011 | operational | Harvest cost grows with the number of recorded runs (`A-006` false) | Every aggregation slows | low | T-011, T-012 | `T-011` states the cost bound or defines incremental harvest | architect |\n| R-012 | operational | The memory optimization tool or a later scan rule rewrites the lesson store | Lesson records are mangled | low | T-002, T-026 | `T-002` places the store outside the tool's scan; AC-009 tests it | architect |\n| R-013 | delivery | The runtime version increment changes the version stamp in pre-change dispatch output (`A-009` false) | AC-018 fails as literally worded | medium | T-014, T-015, T-021 | `Q-002` settles the comparison; `T-014` records the normalised fields | omn-product-owner |\n| R-014 | delivery | The bundled mirror is not refreshed after the last framework edit | The bundled payload test fails and a suite run of about 26 minutes is repeated | medium | T-015, T-022 | `T-022` depends on every framework edit in the change set | omn-dev-1-implement |\n\n## Task Breakdown\n\n### T-001 Inventory the recorded run evidence the harvest reads\n\n- Owner: architect\n- Complexity: S (confidence: low)\n- Depends on: none\n- Traces to: S-001, S-003, S-004, S-015, A-001, A-002\n- Status: assumption-dependent\n- Description: A record exists of the evidence shapes on disk that harvest consumes, per source and per run, with the counts the feature request cites reconciled.\n- Acceptance Criteria:\n  - Each source (run events, recovery ledgers, validation reports) is listed with the fields harvest needs and the runs that lack any of them\n  - The count of recorded validation failures and the runs carrying them is stated\n  - At least one `C3.2` failure and one `C7.1` failure are named with the artifact type each resolves to, or their absence is recorded\n  - Approval-wait events are identified as excluded\n- Gate: Design Gate\n\n### T-002 Define the lesson store contract\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: T-001\n- Traces to: S-004, S-005, S-006, S-023, S-029, S-031\n- Status: ready\n- Description: An approved contract states the lesson record, its fingerprint for each pattern kind, its lifecycle and history, its store location under `memory/`, and its serialisation rules.\n- Acceptance Criteria:\n  - The fingerprint is stated for artifact-type-plus-check patterns and for gate-plus-phase patterns\n  - The record's fields are an explicit closed list that admits no free text taken from evidence\n  - The states candidate, active, and retired, the owner, the rationale, the optional remedy, and the history entry are defined\n  - Serialisation rules make two writes of the same lessons byte-identical\n  - The store location lies outside the memory optimization tool's scan and outside the runs directory\n  - Where the eligibility threshold is configured is stated\n- Gate: Design Gate\n\n### T-003 Deliver lesson harvest with fingerprint upsert\n\n- Owner: omn-dev-1-implement\n- Complexity: L (confidence: low)\n- Depends on: T-002\n- Traces to: S-004, S-005, S-015, S-016, S-023, S-029, S-030, A-001\n- Status: assumption-dependent\n- Description: A harvest capability reads recorded run evidence and upserts one lesson per fingerprint into the store per the approved contract.\n- Acceptance Criteria:\n  - AC-001, AC-002, AC-003, AC-004, AC-005, AC-006 hold on the delivered capability\n  - A harvest after an approval or annotation leaves status, owner, rationale, and remedy unchanged (AC-008)\n  - No lesson is created from an approval wait\n- Gate: Review Gate\n\n### T-004 Deliver the lesson governance commands\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: medium)\n- Depends on: T-002, T-003\n- Traces to: S-006, S-008, S-024\n- Status: ready\n- Description: Operators can approve, retire, and annotate a named lesson from the command line, with every change recorded in its history and nothing removed.\n- Acceptance Criteria:\n  - AC-007 holds for each of the three commands\n  - AC-008 holds for a lesson approved and annotated before a harvest\n  - A command naming an unknown lesson leaves the store unchanged and reports the failure\n- Gate: Review Gate\n\n### T-005 Deliver hydration eligibility evaluation\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-002\n- Traces to: S-007, S-021\n- Status: ready\n- Description: Eligibility of a lesson is evaluated from its status, distinct-run count, and the configured threshold, with a default threshold of two.\n- Acceptance Criteria:\n  - AC-011, AC-012, AC-013 hold\n  - The threshold is read from the location the store contract names\n- Gate: Review Gate\n\n### T-006 Define the recall selection contract\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: T-002\n- Traces to: S-009, S-022, S-024, S-026, S-027\n- Status: ready\n- Description: An approved contract states how a dispatch matches, ranks, caps, records, and renders lessons in the memory slice and the prompt section.\n- Acceptance Criteria:\n  - Matching requires both the phase identifier and the phase's output artifact type\n  - Ranking by distinct-run count and the deterministic tie-break are stated\n  - The memory slice fields for a hydrated dispatch are listed, including the record of which lessons were shown\n  - The prompt section is bounded at one heading line and two lines per lesson, with and without a remedy\n  - Lesson text is rendered as quoted data that the section labels as such\n- Gate: Design Gate\n\n### T-007 Deliver lesson hydration at dispatch\n\n- Owner: omn-dev-1-implement\n- Complexity: L (confidence: medium)\n- Depends on: T-005, T-006, T-013, T-014, T-017\n- Traces to: S-002, S-009, S-013, S-022, S-024, S-026, S-027\n- Status: ready\n- Description: A dispatch of a run whose plan has hydration on carries the selected eligible lessons in its memory slice and its prompt section; other dispatches are unchanged.\n- Acceptance Criteria:\n  - AC-010, AC-014, AC-015, AC-016, AC-017 hold\n  - A run planned before the change or with hydration off produces the captured baseline output (AC-018)\n  - A flag-off dispatch carries a memory slice with hydrated false and a reason naming the plan flag (AC-019)\n- Gate: Review Gate\n\n### T-008 Define the lesson effectiveness attribution rule\n\n- Owner: architect\n- Complexity: S (confidence: medium)\n- Depends on: T-002, T-006\n- Traces to: S-010\n- Status: ready\n- Description: An approved rule states which dispatches count as shown a lesson and which later failures count as recurrences after being shown.\n- Acceptance Criteria:\n  - The rule covers retries within one phase and run, rollbacks, and later runs\n  - The rule names the evidence each count is drawn from\n  - Applying the rule to the AC-020 fixture by hand yields 3 shown and 1 recurrence\n- Gate: Design Gate\n\n### T-009 Deliver the lesson effectiveness report\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: medium)\n- Depends on: T-003, T-007, T-008\n- Traces to: S-010\n- Status: ready\n- Description: A command-line report lists, per lesson, the dispatches shown the lesson and the later recurrences of its failure, per the attribution rule.\n- Acceptance Criteria:\n  - AC-020 holds\n  - A lesson never shown reports zero shown dispatches\n- Gate: Review Gate\n\n### T-010 Record lessons hydrated in execution metrics\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: high)\n- Depends on: T-007\n- Traces to: S-011\n- Status: ready\n- Description: Each invocation's execution metrics carry a lessons-hydrated count equal to the lessons in its memory slice.\n- Acceptance Criteria:\n  - AC-022 holds for hydrated and unhydrated invocations\n  - An invocation dispatched with hydration off records a lessons-hydrated count of zero\n- Gate: Review Gate\n\n### T-011 Define harvest at run aggregation\n\n- Owner: architect\n- Complexity: S (confidence: low)\n- Depends on: T-002\n- Traces to: S-012, A-006\n- Status: assumption-dependent\n- Description: An approved decision states when aggregation invokes harvest, the cost bound it accepts, and how a harvest failure is isolated from aggregation.\n- Acceptance Criteria:\n  - The aggregation point that triggers harvest is named\n  - The decision states whether harvest is full or incremental and why\n  - The outcome of aggregation when harvest fails is stated\n- Gate: Design Gate\n\n### T-012 Deliver harvest at run aggregation\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: low)\n- Depends on: T-003, T-011\n- Traces to: S-012, A-006\n- Status: assumption-dependent\n- Description: Aggregating a run harvests its evidence, so its lessons are available to the next dispatch with no operator step.\n- Acceptance Criteria:\n  - AC-021 holds\n  - A harvest failure produces the aggregation outcome the decision states\n- Gate: Review Gate\n\n### T-013 Define how a run's plan records its hydration choice\n\n- Owner: architect\n- Complexity: M (confidence: low)\n- Depends on: none\n- Traces to: S-014, S-020, S-025, A-003, A-005\n- Status: assumption-dependent\n- Description: An approved decision states where a plan records hydration on or off, how a plan without the record is treated as planned before the change, and the default.\n- Acceptance Criteria:\n  - The plan flag, its default for new plans, and how an operator sets it off are stated\n  - The decision states why a pre-change run's envelope, prompt, and idempotency key cannot change\n  - The default is stated once, so `R-001` resolves as a single change\n- Gate: Design Gate\n\n### T-014 Capture the pre-change dispatch baseline\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: low)\n- Depends on: T-013, T-025\n- Traces to: S-014, A-007, A-009\n- Status: assumption-dependent\n- Description: A stored baseline of dispatch envelope, prompt, and idempotency key, taken from the runtime as committed before the change, exists for the cases AC-018 compares.\n- Acceptance Criteria:\n  - The baseline names the runtime revision it was taken from\n  - The baseline covers a run planned before the change\n  - Any field normalised before comparison is listed with the reason\n- Gate: Review Gate\n\n### T-015 Verify unchanged behaviour for runs planned before the change\n\n- Owner: omn-qa\n- Complexity: M (confidence: low)\n- Depends on: T-014, T-022, T-026\n- Traces to: S-014, S-017, A-004, A-009\n- Status: assumption-dependent\n- Description: Recorded evidence shows that runs planned before the change dispatch as the baseline and that every verifier stays at its recorded baseline.\n- Acceptance Criteria:\n  - AC-018 passes against the stored baseline\n  - Replay checks M12 and M14 pass unchanged\n  - The full unit suite passes and every verifier reports its recorded baseline\n  - The evidence names the revision tested\n- Gate: Verification Gate\n\n### T-016 Review the change set against the additive-only constraint\n\n- Owner: omn-dev-2-reviewer\n- Complexity: S (confidence: high)\n- Depends on: T-022\n- Traces to: S-017, S-018, S-019\n- Status: ready\n- Description: A recorded verdict states whether the change set leaves gates, validators, artifact contracts, Phase Model tables, and agent module text unchanged, calls no model, and adds no dependency beyond the standard library.\n- Acceptance Criteria:\n  - Each protected surface is checked against the change set with a result recorded per surface\n  - No added import or call reaches beyond the standard library or a model\n  - The verdict states whether the documentation edits fall outside the protected surfaces\n- Gate: Review Gate\n\n### T-017 Deliver the plan-time hydration choice\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: low)\n- Depends on: T-013\n- Traces to: S-020, S-025, A-005\n- Status: assumption-dependent\n- Description: A plan created after the change records hydration on unless the operator sets the flag off, and plans created before the change are untouched.\n- Acceptance Criteria:\n  - AC-019 holds for both plan fixtures\n  - No existing plan file is rewritten\n- Gate: Review Gate\n\n### T-018 Publish the release note\n\n- Owner: omn-documentation\n- Complexity: S (confidence: high)\n- Depends on: T-020, T-027\n- Traces to: S-020, S-032\n- Status: ready\n- Description: A release note states what the knowledge loop adds, the new default for runs planned after the change, how to switch it off, and how to govern lessons.\n- Acceptance Criteria:\n  - The note names the runtime version that introduces the loop\n  - The note states that runs planned before the change are unaffected\n  - The note carries the verification outcome recorded in `T-027`\n- Gate: Closure Gate\n\n### T-019 Review lesson content flow for exposure\n\n- Owner: omn-dev-2-reviewer\n- Complexity: S (confidence: high)\n- Depends on: T-003, T-004, T-007\n- Traces to: S-024, S-029\n- Status: ready\n- Description: A recorded verdict states whether evidence text can reach the store or a prompt outside the declared fields, and whether lesson text is rendered as data.\n- Acceptance Criteria:\n  - Every path from evidence to store and from store to prompt is traced with a finding per path\n  - The AC-004 test is confirmed to search every store file\n  - Remedy text rendering is confirmed to follow the recall contract\n- Gate: Review Gate\n\n### T-020 Document the lesson category in the governing documents\n\n- Owner: omn-documentation\n- Complexity: S (confidence: low)\n- Depends on: T-004, T-005, T-007, T-017\n- Traces to: S-028, A-008\n- Status: assumption-dependent\n- Description: `memory/README.md`, `memory/memory-governance.md`, `memory/memory-resolver.md`, and `config/runtime.md` describe the lesson category as implemented.\n- Acceptance Criteria:\n  - AC-023 holds for all four documents\n  - The Memory Loading and Writeback Policy sections of `config/runtime.md` state the new default for runs planned after the change\n  - `runtime/README.md` and agent module text are unchanged\n- Gate: Review Gate\n\n### T-021 Increment the runtime version\n\n- Owner: omn-dev-1-implement\n- Complexity: XS (confidence: low)\n- Depends on: T-014\n- Traces to: S-032, A-009\n- Status: assumption-dependent\n- Description: The framework runtime reports a version above 0.9.0 for the delivered change.\n- Acceptance Criteria:\n  - The reported runtime version is incremented once\n  - The baseline in `T-014` was captured before the increment\n- Gate: Review Gate\n\n### T-022 Refresh the bundled payload mirror\n\n- Owner: omn-dev-1-implement\n- Complexity: XS (confidence: low)\n- Depends on: T-003, T-004, T-005, T-007, T-009, T-010, T-012, T-017, T-020, T-021\n- Traces to: S-032, A-010\n- Status: assumption-dependent\n- Description: The bundled payload mirror matches the framework directory after the last framework edit, refreshed by its sync procedure rather than by hand.\n- Acceptance Criteria:\n  - The bundled payload test passes\n  - No file under the mirror was edited other than by the sync procedure\n- Gate: Review Gate\n\n### T-023 Confirm the framework release checklist passes\n\n- Owner: omn-qa\n- Complexity: S (confidence: medium)\n- Depends on: T-024\n- Traces to: S-032\n- Status: ready\n- Description: Recorded evidence shows `validation/framework-release-checklist.md` satisfied for this change.\n- Acceptance Criteria:\n  - The release checklist verification reports pass\n  - Any item recorded as not applicable names its reason\n- Gate: Closure Gate\n\n### T-024 Author the framework change proposal\n\n- Owner: omn-documentation\n- Complexity: M (confidence: medium)\n- Depends on: T-015, T-016, T-019, T-027\n- Traces to: S-032\n- Status: ready\n- Description: A change proposal under `proposals/`, authored from `templates/framework-change-proposal.md`, links the artifacts of this run.\n- Acceptance Criteria:\n  - The proposal passes `runtime/change_proposal_validator.py`\n  - The proposal links the verification evidence from `T-015` and `T-027`\n- Gate: Closure Gate\n\n### T-025 Define the validation strategy for the twenty-three scope criteria\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-002, T-006, T-008, T-011, T-013\n- Traces to: S-033\n- Status: ready\n- Description: A validation strategy names, for each of AC-001 through AC-023, the check, its fixture, the evidence it produces, and its pass condition.\n- Acceptance Criteria:\n  - Each of AC-001, AC-002, AC-003, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-010, AC-011, AC-012, AC-013, AC-014, AC-015, AC-016, AC-017, AC-018, AC-019, AC-020, AC-021, AC-022, AC-023 has a named check and pass condition\n  - The strategy states how AC-001 runs over a copy of recorded evidence rather than the live runs directory\n  - The strategy states what the AC-018 baseline captures\n- Gate: Design Gate\n\n### T-026 Deliver the unit tests that carry the validation strategy\n\n- Owner: omn-dev-1-implement\n- Complexity: L (confidence: medium)\n- Depends on: T-003, T-004, T-005, T-007, T-009, T-010, T-012, T-014, T-017, T-020, T-025\n- Traces to: S-033\n- Status: ready\n- Description: Unit tests under the repository-root `tests/` directory implement every check the validation strategy names.\n- Acceptance Criteria:\n  - Every check named for AC-001 through AC-023 in the strategy has a test that passes\n  - The tests use fixtures and never read or write the live runs directory\n- Gate: Review Gate\n\n### T-027 Record verification evidence for the scope criteria\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-026\n- Traces to: S-033\n- Status: ready\n- Description: Recorded evidence states pass or fail for each scope criterion other than AC-018, which `T-015` records.\n- Acceptance Criteria:\n  - A result with its evidence is recorded for AC-001, AC-002, AC-003, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-010, AC-011, AC-012, AC-013, AC-014, AC-015, AC-016, AC-017, AC-019, AC-020, AC-021, AC-022, AC-023\n  - Command output listing the `C3.2` and `C7.1` lessons with all six fields is recorded for AC-001\n- Gate: Verification Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| T-001 | T-002 | produces-consumes | The store contract binds to the inventoried evidence shapes |\n| T-002 | T-003 | contract | Harvest writes the defined store |\n| T-002 | T-004 | contract | The commands change fields the contract defines |\n| T-003 | T-004 | produces-consumes | The commands act on harvested lessons |\n| T-002 | T-005 | contract | Eligibility reads status, count, and threshold as defined |\n| T-002 | T-006 | contract | Recall reads the defined record |\n| T-005 | T-007 | produces-consumes | Selection consumes eligibility |\n| T-006 | T-007 | contract | Hydration implements the recall contract |\n| T-013 | T-007 | contract | Hydration honours the plan-choice decision |\n| T-014 | T-007 | produces-consumes | The byte-identity criterion is judged against the captured baseline |\n| T-017 | T-007 | produces-consumes | Hydration reads the recorded plan choice |\n| T-002 | T-008 | contract | Attribution is keyed by the defined fingerprint |\n| T-006 | T-008 | contract | Attribution reads the shown-lessons record the recall contract defines |\n| T-003 | T-009 | produces-consumes | The report reads harvested lessons |\n| T-007 | T-009 | produces-consumes | The report reads which dispatches were shown each lesson |\n| T-008 | T-009 | contract | The report applies the attribution rule |\n| T-007 | T-010 | produces-consumes | The count equals the lessons hydration selects |\n| T-002 | T-011 | contract | The trigger invokes harvest as the contract defines it |\n| T-003 | T-012 | produces-consumes | Aggregation invokes the delivered harvest |\n| T-011 | T-012 | contract | The trigger follows the approved decision |\n| T-013 | T-014 | contract | The baseline covers the cases the decision keeps unchanged |\n| T-025 | T-014 | produces-consumes | The strategy states what the baseline captures |\n| T-014 | T-015 | produces-consumes | Verification compares against the baseline |\n| T-022 | T-015 | verification | The suite includes the bundled payload test over the refreshed mirror |\n| T-026 | T-015 | produces-consumes | Verification runs the delivered tests |\n| T-022 | T-016 | verification | The review assesses the complete change set |\n| T-013 | T-017 | contract | The plan records the choice as decided |\n| T-020 | T-018 | produces-consumes | The note cites the documented default and off switch |\n| T-027 | T-018 | produces-consumes | The note carries the verification outcome |\n| T-003 | T-019 | verification | The review traces evidence into the store |\n| T-004 | T-019 | verification | The review covers operator-written remedy text |\n| T-007 | T-019 | verification | The review traces store content into prompts |\n| T-004 | T-020 | produces-consumes | The documents describe the delivered lifecycle |\n| T-005 | T-020 | produces-consumes | The documents state the delivered threshold |\n| T-007 | T-020 | produces-consumes | The documents describe delivered hydration |\n| T-017 | T-020 | produces-consumes | The documents name the delivered plan flag |\n| T-014 | T-021 | produces-consumes | The baseline must record the pre-increment version stamp |\n| T-003 | T-022 | produces-consumes | The mirror carries the harvest change |\n| T-004 | T-022 | produces-consumes | The mirror carries the command change |\n| T-005 | T-022 | produces-consumes | The mirror carries the eligibility change |\n| T-007 | T-022 | produces-consumes | The mirror carries the dispatch change |\n| T-009 | T-022 | produces-consumes | The mirror carries the report change |\n| T-010 | T-022 | produces-consumes | The mirror carries the metrics change |\n| T-012 | T-022 | produces-consumes | The mirror carries the aggregation change |\n| T-017 | T-022 | produces-consumes | The mirror carries the plan change |\n| T-020 | T-022 | produces-consumes | The mirror carries the documentation change |\n| T-021 | T-022 | produces-consumes | The mirror carries the version increment |\n| T-024 | T-023 | produces-consumes | The release checklist requires a validated change proposal |\n| T-015 | T-024 | produces-consumes | The proposal links the backward-compatibility evidence |\n| T-016 | T-024 | produces-consumes | The proposal links the additive-only verdict |\n| T-019 | T-024 | produces-consumes | The proposal links the exposure verdict |\n| T-027 | T-024 | produces-consumes | The proposal links the criteria evidence |\n| T-002 | T-025 | contract | Store checks bind to the store contract |\n| T-006 | T-025 | contract | Recall checks bind to the recall contract |\n| T-008 | T-025 | contract | Report checks bind to the attribution rule |\n| T-011 | T-025 | contract | Aggregation checks bind to the trigger decision |\n| T-013 | T-025 | contract | Compatibility checks bind to the plan-choice decision |\n| T-025 | T-026 | produces-consumes | The tests implement the strategy |\n| T-003 | T-026 | verification | Tests validate harvest |\n| T-004 | T-026 | verification | Tests validate the commands |\n| T-005 | T-026 | verification | Tests validate eligibility |\n| T-007 | T-026 | verification | Tests validate hydration |\n| T-009 | T-026 | verification | Tests validate the report |\n| T-010 | T-026 | verification | Tests validate the metrics count |\n| T-012 | T-026 | verification | Tests validate aggregation harvest |\n| T-014 | T-026 | produces-consumes | The AC-018 test reads the baseline |\n| T-017 | T-026 | verification | Tests validate the plan choice |\n| T-020 | T-026 | verification | The AC-023 test searches the updated documents |\n| T-026 | T-027 | produces-consumes | Evidence comes from the delivered tests |\n\n### 8.2 External Dependencies\n\nNone identified. Every prerequisite is held by an agent inside the selected workflow; the recorded run evidence is repository content read through `T-001`, and the Scope Gate answers to SQ-001 and SQ-002 rest with that gate's owners.\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-013\n- Wave 2: T-002, T-017\n- Wave 3: T-003, T-005, T-006, T-011\n- Wave 4: T-004, T-008, T-012\n- Wave 5: T-025\n- Wave 6: T-014\n- Wave 7: T-007, T-021\n- Wave 8: T-009, T-010, T-019, T-020\n- Wave 9: T-022, T-026\n- Wave 10: T-015, T-016, T-027\n- Wave 11: T-018, T-024\n- Wave 12: T-023\n\n## Suggested Workflow\n\nSelected workflow: `implement-feature`.\n\nSelected because the plan delivers new framework functionality against an approved scope, carries five design decisions that need an approved technical approach, and closes with verification, documentation, and a change proposal; the change request routes `capability-addition` to this workflow.\n\n| Phase | Tasks |\n|---|---|\n| `scope-and-acceptance` | completed upstream; no task |\n| `execution-planning` | this artifact |\n| `solution-design-and-risk-assessment` | T-001, T-002, T-006, T-008, T-011, T-013, T-025 |\n| `implementation` | T-003, T-004, T-005, T-007, T-009, T-010, T-012, T-014, T-017, T-020, T-021, T-022, T-026 |\n| `quality-review` | T-015, T-016, T-019, T-027 |\n| `documentation-and-release-handoff` | T-018, T-023, T-024 |\n\n| Gate | Required owners |\n|---|---|\n| Scope Gate | omn-product-owner, omn-business-analyst |\n| Planning Gate | omn-tech-lead, omn-orchestrator |\n| Design Gate | omn-architect, omn-tech-lead |\n| Review Gate | omn-dev-2-reviewer, omn-qa |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation |\n\nUnder the Producer Exclusion Rule, the Design Gate decision rests with `omn-tech-lead`, because `architect` produces the evidence it assesses.\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| architecture-analysis | T-001 | architect | Primary |\n| technical-approach-definition | T-002, T-006, T-008, T-011, T-013 | architect | Primary |\n| structural-risk-analysis | T-013 | architect | Primary |\n| implementation-delivery | T-003, T-004, T-005, T-007, T-009, T-010, T-012, T-014, T-017, T-021, T-022, T-026 | omn-dev-1-implement | Primary |\n| validation-design | T-025 | omn-qa | Primary |\n| quality-verification | T-015, T-023, T-027 | omn-qa | Primary |\n| code-review | T-016, T-019 | omn-dev-2-reviewer | Primary |\n| governance-enforcement | T-016 | omn-dev-2-reviewer | Primary |\n| documentation | T-020, T-024 | omn-documentation | Primary |\n| release-communication | T-018 | omn-documentation | Primary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S02 | business/domain-modeling.md | T-001, T-002 | Primary |\n| S01 | architecture/clean-architecture-checklist.md | T-002, T-006, T-011, T-013 | Primary |\n| S07 | testing/testing-strategy.md | T-014, T-015, T-025, T-026, T-027 | Primary |\n| S09 | security/secure-engineering.md | T-002, T-006, T-019 | Secondary |\n| S08 | performance/performance-engineering.md | T-011 | Advisory |\n| S12 | error-handling/error-handling-strategy.md | T-003, T-012 | Secondary |\n| S11 | logging/observability-logging.md | T-010 | Secondary |\n| S10 | git/git-collaboration.md | T-022, T-024 | Secondary |\n\n## Acceptance Criteria\n\n1. A recorded `C3.2` failure and a recorded `C7.1` failure each become a lesson that the next dispatch of the matching phase receives in its memory slice and prompt. Verifies business objective 1. Evidence: AC-001 and AC-014 results recorded at `T-027`.\n2. A failure recurring in a newly aggregated run reaches the next dispatch with no harvest command run in between. Verifies business objective 1. Evidence: AC-021 result recorded at `T-027`.\n3. Only approved or recurring lessons are shown, retired lessons are never shown, and every governance action leaves the lesson count unchanged with one history entry added. Verifies business objective 2. Evidence: AC-007, AC-008, AC-011, AC-012, AC-013 results recorded at `T-027`.\n4. No free text from recorded evidence appears in the store, and lesson text reaches prompts only as labelled data. Verifies business objective 2. Evidence: AC-004 result at `T-027` and the exposure verdict at `T-019`.\n5. For each lesson the framework reports the dispatches shown it and the later recurrences of its failure, and each invocation's metrics carry its hydrated count. Verifies business objective 3. Evidence: AC-020 and AC-022 results recorded at `T-027`.\n6. Runs planned before the change, and runs planned with hydration off, dispatch as the stored baseline with an unchanged idempotency key, and every verifier stays at its recorded baseline. Verifies business objective 4. Evidence: the verification record at `T-015`.\n7. The change set alters no gate, validator, artifact contract, Phase Model table, or agent module text, calls no model, and adds no dependency beyond the standard library. Verifies business objective 4. Evidence: the verdict at `T-016`.\n\n## Definition of Done\n\n- [ ] All seven plan acceptance criteria are verified with recorded evidence\n- [ ] Design, Review, Verification, and Closure Gates are approved with owners recorded\n- [ ] Task acceptance criteria for `T-001` through `T-027` are satisfied or formally waived\n- [ ] `A-001` through `A-010` are confirmed or converted to recorded decisions\n- [ ] `R-001` through `R-014` are closed or accepted with named owners\n- [ ] `Q-001`, `Q-002`, and `Q-003` are closed or explicitly accepted with the decision recorded\n- [ ] The full unit suite passes and the bundled payload test passes over the refreshed mirror\n- [ ] The change proposal passes its validator and the framework release checklist passes\n- [ ] Documentation and release-impact notes are published\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Should the lesson store harvested from this repository's runs ship to installed copies through the bundled payload, or ship empty so each installation learns from its own runs? | No | omn-tech-lead | T-002, T-022 |\n| Q-002 | Is AC-018 byte identity judged after normalising build timestamps and the runtime version stamp, which already vary per dispatch and which the version increment changes? | No | omn-product-owner | T-014, T-015, T-021 |\n| Q-003 | `implement-feature` has no phase before implementation that `omn-qa` owns; `T-025` is mapped to `solution-design-and-risk-assessment` so the strategy precedes the tests that carry it. Is that placement accepted? | No | omn-tech-lead | T-025 |\n\n## Traceability Matrix\n\n| Statement | Covered by |\n|---|---|\n| S-001 rejections and rollbacks are recorded in run evidence today | T-001 |\n| S-002 no recorded evidence reaches a later dispatch; memory slice unhydrated | T-007 |\n| S-003 the same mechanical rejection recurs; operators keep private notes | T-001 |\n| S-004 harvest distils one fingerprinted lesson per recurring failure pattern | T-001, T-002, T-003 |\n| S-005 re-harvest is idempotent through fingerprint upsert | T-002, T-003 |\n| S-006 governed store under memory with candidate, active, retired, owner, rationale | T-002, T-004, A-010 |\n| S-007 eligible when approved or recurring in the configured distinct-run count | T-005 |\n| S-008 operators approve, retire, annotate; nothing deleted | T-004 |\n| S-009 dispatch hydrates matched lessons into slice and prompt, ranked and capped | T-006, T-007 |\n| S-010 per-lesson report of recurrence after being shown | T-008, T-009 |\n| S-011 metrics record lessons hydrated per invocation | T-010 |\n| S-012 harvest runs at aggregation with no operator step | T-011, T-012 |\n| S-013 a phase with an eligible lesson receives it in envelope and prompt | T-007 |\n| S-014 pre-change or flag-off runs dispatch unchanged | T-013, T-014, T-015 |\n| S-015 harvesting current runs yields C3.2 and C7.1 lessons | T-001, T-003, A-002 |\n| S-016 harvesting twice yields an identical store | T-003 |\n| S-017 additive only | T-015, T-016, A-008 |\n| S-018 runtime never calls a model | T-016 |\n| S-019 standard library only | T-016 |\n| S-020 D-001 hydration on by default, recorded in the plan, flag switches off | T-013, T-017, T-018, A-005 |\n| S-021 D-002 automatic eligibility at two distinct runs | T-005 |\n| S-022 D-003, D-004 at most five, highest distinct-run count, deterministic ties | T-006, T-007 |\n| S-023 D-005 approval waits are not lessons | T-002, T-003 |\n| S-024 D-006 remedy optional; without remedy shown with description alone | T-004, T-006, T-007, T-019 |\n| S-025 D-007 pre-change runs never hydrate, plans not backfilled | T-013, T-017 |\n| S-026 D-008 section bounded at one heading and two lines per lesson | T-006, T-007 |\n| S-027 D-009 lesson reaches only its recorded phase and artifact type | T-006, T-007 |\n| S-028 SC-011 governing documents describe the implemented loop | T-020 |\n| S-029 lesson record holds only declared fields; credential-like text excluded | T-002, T-003, T-019 |\n| S-030 no runs directory yields exit 0 and zero lessons | T-003 |\n| S-031 memory optimization tool leaves lesson records unchanged | T-002 |\n| S-032 self-hosting route, version increment, mirror sync, change proposal | T-021, T-022, T-023, T-024, T-018 |\n| S-033 twenty-three scope criteria decide the change | T-025, T-026, T-027, T-015 |\n| S-034 exclusions X-001 to X-009 bound the change | Scope, Out of Scope (context; no task) |\n| AC-001 (S-033) | T-001, T-003, T-025, T-026, T-027 |\n| AC-002 (S-033) | T-003, T-025, T-026, T-027 |\n| AC-003 (S-033) | T-003, T-025, T-026, T-027 |\n| AC-004 (S-033) | T-002, T-003, T-019, T-025, T-026, T-027 |\n| AC-005 (S-033) | T-002, T-003, T-025, T-026, T-027 |\n| AC-006 (S-033) | T-003, T-025, T-026, T-027 |\n| AC-007 (S-033) | T-004, T-025, T-026, T-027 |\n| AC-008 (S-033) | T-003, T-004, T-025, T-026, T-027 |\n| AC-009 (S-033) | T-002, T-025, T-026, T-027 |\n| AC-010 (S-033) | T-006, T-007, T-025, T-026, T-027 |\n| AC-011 (S-033) | T-005, T-025, T-026, T-027 |\n| AC-012 (S-033) | T-005, T-025, T-026, T-027 |\n| AC-013 (S-033) | T-005, T-025, T-026, T-027 |\n| AC-014 (S-033) | T-006, T-007, T-025, T-026, T-027 |\n| AC-015 (S-033) | T-006, T-007, T-025, T-026, T-027 |\n| AC-016 (S-033) | T-006, T-007, T-025, T-026, T-027 |\n| AC-017 (S-033) | T-006, T-007, T-025, T-026, T-027 |\n| AC-018 (S-033) | T-007, T-013, T-014, T-017, T-025, T-026, T-015 |\n| AC-019 (S-033) | T-007, T-013, T-017, T-025, T-026, T-027 |\n| AC-020 (S-033) | T-008, T-009, T-025, T-026, T-027 |\n| AC-021 (S-033) | T-011, T-012, T-025, T-026, T-027 |\n| AC-022 (S-033) | T-010, T-025, T-026, T-027 |\n| AC-023 (S-033) | T-020, T-025, T-026, T-027 |",
+        "digest": "sha256:13107a308ca6cec3bfc8f1e03c31ddd7",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change this agent designs against: a change request, a feature request, or a business intent. Without one there is no requested change to design, and designing anyway would mean inventing the requirement."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-c9fb8d5bbb32/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning",
+      "artifact": "execution-plan.md",
+      "bytes": 48732,
+      "sections": {
+        "read_first": [
+          "Technical Objectives",
+          "Scope",
+          "Task Breakdown",
+          "Dependencies",
+          "Acceptance Criteria",
+          "Definition of Done",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Executive Summary",
+          "Business Objectives",
+          "Assumptions",
+          "Risks",
+          "Suggested Workflow",
+          "Required Capabilities",
+          "Traceability Matrix"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-c9fb8d5bbb32/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:797d550066c3687b3b2ba5e968a821cc",
+    "bytes": 29670,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "solution-design-and-risk-assessment"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-09T14:59:17Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:1961ffd5b447ec39cac35462546aa708",
+        "supplies": "framework-context",
+        "bytes": 22733,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:84e98748204581ef06f3e434c600f794",
+        "supplies": "framework-context",
+        "bytes": 9569,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:50db8f41ad96e89197090292726311a8",
+        "supplies": "framework-context",
+        "bytes": 12274,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null,
+        "bytes": 6564,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+        "supplies": null,
+        "bytes": 809,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null,
+        "bytes": 2277,
+        "read": "on-demand",
+        "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+        "supplies": null,
+        "bytes": 1066,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null,
+        "bytes": 3376,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:73bd155e6b8344e48a8c66266be118cf",
+        "supplies": null,
+        "bytes": 61682,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:15acab9bbb76151f78b5c74a2361a31c",
+    "input_digest": "sha256:f8efa673a8795a3db6fc296d898e7c09",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/knowledge-loop-feature-request.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-feature-request.md",
+        "digest": "sha256:e7a9416b2344d53a4264e32b5a976681"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/knowledge-loop-change-request.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-change-request.md",
+        "digest": "sha256:a4f1eff2640769f1d7f81506a3e8c22a"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/knowledge-loop-business-intent.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-business-intent.md",
+        "digest": "sha256:8080b0e9b989554fc66c2318118d5612"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/knowledge-loop-architecture-context.md",
+        "source_file": ".claude/runs/inputs/knowledge-loop-architecture-context.md",
+        "digest": "sha256:c96206f6e1e68bb201f8b712cc108369"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-c9fb8d5bbb32/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/knowledge-management-2d49d4/.claude/runs/run-c9fb8d5bbb32/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:13107a308ca6cec3bfc8f1e03c31ddd7"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "memory/architecture.md",
+      "runtime/README.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "dependency-map.md",
+      "memory/architecture.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "read_on_demand": [
+      "domain-model/agent-specification.md",
+      "runtime/README.md",
+      "workflows/implement-feature.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 178425,
+    "bytes_required": 13364,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+      "runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/artifacts/review-package-*.md"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      },
+      {
+        "artifact": "review-package.md",
+        "template_ref": "templates/review-package.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "Emitted only for review-pull-request/structural-compliance, where this agent applies the structural and security lens and the findings are classified under the architecture and security categories. runtime/review_package_validator.py already contracts this agent as a permitted producer of review-package.md; the quality rules it applies to the structural lens are the ones in quality.md.",
+        "artifact_path_glob": "runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/artifacts/review-package-*.md",
+        "naming": "runs/run-c9fb8d5bbb32/states/solution-design-and-risk-assessment/artifacts/review-package-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-10-09T14:59:17Z",
+  "model_tier": {
+    "tier": "deep",
+    "host_hint": "opus",
+    "basis": "declared deep for implement-feature/solution-design-and-risk-assessment in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 110389,
+    "modules_core_bytes": 51235,
+    "slice_all_bytes": 178425,
+    "slice_required_bytes": 13364,
+    "inputs_bytes": 8979,
+    "upstream_full_bytes": 48733,
+    "upstream_read_first_bytes": 31480,
+    "task_context_bytes": 29670,
+    "fixed_bytes": 14073,
+    "legacy_estimate_bytes": 360599,
+    "progressive_estimate_bytes": 148801,
+    "legacy_estimate_tokens": 90149,
+    "progressive_estimate_tokens": 37200,
+    "savings_pct": 58.7
+  }
+}

@@ -25,6 +25,7 @@ The resolver operates on governed categories:
 - known-issues
 - technology-stack
 - glossary
+- lessons (machine-maintained; resolved by the rule below, not by the workflow tables)
 
 ## Resolver Inputs
 
@@ -208,6 +209,24 @@ Writeback constraints:
 - write only durable and validated knowledge
 - include owner and validation date for critical updates
 - preserve superseded references for traceability
+
+## Lesson Resolution
+
+The lesson category is resolved per dispatch, not per workflow, by `runtime/knowledge.py`:
+
+- A dispatch receives lessons only when its run's plan-time record says hydration is on. The
+  default is on for runs planned after runtime 0.10.0; the plan flag `--no-lesson-hydration`
+  records off; a run without a record never receives lessons.
+- Candidates are the eligible lessons: `active`, or `candidate` with at least two distinct runs
+  (configurable threshold); `retired` lessons never resolve.
+- Narrowing: a lesson resolves for a state only when its phases include that state and its
+  artifact type is the state's output artifact.
+- Minimality: ranked by distinct runs, then occurrences, then lesson ID, capped at five; the
+  prompt section is at most one heading and two lines per lesson.
+- Delivery: `memory_slice` and the prompt section only, never the context slice or the payload
+  digest.
+- Writeback: harvest at run aggregation is an idempotent upsert keyed by semantic fingerprint;
+  governance actions change only status or remedy and append history.
 
 ## Conflict Handling
 

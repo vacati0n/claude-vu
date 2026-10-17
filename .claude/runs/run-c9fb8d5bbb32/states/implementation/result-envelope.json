@@ -1,0 +1,176 @@
+{
+  "invocation_id": "inv-c9fb8d5bbb32-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-c9fb8d5bbb32/states/implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-1012",
+    "workflowPhase": "implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 26,
+      "testEvidenceEntries": 30,
+      "deviations": 5,
+      "residualRisks": 6,
+      "openQuestions": 4
+    },
+    "evidenceExecution": {
+      "entriesExecuted": 30,
+      "entriesPassed": 27,
+      "entriesFailed": 3,
+      "failedEntries": {
+        "T-021": "plain python tests/test_bundled_payload.py resolves the main checkout's installed package (no lessons.store.* exclusion) -> parity drift on the live store, plus the source-fallback failure that also failed before the change",
+        "T-022": "verify_multi_phase --run-id run-c5a8d50d3238 in place: M14 child commands hit WinError 5 on os.replace of the tracked state.json (3 attempts); M12 pass",
+        "T-024": "verify_multi_phase default selection picked the in-flight run-c9fb8d5bbb32: M6 fails because the delivery phase is running; M12 and M14 pass"
+      },
+      "keyResults": {
+        "tests/test_knowledge.py": "47/47 OK",
+        "tests/test_model_tier.py": "47/47 OK",
+        "tests/test_bundled_payload.py (PYTHONPATH=.)": "11/11 OK before edits, after the exclusion entry, and after sync",
+        "verify_multi_phase on temporary copies (final tree and HEAD)": "15/15 PROVEN each, M12 and M14 pass",
+        "verify_vertical_slice": "10/10 PROVEN",
+        "verify_registry_coverage": "8/8 COVERED",
+        "test_framework_runtime_render / test_lean_dispatch / test_optimize_memory": "21/21, 21/21, 31/31 OK"
+      },
+      "baseline": "captured from the unmodified 0.9.0 tree before any runtime edit; two dispatches of one invocation differed only in built_at, context_slice.frozen_at, task_context.digest (and its prompt echo); idempotency key identical; no field outside the closed list, so no escalation was required under Design Gate condition 1"
+    },
+    "qualityChecks": {
+      "total": 45,
+      "passed": 45,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "M1": "pass",
+        "M5": "pass",
+        "M7": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "M3": "pass",
+        "M2": "pass",
+        "K1": "pass",
+        "K2": "pass",
+        "M4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "B1": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "B4": "pass",
+        "B5": "pass",
+        "B6": "pass",
+        "B7": "pass",
+        "M6": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass"
+      },
+      "notes": {
+        "B2": "every file this change wrote is in the change set and within permitted_writes; separately, runtime child processes of the instructed verifiers wrote run evidence (6 replay entries in runs/run-c9fb8d5bbb32/state.json and a regenerated task-context.yaml; runs/run-c5a8d50d3238 restored by git checkout) -- declared in the report and raised as Q-003",
+        "E3": "regression baseline T-002 re-run after the change as T-020; T-001 baseline compared by T-013"
+      }
+    },
+    "validationEngine": {
+      "validator": "implementation_report_validator",
+      "result": "PASS",
+      "checksRun": 32,
+      "checksPassed": 32,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3
+    },
+    "notMachineCheckableObligations": {
+      "N1": "met: each change-set row describes the change made at that path, checked against git status and diff",
+      "N2": "met: each test-evidence row's Covers cell names the files the executed command exercises",
+      "N3": "met: no hidden side effect in critical logic; pre-change dispatch and aggregation paths are byte-equal to the baseline (T-013, T-015)",
+      "N4": "met: the only new files are runtime/knowledge.py and config/knowledge-policy.json (none-found reuse rung, D-001 one-way boundary) plus tests and fixtures; no new dependency"
+    },
+    "designConformance": {
+      "designGateConditions": {
+        "1": "met (T-001, T-013)",
+        "2": "met (T-013, T-012)",
+        "3": "met (T-015)",
+        "4": "met (T-002, T-016, T-020; only _walk via enumerate_seeds copies memory/)",
+        "5": "met (T-013, 45 slice-member digests)",
+        "6": "met (version raised after T-001)",
+        "7": "met (T-006)",
+        "8": "met in copies (T-023); in place blocked by environment (T-022)"
+      }
+    },
+    "harvestedLessons": {
+      "runsScanned": 25,
+      "occurrences": 70,
+      "lessons": 39,
+      "eligible": 16,
+      "unresolvedOccurrences": 7,
+      "emptyFailureLists": 4,
+      "storeDigest": "sha256:2384c006f914e2a6ec0eecde9e21173f"
+    },
+    "escalations": [],
+    "boundariesDeclined": []
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "runs/run-c9fb8d5bbb32/states/implementation/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "tests/fixtures/knowledge/baseline-0.9.0/baseline.json",
+    "tests/fixtures/knowledge/baseline-0.9.0/dispatch-prompt.md",
+    "tests/fixtures/knowledge/baseline-0.9.0/dispatch-stdout.txt",
+    "tests/fixtures/knowledge/baseline-0.9.0/envelope.json",
+    "tests/fixtures/knowledge/baseline-0.9.0/pre-change-run/events.jsonl",
+    "tests/fixtures/knowledge/baseline-0.9.0/pre-change-run/execution-request.json",
+    "tests/fixtures/knowledge/baseline-0.9.0/pre-change-run/state.json",
+    "omn_agent/source.py",
+    "config/knowledge-policy.json",
+    "runtime/knowledge.py",
+    "runtime/framework_runtime.py",
+    "runtime/execution_metrics.py",
+    "config/runtime.md",
+    "memory/README.md",
+    "memory/memory-governance.md",
+    "memory/memory-resolver.md",
+    "omn_agent/_bundled_payload/config/knowledge-policy.json",
+    "omn_agent/_bundled_payload/config/runtime.md",
+    "omn_agent/_bundled_payload/memory/README.md",
+    "omn_agent/_bundled_payload/memory/memory-governance.md",
+    "omn_agent/_bundled_payload/memory/memory-resolver.md",
+    "omn_agent/_bundled_payload/runtime/execution_metrics.py",
+    "omn_agent/_bundled_payload/runtime/framework_runtime.py",
+    "omn_agent/_bundled_payload/runtime/knowledge.py",
+    "tests/test_knowledge.py",
+    "memory/lessons/lessons.store.json",
+    "runs/run-c9fb8d5bbb32/states/implementation/artifacts/implementation-report.md",
+    "runs/run-c9fb8d5bbb32/states/implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -49,7 +49,11 @@ REQUIRED_SOURCE_FILES = (
     "registry/workflows.yaml",
 )
 
-EXCLUDE_PATTERNS = ("__pycache__", "*.pyc", "*.pyo", ".DS_Store", "*.omn-bak", "*.tmp-omn")
+# `lessons.store.*` keeps a framework checkout's harvested lesson store and its lock file
+# (memory/lessons/, written by runtime/knowledge.py) out of the installer, the bundle sync,
+# and the bundle tests alike: one repository's lessons are never shipped to another.
+EXCLUDE_PATTERNS = ("__pycache__", "*.pyc", "*.pyo", ".DS_Store", "*.omn-bak", "*.tmp-omn",
+                    "lessons.store.*")
 
 # Payload copy bundled inside this package (declared as package data in
 # pyproject.toml), the last-resort source candidate: it is what lets a

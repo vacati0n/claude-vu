@@ -341,6 +341,7 @@ with it, and the figures count what was advised, not what the host ran.
 - coding standards
 - known issues
 - glossary and technology stack
+- lessons from earlier runs (machine-maintained; see Lessons below)
 
 ### Loading Policy
 
@@ -353,6 +354,71 @@ with it, and the figures count what was advised, not what the host ran.
 - Persist only durable, non-ephemeral knowledge.
 - Require ownership and rationale metadata for new entries.
 - Use idempotent memory upsert keyed by semantic fingerprint.
+
+### Lessons
+
+The lesson category is the one memory category the runtime itself writes and hydrates.
+`runtime/knowledge.py` owns it; `framework_runtime.py` calls it one-way, and it never calls a
+model.
+
+**Harvest.** A lesson is distilled from recorded run evidence only: each check ID of a
+`validation_failed` event, keyed `check:<artifact-type>:<check-id>` with the artifact type
+resolved through the run's `state.json`, and each `gate-rejection` failure envelope of a gate
+work item in `recovery-ledger.json`, keyed `gate:<gate>:<phase>` for the phase the gate closes,
+with that gate's `rollback_scheduled` events attached as evidence. Approval waits, output-schema
+failures, empty failure lists, and IDs that are not check IDs are skipped. A lesson carries
+occurrence count, distinct-run count, first and last seen, the check's validator-authored
+description and severity, and evidence references; no event summary, report detail, ledger
+detail or resolution, rationale, or actor text is ever copied into it. Harvest is an idempotent
+upsert keyed by that semantic fingerprint: evidence fields are recomputed, governance fields
+carry over, and unchanged evidence yields a byte-identical store. A repository with no `runs/`
+harvests zero lessons and writes nothing.
+
+**Store and lifecycle.** `memory/lessons/lessons.store.json` (schema
+`framework.memory/lessons.v1`), written atomically under the lock file
+`memory/lessons/lessons.store.lock`. A new lesson is `candidate`, owned by the policy's
+`default_owner`, with a generated rationale. `knowledge.py approve` makes it `active`,
+`knowledge.py retire` makes it `retired`, and `knowledge.py annotate` attaches a one-line
+operator remedy of at most 200 printable characters (refused when it looks like a credential);
+each requires an actor and a rationale and appends one history entry. Nothing is deleted: a
+retired lesson, or one whose evidence has gone (`evidence_state: retained`), keeps its history.
+The store is JSON, so the memory optimizer never rewrites it, and the installer exclusion
+`lessons.store.*` keeps one repository's lessons out of every installed copy.
+
+**Eligibility.** A lesson is eligible for hydration when it is `active`, or when it is a
+`candidate` recurring in at least `auto_eligible_distinct_runs` distinct runs (two by default,
+in `config/knowledge-policy.json`). A `retired` lesson is never eligible.
+
+**Plan-time record.** Whether a run hydrates is decided once, when the run is created, and
+recorded in its `execution-request.json` as `knowledge_loop: {hydration, basis}`. The default is
+the policy's `hydration_default` (`on`); the plan flag `--no-lesson-hydration` records `off`;
+an absent policy file records `off`; an unreadable one fails run creation as a
+`policy-failure`. The choice is never inferred at dispatch: a run with no record, which is every
+run planned before runtime 0.10.0, never hydrates and dispatches exactly as it did, and the flag
+given against an existing run whose record is absent or on is a `request-validation-failure`.
+
+**Recall.** For a run recorded on, `dispatch` hydrates the eligible lessons whose phases include
+the dispatched phase and whose artifact type is the phase's output artifact, ranked by distinct
+runs, then occurrences, then lesson ID, capped at five. Lessons arrive only through
+`memory_slice` (`hydrated`, `reason`, `store`, `store_digest`, `threshold`, `matched`,
+`lessons`), through a "Lessons from earlier runs" prompt section of at most one heading line and
+two lines per lesson, present only when a lesson is shown and rendered as quoted, labelled data,
+and through `lessons_shown` in the `invocation_started` detail. None of it enters the context
+slice, the input contract, or the payload digest, so idempotency keys never move; the context
+slice's `excluded` entry for `memory/*` is unchanged even on a hydrated run. A run recorded off
+receives `hydrated: false` with a reason naming `--no-lesson-hydration`. An unreadable store or
+policy at dispatch fails open: no lessons, with the fault named in the reason.
+
+**Closing the loop.** Every aggregation of a run carrying a `knowledge_loop` record ends with a
+full harvest, after every aggregation output is written. The step never waits on the lock and
+never raises; its outcome, `succeeded`, `skipped` (lock contention), or `failed` with its error
+class, is `runs/<run-id>/knowledge-harvest.json`, and no ledger event is emitted.
+
+**Measuring.** `knowledge.py report` lists, per lesson, the dispatches shown it, the recurrences
+of its failure after being shown (attributed to the one dispatch of that run and phase the
+failure follows), and unwarned occurrences, with no pass threshold. `execution-metrics.json`
+carries `lessons_hydrated` and `lessons_hydrated_by_invocation` per phase and
+`lessons_hydrated_total` per run.
 
 ## Workflow Execution
 

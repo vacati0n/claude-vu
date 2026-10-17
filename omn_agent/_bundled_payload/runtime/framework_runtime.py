@@ -109,6 +109,7 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import execution_metrics as em  # noqa: E402  (sibling module, path inserted above)
+import knowledge as kl         # noqa: E402
 import recovery_policy as rp   # noqa: E402
 import state_engine as se     # noqa: E402
 import task_context as tc     # noqa: E402
@@ -122,7 +123,7 @@ RUNS = CLAUDE / "runs"
 # installed runtime names paths that actually exist on disk.
 FW_PREFIX = CLAUDE.name
 
-RUNTIME_VERSION = "0.9.0"
+RUNTIME_VERSION = "0.10.0"
 
 SLICES = {
     "scope-and-acceptance": "vertical-slice-4-product-owner-execution",
@@ -1675,11 +1676,19 @@ def plan_run(args):
 
     run_dir = RUNS / run_id
     existing = se.StateStore.load(run_dir)
+    no_hydration = bool(getattr(args, "no_lesson_hydration", False))
+    knowledge_loop = None
     if existing is None:
         if not supplied:
             raise RuntimeError_("request-validation-failure",
                                 f"run {run_id} does not exist and no inputs were supplied to "
                                 f"create it")
+        # The lesson-hydration choice is recorded once, here, and never inferred later. It is
+        # resolved before anything is written, so an unreadable policy creates no run.
+        try:
+            knowledge_loop = kl.plan_record(CLAUDE, no_hydration)
+        except kl.KnowledgeError as exc:
+            raise RuntimeError_(exc.error_class, exc.detail) from exc
         run_dir.mkdir(parents=True, exist_ok=True)
         store = se.StateStore.create(
             run_dir, run_id=run_id, command_id=cmd["identifier"],
@@ -1690,6 +1699,18 @@ def plan_run(args):
         created = True
     else:
         store, created = existing, False
+        if no_hydration:
+            # An existing run keeps the record it was created with. Asking for hydration off
+            # on a run with no record (planned before the record existed) or one recorded on
+            # is refused, as a disagreeing --command is: one of the two is wrong.
+            rec = kl.run_record(run_dir)
+            if rec is None or rec.get("hydration") != "off":
+                raise RuntimeError_(
+                    "request-validation-failure",
+                    f"run {run_id} " + ("was planned without a lesson-hydration record"
+                                        if rec is None else "was recorded with lesson "
+                                        "hydration on") + "; --no-lesson-hydration applies "
+                    "only when a run is created. Submit a new request to change it")
         if supplied and store.data["input_digest"] != run_input_digest(supplied):
             raise RuntimeError_("context-integrity-failure",
                                 f"run {run_id} was created from a different input set")
@@ -1756,6 +1777,7 @@ def plan_run(args):
             "inputs": [{"type": s["type"], "reference": s["reference"],
                         "digest": s["digest"]} for s in supplied],
             "submitted_at": now(),
+            "knowledge_loop": knowledge_loop,
         }, indent=2), encoding="utf-8")
         enable_demo()
         ledger.emit("run_initialized", state_id=rows[0]["phase"], actor_type="runtime",
@@ -3066,6 +3088,14 @@ def cmd_dispatch(args):
                              agent_version=c["agent"]["record"]["version"],
                              payload_digest=payload_digest)
 
+    # Lessons from earlier runs are read only now that replay detection and payload binding
+    # are done, so they can never move the payload digest or the idempotency key. A run with
+    # no `knowledge_loop` record (planned before runtime 0.10.0) receives the pre-change
+    # literal and nothing else: no prompt section, no console line, no event detail key.
+    knowledge_record = kl.run_record(run_dir)
+    memory_slice, lessons_shown = kl.dispatch_memory_slice(
+        CLAUDE, knowledge_record, phase, c["output"]["artifact"])
+
     (state_dir / "context-snapshot.json").write_text(
         json.dumps(ctx_slice, indent=2), encoding="utf-8")
     ledger.emit("context_hydrated", state_id=phase, actor_type="runtime",
@@ -3213,8 +3243,7 @@ def cmd_dispatch(args):
             "this_phase_forgoes": soft_pending(store, item),
         },
         "context_slice": ctx_slice,
-        "memory_slice": {"hydrated": False,
-                         "reason": "memory hydration not requested by this run"},
+        "memory_slice": memory_slice,
         "constraints": {
             "permitted_writes": permitted_writes,
             "write_exclusions": write_exclusions,
@@ -3294,7 +3323,9 @@ def cmd_dispatch(args):
                 details={"invocation_id": invocation_id,
                          "transition": f"{rec['from']} -> {rec['to']}",
                          "model_tier": model_tier["tier"],
-                         "escalated": bool(model_tier["escalation"])},
+                         "escalated": bool(model_tier["escalation"]),
+                         **({"lessons_shown": lessons_shown}
+                            if lessons_shown is not None else {})},
                 work_item_id=item["work_item_id"])
 
     write_state_ledger(store, ctx, phase, envelope, c)
@@ -3313,6 +3344,11 @@ def cmd_dispatch(args):
              if model_tier["escalation"] else ""))
     print(f"inputs             : {[s['type'] for s in narrowed]}"
           + (f"  (narrowed out: {dropped})" if dropped else ""))
+    if knowledge_record and knowledge_record.get("hydration") == "on":
+        print(f"lessons            : {len(lessons_shown or [])} shown of "
+              f"{memory_slice.get('matched', 0)} eligible match(es)"
+              if memory_slice.get("hydrated") else
+              f"lessons            : none -- {memory_slice.get('reason')}")
     if prior_rejection:
         print(f"rework pass        : attempt {prior_rejection['superseded_attempt']} superseded "
               f"under {prior_rejection['authorisation_id']} ({prior_rejection['gate']} "
@@ -3598,6 +3634,12 @@ governed by your own module set.
                          f"what you write: {pg['dispatchable_now']}. Do not wait for them and "
                          f"do not read their unfinished artifacts.\n")
 
+    # Lessons from earlier runs: present only when the envelope's memory slice shows at least
+    # one, so every pre-change and switched-off dispatch renders exactly as before.
+    ms = envelope.get("memory_slice") or {}
+    section = kl.render_section(ms.get("lessons") or []) if ms.get("hydrated") else []
+    lessons_block = ("\n" + "\n".join(section) + "\n") if section else ""
+
     mt = envelope.get("model_tier")
     tier_line = ""
     if mt:
@@ -3643,7 +3685,7 @@ absent from it or where your output must carry the full statement; {areas_line}.
 ## Upstream phase outputs
 
 {upstream}
-{repair}{rework}
+{repair}{rework}{lessons_block}
 ## Loading discipline
 
 Policy: `{FW_PREFIX}/config/runtime.md`, sections "Progressive Module Loading", "Task Context",
@@ -5478,7 +5520,23 @@ def maybe_aggregate(ctx, force: bool = False) -> bool:
         print()
         print(report)
         print(f"final report   : {FW_PREFIX}/runs/{store.data['run_id']}/final-report.md")
+    harvest_after_aggregation(ctx)
     return True
+
+
+def harvest_after_aggregation(ctx) -> dict | None:
+    """Close the knowledge loop: harvest lessons once this aggregation is fully written.
+
+    Runs last, after every aggregation output exists, and only for a run carrying a
+    `knowledge_loop` record, so a run planned before runtime 0.10.0 aggregates exactly as it
+    did. The step never raises, never waits on the store lock, and emits no ledger event; its
+    outcome, including a skip or a failure with its error class, is
+    `runs/<run>/knowledge-harvest.json`.
+    """
+    try:
+        return kl.harvest_for_run(CLAUDE, ctx["run_dir"])
+    except Exception:  # noqa: BLE001 -- the step must never fail an aggregation
+        return None
 
 
 def build_completion_package(ctx) -> str:
@@ -5944,6 +6002,12 @@ def add_request_args(p, *, with_phase: bool = False):
                         "performance, react-frontend, avalonia-ui); repeatable. Declared "
                         "areas join the ones derived from the inputs and keep the matching "
                         "domain-conditional skills required")
+    p.add_argument("--no-lesson-hydration", dest="no_lesson_hydration", action="store_true",
+                   help="record, when this command creates the run, that its dispatches are "
+                        "shown no lessons from earlier runs. Recorded once at creation and "
+                        "never inferred later; refused against an existing run whose record "
+                        "is absent or on. The default comes from "
+                        "config/knowledge-policy.json")
     p.add_argument("--gate-policy", dest="gate_policy",
                    choices=sorted(set(GATE_POLICY_MODES) | set(GATE_POLICY_MODE_ALIASES)),
                    help="override config/gate-policy.json's mode for this invocation. "
