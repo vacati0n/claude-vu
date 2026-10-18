@@ -1,0 +1,141 @@
+{
+  "invocation_id": "inv-5e9d799db687-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5e9d799db687/states/closure-and-communication/artifacts/orchestration-result.md"
+  ],
+  "structured_output": {
+    "run_id": "run-5e9d799db687",
+    "work_item_id": "run-5e9d799db687::closure-and-communication",
+    "artifact": "orchestration-result.md",
+    "artifact_path": "runs/run-5e9d799db687/states/closure-and-communication/artifacts/orchestration-result.md",
+    "coordinationBasis": "closure",
+    "disposition": "closed-with-followups",
+    "status": "complete",
+    "closure_gate": {
+      "gate": "Closure Gate",
+      "phase": "PH-005 closure-and-communication",
+      "decision": "none",
+      "assigned_decider": "omn-documentation",
+      "recorded_by_this_role": false
+    },
+    "counts": {
+      "phases_coordinated": 5,
+      "complete": 4,
+      "blocked": 1,
+      "not_started": 0,
+      "handoffs": 4,
+      "handoffs_accepted": 4,
+      "handoffs_refused": 0,
+      "handoffs_pending": 0,
+      "escalations": 0,
+      "follow_ups": 10,
+      "open_questions": 3,
+      "escalations_open_blocking": 0
+    },
+    "escalations_by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "follow_ups_by_severity": {
+      "critical": 0,
+      "high": 3,
+      "medium": 2,
+      "low": 5
+    },
+    "gate_owner_addressed": "omn-documentation",
+    "routed_question_settled": "validation report commit-sequencing question routed to omn-orchestrator: settled as sequencing constraint FU-002 (commit the two test modules together with or after run-e7bf0d73027a's verifier change, after its Verification Gate is re-decided)",
+    "checks": {
+      "quality_contract": {
+        "run": 44,
+        "passed": 44,
+        "failed": 0,
+        "results": {
+          "S1": "pass",
+          "S2": "pass",
+          "S3": "pass",
+          "S4": "pass",
+          "S5": "pass",
+          "S6": "pass",
+          "S7": "pass",
+          "M1": "pass",
+          "M2": "pass",
+          "M3": "pass",
+          "M4": "pass",
+          "M5": "pass",
+          "O1": "pass",
+          "P1": "pass",
+          "P2": "pass",
+          "P3": "pass",
+          "P4": "pass",
+          "O5": "pass",
+          "A1": "pass",
+          "A2": "pass",
+          "A3": "pass",
+          "O4": "pass",
+          "O3": "pass",
+          "N-COUNT": "pass",
+          "H1": "pass",
+          "H2": "pass",
+          "H3": "pass",
+          "H4": "pass",
+          "E1": "pass",
+          "E2": "pass",
+          "E3": "pass",
+          "E4": "pass",
+          "E5": "pass",
+          "O8": "pass",
+          "O6": "pass",
+          "O7": "pass",
+          "O9": "pass",
+          "C1": "pass",
+          "C2": "pass",
+          "T1": "pass",
+          "T2": "pass",
+          "T3": "pass",
+          "T4": "pass",
+          "T5": "pass"
+        }
+      },
+      "mechanical_validator": {
+        "tool": "runtime/orchestration_result_validator.py --envelope",
+        "run": 34,
+        "passed": 34,
+        "note": "first pass failed C6.2 (undefined Q identifier referenced from an upstream artifact); repaired once by citing upstream questions by subject; 3 declared not-machine-checkable"
+      }
+    },
+    "not_machine_checkable": {
+      "N1": "declared",
+      "N2": "declared",
+      "N3": "declared",
+      "N4": "declared"
+    },
+    "read_only_commands": [
+      "python reads of state.json, failure envelopes, run-e7bf0d73027a state.json",
+      "sha256sum of upstream artifacts",
+      "git status --porcelain; git diff --numstat .claude/runtime omn_agent",
+      "wc -l events.jsonl",
+      "verify_self_hosting.py (7/8, S8 names run-5e9d799db687 and run-e7bf0d73027a)",
+      "orchestration_result_validator.py --envelope"
+    ],
+    "transient_writes": "none in the repository; python may have refreshed git-ignored __pycache__ under .claude/runtime; TEMP and TMP set to D:\rvw-tmp-5df08e"
+  },
+  "evidence_refs": [
+    "agents/omn-orchestrator/system.md",
+    "agents/omn-orchestrator/identity.md",
+    "agents/omn-orchestrator/reasoning.md",
+    "agents/omn-orchestrator/execution.md",
+    "agents/omn-orchestrator/output.md",
+    "agents/omn-orchestrator/quality.md",
+    "runs/run-5e9d799db687/states/closure-and-communication/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-5e9d799db687/states/closure-and-communication/artifacts/orchestration-result.md",
+    "runs/run-5e9d799db687/states/closure-and-communication/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

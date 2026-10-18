@@ -1,0 +1,92 @@
+{
+  "run_id": "run-5e9d799db687",
+  "slice": "vertical-slice-6-qa-execution",
+  "runtime_version": "0.10.0",
+  "status": "completed",
+  "queue_status": "Executing",
+  "command_id": "bugfix",
+  "workflow_id": "fix-bug",
+  "workflow_version": "1.0.0",
+  "state_id": "regression-validation",
+  "work_item_id": "run-5e9d799db687::regression-validation",
+  "idempotency_key": "sha256:bd8d4e2419238d2dfe8789a920f6baa5",
+  "attempt": 1,
+  "agent_id": "omn-qa",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "invocation_id": "inv-5e9d799db687-04-001",
+  "input_digest": "sha256:6872a823eb1c3a6e47ac036425b40eaf",
+  "context_digest": "sha256:9978ebb5cb624a7226773a03f0b6ee13",
+  "module_load_order": [
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/identity.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/execution.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "agents/omn-qa/examples.md"
+  ],
+  "artifact_path": "runs/run-5e9d799db687/states/regression-validation/artifacts/validation-report.md",
+  "conditional_artifact_globs": [],
+  "result_envelope_path": "runs/run-5e9d799db687/states/regression-validation/result-envelope.json",
+  "validator": "validation_report_validator",
+  "load_profile_mode": "progressive",
+  "context_budget": {
+    "modules_full_bytes": 80377,
+    "modules_core_bytes": 39471,
+    "slice_all_bytes": 183967,
+    "slice_required_bytes": 20526,
+    "inputs_bytes": 0,
+    "upstream_full_bytes": 10204,
+    "upstream_read_first_bytes": 6409,
+    "task_context_bytes": 12508,
+    "fixed_bytes": 15827,
+    "legacy_estimate_bytes": 290375,
+    "progressive_estimate_bytes": 94741,
+    "legacy_estimate_tokens": 72593,
+    "progressive_estimate_tokens": 23685,
+    "savings_pct": 67.4
+  },
+  "execution_started_at": "2026-10-18T08:44:41Z",
+  "execution_completed_at": "2026-10-18T09:00:39Z",
+  "validation": {
+    "result": "pass",
+    "checksRun": 31,
+    "checksPassed": 31,
+    "blockingFailures": 0,
+    "correctableFailures": 0,
+    "notMachineCheckable": 3,
+    "counts": {
+      "sections": 10,
+      "status": "complete",
+      "identifiers": {
+        "AC": 7,
+        "DF": 0,
+        "Q": 2
+      },
+      "tableRows": {
+        "Acceptance Criteria Results": 7
+      },
+      "criteria": 7,
+      "defects": 0,
+      "verdict": "pass",
+      "validationBasis": "regression",
+      "results": {
+        "met": 7,
+        "not-met": 0,
+        "blocked": 0
+      },
+      "severity": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 0
+      }
+    },
+    "undeclaredSideEffects": []
+  },
+  "agent_result_status": "succeeded",
+  "artifact_digest": "sha256:23ca3baa6d1d265a684df2273dc21cad",
+  "recovery": null
+}

@@ -1,0 +1,313 @@
+schema: framework.runtime/task-context.v1
+task_id: run-5e9d799db687
+command: bugfix
+workflow: fix-bug v1.0.0
+run_status: Completed
+updated_at: '2026-10-18T09:08:33Z'
+objective: 'Run run-e7bf0d73027a (/bugfix, defect runs/inputs/recovery-x1-policy-exception-defect-report.md) fixed runtime/verify_recovery.py
+  so that X1 judges the runtime''s policy-exception clearing action admissible. The fix was confirmed by QA: verify_recovery.py
+  reports 74/74 and the new module tests/test_clearing_action_admissibility.py passes 16/16. QA''s validation report nevertheless
+  returned fail because the root-cause Validation Plan approved at that run''s Triage Gate called for two regression cases
+  that do not exist. The Verification Gate was rejected with these as the outstanding defects. The runtime refused to roll
+  that run back to fix-implementation because its Fix Gate is already approv...'
+inputs:
+- type: defect-report
+  reference: runs/inputs/recovery-x1-missing-regression-tests-defect-report.md
+  digest: sha256:7412953e071deb829255cfefaf1cc9e5
+relevant_agents:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S11
+  - S12
+  - S02
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S08
+  - S12
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S12
+- phase: regression-validation
+  agent: omn-qa
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S11
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  status: completed
+  required_skills:
+  - S10
+  - S11
+completed_phases:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-5e9d799db687/states/triage-and-impact/artifacts/bug-analysis.md
+  digest: sha256:8c39b3ef9c2766b2b6e24b1375970054
+  validation: pass 30/30
+  attempts: 1
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-5e9d799db687/states/root-cause-analysis/artifacts/bug-analysis.md
+  digest: sha256:1c4c61a7156cbc66446fec909a7ecfa8
+  validation: pass 30/30
+  attempts: 1
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-5e9d799db687/states/fix-implementation/artifacts/implementation-report.md
+  digest: sha256:3a8987ce8f4a312db2187698270f6b26
+  validation: pass 32/32
+  attempts: 1
+- phase: regression-validation
+  agent: omn-qa
+  artifact: runs/run-5e9d799db687/states/regression-validation/artifacts/validation-report.md
+  digest: sha256:23ca3baa6d1d265a684df2273dc21cad
+  validation: pass 31/31
+  attempts: 1
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  artifact: runs/run-5e9d799db687/states/closure-and-communication/artifacts/orchestration-result.md
+  digest: sha256:0cb2ca000465fb918fb379524c4a5b22
+  validation: pass 34/34
+  attempts: 1
+gates:
+- gate: Triage Gate
+  closes: triage-and-impact
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent a19a0a451026f870b, recorded by session operator for vuhoangcao
+- gate: Fix Gate
+  closes: fix-implementation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent ad61abc5e66f8eadc, recorded by session operator for vuhoangcao
+- gate: Verification Gate
+  closes: regression-validation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent a424c21853dc34594, recorded by session operator for vuhoangcao
+- gate: Closure Gate
+  closes: closure-and-communication
+  decision: approved
+  owner_role: omn-documentation
+  decided_by: omn-documentation subagent a11b55ed69a71a624, recorded by session operator for vuhoangcao
+artifacts:
+  triage-and-impact: runs/run-5e9d799db687/states/triage-and-impact/artifacts/bug-analysis.md
+  root-cause-analysis: runs/run-5e9d799db687/states/root-cause-analysis/artifacts/bug-analysis.md
+  fix-implementation: runs/run-5e9d799db687/states/fix-implementation/artifacts/implementation-report.md
+  regression-validation: runs/run-5e9d799db687/states/regression-validation/artifacts/validation-report.md
+  closure-and-communication: runs/run-5e9d799db687/states/closure-and-communication/artifacts/orchestration-result.md
+parallel_groups:
+- - triage-and-impact
+- - root-cause-analysis
+- - fix-implementation
+- - regression-validation
+- - closure-and-communication
+risks:
+- 'User impact: framework contributors and operators of run-e7bf0d73027a; that run cannot reach closure while the Verification
+  Gate stands rejected (E-014); no...'
+- 'Business impact: no business impact statement was supplied; severity rests on technical impact alone, and the question
+  is routed to omn-product-owner as Q-003.'
+- 'Technical impact: a regression in the policy-exception command''s guards or arguments (E-015), or in the rollback row''s
+  placeholder exemption, would pass ever...'
+- 'Blast radius: the repository test suite (admissibility module); the runtime policy-exception command surface left without
+  execution coverage; the verifier ad...'
+- 'Technical impact: a regression in the policy-exception command''s guards, its state transition, its envelope resolution,
+  or the builder''s emitted arguments (E...'
+- 'R-001: The 3 test_demo_capture EndToEndEditTestCase cases fail locally on an ffmpeg option, before and after the c... |
+  high | low'
+- 'R-002: Bare python tests/test_bundled_payload.py in this worktree imports omn_agent from the main checkout, so fin... |
+  high | low'
+- 'R-003: The end-to-end module copies .claude/ twice and adds about 45 s of work to the suite | medium | low'
+- 'Accepted risk: None identified.'
+- 'Unmitigated risk: the end-to-end module depends on committed run evidence run-c5a8d50d3238 (tracked in git) and breaks
+  if that plan is altered or removed; ru...'
+- 'Monitoring required: CI unit and recovery-verifier jobs on the default branch once these tests are committed; the admissibility
+  module count at 23 and the po...'
+decisions:
+- 'Root cause statement: no step between the root-cause Validation Plan and the Fix Gate traced each planned regression case
+  to a delivered test, so the unchang...'
+- 'Why detection failed earlier: the implementation report''s deviation table, the one record mapping plan items to delivered
+  work, captured V-001 but not the ro...'
+- 'C-001: Plan sets two targets | The root-cause Validation Plan required an unchanged-rollback case and an end-to-end case
+  that executes the... | E-010'
+- 'C-002: End-to-end case deferred on a misplaced constraint | Fix-implementation read the 74-check verifier total and the
+  single-placeholder verifier helper as excluding... | E-011, E-006'
+- 'C-003: Rollback case dropped unrecorded | Fix-implementation added a gate-exemption case but no rollback case and recorded
+  no deviation for it | E-011, E-004, E-002'
+- 'C-004: Fix Gate carries both gaps | The Fix Gate was approved with both gaps carried forward as conditions, so no phase
+  before QA required them | E-012'
+- 'C-005: Coverage gap in the delivered suite | No test executes cmd_policy_exception and no test pins the rollback row; only
+  verifier checks D4, D23, D27... | E-002, E-003, E-004, E-005, E-006'
+- 'C-006: Observed symptom | QA scored AC-007 and AC-009 not-met and the Verification Gate was rejected, leaving run-e7bf0d73027a
+  unable... | E-013, E-014'
+- 'Proposed fix: the repository test suite must gain (a) an end-to-end case that drives an isolated run to a state item blocked
+  awaiting_policy_exception, execu...'
+- 'Alternative options: a new verifier scenario instead of a suite case covers the same path but changes the 74-check total,
+  needs the single-placeholder helper...'
+- 'Regression risk: low'
+- 'Regression scope: the run tree under .claude/runs, which the runtime writes to and which an end-to-end case shares unless
+  it runs in an isolated copy (the ve...'
+- 'C-002: End-to-end case deferred on a misplaced constraint | Fix-implementation read the 74-check verifier total and the
+  single-placeholder verifier helper as excluding... | E-011, E-006, E-025'
+- 'C-005: Coverage gap in the delivered suite | No test executes cmd_policy_exception and no test pins the rollback row, while
+  the behaviour they would pin... | E-002, E-003, E-004, E-005, E-017, E-020, E-022, E-023, E-024'
+- 'Proposed fix: the test suite must gain (a) an end-to-end case that runs in its own copy of the framework tree, drives a
+  state item to blocked awaiting_policy...'
+- 'Alternative options: a new verifier scenario covers the same path but changes the 74-check total, needs the single-placeholder
+  helper widened, and touches bu...'
+- 'Regression scope: the run tree under .claude/runs, whose location the runtime derives from its own file path and which
+  the end-to-end case shares unless it r...'
+validation_requirements:
+  test_focus:
+  - 'Verification steps: rerun the five reproduction steps and observe a rollback case listed and a case that executes cmd_policy_exception;
+    confirm the condition...'
+  - 'Regression tests added: the end-to-end policy-exception execution case with its two guard refusals, and the unchanged-rollback
+    admissibility case, as stated...'
+  - 'Monitoring signals after release: the CI unit and recovery-verifier jobs observed first-hand as green on the default
+    branch; the admissibility module''s test...'
+  - 'Verification steps: rerun the five reproduction steps and observe a rollback case listed and a case that executes the
+    policy-exception command; map each regr...'
+  - 'Regression tests added: (1) end-to-end: build the tree with shutil.copytree of .claude/ ignoring runs, __pycache__ and
+    worktrees into tempfile.mkdtemp, remov...'
+  evidence:
+  - 'T-001: Plan item (1) main path: emitted action has the three human placeholders only; producer planner exits 2 pol...
+    | end-to-end | C-001'
+  - 'T-002: Plan item (1) second copy: envelope owner_roles set to omn-tech-lead; omn-qa exits 2 not a recorded owner,...
+    | end-to-end | C-001'
+  - 'T-003: Plan item (2): emitted rollback action admissible with --decided-by <who> its only placeholder; filled deci...
+    | unit | C-002'
+  - 'T-004: Mutation witness for (1): producer guard disabled, envelope resolution removed, builder emitting --role eac...
+    | regression | C-001'
+  - 'T-005: Mutation witness for (2): rollback exemption widened to role, decider, rationale fails 2 cases; exemption e...
+    | regression | C-002'
+  - 'T-006: Recovery verifier unchanged at 74/74 RECOVERY PROVEN; injected runs removed; git status identical before an...
+    | end-to-end | C-001, C-002'
+  - 'T-007: Bundled payload parity and source resolution, 11/11 | contract | C-001, C-002'
+  - 'T-008: Regression baseline re-run over every module except test_demo_capture: 31/31 modules, 760 of 760 tests | regression
+    | C-001, C-002'
+  verification:
+  - 'Verification method: baseline before any change (admissibility module 16/16; full suite 30/31 modules, 787 of 787 tests,
+    only test_demo_capture EndToEndEditT...'
+  - 'Commands executed: python -m unittest tests.test_clearing_action_admissibility (before); python tools/run_tests_parallel.py
+    (before and after); python -m uni...'
+  - 'Result summary: executed 8 evidence checks, passed 8, failed 0; full suite after the change 31/32 modules and 796 of
+    796 tests (787 plus 9 new), failing only...'
+  - 'Unverified areas: none'
+  acceptance_criteria:
+  - 'AC-001: An automated case, under tests/ so the verifier''s 74-check total is unchanged, drives a run to a state item...
+    | defect report, Expected behaviour bullet 1 | end-to-end'
+  - 'AC-002: An unchanged-rollback case in tests/test_clearing_action_admissibility.py pins the rollback row''s admissibi...
+    | defect report, Expected behaviour bullet 2 | unit'
+  - 'AC-003: python .claude/runtime/verify_recovery.py still reports 74/74. The full suite passes apart from the known l...
+    | defect report, Expected behaviour bullet 3 | end-to-end'
+  - 'AC-004: fix-implementation changes tests/ only and keeps the verifier 74/74 | Triage Gate rationale, runs/run-5e9d799db687/state.json
+    | end-to-end'
+  - 'AC-005: the end-to-end case runs in an isolated run tree and leaves nothing in .claude/runs | Triage Gate rationale,
+    runs/run-5e9d799db687/state.json | end-to-end'
+  - 'AC-006: both cases fail against mutated code | Triage Gate rationale, runs/run-5e9d799db687/state.json | security'
+  - 'AC-007: every planned test maps to a passing test or recorded deviation | Triage Gate rationale, runs/run-5e9d799db687/state.json
+    | end-to-end'
+open_questions:
+- 'Q-001: Should the framework require item-by-item tracing of Validation Plan regression cases to delivered tests be... |
+  no | architect'
+- 'Q-002: Is the untested behaviour correct first-hand: execute the emitted policy-exception action and verify_recove... |
+  no | omn-dev-1-bug-analyst'
+- 'Q-003: What is the business impact of the blocked closure and the coverage gap; answered by a business impact stat... |
+  no | omn-product-owner'
+- 'Q-004: The run-e7bf0d73027a fix and its test module are uncommitted (E-009); who sequences their commit relative t... |
+  no | omn-orchestrator'
+- 'Q-002: Is the untested behaviour correct first-hand; answered in this phase by E-017, E-019, E-020, kept to record... |
+  no | omn-dev-1-bug-analyst'
+- 'Q-005: Runtime-emitted policy-exception envelopes list no owner roles, so any non-producer role name clears the bl... |
+  no | architect'
+- 'Q-001: Which roles may decide a policy exception, and should runtime-emitted policy-exception envelopes list them as owner
+  roles, given that the listed-owner...'
+- 'Q-002: Who sequences the commit of these two test modules relative to the uncommitted run-e7bf0d73027a verifier change
+  they build on; routes to omn-orchestra...'
+- 'Q-001: The fix-bug Phase Model lists known issue status as an input of this phase, and none was supplied; HO-004 is accepted
+  on the validation report alone....'
+- 'Q-002: No business impact statement was supplied for the blocked closure of run-e7bf0d73027a and the coverage gap (carried
+  from the root-cause analysis open...'
+- 'Q-003: Whether the runtime accepts rolling run-e7bf0d73027a back to regression-validation (FU-001) is not established here;
+  it earlier refused rollback to fi...'
+changed_files:
+- tests/test_policy_exception_command.py (added)
+- tests/test_clearing_action_admissibility.py (modified)
+verdicts:
+- 'Decision: pass'
+- 'Rationale: the Stage 8 first row applies: no defect is open at any severity and all seven criteria are met on evidence
+  executed in this phase, with every gua...'
+- 'Blocking defects outstanding: None identified.'
+- 'Readiness recommendation: recommend that omn-dev-2-reviewer, who decides the Verification Gate under producer exclusion,
+  treat this report as supporting appr...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:fix-implementation
+      term: migration
+    performance:
+    - source: artifact:regression-validation
+      term: performance
+    security:
+    - source: artifact:triage-and-impact
+      term: security
+    - source: artifact:root-cause-analysis
+      term: security
+    - source: artifact:fix-implementation
+      term: injection
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:defect-report
+  - artifact:triage-and-impact
+  - artifact:root-cause-analysis
+  - artifact:fix-implementation
+  - artifact:regression-validation
+  - artifact:closure-and-communication
+relevant_skills:
+  triage-and-impact:
+    S11: required
+    S12: required
+    S02: required
+  root-cause-analysis:
+    S03: required
+    S06: required
+    S08: required
+    S12: required
+  fix-implementation:
+    S03: required
+    S06: required
+    S10: required
+    S12: required
+  regression-validation:
+    S07: required
+    S09: required
+    S11: required
+  closure-and-communication:
+    S10: required
+    S11: required
+repository_context:
+  relevant_modules: []
+  relevant_files:
+  - tests/test_policy_exception_command.py (added)
+  - tests/test_clearing_action_admissibility.py (modified)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path

@@ -1,0 +1,145 @@
+{
+  "invocation_id": "inv-e7bf0d73027a-04-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-e7bf0d73027a/states/regression-validation/artifacts/attempt-2/validation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "VR-run-e7bf0d73027a-regression-validation-a2",
+    "attempt": 2,
+    "supersedes": "runs/run-e7bf0d73027a/states/regression-validation/artifacts/validation-report.md (attempt 1, sha256:234ba14d24a911b742245737c7fb501f, left in place)",
+    "validationBasis": "regression",
+    "status": "complete",
+    "verdict": "pass",
+    "counts": {
+      "criteria": {
+        "total": 9,
+        "met": 9,
+        "not-met": 0,
+        "blocked": 0
+      },
+      "defects": {
+        "critical": 0,
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
+      "defectsByStatus": {
+        "open": 0,
+        "resolved": 2,
+        "accepted-risk": 0
+      },
+      "openQuestions": 2
+    },
+    "rejectionAddressed": {
+      "DF-001": "resolved: tests/test_policy_exception_command.py executes the emitted policy-exception action via the runtime CLI with role, decider, rationale filled; asserts item pending, envelope and ledger resolved, decision recorded; 2/2 OK (AC-009 met)",
+      "DF-002": "resolved: RollbackRowUnchangedTestCase in tests/test_clearing_action_admissibility.py, 7/7 OK on the change and against HEAD verify_recovery.py (AC-007 met)",
+      "R-002": "CI result still unobserved, not used as evidence; Q-001 to omn-orchestrator"
+    },
+    "commandsExecuted": {
+      "python -m unittest tests.test_policy_exception_command tests.test_clearing_action_admissibility -v": "25/25 OK",
+      "both modules in a tree copy with git show HEAD:runtime/verify_recovery.py": "8 of 25 fail (all policy-exception table cases and builder pin); gate, 7 rollback and 2 end-to-end cases pass",
+      "python runtime/verify_recovery.py (worktree)": "exit 0, 74/74 RECOVERY PROVEN, X1 pass over 9 envelopes in 4 runs; run-f94564cb61ce unmodified, no restore needed",
+      "python runtime/verify_recovery.py --keep, then without --keep, then --keep (tree copy)": "exit 0, 74/74 each; runs listing back to baseline after the no-keep run",
+      "scratch judge script on kept envelope of run-d8870619db82 (tree copy)": "admissible on blocked awaiting_policy_exception; inadmissible (placeholder) on pending, completed, awaiting_recovery_task",
+      "cmp authoritative vs bundled verify_recovery.py": "identical",
+      "PYTHONPATH=. python tests/test_bundled_payload.py": "11/11 OK",
+      "python tools/run_tests_parallel.py": "exit 1: 31/32 modules, 796 of 796 tests ran; only test_demo_capture EndToEndEditTestCase 1 failure 2 errors (ffmpeg filter_complex_script, known R-001)",
+      "python runtime/validation_report_validator.py <artifact> --envelope <invocation-envelope>": "PASS 31/31 (3 not-machine-checkable)",
+      "git status --short before vs after": "identical; nothing new under runs"
+    },
+    "regressionsDetected": 0,
+    "qualityChecks": {
+      "run": 57,
+      "passed": 57,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "D7": "pass",
+        "Q2": "pass",
+        "Q5": "pass",
+        "A7": "pass",
+        "A8": "pass",
+        "T1": "pass",
+        "T2": "pass",
+        "T3": "pass",
+        "Q3": "pass",
+        "Q7": "pass",
+        "F1": "pass",
+        "F2": "pass",
+        "F3": "pass",
+        "F4": "pass",
+        "F5": "pass",
+        "F6": "pass",
+        "Q1": "pass",
+        "Q4": "pass",
+        "Q6": "pass",
+        "R1": "pass",
+        "R2": "pass",
+        "R3": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "pass",
+        "E6": "pass",
+        "E7": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "A4": "pass",
+        "A5": "pass",
+        "A6": "pass",
+        "A9": "pass",
+        "A10": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass",
+        "C6": "pass"
+      },
+      "notes": {
+        "A7": "AC-005 criterion text renders the framework path as runtime/verify_recovery.py without its leading hidden-directory prefix so vendor-token check C3 holds; otherwise verbatim, same rendering as attempt 1",
+        "F2": "DF-001 and DF-002 keep their attempt-1 severity medium; status changed to resolved on executed retest evidence",
+        "R1": "Stage 8 row: no open critical or high defect, no not-met or blocked criterion -> pass / complete",
+        "T3": "AC-001 to AC-009 keep attempt-1 order and identifiers"
+      }
+    },
+    "notMachineCheckable": {
+      "N1": "met: X1 gates the verifier exit code, so every branch of the row and exemption was exercised with a HEAD fail-before witness; security guards exercised in table and runtime; no data written or migrated",
+      "N2": "met: each met row cites a command run in this attempt; AC-007 and AC-009 rest on test assertions read in full and executed, not on run-5e9d799db687's verdict",
+      "N3": "met: the analysis's regression scope and the full suite were exercised; unreached paths named in Untested areas"
+    },
+    "independence": "omn-qa authored neither the change (IR-2026-1015, omn-dev-1-implement) nor the tests under retest (IR-2026-1018, omn-dev-1-implement); attempt-1 report is this agent's own prior validation, not the change",
+    "loadedModules": "core tier; identity.md Workflow Participation table consulted for D5; execution.md and examples.md not triggered (direct Execution to Completion path, output shape unambiguous)",
+    "transientWrites": "outside the repository only: D:/rvw-tmp-5df08e/qa-e7bf-a2 (tree copy, kept injected runs, HEAD witness copy, judge.py, logs) and D:/rvw-tmp-5df08e/qa-e7bf-a2-status-*.txt, removed after the run; test-created temp trees under D:/rvw-tmp-5df08e removed by the tests; verify_recovery.py created and removed its injected runs and inputs in the worktree; no git restore was needed; worktree git status identical before and after"
+  },
+  "evidence_refs": [
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/identity.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "runs/run-e7bf0d73027a/states/regression-validation/invocation-envelope.json"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "runs/run-e7bf0d73027a/states/regression-validation/artifacts/attempt-2/validation-report.md",
+    "runs/run-e7bf0d73027a/states/regression-validation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

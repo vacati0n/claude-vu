@@ -1,0 +1,138 @@
+{
+  "invocation_id": "inv-5e9d799db687-03-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5e9d799db687/states/fix-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-1018",
+    "workflowPhase": "fix-implementation",
+    "status": "complete",
+    "verificationStatus": "verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 2,
+      "testEvidenceEntries": 8,
+      "deviations": 0,
+      "residualRisks": 3,
+      "openQuestions": 0
+    },
+    "evidenceTotals": {
+      "executed": 8,
+      "passed": 8,
+      "failed": 0,
+      "notRun": 0
+    },
+    "verificationStatusBasis": "Stage 7 of reasoning.md: both accepted regression cases implemented, every evidence entry executed and passed, no area left without evidence, so verified and complete.",
+    "planToTestMapping": {
+      "Validation Plan (1) end-to-end, producer refusal, non-producer clearing, repeat refusal": "T-001 EmittedPolicyExceptionActionTestCase.test_emitted_action_refuses_the_producer_then_clears_for_a_non_producer",
+      "Validation Plan (1) second copy, listed owner, omn-qa refused with no write": "T-002 ListedOwnerPolicyExceptionTestCase.test_unlisted_role_is_refused_without_write",
+      "Validation Plan (1) must catch producer-guard, envelope-resolution, builder-flag mutations": "T-004, each mutation executed and caught",
+      "Validation Plan (2) unchanged rollback row": "T-003 RollbackRowUnchangedTestCase (7 tests)",
+      "Validation Plan (2) must catch both exemption mutations": "T-005, each mutation executed and caught"
+    },
+    "baseline": {
+      "admissibility_module": "16/16 OK",
+      "full_suite": "30/31 modules, 787 of 787 tests, only test_demo_capture EndToEndEditTestCase (1 failure, 2 errors)"
+    },
+    "after": {
+      "policy_exception_command": "2/2 OK",
+      "admissibility_module": "23/23 OK",
+      "verify_recovery": "74/74 RECOVERY PROVEN",
+      "bundled_payload": "11/11 OK with PYTHONPATH=. and as module; bare script form 1/11 failing on worktree import path (R-002)",
+      "full_suite": "31/32 modules, 796 of 796 tests, same 3 test_demo_capture cases",
+      "suite_excluding_demo_capture": "31/31 modules, 760 of 760 tests",
+      "git_status": "only tests/test_policy_exception_command.py new; nothing new under .claude/runs; run-f94564cb61ce unmodified"
+    },
+    "mutations": {
+      "producer-guard-disabled": "caught, 1 failure",
+      "envelope-resolution-removed": "caught, 1 failure",
+      "builder-emits-role-flag": "caught, 2 failures",
+      "rollback-exemption-widened": "caught, 2 failures",
+      "rollback-exemption-emptied": "caught, 4 failures"
+    },
+    "runtimeDefectExposed": false,
+    "validatorSelfCheck": "implementation_report_validator.py with --envelope: PASS 32/32",
+    "qualityChecks": {
+      "run": 45,
+      "passed": 45,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "M1": "pass",
+        "M5": "pass",
+        "M7": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "M3": "pass",
+        "M2": "pass",
+        "K1": "pass",
+        "K2": "pass",
+        "M4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "B1": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "B4": "pass",
+        "B5": "pass",
+        "B6": "pass",
+        "B7": "pass",
+        "M6": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass"
+      }
+    },
+    "notMachineCheckable": {
+      "N1": "discharged: each change-set row describes the change at that path",
+      "N2": "discharged: T-001/T-002/T-004 execute C-001, T-003/T-005 execute C-002; T-006 to T-008 are regression runs including both",
+      "N3": "discharged: no production source changed",
+      "N4": "discharged: new module justified at rung 7 in Approach taken; rollback case reuses the existing module at rung 2"
+    },
+    "transientWrites": [
+      "D:/rvw-tmp-5df08e omn-pex-*, omn-admissibility-*, mut-* trees (removed)",
+      "D:/rvw-tmp-5df08e impl-*.txt logs",
+      "session scratchpad mutate.py",
+      "verify_recovery.py injected runs and inputs under .claude/runs (created and removed by the verifier)"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/manifest.yaml",
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "runs/run-5e9d799db687/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "tests/test_policy_exception_command.py",
+    "tests/test_clearing_action_admissibility.py",
+    "runs/run-5e9d799db687/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-5e9d799db687/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

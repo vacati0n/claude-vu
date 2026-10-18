@@ -1,0 +1,185 @@
+{
+  "invocation_id": "inv-e7bf0d73027a-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-e7bf0d73027a/states/root-cause-analysis/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "root-cause",
+    "workflow": "fix-bug",
+    "phase": "root-cause-analysis",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "declaredStatus": "complete",
+    "supersedes": "runs/run-e7bf0d73027a/states/triage-and-impact/artifacts/bug-analysis.md (sha256:30f3e37855cf4389e10dbf112f1bf145); identifiers E-001 to E-014, C-001 to C-004 and Q-001 to Q-002 kept, E-015 to E-025 added",
+    "counts": {
+      "evidenceRecords": 25,
+      "causalSteps": 4,
+      "causalStepsByConfidence": {
+        "high": 4,
+        "medium": 0,
+        "low": 0
+      },
+      "evidenceByConfidence": {
+        "high": 22,
+        "medium": 2,
+        "low": 1
+      },
+      "openQuestions": 2,
+      "openQuestionsBlocking": 0
+    },
+    "statusBasis": "reasoning.md Stage 9, last row: reproducibility deterministic across four attempts (E-002, E-003, E-015, E-022); no required input missing; the chain closes on a condition, a contract mismatch between the runtime's policy-exception clearing action and the verifier's admissibility table, which lacks both the placeholder exemption and the row (C-002, E-017); the runtime-at-fault account is eliminated by executing the action end to end (E-018) and by its refusals (E-019), the harness-fault account by E-021; every dependent step is high; business impact read from the supplied statement (E-001).",
+    "severityBasis": "reasoning.md Stage 5, medium: a secondary path, the recovery verifier and FR-03, fails with a false negative on every invocation while no run the runtime executes is affected (E-018, E-023); unchanged from triage, no evidence moved it.",
+    "triageGateConditions": {
+      "Q-001 closed by execution": "the emitted action was executed exactly as written in a temporary copy, only --owner-role, --decided-by and --rationale filled: exit 0, blocked -> pending, envelope resolved, X1 passes afterwards (E-018)",
+      "exemption scope and negative cases": "Proposed fix restricts the exemption to policy-exception on a state item blocked awaiting_policy_exception; negatives executed against the runtime (E-019, E-020) and listed for the fix's tests, including the completed-item replay that exits 0",
+      "bundled payload": "omn_agent/_bundled_payload/runtime/verify_recovery.py exists and is byte-identical (E-012); the Proposed fix requires the same change there",
+      "CI claims": "not used as evidence; red CI stays reported only (E-001, low) and open as Q-002"
+    },
+    "transientWrites": "All experiments ran outside the repository under D:/rvw-tmp-5df08e/rca-e7bf: a full copy of the .claude tree (tree/), verifier outputs (verify-keep.txt, verify-keep.json, verify-2.txt, exercise.txt), git status snapshots, and scratch scripts (scripts/probe.py, scripts/exercise.py). The verifier and the policy-exception command mutated only the copy. In the worktree only bug_analysis_validator.py was run (read-only, -B, no --json-out) and read-only git and grep; git status equals the pre-run baseline. The temp directory is left in place for inspection and may be deleted.",
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "notApplicablePassed": 5,
+      "byGroup": {
+        "structural": {
+          "S1": "pass",
+          "S2": "pass",
+          "S3": "pass",
+          "S4": "pass",
+          "S5": "pass",
+          "S6": "pass",
+          "S7": "pass",
+          "S8": "pass",
+          "S9": "pass"
+        },
+        "metadata": {
+          "D1": "pass",
+          "D2": "pass",
+          "D3": "pass",
+          "D4": "pass",
+          "D5": "pass",
+          "D6": "pass",
+          "D7": "pass"
+        },
+        "agreement": {
+          "B2": "pass",
+          "B3": "pass",
+          "A1": "pass"
+        },
+        "reproduction": {
+          "B4": "pass",
+          "V1": "pass",
+          "V2": "pass",
+          "V3": "pass (not applicable; frequency is deterministic)",
+          "V4": "pass (not applicable; frequency is deterministic)",
+          "V5": "pass"
+        },
+        "evidence": {
+          "B1": "pass",
+          "V6": "pass",
+          "V7": "pass",
+          "V8": "pass",
+          "V9": "pass",
+          "V10": "pass"
+        },
+        "causalChain": {
+          "V11": "pass",
+          "V12": "pass",
+          "V13": "pass",
+          "V14": "pass",
+          "V15": "pass",
+          "V16": "pass"
+        },
+        "impactAndSeverity": {
+          "V17": "pass",
+          "V18": "pass",
+          "V19": "pass",
+          "V20": "pass",
+          "V21": "pass",
+          "V22": "pass (not applicable; impact read from the supplied defect report)"
+        },
+        "fixStrategy": {
+          "V23": "pass",
+          "V24": "pass",
+          "V25": "pass",
+          "V26": "pass (not applicable; chain is not provisional)",
+          "V27": "pass",
+          "V28": "pass"
+        },
+        "statusAndQuestions": {
+          "B5": "pass (not applicable; severity is not critical)",
+          "V29": "pass",
+          "V30": "pass",
+          "V31": "pass",
+          "V32": "pass",
+          "V33": "pass"
+        },
+        "authority": {
+          "A2": "pass",
+          "A3": "pass",
+          "A4": "pass",
+          "A5": "pass",
+          "A6": "pass",
+          "A7": "pass",
+          "A8": "pass"
+        },
+        "content": {
+          "C1": "pass",
+          "C2": "pass",
+          "C3": "pass",
+          "C4": "pass",
+          "C5": "pass",
+          "C6": "pass",
+          "C7": "pass"
+        }
+      },
+      "repairs": "one repair pass: validator C3.2 flagged the word for the framework directory in prose; reworded, full check set re-run"
+    },
+    "validationEngine": {
+      "validator": "bug_analysis_validator",
+      "result": "pass",
+      "checks": "29/29",
+      "notMachineCheckable": 4
+    },
+    "notMachineCheckable": {
+      "N1": "discharged: the root cause names a condition, the builder/verifier contract mismatch (C-002), not the placeholder filter where X1 surfaces it (C-004).",
+      "N2": "discharged: every causal claim cites first-hand evidence at high confidence; the reporter's claims (E-001) and unobserved CI (Q-002) carry no causal step.",
+      "N3": "discharged: the radius names the shared admissibility judgement (X1, D4, D23, D27), FR-03, the CI verifier job, the bundled payload copy, and the persisted FR-03 records in FC-016 to FC-022 and O-015; no persisted open run envelope (E-013, E-023)."
+    },
+    "skillsApplied": [
+      "S03",
+      "S12",
+      "S11",
+      "S01",
+      "S02",
+      "S07",
+      "S09"
+    ],
+    "skillsNotTriggered": [
+      "S06",
+      "S08"
+    ],
+    "affectedAreas": "security was read under S09 because the trigger term was 'injection'; it denotes failure injection, and the only security-relevant control, the producer self-exception guard, held (E-019)",
+    "repositoryRescan": "task context named no files; code sites located from the functions the defect report names in runtime/framework_runtime.py and runtime/verify_recovery.py, plus the bundled payload, tests and .github/workflows/verify.yml",
+    "gateOwnership": "no gate decided; Fix Gate and later belong to their owners"
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/manifest.yaml",
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "runs/run-e7bf0d73027a/states/root-cause-analysis/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-e7bf0d73027a/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-e7bf0d73027a/states/root-cause-analysis/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

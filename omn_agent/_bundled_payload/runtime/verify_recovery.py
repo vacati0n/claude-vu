@@ -621,6 +621,15 @@ def clearing_action_admissible(run_id: str, entry: dict) -> tuple[bool, str]:
                              authoriser -- a second human decision the envelope cannot name --
                              and may stay a placeholder, while the role and rationale are
                              filled in and validated
+      policy-exception --phase P
+                             P is a state item that is blocked with reason
+                             awaiting_policy_exception; the role, decider, and rationale are
+                             the human's judgement and may stay placeholders on exactly that
+                             item -- whether a declared write is a breach or a false positive
+                             is the decision the envelope asks for, so it cannot pre-fill it.
+                             A filled role must be one the envelope lists, where it lists
+                             any, and may not be the producer's own. A completed item is
+                             inadmissible although the command exits 0 there, by replay
       prose (no command)     admissible: it names no command that can fail
 
     A retry-class action states that nothing is required and appends `release` as an optional
@@ -639,8 +648,18 @@ def clearing_action_admissible(run_id: str, entry: dict) -> tuple[bool, str]:
     def opt(flag):
         return argv[argv.index(flag) + 1] if flag in argv else None
 
-    human = ({"--owner-role", "--decided-by", "--rationale"} if sub == "gate"
-             else {"--decided-by"} if sub == "rollback" else set())
+    def awaiting_policy_exception(phase):
+        it = items.get(phase)
+        return (it is not None and it.get("work_type") == "state"
+                and it["status"] == se.BLOCKED
+                and it.get("blocked_reason") == "awaiting_policy_exception")
+
+    judgement = {"--owner-role", "--decided-by", "--rationale"}
+    human = (judgement if sub == "gate"
+             else {"--decided-by"} if sub == "rollback"
+             else judgement if (sub == "policy-exception"
+                                and awaiting_policy_exception(opt("--phase")))
+             else set())
     placeholders = [a for i, a in enumerate(argv)
                     if a.startswith("<") and a.endswith(">")
                     and not (i > 0 and argv[i - 1] in human)]
@@ -685,6 +704,22 @@ def clearing_action_admissible(run_id: str, entry: dict) -> tuple[bool, str]:
                 g.get("owner_roles") and role not in g["owner_roles"]):
             return False, f"rollback names role {role!r}, which may not decide {name}"
         return True, f"rollback on {name} -> {target}, superseding {phases}"
+    if sub == "policy-exception":
+        phase = opt("--phase")
+        it = items.get(phase)
+        if it is None or it.get("work_type") != "state":
+            return False, f"policy-exception names {phase!r}, not a state work item"
+        if not awaiting_policy_exception(phase):
+            return False, (f"policy-exception on {phase} status={it['status']} "
+                           f"blocked_reason={it.get('blocked_reason')}")
+        role = opt("--owner-role")
+        if role != "<role>":
+            producer = entry.get("owner_agent_id") or it.get("owner_agent_id")
+            listed = entry.get("owner_roles") or []
+            if (listed and role not in listed) or (
+                    producer and role in fr.producer_aliases(producer)):
+                return False, f"policy-exception names role {role!r}, which may not decide {phase}"
+        return True, f"policy-exception on {phase} blocked_reason=awaiting_policy_exception"
     return False, f"unknown subcommand {sub!r}"
 
 
