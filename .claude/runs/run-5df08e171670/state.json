@@ -5,9 +5,9 @@
   "command_id": "implement",
   "workflow_id": "implement-feature",
   "workflow_version": "1.0.0",
-  "run_status": "Dispatching",
+  "run_status": "WaitingForHuman",
   "created_at": "2026-09-14T07:19:57Z",
-  "updated_at": "2026-09-14T08:22:20Z",
+  "updated_at": "2026-10-17T13:16:50Z",
   "input_digest": "sha256:58bad3ae4e36fe3a4656eea976d81b82",
   "inputs": [
     {
@@ -565,8 +565,8 @@
       "state_id": "implementation",
       "work_type": "state",
       "owner_agent_id": "omn-dev-1-implement",
-      "status": "pending",
-      "queue_status": "Ready",
+      "status": "completed",
+      "queue_status": "Completed",
       "eligible": true,
       "phase_index": 4,
       "gate": "none",
@@ -578,14 +578,14 @@
           "basis": "Input column names the upstream output 'technical-design.md'"
         }
       ],
-      "attempt": 0,
+      "attempt": 1,
       "attempts_lost": 0,
       "max_attempts": 3,
       "lease_expires_at": null,
       "available_at": null,
-      "last_worker_id": null,
-      "idempotency_key": null,
-      "payload_digest": null,
+      "last_worker_id": "host-subagent:omn-dev-1-implement",
+      "idempotency_key": "sha256:117c632c5a9466a12e660f07a81ba87a",
+      "payload_digest": "sha256:2f49d6883578dbca8436223311b1c859",
       "blocked_reason": null,
       "blocked_detail": null,
       "failure_class": null,
@@ -642,12 +642,47 @@
           "gate": null
         }
       ],
-      "completion": null,
+      "completion": {
+        "committed_at": "2026-10-17T12:51:43Z",
+        "artifact_path": "runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md",
+        "artifact_digest": "sha256:d920d43a9e8b6b6222393ab5417b8d47",
+        "result_status": "succeeded",
+        "invocation_id": "inv-5df08e171670-04-001",
+        "validation": {
+          "result": "pass",
+          "checksRun": 32,
+          "checksPassed": 32,
+          "blockingFailures": 0,
+          "correctableFailures": 0,
+          "notMachineCheckable": 3,
+          "counts": {
+            "sections": 10,
+            "status": "provisional",
+            "identifiers": {
+              "C": 54,
+              "T": 22,
+              "V": 6,
+              "R": 7,
+              "Q": 5
+            },
+            "tableRows": {
+              "Change Set": 54,
+              "Test Evidence": 22,
+              "Deviations and Tradeoffs": 6,
+              "Residual Risk": 7
+            }
+          },
+          "undeclaredSideEffects": []
+        }
+      },
       "supersessions": [],
       "replays": [],
       "created_at": "2026-09-14T07:19:57Z",
-      "updated_at": "2026-09-14T08:22:20Z",
-      "blocked_by": null
+      "updated_at": "2026-10-17T12:51:43Z",
+      "blocked_by": null,
+      "invocation_id": "inv-5df08e171670-04-001",
+      "artifact_path": "runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md",
+      "artifact_identifier": "implementation-report"
     },
     "quality-review": {
       "work_item_id": "run-5df08e171670::quality-review",
@@ -656,9 +691,9 @@
       "state_id": "quality-review",
       "work_type": "state",
       "owner_agent_id": "omn-dev-2-reviewer",
-      "status": "pending",
-      "queue_status": "Waiting",
-      "eligible": false,
+      "status": "completed",
+      "queue_status": "Completed",
+      "eligible": true,
       "phase_index": 5,
       "gate": "Review Gate, Verification Gate",
       "artifact": "review-package.md",
@@ -669,18 +704,18 @@
           "basis": "Input column names the upstream output 'implementation-report.md'"
         }
       ],
-      "attempt": 0,
+      "attempt": 2,
       "attempts_lost": 0,
       "max_attempts": 3,
       "lease_expires_at": null,
       "available_at": null,
-      "last_worker_id": null,
-      "idempotency_key": null,
-      "payload_digest": null,
+      "last_worker_id": "host-subagent:omn-dev-2-reviewer",
+      "idempotency_key": "sha256:d42259dfcd469670c7cffc90b3d0785e",
+      "payload_digest": "sha256:0bd8d1956c1d70d2e71b1a90e551a13a",
       "blocked_reason": null,
       "blocked_detail": null,
-      "failure_class": null,
-      "failure_detail": null,
+      "failure_class": "output-schema-failure",
+      "failure_detail": "validation rejected the artifact: 1 blocking and 0 correctable failure(s) ['C6.2']",
       "guards": [
         {
           "id": "G1-CAPABILITY",
@@ -705,19 +740,79 @@
         {
           "id": "G3-PREDECESSOR",
           "title": "hard predecessors have completed",
-          "outcome": "wait",
-          "reason_code": "dependency_wait",
+          "outcome": "pass",
+          "reason_code": "enqueued",
           "blocked_reason": null,
           "failure_class": null,
-          "detail": "waiting on ['implementation=pending']",
+          "detail": "hard predecessors: implementation",
+          "gate": null
+        },
+        {
+          "id": "G4-GATE",
+          "title": "predecessor gates are approved",
+          "outcome": "pass",
+          "reason_code": "output_accepted",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "gates on hard predecessors: none",
+          "gate": null
+        },
+        {
+          "id": "G5-INPUT",
+          "title": "the agent input contract is satisfied",
+          "outcome": "pass",
+          "reason_code": "enqueued",
+          "blocked_reason": null,
+          "failure_class": null,
+          "detail": "supplied ['feature-request', 'change-request', 'business-intent', 'architecture-context', 'implementation-report']; required none (menu contract)",
           "gate": null
         }
       ],
-      "completion": null,
+      "completion": {
+        "committed_at": "2026-10-17T13:16:35Z",
+        "artifact_path": "runs/run-5df08e171670/states/quality-review/artifacts/review-package.md",
+        "artifact_digest": "sha256:bef6fa470edd2e2a14216dbc4ef25a6a",
+        "result_status": "succeeded",
+        "invocation_id": "inv-5df08e171670-05-002",
+        "validation": {
+          "result": "pass",
+          "checksRun": 31,
+          "checksPassed": 31,
+          "blockingFailures": 0,
+          "correctableFailures": 0,
+          "notMachineCheckable": 3,
+          "counts": {
+            "sections": 10,
+            "status": "complete",
+            "identifiers": {
+              "F": 10,
+              "CR": 10,
+              "Q": 3
+            },
+            "tableRows": {
+              "Findings": 10,
+              "Correction Requests": 10
+            },
+            "findings": 10,
+            "verdict": "reject",
+            "correctionRequests": 10,
+            "severity": {
+              "critical": 1,
+              "high": 4,
+              "medium": 1,
+              "low": 4
+            }
+          },
+          "undeclaredSideEffects": []
+        }
+      },
       "supersessions": [],
       "replays": [],
       "created_at": "2026-09-14T07:19:57Z",
-      "updated_at": "2026-09-14T08:22:20Z"
+      "updated_at": "2026-10-17T13:16:35Z",
+      "invocation_id": "inv-5df08e171670-05-002",
+      "artifact_path": "runs/run-5df08e171670/states/quality-review/artifacts/review-package.md",
+      "artifact_identifier": "review-package"
     },
     "gate:Review Gate": {
       "work_item_id": "run-5df08e171670::gate::Review Gate",
@@ -726,8 +821,8 @@
       "state_id": "Review Gate",
       "work_type": "gate",
       "owner_agent_id": null,
-      "status": "pending",
-      "queue_status": "Waiting",
+      "status": "blocked",
+      "queue_status": "Blocked",
       "eligible": false,
       "phase_index": 5,
       "gate": "Review Gate",
@@ -747,19 +842,19 @@
       "last_worker_id": null,
       "idempotency_key": null,
       "payload_digest": null,
-      "blocked_reason": null,
-      "blocked_detail": null,
-      "failure_class": null,
+      "blocked_reason": "awaiting_human_decision",
+      "blocked_detail": "G6-GATE-EVIDENCE: evidence for quality-review is complete; awaiting a decision from ['omn-dev-2-reviewer', 'omn-qa']",
+      "failure_class": "gate-approval-required",
       "failure_detail": null,
       "guards": [
         {
           "id": "G6-GATE-EVIDENCE",
           "title": "the gated phase has produced its evidence",
-          "outcome": "wait",
-          "reason_code": "dependency_wait",
-          "blocked_reason": null,
-          "failure_class": null,
-          "detail": "quality-review is pending; a gate assesses evidence that does not exist yet",
+          "outcome": "block",
+          "reason_code": "approval_wait",
+          "blocked_reason": "awaiting_human_decision",
+          "failure_class": "gate-approval-required",
+          "detail": "evidence for quality-review is complete; awaiting a decision from ['omn-dev-2-reviewer', 'omn-qa']",
           "gate": null
         }
       ],
@@ -767,7 +862,8 @@
       "supersessions": [],
       "replays": [],
       "created_at": "2026-09-14T07:19:57Z",
-      "updated_at": "2026-09-14T08:22:20Z"
+      "updated_at": "2026-10-17T13:16:49Z",
+      "blocked_by": "guard"
     },
     "gate:Verification Gate": {
       "work_item_id": "run-5df08e171670::gate::Verification Gate",
@@ -776,8 +872,8 @@
       "state_id": "Verification Gate",
       "work_type": "gate",
       "owner_agent_id": null,
-      "status": "pending",
-      "queue_status": "Waiting",
+      "status": "blocked",
+      "queue_status": "Blocked",
       "eligible": false,
       "phase_index": 5,
       "gate": "Verification Gate",
@@ -797,19 +893,19 @@
       "last_worker_id": null,
       "idempotency_key": null,
       "payload_digest": null,
-      "blocked_reason": null,
-      "blocked_detail": null,
-      "failure_class": null,
+      "blocked_reason": "awaiting_human_decision",
+      "blocked_detail": "G6-GATE-EVIDENCE: evidence for quality-review is complete; awaiting a decision from ['omn-qa']",
+      "failure_class": "gate-approval-required",
       "failure_detail": null,
       "guards": [
         {
           "id": "G6-GATE-EVIDENCE",
           "title": "the gated phase has produced its evidence",
-          "outcome": "wait",
-          "reason_code": "dependency_wait",
-          "blocked_reason": null,
-          "failure_class": null,
-          "detail": "quality-review is pending; a gate assesses evidence that does not exist yet",
+          "outcome": "block",
+          "reason_code": "approval_wait",
+          "blocked_reason": "awaiting_human_decision",
+          "failure_class": "gate-approval-required",
+          "detail": "evidence for quality-review is complete; awaiting a decision from ['omn-qa']",
           "gate": null
         }
       ],
@@ -817,7 +913,8 @@
       "supersessions": [],
       "replays": [],
       "created_at": "2026-09-14T07:19:57Z",
-      "updated_at": "2026-09-14T08:22:20Z"
+      "updated_at": "2026-10-17T13:16:49Z",
+      "blocked_by": "guard"
     },
     "documentation-and-release-handoff": {
       "work_item_id": "run-5df08e171670::documentation-and-release-handoff",
@@ -826,8 +923,8 @@
       "state_id": "documentation-and-release-handoff",
       "work_type": "state",
       "owner_agent_id": "omn-documentation",
-      "status": "pending",
-      "queue_status": "Waiting",
+      "status": "blocked",
+      "queue_status": "Blocked",
       "eligible": false,
       "phase_index": 6,
       "gate": "Closure Gate",
@@ -847,9 +944,9 @@
       "last_worker_id": null,
       "idempotency_key": null,
       "payload_digest": null,
-      "blocked_reason": null,
-      "blocked_detail": null,
-      "failure_class": null,
+      "blocked_reason": "awaiting_human_decision",
+      "blocked_detail": "G4-GATE: Review Gate closing quality-review has no recorded decision; owners: ['omn-dev-2-reviewer', 'omn-qa']",
+      "failure_class": "gate-approval-required",
       "failure_detail": null,
       "guards": [
         {
@@ -859,7 +956,7 @@
           "reason_code": "enqueued",
           "blocked_reason": null,
           "failure_class": null,
-          "detail": "omn-documentation v1.0.0 resolves through agents/omn-documentation.agent.md; validator release_note_validator",
+          "detail": "omn-documentation v1.2.0 resolves through agents/omn-documentation.agent.md; validator release_note_validator",
           "gate": null
         },
         {
@@ -875,11 +972,21 @@
         {
           "id": "G3-PREDECESSOR",
           "title": "hard predecessors have completed",
-          "outcome": "wait",
-          "reason_code": "dependency_wait",
+          "outcome": "pass",
+          "reason_code": "enqueued",
           "blocked_reason": null,
           "failure_class": null,
-          "detail": "waiting on ['quality-review=pending']",
+          "detail": "hard predecessors: quality-review",
+          "gate": null
+        },
+        {
+          "id": "G4-GATE",
+          "title": "predecessor gates are approved",
+          "outcome": "block",
+          "reason_code": "approval_wait",
+          "blocked_reason": "awaiting_human_decision",
+          "failure_class": "gate-approval-required",
+          "detail": "Review Gate closing quality-review has no recorded decision; owners: ['omn-dev-2-reviewer', 'omn-qa']",
           "gate": null
         }
       ],
@@ -887,7 +994,8 @@
       "supersessions": [],
       "replays": [],
       "created_at": "2026-09-14T07:19:57Z",
-      "updated_at": "2026-09-14T08:22:20Z"
+      "updated_at": "2026-10-17T13:16:49Z",
+      "blocked_by": "guard"
     },
     "gate:Closure Gate": {
       "work_item_id": "run-5df08e171670::gate::Closure Gate",
@@ -929,7 +1037,7 @@
           "reason_code": "dependency_wait",
           "blocked_reason": null,
           "failure_class": null,
-          "detail": "documentation-and-release-handoff is pending; a gate assesses evidence that does not exist yet",
+          "detail": "documentation-and-release-handoff is blocked; a gate assesses evidence that does not exist yet",
           "gate": null
         }
       ],
@@ -937,7 +1045,7 @@
       "supersessions": [],
       "replays": [],
       "created_at": "2026-09-14T07:19:57Z",
-      "updated_at": "2026-09-14T08:22:20Z"
+      "updated_at": "2026-10-17T13:16:49Z"
     }
   },
   "gates": {
@@ -1451,11 +1559,245 @@
       "attempt": 0,
       "idempotency_key": null,
       "detail": "every guard now passes; the blocker is cleared"
+    },
+    {
+      "seq": 24,
+      "at": "2026-10-17T12:22:49Z",
+      "work_item_id": "run-5df08e171670::implementation",
+      "state_id": "implementation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:117c632c5a9466a12e660f07a81ba87a",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 25,
+      "at": "2026-10-17T12:22:49Z",
+      "work_item_id": "run-5df08e171670::implementation",
+      "state_id": "implementation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:117c632c5a9466a12e660f07a81ba87a",
+      "detail": "dispatching omn-dev-1-implement v1.1.0 through agents/omn-dev-1-implement.agent.md"
+    },
+    {
+      "seq": 26,
+      "at": "2026-10-17T12:51:43Z",
+      "work_item_id": "run-5df08e171670::implementation",
+      "state_id": "implementation",
+      "work_type": "state",
+      "phase_index": 4,
+      "from": "running",
+      "to": "completed",
+      "trigger": "result_accepted",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "runtime",
+      "actor_id": "validation-engine",
+      "attempt": 1,
+      "idempotency_key": "sha256:117c632c5a9466a12e660f07a81ba87a",
+      "detail": "artifact accepted: 32/32 checks passed"
+    },
+    {
+      "seq": 27,
+      "at": "2026-10-17T12:51:56Z",
+      "work_item_id": "run-5df08e171670::quality-review",
+      "state_id": "quality-review",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:d42259dfcd469670c7cffc90b3d0785e",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 28,
+      "at": "2026-10-17T12:51:56Z",
+      "work_item_id": "run-5df08e171670::quality-review",
+      "state_id": "quality-review",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 1,
+      "idempotency_key": "sha256:d42259dfcd469670c7cffc90b3d0785e",
+      "detail": "dispatching omn-dev-2-reviewer v1.1.0 through agents/omn-dev-2-reviewer.agent.md"
+    },
+    {
+      "seq": 29,
+      "at": "2026-10-17T13:11:37Z",
+      "work_item_id": "run-5df08e171670::quality-review",
+      "state_id": "quality-review",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "running",
+      "to": "retrying",
+      "trigger": "retryable_failure_classified",
+      "reason_code": "validation_failed",
+      "queue_status": "Retrying",
+      "actor_type": "runtime",
+      "actor_id": "recovery-controller",
+      "attempt": 1,
+      "idempotency_key": "sha256:d42259dfcd469670c7cffc90b3d0785e",
+      "detail": "class 'output-schema-failure' is retryable and 2 of 3 charged attempt(s) remain, so one further attempt is scheduled after 1.722s of exponential backoff"
+    },
+    {
+      "seq": 30,
+      "at": "2026-10-17T13:14:27Z",
+      "work_item_id": "run-5df08e171670::quality-review",
+      "state_id": "quality-review",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "retrying",
+      "to": "pending",
+      "trigger": "backoff_elapsed",
+      "reason_code": "enqueued",
+      "queue_status": "Waiting",
+      "actor_type": "runtime",
+      "actor_id": "recovery-controller",
+      "attempt": 1,
+      "idempotency_key": "sha256:d42259dfcd469670c7cffc90b3d0785e",
+      "detail": "backoff elapsed at 2026-10-17T13:11:39Z; attempt 2 of 3 may now be dispatched"
+    },
+    {
+      "seq": 31,
+      "at": "2026-10-17T13:14:28Z",
+      "work_item_id": "run-5df08e171670::quality-review",
+      "state_id": "quality-review",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "pending",
+      "to": "leased",
+      "trigger": "lease_acquired",
+      "reason_code": "leased",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 2,
+      "idempotency_key": "sha256:d42259dfcd469670c7cffc90b3d0785e",
+      "detail": "leased to the host-subagent adapter in native mode"
+    },
+    {
+      "seq": 32,
+      "at": "2026-10-17T13:14:28Z",
+      "work_item_id": "run-5df08e171670::quality-review",
+      "state_id": "quality-review",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "leased",
+      "to": "running",
+      "trigger": "invocation_started",
+      "reason_code": "execution_started",
+      "queue_status": "Executing",
+      "actor_type": "runtime",
+      "actor_id": "invocation-gateway",
+      "attempt": 2,
+      "idempotency_key": "sha256:d42259dfcd469670c7cffc90b3d0785e",
+      "detail": "dispatching omn-dev-2-reviewer v1.1.0 through agents/omn-dev-2-reviewer.agent.md"
+    },
+    {
+      "seq": 33,
+      "at": "2026-10-17T13:16:35Z",
+      "work_item_id": "run-5df08e171670::quality-review",
+      "state_id": "quality-review",
+      "work_type": "state",
+      "phase_index": 5,
+      "from": "running",
+      "to": "completed",
+      "trigger": "result_accepted",
+      "reason_code": "output_accepted",
+      "queue_status": "Completed",
+      "actor_type": "runtime",
+      "actor_id": "validation-engine",
+      "attempt": 2,
+      "idempotency_key": "sha256:d42259dfcd469670c7cffc90b3d0785e",
+      "detail": "artifact accepted: 31/31 checks passed"
+    },
+    {
+      "seq": 34,
+      "at": "2026-10-17T13:16:35Z",
+      "work_item_id": "run-5df08e171670::gate::Review Gate",
+      "state_id": "Review Gate",
+      "work_type": "gate",
+      "phase_index": 5,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "awaiting_decision",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G6-GATE-EVIDENCE: evidence for quality-review is complete; awaiting a decision from ['omn-dev-2-reviewer', 'omn-qa']"
+    },
+    {
+      "seq": 35,
+      "at": "2026-10-17T13:16:35Z",
+      "work_item_id": "run-5df08e171670::gate::Verification Gate",
+      "state_id": "Verification Gate",
+      "work_type": "gate",
+      "phase_index": 5,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "awaiting_decision",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G6-GATE-EVIDENCE: evidence for quality-review is complete; awaiting a decision from ['omn-qa']"
+    },
+    {
+      "seq": 36,
+      "at": "2026-10-17T13:16:35Z",
+      "work_item_id": "run-5df08e171670::documentation-and-release-handoff",
+      "state_id": "documentation-and-release-handoff",
+      "work_type": "state",
+      "phase_index": 6,
+      "from": "pending",
+      "to": "blocked",
+      "trigger": "blocker_detected",
+      "reason_code": "approval_wait",
+      "queue_status": "Blocked",
+      "actor_type": "runtime",
+      "actor_id": "state-engine",
+      "attempt": 0,
+      "idempotency_key": null,
+      "detail": "G4-GATE: Review Gate closing quality-review has no recorded decision; owners: ['omn-dev-2-reviewer', 'omn-qa']"
     }
   ],
   "replays": [],
   "last_aggregation": {
-    "signature": "sha256:65f1b008df4f75fb29887fcf0eefeb8a",
-    "at": "2026-09-14T08:18:20Z"
+    "signature": "sha256:a3b552e0bbfad93563bf329612b3416b",
+    "at": "2026-10-17T13:16:35Z"
   }
 }

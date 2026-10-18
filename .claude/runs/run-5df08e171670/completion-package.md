@@ -12,8 +12,8 @@ Produced by the Output Aggregator in `runtime/framework_runtime.py`. This packag
 | runtime | `0.8.0` |
 | run status | `WaitingForHuman` |
 | input digest | `sha256:58bad3ae4e36fe3a4656eea976d81b82` |
-| phases | 6 (3 completed, 1 blocked, 0 failed, 2 pending) |
-| state transitions | 21 |
+| phases | 6 (5 completed, 1 blocked, 0 failed, 0 pending) |
+| state transitions | 36 |
 | replays suppressed | 0 |
 
 ## Phase Ledger
@@ -23,9 +23,9 @@ Produced by the Output Aggregator in `runtime/framework_runtime.py`. This packag
 | 1 | `scope-and-acceptance` | `omn-product-owner` | completed | Completed | `runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md` | pass (33/33) |
 | 2 | `execution-planning` | `planner` | completed | Completed | `runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md` | pass (45/45) |
 | 3 | `solution-design-and-risk-assessment` | `architect` | completed | Completed | `runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/technical-design.md` | pass (78/78) |
-| 4 | `implementation` | `omn-dev-1-implement` | blocked | Blocked | - | awaiting_human_decision |
-| 5 | `quality-review` | `omn-dev-2-reviewer` | pending | Waiting | - | - |
-| 6 | `documentation-and-release-handoff` | `omn-documentation` | pending | Waiting | - | - |
+| 4 | `implementation` | `omn-dev-1-implement` | completed | Completed | `runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md` | pass (32/32) |
+| 5 | `quality-review` | `omn-dev-2-reviewer` | completed | Completed | `runs/run-5df08e171670/states/quality-review/artifacts/review-package.md` | pass (31/31) |
+| 6 | `documentation-and-release-handoff` | `omn-documentation` | blocked | Blocked | - | awaiting_human_decision |
 
 ## Gate Decisions
 
@@ -33,7 +33,7 @@ Produced by the Output Aggregator in `runtime/framework_runtime.py`. This packag
 |---|---|---|---|---|---|
 | Scope Gate | `scope-and-acceptance` | omn-product-owner, omn-business-analyst | approved | omn-business-analyst | omn-business-analyst subagent a3511899e4038408d, recorded by session operator for vuhoangcao |
 | Planning Gate | `execution-planning` | omn-tech-lead, omn-orchestrator | approved | omn-tech-lead | omn-tech-lead subagent a6c306330530bf26c, recorded by session operator for vuhoangcao |
-| Design Gate | `solution-design-and-risk-assessment` | omn-architect, omn-tech-lead | undecided | - | - |
+| Design Gate | `solution-design-and-risk-assessment` | omn-architect, omn-tech-lead | approved | omn-tech-lead | omn-tech-lead subagent a307c9acb773c30c5, recorded by session operator for vuhoangcao |
 | Review Gate | `quality-review` | omn-dev-2-reviewer, omn-qa | undecided | - | - |
 | Verification Gate | `quality-review` | omn-qa | undecided | - | - |
 | Closure Gate | `documentation-and-release-handoff` | omn-orchestrator, omn-documentation | undecided | - | - |
@@ -71,6 +71,20 @@ Modules loaded by each executed agent, in the order its manifest declares.
 | `solution-design-and-risk-assessment` | 5 | `agents/architect/output.md` | `sha256:63a9e786aaef073f0cee8fe992ea05fd` |
 | `solution-design-and-risk-assessment` | 6 | `agents/architect/quality.md` | `sha256:d9fa58935c242fb724123ea69d5eeb61` |
 | `solution-design-and-risk-assessment` | 7 | `agents/architect/examples.md` | `sha256:4badefef323665829e5d262b4d0c6839` |
+| `implementation` | 1 | `agents/omn-dev-1-implement/system.md` | `sha256:19e8b4ae2aad6df4dcc5eb87cc91bcf7` |
+| `implementation` | 2 | `agents/omn-dev-1-implement/identity.md` | `sha256:e02fb41e9c00f1f9270808c8b7981a20` |
+| `implementation` | 3 | `agents/omn-dev-1-implement/reasoning.md` | `sha256:b3abda4d594df1d4346a95a41645c5ef` |
+| `implementation` | 4 | `agents/omn-dev-1-implement/execution.md` | `sha256:e74dc23cc6f165cab07858a0267584d1` |
+| `implementation` | 5 | `agents/omn-dev-1-implement/output.md` | `sha256:bccf4d0c7e2f92084148bcffe4e3b512` |
+| `implementation` | 6 | `agents/omn-dev-1-implement/quality.md` | `sha256:729e61431bb8ad9247e0a2afad953ba0` |
+| `implementation` | 7 | `agents/omn-dev-1-implement/examples.md` | `sha256:5265c7bf5b7d869c9aa34ffe83bfd547` |
+| `quality-review` | 1 | `agents/omn-dev-2-reviewer/system.md` | `sha256:ef234d6d8e6b74d21d099ab744ab9f60` |
+| `quality-review` | 2 | `agents/omn-dev-2-reviewer/identity.md` | `sha256:725ba943cf8532dc4f666e68ca191592` |
+| `quality-review` | 3 | `agents/omn-dev-2-reviewer/reasoning.md` | `sha256:ca41f86059574239b5a83fdbac8554b8` |
+| `quality-review` | 4 | `agents/omn-dev-2-reviewer/execution.md` | `sha256:7a6a432d0e0b51444e99b0c98f62ae0e` |
+| `quality-review` | 5 | `agents/omn-dev-2-reviewer/output.md` | `sha256:1b324b77d86f30d076d08768be2f9d5c` |
+| `quality-review` | 6 | `agents/omn-dev-2-reviewer/quality.md` | `sha256:4d4c09812b441785acd1b03330468cc9` |
+| `quality-review` | 7 | `agents/omn-dev-2-reviewer/examples.md` | `sha256:488657c9d243c3d498245922c2d92906` |
 
 ## State Transition Log
 
@@ -99,6 +113,21 @@ Every persisted work-item transition, in commit order. This is the run's primary
 | 19 | `solution-design-and-risk-assessment` (state) | running | completed | `result_accepted` | `output_accepted` | runtime:validation-engine |
 | 20 | `Design Gate` (gate) | pending | blocked | `awaiting_decision` | `approval_wait` | runtime:state-engine |
 | 21 | `implementation` (state) | pending | blocked | `blocker_detected` | `approval_wait` | runtime:state-engine |
+| 22 | `Design Gate` (gate) | blocked | completed | `decision_approved` | `output_accepted` | human:omn-tech-lead subagent a307c9acb773c30c5, recorded by session operator for vuhoangcao |
+| 23 | `implementation` (state) | blocked | pending | `blocker_cleared` | `enqueued` | runtime:state-engine |
+| 24 | `implementation` (state) | pending | leased | `lease_acquired` | `leased` | runtime:invocation-gateway |
+| 25 | `implementation` (state) | leased | running | `invocation_started` | `execution_started` | runtime:invocation-gateway |
+| 26 | `implementation` (state) | running | completed | `result_accepted` | `output_accepted` | runtime:validation-engine |
+| 27 | `quality-review` (state) | pending | leased | `lease_acquired` | `leased` | runtime:invocation-gateway |
+| 28 | `quality-review` (state) | leased | running | `invocation_started` | `execution_started` | runtime:invocation-gateway |
+| 29 | `quality-review` (state) | running | retrying | `retryable_failure_classified` | `validation_failed` | runtime:recovery-controller |
+| 30 | `quality-review` (state) | retrying | pending | `backoff_elapsed` | `enqueued` | runtime:recovery-controller |
+| 31 | `quality-review` (state) | pending | leased | `lease_acquired` | `leased` | runtime:invocation-gateway |
+| 32 | `quality-review` (state) | leased | running | `invocation_started` | `execution_started` | runtime:invocation-gateway |
+| 33 | `quality-review` (state) | running | completed | `result_accepted` | `output_accepted` | runtime:validation-engine |
+| 34 | `Review Gate` (gate) | pending | blocked | `awaiting_decision` | `approval_wait` | runtime:state-engine |
+| 35 | `Verification Gate` (gate) | pending | blocked | `awaiting_decision` | `approval_wait` | runtime:state-engine |
+| 36 | `documentation-and-release-handoff` (state) | pending | blocked | `blocker_detected` | `approval_wait` | runtime:state-engine |
 
 ## Event Stream
 
@@ -147,6 +176,28 @@ Every persisted work-item transition, in commit order. This is the run's primary
 | E-0041 | `validation_passed` | `solution-design-and-risk-assessment` | runtime:validation-engine | `output_accepted` | artifact conforms: 78/78 checks passed |
 | E-0042 | `escalation_opened` | `gate::Design Gate` | runtime:state-engine | `approval_wait` | gate work item blocked: awaiting_human_decision |
 | E-0043 | `escalation_opened` | `implementation` | runtime:state-engine | `approval_wait` | state work item blocked: awaiting_human_decision |
+| E-0044 | `aggregation_completed` | `documentation-and-release-handoff` | runtime:output-aggregator | `output_accepted` | completion package and provenance manifest persisted for 3/6 completed phase(s) |
+| E-0045 | `escalation_resolved` | `gate::Design Gate` | human:omn-tech-lead subagent a307c9acb773c30c5, recorded by session operator for vuhoangcao | `output_accepted` | Design Gate approved by omn-tech-lead (evidence: solution-design-and-risk-assessment) |
+| E-0046 | `escalation_resolved` | `implementation` | runtime:state-engine | `enqueued` | state work item unblocked |
+| E-0047 | `context_hydrated` | `implementation` | runtime:context-loader | `context_hydration_completed` | context slice frozen: 18 member(s), 5 input(s) |
+| E-0048 | `work_item_leased` | `implementation` | runtime:invocation-gateway | `leased` | invocation envelope built and leased to the host-subagent adapter in native mode |
+| E-0049 | `invocation_started` | `implementation` | runtime:invocation-gateway | `execution_started` | dispatching agent omn-dev-1-implement v1.1.0 through host registration agents/omn-dev-1-implement.agent.md |
+| E-0050 | `invocation_completed` | `implementation` | agent:omn-dev-1-implement | `output_accepted` | agent returned status 'succeeded' with 1 artifact ref(s) |
+| E-0051 | `validation_passed` | `implementation` | runtime:validation-engine | `output_accepted` | artifact conforms: 32/32 checks passed |
+| E-0052 | `context_hydrated` | `quality-review` | runtime:context-loader | `context_hydration_completed` | context slice frozen: 19 member(s), 5 input(s) |
+| E-0053 | `work_item_leased` | `quality-review` | runtime:invocation-gateway | `leased` | invocation envelope built and leased to the host-subagent adapter in native mode |
+| E-0054 | `invocation_started` | `quality-review` | runtime:invocation-gateway | `execution_started` | dispatching agent omn-dev-2-reviewer v1.1.0 through host registration agents/omn-dev-2-reviewer.agent.md |
+| E-0055 | `invocation_completed` | `quality-review` | agent:omn-dev-2-reviewer | `output_accepted` | agent returned status 'succeeded' with 1 artifact ref(s) |
+| E-0056 | `validation_failed` | `quality-review` | runtime:validation-engine | `validation_failed` | artifact rejected: 1 blocking, 0 correctable |
+| E-0057 | `retry_scheduled` | `quality-review` | runtime:recovery-controller | `retry_wait` | artifact rejected; classified output-schema-failure -> retry |
+| E-0058 | `context_hydrated` | `quality-review` | runtime:context-loader | `context_hydration_completed` | context slice frozen: 19 member(s), 5 input(s) |
+| E-0059 | `work_item_leased` | `quality-review` | runtime:invocation-gateway | `leased` | invocation envelope built and leased to the host-subagent adapter in native mode |
+| E-0060 | `invocation_started` | `quality-review` | runtime:invocation-gateway | `execution_started` | dispatching agent omn-dev-2-reviewer v1.1.0 through host registration agents/omn-dev-2-reviewer.agent.md |
+| E-0061 | `invocation_completed` | `quality-review` | agent:omn-dev-2-reviewer | `output_accepted` | agent returned status 'succeeded' with 1 artifact ref(s) |
+| E-0062 | `validation_passed` | `quality-review` | runtime:validation-engine | `output_accepted` | artifact conforms: 31/31 checks passed |
+| E-0063 | `escalation_opened` | `gate::Review Gate` | runtime:state-engine | `approval_wait` | gate work item blocked: awaiting_human_decision |
+| E-0064 | `escalation_opened` | `gate::Verification Gate` | runtime:state-engine | `approval_wait` | gate work item blocked: awaiting_human_decision |
+| E-0065 | `escalation_opened` | `documentation-and-release-handoff` | runtime:state-engine | `approval_wait` | state work item blocked: awaiting_human_decision |
 
 ## Replay Suppression
 
@@ -156,8 +207,9 @@ No repeated call has been made against this run.
 
 | Work item | Blocked reason | Detail |
 |---|---|---|
-| `Design Gate` (gate) | `awaiting_human_decision` | G6-GATE-EVIDENCE: evidence for solution-design-and-risk-assessment is complete; awaiting a decision from ['omn-architect', 'omn-tech-lead'] |
-| `implementation` (state) | `awaiting_human_decision` | G4-GATE: Design Gate closing solution-design-and-risk-assessment has no recorded decision; owners: ['omn-architect', 'omn-tech-lead'] |
+| `Review Gate` (gate) | `awaiting_human_decision` | G6-GATE-EVIDENCE: evidence for quality-review is complete; awaiting a decision from ['omn-dev-2-reviewer', 'omn-qa'] |
+| `Verification Gate` (gate) | `awaiting_human_decision` | G6-GATE-EVIDENCE: evidence for quality-review is complete; awaiting a decision from ['omn-qa'] |
+| `documentation-and-release-handoff` (state) | `awaiting_human_decision` | G4-GATE: Review Gate closing quality-review has no recorded decision; owners: ['omn-dev-2-reviewer', 'omn-qa'] |
 
 ## Residual Items
 

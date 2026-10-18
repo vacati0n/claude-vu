@@ -1,0 +1,148 @@
+{
+  "invocation_id": "inv-e7bf0d73027a-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-e7bf0d73027a/states/regression-validation/artifacts/validation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "VR-run-e7bf0d73027a-regression-validation",
+    "validationBasis": "regression",
+    "status": "complete",
+    "verdict": "fail",
+    "counts": {
+      "criteria": {
+        "total": 9,
+        "met": 7,
+        "not-met": 2,
+        "blocked": 0
+      },
+      "defects": {
+        "critical": 0,
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
+      "openQuestions": 2
+    },
+    "notMetCriteria": {
+      "AC-007": "RCA Validation Plan 'unchanged gate and rollback cases': added module has a gate case, no rollback case (DF-002)",
+      "AC-009": "RCA Validation Plan end-to-end scenario executing the action filled: none added to tests/ or the verifier (DF-001); behaviour itself confirmed by execution in a tree copy"
+    },
+    "carriedConditionRulings": {
+      "endToEndGap": "hermetic table test plus the analysis's earlier executed run does not satisfy AC-009 as written; behaviour confirmed by this phase's own execution (exit 0, blocked->pending, envelope resolved, policy-exception.json written, X1 re-check pass); the missing regression scenario is DF-001",
+      "rollbackRowUnpinned": "confirmed: no rollback case in tests/test_clearing_action_admissibility.py; rollback row exercised only by verifier D4, D23, D27 (pass); recorded as DF-002",
+      "ciResult": "R-002 unobserved and not used as evidence; routed as Q-002 to omn-orchestrator"
+    },
+    "validatorRun": "runtime/validation_report_validator.py with --envelope: PASS 31/31 (3 not-machine-checkable)",
+    "commandsExecuted": {
+      "python -m unittest tests.test_clearing_action_admissibility -v": "16/16 OK",
+      "new module against git show HEAD:.claude/runtime/verify_recovery.py (scratch copy)": "8 of 16 fail, defect witnessed",
+      "PYTHONPATH=. python tests/test_bundled_payload.py": "11/11 OK",
+      "cmp authoritative vs bundled verify_recovery.py": "identical",
+      "python .claude/runtime/verify_recovery.py (worktree, twice)": "exit 0, 74/74 RECOVERY PROVEN, X1 pass over 9 envelopes in 4 runs, git status unchanged, run-f94564cb61ce unmodified",
+      "python .claude/runtime/verify_recovery.py --keep (tree copy)": "exit 0, 74/74",
+      "python .claude/runtime/verify_recovery.py (tree copy, without --keep)": "exit 0, 74/74, injected inputs removed, run-f94564cb61ce identical",
+      "scratch e2e.py executing the emitted policy-exception action (tree copy)": "emitted action admissible; producer role refused by table and runtime (exit 2); filled action exit 0, item blocked->pending, envelope resolved, policy-exception.json written; rejudged inadmissible after clearance; repeat exit 2; X1 re-check pass over 8 envelopes",
+      "python tools/run_tests_parallel.py": "exit 1: 29/31 modules, 787 of 787 tests ran; test_demo_capture 3 known ffmpeg failures; test_gate_rollback 1 setUp PermissionError on os.replace in host temp (environmental)",
+      "PYTHONPATH=tests python -m unittest test_gate_rollback (TMPDIR on D:)": "34/34 OK (environmental re-run)",
+      "grep tests/ for policy-exception execution": "only tests/test_clearing_action_admissibility.py references it; none executes cmd_policy_exception"
+    },
+    "regressionsDetected": 0,
+    "observations": [
+      "full suite reports 29/31 modules against the implementation report's 30/31; the difference is a test_gate_rollback environmental PermissionError that passed 34/34 on re-run and does not import the changed file",
+      "implementation T-005 (demo-excluded 751/751) was not re-run in that exact form; the full suite run here covers the same modules and is the evidence used"
+    ],
+    "qualityChecks": {
+      "run": 57,
+      "passed": 57,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "D7": "pass",
+        "Q2": "pass",
+        "Q5": "pass",
+        "A7": "pass",
+        "A8": "pass",
+        "T1": "pass",
+        "T2": "pass",
+        "T3": "pass",
+        "Q3": "pass",
+        "Q7": "pass",
+        "F1": "pass",
+        "F2": "pass",
+        "F3": "pass",
+        "F4": "pass",
+        "F5": "pass",
+        "F6": "pass",
+        "Q1": "pass",
+        "Q4": "pass",
+        "Q6": "pass",
+        "R1": "pass",
+        "R2": "pass",
+        "R3": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "pass",
+        "E6": "pass",
+        "E7": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "A4": "pass",
+        "A5": "pass",
+        "A6": "pass",
+        "A9": "pass",
+        "A10": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass",
+        "C6": "pass"
+      },
+      "notes": {
+        "A7": "AC-005's criterion text (and the AC-002, AC-004 evidence and DF-001 location) render the framework path as runtime/verify_recovery.py without its leading hidden-directory prefix, so vendor-token check C3.2 holds; the criterion wording is otherwise verbatim",
+        "F2": "DF-001 and DF-002 are medium: a Validation Plan criterion unmet with a workaround (the behaviour is confirmed by executed checks; the missing cases can be added under tests/ without changing the verifier total)",
+        "R1": "Stage 8 row: no open critical or high defect, at least one not-met criterion -> fail / complete"
+      }
+    },
+    "notMachineCheckable": {
+      "N1": "met: X1 gates the verifier exit code, so every branch of the new row and exemption predicate was exercised by unit cases and the emitted action end to end; the self-exception guard exercised in table and runtime; no data written or migrated",
+      "N2": "met: every met row cites a command run in this phase whose output shows the criterion; AC-007 and AC-009 recorded not-met because the cases they require do not exist, although the behaviour they would pin was confirmed",
+      "N3": "met: the analysis's regression scope (X1, D4, D23, D27, executable helper, bundle parity, FR-03 exit code) and the full suite were exercised; unreached paths named in Untested areas"
+    },
+    "independence": "omn-qa authored neither the change (omn-dev-1-implement) nor the evidence under validation (omn-dev-1-bug-analyst, omn-dev-1-implement); run ledger confirms",
+    "loadedModules": "core tier plus identity.md (on-demand trigger: Stage 2 and D5 refer to it) and execution.md (trigger: defect handoff at Retirement); examples.md not triggered",
+    "transientWrites": "scratch only outside the repository: D:/rvw-tmp-5df08e/qa-e7bf (tree copy, HEAD witness copy, e2e.py, logs, json outputs) and D:/rvw-tmp-5df08e/qa-e7bf-status-before.txt; verify_recovery.py created and removed its injected runs and inputs in the worktree, leaving run-f94564cb61ce unmodified so no restore was needed; the first full-suite run and first two worktree verifier runs used the host C: temp directory for test-created temp dirs; worktree git status identical before and after"
+  },
+  "evidence_refs": [
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/identity.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/execution.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "runs/run-e7bf0d73027a/states/regression-validation/invocation-envelope.json"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "runs/run-e7bf0d73027a/states/regression-validation/artifacts/validation-report.md",
+    "runs/run-e7bf0d73027a/states/regression-validation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

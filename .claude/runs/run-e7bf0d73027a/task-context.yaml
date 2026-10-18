@@ -1,0 +1,324 @@
+schema: framework.runtime/task-context.v1
+task_id: run-e7bf0d73027a
+command: bugfix
+workflow: fix-bug v1.0.0
+run_status: Completed
+updated_at: '2026-10-18T09:34:02Z'
+objective: 'python .claude/runtime/verify_recovery.py reports 73/74 checks passed, NOT PROVEN, on main since 097e8f4, and
+  the repository CI (.github/workflows/verify.yml) shows the job red on every pull request. The failing check is X1, "every
+  open envelope''s clearing action is admissible for its work item''s type and status, or names no command". Release checklist
+  item FR-03 has recorded this failure as pre-existing in FC-021 and FC-022 (O-015). [FAIL] X1 every open envelope''s clearing
+  action is admissible for its work item''s type and status, or names no command inadmissible: ["FE-run-d8870619db82-execution-planning-01:
+  placeholder argument [''<role>'', ''<who>'', ''<text>''] in [''python'', ''.claude/runtime...'
+inputs:
+- type: defect-report
+  reference: runs/inputs/recovery-x1-policy-exception-defect-report.md
+  digest: sha256:f9de6fe446b80423637c7ebcb42381e7
+relevant_agents:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S11
+  - S12
+  - S02
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S08
+  - S12
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S12
+- phase: regression-validation
+  agent: omn-qa
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S11
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  status: completed
+  required_skills:
+  - S10
+  - S11
+completed_phases:
+- phase: triage-and-impact
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-e7bf0d73027a/states/triage-and-impact/artifacts/bug-analysis.md
+  digest: sha256:30f3e37855cf4389e10dbf112f1bf145
+  validation: pass 30/30
+  attempts: 1
+- phase: root-cause-analysis
+  agent: omn-dev-1-bug-analyst
+  artifact: runs/run-e7bf0d73027a/states/root-cause-analysis/artifacts/bug-analysis.md
+  digest: sha256:1d761621ac7d5e66902953e9234cf784
+  validation: pass 30/30
+  attempts: 1
+- phase: fix-implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-e7bf0d73027a/states/fix-implementation/artifacts/implementation-report.md
+  digest: sha256:c09038dbd36e45a2d402734475cff427
+  validation: pass 32/32
+  attempts: 1
+- phase: regression-validation
+  agent: omn-qa
+  artifact: runs/run-e7bf0d73027a/states/regression-validation/artifacts/attempt-2/validation-report.md
+  digest: sha256:8915bdacd9144132970a087e37c6daef
+  validation: pass 31/31
+  attempts: 2
+- phase: closure-and-communication
+  agent: omn-orchestrator
+  artifact: runs/run-e7bf0d73027a/states/closure-and-communication/artifacts/orchestration-result.md
+  digest: sha256:637a2574ae367bebc8918cea6d0a8738
+  validation: pass 34/34
+  attempts: 1
+gates:
+- gate: Triage Gate
+  closes: triage-and-impact
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent a7d77e86c588e22cd, recorded by session operator for vuhoangcao
+- gate: Fix Gate
+  closes: fix-implementation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent acc8a10555792a6cf, recorded by session operator for vuhoangcao
+- gate: Verification Gate
+  closes: regression-validation
+  decision: approved
+  owner_role: omn-dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent a1b1e436e38c12a2d, recorded by session operator for vuhoangcao
+- gate: Closure Gate
+  closes: closure-and-communication
+  decision: approved
+  owner_role: omn-documentation
+  decided_by: omn-documentation subagent ac3e08e474e38163d, recorded by session operator for vuhoangcao
+artifacts:
+  triage-and-impact: runs/run-e7bf0d73027a/states/triage-and-impact/artifacts/bug-analysis.md
+  root-cause-analysis: runs/run-e7bf0d73027a/states/root-cause-analysis/artifacts/bug-analysis.md
+  fix-implementation: runs/run-e7bf0d73027a/states/fix-implementation/artifacts/implementation-report.md
+  regression-validation: runs/run-e7bf0d73027a/states/regression-validation/artifacts/attempt-2/validation-report.md
+  closure-and-communication: runs/run-e7bf0d73027a/states/closure-and-communication/artifacts/orchestration-result.md
+parallel_groups:
+- - triage-and-impact
+- - root-cause-analysis
+- - fix-implementation
+- - regression-validation
+- - closure-and-communication
+risks:
+- 'User impact: framework contributors and operators; every framework change sees FR-03 fail and the recovery proof read NOT
+  PROVEN (E-002, E-009); no run execu...'
+- 'Business impact: taken from the supplied defect report''s impact statement (E-001): FR-03 fails for every framework change
+  and CI is red on every pull request...'
+- 'Technical impact: the recovery verifier, the authority on recovery behaviour, gives a false negative on a correct runtime
+  path; a standing known failure also...'
+- 'Blast radius: the recovery verifier''s admissibility judgement (X1, and D4, D23, D27, which share it); release checklist
+  item FR-03 for every framework change...'
+- 'Business impact: taken from the supplied defect report''s impact statement (E-001): FR-03 fails for every framework change,
+  which weakens release predictabili...'
+- 'Technical impact: the recovery verifier, the authority on recovery behaviour, gives a false negative on a runtime path
+  proven correct end to end (E-018); a s...'
+- 'R-001: The 3 test_demo_capture EndToEndEditTestCase cases fail locally on an ffmpeg option, before and after the c... |
+  high | low'
+- 'R-002: The CI recovery verifier job on ubuntu and windows runners was not observed; the change was executed only o... |
+  low | medium'
+- 'Accepted risk: None identified.'
+- 'Unmitigated risk: the CI job result is unobserved and is not evidence (implementation risk R-002); the end-to-end module
+  depends on committed run evidence ru...'
+- 'Monitoring required: the recovery verifier job on the default branch observed green first-hand; FR-03 rows in later proposals
+  recording pass; any X1 or D4, D...'
+decisions:
+- 'Root cause statement: the verifier''s admissibility table was not extended when the runtime''s clearing-action contract
+  gained the policy-exception command, so...'
+- 'Why detection failed earlier: no unit test ties each command-naming branch of the clearing-action builder to a row of the
+  admissibility table, and no test ru...'
+- 'C-001: Runtime contract change | Commit 2e9e99e made the policy-exception command the intended clearing action for awaiting_policy_exception...
+  | E-004, E-005, E-008'
+- 'C-002: Verifier table not extended | The same commit''s admissibility table exempts placeholders only for gate and rollback
+  and has no policy-exc... | E-006, E-008, E-004, E-005'
+- 'C-003: Scenario C leaves the envelope open | The induced policy failure blocks execution-planning awaiting_policy_exception
+  and leaves its envelope open... | E-007, E-002'
+- 'C-004: X1 rejects it at the placeholder filter | X1 judges that envelope inadmissible, so the verifier reports 73/74 NOT
+  PROVEN and exits 1, the same on eve... | E-002, E-003, E-014'
+- 'Proposed fix: the verifier''s admissibility judgement must recognise the policy-exception action as admissible exactly
+  when it names a state work item blocked...'
+- 'Alternative options: (a) revert the runtime action for this block to prose — clears X1 but hides the only clearing command
+  and reopens the terminal-block pro...'
+- 'Regression risk: low'
+- 'Regression scope: X1 and the scenario D checks D4, D23 and D27 via the shared admissibility function and its placeholder
+  filter, where too broad an exemption...'
+- 'Root cause statement: the verifier''s admissibility table was not extended when commit 2e9e99e made policy-exception the
+  runtime''s clearing action for awaitin...'
+- 'Why detection failed earlier: no unit test ties each command-naming branch of the clearing-action builder to a row of the
+  admissibility table, and no test or...'
+- 'C-001: Runtime contract change | Commit 2e9e99e made policy-exception the intended clearing action for awaiting_policy_exception,
+  with role,... | E-004, E-005, E-008, E-024, E-018'
+- 'C-002: Verifier table not extended | The same commit''s table exempts placeholders only for gate and rollback and has no
+  policy-exception row, so... | E-006, E-008, E-017, E-018, E-019'
+- 'C-003: Scenario C leaves the envelope open | The induced policy failure blocks execution-planning awaiting_policy_exception
+  and leaves its envelope open... | E-007, E-016, E-021'
+- 'C-004: X1 rejects it at the placeholder filter | Because of the mismatch in C-002, X1 judges that envelope inadmissible
+  and the verifier reports 73/74 NOT P... | E-002, E-003, E-014, E-015, E-022'
+- 'Proposed fix: the verifier''s admissibility judgement must hold policy-exception admissible exactly when its phase names
+  a state work item whose status is blo...'
+- 'Alternative options: (a) revert the runtime action for this block to prose — clears X1 but hides the only clearing command
+  and reopens the terminal block E-0...'
+- 'V-001: No verifier scenario executing the policy-exception action end to end was added; C-001 changes only the adm... |
+  RCA Validation Plan, end-to-end scenario executing the action with role, decider and rationale filled | A new verifier check
+  changes the 74-check total this phase is required to report, and the ver...'
+- 'V-002: C-001 also judges a filled role, rejecting one the envelope does not list or the producer''s own, mirroring... |
+  RCA Fix Strategy, admissible exactly when the phase names an item blocked awaiting_policy_exception | Narrows admissibility
+  to what the runtime would accept, as the rollback row already does; the em...'
+validation_requirements:
+  test_focus:
+  - 'Verification steps: re-run the reproduction twice and expect 74/74 RECOVERY PROVEN with X1 passing over the policy run''s
+    open envelope; confirm the condition...'
+  - 'Regression tests added: a unit test pinning every command-naming branch of the clearing-action builder to an admissibility
+    row; positive and negative admissi...'
+  - 'Monitoring signals after release: the CI recovery verifier job on the default branch shows green; FR-03 rows in later
+    proposals record pass; any X1 output li...'
+  - 'Verification steps: in a temporary copy of the tree, run python .claude/runtime/verify_recovery.py --keep and then without
+    --keep, expecting 74/74 RECOVERY P...'
+  - 'Regression tests added: positive and negative admissibility cases for policy-exception — inadmissible on a pending item,
+    an item blocked awaiting_recovery_ta...'
+  - 'Monitoring signals after release: the recovery verifier job on the default branch shows green, observed first-hand rather
+    than reported; FR-03 rows in later...'
+  evidence:
+  - 'T-001: Witness: the new module run against the pre-fix verify_recovery.py (HEAD) detects the defect, 8 of 16 tests...
+    | regression | C-001, C-003'
+  - 'T-002: After the fix all 16 cases pass: emitted action admissible with placeholders on the blocked item; pending,...
+    | unit | C-001, C-003'
+  - 'T-003: Recovery verifier: X1 passes over 9 open envelopes in 4 runs; 74/74 RECOVERY PROVEN; injected runs removed...
+    | end-to-end | C-001'
+  - 'T-004: Bundled payload is an exact mirror of the authoritative payload; before the copy only runtime/verify_recove...
+    | contract | C-002'
+  - 'T-005: Regression baseline re-run over every test module except test_demo_capture: 30/30 modules passed, 751 of 75...
+    | regression | C-001, C-002, C-003'
+  verification:
+  - 'Verification method: baseline first (verify_recovery 73/74 NOT PROVEN with only X1 failing; full suite 29/30 modules,
+    771 tests, only test_demo_capture faili...'
+  - 'Commands executed: python .claude/runtime/verify_recovery.py (before and after); python tools/run_tests_parallel.py (before
+    and after); the T-001 witness com...'
+  - 'Result summary: executed 5 evidence checks, passed 5, failed 0; the full suite after the change reports 30/31 modules
+    and 787 of 787 tests ran, its only fail...'
+  - 'Unverified areas: none'
+  acceptance_criteria:
+  - 'AC-001: An open envelope whose clearing action is policy-exception on a state work item blocked awaiting_policy_exc...
+    | defect report, Expected behaviour | end-to-end'
+  - 'AC-002: verify_recovery.py reports 74/74. | defect report, Expected behaviour | end-to-end'
+  - 'AC-003: the placeholder exemption covers only policy-exception on state items blocked awaiting_policy_exception, wi...
+    | state.json Triage Gate rationale | unit'
+  - 'AC-004: the bundled payload copy changes the same way | state.json Triage Gate rationale | unit'
+  - 'AC-005: Verification steps: in a temporary copy of the tree, run python runtime/verify_recovery.py --keep and then...
+    | root-cause bug-analysis, Validation Plan | end-to-end'
+  - 'AC-006: positive and negative admissibility cases for policy-exception — inadmissible on a pending item, an item bl...
+    | root-cause bug-analysis, Validation Plan | unit'
+  - 'AC-007: unchanged gate and rollback cases | root-cause bug-analysis, Validation Plan | unit'
+  - 'AC-008: a test pinning every command-naming branch of the clearing-action builder to an admissibility row | root-cause
+    bug-analysis, Validation Plan | unit'
+  - 'AC-009: an end-to-end scenario that executes the action with role, decider and rationale filled and shows the block...
+    | root-cause bug-analysis, Validation Plan | end-to-end'
+open_questions:
+- 'Q-001: Does the policy-exception action, executed with role, decider and rationale filled, clear the scenario C bl... |
+  no | omn-qa'
+- 'Q-002: Is the CI recovery verifier job red as reported? This run had no CI access; the default-branch job history... |
+  no | omn-orchestrator'
+- 'Q-001: Is the hermetic table test plus the analysis''s executed end-to-end run sufficient, or must a verifier scena...
+  | no | omn-qa'
+- 'Q-001: Is the CI recovery verifier job green on ubuntu and windows runners for this change? Not observable in this phase;
+  routed to omn-orchestrator.'
+- 'Q-002: Should the closure record of this run link IR-2026-1018 of run-5e9d799db687 as the source of the tests that resolved
+  DF-001 and DF-002? Routed to omn-...'
+- 'Q-001: The fix-bug Phase Model lists known issue status as an input to this phase, and none was supplied, so HO-004 rests
+  on the validation report alone. Doe...'
+- 'Q-002: Should one change proposal account for both run-e7bf0d73027a and run-5e9d799db687, or each its own? Either way it
+  must clear S8 and link both runs'' ar...'
+changed_files:
+- .claude/runtime/verify_recovery.py (modified)
+- omn_agent/_bundled_payload/runtime/verify_recovery.py (modified)
+- tests/test_clearing_action_admissibility.py (added)
+findings:
+- 'DF-001: medium | functional | runtime/verify_recovery.py and tests/ (no policy-exception execution)'
+- 'DF-002: medium | functional | tests/test_clearing_action_admissibility.py'
+verdicts:
+- 'Decision: pass'
+- 'Rationale: the Stage 8 row with no open critical or high defect and no criterion not-met or blocked yields pass; all nine
+  criteria are met on checks executed...'
+- 'Blocking defects outstanding: None identified.'
+- 'Readiness recommendation: recommend that omn-dev-2-reviewer, deciding the Verification Gate under producer exclusion, approve
+  on this report, noting CI resul...'
+affected_areas:
+  determinable: true
+  declared:
+  - runtime
+  triggered:
+    database:
+    - source: artifact:fix-implementation
+      term: migration
+    - source: artifact:regression-validation
+      term: database
+    performance:
+    - source: artifact:regression-validation
+      term: performance
+    security:
+    - source: artifact:triage-and-impact
+      term: injection
+    - source: artifact:root-cause-analysis
+      term: injection
+    - source: artifact:regression-validation
+      term: security
+    runtime:
+    - source: operator
+      term: declared
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:defect-report
+  - artifact:triage-and-impact
+  - artifact:root-cause-analysis
+  - artifact:fix-implementation
+  - artifact:regression-validation
+  - artifact:closure-and-communication
+relevant_skills:
+  triage-and-impact:
+    S11: required
+    S12: required
+    S02: required
+  root-cause-analysis:
+    S03: required
+    S06: required
+    S08: required
+    S12: required
+  fix-implementation:
+    S03: required
+    S06: required
+    S10: required
+    S12: required
+  regression-validation:
+    S07: required
+    S09: required
+    S11: required
+  closure-and-communication:
+    S10: required
+    S11: required
+repository_context:
+  relevant_modules: []
+  relevant_files:
+  - .claude/runtime/verify_recovery.py (modified)
+  - omn_agent/_bundled_payload/runtime/verify_recovery.py (modified)
+  - tests/test_clearing_action_admissibility.py (added)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path

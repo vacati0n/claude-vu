@@ -1,0 +1,310 @@
+{
+  "schema": "framework.runtime/execution-metrics.v1",
+  "task_id": "run-e7bf0d73027a",
+  "workflow": "fix-bug v1.0.0",
+  "runtime_version": "0.10.0",
+  "computed_at": "2026-10-18T09:34:02Z",
+  "total_duration": {
+    "wall_clock_seconds": 73082.0,
+    "wall_clock": "20h18m02s",
+    "agent_active_seconds": 53445.0,
+    "agent_active": "14h50m45s"
+  },
+  "phases_executed": {
+    "declared": 5,
+    "completed": 5,
+    "blocked": 0
+  },
+  "agents_executed": {
+    "invocations": 6,
+    "distinct": 4,
+    "by_agent": {
+      "omn-dev-1-bug-analyst": 2,
+      "omn-dev-1-implement": 1,
+      "omn-qa": 2,
+      "omn-orchestrator": 1
+    }
+  },
+  "skills_executed": {
+    "required_reads": 38,
+    "not_triggered": 7
+  },
+  "parallel_groups": {
+    "count": 5,
+    "max_width": 1,
+    "groups": [
+      [
+        "triage-and-impact"
+      ],
+      [
+        "root-cause-analysis"
+      ],
+      [
+        "fix-implementation"
+      ],
+      [
+        "regression-validation"
+      ],
+      [
+        "closure-and-communication"
+      ]
+    ]
+  },
+  "context_loads": {
+    "members_declared": 85,
+    "members_required": 39
+  },
+  "repeated_context_loads": {
+    "files": 11,
+    "by_path": {
+      "context/product-context.md": 6,
+      "context/technical-context.md": 6,
+      "context/release-context.md": 6,
+      "templates/bug-analysis.md": 5,
+      "skills/logging/observability-logging.md": 5,
+      "skills/error-handling/error-handling-strategy.md": 3,
+      "skills/dotnet/engineering-playbook.md": 2,
+      "templates/implementation-report.md": 3,
+      "skills/testing/testing-strategy.md": 3,
+      "templates/validation-report.md": 3,
+      "skills/security/secure-engineering.md": 2
+    }
+  },
+  "validation_runs": {
+    "passed": 6,
+    "failed": 0
+  },
+  "gate_decisions": {
+    "decided": 4,
+    "auto_policy": 0,
+    "rejected": 1
+  },
+  "tokens_or_context_estimate": {
+    "basis": "4 bytes per token; bytes the dispatch asked the agent to read, per envelope",
+    "legacy_bytes": 1646851,
+    "progressive_bytes": 744213,
+    "legacy_tokens": 411712,
+    "progressive_tokens": 186053,
+    "savings_pct": 54.8
+  },
+  "model_tiers": {
+    "by_tier": {
+      "light": {
+        "invocations": 1,
+        "estimated_bytes": 151516
+      },
+      "standard": {
+        "invocations": 2,
+        "estimated_bytes": 136247
+      },
+      "deep": {
+        "invocations": 3,
+        "estimated_bytes": 456450
+      },
+      "untiered": {
+        "invocations": 0,
+        "estimated_bytes": 0
+      }
+    },
+    "invocations_total": 6,
+    "estimated_bytes_total": 744213,
+    "non_deep_share": 0.5
+  },
+  "lessons_hydrated_total": 0,
+  "per_phase": [
+    {
+      "phase": "triage-and-impact",
+      "agent": "omn-dev-1-bug-analyst",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 703.0,
+      "context_members_declared": 15,
+      "context_members_required": 7,
+      "skills": {
+        "required": 6,
+        "not_triggered": 3
+      },
+      "model_tier": "standard",
+      "context_estimate": {
+        "modules_full_bytes": 99953,
+        "modules_core_bytes": 52647,
+        "slice_all_bytes": 109877,
+        "slice_required_bytes": 9236,
+        "inputs_bytes": 3418,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 17454,
+        "fixed_bytes": 53492,
+        "legacy_estimate_bytes": 266740,
+        "progressive_estimate_bytes": 136247,
+        "legacy_estimate_tokens": 66685,
+        "progressive_estimate_tokens": 34061,
+        "savings_pct": 48.9
+      },
+      "lessons_hydrated": 0,
+      "lessons_hydrated_by_invocation": [
+        {
+          "invocation_id": "inv-e7bf0d73027a-01-001",
+          "lessons": 0
+        }
+      ]
+    },
+    {
+      "phase": "root-cause-analysis",
+      "agent": "omn-dev-1-bug-analyst",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 1582.0,
+      "context_members_declared": 18,
+      "context_members_required": 7,
+      "skills": {
+        "required": 7,
+        "not_triggered": 2
+      },
+      "model_tier": "deep",
+      "context_estimate": {
+        "modules_full_bytes": 99953,
+        "modules_core_bytes": 52647,
+        "slice_all_bytes": 177464,
+        "slice_required_bytes": 11497,
+        "inputs_bytes": 3418,
+        "upstream_full_bytes": 0,
+        "upstream_read_first_bytes": 0,
+        "task_context_bytes": 17454,
+        "fixed_bytes": 56466,
+        "legacy_estimate_bytes": 337301,
+        "progressive_estimate_bytes": 141482,
+        "legacy_estimate_tokens": 84325,
+        "progressive_estimate_tokens": 35370,
+        "savings_pct": 58.1
+      },
+      "lessons_hydrated": 0,
+      "lessons_hydrated_by_invocation": [
+        {
+          "invocation_id": "inv-e7bf0d73027a-02-001",
+          "lessons": 0
+        }
+      ]
+    },
+    {
+      "phase": "fix-implementation",
+      "agent": "omn-dev-1-implement",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 1882.0,
+      "context_members_declared": 18,
+      "context_members_required": 9,
+      "skills": {
+        "required": 7,
+        "not_triggered": 1
+      },
+      "model_tier": "deep",
+      "context_estimate": {
+        "modules_full_bytes": 68877,
+        "modules_core_bytes": 32716,
+        "slice_all_bytes": 179860,
+        "slice_required_bytes": 16419,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 29034,
+        "upstream_read_first_bytes": 14761,
+        "task_context_bytes": 17454,
+        "fixed_bytes": 81365,
+        "legacy_estimate_bytes": 359136,
+        "progressive_estimate_bytes": 162715,
+        "legacy_estimate_tokens": 89784,
+        "progressive_estimate_tokens": 40678,
+        "savings_pct": 54.7
+      },
+      "lessons_hydrated": 0,
+      "lessons_hydrated_by_invocation": [
+        {
+          "invocation_id": "inv-e7bf0d73027a-03-001",
+          "lessons": 0
+        }
+      ]
+    },
+    {
+      "phase": "regression-validation",
+      "agent": "omn-qa",
+      "status": "completed",
+      "dispatches": 2,
+      "attempts_charged": 2,
+      "agent_active_seconds": 48926.0,
+      "context_members_declared": 18,
+      "context_members_required": 9,
+      "skills": {
+        "required": 8,
+        "not_triggered": 1
+      },
+      "model_tier": "deep",
+      "context_estimate": {
+        "modules_full_bytes": 80377,
+        "modules_core_bytes": 39471,
+        "slice_all_bytes": 183967,
+        "slice_required_bytes": 20526,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 9985,
+        "upstream_read_first_bytes": 6579,
+        "task_context_bytes": 17454,
+        "fixed_bytes": 68223,
+        "legacy_estimate_bytes": 342552,
+        "progressive_estimate_bytes": 152253,
+        "legacy_estimate_tokens": 85638,
+        "progressive_estimate_tokens": 38063,
+        "savings_pct": 55.6
+      },
+      "lessons_hydrated": 0,
+      "lessons_hydrated_by_invocation": [
+        {
+          "invocation_id": "inv-e7bf0d73027a-04-001",
+          "lessons": 0
+        },
+        {
+          "invocation_id": "inv-e7bf0d73027a-04-002",
+          "lessons": 0
+        }
+      ]
+    },
+    {
+      "phase": "closure-and-communication",
+      "agent": "omn-orchestrator",
+      "status": "completed",
+      "dispatches": 1,
+      "attempts_charged": 1,
+      "agent_active_seconds": 352.0,
+      "context_members_declared": 16,
+      "context_members_required": 7,
+      "skills": {
+        "required": 10,
+        "not_triggered": 0
+      },
+      "model_tier": "light",
+      "context_estimate": {
+        "modules_full_bytes": 75179,
+        "modules_core_bytes": 39453,
+        "slice_all_bytes": 180284,
+        "slice_required_bytes": 16843,
+        "inputs_bytes": 0,
+        "upstream_full_bytes": 13691,
+        "upstream_read_first_bytes": 5798,
+        "task_context_bytes": 17454,
+        "fixed_bytes": 71968,
+        "legacy_estimate_bytes": 341122,
+        "progressive_estimate_bytes": 151516,
+        "legacy_estimate_tokens": 85280,
+        "progressive_estimate_tokens": 37879,
+        "savings_pct": 55.6
+      },
+      "lessons_hydrated": 0,
+      "lessons_hydrated_by_invocation": [
+        {
+          "invocation_id": "inv-e7bf0d73027a-05-001",
+          "lessons": 0
+        }
+      ]
+    }
+  ]
+}

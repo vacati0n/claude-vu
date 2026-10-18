@@ -1,0 +1,121 @@
+{
+  "invocation_id": "inv-e7bf0d73027a-03-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-e7bf0d73027a/states/fix-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-1015",
+    "workflowPhase": "fix-implementation",
+    "status": "complete",
+    "verificationStatus": "verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 3,
+      "testEvidenceEntries": 5,
+      "deviations": 2,
+      "residualRisks": 2,
+      "openQuestions": 1
+    },
+    "evidenceTotals": {
+      "executed": 5,
+      "passed": 5,
+      "failed": 0,
+      "notRun": 0
+    },
+    "verificationStatusBasis": "Stage 7 of reasoning.md: every accepted element implemented, every evidence entry executed and passed, no area left without evidence, so verified and complete.",
+    "baseline": {
+      "verify_recovery": "73/74 NOT PROVEN, only X1 failing",
+      "full_suite": "29/30 modules, 771 of 771 tests, only test_demo_capture EndToEndEditTestCase (1 failure, 2 errors)"
+    },
+    "after": {
+      "verify_recovery": "74/74 RECOVERY PROVEN",
+      "new_tests": "16/16 OK",
+      "bundled_payload": "11/11 OK",
+      "full_suite": "30/31 modules, 787 of 787 tests, same 3 test_demo_capture cases",
+      "suite_excluding_demo_capture": "30/30 modules, 751 of 751 tests"
+    },
+    "qualityChecks": {
+      "run": 45,
+      "passed": 45,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "M1": "pass",
+        "M5": "pass",
+        "M7": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "M3": "pass",
+        "M2": "pass",
+        "K1": "pass",
+        "K2": "pass",
+        "M4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "B1": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "B4": "pass",
+        "B5": "pass",
+        "B6": "pass",
+        "B7": "pass",
+        "M6": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass"
+      },
+      "validationEngine": "implementation_report_validator.py with the invocation envelope: PASS 32/32",
+      "notes": [
+        "B2: tests/ and omn_agent/ are outside the dispatch prompt's .claude/** line but inside the envelope repositoryWrites scope (repository minus runs/** and proposals/**); declared in the report.",
+        "B6: verify_recovery.py transiently created and removed its injected runs and inputs under runs/; git status before and after is identical apart from the three declared source and test files and this phase's two outputs; run-f94564cb61ce was not modified, so no restore was needed.",
+        "Transient scratch writes: D:/rvw-tmp-5df08e/impl-e7bf (HEAD copy of verify_recovery.py, suite logs, module list) and D:/rvw-tmp-5df08e/impl-e7bf-git-before.txt."
+      ]
+    },
+    "notMachineCheckable": {
+      "N1": "each Change Set row describes the change made at that path",
+      "N2": "each Test Evidence row exercises the entries in its Covers cell; T-001 was executed against the HEAD copy of C-001",
+      "N3": "no side effect introduced into critical business logic; the runtime builder and cmd_policy_exception are untouched",
+      "N4": "the one new file (C-003) is justified at ladder rung 7: no existing test module covers the admissibility table; no new abstraction or dependency"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/manifest.yaml",
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "runs/run-e7bf0d73027a/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    ".claude/runtime/verify_recovery.py",
+    "omn_agent/_bundled_payload/runtime/verify_recovery.py",
+    "tests/test_clearing_action_admissibility.py",
+    "runs/run-e7bf0d73027a/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-e7bf0d73027a/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

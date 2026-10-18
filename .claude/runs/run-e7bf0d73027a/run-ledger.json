@@ -1,0 +1,359 @@
+{
+  "run_id": "run-e7bf0d73027a",
+  "runtime_version": "0.10.0",
+  "command_id": "bugfix",
+  "workflow_id": "fix-bug",
+  "workflow_version": "1.0.0",
+  "status": "Completed",
+  "input_digest": "sha256:cc73589621a56a581ddbc0868700ffa3",
+  "created_at": "2026-10-17T13:16:00Z",
+  "updated_at": "2026-10-18T09:34:02Z",
+  "states": {
+    "triage-and-impact": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:90684093dbf370515b5c0a2245ba7a85",
+      "artifact_path": "runs/run-e7bf0d73027a/states/triage-and-impact/artifacts/bug-analysis.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-e7bf0d73027a/states/triage-and-impact/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 30,
+        "checksPassed": 30,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 9,
+          "status": "complete",
+          "identifiers": {
+            "E": 14,
+            "C": 4,
+            "Q": 2
+          },
+          "tableRows": {
+            "Reproduction": 14,
+            "Root Cause Analysis": 4
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    },
+    "root-cause-analysis": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-bug-analyst",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:91e5df817713f092565d7d3b17e9aeae",
+      "artifact_path": "runs/run-e7bf0d73027a/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-e7bf0d73027a/states/root-cause-analysis/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 30,
+        "checksPassed": 30,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 9,
+          "status": "complete",
+          "identifiers": {
+            "E": 25,
+            "C": 4,
+            "Q": 2
+          },
+          "tableRows": {
+            "Reproduction": 25,
+            "Root Cause Analysis": 4
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    },
+    "fix-implementation": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-dev-1-implement",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:663c14fb27f1ad9c98a9fd97816ac662",
+      "artifact_path": "runs/run-e7bf0d73027a/states/fix-implementation/artifacts/implementation-report.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-e7bf0d73027a/states/fix-implementation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 32,
+        "checksPassed": 32,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "C": 3,
+            "T": 5,
+            "V": 2,
+            "R": 2,
+            "Q": 1
+          },
+          "tableRows": {
+            "Change Set": 3,
+            "Test Evidence": 5,
+            "Deviations and Tradeoffs": 2,
+            "Residual Risk": 2
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    },
+    "regression-validation": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-qa",
+      "attempt": 2,
+      "attempts_lost": 0,
+      "attempts_charged": 2,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:e4ae9197debe2b26e63c3237f293fb6d",
+      "artifact_path": "runs/run-e7bf0d73027a/states/regression-validation/artifacts/attempt-2/validation-report.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-e7bf0d73027a/states/regression-validation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 31,
+        "checksPassed": 31,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "AC": 9,
+            "DF": 2,
+            "Q": 2
+          },
+          "tableRows": {
+            "Acceptance Criteria Results": 9,
+            "Defects": 2
+          },
+          "criteria": 9,
+          "defects": 2,
+          "verdict": "pass",
+          "validationBasis": "regression",
+          "results": {
+            "met": 9,
+            "not-met": 0,
+            "blocked": 0
+          },
+          "severity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 2,
+            "low": 0
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 1
+    },
+    "closure-and-communication": {
+      "status": "completed",
+      "queue_status": "Completed",
+      "owner_agent_id": "omn-orchestrator",
+      "attempt": 1,
+      "attempts_lost": 0,
+      "attempts_charged": 1,
+      "max_attempts": 3,
+      "available_at": null,
+      "idempotency_key": "sha256:0a27db204db98110d302dae0979171c0",
+      "artifact_path": "runs/run-e7bf0d73027a/states/closure-and-communication/artifacts/orchestration-result.md",
+      "blocked_reason": null,
+      "failure_class": null,
+      "state_ledger": "runs/run-e7bf0d73027a/states/closure-and-communication/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 34,
+        "checksPassed": 34,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "PH": 5,
+            "HO": 4,
+            "ES": 0,
+            "FU": 8,
+            "Q": 2
+          },
+          "tableRows": {
+            "Phase Progression": 5,
+            "Handoffs": 4,
+            "Follow-Up Actions": 8
+          },
+          "phases": 5,
+          "handoffs": 4,
+          "escalations": 0,
+          "followUps": 8,
+          "disposition": "closed-with-followups",
+          "coordinationBasis": "closure",
+          "progression": {
+            "complete": 4,
+            "blocked": 1,
+            "not-started": 0
+          },
+          "escalationSeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          }
+        },
+        "undeclaredSideEffects": []
+      },
+      "attempts_superseded": 0
+    }
+  },
+  "gates": {
+    "Triage Gate": {
+      "gate": "Triage Gate",
+      "closes_state": "triage-and-impact",
+      "owner_roles": [
+        "omn-dev-1-bug-analyst",
+        "omn-tech-lead"
+      ],
+      "producer_agent": "omn-dev-1-bug-analyst",
+      "decision": "approved",
+      "owner_role": "omn-tech-lead",
+      "decided_by": "omn-tech-lead subagent a7d77e86c588e22cd, recorded by session operator for vuhoangcao",
+      "rationale": "Severity medium on its own evidence, blast radius and deterministic reproduction settled (E-002, E-003); validator 30/30; cited source matches. Conditions for root-cause-analysis: close Q-001 by exercising policy-exception end to end rather than by reading code; the placeholder exemption covers only policy-exception on state items blocked awaiting_policy_exception, with negative cases tested; the bundled payload copy changes the same way; unverified CI claims (Q-002) are not evidence.",
+      "evidence_ref": "runs/run-e7bf0d73027a/states/triage-and-impact",
+      "decided_at": "2026-10-17T13:29:19Z",
+      "decision_history": []
+    },
+    "Fix Gate": {
+      "gate": "Fix Gate",
+      "closes_state": "fix-implementation",
+      "owner_roles": [
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-dev-1-implement",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent acc8a10555792a6cf, recorded by session operator for vuhoangcao",
+      "rationale": "Independent re-run: 16 new admissibility tests pass, 8 of them fail on the HEAD verify_recovery.py; verify_recovery.py 74/74 RECOVERY PROVEN, X1 passing over 9 envelopes, run-f94564cb61ce unchanged; test_bundled_payload 11/11, bundled copy byte-identical. All three Triage Gate conditions hold. No critical or high finding open. Carried: omn-qa rules on the end-to-end gap V-001/Q-001 at the Verification Gate; the rollback row is not pinned by the new module; the CI result (R-002) is unobserved.",
+      "evidence_ref": "runs/run-e7bf0d73027a/states/fix-implementation",
+      "decided_at": "2026-10-17T14:30:28Z",
+      "decision_history": []
+    },
+    "Verification Gate": {
+      "gate": "Verification Gate",
+      "closes_state": "regression-validation",
+      "owner_roles": [
+        "omn-qa",
+        "omn-dev-2-reviewer"
+      ],
+      "producer_agent": "omn-qa",
+      "decision": "approved",
+      "owner_role": "omn-dev-2-reviewer",
+      "decided_by": "omn-dev-2-reviewer subagent a1b1e436e38c12a2d, recorded by session operator for vuhoangcao",
+      "rationale": "omn-qa attempt-2 report: 9/9 criteria, validator 31/31; DF-001 and DF-002 resolved (policy-exception e2e case and RollbackRowUnchangedTestCase present). Independent re-run of both modules 25/25 OK, git status unchanged. No critical or high defect open. Carried risks: CI result (R-002, Q-001) unobserved; the tests came from run-5e9d799db687, not IR-2026-1015 (Q-002); e2e test depends on committed run-c5a8d50d3238; no automated X1 re-check after the block clears; empty-owner-list behaviour unasserted (architect); mutation witnesses not re-run.",
+      "evidence_ref": "runs/run-e7bf0d73027a/states/regression-validation",
+      "decided_at": "2026-10-18T09:26:57Z",
+      "decision_history": [
+        {
+          "decision": "rejected",
+          "owner_role": "omn-dev-2-reviewer",
+          "decided_by": "omn-dev-2-reviewer subagent aa873028df2545b4e, recorded by session operator for vuhoangcao",
+          "rationale": "QA confirmed the fix (AC-001 to AC-006, AC-008 met; reviewer re-ran 16/16 tests). AC-007 and AC-009 from the Triage-approved Validation Plan are unmet; neither defect is critical/high, neither risk formally accepted. fix-implementation must add (DF-001) an automated case executing policy-exception with role, decider and rationale filled, showing the block cleared and envelope resolved, and (DF-002) an unchanged-rollback case in tests/test_clearing_action_admissibility.py; then QA retests. CI result R-002 unobserved, not evidence.",
+          "evidence_ref": "runs/run-e7bf0d73027a/states/regression-validation",
+          "decided_at": "2026-10-18T03:52:13Z",
+          "superseded_by": "RB-run-e7bf0d73027a-verification-gate-01",
+          "target": "regression-validation",
+          "superseded_phases": [
+            "regression-validation"
+          ],
+          "authorised_by": "omn-dev-2-reviewer",
+          "authorisation_decided_by": "session operator for vuhoangcao, on vuhoangcao's instruction, under omn-dev-2-reviewer's rejection (subagent aa873028df2545b4e)",
+          "authorisation_rationale": "Verification Gate rejected for missing regression tests DF-001 and DF-002; rollback to fix-implementation refused (Fix Gate approved). The tests were delivered by run-5e9d799db687 (closed, Closure Gate approved: QA pass 7/7, 25/25 tests, verifier 74/74). Re-entering regression-validation so omn-qa retests with them in place.",
+          "re_armed_at": "2026-10-18T09:08:33Z"
+        }
+      ]
+    },
+    "Closure Gate": {
+      "gate": "Closure Gate",
+      "closes_state": "closure-and-communication",
+      "owner_roles": [
+        "omn-orchestrator",
+        "omn-documentation"
+      ],
+      "producer_agent": "omn-orchestrator",
+      "decision": "approved",
+      "owner_role": "omn-documentation",
+      "decided_by": "omn-documentation subagent ac3e08e474e38163d, recorded by session operator for vuhoangcao",
+      "rationale": "fix-bug exit criteria hold on evidence from other roles: omn-qa attempt 2 pass, 9/9 criteria, verifier 74/74, DF-001 and DF-002 resolved, no critical or high defect open. Verification Gate rejection superseded by RB-run-e7bf0d73027a-verification-gate-01; re-armed gate approved by omn-dev-2-reviewer; Triage and Fix Gates decided by non-producers. Q-001: residual risks plus FU-001 to FU-008 serve as known-issue status. Carried: FU-001 commit order (high), FU-002 missing change proposal/S8 (high), FU-003 CI unobserved, FU-004 empty-owner guard, FU-005 to FU-008. Approval closes the run; it does not authorise commit or release.",
+      "evidence_ref": "runs/run-e7bf0d73027a/states/closure-and-communication",
+      "decided_at": "2026-10-18T09:34:02Z",
+      "decision_history": []
+    }
+  },
+  "summary": {
+    "run_id": "run-e7bf0d73027a",
+    "run_status": "Completed",
+    "phases": 5,
+    "completed": 5,
+    "blocked": 0,
+    "failed": 0,
+    "pending": 0,
+    "retrying": 0,
+    "active": 0,
+    "transitions": 38,
+    "replays_suppressed": 0
+  },
+  "recovery": {
+    "ledger": "runs/run-e7bf0d73027a/recovery-ledger.json",
+    "classifications": 11,
+    "open": 0,
+    "resolved": 11,
+    "retries_scheduled": 0,
+    "by_failure_class": {
+      "gate-approval-required": 9,
+      "gate-rejection": 2
+    },
+    "retry_profile": {
+      "max_attempts": 3,
+      "backoff_strategy": "exponential",
+      "base_delay_seconds": 2,
+      "multiplier": 2,
+      "max_delay_seconds": 60,
+      "jitter_ratio": 0.2,
+      "circuit_breaker_threshold": 3,
+      "policy_ref": "config/runtime.md#retry-policy"
+    }
+  }
+}
