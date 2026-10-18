@@ -2,7 +2,7 @@
 
 ## Usage
 
-Canonical artifact template for `release-note.md`, produced by agent `omn-documentation` in
+Canonical artifact template for `release-note.md`, produced by agent `documentation` in
 its five publication phases: `documentation-and-release-handoff` of `workflows/implement-feature.md`,
 `publication` of `workflows/investigate.md`, `findings-publication` of `workflows/research.md`,
 `documentation-impact` of `workflows/review-pull-request.md`, and `communication-and-post-release`
@@ -21,7 +21,7 @@ A section with nothing to report reads `None identified.`
 
 Identifier scheme: known issues `K-nnn`, zero-padded to three digits and ascending.
 
-The binding behavioural contract is `agents/omn-documentation.md`. Its rule that
+The binding behavioural contract is `agents/documentation.md`. Its rule that
 documentation matches delivered behaviour is enforced mechanically where it is decidable: a
 declared contract change requires a compatibility statement, and a rolled-back release
 requires a recorded issue.
@@ -35,7 +35,7 @@ releaseNote:
   sourceInputs:
     - type:          # deployment-status | monitoring-health-record | final-change-summary | stakeholder-list | verification-report | validation-report | technical-recommendation | architecture-context
       reference:     # supplied reference, or "inline"
-  producedBy: omn-documentation
+  producedBy: documentation
   agentVersion:
   schemaVersion: 1.0.0
   status:            # complete | provisional | blocked

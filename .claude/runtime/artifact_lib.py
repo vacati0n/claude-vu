@@ -148,6 +148,22 @@ def strip_comments(body: str) -> str:
     return re.sub(r"<!--.*?-->", "", body or "", flags=re.S)
 
 
+# --------------------------------------------------------------------------- agent identity
+
+# Agent identifiers once carried an `omn-` prefix. Run evidence, proposals, and dated reports
+# written before the prefix was dropped are never edited in place, so they still name agents
+# such as `omn-qa`; this prefix maps such a name to the agent it denotes today.
+LEGACY_AGENT_PREFIX = "omn-"
+
+
+def canonical_agent_id(agent_id: str) -> str:
+    """The current identifier for an agent name, mapping a legacy prefixed one onto it."""
+    agent_id = str(agent_id or "")
+    if agent_id.startswith(LEGACY_AGENT_PREFIX):
+        return agent_id[len(LEGACY_AGENT_PREFIX):]
+    return agent_id
+
+
 # --------------------------------------------------------------------------- framework facts
 
 
@@ -198,7 +214,10 @@ def framework_facts():
 
     return {
         "registered_agents": registered_agents,
-        "resolvable_agents": registered_agents | contract_agents,
+        # Legacy prefixed names resolve to the active agent they denote, so committed evidence
+        # that names one is not read as naming an unknown agent.
+        "resolvable_agents": (registered_agents | contract_agents
+                              | {LEGACY_AGENT_PREFIX + a for a in contract_agents}),
         "workflows": {r["identifier"] for r in (workflows.get("records") or [])},
         "gates": gates,
         "capabilities": capabilities,

@@ -30,7 +30,7 @@ Lessons from earlier runs are governed memory written by the runtime, not by han
 - Lifecycle: `candidate` on first harvest, `active` when approved, `retired` when retired. Every
   approve, retire, and annotate action needs an actor and a rationale and appends one history
   entry. Nothing is deleted.
-- Ownership: each lesson carries an owner (default `omn-tech-lead`) and a rationale.
+- Ownership: each lesson carries an owner (default `tech-lead`) and a rationale.
 - Eligibility: active, or a candidate recurring in at least two distinct runs (the threshold in
   `config/knowledge-policy.json`); retired lessons are never shown.
 - Hydration is recorded per run at plan time: on by default, off with `--no-lesson-hydration`;

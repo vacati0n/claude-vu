@@ -6,9 +6,9 @@ viable execution path** for Vertical Slices 1 to 3 and nothing more.
 ```
 Slice 1   /implement -> implement-feature -> execution-planning -> planner   -> execution-plan.md
 Slice 2   /implement -> implement-feature -> solution-design-... -> architect -> technical-design.md
-Slice 3'  /implement -> implement-feature -> implementation      -> omn-dev-1-implement
+Slice 3'  /implement -> implement-feature -> implementation      -> dev-1-implement
                                                                  -> implementation-report.md
-Slice 4'  /implement -> implement-feature -> scope-and-acceptance -> omn-product-owner
+Slice 4'  /implement -> implement-feature -> scope-and-acceptance -> product-owner
                                                                  -> scope-definition.md
 Slice 3   one run, every phase: a persisted state machine, guarded transitions, and gates
 Slice 4   the registered surface: 9 commands over 7 workflows, 36 routable phases
@@ -109,7 +109,7 @@ python .claude/runtime/framework_runtime.py release --run-id <run-id> --phase <p
 # 6. Record the human gate decision that unblocks the next phase
 python .claude/runtime/framework_runtime.py gate --run-id <run-id> \
     --gate "Planning Gate" --decision approve \
-    --owner-role omn-tech-lead --decided-by <who> --rationale "<why>"
+    --owner-role tech-lead --decided-by <who> --rationale "<why>"
 
 # 6b. A rejected gate is a classified rollback, and the rollback is a second human decision.
 #     `rollback` authorises it: the completed downstream cone of --target (default: the phase
@@ -124,7 +124,7 @@ python .claude/runtime/framework_runtime.py gate --run-id <run-id> \
 #     `next` names it first while the rejection stands, and `recovery` derives it live.
 python .claude/runtime/framework_runtime.py rollback --run-id <run-id> \
     --gate "Planning Gate" --target execution-planning \
-    --owner-role omn-tech-lead --decided-by <who> --rationale "<why>"
+    --owner-role tech-lead --decided-by <who> --rationale "<why>"
 
 # 7. Inspect and prove
 python .claude/runtime/framework_runtime.py status --run-id <run-id>
@@ -137,8 +137,7 @@ python .claude/runtime/verify_multi_phase.py  --run-id <run-id>
 #     byte for byte. `--no-color`/`--color` override the TTY check either way; `--json`
 #     prints the same tree as a machine-readable `framework.runtime/status-view.v1`
 #     document instead; `--compact` stops after the table/tree, before the transitions,
-#     recovery ledger, and events sections. `omn-agent run <KEY> --show --watch` drives
-#     this in a read-only poll loop (see the root README's Commands table).
+#     recovery ledger, and events sections.
 python .claude/runtime/framework_runtime.py status --run-id <run-id> --json
 python .claude/runtime/framework_runtime.py status --run-id <run-id> --compact --no-color
 
@@ -285,8 +284,8 @@ alternative, must wait.
 Gate ownership is read from `workflows/workflow-gate-matrix.md`. The runtime never invents
 a decision: an undecided gate holds its successor in `blocked` until one is recorded.
 Recording requires the owner role being exercised **and** who actually recorded it, and the
-Producer Exclusion Rule is enforced, including through the `omn-` alias the gate matrix
-still uses for the architecture role.
+Producer Exclusion Rule is enforced, including through the retired `omn-` prefix that older
+run evidence uses for role identifiers.
 
 The decider is a human by default. Under `config/gate-policy.json`'s
 `auto-on-clean-evidence` mode (specified in `config/gate-policy.md`, overridable per
@@ -439,14 +438,14 @@ that accepts everything and a validator that rejects everything both report a re
 neither is a decision.
 
 `release_note_validator.py` decides the release position against evidence, not membership.
-omn-documentation 1.2.0 keys it on the phase's communication basis: only
+documentation 1.2.0 keys it on the phase's communication basis: only
 `communication-and-post-release` states a deployment outcome (`released`, `partial`,
 `rolled-back`), read off a supplied deployment status, and the other four phases publish
 `handed-off`, `findings-published`, or `delta-published`. `R8` requires the evidence type each
 position is read off among `sourceInputs`; `R9` maps the invocation envelope's `state_id` to its
 basis and is declared not-machine-checkable only when no envelope is supplied, on the runtime
 path and on the validator's own `--envelope` command line alike. A committed note produced by an
-earlier omn-documentation version is set aside by `verify_validators.py` as produced under a
+earlier documentation version is set aside by `verify_validators.py` as produced under a
 superseded contract and reported by count (`SUPERSEDED_CONTRACTS`); the validator exempts nothing,
 and such notes stay as recorded.
 
@@ -554,7 +553,7 @@ phase's ledger and artifacts. `verify_vertical_slice.py` reads both.
 
 ## Demo mode
 
-`plan --demo` (or `omn-agent run <KEY> --demo`) records a run for an autonomous end-to-end
+`plan --demo` records a run for an autonomous end-to-end
 demonstration and compiles the presentation itself when the run completes. Runtime 0.8.0.
 
 The film is an edit of the real application on screen. The markers are not the picture; they
@@ -602,7 +601,7 @@ are the **clock and the script** that decide where to cut it.
   every tool call to `framework_runtime.py demo --hook`; it records a `tool_invocation`
   marker against the run named in `runs/.active-demo` and is inert otherwise. That file
   carries a `<framework-dir>` placeholder in its command, because a file on disk cannot know
-  whether it was installed as `.claude` or as `.omn-agent`; `demo --print-hook` prints the
+  the name of the directory it was copied into; `demo --print-hook` prints the
   same block with the path resolved for this tree. Unmerged, the markers carry the runtime's
   own events and nothing the host did, which is a thinner film, not a broken one.
 - **Recording.** `plan --demo --demo-record` starts the camera as part of planning, before
@@ -668,8 +667,8 @@ are the **clock and the script** that decide where to cut it.
   stage lands in `build-manifest.json` with its reason, and a demo failure of any kind is
   logged to `demo/recorder.log`, never raised into the run.
 
-`<framework-dir>` below is this framework directory's real name: `.omn-agent` in a
-repository the installer wrote to, `.claude` in the framework's own checkout.
+`<framework-dir>` below is this framework directory's real name, `.claude` in the framework's
+own checkout.
 
 ```bash
 # film a run and let it cut itself when the run completes
@@ -805,8 +804,8 @@ dispatch time and writes it to `runs/<run-id>/states/<phase>/adapter-prompt.md`.
 
    The declaration is only half of an output contract: `resolve_output_contract` also reads the
    owning agent's manifest `outputs`. That half now exists for both producers.
-   `omn-dev-2-reviewer` holds an active record in `registry/agents.yaml`, a manifest at
-   `agents/omn-dev-2-reviewer/manifest.yaml` declaring `review-package.md` as its required output,
+   `dev-2-reviewer` holds an active record in `registry/agents.yaml`, a manifest at
+   `agents/dev-2-reviewer/manifest.yaml` declaring `review-package.md` as its required output,
    a seven-module set, and a `quality.md`. `architect` declares the same artifact as a conditional
    output, for `review-pull-request/structural-compliance` only, which is the phase
    `review_package_validator` already contracted it to produce: the validator's `producers` tuple

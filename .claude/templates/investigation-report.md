@@ -3,7 +3,7 @@
 ## Usage
 
 Canonical artifact template for `investigation-report.md`, produced by agent
-`omn-context-agent` in the `technical-discovery` phase of `workflows/investigate.md` and the
+`context-agent` in the `technical-discovery` phase of `workflows/investigate.md` and the
 `technical-validation` phase of `workflows/research.md`. One artifact type serves both, because
 both phases ask the same question of the same agent: what is actually true right now, and how
 confident may a decision be in it.
@@ -20,10 +20,10 @@ A section with nothing to report reads `None identified.`
 Identifier schemes: evidence records `E-nnn`, options `O-nnn`, open questions `Q-nnn`. All
 zero-padded to three digits and ascending.
 
-The binding behavioural contract is the `agents/omn-context-agent/` module set, and
-`agents/omn-context-agent/output.md` governs this artifact's structure where the two differ. Its
+The binding behavioural contract is the `agents/context-agent/` module set, and
+`agents/context-agent/output.md` governs this artifact's structure where the two differ. Its
 rules on confidence marking, stale assumptions, and contradictions are enforced mechanically where
-they are decidable by inspection. Earlier revisions named `agents/omn-context-agent.md`, which was
+they are decidable by inspection. Earlier revisions named `agents/context-agent.md`, which was
 never written; the module set replaced the reference.
 
 ---
@@ -35,7 +35,7 @@ investigation:
   sourceInputs:
     - type:          # requirement-framing | investigation-question | research-question | framed-objective | research-brief | context-sources | technical-data-access | business-evidence
       reference:     # supplied reference, or "inline"
-  producedBy: omn-context-agent
+  producedBy: context-agent
   agentVersion:
   schemaVersion: 1.0.0
   status:            # complete | provisional | blocked

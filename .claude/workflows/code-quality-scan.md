@@ -22,8 +22,8 @@ framework assigns to a person, not to the agent that produced the evidence.
 
 ## Participating Agents
 
-- omn-dev-2-reviewer
-- omn-tech-lead
+- dev-2-reviewer
+- tech-lead
 
 ## Operating Rules
 
@@ -49,17 +49,17 @@ runtime gateway in `runtime/framework_runtime.py`.
 
 | Phase | Owner Agent | Participation | Input | Output Artifact | Gate | Required Skills |
 |---|---|---|---|---|---|---|
-| `repository-quality-scan` | `omn-dev-2-reviewer` | primary | supplied quality-scan scope, repository under review at a stable revision | `review-package.md`, carrying the quality-scan findings under the junk-detection categories | Quality Handoff Gate | S01, S02, S03, S07 |
+| `repository-quality-scan` | `dev-2-reviewer` | primary | supplied quality-scan scope, repository under review at a stable revision | `review-package.md`, carrying the quality-scan findings under the junk-detection categories | Quality Handoff Gate | S01, S02, S03, S07 |
 
 ### Phase Identifier Sources
 
 | Phase | Identifier source |
 |---|---|
-| `repository-quality-scan` | Declared by `agents/omn-dev-2-reviewer/manifest.yaml`, `supportedWorkflows[code-quality-scan].phase`. New identifier: no prior state machine names this phase, and it is deliberately distinct from `code-quality-review`, which reviews a change; this phase reviews current repository state. |
+| `repository-quality-scan` | Declared by `agents/dev-2-reviewer/manifest.yaml`, `supportedWorkflows[code-quality-scan].phase`. New identifier: no prior state machine names this phase, and it is deliberately distinct from `code-quality-review`, which reviews a change; this phase reviews current repository state. |
 
 ### Resolution Rules
 
-- A phase resolves to exactly one owner agent. `omn-tech-lead` participates through the
+- A phase resolves to exactly one owner agent. `tech-lead` participates through the
   Quality Handoff Gate, never through phase ownership.
 - The owner agent's manifest declares this workflow and this phase identifier in
   `supportedWorkflows`. The runtime rejects a mismatch rather than guessing.
@@ -128,7 +128,7 @@ outside it:
 | Detailed findings | `Findings` rows; each `Finding` cell carries root cause, why it is problematic, and confidence |
 | Likely generated or redundant patterns | `Findings` rows under `generated-noise` and `duplication`, with the repeated pattern named |
 | Review risk assessment | `Residual Risk` (why the code is hard to validate, what future maintenance risk it creates) |
-| Recommended actions | `Correction Requests` (prioritized: remove, refactor, split, centralize), owner `omn-tech-lead` for arbitration items |
+| Recommended actions | `Correction Requests` (prioritized: remove, refactor, split, centralize), owner `tech-lead` for arbitration items |
 | Human review checklist | `Open Questions` (`Q-nnn`), one per judgement only a human can make, including every needs-human-validation finding |
 
 ## Execution Order
@@ -164,18 +164,18 @@ Prose form of the Phase Model above. The identifier in parentheses is canonical.
 - A package rejected at the gate returns to `repository-quality-scan` with the rejection
   rationale as correction input; the scan is re-run against the same frozen scope.
 - Disputes about whether a finding is junk are not resolved here; they leave as open
-  questions owned by `omn-tech-lead`.
+  questions owned by `tech-lead`.
 
 ## Approval Gates
 
 Gate names are the canonical ones in `workflows/workflow-gate-matrix.md`, which is the
 authority the runtime reads for gate ownership.
 
-- Quality Handoff Gate: omn-dev-2-reviewer and omn-tech-lead.
+- Quality Handoff Gate: dev-2-reviewer and tech-lead.
 
 The gate carries a second owner because the first owner produces the evidence the gate
 assesses, and the Producer Exclusion Rule forbids approving one's own output. The deciding
-owner is omn-tech-lead — the human handoff this workflow exists to end at. Gate decisions
+owner is tech-lead — the human handoff this workflow exists to end at. Gate decisions
 default to human under `config/gate-policy.md`; running this workflow under an auto
 gate-policy does not change who may decide, only whether a clean-evidence approval may be
 recorded without a prompt, and the recommended invocation keeps the default human mode.

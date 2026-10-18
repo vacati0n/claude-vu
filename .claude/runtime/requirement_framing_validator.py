@@ -5,8 +5,8 @@ Mechanically checks a produced `requirement-framing.md` against the contract set
 it:
 
   - `.claude/templates/requirement-framing.md`            rendered form, section and field labels
-  - `.claude/agents/omn-business-analyst/output.md`       structural and semantic output contract
-  - `.claude/agents/omn-business-analyst/quality.md`      the checks the agent runs on itself
+  - `.claude/agents/business-analyst/output.md`       structural and semantic output contract
+  - `.claude/agents/business-analyst/quality.md`      the checks the agent runs on itself
 
 Scope boundary: `RF1` to `RF11` are the rules in that contract decidable by inspecting the
 artifact. Whether the recorded requirements are the *right* requirements for the business is a
@@ -30,8 +30,8 @@ import artifact_contract as ac  # noqa: E402
 from artifact_lib import Check, strip_md  # noqa: E402
 
 TEMPLATE = "templates/requirement-framing.md"
-OUTPUT_REF = "agents/omn-business-analyst/output.md"
-QUALITY_REF = "agents/omn-business-analyst/quality.md"
+OUTPUT_REF = "agents/business-analyst/output.md"
+QUALITY_REF = "agents/business-analyst/quality.md"
 
 VERDICTS = ("framed", "partially-framed", "blocked")
 REQUIREMENT_TYPES = ("functional", "non-functional")
@@ -54,7 +54,7 @@ DOWNSTREAM_ID_PREFIXES = {
 
 CONTRACT = ac.ArtifactContract(
     artifact="requirement-framing.md",
-    producers=("omn-business-analyst",),
+    producers=("business-analyst",),
     metadata_key="requirementFraming",
     metadata_fields=("framingId", "subject", "sourceInputs", "producedBy", "agentVersion",
                      "schemaVersion", "status", "framingVerdict", "requirementCount",
@@ -121,7 +121,7 @@ CONTRACT = ac.ArtifactContract(
 
 
 def semantic_checks(rep, contract):
-    """The framing-specific rules in `agents/omn-business-analyst/`."""
+    """The framing-specific rules in `agents/business-analyst/`."""
     meta = getattr(rep, "meta", {}) or {}
     body_of = getattr(rep, "body_of", {}) or {}
 

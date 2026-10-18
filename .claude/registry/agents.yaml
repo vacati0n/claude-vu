@@ -147,7 +147,7 @@ records:
       - structural-risk-analysis
       - architecture-estimation
 
-  - identifier: omn-product-owner
+  - identifier: product-owner
     displayName: Product Owner
     description: >-
       Converts a supplied business intent into a bounded scope with measurable acceptance
@@ -156,7 +156,7 @@ records:
       boundary rather than separate readings of the same request.
     version: 1.0.0
     status: active
-    specificationPath: agents/omn-product-owner/manifest.yaml
+    specificationPath: agents/product-owner/manifest.yaml
     dependencies:
       - identifier: implement-feature
         versionConstraint: ">=1.0.0 <2.0.0"
@@ -174,7 +174,7 @@ records:
       - scope-definition
       - acceptance-authority
 
-  - identifier: omn-dev-1-implement
+  - identifier: dev-1-implement
     displayName: Implementation Developer
     description: >-
       Implements an accepted change to production quality: builds feature, fix, and
@@ -183,7 +183,7 @@ records:
       set, the verification evidence, and every tradeoff taken.
     version: 1.1.0
     status: active
-    specificationPath: agents/omn-dev-1-implement/manifest.yaml
+    specificationPath: agents/dev-1-implement/manifest.yaml
     dependencies:
       - identifier: implement-feature
         versionConstraint: ">=1.0.0 <2.0.0"
@@ -215,7 +215,7 @@ records:
     capabilities:
       - implementation-delivery
 
-  - identifier: omn-dev-1-bug-analyst
+  - identifier: dev-1-bug-analyst
     displayName: Bug Analyst
     description: >-
       Establishes what a defect is and why it happens: classifies severity and blast radius
@@ -225,7 +225,7 @@ records:
       risk. It diagnoses; it does not repair, and it does not close what it diagnosed.
     version: 1.0.0
     status: active
-    specificationPath: agents/omn-dev-1-bug-analyst/manifest.yaml
+    specificationPath: agents/dev-1-bug-analyst/manifest.yaml
     dependencies:
       - identifier: fix-bug
         versionConstraint: ">=1.0.0 <2.0.0"
@@ -253,7 +253,7 @@ records:
       - defect-triage
       - root-cause-analysis
 
-  - identifier: omn-dev-2-reviewer
+  - identifier: dev-2-reviewer
     displayName: Reviewer
     description: >-
       Judges a completed change against the requirements, the accepted design, and the
@@ -263,7 +263,7 @@ records:
       verdict the next gate assesses.
     version: 1.1.0
     status: active
-    specificationPath: agents/omn-dev-2-reviewer/manifest.yaml
+    specificationPath: agents/dev-2-reviewer/manifest.yaml
     dependencies:
       - identifier: implement-feature
         versionConstraint: ">=1.0.0 <2.0.0"
@@ -297,7 +297,7 @@ records:
       - governance-enforcement
       - quality-verification
 
-  - identifier: omn-qa
+  - identifier: qa
     displayName: QA
     description: >-
       Validates that delivered behavior meets the criteria the change was accepted against and
@@ -307,7 +307,7 @@ records:
       reproducibility, and recommends readiness without ever deciding it.
     version: 1.0.0
     status: active
-    specificationPath: agents/omn-qa/manifest.yaml
+    specificationPath: agents/qa/manifest.yaml
     dependencies:
       - identifier: fix-bug
         versionConstraint: ">=1.0.0 <2.0.0"
@@ -347,7 +347,7 @@ records:
       - defect-classification
       - release-readiness-recommendation
 
-  - identifier: omn-business-analyst
+  - identifier: business-analyst
     displayName: Business Analyst
     description: >-
       Frames a supplied business intent into a complete, consistent, and testable requirement
@@ -357,7 +357,7 @@ records:
       closing it by inference.
     version: 1.0.0
     status: active
-    specificationPath: agents/omn-business-analyst/manifest.yaml
+    specificationPath: agents/business-analyst/manifest.yaml
     dependencies:
       - identifier: investigate
         versionConstraint: ">=1.0.0 <2.0.0"
@@ -381,7 +381,7 @@ records:
       - outcome-alignment
       - acceptance-intent-definition
 
-  - identifier: omn-context-agent
+  - identifier: context-agent
     displayName: Context Agent
     description: >-
       Reconstructs the current-state product, technical, and delivery context a decision needs:
@@ -391,7 +391,7 @@ records:
       a decision may rely on what was found.
     version: 1.1.0
     status: active
-    specificationPath: agents/omn-context-agent/manifest.yaml
+    specificationPath: agents/context-agent/manifest.yaml
     dependencies:
       - identifier: investigate
         versionConstraint: ">=1.0.0 <2.0.0"
@@ -419,7 +419,7 @@ records:
       - contradiction-and-gap-identification
       - technical-discovery-support
 
-  - identifier: omn-documentation
+  - identifier: documentation
     displayName: Documentation
     description: >-
       Publishes what a run actually delivered: turns implementation and validation evidence into
@@ -430,7 +430,7 @@ records:
       known to be wrong.
     version: 1.2.0
     status: active
-    specificationPath: agents/omn-documentation/manifest.yaml
+    specificationPath: agents/documentation/manifest.yaml
     dependencies:
       - identifier: implement-feature
         versionConstraint: ">=1.0.0 <2.0.0"
@@ -473,7 +473,7 @@ records:
       - documentation
       - release-communication
 
-  - identifier: omn-tech-lead
+  - identifier: tech-lead
     displayName: Tech Lead
     description: >-
       Decides which way delivery should go and at what cost: evaluates named options against
@@ -482,7 +482,7 @@ records:
       recommends a direction and a readiness position to the authority that decides it.
     version: 1.0.0
     status: active
-    specificationPath: agents/omn-tech-lead/manifest.yaml
+    specificationPath: agents/tech-lead/manifest.yaml
     dependencies:
       - identifier: investigate
         versionConstraint: ">=1.0.0 <2.0.0"
@@ -536,37 +536,20 @@ records:
   # `agents/retired-roles.md`.
   # ---------------------------------------------------------------------------
 
-  - identifier: orchestrator
-    displayName: Orchestrator (Retired)
-    description: >-
-      Retired on 2026-08-19. Duplicate identifier for the coordination role implemented by
-      `omn-orchestrator`, which owns the coordination phases of the active workflows, holds
-      Primary for Orchestration and Routing in the capability matrix, and is the identifier
-      every workflow and the gate matrix name. Route coordination work to `omn-orchestrator`.
-    version: 1.0.0
-    status: retired
-    specificationPath: agents/retired-roles.md
-    dependencies: []
-    tags:
-      - retired
-      - superseded-by-omn-orchestrator
-    owner: Architecture
-    capabilities: []
-
   - identifier: backend-developer
     displayName: Backend Developer (Retired)
     description: >-
       Retired on 2026-08-19. The framework carries technology specialization through the
       skill registry rather than through stack-named agents. Implementation Delivery has a
-      single Primary owner, `omn-dev-1-implement`, which is stack-neutral and resolves
-      stack-specific skills per phase. Route implementation work to `omn-dev-1-implement`.
+      single Primary owner, `dev-1-implement`, which is stack-neutral and resolves
+      stack-specific skills per phase. Route implementation work to `dev-1-implement`.
     version: 1.0.0
     status: retired
     specificationPath: agents/retired-roles.md
     dependencies: []
     tags:
       - retired
-      - superseded-by-omn-dev-1-implement
+      - superseded-by-dev-1-implement
     owner: Architecture
     capabilities: []
 
@@ -575,19 +558,19 @@ records:
     description: >-
       Retired on 2026-08-19. The identifier names a task rather than an accountable role,
       and duplicated `requirement-clarification`, a capability already held by
-      `omn-business-analyst`. Route requirement clarification to `omn-business-analyst` and
-      acceptance-boundary arbitration to `omn-product-owner`.
+      `business-analyst`. Route requirement clarification to `business-analyst` and
+      acceptance-boundary arbitration to `product-owner`.
     version: 1.0.0
     status: retired
     specificationPath: agents/retired-roles.md
     dependencies: []
     tags:
       - retired
-      - superseded-by-omn-business-analyst
+      - superseded-by-business-analyst
     owner: Architecture
     capabilities: []
 
-  - identifier: omn-orchestrator
+  - identifier: orchestrator
     displayName: Orchestrator
     description: >-
       Coordinates end-to-end workflow execution and records what the run actually did: sequences
@@ -598,7 +581,7 @@ records:
       and never the gates its own record is the evidence for.
     version: 1.0.0
     status: active
-    specificationPath: agents/omn-orchestrator/manifest.yaml
+    specificationPath: agents/orchestrator/manifest.yaml
     dependencies:
       - identifier: fix-bug
         versionConstraint: ">=1.0.0 <2.0.0"

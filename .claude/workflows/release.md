@@ -9,13 +9,13 @@ Promote approved changes to target environments safely with clear ownership, obs
 - Deployment and rollback plans are documented.
 
 ## Participating Agents
-- omn-tech-lead
-- omn-qa
-- omn-dev-2-reviewer
-- omn-documentation
-- omn-product-owner
-- omn-context-agent
-- omn-orchestrator
+- tech-lead
+- qa
+- dev-2-reviewer
+- documentation
+- product-owner
+- context-agent
+- orchestrator
 
 ## Phase Model
 
@@ -25,37 +25,37 @@ order of this table. Phase identifiers are the routing keys used by
 runtime gateway in `runtime/framework_runtime.py`.
 
 Identifiers are not invented here. `readiness-assessment` is the identifier
-`agents/omn-tech-lead/manifest.yaml` declares for this workflow, and the architect manifest
+`agents/tech-lead/manifest.yaml` declares for this workflow, and the architect manifest
 declares it too, as supporting participation; the remaining identifiers are derived from the
 state names in `workflows/workflow-engine.md`, which is the state-machine form of this same
 workflow.
 
 | Phase | Owner Agent | Participation | Input | Output Artifact | Gate | Required Skills |
 |---|---|---|---|---|---|---|
-| `readiness-assessment` | `omn-tech-lead` | primary | frozen release scope, prior gate evidence, risk posture | `technical-recommendation.md` | Readiness Gate | S07, S08, S09 |
-| `artifact-packaging` | `omn-dev-2-reviewer` | primary | `technical-recommendation.md`, build inputs, versioning rules | `review-package.md`, carrying the packaging evidence under the `packaging` category | Artifact Gate | S10, S11, S12 |
-| `candidate-validation` | `omn-qa` | primary | `review-package.md`, target-like environment, validation checklist | `validation-report.md` | none | S07, S08, S11 |
-| `deployment-execution` | `omn-orchestrator` | primary | `validation-report.md`, deployment plan, rollback plan | `orchestration-result.md`, carrying the deployment status with monitoring health record | Deployment Gate | S11, S08, S12 |
-| `communication-and-post-release` | `omn-documentation` | primary | deployment status with monitoring health record, final change summary, stakeholder list | `release-note.md` and post-release action plan | Communication Gate | S02, S11 |
+| `readiness-assessment` | `tech-lead` | primary | frozen release scope, prior gate evidence, risk posture | `technical-recommendation.md` | Readiness Gate | S07, S08, S09 |
+| `artifact-packaging` | `dev-2-reviewer` | primary | `technical-recommendation.md`, build inputs, versioning rules | `review-package.md`, carrying the packaging evidence under the `packaging` category | Artifact Gate | S10, S11, S12 |
+| `candidate-validation` | `qa` | primary | `review-package.md`, target-like environment, validation checklist | `validation-report.md` | none | S07, S08, S11 |
+| `deployment-execution` | `orchestrator` | primary | `validation-report.md`, deployment plan, rollback plan | `orchestration-result.md`, carrying the deployment status with monitoring health record | Deployment Gate | S11, S08, S12 |
+| `communication-and-post-release` | `documentation` | primary | deployment status with monitoring health record, final change summary, stakeholder list | `release-note.md` and post-release action plan | Communication Gate | S02, S11 |
 
 ### Phase Identifier Sources
 
 | Phase | Identifier source |
 |---|---|
-| `readiness-assessment` | Declared by `agents/omn-tech-lead/manifest.yaml`, `supportedWorkflows[release].phase`. Also declared by `agents/architect/manifest.yaml` for this workflow, as supporting participation. |
-| `artifact-packaging` | Derived from the `ArtifactPackaging` state in `workflows/workflow-engine.md`, and now declared by `agents/omn-dev-2-reviewer/manifest.yaml`, `supportedWorkflows[release].phase`. |
-| `candidate-validation` | Declared by `agents/omn-qa/manifest.yaml`, `supportedWorkflows[release].phase`. |
-| `deployment-execution` | Declared by `agents/omn-orchestrator/manifest.yaml`, `supportedWorkflows[release].phase`. |
-| `communication-and-post-release` | Derived from the `CommunicationPostRelease` state in `workflows/workflow-engine.md`, and now declared by `agents/omn-documentation/manifest.yaml`, `supportedWorkflows[release].phase`. |
+| `readiness-assessment` | Declared by `agents/tech-lead/manifest.yaml`, `supportedWorkflows[release].phase`. Also declared by `agents/architect/manifest.yaml` for this workflow, as supporting participation. |
+| `artifact-packaging` | Derived from the `ArtifactPackaging` state in `workflows/workflow-engine.md`, and now declared by `agents/dev-2-reviewer/manifest.yaml`, `supportedWorkflows[release].phase`. |
+| `candidate-validation` | Declared by `agents/qa/manifest.yaml`, `supportedWorkflows[release].phase`. |
+| `deployment-execution` | Declared by `agents/orchestrator/manifest.yaml`, `supportedWorkflows[release].phase`. |
+| `communication-and-post-release` | Derived from the `CommunicationPostRelease` state in `workflows/workflow-engine.md`, and now declared by `agents/documentation/manifest.yaml`, `supportedWorkflows[release].phase`. |
 
 ### Ownership Reconciliation
 
 The architect manifest declares supporting participation in `readiness-assessment`, so the
 architecture role contributes structural risk judgment to the readiness report that
-`omn-tech-lead` owns. Post-release monitoring, which `skills/agent-skill-matrix.md` previously
+`tech-lead` owns. Post-release monitoring, which `skills/agent-skill-matrix.md` previously
 carried as a separate grouping, is the monitoring health record produced inside
-`deployment-execution` and carried into `communication-and-post-release`; `omn-context-agent`
-and `omn-dev-1-bug-analyst` support those phases without owning them.
+`deployment-execution` and carried into `communication-and-post-release`; `context-agent`
+and `dev-1-bug-analyst` support those phases without owning them.
 
 ### Resolution Rules
 
@@ -76,7 +76,7 @@ and `omn-dev-1-bug-analyst` support those phases without owning them.
   `G1-CAPABILITY` with reason `awaiting_contract_reconciliation`: `artifact-packaging`, whose
   versioned-artifact output no validator covers.
 - `deployment-execution` is dispatchable as a *coordination* phase, which is what its Phase Model
-  row declares. `omn-orchestrator` records the deployment state, monitoring health, and rollback
+  row declares. `orchestrator` records the deployment state, monitoring health, and rollback
   position it is supplied, against the deployment and rollback plans it is given; it performs no
   deployment and reads no monitor itself, because no framework agent holds operational access.
   The dependency on that access is therefore a dependency of the release, carried into this phase
@@ -112,20 +112,20 @@ Prose form of the Phase Model above. The identifiers in parentheses are canonica
 ## Failure Recovery
 - Trigger rollback when health thresholds are breached.
 - Pause rollout and return to validation when anomalies occur.
-- Escalate unresolved operational issues to omn-tech-lead and omn-orchestrator.
+- Escalate unresolved operational issues to tech-lead and orchestrator.
 
 ## Approval Gates
 
 Gate names are the canonical ones in `workflows/workflow-gate-matrix.md`, which is the
 authority the runtime reads for gate ownership.
 
-- Readiness Gate: omn-tech-lead and omn-qa.
-- Artifact Gate: omn-dev-2-reviewer and omn-tech-lead.
-- Deployment Gate: omn-orchestrator and omn-tech-lead.
-- Communication Gate: omn-documentation and omn-product-owner.
+- Readiness Gate: tech-lead and qa.
+- Artifact Gate: dev-2-reviewer and tech-lead.
+- Deployment Gate: orchestrator and tech-lead.
+- Communication Gate: documentation and product-owner.
 
-Under the Producer Exclusion Rule the deciding owner is omn-qa for the Readiness Gate,
-omn-tech-lead for the Artifact and Deployment Gates, and omn-product-owner for the
+Under the Producer Exclusion Rule the deciding owner is qa for the Readiness Gate,
+tech-lead for the Artifact and Deployment Gates, and product-owner for the
 Communication Gate. The Artifact and Deployment Gates carry a second owner for that reason:
 their first-listed owner produces the evidence the gate assesses.
 

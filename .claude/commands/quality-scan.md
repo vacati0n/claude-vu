@@ -24,8 +24,8 @@ supplied as a file.
 ## Workflow Triggered
 
 Code Quality Scan (`workflows/code-quality-scan.md`), a single-phase workflow whose
-`repository-quality-scan` phase is owned by `omn-dev-2-reviewer` and whose only gate, the
-Quality Handoff Gate, is decided by `omn-tech-lead` — the human handoff the command exists
+`repository-quality-scan` phase is owned by `dev-2-reviewer` and whose only gate, the
+Quality Handoff Gate, is decided by `tech-lead` — the human handoff the command exists
 to end at.
 
 ## One-Command Execution
@@ -36,8 +36,8 @@ The whole lifecycle is one dispatch cycle. From the repository root:
 2. `python .claude/runtime/framework_runtime.py dispatch --command quality-scan
    --input quality-scan-scope=.claude/runs/inputs/<name>-quality-scan-scope.md`
    — this plans the run, enqueues the single phase, and hands the invocation envelope to
-   the host adapter, which invokes `omn-dev-2-reviewer` through
-   `agents/omn-dev-2-reviewer.agent.md`.
+   the host adapter, which invokes `dev-2-reviewer` through
+   `agents/dev-2-reviewer.agent.md`.
 3. `python .claude/runtime/framework_runtime.py complete --run-id <run-id> --phase
    repository-quality-scan ...` with the produced artifact — the runtime validates it with
    `runtime/review_package_validator.py` and transitions the phase.

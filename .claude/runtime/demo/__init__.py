@@ -247,12 +247,12 @@ def status(run_dir: Path) -> dict:
 def ingest_host_hook(runs_root: Path, payload: dict) -> dict | None:
     """Host tool-hook entry point (Claude Code `PostToolUse` and friends).
 
-    Resolves the active demo run through `runs/.active-demo` (or `OMN_DEMO_RUN_ID`) and
+    Resolves the active demo run through `runs/.active-demo` (or `FRAMEWORK_DEMO_RUN_ID`) and
     records one `tool_invocation` marker. Returns the marker, or None when no demo run is
     active -- which is the normal case and costs one file read.
     """
     import os
-    run_id = os.environ.get("OMN_DEMO_RUN_ID")
+    run_id = os.environ.get("FRAMEWORK_DEMO_RUN_ID")
     pointer = runs_root / ACTIVE_POINTER
     if not run_id and pointer.exists():
         run_id = pointer.read_text(encoding="utf-8").strip()

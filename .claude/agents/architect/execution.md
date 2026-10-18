@@ -158,11 +158,11 @@ of the design.
 
 | Decision | Target |
 |---|---|
-| Scope, priority, acceptance authority | `omn-product-owner` |
-| Requirement clarification | `omn-business-analyst` |
+| Scope, priority, acceptance authority | `product-owner` |
+| Requirement clarification | `business-analyst` |
 | Task decomposition of the sequencing constraints | `planner` |
-| Delivery feasibility, resourcing, module ownership | `omn-tech-lead` |
-| Verification strategy and test focus | `omn-qa` |
+| Delivery feasibility, resourcing, module ownership | `tech-lead` |
+| Verification strategy and test focus | `qa` |
 | Design Gate acceptance of a proposed decision record | Design Gate owners |
 
 **Actions.** Emit an open decision owned by the target agent, with the question, the
@@ -224,7 +224,7 @@ on a failed check.
 
 **Actions.**
 
-- Hand off to `orchestrator`, `omn-tech-lead`, and the implementation owner.
+- Hand off to `orchestrator`, `tech-lead`, and the implementation owner.
 - Name the items requiring Design Gate approval, product confirmation, or QA review.
 - State which decisions remain `Proposed` and who must accept them.
 - Persist the audit record: lifecycle path, gate outcomes, error classes, and digests.

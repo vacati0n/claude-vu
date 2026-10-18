@@ -5,9 +5,9 @@ Mechanically checks a produced `orchestration-result.md` against the contract se
 it:
 
   - `.claude/templates/orchestration-result.md`          rendered form, section and field labels
-  - `.claude/agents/omn-orchestrator/identity.md`        behavioural contract for coordination
-  - `.claude/agents/omn-orchestrator/output.md`          structural contract this artifact renders to
-  - `.claude/agents/omn-orchestrator/quality.md`         the orchestrator's own self-verification checks
+  - `.claude/agents/orchestrator/identity.md`        behavioural contract for coordination
+  - `.claude/agents/orchestrator/output.md`          structural contract this artifact renders to
+  - `.claude/agents/orchestrator/quality.md`         the orchestrator's own self-verification checks
 
 One artifact type carries every coordination output the framework asks for: the `fix-bug` closure
 record, the `refactor` closure and debt record, and the `release` deployment record.
@@ -35,17 +35,17 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import artifact_contract as ac  # noqa: E402
-from artifact_lib import Check, strip_md  # noqa: E402
+from artifact_lib import Check, canonical_agent_id, strip_md  # noqa: E402
 
 TEMPLATE = "templates/orchestration-result.md"
 # The orchestrator's authoritative contract is a module set, not a single file. Each check below
 # names the module that actually states the rule it enforces, so a failure points at the document
 # that decides it rather than at the agent in general.
-CONTRACT_REF = "agents/omn-orchestrator/identity.md"
-OUTPUT_REF = "agents/omn-orchestrator/output.md"
-QUALITY_REF = "agents/omn-orchestrator/quality.md"
+CONTRACT_REF = "agents/orchestrator/identity.md"
+OUTPUT_REF = "agents/orchestrator/output.md"
+QUALITY_REF = "agents/orchestrator/quality.md"
 
-AGENT = "omn-orchestrator"
+AGENT = "orchestrator"
 
 DISPOSITIONS = ("closed", "closed-with-followups", "held", "rolled-back")
 BASES = ("closure", "debt-closure", "deployment")
@@ -263,13 +263,13 @@ def semantic_checks(rep, contract):
     # the progression it claims rests on a decision nobody with the authority to take it took.
     self_decided = [p["id"] for p in phases
                     if _gated(p)
-                    and p["owner"].lower() == AGENT
-                    and p["decided by"].lower() == AGENT]
+                    and canonical_agent_id(p["owner"].lower()) == AGENT
+                    and canonical_agent_id(p["decided by"].lower()) == AGENT]
     add("O4", "workflows/workflow-gate-matrix.md#producer-exclusion-rule", "Blocking",
         "No gate assessing this role's own output is recorded as decided by this role",
         "pass" if not self_decided else "fail",
         f"producer decided its own gate at {self_decided}" if self_decided
-        else f"{sum(1 for p in phases if _gated(p) and p['owner'].lower() == AGENT)} gated "
+        else f"{sum(1 for p in phases if _gated(p) and canonical_agent_id(p['owner'].lower()) == AGENT)} gated "
              f"phase(s) owned by {AGENT}, none self-decided")
 
     # ---------------------------------------------------------------- O5 no transition without a gate

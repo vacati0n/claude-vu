@@ -10,7 +10,7 @@ validationReport:
       reference: inline
     - type: regression-targets
       reference: inline
-  producedBy: omn-qa
+  producedBy: qa
   agentVersion: 1.0.0
   schemaVersion: 1.0.0
   status: complete
@@ -22,7 +22,7 @@ validationReport:
 ## Metadata
 
 - Validation ID: VAL-2026-0071
-- Validator: omn-qa
+- Validator: qa
 - Change under validation: bounded retry delay and the classification record passed to the scheduler
 - Validation date: 2026-08-19
 

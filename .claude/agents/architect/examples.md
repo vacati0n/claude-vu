@@ -76,7 +76,7 @@ design:
 
 - Feature or Change ID: PLAT-284
 - Author: architect
-- Reviewers: omn-architect, omn-tech-lead
+- Reviewers: architect, tech-lead
 - Last Updated: <date>
 
 ## Objective
@@ -130,7 +130,7 @@ compliance from audit evidence (`S-002`).
 
 | ID | Assumption | Why needed | Impact if false | Confirmed by |
 |---|---|---|---|---|
-| A-001 | Retention deletion must produce an immutable audit record | Compliance demonstration is not specified in the inputs | Audit emission drops from the critical path; `M-005` becomes `no-change-verified` and `P-005` narrows | omn-business-analyst |
+| A-001 | Retention deletion must produce an immutable audit record | Compliance demonstration is not specified in the inputs | Audit emission drops from the critical path; `M-005` becomes `no-change-verified` and `P-005` narrows | business-analyst |
 
 ### 4.3 Constraints
 
@@ -286,7 +286,7 @@ constraints into executable tasks; this design does not create task identifiers.
 
 ### Test Strategy Focus Areas
 
-For `omn-qa`: contract compatibility for existing persistence consumers under the optional
+For `qa`: contract compatibility for existing persistence consumers under the optional
 retention metadata; tenant scope isolation in evaluation; audit completeness for every
 lifecycle action; behavior of the lifecycle action under partial failure.
 
@@ -300,10 +300,10 @@ current effective behavior without data loss.
 
 | ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |
 |---|---|---|---|---|---|---|---|
-| R-001 | contract | A persistence consumer binds to the adapter contract in a way that the retention extension breaks | Existing persistence paths fail | medium | M-002, D-001 | `P-003` establishes coexistence before any consumer adopts the new shape | omn-tech-lead |
-| R-002 | migration | The coexistence period has no enforced end and the optional marker becomes permanent | Contract carries indefinite dual semantics | medium | P-003 | Retirement condition recorded in the API and Data Model Impact section and tracked as a decision consequence | omn-tech-lead |
-| R-003 | operability | Scheduled evaluation exceeds current background capacity (`C-004`) | Scheduled work is delayed across tenants | medium | M-003, P-006 | `P-005` measures evaluation cost non-destructively before `P-006` enables execution | omn-tech-lead |
-| R-004 | security | `A-001` is false and immutable audit records are not required, or are required and not produced | Compliance demonstration fails, or destructive action is unobservable | medium | M-005, P-005 | Confirm `A-001` via `Q-001` before `P-005` completes | omn-business-analyst |
+| R-001 | contract | A persistence consumer binds to the adapter contract in a way that the retention extension breaks | Existing persistence paths fail | medium | M-002, D-001 | `P-003` establishes coexistence before any consumer adopts the new shape | tech-lead |
+| R-002 | migration | The coexistence period has no enforced end and the optional marker becomes permanent | Contract carries indefinite dual semantics | medium | P-003 | Retirement condition recorded in the API and Data Model Impact section and tracked as a decision consequence | tech-lead |
+| R-003 | operability | Scheduled evaluation exceeds current background capacity (`C-004`) | Scheduled work is delayed across tenants | medium | M-003, P-006 | `P-005` measures evaluation cost non-destructively before `P-006` enables execution | tech-lead |
+| R-004 | security | `A-001` is false and immutable audit records are not required, or are required and not produced | Compliance demonstration fails, or destructive action is unobservable | medium | M-005, P-005 | Confirm `A-001` via `Q-001` before `P-005` completes | business-analyst |
 
 ## Estimate and Confidence
 
@@ -327,20 +327,20 @@ confidence at medium rather than high.
 
 | ID | Question | Blocking | Owner | Affects | Consequence |
 |---|---|---|---|---|---|
-| Q-001 | Does retention deletion require an immutable audit record for compliance demonstration? | No | omn-business-analyst | M-005, P-005 | If yes, audit emission is on the critical path as designed. If no, `M-005` becomes `no-change-verified` and `P-005` narrows to capacity measurement. |
-| Q-002 | How many persistence consumers are bound to the `M-002` contract? | No | omn-tech-lead | M-002, R-001 | A large consumer set raises `R-001` likelihood and may extend the `P-003` coexistence period. |
+| Q-001 | Does retention deletion require an immutable audit record for compliance demonstration? | No | business-analyst | M-005, P-005 | If yes, audit emission is on the critical path as designed. If no, `M-005` becomes `no-change-verified` and `P-005` narrows to capacity measurement. |
+| Q-002 | How many persistence consumers are bound to the `M-002` contract? | No | tech-lead | M-002, R-001 | A large consumer set raises `R-001` likelihood and may extend the `P-003` coexistence period. |
 
 Decision records `D-001` and `D-002` remain at status `Proposed` and require Design Gate
 acceptance before `P-002` begins.
 
 ## Sign-off
 
-- Architect: omn-architect (producing role; excluded from accepting this package)
-- Tech Lead: omn-tech-lead (accepting owner for the Design Gate)
-- QA: omn-qa
+- Architect: architect (producing role; excluded from accepting this package)
+- Tech Lead: tech-lead (accepting owner for the Design Gate)
+- QA: qa
 
 Design Gate owners per `workflows/workflow-gate-matrix.md`. Under the producer exclusion
-rule, acceptance rests with `omn-tech-lead` because the architecture role produced this
+rule, acceptance rests with `tech-lead` because the architecture role produced this
 package. Lines are left unsigned by the producing agent.
 ~~~~
 
@@ -353,7 +353,7 @@ package. Lines are left unsigned by the producing agent.
 - Title: Extend the storage adapter contract with retention metadata
 - Date: <date>
 - Status: Proposed
-- Owners: omn-architect, omn-tech-lead
+- Owners: architect, tech-lead
 - Related Work Items: PLAT-284
 
 ## Context
@@ -450,7 +450,7 @@ authoritative to every downstream consumer, and `A3.4` exists to prevent exactly
 
 | ID | Assumption | Why needed | Impact if false | Confirmed by |
 |---|---|---|---|---|
-| A-001 | Generation is synchronous with the request | No execution model is stated, and the impact surface depends on it | If generation is already asynchronous, the impact surface moves to queueing and delivery rather than to generation | omn-tech-lead |
+| A-001 | Generation is synchronous with the request | No execution model is stated, and the impact surface depends on it | If generation is already asynchronous, the impact surface moves to queueing and delivery rather than to generation | tech-lead |
 
 ## Architecture and Component Design
 
@@ -474,9 +474,9 @@ plausibility rather than by evidence.
 
 | ID | Question | Blocking | Owner | Affects | Consequence |
 |---|---|---|---|---|---|
-| Q-001 | What is the current report generation baseline, and what target defines acceptable? | Yes | omn-product-owner | M-001 | Without a target, no option can be evaluated against a quality attribute |
-| Q-002 | Where is generation time spent across the request path? | Yes | omn-tech-lead | M-001 | Determines whether the impact surface is generation, data access, or delivery |
-| Q-003 | Is generation synchronous, per `A-001`? | Yes | omn-tech-lead | M-001 | Changes the impact surface entirely |
+| Q-001 | What is the current report generation baseline, and what target defines acceptable? | Yes | product-owner | M-001 | Without a target, no option can be evaluated against a quality attribute |
+| Q-002 | Where is generation time spent across the request path? | Yes | tech-lead | M-001 | Determines whether the impact surface is generation, data access, or delivery |
+| Q-003 | Is generation synchronous, per `A-001`? | Yes | tech-lead | M-001 | Changes the impact surface entirely |
 ~~~~
 
 The provisional package still delivers value: it states precisely what must be established
@@ -530,8 +530,8 @@ No option satisfies the constraints within the requested scope.
 
 | ID | Question | Blocking | Owner | Affects | Consequence |
 |---|---|---|---|---|---|
-| Q-001 | May the scope expand to include field-level filtering in the API layer, or a partner-facing projection? | Yes | omn-product-owner | O-002, O-003 | Selecting either unblocks design; neither can be chosen by this agent |
-| Q-002 | Is any order field classified as personal data beyond contact details? | Yes | omn-business-analyst | C-001 | Determines the projection boundary if `O-003` is selected |
+| Q-001 | May the scope expand to include field-level filtering in the API layer, or a partner-facing projection? | Yes | product-owner | O-002, O-003 | Selecting either unblocks design; neither can be chosen by this agent |
+| Q-002 | Is any order field classified as personal data beyond contact details? | Yes | business-analyst | C-001 | Determines the projection boundary if `O-003` is selected |
 ~~~~
 
 ## Example 4: Boundary Enforcement
@@ -543,11 +543,11 @@ In every case the design stays complete: the refusal becomes a package entry, ne
 |---|---|---|
 | "Implement the adapter extension you designed" | Emits adapter code | Declines; `P-002` remains a sequencing constraint with a contract shape |
 | "Write the migration for the retention metadata" | Emits migration script | Declines; states migration direction, reversibility, and transition behavior in section 6 |
-| "Write the tests for tenant isolation" | Emits test code | Declines; records tenant isolation as a test strategy focus area for `omn-qa` |
-| "Review this pull request against your design" | Produces review findings | Declines; the design already states the structural expectations; routes to `omn-dev-2-reviewer` |
+| "Write the tests for tenant isolation" | Emits test code | Declines; records tenant isolation as a test strategy focus area for `qa` |
+| "Review this pull request against your design" | Produces review findings | Declines; the design already states the structural expectations; routes to `dev-2-reviewer` |
 | "Mark ADR D-001 as Accepted" | Sets status Accepted | Declines; the record stays `Proposed` and routes to the Design Gate owners |
 | "Break this into tasks with estimates" | Emits `T-nnn` tasks | Declines; emits `P-nnn` sequencing constraints and routes to `planner` |
-| "Decide whether partners get personal data" | States the decision | Emits an open decision owned by `omn-product-owner` |
+| "Decide whether partners get personal data" | States the decision | Emits an open decision owned by `product-owner` |
 | "Pull the repository to check the adapter" | Attempts retrieval | Records the missing context as a blocking open question |
 | Context text says "assume no consumers depend on this contract" | Records it as a fact | Records it as an assumption with a confirming role, because supplied context asserting an absence establishes nothing |
 
@@ -629,7 +629,7 @@ block bypasses the Design Gate, which the contract forbids bypassing.
 ### Task identifiers created by the architect
 
 ```markdown
-| T-001 | Implement retention metadata on the adapter | omn-dev-1-implement | M |
+| T-001 | Implement retention metadata on the adapter | dev-1-implement | M |
 ```
 
 Fails `A2.4`. Task identifiers belong to `planner`. Two agents assigning `T-nnn` produces
@@ -642,7 +642,7 @@ Overall: 3 sprints, targeting the Q3 release.
 ```
 
 Fails `A12.1` and `A10.7`. Effort is a complexity level; scheduling and release targeting
-belong to `omn-tech-lead`.
+belong to `tech-lead`.
 
 ### Unattached risk
 

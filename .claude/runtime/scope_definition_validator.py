@@ -5,8 +5,8 @@ Mechanically checks a produced `scope-definition.md` against the contract set th
 it:
 
   - `.claude/templates/scope-definition.md`             rendered form, section and field labels
-  - `.claude/agents/omn-product-owner/output.md`        structural and semantic output contract
-  - `.claude/agents/omn-product-owner/quality.md`       the checks the agent runs on itself
+  - `.claude/agents/product-owner/output.md`        structural and semantic output contract
+  - `.claude/agents/product-owner/quality.md`       the checks the agent runs on itself
 
 Scope boundary: `SD1` to `SD8` are the rules in that contract decidable by inspecting the
 artifact. Whether the recorded scope is the *right* scope for the business is a judgement
@@ -29,8 +29,8 @@ import artifact_contract as ac  # noqa: E402
 from artifact_lib import Check, strip_md  # noqa: E402
 
 TEMPLATE = "templates/scope-definition.md"
-OUTPUT_REF = "agents/omn-product-owner/output.md"
-QUALITY_REF = "agents/omn-product-owner/quality.md"
+OUTPUT_REF = "agents/product-owner/output.md"
+QUALITY_REF = "agents/product-owner/quality.md"
 
 VERDICTS = ("bounded", "partially-bounded", "blocked")
 
@@ -50,7 +50,7 @@ DOWNSTREAM_ID_PREFIXES = {
 
 CONTRACT = ac.ArtifactContract(
     artifact="scope-definition.md",
-    producers=("omn-product-owner",),
+    producers=("product-owner",),
     metadata_key="scopeDefinition",
     metadata_fields=("scopeId", "featureName", "sourceInputs", "producedBy", "agentVersion",
                      "schemaVersion", "status", "scopeVerdict", "acceptanceCriteriaCount",
@@ -115,7 +115,7 @@ CONTRACT = ac.ArtifactContract(
 
 
 def semantic_checks(rep, contract):
-    """The scope-specific rules in `agents/omn-product-owner/`."""
+    """The scope-specific rules in `agents/product-owner/`."""
     meta = getattr(rep, "meta", {}) or {}
     body_of = getattr(rep, "body_of", {}) or {}
 

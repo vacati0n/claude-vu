@@ -4,7 +4,7 @@
 Mechanically checks a produced `release-note.md` against the contract set that governs it:
 
   - `.claude/templates/release-note.md`      rendered form, section and field labels
-  - `.claude/agents/omn-documentation.md`    behavioural contract: outputs, decision rules,
+  - `.claude/agents/documentation.md`    behavioural contract: outputs, decision rules,
                                              constraints
   - `.claude/context/release-context.md`     the release facts a note must not contradict
 
@@ -16,7 +16,7 @@ recorded issue, and the version is one fact rather than two -- and whether the r
 is one the evidence and the phase can yield.
 
 The release position is keyed on the phase's communication basis (Stage 8 of
-`agents/omn-documentation/reasoning.md`). Only the `post-release` basis reads a deployment
+`agents/documentation/reasoning.md`). Only the `post-release` basis reads a deployment
 outcome, off a supplied deployment status; the other three publish a position that asserts no
 merge, release, or deployment fact. `R8` decides the position against the evidence types the
 note lists in `sourceInputs`; `R9` decides it against the phase the invocation envelope names,
@@ -36,9 +36,9 @@ import artifact_contract as ac  # noqa: E402
 from artifact_lib import Check, strip_md  # noqa: E402
 
 TEMPLATE = "templates/release-note.md"
-CONTRACT_REF = "agents/omn-documentation.md"
+CONTRACT_REF = "agents/documentation.md"
 
-STAGE8_REF = "agents/omn-documentation/reasoning.md#stage-8--determine-the-release-position"
+STAGE8_REF = "agents/documentation/reasoning.md#stage-8--determine-the-release-position"
 
 # The contract version that introduced the basis-keyed release position. A note an earlier
 # version produced was read off the superseded deployment-only table; `verify_validators`
@@ -81,7 +81,7 @@ ISSUE_TABLE = ("ID", "Issue", "Impact", "Workaround", "Tracking")
 
 CONTRACT = ac.ArtifactContract(
     artifact="release-note.md",
-    producers=("omn-documentation",),
+    producers=("documentation",),
     metadata_key="releaseNote",
     metadata_fields=("releaseId", "version", "sourceInputs", "producedBy", "agentVersion",
                      "schemaVersion", "status", "releaseVerdict", "inputDigest",
@@ -149,7 +149,7 @@ def source_input_types(meta: dict):
 
 
 def semantic_checks(rep, contract, envelope: dict | None = None):
-    """The release-specific rules of the omn-documentation contract.
+    """The release-specific rules of the documentation contract.
 
     `envelope` is the invocation envelope, when one is supplied. Only `R9` reads it.
     """
