@@ -1,0 +1,78 @@
+{
+  "invocation_id": "inv-5e9d799db687-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5e9d799db687/states/root-cause-analysis/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "root-cause",
+    "workflow": "fix-bug",
+    "phase": "root-cause-analysis",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "declaredStatus": "provisional",
+    "supersedes": "runs/run-5e9d799db687/states/triage-and-impact/artifacts/bug-analysis.md; identifiers E-001 to E-016, C-001 to C-006, Q-001 to Q-004 kept unrenumbered; E-017 to E-026 and Q-005 added",
+    "counts": {
+      "evidenceRecords": 26,
+      "causalSteps": 6,
+      "causalStepsByConfidence": {"high": 6, "medium": 0, "low": 0},
+      "evidenceByConfidence": {"high": 24, "medium": 0, "low": 2},
+      "openQuestions": 5,
+      "openQuestionsBlocking": 0
+    },
+    "statusBasis": "reasoning.md Stage 9, first matching row is row 5: reproducibility deterministic (E-002 to E-005, re-executed in this phase); no required input missing; chain closes on a condition (C-002 to C-004); all alternatives eliminated, including the one triage left open as Q-002, now answered first-hand by E-017, E-019, E-020; every dependent step high; no business impact statement was supplied (Q-003), so provisional.",
+    "severityBasis": "reasoning.md Stage 5, medium, unchanged from triage: a secondary path, regression detection for the policy-exception command and the rollback row, is absent (E-003, E-004, E-005) and closure of run-e7bf0d73027a is blocked (E-014), with acceptable workarounds; the covered behaviour is correct first-hand (E-017, E-019, E-020), so not high.",
+    "reproducibilityBasis": "The five reproduction steps were re-executed in this phase: 16 tests OK with no rollback case, no cmd_policy_exception in tests/, admissibility table reached by one module only, no verifier scenario executing the command.",
+    "triageConditionsDischarged": {
+      "Q-002 execute the emitted action and verify_recovery.py first-hand": "done: E-017 (74/74, git status unchanged), E-018 to E-021 (isolated tree, producer refusal, clearing, listed-role refusal)",
+      "tests/ only, verifier stays 74/74": "Proposed fix and Validation Plan require it; E-017 is the baseline",
+      "isolated run tree, nothing left in .claude/runs": "Validation Plan specifies copytree of .claude/ ignoring runs, __pycache__, worktrees into mkdtemp with addCleanup (precedent E-025); feasibility shown by E-018",
+      "both cases fail against mutated code": "mutations observed to change behaviour: E-023 (rollback exemption widened, emptied), E-024 (producer guard off, envelope resolution removed, builder flag renamed)",
+      "every planned test maps to a passing test or recorded deviation": "Verification steps require the mapping against E-010",
+      "runtime defect found returns to root-cause-analysis": "one contract gap found, not a defect in the covered behaviour: runtime-emitted policy-exception envelopes list no owner roles, so the listed-role guard is unreachable and any non-producer role name clears the block (E-021); recorded as separate, routed to architect as Q-005, and the tests must not pin it as correct"
+    },
+    "transientWrites": "Only the two permitted files were written in the repository. verify_recovery.py was run once in the real worktree: it created and removed its four recovery-injection runs and inputs under .claude/runs; git status --porcelain was identical before and after, so run-f94564cb61ce needed no restore. The full suite was run in the real worktree with git status identical before and after; some suite cases created transient git repositories under C:/Users/vuhoangcao/AppData/Local/Temp regardless of TEMP. Python imports may have refreshed gitignored __pycache__ directories. All experiments that mutate code ran in copies under D:/rvw-tmp-5df08e: rca-e2e-tree, rca-e2e-listed, rca-e2e-mutP, rca-e2e-mutE, rca-e2e-mutF, rca-variants/{current,head,mutA,mutB,mutP,mutE,mutF}, scratch drivers in rca-driver/, outputs rca-*.txt; these remain in place. TEMP and TMP were set to D:/rvw-tmp-5df08e. bug_analysis_validator.py was run read-only without --json-out: first pass FAIL 29/30 on C3.2 from three bare framework-root mentions (repaired by adding the trailing slash), then PASS 30/30.",
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "notApplicablePassed": 3,
+      "notApplicable": ["V3 (not intermittent)", "V4 (not not-reproduced)", "B5 (not critical)"],
+      "repairsApplied": ["C3: three bare framework-root mentions rewritten as path prefixes; the analysis was unchanged", "V10: E-015 cited in the Proposed fix", "V6: E-007 and E-008 re-executed in this phase"],
+      "byGroup": {
+        "structural": {"S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass", "S9": "pass"},
+        "metadata": {"D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass"},
+        "agreement": {"B2": "pass", "B3": "pass", "A1": "pass"},
+        "reproduction": {"B4": "pass", "V1": "pass", "V2": "pass", "V3": "pass", "V4": "pass", "V5": "pass"},
+        "evidence": {"B1": "pass", "V6": "pass", "V7": "pass", "V8": "pass", "V9": "pass", "V10": "pass"},
+        "causalChain": {"V11": "pass", "V12": "pass", "V13": "pass", "V14": "pass", "V15": "pass", "V16": "pass"},
+        "impactAndSeverity": {"V17": "pass", "V18": "pass", "V19": "pass", "V20": "pass", "V21": "pass", "V22": "pass"},
+        "fixStrategy": {"V23": "pass", "V24": "pass", "V25": "pass", "V26": "pass", "V27": "pass", "V28": "pass"},
+        "statusAndQuestions": {"B5": "pass", "V29": "pass", "V30": "pass", "V31": "pass", "V32": "pass", "V33": "pass"},
+        "authority": {"A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A7": "pass", "A8": "pass"},
+        "content": {"C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass", "C7": "pass"}
+      },
+      "validationEngine": {"result": "pass", "checksRun": 30, "checksPassed": 30}
+    },
+    "notMachineCheckable": {
+      "N1": "met: the root cause names a condition, the missing tracing of planned regression cases to delivered tests before the Fix Gate; the test module where the gap is visible is recorded as the consequence in C-005",
+      "N2": "met: every causal step cites high-confidence evidence run or read in this phase; the reported E-016 supports no step and is superseded by E-017, E-019, E-020",
+      "N3": "met: the radius names the test suite, the policy-exception command surface, the verifier admissibility rows and their bundled copy, the run-e7bf0d73027a record and closure, and the uncommitted working tree; the separate owner-role gap of E-021 is named in Technical impact and routed as Q-005 rather than merged into this defect"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "runs/run-5e9d799db687/states/root-cause-analysis/invocation-envelope.json"
+  ],
+  "confidence": 0.85,
+  "declared_side_effects": [
+    "runs/run-5e9d799db687/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-5e9d799db687/states/root-cause-analysis/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

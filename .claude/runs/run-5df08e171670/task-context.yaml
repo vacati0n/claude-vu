@@ -2,8 +2,8 @@ schema: framework.runtime/task-context.v1
 task_id: run-5df08e171670
 command: implement
 workflow: implement-feature v1.0.0
-run_status: Dispatching
-updated_at: '2026-09-14T08:22:21Z'
+run_status: WaitingForHuman
+updated_at: '2026-10-17T13:16:36Z'
 objective: 'Operator request, 2026-09-08, extended 2026-09-12 and 2026-09-14. Type: capability addition. Priority: High —
   the capability exists to support a live product presentation, and the framework had no way to show itself working. The framework
   can execute a governed multi-agent run but cannot show one. Explaining it to someone who has not seen it means talking over
@@ -47,7 +47,7 @@ relevant_agents:
   - S09
 - phase: implementation
   agent: omn-dev-1-implement
-  status: pending
+  status: completed
   required_skills:
   - S03
   - S06
@@ -56,14 +56,14 @@ relevant_agents:
   - S12
 - phase: quality-review
   agent: omn-dev-2-reviewer
-  status: pending
+  status: completed
   required_skills:
   - S07
   - S09
   - S08
 - phase: documentation-and-release-handoff
   agent: omn-documentation
-  status: pending
+  status: blocked
   required_skills:
   - S11
   - S10
@@ -86,6 +86,18 @@ completed_phases:
   artifact: runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/technical-design.md
   digest: sha256:f279b38468e3bfa7f3b3b161eece4de0
   validation: pass 78/78
+  attempts: 2
+- phase: implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md
+  digest: sha256:d920d43a9e8b6b6222393ab5417b8d47
+  validation: pass 32/32
+  attempts: 1
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  artifact: runs/run-5df08e171670/states/quality-review/artifacts/review-package.md
+  digest: sha256:bef6fa470edd2e2a14216dbc4ef25a6a
+  validation: pass 31/31
   attempts: 2
 gates:
 - gate: Scope Gate
@@ -122,6 +134,8 @@ artifacts:
   scope-and-acceptance: runs/run-5df08e171670/states/scope-and-acceptance/artifacts/scope-definition.md
   execution-planning: runs/run-5df08e171670/states/execution-planning/artifacts/execution-plan.md
   solution-design-and-risk-assessment: runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  implementation: runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md
+  quality-review: runs/run-5df08e171670/states/quality-review/artifacts/review-package.md
 parallel_groups:
 - - scope-and-acceptance
   - execution-planning
@@ -240,6 +254,57 @@ validation_requirements:
   - 'The condensation disclosure: that every condensed span carries its factor on screen and that'
   - 'Re-cutting: two presentations differing in length or narration from one recording, with no'
   - The three contract surfaces read together for agreement on the size of the parameter group
+  evidence:
+  - 'T-001: Full repository suite as regression baseline: 771 run, 767 pass, 4 fail (the three in T-012 and the one in...
+    | regression | C-001, C-002, C-003, C-004, C-005, C-006, C-007, C-008, C-009, C-010, C-011, C-012, C-013, C-014, C-015,
+    C-...'
+  - 'T-002: Demo is off by default, costs nothing, and writes nothing; enable is idempotent; a recorder fault never rea...
+    | unit | C-001, C-002, C-016'
+  - 'T-003: Markers carry ms stamps and sequence; replayed event yields no second marker; host hook lands on the active...
+    | unit | C-001, C-003'
+  - 'T-004: Not finished while a gate is undecided or a phase runs; compiled once whatever the number of finish events;...
+    | unit | C-001, C-008, C-011'
+  - 'T-005: HTML deck always produced with fallbacks recorded; GIF fallback without ffmpeg; mp4 path; film waits for th...
+    | integration | C-001, C-012, C-013, C-014'
+  - 'T-006: Caption splitting and timing, overlay slicing, well-formed subtitle file, script with every spoken line, ca...
+    | unit | C-002, C-006, C-010'
+  - 'T-007: Bookkeeping folded, compression never cuts narration, scenes deterministic (3 tests) | unit | C-004'
+  - 'T-008: Relaxed pace, plain-language explanation of every beat, fit-to-narration, rebalance, speech rate reaches th...
+    | unit | C-004, C-005, C-011'
+  - 'T-009: Control-server config read from the host; probe never raises without an installation; connect failure names...
+    | unit | C-007'
+  - 'T-010: Preferred backend authenticates, provisions, records, and stops against the fixture; wrong password refused...
+    | integration | C-007, C-008, C-026'
+  - 'T-011: Capture manifest: absent, recorded, in-progress states; a second recording is refused (4 tests) | unit | C-008'
+  - 'T-012: End-to-end edit through the installed encoder: playable shorter film, recorded edit decision list, recordin...
+    | end-to-end | C-008, C-011'
+  - 'T-013: Frame is canvas-sized with a footage hole, aspect ratio kept, long title shrunk, closing card carries run n...
+    | unit | C-010'
+  - 'T-014: Markers map onto video time; late start excludes missed beats; head-and-tail condensation; cut never longer...
+    | unit | C-011'
+  - 'T-015: Build routing: dashboard without a recording, edit with one, forced drawn mode, failed edit falls back to t...
+    | integration | C-011, C-012, C-013'
+  - 'T-016: Status, backfill, hook inert without an active run, printed hook matches the shipped fragment, wrapper forw...
+    | integration | C-015, C-016, C-019, C-020'
+  - 'T-017: Self-hosting release checklist: 7 of 9 pass; S8 fails because run-5df08e171670 has no change proposal yet,...
+    | static | C-016, C-018'
+  - 'T-018: Registry coverage: every active command record, including implement, resolves to its workflow (8 of 8) | static
+    | C-018'
+  - 'T-019: Wrapper CLI and runner regression suite (45 tests) | regression | C-019, C-020'
+  - 'T-020: Wrapper update regression suite (14 tests) | regression | C-021'
+  - 'T-021: Rendered user guide matches its Markdown source (74 tests) | static | C-024, C-025'
+  - 'T-022: Bundled payload parity: stale list names only runtime/verify_recovery.py, which is not in this change set;...
+    | regression | C-031, C-032, C-033, C-034, C-035, C-036, C-037, C-038, C-039, C-040, C-041, C-042, C-043, C-044, C-045,
+    C-...'
+  verification:
+  - 'Verification method: Ran the repository''s own unittest suites, per test class for the demo modules and per module for
+    the wrapper, user-guide, and payload ch...'
+  - 'Commands executed: PYTHONDONTWRITEBYTECODE=1 python tools/run_tests_parallel.py test_demo_mode test_demo_capture test_demo_pacing
+    test_demo_captions (100 run...'
+  - 'Result summary: 22 evidence entries executed, 18 passed, 4 failed (T-001, T-012, T-017, T-022). Demo tests: 100 executed,
+    97 passed, 3 failed. Full suite: 77...'
+  - 'Unverified areas: the end-to-end filmed edit and audio stripping on this host (C-011, C-008), because T-012 fails; the
+    occlusion-sampling helper C-009, which...'
 constraints:
 - 'Business constraints: publication safety outranks completeness of the demonstration, so a gap is preferable to unverified
   material; a team that never uses th...'
@@ -346,6 +411,21 @@ decisions:
   No | inline; each is a presentation parameter and changes no boundary'
 - 'D-010: Place every file the layer writes under the run''s own directory, derived from the install-prefix variable,... |
   No | inline; it is the direct application of C-010 and the exception is carried by D-001'
+- 'V-001: C-001 to C-054 were committed in 2e9e99e on 2026-09-26, before this phase was dispatched on 2026-10-17; thi... |
+  Workflow order (implementation follows the Design Gate) and reasoning Stage 2 baseline | Git history shows the commit is
+  an ancestor of HEAD 097e8f4; the operator directive for this phase forbids...'
+- 'V-002: The T-012 encoder failure at C-011 was left unrepaired | D-006 substitution ladder; AC-002 and AC-008 end-to-end
+  evidence | The operator directive forbids source modification, and a correction changes delivered behaviour the design...'
+- 'V-003: The parameter-surface reconciliation was not performed: the parser in C-016 registers 10 flags, C-017 docum... |
+  P-003 sequencing; AC-014 | This invocation may write only its two outputs, and reconciliation needs a documentation edit'
+- 'V-004: C-016 and C-049 are accounted at HEAD, with RUNTIME_VERSION 0.10.0 after later recorded changes, not at the... |
+  M-016 target shape (runtime version 0.8.0) | git diff 2e9e99e HEAD on the file shows no changed line mentioning demo; the
+  version bumps are governed by...'
+- 'V-005: C-050 to C-054 are committed bytecode that serves no accepted element | M-021 test set | The repository already
+  tracks tests/__pycache__; they are recorded so the change set is complete'
+- 'V-006: C-001 to C-054 share commit 2e9e99e with 477 unrelated files, so the change cannot be reverted as one commit | Rollback
+  and Rollout position; git collaboration standard (single-purpose commits) | git show --stat 2e9e99e reports 531 files changed;
+  rollback must be path-scoped as the design lists'
 open_questions:
 - 'Q-001: What minimum running length settles A-010, given that the inputs state only several minutes and the rejecti... |
   no | omn-business-analyst'
@@ -384,6 +464,19 @@ open_questions:
 - 'Q-007: How is the closure-phase work carried out and recorded, given that the runtime''s implemented surface does n...
   | no | omn-orchestrator'
 - 'Q-008: Do the Design Gate owners accept decision records D-001 to D-007, which are emitted at status Proposed? | no | omn-tech-lead'
+- 'Q-001: Is the T-012 failure, where encoder 9.0.2 rejects -filter_complex_script, an unsupported-environment limita... |
+  yes | architect'
+- 'Q-002: Does the Review Gate owner accept an implementation phase that records code committed before the phase was... |
+  no | omn-tech-lead'
+- 'Q-003: Who performs the P-003 reconciliation of the parser, the published parameter documentation, and the registr... |
+  no | omn-documentation'
+- 'Q-004: Should the uncommitted working-tree change to .claude/runtime/verify_recovery.py be committed and synced to... |
+  no | omn-orchestrator'
+- 'Q-005: Should verify_self_hosting.py --release-checklist stop writing replay records into committed run evidence w... |
+  no | omn-orchestrator'
+- 'Q-001: Which encoder versions must the filmed path support (IR Q-001)? | no | architect'
+- 'Q-002: Is a network speech engine acceptable at all, and only on explicit opt-in? | no | omn-tech-lead'
+- 'Q-003: Does code committed before the implementation phase (IR V-001) satisfy the workflow''s phase order? | no | omn-tech-lead'
 objectives:
 - TO-01 Every governed step of a recorded run is captured once, in order, stamped in UTC to
 - TO-02 Every segment of a finished demonstration is material of the application performing
@@ -487,6 +580,26 @@ risks:
   is... | The additive-only claim is lost change-wide and the delivered capability cannot be accepted'
 - 'R-014: operability | The presentation''s honesty rests on disclosure and the disclosure is judged insufficient at review
   | The exclusion-plus-disclosure position behind A-006 fails and the editor requires a structural change rathe...'
+- 'R-001: The installed encoder 9.0.2 rejects -filter_complex_script, so every filmed edit on this host fails (C-011) | high
+  | A filmed run on this host falls back to the drawn dashboard, which does not meet the filmed-material requir...'
+- 'R-002: An uncommitted change to .claude/runtime/verify_recovery.py, present before dispatch and outside this chang... |
+  high | The suite and T-022 stay red for a reason unrelated to this change'
+- 'R-003: Running verify_self_hosting.py --release-checklist writes replay records into committed run evidence | high | Committed
+  run evidence of run-c5a8d50d3238 is modified whenever the verifier runs'
+- 'R-004: The occlusion-sampling helper C-009 has no direct automated test, and publication safety depends on it | medium
+  | An occluded span the helper misses could reach a finished presentation'
+- 'R-005: Rollback needs a path-scoped revert across C-001 to C-054 because the commit mixes changes (V-006) | medium | A
+  careless revert of 2e9e99e would undo unrelated recorded changes'
+- 'R-006: Self-hosting S8, FR-05, and FR-06 stay failing until a change proposal links this run (T-017) | high | The framework
+  release checklist cannot pass for this change'
+- 'R-007: The documented and parsed parameter surfaces are offered as AC-014 evidence before they are reconciled (V-003) |
+  medium | The additive-version claim rests on contract surfaces that disagree on the size of the group'
+- 'Accepted risk: design R-001 sampling-period residual, accepted by omn-qa; design R-012 encode inside the run, accepted
+  by omn-tech-lead; design R-009 host ho...'
+- 'Unmitigated risk: until CR-001 and CR-002 close, any film already built under the default pace may contain occluded footage;
+  until CR-004 closes, narration t...'
+- 'Monitoring required: compare each build''s edit decision list against the capture manifest''s occluded list before a film
+  is shared.'
 plan_tasks:
 - 'T-001: Record the technical design of the delivered demonstration capability | depends on none'
 - 'T-002: Reconcile the opt-in recording request against S-001 | depends on T-001'
@@ -604,17 +717,132 @@ repository_context:
   - 'M-026: the artifact templates under templates/ and their validators under runtime/ | no-change-verified | F-004'
   - 'M-027: every command record in registry/commands.yaml other than implement | no-change-verified | F-021'
   - 'M-028: the agent contracts under agents/ | no-change-verified | F-002'
-  relevant_files: []
+  relevant_files:
+  - .claude/runtime/demo/__init__.py (added)
+  - .claude/runtime/demo/context.py (added)
+  - .claude/runtime/demo/recorder.py (added)
+  - .claude/runtime/demo/timeline.py (added)
+  - .claude/runtime/demo/narration.py (added)
+  - .claude/runtime/demo/captions.py (added)
+  - .claude/runtime/demo/obs_ws.py (added)
+  - .claude/runtime/demo/capture.py (added)
+  - .claude/runtime/demo/capture_helper.py (added)
+  - .claude/runtime/demo/overlays.py (added)
+  - .claude/runtime/demo/editor.py (added)
+  - .claude/runtime/demo/renderer.py (added)
+  - .claude/runtime/demo/video_builder.py (added)
+  - .claude/runtime/demo/deck.py (added)
+  - .claude/runtime/demo/hooks.settings.json (added)
+  - .claude/runtime/framework_runtime.py (modified)
+  - .claude/commands/implement.md (modified)
+  - .claude/registry/commands.yaml (modified)
+  - omn_agent/cli.py (modified)
+  - omn_agent/runner.py (modified)
+  - omn_agent/update.py (modified)
+  - .claude/runtime/README.md (modified)
+  - README.md (modified)
+  - docs/USER-GUIDE.md (modified)
+  - docs/user-guide.html (modified)
+  - tests/fixtures/fake_obs.py (added)
+  - tests/test_demo_captions.py (added)
+  - tests/test_demo_capture.py (added)
+  - tests/test_demo_mode.py (added)
+  - tests/test_demo_pacing.py (added)
+  - omn_agent/_bundled_payload/commands/implement.md (modified)
+  - omn_agent/_bundled_payload/registry/commands.yaml (modified)
+  - omn_agent/_bundled_payload/runtime/README.md (modified)
+  - omn_agent/_bundled_payload/runtime/demo/__init__.py (added)
+  - omn_agent/_bundled_payload/runtime/demo/captions.py (added)
+  - omn_agent/_bundled_payload/runtime/demo/capture.py (added)
+  - omn_agent/_bundled_payload/runtime/demo/capture_helper.py (added)
+  - omn_agent/_bundled_payload/runtime/demo/context.py (added)
+  - omn_agent/_bundled_payload/runtime/demo/deck.py (added)
+  - omn_agent/_bundled_payload/runtime/demo/editor.py (added)
   rescan_required_when:
   - the scope or the accepted design changes
   - a dependency this context does not name is discovered
   - a named module or file no longer exists at the recorded path
+changed_files:
+- .claude/runtime/demo/__init__.py (added)
+- .claude/runtime/demo/context.py (added)
+- .claude/runtime/demo/recorder.py (added)
+- .claude/runtime/demo/timeline.py (added)
+- .claude/runtime/demo/narration.py (added)
+- .claude/runtime/demo/captions.py (added)
+- .claude/runtime/demo/obs_ws.py (added)
+- .claude/runtime/demo/capture.py (added)
+- .claude/runtime/demo/capture_helper.py (added)
+- .claude/runtime/demo/overlays.py (added)
+- .claude/runtime/demo/editor.py (added)
+- .claude/runtime/demo/renderer.py (added)
+- .claude/runtime/demo/video_builder.py (added)
+- .claude/runtime/demo/deck.py (added)
+- .claude/runtime/demo/hooks.settings.json (added)
+- .claude/runtime/framework_runtime.py (modified)
+- .claude/commands/implement.md (modified)
+- .claude/registry/commands.yaml (modified)
+- omn_agent/cli.py (modified)
+- omn_agent/runner.py (modified)
+- omn_agent/update.py (modified)
+- .claude/runtime/README.md (modified)
+- README.md (modified)
+- docs/USER-GUIDE.md (modified)
+- docs/user-guide.html (modified)
+- tests/fixtures/fake_obs.py (added)
+- tests/test_demo_captions.py (added)
+- tests/test_demo_capture.py (added)
+- tests/test_demo_mode.py (added)
+- tests/test_demo_pacing.py (added)
+- omn_agent/_bundled_payload/commands/implement.md (modified)
+- omn_agent/_bundled_payload/registry/commands.yaml (modified)
+- omn_agent/_bundled_payload/runtime/README.md (modified)
+- omn_agent/_bundled_payload/runtime/demo/__init__.py (added)
+- omn_agent/_bundled_payload/runtime/demo/captions.py (added)
+- omn_agent/_bundled_payload/runtime/demo/capture.py (added)
+- omn_agent/_bundled_payload/runtime/demo/capture_helper.py (added)
+- omn_agent/_bundled_payload/runtime/demo/context.py (added)
+- omn_agent/_bundled_payload/runtime/demo/deck.py (added)
+- omn_agent/_bundled_payload/runtime/demo/editor.py (added)
+findings:
+- 'F-001: critical | security | .claude/runtime/demo/editor.py:196-220'
+- 'F-002: high | security | .claude/runtime/demo/capture_helper.py:46-56'
+- 'F-003: high | correctness | .claude/runtime/demo/editor.py:725'
+- 'F-004: high | security | .claude/runtime/demo/narration.py:32'
+- 'F-005: high | correctness | .claude/runtime/framework_runtime.py:1732-1760'
+- 'F-006: medium | test-adequacy | tests/test_demo_capture.py'
+- 'F-007: low | maintainability | .claude/runtime/demo/__init__.py:174-175'
+- 'F-008: low | maintainability | .claude/runtime/demo/__init__.py:33-38'
+- 'F-009: low | security | .claude/runtime/demo/narration.py:164'
+- 'F-010: low | packaging | tests/__pycache__/test_demo_.pyc'
+- 'CR-001: F-001 | No published segment overlaps any recorded occlusion span, under every pace and explain setting | yes'
+- 'CR-002: F-002 | Every occlusion the helper detects is excluded from publication, whatever its length; only the R-001 sampli...
+  | yes'
+- 'CR-003: F-003 | A filmed build succeeds on the encoder installed on the operator host, and the supported encoder range
+  is s... | yes'
+- 'CR-004: F-004 | No narration text leaves the host unless the operator explicitly selects a network engine, and that exposur...
+  | yes'
+- 'CR-005: F-005 | No fault in the arming call, the status display or the emit-tap import can raise into the run; each logs
+  an... | yes'
+- 'CR-006: F-006 | Executed checks cover each gap listed under Gaps requiring new tests | no'
+- 'CR-007: F-007 | A claim fault cannot start a second build of the same run | no'
+- 'CR-008: F-008 | The package docstring names the integration points the runtime actually uses | no'
+- 'CR-009: F-009 | Operator-supplied voice names and paths cannot alter the speech-engine script | no'
+- 'CR-010: F-010 | No compiled bytecode is tracked in the repository | no'
+verdicts:
+- 'Decision: reject'
+- 'Rationale: An open critical finding (F-001) publishes occluded footage by default, and four open high findings break publication
+  safety, the filmed path, sec...'
+- 'Blocking findings outstanding: F-001, F-002, F-003, F-004, F-005'
+- 'Readiness recommendation: recommended to omn-qa, the Review Gate decider under producer exclusion, that the Review Gate
+  not pass until CR-001 to CR-005 close...'
 affected_areas:
   determinable: true
   declared: []
   triggered:
     database:
     - source: artifact:solution-design-and-risk-assessment
+      term: migration
+    - source: artifact:implementation
       term: migration
     performance:
     - source: input:change-request
@@ -641,6 +869,8 @@ affected_areas:
   - artifact:scope-and-acceptance
   - artifact:execution-planning
   - artifact:solution-design-and-risk-assessment
+  - artifact:implementation
+  - artifact:quality-review
 relevant_skills:
   scope-and-acceptance:
     S02: required

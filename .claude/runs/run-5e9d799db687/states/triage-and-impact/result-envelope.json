@@ -1,0 +1,87 @@
+{
+  "invocation_id": "inv-5e9d799db687-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5e9d799db687/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "triage",
+    "workflow": "fix-bug",
+    "phase": "triage-and-impact",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "declaredStatus": "provisional",
+    "counts": {
+      "evidenceRecords": 16,
+      "causalSteps": 6,
+      "causalStepsByConfidence": {
+        "high": 6,
+        "medium": 0,
+        "low": 0
+      },
+      "evidenceByConfidence": {
+        "high": 14,
+        "medium": 0,
+        "low": 2
+      },
+      "openQuestions": 4,
+      "openQuestionsBlocking": 0
+    },
+    "statusBasis": "reasoning.md Stage 9, first matching row is row 5: reproducibility is deterministic (E-002 to E-006); no required input was missing; the chain closes on a condition, the absence of item-by-item tracing of Validation Plan regression cases to delivered tests before the Fix Gate (C-002 to C-004); the three alternatives tested are eliminated by E-003, E-005, E-006, E-007, E-014; every dependent step is high; but no business impact statement was supplied, so severity rests on technical impact alone (Q-003), which yields provisional. Q-002 (first-hand execution of the untested behaviour, E-016 low) is carried to root-cause-analysis and affects no dependent step.",
+    "severityBasis": "reasoning.md Stage 5, medium: a secondary path, regression detection for the policy-exception command and the rollback admissibility row, is absent from the test suite (E-003, E-004, E-005), and a workflow path, closure of run-e7bf0d73027a, is blocked (E-014); acceptable workarounds exist in verifier checks D4, D23, D27 and X1 (E-006) and in a formal risk decision. No correctness, data, or security consequence is observed (E-007), so not high; a regression could pass undetected and a run is blocked, so not low. The reporter's medium is registered at low confidence (E-001) and did not set the value.",
+    "reproducibilityBasis": "Established in this run by executing the report's two reproduction steps plus three further read-only inspections: the admissibility module runs 16 tests OK with no rollback case (E-002, E-004); no file under tests/ names cmd_policy_exception and no test executes the command (E-003, E-005); the verifier executes no policy-exception scenario (E-006). The outcome is the absence of code, so it holds on every execution under the stated preconditions.",
+    "scopeDecision": "DF-001 and DF-002 are analysed as one defect: one symptom (AC-007 and AC-009 not-met, Verification Gate rejected), one origin in the same root-cause Validation Plan, one causal chain.",
+    "transientWrites": "No repository file was written other than the two permitted paths. The unittest run and the validator run imported repository modules, which may refresh gitignored __pycache__ directories under tests/ and .claude/runtime/. TEMP and TMP were set to D:/rvw-tmp-5df08e (mkdir -p, existing or created). verify_recovery.py was not run in this phase, so run-f94564cb61ce was not touched and needed no restore. bug_analysis_validator.py was run read-only without --json-out: first pass FAIL 28/30 on two foreign identifier tokens from run-e7bf0d73027a (repaired by describing them by subject), second pass PASS 30/30.",
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "notApplicablePassed": 3,
+      "notApplicable": ["V3 (not intermittent)", "V4 (not not-reproduced)", "B5 (not critical)"],
+      "repairsApplied": ["C5 and C4: two references to run-e7bf0d73027a identifiers reworded by subject; the analysis was unchanged"],
+      "byGroup": {
+        "structural": {"S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass", "S9": "pass"},
+        "metadata": {"D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass"},
+        "agreement": {"B2": "pass", "B3": "pass", "A1": "pass"},
+        "reproduction": {"B4": "pass", "V1": "pass", "V2": "pass", "V3": "pass", "V4": "pass", "V5": "pass"},
+        "evidence": {"B1": "pass", "V6": "pass", "V7": "pass", "V8": "pass", "V9": "pass", "V10": "pass"},
+        "causalChain": {"V11": "pass", "V12": "pass", "V13": "pass", "V14": "pass", "V15": "pass", "V16": "pass"},
+        "impactAndSeverity": {"V17": "pass", "V18": "pass", "V19": "pass", "V20": "pass", "V21": "pass", "V22": "pass"},
+        "fixStrategy": {"V23": "pass", "V24": "pass", "V25": "pass", "V26": "pass", "V27": "pass", "V28": "pass"},
+        "statusAndQuestions": {"B5": "pass", "V29": "pass", "V30": "pass", "V31": "pass", "V32": "pass", "V33": "pass"},
+        "authority": {"A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A7": "pass", "A8": "pass"},
+        "content": {"C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass", "C7": "pass"}
+      },
+      "validationEngine": {"result": "pass", "checksRun": 30, "checksPassed": 30}
+    },
+    "notMachineCheckable": {
+      "N1": "met: the root cause names a condition, the missing tracing of planned regression cases to delivered tests before the Fix Gate, not the test module where the gap is visible (C-005 records that location as a consequence)",
+      "N2": "met: every causal step cites high-confidence evidence read or run in this phase; the only reported behaviour claim (E-016) is low, supports no causal step, and is carried as Q-002",
+      "N3": "met: the radius names the test suite, the runtime policy-exception command surface, the verifier admissibility rows and their bundled copy, the run-e7bf0d73027a record and closure, and the uncommitted working-tree state; no persisted bad data was written"
+    },
+    "skillsApplied": ["S11", "S12", "S02", "S03", "S01", "S07"],
+    "skillsNotTriggered": ["S06", "S08", "S09"],
+    "modulesLoaded": {
+      "core": ["system.md", "reasoning.md", "output.md", "quality.md"],
+      "onDemand": ["identity.md (loaded for the Open Questions owner escalation path and the evidence-level rules)"],
+      "notLoaded": ["execution.md (run stayed on the direct Execution to Completion path)", "examples.md (output shape unambiguous)"]
+    },
+    "repositoryRescan": "none; the task context named no files, so the sites were taken from the defect report and the run-e7bf0d73027a evidence it cites"
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "runs/run-5e9d799db687/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-5e9d799db687/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-5e9d799db687/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

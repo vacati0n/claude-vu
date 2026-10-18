@@ -1,0 +1,275 @@
+{
+  "invocation_id": "inv-5df08e171670-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "report_id": "IR-2026-1014",
+    "report_status": "provisional",
+    "verification_status": "partially-verified",
+    "review_status": "pending-review",
+    "counts": {
+      "change_set": 54,
+      "test_evidence": 22,
+      "deviations": 6,
+      "residual_risks": 7,
+      "open_questions": 5
+    },
+    "evidence": {
+      "entries_executed": 22,
+      "entries_passed": 18,
+      "entries_failed": 4,
+      "entries_not_run": 0
+    },
+    "tests": {
+      "demo_modules": {
+        "executed": 100,
+        "passed": 97,
+        "failed": 3
+      },
+      "full_suite": {
+        "executed": 771,
+        "passed": 767,
+        "failed": 4
+      }
+    },
+    "framework_verifiers": {
+      "executed": 4,
+      "passed": 3,
+      "failed": 1,
+      "failed_names": [
+        "verify_self_hosting.py --release-checklist (7/9: S8, S10)"
+      ]
+    },
+    "provenance": "No source was written by this invocation. The change set was committed in 2e9e99e (2026-09-26T12:09:50Z) before the phase was dispatched (2026-10-17T12:22:49Z) and is accounted at HEAD 097e8f4.",
+    "known_failures": [
+      "test_demo_capture.EndToEndEditTestCase (1 failure, 2 errors): the installed ffmpeg 9.0.2 rejects the -filter_complex_script option the delivered editor.py passes; the operator characterised this as a local-environment issue, and whether it is that or a delivered defect is escalated (Q-001)",
+      "test_bundled_payload parity: drift is caused by an uncommitted working-tree change to .claude/runtime/verify_recovery.py that was present before dispatch and is outside this change set",
+      "verify_self_hosting S8/S10: run-5df08e171670 has no change proposal yet"
+    ],
+    "transient_writes_reverted": [
+      ".claude/runs/run-c5a8d50d3238/state.json",
+      ".claude/runs/run-c5a8d50d3238/task-context.yaml"
+    ],
+    "transient_writes_detail": "written by verify_self_hosting.py --release-checklist (replay records); both were clean at dispatch and were restored to their HEAD content with git checkout; no net change",
+    "quality_checks": {
+      "run": 45,
+      "passed": 45,
+      "results": {
+        "S1": {
+          "result": "pass",
+          "detail": "structural checks confirmed by the Validation Engine run (32/32) and by inspection"
+        },
+        "S2": {
+          "result": "pass",
+          "detail": "structural checks confirmed by the Validation Engine run (32/32) and by inspection"
+        },
+        "S3": {
+          "result": "pass",
+          "detail": "structural checks confirmed by the Validation Engine run (32/32) and by inspection"
+        },
+        "S4": {
+          "result": "pass",
+          "detail": "structural checks confirmed by the Validation Engine run (32/32) and by inspection"
+        },
+        "S5": {
+          "result": "pass",
+          "detail": "structural checks confirmed by the Validation Engine run (32/32) and by inspection"
+        },
+        "S6": {
+          "result": "pass",
+          "detail": "structural checks confirmed by the Validation Engine run (32/32) and by inspection"
+        },
+        "S7": {
+          "result": "pass",
+          "detail": "structural checks confirmed by the Validation Engine run (32/32) and by inspection"
+        },
+        "S8": {
+          "result": "pass",
+          "detail": "structural checks confirmed by the Validation Engine run (32/32) and by inspection"
+        },
+        "D1": {
+          "result": "pass",
+          "detail": "metadata block parses with every field populated"
+        },
+        "D2": {
+          "result": "pass",
+          "detail": "metadata block parses with every field populated"
+        },
+        "D3": {
+          "result": "pass",
+          "detail": "metadata block parses with every field populated"
+        },
+        "D4": {
+          "result": "pass",
+          "detail": "metadata block parses with every field populated"
+        },
+        "D5": {
+          "result": "pass",
+          "detail": "metadata block parses with every field populated"
+        },
+        "D6": {
+          "result": "pass",
+          "detail": "inputDigest and contextDigest copied verbatim from context_slice; the validator's digest cross-check passed"
+        },
+        "M1": {
+          "result": "pass",
+          "detail": "each of the 54 change-set entries is cited in at least one Covers cell; T-001 covers all of them"
+        },
+        "M5": {
+          "result": "pass",
+          "detail": "Type and Result use the declared vocabularies"
+        },
+        "M7": {
+          "result": "pass",
+          "detail": "partially-verified with named unverified areas"
+        },
+        "E1": {
+          "result": "pass",
+          "detail": "every Command cell names a command executed in this invocation"
+        },
+        "E2": {
+          "result": "pass",
+          "detail": "every Result cell records the observed outcome; four are fail"
+        },
+        "E3": {
+          "result": "pass",
+          "detail": "no source change was made, so the baseline is the post-change state; the demo modules were run twice (parallel runner, then per class) with identical results"
+        },
+        "E4": {
+          "result": "pass",
+          "detail": "pre-existing verify_recovery.py drift recorded as R-002, with the git status at dispatch as its baseline"
+        },
+        "M3": {
+          "result": "pass",
+          "detail": "status is provisional, not complete"
+        },
+        "M2": {
+          "result": "pass",
+          "detail": "workflowPhase, status, and verificationStatus agree in both places"
+        },
+        "K1": {
+          "result": "pass",
+          "detail": "five open questions recorded"
+        },
+        "K2": {
+          "result": "pass",
+          "detail": "the Stage 7 row for a fail entry yields partially-verified / provisional"
+        },
+        "M4": {
+          "result": "pass",
+          "detail": "every deviation cites C entries"
+        },
+        "V1": {
+          "result": "pass",
+          "detail": "every deviation names an escalation or not-required"
+        },
+        "V2": {
+          "result": "pass",
+          "detail": "V-001, V-002, and V-003 change what was accepted or its evidence, and each is escalated (Q-002, Q-001, Q-003)"
+        },
+        "V3": {
+          "result": "pass",
+          "detail": "C-050 to C-054 have no accepted element and are covered by V-005"
+        },
+        "B1": {
+          "result": "pass",
+          "detail": "the change set lists every file of the change; Declared side effects lists both outputs plus the transient verifier writes, which were reverted"
+        },
+        "B2": {
+          "result": "pass",
+          "detail": "net state: no file outside permitted_writes carries a change. Running verify_self_hosting.py --release-checklist (twice) transiently wrote runs/run-c5a8d50d3238/state.json and task-context.yaml; both were restored to their HEAD content with git checkout and the writes are disclosed (R-003)"
+        },
+        "B3": {
+          "result": "pass",
+          "detail": "no code was changed by this invocation; by inspection the four guarded sites hold"
+        },
+        "B4": {
+          "result": "pass",
+          "detail": "no test was disabled, skipped, or weakened; failures are reported as fail"
+        },
+        "B5": {
+          "result": "pass",
+          "detail": "no credential, token, or secret appears"
+        },
+        "B6": {
+          "result": "pass",
+          "detail": "no committed run evidence carries a net change; the transient verifier writes to run-c5a8d50d3238 were reverted (see B2)"
+        },
+        "B7": {
+          "result": "pass",
+          "detail": "nothing was removed or weakened"
+        },
+        "M6": {
+          "result": "pass",
+          "detail": "no review, merge, or release verdict recorded"
+        },
+        "A1": {
+          "result": "pass",
+          "detail": "Review status is pending-review"
+        },
+        "A2": {
+          "result": "pass",
+          "detail": "no criterion, threshold, or invariant was relaxed"
+        },
+        "A3": {
+          "result": "pass",
+          "detail": "no scope, design, or gate decision was recorded"
+        },
+        "C1": {
+          "result": "pass",
+          "detail": "no diff, patch, or modification directive"
+        },
+        "C2": {
+          "result": "pass",
+          "detail": "no model or vendor name; tool names (ffmpeg, OBS Studio, Pillow) come from the inputs"
+        },
+        "C3": {
+          "result": "pass",
+          "detail": "identifiers zero-padded, ascending from 001, unique"
+        },
+        "C4": {
+          "result": "pass",
+          "detail": "every referenced identifier is defined; no upstream C/T/R/Q identifier is bare-cited"
+        },
+        "C5": {
+          "result": "pass",
+          "detail": "Reviewer focus areas names the sites of V-001 to V-003, V-006, R-001, and R-004"
+        }
+      }
+    },
+    "validation_engine_self_run": "implementation_report_validator.py: PASS 32/32",
+    "not_machine_checkable": {
+      "N1": "discharged: each change-set row was checked against git show --stat 2e9e99e and the file at HEAD",
+      "N2": "discharged with a limit: T-002 to T-022 name the test class or module that exercises each entry; T-001 covers every entry only as a regression baseline, and entries with no direct check are named under Unverified areas",
+      "N3": "discharged: this invocation changed no business logic; by inspection the delivered runtime reaches the demo layer only at four guarded sites",
+      "N4": "discharged: Approach taken records the ladder rung the design gives for the new package (no existing component draws, films, or edits; optional tools stay behind a fallback ladder rather than becoming dependencies)"
+    },
+    "input_digest": "sha256:54c8a7a4d8c82861eec77601136ce5b9",
+    "context_digest": "sha256:71b01b435a6f92e7b8bf1d1a67c8c50d",
+    "attestations": [
+      "no review verdict was recorded by this agent",
+      "no source, configuration, or test file was modified by this invocation",
+      "every command in the Test Evidence table was executed in this environment and its result read from its own output",
+      "no external system was accessed"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-implement/system.md",
+    "agents/omn-dev-1-implement/identity.md",
+    "agents/omn-dev-1-implement/reasoning.md",
+    "agents/omn-dev-1-implement/output.md",
+    "agents/omn-dev-1-implement/quality.md",
+    "runs/run-5df08e171670/states/implementation/invocation-envelope.json",
+    "runs/run-5df08e171670/task-context.yaml",
+    "runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/technical-design.md"
+  ],
+  "confidence": 0.8,
+  "declared_side_effects": [
+    "runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md",
+    "runs/run-5df08e171670/states/implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

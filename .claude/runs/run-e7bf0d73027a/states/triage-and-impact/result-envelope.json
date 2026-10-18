@@ -1,0 +1,177 @@
+{
+  "invocation_id": "inv-e7bf0d73027a-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-e7bf0d73027a/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "triage",
+    "workflow": "fix-bug",
+    "phase": "triage-and-impact",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "declaredStatus": "complete",
+    "counts": {
+      "evidenceRecords": 14,
+      "causalSteps": 4,
+      "causalStepsByConfidence": {
+        "high": 4,
+        "medium": 0,
+        "low": 0
+      },
+      "evidenceByConfidence": {
+        "high": 11,
+        "medium": 2,
+        "low": 1
+      },
+      "openQuestions": 2,
+      "openQuestionsBlocking": 0
+    },
+    "statusBasis": "reasoning.md Stage 9, first matching row is the last: reproducibility is deterministic (E-002, E-003); no required input was missing; the chain closes on a condition, a contract mismatch between the runtime's clearing-action contract and the verifier's admissibility table (C-002); the runtime-at-fault alternative is eliminated by E-004 and E-005 and the harness-or-timing alternative by E-003 and E-014; every dependent step is high; business impact is read from the supplied defect report's impact statement (E-001), so severity does not rest on technical impact alone. Q-001 and Q-002 are non-blocking and change no causal step's standing.",
+    "severityBasis": "reasoning.md Stage 5, medium: a secondary path, the recovery verifier and the FR-03 release checklist item it backs, fails with a false negative on every invocation (E-002, E-003), while no run the runtime executes is affected (E-005, E-013). It is above low because it has a correctness consequence for the verification surface: the standing X1 failure masks any genuinely inadmissible clearing action introduced later. The reporter's own medium is registered as E-001 at low confidence and did not set the value.",
+    "reproducibilityBasis": "Established in this run, not copied from the report: two invocations of python .claude/runtime/verify_recovery.py under unchanged preconditions each exited 1 with 73/74 NOT PROVEN and the same X1 failure on the same envelope id (E-002, E-003). The report's claim that the injected run id differs per invocation was not borne out; it was identical across both runs.",
+    "transientWrites": "verify_recovery.py was run twice; it created and removed its own injected run directories under runs/ (including run-d8870619db82). git status afterwards showed no tracked file under runs/ modified by these runs, so no git restore of run-f94564cb61ce was needed (E-014). Its stdout was captured to D:/rvw-tmp-5df08e/vr1.txt and vr2.txt, outside the repository. bug_analysis_validator.py was run read-only without --json-out: PASS, 30/30.",
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "notApplicablePassed": 5,
+      "byGroup": {
+        "structural": {
+          "S1": "pass",
+          "S2": "pass",
+          "S3": "pass",
+          "S4": "pass",
+          "S5": "pass",
+          "S6": "pass",
+          "S7": "pass",
+          "S8": "pass",
+          "S9": "pass"
+        },
+        "metadata": {
+          "D1": "pass",
+          "D2": "pass",
+          "D3": "pass",
+          "D4": "pass",
+          "D5": "pass",
+          "D6": "pass",
+          "D7": "pass"
+        },
+        "agreement": {
+          "B2": "pass",
+          "B3": "pass",
+          "A1": "pass"
+        },
+        "reproduction": {
+          "B4": "pass",
+          "V1": "pass",
+          "V2": "pass",
+          "V3": "pass (not applicable; frequency is deterministic)",
+          "V4": "pass (not applicable; frequency is deterministic)",
+          "V5": "pass"
+        },
+        "evidence": {
+          "B1": "pass",
+          "V6": "pass",
+          "V7": "pass",
+          "V8": "pass",
+          "V9": "pass",
+          "V10": "pass"
+        },
+        "causalChain": {
+          "V11": "pass",
+          "V12": "pass",
+          "V13": "pass",
+          "V14": "pass",
+          "V15": "pass",
+          "V16": "pass"
+        },
+        "impactAndSeverity": {
+          "V17": "pass",
+          "V18": "pass",
+          "V19": "pass",
+          "V20": "pass",
+          "V21": "pass",
+          "V22": "pass (not applicable; impact read from the supplied defect report)"
+        },
+        "fixStrategy": {
+          "V23": "pass",
+          "V24": "pass",
+          "V25": "pass",
+          "V26": "pass (not applicable; chain is not provisional)",
+          "V27": "pass",
+          "V28": "pass"
+        },
+        "statusAndQuestions": {
+          "B5": "pass (not applicable; severity is not critical)",
+          "V29": "pass",
+          "V30": "pass",
+          "V31": "pass",
+          "V32": "pass",
+          "V33": "pass"
+        },
+        "authority": {
+          "A2": "pass",
+          "A3": "pass",
+          "A4": "pass",
+          "A5": "pass",
+          "A6": "pass",
+          "A7": "pass",
+          "A8": "pass"
+        },
+        "content": {
+          "C1": "pass",
+          "C2": "pass",
+          "C3": "pass",
+          "C4": "pass",
+          "C5": "pass",
+          "C6": "pass",
+          "C7": "pass"
+        }
+      }
+    },
+    "validationEngine": {
+      "validator": "bug_analysis_validator",
+      "result": "pass",
+      "checks": "30/30",
+      "notMachineCheckable": 3
+    },
+    "notMachineCheckable": {
+      "N1": "discharged: the root cause names a condition, a contract mismatch between the command set the clearing-action builder emits and the rows the verifier's admissibility table knows, not the placeholder filter where X1 surfaces it (C-002 versus C-004).",
+      "N2": "discharged: every causal claim cites registered first-hand evidence at high confidence; the reporter's claims (E-001) and the unobserved CI status (Q-002) carry no causal step.",
+      "N3": "discharged: the radius names the verifier's shared admissibility judgement, FR-03, the CI verifier job, the bundled payload copy, and the persisted FR-03 failure records in FC-016 to FC-022 and O-015; confirmed absence of any persisted run envelope (E-013)."
+    },
+    "skillsApplied": [
+      "S11",
+      "S12",
+      "S02",
+      "S03",
+      "S01",
+      "S07"
+    ],
+    "skillsNotTriggered": [
+      "S06",
+      "S08",
+      "S09"
+    ],
+    "repositoryRescan": "task context named no modules or files; the code sites were located from the defect report's named functions in runtime/framework_runtime.py and runtime/verify_recovery.py, and the dependency on omn_agent/_bundled_payload and .github/workflows/verify.yml was discovered and read",
+    "gateOwnership": "Triage Gate evidence only; the decision rests with omn-tech-lead under the Producer Exclusion Rule"
+  },
+  "evidence_refs": [
+    "agents/omn-dev-1-bug-analyst/manifest.yaml",
+    "agents/omn-dev-1-bug-analyst/system.md",
+    "agents/omn-dev-1-bug-analyst/identity.md",
+    "agents/omn-dev-1-bug-analyst/reasoning.md",
+    "agents/omn-dev-1-bug-analyst/output.md",
+    "agents/omn-dev-1-bug-analyst/quality.md",
+    "runs/run-e7bf0d73027a/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-e7bf0d73027a/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-e7bf0d73027a/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,108 @@
+{
+  "invocation_id": "inv-5e9d799db687-04-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-5e9d799db687/states/regression-validation/artifacts/validation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "VR-run-5e9d799db687-regression-validation",
+    "validationBasis": "regression",
+    "status": "complete",
+    "verdict": "pass",
+    "counts": {
+      "criteria": {
+        "total": 7,
+        "met": 7,
+        "not-met": 0,
+        "blocked": 0
+      },
+      "defects": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 0
+      },
+      "openQuestions": 2
+    },
+    "criteriaSources": {
+      "AC-001..AC-003": "runs/inputs/recovery-x1-missing-regression-tests-defect-report.md, Expected behaviour bullets 1-3, verbatim",
+      "AC-004..AC-007": "Triage Gate rationale in runs/run-5e9d799db687/state.json, the four delivered-behaviour conditions, verbatim"
+    },
+    "carriedNoteRulings": {
+      "e2eReadsCommittedRun": "confirmed: GOOD_SOURCE reads runs/run-c5a8d50d3238 execution-plan.md, which is tracked in git and was unmodified before and after; recorded as unmitigated risk, not a defect",
+      "noOwnersListedUnasserted": "confirmed: the empty-owner-list acceptance is executed but not asserted; out of scope by the root-cause Fix Strategy; routed to architect as report Q-001",
+      "R-002": "reproduced: bare python tests/test_bundled_payload.py fails 1/11 (test_repo_checkout_still_resolves_its_own_payload_tree) because omn_agent is installed editable from the main checkout and script mode puts tests/ rather than the worktree root on sys.path; passes 11/11 with PYTHONPATH=. and inside the parallel suite; neither changed file is imported by that module; environmental, not a regression of this change"
+    },
+    "validatorRun": "runtime/validation_report_validator.py with --envelope: PASS 31/31 (3 not-machine-checkable)",
+    "commandsExecuted": {
+      "python -m unittest tests.test_policy_exception_command tests.test_clearing_action_admissibility -v": "25/25 OK in 19.0 s (2 end-to-end, 23 admissibility including 7 rollback)",
+      "python .claude/runtime/verify_recovery.py": "exit 0, 74/74 checks passed -- RECOVERY PROVEN, X1 over 9 envelopes in 4 runs; injected runs and inputs removed; git status identical; run-f94564cb61ce unmodified, no restore needed",
+      "python tests/test_bundled_payload.py": "exit 1, 10/11, test_repo_checkout_still_resolves_its_own_payload_tree fails resolving the main checkout (R-002)",
+      "PYTHONPATH=. python tests/test_bundled_payload.py": "11/11 OK",
+      "python tools/run_tests_parallel.py": "exit 1: 31/32 modules, 796 of 796 discovered tests ran, 294.6 s wall; only test_demo_capture EndToEndEditTestCase fails (1 failure, 2 errors) on ffmpeg 9.0.2 'Unrecognized option filter_complex_script'",
+      "qa_mutate.py probe on temp tree copies (session scratchpad script)": "E1 producer guard off: 1 failure; E2 envelope resolution off: 1 failure; E3 builder emits --role: 2 failures; E4 listed-owner guard off: 1 failure; R1 rollback exemption widened: 2 failures; R2 rollback exemption emptied: 4 failures; H1 RollbackRowUnchangedTestCase against HEAD 097e8f4 verify_recovery.py: 7/7 OK",
+      "git diff --numstat .claude/runtime omn_agent; cmp of both verify_recovery.py copies": "only verify_recovery.py and its bundled copy, 37/2 each, matching root-cause E-007 pre-run state; byte-identical; framework_runtime.py unchanged",
+      "git status --porcelain and git status --porcelain --ignored .claude/runs, before and after": "identical; nothing new under .claude/runs",
+      "git ls-files run-c5a8d50d3238 execution-plan.md": "tracked"
+    },
+    "regressionsDetected": 0,
+    "observations": [
+      "implementation T-008 (suite without test_demo_capture, 760/760) was not re-run in that exact form; the full parallel suite run here covers the same modules plus test_demo_capture and is the evidence used",
+      "implementation T-004 and T-005 mutations were re-run independently by this phase's own probe, with one additional mutation (E4, listed-owner guard) the implementer did not run",
+      "untested branches recorded in the report: rollback row target-range and attempt-budget refusals; policy-exception command terminal replay and wrong-blocked-reason refusal"
+    ],
+    "qualityChecks": {
+      "run": 57,
+      "passed": 57,
+      "results": {
+        "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+        "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass",
+        "Q2": "pass", "Q5": "pass", "A7": "pass", "A8": "pass", "T1": "pass", "T2": "pass", "T3": "pass",
+        "Q3": "pass", "Q7": "pass",
+        "F1": "pass", "F2": "pass", "F3": "pass", "F4": "pass", "F5": "pass", "F6": "pass",
+        "Q1": "pass", "Q4": "pass", "Q6": "pass", "R1": "pass", "R2": "pass", "R3": "pass",
+        "E1": "pass", "E2": "pass", "E3": "pass", "E4": "pass", "E5": "pass", "E6": "pass", "E7": "pass",
+        "A1": "pass", "A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A9": "pass", "A10": "pass",
+        "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass"
+      },
+      "notes": {
+        "F1-F6": "no defect recorded; vacuously satisfied",
+        "T2": "no blocked criterion; vacuously satisfied",
+        "R3": "status complete; open questions recorded regardless",
+        "R1": "Stage 8 row 1: no open critical or high defect, no not-met or blocked criterion -> pass / complete",
+        "C3": "first render named the main checkout's directory path, which contains a vendor token; replaced with a description, no result or count changed",
+        "A1": "change and evidence authored by omn-dev-1-implement (IR-2026-1018); this agent authored neither",
+        "A9": "no test file written; not the safety-net-establishment phase"
+      }
+    },
+    "notMachineCheckable": {
+      "N1": "met: the change guards a proceed-or-stop path, so every asserted guard and state effect was proven by an executed mutation; run-tree side effects compared before and after",
+      "N2": "met: each met criterion cites a check executed in this phase whose output demonstrates it; AC-002's pre-fix pin is demonstrated by running the rollback cases against the HEAD verifier, not inferred",
+      "N3": "met: the full suite, the verifier, bundle parity, the 16 pre-existing admissibility cases, and the .claude/runs tree were each exercised; untested branches are named in the report"
+    },
+    "gateRouting": "Verification Gate is decided by omn-dev-2-reviewer under producer exclusion; this report recommends, it does not decide",
+    "transientWrites": [
+      "D:/rvw-tmp-5df08e/qa-5e9d/ (git status snapshots, verifier and suite logs, HEAD verify_recovery.py copy, mutation tree copies); removed at the end of the phase",
+      "session scratchpad qa_mutate.py, outside the repository",
+      "test temp trees omn-pex-* and omn-admissibility-* under D:/rvw-tmp-5df08e, removed by the tests' own cleanup",
+      "verify_recovery.py injected runs and inputs under .claude/runs, created and removed by the verifier itself",
+      "git-ignored __pycache__ directories from test imports"
+    ]
+  },
+  "evidence_refs": [
+    "agents/omn-qa/manifest.yaml",
+    "agents/omn-qa/system.md",
+    "agents/omn-qa/identity.md",
+    "agents/omn-qa/reasoning.md",
+    "agents/omn-qa/output.md",
+    "agents/omn-qa/quality.md",
+    "runs/run-5e9d799db687/states/regression-validation/invocation-envelope.json"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "runs/run-5e9d799db687/states/regression-validation/artifacts/validation-report.md",
+    "runs/run-5e9d799db687/states/regression-validation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}
