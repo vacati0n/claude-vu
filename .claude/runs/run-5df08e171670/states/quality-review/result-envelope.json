@@ -1,0 +1,105 @@
+{
+  "invocation_id": "inv-5df08e171670-05-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    ".claude/runs/run-5df08e171670/states/quality-review/artifacts/review-package.md"
+  ],
+  "structured_output": {
+    "package_id": "RP-2026-0005",
+    "package_status": "complete",
+    "verdict": "reject",
+    "findings_by_severity": {
+      "critical": 1,
+      "high": 4,
+      "medium": 1,
+      "low": 4
+    },
+    "correction_requests": 10,
+    "blocking_correction_requests": 5,
+    "open_questions": 3,
+    "blocking_findings_outstanding": [
+      "F-001",
+      "F-002",
+      "F-003",
+      "F-004",
+      "F-005"
+    ],
+    "checks": {
+      "S1": "pass",
+      "S2": "pass",
+      "S3": "pass",
+      "S4": "pass",
+      "S5": "pass",
+      "S6": "pass",
+      "S7": "pass",
+      "S8": "pass",
+      "D1": "pass",
+      "D2": "pass",
+      "D3": "pass",
+      "D4": "pass",
+      "D5": "pass",
+      "D6": "pass",
+      "P1": "pass",
+      "P2": "pass",
+      "P3": "pass",
+      "P4": "pass",
+      "P5": "pass",
+      "P6": "pass",
+      "P7": "pass",
+      "F1": "pass",
+      "F2": "pass",
+      "F3": "pass",
+      "F4": "pass",
+      "F5": "pass",
+      "R1": "pass",
+      "R2": "pass",
+      "R3": "pass",
+      "E1": "pass",
+      "E2": "pass",
+      "E3": "pass",
+      "E4": "pass",
+      "E5": "pass",
+      "A1": "pass",
+      "A2": "pass",
+      "A3": "pass",
+      "A4": "pass",
+      "A5": "pass",
+      "A6": "pass",
+      "C1": "pass",
+      "C2": "pass",
+      "C3": "pass",
+      "C4": "pass",
+      "C5": "pass",
+      "C6": "pass"
+    },
+    "checks_run": 46,
+    "checks_passed": 46,
+    "obligations": {
+      "N1": "discharged: publication safety, fault absorption, encoder path, network egress and input sanitization were each examined at their code sites; renderer, deck, overlays, captions and timeline internals were not read line by line and are recorded as out of scope",
+      "N2": "discharged: every finding cites a design constraint or decision, a loaded skill rule, or an implementation-report deviation",
+      "N3": "discharged: no severity was lowered; F-001 is critical because occluded footage reaches the published film in the default mode, confirmed by probe"
+    },
+    "repair": {
+      "attempt": 2,
+      "cleared": [
+        "C6.2"
+      ],
+      "change": "Findings row F-008 Requirement cell: a design-artifact identifier that collided with the package finding prefix is now cited by subject; no finding, severity or verdict changed"
+    }
+  },
+  "evidence_refs": [
+    ".claude/agents/omn-dev-2-reviewer/system.md",
+    ".claude/agents/omn-dev-2-reviewer/identity.md",
+    ".claude/agents/omn-dev-2-reviewer/reasoning.md",
+    ".claude/agents/omn-dev-2-reviewer/output.md",
+    ".claude/agents/omn-dev-2-reviewer/quality.md",
+    ".claude/runs/run-5df08e171670/states/quality-review/invocation-envelope.json"
+  ],
+  "confidence": 0.85,
+  "declared_side_effects": [
+    ".claude/runs/run-5df08e171670/states/quality-review/artifacts/review-package.md",
+    ".claude/runs/run-5df08e171670/states/quality-review/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

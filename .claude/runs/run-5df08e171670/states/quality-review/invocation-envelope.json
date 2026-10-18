@@ -1,0 +1,766 @@
+{
+  "invocation_id": "inv-5df08e171670-05-002",
+  "run_id": "run-5df08e171670",
+  "work_item_id": "run-5df08e171670::quality-review",
+  "idempotency_key": "sha256:d42259dfcd469670c7cffc90b3d0785e",
+  "state_id": "quality-review",
+  "phase_index": 5,
+  "agent_id": "omn-dev-2-reviewer",
+  "agent_version": "1.1.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-dev-2-reviewer.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-dev-2-reviewer/manifest.yaml",
+    "load_order": [
+      "agents/omn-dev-2-reviewer/system.md",
+      "agents/omn-dev-2-reviewer/identity.md",
+      "agents/omn-dev-2-reviewer/reasoning.md",
+      "agents/omn-dev-2-reviewer/execution.md",
+      "agents/omn-dev-2-reviewer/output.md",
+      "agents/omn-dev-2-reviewer/quality.md",
+      "agents/omn-dev-2-reviewer/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-dev-2-reviewer/system.md": "sha256:ef234d6d8e6b74d21d099ab744ab9f60",
+      "agents/omn-dev-2-reviewer/identity.md": "sha256:725ba943cf8532dc4f666e68ca191592",
+      "agents/omn-dev-2-reviewer/reasoning.md": "sha256:ca41f86059574239b5a83fdbac8554b8",
+      "agents/omn-dev-2-reviewer/execution.md": "sha256:7a6a432d0e0b51444e99b0c98f62ae0e",
+      "agents/omn-dev-2-reviewer/output.md": "sha256:1b324b77d86f30d076d08768be2f9d5c",
+      "agents/omn-dev-2-reviewer/quality.md": "sha256:4d4c09812b441785acd1b03330468cc9",
+      "agents/omn-dev-2-reviewer/examples.md": "sha256:488657c9d243c3d498245922c2d92906"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-dev-2-reviewer/system.md",
+        "agents/omn-dev-2-reviewer/reasoning.md",
+        "agents/omn-dev-2-reviewer/output.md",
+        "agents/omn-dev-2-reviewer/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-dev-2-reviewer/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-dev-2-reviewer/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-dev-2-reviewer/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 37917,
+      "full_bytes": 74352
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "code-review",
+      "governance-enforcement",
+      "quality-verification"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S07",
+        "proficiency": "Primary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Primary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S07",
+        "registryIdentifier": "testing-strategy",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S08",
+        "registryIdentifier": "performance-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "security is always read in review and validation phases",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "required",
+      "area": "performance",
+      "basis": "area performance triggered by 'profile' in input:change-request",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "required",
+      "area": "database",
+      "basis": "area database triggered by 'migration' in artifact:solution-design-and-risk-assessment",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "pull-request-diff",
+      "quality-scan-scope",
+      "technical-design",
+      "execution-plan",
+      "scope-definition",
+      "bug-analysis",
+      "architecture-decision-record",
+      "coding-standards",
+      "test-evidence",
+      "architecture-rules",
+      "security-criteria",
+      "standards-checklist",
+      "regression-targets",
+      "known-issues",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/demo-mode-feature-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-feature-request.md",
+        "text": "# Feature Request \u2014 Autonomous end-to-end demonstration capture (`/implement --demo`)\n\n## Source\n\nOperator request, 2026-09-08, extended 2026-09-12 and 2026-09-14. Type: capability addition.\nPriority: High \u2014 the capability exists to support a live product presentation, and the\nframework had no way to show itself working.\n\n## Request\n\nThe framework can execute a governed multi-agent run but cannot *show* one. Explaining it to\nsomeone who has not seen it means talking over a state table. Add a capability by which a run\nrecords itself and produces a distribution-ready demonstration film with no human editing\nstep, so that a presenter has evidence rather than assertions.\n\nThree deliverables, in the order they were asked for:\n\n1. **`/implement --demo`.** An optional flag on the existing command that turns on recording\n   for a run. Every canonical runtime event, dispatch prompt, agent result, validation\n   verdict, gate decision, and host tool call becomes a millisecond-stamped execution marker.\n   At run completion the framework compiles the presentation itself, with no further command.\n2. **Film the real application.** The first implementation drew a synthetic dashboard. That\n   was rejected: the demonstration must show Claude Desktop actually doing the work, recorded\n   from the screen, with the marker stream used to decide where to cut rather than to draw.\n3. **Explain it to a non-technical audience.** The first cut ran 35 seconds with terse\n   technical narration. The audience is older and non-technical, so the film must run for\n   several minutes, explain every step in plain language, show each spoken line on screen as\n   a caption, and be accompanied by a written script the presenter can read beforehand.\n\n## Acceptance criteria\n\n- `--demo` on `plan` records a run; without it the demo package is never imported and the\n  runtime's only cost is one file-existence check per emitted event.\n- Markers carry UTC millisecond timestamps and the exchange with each agent as observed at\n  the adapter boundary; a replayed event does not produce a second marker.\n- A recording of the Claude Desktop window can be started and stopped from the runtime, keeps\n  running while the run proceeds, and records the instant its own clock read zero.\n- The editor maps every marker onto a frame of that recording and cuts the footage against the\n  run, condensing waiting with the factor stated on screen.\n- A demonstration for a first-time audience runs to minutes, is narrated in plain language,\n  carries captions, and ships with a script and a subtitle file.\n- Footage that filmed anything other than the target window is never published.\n- A run that completes while filming stops its own camera and compiles the film once.\n- Absent optional dependencies degrade to a recorded fallback rather than a failure.\n- The existing test suite stays green and the framework verifiers continue to pass.\n\n## Constraints\n\n- Additive only. No change to gate semantics, the Producer Exclusion Rule, the state machine,\n  recovery classification, or any existing artifact contract.\n- No new mandatory dependency. Pillow, ffmpeg, OBS Studio, and every text-to-speech engine are\n  optional, and each absence must be a recorded fallback.\n- Nothing in the demo layer may raise into the run it observes.\n- Only the target window may ever be recorded, and the recording's own audio is never\n  published.",
+        "digest": "sha256:563fa9d0a3547f8f865e6410fb0f4547"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/demo-mode-change-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-change-request.md",
+        "text": "# Change Request \u2014 Demo mode (`/implement --demo`), runtime 0.8.0\n\n## Change class\n\n`capability-addition`, as classified by `config/self-hosting-profile.md` and confirmed by\n`python .claude/runtime/self_hosting.py classify --path .claude/runtime/demo/editor.py`.\nThe framework gains a runtime behaviour it did not have. Routed to `/implement` over\n`workflows/implement-feature.md`, entry phase `scope-and-acceptance`.\n\n## What changes\n\n### New: the demo package, `runtime/demo/` (14 modules, about 5,600 lines)\n\n| Module | Responsibility |\n|---|---|\n| `__init__.py` | The public surface and the three integration points; the autonomous-build claim |\n| `context.py` | `DemoContext`: the per-run switch and its options |\n| `recorder.py` | Canonical events, on-disk envelopes, and host tool hooks to execution markers |\n| `timeline.py` | Markers to presentation scenes; the three narration registers |\n| `narration.py` | Text-to-speech engine chain, delivery rate, WAV assembly |\n| `captions.py` | Spoken lines to timed cues, a subtitle file, and a script |\n| `obs_ws.py` | A standard-library obs-websocket v5 client |\n| `capture.py` | Window targeting, both capture backends, the capture manifest |\n| `capture_helper.py` | The detached process that owns a recording and watches for occlusion |\n| `overlays.py` | The presentation frame drawn around the footage |\n| `editor.py` | Edit decision list, narration fitting, the ffmpeg cut |\n| `renderer.py`, `video_builder.py`, `deck.py` | The drawn-dashboard fallback when nothing was filmed |\n\n### Modified: `runtime/framework_runtime.py`\n\n- `RUNTIME_VERSION` 0.7.0 to 0.8.0.\n- `add_request_args` gains the `--demo` parameter group (seven optional flags).\n- `plan_run` gains `enable_demo()`, called after the execution request is written and before\n  the first event, so the recording opens on the run being accepted.\n- `RunLedger.emit` gains a tap guarded by one `Path.exists()`.\n- A new `demo` subcommand: status, build, backfill, host hook, record start and stop.\n\n### Modified: registry and command contract\n\n- `registry/commands.yaml`: the `implement` record 1.0.0 to 1.1.0 (MINOR, additive parameters\n  with safe defaults, per the versioning strategy in `domain-model/command-specification.md`).\n- `commands/implement.md`: a Parameters section documenting the flag group.\n\n### Modified: CLI wrapper and documentation\n\n- `omn_agent/cli.py`, `runner.py`, `update.py`: `--demo` forwarded to the runtime.\n- `runtime/README.md`, `docs/USER-GUIDE.md` (section 5g) and its rendered HTML, `README.md`.\n\n### New: tests\n\n`tests/test_demo_mode.py`, `test_demo_capture.py`, `test_demo_pacing.py`,\n`test_demo_captions.py`, and `tests/fixtures/fake_obs.py` \u2014 1,718 lines, 92 cases.\n\n## What does not change\n\nNo workflow specification, Phase Model, gate matrix, agent contract, artifact template,\nvalidator, state transition table, recovery policy, or existing registry record other than the\n`implement` command's own version. No existing test was weakened; two were tightened where\nthis change made their former assertions wrong.\n\n## Defects found and fixed during the change\n\nEach was found by inspecting output, not by reading code:\n\n1. Window-level `gdigrab` returns black frames on a GPU-composited Electron window.\n2. ffmpeg on Windows ignores `q` on a piped stdin, so recordings were never finalised; they\n   are now Matroska and stopped with a console break.\n3. `SW_RESTORE` un-maximises a maximised window.\n4. A variable-rate capture defeats `tpad`, so every hold silently padded nothing.\n5. The ffmpeg backend films a place on the screen, so a window losing focus filmed the\n   operator's desktop. Occlusion is now watched for, recovered from, and excluded.\n6. `run_completed` fires before the closing gate is decided, so the camera stopped one beat\n   short of the final approval.\n7. The film was compiled twice, because two events both mean \"finished\".\n\n## Rollback\n\nDelete `runtime/demo/` and the four test modules, revert the three integration points in\n`framework_runtime.py`, restore `RUNTIME_VERSION` to 0.7.0, revert the `implement` record to\n1.0.0 and its specification, and revert the CLI and documentation edits. No run evidence\noutside `runs/<run>/demo/` is invalidated, because nothing else was written.",
+        "digest": "sha256:5d21bb1a8e746477e8ea85a743e94068"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/demo-mode-business-intent.md",
+        "source_file": ".claude/runs/inputs/demo-mode-business-intent.md",
+        "text": "# Business Intent \u2014 Showing the framework working\n\n## The problem this exists to solve\n\nThe framework's value is invisible. What it produces is a governed trail: artifacts, gate\ndecisions, validation reports, recovery ledgers. Every one of those is the right output for an\nauditor and the wrong output for a first meeting. Explaining the framework today means\nnarrating a state table to someone who has no reason yet to care, and the claim doing the most\nwork in that conversation \u2014 that specialist agents hand work to each other and that no agent\ncan get past a human checkpoint \u2014 is precisely the claim a table cannot demonstrate.\n\n## Target users\n\n| User | What they need |\n|---|---|\n| Presenter | To show the framework working, without spending a day editing video |\n| Prospective adopter, non-technical | To understand the shape of the process without reading the screen |\n| Prospective adopter, technical | To confirm the film is a real run and not a staged mock-up |\n| Existing team | A short reference cut of a lifecycle, for onboarding |\n\nThe second is the demanding one and drove the final design. The stated audience is older and\nnon-technical. They will listen rather than read; they will not pause and scrub; they will not\nknow what a dispatch is. A film for them must run long enough to follow, explain each step in\nordinary words, and carry captions for anyone who cannot hear it.\n\n## Business outcomes sought\n\n- A presenter can produce a distribution-ready demonstration from a real run without editing.\n- What is shown is evidence, not a mock-up: every frame is the real application, and the film\n  states how it was condensed.\n- The demonstration can be re-cut for a different audience from the same recording, because\n  recording is the expensive part and it should happen once.\n- A presenter who is not the author can deliver it, from a written script.\n\n## Non-goals\n\n- Not a monitoring or observability product. The markers exist to cut a film, not to run a\n  dashboard.\n- Not a general video editor. It edits one thing: a recording of a run, against that run.\n- Not a replacement for the final report, the completion package, or the recovery ledger.\n- Not a way to make a run look better than it was. A rejection, a retry, and a condensed wait\n  are all shown, with the condensation factor stated on screen.\n\n## Constraints the business places on the solution\n\n- A demonstration is made to be published, so nothing that was not part of the run may end up\n  in it. This is the hard constraint, and it outranks completeness of the film.\n- The capability must cost nothing when unused. A team that never runs a demonstration must\n  not pay for its existence in dependencies or in runtime.\n- No new mandatory dependency, because the framework installs into other people's repositories.\n\n## How success is judged\n\nA complete lifecycle, filmed live, cut without human editing, understandable end to end by\nsomeone meeting the framework for the first time, and verifiably free of anything that was not\npart of the run.",
+        "digest": "sha256:d7c3a27030f383417920cef88eb56166"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/demo-mode-architecture-context.md",
+        "source_file": ".claude/runs/inputs/demo-mode-architecture-context.md",
+        "text": "# Architecture Context \u2014 Where demo mode sits in the runtime\n\n## Current-state structure this change extends\n\n`runtime/framework_runtime.py` (about 5,700 lines) implements the executable subset of\n`config/runtime.md` and `config/execution-engine.md`. The components relevant here:\n\n- **Execution Context Store** (`RunLedger`). Owns `runs/<run>/events.jsonl`, an append-only\n  stream of the fifteen canonical event types in `CANONICAL_EVENTS`. Every state change in a\n  run passes through `RunLedger.emit`, which is therefore the single point at which the whole\n  progress of a run is observable.\n- **Agent Invocation Gateway** (`cmd_dispatch`). Writes the canonical Agent Invocation Envelope\n  and the dispatch prompt to `runs/<run>/states/<phase>/`, then leases to the host-subagent\n  adapter. The runtime core never talks to a model, so this boundary is the only place the\n  exchange with an agent is visible.\n- **Validation Engine** (`VALIDATORS`). Writes `validation-report.json` per phase.\n- **Task Context** (`task_context.py`) and **execution metrics** (`execution_metrics.py`),\n  added in 0.7.0, which already derive per-run documents from persisted evidence only.\n\n## The architectural fact this change rests on\n\nThe runtime already records everything a demonstration needs, in order, with timestamps, and\nalready writes the prompt and the result to disk at the moment each is complete. Nothing new\nhas to be instrumented. What was missing was a consumer of that record, and a clock that ties\nit to a picture.\n\n## Design constraints inherited from the existing architecture\n\n1. **The runtime core owns control flow; adapters own external integration.** Screen capture,\n   OBS, ffmpeg, and speech synthesis are external integrations and must sit behind the same\n   kind of boundary the model adapters sit behind, not inside the execution path.\n2. **Deliberately not implemented** (`runtime/README.md`): a metrics pipeline. Demo mode must\n   not become one by the back door. Markers exist to cut a film.\n3. **`config/execution-engine.md`**: recovery behaviour is policy-driven and failures are\n   classified, never handled at the call site. A demo failure is not a run failure and must\n   not enter that machinery at all; it is caught and logged.\n4. **Zero-bloat context** (`config/runtime.md`, Progressive Module Loading). Runtime 0.7.0 was\n   an effort to reduce what a dispatch reads. A new capability must not add to it.\n5. **The installed form.** `FW_PREFIX` exists because the framework is `.claude/` in its own\n   repository and `.omn-agent/` once installed elsewhere. Anything path-facing must derive\n   from it.\n\n## Integration surface available\n\n`RunLedger.emit` is the natural tap: one function, every event, already ordered and stamped.\nThe cost of a guard there is one `stat()` per event. `plan_run` is the natural place to arm\nthe capability, because it is where a run is materialised and where the execution request is\nwritten. `main()`'s subparser set is where an operator-facing surface is added.\n\n## Prior art in this repository to reuse rather than reinvent\n\n- `execution_metrics.py` already estimates per-dispatch context cost and is the right source\n  for the token figures a film reports.\n- `task_context.py` already parses artifacts deterministically, never by summarisation; the\n  same discipline applies to anything a marker asserts.\n- `artifact_lib.py` provides shared artifact parsing.\n- The colorized `status` tree in `framework_runtime.py` already establishes a visual\n  vocabulary for phases, gates, and their statuses.\n\n## Known environmental facts\n\n- Windows is the operator platform. OBS Studio 32.2.2 is installed with obs-websocket\n  bundled, but its server is disabled and its configuration is not writable by the agent.\n- No system ffmpeg; Pillow is present; Windows SAPI voices are available.\n- Claude Desktop is an Electron application: window class `Chrome_WidgetWin_1`, packaged under\n  WindowsApps, GPU-composited.\n\n## Risks this change must address\n\n- **Publication risk.** A screen recording may capture something that was not part of the run.\n  This is the dominant risk and the architecture must make it impossible to publish silently.\n- **Dependency risk.** Three optional external tools, each absent on some host.\n- **Evidence risk.** A film is a claim about a run. It must be derivable from the run's own\n  record, and it must state where it condensed time.",
+        "digest": "sha256:804a281170829bd910709cc9e1daa95d"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/remove-omn-keyword-wrapper-d73ffc/.claude/runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md",
+        "text": "```yaml\nimplementationReport:\n  reportId: IR-2026-1014\n  changeReference: run-5df08e171670 / demonstration capture capability (/implement --demo), runtime 0.8.0, delivered in commit 2e9e99e\n  sourceInputs:\n    - type: technical-design\n      reference: runs/run-5df08e171670/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n    - type: feature-request\n      reference: runs/inputs/demo-mode-feature-request.md\n    - type: change-request\n      reference: runs/inputs/demo-mode-change-request.md\n    - type: business-intent\n      reference: runs/inputs/demo-mode-business-intent.md\n    - type: architecture-context\n      reference: runs/inputs/demo-mode-architecture-context.md\n  producedBy: omn-dev-1-implement\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: provisional\n  workflowPhase: implementation\n  verificationStatus: partially-verified\n  inputDigest: sha256:54c8a7a4d8c82861eec77601136ce5b9\n  contextDigest: sha256:71b01b435a6f92e7b8bf1d1a67c8c50d\n```\n\n## Metadata\n\n- Report ID: IR-2026-1014\n- Change reference: run-5df08e171670 / demonstration capture capability (/implement --demo), runtime 0.8.0, delivered in commit 2e9e99e\n- Workflow phase: implementation\n- Status: provisional\n- Verification status: partially-verified\n- Review status: pending-review\n\n## Implementation Summary\n\n- Change intent: A run planned with `--demo` records every governed step as a millisecond-stamped marker, can film the target application window through a detached helper, and compiles a captioned, narrated presentation exactly once after its last gate is decided; a run planned without it reaches the demo package only through one existence check per emitted event.\n- Approach taken: No code was written in this invocation. The whole change set was committed in 2e9e99e (2026-09-26), before this phase was dispatched (2026-10-17T12:22:49Z); this phase maps that delivered code onto design M-001 to M-022 and decisions D-001 to D-010 at HEAD 097e8f4 and runs the repository's own tests against it (V-001). The design records the new package, modules, and test files as already delivered, at the rung where a new file is justified: no existing runtime component draws, films, or edits, and each optional tool (Pillow, ffmpeg, OBS Studio, speech engines) stays behind a recorded fallback rather than becoming a dependency (D-006). Demo-related lines in `.claude/runtime/framework_runtime.py` have not changed since 2e9e99e (V-004).\n- Design reference: technical-design.md for run-5df08e171670, impacted modules M-001 to M-022, decisions D-001 to D-010, sequencing P-001 to P-011, acceptance criteria AC-001 to AC-014.\n- Out of scope: M-023 to M-028 (Phase Model, gate matrix, state transition table and recovery classification, artifact templates and validators, other command records, agent contracts) are cleared by the design as no-change-verified and were not touched; files in commit 2e9e99e outside M-001 to M-022 (other change proposals, run evidence, user-guide reconciliation fixtures) belong to other recorded changes and are not accounted here.\n\n## Change Set\n\n| ID | Path | Change Type | Purpose | Design Ref |\n|---|---|---|---|---|\n| `C-001` | `.claude/runtime/demo/__init__.py` | added | Public surface, event tap, finish check over the state store, and the once-only compilation claim | M-001, D-001, D-005 |\n| `C-002` | `.claude/runtime/demo/context.py` | added | Per-run switch file and persisted demo options | M-002, D-001 |\n| `C-003` | `.claude/runtime/demo/recorder.py` | added | Events, envelopes, validation reports, and host tool calls to de-duplicated markers | M-003, D-008 |\n| `C-004` | `.claude/runtime/demo/timeline.py` | added | Markers to scenes and the three narration registers | M-004, D-009 |\n| `C-005` | `.claude/runtime/demo/narration.py` | added | Speech-engine chain, delivery rate, and WAV assembly with recorded fallback | M-005, D-006 |\n| `C-006` | `.claude/runtime/demo/captions.py` | added | Timed caption cues, subtitle file, and presenter script | M-006, D-009 |\n| `C-007` | `.claude/runtime/demo/obs_ws.py` | added | Standard-library obs-websocket v5 client for the preferred backend | M-007, D-003 |\n| `C-008` | `.claude/runtime/demo/capture.py` | added | Window targeting, both capture backends, and the capture manifest | M-008, D-003 |\n| `C-009` | `.claude/runtime/demo/capture_helper.py` | added | Detached process that owns the recording and samples occlusion | M-009, D-002 |\n| `C-010` | `.claude/runtime/demo/overlays.py` | added | Presentation frame drawn around the footage | M-010, D-009 |\n| `C-011` | `.claude/runtime/demo/editor.py` | added | Edit decision list, narration fitting, withheld-span exclusion, and the encoder cut | M-011, D-003, D-006 |\n| `C-012` | `.claude/runtime/demo/renderer.py` | added | Drawn-dashboard frames for the lowest substitution rung | M-012, D-006 |\n| `C-013` | `.claude/runtime/demo/video_builder.py` | added | Frames and narration to an output, plus the build manifest | M-013, D-006 |\n| `C-014` | `.claude/runtime/demo/deck.py` | added | Self-contained HTML deck that is always produced | M-014, D-006 |\n| `C-015` | `.claude/runtime/demo/hooks.settings.json` | added | Operator-merged host tool-hook fragment read through the runs-root pointer | M-015, D-001 |\n| `C-016` | `.claude/runtime/framework_runtime.py` | modified | Four guarded sites (ledger tap, plan arming, status display, demo subcommand) and the `--demo` parameter group | M-016, D-001, D-007 |\n| `C-017` | `.claude/commands/implement.md` | modified | Published documentation of the `--demo` parameter group | M-017, D-007 |\n| `C-018` | `.claude/registry/commands.yaml` | modified | Implement record raised to 1.1.0 with the additive parameter group | M-018, D-007 |\n| `C-019` | `omn_agent/cli.py` | modified | Wrapper accepts `--demo` on run | M-019 |\n| `C-020` | `omn_agent/runner.py` | modified | Wrapper forwards `--demo` to the runtime plan call | M-019 |\n| `C-021` | `omn_agent/update.py` | modified | Wrapper forwards `--demo` on re-plan and materialize argv | M-019 |\n| `C-022` | `.claude/runtime/README.md` | modified | Documents the demo runtime surface | M-020 |\n| `C-023` | `README.md` | modified | Repository readme rows for the demo command forms | M-020 |\n| `C-024` | `docs/USER-GUIDE.md` | modified | Operator instructions for demo mode | M-020 |\n| `C-025` | `docs/user-guide.html` | modified | Rendered output of the user guide | M-020 |\n| `C-026` | `tests/fixtures/fake_obs.py` | added | Local control-server fixture for backend tests | M-021 |\n| `C-027` | `tests/test_demo_captions.py` | added | Caption, subtitle, and script tests | M-021 |\n| `C-028` | `tests/test_demo_capture.py` | added | Capture, edit, occlusion, routing, and end-to-end edit tests | M-021 |\n| `C-029` | `tests/test_demo_mode.py` | added | Switch, recorder, timeline, builder, and CLI tests | M-021 |\n| `C-030` | `tests/test_demo_pacing.py` | added | Pacing, plain-language narration, and fitting tests | M-021 |\n| `C-031` | `omn_agent/_bundled_payload/commands/implement.md` | modified | Installable copy of C-017 | M-022 |\n| `C-032` | `omn_agent/_bundled_payload/registry/commands.yaml` | modified | Installable copy of C-018 | M-022 |\n| `C-033` | `omn_agent/_bundled_payload/runtime/README.md` | modified | Installable copy of C-022 | M-022 |\n| `C-034` | `omn_agent/_bundled_payload/runtime/demo/__init__.py` | added | Installable copy of C-001 | M-022 |\n| `C-035` | `omn_agent/_bundled_payload/runtime/demo/captions.py` | added | Installable copy of C-006 | M-022 |\n| `C-036` | `omn_agent/_bundled_payload/runtime/demo/capture.py` | added | Installable copy of C-008 | M-022 |\n| `C-037` | `omn_agent/_bundled_payload/runtime/demo/capture_helper.py` | added | Installable copy of C-009 | M-022 |\n| `C-038` | `omn_agent/_bundled_payload/runtime/demo/context.py` | added | Installable copy of C-002 | M-022 |\n| `C-039` | `omn_agent/_bundled_payload/runtime/demo/deck.py` | added | Installable copy of C-014 | M-022 |\n| `C-040` | `omn_agent/_bundled_payload/runtime/demo/editor.py` | added | Installable copy of C-011 | M-022 |\n| `C-041` | `omn_agent/_bundled_payload/runtime/demo/hooks.settings.json` | added | Installable copy of C-015 | M-022 |\n| `C-042` | `omn_agent/_bundled_payload/runtime/demo/narration.py` | added | Installable copy of C-005 | M-022 |\n| `C-043` | `omn_agent/_bundled_payload/runtime/demo/obs_ws.py` | added | Installable copy of C-007 | M-022 |\n| `C-044` | `omn_agent/_bundled_payload/runtime/demo/overlays.py` | added | Installable copy of C-010 | M-022 |\n| `C-045` | `omn_agent/_bundled_payload/runtime/demo/recorder.py` | added | Installable copy of C-003 | M-022 |\n| `C-046` | `omn_agent/_bundled_payload/runtime/demo/renderer.py` | added | Installable copy of C-012 | M-022 |\n| `C-047` | `omn_agent/_bundled_payload/runtime/demo/timeline.py` | added | Installable copy of C-004 | M-022 |\n| `C-048` | `omn_agent/_bundled_payload/runtime/demo/video_builder.py` | added | Installable copy of C-013 | M-022 |\n| `C-049` | `omn_agent/_bundled_payload/runtime/framework_runtime.py` | modified | Installable copy of C-016 | M-022 |\n| `C-050` | `tests/__pycache__/test_demo_captions.cpython-314.pyc` | added | Compiled bytecode of C-027 committed with the change | V-005 |\n| `C-051` | `tests/__pycache__/test_demo_capture.cpython-314.pyc` | added | Compiled bytecode of C-028 committed with the change | V-005 |\n| `C-052` | `tests/__pycache__/test_demo_mode.cpython-314.pyc` | added | Compiled bytecode of C-029 committed with the change | V-005 |\n| `C-053` | `tests/__pycache__/test_demo_pacing.cpython-314.pyc` | added | Compiled bytecode of C-030 committed with the change | V-005 |\n| `C-054` | `tests/fixtures/__pycache__/fake_obs.cpython-314.pyc` | added | Compiled bytecode of C-026 committed with the change | V-005 |\n\n## Test Evidence\n\n| ID | Test | Type | Covers | Command | Result |\n|---|---|---|---|---|---|\n| `T-001` | Full repository suite as regression baseline: 771 run, 767 pass, 4 fail (the three in T-012 and the one in T-022) | regression | `C-001`, `C-002`, `C-003`, `C-004`, `C-005`, `C-006`, `C-007`, `C-008`, `C-009`, `C-010`, `C-011`, `C-012`, `C-013`, `C-014`, `C-015`, `C-016`, `C-017`, `C-018`, `C-019`, `C-020`, `C-021`, `C-022`, `C-023`, `C-024`, `C-025`, `C-026`, `C-027`, `C-028`, `C-029`, `C-030`, `C-031`, `C-032`, `C-033`, `C-034`, `C-035`, `C-036`, `C-037`, `C-038`, `C-039`, `C-040`, `C-041`, `C-042`, `C-043`, `C-044`, `C-045`, `C-046`, `C-047`, `C-048`, `C-049`, `C-050`, `C-051`, `C-052`, `C-053`, `C-054` | `PYTHONDONTWRITEBYTECODE=1 python tools/run_tests_parallel.py` | fail |\n| `T-002` | Demo is off by default, costs nothing, and writes nothing; enable is idempotent; a recorder fault never reaches the runtime (3 tests) | unit | `C-001`, `C-002`, `C-016` | `cd tests && python -m unittest test_demo_mode.DemoSwitchTestCase` | pass |\n| `T-003` | Markers carry ms stamps and sequence; replayed event yields no second marker; host hook lands on the active run only; backfill runs once (6 tests) | unit | `C-001`, `C-003` | `cd tests && python -m unittest test_demo_mode.RecorderTestCase` | pass |\n| `T-004` | Not finished while a gate is undecided or a phase runs; compiled once whatever the number of finish events; occluded or wholly hidden footage never published (6 tests) | unit | `C-001`, `C-008`, `C-011` | `cd tests && python -m unittest test_demo_capture.FinishAndOcclusionTestCase` | pass |\n| `T-005` | HTML deck always produced with fallbacks recorded; GIF fallback without ffmpeg; mp4 path; film waits for the last gate; run completion triggers build (5 tests) | integration | `C-001`, `C-012`, `C-013`, `C-014` | `cd tests && python -m unittest test_demo_mode.BuilderTestCase` | pass |\n| `T-006` | Caption splitting and timing, overlay slicing, well-formed subtitle file, script with every spoken line, captions on by default (19 tests) | unit | `C-002`, `C-006`, `C-010` | `cd tests && python -m unittest test_demo_captions` | pass |\n| `T-007` | Bookkeeping folded, compression never cuts narration, scenes deterministic (3 tests) | unit | `C-004` | `cd tests && python -m unittest test_demo_mode.TimelineTestCase` | pass |\n| `T-008` | Relaxed pace, plain-language explanation of every beat, fit-to-narration, rebalance, speech rate reaches the engine, filtergraph pacing (22 tests) | unit | `C-004`, `C-005`, `C-011` | `cd tests && python -m unittest test_demo_pacing` | pass |\n| `T-009` | Control-server config read from the host; probe never raises without an installation; connect failure names the port (3 tests) | unit | `C-007` | `cd tests && python -m unittest test_demo_capture.ObsWebSocketTestCase` | pass |\n| `T-010` | Preferred backend authenticates, provisions, records, and stops against the fixture; wrong password refused (3 tests) | integration | `C-007`, `C-008`, `C-026` | `cd tests && python -m unittest test_demo_capture.FakeObsBackendTestCase` | pass |\n| `T-011` | Capture manifest: absent, recorded, in-progress states; a second recording is refused (4 tests) | unit | `C-008` | `cd tests && python -m unittest test_demo_capture.CaptureManifestTestCase` | pass |\n| `T-012` | End-to-end edit through the installed encoder: playable shorter film, recorded edit decision list, recording audio never published (3 tests: 1 failure, 2 errors) | end-to-end | `C-008`, `C-011` | `cd tests && python -m unittest test_demo_capture.EndToEndEditTestCase` | fail |\n| `T-013` | Frame is canvas-sized with a footage hole, aspect ratio kept, long title shrunk, closing card carries run numbers (4 tests) | unit | `C-010` | `cd tests && python -m unittest test_demo_capture.OverlayTestCase` | pass |\n| `T-014` | Markers map onto video time; late start excludes missed beats; head-and-tail condensation; cut never longer than its source; filtergraph declares every segment (8 tests) | unit | `C-011` | `cd tests && python -m unittest test_demo_capture.EditDecisionTestCase` | pass |\n| `T-015` | Build routing: dashboard without a recording, edit with one, forced drawn mode, failed edit falls back to the dashboard, edit without recording reports (5 tests) | integration | `C-011`, `C-012`, `C-013` | `cd tests && python -m unittest test_demo_capture.BuildRoutingTestCase` | pass |\n| `T-016` | Status, backfill, hook inert without an active run, printed hook matches the shipped fragment, wrapper forwards the flag, flag declared on every request parser (6 tests) | integration | `C-015`, `C-016`, `C-019`, `C-020` | `cd tests && python -m unittest test_demo_mode.CliTestCase` | pass |\n| `T-017` | Self-hosting release checklist: 7 of 9 pass; S8 fails because run-5df08e171670 has no change proposal yet, and S10 fails on FR-05 and FR-06 for the same cause | static | `C-016`, `C-018` | `python .claude/runtime/verify_self_hosting.py --release-checklist` | fail |\n| `T-018` | Registry coverage: every active command record, including implement, resolves to its workflow (8 of 8) | static | `C-018` | `python .claude/runtime/verify_registry_coverage.py` | pass |\n| `T-019` | Wrapper CLI and runner regression suite (45 tests) | regression | `C-019`, `C-020` | `cd tests && python -m unittest test_omn_agent` | pass |\n| `T-020` | Wrapper update regression suite (14 tests) | regression | `C-021` | `cd tests && python -m unittest test_update` | pass |\n| `T-021` | Rendered user guide matches its Markdown source (74 tests) | static | `C-024`, `C-025` | `cd tests && python -m unittest test_render_user_guide` | pass |\n| `T-022` | Bundled payload parity: stale list names only `runtime/verify_recovery.py`, which is not in this change set; demo copies match their sources | regression | `C-031`, `C-032`, `C-033`, `C-034`, `C-035`, `C-036`, `C-037`, `C-038`, `C-039`, `C-040`, `C-041`, `C-042`, `C-043`, `C-044`, `C-045`, `C-046`, `C-047`, `C-048`, `C-049` | `PYTHONDONTWRITEBYTECODE=1 python tools/run_tests_parallel.py test_bundled_payload` | fail |\n\n## Verification Results\n\n- Verification method: Ran the repository's own unittest suites, per test class for the demo modules and per module for the wrapper, user-guide, and payload checks, plus the framework verifiers, at HEAD 097e8f4 with the working tree as found at dispatch. This invocation made no source change, so the T-001 baseline is also the post-change state. The demo modules were run twice (parallel runner, then per class) and both runs gave the same result.\n- Commands executed: `PYTHONDONTWRITEBYTECODE=1 python tools/run_tests_parallel.py test_demo_mode test_demo_capture test_demo_pacing test_demo_captions` (100 run, 97 pass, 3 fail); `PYTHONDONTWRITEBYTECODE=1 python tools/run_tests_parallel.py` (771 run, 767 pass, 4 fail); the per-class and per-module commands in T-002 to T-022; `python .claude/runtime/verify_manifests.py` (2/2 pass); `python .claude/runtime/verify_validators.py` (6/6 pass); `python .claude/runtime/verify_registry_coverage.py` (8/8 pass); `python .claude/runtime/verify_self_hosting.py --release-checklist`, run twice (7/9); `git log`, `git show --stat`, `git diff --stat`, and `git status --short` to establish provenance; `git checkout --` on two run-evidence files to revert the verifier's writes (R-003); `ffmpeg -version` to identify the installed encoder (9.0.2).\n- Result summary: 22 evidence entries executed, 18 passed, 4 failed (T-001, T-012, T-017, T-022). Demo tests: 100 executed, 97 passed, 3 failed. Full suite: 771 executed, 767 passed, 4 failed. Framework verifiers: 4 executed, 3 passed, 1 failed. Cause of each failure: T-012, the installed encoder 9.0.2 rejects the `-filter_complex_script` option the delivered editor passes (R-001); T-022, an uncommitted working-tree change to `.claude/runtime/verify_recovery.py` that was present before dispatch (R-002); T-017, this run has no change proposal yet (R-006).\n- Unverified areas: the end-to-end filmed edit and audio stripping on this host (C-011, C-008), because T-012 fails; the occlusion-sampling helper C-009, which has no direct test; agreement between the documented parameter surface in C-017 and the parser in C-016, which no test checks (V-003); the demo-flag forwarding in C-021, which no test asserts directly; accuracy of the documentation in C-022 and C-023, checked by inspection only; the C-050 to C-054 bytecode; the live-run demonstrations for AC-001, AC-004, AC-006, AC-007, AC-009, AC-010, AC-012, and AC-013, which need governed recorded runs and a first-time viewer and were not executed in this phase; and the verifiers `verify_vertical_slice.py`, `verify_multi_phase.py`, and `verify_recovery.py`, which were not run because they exercise run directories.\n\n## Deviations and Tradeoffs\n\n| ID | Deviation | Design element | Rationale | Escalation |\n|---|---|---|---|---|\n| `V-001` | C-001 to C-054 were committed in 2e9e99e on 2026-09-26, before this phase was dispatched on 2026-10-17; this phase records the code rather than implementing it, and no pre-change baseline could be taken | Workflow order (implementation follows the Design Gate) and reasoning Stage 2 baseline | Git history shows the commit is an ancestor of HEAD 097e8f4; the operator directive for this phase forbids source modification | Q-002 to omn-tech-lead |\n| `V-002` | The T-012 encoder failure at C-011 was left unrepaired | D-006 substitution ladder; AC-002 and AC-008 end-to-end evidence | The operator directive forbids source modification, and a correction changes delivered behaviour the design accepted | Q-001 to architect |\n| `V-003` | The parameter-surface reconciliation was not performed: the parser in C-016 registers 10 flags, C-017 documents all 10 in 9 rows, C-018 states only an additive group, and the change-request says seven | P-003 sequencing; AC-014 | This invocation may write only its two outputs, and reconciliation needs a documentation edit | Q-003 to omn-documentation |\n| `V-004` | C-016 and C-049 are accounted at HEAD, with `RUNTIME_VERSION` 0.10.0 after later recorded changes, not at the 0.8.0 the design targets; demo-related lines are unchanged since 2e9e99e | M-016 target shape (runtime version 0.8.0) | `git diff 2e9e99e HEAD` on the file shows no changed line mentioning demo; the version bumps are governed by their own proposals | not-required |\n| `V-005` | C-050 to C-054 are committed bytecode that serves no accepted element | M-021 test set | The repository already tracks `tests/__pycache__`; they are recorded so the change set is complete | not-required |\n| `V-006` | C-001 to C-054 share commit 2e9e99e with 477 unrelated files, so the change cannot be reverted as one commit | Rollback and Rollout position; git collaboration standard (single-purpose commits) | `git show --stat 2e9e99e` reports 531 files changed; rollback must be path-scoped as the design lists | not-required |\n\n## Boundary Compliance\n\n- Module boundaries preserved: By inspection at HEAD, the runtime reaches the demo package only at the four guarded sites in C-016: the ledger tap behind a demo-context existence check, plan arming behind the `--demo` flag, the status display behind the same existence check, and the demo subcommand. Each import is lazy. T-002 shows a fault in the recorder does not reach the runtime. M-023 to M-028 were not touched.\n- Public interface changes: Additive only. C-016 adds an optional `--demo` parameter group (default off) and a `demo` subcommand; C-017 and C-018 publish it, with the implement record at 1.1.0; C-019 to C-021 forward the flag. No existing parameter changes meaning.\n- Data or migration impact: None identified. No schema or migration. New on-disk state is created only under `runs/<run>/demo/` and at the `runs/.active-demo` pointer, and only the demo layer writes or reads it (D-008, D-010).\n- Declared side effects: This invocation wrote only `.claude/runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md` and `.claude/runs/run-5df08e171670/states/implementation/result-envelope.json`. The C-001 to C-054 files were produced outside this invocation, in commit 2e9e99e, and this report records them (V-001). One transient write also happened: running `verify_self_hosting.py --release-checklist` appended replay records to `.claude/runs/run-c5a8d50d3238/state.json` and `.claude/runs/run-c5a8d50d3238/task-context.yaml`. Both files were clean at dispatch, and both were restored to their HEAD content with `git checkout --`, so they carry no net change (R-003).\n\n## Residual Risk\n\n| ID | Risk | Likelihood | Impact | Mitigation |\n|---|---|---|---|---|\n| `R-001` | The installed encoder 9.0.2 rejects `-filter_complex_script`, so every filmed edit on this host fails (C-011) | high | A filmed run on this host falls back to the drawn dashboard, which does not meet the filmed-material requirement, and AC-002 and AC-008 cannot be shown end to end | In place: a failed edit falls back to the dashboard and records the error in the build manifest (T-015) |\n| `R-002` | An uncommitted change to `.claude/runtime/verify_recovery.py`, present before dispatch and outside this change set, breaks bundled payload parity | high | The suite and T-022 stay red for a reason unrelated to this change | In place: the `git status` taken at dispatch shows the file already modified, and the T-022 stale list names only that file |\n| `R-003` | Running `verify_self_hosting.py --release-checklist` writes replay records into committed run evidence | high | Committed run evidence of run-c5a8d50d3238 is modified whenever the verifier runs | In place: this invocation detected the writes with `git status` and restored both files to their HEAD content |\n| `R-004` | The occlusion-sampling helper C-009 has no direct automated test, and publication safety depends on it | medium | An occluded span the helper misses could reach a finished presentation | In place: T-004 shows that occluded spans recorded in the manifest are excluded and a wholly hidden recording publishes nothing |\n| `R-005` | Rollback needs a path-scoped revert across C-001 to C-054 because the commit mixes changes (V-006) | medium | A careless revert of 2e9e99e would undo unrelated recorded changes | In place: the design's Rollout and Rollback section lists the paths to revert |\n| `R-006` | Self-hosting S8, FR-05, and FR-06 stay failing until a change proposal links this run (T-017) | high | The framework release checklist cannot pass for this change | In place: none in this phase; the item is carried as follow-up work |\n| `R-007` | The documented and parsed parameter surfaces are offered as AC-014 evidence before they are reconciled (V-003) | medium | The additive-version claim rests on contract surfaces that disagree on the size of the group | In place: the disagreement is recorded here with its counts |\n\n## Handoff Notes\n\n- Reviewer focus areas: C-011 encoder invocation and its fallback (V-002, R-001); C-009 helper with no direct test (R-004); C-016, C-017, and C-018 parameter-surface agreement (V-003, R-007); the four guarded sites in C-016 and the lazy-import zero-cost claim; whether recording delivered code after the fact satisfies the workflow (V-001); path-scoped rollback (V-006).\n- Follow-up work: a decision on encoder-version compatibility in C-011 (Q-001); P-003 reconciliation of C-016, C-017, and C-018 (Q-003); a change proposal linking this run, which the closure phase owns (R-006); resolving the uncommitted `verify_recovery.py` change (Q-004); stopping `verify_self_hosting.py` from writing run evidence (Q-005); the live recorded-run demonstrations for the acceptance criteria named under Unverified areas, owned by omn-qa.\n- Documentation impact: C-017 may need its parameter count reconciled with the parser (V-003). Documentation in C-022 to C-025 describes the delivered surface and was checked only by inspection and by the T-021 render check. Release communication belongs to the closure phase.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected changes |\n|---|---|---|---|---|\n| `Q-001` | Is the T-012 failure, where encoder 9.0.2 rejects `-filter_complex_script`, an unsupported-environment limitation or a delivered defect that needs a design-accepted correction? | yes | architect | `C-011`, `C-040` |\n| `Q-002` | Does the Review Gate owner accept an implementation phase that records code committed before the phase was dispatched, with no pre-change baseline? | no | omn-tech-lead | `C-001`, `C-016`, `C-049` |\n| `Q-003` | Who performs the P-003 reconciliation of the parser, the published parameter documentation, and the registry record, given that this phase may not write them? | no | omn-documentation | `C-016`, `C-017`, `C-018` |\n| `Q-004` | Should the uncommitted working-tree change to `.claude/runtime/verify_recovery.py` be committed and synced to the bundled payload, or reverted? | no | omn-orchestrator | `C-031` to `C-049` |\n| `Q-005` | Should `verify_self_hosting.py --release-checklist` stop writing replay records into committed run evidence when it runs? | no | omn-orchestrator | none in this change set |",
+        "digest": "sha256:c3c3f6b4f6a44140885cbbbe44538254",
+        "produced_by": "implementation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the subject under review: an implementation report for a delivered change, a stable pull request diff for a review-pull-request run, or a quality-scan scope naming the repository boundary, exclusions, and risk threshold for a code-quality-scan run. Without one there is nothing under review, and reviewing anyway would mean assessing this agent's own choice of what to read."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-5df08e171670/states/quality-review/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-5df08e171670/states/quality-review/artifacts/review-package.md"
+    ],
+    "failures": [
+      {
+        "id": "C6.2",
+        "severity": "Blocking",
+        "quality_ref": "templates/review-package.md",
+        "requirement": "Every referenced identifier is defined in its declaring section",
+        "detail": "undefined: {'F': ['F-020']}"
+      }
+    ]
+  },
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md",
+      "produced_by": "implementation",
+      "artifact": "implementation-report.md",
+      "bytes": 26964,
+      "sections": {
+        "read_first": [
+          "Implementation Summary",
+          "Change Set",
+          "Test Evidence",
+          "Verification Results",
+          "Deviations and Tradeoffs",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Boundary Compliance",
+          "Residual Risk",
+          "Handoff Notes"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-5df08e171670/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:19bc9b2d02934e756561d008d044570e",
+    "bytes": 60838,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "database",
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "quality-review"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-17T13:14:28Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:3300717f35d0b29badb0d146de6af8da",
+        "supplies": "framework-context",
+        "bytes": 22733,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:84e98748204581ef06f3e434c600f794",
+        "supplies": "framework-context",
+        "bytes": 9569,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:15b32b7dc6a6e5c3c47fac6809f1df7a",
+        "supplies": "framework-context",
+        "bytes": 12345,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null,
+        "bytes": 5292,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null,
+        "bytes": 5825,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null,
+        "bytes": 6564,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null,
+        "bytes": 1265,
+        "read": "required",
+        "read_reason": "skill S07 is required for this phase"
+      },
+      {
+        "path": "skills/security/secure-engineering.md",
+        "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+        "supplies": null,
+        "bytes": 1236,
+        "read": "required",
+        "read_reason": "skill S09 is required for this phase"
+      },
+      {
+        "path": "skills/performance/performance-engineering.md",
+        "digest": "sha256:018d88d8cc352700bf6bb06703a8129e",
+        "supplies": null,
+        "bytes": 1266,
+        "read": "required",
+        "read_reason": "skill S08 is required for this phase"
+      },
+      {
+        "path": "skills/architecture/clean-architecture-checklist.md",
+        "digest": "sha256:8e4f9ca28ad1bb63d8368998cb67cc5a",
+        "supplies": null,
+        "bytes": 4862,
+        "read": "required",
+        "read_reason": "skill S01 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0fe5a799cafdd70db8744b0287682ffe",
+        "supplies": null,
+        "bytes": 62800,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:dbb6d6ebe90100e36dc74083b2321673",
+    "input_digest": "sha256:d4a7d2d02caadd26f52a177ab99b2c74",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/demo-mode-feature-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-feature-request.md",
+        "digest": "sha256:563fa9d0a3547f8f865e6410fb0f4547"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/demo-mode-change-request.md",
+        "source_file": ".claude/runs/inputs/demo-mode-change-request.md",
+        "digest": "sha256:5d21bb1a8e746477e8ea85a743e94068"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/demo-mode-business-intent.md",
+        "source_file": ".claude/runs/inputs/demo-mode-business-intent.md",
+        "digest": "sha256:d7c3a27030f383417920cef88eb56166"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/demo-mode-architecture-context.md",
+        "source_file": ".claude/runs/inputs/demo-mode-architecture-context.md",
+        "digest": "sha256:804a281170829bd910709cc9e1daa95d"
+      },
+      {
+        "type": "implementation-report",
+        "reference": "runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/remove-omn-keyword-wrapper-d73ffc/.claude/runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md",
+        "digest": "sha256:c3c3f6b4f6a44140885cbbbe44538254"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/review-package.md",
+      "templates/technical-design.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/architecture/clean-architecture-checklist.md",
+      "skills/performance/performance-engineering.md",
+      "skills/security/secure-engineering.md",
+      "skills/testing/testing-strategy.md",
+      "templates/implementation-report.md",
+      "templates/review-package.md",
+      "templates/technical-design.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/implement-feature.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 191832,
+    "bytes_required": 27859,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": false,
+    "reason": "memory hydration not requested by this run"
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-5df08e171670/states/quality-review/artifacts/review-package.md",
+      "runs/run-5df08e171670/states/quality-review/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies repository source, tests, or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose result is not recorded in the review package"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code or tests",
+      "revise the technical design rather than raising a finding against it",
+      "define, widen, or narrow product scope",
+      "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+      "record a merge or release decision",
+      "decide a gate that assesses evidence this agent produced",
+      "review a change this agent authored",
+      "approve while a critical or high finding is open, or while test evidence is absent",
+      "lower a severity without evidence that lowers it",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "review an implemented change against the requirements, the accepted design, and the standards in force",
+        "survey a bounded repository scope for redundant, dead, duplicated, over-abstracted, or generated low-value code, against the maintainability standards in force",
+        "assess conformance to coding standards, architecture rules, and security criteria",
+        "judge whether the supplied evidence supports the claim it is offered for",
+        "judge whether executed tests cover the behavior the change altered",
+        "classify each defect by severity, category, and location against a named standard",
+        "issue correction requests that state a required outcome and name its owner",
+        "assess residual risk and recommend readiness for the gate the phase feeds",
+        "execute the repository's own verification commands to confirm reported results",
+        "decide a gate over evidence another role produced"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code or tests",
+        "revise the technical design rather than raising a finding against it",
+        "define, widen, or narrow product scope",
+        "validate acceptance criteria or release thresholds, which belongs to omn-qa",
+        "record a merge or release decision",
+        "decide a gate that assesses evidence this agent produced",
+        "review a change this agent authored",
+        "approve while a critical or high finding is open, or while test evidence is absent",
+        "lower a severity without evidence that lowers it",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "rationale": "Independence is the whole value of this role. An agent that can change the code it assesses becomes the producer of the work it is about to judge, and the Producer Exclusion Rule then disqualifies it from the very verdict it exists to give. The review reads the repository and writes only its own artifact and result envelope."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run read-only to confirm results the change under review reports as executed",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies repository source, tests, or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose result is not recorded in the review package"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same finding set, the same severity assignment, the same correction-request set, the same verdict, and the same declared package status.",
+      "identifierSchemes": {
+        "findings": "F-<zero-padded-sequence>",
+        "correctionRequests": "CR-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Findings are ordered by descending severity; ties break toward the lower location in lexical order. Correction requests follow the findings they address.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied change, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "review-package.md",
+    "artifact_path": "runs/run-5df08e171670/states/quality-review/artifacts/review-package.md",
+    "template_ref": "templates/review-package.md",
+    "contract_ref": "agents/omn-dev-2-reviewer/output.md",
+    "quality_ref": "agents/omn-dev-2-reviewer/quality.md",
+    "validator": "review_package_validator",
+    "result_envelope_path": "runs/run-5df08e171670/states/quality-review/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-17T13:14:28Z",
+  "model_tier": {
+    "tier": "deep",
+    "host_hint": "opus",
+    "basis": "declared deep for implement-feature/quality-review in config/model-tier-policy.json; deep is the ceiling, so 1 recorded rejection(s) do not raise it",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 74352,
+    "modules_core_bytes": 37917,
+    "slice_all_bytes": 191832,
+    "slice_required_bytes": 27859,
+    "inputs_bytes": 15390,
+    "upstream_full_bytes": 27144,
+    "upstream_read_first_bytes": 20471,
+    "task_context_bytes": 60838,
+    "fixed_bytes": 97317,
+    "legacy_estimate_bytes": 406035,
+    "progressive_estimate_bytes": 259792,
+    "legacy_estimate_tokens": 101508,
+    "progressive_estimate_tokens": 64948,
+    "savings_pct": 36.0
+  }
+}

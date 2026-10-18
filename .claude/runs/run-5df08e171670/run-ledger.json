@@ -1,13 +1,13 @@
 {
   "run_id": "run-5df08e171670",
-  "runtime_version": "0.8.0",
+  "runtime_version": "0.10.0",
   "command_id": "implement",
   "workflow_id": "implement-feature",
   "workflow_version": "1.0.0",
-  "status": "Dispatching",
+  "status": "WaitingForHuman",
   "input_digest": "sha256:58bad3ae4e36fe3a4656eea976d81b82",
   "created_at": "2026-09-14T07:19:57Z",
-  "updated_at": "2026-09-14T08:22:21Z",
+  "updated_at": "2026-10-17T13:16:36Z",
   "states": {
     "scope-and-acceptance": {
       "status": "completed",
@@ -135,42 +135,97 @@
       "attempts_superseded": 0
     },
     "implementation": {
-      "status": "pending",
-      "queue_status": "Ready",
+      "status": "completed",
+      "queue_status": "Completed",
       "owner_agent_id": "omn-dev-1-implement",
-      "attempt": 0,
+      "attempt": 1,
       "attempts_lost": 0,
-      "attempts_charged": 0,
+      "attempts_charged": 1,
       "max_attempts": 3,
       "available_at": null,
-      "idempotency_key": null,
-      "artifact_path": null,
+      "idempotency_key": "sha256:117c632c5a9466a12e660f07a81ba87a",
+      "artifact_path": "runs/run-5df08e171670/states/implementation/artifacts/implementation-report.md",
       "blocked_reason": null,
       "failure_class": null,
-      "state_ledger": null,
-      "validation": null,
+      "state_ledger": "runs/run-5df08e171670/states/implementation/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 32,
+        "checksPassed": 32,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "provisional",
+          "identifiers": {
+            "C": 54,
+            "T": 22,
+            "V": 6,
+            "R": 7,
+            "Q": 5
+          },
+          "tableRows": {
+            "Change Set": 54,
+            "Test Evidence": 22,
+            "Deviations and Tradeoffs": 6,
+            "Residual Risk": 7
+          }
+        },
+        "undeclaredSideEffects": []
+      },
       "attempts_superseded": 0
     },
     "quality-review": {
-      "status": "pending",
-      "queue_status": "Waiting",
+      "status": "completed",
+      "queue_status": "Completed",
       "owner_agent_id": "omn-dev-2-reviewer",
-      "attempt": 0,
+      "attempt": 2,
       "attempts_lost": 0,
-      "attempts_charged": 0,
+      "attempts_charged": 2,
       "max_attempts": 3,
       "available_at": null,
-      "idempotency_key": null,
-      "artifact_path": null,
+      "idempotency_key": "sha256:d42259dfcd469670c7cffc90b3d0785e",
+      "artifact_path": "runs/run-5df08e171670/states/quality-review/artifacts/review-package.md",
       "blocked_reason": null,
-      "failure_class": null,
-      "state_ledger": null,
-      "validation": null,
+      "failure_class": "output-schema-failure",
+      "state_ledger": "runs/run-5df08e171670/states/quality-review/state-ledger.json",
+      "validation": {
+        "result": "pass",
+        "checksRun": 31,
+        "checksPassed": 31,
+        "blockingFailures": 0,
+        "correctableFailures": 0,
+        "notMachineCheckable": 3,
+        "counts": {
+          "sections": 10,
+          "status": "complete",
+          "identifiers": {
+            "F": 10,
+            "CR": 10,
+            "Q": 3
+          },
+          "tableRows": {
+            "Findings": 10,
+            "Correction Requests": 10
+          },
+          "findings": 10,
+          "verdict": "reject",
+          "correctionRequests": 10,
+          "severity": {
+            "critical": 1,
+            "high": 4,
+            "medium": 1,
+            "low": 4
+          }
+        },
+        "undeclaredSideEffects": []
+      },
       "attempts_superseded": 0
     },
     "documentation-and-release-handoff": {
-      "status": "pending",
-      "queue_status": "Waiting",
+      "status": "blocked",
+      "queue_status": "Blocked",
       "owner_agent_id": "omn-documentation",
       "attempt": 0,
       "attempts_lost": 0,
@@ -179,8 +234,8 @@
       "available_at": null,
       "idempotency_key": null,
       "artifact_path": null,
-      "blocked_reason": null,
-      "failure_class": null,
+      "blocked_reason": "awaiting_human_decision",
+      "failure_class": "gate-approval-required",
       "state_ledger": null,
       "validation": null,
       "attempts_superseded": 0
@@ -285,26 +340,26 @@
   },
   "summary": {
     "run_id": "run-5df08e171670",
-    "run_status": "Dispatching",
+    "run_status": "WaitingForHuman",
     "phases": 6,
-    "completed": 3,
-    "blocked": 0,
+    "completed": 5,
+    "blocked": 1,
     "failed": 0,
-    "pending": 3,
+    "pending": 0,
     "retrying": 0,
     "active": 0,
-    "transitions": 23,
+    "transitions": 36,
     "replays_suppressed": 0
   },
   "recovery": {
     "ledger": "runs/run-5df08e171670/recovery-ledger.json",
-    "classifications": 6,
-    "open": 0,
-    "resolved": 6,
-    "retries_scheduled": 1,
+    "classifications": 10,
+    "open": 3,
+    "resolved": 7,
+    "retries_scheduled": 2,
     "by_failure_class": {
-      "gate-approval-required": 5,
-      "output-schema-failure": 1
+      "gate-approval-required": 8,
+      "output-schema-failure": 2
     },
     "retry_profile": {
       "max_attempts": 3,
