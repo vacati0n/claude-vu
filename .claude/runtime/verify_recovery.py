@@ -844,7 +844,7 @@ def scenario_d() -> Result:
     refusals = []
     for label, argv in (
             ("producer role", ["--owner-role", producer]),
-            ("unlisted role", ["--owner-role", "omn-nobody"]),
+            ("unlisted role", ["--owner-role", "nobody-role"]),
             ("invalid target", ["--owner-role", decider, "--target", "implementation"]),
     ):
         code, out = run("rollback", "--run-id", run_id, "--gate", GATE, "--decided-by",

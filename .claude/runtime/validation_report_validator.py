@@ -4,9 +4,9 @@
 Mechanically checks a produced `validation-report.md` against the contract set that governs it:
 
   - `.claude/templates/validation-report.md`   rendered form, section and field labels
-  - `.claude/agents/omn-qa/identity.md`        behavioural contract for the validation lens
-  - `.claude/agents/omn-qa/output.md`          structural contract this artifact renders to
-  - `.claude/agents/omn-qa/quality.md`         QA's own self-verification checks
+  - `.claude/agents/qa/identity.md`        behavioural contract for the validation lens
+  - `.claude/agents/qa/output.md`          structural contract this artifact renders to
+  - `.claude/agents/qa/quality.md`         QA's own self-verification checks
 
 One artifact type carries every validation output the framework asks for: the `fix-bug`
 regression evidence, both `refactor` validations, the `review-pull-request` test adequacy
@@ -35,9 +35,9 @@ TEMPLATE = "templates/validation-report.md"
 # QA's authoritative contract is a module set, not a single file. Each check below names the
 # module that actually states the rule it enforces, so a failure points at the document that
 # decides it rather than at the agent in general.
-CONTRACT_REF = "agents/omn-qa/identity.md"
-OUTPUT_REF = "agents/omn-qa/output.md"
-QUALITY_REF = "agents/omn-qa/quality.md"
+CONTRACT_REF = "agents/qa/identity.md"
+OUTPUT_REF = "agents/qa/output.md"
+QUALITY_REF = "agents/qa/quality.md"
 
 VERDICTS = ("pass", "pass-with-reservations", "fail")
 RESULTS = ("met", "not-met", "blocked")
@@ -55,7 +55,7 @@ CONTRACT = ac.ArtifactContract(
     artifact="validation-report.md",
     # One producer. Unlike a review package, no second role authors a validation report:
     # validating acceptance and release thresholds is QA's alone.
-    producers=("omn-qa",),
+    producers=("qa",),
     metadata_key="validationReport",
     metadata_fields=("reportId", "validationReference", "validationBasis", "sourceInputs",
                      "producedBy", "agentVersion", "schemaVersion", "status", "verdict",

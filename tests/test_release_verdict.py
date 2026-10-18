@@ -1,6 +1,6 @@
 """Regression tests for the release-verdict defect (fix-bug run run-f94564cb61ce).
 
-Before the repair the omn-documentation release-verdict contract knew only deployment
+Before the repair the documentation release-verdict contract knew only deployment
 outcomes -- `released`, `partial`, `rolled-back` -- each read off a supplied deployment
 status, while four of the five phases that publish `release-note.md` are never supplied one.
 Those phases therefore had no verdict that was both truthful and accepted: the faithful
@@ -37,7 +37,6 @@ from unittest import mock
 REPO = Path(__file__).resolve().parent.parent
 CLAUDE = REPO / ".claude"
 RUNTIME = CLAUDE / "runtime"
-BUNDLE = REPO / "omn_agent" / "_bundled_payload"
 sys.path.insert(0, str(RUNTIME))
 
 import release_note_validator as rnv  # noqa: E402
@@ -47,7 +46,7 @@ FIXTURE = (RUNTIME / "fixtures" / "release-note.md").read_text(encoding="utf-8")
 INPUT_DIGEST = "sha256:fixture-input-not-run-produced"
 CONTEXT_DIGEST = "sha256:fixture-context-not-run-produced"
 
-# The five omn-documentation phases and the position each one's basis yields when its
+# The five documentation phases and the position each one's basis yields when its
 # evidence is present. Stated here independently of the validator so the tests check it.
 PHASES = {
     "documentation-and-release-handoff": ("handed-off", ["verification-report"]),
@@ -302,7 +301,7 @@ def read(rel: str, root: Path = CLAUDE) -> str:
 def deliverable_rows() -> dict:
     """output.md's Deliverable table: phase -> (basis, positions)."""
     rows = {}
-    for line in read("agents/omn-documentation/output.md").splitlines():
+    for line in read("agents/documentation/output.md").splitlines():
         cells = re.findall(r"`([^`]+)`", line)
         if line.startswith("| `") and len(cells) >= 4 and cells[2] in rnv.VERDICT_OF_BASIS:
             rows[cells[1]] = (cells[2], tuple(cells[3:]))
@@ -316,7 +315,7 @@ class ContractAgreement(unittest.TestCase):
         for phase, (basis, positions) in rows.items():
             with self.subTest(phase=phase):
                 self.assertEqual(positions, rnv.VERDICT_OF_BASIS[basis])
-        identity = read("agents/omn-documentation/identity.md")
+        identity = read("agents/documentation/identity.md")
         for phase, basis in rnv.PHASE_BASIS.items():
             with self.subTest(identity=phase):
                 self.assertRegex(identity, rf"\| `{phase}` \| primary \| `{basis}` \|")
@@ -324,20 +323,20 @@ class ContractAgreement(unittest.TestCase):
     def test_the_vocabulary_is_one_list_everywhere(self):
         expected = set(rnv.VERDICTS)
         self.assertEqual(expected, set(DEPLOYMENT_VERDICTS) | set(NEW_POSITIONS))
-        output = read("agents/omn-documentation/output.md")
+        output = read("agents/documentation/output.md")
         row = re.search(r"^\| `releaseVerdict` \|(.*)\|$", output, re.M).group(1)
         self.assertEqual(set(re.findall(r"`([^`]+)`", row)), expected)
         template = read("templates/release-note.md")
         comment = re.search(r"releaseVerdict:\s*#([^\n]*)", template).group(1)
         self.assertEqual({t.strip() for t in comment.split("|")}, expected)
-        quality = read("agents/omn-documentation/quality.md")
+        quality = read("agents/documentation/quality.md")
         r1 = re.search(r"^\| `R1` \|(.*)$", quality, re.M).group(1)
         self.assertEqual(set(re.findall(r"`([^`]+)`", r1)) - {"releaseVerdict"}, expected)
         self.assertRegex(quality, r"(?m)^\| `R8` \|", "quality.md declares no R8")
         self.assertRegex(quality, r"(?m)^\| `R9` \|", "quality.md declares no R9")
 
     def test_stage_8_yields_a_position_for_every_basis(self):
-        reasoning = read("agents/omn-documentation/reasoning.md")
+        reasoning = read("agents/documentation/reasoning.md")
         stage = reasoning.split("## Stage 8", 1)[1].split("## Stage 9", 1)[0]
         rows = []
         for ln in stage.splitlines():
@@ -354,7 +353,7 @@ class ContractAgreement(unittest.TestCase):
                               f"no withheld row for {basis}")
 
     def test_the_charter_and_the_runtime_readme_state_the_basis_rule(self):
-        charter = read("agents/omn-documentation/system.md")
+        charter = read("agents/documentation/system.md")
         self.assertRegex(charter, r"(?m)^\| Record a handoff, findings, or documentation-delta "
                                   r"publication as released \| Refuse;")
         readme = read("runtime/README.md")
@@ -365,20 +364,20 @@ class ContractAgreement(unittest.TestCase):
                 self.assertIn(f"/{phase}`", row)
         for rule in ("`R8`", "`R9`", "`SUPERSEDED_CONTRACTS`"):
             self.assertIn(rule, readme)
-        identity = read("agents/omn-documentation/identity.md")
+        identity = read("agents/documentation/identity.md")
         evidence = identity.split("### Required Evidence Level", 1)[1].split("## ", 1)[0]
         for position in NEW_POSITIONS:
             with self.subTest(required_evidence=position):
                 self.assertIn(f"(`{position}`)", evidence)
 
     def test_versions_agree(self):
-        manifest = read("agents/omn-documentation/manifest.yaml")
+        manifest = read("agents/documentation/manifest.yaml")
         self.assertRegex(manifest, r"\n  version: 1\.2\.0\n")
-        host = read("agents/omn-documentation.agent.md")
+        host = read("agents/documentation.agent.md")
         self.assertIn("| version | `1.2.0` |", host)
         self.assertIn("`metadata.version` is `1.2.0`", host)
         agents = read("registry/agents.yaml")
-        rec = agents.split("identifier: omn-documentation\n", 1)[1]
+        rec = agents.split("identifier: documentation\n", 1)[1]
         self.assertRegex(rec, r"^(?:.*\n){0,12}?    version: 1\.2\.0\n")
         templates = read("registry/templates.yaml")
         rec = templates.split("identifier: release-note\n", 1)[1]
@@ -387,20 +386,6 @@ class ContractAgreement(unittest.TestCase):
         self.assertEqual(rnv.CURRENT_CONTRACT_VERSION, (1, 2, 0))
 
 
-class BundledPayloadParity(unittest.TestCase):
-    def test_the_bundled_validator_states_the_same_vocabulary(self):
-        spec = importlib.util.spec_from_file_location(
-            "bundled_release_note_validator", BUNDLE / "runtime" / "release_note_validator.py")
-        bundled = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(bundled)
-        self.assertEqual(bundled.VERDICTS, rnv.VERDICTS)
-        self.assertEqual(bundled.PHASE_BASIS, rnv.PHASE_BASIS)
-        self.assertEqual(bundled.VERDICT_OF_BASIS, rnv.VERDICT_OF_BASIS)
-        self.assertEqual(bundled.VERDICT_EVIDENCE, rnv.VERDICT_EVIDENCE)
-        for rel in ("agents/omn-documentation/output.md", "agents/omn-documentation/quality.md",
-                    "agents/omn-documentation/reasoning.md", "templates/release-note.md"):
-            with self.subTest(file=rel):
-                self.assertEqual(read(rel, BUNDLE), read(rel))
 
 
 # ------------------------------------------------------------------ coverage verification
@@ -414,7 +399,7 @@ class SupersededContractCandidates(_Notes):
         note = state / "artifacts" / "release-note.md"
         note.write_text(text, encoding="utf-8")
         env = dict(envelope("documentation-and-release-handoff"),
-                   agent_id="omn-documentation", agent_version=version)
+                   agent_id="documentation", agent_version=version)
         (state / "invocation-envelope.json").write_text(json.dumps(env), encoding="utf-8")
         return note
 
@@ -431,7 +416,7 @@ class SupersededContractCandidates(_Notes):
             env_of(old).write_text(broken, encoding="utf-8", errors="surrogateescape")
             self.assertIsNone(vv.superseded_reason("release-note.md", env_of(old)))
         env_of(old).write_text(json.dumps(dict(envelope("documentation-and-release-handoff"),
-                                               agent_id="omn-documentation",
+                                               agent_id="documentation",
                                                agent_version="1.1.0")), encoding="utf-8")
         with mock.patch.object(vv, "committed_instances", return_value=[old, new]):
             listed = [p for p, _s, _e in vv.candidate_instances("release-note.md")]

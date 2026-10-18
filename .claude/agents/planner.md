@@ -35,8 +35,8 @@ The Planner Agent is implemented as a runtime module set. Load
 - Contract sections previously defined here now live in `agents/planner/identity.md`.
 - The prior free-form plan package is replaced by the fixed twelve-section
   `execution-plan.md` artifact, rendered from `templates/execution-plan.md`.
-- Escalation targets previously naming `omn-architect` now name `architect` for
-  structural concerns, matching the registered agent set.
+- Escalation targets name `architect` for structural concerns, matching the registered
+  agent set.
 - Discovery is through `registry/agents.yaml`, record `planner`, whose
   `specificationPath` points at the runtime folder.
 

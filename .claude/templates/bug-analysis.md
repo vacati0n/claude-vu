@@ -2,7 +2,7 @@
 
 ## Usage
 
-Canonical artifact template for `bug-analysis.md`, produced by agent `omn-dev-1-bug-analyst`
+Canonical artifact template for `bug-analysis.md`, produced by agent `dev-1-bug-analyst`
 in the `root-cause-analysis` phase of `workflows/fix-bug.md`.
 
 Template version 1.1.0. Version 1.1.0 is the machine-checkable revision: it adds the leading
@@ -16,8 +16,8 @@ A section with nothing to report reads `None identified.`
 Identifier schemes: evidence records `E-nnn`, causal steps `C-nnn`, open questions `Q-nnn`.
 All zero-padded to three digits and ascending.
 
-The binding behavioural contract is `agents/omn-dev-1-bug-analyst/output.md`, within the module
-set `agents/omn-dev-1-bug-analyst/manifest.yaml` declares. Two of its rules are
+The binding behavioural contract is `agents/dev-1-bug-analyst/output.md`, within the module
+set `agents/dev-1-bug-analyst/manifest.yaml` declares. Two of its rules are
 enforced mechanically and are worth restating here: every causal claim cites evidence, and
 reproducibility is established before a diagnosis is called final.
 
@@ -30,7 +30,7 @@ bugAnalysis:
   sourceInputs:
     - type:          # defect-report | symptom-evidence | business-impact-statement | logs | traces | code-context
       reference:     # supplied reference, or "inline"
-  producedBy: omn-dev-1-bug-analyst
+  producedBy: dev-1-bug-analyst
   agentVersion:
   schemaVersion: 1.0.0
   status:            # complete | provisional | blocked

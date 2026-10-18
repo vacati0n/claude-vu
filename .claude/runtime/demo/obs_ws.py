@@ -211,7 +211,7 @@ class OBSClient:
                 timeout: float | None = None) -> dict:
         """One request/response round trip. Raises OBSError on a non-success status."""
         self._req += 1
-        rid = f"omn-{self._req}"
+        rid = f"req-{self._req}"
         self._send({"op": REQUEST, "d": {"requestType": request_type, "requestId": rid,
                                          "requestData": data or {}}})
         deadline = time.monotonic() + (timeout or self.timeout)

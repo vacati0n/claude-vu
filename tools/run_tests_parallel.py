@@ -55,7 +55,7 @@ def discover(names: list[str]) -> list[tuple[str, list[str]]]:
 
 def run_chunk(module: str, ids: list[str]) -> dict:
     started = time.monotonic()
-    # PYTHONPATH=tests makes sibling imports (`from test_omn_agent import ...`) resolve exactly
+    # PYTHONPATH=tests makes sibling imports (`from test_x import ...`) resolve exactly
     # as they do under `discover -s tests`; a dotted `tests.<name>` would not.
     env = {**os.environ, "PYTHONPATH": os.pathsep.join(
         [str(TESTS)] + ([os.environ["PYTHONPATH"]] if os.environ.get("PYTHONPATH") else []))}

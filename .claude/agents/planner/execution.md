@@ -153,11 +153,11 @@ of the plan.
 
 | Decision | Target |
 |---|---|
-| Scope, priority, acceptance authority | `omn-product-owner` |
-| Requirement or business-rule clarification | `omn-business-analyst` |
+| Scope, priority, acceptance authority | `product-owner` |
+| Requirement or business-rule clarification | `business-analyst` |
 | Structural or system-boundary decision | `architect` |
-| Delivery feasibility or resourcing tradeoff | `omn-tech-lead` |
-| Validation strategy | `omn-qa` |
+| Delivery feasibility or resourcing tradeoff | `tech-lead` |
+| Validation strategy | `qa` |
 
 **Actions.** Emit a decision task owned by the target agent, with the question, the
 options visible from the inputs, and the downstream impact of each option on the plan.

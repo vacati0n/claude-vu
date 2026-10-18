@@ -27,13 +27,11 @@ Model, a gate, or what any agent is asked to do.
 | `--demo-record` | flag | off | Start filming the Claude Desktop window as part of this command, before the run's first event is emitted, so the opening beats are on camera. Uses OBS Studio when its WebSocket server is enabled, otherwise ffmpeg over the window's rectangle. A failure to start is reported and never stops the run. |
 
 Operator entry points carrying the flag. `<framework-dir>` below is this framework
-directory's real name -- `.omn-agent` in a repository the installer wrote to, `.claude` in
-the framework's own checkout:
+directory's real name, `.claude` in the framework's own checkout:
 
 ```bash
 python <framework-dir>/runtime/framework_runtime.py plan --demo \
     --input feature-request=<framework-dir>/runs/inputs/<request>.md
-omn-agent run <KEY> --demo                       # the same switch, through the CLI wrapper
 python <framework-dir>/runtime/framework_runtime.py demo --run-id <run> --record-start
 python <framework-dir>/runtime/framework_runtime.py demo --run-id <run> --record-stop --build
 python <framework-dir>/runtime/framework_runtime.py demo --run-id <run> [--snapshot|--build|--backfill]

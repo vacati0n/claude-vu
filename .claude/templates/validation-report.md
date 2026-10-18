@@ -10,11 +10,11 @@ their Output Artifact column:
 
 | Workflow | Phase | Producer |
 |---|---|---|
-| `fix-bug` | `regression-validation` | `omn-qa` |
-| `refactor` | `safety-net-establishment` | `omn-qa` |
-| `refactor` | `behavioral-validation` | `omn-qa` |
-| `review-pull-request` | `test-risk-validation` | `omn-qa` |
-| `release` | `candidate-validation` | `omn-qa` |
+| `fix-bug` | `regression-validation` | `qa` |
+| `refactor` | `safety-net-establishment` | `qa` |
+| `refactor` | `behavioral-validation` | `qa` |
+| `review-pull-request` | `test-risk-validation` | `qa` |
+| `release` | `candidate-validation` | `qa` |
 
 They are one artifact type. Each is a criterion-by-criterion validation result over a defined
 validation scope, carrying the defects it found and closing with a readiness verdict, and the
@@ -38,7 +38,7 @@ A validation report quotes the output of the checks it ran, so fenced blocks and
 are permitted here. The prohibition this template does keep is the one every agent contract
 shares: no model, vendor, or provider is named.
 
-The binding behavioural contract is the module set under `agents/omn-qa/` — `output.md` for
+The binding behavioural contract is the module set under `agents/qa/` — `output.md` for
 structure and `quality.md` for the checks. Four QA rules are enforced mechanically: a criterion
 with no evidence cannot be recorded as met, an execution count cannot drift from the results it
 summarises, an open critical or high defect cannot be passed away, and a verdict cannot claim a
@@ -54,7 +54,7 @@ validationReport:
   sourceInputs:
     - type:          # implementation-report | review-package | technical-design | bug-analysis | scope-definition | test-evidence | acceptance-criteria | regression-targets | packaging-evidence
       reference:     # supplied reference, or "inline"
-  producedBy:        # omn-qa
+  producedBy:        # qa
   agentVersion:
   schemaVersion: 1.0.0
   status:            # complete | provisional | blocked

@@ -180,23 +180,23 @@ skills:
 
 collaboration:
   upstream:
-    - omn-product-owner
-    - omn-business-analyst
+    - product-owner
+    - business-analyst
     - planner
-    - omn-context-agent
-    - omn-orchestrator
+    - context-agent
+    - orchestrator
   downstream:
-    - omn-tech-lead
-    - omn-dev-1-implement
-    - omn-dev-2-reviewer
-    - omn-qa
-    - omn-documentation
+    - tech-lead
+    - dev-1-implement
+    - dev-2-reviewer
+    - qa
+    - documentation
   escalation:
-    scope: omn-product-owner
-    delivery: omn-tech-lead
-    coordination: omn-orchestrator
-    requirements: omn-business-analyst
-    verification: omn-qa
+    scope: product-owner
+    delivery: tech-lead
+    coordination: orchestrator
+    requirements: business-analyst
+    verification: qa
 
 boundaries:
   withPlanner: >-
@@ -244,8 +244,3 @@ versioning:
     - ref: ../architect.md
       version: 1.0.0
       reason: Contract migrated into runtime module set.
-  deprecates:
-    - ref: ../omn-architect.md
-      reason: >-
-        Legacy role specification for the same architecture domain. Reference rewiring
-        across workflows and governance documents is a deferred migration.

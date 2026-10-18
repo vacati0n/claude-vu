@@ -11,12 +11,12 @@ file in their Output Artifact column:
 
 | Workflow | Phase | Producer | Decision Basis |
 |---|---|---|---|
-| `investigate` | `option-analysis` | `omn-tech-lead` | `option-analysis` |
-| `investigate` | `recommendation` | `omn-tech-lead` | `recommendation` |
-| `research` | `option-synthesis` | `omn-tech-lead` | `option-analysis` |
-| `research` | `recommendation-draft` | `omn-tech-lead` | `recommendation` |
-| `review-pull-request` | `merge-decision` | `omn-tech-lead` | `merge-decision` |
-| `release` | `readiness-assessment` | `omn-tech-lead` | `release-readiness` |
+| `investigate` | `option-analysis` | `tech-lead` | `option-analysis` |
+| `investigate` | `recommendation` | `tech-lead` | `recommendation` |
+| `research` | `option-synthesis` | `tech-lead` | `option-analysis` |
+| `research` | `recommendation-draft` | `tech-lead` | `recommendation` |
+| `review-pull-request` | `merge-decision` | `tech-lead` | `merge-decision` |
+| `release` | `readiness-assessment` | `tech-lead` | `release-readiness` |
 
 They are one artifact type. Each is a criteria-based comparison of named options over a stated
 decision context, carrying the risks and blockers that bear on delivery and closing with a
@@ -30,11 +30,11 @@ built* — the structure, the boundaries, the decision records. A recommendation
 way delivery should go and at what cost* — the option to take, the sequence to take it in, the
 risk carried, and what must be true first. The two produce different artifacts because they
 answer different questions and are owned by different roles: structural design belongs to
-`architect`, delivery tradeoffs belong to `omn-tech-lead`.
+`architect`, delivery tradeoffs belong to `tech-lead`.
 
 A technical recommendation is also not a gate decision. Every gate this artifact is evidence
 for — the Recommendation Gate, the Merge Gate, the Readiness Gate — is decided by another role
-under the Producer Exclusion Rule, because `omn-tech-lead` produced the evidence assessed
+under the Producer Exclusion Rule, because `tech-lead` produced the evidence assessed
 there. The Readiness section therefore names the deciding authority and recommends to it; it
 never records the decision as taken.
 
@@ -44,7 +44,7 @@ A section with nothing to report reads `None identified.`
 Identifier schemes: evaluation criteria `EC-nnn`, options `O-nnn`, risks and blockers `RK-nnn`,
 open questions `Q-nnn`. All zero-padded to three digits and ascending.
 
-The binding behavioural contract is the module set under `agents/omn-tech-lead/` — `output.md`
+The binding behavioural contract is the module set under `agents/tech-lead/` — `output.md`
 for structure and `quality.md` for the checks. Six tech-lead rules are enforced mechanically: a
 recommended option must be one the artifact actually evaluated, the assessment summary cannot
 drift from the tables it summarises, every evaluated option must be assessed against the
@@ -62,7 +62,7 @@ technicalRecommendation:
   sourceInputs:
     - type:            # investigation-report | technical-design | review-package | validation-report | implementation-report | scope-definition | execution-plan | release-checklist | risk-profile | evaluation-criteria | workflow-constraints | readiness-criteria
       reference:       # supplied reference, or "inline"
-  producedBy:          # omn-tech-lead
+  producedBy:          # tech-lead
   agentVersion:
   schemaVersion: 1.0.0
   status:              # complete | provisional | blocked

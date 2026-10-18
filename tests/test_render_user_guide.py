@@ -13,7 +13,7 @@ classified in `docs/user-guide-reconciliation-diff.md` against a row of the
 reconciliation record. The check is hermetic on purpose: the reconciliation was
 a one-time event, so its proof compares two frozen pages and stays true while
 the handbook goes on being edited. The live page is exercised by the tests that
-should stay live -- the banner, the anchor baseline, check mode writing nothing,
+should stay live -- the banner, the published anchor set, check mode writing nothing,
 and the delivered page being a render of the delivered source -- and by the
 record's own form checks. Nothing here writes to a tracked file.
 
@@ -51,8 +51,7 @@ sys.path.insert(0, str(REPO / "tools"))
 import render_user_guide as renderer  # noqa: E402
 
 # The anchor identifier baseline the published handbook exposed before it became
-# a build output. Every one must survive regeneration, and the internal link
-# graph must stay closed over exactly this set.
+# a build output. Both frozen fixtures carry exactly this set.
 BASELINE_ANCHORS = {
     "model", "install", "work", "flows", "run", "ownership", "health",
     "trouble", "custom",
@@ -60,6 +59,16 @@ BASELINE_ANCHORS = {
     "flow-review", "flow-release", "flow-quality-scan",
     "rework", "fix-comments", "update", "run-e2e", "live-view",
 }
+
+# The anchors the live handbook exposes. The baseline less the three sections
+# that documented the retired command-line wrapper's one-command loops
+# (`pr fix-comments`, `update`, `run <Provider> <TicketKey>`), which left with
+# it. The internal link graph must stay closed over exactly this set.
+PUBLISHED_ANCHORS = BASELINE_ANCHORS - {"fix-comments", "update", "run-e2e"}
+
+# Every slash command the handbook must document, read from the command registry
+# so a newly registered command that the handbook omits fails here.
+COMMAND_REGISTRY = REPO / ".claude" / "registry" / "commands.yaml"
 
 # The published handbook as committed immediately before it became a build
 # output (`git show HEAD:docs/user-guide.html` at the change's base), held as a
@@ -537,13 +546,13 @@ class PublishedHandbook(unittest.TestCase):
     def test_committed_output_matches_a_render_of_the_source(self):
         self.assertEqual(self.html, render(renderer.read_source()))
 
-    def test_every_baseline_anchor_survives(self):
+    def test_every_published_anchor_survives(self):
         declared = set(re.findall(r'\sid="([^"]+)"', self.html))
-        self.assertEqual(declared, BASELINE_ANCHORS)
+        self.assertEqual(declared, PUBLISHED_ANCHORS)
 
-    def test_the_internal_link_graph_is_closed_over_the_baseline(self):
+    def test_the_internal_link_graph_is_closed_over_the_published_anchors(self):
         targets = set(re.findall(r'href="#([^"]+)"', self.html))
-        self.assertEqual(targets, BASELINE_ANCHORS)
+        self.assertEqual(targets, PUBLISHED_ANCHORS)
 
     def test_the_page_opens_with_a_generated_do_not_edit_banner(self):
         head = self.html.split("<header>")[0]
@@ -557,12 +566,23 @@ class PublishedHandbook(unittest.TestCase):
                          'class="callout"', 'class="chain"', 'class="comment"'):
             self.assertIn(fragment, self.html)
 
-    def test_the_branch_naming_templates_section_reaches_the_published_form(self):
-        for fragment in ("Branch naming templates", "Token reference",
-                         "{ticket_id}", "Normalization and validation rules",
-                         "Viewing and changing templates later",
-                         "Migration and backward compatibility"):
-            self.assertIn(fragment, self.html)
+    def test_every_registered_slash_command_is_documented(self):
+        registry = COMMAND_REGISTRY.read_text(encoding="utf-8")
+        records = registry.split("\nrecords:", 1)[1]
+        commands = re.findall(r"^  - identifier: ([a-z0-9-]+)$", records, re.M)
+        self.assertGreater(len(commands), 5, "the command registry looks truncated")
+        for command in commands:
+            self.assertIn("<code>/%s</code>" % command, self.html, command)
+
+    def test_the_retired_command_line_wrapper_is_not_documented(self):
+        # the framework is entered through Claude Code slash commands and the
+        # runtime's own scripts; the wrapper CLI and its install layout are gone
+        source = SOURCE.read_text(encoding="utf-8")
+        for retired in ("omn-agent", "omn_agent", ".omn-agent", "Omn-Agent"):
+            self.assertNotIn(retired, source)
+            self.assertNotIn(retired, self.html)
+        self.assertIn("python .claude/runtime/framework_runtime.py plan", source)
+        self.assertIn("python .claude/runtime/self_hosting.py classify", source)
 
     def test_the_regeneration_command_uses_forward_slashes_only(self):
         self.assertNotIn("\\", renderer.RENDER_COMMAND)
@@ -598,6 +618,8 @@ class PreChangeEquivalence(unittest.TestCase):
         cls.wording = record_wording_labels(cls.record)
 
     def test_the_fixture_is_the_pre_change_page(self):
+        # frozen history: the page predates the retirement of the omn branding,
+        # so its title still names it, as do the 5a command lines checked below
         self.assertIn("Omn-Agent AI Engineering Framework · Team Guide",
                       self.before)
         self.assertIn("This guide is versioned at", self.before)
@@ -875,8 +897,10 @@ class ReconciliationRecord(unittest.TestCase):
         self.assertIn("non-droppable-merge", self.text)
         for fragment in ("pyyaml", "V-IMPORT"):
             self.assertIn(fragment, self.text)
-            self.assertIn(fragment.lower(), html.lower())
-            self.assertIn(fragment.lower(), source.lower())
+        # `V-IMPORT` was a finding of the retired wrapper's `validate`, so it
+        # left the handbook with it; the PyYAML requirement it guarded stays
+        self.assertIn("pyyaml", html.lower())
+        self.assertIn("pyyaml", source.lower())
 
     def test_the_5a_command_lines_carry_a_resolution_row(self):
         rows = "\n".join(self.rows)

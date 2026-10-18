@@ -48,8 +48,8 @@ DEFAULT_EXE = "Claude.exe"
 
 # OBS provisioning names. Kept separate from anything the user owns: the demo never edits
 # the operator's own scene collection or profile.
-OBS_COLLECTION = "OMN Demo Capture"
-OBS_PROFILE = "OMN Demo Capture"
+OBS_COLLECTION = "Framework Demo Capture"
+OBS_PROFILE = "Framework Demo Capture"
 OBS_SCENE = "Claude Desktop"
 OBS_SOURCE = "Claude Desktop Window"
 WGC_METHOD = 2          # window_capture: 0 auto, 1 BitBlt, 2 Windows Graphics Capture
@@ -327,7 +327,7 @@ class OBSBackend(_Backend):
     def _provision(self, obs: OBSClient, session: "CaptureSession"):
         """Create the demo's own scene collection, profile, scene, and window source.
 
-        Everything is namespaced under `OMN Demo Capture`, and every call is idempotent, so
+        Everything is namespaced under `Framework Demo Capture`, and every call is idempotent, so
         the operator's own OBS setup is neither read nor modified.
         """
         collections = (obs.request("GetSceneCollectionList") or {}).get("sceneCollections", [])

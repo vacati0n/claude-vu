@@ -13,11 +13,11 @@ Five slices are wired today:
     slice 2  /implement -> implement-feature -> solution-design-and-risk-assessment
                         -> architect -> technical-design.md
     slice 3  /implement -> implement-feature -> implementation
-                        -> omn-dev-1-implement -> implementation-report.md
+                        -> dev-1-implement -> implementation-report.md
     slice 4  /implement -> implement-feature -> scope-and-acceptance
-                        -> omn-product-owner -> scope-definition.md
+                        -> product-owner -> scope-definition.md
     slice 5  /implement -> implement-feature -> quality-review
-                        -> omn-dev-2-reviewer -> review-package.md
+                        -> dev-2-reviewer -> review-package.md
 
 This is deliberately narrow. It does not turn `validation/framework-validation-checklist.md`
 into executable code; it adds only the checks needed to decide whether a slice is real.
@@ -68,21 +68,21 @@ SLICE_CONFIG = {
         "min_bytes": 2000,
     },
     "implement": {
-        "agent": "omn-dev-1-implement",
+        "agent": "dev-1-implement",
         "command": "implement",
         "phase": "implementation",
         "artifact": "implementation-report.md",
         "min_bytes": 2000,
     },
     "product-owner": {
-        "agent": "omn-product-owner",
+        "agent": "product-owner",
         "command": "implement",
         "phase": "scope-and-acceptance",
         "artifact": "scope-definition.md",
         "min_bytes": 2000,
     },
     "reviewer": {
-        "agent": "omn-dev-2-reviewer",
+        "agent": "dev-2-reviewer",
         "command": "implement",
         "phase": "quality-review",
         "artifact": "review-package.md",
@@ -93,7 +93,7 @@ SLICE_CONFIG = {
     # contract; a slice pinned to one of them would be proving a phase the runtime cannot
     # dispatch.
     "documentation": {
-        "agent": "omn-documentation",
+        "agent": "documentation",
         "command": "release",
         "phase": "communication-and-post-release",
         "artifact": "release-note.md",

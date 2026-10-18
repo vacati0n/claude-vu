@@ -331,7 +331,7 @@ None.
         return root
 
     def fixture_findings(self, producer: str, matrix_rows: list):
-        with tempfile.TemporaryDirectory(prefix="omn-content-") as td:
+        with tempfile.TemporaryDirectory(prefix="fw-content-") as td:
             root = self.fixture_tree(Path(td), producer, matrix_rows)
             with mock.patch.multiple(fr, CLAUDE=root):
                 return gate_ownership_findings()
@@ -356,7 +356,7 @@ None.
     # ---- negative fixtures, both alias directions -------------------------------
 
     def test_producer_only_row_fails_through_the_prefixed_alias(self):
-        # producer `architect`; the row's only owner is its `omn-` prefixed alias
+        # producer `architect`; the row's only owner is its legacy `omn-` prefixed alias
         violations, missing, _ = self.fixture_findings(
             "architect", ["| wf-fixture | Fixture Gate | omn-architect |"])
         self.assertEqual(missing, [])
@@ -364,7 +364,8 @@ None.
         self.assertIn("Fixture Gate", violations[0])
 
     def test_producer_only_row_fails_through_the_deprefixed_alias(self):
-        # producer `omn-qa`; the row's only owner is its de-prefixed alias
+        # producer `omn-qa`, a legacy run-evidence identifier; the row's only owner is
+        # its de-prefixed alias
         violations, missing, _ = self.fixture_findings(
             "omn-qa", ["| wf-fixture | Fixture Gate | qa |"])
         self.assertEqual(missing, [])
@@ -373,12 +374,12 @@ None.
 
     def test_unmutated_fixture_row_yields_zero_findings(self):
         violations, missing, skipped = self.fixture_findings(
-            "architect", ["| wf-fixture | Fixture Gate | omn-architect, omn-tech-lead |"])
+            "architect", ["| wf-fixture | Fixture Gate | architect, tech-lead |"])
         self.assertEqual((violations, missing, skipped), ([], [], []))
 
     def test_phase_model_gate_absent_from_matrix_is_a_failure(self):
         violations, missing, _ = self.fixture_findings(
-            "architect", ["| wf-fixture | Unrelated Gate | omn-tech-lead |"])
+            "architect", ["| wf-fixture | Unrelated Gate | tech-lead |"])
         self.assertEqual(violations, [])
         self.assertEqual(len(missing), 1, missing)
         self.assertIn("Fixture Gate", missing[0])
@@ -386,8 +387,8 @@ None.
     def test_inert_matrix_row_is_reported_skipped_not_failed(self):
         violations, missing, skipped = self.fixture_findings(
             "architect",
-            ["| wf-fixture | Fixture Gate | omn-architect, omn-tech-lead |",
-             "| wf-fixture | Orphan Gate | omn-architect |"])
+            ["| wf-fixture | Fixture Gate | architect, tech-lead |",
+             "| wf-fixture | Orphan Gate | architect |"])
         self.assertEqual((violations, missing), ([], []))
         self.assertEqual(skipped, ["wf-fixture / Orphan Gate"])
 
@@ -399,7 +400,7 @@ class SupersededSpecifications(unittest.TestCase):
         self.assertEqual(superseded_marker_findings(FRAMEWORK), [])
 
     def test_dropping_the_line_one_marker_fails(self):
-        with tempfile.TemporaryDirectory(prefix="omn-content-") as td:
+        with tempfile.TemporaryDirectory(prefix="fw-content-") as td:
             root = Path(td) / "fw"
             (root / "agents").mkdir(parents=True)
             for rel in SUPERSEDED_SPECS:
@@ -433,7 +434,7 @@ class RootGovernanceBanners(unittest.TestCase):
                 kept = [ln for ln in lines if not ln.strip().startswith(BANNER)]
                 self.assertLess(
                     len(kept), len(lines), f"{name} carries no banner to remove")
-                with tempfile.TemporaryDirectory(prefix="omn-content-") as td:
+                with tempfile.TemporaryDirectory(prefix="fw-content-") as td:
                     doc = Path(td) / name
                     doc.write_text("\n".join(kept) + "\n", encoding="utf-8")
                     findings = banner_findings(doc, counterpart)

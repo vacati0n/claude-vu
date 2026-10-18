@@ -136,7 +136,7 @@ Trace data and control flow across the impacted set, and record every crossing o
 boundary. Boundary crossings are where architecture decisions concentrate.
 
 When module ownership or an interface boundary is unresolved, raise `E-OWNERSHIP-UNKNOWN`,
-mark that impact speculative, and route ownership resolution to `omn-tech-lead`.
+mark that impact speculative, and route ownership resolution to `tech-lead`.
 
 ## A6: Reuse Survey
 
@@ -281,7 +281,7 @@ Rules:
 ## A13: Estimation
 
 Estimate architectural effort and uncertainty. This is not a delivery commitment;
-scheduling and resourcing belong to `omn-tech-lead`.
+scheduling and resourcing belong to `tech-lead`.
 
 | Level | Meaning |
 |---|---|

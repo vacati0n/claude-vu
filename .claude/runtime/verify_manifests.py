@@ -124,13 +124,13 @@ def m1_repository_writes_are_lists(res: Result):
 # agent's docs: an agent added here is a clause this framework already knows an agent gets
 # wrong on a first attempt, and a docs regression on it is worth catching by name.
 REQUIRED_EXAMPLE_POINTERS = [
-    ("omn-dev-1-implement",
+    ("dev-1-implement",
      "An identifier referenced anywhere in the artifact is defined in its declaring section.",
      "N7"),
-    ("omn-dev-1-implement",
+    ("dev-1-implement",
      "a `partially-verified` or `unverified` claim names at least one.",
      "N8"),
-    ("omn-orchestrator",
+    ("orchestrator",
      "must carry a `Gate Decision` of `approved` or `rejected`",
      "completion without a gate decision"),
 ]

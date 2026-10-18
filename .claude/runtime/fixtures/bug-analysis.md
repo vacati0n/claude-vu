@@ -7,7 +7,7 @@ bugAnalysis:
       reference: inline
     - type: logs
       reference: inline
-  producedBy: omn-dev-1-bug-analyst
+  producedBy: dev-1-bug-analyst
   agentVersion: 1.0.0
   schemaVersion: 1.0.0
   status: complete

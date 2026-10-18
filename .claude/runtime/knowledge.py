@@ -25,8 +25,8 @@ re-harvest is an idempotent upsert and an operator's decision survives it. Seria
 canonical (sorted keys, two-space indent, ASCII escapes, LF, trailing newline, lessons ordered by
 fingerprint, no harvest timestamp), so unchanged evidence yields a byte-identical file. Writes
 go through a temporary file and `os.replace` under an exclusive lock file
-(`lessons.store.lock`). Both names match the installer exclusion `lessons.store.*`, so one
-repository's lessons are never shipped to another.
+(`lessons.store.lock`). Both belong to this repository alone; one repository's lessons are
+never shipped to another.
 
 Lifecycle
 ---------
@@ -75,7 +75,7 @@ STATUSES = ("candidate", "active", "retired")
 KINDS = ("validation-check", "gate-rejection")
 HYDRATION_VALUES = ("on", "off")
 DEFAULT_THRESHOLD = 2
-DEFAULT_OWNER = "omn-tech-lead"
+DEFAULT_OWNER = "tech-lead"
 
 RECALL_CAP = 5             # fixed by design; deliberately not a policy key
 DESCRIPTION_CAP = 160

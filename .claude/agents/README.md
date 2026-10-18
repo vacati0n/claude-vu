@@ -14,10 +14,12 @@ All agent specifications must conform before activation. The shared `agent-contr
 
 - Identifiers are lowercase kebab-case and must match
   `^[a-z0-9]+(-[a-z0-9]+)*$`, as enforced by `registry/agents.yaml`.
-- Role-scoped agents use the `omn-` prefix with format `omn-<domain>-<role>`.
-  Examples: `omn-dev-1-implement`, `omn-dev-2-reviewer`.
-- Framework-level agents use the unprefixed role name.
-  Examples: `planner`, `architect`, `omn-orchestrator`.
+- Identifiers carry no prefix. Role-scoped agents use the format `<domain>-<role>`.
+  Examples: `dev-1-implement`, `dev-2-reviewer`.
+- Framework-level agents use the plain role name.
+  Examples: `planner`, `architect`, `orchestrator`.
+- The retired `omn-` prefix survives only in historical run evidence and in the
+  retired-role records of `agents/retired-roles.md`.
 - Filenames and folder names must match agent identifiers exactly.
 
 ## Agent Layout

@@ -283,7 +283,7 @@ ORCH_WHAT = vv.MUTATIONS[ORCH][3]
 PH_ROW = re.compile(r"^\| `PH-\d{3}` \|")
 # The one row the mutation can land on in the fixture: owned by the orchestrator, at a real gate.
 ORCH_GATED_ROW = next(ln for ln in ORCH_FIXTURE_TEXT.splitlines()
-                      if PH_ROW.match(ln) and "| `omn-orchestrator` |" in ln)
+                      if PH_ROW.match(ln) and "| `orchestrator` |" in ln)
 
 
 def plain_rendered(text: str = ORCH_FIXTURE_TEXT) -> str:

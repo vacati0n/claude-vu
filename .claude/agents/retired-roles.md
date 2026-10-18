@@ -16,45 +16,28 @@ resolving a name that does not exist.
 
 | Role | Retired on | Superseded by | Reason |
 |---|---|---|---|
-| `orchestrator` | 2026-08-19 | `omn-orchestrator` | duplicate identifier for the coordination role |
-| `backend-developer` | 2026-08-19 | `omn-dev-1-implement` | technology specialization is carried by skills, not by agents |
-| `omn-planning-generate-clarification-questions` | 2026-08-19 | `omn-business-analyst` | task-shaped identifier, not a role; duplicated an owned capability |
+| `backend-developer` | 2026-08-19 | `dev-1-implement` | technology specialization is carried by skills, not by agents |
+| `omn-planning-generate-clarification-questions` | 2026-08-19 | `business-analyst` | task-shaped identifier, not a role; duplicated an owned capability |
 
 Each decision is recorded in `registry/agents.yaml` as a record at status `retired`, so a
 runtime attempt to load one fails with an explicit policy failure naming the status rather
 than an unresolved-identifier failure.
 
-## `orchestrator`
-
-- Status: retired
-- Retired on: 2026-08-19
-- Superseding agent: `omn-orchestrator` (`agents/omn-orchestrator.agent.md`)
-- Reason: duplicate ownership of the coordination role
-
-`orchestrator` and `omn-orchestrator` named one role. `omn-orchestrator` is the identifier
-every active workflow, `workflows/workflow-gate-matrix.md`, and `agents/capability-matrix.md`
-use; it owns three phases across the active Phase Models and holds a host entry point.
-`orchestrator` owns no phase, holds no host entry point, and has no contract file. It was
-never a second role, so it is retired rather than implemented.
-
-Evidence:
-
-- `omn-orchestrator` is the owner agent for `fix-bug/closure-and-communication`,
-  `refactor/closure-and-debt-record`, and `release/deployment-execution`.
-- `agents/capability-matrix.md` gives `omn-orchestrator` Primary for Orchestration and
-  Routing. No second agent holds that column.
-- No `agents/orchestrator.md` and no `agents/orchestrator/` module set has ever existed.
+A bare `orchestrator` identifier was also retired on 2026-08-19, as a duplicate of the
+coordination role then named `omn-orchestrator`. When agent identifiers dropped the `omn-`
+prefix, that role took the name `orchestrator`, so the retirement record was withdrawn: the
+identifier now names the active coordination agent (`agents/orchestrator.agent.md`).
 
 ## `backend-developer`
 
 - Status: retired
 - Retired on: 2026-08-19
-- Superseding agent: `omn-dev-1-implement` (`agents/omn-dev-1-implement.agent.md`)
+- Superseding agent: `dev-1-implement` (`agents/dev-1-implement.agent.md`)
 - Reason: the framework expresses technology specialization through skills, not through
   stack-specific agents
 
 `backend-developer` was carried as a "specialized execution profile". The framework has one
-Primary owner of Implementation Delivery, `omn-dev-1-implement`, which is deliberately
+Primary owner of Implementation Delivery, `dev-1-implement`, which is deliberately
 stack-neutral. Stack-specific expertise reaches it through the skill registry — for example
 `skills/dotnet/engineering-playbook.md`, `skills/react/react-engineering.md`, and
 `skills/avalonia/desktop-ux-guidelines.md` — resolved per phase by the Skill Registry Loader.
@@ -63,7 +46,7 @@ matrix assigns to exactly one agent, which the capability model does not permit.
 
 Evidence:
 
-- `omn-dev-1-implement` is the sole Primary for Implementation Delivery in
+- `dev-1-implement` is the sole Primary for Implementation Delivery in
   `agents/capability-matrix.md` and owns the implementation phase of `implement-feature`,
   `fix-bug`, and `refactor`.
 - No active workflow Phase Model names `backend-developer` as an owner agent or participant.
@@ -74,24 +57,24 @@ Evidence:
 
 - Status: retired
 - Retired on: 2026-08-19
-- Superseding agents: `omn-business-analyst` for requirement clarification;
-  `omn-product-owner` for acceptance arbitration
+- Superseding agents: `business-analyst` for requirement clarification;
+  `product-owner` for acceptance arbitration
 - Reason: the identifier names a task, not a role, and duplicated a capability already owned
 
 The identifier describes an activity — generating clarification questions — rather than an
 accountable role. That activity is a declared capability, `requirement-clarification`, held
-by `omn-business-analyst`, which produces `requirement-framing.md` and is contracted to name
+by `business-analyst`, which produces `requirement-framing.md` and is contracted to name
 every gap and unresolved assumption rather than close it by inference. Where clarification
-concerns acceptance boundaries rather than requirements, `omn-product-owner` arbitrates.
+concerns acceptance boundaries rather than requirements, `product-owner` arbitrates.
 
 Retaining the identifier as an agent also broke the ownership model: its row in
 `agents/capability-matrix.md` claimed Primary for Product Scope and Acceptance alongside
-`omn-product-owner` and `omn-business-analyst`, giving one column three Primary owners.
+`product-owner` and `business-analyst`, giving one column three Primary owners.
 
 Evidence:
 
 - `registry/agents.yaml` records `requirement-clarification` among the capabilities of
-  `omn-business-analyst`.
+  `business-analyst`.
 - No active workflow Phase Model names the identifier as an owner agent or participant.
 - No contract file for the identifier has ever existed.
 
@@ -105,7 +88,7 @@ are digest-pinned by committed run evidence: each invocation envelope records th
 every module loaded, and `runtime/verify_vertical_slice.py` check `C6` fails on drift.
 Rewriting them would invalidate the provenance record of a run that actually executed.
 Their machine-readable collaboration and escalation fields — held in `manifest.yaml`, which
-carries no recorded digest — have been rewired to `omn-orchestrator`, so runtime resolution
+carries no recorded digest — have been rewired to `orchestrator`, so runtime resolution
 reads the active identifier. The prose references inside the pinned modules are a deferred
 migration that lands the next time those contracts are revised and re-run.
 
@@ -119,7 +102,5 @@ reference, and is consistent with "tech lead" appearing beside it. It is left as
 
 ## Related Records
 
-- `agents/omn-architect.md` records a separate deprecation, of `omn-architect` in favour of
-  `architect`, under the same supersession pattern.
 - `agents/agent-catalog.md` routes intent to active agents and points here for retired ones.
 - `agents/capability-matrix.md` carries a row for every active agent only.

@@ -1,5 +1,7 @@
 # Handbook reconciliation: the recorded comparison
 
+> **Historical record.** This file records a one-time event and is kept as it was. The handbook it describes still documented the `omn-agent` command-line wrapper and the `omn-` agent prefix, both since retired; the current handbook is `docs/USER-GUIDE.md`.
+
 This file records the normalised comparison the Design Gate required between the
 published handbook as committed immediately before it became a build output
 (`tests/fixtures/user-guide-pre-change.html`) and the page as regenerated when the

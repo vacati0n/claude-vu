@@ -20,15 +20,13 @@
 
 ## Context Budget
 
-- A session in the framework checkout auto-compacts once its context passes 100,000 tokens.
-  `.claude/settings.json` sets `CLAUDE_CODE_AUTO_COMPACT_WINDOW` to `100000`, an absolute token
+- A session in the framework checkout auto-compacts once its context passes 250,000 tokens.
+  `.claude/settings.json` sets `CLAUDE_CODE_AUTO_COMPACT_WINDOW` to `250000`, an absolute token
   count, so the threshold is the same on every model, including 1M-context models that would
   otherwise compact only near their full window.
 - Do not express the budget with `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`: it is a percentage of the
   window, so it means a different token count on each model.
-- The setting is read by Claude Code only after the folder is trusted. A repository that installs
-  the framework into `.omn-agent/` adds the same `env` entry to its own `.claude/settings.json`;
-  the installer does not write host settings.
+- The setting is read by Claude Code only after the folder is trusted.
 
 ## Change Management
 

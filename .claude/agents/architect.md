@@ -38,7 +38,7 @@ The Architect Agent is implemented as a runtime module set. Load
   records at status `Proposed`.
 - Three responsibilities are now bounded explicitly against neighbouring agents. The
   executable task breakdown belongs to `planner`; delivery feasibility and scheduling belong
-  to `omn-tech-lead`; verifying concrete changes belongs to `omn-dev-2-reviewer`. See
+  to `tech-lead`; verifying concrete changes belongs to `dev-2-reviewer`. See
   `manifest.yaml` `boundaries`.
 - Decision records are emitted at status `Proposed` only. Acceptance belongs to the Design
   Gate owners.

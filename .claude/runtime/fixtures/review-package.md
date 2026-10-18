@@ -7,7 +7,7 @@ reviewPackage:
       reference: inline
     - type: test-evidence
       reference: inline
-  producedBy: omn-dev-2-reviewer
+  producedBy: dev-2-reviewer
   agentVersion: 1.0.0
   schemaVersion: 1.0.0
   status: complete
@@ -19,7 +19,7 @@ reviewPackage:
 ## Metadata
 
 - Review ID: RVW-2026-0058
-- Reviewer: omn-dev-2-reviewer
+- Reviewer: dev-2-reviewer
 - Change under review: classified retry policy and structured failure envelopes
 - Review date: 2026-08-18
 
@@ -61,8 +61,8 @@ reviewPackage:
 
 | ID | Addresses | Required change | Blocking | Owner |
 |---|---|---|---|---|
-| `CR-001` | `F-001` | cap the computed delay at the profile maximum and assert the cap in the recovery proof | yes | omn-dev-1-implement |
-| `CR-002` | `F-002` | return the classification as one record and unpack it once | no | omn-dev-1-implement |
+| `CR-001` | `F-001` | cap the computed delay at the profile maximum and assert the cap in the recovery proof | yes | dev-1-implement |
+| `CR-002` | `F-002` | return the classification as one record and unpack it once | no | dev-1-implement |
 
 ## Residual Risk
 

@@ -6,17 +6,17 @@ Define operator command entry points and their workflow bindings.
 
 | Command | Primary Workflow | Owning Phase | Phase Owner Agent |
 |---|---|---|---|
-| `/implement` | `workflows/implement-feature.md` | `execution-planning` onward, full lifecycle | planner, architect, omn-dev-1-implement |
-| `/bugfix` | `workflows/fix-bug.md` | `triage-and-impact` onward, full lifecycle | omn-dev-1-bug-analyst |
+| `/implement` | `workflows/implement-feature.md` | `execution-planning` onward, full lifecycle | planner, architect, dev-1-implement |
+| `/bugfix` | `workflows/fix-bug.md` | `triage-and-impact` onward, full lifecycle | dev-1-bug-analyst |
 | `/refactor` | `workflows/refactor.md` | `scope-invariants-and-risk-profile` onward, full lifecycle | architect |
-| `/investigate` | `workflows/investigate.md` | `problem-framing` onward, full lifecycle | omn-business-analyst |
-| `/research` | `workflows/research.md` | `research-framing` onward, full lifecycle | omn-business-analyst |
-| `/review` | `workflows/review-pull-request.md` | `code-quality-review` onward, full lifecycle | omn-dev-2-reviewer |
-| `/quality-scan` | `workflows/code-quality-scan.md` | `repository-quality-scan`, the whole single-phase lifecycle | omn-dev-2-reviewer |
+| `/investigate` | `workflows/investigate.md` | `problem-framing` onward, full lifecycle | business-analyst |
+| `/research` | `workflows/research.md` | `research-framing` onward, full lifecycle | business-analyst |
+| `/review` | `workflows/review-pull-request.md` | `code-quality-review` onward, full lifecycle | dev-2-reviewer |
+| `/quality-scan` | `workflows/code-quality-scan.md` | `repository-quality-scan`, the whole single-phase lifecycle | dev-2-reviewer |
 | `/optimize-memory` | `workflows/refactor.md` | `scope-invariants-and-risk-profile` onward, scoped to knowledge surfaces | architect |
-| `/release` | `workflows/release.md` | `readiness-assessment` onward, full lifecycle | omn-tech-lead |
-| `/document` | `workflows/implement-feature.md` | `documentation-and-release-handoff` | omn-documentation |
-| `/test` | `workflows/review-pull-request.md` | `test-risk-validation` | omn-qa |
+| `/release` | `workflows/release.md` | `readiness-assessment` onward, full lifecycle | tech-lead |
+| `/document` | `workflows/implement-feature.md` | `documentation-and-release-handoff` | documentation |
+| `/test` | `workflows/review-pull-request.md` | `test-risk-validation` | qa |
 
 Every row resolves to exactly one active record in `registry/workflows.yaml`, and every named
 phase owner is host-invocable through `agents/<agent-id>.agent.md`. `/document` and `/test` are

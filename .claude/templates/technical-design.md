@@ -163,7 +163,7 @@ impact is assessed for every change; None identified. requires a stated reason. 
 
 <!-- These are structural constraints, not tasks. No T-nnn identifier is created here;
 the planner owns task decomposition. Binds names planner tasks constrained by this step
-when an execution plan was supplied. Milestones and schedules belong to omn-tech-lead. -->
+when an execution plan was supplied. Milestones and schedules belong to tech-lead. -->
 
 ### Test Strategy Focus Areas
 

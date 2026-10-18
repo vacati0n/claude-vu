@@ -3,7 +3,7 @@
 ## Usage
 
 Canonical artifact template for `scope-definition.md`, produced by agent
-`omn-product-owner` in the `scope-and-acceptance` phase of
+`product-owner` in the `scope-and-acceptance` phase of
 `workflows/implement-feature.md`.
 
 Template version 1.0.0. It is machine-checkable from its first revision: the leading
@@ -24,8 +24,8 @@ Identifier schemes, each zero-padded to three digits and ascending from `001`:
 | `D-nnn` | Scope Decisions |
 | `Q-nnn` | Open Questions |
 
-The binding behavioural contract is `agents/omn-product-owner/output.md`, and the checks
-that decide conformance are `agents/omn-product-owner/quality.md`. Two rules from that
+The binding behavioural contract is `agents/product-owner/output.md`, and the checks
+that decide conformance are `agents/product-owner/quality.md`. Two rules from that
 contract are enforced mechanically because they are decidable by inspecting the artifact:
 every acceptance criterion names the in-scope item it bounds and the method that verifies
 it, and the artifact carries no task, design, or change identifier, because breakdown and
@@ -40,7 +40,7 @@ scopeDefinition:
   sourceInputs:
     - type:          # feature-request | business-intent | change-request | acceptance-intent | business-constraints
       reference:     # supplied reference, or "inline"
-  producedBy: omn-product-owner
+  producedBy: product-owner
   agentVersion:
   schemaVersion: 1.0.0
   status:                    # complete | provisional | blocked

@@ -12,8 +12,8 @@ Execute release preparation and readiness checks using `workflows/release.md`.
 
 ## Assigned Agents
 
-- Primary: `omn-tech-lead`.
-- Secondary: `omn-qa`, `omn-documentation`, `omn-product-owner`.
+- Primary: `tech-lead`.
+- Secondary: `qa`, `documentation`, `product-owner`.
 
 ## Outputs
 

@@ -12,8 +12,8 @@ Execute structured technical or product investigation via `workflows/investigate
 
 ## Assigned Agents
 
-- Primary: `omn-business-analyst`.
-- Secondary: `omn-context-agent`, `omn-architect`.
+- Primary: `business-analyst`.
+- Secondary: `context-agent`, `architect`.
 
 ## Outputs
 
