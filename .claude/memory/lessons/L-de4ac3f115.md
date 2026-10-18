@@ -33,7 +33,7 @@ lesson_record:
     - "runs/run-3e6f6a248b99/recovery-ledger.json#FE-run-3e6f6a248b99-Fix Gate-02"
   evidence_state: "current"
   status: "candidate"
-  owner: "omn-tech-lead"
+  owner: "tech-lead"
   rationale: "harvested from recorded run evidence: this gate rejected the evidence of the phase it closes"
   remedy: null
   history: []

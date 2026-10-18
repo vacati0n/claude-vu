@@ -38,7 +38,7 @@ sys.path.insert(0, str(RUNTIME))
 import framework_runtime as fr  # noqa: E402
 import state_engine as se       # noqa: E402
 
-PRODUCER = "omn-dev-1-bug-analyst"
+PRODUCER = "dev-1-bug-analyst"
 PRODUCER_VERSION = "1.0.0"
 WORKFLOW = "fix-bug"
 WORKFLOW_VERSION = "1.0.0"
@@ -62,7 +62,7 @@ bugAnalysis:
 
 | ID | Question | Blocking | Owner | Affected steps |
 |---|---|---|---|---|
-| Q-001 | Is the log retention policy affected? | no | omn-tech-lead | none |
+| Q-001 | Is the log retention policy affected? | no | tech-lead | none |
 """
 
 BLOCKING_QUESTION_ARTIFACT = CLEAN_ARTIFACT.replace(
@@ -91,7 +91,7 @@ OPEN_DEFECT_ARTIFACT = CLEAN_ARTIFACT + """
 
 class GatePolicyTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-gate-policy-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-gate-policy-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.claude = self.tmp / "claude"
         self.runs = self.claude / "runs"
@@ -157,7 +157,7 @@ class GatePolicyTestCase(unittest.TestCase):
 
         store.add_gate({
             "gate": GATE, "closes_state": PHASE,
-            "owner_roles": owner_roles or ["omn-dev-2-reviewer", "omn-tech-lead"],
+            "owner_roles": owner_roles or ["dev-2-reviewer", "tech-lead"],
             "producer_agent": PRODUCER, "decision": None, "owner_role": None,
             "decided_by": None, "rationale": None, "evidence_ref": None,
             "decided_at": None,
@@ -228,7 +228,7 @@ class GatePolicyTestCase(unittest.TestCase):
         g = ctx["store"].gate(GATE)
         self.assertEqual(g["decision"], "approved")
         self.assertEqual(g["decided_by"], fr.AUTO_POLICY_DECIDER)
-        self.assertEqual(g["owner_role"], "omn-dev-2-reviewer")
+        self.assertEqual(g["owner_role"], "dev-2-reviewer")
         self.assertIn("severity=low", g["rationale"])
         self.assertIn("precedent=found", g["rationale"])
         self.assertEqual(g["auto_policy"]["mode"], "auto-on-clean-evidence")
@@ -253,10 +253,10 @@ class GatePolicyTestCase(unittest.TestCase):
 
     def test_auto_decision_never_names_the_producer_role(self):
         self.make_precedent()
-        ctx = self.make_run(owner_roles=[PRODUCER, "omn-tech-lead"])
+        ctx = self.make_run(owner_roles=[PRODUCER, "tech-lead"])
         decided, _ = self.auto_decide(ctx)
         self.assertEqual(decided, [GATE])
-        self.assertEqual(ctx["store"].gate(GATE)["owner_role"], "omn-tech-lead")
+        self.assertEqual(ctx["store"].gate(GATE)["owner_role"], "tech-lead")
 
     def test_only_producer_roles_listed_holds_for_human(self):
         self.make_precedent()
@@ -301,7 +301,7 @@ class GatePolicyTestCase(unittest.TestCase):
     def test_open_defect_holds_qa_owned_gate(self):
         self.make_precedent()
         ctx = self.make_run(OPEN_DEFECT_ARTIFACT,
-                            owner_roles=["omn-qa", "omn-tech-lead"])
+                            owner_roles=["qa", "tech-lead"])
         self.assert_held(ctx, "unresolved defect(s)")
 
     def test_open_defect_ignored_on_non_qa_gate(self):
@@ -350,7 +350,7 @@ class GatePolicyTestCase(unittest.TestCase):
         self.make_precedent()
         ctx = self.make_run()
         g = ctx["store"].gate(GATE)
-        g["decision_history"] = [{"decision": "rejected", "owner_role": "omn-tech-lead",
+        g["decision_history"] = [{"decision": "rejected", "owner_role": "tech-lead",
                                   "decided_by": "reviewer", "decided_at": "2026-09-06T00:00:00Z",
                                   "superseded_by": "RB-run-undertest00-triage-gate-01"}]
         ctx["store"].save()
@@ -375,12 +375,12 @@ class GatePolicyTestCase(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()):
             fr.record_gate_decision(
                 ctx, gate_item, ctx["store"].gate(GATE), approved=False,
-                owner_role="omn-tech-lead", decided_by="reviewer", rationale="not yet",
+                owner_role="tech-lead", decided_by="reviewer", rationale="not yet",
                 evidence_ref="runs/run-undertest00/states/triage-and-impact")
         entries = fr.rp.RecoveryLedger(ctx["run_dir"]).entries()
         self.assertEqual([(e["failure_class"], e["status"]) for e in entries],
                          [("gate-approval-required", "resolved"), ("gate-rejection", "open")])
-        self.assertIn("rejected by omn-tech-lead", entries[0]["resolution"])
+        self.assertIn("rejected by tech-lead", entries[0]["resolution"])
         self.assertEqual(gate_item["status"], se.FAILED)
         self.assertEqual(gate_item["failure_class"], "gate-rejection")
         self.assertIn("rollback", entries[1]["clearing_action"])
@@ -412,8 +412,8 @@ class GatePolicyTestCase(unittest.TestCase):
         sibling["failure_class"] = "gate-rejection"
         store.add_item(sibling)
         store.add_gate({"gate": "Sibling Gate", "closes_state": PHASE,
-                        "owner_roles": ["omn-tech-lead"], "producer_agent": PRODUCER,
-                        "decision": "rejected", "owner_role": "omn-tech-lead",
+                        "owner_roles": ["tech-lead"], "producer_agent": PRODUCER,
+                        "decision": "rejected", "owner_role": "tech-lead",
                         "decided_by": "reviewer", "rationale": "not yet",
                         "evidence_ref": None, "decided_at": "2026-09-06T00:00:00Z",
                         "decision_history": []})
@@ -480,7 +480,7 @@ class GatePolicyTestCase(unittest.TestCase):
         item = store.item(GATE, "gate")
         g = store.gate(GATE)
         fr.record_gate_decision(
-            ctx, item, g, approved=True, owner_role="omn-tech-lead",
+            ctx, item, g, approved=True, owner_role="tech-lead",
             decided_by="dev@example.com", rationale="evidence reviewed",
             evidence_ref="runs/run-undertest00/states/triage-and-impact",
             actor_type="human")

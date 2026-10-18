@@ -20,7 +20,7 @@ or passes `--gate-policy` explicitly.
 
 The mode is set in `config/gate-policy.json`, and overridden per invocation with
 `--gate-policy auto` / `--gate-policy human` on the runtime's `plan`/`dispatch`/
-`complete`/`next`/`gate` subcommands, or on `omn-agent run`.
+`complete`/`next`/`gate` subcommands.
 
 ## `config/gate-policy.json`
 
@@ -64,7 +64,7 @@ gate owner that did not produce the evidence, and a gate with no such role stays
    column of its Open Questions table).
 5. **No deviation was escalated** (the `Escalation` column of its Deviations and
    Tradeoffs table names only `not-required`).
-6. **No defect stands unresolved** — for QA-owned gates specifically (`omn-qa` among the
+6. **No defect stands unresolved** — for QA-owned gates specifically (`qa` among the
    gate's owners), no row of the validation report's Defects table has `Status: open`.
 7. **An approved precedent exists**: this exact (workflow, workflow version, gate,
    producing-agent version) combination has been decided `approved` in a prior run. The

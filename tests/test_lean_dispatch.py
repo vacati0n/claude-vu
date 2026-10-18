@@ -68,7 +68,7 @@ design:
 
 | ID | Decision needed | Owner |
 |---|---|---|
-| Q-001 | CSV delimiter for locales | omn-product-owner |
+| Q-001 | CSV delimiter for locales | product-owner |
 """
 
 REPORT = """## Change Set
@@ -274,12 +274,12 @@ class SliceReadHintsTestCase(unittest.TestCase):
 class DispatchPromptTestCase(unittest.TestCase):
 
     def _envelope(self, **over):
-        agent = fr.load_agent("omn-dev-1-implement")
+        agent = fr.load_agent("dev-1-implement")
         env = {
             "invocation_id": "inv-x-04-001", "run_id": "run-x", "work_item_id": "run-x::implementation",
             "idempotency_key": "sha256:k", "state_id": "implementation", "phase_index": 4,
-            "agent_id": "omn-dev-1-implement", "agent_version": "1.0.0",
-            "host_registration": "agents/omn-dev-1-implement.agent.md",
+            "agent_id": "dev-1-implement", "agent_version": "1.0.0",
+            "host_registration": "agents/dev-1-implement.agent.md",
             "capability_bindings": {"manifest": agent["manifest_path"],
                                     "load_order": [m["path"] for m in agent["modules"]],
                                     "load_profile": fr.load_profile(agent),
@@ -312,8 +312,8 @@ class DispatchPromptTestCase(unittest.TestCase):
             "expected_output_schema": {"artifact": "implementation-report.md",
                                        "artifact_path": "runs/run-x/states/implementation/artifacts/implementation-report.md",
                                        "template_ref": "templates/implementation-report.md",
-                                       "contract_ref": "agents/omn-dev-1-implement/output.md",
-                                       "quality_ref": "agents/omn-dev-1-implement/quality.md",
+                                       "contract_ref": "agents/dev-1-implement/output.md",
+                                       "quality_ref": "agents/dev-1-implement/quality.md",
                                        "result_envelope_path": "runs/run-x/states/implementation/result-envelope.json",
                                        "conditional_artifacts": []},
             "prior_validation": None, "prior_rejection": None,
@@ -330,7 +330,7 @@ class DispatchPromptTestCase(unittest.TestCase):
         self.assertIn("Read first: the task context", prompt)
         self.assertIn("task-context.yaml", prompt)
         self.assertIn("Read the core modules, in full", prompt)
-        self.assertIn("agents/omn-dev-1-implement/system.md", prompt)
+        self.assertIn("agents/dev-1-implement/system.md", prompt)
         self.assertIn("identity.md` (agent-contract) -- load before deciding", prompt)
         self.assertIn("Read first: Objective, Constraints, Impacted Modules", prompt)
         self.assertIn("`S06` | Database Engineering | `not-triggered`", prompt)
@@ -351,12 +351,12 @@ class DispatchPromptTestCase(unittest.TestCase):
         self.assertIn("Load\n`quality.md` and `output.md` first", prompt)
 
     def test_full_profile_prompt_defers_nothing(self):
-        agent = fr.load_agent("omn-dev-1-implement")
+        agent = fr.load_agent("dev-1-implement")
         env = self._envelope()
         env["capability_bindings"]["load_profile"] = fr.load_profile(agent, "full")
         prompt = fr.build_dispatch_prompt(env, self._chain())
         self.assertIn("The load profile is `full`", prompt)
-        self.assertIn("agents/omn-dev-1-implement/examples.md", prompt)
+        self.assertIn("agents/dev-1-implement/examples.md", prompt)
 
 
 class ExecutionMetricsTestCase(unittest.TestCase):

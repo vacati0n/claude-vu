@@ -9,13 +9,13 @@ Restore intended behavior through evidence-based diagnosis, targeted remediation
 - Severity classification has an identified owner.
 
 ## Participating Agents
-- omn-dev-1-bug-analyst
-- omn-dev-1-implement
-- omn-dev-2-reviewer
-- omn-qa
-- omn-tech-lead
-- omn-documentation
-- omn-orchestrator
+- dev-1-bug-analyst
+- dev-1-implement
+- dev-2-reviewer
+- qa
+- tech-lead
+- documentation
+- orchestrator
 
 ## Phase Model
 
@@ -30,21 +30,21 @@ this same workflow, and from the phase names in `skills/agent-skill-matrix.md`.
 
 | Phase | Owner Agent | Participation | Input | Output Artifact | Gate | Required Skills |
 |---|---|---|---|---|---|---|
-| `triage-and-impact` | `omn-dev-1-bug-analyst` | primary | defect report, symptom evidence, business impact statement | `bug-analysis.md`, carrying the severity classification and reproducibility decision at status `provisional` | Triage Gate | S11, S12, S02 |
-| `root-cause-analysis` | `omn-dev-1-bug-analyst` | primary | `bug-analysis.md`, logs, traces, code context | `bug-analysis.md` | none | S03, S06, S08, S12 |
-| `fix-implementation` | `omn-dev-1-implement` | primary | `bug-analysis.md`, affected modules, regression targets | `implementation-report.md` | Fix Gate | S03, S06, S10, S12 |
-| `regression-validation` | `omn-qa` | primary | `implementation-report.md`, defect acceptance criteria | `validation-report.md` | Verification Gate | S07, S09, S11 |
-| `closure-and-communication` | `omn-orchestrator` | primary | `validation-report.md`, known issue status | `orchestration-result.md`, carrying the closure record and release-impact communication package | Closure Gate | S10, S11 |
+| `triage-and-impact` | `dev-1-bug-analyst` | primary | defect report, symptom evidence, business impact statement | `bug-analysis.md`, carrying the severity classification and reproducibility decision at status `provisional` | Triage Gate | S11, S12, S02 |
+| `root-cause-analysis` | `dev-1-bug-analyst` | primary | `bug-analysis.md`, logs, traces, code context | `bug-analysis.md` | none | S03, S06, S08, S12 |
+| `fix-implementation` | `dev-1-implement` | primary | `bug-analysis.md`, affected modules, regression targets | `implementation-report.md` | Fix Gate | S03, S06, S10, S12 |
+| `regression-validation` | `qa` | primary | `implementation-report.md`, defect acceptance criteria | `validation-report.md` | Verification Gate | S07, S09, S11 |
+| `closure-and-communication` | `orchestrator` | primary | `validation-report.md`, known issue status | `orchestration-result.md`, carrying the closure record and release-impact communication package | Closure Gate | S10, S11 |
 
 ### Phase Identifier Sources
 
 | Phase | Identifier source |
 |---|---|
-| `triage-and-impact` | Declared by `agents/omn-dev-1-bug-analyst/manifest.yaml`, `supportedWorkflows[fix-bug].phase`. Consistent with the `Triage` state in `workflows/workflow-engine.md` and the Skill Matrix phase name. |
-| `root-cause-analysis` | Declared by `agents/omn-dev-1-bug-analyst/manifest.yaml`, `supportedWorkflows[fix-bug].phase`. Consistent with the `RootCauseAnalysis` state in `workflows/workflow-engine.md`. |
-| `fix-implementation` | Declared by `agents/omn-dev-1-implement/manifest.yaml`, `supportedWorkflows[fix-bug].phase`. |
-| `regression-validation` | Declared by `agents/omn-qa/manifest.yaml`, `supportedWorkflows[fix-bug].phase`. |
-| `closure-and-communication` | Declared by `agents/omn-orchestrator/manifest.yaml`, `supportedWorkflows[fix-bug].phase`. |
+| `triage-and-impact` | Declared by `agents/dev-1-bug-analyst/manifest.yaml`, `supportedWorkflows[fix-bug].phase`. Consistent with the `Triage` state in `workflows/workflow-engine.md` and the Skill Matrix phase name. |
+| `root-cause-analysis` | Declared by `agents/dev-1-bug-analyst/manifest.yaml`, `supportedWorkflows[fix-bug].phase`. Consistent with the `RootCauseAnalysis` state in `workflows/workflow-engine.md`. |
+| `fix-implementation` | Declared by `agents/dev-1-implement/manifest.yaml`, `supportedWorkflows[fix-bug].phase`. |
+| `regression-validation` | Declared by `agents/qa/manifest.yaml`, `supportedWorkflows[fix-bug].phase`. |
+| `closure-and-communication` | Declared by `agents/orchestrator/manifest.yaml`, `supportedWorkflows[fix-bug].phase`. |
 
 ### Resolution Rules
 
@@ -59,10 +59,10 @@ this same workflow, and from the phase names in `skills/agent-skill-matrix.md`.
   reason and reported as an open escalation, so a run reports what it could not do rather
   than reporting success over a partial traversal.
 - All five phases of this workflow are dispatchable today. `triage-and-impact` and
-  `root-cause-analysis` resolve the full capability chain through the `omn-dev-1-bug-analyst`
+  `root-cause-analysis` resolve the full capability chain through the `dev-1-bug-analyst`
   record in `registry/agents.yaml`; `fix-implementation` and `regression-validation` resolve
-  theirs through `omn-dev-1-implement` and `omn-qa`; and `closure-and-communication` resolves
-  its own through the `omn-orchestrator` record, its runtime module set, and the registered
+  theirs through `dev-1-implement` and `qa`; and `closure-and-communication` resolves
+  its own through the `orchestrator` record, its runtime module set, and the registered
   validator for `orchestration-result.md`. Each waits on its predecessor rather than blocking
   on capability. `triage-and-impact` blocked at `G1-CAPABILITY` with reason
   `awaiting_contract_reconciliation` until the Output Artifact column above named a decision
@@ -104,21 +104,21 @@ Prose form of the Phase Model above. The identifiers in parentheses are canonica
 - Escalate when reproduction cannot be established.
 - Re-open diagnosis when fix fails validation.
 - Roll back unsafe corrections and re-enter design of fix strategy.
-- Escalate recurring failures to omn-tech-lead for architectural review.
+- Escalate recurring failures to tech-lead for architectural review.
 
 ## Approval Gates
 
 Gate names are the canonical ones in `workflows/workflow-gate-matrix.md`, which is the
 authority the runtime reads for gate ownership.
 
-- Triage Gate: omn-dev-1-bug-analyst and omn-tech-lead.
-- Fix Gate: omn-dev-2-reviewer.
-- Verification Gate: omn-qa and omn-dev-2-reviewer.
-- Closure Gate: omn-orchestrator and omn-documentation.
+- Triage Gate: dev-1-bug-analyst and tech-lead.
+- Fix Gate: dev-2-reviewer.
+- Verification Gate: qa and dev-2-reviewer.
+- Closure Gate: orchestrator and documentation.
 
 The Producer Exclusion Rule decides who signs. The bug analyst produces the triage package,
-so the Triage Gate decision rests with omn-tech-lead; omn-qa produces the verification
-evidence, so the Verification Gate decision rests with omn-dev-2-reviewer; and
-omn-orchestrator produces the closure record, so the Closure Gate decision rests with
-omn-documentation.
+so the Triage Gate decision rests with tech-lead; qa produces the verification
+evidence, so the Verification Gate decision rests with dev-2-reviewer; and
+orchestrator produces the closure record, so the Closure Gate decision rests with
+documentation.
 

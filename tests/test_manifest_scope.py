@@ -1,8 +1,8 @@
 """Regression tests for the repositoryWrites scope-explosion defect (ON-165).
 
-`agents/omn-qa/manifest.yaml` once declared `repositoryWrites.scope` as a YAML
+`agents/qa/manifest.yaml` once declared `repositoryWrites.scope` as a YAML
 prose string; `list(prose)` in the dispatch-envelope assembly exploded it into
-~200 single-character glob entries in every omn-qa dispatch. These tests pin
+~200 single-character glob entries in every qa dispatch. These tests pin
 the guard (`_glob_list`), the phase-conditional grant (`scopePhases` /
 `_repo_write_scope_applies`), the fixed manifest itself, and the authoring-time
 check (`verify_manifests.py` M1) that catches the mistake class at edit time.
@@ -64,10 +64,10 @@ class ScopePhasesTests(unittest.TestCase):
 
 class RealManifestTests(unittest.TestCase):
     def qa_repo_writes(self) -> dict:
-        manifest = fr.load_yaml("agents/omn-qa/manifest.yaml")
+        manifest = fr.load_yaml("agents/qa/manifest.yaml")
         return manifest["authorityScope"]["repositoryWrites"]
 
-    def test_omn_qa_scope_is_a_list(self):
+    def test_qa_scope_is_a_list(self):
         rw = self.qa_repo_writes()
         self.assertTrue(rw["allowed"])
         self.assertIsInstance(rw["scope"], list)
@@ -77,11 +77,11 @@ class RealManifestTests(unittest.TestCase):
             # A glob pattern, not a prose sentence.
             self.assertNotIn(" ", pattern)
 
-    def test_omn_qa_grant_is_phase_conditional(self):
+    def test_qa_grant_is_phase_conditional(self):
         rw = self.qa_repo_writes()
         self.assertEqual(rw["scopePhases"], ["refactor/safety-net-establishment"])
 
-    def test_omn_qa_scope_never_contains_single_character_entries(self):
+    def test_qa_scope_never_contains_single_character_entries(self):
         # The exact regression: exploded prose produced entries like "a", "u".
         rw = self.qa_repo_writes()
         scope = fr._glob_list(rw.get("scope"))
@@ -154,6 +154,7 @@ class ReportSubcommandTests(unittest.TestCase):
                         "## Timeline"):
             self.assertIn(section, out)
         # Every phase row names its agent; every gate row names its decider.
+        # The committed run predates the prefix drop, so it names the legacy identifier.
         self.assertIn("`omn-dev-1-implement`", out)
         self.assertIn("`fix-implementation`", out)
         self.assertIn("| approved |", out)

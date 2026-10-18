@@ -157,7 +157,7 @@ class OverlaySlicingTestCase(unittest.TestCase):
 
 class SubtitleFileTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-cap-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-cap-"))
         self.cues = cap.time_cues(LINE, 1.5, 22.0) + cap.time_cues("And then this.", 30.0, 4.0)
 
     def test_the_subtitle_file_is_well_formed_and_ordered(self):

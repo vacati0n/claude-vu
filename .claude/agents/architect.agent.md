@@ -26,10 +26,9 @@ adapter **loads** it. It never restates, summarizes, overrides, or substitutes f
 this file and the module set ever appear to disagree, the module set governs and this file
 is wrong.
 
-`.claude/agents/architect.md` is the superseded pre-migration specification and
-`.claude/agents/omn-architect.md` is the deprecated legacy role. Neither is loaded by this
-adapter. Both are named here only so that a reader who finds them knows they are not the
-contract.
+`.claude/agents/architect.md` is the superseded pre-migration specification. It is not
+loaded by this adapter, and is named here only so that a reader who finds it knows it is not
+the contract.
 
 ## Bootstrap procedure
 

@@ -3,7 +3,7 @@
 ## Usage
 
 Canonical artifact template for `requirement-framing.md`, produced by agent
-`omn-business-analyst` in the `problem-framing` phase of `workflows/investigate.md` and the
+`business-analyst` in the `problem-framing` phase of `workflows/investigate.md` and the
 `research-framing` phase of `workflows/research.md`.
 
 Template version 1.0.0. It is machine-checkable from its first revision: the leading
@@ -25,8 +25,8 @@ Identifier schemes, each zero-padded to three digits and ascending from `001`:
 | `AS-nnn` | Assumptions |
 | `Q-nnn` | Open Questions |
 
-The binding behavioural contract is `agents/omn-business-analyst/output.md`, and the checks
-that decide conformance are `agents/omn-business-analyst/quality.md`. Four rules from that
+The binding behavioural contract is `agents/business-analyst/output.md`, and the checks
+that decide conformance are `agents/business-analyst/quality.md`. Four rules from that
 contract are enforced mechanically because they are decidable by inspecting the artifact:
 every requirement traces to a declared outcome, every requirement is bounded by at least one
 acceptance intent, every assumption states the basis it rests on, and the artifact carries no
@@ -42,7 +42,7 @@ requirementFraming:
   sourceInputs:
     - type:          # business-intent | product-context | problem-statement | requirement-input
       reference:     # supplied reference, or "inline"
-  producedBy: omn-business-analyst
+  producedBy: business-analyst
   agentVersion:
   schemaVersion: 1.0.0
   status:                 # complete | provisional | blocked

@@ -5,8 +5,8 @@ Mechanically checks a produced `implementation-report.md` against the contract s
 governs it:
 
   - `.claude/templates/implementation-report.md`     rendered form, section and field labels
-  - `.claude/agents/omn-dev-1-implement/output.md`   output contract
-  - `.claude/agents/omn-dev-1-implement/quality.md`  numbered self-verification set
+  - `.claude/agents/dev-1-implement/output.md`   output contract
+  - `.claude/agents/dev-1-implement/quality.md`  numbered self-verification set
 
 The structural, field, vocabulary, and identifier rules are declared as data and executed by
 `artifact_contract.py`. The checks below are the ones specific to an implementation record
@@ -33,8 +33,8 @@ import artifact_contract as ac  # noqa: E402
 from artifact_lib import Check, strip_md  # noqa: E402
 
 TEMPLATE = "templates/implementation-report.md"
-OUTPUT_REF = "agents/omn-dev-1-implement/output.md"
-QUALITY_REF = "agents/omn-dev-1-implement/quality.md"
+OUTPUT_REF = "agents/dev-1-implement/output.md"
+QUALITY_REF = "agents/dev-1-implement/quality.md"
 
 PHASES = ("implementation", "fix-implementation", "refactor-implementation")
 VERIFICATION = ("verified", "partially-verified", "unverified")
@@ -57,7 +57,7 @@ READINESS_CLAIMS = [
 
 CONTRACT = ac.ArtifactContract(
     artifact="implementation-report.md",
-    producers=("omn-dev-1-implement",),
+    producers=("dev-1-implement",),
     metadata_key="implementationReport",
     metadata_fields=("reportId", "changeReference", "sourceInputs", "producedBy",
                      "agentVersion", "schemaVersion", "status", "workflowPhase",
@@ -130,7 +130,7 @@ def _cells(headers, rows, name):
 
 
 def semantic_checks(rep, contract):
-    """The implementation-specific rules in `agents/omn-dev-1-implement/quality.md`."""
+    """The implementation-specific rules in `agents/dev-1-implement/quality.md`."""
     meta = getattr(rep, "meta", {}) or {}
     body_of = getattr(rep, "body_of", {}) or {}
     text_all = "\n".join(body_of.values())

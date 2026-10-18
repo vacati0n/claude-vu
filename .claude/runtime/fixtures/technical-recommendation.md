@@ -10,7 +10,7 @@ technicalRecommendation:
       reference: inline
     - type: scope-definition
       reference: inline
-  producedBy: omn-tech-lead
+  producedBy: tech-lead
   agentVersion: 1.0.0
   schemaVersion: 1.0.0
   status: complete
@@ -23,8 +23,8 @@ technicalRecommendation:
 ## Metadata
 
 - Recommendation ID: TL-2026-0044
-- Decision owner: omn-orchestrator
-- Requested by: omn-orchestrator, on behalf of the run that opened INV-4417
+- Decision owner: orchestrator
+- Requested by: orchestrator, on behalf of the run that opened INV-4417
 - Decision date: 2026-08-19
 
 ## Decision Context
@@ -62,8 +62,8 @@ technicalRecommendation:
 
 | ID | Risk or blocker | Severity | Likelihood | Delivery impact | Mitigation | Owner | Status |
 |---|---|---|---|---|---|---|---|
-| `RK-001` | The bounded delay is unverified against the exhausted-budget path | high | certain | An incorrect bound strands runs in a second way rather than the first | Extend the recovery proof to the exhausted-budget path and re-run it before the branch is cut | omn-qa | open |
-| `RK-002` | The classification recorded on exhaustion is consumed by one downstream reader that was not surveyed | medium | possible | A consumer reading the old classification would mis-route a recovered run | Survey the consumers of the classification field and record the result against the change | omn-context-agent | mitigated |
+| `RK-001` | The bounded delay is unverified against the exhausted-budget path | high | certain | An incorrect bound strands runs in a second way rather than the first | Extend the recovery proof to the exhausted-budget path and re-run it before the branch is cut | qa | open |
+| `RK-002` | The classification recorded on exhaustion is consumed by one downstream reader that was not surveyed | medium | possible | A consumer reading the old classification would mis-route a recovered run | Survey the consumers of the classification field and record the result against the change | context-agent | mitigated |
 
 ## Assessment Summary
 
@@ -91,7 +91,7 @@ technicalRecommendation:
 - Recommended decision: proceed-with-conditions
 - Conditions to satisfy: `RK-001` mitigated on re-run evidence and recorded before the release branch is cut.
 - Blocking items outstanding: `RK-001`
-- Deciding authority: omn-orchestrator
+- Deciding authority: orchestrator
 
 ## Open Questions
 

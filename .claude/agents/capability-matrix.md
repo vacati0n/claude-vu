@@ -10,19 +10,18 @@
 
 | Agent | Orchestration and Routing | Context Discovery | Product Scope and Acceptance | Execution Planning | Architecture and Design | Implementation Delivery | Defect Analysis | Quality Verification | Code Review and Governance | Documentation and Communication | Release Readiness and Operations |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| omn-orchestrator | Primary | Secondary | Secondary | Secondary | Secondary | Unsupported | Secondary | Secondary | Secondary | Secondary | Secondary |
-| omn-context-agent | Unsupported | Primary | Secondary | Unsupported | Secondary | Unsupported | Secondary | Unsupported | Unsupported | Unsupported | Secondary |
-| omn-product-owner | Unsupported | Secondary | Primary | Secondary | Secondary | Unsupported | Unsupported | Secondary | Unsupported | Secondary | Secondary |
-| omn-business-analyst | Unsupported | Secondary | Primary | Secondary | Secondary | Unsupported | Secondary | Unsupported | Unsupported | Unsupported | Unsupported |
+| orchestrator | Primary | Secondary | Secondary | Secondary | Secondary | Unsupported | Secondary | Secondary | Secondary | Secondary | Secondary |
+| context-agent | Unsupported | Primary | Secondary | Unsupported | Secondary | Unsupported | Secondary | Unsupported | Unsupported | Unsupported | Secondary |
+| product-owner | Unsupported | Secondary | Primary | Secondary | Secondary | Unsupported | Unsupported | Secondary | Unsupported | Secondary | Secondary |
+| business-analyst | Unsupported | Secondary | Primary | Secondary | Secondary | Unsupported | Secondary | Unsupported | Unsupported | Unsupported | Unsupported |
 | planner | Secondary | Secondary | Secondary | Primary | Unsupported | Unsupported | Unsupported | Secondary | Unsupported | Secondary | Unsupported |
 | architect | Secondary | Secondary | Secondary | Secondary | Primary | Unsupported | Secondary | Secondary | Secondary | Secondary | Secondary |
-| omn-architect (deprecated) | Secondary | Secondary | Secondary | Secondary | Primary | Secondary | Secondary | Secondary | Secondary | Unsupported | Secondary |
-| omn-tech-lead | Secondary | Secondary | Secondary | Secondary | Primary | Secondary | Secondary | Secondary | Secondary | Unsupported | Primary |
-| omn-dev-1-implement | Unsupported | Unsupported | Secondary | Unsupported | Secondary | Primary | Secondary | Secondary | Unsupported | Unsupported | Secondary |
-| omn-dev-1-bug-analyst | Unsupported | Secondary | Secondary | Unsupported | Secondary | Secondary | Primary | Secondary | Unsupported | Unsupported | Secondary |
-| omn-dev-2-reviewer | Unsupported | Unsupported | Secondary | Unsupported | Secondary | Secondary | Secondary | Primary | Primary | Secondary | Secondary |
-| omn-qa | Unsupported | Secondary | Secondary | Unsupported | Secondary | Unsupported | Secondary | Primary | Secondary | Unsupported | Primary |
-| omn-documentation | Unsupported | Secondary | Secondary | Unsupported | Unsupported | Unsupported | Unsupported | Secondary | Unsupported | Primary | Secondary |
+| tech-lead | Secondary | Secondary | Secondary | Secondary | Primary | Secondary | Secondary | Secondary | Secondary | Unsupported | Primary |
+| dev-1-implement | Unsupported | Unsupported | Secondary | Unsupported | Secondary | Primary | Secondary | Secondary | Unsupported | Unsupported | Secondary |
+| dev-1-bug-analyst | Unsupported | Secondary | Secondary | Unsupported | Secondary | Secondary | Primary | Secondary | Unsupported | Unsupported | Secondary |
+| dev-2-reviewer | Unsupported | Unsupported | Secondary | Unsupported | Secondary | Secondary | Secondary | Primary | Primary | Secondary | Secondary |
+| qa | Unsupported | Secondary | Secondary | Unsupported | Secondary | Unsupported | Secondary | Primary | Secondary | Unsupported | Primary |
+| documentation | Unsupported | Secondary | Secondary | Unsupported | Unsupported | Unsupported | Unsupported | Secondary | Unsupported | Primary | Secondary |
 
 ## Capability Identifiers
 
@@ -59,23 +58,19 @@ from this table records a framework gap rather than inventing the identifier.
   `agents/planner/quality.md`.
 - `architect` is the active Primary owner of Architecture and Design. It is Unsupported for
   Implementation Delivery only; its Secondary ratings reflect analysis and expectation
-  setting rather than execution. Boundaries against `planner`, `omn-tech-lead`, and
-  `omn-dev-2-reviewer` are declared in `agents/architect/manifest.yaml`.
-- `omn-architect` is deprecated in favour of `architect` and is retained only while its
-  references across workflows and governance documents are rewired. Its row is kept so that
-  documents still naming it resolve during the migration.
-- `orchestrator`, `backend-developer`, and `omn-planning-generate-clarification-questions`
+  setting rather than execution. Boundaries against `planner`, `tech-lead`, and
+  `dev-2-reviewer` are declared in `agents/architect/manifest.yaml`.
+- `backend-developer` and `omn-planning-generate-clarification-questions`
   are retired and carry no row. None owns a phase in any active Phase Model and none has a
   contract under `agents/`. `agents/retired-roles.md` records the retirement reason and the
   superseding owner for each; `registry/agents.yaml` carries each at status `retired`.
 
 ## Recommendations for Balancing Responsibilities
 
-1. Reduce concentration in release operations by assigning explicit secondary release ownership to `omn-orchestrator` and `omn-dev-2-reviewer` for non-deployment release gates.
-2. Strengthen context-to-delivery continuity by designating `omn-context-agent` as Secondary for quality verification evidence preparation.
-3. Lower architect and tech-lead overlap by clarifying that `omn-architect` owns strategic design decisions while `omn-tech-lead` owns delivery feasibility and operational tradeoffs.
-4. Improve documentation resilience by assigning `omn-product-owner` as explicit Secondary for user-impact communication and `omn-qa` as Secondary for validation evidence sections.
-5. Increase defect feedback efficiency by making `omn-dev-1-implement` Secondary in post-incident analysis writeups with `omn-dev-1-bug-analyst` remaining Primary.
+1. Reduce concentration in release operations by assigning explicit secondary release ownership to `orchestrator` and `dev-2-reviewer` for non-deployment release gates.
+2. Strengthen context-to-delivery continuity by designating `context-agent` as Secondary for quality verification evidence preparation.
+3. Lower architect and tech-lead overlap by clarifying that `architect` owns strategic design decisions while `tech-lead` owns delivery feasibility and operational tradeoffs.
+4. Improve documentation resilience by assigning `product-owner` as explicit Secondary for user-impact communication and `qa` as Secondary for validation evidence sections.
+5. Increase defect feedback efficiency by making `dev-1-implement` Secondary in post-incident analysis writeups with `dev-1-bug-analyst` remaining Primary.
 6. Add quarterly matrix calibration tied to workflow retrospectives to adjust Primary/Secondary assignments based on observed bottlenecks.
 7. Keep the matrix closed over active agents only: every phase owner in an active Phase Model holds exactly one row, and a retired identifier holds none. Capability resolution is then total over the set the runtime can actually dispatch.
-8. Retire the `omn-architect` row once every workflow, gate, and catalog reference is rewired to `architect`, so the architecture domain has a single owner.

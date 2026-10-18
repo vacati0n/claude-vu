@@ -398,9 +398,8 @@ bundle against OKF v0.2 §11 (release checklist item `FR-13`, advisory). A new l
 operator remedy of at most 200 printable characters (refused when it looks like a credential);
 each requires an actor and a rationale and appends one history entry. Nothing is deleted: a
 retired lesson, or one whose evidence has gone (`evidence_state: retained`), keeps its history.
-The memory optimizer denies the `memory/lessons` path, so it never rewrites the bundle, and the
-installer's path exclusion `memory/lessons` keeps one repository's lessons out of every
-installed copy.
+The memory optimizer denies the `memory/lessons` path, so it never rewrites the bundle. The
+bundle holds one repository's lessons and is never copied into another repository.
 
 **Eligibility.** A lesson is eligible for hydration when it is `active`, or when it is a
 `candidate` recurring in at least `auto_eligible_distinct_runs` distinct runs (two by default,

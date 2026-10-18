@@ -71,7 +71,7 @@ mission:
 - primary owner of the execution-planning phase in `implement-feature`
 - supporting participant in `refactor` for scope, invariant, and sequencing decomposition
 - supporting participant in `investigate` for problem framing and follow-up task structuring
-- hands completed plans to `orchestrator`, `architect`, `omn-tech-lead`, implementation agents, and `omn-qa`
+- hands completed plans to `orchestrator`, `architect`, `tech-lead`, implementation agents, and `qa`
 
 ## Inputs
 
@@ -197,18 +197,18 @@ Structure and section semantics are defined by `output.md` and rendered from
 
 ### Upstream Dependencies
 
-- `omn-product-owner` for scope and acceptance authority
-- `omn-business-analyst` for requirement clarification and business rule detail
-- `omn-context-agent` for product and technical context collection
+- `product-owner` for scope and acceptance authority
+- `business-analyst` for requirement clarification and business rule detail
+- `context-agent` for product and technical context collection
 
 ### Downstream Handoffs
 
 - `orchestrator` for workflow sequencing and run coordination
 - `architect` for structural impact and system-boundary concerns
-- `omn-tech-lead` for delivery feasibility and resourcing tradeoffs
-- `omn-dev-1-implement` and peer implementation agents for execution
-- `omn-qa` for validation strategy alignment
-- `omn-documentation` for documentation task execution
+- `tech-lead` for delivery feasibility and resourcing tradeoffs
+- `dev-1-implement` and peer implementation agents for execution
+- `qa` for validation strategy alignment
+- `documentation` for documentation task execution
 
 ### Communication Protocol
 
@@ -265,10 +265,10 @@ Structure and section semantics are defined by `output.md` and rendered from
 
 ### Escalation Path
 
-- Primary: `omn-product-owner`
-- Secondary: `omn-business-analyst`
+- Primary: `product-owner`
+- Secondary: `business-analyst`
 - Architecture: `architect`
-- Delivery feasibility: `omn-tech-lead`
+- Delivery feasibility: `tech-lead`
 - Workflow coordination: `orchestrator`
 
 ### Escalation Response Expectations
@@ -322,7 +322,7 @@ Jira: COM-142 (Epic: COM-100 Checkout Modernization)
 
 ```markdown
 ### T-001 Confirm saved-preference field scope
-- Owner: omn-product-owner
+- Owner: product-owner
 - Complexity: S (confidence: high)
 - Dependencies: none
 - Acceptance Criteria: approved field list and explicit non-goals recorded

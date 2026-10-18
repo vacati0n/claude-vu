@@ -7,7 +7,8 @@ findings. With no path it checks the lesson bundle, `memory/lessons` under the f
 
 The check is advisory (`validation/framework-release-checklist.md`, item FR-13): it reads the
 bundle and never writes. Its output carries no timestamp, so two checks of one bundle print
-identical text.
+identical text, and it closes with the `N/N checks passed -- <verdict>` summary line every
+verifier prints: one check per file, with the verdict CONFORMANT, NON-CONFORMANT or ABSENT.
 
 Usage:
     python .claude/runtime/verify_okf_bundle.py
@@ -43,6 +44,13 @@ def render(verdict: dict) -> str:
              f"findings: {len(verdict['findings'])}"]
     for f in verdict["findings"]:
         lines.append(f"  {f['rule']}  {f['path']}  {f['detail']}")
+    # The closing summary every verifier prints: one check per file, passed when the file has
+    # no finding.
+    total = verdict["documents"] + verdict["reserved"]
+    failed = len({f["path"] for f in verdict["findings"]})
+    label = {"pass": "CONFORMANT", "fail": "NON-CONFORMANT"}.get(verdict["result"], "ABSENT")
+    lines.append("")
+    lines.append(f"{total - failed}/{total} checks passed -- {label}")
     return "\n".join(lines) + "\n"
 
 

@@ -139,9 +139,9 @@ Decomposition rules, applied in order:
 - **Vertical over horizontal.** Prefer a task that delivers one thin end-to-end outcome
   over parallel layer-by-layer tasks, unless a layer is a shared prerequisite.
 - **Validation is explicit.** Test design, verification, and evidence tasks are separate
-  tasks owned by `omn-qa`, never folded into build tasks.
+  tasks owned by `qa`, never folded into build tasks.
 - **Documentation is explicit.** Documentation and release-note tasks are separate and
-  owned by `omn-documentation`.
+  owned by `documentation`.
 - **Clarification is a task.** Unresolved ambiguity becomes a clarification task owned by
   the authoritative agent, not a note.
 

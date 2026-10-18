@@ -4,9 +4,9 @@
 Mechanically checks a produced `bug-analysis.md` against the contract set that governs it:
 
   - `.claude/templates/bug-analysis.md`               rendered form, section and field labels
-  - `.claude/agents/omn-dev-1-bug-analyst/output.md`  structural and semantic output contract
-  - `.claude/agents/omn-dev-1-bug-analyst/identity.md` decision rules, constraints, authority
-  - `.claude/agents/omn-dev-1-bug-analyst/quality.md`  the numbered check set this reproduces
+  - `.claude/agents/dev-1-bug-analyst/output.md`  structural and semantic output contract
+  - `.claude/agents/dev-1-bug-analyst/identity.md` decision rules, constraints, authority
+  - `.claude/agents/dev-1-bug-analyst/quality.md`  the numbered check set this reproduces
 
 The structural, field, vocabulary, and identifier rules are declared as data and executed by
 `artifact_contract.py` as `C1` to `C7`; the checks below are the ones specific to a defect
@@ -30,9 +30,9 @@ import artifact_contract as ac  # noqa: E402
 from artifact_lib import Check, strip_md  # noqa: E402
 
 TEMPLATE = "templates/bug-analysis.md"
-CONTRACT_REF = "agents/omn-dev-1-bug-analyst/identity.md"
-OUTPUT_REF = "agents/omn-dev-1-bug-analyst/output.md"
-QUALITY_REF = "agents/omn-dev-1-bug-analyst/quality.md"
+CONTRACT_REF = "agents/dev-1-bug-analyst/identity.md"
+OUTPUT_REF = "agents/dev-1-bug-analyst/output.md"
+QUALITY_REF = "agents/dev-1-bug-analyst/quality.md"
 
 REPRODUCIBILITY = ("deterministic", "intermittent", "not-reproduced")
 RISK_LEVELS = ("high", "medium", "low")
@@ -42,7 +42,7 @@ CAUSAL_TABLE = ("ID", "Step", "Claim", "Evidence", "Confidence")
 
 CONTRACT = ac.ArtifactContract(
     artifact="bug-analysis.md",
-    producers=("omn-dev-1-bug-analyst",),
+    producers=("dev-1-bug-analyst",),
     metadata_key="bugAnalysis",
     metadata_fields=("analysisId", "defectReference", "sourceInputs", "producedBy",
                      "agentVersion", "schemaVersion", "status", "severity",
@@ -110,7 +110,7 @@ CONTRACT = ac.ArtifactContract(
 
 
 def semantic_checks(rep, contract):
-    """The defect-specific rules in `agents/omn-dev-1-bug-analyst/quality.md`."""
+    """The defect-specific rules in `agents/dev-1-bug-analyst/quality.md`."""
     meta = getattr(rep, "meta", {}) or {}
     body_of = getattr(rep, "body_of", {}) or {}
 

@@ -24,6 +24,7 @@ import contextlib
 import hashlib
 import io
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -33,6 +34,18 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
+
+
+@contextlib.contextmanager
+def _chdir(path):
+    """contextlib.chdir for Python 3.10, the runtime's floor."""
+    before = Path.cwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(before)
+
 
 REPO = Path(__file__).resolve().parent.parent
 CLAUDE = REPO / ".claude"
@@ -47,7 +60,6 @@ import framework_runtime as fr  # noqa: E402
 import knowledge as kl  # noqa: E402
 import optimize_memory as om  # noqa: E402
 import state_engine as se  # noqa: E402
-from omn_agent import source as source_mod  # noqa: E402
 
 # A credential-shaped marker (not a real secret): planted in every evidence source.
 MARKER = "password=PLANTED-MARKER-7f3a9c"
@@ -73,7 +85,7 @@ def IGNORE(directory, names):
 
 def make_root() -> Path:
     """A bare framework root: config/ with the shipped policy, nothing else."""
-    tmp = Path(tempfile.mkdtemp(prefix="omn-kl-"))
+    tmp = Path(tempfile.mkdtemp(prefix="fw-kl-"))
     (tmp / "config").mkdir()
     shutil.copy(CLAUDE / kl.POLICY_REL, tmp / kl.POLICY_REL)
     return tmp
@@ -81,7 +93,7 @@ def make_root() -> Path:
 
 def make_tree(text: str | None = None) -> Path:
     """A full copy of the framework tree (no runs, no lesson store) for the real CLI."""
-    tmp = Path(tempfile.mkdtemp(prefix="omn-kl-tree-"))
+    tmp = Path(tempfile.mkdtemp(prefix="fw-kl-tree-"))
     shutil.copytree(CLAUDE, tmp / ".claude", ignore=IGNORE)
     if text is not None:
         (tmp / "req.md").write_text(text, encoding="utf-8")
@@ -185,7 +197,7 @@ def lesson(fp: str, *, phases, distinct: int, occurrences: int | None = None,
            "phases": sorted(phases), "occurrences": occurrences or distinct,
            "distinct_runs": distinct, "first_seen": "2026-01-01T00:00:00Z",
            "last_seen": "2026-01-02T00:00:00Z", "evidence": ["runs/r/events.jsonl#E-0001"],
-           "evidence_state": "current", "status": status, "owner": "omn-tech-lead",
+           "evidence_state": "current", "status": status, "owner": "tech-lead",
            "rationale": "fixture", "remedy": remedy, "history": []}
     return rec
 
@@ -275,7 +287,7 @@ class HarvestRecordedEvidenceTestCase(unittest.TestCase):
         for l in self.lessons.values():
             self.assertEqual(set(l), set(kl.LESSON_FIELDS), l["fingerprint"])
             self.assertEqual(l["status"], "candidate")
-            self.assertEqual(l["owner"], "omn-tech-lead")
+            self.assertEqual(l["owner"], "tech-lead")
 
 
 class GateLessonTestCase(unittest.TestCase):
@@ -1137,7 +1149,7 @@ class AggregationHarvestTestCase(unittest.TestCase):
                 mock.patch.object(fr, "RUNS", tmp / ".claude" / "runs"), \
                 mock.patch.object(fr, "now", return_value=fixed), \
                 mock.patch.object(se, "now", return_value=fixed), \
-                contextlib.chdir(tmp), contextlib.ExitStack() as stack, \
+                _chdir(tmp), contextlib.ExitStack() as stack, \
                 contextlib.redirect_stdout(out):
             for target, attr, value in patches.get("patches", []):
                 stack.enter_context(mock.patch.object(target, attr, value))
@@ -1158,7 +1170,7 @@ class AggregationHarvestTestCase(unittest.TestCase):
         tmp, run_id, run_dir = self.knowledge_run("Add a CSV export of fails for testers.\n")
         commit_phase(tmp, run_dir, self.PHASE)
         to_gate_point(tmp, run_id, run_dir)
-        snap = Path(tempfile.mkdtemp(prefix="omn-kl-snap-"))
+        snap = Path(tempfile.mkdtemp(prefix="fw-kl-snap-"))
         self.addCleanup(shutil.rmtree, snap, ignore_errors=True)
         shutil.copytree(run_dir, snap / "run")
         boom = mock.Mock(side_effect=RuntimeError("forced"))
@@ -1206,27 +1218,6 @@ class AggregationHarvestTestCase(unittest.TestCase):
 
 
 # ------------------------------------------------------------------ boundaries
-
-
-class PayloadExclusionTestCase(unittest.TestCase):
-    """Design Gate condition 4: the bundle and its lock never reach the installed payload."""
-
-    def test_bundle_and_lock_are_excluded_from_the_seeded_payload(self):
-        root = Path(tempfile.mkdtemp(prefix="omn-kl-payload-"))
-        self.addCleanup(shutil.rmtree, root, ignore_errors=True)
-        (root / "memory" / "lessons" / "nested").mkdir(parents=True)
-        for name in ("index.md", "log.md", "L-0123456789.md", "L-0123456789.md.tmp",
-                     "lessons.lock", "lessons.store.json", "nested/index.md"):
-            (root / "memory" / "lessons" / name).write_text("{}", encoding="utf-8")
-        (root / "memory" / "index.md").write_text("# m\n", encoding="utf-8")
-        seeds = source_mod.enumerate_seeds(root)
-        self.assertEqual(sorted(seeds), ["memory/index.md"])
-        self.assertIn("memory/lessons", source_mod.EXCLUDE_PATHS)
-
-    def test_the_bundled_payload_holds_no_store(self):
-        bundle = REPO / "omn_agent" / source_mod.BUNDLED_PAYLOAD_DIR
-        self.assertEqual(list((bundle / "memory" / "lessons").rglob("*")), [])
-        self.assertEqual(list(bundle.rglob("lessons.store.*")), [])
 
 
 class ModuleBoundaryTestCase(unittest.TestCase):

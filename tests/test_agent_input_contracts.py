@@ -1,9 +1,9 @@
 """Contract-level regression test for the refactor phase-2-to-phase-3 handoff defect.
 
-`agents/omn-qa/manifest.yaml` declares exactly one output identifier,
+`agents/qa/manifest.yaml` declares exactly one output identifier,
 `validation-report`, and the Phase Model of `workflows/refactor.md` hands that
 artifact from `safety-net-establishment` to `refactor-implementation`, a phase
-`omn-dev-1-implement` owns. Until this fix that agent's accepted-input menu named
+`dev-1-implement` owns. Until this fix that agent's accepted-input menu named
 `technical-design`, `bug-analysis` and `test-baseline-record`, and the third of
 those was declared as an output by no agent at all. The producing and consuming
 sets were therefore disjoint: `narrow_inputs` discarded the delivered artifact
@@ -45,8 +45,8 @@ sys.path.insert(0, str(RUNTIME))
 
 import framework_runtime as fr  # noqa: E402
 
-CONSUMER = "omn-dev-1-implement"
-PRODUCER = "omn-qa"
+CONSUMER = "dev-1-implement"
+PRODUCER = "qa"
 
 # The identifier withdrawn by this fix. It was declared as an output by no agent,
 # and had never been supplied as an input by any run.

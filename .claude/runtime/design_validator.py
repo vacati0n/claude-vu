@@ -771,7 +771,13 @@ def validate(artifact_path: Path, envelope: dict | None = None) -> Report:
         f"unknown: {unknown_gates}" if unknown_gates
         else f"{len(named_gates)} gate name(s) resolve")
 
-    named_agents = sorted(set(re.findall(r"\b(omn-[a-z0-9-]+)\b", text)))
+    # Agent identifiers carry no common prefix, so a reference is any resolvable identifier
+    # the text names, plus any identifier in the retired `omn-` naming scheme, which only
+    # resolves while the registry still lists it.
+    named_agents = sorted(
+        {a for a in facts["resolvable_agents"]
+         if re.search(rf"(?<![\w-]){re.escape(a)}(?![\w-])", text)}
+        | set(re.findall(r"(?<![\w-])(omn-[a-z0-9-]+)\b", text)))
     unknown_agents = [a for a in named_agents if a not in facts["resolvable_agents"]]
     add("D15.2", "A14.2", "Blocking",
         "Every referenced agent resolves in registry/agents.yaml or under agents/",

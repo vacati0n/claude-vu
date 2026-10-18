@@ -137,7 +137,7 @@ class DeclarationTestCase(unittest.TestCase):
 class LoaderTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-tier-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-tier-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         (self.tmp / "config").mkdir()
         self.path = self.tmp / fr.MODEL_TIER_POLICY_REL
@@ -264,7 +264,7 @@ class ResolverTestCase(unittest.TestCase):
 class RejectionCountTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp(prefix="omn-tier-"))
+        self.tmp = Path(tempfile.mkdtemp(prefix="fw-tier-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
 
     def ledger(self, entries):
@@ -294,7 +294,7 @@ class RejectionCountTestCase(unittest.TestCase):
             runtime_version=fr.RUNTIME_VERSION, input_digest="sha256:test", inputs=[])
         item = store.add_item(se.new_work_item(
             run_id="run-tier", workflow_id="implement-feature", state_id="implementation",
-            work_type="state", owner_agent_id="omn-dev-1-implement", phase_index=1, gate=None,
+            work_type="state", owner_agent_id="dev-1-implement", phase_index=1, gate=None,
             artifact="x.md", depends_on=[]))
         store.transition(item, se.LEASED, reason_code="leased", **common)
         store.transition(item, se.RUNNING, reason_code="execution_started", **common)
@@ -416,7 +416,7 @@ class DispatchTestCase(unittest.TestCase):
 
     @classmethod
     def make_tree(cls, text: str):
-        tmp = Path(tempfile.mkdtemp(prefix="omn-tier-run-"))
+        tmp = Path(tempfile.mkdtemp(prefix="fw-tier-run-"))
         shutil.copytree(CLAUDE, tmp / ".claude", ignore=shutil.ignore_patterns(
             "runs", "__pycache__", "worktrees"))
         (tmp / "req.md").write_text(text, encoding="utf-8")
@@ -470,7 +470,7 @@ class DispatchTestCase(unittest.TestCase):
             self.assertIn(key, env)
         self.assertEqual(env["state_id"], "scope-and-acceptance")
         self.assertEqual(env["adapter"], "host-subagent")
-        self.assertEqual(env["agent_id"], "omn-product-owner")
+        self.assertEqual(env["agent_id"], "product-owner")
         self.assertEqual(env["run_id"], self.run_id)
 
     def test_only_model_tier_was_added_to_the_envelope_field_set(self):
@@ -576,11 +576,11 @@ class DispatchTestCase(unittest.TestCase):
              phase, str(tmp / ".claude")], capture_output=True, text=True)
         self.assertEqual(done.returncode, 0, done.stderr)
         rejected = self.cli(tmp, "gate", "--run-id", run_id, "--gate", gate, "--decision",
-                            "reject", "--owner-role", "omn-business-analyst", "--decided-by",
+                            "reject", "--owner-role", "business-analyst", "--decided-by",
                             "tester", "--rationale", "needs rework")
         self.assertEqual(rejected.returncode, 0, rejected.stdout + rejected.stderr)
         rolled = self.cli(tmp, "rollback", "--run-id", run_id, "--gate", gate, "--owner-role",
-                          "omn-business-analyst", "--decided-by", "tester")
+                          "business-analyst", "--decided-by", "tester")
         self.assertEqual(rolled.returncode, 0, rolled.stdout + rolled.stderr)
         self.assertEqual(self.cli(tmp, "dispatch", "--run-id", run_id, "--phase",
                                   phase).returncode, 0)
@@ -606,7 +606,7 @@ class DispatchTestCase(unittest.TestCase):
                          .read_text(encoding="utf-8"))
         self.assertEqual((env["model_tier"]["tier"], env["model_tier"]["host_hint"]),
                          ("standard", fr.INHERIT_HINT))
-        self.assertEqual(env["agent_id"], "omn-product-owner")
+        self.assertEqual(env["agent_id"], "product-owner")
 
     def test_a_malformed_declaration_fails_the_dispatch_as_a_policy_failure(self):
         tmp = self.make_tree("Add an XML export of products for administrators.\n")

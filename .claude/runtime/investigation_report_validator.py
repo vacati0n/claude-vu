@@ -5,7 +5,7 @@ Mechanically checks a produced `investigation-report.md` against the contract se
 governs it:
 
   - `.claude/templates/investigation-report.md`   rendered form, section and field labels
-  - `.claude/agents/omn-context-agent/`           behavioural contract: the module set's
+  - `.claude/agents/context-agent/`           behavioural contract: the module set's
                                                   scope, decision rules, output contract,
                                                   and self-verification checks
 
@@ -34,16 +34,16 @@ TEMPLATE = "templates/investigation-report.md"
 # The Context Agent's authoritative contract is a module set, not a single file. Each check below
 # names the module that actually states the rule it enforces, so a failure points at the document
 # that decides it rather than at the agent in general.
-CONTRACT_REF = "agents/omn-context-agent/identity.md"
-OUTPUT_REF = "agents/omn-context-agent/output.md"
-QUALITY_REF = "agents/omn-context-agent/quality.md"
+CONTRACT_REF = "agents/context-agent/identity.md"
+OUTPUT_REF = "agents/context-agent/output.md"
+QUALITY_REF = "agents/context-agent/quality.md"
 
 EVIDENCE_TABLE = ("ID", "Source", "Observation", "Confidence", "Staleness")
 OPTION_TABLE = ("ID", "Option", "Benefits", "Risks", "Effort", "Evidence")
 
 CONTRACT = ac.ArtifactContract(
     artifact="investigation-report.md",
-    producers=("omn-context-agent",),
+    producers=("context-agent",),
     metadata_key="investigation",
     metadata_fields=("investigationId", "decisionReference", "sourceInputs", "producedBy",
                      "agentVersion", "schemaVersion", "status", "confidence",
@@ -99,7 +99,7 @@ CONTRACT = ac.ArtifactContract(
 
 
 def semantic_checks(rep, contract):
-    """The investigation-specific rules the `agents/omn-context-agent/` module set states."""
+    """The investigation-specific rules the `agents/context-agent/` module set states."""
     meta = getattr(rep, "meta", {}) or {}
     body_of = getattr(rep, "body_of", {}) or {}
 

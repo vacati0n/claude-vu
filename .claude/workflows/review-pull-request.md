@@ -9,16 +9,12 @@ Provide structured multi-agent validation of proposed changes before merge or re
 - Diff is stable and ready for review.
 
 ## Participating Agents
-- omn-dev-2-reviewer
-- omn-architect
-- omn-qa
-- omn-tech-lead
-- omn-documentation
-- omn-orchestrator
-
-> Architecture participation is owned by `architect` (`agents/architect/`). The
-> `omn-architect` entries in this specification name the same role and are pending
-> reference migration.
+- dev-2-reviewer
+- architect
+- qa
+- tech-lead
+- documentation
+- orchestrator
 
 ## Phase Model
 
@@ -28,34 +24,34 @@ order of this table. Phase identifiers are the routing keys used by
 runtime gateway in `runtime/framework_runtime.py`.
 
 Identifiers are not invented here. `structural-compliance` is the identifier the architect
-manifest already declares for this workflow, `test-risk-validation` is the one the omn-qa
-manifest declares, and `merge-decision` is the one `agents/omn-tech-lead/manifest.yaml`
+manifest already declares for this workflow, `test-risk-validation` is the one the qa
+manifest declares, and `merge-decision` is the one `agents/tech-lead/manifest.yaml`
 declares; the remaining identifiers are derived from the state names in
 `workflows/workflow-engine.md`, which is the state-machine form of this same workflow.
 
 | Phase | Owner Agent | Participation | Input | Output Artifact | Gate | Required Skills |
 |---|---|---|---|---|---|---|
-| `code-quality-review` | `omn-dev-2-reviewer` | primary | stable pull request diff, standards checklist, test evidence | `review-package.md` | Code Quality Gate | S03, S07, S09 |
+| `code-quality-review` | `dev-2-reviewer` | primary | stable pull request diff, standards checklist, test evidence | `review-package.md` | Code Quality Gate | S03, S07, S09 |
 | `structural-compliance` | `architect` | supporting | quality findings with correction requests, architecture rules, security criteria | `review-package.md`, carrying the structural and security findings under the `architecture` and `security` categories | Architecture Gate | S01, S06, S09 |
-| `test-risk-validation` | `omn-qa` | primary | `review-package.md`, test evidence, risk profile | `validation-report.md` | Verification Gate | S07, S08, S11 |
-| `documentation-impact` | `omn-documentation` | primary | `validation-report.md`, release implications | `release-note.md`, on the `documentation-delta` communication basis | none | S10, S11 |
-| `merge-decision` | `omn-tech-lead` | primary | `release-note.md`, unresolved findings list | `technical-recommendation.md` | Merge Gate | S07, S09, S10 |
+| `test-risk-validation` | `qa` | primary | `review-package.md`, test evidence, risk profile | `validation-report.md` | Verification Gate | S07, S08, S11 |
+| `documentation-impact` | `documentation` | primary | `validation-report.md`, release implications | `release-note.md`, on the `documentation-delta` communication basis | none | S10, S11 |
+| `merge-decision` | `tech-lead` | primary | `release-note.md`, unresolved findings list | `technical-recommendation.md` | Merge Gate | S07, S09, S10 |
 
 ### Phase Identifier Sources
 
 | Phase | Identifier source |
 |---|---|
-| `code-quality-review` | Derived from the `QualityReview` state in `workflows/workflow-engine.md`, and now declared by `agents/omn-dev-2-reviewer/manifest.yaml`, `supportedWorkflows[review-pull-request].phase`. |
+| `code-quality-review` | Derived from the `QualityReview` state in `workflows/workflow-engine.md`, and now declared by `agents/dev-2-reviewer/manifest.yaml`, `supportedWorkflows[review-pull-request].phase`. |
 | `structural-compliance` | Declared by `agents/architect/manifest.yaml`, `supportedWorkflows[review-pull-request].phase`. |
-| `test-risk-validation` | Declared by `agents/omn-qa/manifest.yaml`, `supportedWorkflows[review-pull-request].phase`. |
-| `documentation-impact` | Derived from the `DocumentationImpact` state in `workflows/workflow-engine.md`, and now declared by `agents/omn-documentation/manifest.yaml`, `supportedWorkflows[review-pull-request].phase`. |
-| `merge-decision` | Declared by `agents/omn-tech-lead/manifest.yaml`, `supportedWorkflows[review-pull-request].phase`. Consistent with the `MergeDecision` state in `workflows/workflow-engine.md`. |
+| `test-risk-validation` | Declared by `agents/qa/manifest.yaml`, `supportedWorkflows[review-pull-request].phase`. |
+| `documentation-impact` | Derived from the `DocumentationImpact` state in `workflows/workflow-engine.md`, and now declared by `agents/documentation/manifest.yaml`, `supportedWorkflows[review-pull-request].phase`. |
+| `merge-decision` | Declared by `agents/tech-lead/manifest.yaml`, `supportedWorkflows[review-pull-request].phase`. Consistent with the `MergeDecision` state in `workflows/workflow-engine.md`. |
 
 ### Ownership Reconciliation
 
 `structural-compliance` is owned by `architect` while its Participation column reads
 `supporting`, and both statements are accurate. The architect manifest declares supporting
-participation in this workflow, because `omn-dev-2-reviewer` drives the review end to end;
+participation in this workflow, because `dev-2-reviewer` drives the review end to end;
 ownership of this one phase still belongs to the architecture role, because the structural
 and security assessment is its output and no other registered agent may author it. The
 Participation column reproduces the manifest rather than contradicting it.
@@ -84,7 +80,7 @@ is registered for it.
   registration, resolvable phase-mandatory skills, a registered validator for its output
   artifact, and a declared context slice. Two still block at `G1-CAPABILITY`:
   `structural-compliance`, because `architect` declares no contracted output for the findings
-  assessment this workflow asks of it, and `documentation-impact`, because `omn-documentation`
+  assessment this workflow asks of it, and `documentation-impact`, because `documentation`
   is host-invocable but holds no record in `registry/agents.yaml`. See `runtime/README.md` for
   the implemented surface, and `verify_registry_coverage.py` check `C6` for the per-phase
   verdict.
@@ -115,19 +111,19 @@ Prose form of the Phase Model above. The identifiers in parentheses are canonica
 ## Failure Recovery
 - Return PR to implementation when critical issues are found.
 - Add focused validation tasks for unproven risk areas.
-- Escalate unresolved disputes to omn-tech-lead and omn-orchestrator.
+- Escalate unresolved disputes to tech-lead and orchestrator.
 
 ## Approval Gates
 
 Gate names are the canonical ones in `workflows/workflow-gate-matrix.md`, which is the
 authority the runtime reads for gate ownership.
 
-- Code Quality Gate: omn-dev-2-reviewer and omn-tech-lead.
-- Architecture Gate: omn-architect and omn-tech-lead.
-- Verification Gate: omn-qa and omn-dev-2-reviewer.
-- Merge Gate: omn-tech-lead and omn-orchestrator.
+- Code Quality Gate: dev-2-reviewer and tech-lead.
+- Architecture Gate: architect and tech-lead.
+- Verification Gate: qa and dev-2-reviewer.
+- Merge Gate: tech-lead and orchestrator.
 
 Each gate carries a second owner because the first owner produces the evidence that gate
 assesses, and the Producer Exclusion Rule forbids approving one's own output. The deciding
-owner is omn-tech-lead for the Code Quality and Architecture Gates, omn-dev-2-reviewer for
-the Verification Gate, and omn-orchestrator for the Merge Gate.
+owner is tech-lead for the Code Quality and Architecture Gates, dev-2-reviewer for
+the Verification Gate, and orchestrator for the Merge Gate.

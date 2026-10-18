@@ -66,6 +66,8 @@ frameworkChangeProposal:
 
 The scope paths were checked against `git status` and `git diff --stat`. Under `.claude/`, 9 tracked framework paths are modified, 1 is deleted (the JSON store), and 47 framework paths are new (2 runtime modules, 2 reserved bundle files, 43 lesson documents). Under `omn_agent/`, `source.py` and 8 mirror paths are modified and 2 mirror paths are new. No path of another change is claimed.
 
+Reconciliation with the base branch, after the run closed. The base branch meanwhile deleted the `omn_agent` package (its installer, payload exclusion and bundled mirror) and renamed the agents from `omn-<role>` to `<role>`. Merging it into this change therefore dropped the `omn_agent/` rows above: the installer exclusion and the mirror no longer exist, so `tests/test_knowledge.py` loses its two installer-exclusion tests (52 to 50) and `tests/test_bundled_payload.py` is gone. The bundle's `owner` fields were rewritten from `omn-tech-lead` to `tech-lead` through `write_store`, matching the base branch's rename of the JSON store, and the bundle still conforms with zero findings. FR-13's owner is `qa`. `runtime/verify_okf_bundle.py` now ends with the `N/N checks passed -- <verdict>` summary line that the base branch's CI requires of every discovered verifier. Run evidence and the role names quoted from it are left as recorded.
+
 ## Routing Decision
 
 - Change class: capability-addition

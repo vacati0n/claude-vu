@@ -12,8 +12,8 @@ Initiate a full defect lifecycle run using `workflows/fix-bug.md`.
 
 ## Assigned Agents
 
-- Primary: `omn-dev-1-bug-analyst`.
-- Secondary: `omn-dev-1-implement`, `omn-dev-2-reviewer`, `omn-qa`.
+- Primary: `dev-1-bug-analyst`.
+- Secondary: `dev-1-implement`, `dev-2-reviewer`, `qa`.
 
 ## Outputs
 

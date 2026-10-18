@@ -12,8 +12,8 @@ Execute the feature delivery workflow defined in `workflows/implement-feature.md
 
 ## Assigned Agents
 
-- Primary: `omn-product-owner`.
-- Secondary: `omn-architect`, `omn-dev-1-implement`, `omn-dev-2-reviewer`, `omn-qa`.
+- Primary: `product-owner`.
+- Secondary: `architect`, `dev-1-implement`, `dev-2-reviewer`, `qa`.
 
 ## Outputs
 

@@ -12,8 +12,8 @@ Create or update technical documentation aligned with implemented behavior.
 
 ## Assigned Agents
 
-- Primary: `omn-documentation`.
-- Secondary: `omn-dev-2-reviewer` for accuracy validation.
+- Primary: `documentation`.
+- Secondary: `dev-2-reviewer` for accuracy validation.
 
 ## Outputs
 

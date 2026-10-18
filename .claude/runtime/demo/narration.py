@@ -13,8 +13,8 @@ pretending.
     say       macOS `say` writing WAVE directly
     espeak    `espeak-ng` / `espeak` on Linux
 
-Select with the context option `narration` or the environment variable `OMN_DEMO_TTS`:
-`auto` (default), `off`, or an engine name. `OMN_DEMO_VOICE` names a voice.
+Select with the context option `narration` or the environment variable `FRAMEWORK_DEMO_TTS`:
+`auto` (default), `off`, or an engine name. `FRAMEWORK_DEMO_VOICE` names a voice.
 """
 
 from __future__ import annotations
@@ -262,10 +262,10 @@ def synthesize(lines: list, work: Path, *, engine: str = "auto", voice: str | No
     Returns {"engine": name|None, "segments": [{index, path, duration_ms}], "attempts": [...]}.
     Never raises: a narration that cannot be made is a recorded fallback, not a failure.
     """
-    engine = (os.environ.get("OMN_DEMO_TTS") or engine or "auto").lower()
-    voice = os.environ.get("OMN_DEMO_VOICE") or voice
+    engine = (os.environ.get("FRAMEWORK_DEMO_TTS") or engine or "auto").lower()
+    voice = os.environ.get("FRAMEWORK_DEMO_VOICE") or voice
     if rate is None:
-        rate = os.environ.get("OMN_DEMO_SPEECH_RATE")
+        rate = os.environ.get("FRAMEWORK_DEMO_SPEECH_RATE")
     attempts = []
     if engine == "off" or not lines:
         return {"engine": None, "segments": [], "attempts": [{"engine": "off",

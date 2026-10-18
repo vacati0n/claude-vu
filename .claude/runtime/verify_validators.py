@@ -56,6 +56,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import artifact_contract as ac  # noqa: E402
 import framework_runtime as fr  # noqa: E402
 import release_note_validator as rnv  # noqa: E402
+from artifact_lib import canonical_agent_id  # noqa: E402
 
 CLAUDE = fr.CLAUDE
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
@@ -165,7 +166,7 @@ PHASE_ID_CELL = re.compile(r"^`?PH-\d{3}`?$")
 
 
 def award_itself_its_own_gate(text: str):
-    """Name `omn-orchestrator` as the decider of a gate its own output is the evidence for.
+    """Name `orchestrator` as the decider of a gate its own output is the evidence for.
 
     The characteristic coordinator failure, and the one the Producer Exclusion Rule exists to
     stop. Expressed as a derivation rather than a literal for the same reason as the count
@@ -191,11 +192,11 @@ def award_itself_its_own_gate(text: str):
         if len(cells) < 9 or not PHASE_ID_CELL.match(cells[0]):
             continue
         owner, gate, decider = cells[2], cells[4], cells[6]
-        if owner.strip("`") != "omn-orchestrator":
+        if canonical_agent_id(owner.strip("`")) != "orchestrator":
             continue
-        if gate.lower() in ("none", "not-applicable") or decider.strip("`") == "omn-orchestrator":
+        if gate.lower() in ("none", "not-applicable") or canonical_agent_id(decider.strip("`")) == "orchestrator":
             continue
-        cells[6] = "`omn-orchestrator`"
+        cells[6] = "`orchestrator`"
         return line, "| " + " | ".join(cells) + " |"
     return None
 
@@ -301,12 +302,12 @@ ALTERNATE_SOURCES = {
 
 
 # Artifact type -> (producing agent, first contract version a conforming instance is judged
-# under, why an earlier one is set aside). `release-note.md`: omn-documentation 1.2.0 keyed the
+# under, why an earlier one is set aside). `release-note.md`: documentation 1.2.0 keyed the
 # release position on the phase's communication basis, so a note an earlier version produced
 # carries a position the corrected contract would not yield (fix-bug run run-f94564cb61ce). Those
 # notes stay as recorded; they are run evidence, and are counted here rather than validated.
 SUPERSEDED_CONTRACTS = {
-    "release-note.md": ("omn-documentation", rnv.CURRENT_CONTRACT_VERSION,
+    "release-note.md": ("documentation", rnv.CURRENT_CONTRACT_VERSION,
                         "produced under the superseded release-position contract"),
 }
 
@@ -335,7 +336,7 @@ def superseded_reason(artifact: str, envelope_path) -> str | None:
     if not isinstance(env, dict):
         return None
     version = version_tuple(env.get("agent_version"))
-    if env.get("agent_id") != agent_id or version is None or version >= minimum:
+    if canonical_agent_id(env.get("agent_id")) != agent_id or version is None or version >= minimum:
         return None
     return (f"{why}: {agent_id} {env.get('agent_version')} is below "
             f"{'.'.join(map(str, minimum))}")
@@ -556,8 +557,8 @@ def phase_model_artifacts() -> dict:
 #
 # The set is now empty. The five rows it held are the remainder of `O-001` in
 # `proposals/framework-change-proposal-FC-004.md`, and none of them needed the new artifact type
-# that item anticipated. Four were `omn-documentation` phases, and the deliverable table in
-# `agents/omn-documentation/output.md` already declared one artifact type for every publication
+# that item anticipated. Four were `documentation` phases, and the deliverable table in
+# `agents/documentation/output.md` already declared one artifact type for every publication
 # that agent emits, discriminated by communication basis rather than by file. The fifth was
 # `review-pull-request/structural-compliance`, and `review_package_validator` already contracted
 # `architect` as a permitted producer of `review-package.md` for that exact phase. Each cell was

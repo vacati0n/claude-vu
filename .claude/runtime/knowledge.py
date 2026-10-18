@@ -40,8 +40,8 @@ then rewrites `log.md` and `index.md` last; each file goes through a temporary f
 harvest is the digest over each root `.md` file name and its sha256. A checkout still holding
 the pre-bundle JSON store (`lessons.store.json`) runs `migrate` once: it writes the bundle, reads
 it back, compares it record for record, and removes the JSON store only on equality. Until then
-every reader and writer refuses with `store-migration-pending`. The installer excludes the whole
-`memory/lessons` path, so one repository's lessons are never shipped to another.
+every reader and writer refuses with `store-migration-pending`. The bundle belongs to this
+repository alone; one repository's lessons are never shipped to another.
 
 Lifecycle
 ---------
@@ -97,7 +97,7 @@ STATUSES = ("candidate", "active", "retired")
 KINDS = ("validation-check", "gate-rejection")
 HYDRATION_VALUES = ("on", "off")
 DEFAULT_THRESHOLD = 2
-DEFAULT_OWNER = "omn-tech-lead"
+DEFAULT_OWNER = "tech-lead"
 
 RECALL_CAP = 5             # fixed by design; deliberately not a policy key
 DESCRIPTION_CAP = 160

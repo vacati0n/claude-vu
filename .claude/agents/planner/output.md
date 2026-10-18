@@ -14,7 +14,7 @@ template and this contract differ, this contract governs and the template is cor
 | Format | GitHub-flavored Markdown |
 | Template | `templates/execution-plan.md` |
 | Producer | `planner` |
-| Consumers | `orchestrator`, `architect`, `omn-tech-lead`, implementation agents, `omn-qa` |
+| Consumers | `orchestrator`, `architect`, `tech-lead`, implementation agents, `qa` |
 | Schema version | 1.0.0 |
 
 ## Structural Rules

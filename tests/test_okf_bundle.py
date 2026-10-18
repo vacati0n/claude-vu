@@ -10,6 +10,7 @@ live `runs/` or `memory/` directories.
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -50,7 +51,7 @@ def record(fp: str, *, status: str = "candidate", history=None, evidence=None,
                              ["runs/run-a/events.jsonl#E-0001",
                               "runs/run-b/events.jsonl#E-0002",
                               "runs/run-a/events.jsonl#E-0009"]),
-            "evidence_state": evidence_state, "status": status, "owner": "omn-tech-lead",
+            "evidence_state": evidence_state, "status": status, "owner": "tech-lead",
             "rationale": "fixture rationale", "remedy": remedy, "history": list(history or [])}
 
 
@@ -77,7 +78,7 @@ def mixed_records() -> list:
 
 
 def make_root() -> Path:
-    root = Path(tempfile.mkdtemp(prefix="omn-okf-"))
+    root = Path(tempfile.mkdtemp(prefix="okf-"))
     (root / "config").mkdir()
     shutil.copy(CLAUDE / kl.POLICY_REL, root / kl.POLICY_REL)
     return root
@@ -413,7 +414,7 @@ class ConformanceTestCase(unittest.TestCase):
         self.bundle = self.root / kl.BUNDLE_REL
 
     def seeded(self, name: str, text: str) -> dict:
-        target = Path(tempfile.mkdtemp(prefix="omn-okf-seed-"))
+        target = Path(tempfile.mkdtemp(prefix="okf-seed-"))
         self.addCleanup(shutil.rmtree, target, ignore_errors=True)
         shutil.copytree(self.bundle, target / "b")
         (target / "b" / name).parent.mkdir(parents=True, exist_ok=True)
@@ -458,6 +459,14 @@ class ConformanceTestCase(unittest.TestCase):
         self.assertEqual((failed.returncode, again.returncode), (1, 1))
         self.assertEqual(failed.stdout, again.stdout)
         self.assertIn("OKF-11.3-log", failed.stdout)
+        # The closing summary line the CI verifier jobs parse: one check per file.
+        summary = re.compile(r"(?m)^(\d+)/(\d+) checks passed -- (\S+)$")
+        ok, bad = summary.findall(first.stdout), summary.findall(failed.stdout)
+        self.assertEqual(len(ok), 1)
+        self.assertEqual(ok[0][0], ok[0][1])
+        self.assertEqual(ok[0][2], "CONFORMANT")
+        self.assertEqual((int(bad[0][0]) + 1, bad[0][1], bad[0][2]),
+                         (int(ok[0][1]), ok[0][1], "NON-CONFORMANT"))
         missing = verify(self.root / "nowhere")
         self.assertEqual(missing.returncode, 2)
         empty = self.root / "empty"

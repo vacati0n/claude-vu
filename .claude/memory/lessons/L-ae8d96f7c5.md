@@ -31,7 +31,7 @@ lesson_record:
     - "runs/run-c9fb8d5bbb32/events.jsonl#E-0069"
   evidence_state: "current"
   status: "candidate"
-  owner: "omn-tech-lead"
+  owner: "tech-lead"
   rationale: "harvested from recorded run evidence: the Validation Engine rejected this artifact type on this check"
   remedy: null
   history: []

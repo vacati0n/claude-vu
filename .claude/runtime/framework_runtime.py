@@ -5,7 +5,7 @@ Implements the executable subset of `config/runtime.md`, `config/execution-engin
 `config/task-queue.md` required to drive a whole workflow rather than one phase of it:
 
     /implement -> implement-feature -> scope-and-acceptance
-                                       -> omn-product-owner
+                                       -> product-owner
                                           -> scope-definition.md
                                     -> Scope Gate                            (human)
                                     -> execution-planning
@@ -15,7 +15,7 @@ Implements the executable subset of `config/runtime.md`, `config/execution-engin
                                        -> architect -> technical-design.md
                                     -> Design Gate                           (human)
                                     -> implementation
-                                       -> omn-dev-1-implement
+                                       -> dev-1-implement
                                           -> implementation-report.md
                                     -> quality-review                        (blocked)
                                     -> documentation-and-release-handoff     (blocked)
@@ -117,10 +117,9 @@ import task_context as tc     # noqa: E402
 CLAUDE = Path(__file__).resolve().parent.parent
 RUNS = CLAUDE / "runs"
 
-# The framework directory's actual name: ".claude" in the framework's own source
-# repository, ".omn-agent" once installed into a target repository. Every path label
-# this runtime prints or renders into a prompt derives its prefix from this, so an
-# installed runtime names paths that actually exist on disk.
+# The framework directory's actual name, ".claude" in the framework's own checkout. Every
+# path label this runtime prints or renders into a prompt derives its prefix from this, so a
+# copied runtime names paths that actually exist on disk.
 FW_PREFIX = CLAUDE.name
 
 RUNTIME_VERSION = "0.11.0"
@@ -588,8 +587,8 @@ CONTEXT_SLICE_PHASE = {
     # Input column names, the phase-mandatory skills its Required Skills column declares, and
     # the gate matrix where the phase feeds a gate.
     #
-    # The four publication phases are owned by `omn-documentation` and emit one artifact type,
-    # per the deliverable table in `agents/omn-documentation/output.md`. What differs between
+    # The four publication phases are owned by `documentation` and emit one artifact type,
+    # per the deliverable table in `agents/documentation/output.md`. What differs between
     # them is the communication basis and therefore the upstream evidence each reads: a
     # `release-handoff` reads the verification and change record, a `findings` publication the
     # recommendation it publishes, a `documentation-delta` the validation record behind it.
@@ -1151,7 +1150,7 @@ def resolve_phase_skills(required_codes: list) -> list:
 def verify_manifest_declares_phase(agent: dict, workflow_id: str, phase_id: str):
     """The routed (workflow, phase) pair must be one the agent's manifest declares.
 
-    An agent may own more than one phase of the same workflow -- `omn-qa` owns both
+    An agent may own more than one phase of the same workflow -- `qa` owns both
     `safety-net-establishment` and `behavioral-validation` in `refactor` -- so the manifest is
     matched on the pair rather than on the workflow alone. Matching on workflow alone would
     resolve to whichever row happened to be declared first and reject the other phase as a
@@ -1507,10 +1506,10 @@ def phase_gates(row: dict) -> list:
 def producer_aliases(agent_id: str | None) -> set:
     """Identifiers that name the same role as the producing agent.
 
-    workflows/workflow-gate-matrix.md still lists the architecture role as
-    `omn-architect` while the executable agent is `architect`, and records that the two
-    name the same role. The Producer Exclusion Rule has to see through that, or an agent
-    could approve a gate over its own output under its other name.
+    Run evidence recorded before agent identifiers dropped the retired `omn-` prefix names
+    roles such as `omn-architect` for the agent now called `architect`. The Producer
+    Exclusion Rule has to see through that, or an agent could approve a gate over its own
+    output under its other name.
     """
     if not agent_id:
         return set()
@@ -2571,9 +2570,9 @@ def _use_color(args) -> bool:
     """Whether the tree/icon renderer should run instead of the plain table.
 
     `NO_COLOR` (https://no-color.org) and `--no-color` always win. `--color` forces it on
-    even off a TTY -- `omn-agent run --show` passes it after checking its own real
-    stdout, because the child here always sees a pipe once `runner.py` captures its
-    output, so its own `sys.stdout.isatty()` cannot see the real terminal. Absent either
+    even off a TTY -- a caller that captures this process's output passes it after checking
+    its own real stdout, because the child here then always sees a pipe, so its own
+    `sys.stdout.isatty()` cannot see the real terminal. Absent either
     flag, a direct invocation of this script falls back to its own TTY check.
     """
     if getattr(args, "no_color", False) or os.environ.get("NO_COLOR"):
@@ -2964,7 +2963,7 @@ def _repo_write_scope_applies(repo_writes: dict, workflow_id: str, phase_id: str
     An unconditional grant (no `scopePhases` declared) applies to every phase the agent is
     dispatched into, unchanged from before this existed. A grant scoped to specific phases
     (`scopePhases: ["<workflow>/<phase>"]`) applies only when the routed `(workflow, phase)`
-    pair is named there -- the mechanism `agents/omn-qa/manifest.yaml` uses to declare that
+    pair is named there -- the mechanism `agents/qa/manifest.yaml` uses to declare that
     its one write grant (automated test files) holds only in refactor's
     `safety-net-establishment` phase, and nowhere else.
     """
@@ -4666,7 +4665,7 @@ def evaluate_auto_approval(ctx, item: dict, policy: dict):
     if escalated:
         failed.append(f"deviation(s) escalated: {escalated}")
 
-    if "omn-qa" in (g.get("owner_roles") or []):
+    if "qa" in (g.get("owner_roles") or []):
         open_defects = _open_defects(text) if text else []
         evaluated.append(f"open-defects={open_defects or 0}")
         if open_defects:
@@ -5841,7 +5840,7 @@ def demo_hook_settings() -> dict:
     """The host tool-hook wiring block with this tree's own framework directory already in
     the command. `runtime/demo/hooks.settings.json` carries the same block with a
     `<framework-dir>` placeholder, because a file on disk cannot know whether it was
-    installed as `.claude` or as `.omn-agent`; this is that block resolved, and is what
+    copied under `.claude` or under another directory name; this is that block resolved, and is what
     `demo --print-hook` emits for the operator to merge."""
     return {
         "hooks": {
@@ -6175,8 +6174,8 @@ def main():
                    help="force the plain table even on a TTY")
     s.add_argument("--color", action="store_true",
                    help="force the colorized phase/step/gate tree even off a TTY "
-                        "(used by 'omn-agent run --show', which pipes this process's "
-                        "output through its own capture)")
+                        "(for a caller that pipes this process's output through its "
+                        "own capture)")
     s.add_argument("--json", action="store_true",
                    help="print the machine-readable run-state projection instead of "
                         "the table/tree and everything below it")

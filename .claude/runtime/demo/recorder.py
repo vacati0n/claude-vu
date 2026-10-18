@@ -130,7 +130,7 @@ def _first_long_string(value, minimum: int = 40, _depth: int = 0) -> str | None:
 def _humanize(identifier: str | None) -> str:
     if not identifier:
         return ""
-    return identifier.replace("omn-", "").replace("-", " ")
+    return identifier.replace("-", " ")
 
 
 # ------------------------------------------------------------------ projection

@@ -1,13 +1,9 @@
 """Tests for the colorized tree / icon / JSON status rendering added to
 `framework_runtime.py`.
 
-`framework_runtime.py` is not part of the `omn_agent` package: it's the framework's own
-runtime, whose authoritative source lives at `.claude/runtime/` next to this repo's
-`omn_agent/` package (see `omn_agent/source.py`) and which gets installed into a target
-repo as `.omn-agent/runtime/framework_runtime.py` and driven by `omn_agent.runner`.
-These tests import it directly to exercise the renderer against a real
-`state_engine.StateStore`, independent of the CLI wrapper (covered separately in
-`tests/test_run_show.py`).
+`framework_runtime.py` is the framework's own runtime, whose source lives at
+`.claude/runtime/`. These tests import it directly to exercise the renderer against a real
+`state_engine.StateStore`.
 """
 
 from __future__ import annotations
@@ -109,19 +105,19 @@ class _StoreFixture(unittest.TestCase):
             workflow_id="implement-feature", workflow_version="1.0.0",
             runtime_version="0.5.0", input_digest="sha256:aaa", inputs=[])
 
-        self._add_state(1, "scope-and-acceptance", "omn-product-owner",
+        self._add_state(1, "scope-and-acceptance", "product-owner",
                         status=se.COMPLETED, gate="Scope Gate",
                         gate_decision={"decision": "approve",
-                                      "owner_role": "omn-tech-lead"})
+                                      "owner_role": "tech-lead"})
         self._add_state(2, "execution-planning", "planner", status=se.RUNNING)
         self._add_state(3, "solution-design-and-risk-assessment", "architect",
                         status=se.BLOCKED,
                         extra={"blocked_reason": "awaiting_capability"})
-        self._add_state(4, "implementation", "omn-dev-1-implement", status=se.RETRYING,
+        self._add_state(4, "implementation", "dev-1-implement", status=se.RETRYING,
                         extra={"failure_class": "tool_failure", "attempt": 1,
                                "max_attempts": 3,
                                "available_at": "2026-08-20T12:00:00Z"})
-        self._add_state(5, "quality-review", "omn-dev-2-reviewer", status=se.COMPLETED,
+        self._add_state(5, "quality-review", "dev-2-reviewer", status=se.COMPLETED,
                         gate="Review Gate")  # gate_decision=None -> blocked, undecided
         self.store.save()
 
@@ -148,7 +144,7 @@ class _StoreFixture(unittest.TestCase):
             self.store.add_item(gate_item)
             self.store.add_gate({
                 "gate": gate, "closes_state": state_id,
-                "owner_roles": ["omn-tech-lead"], "producer_agent": owner,
+                "owner_roles": ["tech-lead"], "producer_agent": owner,
                 **(gate_decision or {}),
             })
 
@@ -186,7 +182,7 @@ class RenderTreeTestCase(_StoreFixture):
         lines = fr.render_tree(self.store, color=False)
         gate_line = next(l for l in lines if "Review Gate" in l)
         self.assertIn("awaiting_human_decision", gate_line)
-        self.assertIn("omn-tech-lead", gate_line)
+        self.assertIn("tech-lead", gate_line)
 
 
 class EdgeCaseTestCase(unittest.TestCase):
@@ -206,7 +202,7 @@ class EdgeCaseTestCase(unittest.TestCase):
 
     def test_all_completed_run_renders_and_serializes_cleanly(self):
         for idx, (state_id, owner) in enumerate(
-                [("scope-and-acceptance", "omn-product-owner"),
+                [("scope-and-acceptance", "product-owner"),
                  ("execution-planning", "planner")], start=1):
             item = se.new_work_item(
                 run_id=self.RUN_ID, workflow_id="implement-feature", state_id=state_id,
@@ -232,7 +228,7 @@ class EdgeCaseTestCase(unittest.TestCase):
         item = se.new_work_item(
             run_id=self.RUN_ID, workflow_id="implement-feature",
             state_id="scope-and-acceptance", work_type="state",
-            owner_agent_id="omn-product-owner", phase_index=1, gate="Scope Gate",
+            owner_agent_id="product-owner", phase_index=1, gate="Scope Gate",
             artifact=None, depends_on=[])
         item["status"] = se.COMPLETED
         item["eligible"] = True
@@ -247,7 +243,7 @@ class EdgeCaseTestCase(unittest.TestCase):
         gate_item["blocked_reason"] = "awaiting_human_decision"
         self.store.add_item(gate_item)
         self.store.add_gate({"gate": "Scope Gate", "closes_state": "scope-and-acceptance",
-                             "owner_roles": [], "producer_agent": "omn-product-owner"})
+                             "owner_roles": [], "producer_agent": "product-owner"})
         self.store.save()
 
         lines = fr.render_tree(self.store, color=False)
@@ -277,7 +273,7 @@ class ReArmedGateAndSupersededStepTestCase(unittest.TestCase):
             runtime_version="0.5.0", input_digest="sha256:bbb", inputs=[])
         step = se.new_work_item(
             run_id=self.RUN_ID, workflow_id="implement-feature", state_id="implementation",
-            work_type="state", owner_agent_id="omn-dev-1-implement", phase_index=4,
+            work_type="state", owner_agent_id="dev-1-implement", phase_index=4,
             gate=None, artifact=None, depends_on=[])
         step.update({"status": se.PENDING, "eligible": True, "queue_status": "Ready",
                      "attempt": 1,
@@ -293,10 +289,10 @@ class ReArmedGateAndSupersededStepTestCase(unittest.TestCase):
         self.store.add_item(gate_item)   # pending, re-armed
         self.store.add_gate({
             "gate": "Review Gate", "closes_state": "quality-review",
-            "owner_roles": ["omn-dev-2-reviewer", "omn-qa"],
-            "producer_agent": "omn-dev-2-reviewer", "decision": None, "owner_role": None,
+            "owner_roles": ["dev-2-reviewer", "qa"],
+            "producer_agent": "dev-2-reviewer", "decision": None, "owner_role": None,
             "decided_by": None, "rationale": None, "evidence_ref": None, "decided_at": None,
-            "decision_history": [{"decision": "rejected", "owner_role": "omn-qa",
+            "decision_history": [{"decision": "rejected", "owner_role": "qa",
                                   "decided_by": "qa", "decided_at": "2026-09-06T09:05:36Z",
                                   "superseded_by": "RB-run-rendertest02-review-gate-01"}],
         })
@@ -310,8 +306,8 @@ class ReArmedGateAndSupersededStepTestCase(unittest.TestCase):
             # the step line now also names the gate in its supersession suffix, so the
             # gate's own row is the one without it
             gate_line = next(l for l in lines if "Review Gate" in l and "superseded" not in l)
-            self.assertIn("omn-dev-2-reviewer, omn-qa", gate_line)
-            self.assertIn("re-armed after rejected by omn-qa", gate_line)
+            self.assertIn("dev-2-reviewer, qa", gate_line)
+            self.assertIn("re-armed after rejected by qa", gate_line)
 
     def test_json_carries_rollback_block_and_decision_history(self):
         payload = fr.state_json(self.store)
@@ -325,7 +321,7 @@ class ReArmedGateAndSupersededStepTestCase(unittest.TestCase):
                          ("pending", True, 1))
         self.assertEqual((gate["status"], gate["decision"]), ("pending", None))
         self.assertEqual(gate["decision_history"], [{
-            "decision": "rejected", "owner_role": "omn-qa", "decided_by": "qa",
+            "decision": "rejected", "owner_role": "qa", "decided_by": "qa",
             "decided_at": "2026-09-06T09:05:36Z",
             "superseded_by": "RB-run-rendertest02-review-gate-01"}])
         json.dumps(payload)
@@ -333,7 +329,7 @@ class ReArmedGateAndSupersededStepTestCase(unittest.TestCase):
     def test_steps_without_supersessions_carry_no_rollback_key(self):
         plain = se.new_work_item(
             run_id=self.RUN_ID, workflow_id="implement-feature", state_id="scope",
-            work_type="state", owner_agent_id="omn-product-owner", phase_index=1,
+            work_type="state", owner_agent_id="product-owner", phase_index=1,
             gate=None, artifact=None, depends_on=[])
         self.store.add_item(plain)
         payload = fr.state_json(self.store)

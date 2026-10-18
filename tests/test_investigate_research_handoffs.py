@@ -10,11 +10,11 @@ Before this repair three of the four hand-offs of `investigate` and of `research
 identifier the consumer did not accept, so every run of either workflow stalled at G5-INPUT:
 
   problem-framing / research-framing -> discovery    requirement-framing, not accepted by
-                                                     omn-context-agent
+                                                     context-agent
   option-analysis / option-synthesis -> recommendation  only technical-recommendation reached
-                                                     omn-tech-lead, which does not accept it
+                                                     tech-lead, which does not accept it
   recommendation -> publication                      technical-recommendation, not accepted by
-                                                     omn-documentation
+                                                     documentation
 
 and both self-hosting profile rows that route to these workflows named an entry input type the
 entry agent rejects (`investigation-request`, declared nowhere, and `research-question`,
@@ -79,8 +79,8 @@ KNOWN_UNROUTABLE_PROFILE_ROWS = frozenset({"change-review", "framework-release"}
 
 # The contract version that first accepts the delivered identifier, per changed agent.
 CHANGED_AGENTS = {
-    "omn-context-agent": ("requirement-framing", (1, 1, 0)),
-    "omn-documentation": ("technical-recommendation", (1, 1, 0)),
+    "context-agent": ("requirement-framing", (1, 1, 0)),
+    "documentation": ("technical-recommendation", (1, 1, 0)),
 }
 CHANGED_WORKFLOWS = {"investigate": (1, 1, 0), "research": (1, 1, 0)}
 
@@ -249,32 +249,32 @@ class ContractBoundaryTests(unittest.TestCase):
     """Each widening admits the delivered identifier and still refuses its neighbours."""
 
     def test_context_agent_accepts_framing_and_still_refuses_undeclared(self):
-        agent = fr.load_agent("omn-context-agent")
-        self.assertTrue(fr.input_contract_satisfiable("omn-context-agent",
+        agent = fr.load_agent("context-agent")
+        self.assertTrue(fr.input_contract_satisfiable("context-agent",
                                                       pool("requirement-framing")))
-        self.assertFalse(fr.input_contract_satisfiable("omn-context-agent",
+        self.assertFalse(fr.input_contract_satisfiable("context-agent",
                                                        pool("investigation-request")))
-        self.assertFalse(fr.input_contract_satisfiable("omn-context-agent", []))
+        self.assertFalse(fr.input_contract_satisfiable("context-agent", []))
         with self.assertRaises(fr.RuntimeError_) as raised:
             fr.resolve_input_contract(agent, pool("requirement-framing",
                                                   "investigation-request"))
         self.assertIn("declares no input type", str(raised.exception))
 
     def test_documentation_accepts_recommendation_and_still_refuses_undeclared(self):
-        self.assertTrue(fr.input_contract_satisfiable("omn-documentation",
+        self.assertTrue(fr.input_contract_satisfiable("documentation",
                                                       pool("technical-recommendation")))
-        self.assertFalse(fr.input_contract_satisfiable("omn-documentation",
+        self.assertFalse(fr.input_contract_satisfiable("documentation",
                                                        pool("requirement-framing")))
-        self.assertFalse(fr.input_contract_satisfiable("omn-documentation",
+        self.assertFalse(fr.input_contract_satisfiable("documentation",
                                                        pool("investigation-report")))
-        self.assertFalse(fr.input_contract_satisfiable("omn-documentation", []))
+        self.assertFalse(fr.input_contract_satisfiable("documentation", []))
 
     def test_recommendation_is_routed_its_evidence_base_and_tech_lead_menu_is_unchanged(self):
         passed, narrowed, _ = g5_verdict("investigate", "recommendation", [ENTRY_INPUT])
         self.assertTrue(passed)
         self.assertIn("investigation-report", narrowed)
         # tech-lead's own output alone still does not satisfy it: no menu was widened
-        self.assertFalse(fr.input_contract_satisfiable("omn-tech-lead",
+        self.assertFalse(fr.input_contract_satisfiable("tech-lead",
                                                        pool("technical-recommendation")))
 
     def test_business_analyst_accepts_routed_input_and_still_refuses_old_ones(self):
@@ -360,7 +360,7 @@ class RecommendationPrecedenceTests(unittest.TestCase):
     contract must say which one governs, naming the producing phases the Phase Model gives."""
 
     FINDINGS = {"investigate": "publication", "research": "findings-publication"}
-    DOCS = REPO / ".claude" / "agents" / "omn-documentation"
+    DOCS = REPO / ".claude" / "agents" / "documentation"
 
     def test_documentation_contract_names_the_governing_and_the_draft_recommendation(self):
         identity = (self.DOCS / "identity.md").read_text(encoding="utf-8")
@@ -381,7 +381,7 @@ class ReleaseNoteSourceTypeTests(unittest.TestCase):
     """The release note can record the recommendation it was published from."""
 
     def test_source_input_vocabulary_names_technical_recommendation(self):
-        output = (REPO / ".claude" / "agents" / "omn-documentation" / "output.md").read_text(
+        output = (REPO / ".claude" / "agents" / "documentation" / "output.md").read_text(
             encoding="utf-8")
         declared = re.search(r"Declared `type` values are (.*?)\.\s", output, re.S).group(1)
         self.assertIn("`technical-recommendation`", declared)

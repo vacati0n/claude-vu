@@ -12,8 +12,8 @@ Run a behavior-preserving structural improvement cycle using `workflows/refactor
 
 ## Assigned Agents
 
-- Primary: `omn-tech-lead`.
-- Secondary: `omn-dev-1-implement`, `omn-dev-2-reviewer`, `omn-qa`.
+- Primary: `tech-lead`.
+- Secondary: `dev-1-implement`, `dev-2-reviewer`, `qa`.
 
 ## Outputs
 

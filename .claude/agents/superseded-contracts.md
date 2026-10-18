@@ -19,7 +19,7 @@ file.
 | Title | Shared agent-contract and agent-lifecycle modules superseded by the runtime module-set architecture |
 | Date | 2026-08-19 |
 | Status | Accepted |
-| Decided by | `omn-tech-lead` (accepting owner), recorded by operator |
+| Decided by | `tech-lead` (accepting owner), recorded by operator |
 | Arises from | Reconciliation finding `M-1`, `reports/wave-1-reconciliation-report-2026-08-19.md` |
 | Related | `agents/retired-roles.md`, ADR `D-001` and `D-002` of `run-93b302cbdb28` |
 
