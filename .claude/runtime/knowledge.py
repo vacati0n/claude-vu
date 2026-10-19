@@ -9,24 +9,39 @@ given phase should be shown. It never calls a model, and every lesson is derived
 
 Store
 -----
-`memory/lessons/lessons.store.json`, schema `framework.memory/lessons.v1`, top-level keys
-`schema` and `lessons`. One lesson per fingerprint:
+`memory/lessons/`, an Open Knowledge Format (OKF) v0.2 bundle written through `okf.py`. One lesson
+per fingerprint:
 
 - `check:<artifact-type>:<check-id>` -- a check of the Validation Engine that rejected that
   artifact type;
 - `gate:<gate>:<phase>` -- a gate that rejected the evidence of the phase it closes.
 
-A lesson record holds a closed field list (see `LESSON_FIELDS`). Free text from the evidence --
-event summaries, report details, ledger details and resolutions, gate rationales, actor names --
-is never read into it: the only text copied is the check's own validator-authored description
-and severity. Evidence fields are recomputed from scratch on every harvest; the governance
-fields (`status`, `owner`, `rationale`, `remedy`, `history`) carry over by fingerprint, so a
-re-harvest is an idempotent upsert and an operator's decision survives it. Serialisation is
-canonical (sorted keys, two-space indent, ASCII escapes, LF, trailing newline, lessons ordered by
-fingerprint, no harvest timestamp), so unchanged evidence yields a byte-identical file. Writes
-go through a temporary file and `os.replace` under an exclusive lock file
-(`lessons.store.lock`). Both belong to this repository alone; one repository's lessons are
-never shipped to another.
+Each lesson is one concept document, `L-<10 hex>.md`, whose frontmatter carries `type: Lesson`,
+a title, description, tags, sources (the evidence paths, relative to the document), generated,
+verified (one entry per approval), an OKF status (`candidate` draft, `active` stable, `retired`
+deprecated), `stale_after` for a retained lesson only, and the full lesson record under
+`lesson_record`, a closed field list (see `LESSON_FIELDS`). `index.md` (frontmatter
+`okf_version` only, then one link entry per lesson) and `log.md` (dated headings, newest first:
+a Creation entry per lesson and an Update or Deprecation entry per governance action, with no
+free text) are derived from the record set and never read back.
+
+Free text from the evidence -- event summaries, report details, ledger details and resolutions,
+gate rationales, actor names -- is never read into a record: the only text copied is the check's
+own validator-authored description and severity. Evidence fields are recomputed from scratch on
+every harvest; the governance fields (`status`, `owner`, `rationale`, `remedy`, `history`) carry
+over by fingerprint, so a re-harvest is an idempotent upsert and an operator's decision survives
+it. Serialisation is canonical (every string quoted with ASCII escapes, LF, trailing newline, no
+harvest timestamp), so unchanged evidence yields byte-identical files, `log.md` included.
+
+A write holds an exclusive lock file (`lessons.lock`) and, after rendering every file, replaces
+in order each changed document, removes documents with no record and leftover temporary files,
+then rewrites `log.md` and `index.md` last; each file goes through a temporary file and
+`os.replace`, and is skipped when its bytes are equal. The store digest reported by recall and
+harvest is the digest over each root `.md` file name and its sha256. A checkout still holding
+the pre-bundle JSON store (`lessons.store.json`) runs `migrate` once: it writes the bundle, reads
+it back, compares it record for record, and removes the JSON store only on equality. Until then
+every reader and writer refuses with `store-migration-pending`. The bundle belongs to this
+repository alone; one repository's lessons are never shipped to another.
 
 Lifecycle
 ---------
@@ -43,13 +58,14 @@ descending), then lesson ID, capped at `RECALL_CAP`. The runtime decides *whethe
 hydrates (its `knowledge_loop` record, written once at plan time); this module only decides
 *what* is shown.
 
-Dependencies: the standard library and `state_engine.digest`. Nothing here imports
+Dependencies: the standard library, `state_engine.digest`, and `okf`. Nothing here imports
 `framework_runtime.py`; the runtime calls this module, one-way.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -58,15 +74,21 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+import okf
 import state_engine as se
 
 CLAUDE = Path(__file__).resolve().parent.parent
 
-STORE_REL = "memory/lessons/lessons.store.json"
-LOCK_REL = "memory/lessons/lessons.store.lock"
+BUNDLE_REL = "memory/lessons"
+LOCK_REL = "memory/lessons/lessons.lock"
+# The JSON store every checkout held before the bundle. Only `migrate` reads it; while it
+# exists with no bundle beside it, every reader and writer refuses with
+# `store-migration-pending`.
+LEGACY_STORE_REL = "memory/lessons/lessons.store.json"
 POLICY_REL = "config/knowledge-policy.json"
 HARVEST_FILENAME = "knowledge-harvest.json"
 
+# The in-memory interface identifier `load_store` returns; no file carries it any more.
 STORE_SCHEMA = "framework.memory/lessons.v1"
 POLICY_SCHEMA = "framework.config/knowledge-policy.v1"
 HARVEST_SCHEMA = "framework.runtime/knowledge-harvest.v1"
@@ -81,6 +103,18 @@ RECALL_CAP = 5             # fixed by design; deliberately not a policy key
 DESCRIPTION_CAP = 160
 REMEDY_CAP = 200
 TEXT_CAP = 300             # governance actor and rationale, collapsed to one line
+
+# The lesson bundle: one OKF concept document per lesson, named by its lesson_id.
+DOCUMENT_TYPE = "Lesson"
+RECORD_KEY = "lesson_record"
+PRODUCER = "knowledge-loop/1.0.0"   # producer and lesson document format version
+SOURCE_PREFIX = "../../"            # a source resolves against the document's own location
+LESSON_ID = re.compile(r"^L-[0-9a-f]{10}$")
+DOCUMENT_NAME = re.compile(r"^L-[0-9a-f]{10}\.md$")
+TMP_SUFFIX = ".tmp"
+EPOCH_DAY = "1970-01-01"
+OKF_STATUS = {"candidate": "draft", "active": "stable", "retired": "deprecated"}
+LOG_ACTIONS = {"approve": "Update", "annotate": "Update", "retire": "Deprecation"}
 
 CHECK_ID = re.compile(r"^[A-Z]{1,3}\d+(?:\.\d+)*$")
 # A remedy is operator text that later dispatches are shown. Anything that looks like a
@@ -230,12 +264,12 @@ def run_record(run_dir: Path) -> dict | None:
 # ------------------------------------------------------------------ store
 
 
-def store_path(root: Path) -> Path:
-    return Path(root) / STORE_REL
+def bundle_path(root: Path) -> Path:
+    return Path(root) / BUNDLE_REL
 
 
-def canonical_bytes(data: dict) -> bytes:
-    return (json.dumps(data, sort_keys=True, indent=2, ensure_ascii=True) + "\n").encode("utf-8")
+def legacy_store_path(root: Path) -> Path:
+    return Path(root) / LEGACY_STORE_REL
 
 
 def bytes_digest(data: bytes) -> str:
@@ -246,33 +280,321 @@ def lesson_id_for(fingerprint: str) -> str:
     return "L-" + se.digest(fingerprint)[len("sha256:"):][:10]
 
 
-def load_store(root: Path) -> dict | None:
-    """The store document, or None when no store exists yet."""
-    path = store_path(root)
-    if not path.exists():
+def _documents(bundle: Path) -> list:
+    """The lesson documents at the bundle root, sorted by name."""
+    if not bundle.is_dir():
+        return []
+    return sorted((p for p in bundle.iterdir() if p.is_file() and DOCUMENT_NAME.match(p.name)),
+                  key=lambda p: p.name)
+
+
+def bundle_exists(root: Path) -> bool:
+    """True when the bundle directory holds index.md or any lesson document."""
+    bundle = bundle_path(root)
+    return (bundle / okf.INDEX_NAME).is_file() or bool(_documents(bundle))
+
+
+def _refuse_pending(root: Path) -> None:
+    if legacy_store_path(root).exists() and not bundle_exists(root):
+        raise KnowledgeError("store-migration-pending",
+                             f"{LEGACY_STORE_REL} holds the lessons and {BUNDLE_REL} does not; "
+                             f"run `knowledge.py migrate` once to move them into the bundle")
+
+
+def bundle_digest(root: Path) -> str | None:
+    """The state_engine digest over `name sha256` lines, one per root .md file, by name."""
+    bundle = bundle_path(root)
+    if not bundle.is_dir():
         return None
+    lines = [f"{p.name} {hashlib.sha256(p.read_bytes()).hexdigest()}"
+             for p in sorted(bundle.iterdir(), key=lambda p: p.name)
+             if p.is_file() and p.suffix == ".md"]
+    return se.digest("\n".join(lines))
+
+
+def _read_legacy(root: Path) -> dict:
+    """The JSON store a pre-bundle checkout holds; read only by `migrate`."""
     try:
-        data = json.loads(path.read_bytes().decode("utf-8"))
+        data = json.loads(legacy_store_path(root).read_bytes().decode("utf-8"))
     except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
-        raise KnowledgeError("store-unreadable", f"{STORE_REL}: {exc}") from exc
+        raise KnowledgeError("store-unreadable", f"{LEGACY_STORE_REL}: {exc}") from exc
     if not isinstance(data, dict) or data.get("schema") != STORE_SCHEMA \
             or not isinstance(data.get("lessons"), list):
         raise KnowledgeError("store-unreadable",
-                             f"{STORE_REL} is not a {STORE_SCHEMA} document")
+                             f"{LEGACY_STORE_REL} is not a {STORE_SCHEMA} document")
     return data
 
 
-def write_store(root: Path, data: dict) -> bool:
-    """Atomically replace the store when its canonical bytes differ. Returns True if written."""
-    path = store_path(root)
-    new = canonical_bytes(data)
-    if path.exists() and path.read_bytes() == new:
+def load_store(root: Path) -> dict | None:
+    """The lessons as one in-memory store document, or None when no bundle exists yet.
+
+    Every lesson document at the bundle root is parsed; each must be a `Lesson` whose
+    `lesson_record` holds exactly the `LESSON_FIELDS` keys and whose `lesson_id` is the file
+    stem. The returned shape is the one every caller has always used: `schema` and the lessons
+    ordered by fingerprint.
+    """
+    root = Path(root)
+    _refuse_pending(root)
+    if not bundle_exists(root):
+        return None
+    lessons = []
+    for path in _documents(bundle_path(root)):
+        rel = f"{BUNDLE_REL}/{path.name}"
+        try:
+            front, _ = okf.parse_document(path.read_bytes().decode("utf-8"))
+        except (OSError, UnicodeDecodeError, okf.OkfError) as exc:
+            raise KnowledgeError("store-unreadable", f"{rel}: {exc}") from exc
+        if not isinstance(front, dict) or front.get("type") != DOCUMENT_TYPE:
+            raise KnowledgeError("store-unreadable", f"{rel} is not a {DOCUMENT_TYPE} document")
+        record = front.get(RECORD_KEY)
+        if not isinstance(record, dict) or set(record) != set(LESSON_FIELDS):
+            raise KnowledgeError("store-unreadable",
+                                 f"{rel}: {RECORD_KEY} does not hold exactly the lesson fields")
+        if record.get("lesson_id") != path.stem:
+            raise KnowledgeError("store-unreadable",
+                                 f"{rel}: lesson_id {record.get('lesson_id')!r} is not the "
+                                 f"file name")
+        lessons.append({k: record[k] for k in LESSON_FIELDS})
+    lessons.sort(key=lambda l: str(l.get("fingerprint")))
+    return {"schema": STORE_SCHEMA, "lessons": lessons}
+
+
+# --- lesson document, index, and change log: pure functions of the record set
+
+
+def okf_status(status) -> str:
+    return OKF_STATUS.get(status, "draft")
+
+
+def okf_actor(actor) -> str:
+    """`human:` and a sanitised identifier; the prefix is never doubled."""
+    text = str(actor or "").strip()
+    if text.lower().startswith("human:"):
+        text = text[len("human:"):]
+    text = re.sub(r"[^A-Za-z0-9._@-]", "-", text).strip("-")[:64].strip("-")
+    return "human:" + (text or "unknown")
+
+
+def lesson_title(lesson: dict) -> str:
+    key = lesson.get("check_id") or lesson.get("gate") or "?"
+    return (f"{neutralise(lesson.get('kind'), 40)} {neutralise(key, 60)} on "
+            f"{neutralise(lesson.get('artifact_type'), 60)}")
+
+
+def lesson_description(lesson: dict) -> str:
+    """The description exactly as `render_section` shows it."""
+    return neutralise(lesson.get("check_description"), DESCRIPTION_CAP) \
+        or "no description recorded"
+
+
+def lesson_frontmatter(lesson: dict) -> dict:
+    """The OKF frontmatter for one lesson; the whole record rides under `lesson_record`."""
+    tags = []
+    for raw in [lesson.get("kind"), lesson.get("artifact_type"), *(lesson.get("phases") or [])]:
+        tag = neutralise(raw, 60)
+        if tag and tag not in tags:
+            tags.append(tag)
+    front = {"type": DOCUMENT_TYPE, "title": lesson_title(lesson),
+             "description": lesson_description(lesson), "tags": tags or ["lesson"]}
+    paths = sorted({str(ref).split("#", 1)[0] for ref in (lesson.get("evidence") or [])}
+                   - {""})
+    if paths:
+        front["sources"] = [{"resource": SOURCE_PREFIX + p} for p in paths]
+    seen = lesson.get("last_seen") or lesson.get("first_seen")
+    if seen:
+        front["generated"] = {"at": seen, "by": PRODUCER}
+    verified = [{"at": h.get("time"), "by": okf_actor(h.get("actor"))}
+                for h in (lesson.get("history") or [])
+                if isinstance(h, dict) and h.get("action") == "approve"]
+    if verified:
+        front["verified"] = verified
+    front["status"] = okf_status(lesson.get("status"))
+    if lesson.get("evidence_state") == "retained" and seen:
+        front["stale_after"] = seen
+    front[RECORD_KEY] = {k: lesson.get(k) for k in LESSON_FIELDS}
+    return front
+
+
+def render_document(lesson: dict) -> bytes:
+    """One lesson document; refuses an unsafe lesson_id or an unsupported value type."""
+    lesson_id = lesson.get("lesson_id")
+    if not isinstance(lesson_id, str) or not LESSON_ID.match(lesson_id):
+        raise KnowledgeError("store-unwritable",
+                             f"lesson_id {lesson_id!r} is not L- and ten lowercase hex "
+                             f"characters; nothing was written")
+    front = lesson_frontmatter(lesson)
+    body = f"# {front['title']}\n\nSummary: {front['description']}\n"
+    try:
+        text = okf.join_document(front, body, keep_order=(RECORD_KEY,))
+    except okf.OkfError as exc:
+        raise KnowledgeError("store-unwritable",
+                             f"{lesson_id}: {exc}; nothing was written") from exc
+    return text.encode("utf-8")
+
+
+def _md_escape(text: str) -> str:
+    return text.replace("\\", "\\\\").replace("[", "\\[").replace("]", "\\]")
+
+
+def render_index(lessons: list) -> bytes:
+    """index.md: the okf_version frontmatter, a heading, one link entry per lesson."""
+    lines = [okf.DELIMITER, f'okf_version: "{okf.OKF_VERSION}"', okf.DELIMITER, "# Lessons", ""]
+    for l in lessons:
+        lines.append(f"- [{_md_escape(lesson_title(l))}]({l['lesson_id']}.md) - "
+                     f"{_md_escape(lesson_description(l))}")
+    return ("\n".join(lines) + "\n").encode("utf-8")
+
+
+def _log_entries(lessons: list) -> list:
+    """(timestamp, fingerprint, history position, line); creation has position -1."""
+    entries = []
+    for l in lessons:
+        lid, fp = l["lesson_id"], str(l.get("fingerprint"))
+        history = [h for h in (l.get("history") or []) if isinstance(h, dict)]
+        stamp = str(l.get("first_seen") or l.get("last_seen") or EPOCH_DAY)
+        initial = history[0].get("from") if history else l.get("status")
+        entries.append((stamp, fp, -1, f"- **Creation** [{lid}]({lid}.md): status "
+                                       f"{okf_status(initial)}, by {PRODUCER}"))
+        for pos, h in enumerate(history):
+            word = LOG_ACTIONS.get(h.get("action"), "Update")
+            entries.append((str(h.get("time") or EPOCH_DAY), fp, pos,
+                            f"- **{word}** [{lid}]({lid}.md): status "
+                            f"{okf_status(h.get('to'))}, by {okf_actor(h.get('actor'))}"))
+    return entries
+
+
+def _day(stamp: str) -> str:
+    try:
+        return datetime.fromisoformat(stamp[:10]).date().isoformat()
+    except ValueError:
+        return EPOCH_DAY
+
+
+def render_log(lessons: list) -> bytes:
+    """log.md: dated headings newest first; within a date, newest entry first."""
+    by_day: dict = {}
+    for entry in _log_entries(lessons):
+        by_day.setdefault(_day(entry[0]), []).append(entry)
+    lines = ["# Lesson Change Log"]
+    for day in sorted(by_day, reverse=True):
+        rows = sorted(by_day[day], key=lambda e: (e[1], -e[2]))
+        rows.sort(key=lambda e: e[0], reverse=True)
+        lines += ["", f"## {day}", ""] + [r[3] for r in rows]
+    return ("\n".join(lines) + "\n").encode("utf-8")
+
+
+def _replace(path: Path, data: bytes) -> bool:
+    """Whole-file replace through a temporary file; skipped when the bytes are equal."""
+    if path.is_file() and path.read_bytes() == data:
         return False
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_name(path.name + ".tmp")
-    tmp.write_bytes(new)
+    tmp = path.with_name(path.name + TMP_SUFFIX)
+    tmp.write_bytes(data)
     os.replace(tmp, path)
     return True
+
+
+def _write_bundle(root: Path, data: dict) -> bool:
+    lessons = sorted((l for l in data.get("lessons") or [] if isinstance(l, dict)),
+                     key=lambda l: str(l.get("fingerprint")))
+    docs = {f"{l.get('lesson_id')}.md": render_document(l) for l in lessons}
+    if len(docs) != len(lessons):
+        raise KnowledgeError("store-unwritable",
+                             "two lessons share one lesson_id; nothing was written")
+    log, index = render_log(lessons), render_index(lessons)
+    bundle = bundle_path(root)
+    bundle.mkdir(parents=True, exist_ok=True)
+    changed = False
+    for name in sorted(docs):                                   # step 1: documents
+        changed = _replace(bundle / name, docs[name]) or changed
+    for path in sorted(bundle.iterdir(), key=lambda p: p.name):  # step 2: orphans, temps
+        orphan = bool(DOCUMENT_NAME.match(path.name)) and path.name not in docs
+        if path.is_file() and (orphan or path.name.endswith(TMP_SUFFIX)):
+            path.unlink()
+            changed = True
+    changed = _replace(bundle / okf.LOG_NAME, log) or changed      # step 3: log.md
+    changed = _replace(bundle / okf.INDEX_NAME, index) or changed  # step 4: index.md last
+    return changed
+
+
+def write_store(root: Path, data: dict) -> bool:
+    """Write the bundle for `data`; True when any file was written or removed.
+
+    Every file is rendered before the first is touched, so a guard or type failure writes
+    nothing. Then, in order: each changed lesson document; the removal of documents with no
+    record and of leftover temporary files; log.md; index.md last. The reserved files are pure
+    functions of the record set, so an interrupted write is repaired by the next one. The
+    caller holds the lock.
+    """
+    root = Path(root)
+    _refuse_pending(root)
+    return _write_bundle(root, data)
+
+
+def migrate(root: Path = CLAUDE, *, lock_timeout: float = 10.0) -> dict:
+    """Move the JSON store into the bundle; the JSON store is removed only once verified.
+
+    Under the lock: read the JSON store, write the full bundle, read the bundle back, and
+    compare it record for record (count, lesson_id set, equal records). Only on equality is
+    the JSON store removed. On any mismatch both forms stay in place and the call fails with
+    `migration-mismatch`. Re-running after an interruption repeats the whole procedure.
+
+    With both forms present the bundle is authoritative, so the JSON store may only complete
+    it, never overwrite it: the procedure runs only when every lesson the bundle already holds
+    is in the JSON store with an equal record, as after an interrupted or mismatched earlier
+    migration. When the bundle holds a lesson the JSON store lacks, or a record unequal to
+    its JSON record (a later harvest or governance action), the call fails with
+    `migration-mismatch` before anything is written: no bundle file changes and the JSON
+    store is kept.
+    """
+    root = Path(root)
+    if not legacy_store_path(root).exists():
+        return {"status": "no-legacy-store", "lessons": None, "documents": None,
+                "store": BUNDLE_REL, "legacy_removed": False, "store_digest": bundle_digest(root)}
+    with StoreLock(root, lock_timeout):
+        source = _read_legacy(root)
+        records = source["lessons"]
+        if not all(isinstance(l, dict) and set(l) == set(LESSON_FIELDS) for l in records):
+            raise KnowledgeError("migration-mismatch",
+                                 f"{LEGACY_STORE_REL} holds a record without exactly the lesson "
+                                 f"fields; nothing was written and the JSON store was kept")
+        want = sorted(({k: l[k] for k in LESSON_FIELDS} for l in records),
+                      key=lambda l: str(l.get("fingerprint")))
+        if bundle_exists(root):
+            by_id = {l["lesson_id"]: l for l in want}
+            present = (load_store(root) or {"lessons": []})["lessons"]
+            only = sorted(l["lesson_id"] for l in present if l["lesson_id"] not in by_id)
+            differ = sorted(l["lesson_id"] for l in present
+                            if l["lesson_id"] in by_id and l != by_id[l["lesson_id"]])
+            if only or differ:
+                found = []
+                if only:
+                    found.append(f"{len(only)} lesson(s) only in the bundle "
+                                 f"({', '.join(only)})")
+                if differ:
+                    found.append(f"{len(differ)} lesson(s) whose bundle record differs from "
+                                 f"the JSON record ({', '.join(differ)})")
+                raise KnowledgeError("migration-mismatch",
+                                     f"{BUNDLE_REL} already exists and is authoritative; it holds "
+                                     + " and ".join(found)
+                                     + f"; nothing was written and {LEGACY_STORE_REL} was kept. "
+                                     f"Reconcile the two before removing the JSON store")
+        written = _write_bundle(root, {"schema": STORE_SCHEMA, "lessons": want})
+        got = (load_store(root) or {"lessons": []})["lessons"]
+        problems = []
+        if len(got) != len(want):
+            problems.append(f"{len(got)} documents read back for {len(want)} records")
+        if {l["lesson_id"] for l in got} != {l["lesson_id"] for l in want}:
+            problems.append("the lesson_id sets differ")
+        if not problems and got != want:
+            problems.append("a record read back differs from its JSON record")
+        if problems:
+            raise KnowledgeError("migration-mismatch",
+                                 "; ".join(problems) + f"; {LEGACY_STORE_REL} was kept")
+        legacy_store_path(root).unlink()
+        return {"status": "migrated", "lessons": len(want),
+                "documents": len(_documents(bundle_path(root))), "store": BUNDLE_REL,
+                "bundle_written": written, "legacy_removed": True,
+                "store_digest": bundle_digest(root)}
 
 
 class StoreLock:
@@ -544,9 +866,10 @@ def harvest(root: Path = CLAUDE, *, lock_timeout: float = 10.0) -> dict:
                 for fp, occ in sorted(grouped.items())}
 
     outcome = {"status": "succeeded", "lessons": 0, "created": 0, "updated": 0,
-               "retained": 0, "store": STORE_REL, "store_written": False,
+               "retained": 0, "store": BUNDLE_REL, "store_written": False,
                "store_digest": None, **counters}
-    if not computed and not store_path(root).exists():
+    _refuse_pending(root)
+    if not computed and not bundle_exists(root):
         outcome["elapsed_seconds"] = round(time.monotonic() - started, 3)
         return outcome
 
@@ -580,7 +903,7 @@ def harvest(root: Path = CLAUDE, *, lock_timeout: float = 10.0) -> dict:
         data = {"schema": STORE_SCHEMA, "lessons": merged}
         outcome["store_written"] = write_store(root, data)
         outcome["lessons"] = len(merged)
-        outcome["store_digest"] = bytes_digest(canonical_bytes(data))
+        outcome["store_digest"] = bundle_digest(root)
     outcome["elapsed_seconds"] = round(time.monotonic() - started, 3)
     return outcome
 
@@ -657,14 +980,15 @@ def govern(root: Path, action: str, lesson_ref: str, *, actor: str, rationale: s
     elif action not in TRANSITIONS:
         raise KnowledgeError("request-validation-failure", f"unknown action {action!r}")
     root = Path(root)
-    if not store_path(root).exists():
-        raise KnowledgeError("unknown-lesson", f"no lesson store at {STORE_REL}; run harvest "
+    _refuse_pending(root)
+    if not bundle_exists(root):
+        raise KnowledgeError("unknown-lesson", f"no lesson bundle at {BUNDLE_REL}; run harvest "
                                                f"first")
     with StoreLock(root, lock_timeout):
         data = load_store(root)
         lesson = find_lesson(data, lesson_ref)
         if lesson is None:
-            raise KnowledgeError("unknown-lesson", f"no lesson {lesson_ref!r} in {STORE_REL}")
+            raise KnowledgeError("unknown-lesson", f"no lesson {lesson_ref!r} in {BUNDLE_REL}")
         before = lesson.get("status")
         if action == "annotate":
             after = before
@@ -709,15 +1033,14 @@ def recall(root: Path, phase: str, artifact_type: str) -> dict:
     root = Path(root)
     policy = load_policy(root)
     threshold = threshold_of(policy)
-    path = store_path(root)
     data = load_store(root)
     lessons = (data or {}).get("lessons") or []
     matches = [l for l in lessons if isinstance(l, dict) and eligible(l, threshold)
                and phase in (l.get("phases") or []) and l.get("artifact_type") == artifact_type]
     ranked = sorted(matches, key=rank_key)[:RECALL_CAP]
     return {
-        "store": STORE_REL,
-        "store_digest": bytes_digest(path.read_bytes()) if data is not None else None,
+        "store": BUNDLE_REL,
+        "store_digest": bundle_digest(root) if data is not None else None,
         "threshold": threshold,
         "matched": len(matches),
         "lessons": [{k: l.get(k) for k in SLICE_FIELDS} for l in ranked],
@@ -908,6 +1231,9 @@ def main(argv=None) -> int:
     rc.add_argument("--json", action="store_true")
     rp = sub.add_parser("report", help="per-lesson effectiveness: shown, recurred, unwarned")
     rp.add_argument("--json", action="store_true")
+    mg = sub.add_parser("migrate", help="move the JSON lesson store into the lesson bundle, "
+                                        "removing it only once verified")
+    mg.add_argument("--json", action="store_true")
     args = ap.parse_args(argv)
     root = Path(args.root)
     try:
@@ -923,10 +1249,10 @@ def main(argv=None) -> int:
             print(f"skipped        : unresolved {out['unresolved']}, empty failure lists "
                   f"{out['empty_failure_lists']}, non-check IDs {out['skipped_ids']}, "
                   f"unreadable files {out['unreadable_files']}")
-            print(f"store          : {STORE_REL}  "
+            print(f"store          : {BUNDLE_REL}  "
                   f"({'written' if out['store_written'] else 'unchanged'}"
                   + (f", {out['store_digest']}" if out["store_digest"] else "") + ")")
-            if store_path(root).exists():
+            if bundle_exists(root):
                 _print_lessons(root)
             return 0
         if args.cmd == "list":
@@ -951,6 +1277,20 @@ def main(argv=None) -> int:
                   f"match(es) for {args.phase} -> {args.artifact}")
             for line in render_section(got["lessons"]):
                 print(line)
+            return 0
+        if args.cmd == "migrate":
+            out = migrate(root)
+            if args.json:
+                print(json.dumps(out, indent=2, sort_keys=True))
+                return 0
+            if out["status"] == "no-legacy-store":
+                print(f"migrate        : nothing to do, no {LEGACY_STORE_REL} "
+                      f"(bundle {BUNDLE_REL}"
+                      + (f", {out['store_digest']})" if out["store_digest"] else " absent)"))
+                return 0
+            print(f"migrate        : {out['lessons']} lesson(s) verified record for record; "
+                  f"{out['documents']} document(s) in {BUNDLE_REL}, {out['store_digest']}")
+            print(f"removed        : {LEGACY_STORE_REL}")
             return 0
         if args.cmd == "report":
             rep = effectiveness(root)

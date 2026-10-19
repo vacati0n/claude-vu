@@ -38,6 +38,7 @@ with the evidence the deciding role relied on, never with an unsupported asserti
 | `FR-10` | Rollback is stated: what reverting this change requires, and what evidence would be invalidated by reverting it | mandatory | tech-lead | inspection |
 | `FR-11` | The multi-phase state machine still proves out end to end | advisory | qa | `python .claude/runtime/verify_multi_phase.py --run-id run-c5a8d50d3238` |
 | `FR-12` | A release note draft exists where the change alters behaviour a consumer of the framework depends on | advisory | documentation | inspection |
+| `FR-13` | The lesson bundle conforms to OKF v0.2 §11 | advisory | qa | `python .claude/runtime/verify_okf_bundle.py` |
 
 ## Obligations
 
@@ -49,6 +50,10 @@ with the evidence the deciding role relied on, never with an unsupported asserti
 illegal-transition probe in the system temp directory, which a sandboxed shell may refuse to
 write. The check itself is not weaker than `FR-04`; its runnability is environment-dependent, and
 an item that cannot be run everywhere must not silently become a blocker that is skipped.
+
+`FR-13` is advisory because the lesson bundle is evidence the framework derives, not a release
+contract: a non-conforming bundle is a finding to repair with the next lesson write, and an
+absent bundle (a checkout that has harvested nothing) passes.
 
 ## Owner Roles
 

@@ -27,14 +27,14 @@ frameworkChangeProposal:
 ## Authoring Baseline
 
 - Authored at: 2026-10-19T07:40:00Z
-- Runtime version: 0.10.1. The run was submitted at 0.10.0, and this change raises it.
+- Runtime version: 0.11.1. The run was submitted at 0.10.0. The `FC-026` change raised it to 0.11.0 on the main line while this run was in flight, and this change raises it to 0.11.1 at merge.
 - Dispatchable phases framework-wide: 37 of 37
 - Routed workflow dispatchable phases: `triage-and-impact`, `root-cause-analysis`, `fix-implementation`, `regression-validation`, `closure-and-communication`
 
 ## Change Statement
 
 - Objective: close `FC-027` open item `O-002`. `clearing_action` in `runtime/framework_runtime.py` built its `release` command with `--detail <what happened>`, which is free text in angle brackets, unquoted. That command is the clearing action for a state work item blocked `awaiting_recovery_task` that no guard raised, and the optional reclaim in the retry-class prose. bash, PowerShell and cmd.exe all reject it before `release` runs. `verify_recovery.placeholders` flags it, so `X1` rejects any open envelope that carries it. The root-cause analysis found the cause: `--detail` needs no human judgement, but the builder left it a placeholder instead of filling it the way the gate and policy-exception branches fill theirs.
-- In scope: `runtime/framework_runtime.py`. `clearing_action` now fills `--detail` with fixed text, quoted by the existing `_shell_word` helper: "operator cleared the block with the prescribed release action". The `none required` retry prefix, the `release` subcommand and every other branch are unchanged. `RUNTIME_VERSION` goes from 0.10.0 to 0.10.1, as `FR-07` requires. Also in scope: `tests/test_release_clearing_action.py` (added, 12 tests built only from the builder's output), the version pin in `tests/test_knowledge.py`, and the run `run-34fbc64712b5` over `fix-bug`.
+- In scope: `runtime/framework_runtime.py`. `clearing_action` now fills `--detail` with fixed text, quoted by the existing `_shell_word` helper: "operator cleared the block with the prescribed release action". The `none required` retry prefix, the `release` subcommand and every other branch are unchanged. `RUNTIME_VERSION` gets a patch rise, as `FR-07` requires: 0.10.0 to 0.10.1 in the run, and 0.11.0 to 0.11.1 once merged over `FC-026`. Also in scope: `tests/test_release_clearing_action.py` (added, 12 tests built only from the builder's output), the version pin in `tests/test_knowledge.py`, and the run `run-34fbc64712b5` over `fix-bug`.
 - Out of scope: any verifier change, and no `X1` exemption, as the Triage Gate required. The 33 committed failure-envelope entries in 14 runs that carry the old text, all resolved and left as recorded. The `runtime/README.md` synopsis that still shows `--detail "<what happened>"`, which the Triage Gate made optional (`O-004`). The retry reclaim's no-op on a `retrying` item (`O-003`).
 - Acceptance basis: the run was planned through the framework by the routed command. Every phase of the routed workflow was executed by a host-dispatched subagent and accepted by its registered validator. All four gates were approved with producer exclusion held. The new tests fail against the old text as mutation witnesses, and every verifier passes on a temporary copy of the tree.
 
@@ -44,7 +44,7 @@ frameworkChangeProposal:
 |---|---|---|---|
 | `.claude/runtime/framework_runtime.py` | `SR-1` | in-scope | `clearing_action` detail and `RUNTIME_VERSION`: the change this proposal carries |
 | `tests/test_release_clearing_action.py` | no rule | out-of-scope | Outside the framework surface; the regression tests the Validation Plan names |
-| `tests/test_knowledge.py` | no rule | out-of-scope | Outside the framework surface; the exact `RUNTIME_VERSION` pin moves to 0.10.1 (`V-002`) |
+| `tests/test_knowledge.py` | no rule | out-of-scope | Outside the framework surface; the exact `RUNTIME_VERSION` pin moves to 0.11.1 (`V-002`, 0.10.1 in the run) |
 | `.claude/runs/run-34fbc64712b5/` | `SR-3` | out-of-scope | Run evidence written during the run |
 | `.claude/runs/inputs/release-clearing-action-placeholder-defect-report.md` | `SR-3` | out-of-scope | The supplied `defect-report` input |
 | `.claude/proposals/framework-change-proposal-FC-029.md` | `SR-5` | out-of-scope | This proposal: the governance record of the routed change, not a second change |
@@ -137,7 +137,7 @@ Producer exclusion held at every gate. No gate was decided by the agent that pro
 | `FR-04` | Committed evidence still verifies | pass | `verify_vertical_slice.py`: 10/10 PROVEN |
 | `FR-05` | Self-hosting governance resolves | pass | `S6` accepts this proposal and `S7` passes for `run-34fbc64712b5`; `S8` does not list it |
 | `FR-06` | Change carried by the routed command with a linked proposal | pass | `run-34fbc64712b5` is a `/bugfix` run over `fix-bug`; this proposal links its artifacts |
-| `FR-07` | `RUNTIME_VERSION` moved only if runtime behaviour changed | pass | 0.10.0 to 0.10.1; the emitted clearing action changed. A patch rise, because no capability was added |
+| `FR-07` | `RUNTIME_VERSION` moved only if runtime behaviour changed | pass | 0.11.0 to 0.11.1 on the main line (0.10.1 when the run delivered it); the emitted clearing action changed. A patch rise, because no capability was added |
 | `FR-08` | Documentation matches delivered behaviour | pass | No document describes the emitted detail text. The README synopsis shows the operator's own `--detail` as a quoted placeholder, which stays valid usage (`O-004`) |
 | `FR-09` | Capability claims backed by evidence, gaps recorded | pass | Every claim cites a run artifact or a command re-run at authoring. The latent reachability, the reclaim no-op, `DF-001` and the single-host evidence are disclosed |
 | `FR-10` | Rollback stated | pass | Risk and Rollback above |
@@ -155,7 +155,7 @@ Producer exclusion held at every gate. No gate was decided by the agent that pro
 | `O-005` | `DF-001`: a `verify_recovery.py` crash in `wait_for_backoff` (`available_at` None), seen once under heavy load and not reproduced; owed its own fix-bug run (`FU-005`) | qa | Open; not caused by this change |
 | `O-006` | The host's agent adapter and this run's gate records still name the retired agent identifiers; the dispatched agents loaded the current registrations (`FU-006`) | architect | Open |
 | `O-007` | Behaviour was confirmed on one Windows host only (`FU-008`) | qa | Open until CI runs |
-| `O-008` | The knowledge harvest rewrote `memory/lessons/lessons.store.json` in the working tree with lessons from earlier committed runs. This change does not commit it, as `FC-027` did not; the run's harvest record names that store digest | architect | Open |
+| `O-008` | During the run, the knowledge harvest rewrote the lessons store in the working tree with lessons from earlier committed runs. This change does not commit that rewrite, as `FC-027` did not; the run's harvest record names that store digest. `FC-026` has since moved the store to a bundle | architect | Open |
 
 ## Sign-off
 

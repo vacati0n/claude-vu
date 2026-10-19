@@ -374,16 +374,32 @@ upsert keyed by that semantic fingerprint: evidence fields are recomputed, gover
 carry over, and unchanged evidence yields a byte-identical store. A repository with no `runs/`
 harvests zero lessons and writes nothing.
 
-**Store and lifecycle.** `memory/lessons/lessons.store.json` (schema
-`framework.memory/lessons.v1`), written atomically under the lock file
-`memory/lessons/lessons.store.lock`. A new lesson is `candidate`, owned by the policy's
+**Store and lifecycle.** `memory/lessons/`, an Open Knowledge Format (OKF) v0.2 bundle: one
+concept document `L-<10 hex>.md` per lesson, whose frontmatter carries `type: Lesson`, title,
+description, tags, sources, generated, verified, an OKF status (`candidate` draft, `active`
+stable, `retired` deprecated), `stale_after` for a retained lesson only, and the full lesson
+record under `lesson_record`; plus the reserved files `index.md` (frontmatter `okf_version` only,
+one link entry per lesson) and `log.md` (dated headings, newest first, one Creation entry per
+lesson and one Update or Deprecation entry per governance action, no free text). Both reserved
+files are derived from the lesson records and never read back. A write holds the lock file
+`memory/lessons/lessons.lock`, renders every file first, then replaces each changed document,
+removes documents with no record and leftover temporary files, and rewrites `log.md` and
+`index.md` last; each file goes through a temporary file and `os.replace` and is skipped when its
+bytes are equal, so unchanged evidence leaves every file byte-identical and an interrupted write
+is repaired by the next one. The `store_digest` that recall and `knowledge-harvest.json` report
+is the digest over each root `.md` file name and its sha256. A checkout still holding the
+pre-bundle JSON store runs `knowledge.py migrate` once: it writes the
+bundle, reads it back, compares it record for record, and removes the JSON store only on
+equality (`migration-mismatch` otherwise, keeping both). Until then every reader and writer
+refuses with `store-migration-pending`. `runtime/verify_okf_bundle.py` checks the
+bundle against OKF v0.2 §11 (release checklist item `FR-13`, advisory). A new lesson is `candidate`, owned by the policy's
 `default_owner`, with a generated rationale. `knowledge.py approve` makes it `active`,
 `knowledge.py retire` makes it `retired`, and `knowledge.py annotate` attaches a one-line
 operator remedy of at most 200 printable characters (refused when it looks like a credential);
 each requires an actor and a rationale and appends one history entry. Nothing is deleted: a
 retired lesson, or one whose evidence has gone (`evidence_state: retained`), keeps its history.
-The store is JSON, so the memory optimizer never rewrites it. It holds one repository's
-lessons and is never copied into another repository.
+The memory optimizer denies the `memory/lessons` path, so it never rewrites the bundle. The
+bundle holds one repository's lessons and is never copied into another repository.
 
 **Eligibility.** A lesson is eligible for hydration when it is `active`, or when it is a
 `candidate` recurring in at least `auto_eligible_distinct_runs` distinct runs (two by default,

@@ -1,0 +1,48 @@
+---
+okf_version: "0.2"
+---
+# Lessons
+
+- [validation-check V4.1 on execution-plan.md](L-9b5801a992.md) - Every task carries all eight declared fields
+- [validation-check V4.8 on execution-plan.md](L-9f498451bb.md) - Every task states at least one acceptance criterion
+- [validation-check V8.2 on execution-plan.md](L-2120d10ba2.md) - Declared capabilities exist in agents/capability-matrix.md
+- [validation-check C4.3 on implementation-report.md](L-764bff2fee.md) - Fields with a declared substance floor carry more than a token answer
+- [validation-check C7.1 on implementation-report.md](L-4001c21edb.md) - Metadata digests match the frozen snapshot recorded in the invocation envelope
+- [validation-check C3.2 on release-note.md](L-ae8d96f7c5.md) - No model, vendor, or provider named
+- [validation-check R1 on release-note.md](L-3999fb5c73.md) - releaseVerdict is one of released, partial, rolled-back, handed-off, findings-published, delta-published
+- [validation-check R2 on release-note.md](L-a73334458a.md) - The version in the metadata block and in the Metadata section are the same
+- [validation-check R7 on release-note.md](L-a1c32dc2c2.md) - The version is a recognisable version string
+- [validation-check R8 on release-note.md](L-d5b14c79b4.md) - The release position is supported by the evidence type it is read off
+- [validation-check R9 on release-note.md](L-1a032fb882.md) - The release position is one the phase's communication basis yields
+- [validation-check C3.2 on scope-definition.md](L-7589a73850.md) - No model, vendor, or provider named
+- [validation-check C7.1 on scope-definition.md](L-32cc91b20e.md) - Metadata digests match the frozen snapshot recorded in the invocation envelope
+- [validation-check SD4 on scope-definition.md](L-479b3eeb81.md) - Every acceptance criterion names the in-scope item it bounds
+- [validation-check D10.1 on technical-design.md](L-51be31d9d4.md) - Every contract-change module appears in the API and Data Model Impact section
+- [validation-check D11.5 on technical-design.md](L-d84ea03af4.md) - No milestone, schedule, or resourcing commitment appears in the delivery plan
+- [validation-check D12.3 on technical-design.md](L-22390c2ab0.md) - Risk class and likelihood use the declared vocabularies
+- [validation-check D12.5 on technical-design.md](L-d1d17da655.md) - Security and compliance impact is assessed, with a reason when none is identified
+- [validation-check D13.2 on technical-design.md](L-54d9e5c9d8.md) - Effort is never expressed as a duration
+- [validation-check D13.3 on technical-design.md](L-0c65ee3df9.md) - The scope assumptions behind the estimate are stated
+- [validation-check D14.3 on technical-design.md](L-16562ce500.md) - Every open decision owner resolves to a known agent
+- [validation-check D15.1 on technical-design.md](L-58d9ae3d2e.md) - Every named gate exists in workflows/workflow-gate-matrix.md
+- [validation-check D15.2 on technical-design.md](L-48df21734d.md) - Every referenced agent resolves in registry/agents.yaml or under agents/
+- [validation-check D16.1 on technical-design.md](L-4a60ec1bdb.md) - Lateral closure: every referenced identifier is defined in its own register
+- [validation-check D16.4 on technical-design.md](L-4619b980fc.md) - No supplied planner task is left unaddressed by the sequencing constraints
+- [validation-check D17.1 on technical-design.md](L-78c060dbd9.md) - Every architecture-significant decision has exactly one decision record
+- [validation-check D17.7 on technical-design.md](L-d7942f3a5a.md) - Every decision record's alternatives are carried from the package evaluation table
+- [validation-check D2.4 on technical-design.md](L-14a79151cb.md) - No unpermitted level-2 sections introduced; supplementary material is an appendix
+- [validation-check D3.5 on technical-design.md](L-41c5dd8f64.md) - No sign-off line is signed by the producing agent
+- [validation-check D3.6 on technical-design.md](L-a6553862f3.md) - No model, vendor, provider, or agent runtime named
+- [validation-check D4.1 on technical-design.md](L-22847e61b4.md) - Every architectural objective traces to a statement identifier
+- [validation-check D4.3 on technical-design.md](L-6e77db508d.md) - Every requirement traces to a statement identifier
+- [validation-check D5.5 on technical-design.md](L-58915e88ef.md) - Constraint class and force use the declared vocabularies
+- [validation-check D7.1 on technical-design.md](L-86e0622785.md) - Every reuse survey row states capability, candidate, outcome, and rationale
+- [validation-check D7.2 on technical-design.md](L-bfdb9bc126.md) - Every reuse outcome uses the declared vocabulary
+- [validation-check D8.2 on technical-design.md](L-6af13c8ccc.md) - Every option is evaluated against every recorded criterion
+- [validation-check D8.3 on technical-design.md](L-606ac5af7f.md) - Every eliminated option names the hard constraint it violates
+- [validation-check D8.4 on technical-design.md](L-6701578f8b.md) - The recorded selection is the option the evaluation table marks selected
+- [validation-check D8.5 on technical-design.md](L-cf715d2dd9.md) - At least one rejected alternative is recorded with its rationale
+- [validation-check D8.6 on technical-design.md](L-b3ac2f97e3.md) - Tradeoffs accepted by the selection are stated
+- [validation-check D9.2 on technical-design.md](L-750011a2d2.md) - decisionRecords lists exactly the architecture-significant decisions
+- [gate-rejection Fix Gate on implementation-report.md](L-de4ac3f115.md) - Gate 'Fix Gate' rejected the evidence of phase 'fix-implementation' and the phase was sent back for rework
+- [gate-rejection Review Gate on review-package.md](L-7f80924b57.md) - Gate 'Review Gate' rejected the evidence of phase 'quality-review' and the phase was sent back for rework

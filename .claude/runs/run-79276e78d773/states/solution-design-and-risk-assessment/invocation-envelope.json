@@ -1,0 +1,774 @@
+{
+  "invocation_id": "inv-79276e78d773-03-002",
+  "run_id": "run-79276e78d773",
+  "work_item_id": "run-79276e78d773::solution-design-and-risk-assessment",
+  "idempotency_key": "sha256:5b3453d60e812c9889dfc56ebb89e487",
+  "state_id": "solution-design-and-risk-assessment",
+  "phase_index": 3,
+  "agent_id": "architect",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/architect.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/architect/manifest.yaml",
+    "load_order": [
+      "agents/architect/system.md",
+      "agents/architect/identity.md",
+      "agents/architect/reasoning.md",
+      "agents/architect/execution.md",
+      "agents/architect/output.md",
+      "agents/architect/quality.md",
+      "agents/architect/examples.md"
+    ],
+    "module_digests": {
+      "agents/architect/system.md": "sha256:33d317684aece20ce5b970f6b595c107",
+      "agents/architect/identity.md": "sha256:fc073d2135f891349e8f6639243819e3",
+      "agents/architect/reasoning.md": "sha256:1b050c733dde6e76cac3bd0882b5ceea",
+      "agents/architect/execution.md": "sha256:eccf44aede67c91ba47cae943efb93cf",
+      "agents/architect/output.md": "sha256:63a9e786aaef073f0cee8fe992ea05fd",
+      "agents/architect/quality.md": "sha256:ce1c8f09d9d185400063ec43b073d0c7",
+      "agents/architect/examples.md": "sha256:4badefef323665829e5d262b4d0c6839"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/architect/system.md",
+        "agents/architect/reasoning.md",
+        "agents/architect/output.md",
+        "agents/architect/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/architect/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/architect/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/architect/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 51235,
+      "full_bytes": 110389
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "architecture-analysis",
+      "impact-analysis",
+      "technical-approach-definition",
+      "reuse-assessment",
+      "option-evaluation",
+      "architecture-decision-authoring",
+      "sequencing-guidance",
+      "structural-risk-analysis",
+      "architecture-estimation"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Primary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S01",
+        "registryIdentifier": "clean-architecture-checklist",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S09",
+        "registryIdentifier": "secure-engineering",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "required",
+      "area": "database",
+      "basis": "area database triggered by 'migration' in input:feature-request",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in input:architecture-context",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "required",
+      "area": "performance",
+      "basis": "area performance triggered by 'profile' in input:change-request",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "change-request",
+      "feature-request",
+      "business-intent",
+      "architecture-context",
+      "execution-plan",
+      "architecture-decision-records",
+      "dependency-inventory",
+      "module-boundaries",
+      "non-functional-requirements",
+      "operability-security-compliance-constraints",
+      "incident-history",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/okf-lessons-feature-request.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-feature-request.md",
+        "text": "# Feature Request \u2014 Lesson Store as an Open Knowledge Format Bundle\n\n## Request\n\nStore the framework's harvested lessons in the Open Knowledge Format (OKF) v0.2, published at\nhttps://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md, instead of the\nsingle JSON document `memory/lessons/lessons.store.json` introduced by FC-022.\n\nToday every lesson lives in one framework-private JSON file (schema `framework.memory/lessons.v1`).\nOnly `runtime/knowledge.py` can read it. It carries no provenance or trust metadata that a third\nparty would understand, and it cannot be browsed, linked or reviewed as documents. OKF is an open,\nvendor-neutral format built for this: a directory of markdown concept documents with YAML\nfrontmatter, plus reserved `index.md` and `log.md` files.\n\n## Expected outcome\n\n1. **Bundle.** The lesson store becomes an OKF bundle directory under `memory/lessons/`. The\n   bundle has one markdown concept document per lesson, a root `index.md` that declares\n   `okf_version: \"0.2\"`, and a `log.md` change log.\n2. **Concept documents.** Each lesson document's YAML frontmatter carries the following:\n   - non-empty `type`, `title`, `description` and `tags`;\n   - `sources` (SPEC \u00a75.1): one entry per run artifact the lesson was harvested from. Each entry\n     has a required `resource`;\n   - `generated` (\u00a75.2): `{by, at}`, where `by` is an actor of the form `<producer>/<version>`;\n   - `verified` (\u00a75.3) where the lesson has been confirmed. An operator approval uses a\n     `human:<id>` actor, and a machine confirmation uses a `process:<id>` actor;\n   - `status` (\u00a75.4): `draft`, `stable` or `deprecated`, mapped from the governance state\n     (`candidate`, `active`, `retired`);\n   - `stale_after` (\u00a75.5) where it applies;\n   - every other lesson field, kept as a producer extension key so that nothing FC-022 records is\n     lost.\n\n   Every timestamp is ISO 8601 with a UTC offset, and every actor follows \u00a77.\n3. **Same loop.** These parts read and write the bundle: harvest, governance (approve, retire,\n   annotate), recall, effectiveness and the aggregation step. For the same lessons, the rendered\n   prompt section (`render_section`) is byte-for-byte unchanged, including the CR-005\n   neutralisation. Re-harvesting unchanged evidence leaves the bundle byte-identical.\n4. **Conformance check.** The framework's verification tooling gains a deterministic check of the\n   bundle against OKF \u00a711, which can also be run standalone. The check confirms three things:\n   - every non-reserved `.md` has parseable YAML frontmatter;\n   - every frontmatter block has a non-empty `type`;\n   - the reserved files follow \u00a78 and \u00a79 when they are present.\n5. **Migration.** The 42 existing lessons are migrated into the bundle with their governance\n   history intact, and the JSON store is removed.\n\n## Constraints\n\n- No run evidence under `runs/` is edited.\n- Only the standard library is used; there is no third-party YAML dependency.\n- The bundle stays out of the installed payload and the bundled mirror, as the JSON store did.\n- The memory optimiser must not rewrite the bundle.",
+        "digest": "sha256:68967bc015098f6c332ca509f1a73b76"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/okf-lessons-change-request.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-change-request.md",
+        "text": "# Change Request \u2014 Lesson Store as an Open Knowledge Format Bundle\n\n## Change class\n\nThe change class is `capability-addition`, per the Routing Table in `config/self-hosting-profile.md`.\nThe framework gains two things it did not have: a new storage contract for lessons (an OKF v0.2\nbundle) and a conformance-check capability.\n\nClassification evidence:\n- `python .claude/runtime/self_hosting.py classify --path` returns framework-internal (`SR-1`) for\n  both `runtime/knowledge.py` and `memory/lessons/lessons.store.json`.\n- `python .claude/runtime/self_hosting.py route --intent capability-addition` returns\n  `/implement` over `implement-feature` v1.0.0 at `scope-and-acceptance`.\n\n## Surfaces this change is expected to touch\n\n| Surface | Nature of change |\n|---|---|\n| `runtime/knowledge.py` | Bundle reader and writer, frontmatter serialiser and parser, migration, OKF \u00a711 conformance check, command line |\n| `runtime/` (verifier; the carrier is chosen in design) | Standalone deterministic OKF conformance verifier |\n| `validation/framework-release-checklist.md` | Possibly an advisory item that runs the conformance verifier |\n| `memory/lessons/` | The JSON store is replaced by the bundle: `index.md`, `log.md`, and one concept document per lesson |\n| `memory/README.md`, `memory/memory-governance.md`, `memory/memory-resolver.md`, `config/runtime.md` | Describe the bundle |\n| `runtime/optimize_memory.py` | Possibly: keep the bundle out of the optimiser |\n| `omn_agent/source.py` | The installer exclusion covers the bundle |\n| `tests/test_knowledge.py` | Tests for bundle round trip, idempotency, migration and conformance |\n| `omn_agent/_bundled_payload/**` | Mirror refreshed with `python tests/test_bundled_payload.py --sync` |\n\n## Not touched\n\nThe change does not touch gates, artifact validators, Phase Model tables, agent module text, or run\nevidence under `runs/`.",
+        "digest": "sha256:8421834b6a46a2a11175f90e398440c1"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/okf-lessons-business-intent.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-business-intent.md",
+        "text": "# Business Intent \u2014 Lesson Store as an Open Knowledge Format Bundle\n\n## Problem\n\nThe framework's lessons hold what it has learned about what goes wrong in runs, and they are\nlocked in a private JSON schema. Three things follow from that:\n- operators cannot read the lessons as documents;\n- other tools cannot consume them;\n- nothing in the file tells an outside reader who produced a lesson or who confirmed it.\n\n## Intent\n\nStore the framework's learned knowledge in an open, vendor-neutral knowledge format, so that it is\nportable and can be reviewed. The change must not lose any governance or behaviour that the\nknowledge loop has today.\n\n## Success\n\n- The lesson store is a conformant OKF v0.2 bundle, and a deterministic check proves it.\n- Each lesson states, in the format's own terms, where it came from (`sources`, `generated`) and\n  how far it can be trusted (`verified`, `status`).\n- At dispatch, agents are shown exactly the same lesson text as before.\n- No gate, validator, or acceptance rule is weakened, and every verifier stays at its recorded\n  baseline.\n\n## Non-goals\n\n- Publishing the bundle outside the repository, or shipping it to installed copies.\n- Changing which lessons are harvested, when they become eligible, or how they are ranked.\n- Converting any other `memory/` document to OKF.",
+        "digest": "sha256:cb8d061443933d4978cd60b68fbb7d80"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/okf-lessons-architecture-context.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-architecture-context.md",
+        "text": "# Architecture Context \u2014 Lesson Store as an Open Knowledge Format Bundle\n\n## The current store\n\n- `runtime/knowledge.py` (FC-022) owns the store through three pieces:\n  - `load_store(root)` returns the document `{schema, lessons: [...]}`, or None.\n  - `write_store(root, data)` writes canonical bytes atomically, through a temporary file and\n    `os.replace`, and only when the bytes differ.\n  - `StoreLock` is an exclusive lock file, `memory/lessons/lessons.store.lock`.\n\n  Harvest, governance, recall, effectiveness, the report and the aggregation step all go through\n  `load_store` and `write_store`. If their dict interface stays the same, every caller stays\n  unchanged.\n- A lesson record has a closed field list (`LESSON_FIELDS`):\n  - `lesson_id`: `L-` plus 10 hex characters of the fingerprint digest;\n  - `fingerprint`, `kind`, `artifact_type`, `check_id`, `check_description`, `check_severity`,\n    `gate`, `phases`, `occurrences`, `distinct_runs`, `first_seen`, `last_seen`;\n  - `evidence`: run-relative references such as `runs/<run>/events.jsonl#E-0029`;\n  - `evidence_state`, `status`, `owner`, `rationale`, `remedy`;\n  - `history`: governance actions, each with an actor and a time.\n\n  Timestamps have the form `YYYY-MM-DDTHH:MM:SSZ`.\n- `render_section` builds the bounded, labelled prompt section from lesson records, and\n  neutralises every field (CR-005). It must receive the same records as before.\n\n## OKF v0.2 essentials\n\n- **Files.** `index.md` and `log.md` are reserved. Every other `.md` is a concept document.\n- **Frontmatter.** It is delimited by `---`, and `type` is the only required key. Consumers must\n  preserve unknown keys.\n- **Provenance and trust fields:**\n  - `sources` entries require `resource`;\n  - `generated` requires `by`;\n  - `verified` is a list of `{by, at}`, and a bare map counts as one entry;\n  - `status` defaults to `stable`;\n  - `stale_after` is an absolute instant.\n- **Actors** take one of three forms: `<producer>/<version>`, `human:<id>` or `process:<id>`.\n- **index.md.** A root `index.md` may carry only one frontmatter key, `okf_version: \"0.2\"`. Its\n  body is `# Heading` sections of `* [Title](url) - desc` entries.\n- **log.md.** It starts with `# Title`, followed by `## YYYY-MM-DD` groups, newest first. Entries\n  have the form `* **Creation|Update|Deprecation**: ...`.\n- **\u00a711 conformance:**\n  - every non-reserved `.md` has parseable frontmatter;\n  - every frontmatter block has a non-empty `type`;\n  - the reserved files follow \u00a78 and \u00a79.\n\n## Constraints from the codebase\n\n- The standard library has no YAML parser. The change needs a deterministic writer, and a parser\n  for the subset that the writer emits. The conformance check must parse the frontmatter it judges.\n- `omn_agent/source.py` excludes paths by fnmatch on the name of each path part\n  (`EXCLUDE_PATTERNS`, today `lessons.store.*`). That pattern does not cover a bundle of `index.md`,\n  `log.md` and `L-*.md` files, and generic names such as `index.md` cannot be excluded by name\n  alone.\n- `runtime/optimize_memory.py` rewrites `memory/*.md` to reduce token cost. It skips three kinds of\n  file: denied path segments, denied names, and files that declare themselves generated.\n- The memory directory is excluded from the context slice (`memory/*`), so the bundle's documents\n  are not slice members.\n- Tests in `tests/test_knowledge.py` reference `STORE_REL`, the JSON file name, and the\n  `lessons.store.*` exclusion. The backward-compatibility tests compare a dispatch by the 0.9.0\n  runtime with a current one.\n- `change_proposal_validator.py` F9 validates release checklist items per proposal, and requires\n  only the mandatory items. A new mandatory item would therefore invalidate every recorded proposal.\n\n## Authoring rules\n\n- Artifact validators reject the substring of the host vendor name (check `C3.2`), so write paths\n  without the dot-directory prefix.\n- Never edit `runs/` evidence.\n- Edit the framework directory, then run `python tests/test_bundled_payload.py --sync`.",
+        "digest": "sha256:8859dd1736058635fdf5470ac277b2dc"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-79276e78d773/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/hopeful-einstein-00bc6a/.claude/runs/run-79276e78d773/states/execution-planning/artifacts/execution-plan.md",
+        "text": "```yaml\nplan:\n  planId: PLAN-79276e78d773-okf-lesson-bundle\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/okf-lessons-feature-request.md\n  producedBy: planner\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  inputDigest: sha256:68967bc015098f6c332ca509f1a73b76\n  contextDigest: sha256:d78ae7219c9213d6226b6f0ad2b306d4\n```\n\n## Executive Summary\n\nThis plan moves the framework's harvested lessons from one framework-private JSON document into an OKF v0.2 bundle under the lesson memory location, for the operators who review and govern lessons, the agents that receive lessons at dispatch, and tools outside the runtime. Success means a deterministic standalone check judges the bundle conformant and every lesson states its origin and trust. The knowledge loop, the dispatched lesson text and every existing verdict must also stay as they were (BO-1 to BO-5). The work is 39 tasks in 13 execution waves: twelve design and decision tasks, sixteen implementation-phase tasks, eight review and verification tasks, and three closure tasks. The highest-impact risk is R-008: lesson field content could alter the structure of a frontmatter block, the root index or the change log, which would defeat the existing neutralisation of dispatched text. The plan status is complete. The five blocking scope questions were settled at the Scope Gate, and the two remaining questions, Q-001 and Q-002, are non-blocking and close during design.\n\n## Business Objectives\n\n- BO-1: Operators and tools outside the runtime can read, browse and review every lesson as an open-format document. Measured by the conformance check passing the bundle and by the root index linking every lesson document (S-001, S-002, S-011, S-017).\n- BO-2: Each lesson states where it came from and how far it can be trusted. Measured by every lesson document carrying sources, generated and status, and carrying verified exactly where an operator approved it (S-003, S-004).\n- BO-3: The knowledge loop keeps its governance and behaviour with no loss. Measured by loop-step parity, byte-identical dispatched lesson text, idempotent re-harvest, interruption safety and complete migration of identifiers, fields and history (S-005, S-006, S-007, S-008, S-009, S-010, S-012).\n- BO-4: The change weakens no framework protection or distribution boundary. Measured by unchanged run evidence, unchanged baseline verdicts, an optimiser that leaves the bundle alone, and a bundle that is absent from the payload and the mirror (S-013, S-014, S-015, S-016).\n- BO-5: Operators find current documentation of the lesson store. Measured by the memory documents naming the bundle as the lesson store (S-018).\n\n## Technical Objectives\n\n- TO-1: Bundle files conform to OKF v0.2 \u00a711, as decided by a deterministic check that runs standalone. Traces to BO-1. Verified by T-023.\n- TO-2: Frontmatter serialisation uses the standard library only, is byte-stable for equal input, and round-trips every lesson field value exactly. Traces to BO-2 and BO-3. Verified by T-005 and T-015.\n- TO-3: Every bundle file write leaves that file complete under interruption, and is skipped when its bytes are unchanged. Traces to BO-3. Verified by T-018 and T-015.\n- TO-4: Every date and generated value in the bundle derives from lesson record fields, never from write time. Traces to BO-3. Verified by T-015.\n- TO-5: No lesson field value can alter the structure of a lesson document, the root index or the change log. Traces to BO-2 and BO-3. Verified by T-016 and T-005.\n- TO-6: The bundle path is excluded from the installed payload, the bundled mirror and the memory optimiser, and no other path is newly excluded. Traces to BO-4. Verified by T-029 and T-033.\n\n## Scope\n\nNotation: S-001 to S-018 are the In Scope items of scope-definition (sha256:81bea5e4244406eb46c1b8bcf2b47c2a), adopted unchanged as this plan's statements. AC-nnn names that artifact's acceptance criterion nnn. SQ-nnn names its open question nnn. D-nnn and X-nnn are its decisions and exclusions. \"Scope Gate ruling\" cites the approved Scope Gate decision recorded in the run state. Surfaces come from the change request (sha256:8421834b6a46a2a11175f90e398440c1) and the architecture context (sha256:8859dd1736058635fdf5470ac277b2dc). The task context names no repository files, so no repository rescan was performed.\n\n### In Scope\n\n- S-001: Lessons are held as a bundle with one document per lesson, a root index declaring the OKF version, and a change log. Covered by T-001, T-002, T-003, T-004, T-005.\n- S-002: Each lesson document states a non-empty type, title, description and tags. Covered by T-004, T-005, T-006, T-007, T-008.\n- S-003: Each lesson document states its source run artifacts, and the producer that generated it and when. Covered by T-004, T-005, T-006, T-007, T-008.\n- S-004: Each lesson document states its operator approval and its status as draft, stable or deprecated. Covered by T-004, T-005, T-006, T-007, T-008, T-009, T-010.\n- S-005: Every other lesson field, governance history included, stays readable under its own key. Covered by T-004, T-005, T-006, T-007, T-008.\n- S-006: The change log records each creation and each governance change, newest first. Covered by T-002, T-004, T-005, T-011.\n- S-007: Harvest, approve, retire, annotate, recall, effectiveness reporting and the aggregation step work on the bundle with the same results as before. Covered by T-004, T-008, T-012, T-013, T-014, T-015.\n- S-008: Agents receive each lesson at dispatch with exactly the same text as before. Covered by T-004, T-014, T-015, T-016.\n- S-009: Re-harvesting unchanged evidence leaves the bundle unchanged. Covered by T-004, T-013, T-015, T-017.\n- S-010: An interrupted write never leaves a lesson document, the index or the change log partly written. Covered by T-004, T-017, T-018.\n- S-011: An operator can run a deterministic standalone OKF \u00a711 check that reports pass or fail. Covered by T-001, T-004, T-007, T-013, T-019, T-020, T-021, T-022, T-023.\n- S-012: The current lessons become documents with identifiers and history intact, and the JSON store is removed. Covered by T-004, T-005, T-013, T-024, T-025, T-026, T-027, T-028.\n- S-013: Every existing run evidence file stays unchanged. Covered by T-004, T-012, T-014, T-029.\n- S-014: The bundle is absent from the installed payload and the bundled mirror. Covered by T-004, T-030, T-031, T-032, T-033.\n- S-015: The memory optimiser leaves the bundle unchanged. Covered by T-004, T-029, T-034, T-035.\n- S-016: Every existing gate, artifact validator and verifier keeps its recorded baseline verdict. Covered by T-004, T-014, T-016, T-029.\n- S-017: An operator can browse from the root index to every lesson document. Covered by T-002, T-003, T-004, T-005.\n- S-018: The memory documentation describes the bundle in place of the JSON store. Covered by T-004, T-028, T-036, T-037.\n\n### Out of Scope\n\n- X-001: Publishing the bundle outside the repository. Excluded because the business intent states it as a non-goal.\n- X-002: Changing harvest eligibility, timing or ranking. Excluded because the business intent states it as a non-goal.\n- X-003: Converting any other memory document to OKF. Excluded because the business intent states it as a non-goal.\n- X-004: Any process or machine actor that marks a lesson verified. Excluded because the inputs name no confirming process (D-001).\n- X-005: A mandatory release checklist item for the conformance check. Excluded because a new mandatory item would invalidate every recorded change proposal under rule F9.\n- X-006: Changing governance states, their meanings or the governance actions. Excluded because the request maps the three existing states and keeps the actions.\n- X-007: Changing Phase Model tables, agent module text, gates or artifact validators. Excluded because the change request lists them as not touched.\n\n### Deferred\n\n- Agreement of the root index, the change log and the lesson documents with each other after an interruption between files. This comes into scope if omn-business-analyst refutes A-004 (R-002).\n- Tuning recall read cost beyond present behaviour. This comes into scope if T-016 finds that dispatch latency grows with lesson count (R-010).\n\n## Assumptions\n\n| ID | Assumption | Basis | Impact if false | Confirmed by |\n|---|---|---|---|---|\n| A-001 | The statement of OKF v0.2 \u00a75, \u00a77, \u00a78, \u00a79 and \u00a711 in the feature request and the architecture context matches the SPEC text | S-001, S-011 | The contracts in T-002 and T-006 and the check in T-021 change, and scope criteria may change (R-001) | architect |\n| A-002 | Reference outputs captured on the unchanged tree are accepted as the recorded baselines for S-007, S-008, S-013 and S-016 | S-016 | T-014 is redefined, and T-015 and T-029 compare against a different reference (R-007) | omn-qa |\n| A-003 | No harvest or governance action changes the lesson set between baseline capture in T-014 and migration in T-025 | S-008, S-012 | Same-lesson-set comparisons for AC-010 and AC-011 become invalid, and T-014 must be repeated (R-007) | omn-tech-lead |\n| A-004 | S-010 requires each file to be complete on its own. It does not require the root index, the change log and the lesson documents to agree with each other after an interruption | S-010 | T-017 must provide cross-file agreement, T-018 adds a cross-file check, and T-003, T-008 and T-011 grow (R-002) | omn-business-analyst |\n| A-005 | The change is a framework-internal capability addition governed by the self-hosting profile, so it carries a framework change proposal and the framework release checklist | plan-wide | T-038 and T-039 are removed (R-013) | omn-tech-lead |\n\n## Risks\n\n| ID | Class | Trigger | Impact | Likelihood | Affects | Mitigation | Owner |\n|---|---|---|---|---|---|---|---|\n| R-001 | requirement | T-001 finds the SPEC text differs from the request's statement of \u00a75, \u00a77, \u00a78, \u00a79 or \u00a711 (A-001 false) | The contracts in T-002 and T-006 and the check in T-021 change; scope criteria may change | low | T-001, T-002, T-006, T-021 | T-001 confirms the rules before any contract closes; tracked as Q-001 | architect |\n| R-002 | requirement | S-010 is ruled to require cross-file agreement after an interruption (A-004 false) | T-017 and T-018 widen; T-003, T-008 and T-011 grow in complexity | medium | T-003, T-008, T-011, T-017, T-018 | omn-business-analyst confirms A-004 before T-017 closes | omn-business-analyst |\n| R-003 | technical | A field value with multi-line text, quoting or delimiter-like lines does not round-trip through the standard-library frontmatter writer and parser | Field loss breaks S-005; changed text breaks S-008 | medium | T-006, T-007, T-008 | T-004 sets round-trip fixtures over every migrated record; T-005 and T-015 verify | architect |\n| R-004 | technical | A bundle date or generated value derives from write time instead of record fields | Re-harvest changes bytes and AC-012 fails | medium | T-002, T-006, T-011, T-024 | T-002, T-006 and T-024 bind every date to record fields; T-015 verifies | architect |\n| R-005 | technical | Migration drops or alters a field or history entry, including for lessons with empty history | Governance history is lost and S-005 and S-012 fail | medium | T-024, T-025, T-026, T-027 | T-026 removes the JSON store only after T-027 records complete migration | architect |\n| R-006 | dependency | The OKF v0.2 SPEC text is not supplied before T-001 closes | Q-001 stays open and R-001 carries into build | medium | T-001 | The operator supplies the SPEC text per 8.2; otherwise the Design Gate records the residual risk | architect |\n| R-007 | dependency | The baseline cannot be taken on the unchanged tree, or the lesson set changes between T-014 and T-025 (A-002 or A-003 false) | S-007, S-008 and S-016 comparisons lose their reference | low | T-014, T-015, T-025, T-027, T-029 | T-014 precedes T-025 in 8.1; omn-tech-lead holds lesson-set changes until T-025 completes | omn-qa |\n| R-008 | security | Lesson field content harvested from run evidence contains frontmatter delimiters, key-like lines or link syntax | A document gains or loses keys, the index or change log breaks, or altered text reaches dispatch past the existing neutralisation | medium | T-003, T-006, T-007, T-008, T-011, T-016 | T-006 sets a structural safety rule for every field; T-004 adds hostile-content fixtures; T-016 reviews | architect |\n| R-009 | operational | An exclusion rule matches generic names such as index.md or log.md outside the bundle, or misses a bundle file | Unrelated memory files leave the payload, or bundle files ship or are rewritten | medium | T-030, T-031, T-034, T-035 | T-030 and T-034 define rules scoped to the bundle path; T-029 and T-033 verify | architect |\n| R-010 | operational | Recall at dispatch reads one document per lesson instead of one store document | Dispatch latency grows with lesson count | low | T-008, T-016 | T-016 reviews read cost; any tuning is deferred per Scope | architect |\n| R-011 | delivery | Existing automated suites and backward-compatibility comparisons reference the JSON store name and its exclusion pattern | Suite failures after T-026 until T-013 lands | high | T-013, T-026 | T-013 depends on T-026 and updates the suite in the same change | omn-dev-1-implement |\n| R-012 | delivery | A framework file changes after T-032 refreshes the mirror | The mirror drifts from the tree and T-033 evidence becomes stale | medium | T-032, T-033 | T-032 depends on every framework-editing task through 8.1 | omn-dev-1-implement |\n| R-013 | delivery | The change is not governed by the self-hosting profile (A-005 false) | T-038 and T-039 are removed | low | T-038, T-039 | omn-tech-lead confirms the change class at the Planning Gate | omn-tech-lead |\n\nThe task context lists three affected areas: database (R-005), performance (R-010) and security (R-008).\n\n## Task Breakdown\n\n### T-001 Confirm the OKF v0.2 rules the bundle binds to\n\n- Owner: architect\n- Complexity: S (confidence: low)\n- Depends on: none (external prerequisite in 8.2)\n- Traces to: S-001, S-011, A-001\n- Status: assumption-dependent (A-001; closes Q-001)\n- Description: The technical design records whether the statement in the feature request and the architecture context holds for SPEC \u00a75 (including \u00a75.3 and \u00a75.4, per the Scope Gate ruling), \u00a77, \u00a78, \u00a79 and \u00a711, and lists each difference.\n- Acceptance Criteria:\n  - The design gives each of \u00a75.1 to \u00a75.5, \u00a77, \u00a78, \u00a79 and \u00a711 a verdict of confirmed or differs\n  - Q-001 is closed, or the Design Gate records its residual risk\n- Gate: Design Gate\n\n### T-002 Define the reserved-file contract for the root index and the change log\n\n- Owner: architect\n- Complexity: S (confidence: medium)\n- Depends on: T-001\n- Traces to: S-001, S-006, S-017\n- Status: ready\n- Description: The design fixes the root index frontmatter and link layout. It also fixes the change log title, date grouping and entry forms, maps entry types to governance actions per D-003, and takes every date from record fields.\n- Acceptance Criteria:\n  - The index contract allows exactly one frontmatter key, `okf_version`, valued \"0.2\", and one link with a description per lesson document under a # heading\n  - The change log contract maps creation, approve, annotate and retire to Creation, Update and Deprecation entries, and dates a lesson with empty history from `first_seen`, never from write time (Scope Gate ruling)\n- Gate: Design Gate\n\n### T-003 Produce the root index of the bundle\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-002, T-007, T-017\n- Traces to: S-001, S-017\n- Status: ready\n- Description: Every bundle write leaves a root index that conforms to the T-002 contract and links every lesson document present.\n- Acceptance Criteria:\n  - The root index frontmatter holds only `okf_version` with value \"0.2\"\n  - The index links each lesson document exactly once with its description, with zero missing or duplicate links\n  - Writing the index over an unchanged lesson set leaves its bytes unchanged\n- Gate: Review Gate\n\n### T-004 Map every scope acceptance criterion to a verification method and evidence record\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-002, T-006, T-010, T-017, T-019\n- Traces to: S-001, S-002, S-003, S-004, S-005, S-006, S-007, S-008, S-009, S-010, S-011, S-012, S-013, S-014, S-015, S-016, S-017, S-018\n- Status: ready\n- Description: A verification approach exists that names, for AC-001 to AC-024 and the stale_after criterion from T-010, the check, the fixture or seeded defect it needs, and the evidence it records.\n- Acceptance Criteria:\n  - Each of AC-001 to AC-024, plus the T-010 criterion, maps to exactly one of T-005, T-015, T-018, T-023, T-027, T-029, T-033 and T-037\n  - The approach names three seeded defect bundles for AC-014, the write steps that receive an injected interruption for AC-013, and hostile field-content fixtures for R-008\n  - The approach includes a check of the `generated.at` and `generated.by` values (Scope Gate carry-forward on AC-005)\n- Gate: Design Gate\n\n### T-005 Verify the bundle content against its contracts\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-003, T-004, T-008, T-011, T-026\n- Traces to: S-001, S-002, S-003, S-004, S-005, S-006, S-012, S-017\n- Status: ready\n- Description: Recorded evidence shows that the final bundle meets AC-001 to AC-009, AC-018, AC-023 and the T-010 stale_after criterion.\n- Acceptance Criteria:\n  - The evidence records zero exceptions for AC-001 to AC-009 and AC-023 on the final bundle\n  - AC-004 is compared on the artifact path without its event suffix (Scope Gate carry-forward)\n  - The JSON lesson store is absent (AC-018), and the T-010 criterion holds for every lesson\n- Gate: Verification Gate\n\n### T-006 Define the lesson document frontmatter contract\n\n- Owner: architect\n- Complexity: M (confidence: medium)\n- Depends on: T-001, T-009\n- Traces to: S-002, S-003, S-004, S-005\n- Status: ready\n- Description: The design maps every lesson record field to a standard OKF key or a producer extension key. It also fixes the text rules for type, title, description and tags, using existing record fields only (Scope Gate ruling on SQ-001).\n- Acceptance Criteria:\n  - Every lesson record field maps to exactly one frontmatter key, with sources per D-002, verified per D-001, and status mapped from candidate, active and retired to draft, stable and deprecated\n  - `generated.by` uses the producer/version actor form and `generated.at` takes `last_seen` (Scope Gate ruling on SQ-002)\n  - The description is neutralised the same way the rendered lesson section neutralises it, and every field value has a stated rule that keeps it from altering frontmatter structure (R-008)\n- Gate: Design Gate\n\n### T-007 Provide deterministic frontmatter serialisation and parsing\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: medium)\n- Depends on: T-006\n- Traces to: S-002, S-003, S-004, S-005, S-011\n- Status: ready\n- Description: Lesson frontmatter is written and read using the standard library only. Equal field values always produce equal bytes, and reading what was written returns the same values.\n- Acceptance Criteria:\n  - Writing and then reading the frontmatter of every migrated lesson returns field values identical to the record\n  - Two writes of the same record produce identical bytes\n  - The change adds no third-party dependency\n- Gate: Review Gate\n\n### T-008 Hold each lesson as a concept document that the lesson loop reads and writes\n\n- Owner: omn-dev-1-implement\n- Complexity: L (confidence: medium)\n- Depends on: T-006, T-007, T-017\n- Traces to: S-002, S-003, S-004, S-005, S-007\n- Status: ready\n- Description: Harvest, approve, retire, annotate, recall, effectiveness reporting and the aggregation step read and write lesson records through per-lesson concept documents that follow the T-006 contract.\n- Acceptance Criteria:\n  - Each loop step runs on the bundle without using the JSON store\n  - Every concept document written carries the frontmatter keys the T-006 contract requires\n  - Running a step again over unchanged lessons leaves every document's bytes unchanged\n- Gate: Review Gate\n\n### T-009 Decide the stale_after rule from lesson record fields\n\n- Owner: architect\n- Complexity: S (confidence: medium)\n- Depends on: T-001\n- Traces to: S-004\n- Status: ready\n- Description: The design states which lessons carry stale_after and the instant it holds. The rule derives from record fields only, with no wall clock. A ruling that the rule applies to no lesson must carry its justification (Scope Gate ruling on SQ-003).\n- Acceptance Criteria:\n  - The rule names its input fields and yields the same value on every write of an unchanged record\n  - The design records the rule, or the justified ruling that it applies to no lesson\n- Gate: Design Gate\n\n### T-010 Record the acceptance criterion for the stale_after rule\n\n- Owner: omn-product-owner\n- Complexity: XS (confidence: high)\n- Depends on: T-009\n- Traces to: S-004\n- Status: ready\n- Description: The scope acceptance criteria gain one verifiable criterion for the T-009 rule, as the Scope Gate required.\n- Acceptance Criteria:\n  - One criterion states the expected stale_after presence and value for each lesson, with its verification method\n  - The criterion derives its expected value from the record fields T-009 names, with no reference to write time\n- Gate: Design Gate\n\n### T-011 Produce the change log for every lesson write\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-002, T-017\n- Traces to: S-006\n- Status: ready\n- Description: The change log holds one entry per lesson creation and per governance action in history, in the T-002 form, with the newest date group first.\n- Acceptance Criteria:\n  - The change log opens with a title line and groups entries under date headings, newest first (AC-009)\n  - The entry count equals the number of creations plus history entries in the lesson set\n  - Every date derives from record fields, so an unchanged lesson set yields an unchanged change log\n- Gate: Review Gate\n\n### T-012 Name the bundle in the memory slice of new invocation envelopes\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-008, T-017\n- Traces to: S-007, S-013\n- Status: ready\n- Description: New invocation envelopes record the bundle as the lesson store and carry the bundle digest that T-017 defines. Envelopes already recorded under runs are left untouched (Scope Gate ruling on SQ-005).\n- Acceptance Criteria:\n  - An envelope built after the change names the bundle location and its digest in the memory slice\n  - For the same lesson set, the lessons hydrated into the memory slice equal those hydrated before the change\n  - No envelope recorded before the change is altered\n- Gate: Review Gate\n\n### T-013 Update the automated knowledge-loop test suite to the bundle\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: medium)\n- Depends on: T-003, T-004, T-008, T-011, T-012, T-021, T-025, T-026\n- Traces to: S-007, S-009, S-011, S-012\n- Status: ready\n- Description: The automated suite covers bundle round trip, idempotent re-harvest, migration and the conformance check as T-004 assigns them, and no longer refers to the JSON store.\n- Acceptance Criteria:\n  - The suite passes on the final tree with zero references to the JSON store file name or its exclusion pattern\n  - Each behaviour that T-004 assigns to automated coverage has at least one passing case\n- Gate: Review Gate\n\n### T-014 Capture the pre-change reference baseline\n\n- Owner: omn-qa\n- Complexity: M (confidence: low)\n- Depends on: none\n- Traces to: S-007, S-008, S-013, S-016, A-002, A-003\n- Status: assumption-dependent (A-002, A-003)\n- Description: Before the store changes form, a recorded baseline exists for the current lesson set. It holds the rendered lesson section, the result of each loop step, the hash of every run evidence file, and the verdict of every gate, artifact validator and verifier.\n- Acceptance Criteria:\n  - The baseline records the lesson set it was taken from, by lesson identifier and record digest\n  - The rendered lesson section is stored byte for byte\n  - Every gate, artifact validator and verifier covered by S-016 has a recorded verdict and input reference\n- Gate: Verification Gate\n\n### T-015 Verify the lesson loop behaves as before on the bundle\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-003, T-004, T-008, T-011, T-012, T-014, T-026\n- Traces to: S-007, S-008, S-009\n- Status: ready\n- Description: Recorded evidence shows that AC-010, AC-011 and AC-012 hold on the final bundle against the T-014 baseline.\n- Acceptance Criteria:\n  - Each loop step result matches the baseline for the same lesson set, with zero mismatches (AC-010)\n  - The rendered lesson section is byte-identical to the baseline, neutralised content included (AC-011)\n  - A second harvest over unchanged evidence changes zero bundle files (AC-012)\n- Gate: Verification Gate\n\n### T-016 Review the change set against the technical design\n\n- Owner: omn-dev-2-reviewer\n- Complexity: M (confidence: medium)\n- Depends on: T-013, T-032\n- Traces to: S-008, S-016\n- Status: ready\n- Description: A review package with severity-classified findings and a verdict exists for the full change set. It covers field-content safety (R-008) and recall read cost (R-010).\n- Acceptance Criteria:\n  - The review package records a verdict, with zero unresolved critical or major findings\n  - The findings state whether any lesson field value can alter the structure of a frontmatter block, the index or the change log\n- Gate: Review Gate\n\n### T-017 Define the bundle write contract\n\n- Owner: architect\n- Complexity: M (confidence: low)\n- Depends on: none\n- Traces to: S-009, S-010, A-004\n- Status: assumption-dependent (A-004)\n- Description: The design fixes four things: how each bundle file is written so that an interruption leaves it complete, when a write is skipped because the bytes are unchanged, how concurrent writers are excluded, and how the bundle digest is formed.\n- Acceptance Criteria:\n  - The concept documents, the root index and the change log each have a stated write rule that leaves the file in its prior or new complete state\n  - The digest rule yields the same value for byte-identical bundles\n  - The design states how the index and change log recover after an interruption between files (A-004)\n- Gate: Design Gate\n\n### T-018 Verify interruption safety of every bundle write\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-003, T-004, T-008, T-011\n- Traces to: S-010\n- Status: ready\n- Description: Recorded evidence shows that AC-013 holds at every write step T-004 names.\n- Acceptance Criteria:\n  - After an interruption at each named step, every concept document, the root index and the change log parse and match their prior or new complete state, with zero partly written files\n  - The evidence records one outcome for each write step T-004 names, with zero named steps left without a recorded interruption result\n- Gate: Verification Gate\n\n### T-019 Choose the carrier of the conformance check\n\n- Owner: architect\n- Complexity: S (confidence: high)\n- Depends on: T-001\n- Traces to: S-011\n- Status: ready\n- Description: The design names where the conformance check lives, and how an operator runs it standalone and from the verification tooling (D-004).\n- Acceptance Criteria:\n  - The design names one carrier and one standalone invocation form\n  - The carrier runs without the harvest, governance or recall steps\n- Gate: Design Gate\n\n### T-020 Decide whether the release checklist lists the conformance check as advisory\n\n- Owner: omn-qa\n- Complexity: XS (confidence: high)\n- Depends on: T-019\n- Traces to: S-011\n- Status: ready (closes Q-002)\n- Description: A recorded decision states whether the framework release checklist gains an advisory item that runs the conformance check. A mandatory item is never an option (X-005).\n- Acceptance Criteria:\n  - The decision is recorded with its rationale and names no mandatory item\n  - Where the decision adds an advisory item, it names the T-019 standalone invocation form that the item runs\n- Gate: Design Gate\n\n### T-021 Provide the standalone OKF \u00a711 conformance check\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: medium)\n- Depends on: T-002, T-007, T-019\n- Traces to: S-011\n- Status: ready\n- Description: Through the T-019 carrier, an operator can run a deterministic check that reports pass or fail for a bundle against \u00a711.\n- Acceptance Criteria:\n  - The check reports fail for a non-reserved document without parseable frontmatter, for an empty type, and for a reserved file that breaks \u00a78 or \u00a79\n  - Two runs over the same bundle give identical output and exit status\n- Gate: Review Gate\n\n### T-022 Apply the release-checklist listing decision\n\n- Owner: omn-dev-1-implement\n- Complexity: XS (confidence: high)\n- Depends on: T-020, T-021\n- Traces to: S-011\n- Status: ready\n- Description: The framework release checklist matches the T-020 decision.\n- Acceptance Criteria:\n  - The checklist carries the advisory item only if T-020 chose it, and gains no mandatory item\n  - Every recorded change proposal keeps its rule F9 verdict\n- Gate: Review Gate\n\n### T-023 Verify the conformance check verdicts\n\n- Owner: omn-qa\n- Complexity: S (confidence: high)\n- Depends on: T-004, T-021, T-026\n- Traces to: S-011\n- Status: ready\n- Description: Recorded evidence shows that AC-014 and AC-015 hold.\n- Acceptance Criteria:\n  - The check passes the final bundle and fails each of the three seeded defect bundles (AC-014)\n  - Two standalone runs give identical output and exit status (AC-015)\n- Gate: Verification Gate\n\n### T-024 Define the migration method\n\n- Owner: architect\n- Complexity: S (confidence: medium)\n- Depends on: T-002, T-006\n- Traces to: S-012\n- Status: ready\n- Description: The design states how every record in the JSON store becomes one concept document with its identifier, fields and history intact, and how the root index and change log are produced from the migrated set.\n- Acceptance Criteria:\n  - The method maps every record field and history entry, including for lessons with empty history (Scope Gate carry-forward)\n  - The method takes every generated value and date from record fields, so a later re-harvest leaves the migrated bundle unchanged\n- Gate: Design Gate\n\n### T-025 Migrate the existing lessons into the bundle\n\n- Owner: omn-dev-1-implement\n- Complexity: M (confidence: medium)\n- Depends on: T-003, T-008, T-011, T-014, T-024\n- Traces to: S-012\n- Status: ready\n- Description: The bundle holds one concept document for each record in the store at migration time, with the root index and change log produced per T-024.\n- Acceptance Criteria:\n  - The bundle's lesson identifier set equals the store's set at migration time (42 lessons when the request was made)\n  - Every history entry keeps its actor and time\n- Gate: Review Gate\n\n### T-026 Remove the JSON lesson store\n\n- Owner: omn-dev-1-implement\n- Complexity: XS (confidence: high)\n- Depends on: T-027\n- Traces to: S-012\n- Status: ready\n- Description: After T-027 confirms the migration, the JSON lesson store no longer exists and no lesson loop step reads it.\n- Acceptance Criteria:\n  - The JSON lesson store file is absent from the lesson memory location\n  - No loop step reads or writes the JSON store\n- Gate: Review Gate\n\n### T-027 Verify migration completeness\n\n- Owner: omn-qa\n- Complexity: S (confidence: high)\n- Depends on: T-004, T-014, T-025\n- Traces to: S-012\n- Status: ready\n- Description: Recorded evidence shows that AC-016 and AC-017 hold before the JSON store is removed.\n- Acceptance Criteria:\n  - The lesson identifier sets before and after migration are identical, with zero missing or extra identifiers (AC-016)\n  - Each lesson keeps the same history entry count, actors and times (AC-017)\n- Gate: Verification Gate\n\n### T-028 Publish the release note for the lesson store change\n\n- Owner: omn-documentation\n- Complexity: S (confidence: high)\n- Depends on: T-005, T-015, T-016, T-018, T-023, T-029, T-033, T-037\n- Traces to: S-012, S-018\n- Status: ready\n- Description: A release note states that lessons now live in an OKF v0.2 bundle, that the JSON store is removed, and how an operator runs the conformance check. It cites the verification evidence.\n- Acceptance Criteria:\n  - The release note names the bundle location, the removal of the JSON store, and the standalone check\n  - The release note cites the review verdict and each verification record\n- Gate: Closure Gate\n\n### T-029 Verify protected surfaces stay unchanged\n\n- Owner: omn-qa\n- Complexity: M (confidence: medium)\n- Depends on: T-004, T-014, T-032\n- Traces to: S-013, S-015, S-016\n- Status: ready\n- Description: Recorded evidence shows that AC-019, AC-021 and AC-022 hold on the final tree.\n- Acceptance Criteria:\n  - Every pre-existing run evidence file keeps its baseline hash, with zero changed files (AC-019)\n  - A memory optimiser run changes zero bundle files (AC-021)\n  - Every gate, artifact validator and verifier returns its baseline verdict, with zero changed verdicts (AC-022)\n- Gate: Verification Gate\n\n### T-030 Define the distribution exclusion for the bundle\n\n- Owner: architect\n- Complexity: S (confidence: medium)\n- Depends on: none\n- Traces to: S-014\n- Status: ready\n- Description: The design states the rule that excludes every bundle file from the installed payload and the bundled mirror without excluding any other file, given that index.md and log.md are generic names.\n- Acceptance Criteria:\n  - The rule matches every file under the bundle path and no file outside it\n  - The design states that files named index.md or log.md outside the bundle path stay in the installed payload and the bundled mirror (R-009)\n- Gate: Design Gate\n\n### T-031 Exclude the bundle from the installed payload\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-030\n- Traces to: S-014\n- Status: ready\n- Description: An installation built after the change contains no file under the bundle path, and no file outside the bundle path is newly excluded.\n- Acceptance Criteria:\n  - The installed payload holds zero files under the bundle path\n  - No file outside the bundle path is newly excluded from the installed payload\n- Gate: Review Gate\n\n### T-032 Refresh the bundled mirror from the final framework tree\n\n- Owner: omn-dev-1-implement\n- Complexity: XS (confidence: high)\n- Depends on: T-012, T-022, T-026, T-030, T-031, T-035, T-036\n- Traces to: S-014\n- Status: ready\n- Description: The bundled mirror equals the final framework tree under the T-030 exclusion.\n- Acceptance Criteria:\n  - The mirror holds zero files under the bundle path\n  - The mirror matches the final framework tree for every other file\n- Gate: Review Gate\n\n### T-033 Verify the bundle is absent from distribution\n\n- Owner: omn-qa\n- Complexity: XS (confidence: high)\n- Depends on: T-004, T-032\n- Traces to: S-014\n- Status: ready\n- Description: Recorded evidence shows that AC-020 holds.\n- Acceptance Criteria:\n  - Listings of the installed payload and the bundled mirror show zero files under the bundle path, including files named `index.md`, `log.md` or `L-*.md` (AC-020)\n  - The same listings show every memory file outside the bundle path that the final framework tree holds, with zero files missing\n- Gate: Verification Gate\n\n### T-034 Define how the memory optimiser leaves the bundle unchanged\n\n- Owner: architect\n- Complexity: S (confidence: medium)\n- Depends on: none\n- Traces to: S-015\n- Status: ready\n- Description: The design states the rule by which the memory optimiser skips every bundle file.\n- Acceptance Criteria:\n  - The rule covers every bundle file and leaves the optimiser's treatment of other memory documents unchanged\n  - The rule is scoped to the bundle path, so memory documents named index.md or log.md outside it are still optimised (R-009)\n- Gate: Design Gate\n\n### T-035 Keep the memory optimiser from rewriting the bundle\n\n- Owner: omn-dev-1-implement\n- Complexity: S (confidence: medium)\n- Depends on: T-034\n- Traces to: S-015\n- Status: ready\n- Description: An optimiser run leaves every bundle file byte-identical and treats other memory documents as before.\n- Acceptance Criteria:\n  - An optimiser run over the memory location changes zero bundle files\n  - The optimiser's output for other memory documents is unchanged\n- Gate: Review Gate\n\n### T-036 Describe the bundle in the memory documentation\n\n- Owner: omn-documentation\n- Complexity: S (confidence: high)\n- Depends on: T-002, T-006, T-017\n- Traces to: S-018\n- Status: ready\n- Description: The memory documents that the change request names describe the bundle as the lesson store, including its document, index and change log forms.\n- Acceptance Criteria:\n  - The memory readme, memory governance, memory resolver and runtime configuration documents name the bundle as the current lesson store\n  - None of those documents names the JSON store as the current lesson store\n- Gate: Review Gate\n\n### T-037 Verify the memory documentation names the bundle\n\n- Owner: omn-qa\n- Complexity: XS (confidence: high)\n- Depends on: T-004, T-036\n- Traces to: S-018\n- Status: ready\n- Description: Recorded evidence shows that AC-024 holds.\n- Acceptance Criteria:\n  - A text search of the named memory documents finds zero references to the JSON store as the current lesson store (AC-024)\n  - Each of the memory readme, memory governance, memory resolver and runtime configuration documents names the bundle location as the current lesson store\n- Gate: Verification Gate\n\n### T-038 Record the framework change proposal for this change\n\n- Owner: omn-documentation\n- Complexity: S (confidence: low)\n- Depends on: T-028\n- Traces to: A-005\n- Status: assumption-dependent (A-005)\n- Description: A framework change proposal exists for this capability addition and links the run artifacts that carried it.\n- Acceptance Criteria:\n  - The proposal links this run's scope definition, execution plan, technical design, review package and release note\n  - The proposal states the change class that the self-hosting classification gives this change (A-005)\n- Gate: Closure Gate\n\n### T-039 Verify the framework release checklist for this change\n\n- Owner: omn-qa\n- Complexity: XS (confidence: low)\n- Depends on: T-038\n- Traces to: A-005\n- Status: assumption-dependent (A-005)\n- Description: Recorded evidence shows that the change satisfies the framework release checklist.\n- Acceptance Criteria:\n  - The self-hosting release checklist verification reports pass for this change\n  - The verification record cites the T-038 proposal and lists zero failed checklist items\n- Gate: Closure Gate\n\n## Dependencies\n\n### 8.1 Dependency Edges\n\n| From | To | Type | Justification |\n|---|---|---|---|\n| External: operator supplying the OKF v0.2 SPEC text | T-001 | external | Confirming the rules needs the SPEC text, which is not a supplied input |\n| T-001 | T-002 | decision-gate | Confirmed \u00a78 and \u00a79 rules shape the reserved-file contract |\n| T-002 | T-003 | contract | The index follows the reserved-file contract |\n| T-007 | T-003 | produces-consumes | The index frontmatter is written by the serialiser |\n| T-017 | T-003 | contract | The index write follows the write contract |\n| T-002 | T-004 | contract | Index and change log checks bind to the reserved-file contract |\n| T-006 | T-004 | contract | Document checks bind to the frontmatter contract |\n| T-010 | T-004 | produces-consumes | The stale_after criterion must exist before it is mapped |\n| T-017 | T-004 | contract | Interruption steps come from the write contract |\n| T-019 | T-004 | contract | Conformance checks run through the chosen carrier |\n| T-003 | T-005 | verification | Verifies the root index |\n| T-004 | T-005 | produces-consumes | Uses the verification method |\n| T-008 | T-005 | verification | Verifies the lesson documents |\n| T-011 | T-005 | verification | Verifies the change log |\n| T-026 | T-005 | verification | Verifies the final bundle and the absent store |\n| T-001 | T-006 | decision-gate | Confirmed \u00a75 and \u00a77 rules shape the frontmatter contract |\n| T-009 | T-006 | decision-gate | The stale_after rule sets that key's presence |\n| T-006 | T-007 | contract | The serialiser writes the contracted keys |\n| T-006 | T-008 | contract | Documents follow the frontmatter contract |\n| T-007 | T-008 | produces-consumes | Documents are written and read through the serialiser |\n| T-017 | T-008 | contract | Document writes follow the write contract |\n| T-001 | T-009 | decision-gate | The rule depends on the confirmed \u00a75.5 meaning |\n| T-009 | T-010 | decision-gate | The criterion states the decided rule |\n| T-002 | T-011 | contract | The change log follows the reserved-file contract |\n| T-017 | T-011 | contract | Change log writes follow the write contract |\n| T-008 | T-012 | produces-consumes | Memory slice hydration reads lessons from the bundle |\n| T-017 | T-012 | contract | The envelope carries the bundle digest the write contract defines |\n| T-003 | T-013 | produces-consumes | The suite covers the index |\n| T-004 | T-013 | produces-consumes | The suite follows the verification method |\n| T-008 | T-013 | produces-consumes | The suite covers the document round trip |\n| T-011 | T-013 | produces-consumes | The suite covers the change log |\n| T-012 | T-013 | produces-consumes | The suite covers memory slice naming |\n| T-021 | T-013 | produces-consumes | The suite covers the conformance check |\n| T-025 | T-013 | produces-consumes | The suite covers migration |\n| T-026 | T-013 | produces-consumes | The suite drops its references to the removed store |\n| T-003 | T-015 | verification | Verifies index behaviour on re-harvest |\n| T-004 | T-015 | produces-consumes | Uses the verification method |\n| T-008 | T-015 | verification | Verifies loop steps on the bundle |\n| T-011 | T-015 | verification | Verifies change log stability on re-harvest |\n| T-012 | T-015 | verification | Verifies recall hydration |\n| T-014 | T-015 | produces-consumes | Compares against the baseline |\n| T-026 | T-015 | verification | Verifies the loop on the final bundle-only tree |\n| T-013 | T-016 | produces-consumes | The review covers the updated suite |\n| T-032 | T-016 | produces-consumes | The review takes the final change set, which T-032 closes |\n| T-003 | T-018 | verification | Verifies index write safety |\n| T-004 | T-018 | produces-consumes | Uses the named interruption steps |\n| T-008 | T-018 | verification | Verifies document write safety |\n| T-011 | T-018 | verification | Verifies change log write safety |\n| T-001 | T-019 | decision-gate | Confirmed \u00a711 rules shape what the carrier runs |\n| T-019 | T-020 | decision-gate | The listing decision depends on how the check is invoked |\n| T-002 | T-021 | contract | The check enforces the reserved-file rules |\n| T-007 | T-021 | produces-consumes | The check parses frontmatter with the parser |\n| T-019 | T-021 | contract | The check lives in the chosen carrier |\n| T-020 | T-022 | decision-gate | The checklist follows the listing decision |\n| T-021 | T-022 | produces-consumes | An advisory item runs the check |\n| T-004 | T-023 | produces-consumes | Uses the seeded defect bundles |\n| T-021 | T-023 | verification | Verifies the check |\n| T-026 | T-023 | verification | The check is run over the final bundle |\n| T-002 | T-024 | contract | Migration produces the index and log per contract |\n| T-006 | T-024 | contract | Migration maps fields per the frontmatter contract |\n| T-003 | T-025 | produces-consumes | Migration writes the index |\n| T-008 | T-025 | produces-consumes | Migration writes documents through the bundle writer |\n| T-011 | T-025 | produces-consumes | Migration writes the change log |\n| T-014 | T-025 | produces-consumes | The baseline must record the lesson set before it changes form (A-003) |\n| T-024 | T-025 | contract | Migration follows the method |\n| T-027 | T-026 | produces-consumes | Removal needs evidence that migration is complete (R-005) |\n| T-004 | T-027 | produces-consumes | Uses the verification method |\n| T-014 | T-027 | produces-consumes | Compares with the baseline lesson set |\n| T-025 | T-027 | verification | Verifies migration |\n| T-005 | T-028 | produces-consumes | The release note cites bundle content evidence |\n| T-015 | T-028 | produces-consumes | The release note cites loop parity evidence |\n| T-016 | T-028 | produces-consumes | The release note cites the review verdict |\n| T-018 | T-028 | produces-consumes | The release note cites interruption evidence |\n| T-023 | T-028 | produces-consumes | The release note cites conformance evidence |\n| T-029 | T-028 | produces-consumes | The release note cites protected-surface evidence |\n| T-033 | T-028 | produces-consumes | The release note cites distribution evidence |\n| T-037 | T-028 | produces-consumes | The release note cites documentation evidence |\n| T-004 | T-029 | produces-consumes | Uses the verification method |\n| T-014 | T-029 | produces-consumes | Compares against the baseline hashes and verdicts |\n| T-032 | T-029 | verification | Verifies the final tree |\n| T-030 | T-031 | contract | The installer follows the exclusion rule |\n| T-012 | T-032 | produces-consumes | The mirror takes the changed framework tree |\n| T-022 | T-032 | produces-consumes | The mirror takes the checklist change |\n| T-026 | T-032 | produces-consumes | The mirror takes the store removal and the bundle code |\n| T-030 | T-032 | contract | The mirror follows the exclusion rule |\n| T-031 | T-032 | produces-consumes | The mirror takes the installer exclusion |\n| T-035 | T-032 | produces-consumes | The mirror takes the optimiser change |\n| T-036 | T-032 | produces-consumes | The mirror takes the memory documentation |\n| T-004 | T-033 | produces-consumes | Uses the verification method |\n| T-032 | T-033 | verification | Verifies the payload and the mirror |\n| T-034 | T-035 | contract | The optimiser follows the skip rule |\n| T-002 | T-036 | produces-consumes | The documentation describes the index and change log |\n| T-006 | T-036 | produces-consumes | The documentation describes the lesson documents |\n| T-017 | T-036 | produces-consumes | The documentation describes the store digest and write rules |\n| T-004 | T-037 | produces-consumes | Uses the verification method |\n| T-036 | T-037 | verification | Verifies the documentation |\n| T-028 | T-038 | produces-consumes | The proposal links the release note |\n| T-038 | T-039 | verification | Verifies the checklist for the proposal |\n\n### 8.2 External Dependencies\n\n| Responsible party | What is needed | Blocks |\n|---|---|---|\n| External: operator supplying the OKF v0.2 SPEC text | The OKF v0.2 SPEC text for \u00a75, \u00a77, \u00a78, \u00a79 and \u00a711, supplied as an input to the design phase (R-006) | T-001 |\n\n### 8.3 Implementation Order\n\n- Wave 1: T-001, T-014, T-017, T-030, T-034\n- Wave 2: T-002, T-009, T-019, T-031, T-035\n- Wave 3: T-006, T-010, T-011, T-020\n- Wave 4: T-004, T-007, T-024, T-036\n- Wave 5: T-003, T-008, T-021, T-037\n- Wave 6: T-012, T-018, T-022, T-025\n- Wave 7: T-027\n- Wave 8: T-026\n- Wave 9: T-005, T-013, T-015, T-023, T-032\n- Wave 10: T-016, T-029, T-033\n- Wave 11: T-028\n- Wave 12: T-038\n- Wave 13: T-039\n\n## Suggested Workflow\n\nSelected workflow: implement-feature\n\nSelected because: The request adds new framework functionality, a bundle storage contract and a conformance check. The change request classes it as a capability addition and routes it to this workflow. This plan is the execution-planning evidence for the Planning Gate. It recommends the workflow and does not start it. Implementation-phase tasks need the Design Gate approved before they start.\n\n| Phase | Tasks |\n|---|---|\n| solution-design-and-risk-assessment | T-001, T-002, T-004, T-006, T-009, T-010, T-017, T-019, T-020, T-024, T-030, T-034 |\n| implementation | T-003, T-007, T-008, T-011, T-012, T-013, T-014, T-021, T-022, T-025, T-026, T-027, T-031, T-032, T-035, T-036 |\n| quality-review | T-005, T-015, T-016, T-018, T-023, T-029, T-033, T-037 |\n| documentation-and-release-handoff | T-028, T-038, T-039 |\n\n| Gate | Required owners |\n|---|---|\n| Planning Gate | omn-tech-lead, omn-orchestrator (planner produced this evidence and does not decide) |\n| Design Gate | omn-architect, omn-tech-lead (architect produces the design, so omn-tech-lead decides) |\n| Review Gate | omn-dev-2-reviewer, omn-qa (omn-dev-2-reviewer produces the findings, so omn-qa decides) |\n| Verification Gate | omn-qa |\n| Closure Gate | omn-orchestrator, omn-documentation (omn-documentation produces T-028, so omn-orchestrator decides) |\n\n## Required Capabilities\n\n### 10.1 Agent Capabilities\n\n| Capability | Tasks | Owning agent | Proficiency |\n|---|---|---|---|\n| architecture-analysis | T-001 | architect | Primary |\n| technical-approach-definition | T-002, T-006, T-017, T-019, T-024, T-030, T-034 | architect | Primary |\n| architecture-decision-authoring | T-009 | architect | Primary |\n| acceptance-authority | T-010 | omn-product-owner | Primary |\n| validation-design | T-004, T-020 | omn-qa | Primary |\n| quality-verification | T-005, T-014, T-015, T-018, T-023, T-027, T-029, T-033, T-037, T-039 | omn-qa | Primary |\n| implementation-delivery | T-003, T-007, T-008, T-011, T-012, T-013, T-021, T-022, T-025, T-026, T-031, T-032, T-035 | omn-dev-1-implement | Primary |\n| code-review | T-016 | omn-dev-2-reviewer | Primary |\n| documentation | T-036, T-038 | omn-documentation | Primary |\n| release-communication | T-028 | omn-documentation | Primary |\n\n### 10.2 Required Skills\n\n| Skill | File | Tasks | Level |\n|---|---|---|---|\n| S01 | skills/architecture/clean-architecture-checklist.md | T-001, T-002, T-006, T-009, T-017, T-019, T-024, T-030, T-034 | Primary |\n| S02 | skills/business/domain-modeling.md | T-006, T-009, T-010, T-024 | Primary |\n| S03 | skills/dotnet/engineering-playbook.md | T-007, T-008, T-021 | Advisory |\n| S06 | skills/database/database-engineering.md | T-024, T-025, T-026, T-027 | Primary |\n| S07 | skills/testing/testing-strategy.md | T-004, T-005, T-013, T-014, T-015, T-018, T-023, T-027, T-029, T-033, T-037, T-039 | Primary |\n| S08 | skills/performance/performance-engineering.md | T-016 | Advisory |\n| S09 | skills/security/secure-engineering.md | T-006, T-016 | Secondary |\n| S10 | skills/git/git-collaboration.md | T-032, T-038 | Secondary |\n| S11 | skills/logging/observability-logging.md | T-028 | Advisory |\n| S12 | skills/error-handling/error-handling-strategy.md | T-017, T-021 | Secondary |\n\n## Acceptance Criteria\n\n1. BO-1: The conformance check passes the bundle, fails each of three seeded defects, and gives identical output on repeated runs. Evidence: the T-023 verification record for AC-014 and AC-015.\n2. BO-1: The root index declares OKF v0.2 and links every lesson document exactly once. Evidence: the T-005 verification record for AC-002 and AC-023.\n3. BO-2: Every lesson document carries a non-empty type, title, description and tags, plus sources, generated and status. It carries verified exactly where an operator approved the lesson, and stale_after as the T-010 criterion states. Evidence: the T-005 verification record for AC-003 to AC-007 and the T-010 criterion.\n4. BO-3: For the same lesson set, every loop step gives its baseline result, the dispatched lesson text is byte-identical, and a re-harvest changes no bundle file. Evidence: the T-015 verification record against the T-014 baseline for AC-010 to AC-012.\n5. BO-3: Every lesson's identifier, fields and governance history survive migration, the change log reflects the history, and the JSON store is gone. Evidence: the T-027 and T-005 verification records for AC-008, AC-009 and AC-016 to AC-018.\n6. BO-3: An interruption at any write step leaves no partly written bundle file. Evidence: the T-018 verification record for AC-013.\n7. BO-4: Run evidence hashes, baseline verdicts and the bundle under an optimiser run are all unchanged, and the payload and mirror hold no bundle file. Evidence: the T-029 and T-033 verification records for AC-019 to AC-022.\n8. BO-5: The memory documentation names the bundle as the current lesson store. Evidence: the T-037 verification record for AC-024.\n\n## Definition of Done\n\n- [ ] All eight plan acceptance criteria are verified with recorded evidence\n- [ ] The Planning, Design, Review, Verification and Closure Gates are approved, with deciding owners recorded\n- [ ] Each task's acceptance criteria are satisfied or formally waived by the gate owner\n- [ ] A-001 to A-005 are confirmed by their named roles or converted to recorded decisions\n- [ ] R-001 to R-013 are closed or accepted with named owners\n- [ ] Q-001 and Q-002 are closed or explicitly accepted at the Design Gate\n- [ ] The release note (T-028) and the memory documentation (T-036) are published\n- [ ] The change proposal (T-038) is recorded and the release checklist verification (T-039) passes\n- [ ] Durable outcomes are recorded to memory per `memory/memory-governance.md`\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| Q-001 | Do the feature request and the architecture context state OKF v0.2 \u00a75, \u00a77, \u00a78, \u00a79 and \u00a711 accurately, given that the SPEC text is not a supplied input? Carried from SQ-006; per the Scope Gate it closes at design on \u00a75.3 and \u00a75.4 | no | architect | T-001, T-002, T-006, T-021 |\n| Q-002 | Should the framework release checklist list the conformance check as an advisory item? Carried from SQ-007 | no | omn-qa | T-020, T-022 |\n\n## Traceability Matrix\n\n| Statement | Covered by |\n|---|---|\n| S-001 | T-001, T-002, T-003, T-004, T-005 |\n| S-002 | T-004, T-005, T-006, T-007, T-008 |\n| S-003 | T-004, T-005, T-006, T-007, T-008 |\n| S-004 | T-004, T-005, T-006, T-007, T-008, T-009, T-010 |\n| S-005 | T-004, T-005, T-006, T-007, T-008 |\n| S-006 | T-002, T-004, T-005, T-011 |\n| S-007 | T-004, T-008, T-012, T-013, T-014, T-015 |\n| S-008 | T-004, T-014, T-015, T-016 |\n| S-009 | T-004, T-013, T-015, T-017 |\n| S-010 | T-004, T-017, T-018, A-004 |\n| S-011 | T-001, T-004, T-007, T-013, T-019, T-020, T-021, T-022, T-023, A-001, Q-001, Q-002 |\n| S-012 | T-004, T-005, T-013, T-024, T-025, T-026, T-027, T-028, A-003 |\n| S-013 | T-004, T-012, T-014, T-029 |\n| S-014 | T-004, T-030, T-031, T-032, T-033 |\n| S-015 | T-004, T-029, T-034, T-035 |\n| S-016 | T-004, T-014, T-016, T-029, A-002 |\n| S-017 | T-002, T-003, T-004, T-005 |\n| S-018 | T-004, T-028, T-036, T-037 |",
+        "digest": "sha256:59f88d997f3412736e39dead4ab23afa",
+        "produced_by": "execution-planning"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the change this agent designs against: a change request, a feature request, or a business intent. Without one there is no requested change to design, and designing anyway would mean inventing the requirement."
+  },
+  "prior_validation": {
+    "attempt": 1,
+    "report": "runs/run-79276e78d773/states/solution-design-and-risk-assessment/validation-report.json",
+    "result": "fail",
+    "existing_artifacts": [
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-001.md",
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-002.md",
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-003.md",
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-004.md",
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-005.md",
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-D-006.md",
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/technical-design.md"
+    ],
+    "failures": [
+      {
+        "id": "D4.3",
+        "severity": "Blocking",
+        "quality_ref": "A5.3",
+        "requirement": "Every requirement traces to a statement identifier",
+        "detail": "untraced: ['Acceptance criteria: The stale_after criterion is to be recorded by omn-product-o']"
+      }
+    ]
+  },
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "execution-plan",
+      "reference": "runs/run-79276e78d773/states/execution-planning/artifacts/execution-plan.md",
+      "produced_by": "execution-planning",
+      "artifact": "execution-plan.md",
+      "bytes": 54606,
+      "sections": {
+        "read_first": [
+          "Technical Objectives",
+          "Scope",
+          "Task Breakdown",
+          "Dependencies",
+          "Acceptance Criteria",
+          "Definition of Done",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Executive Summary",
+          "Business Objectives",
+          "Assumptions",
+          "Risks",
+          "Suggested Workflow",
+          "Required Capabilities",
+          "Traceability Matrix"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-79276e78d773/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:d842fd3499d2436096a24608271af5ec",
+    "bytes": 30343,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "database",
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "solution-design-and-risk-assessment"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-17T11:53:58Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:3300717f35d0b29badb0d146de6af8da",
+        "supplies": "framework-context",
+        "bytes": 22733,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:84e98748204581ef06f3e434c600f794",
+        "supplies": "framework-context",
+        "bytes": 9569,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:15b32b7dc6a6e5c3c47fac6809f1df7a",
+        "supplies": "framework-context",
+        "bytes": 12345,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/technical-design.md",
+        "digest": "sha256:059cb9abe521577a73abcd7da93cd820",
+        "supplies": null,
+        "bytes": 6564,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/architecture-decision-record.md",
+        "digest": "sha256:0c041c91ada2562ca494714071fc3e87",
+        "supplies": null,
+        "bytes": 809,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "domain-model/agent-specification.md",
+        "digest": "sha256:ce2f6da48f89ce2732a3a198a6513205",
+        "supplies": null,
+        "bytes": 2277,
+        "read": "on-demand",
+        "read_reason": "the vocabulary and lifecycle the contracts are stated in; consult when a contract term is unclear"
+      },
+      {
+        "path": "memory/architecture.md",
+        "digest": "sha256:380aeb08f8d70c9ccaa2a75300182bf1",
+        "supplies": null,
+        "bytes": 1066,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "dependency-map.md",
+        "digest": "sha256:d6ec0efcde90f86e21a648f58af0f9d3",
+        "supplies": null,
+        "bytes": 3376,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0fe5a799cafdd70db8744b0287682ffe",
+        "supplies": null,
+        "bytes": 62800,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:7dc594ecd8e764b25cbc1e8aaab42fac",
+    "input_digest": "sha256:160718068b2d75a7e7d71628f2c09025",
+    "inputs": [
+      {
+        "type": "feature-request",
+        "reference": "runs/inputs/okf-lessons-feature-request.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-feature-request.md",
+        "digest": "sha256:68967bc015098f6c332ca509f1a73b76"
+      },
+      {
+        "type": "change-request",
+        "reference": "runs/inputs/okf-lessons-change-request.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-change-request.md",
+        "digest": "sha256:8421834b6a46a2a11175f90e398440c1"
+      },
+      {
+        "type": "business-intent",
+        "reference": "runs/inputs/okf-lessons-business-intent.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-business-intent.md",
+        "digest": "sha256:cb8d061443933d4978cd60b68fbb7d80"
+      },
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/okf-lessons-architecture-context.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-architecture-context.md",
+        "digest": "sha256:8859dd1736058635fdf5470ac277b2dc"
+      },
+      {
+        "type": "execution-plan",
+        "reference": "runs/run-79276e78d773/states/execution-planning/artifacts/execution-plan.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/hopeful-einstein-00bc6a/.claude/runs/run-79276e78d773/states/execution-planning/artifacts/execution-plan.md",
+        "digest": "sha256:59f88d997f3412736e39dead4ab23afa"
+      }
+    ],
+    "unnarrowed": [
+      "dependency-map.md",
+      "domain-model/agent-specification.md",
+      "memory/architecture.md",
+      "runtime/README.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "dependency-map.md",
+      "memory/architecture.md",
+      "templates/architecture-decision-record.md",
+      "templates/technical-design.md"
+    ],
+    "read_on_demand": [
+      "domain-model/agent-specification.md",
+      "runtime/README.md",
+      "workflows/implement-feature.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 179614,
+    "bytes_required": 13364,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": true,
+    "reason": "lessons from earlier runs hydrated per this run's knowledge_loop record (recorded at plan time)",
+    "store": "memory/lessons/lessons.store.json",
+    "store_digest": "sha256:d0b781833f7759aa7847794d6be33139",
+    "threshold": 2,
+    "matched": 12,
+    "lessons": [
+      {
+        "lesson_id": "L-4619b980fc",
+        "kind": "validation-check",
+        "check_id": "D16.4",
+        "gate": null,
+        "artifact_type": "technical-design.md",
+        "check_description": "No supplied planner task is left unaddressed by the sequencing constraints",
+        "check_severity": "Correctable",
+        "distinct_runs": 7,
+        "occurrences": 7,
+        "last_seen": "2026-09-17T16:35:01Z",
+        "status": "candidate",
+        "remedy": null
+      },
+      {
+        "lesson_id": "L-16562ce500",
+        "kind": "validation-check",
+        "check_id": "D14.3",
+        "gate": null,
+        "artifact_type": "technical-design.md",
+        "check_description": "Every open decision owner resolves to a known agent",
+        "check_severity": "Correctable",
+        "distinct_runs": 4,
+        "occurrences": 4,
+        "last_seen": "2026-09-14T08:09:01Z",
+        "status": "candidate",
+        "remedy": null
+      },
+      {
+        "lesson_id": "L-4a60ec1bdb",
+        "kind": "validation-check",
+        "check_id": "D16.1",
+        "gate": null,
+        "artifact_type": "technical-design.md",
+        "check_description": "Lateral closure: every referenced identifier is defined in its own register",
+        "check_severity": "Blocking",
+        "distinct_runs": 3,
+        "occurrences": 3,
+        "last_seen": "2026-09-17T16:35:01Z",
+        "status": "candidate",
+        "remedy": null
+      },
+      {
+        "lesson_id": "L-58915e88ef",
+        "kind": "validation-check",
+        "check_id": "D5.5",
+        "gate": null,
+        "artifact_type": "technical-design.md",
+        "check_description": "Constraint class and force use the declared vocabularies",
+        "check_severity": "Correctable",
+        "distinct_runs": 3,
+        "occurrences": 3,
+        "last_seen": "2026-09-17T16:35:01Z",
+        "status": "candidate",
+        "remedy": null
+      },
+      {
+        "lesson_id": "L-6af13c8ccc",
+        "kind": "validation-check",
+        "check_id": "D8.2",
+        "gate": null,
+        "artifact_type": "technical-design.md",
+        "check_description": "Every option is evaluated against every recorded criterion",
+        "check_severity": "Blocking",
+        "distinct_runs": 3,
+        "occurrences": 3,
+        "last_seen": "2026-09-17T16:35:01Z",
+        "status": "candidate",
+        "remedy": null
+      }
+    ]
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/result-envelope.json",
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+      "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/review-package-*.md"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write production code, tests, migrations, scripts, or configuration",
+      "apply patches or edit application modules",
+      "accept or approve its own architecture decision records",
+      "approve product scope without product-owner authority",
+      "execute QA, review, or release activities",
+      "execute workflows or planned work",
+      "access external systems directly",
+      "produce the executable task breakdown owned by the planner"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "analyze the current architecture in relation to requested work",
+        "identify impacted modules, interfaces, dependencies, and integration points",
+        "define and justify the technical approach for a requested change",
+        "evaluate options against constraints and quality attributes",
+        "recommend reusable components and justify reuse or its rejection",
+        "author architecture decision records at status Proposed",
+        "define sequencing constraints and architectural prerequisites",
+        "identify structural, operational, security, performance, and migration risks",
+        "estimate effort at architecture and delivery-planning granularity"
+      ],
+      "prohibited": [
+        "write production code, tests, migrations, scripts, or configuration",
+        "apply patches or edit application modules",
+        "accept or approve its own architecture decision records",
+        "approve product scope without product-owner authority",
+        "execute QA, review, or release activities",
+        "execute workflows or planned work",
+        "access external systems directly",
+        "produce the executable task breakdown owned by the planner"
+      ]
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical architecture context snapshot must produce the same impacted-module set, the same option set, the same selected approach, and the same decision records.",
+      "identifierSchemes": {
+        "statements": "S-<zero-padded-sequence>",
+        "facts": "F-<zero-padded-sequence>",
+        "assumptions": "A-<zero-padded-sequence>",
+        "constraints": "C-<zero-padded-sequence>",
+        "modules": "M-<zero-padded-sequence>",
+        "options": "O-<zero-padded-sequence>",
+        "decisions": "D-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "planSteps": "P-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "selectionRule": "The selected option is the highest-scoring option under the recorded evaluation criteria; ties break toward the option with the smaller impact surface, then toward the lower option identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied architecture context or inputs."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 2,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "technical-design.md",
+    "artifact_path": "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/technical-design.md",
+    "template_ref": "templates/technical-design.md",
+    "contract_ref": "agents/architect/output.md",
+    "quality_ref": "agents/architect/quality.md",
+    "validator": "design_validator",
+    "result_envelope_path": "runs/run-79276e78d773/states/solution-design-and-risk-assessment/result-envelope.json",
+    "conditional_artifacts": [
+      {
+        "artifact": "architecture-decision-record.md",
+        "template_ref": "templates/architecture-decision-record.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "One record per architecture-significant decision, emitted at status Proposed. Acceptance belongs to the Design Gate owners, never to this agent.",
+        "artifact_path_glob": "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-*.md",
+        "naming": "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/architecture-decision-record-<identifier>.md"
+      },
+      {
+        "artifact": "review-package.md",
+        "template_ref": "templates/review-package.md",
+        "contract_ref": "agents/architect/output.md",
+        "condition": "Emitted only for review-pull-request/structural-compliance, where this agent applies the structural and security lens and the findings are classified under the architecture and security categories. runtime/review_package_validator.py already contracts this agent as a permitted producer of review-package.md; the quality rules it applies to the structural lens are the ones in quality.md.",
+        "artifact_path_glob": "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/review-package-*.md",
+        "naming": "runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/review-package-<identifier>.md"
+      }
+    ]
+  },
+  "built_at": "2026-10-17T11:53:58Z",
+  "model_tier": {
+    "tier": "deep",
+    "host_hint": "opus",
+    "basis": "declared deep for implement-feature/solution-design-and-risk-assessment in config/model-tier-policy.json; deep is the ceiling, so 1 recorded rejection(s) do not raise it",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 110389,
+    "modules_core_bytes": 51235,
+    "slice_all_bytes": 179614,
+    "slice_required_bytes": 13364,
+    "inputs_bytes": 10348,
+    "upstream_full_bytes": 54607,
+    "upstream_read_first_bytes": 41894,
+    "task_context_bytes": 30343,
+    "fixed_bytes": 122563,
+    "legacy_estimate_bytes": 477521,
+    "progressive_estimate_bytes": 269747,
+    "legacy_estimate_tokens": 119380,
+    "progressive_estimate_tokens": 67436,
+    "savings_pct": 43.5
+  }
+}

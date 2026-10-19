@@ -1,0 +1,85 @@
+{
+  "invocation_id": "inv-79276e78d773-06-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-79276e78d773/states/documentation-and-release-handoff/artifacts/release-note.md"
+  ],
+  "structured_output": {
+    "run_id": "run-79276e78d773",
+    "agent_id": "omn-documentation",
+    "agent_version": "1.2.0",
+    "communication_basis": "release-handoff",
+    "release_verdict": "handed-off",
+    "artifact_status": "provisional",
+    "status_basis": "Stage 8 row 'any: position establishable but a required statement is unsupported'. The post-review corrections CR-001 and CR-003 are reported applied, but no supplied artifact records them, their test runs, or a reviewer re-review; F-001 and F-003 are therefore published as open (K-001, K-003, K-007).",
+    "known_issues": {
+      "count": 7,
+      "ids": ["K-001", "K-002", "K-003", "K-004", "K-005", "K-006", "K-007"],
+      "order_source": "review-package Findings (F-001 to F-003), Residual Risk, Open Questions (Q-001, Q-002), then the open question routed from the dispatch brief (K-007)"
+    },
+    "published_statements": {
+      "count": 24,
+      "all_traced_to_source_inputs": true,
+      "source_inputs": [
+        "architecture-context: runs/inputs/okf-lessons-architecture-context.md",
+        "verification-report: runs/run-79276e78d773/states/quality-review/artifacts/review-package.md",
+        "validation-report: runs/run-79276e78d773/states/implementation/validation-report.json",
+        "final-change-summary: runs/run-79276e78d773/task-context.yaml"
+      ]
+    },
+    "changes_by_stage5_class": {
+      "breaking": 1,
+      "contract": 1,
+      "operational": 1,
+      "feature": 1,
+      "fix": 0,
+      "improvement": 1,
+      "internal": 1,
+      "internal_note": "the internal entry (serialiser, lock, write order) is classified and not published"
+    },
+    "checks": {
+      "run": 62,
+      "passed": 62,
+      "failed": 0,
+      "scope": "quality.md checks S1-S8, D1-D7, P1-P6, R1-R9 (R3 counted once), X1-X4, K1-K6, R6, A1-A13, C1-C6; self-verified before emission; the Validation Engine decides the machine-checkable subset",
+      "note": "N1-N3 are not-machine-checkable and are reported below, not counted"
+    },
+    "not_machine_checkable_obligations": {
+      "N1": "met for the reviewed state: the note describes the change as the review package and the validator record show it; the post-correction behaviour is not described as delivered and is open at K-007",
+      "N2": "met for this note: no existing documentation was supplied to compare, and no stale statement was found in the supplied inputs to carry forward",
+      "N3": "met for the reviewed change: each Stage 5 class is represented, and the one breaking change is stated with its compatibility consequence and required action; post-correction surface is open at K-007"
+    },
+    "open_questions_routed": {
+      "Q-001": "architect",
+      "Q-002": "omn-tech-lead",
+      "CR-002": "architect",
+      "CR-001_CR-003_change_record_and_re_review": ["omn-dev-1-implement", "omn-dev-2-reviewer", "omn-qa"]
+    },
+    "inputs_read": [
+      "runs/inputs/okf-lessons-architecture-context.md",
+      "runs/run-79276e78d773/states/quality-review/artifacts/review-package.md",
+      "runs/run-79276e78d773/states/implementation/validation-report.json",
+      "runs/run-79276e78d773/task-context.yaml"
+    ],
+    "digests_copied_from_envelope": {
+      "inputDigest": "sha256:f6a9f769682c7efc59bfdbb427f51a87",
+      "contextDigest": "sha256:598693b3d4e606388ca8c2715f151cf0"
+    }
+  },
+  "evidence_refs": [
+    "agents/omn-documentation/system.md",
+    "agents/omn-documentation/identity.md",
+    "agents/omn-documentation/reasoning.md",
+    "agents/omn-documentation/execution.md",
+    "agents/omn-documentation/output.md",
+    "agents/omn-documentation/quality.md",
+    "runs/run-79276e78d773/states/documentation-and-release-handoff/invocation-envelope.json"
+  ],
+  "confidence": "medium",
+  "declared_side_effects": [
+    "runs/run-79276e78d773/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "runs/run-79276e78d773/states/documentation-and-release-handoff/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

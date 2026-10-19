@@ -122,7 +122,7 @@ RUNS = CLAUDE / "runs"
 # copied runtime names paths that actually exist on disk.
 FW_PREFIX = CLAUDE.name
 
-RUNTIME_VERSION = "0.10.1"
+RUNTIME_VERSION = "0.11.1"
 
 SLICES = {
     "scope-and-acceptance": "vertical-slice-4-product-owner-execution",
