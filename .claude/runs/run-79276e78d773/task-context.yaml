@@ -1,0 +1,1008 @@
+schema: framework.runtime/task-context.v1
+task_id: run-79276e78d773
+command: implement
+workflow: implement-feature v1.0.0
+run_status: Completed
+updated_at: '2026-10-17T13:54:31Z'
+objective: 'Store the framework''s harvested lessons in the Open Knowledge Format (OKF) v0.2, published at https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md,
+  instead of the single JSON document memory/lessons/lessons.store.json introduced by FC-022. Today every lesson lives in
+  one framework-private JSON file (schema framework.memory/lessons.v1). Only runtime/knowledge.py can read it. It carries
+  no provenance or trust metadata that a third party would understand, and it cannot be browsed, linked or reviewed as documents.
+  OKF is an open, vendor-neutral format built for this: a directory of markdown concept documents with YAML frontmatter, plus
+  reserved index.md and log.md fi...'
+inputs:
+- type: feature-request
+  reference: runs/inputs/okf-lessons-feature-request.md
+  digest: sha256:68967bc015098f6c332ca509f1a73b76
+- type: change-request
+  reference: runs/inputs/okf-lessons-change-request.md
+  digest: sha256:8421834b6a46a2a11175f90e398440c1
+- type: business-intent
+  reference: runs/inputs/okf-lessons-business-intent.md
+  digest: sha256:cb8d061443933d4978cd60b68fbb7d80
+- type: architecture-context
+  reference: runs/inputs/okf-lessons-architecture-context.md
+  digest: sha256:8859dd1736058635fdf5470ac277b2dc
+relevant_agents:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  status: completed
+  required_skills:
+  - S02
+  - S07
+- phase: execution-planning
+  agent: planner
+  status: completed
+  required_skills:
+  - S02
+  - S01
+  - S07
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  status: completed
+  required_skills:
+  - S01
+  - S03
+  - S06
+  - S09
+- phase: implementation
+  agent: omn-dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S11
+  - S12
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S08
+- phase: documentation-and-release-handoff
+  agent: omn-documentation
+  status: completed
+  required_skills:
+  - S11
+  - S10
+  - S12
+completed_phases:
+- phase: scope-and-acceptance
+  agent: omn-product-owner
+  artifact: runs/run-79276e78d773/states/scope-and-acceptance/artifacts/scope-definition.md
+  digest: sha256:81bea5e4244406eb46c1b8bcf2b47c2a
+  validation: pass 33/33
+  attempts: 2
+- phase: execution-planning
+  agent: planner
+  artifact: runs/run-79276e78d773/states/execution-planning/artifacts/execution-plan.md
+  digest: sha256:54a4d2361348528162d4d0932767eae6
+  validation: pass 45/45
+  attempts: 2
+- phase: solution-design-and-risk-assessment
+  agent: architect
+  artifact: runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  digest: sha256:e2edbf41eea0c169d7804de57028ce04
+  validation: pass 78/78
+  attempts: 2
+- phase: implementation
+  agent: omn-dev-1-implement
+  artifact: runs/run-79276e78d773/states/implementation/artifacts/implementation-report.md
+  digest: sha256:d80c7166f3d4ce3d0ddc2cf53a059a53
+  validation: pass 32/32
+  attempts: 1
+- phase: quality-review
+  agent: omn-dev-2-reviewer
+  artifact: runs/run-79276e78d773/states/quality-review/artifacts/review-package.md
+  digest: sha256:6b345c60d45fd57651e6640c0c192c1b
+  validation: pass 31/31
+  attempts: 1
+- phase: documentation-and-release-handoff
+  agent: omn-documentation
+  artifact: runs/run-79276e78d773/states/documentation-and-release-handoff/artifacts/release-note.md
+  digest: sha256:b496a9715672d0b94a8875ac253bcfc5
+  validation: pass 34/34
+  attempts: 1
+gates:
+- gate: Scope Gate
+  closes: scope-and-acceptance
+  decision: approved
+  owner_role: omn-business-analyst
+  decided_by: omn-business-analyst subagent a571b7e63bb7c98ac, recorded by session operator for vuhoangcao
+- gate: Planning Gate
+  closes: execution-planning
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent ac059d1a8684013e1, recorded by session operator for vuhoangcao
+- gate: Design Gate
+  closes: solution-design-and-risk-assessment
+  decision: approved
+  owner_role: omn-tech-lead
+  decided_by: omn-tech-lead subagent a4d823ed9c79d02bc, recorded by session operator for vuhoangcao
+- gate: Review Gate
+  closes: quality-review
+  decision: approved
+  owner_role: omn-qa
+  decided_by: omn-qa subagent aa2b26c926605097c, recorded by session operator for vuhoangcao
+- gate: Verification Gate
+  closes: quality-review
+  decision: approved
+  owner_role: omn-qa
+  decided_by: omn-qa subagent aa2b26c926605097c, recorded by session operator for vuhoangcao
+- gate: Closure Gate
+  closes: documentation-and-release-handoff
+  decision: approved
+  owner_role: omn-orchestrator
+  decided_by: omn-orchestrator subagent a22525a88ae5e6723, recorded by session operator for vuhoangcao
+artifacts:
+  scope-and-acceptance: runs/run-79276e78d773/states/scope-and-acceptance/artifacts/scope-definition.md
+  execution-planning: runs/run-79276e78d773/states/execution-planning/artifacts/execution-plan.md
+  solution-design-and-risk-assessment: runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/technical-design.md
+  implementation: runs/run-79276e78d773/states/implementation/artifacts/implementation-report.md
+  quality-review: runs/run-79276e78d773/states/quality-review/artifacts/review-package.md
+  documentation-and-release-handoff: runs/run-79276e78d773/states/documentation-and-release-handoff/artifacts/release-note.md
+parallel_groups:
+- - scope-and-acceptance
+  - execution-planning
+- - solution-design-and-risk-assessment
+- - implementation
+- - quality-review
+- - documentation-and-release-handoff
+scope:
+  in_scope:
+  - 'S-001: Lessons are held as a bundle under the lesson memory location: one document per lesson, a root index that d...
+    | Feature request, expected outcome 1 | must-have'
+  - 'S-002: Each lesson document states a type, title, description, and tags, each non-empty | Feature request, expected outcome
+    2 | must-have'
+  - 'S-003: Each lesson document states the run artifacts it was harvested from, and which producer generated it and when
+    | Feature request, expected outcome 2 (sources, generated) | must-have'
+  - 'S-004: Each lesson document states whether an operator has approved it, and its status as draft, stable, or deprec...
+    | Feature request, expected outcome 2 (verified, status); D-001 | must-have'
+  - 'S-005: Every other lesson field, including governance history, stays readable in the lesson document under its own...
+    | Feature request, expected outcome 2 (extension keys); business intent, Intent | must-have'
+  - 'S-006: The change log records each lesson''s creation and each governance change, newest first | Feature request, expected
+    outcome 1 (change log); D-003 | must-have'
+  - 'S-007: Harvest, approve, retire, annotate, recall, effectiveness reporting, and the aggregation step read and writ...
+    | Feature request, expected outcome 3 | must-have'
+  - 'S-008: Agents receive each lesson at dispatch with exactly the same text as before, including the existing neutral...
+    | Feature request, expected outcome 3; business intent, Success | must-have'
+  - 'S-009: Re-harvesting unchanged run evidence leaves the bundle unchanged | Feature request, expected outcome 3 | must-have'
+  - 'S-010: An interrupted lesson write never leaves a lesson document, the index, or the change log partly written | Business
+    intent, Intent (no loss of current behaviour); architecture context (current atomic write) | must-have'
+  - 'S-011: An operator can run a deterministic check of the bundle against OKF §11 on its own, and it reports pass or...
+    | Feature request, expected outcome 4; D-004 | must-have'
+  - 'S-012: The lessons in the current store become documents with their identifiers and governance history intact, and...
+    | Feature request, expected outcome 5 | must-have'
+  - 'S-013: The change leaves every existing run evidence file unchanged | Feature request, constraints | must-have'
+  - 'S-014: The lesson bundle is absent from the installed payload and the bundled mirror, as the JSON store was | Feature
+    request, constraints | must-have'
+  - 'S-015: The memory optimiser leaves the bundle unchanged | Feature request, constraints; change request, surfaces | must-have'
+  - 'S-016: Every existing gate, artifact validator, and verifier keeps its recorded baseline verdict | Business intent, Success
+    | must-have'
+  - 'S-017: An operator can browse from the root index to every lesson document | Business intent, Problem; feature request,
+    Request | should-have'
+  - 'S-018: The memory documentation describes the bundle in place of the JSON store | Change request, surfaces this change
+    is expected to touch | should-have'
+  - 'S-001: Lessons are held as a bundle with one document per lesson, a root index declaring the OKF version, and a change
+    log. Covered by T-001, T-002, T-003, T...'
+  - 'S-002: Each lesson document states a non-empty type, title, description and tags. Covered by T-004, T-005, T-006, T-007,
+    T-008.'
+  - 'S-003: Each lesson document states its source run artifacts, and the producer that generated it and when. Covered by
+    T-004, T-005, T-006, T-007, T-008.'
+  - 'S-004: Each lesson document states its operator approval and its status as draft, stable or deprecated. Covered by T-004,
+    T-005, T-006, T-007, T-008, T-009,...'
+  - 'S-005: Every other lesson field, governance history included, stays readable under its own key. Covered by T-004, T-005,
+    T-006, T-007, T-008.'
+  - 'S-006: The change log records each creation and each governance change, newest first. Covered by T-002, T-004, T-005,
+    T-011.'
+  - 'S-007: Harvest, approve, retire, annotate, recall, effectiveness reporting and the aggregation step work on the bundle
+    with the same results as before. Cover...'
+  - 'S-008: Agents receive each lesson at dispatch with exactly the same text as before. Covered by T-004, T-014, T-015, T-016.'
+  - 'S-009: Re-harvesting unchanged evidence leaves the bundle unchanged. Covered by T-004, T-013, T-015, T-017.'
+  - 'S-010: An interrupted write never leaves a lesson document, the index or the change log partly written. Covered by T-004,
+    T-017, T-018.'
+  - 'S-011: An operator can run a deterministic standalone OKF §11 check that reports pass or fail. Covered by T-001, T-004,
+    T-007, T-013, T-019, T-020, T-021, T-...'
+  - 'S-012: The current lessons become documents with identifiers and history intact, and the JSON store is removed. Covered
+    by T-004, T-005, T-013, T-024, T-025,...'
+  - 'S-013: Every existing run evidence file stays unchanged. Covered by T-004, T-012, T-014, T-029.'
+  - 'S-014: The bundle is absent from the installed payload and the bundled mirror. Covered by T-004, T-030, T-031, T-032,
+    T-033.'
+  - 'S-015: The memory optimiser leaves the bundle unchanged. Covered by T-004, T-029, T-034, T-035.'
+  - 'S-016: Every existing gate, artifact validator and verifier keeps its recorded baseline verdict. Covered by T-004, T-014,
+    T-016, T-029.'
+  - 'S-017: An operator can browse from the root index to every lesson document. Covered by T-002, T-003, T-004, T-005.'
+  - 'S-018: The memory documentation describes the bundle in place of the JSON store. Covered by T-004, T-028, T-036, T-037.'
+  out_of_scope:
+  - 'X-001: Publishing the bundle outside the repository | Non-goal stated in the business intent | A separate request names
+    an external consumer and a publication target'
+  - 'X-002: Changing which lessons are harvested, when they become eligible, or how they rank | Non-goal stated in the business
+    intent | A separate change request on harvest eligibility or ranking'
+  - 'X-003: Converting any other memory document to OKF | Non-goal stated in the business intent | A separate change request
+    names that document'
+  - 'X-004: Any process or machine actor that marks a lesson verified | The inputs name no confirming process (D-001) | A
+    supplied requirement names the confirming process'
+  - 'X-005: Making the conformance check a mandatory item of the framework release checklist | A new mandatory item invalidates
+    every recorded change proposal under rule F9 (architecture context) | A separate change to the F9 rule of the proposal
+    validator'
+  - 'X-006: Changing the governance states, their meanings, or the governance actions | The request maps the three existing
+    states and keeps the actions | A separate change request to lesson governance'
+  - 'X-007: Changing the Phase Model tables, agent module text, gates, or artifact validators | Listed as "not touched" in
+    the change request | A separate change request naming one of them'
+  - 'X-001: Publishing the bundle outside the repository. Excluded because the business intent states it as a non-goal.'
+  - 'X-002: Changing harvest eligibility, timing or ranking. Excluded because the business intent states it as a non-goal.'
+  - 'X-003: Converting any other memory document to OKF. Excluded because the business intent states it as a non-goal.'
+  - 'X-004: Any process or machine actor that marks a lesson verified. Excluded because the inputs name no confirming process
+    (D-001).'
+  - 'X-005: A mandatory release checklist item for the conformance check. Excluded because a new mandatory item would invalidate
+    every recorded change proposal un...'
+  - 'X-006: Changing governance states, their meanings or the governance actions. Excluded because the request maps the three
+    existing states and keeps the actions.'
+  - 'X-007: Changing Phase Model tables, agent module text, gates or artifact validators. Excluded because the change request
+    lists them as not touched.'
+validation_requirements:
+  acceptance_criteria:
+  - 'A-001: The bundle holds one concept document per lesson record in the store at migration, plus index.md and log.md...
+    | S-001 | count of concept documents and reserved files compared with the migrated record count'
+  - 'A-002: Root index.md frontmatter contains exactly one key, okf_version, with value "0.2" | S-001 | read of the root index
+    frontmatter by the conformance check'
+  - 'A-003: Every concept document has a non-empty type, title, and description, and a non-empty tags list; zero except...
+    | S-002 | conformance check over all concept documents'
+  - 'A-004: Each document''s sources holds one entry per distinct run artifact path among its lesson evidence references...
+    | S-003 | comparison of each sources value with its lesson record evidence field'
+  - 'A-005: Every generated.by matches <producer>/<version> and every generated.at is an ISO 8601 instant with a UTC of...
+    | S-003 | pattern check over all concept documents'
+  - 'A-006: Every status is draft for candidate, stable for active, and deprecated for retired, matching the governance...
+    | S-004 | comparison of each status with the governance state in its lesson record'
+  - 'A-007: verified is present on exactly the lessons with an approval in their history, with a human:<id> actor and t...
+    | S-004 | comparison of verified entries with approval entries in history'
+  - 'A-008: Every lesson field not mapped to a standard key by S-002 to S-004 appears under a producer extension key wi...
+    | S-005 | field-by-field comparison of each migrated lesson record with its document'
+  - 'A-009: log.md opens with a title line, groups entries under ## YYYY-MM-DD headings newest first, writes each entry...
+    | S-006 | format check of the change log and count comparison with history entries'
+  - 'A-010: Harvest, approve, retire, annotate, recall, effectiveness reporting, and the aggregation step produce on th...
+    | S-007 | run of each step on the migrated bundle compared with results recorded before migration'
+  - 'A-011: The render_section output for the same lesson set is byte-identical before and after the change, including...
+    | S-008 | byte comparison of the rendered section captured before migration with the rendered section after'
+  - 'A-012: A re-harvest over unchanged run evidence leaves every bundle file byte-identical, including log.md; zero ch...
+    | S-009 | harvest run twice over unchanged evidence, with a file hash comparison'
+  - 'A-013: An interruption injected at each write step leaves every concept document, index.md, and log.md in either i...
+    | S-010 | fault injection at each write step, with a parse and state check after each'
+  - 'A-014: The conformance check passes the migrated bundle and fails each of three seeded defects: unparseable frontm...
+    | S-011 | run of the check over the migrated bundle and over three seeded fixture bundles'
+  - 'A-015: The conformance check runs without the harvest, governance, or recall steps and gives identical output and...
+    | S-011 | standalone run twice, with output and exit status compared'
+  - 'A-016: Migration yields one concept document per lesson record in the store at migration time (42 at the time of t...
+    | S-012 | count and set comparison of lesson_id values before and after migration'
+  - 'A-017: Each migrated lesson keeps its full governance history, with the same number of entries and the same actor...
+    | S-012 | per-lesson comparison of history entries before and after migration'
+  - 'A-018: memory/lessons/lessons.store.json does not exist after migration | S-012 | file existence check'
+  - 'A-019: Every run evidence file that exists before the change keeps its hash; zero changed files | S-013 | hash comparison
+    of the pre-existing run evidence before and after the change'
+  - 'A-020: The installed payload and the bundled mirror contain zero files under the lesson bundle path, including fil...
+    | S-014 | listing of the installed payload and the bundled mirror for the bundle path'
+  - 'A-021: A run of the memory optimiser leaves every bundle file byte-identical; zero changed files | S-015 | hash comparison
+    of the bundle before and after an optimiser run'
+  - 'A-022: Each existing gate, artifact validator, and verifier returns the verdict recorded as its baseline on the sa...
+    | S-016 | rerun of each against its recorded baseline'
+  - 'A-023: The root index links each concept document exactly once, with a description, under a # heading; zero missin...
+    | S-017 | comparison of the index links with the set of concept document files'
+  - 'A-024: The memory documents named in the change request name no JSON store as the current lesson store; zero occur...
+    | S-018 | text search of the named memory documents'
+  test_focus:
+  - 'Carrier: tests/test_knowledge.py (M-013). Every test builds a temporary framework root. The copy-ignore becomes a callable
+    that skips memory/lessons by relat...'
+  - 'Existing tests moved to the bundle:'
+  - The store helper writes through write_store.
+  - Idempotency expects the file set index.md, log.md, and one L-.md per lesson.
+  - The governance byte comparison filters lessons.lock.
+  - The optimiser test expects the bundle-path denial reason for index.md, log.md, and a concept document.
+  - Dispatch expects store memory/lessons and the bundle path absent from context_slice.
+  - The unreadable-store fixture is a concept document with broken frontmatter, and recall fails open naming store-unreadable.
+  - Aggregation absence checks expect no bundle directory.
+  - Payload exclusion places bundle files and a memory/index.md in a temporary memory tree, expects only memory/index.md in
+    the seeds, and expects EXCLUDE_PATHS...
+  - The documentation test names the bundle and no JSON store.
+  - The version test expects 0.11.0.
+  - The module boundary test expects knowledge to import only the standard library, state_engine, and okf, and okf and the
+    verifier to import only the standard l...
+  - 'Serialiser: round-trip identity for every live record shape (F-011). Hostile fixtures cover newlines, a line of three
+    dashes, a colon followed by a space, a...'
+  - 'AC-001, AC-016, AC-017, AC-018: migrate a copy of the P-003 store. Pass when the document count equals the record count
+    at migration, lesson_id sets match, e...'
+  - 'AC-002, AC-003, AC-005 to AC-008, AC-023: field checks over every document against its record. AC-004 compares each resources
+    set, with the two parent steps...'
+  - 'AC-009: count of log entries equals lessons plus history entries; dates strictly descending; a fixture with approve,
+    annotate, and retire entries on two dates.'
+  - 'AC-010, AC-011, AC-015: compare loop outputs and render bytes with the P-003 baseline over the same lesson set (A-007);
+    conformance twice gives equal output...'
+  - 'AC-012: two harvests over unchanged evidence; every bundle file hash equal, log.md included.'
+  - 'AC-013: fault injection after each write step (each document replace, the removal, log.md, index.md). Pass when every
+    file parses, is either its prior or its...'
+  - 'AC-014: the migrated bundle passes; seeded bundles with unparseable frontmatter, an empty type, and a malformed index
+    or log each fail with the expected rule.'
+  - 'AC-019 to AC-022: hash comparison of run directories other than the carrying run (A-009); payload and mirror listings
+    under memory/lessons are empty; an opti...'
+  - 'AC-024: text search of M-009 to M-012.'
+  - 'Beyond the criteria: a lesson_id outside the guard fails with store-unwritable and nothing written; a JSON-only fixture
+    yields store-migration-pending for ha...'
+  evidence:
+  - 'T-001: Frontmatter subset round-trip and hostile fixtures, document mapping against every record shape, index, log...
+    | integration | C-001, C-002, C-003, C-059'
+  - 'T-002: Knowledge loop suite on the bundle: harvest, idempotent file set, governance, lock, optimiser denial, dispa...
+    | regression | C-002, C-004, C-005, C-006, C-008, C-009, C-010, C-011, C-058'
+  - 'T-003: Bundled payload mirrors the framework tree after the sync: 11 tests | regression | C-006, C-060, C-061, C-062,
+    C-063, C-064, C-065, C-066, C-067, C-068, C-069'
+  - 'T-004: Memory optimiser suite unchanged by the new denial rule: 31 tests | regression | C-005'
+  - 'T-005: Sync refreshes 289 payload files and mirrors nothing under memory/lessons | static | C-006, C-060, C-061, C-062,
+    C-063, C-064, C-065, C-066, C-067, C-068, C-069'
+  - 'T-006: Validator coverage verdict equals the pre-change baseline, 6 of 6 | regression | C-004'
+  - 'T-007: Registry coverage verdict equals the pre-change baseline, 8 of 8 | regression | C-004'
+  - 'T-008: Live migration: 43 records written, read back, compared record for record, JSON store removed; a re-run rep...
+    | integration | C-002, C-012, C-013, C-014, C-015, C-016, C-017, C-018, C-019, C-020, C-021, C-022, C-023, C-024, C-025,
+    C-...'
+  - 'T-009: Live bundle conforms: 43 documents, 2 reserved files, 0 findings, identical output on two runs; a missing p...
+    | contract | C-001, C-003, C-013, C-014, C-015, C-016, C-017, C-018, C-019, C-020, C-021, C-022, C-023, C-024, C-025,
+    C-...'
+  - 'T-010: Live list reads 43 lessons from the bundle | integration | C-002, C-015, C-016, C-017, C-018, C-019, C-020, C-021,
+    C-022, C-023, C-024, C-025, C-026, C-027, C-028, C-...'
+  - 'T-011: Live recall shows 2 of 2 eligible lessons for execution-planning with the unchanged prompt section | integration
+    | C-002, C-015, C-016, C-017, C-018, C-019, C-020, C-021, C-022, C-023, C-024, C-025, C-026, C-027, C-028, C-...'
+  - 'T-012: Per-lesson and whole-set render bytes, recall over 8 phase and artifact pairs, records, and effectiveness e...
+    | regression | C-002, C-015, C-016, C-017, C-018, C-019, C-020, C-021, C-022, C-023, C-024, C-025, C-026, C-027, C-028,
+    C-...'
+  - 'T-013: Hashes of 1308 run-evidence files outside the carrying run equal the pre-change snapshot | regression | C-002,
+    C-012'
+  - 'T-014: The release checklist parses with FR-13 advisory, owner omn-qa, naming the verifier | static | C-007'
+  verification:
+  - 'Verification method: the regression baseline (both knowledge-related suites, both coverage verifiers, the optimiser suite,
+    a byte capture of render, recall,...'
+  - 'Commands executed: PYTHONPATH=. python tests/test_okf_bundle.py; PYTHONPATH=. python tests/test_knowledge.py; PYTHONPATH=.
+    python tests/test_bundled_payload....'
+  - 'Result summary: executed 14, passed 14, failed 0 (122 unit tests across four suites; parity and run-evidence comparisons
+    identical)'
+  - 'Unverified areas: none'
+constraints:
+- 'Business constraints: No gate, validator, or acceptance rule is weakened (S-016); the dispatched lesson text does not change
+  (S-008); harvest eligibility and...'
+- 'Regulatory or policy constraints: No run evidence under runs/ is edited (S-013); the memory optimiser does not rewrite
+  the bundle (S-015); the bundle stays o...'
+- 'Delivery constraints: Standard library only, with no third-party YAML dependency (feature request); the bundled mirror
+  is refreshed by the framework sync ste...'
+- 'External dependencies: The OKF v0.2 SPEC, cited by the feature request, is not among the supplied inputs; the rules attributed
+  to it are taken as the request...'
+- 'Wave 1: T-001, T-014, T-017, T-030, T-034'
+- 'Wave 2: T-002, T-009, T-019, T-031, T-035'
+- 'Wave 3: T-006, T-010, T-011, T-020'
+- 'Wave 4: T-004, T-007, T-024, T-036'
+- 'Wave 5: T-003, T-008, T-021, T-037'
+- 'Wave 6: T-012, T-018, T-022, T-025'
+- 'Wave 7: T-027'
+- 'Wave 8: T-026'
+- 'Wave 9: T-005, T-013, T-015, T-023, T-032'
+- 'Wave 10: T-016, T-029, T-033'
+- 'Wave 11: T-028'
+- 'Wave 12: T-038'
+- 'Wave 13: T-039'
+- 'C-001: functional | Bundle at memory/lessons: L-.md per lesson, index.md with okf_version "0.2", log.md; the lock file
+  is not .md | hard'
+- 'C-002: functional | type, title, description, tags non-empty and derived only from record fields | hard'
+- 'C-003: functional | sources holds one entry per distinct artifact path; generated.by is producer/version, generated.at
+  is last_... | hard'
+- 'C-004: functional | verified only for operator approvals with a human actor; status draft, stable, deprecated for candidate,
+  ac... | hard'
+- 'C-005: functional | Every record field is kept under an extension key, and the read path returns records equal to those
+  written | hard'
+- 'C-006: functional | The change log holds one creation entry per lesson and one entry per history entry, newest first, dated
+  fro... | hard'
+- 'C-007: functional | Loop steps give the same results, and rendered lesson text is byte-identical | hard'
+- 'C-008: quality-attribute | Every bundle byte derives from record fields; no write-time value; re-harvest is byte-identical
+  | hard'
+- 'C-009: quality-attribute | Each bundle file is replaced whole; no partial file survives an interruption | hard'
+- 'C-010: functional | A deterministic §11 check runs standalone, without harvest, governance, or recall | hard'
+- 'C-011: migration | Migrated lessons keep identifiers, fields, and history; the JSON store is removed only after complete
+  migra... | hard'
+- 'C-012: compliance | No existing run evidence file is edited | hard'
+- 'C-013: operability | The bundle is excluded from payload and mirror by relative path; no other path is newly excluded |
+  hard'
+- 'C-014: operability | The optimiser leaves the bundle unchanged, scoped by relative path | hard'
+- 'C-015: structural | Gates, artifact validators, Phase Model tables, and agent text unchanged; every verifier keeps its
+  baseline... | hard'
+- 'C-016: structural | Standard library only | hard'
+- 'C-017: security | No field value can add, remove, or reorder frontmatter keys, index entries, or log entries, or form a
+  path... | hard'
+- 'C-018: operability | The conformance check is an advisory checklist item, never mandatory | hard'
+- 'C-019: operability | RUNTIME_VERSION 0.11.0, set after the baseline exists | hard'
+- 'C-020: operability | Mirror refreshed by the sync step only; change proposal and release checklist under the self-hosting
+  profile | hard'
+- 'C-021: compliance | Artifacts write paths without the dot-directory prefix and carry no vendor substring | hard'
+- 'C-022: quality-attribute | The conformance check depends on no lesson-loop code and works on any bundle path | negotiable'
+- 'C-023: quality-attribute | Dispatch recall cost stays proportional to lesson count; no budget is stated | negotiable'
+- 'C-024: functional | The root index links each concept document exactly once, with a description, under a # heading | hard'
+- 'C-025: operability | The memory documents name the bundle and no JSON store as the current lesson store | hard'
+- 'C-026: structural | Governance states, actions, harvest eligibility, and ranking are unchanged | hard'
+- 'P-001: The OKF verdicts, reserved-file, frontmatter, stale_after, write, carrier, migration, and exclusion contrac... |
+  M-001, M-002, M-003, M-006, M-007 | none'
+- 'P-002: The stale_after acceptance criterion is recorded and every scope criterion is mapped to a verification method |
+  M-003 | P-001'
+- 'P-003: The reference baseline is captured read-only on the unchanged tree: render bytes, loop outputs, verifier ve... |
+  M-002, M-003, M-005 | P-001'
+- 'P-004: The path-scoped exclusions exist in M-006 and M-007 before any bundle file exists in the authoritative tree | M-006,
+  M-007 | P-001'
+- 'P-005: M-001 serialiser, parser, and conformance exist | M-001 | P-001'
+- 'P-006: M-002 bundle read and write, index, change log, lock path, and bundle naming in recall and harvest exist | M-002
+  | P-003, P-005'
+- 'P-007: M-004 verifier and the FR-13 advisory item exist | M-004, M-008 | P-005'
+- 'P-008: RUNTIME_VERSION reads 0.11.0 | M-005 | P-003'
+- 'P-009: The live store is migrated into the bundle and the migration is verified complete against the P-003 copy, w... |
+  M-002, M-003 | P-003, P-004, P-006'
+- 'P-010: The JSON store is removed, and the test suite is moved to the bundle, in the same change as P-009 | M-003, M-013
+  | P-009'
+- 'P-011: The documents describe the delivered bundle, reserved files, write contract, digest, migration, and verifier | M-009,
+  M-010, M-011, M-012 | P-006, P-010'
+- 'P-012: The mirror is refreshed by the sync step after the last framework edit | M-014 | P-004, P-007, P-008, P-010, P-011'
+- 'P-013: Verification on the final tree against the P-003 baseline: bundle content, loop parity, interruption, confo... |
+  M-001 to M-015, M-019 | P-002, P-012'
+- 'P-014: The release note, change proposal, and release checklist cite the P-013 evidence | M-008, M-014 | P-013'
+decisions:
+- 'D-001: verified is written only for an operator approval, with a human:<id> actor; no process: actor is introduced | The
+  inputs define the process actor form but name no confirming process; a new confirmation would add behav... | No lesson is
+  marked verified by a machine; a machine confirmation becomes a separate ch...'
+- 'D-002: sources holds one entry per distinct run artifact path; each full evidence reference is kept under a produc... |
+  The request requires one entry per run artifact and that nothing the lesson store records is lost; evidence... | A lesson''s
+  sources count can be lower than its evidence reference count; every refer...'
+- 'D-003: Creation entries are written on a lesson''s first write; update entries on approve and annotate; deprecation...
+  | The three entry types of the format map to the governance actions the request names; the request asks for a... | The entry
+  count is fixed by the lesson history (A-009)'
+- 'D-004: The carrier of the conformance check (module or command) is left to design; its behaviour is fixed here | The change
+  request defers the carrier to design, and the choice of structure belongs to the architect | The location and invocation
+  form stay open until design; S-011, A-014, and A-015 bind behaviour only'
+- 'Selected: O-002.'
+- 'T-001 verdicts (supplied SPEC copy; answers the plan''s architect-owned first question; plan assumption one holds, plan
+  risk one does not materialise):'
+- §5.1 matches the request; resource is required in each entry (F-024).
+- §5.2 holds both generated and verified; the request's placement of verified in §5.3 is a numbering slip, since §5.3 is trust
+  tiers, which this design does no...
+- §5.4 and §5.5 match; status is always written, so the default never applies.
+- '§7 matches: producer/version, human:id, process:id.'
+- §8 matches; the entry description is a SHOULD, and this design always writes one.
+- §9 matches on ISO date headings, newest first; the bold leading word is a convention, not a rule, so the check does not
+  enforce it while the writer always em...
+- §11 matches; rule 2 is applied to concept documents, because §8 limits the root index frontmatter to okf_version (Q-003).
+- Z satisfies the explicit-offset rule, consistent with S-025 and the SPEC examples.
+- 'Structural change:'
+- 'Module M-001 (D-001). Standard library only, no framework import. Offers: dump a mapping to the frontmatter subset, parse
+  the subset, split and join a docume...'
+- Serialisation subset (D-007).
+- UTF-8 without BOM, LF endings, trailing newline; the document opens with a line of three dashes and the frontmatter closes
+  with the same line.
+- Keys are bare and must match a letter or underscore followed by letters, digits, or underscores; indentation is two spaces.
+- Every string is double-quoted. Backslash and double quote are backslash-escaped. Every character outside printable ASCII
+  becomes a four-hex or eight-hex unic...
+- null, true, false, and base-10 integers are bare; floats are refused (A-006).
+- Lists and mappings are block form. A list of mappings puts its first key on the dash line. Empty collections are written
+  as empty flow brackets.
+- Mapping key order is the caller's order for the top level and the lesson_record mapping, and sorted for every nested mapping.
+- The parser accepts that canonical form, plus plain scalars (null, tilde, or empty as null; true and false; integers; anything
+  else a string), single-quoted s...
+- Bundle layout and mapping (D-002).
+- BUNDLE_REL is memory/lessons. Each concept document is named lesson_id plus .md; index.md and log.md complete the bundle;
+  the lock is memory/lessons/lessons....
+- Before a file name is formed, lesson_id must match L- followed by exactly 10 lowercase hex characters; otherwise the write
+  fails with store-unwritable.
+- 'Frontmatter keys, in this order:'
+- 'type: always Lesson.'
+- 'title: neutralised kind (cap 40), a space, neutralised check_id or else gate or else a question mark (cap 60), the word
+  on, and neutralised artifact_type (ca...'
+- 'description: the check description neutralised at cap 160 exactly as render_section does, or "no description recorded".'
+- 'tags: kind, artifact_type, then each phase, each neutralised (cap 60), de-duplicated in order with empties dropped; the
+  single tag lesson if nothing remains.'
+- 'sources: one entry per distinct evidence path. The path is the text before the first hash; resource is that path prefixed
+  by two parent-directory steps (F-02...'
+- 'generated: by is knowledge-loop/1.0.0, where 1.0.0 is the lesson document format version; at is last_seen, or first_seen
+  when last_seen is absent; the key is...'
+- 'verified: present only when history holds approve entries; one entry per approve entry, in history order. by is human:
+  followed by the actor sanitised (chara...'
+- 'status: candidate is draft, active is stable, retired is deprecated, anything else is draft.'
+- 'stale_after: see D-004.'
+- 'lesson_record: every LESSON_FIELDS value, in LESSON_FIELDS order.'
+- 'Body: a level-1 heading with the title, a blank line, then a line reading Summary: followed by the description. The body
+  is never read back.'
+- Read and write contract (D-003).
+- load_store returns None when the bundle directory holds neither index.md nor any L-.md. Otherwise it parses every L-.md
+  at the bundle root and requires type...
+- It returns schema STORE_SCHEMA (kept as the in-memory interface identifier) and the lessons sorted by fingerprint, so every
+  caller above it is unchanged.
+- When the legacy JSON store exists and the bundle does not, every reader and writer raises store-migration-pending; recall
+  fails open on it as on any error (F...
+- 'write_store, under the lock, performs four steps in order:'
+- 'D-001: New standard-library module M-001 and standalone verifier M-004; M-002 and M-004 depend on M-001 one-way (O... |
+  yes | architecture-decision-record-D-001.md'
+- 'D-002: Bundle layout, file naming with identifier guard, lesson-to-frontmatter mapping, and the lesson_record exte... |
+  yes | architecture-decision-record-D-002.md'
+- 'D-003: Read and write contract: lock, four-step write order, whole-file replace, skip-equal, derived reserved file... |
+  yes | architecture-decision-record-D-003.md'
+- 'D-004: stale_after only for retained lessons, valued last_seen (O-002) | yes | architecture-decision-record-D-004.md'
+- 'D-005: Explicit migrate subcommand with verify-before-delete; readers refuse a JSON-only state with store-migratio... |
+  yes | architecture-decision-record-D-005.md'
+- 'D-006: Path-scoped exclusion in M-006 and M-007; lessons.store. retired (O-002) | yes | architecture-decision-record-D-006.md'
+- 'D-007: Frontmatter serialisation subset and parser acceptance (O-002) | no | inline, 5.3 Serialisation subset'
+- 'D-008: index.md and log.md derivation and ordering (O-002) | no | inline, 5.3 Reserved files'
+- 'D-009: Conformance rules, output shape, and verifier exit contract (O-002) | no | inline, 5.3 Conformance and verifier'
+- 'D-010: Advisory checklist item FR-13 owned by omn-qa (O-002) | no | inline, 5.3 Checklist'
+- 'D-011: RUNTIME_VERSION 0.11.0 after the baseline (O-002) | no | inline, P-008'
+- 'D-012: Documentation in M-009 to M-012; runtime/README.md unchanged (O-002) | no | inline, 5.3 Documentation'
+- 'V-001: migrate with no JSON store present returns status no-legacy-store and exits 0 without writing (C-002) | D-005 states
+  no behaviour for an absent JSON store | A re-run after a completed migration must be harmless; T-008 shows the second run
+  reports the unchanged bun...'
+- 'V-002: The lock-contention aggregation test asserts the bundle directory holds only lessons.lock instead of no dir... |
+  Test Strategy Focus Areas, aggregation absence checks | D-003 places the lock inside memory/lessons, so a held lock creates
+  the directory; the assertion still prov...'
+- 'V-003: New bundle tests sit in a new module beside the moved suite (C-059) | Test Strategy Focus Areas name tests/test_knowledge.py
+  as carrier | Keeps the frozen backward-compatibility suite unchanged in shape; the operator authorised a new test module'
+- 'V-004: write_store renders every file before the first write but leaves the lock to its callers (harvest, govern,... |
+  D-003 reads write_store, under the lock | A lock taken inside write_store would deadlock its locked callers; every writer
+  path still holds the lock,...'
+open_questions:
+- 'Q-001: What text populates type, title, description, and tags for each lesson, given that the lesson record holds... |
+  yes | omn-business-analyst'
+- 'Q-002: For the migrated lessons, do generated.by and generated.at carry the original harvest actor and time, or th... |
+  yes | omn-business-analyst'
+- 'Q-003: What condition makes a lesson stale, and for which lessons does stale_after apply? No criterion for stale_a... |
+  yes | omn-business-analyst'
+- 'Q-004: Does OKF v0.2 accept the Z designator as the UTC offset that every timestamp must carry, given that existin... |
+  yes | omn-business-analyst'
+- 'Q-005: Does the rendered lesson section, or any other dispatch output, include a timestamp or stored field whose f... |
+  yes | omn-context-agent'
+- 'Q-006: The OKF v0.2 SPEC text is not among the supplied inputs. Is the request''s statement of §5, §7, §8, §9, and... |
+  no | omn-business-analyst'
+- 'Q-007: Should the conformance check be listed as an advisory item in the framework release checklist? (S-011, X-005) |
+  no | omn-qa'
+- 'Q-001: Do the feature request and the architecture context state OKF v0.2 §5, §7, §8, §9 and §11 accurately, given... |
+  no | architect'
+- 'Q-002: Should the framework release checklist list the conformance check as an advisory item? Carried from SQ-007 | no
+  | omn-qa'
+- 'Q-001: Is AC-004 compared after removing the two parent-directory steps from each resource as well as the fragment... |
+  no | omn-business-analyst'
+- 'Q-002: Record the acceptance criterion for the stale_after rule of D-004 (T-010) | no | omn-product-owner'
+- 'Q-003: Accept the §11 rule 2 reading (concept documents only) and the §9 reading (bold action word emitted, not en... |
+  no | omn-tech-lead'
+- 'Q-004: Does FR-08 require runtime/README.md to list the verifier and module (A-008)? | no | omn-documentation'
+- 'Q-005: Accept the records for D-001 to D-006, emitted at Proposed; implementation waits on them | no | omn-tech-lead'
+- 'Q-006: AC-016 names 42 lessons and the store now holds 43 (F-012); is the count at migration time the reference, a... |
+  no | omn-product-owner'
+- 'Q-001: When the JSON store and the bundle are both present and differ, which form wins: the bundle, as design sect... |
+  no | architect'
+- 'Q-002: Can any installed copy hold a JSON store written by runtime 0.10.0, contrary to the design''s statement that...
+  | no | omn-tech-lead'
+objectives:
+- 'TO-1: Bundle files conform to OKF v0.2 §11, as decided by a deterministic check that runs standalone. Traces to BO-1. Verified
+  by T-023.'
+- 'TO-2: Frontmatter serialisation uses the standard library only, is byte-stable for equal input, and round-trips every lesson
+  field value exactly. Traces to B...'
+- 'TO-3: Every bundle file write leaves that file complete under interruption, and is skipped when its bytes are unchanged.
+  Traces to BO-3. Verified by T-018 an...'
+- 'TO-4: Every date and generated value in the bundle derives from lesson record fields, never from write time. Traces to
+  BO-3. Verified by T-015.'
+- 'TO-5: No lesson field value can alter the structure of a lesson document, the root index or the change log. Traces to BO-2
+  and BO-3. Verified by T-016 and T-...'
+- 'TO-6: The bundle path is excluded from the installed payload, the bundled mirror and the memory optimiser, and no other
+  path is newly excluded. Traces to BO-...'
+- 'Desired outcome: The lesson store becomes an OKF v0.2 bundle of Markdown concept documents, a root index, and a change
+  log under memory/lessons, which a thir...'
+- 'Architectural objectives:'
+- One lesson-agnostic, standard-library module owns the frontmatter subset writer and parser and the OKF §11 check, and depends
+  on no lesson-loop code; the les...
+- 'The lesson loop''s store boundary changes form only: load and write keep the in-memory record shape, so harvest, governance,
+  eligibility, recall, rendering, a...'
+- Every bundle file is a deterministic function of the lesson records, with no write-time value, and each file is replaced
+  whole (S-009, S-010, S-023, S-024, S...
+- The bundle path is excluded from distribution and from the memory optimiser by its relative path, and nothing else is newly
+  excluded (S-014, S-015, S-030).
+- The JSON store is retired only after a verified, record-for-record migration (S-012, S-033).
+- 'In scope: OKF rule verdicts (T-001), the bundle layout, lesson document mapping, serialisation subset, reserved-file contracts,
+  write and read contract, bund...'
+- 'Out of scope:'
+- Publishing the bundle outside the repository (X-001).
+- Any change to harvest eligibility, timing, ranking, governance states, or governance actions (X-002, X-006).
+- Converting any other memory document to OKF (X-003).
+- A process or machine actor in verified (X-004).
+- A mandatory checklist item for the conformance check (X-005).
+- Any change to Phase Model tables, agent module text, gates, or artifact validators (X-007).
+- Any edit to an existing file under runs/, including envelopes that name the JSON store (S-013).
+- Any change to the recall ranking or rendering text; stale_after is not read by recall (S-008, X-002).
+assumptions:
+- 'A-001: The statement of OKF v0.2 §5, §7, §8, §9 and §11 in the feature request and the architecture context matche... |
+  S-001, S-011 | The contracts in T-002 and T-006 and the check in T-021 change, and scope criteria may change (R-001)'
+- 'A-002: Reference outputs captured on the unchanged tree are accepted as the recorded baselines for S-007, S-008, S... |
+  S-016 | T-014 is redefined, and T-015 and T-029 compare against a different reference (R-007)'
+- 'A-003: No harvest or governance action changes the lesson set between baseline capture in T-014 and migration in T... |
+  S-008, S-012 | Same-lesson-set comparisons for AC-010 and AC-011 become invalid, and T-014 must be repeated (R-007)'
+- 'A-004: S-010 requires each file to be complete on its own. It does not require the root index, the change log and... |
+  S-010 | T-017 must provide cross-file agreement, T-018 adds a cross-file check, and T-003, T-008 and T-011 grow (R-...'
+- 'A-005: The change is a framework-internal capability addition governed by the self-hosting profile, so it carries... |
+  plan-wide | T-038 and T-039 are removed (R-013)'
+- 'A-001: No installer, sync, or test path other than _walk enumerates memory files | The path-scoped exclusion relies on
+  _walk alone (D-006) | Bundle files could ship by another path; D-006 changes'
+- 'A-002: The package-data globs already cover any new runtime .py file | M-001 and M-004 must reach installs and the mirror
+  | The declared-globs test fails until a glob is added'
+- 'A-003: S-010 asks each file to be complete on its own, not that documents, index, and log agree after an interrupt... |
+  Fixes the write contract''s guarantee (D-003) | Cross-file agreement needs a staged directory swap; D-003 changes'
+- 'A-004: A consumer resolves a relative sources resource against the document''s own location (§6.2), so a two-level-...
+  | Fixes the sources value form (D-002) | Resources must use another form; AC-004''s comparison changes'
+- 'A-005: Reading one document per lesson at each hydrated dispatch is acceptable at current lesson counts; no latenc... |
+  Recall reads the whole bundle (D-003) | An index-only fast path or cache is needed'
+- 'A-006: No lesson record value is a float or another type outside F-004 | The serialiser refuses floats (D-007) | A write
+  fails with store-unwritable until the type is supported'
+- 'A-007: No aggregation of a knowledge-loop run happens between T-014 and T-027, so the lesson set stays frozen as S... |
+  Same-set comparisons for AC-010, AC-011, AC-016 (F-027) | Parity runs against a captured copy and the migration count is
+  taken at T-025'
+- 'A-008: FR-08 inspection accepts config/runtime.md and the memory documents as the documentation of the bundle and... |
+  Avoids editing a context-slice member mid-run | runtime/README.md gains a row and later dispatches see a new context digest'
+- 'A-009: AC-019 is measured over run directories other than the carrying run, whose own state and event files the ru... |
+  The carrying run''s evidence changes as the run proceeds (F-027) | AC-019 cannot pass as worded for the carrying run'
+risks:
+- 'R-001: requirement | T-001 finds the SPEC text differs from the request''s statement of §5, §7, §8, §9 or §11 (A-001 false)
+  | The contracts in T-002 and T-006 and the check in T-021 change; scope criteria may change'
+- 'R-002: requirement | S-010 is ruled to require cross-file agreement after an interruption (A-004 false) | T-017 and T-018
+  widen; T-003, T-008 and T-011 grow in complexity'
+- 'R-003: technical | A field value with multi-line text, quoting or delimiter-like lines does not round-trip through the
+  standar... | Field loss breaks S-005; changed text breaks S-008'
+- 'R-004: technical | A bundle date or generated value derives from write time instead of record fields | Re-harvest changes
+  bytes and AC-012 fails'
+- 'R-005: technical | Migration drops or alters a field or history entry, including for lessons with empty history | Governance
+  history is lost and S-005 and S-012 fail'
+- 'R-006: dependency | The OKF v0.2 SPEC text is not supplied before T-001 closes | Q-001 stays open and R-001 carries into
+  build'
+- 'R-007: dependency | The baseline cannot be taken on the unchanged tree, or the lesson set changes between T-014 and T-025
+  (A-00... | S-007, S-008 and S-016 comparisons lose their reference'
+- 'R-008: security | Lesson field content harvested from run evidence contains frontmatter delimiters, key-like lines or link
+  sy... | A document gains or loses keys, the index or change log breaks, or altered text reaches dispatch past the e...'
+- 'R-009: operational | An exclusion rule matches generic names such as index.md or log.md outside the bundle, or misses a
+  bundle file | Unrelated memory files leave the payload, or bundle files ship or are rewritten'
+- 'R-010: operational | Recall at dispatch reads one document per lesson instead of one store document | Dispatch latency
+  grows with lesson count'
+- 'R-011: delivery | Existing automated suites and backward-compatibility comparisons reference the JSON store name and its
+  excl... | Suite failures after T-026 until T-013 lands'
+- 'R-012: delivery | A framework file changes after T-032 refreshes the mirror | The mirror drifts from the tree and T-033
+  evidence becomes stale'
+- 'R-013: delivery | The change is not governed by the self-hosting profile (A-005 false) | T-038 and T-039 are removed'
+- 'R-001: security | A field value carrying delimiter-like lines, key-like text, link syntax, or control characters reaches
+  a bu... | A document gains or loses keys, the index or log breaks, or altered text reaches dispatch'
+- 'R-002: contract | A value does not round-trip through the subset (escape, integer-looking string, empty collection) | Fields
+  are lost (S-005) or rendered text changes (S-008)'
+- 'R-003: migration | Migration drops or alters a field or history entry | Governance history is lost; AC-016 to AC-018 fail'
+- 'R-004: delivery | A knowledge-loop aggregation runs between T-014 and T-027 (A-007 false) | Same-set comparisons lose their
+  reference; the count moves again (F-012)'
+- 'R-005: operability | An interruption leaves documents updated but index or log stale, and S-010 is ruled to need cross-file
+  agre... | AC-013 fails as reinterpreted'
+- 'R-006: performance | Lesson count grows so per-dispatch parsing of every document becomes noticeable (A-005 false) | Dispatch
+  latency grows'
+- 'R-007: operability | The path rule misses a bundle file or another path enumerates memory (A-001 false), or the optimiser
+  rule o... | Bundle files ship or are rewritten, or unrelated memory files leave scope'
+- 'R-008: contract | A consumer resolves the relative sources resource differently (A-004 false) | Sources point nowhere for
+  that consumer; AC-004''s comparison changes'
+- 'R-009: delivery | Suites or the frozen comparison set still name the JSON store when it is removed | Suite failures between
+  T-026 and T-013'
+- 'R-010: delivery | A framework file changes after the mirror refresh | The mirror drifts; P-013 evidence is stale'
+- 'R-011: contract | A record holds a float or another unsupported type (A-006 false) | A write fails with store-unwritable'
+- 'R-012: operability | Another checkout pulls the change with a JSON-only store | Recall withholds lessons there until migrate
+  runs'
+- 'R-013: delivery | FR-08 inspection requires runtime/README.md to list the verifier (A-008 false) | A context-slice member
+  is edited, and an active item re-dispatched after it raises a context-integrity failure'
+- 'R-014: delivery | New runtime files fall outside the package-data globs (A-002 false) | Declared-globs test fails; installs
+  lack M-001'
+- 'R-015: contract | A third-party reading of §11 rule 2 or of the §9 entry form differs from this design | The bundle is
+  judged non-conforming elsewhere'
+- 'R-016: security | A crafted lesson_id forms a file name outside the bundle | A write lands outside memory/lessons'
+- 'R-017: delivery | AC-019 is read as including the carrying run (A-009 false) | AC-019 cannot pass'
+- 'R-001: Another checkout pulling the change keeps a JSON-only store until its operator runs migrate | medium | Recall withholds
+  lessons there and aggregation records the harvest as failed, both naming store-migration-p...'
+- 'R-002: An interrupted write leaves documents ahead of index.md and log.md until the next write | low | Index or log briefly
+  disagrees with the documents; nothing reads them back'
+- 'R-003: Recall and harvest now parse one document per lesson instead of one file | low | Dispatch and aggregation time grow
+  linearly with lesson count'
+- 'R-004: verify_validators.py check F7 recomputes proposal scope paths relative to the working directory, so run fro... |
+  low | A run from the wrong directory reads as a regression'
+- 'Accepted risk: After an interruption, concept documents can disagree with index.md and log.md until the next write (design
+  A-003 and Tradeoffs accepted; the...'
+- 'Unmitigated risk: Other checkouts that still hold a JSON-only store must run migrate once; until CR-001 closes, any of
+  them that reaches the both-forms state...'
+- 'Monitoring required: The elapsed time recorded in knowledge-harvest.json as the lesson count grows (design R-006); FR-13
+  advisory verifier results in change...'
+plan_tasks:
+- 'T-001: Confirm the OKF v0.2 rules the bundle binds to | depends on none (external prerequisite in 8.2)'
+- 'T-002: Define the reserved-file contract for the root index and the change log | depends on T-001'
+- 'T-003: Produce the root index of the bundle | depends on T-002, T-007, T-017'
+- 'T-004: Map every scope acceptance criterion to a verification method and evidence record | depends on T-002, T-006, T-010,
+  T-017, T-019'
+- 'T-005: Verify the bundle content against its contracts | depends on T-003, T-004, T-008, T-011, T-026'
+- 'T-006: Define the lesson document frontmatter contract | depends on T-001, T-009'
+- 'T-007: Provide deterministic frontmatter serialisation and parsing | depends on T-006'
+- 'T-008: Hold each lesson as a concept document that the lesson loop reads and writes | depends on T-006, T-007, T-017'
+- 'T-009: Decide the stale_after rule from lesson record fields | depends on T-001'
+- 'T-010: Record the acceptance criterion for the stale_after rule | depends on T-009'
+- 'T-011: Produce the change log for every lesson write | depends on T-002, T-017'
+- 'T-012: Name the bundle in the memory slice of new invocation envelopes | depends on T-008, T-017'
+- 'T-013: Update the automated knowledge-loop test suite to the bundle | depends on T-003, T-004, T-008, T-011, T-012, T-021,
+  T-025, T-026'
+- 'T-014: Capture the pre-change reference baseline | depends on none'
+- 'T-015: Verify the lesson loop behaves as before on the bundle | depends on T-003, T-004, T-008, T-011, T-012, T-014, T-026'
+- 'T-016: Review the change set against the technical design | depends on T-013, T-032'
+- 'T-017: Define the bundle write contract | depends on none'
+- 'T-018: Verify interruption safety of every bundle write | depends on T-003, T-004, T-008, T-011'
+- 'T-019: Choose the carrier of the conformance check | depends on T-001'
+- 'T-020: Decide whether the release checklist lists the conformance check as advisory | depends on T-019'
+- 'T-021: Provide the standalone OKF §11 conformance check | depends on T-002, T-007, T-019'
+- 'T-022: Apply the release-checklist listing decision | depends on T-020, T-021'
+- 'T-023: Verify the conformance check verdicts | depends on T-004, T-021, T-026'
+- 'T-024: Define the migration method | depends on T-002, T-006'
+- 'T-025: Migrate the existing lessons into the bundle | depends on T-003, T-008, T-011, T-014, T-024'
+- 'T-026: Remove the JSON lesson store | depends on T-027'
+- 'T-027: Verify migration completeness | depends on T-004, T-014, T-025'
+- 'T-028: Publish the release note for the lesson store change | depends on T-005, T-015, T-016, T-018, T-023, T-029, T-033,
+  T-037'
+- 'T-029: Verify protected surfaces stay unchanged | depends on T-004, T-014, T-032'
+- 'T-030: Define the distribution exclusion for the bundle | depends on none'
+- 'T-031: Exclude the bundle from the installed payload | depends on T-030'
+- 'T-032: Refresh the bundled mirror from the final framework tree | depends on T-012, T-022, T-026, T-030, T-031, T-035,
+  T-036'
+- 'T-033: Verify the bundle is absent from distribution | depends on T-004, T-032'
+- 'T-034: Define how the memory optimiser leaves the bundle unchanged | depends on none'
+- 'T-035: Keep the memory optimiser from rewriting the bundle | depends on T-034'
+- 'T-036: Describe the bundle in the memory documentation | depends on T-002, T-006, T-017'
+- 'T-037: Verify the memory documentation names the bundle | depends on T-004, T-036'
+- 'T-038: Record the framework change proposal for this change | depends on T-028'
+- 'T-039: Verify the framework release checklist for this change | depends on T-038'
+facts:
+- 'F-001: STORE_REL is memory/lessons/lessons.store.json, LOCK_REL memory/lessons/lessons.store.lock, STORE_SCHEMA fr... |
+  runtime/knowledge.py constants, canonical_bytes, write_store'
+- 'F-002: load_store returns schema and lessons, or None when no store exists, and raises store-unreadable on a malfo... |
+  runtime/knowledge.py load_store'
+- 'F-003: StoreLock is an exclusive-create lock file with a timeout and error class lock-contention; harvest_for_run... |
+  runtime/knowledge.py StoreLock, harvest_for_run'
+- 'F-004: A lesson record has 20 fields in LESSON_FIELDS order (lesson_id to history); lesson_id is L- plus 10 hex of... |
+  runtime/knowledge.py LESSON_FIELDS, lesson_id_for; memory/lessons/lessons.store.json'
+- 'F-005: approve moves candidate or retired to active, retire moves candidate or active to retired, annotate sets re... |
+  runtime/knowledge.py TRANSITIONS, govern'
+- 'F-006: neutralise collapses to one line, turns double quotes and backticks into single quotes, drops non-printable... |
+  runtime/knowledge.py neutralise, render_section'
+- 'F-007: recall returns store as STORE_REL and store_digest as the digest of the store file bytes; dispatch_memory_s... |
+  runtime/knowledge.py recall, dispatch_memory_slice'
+- 'F-008: harvest rebuilds evidence fields from scratch, carries governance fields by fingerprint, marks a lesson wit... |
+  runtime/knowledge.py harvest'
+- 'F-009: knowledge.py imports only the standard library and state_engine, enforced by a module boundary test | runtime/knowledge.py
+  imports; tests/test_knowledge.py ModuleBoundaryTestCase'
+- 'F-010: RUNTIME_VERSION is 0.10.0; framework_runtime.py reaches the loop only through plan_record, run_record, disp... |
+  runtime/framework_runtime.py RUNTIME_VERSION and kl call sites'
+- 'F-011: The live store holds 43 lessons, all candidate, all with empty history, evidence_state current, and remedy... |
+  memory/lessons/lessons.store.json'
+- 'F-012: AC-016 records 42 lessons at request time; the store now holds 43 and carries evidence from this run, so th... |
+  scope definition AC-016; memory/lessons/lessons.store.json; working-tree status'
+- 'F-013: EXCLUDE_PATTERNS includes lessons.store., matched by name against path parts in _walk; memory is a seed dir... |
+  omn_agent/source.py'
+- 'F-014: The bundle parity test builds its payload map through _walk and fails on any bundled file absent from that map |
+  tests/test_bundled_payload.py'
+- 'F-015: The optimiser scans memory and context, denies path segments such as runs and reports and the names changel... |
+  runtime/optimize_memory.py DENIED_SEGMENTS, DENIED_NAMES, GENERATED_MARKERS, _denied, classify'
+- 'F-016: The release checklist has FR-01 to FR-12, FR-11 and FR-12 advisory; the release-checklist mode runs command... |
+  validation/framework-release-checklist.md; runtime/verify_self_hosting.py S5, S10; runtime/self_hosting.py'
+- 'F-017: Proposal check F9 requires a result row only for mandatory checklist items | runtime/change_proposal_validator.py
+  F9'
+- 'F-018: tests/test_knowledge.py names the JSON store in its copy-ignore pattern, idempotency file set, lock-name fi... |
+  tests/test_knowledge.py'
+- 'F-019: BackwardCompatibilityTestCase rebuilds the pre-change runtime from REFERENCE_COMMIT and a frozen KNOWLEDGE_... |
+  tests/test_knowledge.py BackwardCompatibilityTestCase, reference_runtime_sources, framework_relative'
+- 'F-020: config/runtime.md, memory/README.md, and memory/memory-governance.md name the JSON store as the lesson stor... |
+  text search of config/, memory/, runtime/'
+- 'F-021: runtime/README.md lists runtime scripts in a table that omits knowledge.py and optimize_memory.py; FC-022 d... |
+  runtime/README.md; FC-022 technical design C-016; this dispatch''s context slice'
+- 'F-022: A dispatch of a completed item is replay-suppressed before any envelope is built, and M14 replays only comp... |
+  runtime/verify_multi_phase.py M14; runtime/framework_runtime.py cmd_dispatch'
+- 'F-023: OKF v0.2: index.md and log.md are reserved at every level (§3.1); type is the only required key and produce... |
+  supplied OKF v0.2 SPEC copy'
+- 'F-024: OKF v0.2: sources entries require resource, which may be a relative path (§5.1, §6.2); generated (by requir... |
+  supplied OKF v0.2 SPEC copy'
+- 'F-025: The runtime under change is standard-library Python; the .NET stack in the technical context describes prod... |
+  runtime/.py; context/technical-context.md'
+- 'F-026: Evidence references are relative to the framework root, and the bundle lies two directory levels below it | memory/lessons/lessons.store.json
+  evidence values; S-029'
+- 'F-027: The aggregation harvest runs at complete, gate, and aggregate for any run carrying a knowledge_loop record,... |
+  runtime/framework_runtime.py harvest_for_run call site; this run''s dispatch prompt lesson section; F-012'
+repository_context:
+  relevant_modules:
+  - 'M-001: runtime/okf.py (new) | extension | F-023, F-024, F-025'
+  - 'M-002: runtime/knowledge.py | contract-change | F-001 to F-009'
+  - 'M-003: memory/lessons (store data: JSON document to bundle) | contract-change | F-011, F-012, F-026'
+  - 'M-004: runtime/verify_okf_bundle.py (new) | extension | F-016, F-023'
+  - 'M-005: runtime/framework_runtime.py | behavior-change | F-010'
+  - 'M-006: omn_agent/source.py | behavior-change | F-013, A-001'
+  - 'M-007: runtime/optimize_memory.py | behavior-change | F-015'
+  - 'M-008: validation/framework-release-checklist.md | extension | F-016, F-017'
+  - 'M-009: config/runtime.md | behavior-change | F-020'
+  - 'M-010: memory/README.md | behavior-change | F-020'
+  - 'M-011: memory/memory-governance.md | behavior-change | F-020'
+  - 'M-012: memory/memory-resolver.md | behavior-change | F-020'
+  - 'M-013: tests/test_knowledge.py | behavior-change | F-018, F-019'
+  - 'M-014: omn_agent/_bundled_payload mirror | operational-impact | F-013, F-014'
+  - 'M-015: tests/test_bundled_payload.py | no-change-verified | F-014'
+  - 'M-016: runtime/execution_metrics.py | no-change-verified | F-010'
+  - 'M-017: runtime/state_engine.py | no-change-verified | F-009'
+  - 'M-018: runtime/change_proposal_validator.py | no-change-verified | F-017'
+  - 'M-019: runtime/verify_self_hosting.py and runtime/self_hosting.py | no-change-verified | F-016'
+  - 'M-020: runtime/README.md | no-change-verified | F-021, A-008'
+  - 'M-021: runtime artifact validators, workflows/implement-feature.md Phase Model, agent module sets | no-change-verified
+    | F-022, F-010'
+  - 'M-022: config/knowledge-policy.json | no-change-verified | F-008'
+  - 'M-023: existing run evidence under runs/ | no-change-verified | F-007, F-022'
+  relevant_files:
+  - runtime/okf.py (added)
+  - runtime/knowledge.py (modified)
+  - runtime/verify_okf_bundle.py (added)
+  - runtime/framework_runtime.py (modified)
+  - runtime/optimize_memory.py (modified)
+  - omn_agent/source.py (modified)
+  - validation/framework-release-checklist.md (modified)
+  - config/runtime.md (modified)
+  - memory/README.md (modified)
+  - memory/memory-governance.md (modified)
+  - memory/memory-resolver.md (modified)
+  - memory/lessons/lessons.store.json (removed)
+  - memory/lessons/index.md (added)
+  - memory/lessons/log.md (added)
+  - memory/lessons/L-0c65ee3df9.md (added)
+  - memory/lessons/L-14a79151cb.md (added)
+  - memory/lessons/L-16562ce500.md (added)
+  - memory/lessons/L-1a032fb882.md (added)
+  - memory/lessons/L-2120d10ba2.md (added)
+  - memory/lessons/L-22390c2ab0.md (added)
+  - memory/lessons/L-22847e61b4.md (added)
+  - memory/lessons/L-32cc91b20e.md (added)
+  - memory/lessons/L-3999fb5c73.md (added)
+  - memory/lessons/L-4001c21edb.md (added)
+  - memory/lessons/L-41c5dd8f64.md (added)
+  - memory/lessons/L-4619b980fc.md (added)
+  - memory/lessons/L-479b3eeb81.md (added)
+  - memory/lessons/L-48df21734d.md (added)
+  - memory/lessons/L-4a60ec1bdb.md (added)
+  - memory/lessons/L-51be31d9d4.md (added)
+  - memory/lessons/L-54d9e5c9d8.md (added)
+  - memory/lessons/L-58915e88ef.md (added)
+  - memory/lessons/L-58d9ae3d2e.md (added)
+  - memory/lessons/L-606ac5af7f.md (added)
+  - memory/lessons/L-6701578f8b.md (added)
+  - memory/lessons/L-6af13c8ccc.md (added)
+  - memory/lessons/L-6e77db508d.md (added)
+  - memory/lessons/L-750011a2d2.md (added)
+  - memory/lessons/L-7589a73850.md (added)
+  - memory/lessons/L-764bff2fee.md (added)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path
+changed_files:
+- runtime/okf.py (added)
+- runtime/knowledge.py (modified)
+- runtime/verify_okf_bundle.py (added)
+- runtime/framework_runtime.py (modified)
+- runtime/optimize_memory.py (modified)
+- omn_agent/source.py (modified)
+- validation/framework-release-checklist.md (modified)
+- config/runtime.md (modified)
+- memory/README.md (modified)
+- memory/memory-governance.md (modified)
+- memory/memory-resolver.md (modified)
+- memory/lessons/lessons.store.json (removed)
+- memory/lessons/index.md (added)
+- memory/lessons/log.md (added)
+- memory/lessons/L-0c65ee3df9.md (added)
+- memory/lessons/L-14a79151cb.md (added)
+- memory/lessons/L-16562ce500.md (added)
+- memory/lessons/L-1a032fb882.md (added)
+- memory/lessons/L-2120d10ba2.md (added)
+- memory/lessons/L-22390c2ab0.md (added)
+- memory/lessons/L-22847e61b4.md (added)
+- memory/lessons/L-32cc91b20e.md (added)
+- memory/lessons/L-3999fb5c73.md (added)
+- memory/lessons/L-4001c21edb.md (added)
+- memory/lessons/L-41c5dd8f64.md (added)
+- memory/lessons/L-4619b980fc.md (added)
+- memory/lessons/L-479b3eeb81.md (added)
+- memory/lessons/L-48df21734d.md (added)
+- memory/lessons/L-4a60ec1bdb.md (added)
+- memory/lessons/L-51be31d9d4.md (added)
+- memory/lessons/L-54d9e5c9d8.md (added)
+- memory/lessons/L-58915e88ef.md (added)
+- memory/lessons/L-58d9ae3d2e.md (added)
+- memory/lessons/L-606ac5af7f.md (added)
+- memory/lessons/L-6701578f8b.md (added)
+- memory/lessons/L-6af13c8ccc.md (added)
+- memory/lessons/L-6e77db508d.md (added)
+- memory/lessons/L-750011a2d2.md (added)
+- memory/lessons/L-7589a73850.md (added)
+- memory/lessons/L-764bff2fee.md (added)
+findings:
+- 'F-001: high | correctness | runtime/knowledge.py:533 (migrate)'
+- 'F-002: low | correctness | runtime/okf.py:476 (conformance, OKF-11.1)'
+- 'F-003: low | correctness | runtime/optimize_memory.py:312 (_denied)'
+- 'CR-001: F-001 | migrate never removes or overwrites a lesson document or a governance history entry that the JSON store
+  lac... | yes'
+- 'CR-002: F-002 | the verifier''s usage text and its OKF-11.1 finding state that frontmatter outside the supported subset
+  is r... | no'
+- 'CR-003: F-003 | the optimiser''s lesson-bundle denial matches memory/lessons only within the path relative to the scan
+  root,... | no'
+verdicts:
+- 'Decision: approve-with-corrections'
+- 'Rationale: One high finding (F-001) is open with a blocking correction request, no critical finding is open, and executed
+  test evidence was reviewed, so the...'
+- 'Blocking findings outstanding: F-001'
+- 'Readiness recommendation: Recommended to omn-qa, owner of the Review Gate, that the change not progress until CR-001 is
+  closed with a test for the divergent...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: input:feature-request
+      term: migration
+    - source: input:change-request
+      term: migration
+    - source: artifact:scope-and-acceptance
+      term: migration
+    performance:
+    - source: input:change-request
+      term: profile
+    - source: artifact:scope-and-acceptance
+      term: performance
+    - source: artifact:execution-planning
+      term: latency
+    security:
+    - source: input:architecture-context
+      term: token
+    - source: artifact:scope-and-acceptance
+      term: injection
+    - source: artifact:execution-planning
+      term: security
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:feature-request
+  - input:change-request
+  - input:business-intent
+  - input:architecture-context
+  - artifact:scope-and-acceptance
+  - artifact:execution-planning
+  - artifact:solution-design-and-risk-assessment
+  - artifact:implementation
+  - artifact:quality-review
+  - artifact:documentation-and-release-handoff
+relevant_skills:
+  scope-and-acceptance:
+    S02: required
+    S07: required
+  execution-planning:
+    S02: required
+    S01: required
+    S07: required
+  solution-design-and-risk-assessment:
+    S01: required
+    S03: required
+    S06: required
+    S09: required
+  implementation:
+    S03: required
+    S06: required
+    S10: required
+    S11: required
+    S12: required
+  quality-review:
+    S07: required
+    S09: required
+    S08: required
+  documentation-and-release-handoff:
+    S11: required
+    S10: required
+    S12: required
