@@ -1,0 +1,162 @@
+{
+  "invocation_id": "inv-2cf7a34e3daa-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-2cf7a34e3daa/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisId": "BA-run-2cf7a34e3daa-triage-001",
+    "defectReference": "DF-001",
+    "analysisBasis": "triage",
+    "workflowPhase": "triage-and-impact",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "status": "provisional",
+    "statusBasis": "Stage 9 first matching row: an alternative account remains uneliminated (Q-001 other checklist items writing; Q-003 recovery crash residue), so provisional; business impact is also unquantified (Q-005).",
+    "counts": {
+      "evidenceRecords": 16,
+      "causalSteps": 6,
+      "causalStepsByConfidence": {
+        "high": 6,
+        "medium": 0,
+        "low": 0
+      },
+      "openQuestions": 5,
+      "blockingOpenQuestions": 0
+    },
+    "qualityChecks": {
+      "run": 69,
+      "passed": 69,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "S9": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "D7": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "A1": "pass",
+        "B4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "V4": "pass",
+        "V5": "pass",
+        "B1": "pass",
+        "V6": "pass",
+        "V7": "pass",
+        "V8": "pass",
+        "V9": "pass",
+        "V10": "pass",
+        "V11": "pass",
+        "V12": "pass",
+        "V13": "pass",
+        "V14": "pass",
+        "V15": "pass",
+        "V16": "pass",
+        "V17": "pass",
+        "V18": "pass",
+        "V19": "pass",
+        "V20": "pass",
+        "V21": "pass",
+        "V22": "pass",
+        "V23": "pass",
+        "V24": "pass",
+        "V25": "pass",
+        "V26": "pass",
+        "V27": "pass",
+        "V28": "pass",
+        "B5": "pass",
+        "V29": "pass",
+        "V30": "pass",
+        "V31": "pass",
+        "V32": "pass",
+        "V33": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "A4": "pass",
+        "A5": "pass",
+        "A6": "pass",
+        "A7": "pass",
+        "A8": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass",
+        "C6": "pass",
+        "C7": "pass"
+      }
+    },
+    "validationEngine": {
+      "command": "python .claude/runtime/bug_analysis_validator.py <artifact> --envelope <invocation-envelope>",
+      "result": "PASS",
+      "checks": "30/30"
+    },
+    "obligations": {
+      "N1": "met: the root cause names a contract mismatch (M14 asserts no side effect while replaying in place a runtime whose replay path persists bookkeeping by design, and its fingerprint excludes that bookkeeping), not the file where the diff appears",
+      "N2": "met: every causal step cites high-confidence evidence read or run in this invocation; the reported full-checklist result (E-001, E-002) is labelled low and not relied on by any step",
+      "N3": "met with one recorded gap: radius names runner, M14 replay, runtime state store, committed run evidence, already-committed replay records, version-control boundary, temp-file residue, and latent recovery residue; whether other checklist items write is open as Q-001"
+    },
+    "reproductionAttempts": [
+      {
+        "command": "python .claude/runtime/verify_multi_phase.py --run-id run-c5a8d50d3238",
+        "exit": 1,
+        "m14": "FAIL (Windows PermissionError in plan)",
+        "treeChanged": true
+      },
+      {
+        "command": "python .claude/runtime/framework_runtime.py plan --run-id run-c5a8d50d3238; ... dispatch --phase execution-planning",
+        "exit": [
+          1,
+          0
+        ],
+        "treeChanged": true
+      },
+      {
+        "command": "python .claude/runtime/verify_multi_phase.py --run-id run-c5a8d50d3238 --no-replay",
+        "exit": 1,
+        "m14": "skipped",
+        "treeChanged": false
+      },
+      {
+        "command": "python .claude/runtime/verify_multi_phase.py --run-id run-c5a8d50d3238",
+        "exit": 0,
+        "m14": "PASS",
+        "treeChanged": true
+      }
+    ],
+    "transientWritesRestored": "Reproduction commands transiently modified .claude/runs/run-c5a8d50d3238/state.json and task-context.yaml (and once created state.json.tmp); each was restored with git checkout -- .claude/runs/run-c5a8d50d3238 as the dispatch instructions permit, and git status showed no change under that run at completion.",
+    "separateDefectsToRoute": [
+      "Q-004: intermittent PermissionError on os.replace in StateStore.save on Windows"
+    ],
+    "fullChecklistRerun": false
+  },
+  "evidence_refs": [
+    "agents/dev-1-bug-analyst/system.md",
+    "agents/dev-1-bug-analyst/identity.md",
+    "agents/dev-1-bug-analyst/reasoning.md",
+    "agents/dev-1-bug-analyst/output.md",
+    "agents/dev-1-bug-analyst/quality.md",
+    "runs/run-2cf7a34e3daa/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-2cf7a34e3daa/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-2cf7a34e3daa/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

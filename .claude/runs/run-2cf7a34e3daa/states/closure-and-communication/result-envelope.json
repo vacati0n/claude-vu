@@ -1,0 +1,176 @@
+{
+  "invocation_id": "inv-2cf7a34e3daa-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-2cf7a34e3daa/states/closure-and-communication/artifacts/orchestration-result.md"
+  ],
+  "structured_output": {
+    "resultId": "OR-run-2cf7a34e3daa-closure-and-communication",
+    "coordinationBasis": "closure",
+    "disposition": "closed-with-followups",
+    "status": "provisional",
+    "counts": {
+      "phases": 5,
+      "complete": 4,
+      "blocked": 1,
+      "notStarted": 0,
+      "handoffs": 4,
+      "escalations": 0,
+      "followUps": 10,
+      "openQuestions": 2
+    },
+    "escalationSeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "followUpSeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 4,
+      "low": 6
+    },
+    "followUpOwners": {
+      "FU-001": "operator",
+      "FU-002": "tech-lead",
+      "FU-003": "tech-lead",
+      "FU-004": "qa",
+      "FU-005": "architect",
+      "FU-006": "dev-1-implement",
+      "FU-007": "orchestrator",
+      "FU-008": "tech-lead",
+      "FU-009": "qa",
+      "FU-010": "tech-lead"
+    },
+    "positionAddressedTo": "documentation (Closure Gate owner; Producer Exclusion Rule)",
+    "closureGate": "undecided; PH-005 recorded blocked pending documentation's decision",
+    "qualityChecks": {
+      "own": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "M1": "pass",
+        "M2": "pass",
+        "M3": "pass",
+        "M4": "pass",
+        "M5": "pass",
+        "P1": "pass",
+        "P2": "pass",
+        "P3": "pass",
+        "P4": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "N-COUNT": "pass",
+        "H1": "pass",
+        "H2": "pass",
+        "H3": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "T1": "pass",
+        "T2": "pass",
+        "T3": "pass",
+        "T4": "pass",
+        "H4": "pass (advisory; no refused handoff)",
+        "E5": "pass (advisory; no escalation raised)",
+        "T5": "pass (advisory)"
+      },
+      "validator": {
+        "C1.1": "pass",
+        "C1.2": "pass",
+        "C1.3": "pass",
+        "C1.4": "pass",
+        "C2.1": "pass",
+        "C2.2": "pass",
+        "C2.3": "pass",
+        "C2.4": "pass",
+        "C2.5": "pass",
+        "C3.1": "pass",
+        "C3.2": "pass",
+        "C3.3": "pass",
+        "C4.1": "pass",
+        "C4.2": "pass",
+        "C4.3": "pass",
+        "C5.1": "pass",
+        "C5.2": "pass",
+        "C4.4": "pass",
+        "C4.5": "pass",
+        "C4.6": "pass",
+        "C6.1": "pass",
+        "C6.2": "pass",
+        "C6.3": "pass",
+        "C6.4": "pass",
+        "C7.1": "pass",
+        "N1": "not-machine-checkable",
+        "N2": "not-machine-checkable",
+        "N3": "not-machine-checkable",
+        "O1": "pass",
+        "O2": "pass",
+        "O3": "pass",
+        "O4": "pass",
+        "O5": "pass",
+        "O6": "pass",
+        "O7": "pass",
+        "O8": "pass",
+        "O9": "pass"
+      }
+    },
+    "notMachineCheckable": [
+      "N1",
+      "N2",
+      "N3",
+      "N4"
+    ],
+    "checksRun": 70,
+    "checksPassed": 70,
+    "validatorRun": "runtime/orchestration_result_validator.py with --envelope: PASS 34/34 (3 not-machine-checkable); first render failed C6.2 because upstream open-question tokens collided with this record's Q family; replaced by descriptions, no row, count or position changed",
+    "commandsExecuted": [
+      "python reads of state.json, invocation envelope, failure envelopes and task-context.yaml",
+      "git status --short (read-only)",
+      "listing of proposals/",
+      "orchestration_result_validator.py on this record"
+    ],
+    "modulesLoaded": {
+      "core": [
+        "system.md",
+        "reasoning.md",
+        "output.md",
+        "quality.md"
+      ],
+      "onDemand": {
+        "identity.md": "loaded: reasoning Step 10 refers to its decision rules",
+        "examples.md": "loaded: PH-005 row shape",
+        "execution.md": "not loaded: run stayed on the direct Execution -> Completion path"
+      }
+    }
+  },
+  "evidence_refs": [
+    "agents/orchestrator/manifest.yaml",
+    "agents/orchestrator/system.md",
+    "agents/orchestrator/identity.md",
+    "agents/orchestrator/reasoning.md",
+    "agents/orchestrator/output.md",
+    "agents/orchestrator/quality.md",
+    "agents/orchestrator/examples.md",
+    "runs/run-2cf7a34e3daa/states/closure-and-communication/invocation-envelope.json",
+    "runs/run-2cf7a34e3daa/task-context.yaml",
+    "runs/run-2cf7a34e3daa/state.json",
+    "runs/run-2cf7a34e3daa/states/regression-validation/artifacts/validation-report.md"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-2cf7a34e3daa/states/closure-and-communication/artifacts/orchestration-result.md",
+    "runs/run-2cf7a34e3daa/states/closure-and-communication/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

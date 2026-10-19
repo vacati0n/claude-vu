@@ -1,0 +1,198 @@
+{
+  "frozen_at": "2026-10-19T03:41:05Z",
+  "members": [
+    {
+      "path": "registry/agents.yaml",
+      "digest": "sha256:239f9bf99aea57059bdb54c03a50ca01",
+      "supplies": "framework-context",
+      "bytes": 21932,
+      "read": "runtime-resolved",
+      "read_reason": "agent routing and versions are resolved by the runtime"
+    },
+    {
+      "path": "registry/workflows.yaml",
+      "digest": "sha256:089e79af5d18d9b11dce7e6ac8a2c310",
+      "supplies": "framework-context",
+      "bytes": 9561,
+      "read": "runtime-resolved",
+      "read_reason": "the workflow is already routed; the phase is in the envelope"
+    },
+    {
+      "path": "registry/skills.yaml",
+      "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+      "supplies": "framework-context",
+      "bytes": 17318,
+      "read": "runtime-resolved",
+      "read_reason": "the phase's skills are resolved in skill_dispatch"
+    },
+    {
+      "path": "registry/templates.yaml",
+      "digest": "sha256:15b32b7dc6a6e5c3c47fac6809f1df7a",
+      "supplies": "framework-context",
+      "bytes": 12345,
+      "read": "runtime-resolved",
+      "read_reason": "the output template is named in expected_output_schema"
+    },
+    {
+      "path": "agents/capability-matrix.md",
+      "digest": "sha256:d9accc4117996076a1eeed79e6235645",
+      "supplies": "framework-context",
+      "bytes": 6511,
+      "read": "runtime-resolved",
+      "read_reason": "capability ownership is resolved by the runtime"
+    },
+    {
+      "path": "skills/agent-skill-matrix.md",
+      "digest": "sha256:dc3463b8a44d89167178839fd616a0e3",
+      "supplies": "framework-context",
+      "bytes": 16779,
+      "read": "runtime-resolved",
+      "read_reason": "the phase's skills are resolved in skill_dispatch"
+    },
+    {
+      "path": "workflows/workflow-gate-matrix.md",
+      "digest": "sha256:daa929f8e7c5c6a782b6240c63b2b855",
+      "supplies": "framework-context",
+      "bytes": 6407,
+      "read": "on-demand",
+      "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+    },
+    {
+      "path": "context/product-context.md",
+      "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+      "supplies": "framework-context",
+      "bytes": 525,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "context/technical-context.md",
+      "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+      "supplies": "framework-context",
+      "bytes": 554,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "context/release-context.md",
+      "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+      "supplies": "framework-context",
+      "bytes": 470,
+      "read": "required",
+      "read_reason": "declared for this phase"
+    },
+    {
+      "path": "workflows/fix-bug.md",
+      "digest": "sha256:b55bd054c59a326cb7945c28c27c1dc1",
+      "supplies": "framework-context",
+      "bytes": 7417,
+      "read": "on-demand",
+      "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+    },
+    {
+      "path": "templates/validation-report.md",
+      "digest": "sha256:6d0681a1b3e3c176479c56867d1c6319",
+      "supplies": null,
+      "bytes": 5683,
+      "read": "required",
+      "read_reason": "an artifact template this phase renders or reads"
+    },
+    {
+      "path": "templates/implementation-report.md",
+      "digest": "sha256:d0616790c1cb2c658ccc70b61ebb4a3e",
+      "supplies": null,
+      "bytes": 5809,
+      "read": "required",
+      "read_reason": "an artifact template this phase renders or reads"
+    },
+    {
+      "path": "templates/bug-analysis.md",
+      "digest": "sha256:41a09a54f2e915d7481fef9325f3515d",
+      "supplies": null,
+      "bytes": 3716,
+      "read": "required",
+      "read_reason": "an artifact template this phase renders or reads"
+    },
+    {
+      "path": "skills/testing/testing-strategy.md",
+      "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+      "supplies": null,
+      "bytes": 1265,
+      "read": "required",
+      "read_reason": "skill S07 is required for this phase"
+    },
+    {
+      "path": "skills/security/secure-engineering.md",
+      "digest": "sha256:474ba6292d92cbc8e8533e7942955357",
+      "supplies": null,
+      "bytes": 1236,
+      "read": "required",
+      "read_reason": "skill S09 is required for this phase"
+    },
+    {
+      "path": "skills/logging/observability-logging.md",
+      "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+      "supplies": null,
+      "bytes": 1208,
+      "read": "required",
+      "read_reason": "skill S11 is required for this phase"
+    },
+    {
+      "path": "runtime/README.md",
+      "digest": "sha256:b412fe5b3915130854630a0995af73f2",
+      "supplies": null,
+      "bytes": 63184,
+      "read": "on-demand",
+      "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+    }
+  ],
+  "context_digest": "sha256:9c329f33acd5b4756270f19f411bdb04",
+  "input_digest": "sha256:3e5cde9e0332e6c0e628bbd5b5a3d164",
+  "inputs": [
+    {
+      "type": "implementation-report",
+      "reference": "runs/run-2cf7a34e3daa/states/fix-implementation/artifacts/implementation-report.md",
+      "source_file": "D:/Project/claude-framework/.claude/worktrees/agitated-villani-dbbb4c/.claude/runs/run-2cf7a34e3daa/states/fix-implementation/artifacts/implementation-report.md",
+      "digest": "sha256:3e5cde9e0332e6c0e628bbd5b5a3d164"
+    }
+  ],
+  "unnarrowed": [
+    "runtime/README.md",
+    "skills/logging/observability-logging.md",
+    "skills/security/secure-engineering.md",
+    "skills/testing/testing-strategy.md",
+    "templates/bug-analysis.md",
+    "templates/implementation-report.md",
+    "templates/validation-report.md"
+  ],
+  "read_policy": "config/runtime.md#context-loading",
+  "read_required": [
+    "context/product-context.md",
+    "context/release-context.md",
+    "context/technical-context.md",
+    "skills/logging/observability-logging.md",
+    "skills/security/secure-engineering.md",
+    "skills/testing/testing-strategy.md",
+    "templates/bug-analysis.md",
+    "templates/implementation-report.md",
+    "templates/validation-report.md"
+  ],
+  "read_on_demand": [
+    "runtime/README.md",
+    "workflows/fix-bug.md",
+    "workflows/workflow-gate-matrix.md"
+  ],
+  "runtime_resolved": [
+    "agents/capability-matrix.md",
+    "registry/agents.yaml",
+    "registry/skills.yaml",
+    "registry/templates.yaml",
+    "registry/workflows.yaml",
+    "skills/agent-skill-matrix.md"
+  ],
+  "bytes_total": 181920,
+  "bytes_required": 20466,
+  "excluded": [
+    "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+  ]
+}

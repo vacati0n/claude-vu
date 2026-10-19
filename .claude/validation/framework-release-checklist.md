@@ -51,6 +51,11 @@ illegal-transition probe in the system temp directory, which a sandboxed shell m
 write. The check itself is not weaker than `FR-04`; its runnability is environment-dependent, and
 an item that cannot be run everywhere must not silently become a blocker that is skipped.
 
+`verify_self_hosting.py --release-checklist` runs every command item in its own disposable copy
+of the working tree under the system temp directory, and its check `S11` fails if the repository,
+or any item's copy, is changed by content. The checklist therefore never rewrites committed run
+evidence, and running it needs a writable temp directory for every item, not only `FR-11`.
+
 `FR-13` is advisory because the lesson bundle is evidence the framework derives, not a release
 contract: a non-conforming bundle is a finding to repair with the next lesson write, and an
 absent bundle (a checkout that has harvested nothing) passes.

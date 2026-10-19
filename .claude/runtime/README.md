@@ -57,13 +57,13 @@ the recovery.
 | `execution_metrics.py` | Execution metrics: the per-run performance trace (`runs/<run>/execution-metrics.json`) and the per-dispatch context estimate under the legacy and the progressive rules |
 | `fixtures/` | Conforming reference artifact per type, for the validator proof. See `fixtures/README.md` |
 | `verify_vertical_slice.py` | Executable proof that one phase really executed |
-| `verify_multi_phase.py` | Executable proof that the run is a multi-phase state machine, and that re-running it changes nothing |
+| `verify_multi_phase.py` | Executable proof that the run is a multi-phase state machine, and that re-running it changes nothing; the re-run (`M14`) executes in a disposable copy of the working tree, so the run it proves is never written |
 | `verify_registry_coverage.py` | Coverage proof over the registered surface: command routing, Phase Model publication, phase-owner invocability, phase skills, gate decidability, and per-phase dispatchability with reasons |
 | `verify_validators.py` | Coverage proof over the Validation Engine: every artifact a Phase Model names has a validator, every validator accepts a conforming artifact, and every validator rejects a mutated one by the named check |
 | `verify_recovery.py` | Recovery proof by failure injection: a rejected artifact repaired on retry, a retry budget exhausted and bounded, a policy violation never retried, and a gate rejection rolled back under a recorded human authorisation and rebuilt with the rejected evidence kept immutable |
 | `self_hosting.py` | Executable form of `config/self-hosting-profile.md`: scope classification, change-class routing, evidence expansion, release-checklist parsing, and per-command dispatchability |
 | `change_proposal_validator.py` | Validation Engine for `framework-change-proposal.md`, the governance record of a framework-internal change. Re-reads the run the proposal names rather than trusting what it claims |
-| `verify_self_hosting.py` | Proof that the self-hosting operating mode holds: the profile routes, the evidence requirement is enforceable, every recorded change was carried by a conforming run, and no run inside the window is unaccounted for |
+| `verify_self_hosting.py` | Proof that the self-hosting operating mode holds: the profile routes, the evidence requirement is enforceable, every recorded change was carried by a conforming run, and no run inside the window is unaccounted for; `--release-checklist` runs each command item in its own disposable copy of the working tree and proves by content digest of every file git lists (`S11`) that the working tree, and each copy, was left unchanged |
 | `close_legacy_run.py` | Migration utility: closes a pre-slice-3 run directory, which carries no state store and so cannot be closed by `complete`. Delete once no such run remains |
 | `demo/` | Demo mode (`--demo`, runtime 0.8.0). Telemetry: `context.py` the per-run switch, `recorder.py` the Recorder that turns events, envelopes, and host tool hooks into millisecond-stamped markers, `timeline.py` markers to scenes, `narration.py` the text-to-speech engine chain, `captions.py` the spoken lines as timed cues, subtitles, and a script. Filming the real application: `obs_ws.py` a standard-library obs-websocket client, `capture.py` window capture and the capture manifest, `capture_helper.py` the detached recorder process, `overlays.py` the presentation frame, `editor.py` the edit decision list and the ffmpeg cut. Drawing the run instead: `renderer.py`, `video_builder.py`, `deck.py`. `hooks.settings.json` is the optional host tool-hook wiring. See **Demo mode** below |
 
@@ -467,8 +467,12 @@ attempt number is excluded, so a retry preserves the key.
 
 A suppressed call writes one bookkeeping entry to `state.json` and nothing else: no event,
 no transition, no file. That entry is the evidence that the repetition was seen and
-suppressed. `verify_multi_phase.py` check M13 re-executes the runtime against a committed
-run and proves the whole fingerprint is unchanged.
+suppressed. The save that records it also refreshes the run's stamps and guard details and
+rebuilds `task-context.yaml`, so a replay is never byte-neutral. `verify_multi_phase.py` check
+M14 therefore re-executes the runtime against a disposable copy of the working tree holding the
+run, with the copy as the runtime's root, proves the run's fingerprint in the copy unchanged,
+names the files the replay's bookkeeping rewrote there, and removes the copy; the run itself is
+never written.
 
 ## What a dispatch asks an agent to read
 
