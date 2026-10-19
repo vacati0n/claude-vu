@@ -1,0 +1,167 @@
+{
+  "invocation_id": "inv-ca5b47a3f8b7-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ca5b47a3f8b7/states/root-cause-analysis/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "root-cause",
+    "workflow": "fix-bug",
+    "phase": "root-cause-analysis",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "declaredStatus": "provisional",
+    "supersedes": "runs/run-ca5b47a3f8b7/states/triage-and-impact/artifacts/bug-analysis.md",
+    "counts": {
+      "evidenceRecords": 17,
+      "causalSteps": 5,
+      "causalStepsByConfidence": {
+        "high": 5,
+        "medium": 0,
+        "low": 0
+      },
+      "evidenceByConfidence": {
+        "high": 15,
+        "medium": 1,
+        "low": 1
+      },
+      "openQuestions": 4,
+      "openQuestionsBlocking": 0
+    },
+    "statusBasis": "reasoning.md Stage 9, first matching row: business impact was unquantified and severity rests on technical impact alone (Q-003), therefore provisional. The chain is closed on a condition (a placeholder contract mismatch), the tokenisation, builder-only, and hypothesis-H alternatives are eliminated (E-008, E-006, E-005/E-010), and every step is high.",
+    "severityBasis": "reasoning.md Stage 5: a secondary verification path returns wrong verdicts for split, glued, and unterminated placeholders (E-002, E-006, E-014) and passes a builder action that cannot run as written (E-005, E-008); acceptable manual workaround; no committed open verdict wrong (E-009); no state or data mutation. Unchanged from triage; the reporter's value (E-001, low) did not set it.",
+    "reproducibilityBasis": "Reproduced in triage three times (E-002) and again in this phase at the unchanged worktree (E-014), with preconditions varied one at a time (E-005, E-006).",
+    "gateConditionsApplied": "Triage Gate conditions read first-hand from state.json (E-013): scope limited to the shared detection and its unit tests; no --detail exemption; builder placeholder kept as non-blocking follow-up Q-001; named regression tests listed in the Validation Plan.",
+    "counterfactualEvidence": "Run only in the host prototype tree outside the worktree, never in the real worktree: 247 committed envelopes keep their true/false verdict versus before.json, two reason strings change (E-015); recovery verification 74/74 with X1 over 9 open envelopes (E-016); all placeholder forms refused and existing exemption tests pass (E-017). This is evidence that the strategy's constraints can be met, not a validation of a delivered fix.",
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "byGroup": {
+        "structural": {
+          "S1": "pass",
+          "S2": "pass",
+          "S3": "pass",
+          "S4": "pass",
+          "S5": "pass",
+          "S6": "pass",
+          "S7": "pass",
+          "S8": "pass",
+          "S9": "pass"
+        },
+        "metadata": {
+          "D1": "pass",
+          "D2": "pass",
+          "D3": "pass",
+          "D4": "pass",
+          "D5": "pass",
+          "D6": "pass",
+          "D7": "pass"
+        },
+        "agreement": {
+          "B2": "pass",
+          "B3": "pass",
+          "A1": "pass"
+        },
+        "reproduction": {
+          "B4": "pass",
+          "V1": "pass",
+          "V2": "pass",
+          "V3": "pass",
+          "V4": "pass",
+          "V5": "pass"
+        },
+        "evidence": {
+          "B1": "pass",
+          "V6": "pass",
+          "V7": "pass",
+          "V8": "pass",
+          "V9": "pass",
+          "V10": "pass"
+        },
+        "causalChain": {
+          "V11": "pass",
+          "V12": "pass",
+          "V13": "pass",
+          "V14": "pass",
+          "V15": "pass",
+          "V16": "pass"
+        },
+        "impactAndSeverity": {
+          "V17": "pass",
+          "V18": "pass",
+          "V19": "pass",
+          "V20": "pass",
+          "V21": "pass",
+          "V22": "pass"
+        },
+        "fixStrategy": {
+          "V23": "pass",
+          "V24": "pass",
+          "V25": "pass",
+          "V26": "pass",
+          "V27": "pass",
+          "V28": "pass"
+        },
+        "statusAndQuestions": {
+          "B5": "pass",
+          "V29": "pass",
+          "V30": "pass",
+          "V31": "pass",
+          "V32": "pass",
+          "V33": "pass"
+        },
+        "authority": {
+          "A2": "pass",
+          "A3": "pass",
+          "A4": "pass",
+          "A5": "pass",
+          "A6": "pass",
+          "A7": "pass",
+          "A8": "pass"
+        },
+        "content": {
+          "C1": "pass",
+          "C2": "pass",
+          "C3": "pass",
+          "C4": "pass",
+          "C5": "pass",
+          "C6": "pass",
+          "C7": "pass"
+        }
+      }
+    },
+    "validationEngineSelfRun": {
+      "validator": "runtime/bug_analysis_validator.py",
+      "result": "pass",
+      "checksRun": 30,
+      "checksPassed": 30
+    },
+    "notMachineCheckable": {
+      "N1": "discharged: the root cause is the contract mismatch between free-text unquoted placeholder notation and a per-argument predicate, a condition that could differ by design; the counterfactual (E-017) shows changing that condition closes every form.",
+      "N2": "discharged: every claim cites evidence run or read in this run; the reporter's claims are registered low and used only as hypothesis H.",
+      "N3": "discharged: the radius names the verification harness, the runtime envelope builder and status surfaces, persisted committed envelopes, and the unit tests; induced-run reach was settled (E-016)."
+    },
+    "hostNotes": [
+      "The host registered this role under a namespaced agent id; the repository manifest dev-1-bug-analyst and the runtime contract_checks governed.",
+      "The worktree shows memory/lessons/lessons.store.json modified; this agent did not write it."
+    ]
+  },
+  "evidence_refs": [
+    ".claude/agents/dev-1-bug-analyst/system.md",
+    ".claude/agents/dev-1-bug-analyst/identity.md",
+    ".claude/agents/dev-1-bug-analyst/reasoning.md",
+    ".claude/agents/dev-1-bug-analyst/output.md",
+    ".claude/agents/dev-1-bug-analyst/quality.md",
+    ".claude/agents/dev-1-bug-analyst/examples.md",
+    ".claude/runs/run-ca5b47a3f8b7/states/root-cause-analysis/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-ca5b47a3f8b7/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-ca5b47a3f8b7/states/root-cause-analysis/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

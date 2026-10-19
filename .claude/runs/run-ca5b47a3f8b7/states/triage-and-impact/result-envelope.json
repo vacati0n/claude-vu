@@ -1,0 +1,164 @@
+{
+  "invocation_id": "inv-ca5b47a3f8b7-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ca5b47a3f8b7/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "triage",
+    "workflow": "fix-bug",
+    "phase": "triage-and-impact",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "declaredStatus": "provisional",
+    "counts": {
+      "evidenceRecords": 12,
+      "causalSteps": 5,
+      "causalStepsByConfidence": {
+        "high": 5,
+        "medium": 0,
+        "low": 0
+      },
+      "evidenceByConfidence": {
+        "high": 10,
+        "medium": 1,
+        "low": 1
+      },
+      "openQuestions": 3,
+      "openQuestionsBlocking": 1
+    },
+    "statusBasis": "reasoning.md Stage 9, first matching row: business impact was unquantified and severity rests on technical impact alone (Q-003), therefore provisional. Reproducibility is deterministic; no required input was missing; the chain closes on a condition (a placeholder contract mismatch) with the tokenisation alternative and hypothesis H eliminated; no dependent step is below high.",
+    "severityBasis": "reasoning.md Stage 5: a secondary verification path (X1 and the execution guard) returns wrong verdicts for split, glued, and unterminated placeholders (E-002, E-006), and the builder's awaiting-recovery-task release prescription that it passes cannot run as written (E-005, E-008); an acceptable manual workaround exists, no committed open envelope verdict is wrong (E-009), and no state or data is mutated. The reporter's medium is registered at low confidence (E-001) and did not set the value.",
+    "reproducibilityBasis": "Established in this run: the reported case reproduced identically in three runs (E-002), and one precondition at a time was varied (leased and blocked state, builder-emitted form, glued, unterminated, exempt-flag position) with the same outcome (E-005, E-006).",
+    "hypothesisOutcome": "Supplied hypothesis H (no committed or induced envelope carries a multi-word placeholder; only a future builder change would expose it) is partially overturned: the current builder emits --detail <what happened> (E-005, E-007) and two resolved committed envelopes carry it (E-010); no committed open envelope verdict is wrong (E-009); induced runs not observed (Q-002).",
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "byGroup": {
+        "structural": {
+          "S1": "pass",
+          "S2": "pass",
+          "S3": "pass",
+          "S4": "pass",
+          "S5": "pass",
+          "S6": "pass",
+          "S7": "pass",
+          "S8": "pass",
+          "S9": "pass"
+        },
+        "metadata": {
+          "D1": "pass",
+          "D2": "pass",
+          "D3": "pass",
+          "D4": "pass",
+          "D5": "pass",
+          "D6": "pass",
+          "D7": "pass"
+        },
+        "agreement": {
+          "B2": "pass",
+          "B3": "pass",
+          "A1": "pass"
+        },
+        "reproduction": {
+          "B4": "pass",
+          "V1": "pass",
+          "V2": "pass",
+          "V3": "pass",
+          "V4": "pass",
+          "V5": "pass"
+        },
+        "evidence": {
+          "B1": "pass",
+          "V6": "pass",
+          "V7": "pass",
+          "V8": "pass",
+          "V9": "pass",
+          "V10": "pass"
+        },
+        "causalChain": {
+          "V11": "pass",
+          "V12": "pass",
+          "V13": "pass",
+          "V14": "pass",
+          "V15": "pass",
+          "V16": "pass"
+        },
+        "impactAndSeverity": {
+          "V17": "pass",
+          "V18": "pass",
+          "V19": "pass",
+          "V20": "pass",
+          "V21": "pass",
+          "V22": "pass"
+        },
+        "fixStrategy": {
+          "V23": "pass",
+          "V24": "pass",
+          "V25": "pass",
+          "V26": "pass",
+          "V27": "pass",
+          "V28": "pass"
+        },
+        "statusAndQuestions": {
+          "B5": "pass",
+          "V29": "pass",
+          "V30": "pass",
+          "V31": "pass",
+          "V32": "pass",
+          "V33": "pass"
+        },
+        "authority": {
+          "A2": "pass",
+          "A3": "pass",
+          "A4": "pass",
+          "A5": "pass",
+          "A6": "pass",
+          "A7": "pass",
+          "A8": "pass"
+        },
+        "content": {
+          "C1": "pass",
+          "C2": "pass",
+          "C3": "pass",
+          "C4": "pass",
+          "C5": "pass",
+          "C6": "pass",
+          "C7": "pass"
+        }
+      }
+    },
+    "validationEngineSelfRun": {
+      "validator": "runtime/bug_analysis_validator.py",
+      "result": "pass",
+      "checksRun": 30,
+      "checksPassed": 30
+    },
+    "notMachineCheckable": {
+      "N1": "discharged: the root cause is the placeholder contract mismatch between builder notation and the per-argument predicate, a condition that could differ by design, not the predicate's location (C-003).",
+      "N2": "discharged: every claim cites first-hand evidence; the reporter's claims are registered low and used only as hypothesis H.",
+      "N3": "discharged: the radius names the verification harness, the runtime envelope builder and status surfaces, persisted committed envelopes, and the unit tests; induced-run reach is recorded as Q-002."
+    },
+    "hostNotes": [
+      "The host registered this role under a namespaced agent id; the repository manifest identifier dev-1-bug-analyst and the runtime contract_checks (pass) governed this invocation."
+    ]
+  },
+  "evidence_refs": [
+    ".claude/agents/dev-1-bug-analyst/system.md",
+    ".claude/agents/dev-1-bug-analyst/identity.md",
+    ".claude/agents/dev-1-bug-analyst/reasoning.md",
+    ".claude/agents/dev-1-bug-analyst/output.md",
+    ".claude/agents/dev-1-bug-analyst/quality.md",
+    ".claude/agents/dev-1-bug-analyst/examples.md",
+    ".claude/runs/run-ca5b47a3f8b7/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-ca5b47a3f8b7/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-ca5b47a3f8b7/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

@@ -1,0 +1,675 @@
+{
+  "invocation_id": "inv-ca5b47a3f8b7-05-001",
+  "run_id": "run-ca5b47a3f8b7",
+  "work_item_id": "run-ca5b47a3f8b7::closure-and-communication",
+  "idempotency_key": "sha256:d66419d339f16df1ef9cfe5179cbbabf",
+  "state_id": "closure-and-communication",
+  "phase_index": 5,
+  "agent_id": "orchestrator",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/orchestrator.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/orchestrator/manifest.yaml",
+    "load_order": [
+      "agents/orchestrator/system.md",
+      "agents/orchestrator/identity.md",
+      "agents/orchestrator/reasoning.md",
+      "agents/orchestrator/execution.md",
+      "agents/orchestrator/output.md",
+      "agents/orchestrator/quality.md",
+      "agents/orchestrator/examples.md"
+    ],
+    "module_digests": {
+      "agents/orchestrator/system.md": "sha256:565828cc0ac06d7bfbbc912a17aa1d7d",
+      "agents/orchestrator/identity.md": "sha256:165844a62e8176cc6ab69103be732a77",
+      "agents/orchestrator/reasoning.md": "sha256:dc6bcc26b33d8e390ebc4d5cce386a4c",
+      "agents/orchestrator/execution.md": "sha256:541b9b87821a25ab76dcf930bc2c0a00",
+      "agents/orchestrator/output.md": "sha256:7a2b2d948ba94e7ac6bac09c49f5b5c0",
+      "agents/orchestrator/quality.md": "sha256:d30199fff431cc4ba7635d5de13fbb9f",
+      "agents/orchestrator/examples.md": "sha256:b04697acbf2dc6e2bf398b5204889ee7"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/orchestrator/system.md",
+        "agents/orchestrator/reasoning.md",
+        "agents/orchestrator/output.md",
+        "agents/orchestrator/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/orchestrator/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/orchestrator/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/orchestrator/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 39377,
+      "full_bytes": 74871
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "workflow-coordination",
+      "phase-progression-control",
+      "handoff-management",
+      "escalation-routing",
+      "closure-governance",
+      "release-communication-support"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S08",
+        "proficiency": "Secondary",
+        "registryIdentifier": "performance-engineering",
+        "specificationPath": "skills/performance/performance-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Advisory",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Advisory",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S08",
+      "displayName": "Performance Engineering",
+      "specificationPath": "skills/performance/performance-engineering.md",
+      "status": "required",
+      "area": "performance",
+      "basis": "area performance triggered by 'performance' in artifact:regression-validation",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in artifact:triage-and-impact",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Advisory)"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "required",
+      "area": "database",
+      "basis": "area database triggered by 'migration' in artifact:fix-implementation",
+      "source": "agent-manifest (Advisory)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "validation-report",
+      "workflow-state",
+      "gate-evidence",
+      "implementation-report",
+      "review-package",
+      "release-note",
+      "technical-recommendation",
+      "deployment-plan",
+      "rollback-plan",
+      "known-issue-status",
+      "documentation-updates",
+      "escalation-context",
+      "closure-context",
+      "release-context",
+      "monitoring-evidence",
+      "technical-debt-record",
+      "dependency-map",
+      "prior-gate-evidence",
+      "unresolved-findings"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "validation-report",
+        "reference": "runs/run-ca5b47a3f8b7/states/regression-validation/artifacts/validation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/busy-villani-8d289b/.claude/runs/run-ca5b47a3f8b7/states/regression-validation/artifacts/validation-report.md",
+        "text": "```yaml\nvalidationReport:\n  reportId: VR-run-ca5b47a3f8b7-regression-validation\n  validationReference: run-ca5b47a3f8b7::fix-implementation (defect runs/inputs/recovery-x1-multi-word-placeholder-defect-report.md)\n  validationBasis: regression\n  sourceInputs:\n    - type: implementation-report\n      reference: runs/run-ca5b47a3f8b7/states/fix-implementation/artifacts/implementation-report.md\n    - type: defect-report\n      reference: runs/inputs/recovery-x1-multi-word-placeholder-defect-report.md\n    - type: bug-analysis\n      reference: runs/run-ca5b47a3f8b7/states/root-cause-analysis/artifacts/bug-analysis.md\n    - type: acceptance-criteria\n      reference: runs/run-ca5b47a3f8b7/state.json\n  producedBy: qa\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: pass\n  inputDigest: sha256:495ea7248751e26c05f245b42d64e2f2\n  contextDigest: sha256:9af9244df5ecf1e5560f1fac2e4a5c44\n```\n\n## Metadata\n\n- Validation ID: VR-run-ca5b47a3f8b7-regression-validation\n- Validator: qa\n- Change under validation: shared `placeholders` helper in .claude/runtime/verify_recovery.py used by `clearing_action_admissible` and `executable`, plus PlaceholderFormTestCase in tests/test_clearing_action_admissibility.py (implementation report IR-2026-1019, digest sha256:495ea7248751e26c05f245b42d64e2f2, change set `C-001`, `C-002`)\n- Validation date: 2026-10-18\n\n## Validation Scope\n\n- In scope: placeholder detection in every form (one word, several words, glued prefix, glued suffix, unterminated) by the X1 admissibility table and the execution guard; the whole-argument exemption after row-exempt flags (gate, rollback `--decided-by`, policy-exception); valid-action admissibility; the committed-envelope true/false baseline; the recovery verification over induced runs; the full unit suite as the regression surface, including every test module that imports verify_recovery.py (test_clearing_action_admissibility, test_gate_rollback, test_policy_exception_command); the framework verifiers named by the dispatch.\n- Out of scope: the builder's `--detail <what happened>` emission in .claude/runtime/framework_runtime.py, a follow-up per the Triage Gate (tech-lead) and the root-cause open question on the builder (architect); code quality of the change, which the Fix Gate (dev-2-reviewer) judged; post-release monitoring signals of the Validation Plan, which only operation can observe; CI and non-Windows platforms, not reachable from this host (the root-cause open question on platforms, orchestrator); this run's still-missing change proposal flagged by self-hosting S8, a closure-phase obligation (orchestrator).\n- Evidence examined: implementation report (supplied input, read in full); defect report runs/inputs/recovery-x1-multi-word-placeholder-defect-report.md (read in full); root-cause bug-analysis (read in full); Triage Gate and Fix Gate records in runs/run-ca5b47a3f8b7/state.json; `git diff` and `git status` of the worktree; commands run in this invocation, listed per criterion below: the admissibility module in the worktree, the new tests against the committed module, repro.py, builder.py, probe_exempt.py, two QA probes (qa_edge.py, literal_bracket.py), scan.py with a before.json comparison, a rejudge of this run's envelopes under both modules, `tools/run_tests_parallel.py` on a changed copy and a baseline copy, test_knowledge with the committed lessons store, verify_recovery.py, verify_multi_phase.py and verify_self_hosting.py on copies, and verify_registry_coverage.py, verify_validators.py, verify_manifests.py and `verify_vertical_slice.py --run-id run-c5a8d50d3238` in place.\n\n## Test Strategy\n\n- Risk basis: the change alters a predicate that decides whether a recovery verification passes and whether the execution guard runs an action (Stage 4: exhaustive branch coverage), and its interface is called by both guards (every call site exercised); every branch of `placeholders` (no bracket, unterminated closed later, unterminated to the end, whole versus not whole, exempt flag versus not, first position) was driven by the unit module and qa_edge.py, and both call sites by the unit module, builder.py and the recovery verification; no data is written or migrated, and the full before-and-after comparison was applied to the committed-envelope verdicts instead.\n- Levels executed: unit, integration\n- Environment: host Windows 11 checkout at commit 340a41b with Python 3.14.0; unit module, probes, scan and four read-only verifiers in the worktree, with `git status` compared before and after each; full suites and the three writing verifiers in isolated copies of the tracked tree in a scratch directory outside the worktree, the changed copy byte-identical to the worktree for both changed files (md5 checked), the baseline copy differing only in those two files at HEAD; target CI and other platforms were not reached.\n- Not executed: end-to-end beyond the recovery verification's induced command-line runs, because the change has no user journey other than the verifier itself; performance, because area performance is not triggered and the predicate is a single linear pass; a dedicated security level, because the triggered security area rests on the word token meaning argv tokens (root-cause Technical impact) and the change handles no credential, authorization or external input; the database area was triggered by the word migration in the implementation report's \"Data or migration impact: none\" and has no surface here.\n\n## Acceptance Criteria Results\n\n| ID | Criterion | Source | Method | Result | Evidence |\n|---|---|---|---|---|---|\n| AC-001 | A clearing action that carries a placeholder in any form is inadmissible, unless the placeholder is one whole argument following a flag the row exempts as human judgement. That covers one word, several words, a placeholder glued to other text, and an unterminated `<`. | defect report, Expected behaviour | unit | met | `python -m unittest tests.test_clearing_action_admissibility -v` 30/30 OK, the five form tests and the exempt-flag test among them; repro.py and builder.py report every form inadmissible; qa_edge.py: whole exempt trio yields [], every non-whole or non-exempt form is reported |\n| AC-002 | `executable()` refuses the same forms. | defect report, Expected behaviour | unit | met | every PlaceholderFormTestCase refusal asserts AssertionError from `vr.executable` (30/30 OK); builder.py: \"executable refuses\" for `<owner>x`, `x<owner>`, `<owner`, `--rationale <fill in text>` and the builder's `<what happened>`; qa_edge.py refuses multi-word and glued deciders |\n| AC-003 | A valid action without a placeholder stays admissible, and every exemption the table grants today (gate, rollback `--decided-by`, policy-exception on an item blocked `awaiting_policy_exception`) keeps its verdict. | defect report, Expected behaviour | unit | met | repro.py: `tool_failure` -> (True, release on execution-planning status=leased); test_valid_action_is_admissible, test_gate_action_keeps_its_exemption, test_emitted_action_leaves_only_the_decider_and_is_admissible, test_emitted_action_with_placeholders_is_admissible all ok; probe_exempt.py whole `<role>`, `<who>`, `<text>` -> [] |\n| AC-004 | Every committed envelope under `.claude/runs/` keeps its verdict, and `verify_recovery.py` still proves out in full. Committed run evidence is not edited. | defect report, Expected behaviour | integration | met | scan.py: 251 envelopes, 0 errors; all 247 before.json keys present with 0 true/false flips; 4 new envelopes of this run judge identically under HEAD and fixed modules (rejudge_new.py); verify_recovery.py on a copy 74/74 RECOVERY PROVEN; `git status` shows no tracked file under .claude/runs modified |\n| AC-005 | Regression tests in `tests/test_clearing_action_admissibility.py` pin single-word and multi-word placeholders as inadmissible and a valid action as admissible. | defect report, Expected behaviour | unit | met | test_single_word_placeholder_is_inadmissible, test_multi_word_placeholder_is_inadmissible, test_valid_action_is_admissible ok; against the committed module the new tests fail 8 times across 5 methods (multi-word, glued prefix, glued suffix, unterminated, exempt-flag), so they pin the fix |\n| AC-006 | Scope: only the shared placeholder detection in verify_recovery.py plus tests in tests/test_clearing_action_admissibility.py; no --detail exemption. | Triage Gate rationale, runs/run-ca5b47a3f8b7/state.json | integration | met | `git diff` touches only those two files for this change; the third modified file, lessons.store.json, holds runtime-harvested lessons from other runs, mtime 11:39Z, before the fix-implementation invocation at 11:47:54Z; builder.py: the builder's `--detail <what happened>` release action is inadmissible under leased and blocked states |\n| AC-007 | the builder's unparseable --detail <what happened> stays an open follow-up, not a blocker | Triage Gate rationale, runs/run-ca5b47a3f8b7/state.json | integration | met | `git diff --stat` shows framework_runtime.py unmodified; builder.py still prints the action ending `--detail <what happened>`; implementation report Out of scope and `R-001` record the follow-up |\n| AC-008 | tests pin multi-word, glued prefix, glued suffix, unterminated and single-word placeholders as inadmissible and refused by executable, keep a valid action admissible and keep the gate, --decided-by and policy-exception exemptions | Triage Gate rationale, runs/run-ca5b47a3f8b7/state.json | unit | met | the five form tests assert inadmissible and `executable` refusal; test_valid_action_is_admissible; test_gate_action_keeps_its_exemption, test_emitted_action_leaves_only_the_decider_and_is_admissible, test_emitted_action_with_placeholders_is_admissible; 30/30 OK in this run |\n| AC-009 | every committed envelope keeps its true/false verdict against the baseline, with no run evidence edited, else stop and escalate | Triage Gate rationale, runs/run-ca5b47a3f8b7/state.json | integration | met | scan.py compared on `ok` per key with before.json: 247 of 247 unchanged, 0 missing; only the two resolved run-4c51600606df envelopes change reason text to `<what happened>`, both still False; no tracked run evidence modified per `git status` |\n| AC-010 | Shared placeholders helper closes the defect in clearing_action_admissible and executable within the Triage Gate scope | Fix Gate rationale, runs/run-ca5b47a3f8b7/state.json | unit | met | the diff routes both `clearing_action_admissible` and `executable` through `placeholders`; the new tests fail against the committed module and pass with the fix; AC-001, AC-002 and AC-006 evidence |\n| AC-011 | rerun the reproduction expecting `<fill in owner name>` inadmissible, `<owner>` inadmissible, `tool_failure` admissible | root-cause bug-analysis, Validation Plan | unit | met | `python repro.py`: `<fill in owner name>` False, `<owner>` False, `tool_failure` True |\n| AC-012 | rerun the builder probe expecting the builder action, glued, and unterminated forms inadmissible and refused by the execution guard | root-cause bug-analysis, Validation Plan | unit | met | `python builder.py`: builder action False under leased and blocked, \"executable refused\"; `<owner>x`, `x<owner>`, `<owner` each False and \"executable refuses\" |\n| AC-013 | rerun scan.py and confirm every envelope's true/false verdict equals before.json | root-cause bug-analysis, Validation Plan | integration | met | `python scan.py after.json` then a per-key `ok` comparison: 0 flips over 247 keys; the 4 keys absent from before.json are this run's own envelopes, equal under both modules |\n| AC-014 | run the full recovery verification in an isolated copy and the unit tests, expecting 74/74 and all pass. | root-cause bug-analysis, Validation Plan | integration | met | verify_recovery.py on an isolated copy: 74/74, X1 PASS over 9 open envelopes across 4 runs; the unit tests, which the source names as the admissibility unit tests (its `E-011`), 30/30 OK |\n| AC-015 | new in tests/test_clearing_action_admissibility.py, each judged inadmissible and refused by executable: test_multi_word_placeholder_is_inadmissible, test_glued_prefix_placeholder_is_inadmissible, test_glued_suffix_placeholder_is_inadmissible, test_unterminated_placeholder_is_inadmissible, test_single_word_placeholder_is_inadmissible; plus test_valid_action_is_admissible; kept unchanged: test_gate_action_keeps_its_exemption, test_emitted_action_leaves_only_the_decider_and_is_admissible, test_emitted_action_with_placeholders_is_admissible. | root-cause bug-analysis, Validation Plan | unit | met | all six named new tests present and ok via `assert_refused` (inadmissible plus `executable` AssertionError); `git diff` of the test file adds only the docstring lines and the new class, so the three kept tests are unchanged and ok |\n\n## Execution Summary\n\n- Criteria validated: 15\n- Met: 15\n- Not met: 0\n- Blocked: 0\n\n## Defects\n\n| ID | Severity | Category | Location | Symptom | Reproducibility | Status |\n|---|---|---|---|---|---|---|\n| DF-001 | low | functional | .claude/runtime/verify_recovery.py `placeholders` | a quoted argument holding literal bracket text (`--detail 'retry count > 3'`, `--detail 'see <step 4> above'`) on a leased release is judged inadmissible; the committed module judged both admissible; no committed or induced envelope carries such text | always | open |\n\n## Regression Assessment\n\n- Regression scope: X1 verdicts on every committed and induced open envelope; scenario-D rollback executions through the execution guard; the gate, rollback decider and policy-exception exemptions; every test module importing verify_recovery.py; the rest of the unit suite; the multi-phase, self-hosting, registry, validator, manifest and vertical-slice verifiers.\n- Regressions detected: None identified.\n- Coverage of changed behavior: both call sites of `placeholders` and every branch of it are reached by the unit module (30/30), builder.py, probe_exempt.py and qa_edge.py; scenario D and X1 by verify_recovery.py 74/74; full suite on copies: baseline 567 ran, changed 574 ran, failing set identical (5: test_demo_capture x3 for an ffmpeg `filter_complex_script` option error, test_knowledge BackwardCompatibility x2), test_knowledge failing the same 2 with the committed lessons store; neither failing module imports verify_recovery.py; verify_multi_phase 15/15, verify_registry_coverage 8/8, verify_validators 6/6, verify_manifests 2/2, verify_vertical_slice 10/10, verify_self_hosting 8/8 on a tracked-tree copy and 7/8 with this run copied in (S8 only: run-ca5b47a3f8b7 unaccounted, its proposal not yet written).\n- Untested areas: a lone `>` and two bracket pairs after an exempt flag (Fix Gate F-1, F-2) behave as required in qa_edge.py but no automated test pins them; DF-001's literal-bracket edge is pinned by no test either way; behavior under CI and non-Windows platforms; any test inside the 5 pre-existing failing tests' bodies, which stop at their first failure.\n\n## Residual Risk\n\n- Accepted risk: the builder's `--detail <what happened>` emission left as a non-blocking follow-up, accepted by tech-lead at the Triage Gate; the Fix Gate low findings F-1, F-2 (unpinned forms) and F-3 (literal-bracket text refused, DF-001, implementation `R-003`) carried as non-blocking by dev-2-reviewer at the Fix Gate.\n- Unmitigated risk: an induced or real run that leaves the builder's bare release prescription open will now fail X1 until the builder follow-up lands (implementation `R-001`); the 5 pre-existing full-suite failures mask any new failure in test_demo_capture and test_knowledge (implementation `R-002`); DF-001 has no explicit risk acceptance by its design owner (`Q-001`); results rest on one host and platform (`Q-002`).\n- Monitoring required: the X1 detail line and the per-envelope true/false verdicts against before.json, per the root-cause Validation Plan; any open envelope with a `<` outside an exempt whole argument judged admissible indicates recurrence; any open envelope judged inadmissible for a quoted literal bracket indicates DF-001 has surfaced.\n\n## Verdict\n\n- Decision: pass\n- Rationale: all 15 criteria are met on evidence executed in this invocation, no criterion is not-met or blocked, and the only defect, DF-001, is low, so Stage 8 yields its first row, pass with status complete.\n- Blocking defects outstanding: None identified.\n- Readiness recommendation: recommend that dev-2-reviewer, who decides the fix-bug Verification Gate because this agent produced its evidence, approve it, carrying DF-001, `Q-001` and `Q-002` forward; the decision rests with the gate owner.\n\n## Open Questions\n\n- Q-001: Must a quoted argument holding literal angle-bracket text stay admissible, or is refusing it (DF-001) the intended consequence of treating every bracket span as a placeholder? Routes to architect, as owner of the accepted fix strategy.\n- Q-002: Behavior was confirmed only on this Windows host with Python 3.14.0; a CI run of the admissibility module and the recovery verification would confirm it elsewhere. Routes to orchestrator.",
+        "digest": "sha256:2b392c8f8365dd21c8cac729e8dcc742",
+        "produced_by": "regression-validation"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the recorded account of what the run did that this record is assembled from: a validation report for a `fix-bug` or `refactor` closure, the workflow state for a progression this record reconstructs, or the gate evidence a transition rested on. Without one there is nothing to coordinate from, and producing a record anyway would mean asserting a progression no recorded evidence establishes \u2014 which is the precise failure this role exists to prevent."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "validation-report",
+      "reference": "runs/run-ca5b47a3f8b7/states/regression-validation/artifacts/validation-report.md",
+      "produced_by": "regression-validation",
+      "artifact": "validation-report.md",
+      "bytes": 17094,
+      "sections": {
+        "read_first": [
+          "Acceptance Criteria Results",
+          "Defects",
+          "Verdict",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Validation Scope",
+          "Test Strategy",
+          "Execution Summary",
+          "Regression Assessment",
+          "Residual Risk"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-ca5b47a3f8b7/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:4f0cee46981bbdb4a25fce613ccb7960",
+    "bytes": 17261,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "database",
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "closure-and-communication"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-18T12:48:05Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:239f9bf99aea57059bdb54c03a50ca01",
+        "supplies": "framework-context",
+        "bytes": 21932,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:089e79af5d18d9b11dce7e6ac8a2c310",
+        "supplies": "framework-context",
+        "bytes": 9561,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:15b32b7dc6a6e5c3c47fac6809f1df7a",
+        "supplies": "framework-context",
+        "bytes": 12345,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:d9accc4117996076a1eeed79e6235645",
+        "supplies": "framework-context",
+        "bytes": 6511,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:dc3463b8a44d89167178839fd616a0e3",
+        "supplies": "framework-context",
+        "bytes": 16779,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:daa929f8e7c5c6a782b6240c63b2b855",
+        "supplies": "framework-context",
+        "bytes": 6407,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b55bd054c59a326cb7945c28c27c1dc1",
+        "supplies": "framework-context",
+        "bytes": 7417,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/orchestration-result.md",
+        "digest": "sha256:bd40ed36be1f828e2c24d239916567b4",
+        "supplies": null,
+        "bytes": 7095,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/validation-report.md",
+        "digest": "sha256:6d0681a1b3e3c176479c56867d1c6319",
+        "supplies": null,
+        "bytes": 5683,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null,
+        "bytes": 1252,
+        "read": "required",
+        "read_reason": "skill S10 is required for this phase"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:a61b6b4efb797afb614d6d1da21132e1",
+        "supplies": null,
+        "bytes": 62554,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:e097b22f3b871b4bcb03baf93ecd891a",
+    "input_digest": "sha256:2b392c8f8365dd21c8cac729e8dcc742",
+    "inputs": [
+      {
+        "type": "validation-report",
+        "reference": "runs/run-ca5b47a3f8b7/states/regression-validation/artifacts/validation-report.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/busy-villani-8d289b/.claude/runs/run-ca5b47a3f8b7/states/regression-validation/artifacts/validation-report.md",
+        "digest": "sha256:2b392c8f8365dd21c8cac729e8dcc742"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/orchestration-result.md",
+      "templates/validation-report.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/orchestration-result.md",
+      "templates/validation-report.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/fix-bug.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 177611,
+    "bytes_required": 16787,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": true,
+    "reason": "lessons from earlier runs hydrated per this run's knowledge_loop record (recorded at plan time)",
+    "store": "memory/lessons/lessons.store.json",
+    "store_digest": "sha256:8a376d60a1d7f6d1fa5be505f3455d2b",
+    "threshold": 2,
+    "matched": 0,
+    "lessons": []
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-ca5b47a3f8b7/states/closure-and-communication/artifacts/orchestration-result.md",
+      "runs/run-ca5b47a3f8b7/states/closure-and-communication/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any deployment, rollback, merge, publication, or release action",
+        "any command that modifies source, tests, committed run evidence, or a governance record",
+        "repository history rewriting",
+        "any command whose result is not recorded in the orchestration result"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution other than read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author requirements, scope, acceptance criteria, structural design, tests, or task breakdowns",
+      "take a gate decision that belongs to another role, or record one that was never taken",
+      "decide a gate that assesses evidence this agent produced",
+      "permit a phase transition whose governing gate carries no recorded decision",
+      "record a phase as complete without the gate decision and the evidence behind it",
+      "close a run carrying an unresolved critical or high escalation",
+      "perform a deployment, a rollback, a merge, or a publication action itself",
+      "record a deployment state, monitoring result, or rollback position it was not supplied",
+      "reclassify an escalation's severity, or a finding's, to reach a closure",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "reconstruct the phase progression a run actually executed, from its recorded evidence",
+        "verify that every transition a run took carries a recorded decision at the gate governing it",
+        "accept or refuse a handoff on whether the receiving phase's input contract is satisfied",
+        "record the gate decisions other roles took, naming the authority that took each one",
+        "hold a transition whose gate carries no recorded decision, and say what it is waiting for",
+        "raise and route an escalation this role cannot resolve within its own authority",
+        "record the follow-up actions, deferred scope, and technical debt delta a run leaves behind",
+        "record the deployment state, monitoring health, and rollback position supplied to it",
+        "state a closure position and recommend closure to the authority that decides it",
+        "decide a gate over evidence another role produced, where the gate matrix assigns it"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author requirements, scope, acceptance criteria, structural design, tests, or task breakdowns",
+        "take a gate decision that belongs to another role, or record one that was never taken",
+        "decide a gate that assesses evidence this agent produced",
+        "permit a phase transition whose governing gate carries no recorded decision",
+        "record a phase as complete without the gate decision and the evidence behind it",
+        "close a run carrying an unresolved critical or high escalation",
+        "perform a deployment, a rollback, a merge, or a publication action itself",
+        "record a deployment state, monitoring result, or rollback position it was not supplied",
+        "reclassify an escalation's severity, or a finding's, to reach a closure",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else in the repository, in any phase.",
+        "rationale": "A coordination record is worth what its independence is worth. This role's artifact is the evidence a Closure or Deployment Gate is decided on, and an agent that could change the code, the evidence, or another phase's artifact while accounting for the run would be reporting on work it had shaped itself. The account and the work stay in different hands."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "read-only inspection of run and repository state \u2014 recorded events, gate evidence, work-item status, artifact presence, and the framework's own verification output \u2014 run to ground a progression, handoff, or closure statement in recorded fact rather than in assertion",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any deployment, rollback, merge, publication, or release action",
+          "any command that modifies source, tests, committed run evidence, or a governance record",
+          "repository history rewriting",
+          "any command whose result is not recorded in the orchestration result"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same phase progression set in the same order, the same handoff set with the same acceptance states, the same escalation set with the same severities, the same follow-up action set, the same operational status, the same closure disposition, and the same declared artifact status.",
+      "identifierSchemes": {
+        "phaseProgression": "PH-<zero-padded-sequence>",
+        "handoffs": "HO-<zero-padded-sequence>",
+        "escalations": "ES-<zero-padded-sequence>",
+        "followUpActions": "FU-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Phase progression rows follow the run's dependency order, which is the order the routed workflow's Phase Model declares; a re-run may not reorder them into a different-looking progression. Handoffs follow the order of the transitions they carried. Escalations and follow-up actions are ordered by descending severity; ties break toward the lower identifier.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied plans, evidence, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "orchestration-result.md",
+    "artifact_path": "runs/run-ca5b47a3f8b7/states/closure-and-communication/artifacts/orchestration-result.md",
+    "template_ref": "templates/orchestration-result.md",
+    "contract_ref": "agents/orchestrator/output.md",
+    "quality_ref": "agents/orchestrator/quality.md",
+    "validator": "orchestration_result_validator",
+    "result_envelope_path": "runs/run-ca5b47a3f8b7/states/closure-and-communication/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-18T12:48:05Z",
+  "model_tier": {
+    "tier": "light",
+    "host_hint": "haiku",
+    "basis": "declared light for fix-bug/closure-and-communication in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 74871,
+    "modules_core_bytes": 39377,
+    "slice_all_bytes": 177611,
+    "slice_required_bytes": 16787,
+    "inputs_bytes": 0,
+    "upstream_full_bytes": 17095,
+    "upstream_read_first_bytes": 8740,
+    "task_context_bytes": 17261,
+    "fixed_bytes": 18439,
+    "legacy_estimate_bytes": 288016,
+    "progressive_estimate_bytes": 100604,
+    "legacy_estimate_tokens": 72004,
+    "progressive_estimate_tokens": 25151,
+    "savings_pct": 65.1
+  }
+}

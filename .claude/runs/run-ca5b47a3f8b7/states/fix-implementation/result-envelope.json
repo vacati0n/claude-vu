@@ -1,0 +1,116 @@
+{
+  "invocation_id": "inv-ca5b47a3f8b7-03-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-ca5b47a3f8b7/states/fix-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-1019",
+    "workflowPhase": "fix-implementation",
+    "status": "complete",
+    "verificationStatus": "verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 2,
+      "testEvidenceEntries": 9,
+      "deviations": 1,
+      "residualRisks": 3,
+      "openQuestions": 0
+    },
+    "evidenceTotals": {
+      "executed": 9,
+      "passed": 9,
+      "failed": 0,
+      "notRun": 0
+    },
+    "verificationStatusBasis": "Stage 7 of reasoning.md: every accepted element implemented, every evidence entry executed and passed, no area in scope left without evidence, so verified and complete.",
+    "baseline": {
+      "admissibility_module": "23/23 OK",
+      "full_suite": "567 run, 5 pre-existing failures/errors (test_demo_capture x3, test_knowledge backward compatibility x2)"
+    },
+    "after": {
+      "admissibility_module": "30/30 OK",
+      "verify_recovery": "74/74 RECOVERY PROVEN (isolated copy); X1 over 9 open envelopes across 4 runs",
+      "scan": "247 baseline envelopes, 0 ok flips; 2 reason changes (run-4c51600606df, now '<what happened>'); 2 newer envelopes of this run judged identically under the committed module",
+      "mutations": "5 of 5 mutants killed",
+      "full_suite": "574 run, the same 5 pre-existing failures, no new failure",
+      "self_validation": "implementation_report_validator PASS 32/32"
+    },
+    "qualityChecks": {
+      "run": 45,
+      "passed": 45,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "M1": "pass",
+        "M5": "pass",
+        "M7": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "M3": "pass",
+        "M2": "pass",
+        "K1": "pass",
+        "K2": "pass",
+        "M4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "B1": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "B4": "pass",
+        "B5": "pass",
+        "B6": "pass",
+        "B7": "pass",
+        "M6": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass"
+      }
+    },
+    "notMachineCheckable": {
+      "N1": "each Change Set row describes the change made at that path",
+      "N2": "each Test Evidence row exercises the entries in its Covers cell; T-001 and T-003 were executed against the committed and mutated copies of C-001 in an isolated tree",
+      "N3": "no side effect introduced into critical business logic; framework_runtime.py and every committed run artifact are untouched",
+      "N4": "one new function, placeholders, justified at ladder rung 7 because the accepted fix requires one shared definition and no lower rung spans split arguments; no new file, abstraction layer, or dependency"
+    }
+  },
+  "evidence_refs": [
+    "agents/dev-1-implement/manifest.yaml",
+    "agents/dev-1-implement/system.md",
+    "agents/dev-1-implement/identity.md",
+    "agents/dev-1-implement/reasoning.md",
+    "agents/dev-1-implement/output.md",
+    "agents/dev-1-implement/quality.md",
+    "runs/run-ca5b47a3f8b7/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    ".claude/runtime/verify_recovery.py",
+    "tests/test_clearing_action_admissibility.py",
+    "runs/run-ca5b47a3f8b7/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-ca5b47a3f8b7/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}
