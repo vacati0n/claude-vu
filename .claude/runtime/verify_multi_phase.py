@@ -11,6 +11,14 @@ Nothing here is asserted from a specification document. Every check reads live r
 final check is not a read at all -- it re-executes the runtime against the same request and
 proves that nothing changed.
 
+That re-execution runs against a disposable copy, never against the run itself. The runtime's
+replay path persists bookkeeping by design -- refreshed stamps, re-rendered guard details,
+appended replay records, a rebuilt `task-context.yaml` -- so replaying in place would rewrite
+committed run evidence while proving it unchanged. `M14` copies the working tree (git's view of
+it, leaving out every other run directory, `__pycache__`, and nested worktrees), runs the copied
+runtime with the copy as its root, fingerprints the copy before and after, and removes the copy in
+a `finally` block. The verdict is the one it always was; what the copy absorbs is reported by file.
+
 Usage:
     python .claude/runtime/verify_multi_phase.py [--run-id run-xxxxxxxxxxxx]
     python .claude/runtime/verify_multi_phase.py --no-replay      # skip the live re-run
@@ -113,13 +121,17 @@ def events_of(run_dir: Path) -> list:
     return [json.loads(l) for l in p.read_text(encoding="utf-8").splitlines() if l.strip()]
 
 
-def fingerprint(run_dir: Path, store) -> dict:
-    """Everything a second execution of the same request must leave untouched."""
+def fingerprint(run_dir: Path, store, claude: Path = CLAUDE) -> dict:
+    """Everything a second execution of the same request must leave untouched.
+
+    Artifact paths are run-relative to a framework root; `claude` is the root they resolve
+    against, which for `M14` is the disposable copy the replay ran in, never the original.
+    """
     arts = {}
     for i in store.state_items():
         c = i.get("completion") or {}
         if c.get("artifact_path"):
-            f = CLAUDE / c["artifact_path"]
+            f = claude / c["artifact_path"]
             arts[i["state_id"]] = fr.sha256_text(f.read_text(encoding="utf-8")) \
                 if f.exists() else None
     return {
@@ -544,7 +556,6 @@ def run_checks(run_dir: Path, replay: bool) -> Result:
               "skipped by --no-replay")
         return r
 
-    before = fingerprint(run_dir, store)
     cmds = [["plan", "--run-id", store.data["run_id"]]]
     for i in state_items:
         if i["status"] == se.COMPLETED:
@@ -552,23 +563,44 @@ def run_checks(run_dir: Path, replay: bool) -> Result:
                          "--phase", i["state_id"]])
             cmds.append(["complete", "--run-id", store.data["run_id"],
                          "--phase", i["state_id"]])
-    outputs = []
-    for c in cmds:
-        p = subprocess.run([sys.executable, str(HERE / "framework_runtime.py")] + c,
-                           capture_output=True, text=True, cwd=str(CLAUDE.parent))
-        outputs.append((c[0], c[-1], p.returncode))
-    after_store = se.StateStore.load(run_dir)
-    after = fingerprint(run_dir, after_store)
+    # The replay runs in a disposable copy: the copied runtime resolves its root from its own
+    # location, so every write it makes lands in the copy, which is removed whatever happens.
+    scratch = vsh.scratch_tree("m14-replay-", keep_run=run_dir.name)
+    try:
+        claude_copy = scratch / CLAUDE.name
+        copy_run = claude_copy / "runs" / run_dir.name
+        if run_dir.resolve() != (RUNS / run_dir.name).resolve() or not copy_run.exists():
+            # A run outside this framework's runs/ directory, or one git does not list, is
+            # copied from where it is.
+            vsh.remove_tree(copy_run)
+            shutil.copytree(run_dir, copy_run,
+                            ignore=shutil.ignore_patterns("__pycache__"))
+        copy_store = se.StateStore.load(copy_run)
+        before = fingerprint(copy_run, copy_store, claude_copy)
+        files_before = vsh.walk_snapshot(copy_run)
+        outputs = []
+        for c in cmds:
+            p = subprocess.run(
+                [sys.executable, str(claude_copy / "runtime" / "framework_runtime.py")] + c,
+                capture_output=True, text=True, cwd=str(scratch))
+            outputs.append((c[0], c[-1], p.returncode))
+        after_store = se.StateStore.load(copy_run)
+        after = fingerprint(copy_run, after_store, claude_copy)
+        rewritten = vsh.snapshot_changes(files_before, vsh.walk_snapshot(copy_run))
+    finally:
+        vsh.remove_tree(scratch)
     diffs = [k for k in before if before[k] != after[k]]
     failed_cmds = [o for o in outputs if o[2] != 0]
     replays = len(after_store.data.get("replays") or [])
     ok = not diffs and not failed_cmds
     r.add("M14", "re-running the same request produces no new side effect", ok,
-          f"re-executed {len(cmds)} runtime command(s) against the committed run; events "
-          f"{before['events']} -> {after['events']}, transitions {before['transitions']} -> "
-          f"{after['transitions']}, artifact digests unchanged, {replays} replay(s) recorded "
-          f"and suppressed"
-          if ok else f"changed: {diffs}; non-zero exits: {failed_cmds}")
+          f"re-executed {len(cmds)} runtime command(s) against a disposable copy of the "
+          f"committed run; events {before['events']} -> {after['events']}, transitions "
+          f"{before['transitions']} -> {after['transitions']}, artifact digests unchanged, "
+          f"{replays} replay(s) recorded and suppressed; bookkeeping rewritten in the copy: "
+          f"{', '.join(rewritten) or 'none'}"
+          if ok else f"changed: {diffs}; non-zero exits: {failed_cmds}; replayed on a "
+                     f"disposable copy, files rewritten there: {', '.join(rewritten) or 'none'}")
     return r
 
 

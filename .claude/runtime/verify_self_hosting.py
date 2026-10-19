@@ -25,6 +25,15 @@ of the default run, because every framework change must pass this verifier as re
 `FR-05`, and the first change under a new profile cannot be preceded by a second one. `S10`
 (`--release-checklist`) executes every command-mode item of the framework release checklist.
 
+Each item runs in its own disposable copy of the working tree, never in the repository: a
+verifier that writes, however legitimately, writes into a copy that is removed afterwards, so the
+checklist cannot rewrite committed run evidence. The copy is git's view of the repository
+(tracked plus untracked, not ignored), so uncommitted work is verified as it stands and `.git`,
+ignored files, and nested worktrees are left out. `S11`, asked with `S10`, proves it: a content
+digest of every file git lists in the repository is taken before and after the checklist and must
+not differ, and no item may change a file inside its own copy either, so isolation cannot hide a
+verifier that starts writing again. `S10` is decided exactly as before, by each item's exit code.
+
     python .claude/runtime/verify_self_hosting.py
     python .claude/runtime/verify_self_hosting.py --mode-evidence      # also asserts S9
     python .claude/runtime/verify_self_hosting.py --release-checklist  # also runs FR-nn commands
@@ -34,10 +43,16 @@ of the default run, because every framework change must pass this verifier as re
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
+import shutil
+import stat
 import subprocess
 import re
 import sys
+import tempfile
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -61,6 +76,155 @@ class Report:
     @property
     def passed(self):
         return all(c["result"] == "pass" for c in self.checks)
+
+
+# --------------------------------------------------------------------------- scratch trees
+
+# A sentinel every framework tree carries; a git listing without it did not list this tree.
+_RUNTIME_SENTINEL = "runtime/framework_runtime.py"
+# File copies and removals run on a small thread pool: on a host whose file system scans every
+# new file, copying the framework tree file by file costs about four times as long.
+_IO_WORKERS = min(16, (os.cpu_count() or 4) * 2)
+
+
+def git_paths(root: Path, *pathspec: str) -> list[str] | None:
+    """Files git sees under `root`: tracked plus untracked, ignored files left out.
+
+    Paths are posix and relative to `root`. `None` when git is unavailable or `root` is not
+    inside a git work tree, so the caller can fall back rather than read an empty listing as an
+    empty tree.
+    """
+    try:
+        proc = subprocess.run(["git", "ls-files", "-z", "--cached", "--others",
+                               "--exclude-standard", "--", *pathspec],
+                              cwd=str(root), capture_output=True)
+    except OSError:
+        return None
+    if proc.returncode != 0:
+        return None
+    names = proc.stdout.decode("utf-8", "surrogateescape").split("\0")
+    return sorted({n for n in names if n and not n.endswith("/")})
+
+
+def _framework_excluded(parts: tuple, keep_run: str | None, is_dir: bool = False) -> bool:
+    """Whether a path inside the framework tree (as parts) stays out of a scratch copy."""
+    if "__pycache__" in parts or (parts and parts[0] == "worktrees"):
+        return True
+    return (keep_run is not None and len(parts) >= 2 and (len(parts) > 2 or is_dir)
+            and parts[0] == "runs" and parts[1].startswith("run-") and parts[1] != keep_run)
+
+
+def remove_tree(path: Path) -> None:
+    """Remove a scratch tree, clearing read-only bits a Windows checkout may carry.
+
+    A tree that still cannot be removed is reported by path rather than raised, so a failed
+    cleanup never replaces the verdict of the work that ran inside it.
+    """
+    def _retry(func, p, *_):
+        os.chmod(p, stat.S_IWRITE)
+        func(p)
+
+    def _unlink(p):
+        try:
+            os.unlink(p)
+        except PermissionError:
+            _retry(os.unlink, p)
+        except OSError:
+            pass  # left for rmtree, which reports what it cannot remove
+
+    try:
+        files = [os.path.join(d, f) for d, _, fs in os.walk(path) for f in fs]
+        with ThreadPoolExecutor(_IO_WORKERS) as pool:
+            list(pool.map(_unlink, files))
+        if sys.version_info >= (3, 12):
+            shutil.rmtree(path, onexc=_retry)
+        else:
+            shutil.rmtree(path, onerror=_retry)
+    except FileNotFoundError:
+        pass
+    except OSError as exc:
+        print(f"warning: scratch tree {path} was not removed: {exc}", file=sys.stderr)
+
+
+def scratch_tree(prefix: str, *, keep_run: str | None = None) -> Path:
+    """A disposable copy of the working tree; returns the repository-root equivalent.
+
+    The copy is git's view of the repository: tracked files as they are on disk and untracked
+    files that are not ignored, so uncommitted work is copied as it stands while `.git`, ignored
+    files, and nested worktrees are not. Files outside the framework directory are copied too,
+    because verifiers read some of them (a change proposal's verification rows name `tests/`
+    scripts). Without git, or outside a work tree, only the framework directory is copied,
+    leaving out `__pycache__` and a top-level `worktrees`. With `keep_run`, every `runs/run-*`
+    directory except that one is left out; `runs/inputs` is always kept. The caller removes
+    the copy with `remove_tree`, in a `finally` block.
+    """
+    root = Path(tempfile.mkdtemp(prefix=prefix))
+    try:
+        listed = git_paths(REPO)
+        inner = CLAUDE.name + "/"
+        if listed and inner + _RUNTIME_SENTINEL in listed:
+            pairs = []
+            for rel in listed:
+                parts = tuple(rel.split("/"))
+                src = REPO / rel
+                if "__pycache__" in parts or not src.is_file() or (
+                        rel.startswith(inner)
+                        and _framework_excluded(parts[1:], keep_run)):
+                    continue
+                pairs.append((src, root.joinpath(*parts)))
+            for directory in sorted({t.parent for _, t in pairs}):
+                directory.mkdir(parents=True, exist_ok=True)
+            with ThreadPoolExecutor(_IO_WORKERS) as pool:
+                list(pool.map(lambda pair: shutil.copy2(*pair), pairs))
+        else:
+            def _ignore(directory, names):
+                rel = Path(directory).relative_to(CLAUDE).parts
+                return {n for n in names if _framework_excluded(
+                    rel + (n,), keep_run, (Path(directory) / n).is_dir())}
+            shutil.copytree(CLAUDE, root / CLAUDE.name, ignore=_ignore)
+    except BaseException:
+        remove_tree(root)
+        raise
+    return root
+
+
+def _digest_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def tree_snapshot(root: Path) -> dict:
+    """Path -> content digest for every file git lists under `root` (tracked and untracked).
+
+    A tracked file missing from disk maps to `None`, so a deletion is a difference too. Content
+    is compared rather than `git status` lines, because a second write to an already-modified or
+    untracked file leaves the status line unchanged. Without git, the framework tree is walked
+    instead, leaving out `__pycache__` and nested worktrees.
+    """
+    listed = git_paths(root)
+    if listed is None:
+        return {f"{CLAUDE.name}/{k}": v for k, v in walk_snapshot(root / CLAUDE.name).items()}
+    return {p: (_digest_file(root / p) if (root / p).is_file() else None) for p in listed}
+
+
+def walk_snapshot(root: Path) -> dict:
+    """Path -> content digest for every file under `root`, leaving out `__pycache__` and a
+    top-level `worktrees`. Used for scratch copies, which no git work tree lists, and for the
+    framework tree where git is unavailable."""
+    out = {}
+    if not root.exists():
+        return out
+    for dirpath, dirnames, filenames in os.walk(root):
+        rel = Path(dirpath).relative_to(root).parts
+        dirnames[:] = sorted(d for d in dirnames
+                             if d != "__pycache__" and not (not rel and d == "worktrees"))
+        for name in filenames:
+            out[Path(*rel, name).as_posix()] = _digest_file(Path(dirpath) / name)
+    return out
+
+
+def snapshot_changes(before: dict, after: dict) -> list[str]:
+    """Paths added, removed, or changed in content between two snapshots, sorted."""
+    return sorted(p for p in set(before) | set(after) if before.get(p, 0) != after.get(p, 0))
 
 
 # --------------------------------------------------------------------------- helpers
@@ -402,23 +566,49 @@ def main():  # noqa: C901 - a verifier is a flat sequence of checks by design
     if a.release_checklist:
         print()
         print("Framework release checklist execution")
+        tree_before = tree_snapshot(REPO)
         for it in items:
             if it["mode"] != "command":
                 executed_items.append({**it, "result": "inspection", "returncode": None})
                 continue
-            proc = subprocess.run(it["verification"], shell=True, cwd=REPO,
-                                  capture_output=True, text=True)
+            # A fresh copy per item: no item sees, or is judged by, another item's writes.
+            scratch = scratch_tree(f"checklist-{it['id'].lower()}-")
+            try:
+                copy_before = walk_snapshot(scratch)
+                proc = subprocess.run(it["verification"], shell=True, cwd=str(scratch),
+                                      capture_output=True, text=True)
+                copy_writes = snapshot_changes(copy_before, walk_snapshot(scratch))
+            finally:
+                remove_tree(scratch)
             ok = proc.returncode == 0
             tail = (proc.stdout.strip().splitlines() or [""])[-1][:96]
             executed_items.append({**it, "result": "pass" if ok else "fail",
-                                   "returncode": proc.returncode, "tail": tail})
+                                   "returncode": proc.returncode, "tail": tail,
+                                   "copy_writes": copy_writes})
             print(f"  [{'PASS' if ok else 'FAIL'}] {it['id']:<6} {it['obligation']:<9} {tail}")
+        tree_changed = snapshot_changes(tree_before, tree_snapshot(REPO))
         failed_mandatory = [i["id"] for i in executed_items
                             if i["obligation"] == "mandatory" and i["result"] == "fail"]
         r.add("S10", "every mandatory checklist item with a command passes",
               not failed_mandatory,
               f"{sum(1 for i in executed_items if i['result'] == 'pass')} executed item(s) "
               f"passed" if not failed_mandatory else f"failed: {failed_mandatory}")
+        copy_writers = [f"{i['id']}: {', '.join(i['copy_writes'][:5])}"
+                        + (f" (+{len(i['copy_writes']) - 5} more)"
+                           if len(i["copy_writes"]) > 5 else "")
+                        for i in executed_items if i.get("copy_writes")]
+        r.add("S11", "the release checklist leaves the working tree unchanged, and no item "
+              "writes inside its own copy of the working tree",
+              not tree_changed and not copy_writers,
+              f"{len(tree_before)} file(s) compared by content before and after; none changed; "
+              f"{sum(1 for i in executed_items if i['mode'] == 'command')} item(s) each ran in "
+              f"a disposable copy and left it unchanged"
+              if not tree_changed and not copy_writers else
+              "; ".join(([f"working tree changed: {tree_changed[:10]}"
+                          + (f" (+{len(tree_changed) - 10} more)"
+                             if len(tree_changed) > 10 else "")] if tree_changed else [])
+                        + ([f"wrote inside its copy: {'; '.join(copy_writers)}"]
+                           if copy_writers else [])))
 
     # ------------------------------------------------------------------ output
     print()

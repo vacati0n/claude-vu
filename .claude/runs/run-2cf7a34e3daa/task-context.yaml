@@ -1,0 +1,382 @@
+schema: framework.runtime/task-context.v1
+task_id: run-2cf7a34e3daa
+command: bugfix
+workflow: fix-bug v1.0.0
+run_status: Completed
+updated_at: '2026-10-19T04:18:24Z'
+objective: 'python .claude/runtime/verify_self_hosting.py --release-checklist is the command every framework change must pass
+  (CLAUDE.md, validation/framework-release-checklist.md). Running it on a clean checkout leaves the working tree dirty: committed
+  run evidence under .claude/runs/ is rewritten in place. Contributors therefore run the checklist on a temporary copy of
+  the tree so that they do not commit, or have to revert, changes to a past run. An independent review recorded this as DF-001.
+  DF-001 (medium, always): after python .claude/runtime/verify_self_hosting.py --release-checklist on a clean checkout, git
+  status --short reports M .claude/runs/run-c5a8d50d3238/state.json and M .claude/runs/ru...'
+inputs:
+- type: defect-report
+  reference: runs/inputs/release-checklist-mutates-committed-runs-defect-report.md
+  digest: sha256:1baebc70bf310ad1b1104d5370b40dac
+relevant_agents:
+- phase: triage-and-impact
+  agent: dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S11
+  - S12
+  - S02
+- phase: root-cause-analysis
+  agent: dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S08
+  - S12
+- phase: fix-implementation
+  agent: dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S12
+- phase: regression-validation
+  agent: qa
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S11
+- phase: closure-and-communication
+  agent: orchestrator
+  status: completed
+  required_skills:
+  - S10
+  - S11
+completed_phases:
+- phase: triage-and-impact
+  agent: dev-1-bug-analyst
+  artifact: runs/run-2cf7a34e3daa/states/triage-and-impact/artifacts/bug-analysis.md
+  digest: sha256:5f75a0fe451daa5ae814ac85088c3092
+  validation: pass 30/30
+  attempts: 1
+- phase: root-cause-analysis
+  agent: dev-1-bug-analyst
+  artifact: runs/run-2cf7a34e3daa/states/root-cause-analysis/artifacts/bug-analysis.md
+  digest: sha256:05e37128d1e13b6cd9b762e0b9a7f7af
+  validation: pass 30/30
+  attempts: 1
+- phase: fix-implementation
+  agent: dev-1-implement
+  artifact: runs/run-2cf7a34e3daa/states/fix-implementation/artifacts/implementation-report.md
+  digest: sha256:3d91a8444e03ab96d034cea520d96522
+  validation: pass 32/32
+  attempts: 1
+- phase: regression-validation
+  agent: qa
+  artifact: runs/run-2cf7a34e3daa/states/regression-validation/artifacts/validation-report.md
+  digest: sha256:8184c1971fd04323ad2ec13c4539755b
+  validation: pass 31/31
+  attempts: 1
+- phase: closure-and-communication
+  agent: orchestrator
+  artifact: runs/run-2cf7a34e3daa/states/closure-and-communication/artifacts/orchestration-result.md
+  digest: sha256:afaa01cda1b5ca878f73f0edfa60e75a
+  validation: pass 34/34
+  attempts: 1
+gates:
+- gate: Triage Gate
+  closes: triage-and-impact
+  decision: approved
+  owner_role: tech-lead
+  decided_by: omn-tech-lead subagent a02e34fe4fab1c375, recorded by session operator for vuhoangcao
+- gate: Fix Gate
+  closes: fix-implementation
+  decision: approved
+  owner_role: dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent ad05a67feccdff38f, recorded by session operator for vuhoangcao
+- gate: Verification Gate
+  closes: regression-validation
+  decision: approved
+  owner_role: dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent a99c3641e45ce401c, recorded by session operator for vuhoangcao
+- gate: Closure Gate
+  closes: closure-and-communication
+  decision: approved
+  owner_role: documentation
+  decided_by: omn-documentation subagent aa64082a8e1e45450, recorded by session operator for vuhoangcao
+artifacts:
+  triage-and-impact: runs/run-2cf7a34e3daa/states/triage-and-impact/artifacts/bug-analysis.md
+  root-cause-analysis: runs/run-2cf7a34e3daa/states/root-cause-analysis/artifacts/bug-analysis.md
+  fix-implementation: runs/run-2cf7a34e3daa/states/fix-implementation/artifacts/implementation-report.md
+  regression-validation: runs/run-2cf7a34e3daa/states/regression-validation/artifacts/validation-report.md
+  closure-and-communication: runs/run-2cf7a34e3daa/states/closure-and-communication/artifacts/orchestration-result.md
+parallel_groups:
+- - triage-and-impact
+- - root-cause-analysis
+- - fix-implementation
+- - regression-validation
+- - closure-and-communication
+risks:
+- 'User impact: Every contributor who runs the mandatory release step (E-010) must restore or isolate the committed run afterwards,
+  or risk committing rewritten...'
+- 'Business impact: No business impact statement was supplied, so the severity rests on technical impact alone (Q-005).'
+- 'Technical impact: Integrity of committed point-in-time run evidence. Each checklist run rewrites a past run''s state.json
+  and task-context.yaml: timestamps, g...'
+- 'Blast radius: (1) the release-checklist runner (E-009); (2) the multi-phase verifier''s M14 replay, for any run id passed,
+  or for the most recently modified r...'
+- 'User impact: Every contributor who runs the mandatory release step (E-010) must isolate or restore the committed run afterwards,
+  or risk committing rewritten...'
+- 'Technical impact: Integrity of committed point-in-time run evidence: each checklist run rewrites a past run''s state.json
+  and task-context.yaml with timestamp...'
+- 'R-001: test_demo_capture EndToEndEditTestCase fails on hosts whose ffmpeg rejects filter_complex_script | high | low'
+- 'R-002: The full checklist now runs inside unittest discover (468 s on this Windows host with per-item copies), len... |
+  high | medium'
+- 'R-003: The intermittent Windows os.replace save failure can make M14 fail inside its copy | low | low'
+- 'R-004: The git-unavailable fallback copies only the framework directory, so a verifier reading tests/ there would... |
+  low | medium'
+- 'R-005: A copy that cannot be removed is reported by a warning, not raised, so a temp copy can be left behind | low | low'
+- 'R-006: verify_self_hosting.py fails S8 until this run''s change proposal is written | high | low'
+- 'Accepted risk: None identified.'
+- 'Unmitigated risk: the mandatory release step takes 192 s on this host against 69 s for HEAD''s checklist measured here,
+  and the clean-tree test repeats it ins...'
+- 'Monitoring required: any non-empty git status or changed file digest after a checklist run; the S11 detail in the release-checklist
+  result of each change pro...'
+decisions:
+- 'Root cause statement: The M14 idempotency proof asserts "no new side effect" while replaying the runtime in place against
+  committed evidence, but the runtime...'
+- 'Why detection failed earlier: M14''s fingerprint() omits updated_at, guard details, the replays lists, and task-context.yaml,
+  and it reports the growing repla...'
+- 'C-001: Checklist trigger | The release checklist runs FR-11 against committed run-c5a8d50d3238, with the repository root
+  as cwd and no... | E-009, E-010'
+- 'C-002: In-place replay | M14 re-executes runtime plan, dispatch, and complete directly on the committed run directory;
+  skipping M14... | E-011, E-007'
+- 'C-003: Replay is not write-free | The runtime''s replay path rewrites state by design: plan re-saves every item with fresh
+  stamps and registry... | E-012, E-013, E-005'
+- 'C-004: Side-effect definition mismatch | M14''s fingerprint excludes every field the replay rewrites, so it passes while
+  the store is rewritten | E-011, E-008'
+- 'C-005: No tree-integrity check | The runner decides by return code only, and FR-11 is advisory, so the checklist completes
+  without detecting... | E-009, E-010, E-008'
+- 'C-006: Observed symptom | git status lists state.json and task-context.yaml of run-c5a8d50d3238 as modified after FR-11,
+  whether M14... | E-004, E-008'
+- 'Proposed fix: The release checklist and every verifier it runs must leave all tracked and untracked files under the repository
+  byte-identical. M14 must still...'
+- 'Alternative options: (a) Run the whole checklist in a disposable copy of the tree, as contributors do today: simplest,
+  but each verifier run alone still muta...'
+- 'Regression risk: medium'
+- 'Regression scope: M14, the only live idempotency proof, through the shared runtime commands plan/dispatch/complete and
+  the fixed .claude/runs root that the r...'
+- 'Root cause statement: The M14 idempotency proof asserts "no new side effect" while replaying the runtime in place against
+  committed run evidence, although th...'
+- 'Why detection failed earlier: M14''s fingerprint() omits updated_at, guard details, the replays lists, and task-context.yaml,
+  and reports the growing replay c...'
+- 'C-001: Checklist trigger | The release checklist runs FR-11 against committed run-c5a8d50d3238 with the repository root
+  as cwd and no... | E-009, E-010, E-018, E-020'
+- 'C-002: In-place replay | M14 re-executes runtime plan, dispatch, and complete on the run directory the runtime resolves
+  from its own... | E-011, E-007, E-024'
+- 'C-003: Replay is not write-free | The runtime''s replay path rewrites state by design: re-saved items with fresh stamps
+  and registry-rendered... | E-012, E-013, E-005'
+- 'C-004: Side-effect definition mismatch | M14''s fingerprint excludes every field the replay rewrites, so M14 passes while
+  the store is rewritten | E-011, E-008, E-019'
+- 'C-005: No tree-integrity check | The runner decides by return code only, FR-11 is advisory, and no test observes the tree
+  afterwards, so the... | E-009, E-010, E-030'
+- 'C-006: Observed symptom | git status lists state.json and task-context.yaml of run-c5a8d50d3238 as modified after FR-11
+  or the full c... | E-004, E-008, E-019, E-020'
+- 'Proposed fix: The release checklist and every verifier it runs, including each run alone, must leave every tracked and
+  untracked file byte-identical. Strateg...'
+- 'Alternative options: (a) Run the whole checklist in a copy only: simplest, but each verifier run alone still mutates evidence.
+  (b) Snapshot and restore the r...'
+- 'Regression scope: M14, the only live idempotency proof, through the runtime commands plan/dispatch/complete and the root
+  the runtime resolves from its file l...'
+- 'V-001: The M14 copy holds git''s view of the whole repository minus other run directories, not only runtime, regist...
+  | Triage Gate condition: copy holding runtime, registry and run | The root-cause analysis showed such a minimal copy cannot
+  plan (command specification unresolved) while the...'
+- 'V-002: The checklist fails on any content-digest difference over every git-listed file, and on writes inside an it... |
+  Triage Gate condition: fail the checklist on any git status difference | Porcelain lines miss a second write to an already-modified
+  or untracked file; content comparison catches ev...'
+- 'V-003: Each checklist command item gets its own fresh copy rather than one copy shared by the whole checklist (C-002) |
+  RCA Fix Strategy part (b), copy granularity | No item can see or be judged by another item''s writes; cost measured at about
+  15 s per item on this host (c...'
+- 'V-004: The two regression test modules are written under tests/, outside the dispatch prompt''s .claude/ write line...
+  | dispatch permitted-writes line | The manifest''s repository write scope is the repository minus runs/ and proposals/;
+  CI discovers tests only...'
+- 'V-005: The Stage 2 baseline was not executed before the code was written, because the first dispatch was interrupt... |
+  reasoning procedure Stage 2, baseline before change | Attribution of the only post-change failures and the fail-before witness
+  were both obtained by running HEAD...'
+validation_requirements:
+  test_focus:
+  - 'Verification steps: The reproduction inverted. From a clean tree, run verify_multi_phase.py --run-id run-c5a8d50d3238
+    and then the full verify_self_hosting.p...'
+  - 'Regression tests added: an automated test that runs the release checklist and asserts that git status --porcelain --untracked-files=all
+    is identical before a...'
+  - 'Monitoring signals after release: Any non-empty git status after a checklist run; the replay-record count in committed
+    run state.json files across commits (a...'
+  - 'Verification steps: The reproduction inverted, run from a clean real tree and repeated with an existing dirty and untracked
+    set (E-029). Run verify_multi_pha...'
+  - 'Regression tests added: the checklist run asserting an unchanged tree by file content, not porcelain only (E-028), and
+    independent of the checklist verdict,...'
+  - 'Monitoring signals after release: Any tree change after a checklist run; replay-record count in committed run state.json
+    files across commits (growth beyond...'
+  evidence:
+  - 'T-001: M14 replay leaves run-c5a8d50d3238 byte-identical and its copy removed; pre-fix witness: HEAD''s verifier ru...
+    | regression | C-001, C-002, C-004'
+  - 'T-002: a transition appended in the copy during replay still fails M14; committed run untouched | regression | C-001,
+    C-004'
+  - 'T-003: an artifact rewritten in the copy during replay fails M14 on artifact_digests, proving the fingerprint read...
+    | regression | C-001, C-004'
+  - 'T-004: a replay command that raises still leaves no copy behind and the committed run untouched | unit | C-001, C-002,
+    C-004'
+  - 'T-005: a raising recovery scenario still removes injected inputs and runs, run in a scratch copy | regression | C-002,
+    C-003, C-004'
+  - 'T-006: full checklist: every listed file byte-identical, git status unchanged, S11 pass, every command item ran wi...
+    | end-to-end | C-002, C-005, C-007'
+  - 'T-007: verifier in the real tree: 15/15, M14 detail names the disposable copy and the rewritten state.json, task-c...
+    | end-to-end | C-001, C-002'
+  - 'T-008: recovery proof 74/74 with injected runs removed; content digest of all git-listed files unchanged | end-to-end
+    | C-003'
+  - 'T-009: default self-hosting proof: 7/8, only S8 fails because this in-flight run has no change proposal yet; tree...
+    | regression | C-002'
+  - 'T-010: manifest, registry coverage, validator coverage, and vertical-slice proofs each exit 0; git status unchanged |
+    static | C-002, C-006, C-007'
+  - 'T-011: regression suite, 572 tests: 569 pass; 3 fail in test_demo_capture EndToEndEditTestCase (host ffmpeg reject...
+    | regression | C-001, C-002, C-003, C-006'
+  verification:
+  - 'Verification method: The reproduction inverted on this Windows host. A pre-fix witness was run first: HEAD extracted
+    with git archive into a scratch director...'
+  - 'Commands executed: python -m unittest tests.test_verifier_isolation -v (5/5 OK, 33 s); python -m unittest tests.test_release_checklist_clean_tree
+    -v (host, 4...'
+  - 'Result summary: 11 evidence entries executed, 9 passed, 2 failed; both failures are pre-existing and unrelated to the
+    change set (T-009 the in-flight run''s m...'
+  - 'Unverified areas: Linux and macOS hosts and CI runners (all runs were on one Windows host); the git-unavailable fallback
+    paths of scratch_tree and tree_snaps...'
+  acceptance_criteria:
+  - 'AC-001: Running the release checklist leaves the working tree exactly as it found it: no modified, added or deleted...
+    | defect report, Expected behaviour bullet 1 | end-to-end'
+  - 'AC-002: Each verifier the checklist runs can still be run on its own, with the same arguments, and still proves wha...
+    | defect report, Expected behaviour bullet 2 | end-to-end'
+  - 'AC-003: An automated test runs the release checklist and asserts that git status is unchanged afterwards. | defect report,
+    Expected behaviour bullet 3 | end-to-end'
+open_questions:
+- 'Q-001: Do any items other than FR-11 write under the repository during a full checklist run? This was reported as... |
+  no | qa'
+- 'Q-002: Were the 253 replay records and the prefixed guard details committed at HEAD (E-014) produced by earlier ve... |
+  no | tech-lead'
+- 'Q-003: Does an exception inside a verify_recovery.py scenario leave injected runs and inputs under .claude/runs/?... |
+  no | qa'
+- 'Q-004: Separate defect to route: StateStore.save intermittently fails os.replace with PermissionError on Windows,... |
+  no | orchestrator'
+- 'Q-005: No business impact statement was supplied; confirm the business consequence that the technically derived se... |
+  no | product-owner'
+- 'Q-001: Answered in this phase: no item other than FR-11 writes under the repository, alone or in a full checklist... |
+  no | qa'
+- 'Q-002: Were the 253 replay records committed at HEAD (E-014) produced by earlier verifier replays, and should comm... |
+  no | tech-lead'
+- 'Q-003: Answered in this phase: yes, a raised verify_recovery.py scenario leaves the injected input and run behind... |
+  no | qa'
+- 'Q-005: No business impact statement was supplied; confirm the business consequence the technically derived severit... |
+  no | product-owner'
+- 'Q-006: The Triage Gate condition names a copy holding runtime, registry, and run; evidence shows that copy cannot... |
+  no | tech-lead'
+- 'Q-007: The Triage Gate condition fails on a git status difference; porcelain lines miss repeat writes to dirty or... |
+  no | tech-lead'
+- 'Q-001: Confirm the amended M14 copy scope (whole repository view minus other runs) in place of the gate''s runtime-...
+  | no | tech-lead'
+- 'Q-002: Confirm the content-digest comparison (plus no writes inside copies) in place of the gate''s git status wording
+  | no | tech-lead'
+- 'Q-003: Should the multi-minute checklist test run in the default unittest discover CI path, or be gated or moved | no |
+  qa'
+- 'Q-004: Route the intermittent Windows os.replace PermissionError in the state store save as a separate defect | no | orchestrator'
+- 'Q-005: Keep or re-baseline the replay records already committed in run-c5a8d50d3238 under the point-in-time eviden... |
+  no | tech-lead'
+- 'Q-001: Should a committed test induce a write and assert that S11 fails, so that S11 cannot be disabled unnoticed (Fix
+  Gate finding F-001); routes to tech-lead.'
+- 'Q-002: Should S11 also compare file mode on hosts that track it, so that its check covers every git status difference (Fix
+  Gate finding F-003); routes to arc...'
+- 'Q-003: Is a release checklist of 192 s against 69 s at HEAD on this host, repeated inside both CI unit jobs, an acceptable
+  cost for the mandatory release ste...'
+- 'Q-001: The fix-bug Phase Model lists known issue status as an input of this phase, and none was supplied; HO-004 is accepted
+  on the validation report alone....'
+- 'Q-002: No business impact statement was supplied, so DF-001''s severity rests on technical impact alone (a triage open
+  question, still unanswered). Confirm th...'
+changed_files:
+- .claude/runtime/verify_multi_phase.py (modified)
+- .claude/runtime/verify_self_hosting.py (modified)
+- .claude/runtime/verify_recovery.py (modified)
+- tests/test_verifier_isolation.py (added)
+- tests/test_release_checklist_clean_tree.py (added)
+- .claude/runtime/README.md (modified)
+- .claude/validation/framework-release-checklist.md (modified)
+verdicts:
+- 'Decision: pass'
+- 'Rationale: The Stage 8 first row applies: no defect is open at any severity and all three criteria are met on checks executed
+  in this phase, with the pre-fix...'
+- 'Blocking defects outstanding: None identified.'
+- 'Readiness recommendation: recommend that dev-2-reviewer, who decides the Verification Gate under producer exclusion, treat
+  this report as supporting approval...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:fix-implementation
+      term: migration
+    - source: artifact:closure-and-communication
+      term: database
+    performance:
+    - source: artifact:fix-implementation
+      term: profile
+    - source: artifact:regression-validation
+      term: performance
+    - source: artifact:closure-and-communication
+      term: performance
+    security:
+    - source: artifact:triage-and-impact
+      term: injection
+    - source: artifact:root-cause-analysis
+      term: injection
+    - source: artifact:regression-validation
+      term: security
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:defect-report
+  - artifact:triage-and-impact
+  - artifact:root-cause-analysis
+  - artifact:fix-implementation
+  - artifact:regression-validation
+  - artifact:closure-and-communication
+relevant_skills:
+  triage-and-impact:
+    S11: required
+    S12: required
+    S02: required
+  root-cause-analysis:
+    S03: required
+    S06: required
+    S08: required
+    S12: required
+  fix-implementation:
+    S03: required
+    S06: required
+    S10: required
+    S12: required
+  regression-validation:
+    S07: required
+    S09: required
+    S11: required
+  closure-and-communication:
+    S10: required
+    S11: required
+repository_context:
+  relevant_modules: []
+  relevant_files:
+  - .claude/runtime/verify_multi_phase.py (modified)
+  - .claude/runtime/verify_self_hosting.py (modified)
+  - .claude/runtime/verify_recovery.py (modified)
+  - tests/test_verifier_isolation.py (added)
+  - tests/test_release_checklist_clean_tree.py (added)
+  - .claude/runtime/README.md (modified)
+  - .claude/validation/framework-release-checklist.md (modified)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path

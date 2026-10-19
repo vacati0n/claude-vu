@@ -1,0 +1,168 @@
+{
+  "invocation_id": "inv-2cf7a34e3daa-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-2cf7a34e3daa/states/root-cause-analysis/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisId": "BA-run-2cf7a34e3daa-rca-001",
+    "defectReference": "DF-001",
+    "analysisBasis": "root-cause",
+    "workflowPhase": "root-cause-analysis",
+    "supersedes": "runs/run-2cf7a34e3daa/states/triage-and-impact/artifacts/bug-analysis.md",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "status": "provisional",
+    "statusBasis": "Stage 9 first matching row: business impact unquantified, severity on technical impact alone (Q-005). Chain closed on a condition; all alternatives eliminated (Q-001 and Q-003 answered with E-018, E-020, E-022); no dependent step below high.",
+    "counts": {
+      "evidenceRecords": 30,
+      "causalSteps": 6,
+      "causalStepsByConfidence": {
+        "high": 6,
+        "medium": 0,
+        "low": 0
+      },
+      "openQuestions": 7,
+      "blockingOpenQuestions": 0,
+      "answeredInThisPhase": [
+        "Q-001",
+        "Q-003"
+      ]
+    },
+    "qualityChecks": {
+      "run": 69,
+      "passed": 69,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "S9": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "D7": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "A1": "pass",
+        "B4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "V4": "pass",
+        "V5": "pass",
+        "B1": "pass",
+        "V6": "pass",
+        "V7": "pass",
+        "V8": "pass",
+        "V9": "pass",
+        "V10": "pass",
+        "V11": "pass",
+        "V12": "pass",
+        "V13": "pass",
+        "V14": "pass",
+        "V15": "pass",
+        "V16": "pass",
+        "V17": "pass",
+        "V18": "pass",
+        "V19": "pass",
+        "V20": "pass",
+        "V21": "pass",
+        "V22": "pass",
+        "V23": "pass",
+        "V24": "pass",
+        "V25": "pass",
+        "V26": "pass",
+        "V27": "pass",
+        "V28": "pass",
+        "B5": "pass",
+        "V29": "pass",
+        "V30": "pass",
+        "V31": "pass",
+        "V32": "pass",
+        "V33": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "A4": "pass",
+        "A5": "pass",
+        "A6": "pass",
+        "A7": "pass",
+        "A8": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass",
+        "C6": "pass",
+        "C7": "pass"
+      }
+    },
+    "validationEngine": {
+      "command": "python <framework-root>/runtime/bug_analysis_validator.py <artifact> --envelope <invocation-envelope>",
+      "result": "PASS",
+      "checks": "30/30"
+    },
+    "obligations": {
+      "N1": "met: the root cause names a contract mismatch (in-place replay asserted side-effect-free while the replay path persists bookkeeping the fingerprint excludes) plus a missing isolation/integrity condition, not the files where the diff appears",
+      "N2": "met: every causal step cites high-confidence evidence run or read in this run; reported items E-001 and E-002 are low and support no step",
+      "N3": "met: radius names runner, M14 replay, shared state store, committed run evidence (FR-11 sole writer), committed replay records, version-control boundary, temp-file residue, and reproduced recovery residue"
+    },
+    "gateConditionFindings": {
+      "Q-001": "closed: in a git-initialised disposable copy of the working tree, FR-01..FR-05 alone and the full --release-checklist were run with git status and a full content-hash manifest before/after; only FR-11 writes, exactly state.json and task-context.yaml of run-c5a8d50d3238",
+      "Q-003": "confirmed: cleanup is not in finally (source) and an induced scenario exception left 18 untracked files (input + injected run run-62db758f9671) in the copy",
+      "strategyA": "validated with amendments: copy must be the whole framework tree minus other runs and nested worktrees (runtime+registry+run cannot plan, E-023/E-024); fingerprint and change report must read the copy root, not the module-level root (E-025)",
+      "strategyB": "validated with amendments: copy git's view of the tree (tracked + untracked-not-ignored) to avoid nested worktrees (E-027); verdicts preserved (no git use, E-026, parity E-021); compare content not porcelain lines (E-028); also fail on writes inside the copy so isolation does not mask a regression",
+      "strategyC": "validated with amendments: assert by content and independent of checklist verdict (S8 fails for in-flight runs, E-021); ~90 s added to CI unittest discover (E-020, E-030); non-bookkeeping detection feasible via temp-tree fixture (E-027); add recovery-cleanup-on-exception test (E-022)"
+    },
+    "reproductionAttempts": [
+      {
+        "where": "disposable copy",
+        "command": "verify_multi_phase.py --run-id run-c5a8d50d3238",
+        "exit": 0,
+        "m14": "PASS",
+        "treeChanged": true
+      },
+      {
+        "where": "disposable copy",
+        "command": "verify_self_hosting.py --release-checklist",
+        "exit": 1,
+        "s10": "FAIL on FR-05/FR-06 (S8, in-flight run)",
+        "treeChanged": true,
+        "changedFiles": 2
+      }
+    ],
+    "commandsInRealTree": [
+      "git status (read-only)",
+      "verify_self_hosting.py without --release-checklist (shown non-writing in the copy; real git status unchanged)",
+      "bug_analysis_validator.py (read-only)"
+    ],
+    "disposableCopies": "three copies under the host temp directory, all deleted; no write under the repository besides the two permitted paths",
+    "separateDefectsToRoute": [
+      "Q-004: intermittent PermissionError on os.replace in StateStore.save on Windows"
+    ],
+    "fullChecklistRerun": true
+  },
+  "evidence_refs": [
+    "agents/dev-1-bug-analyst/system.md",
+    "agents/dev-1-bug-analyst/identity.md",
+    "agents/dev-1-bug-analyst/reasoning.md",
+    "agents/dev-1-bug-analyst/output.md",
+    "agents/dev-1-bug-analyst/quality.md",
+    "runs/run-2cf7a34e3daa/states/root-cause-analysis/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-2cf7a34e3daa/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-2cf7a34e3daa/states/root-cause-analysis/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

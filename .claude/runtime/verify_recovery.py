@@ -1203,42 +1203,45 @@ def main():
     print(f"  retry profile: {rp.RETRY_PROFILE}")
     print(f"  conforming source artifact: .claude/"
           f"{GOOD_SOURCE.relative_to(CLAUDE).as_posix()}")
-    results = [scenario_a(), scenario_b(), scenario_c(), scenario_d(), scenario_policy()]
-    admissibility = Result("Clearing actions -- every open envelope of every induced run names "
-                           "an action admissible for its work item")
-    check_clearing_actions(admissibility, "X1", [
-        run_id_for(INPUTS / f"recovery-injection-{slug}.md")
-        for slug in ("repaired", "exhausted", "policy", "rollback")])
-    results.append(admissibility)
-    for res in results:
-        print("\n".join(res.render()))
+    # Cleanup runs in `finally`: a scenario that raises must still remove the inputs and runs
+    # it injected, or they are left under runs/ beside committed evidence.
+    try:
+        results = [scenario_a(), scenario_b(), scenario_c(), scenario_d(), scenario_policy()]
+        admissibility = Result("Clearing actions -- every open envelope of every induced run "
+                               "names an action admissible for its work item")
+        check_clearing_actions(admissibility, "X1", [
+            run_id_for(INPUTS / f"recovery-injection-{slug}.md")
+            for slug in ("repaired", "exhausted", "policy", "rollback")])
+        results.append(admissibility)
+        for res in results:
+            print("\n".join(res.render()))
 
-    total = sum(len(r.checks) for r in results)
-    passed = sum(1 for r in results for c in r.checks if c["result"] == "pass")
-    print()
-    print("-" * 100)
-    print(f"{passed}/{total} checks passed -- "
-          f"{'RECOVERY PROVEN' if passed == total else 'NOT PROVEN'}")
+        total = sum(len(r.checks) for r in results)
+        passed = sum(1 for r in results for c in r.checks if c["result"] == "pass")
+        print()
+        print("-" * 100)
+        print(f"{passed}/{total} checks passed -- "
+              f"{'RECOVERY PROVEN' if passed == total else 'NOT PROVEN'}")
 
-    if a.json_out:
-        Path(a.json_out).write_text(json.dumps({
-            "schema": "framework.runtime/recovery-verification.v1",
-            "verified_at": rp.iso(rp.now()),
-            "runtime_version": fr.RUNTIME_VERSION,
-            "retry_profile": rp.RETRY_PROFILE,
-            "result": "pass" if passed == total else "fail",
-            "checks_run": total,
-            "checks_passed": passed,
-            "scenarios": [{"title": r.title, "checks": r.checks} for r in results],
-        }, indent=2), encoding="utf-8")
-
-    if not a.keep:
-        for slug in ("repaired", "exhausted", "policy", "rollback"):
-            path = INPUTS / f"recovery-injection-{slug}.md"
-            if path.exists():
-                reset_run(run_id_for(path), path)
-                path.unlink()
-        print("injected runs and inputs removed; pass --keep to retain them as evidence")
+        if a.json_out:
+            Path(a.json_out).write_text(json.dumps({
+                "schema": "framework.runtime/recovery-verification.v1",
+                "verified_at": rp.iso(rp.now()),
+                "runtime_version": fr.RUNTIME_VERSION,
+                "retry_profile": rp.RETRY_PROFILE,
+                "result": "pass" if passed == total else "fail",
+                "checks_run": total,
+                "checks_passed": passed,
+                "scenarios": [{"title": r.title, "checks": r.checks} for r in results],
+            }, indent=2), encoding="utf-8")
+    finally:
+        if not a.keep:
+            for slug in ("repaired", "exhausted", "policy", "rollback"):
+                path = INPUTS / f"recovery-injection-{slug}.md"
+                if path.exists():
+                    reset_run(run_id_for(path), path)
+                    path.unlink()
+            print("injected runs and inputs removed; pass --keep to retain them as evidence")
     return 0 if passed == total else 1
 
 

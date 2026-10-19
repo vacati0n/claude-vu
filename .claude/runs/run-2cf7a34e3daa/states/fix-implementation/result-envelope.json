@@ -1,0 +1,117 @@
+{
+  "invocation_id": "inv-2cf7a34e3daa-03-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-2cf7a34e3daa/states/fix-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-1019",
+    "workflowPhase": "fix-implementation",
+    "status": "provisional",
+    "verificationStatus": "partially-verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 7,
+      "testEvidenceEntries": 11,
+      "deviations": 5,
+      "residualRisks": 6,
+      "openQuestions": 5
+    },
+    "evidenceTotals": {
+      "executed": 11,
+      "passed": 9,
+      "failed": 2,
+      "notRun": 0
+    },
+    "verificationStatusBasis": "Stage 7 of reasoning.md: every accepted element implemented; two evidence entries fail (T-009 S8 for the in-flight run's missing change proposal, T-011 three pre-existing test_demo_capture failures identical at HEAD) and named areas lack evidence, so partially-verified and provisional.",
+    "qualityChecks": {
+      "run": 45,
+      "passed": 45,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "M1": "pass",
+        "M5": "pass",
+        "M7": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "M3": "pass",
+        "M2": "pass",
+        "K1": "pass",
+        "K2": "pass",
+        "M4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "B1": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "B4": "pass",
+        "B5": "pass",
+        "B6": "pass",
+        "B7": "pass",
+        "M6": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass"
+      },
+      "validationEngine": "implementation_report_validator.py with the invocation envelope: PASS 32/32",
+      "notes": [
+        "E1: T-006 (full checklist test, 468 s) was executed by the host after the change in this phase's first dispatch; verifier code is unchanged since, so it was not re-run. All other commands were executed in this resumption.",
+        "E3: the pre-change baseline was not taken before coding (interrupted first dispatch); reconstructed by running HEAD from a git archive copy (pre-fix M14 witness; test_demo_capture EndToEndEditTestCase same 3 failures). Recorded as V-005.",
+        "B2: tests/ files are outside the dispatch prompt's .claude/** line but inside the manifest repositoryWrites scope (repository minus runs/** and proposals/**); recorded as V-004.",
+        "B6: git status --porcelain --untracked-files=all and a sha256 digest of every git-listed file were identical before and after every command run in the real tree; no committed run was modified.",
+        "Resumption change: added test_a_rewritten_artifact_in_the_copy_still_fails_m14 to tests/test_verifier_isolation.py (Validation Plan: induced artifact rewrite must still fail M14); 5/5 OK.",
+        "memory/lessons/lessons.store.json is modified in the working tree by the runtime lesson harvest before dispatch (digest equals memory_slice.store_digest); not part of this change."
+      ]
+    },
+    "notMachineCheckable": {
+      "N1": "each Change Set row describes the change made at that path, checked against git diff and the two new test files",
+      "N2": "each Test Evidence row exercises the entries in its Covers cell; T-001 additionally has a pre-fix witness from a HEAD archive copy",
+      "N3": "no side effect introduced into critical business logic; the runtime and state engine are untouched and every verifier write lands in a removed temp copy",
+      "N4": "no new dependency or runtime module; helpers reuse the standard library and git listing inside the existing verify_self_hosting.py (rungs 2, 3, 5); the two new test modules are rung 7 because no existing test covers the checklist or M14 replay"
+    }
+  },
+  "evidence_refs": [
+    "agents/dev-1-implement/manifest.yaml",
+    "agents/dev-1-implement/system.md",
+    "agents/dev-1-implement/reasoning.md",
+    "agents/dev-1-implement/output.md",
+    "agents/dev-1-implement/quality.md",
+    "runs/run-2cf7a34e3daa/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    ".claude/runtime/verify_multi_phase.py",
+    ".claude/runtime/verify_self_hosting.py",
+    ".claude/runtime/verify_recovery.py",
+    "tests/test_verifier_isolation.py",
+    "tests/test_release_checklist_clean_tree.py",
+    ".claude/runtime/README.md",
+    ".claude/validation/framework-release-checklist.md",
+    "runs/run-2cf7a34e3daa/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-2cf7a34e3daa/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

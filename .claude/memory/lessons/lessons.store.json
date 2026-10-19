@@ -294,6 +294,32 @@
       "status": "candidate"
     },
     {
+      "artifact_type": "review-package.md",
+      "check_description": "Every referenced identifier is defined in its declaring section",
+      "check_id": "C6.2",
+      "check_severity": "Blocking",
+      "distinct_runs": 1,
+      "evidence": [
+        "runs/run-5df08e171670/events.jsonl#E-0056"
+      ],
+      "evidence_state": "current",
+      "fingerprint": "check:review-package.md:C6.2",
+      "first_seen": "2026-10-17T13:11:37Z",
+      "gate": null,
+      "history": [],
+      "kind": "validation-check",
+      "last_seen": "2026-10-17T13:11:37Z",
+      "lesson_id": "L-a56f9e6931",
+      "occurrences": 1,
+      "owner": "tech-lead",
+      "phases": [
+        "quality-review"
+      ],
+      "rationale": "harvested from recorded run evidence: the Validation Engine rejected this artifact type on this check",
+      "remedy": null,
+      "status": "candidate"
+    },
+    {
       "artifact_type": "scope-definition.md",
       "check_description": "No model, vendor, or provider named",
       "check_id": "C3.2",
@@ -1123,6 +1149,33 @@
       "owner": "tech-lead",
       "phases": [
         "quality-review"
+      ],
+      "rationale": "harvested from recorded run evidence: this gate rejected the evidence of the phase it closes",
+      "remedy": null,
+      "status": "candidate"
+    },
+    {
+      "artifact_type": "validation-report.md",
+      "check_description": "Gate 'Verification Gate' rejected the evidence of phase 'regression-validation' and the phase was sent back for rework",
+      "check_id": null,
+      "check_severity": null,
+      "distinct_runs": 1,
+      "evidence": [
+        "runs/run-e7bf0d73027a/events.jsonl#E-0046",
+        "runs/run-e7bf0d73027a/recovery-ledger.json#FE-run-e7bf0d73027a-Verification Gate-02"
+      ],
+      "evidence_state": "current",
+      "fingerprint": "gate:Verification Gate:regression-validation",
+      "first_seen": "2026-10-18T03:52:13Z",
+      "gate": "Verification Gate",
+      "history": [],
+      "kind": "gate-rejection",
+      "last_seen": "2026-10-18T03:52:13Z",
+      "lesson_id": "L-504beb7a6e",
+      "occurrences": 1,
+      "owner": "tech-lead",
+      "phases": [
+        "regression-validation"
       ],
       "rationale": "harvested from recorded run evidence: this gate rejected the evidence of the phase it closes",
       "remedy": null,
