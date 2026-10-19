@@ -1213,7 +1213,7 @@ class DocumentationTestCase(unittest.TestCase):
             self.assertIn(needed, runtime_md)
 
     def test_runtime_version_rose(self):
-        self.assertEqual(fr.RUNTIME_VERSION, "0.10.0")
+        self.assertEqual(fr.RUNTIME_VERSION, "0.10.1")
 
 
 if __name__ == "__main__":

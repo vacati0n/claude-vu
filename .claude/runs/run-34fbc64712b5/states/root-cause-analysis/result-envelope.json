@@ -1,0 +1,79 @@
+{
+  "invocation_id": "inv-34fbc64712b5-02-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-34fbc64712b5/states/root-cause-analysis/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "root-cause",
+    "workflow": "fix-bug",
+    "phase": "root-cause-analysis",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "declaredStatus": "provisional",
+    "supersedes": "runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md",
+    "counts": {
+      "evidenceRecords": 22,
+      "causalSteps": 4,
+      "causalStepsByConfidence": {"high": 4, "medium": 0, "low": 0},
+      "evidenceByConfidence": {"high": 20, "medium": 1, "low": 1},
+      "openQuestions": 5,
+      "openQuestionsBlocking": 0,
+      "openQuestionsResolvedThisPhase": 2
+    },
+    "statusBasis": "reasoning.md Stage 9, first matching row: business impact was unquantified and severity rests on technical impact alone (Q-003), therefore provisional. Reproduction is deterministic; the chain closes on a condition (C-002, a contract mismatch); the alternatives (placeholder unavoidable, X1 over-strict, quoting suffices, non-retry branch live) are eliminated by E-019, E-007/E-021, E-020, and E-016/E-017; every step is high.",
+    "severityBasis": "reasoning.md Stage 5: an emitted recovery command fails as written on bash, PowerShell, and cmd.exe (E-007, E-021), a secondary path with an acceptable workaround (E-019); no state or data mutation. Unchanged from triage. The reachability finding (E-016) narrows the live route to the retry reclaim but leaves the impact unchanged; the reporter's value (E-001, low) did not set it.",
+    "reproducibilityBasis": "Reproduced first-hand in this phase across every policy class with and without guard (E-004, E-005, E-006), in three shells (E-007, E-021), and end to end in a disposable copy (E-018, E-019), with one precondition varied at a time.",
+    "supersessionChanges": [
+      "Triage evidence E-010 no longer claims the recovery controller emits non-guard awaiting_recovery_task envelopes; E-016 shows no current emitter reaches that branch.",
+      "Triage Q-001 (non-POSIX shells) resolved by E-021; triage Q-002 (X1 live or latent) resolved by E-016/E-017: latent.",
+      "New separate defect recorded as Q-004: the retry reclaim reclaims nothing on a retrying item (E-018)."
+    ],
+    "gateConditionsApplied": "Triage Gate conditions read first-hand from state.json (E-022): the fix strategy changes only clearing_action, takes no X1 exemption, leaves the 33 committed entries as recorded, names builder-driven tests including the retry reclaim in the new module tests/test_release_clearing_action.py, leaves tests/test_clearing_action_admissibility.py untouched, and requires every verifier to pass, with verify_recovery.py and verify_multi_phase.py run only in a disposable copy.",
+    "counterfactualEvidence": "Run only in a disposable copy outside the repository, never in the worktree: verify_recovery.py 74/74 with X1 over 9 open envelopes (E-017); release with and without a quoted bracket-free detail clears a controller-blocked item (E-019); the dropped and quoted-literal forms parse in all three shells and leave placeholders empty (E-020, E-021). This shows the strategy's constraints can be met; it does not validate a delivered fix.",
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "byGroup": {
+        "structural": {"S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass", "S9": "pass"},
+        "metadata": {"D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass"},
+        "agreement": {"B2": "pass", "B3": "pass", "A1": "pass"},
+        "reproduction": {"B4": "pass", "V1": "pass", "V2": "pass", "V3": "pass", "V4": "pass", "V5": "pass"},
+        "evidence": {"B1": "pass", "V6": "pass", "V7": "pass", "V8": "pass", "V9": "pass", "V10": "pass"},
+        "causalChain": {"V11": "pass", "V12": "pass", "V13": "pass", "V14": "pass", "V15": "pass", "V16": "pass"},
+        "impactAndSeverity": {"V17": "pass", "V18": "pass", "V19": "pass", "V20": "pass", "V21": "pass", "V22": "pass"},
+        "fixStrategy": {"V23": "pass", "V24": "pass", "V25": "pass", "V26": "pass", "V27": "pass", "V28": "pass"},
+        "statusAndQuestions": {"B5": "pass", "V29": "pass", "V30": "pass", "V31": "pass", "V32": "pass", "V33": "pass"},
+        "authority": {"A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A7": "pass", "A8": "pass"},
+        "content": {"C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass", "C7": "pass"}
+      }
+    },
+    "validationEngineSelfRun": "bug_analysis_validator.py with the invocation envelope, run against a byte-identical copy outside the repository: PASS 30/30, 0 blocking, 0 correctable.",
+    "notMachineCheckable": {
+      "N1": "met: the root cause is the builder's treatment of a defaulted flag as an operator-fill placeholder (C-002), a condition that could differ by design; the parse failure and X1 refusal are recorded as consequences (C-003, C-004).",
+      "N2": "met: every step cites first-hand high-confidence evidence; the reporter's account (E-001) and its redirect explanation enter no step.",
+      "N3": "met: the radius names the builder, the envelope and ledger data boundary with its 33 persisted entries, the three shells, the verifier, and operator documentation, plus the latent non-retry branch and the unreached branches."
+    },
+    "hostNotes": [
+      "The host adapter that launched this invocation carried the retired namespaced agent id; the repository manifest dev-1-bug-analyst and the runtime contract_checks governed.",
+      "The worktree already showed memory/lessons/lessons.store.json modified when this invocation started; this agent did not write it."
+    ]
+  },
+  "evidence_refs": [
+    ".claude/agents/dev-1-bug-analyst/system.md",
+    ".claude/agents/dev-1-bug-analyst/identity.md",
+    ".claude/agents/dev-1-bug-analyst/reasoning.md",
+    ".claude/agents/dev-1-bug-analyst/output.md",
+    ".claude/agents/dev-1-bug-analyst/quality.md",
+    ".claude/runs/run-34fbc64712b5/states/root-cause-analysis/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-34fbc64712b5/states/root-cause-analysis/artifacts/bug-analysis.md",
+    "runs/run-34fbc64712b5/states/root-cause-analysis/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}
