@@ -2,7 +2,7 @@
 
 ```yaml
 frameworkChangeProposal:
-  proposalId: FC-027
+  proposalId: FC-028
   changeClass: defect-repair
   routedCommand: bugfix
   routedWorkflow: fix-bug
@@ -17,7 +17,7 @@ frameworkChangeProposal:
 
 ## Metadata
 
-- Proposal identifier: FC-027
+- Proposal identifier: FC-028
 - Change title: Run the release checklist and the M14 replay in disposable copies so committed run evidence is never rewritten (run-2cf7a34e3daa)
 - Change class: defect-repair
 - Routed command: `/bugfix`
@@ -52,7 +52,7 @@ frameworkChangeProposal:
 | `tests/test_verifier_isolation.py` | no rule | out-of-scope | Outside the framework surface; `M14` and recovery isolation tests |
 | `.claude/runs/run-2cf7a34e3daa/state.json` | `SR-3` | out-of-scope | Run evidence written during the run |
 | `.claude/runs/inputs/release-checklist-mutates-committed-runs-defect-report.md` | `SR-3` | out-of-scope | The supplied `defect-report` input |
-| `.claude/proposals/framework-change-proposal-FC-027.md` | `SR-5` | out-of-scope | This proposal: the governance record of the routed change, not a second change |
+| `.claude/proposals/framework-change-proposal-FC-028.md` | `SR-5` | out-of-scope | This proposal: the governance record of the routed change, not a second change |
 
 ## Routing Decision
 
