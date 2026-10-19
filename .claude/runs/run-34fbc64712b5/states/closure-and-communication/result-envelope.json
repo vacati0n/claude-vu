@@ -1,0 +1,142 @@
+{
+  "invocation_id": "inv-34fbc64712b5-05-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-34fbc64712b5/states/closure-and-communication/artifacts/orchestration-result.md"
+  ],
+  "structured_output": {
+    "coordinationBasis": "closure",
+    "disposition": "closed-with-followups",
+    "status": "complete",
+    "counts": {
+      "phases": 5,
+      "complete": 4,
+      "blocked": 1,
+      "not_started": 0,
+      "handoffs": 4,
+      "escalations": 0,
+      "follow_ups": 9,
+      "open_questions": 3
+    },
+    "escalation_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "follow_up_severity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 1,
+      "low": 7
+    },
+    "follow_up_owners": {
+      "FU-001": "the run's operator",
+      "FU-002": "tech-lead",
+      "FU-003": "architect",
+      "FU-004": "documentation",
+      "FU-005": "the run's operator",
+      "FU-006": "architect",
+      "FU-007": "architect",
+      "FU-008": "the run's operator",
+      "FU-009": "tech-lead"
+    },
+    "addressed_to": "documentation (fix-bug Closure Gate)",
+    "checks": {
+      "S1": "pass",
+      "S2": "pass",
+      "S3": "pass",
+      "S4": "pass",
+      "S5": "pass",
+      "S6": "pass",
+      "S7": "pass",
+      "M1": "pass",
+      "M2": "pass",
+      "M3": "pass",
+      "M4": "pass",
+      "M5": "pass",
+      "O1": "pass",
+      "P1": "pass",
+      "P2": "pass",
+      "P3": "pass",
+      "P4": "pass",
+      "O5": "pass",
+      "A1": "pass",
+      "A2": "pass",
+      "A3": "pass",
+      "O4": "pass",
+      "O3": "pass",
+      "N-COUNT": "pass",
+      "H1": "pass",
+      "H2": "pass",
+      "H3": "pass",
+      "H4": "pass",
+      "E1": "pass",
+      "E2": "pass",
+      "E3": "pass",
+      "E4": "pass",
+      "E5": "pass",
+      "O8": "pass",
+      "O6": "pass",
+      "O7": "pass",
+      "O9": "pass",
+      "C1": "pass",
+      "C2": "pass",
+      "T1": "pass",
+      "T2": "pass",
+      "T3": "pass",
+      "T4": "pass",
+      "T5": "pass"
+    },
+    "checks_run": 44,
+    "checks_passed": 44,
+    "validation_engine": {
+      "validator": "orchestration_result_validator",
+      "result": "pass",
+      "checks_run": 34,
+      "checks_passed": 34,
+      "not_machine_checkable": 3
+    },
+    "not_machine_checkable": {
+      "N1": "declared",
+      "N2": "declared",
+      "N3": "declared",
+      "N4": "declared"
+    },
+    "findings": [
+      "PH-005 blocked at its own Closure Gate, undecided, assigned to documentation",
+      "verify_self_hosting.py S8 lists run-34fbc64712b5 unaccounted (FU-001)",
+      "this change depends on unmerged FC-027 (run-ca5b47a3f8b7); proposal numbers FC-026 to FC-028 are taken by open changes (FU-002)",
+      "validation open question 1 (DF-001) answered: open its own fix-bug run (FU-005)"
+    ],
+    "read_only_commands": [
+      "python reads of state.json",
+      "sha256sum of four upstream artifacts",
+      "wc -l events.jsonl",
+      "git status --short",
+      "sed -n 105,109p runtime/README.md",
+      "git ls-tree / git log over all refs for FC-026..FC-028",
+      "grep omn- in agent host registrations",
+      "python runtime/verify_self_hosting.py",
+      "python runtime/orchestration_result_validator.py --envelope"
+    ],
+    "transient_writes": []
+  },
+  "evidence_refs": [
+    "agents/orchestrator/manifest.yaml",
+    "agents/orchestrator/system.md",
+    "agents/orchestrator/identity.md",
+    "agents/orchestrator/reasoning.md",
+    "agents/orchestrator/output.md",
+    "agents/orchestrator/quality.md",
+    "agents/orchestrator/examples.md",
+    "runs/run-34fbc64712b5/states/closure-and-communication/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-34fbc64712b5/states/closure-and-communication/artifacts/orchestration-result.md",
+    "runs/run-34fbc64712b5/states/closure-and-communication/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

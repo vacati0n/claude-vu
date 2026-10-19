@@ -1,0 +1,690 @@
+{
+  "invocation_id": "inv-34fbc64712b5-03-001",
+  "run_id": "run-34fbc64712b5",
+  "work_item_id": "run-34fbc64712b5::fix-implementation",
+  "idempotency_key": "sha256:2d84aed9a6d91b29a7216995ef14bc90",
+  "state_id": "fix-implementation",
+  "phase_index": 3,
+  "agent_id": "dev-1-implement",
+  "agent_version": "1.1.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/dev-1-implement.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/dev-1-implement/manifest.yaml",
+    "load_order": [
+      "agents/dev-1-implement/system.md",
+      "agents/dev-1-implement/identity.md",
+      "agents/dev-1-implement/reasoning.md",
+      "agents/dev-1-implement/execution.md",
+      "agents/dev-1-implement/output.md",
+      "agents/dev-1-implement/quality.md",
+      "agents/dev-1-implement/examples.md"
+    ],
+    "module_digests": {
+      "agents/dev-1-implement/system.md": "sha256:f66f6548976bd074845dace1bc0041a1",
+      "agents/dev-1-implement/identity.md": "sha256:73c350ff8bbf8c3a81a3323ec008761a",
+      "agents/dev-1-implement/reasoning.md": "sha256:9ab46034da6f7a6b47418fa3a1faa36f",
+      "agents/dev-1-implement/execution.md": "sha256:85bc55c80ca4120571e93a9cb8148784",
+      "agents/dev-1-implement/output.md": "sha256:c6eb01fed0ad992e1bb58c87cc222270",
+      "agents/dev-1-implement/quality.md": "sha256:e83df9473b02f5d1c04ad87bcced61b3",
+      "agents/dev-1-implement/examples.md": "sha256:2bb1fc5f8b0485701e2228ed99d91ee0"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/dev-1-implement/system.md",
+        "agents/dev-1-implement/reasoning.md",
+        "agents/dev-1-implement/output.md",
+        "agents/dev-1-implement/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/dev-1-implement/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/dev-1-implement/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/dev-1-implement/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 32672,
+      "full_bytes": 68729
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "implementation-delivery"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S03",
+        "proficiency": "Primary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Primary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S06",
+        "proficiency": "Secondary",
+        "registryIdentifier": "database-engineering",
+        "specificationPath": "skills/database/database-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Secondary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S11",
+        "proficiency": "Secondary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Advisory",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Advisory",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S03",
+        "registryIdentifier": "engineering-playbook",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S06",
+        "registryIdentifier": "database-engineering",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S06",
+      "displayName": "Database Engineering",
+      "specificationPath": "skills/database/database-engineering.md",
+      "status": "not-triggered",
+      "area": "database",
+      "basis": "area database is not affected by this task; the skill stays resolved and is read only if the work reveals the domain",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Advisory)"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in artifact:triage-and-impact",
+      "source": "agent-manifest (Advisory)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "technical-design",
+      "bug-analysis",
+      "validation-report",
+      "execution-plan",
+      "coding-standards",
+      "architecture-decision-record",
+      "feature-request",
+      "change-request",
+      "business-intent",
+      "architecture-context",
+      "regression-targets",
+      "parity-checklist",
+      "known-issues"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/distracted-jones-f4cf9a/.claude/runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md",
+        "text": "```yaml\nbugAnalysis:\n  analysisId: BA-run-34fbc64712b5-triage-and-impact\n  defectReference: FC-027/O-002\n  sourceInputs:\n    - type: defect-report\n      reference: runs/inputs/release-clearing-action-placeholder-defect-report.md\n  producedBy: dev-1-bug-analyst\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  severity: medium\n  reproducibility: deterministic\n  inputDigest: sha256:71fa90ad70f8c8ffcafa075848b9659e\n  contextDigest: sha256:d349d25df9ecf914b11063912c8be2cd\n```\n\n## Metadata\n\n- Bug ID: FC-027/O-002\n- Reporter: the FC-027 change proposal, open item `O-002` (owner architect), raised as the supplied defect report (`E-001`, `E-013`)\n- Severity: medium\n- Status: provisional\n\n## Symptom Summary\n\n- Observed behavior: For a state work item blocked `awaiting_recovery_task` without guard `G3-PREDECESSOR`, `clearing_action` returns a `release` command ending `--detail <what happened>`; `shlex` splits the tail into `<what` and `happened>`, `verify_recovery.placeholders` returns `['<what happened>']`, X1 admissibility judges the action inadmissible, and a POSIX shell refuses the command with a syntax error (exit 2) so `release` never runs (`E-004`, `E-007`, `E-008`). The same command follows \"To reclaim it sooner:\" in every retry-class action (`E-006`). The report's account of the shell failure (redirect from a missing file `what`) differs from what this run observed (a syntax error on the trailing `>`); the observation is recorded, the report is not carried forward (`E-001`, `E-007`).\n- Expected behavior: Per the defect report (`E-001`), the emitted `release` action parses as written and carries no placeholder `placeholders` recognises, the retry-class reclaim names the same runnable command, and X1 admits the action while every other verifier still passes; `release` already defaults `--detail` (`E-003`).\n- First observed date: the placeholder is present in the builder since its first committed form dated 2026-09-04 (`E-012`); first recorded as a defect as `O-002` of FC-027 on 2026-10-19 (`E-013`); ongoing at the analysed revision.\n- Affected environments: known affected: the runtime at the analysed revision, every non-guard `awaiting_recovery_task` block (aggregation-conflict, dependency-failure) and every retry-class action (`E-004`, `E-006`, `E-010`); known unaffected: the guard-raised `G3-PREDECESSOR` path, which emits prose (`E-005`); not observed: the host's native non-POSIX shells, and a full `verify_recovery.py` run over its induced scenarios (`Q-001`, `Q-002`).\n\n## Reproduction\n\n- Preconditions: Python with `.claude/runtime` on the import path at the analysed revision; a state work item dict with `work_type` state; a classification from `recovery_policy.classify` for a non-retryable class whose blocked reason is `awaiting_recovery_task` (aggregation-conflict or dependency-failure) with no guard, or for a retryable class with budget left (output-schema-failure, worker-loss, invocation-transport-failure).\n- Steps to reproduce: (1) import `framework_runtime`, `recovery_policy`, and `verify_recovery`; (2) build `cls = recovery_policy.classify(\"aggregation-conflict\", attempt=1, attempts_lost=0, max_attempts=3, seed=\"s\")`; (3) call `framework_runtime.clearing_action(\"run-x\", {\"state_id\": \"triage-and-impact\", \"work_type\": \"state\", \"work_item_id\": \"x\"}, cls, cls.blocked_reason)`; (4) evaluate `verify_recovery.placeholders(shlex.split(action))` and observe `['<what happened>']`; (5) repeat with dependency-failure, then with each retryable class using `verify_recovery.runtime_command(action)`; (6) in an empty scratch directory run the action through `bash -c` and observe the syntax error and exit 2; (7) with `verify_recovery.load_state` replaced in memory by a state holding the item blocked by the recovery controller, call `clearing_action_admissible` on the action and on the same action with `--detail <what happened>` removed.\n- Reproduction frequency: deterministic\n- Evidence: the Evidence Register below, `E-001` to `E-015`.\n\n### Evidence Register\n\n| ID | Evidence | Source | Confidence |\n|---|---|---|---|\n| `E-001` | Reports the unquoted --detail placeholder in the release action, its reuse in retry prose, X1 rejection since FC-027, a redirect failure in a POSIX shell, severity medium | supplied defect-report, digest sha256:71fa90ad70f8c8ffcafa075848b9659e | low |\n| `E-002` | release_cmd is composed once with a literal unquoted --detail placeholder, returned whole for a non-guard awaiting_recovery_task block and appended to retry prose; the gate and policy-exception branches quote their values and leave placeholders only on owner-role, decided-by, rationale | source read of runtime/framework_runtime.py clearing_action, lines 2038-2084 | high |\n| `E-003` | release declares --detail optional with default \"adapter did not report a result\"; release --help lists it as optional | source read of runtime/framework_runtime.py line 6115; command framework_runtime.py release --help | high |\n| `E-004` | For aggregation-conflict and dependency-failure without a guard, the action ends --detail followed by two argv entries; placeholders returns one entry, the whole bracketed text; 2 of 2 classes | command: scratch script calling clearing_action, shlex.split, verify_recovery.placeholders | high |\n| `E-005` | With guard G3-PREDECESSOR the same classification yields prose naming no command | command: same scratch script, guard path | high |\n| `E-006` | For output-schema-failure, worker-loss, invocation-transport-failure the action starts \"none required\" and its embedded command yields the same placeholder; 3 of 3 classes | command: same scratch script, runtime_command then placeholders | high |\n| `E-007` | The emitted action run through bash fails with \"syntax error near unexpected token newline\", exit 2; the command does not execute | command: bash -c with the emitted action, in an empty scratch directory | high |\n| `E-008` | clearing_action_admissible: non-retry action inadmissible, reason names the placeholder; retry action admissible as \"retry: nothing required\"; same action without --detail admissible against the blocked item | command: scratch script with an in-memory state stand-in; no run directory read or written | high |\n| `E-009` | The exemption set for release is empty; only gate, rollback, and an awaiting_policy_exception item exempt human flags, and --detail is in none of them; retry prose short-circuits before parsing | source read of runtime/verify_recovery.py runtime_command, placeholders, clearing_action_admissible | high |\n| `E-010` | Non-retryable classes with blocked reason awaiting_recovery_task are aggregation-conflict, dependency-failure, gate-rejection; the recovery controller emits envelopes with no guard; gate-rejection routes to rollback | source read of runtime/recovery_policy.py FAILURE_POLICIES and framework_runtime.py emit call sites | high |\n| `E-011` | 33 recovery-ledger entries across 14 committed runs carry the placeholder action (31 retry form, 2 release form); all resolved; confirmed 0 open | command: scratch read-only scan of runs/run-*/recovery-ledger.json | high |\n| `E-012` | The placeholder string is present in the builder since the commit dated 2026-09-04 that first added it | command: git log -S over runtime/framework_runtime.py | high |\n| `E-013` | FC-027 records O-002 open (owner architect), the builder left unchanged, and a --detail exemption refused at its Triage Gate; quoted text containing angle brackets is now judged a placeholder (O-001) | read of proposals/framework-change-proposal-FC-027.md lines 38, 125, 150 | medium |\n| `E-014` | 30 admissibility tests pass; placeholder cases use hand-built release strings; the builder pin test checks only subcommand names; no test drives the emitted release action | read and run of tests/test_clearing_action_admissibility.py | high |\n| `E-015` | Operator documentation shows release with a quoted --detail placeholder, a form placeholders also recognises when not exempt | read of runtime/README.md line 107 | high |\n\n## Impact Assessment\n\n- User impact: an operator clearing a non-guard `awaiting_recovery_task` block, or reclaiming a retry-scheduled item early, copies the prescribed command and the shell refuses it; the operator must edit the command by hand before `release` runs (`E-004`, `E-006`, `E-007`). Affected population: every operator of the runtime meeting those conditions; frequency of those conditions is not measured here.\n- Business impact: not supplied. No business impact statement accompanied this defect, so the severity rests on technical impact alone and `Q-003` routes the question; the reporter's severity in `E-001` is recorded as context and did not set it.\n- Technical impact: a secondary recovery path fails as written, with an acceptable workaround (omit `--detail`, which `release` defaults) (`E-003`, `E-008`); no state transition, ledger write, or `release` semantics is altered, because the command never executes (`E-007`); the recovery verifier refuses any open envelope carrying the non-retry form, while the retry form escapes X1 because it is judged as prose (`E-008`, `E-009`).\n- Blast radius: the clearing-action builder in the runtime and every failure envelope it writes for non-guard `awaiting_recovery_task` blocks and retry-class schedules (`E-002`, `E-010`); the per-condition failure envelope files and run recovery ledgers, where persisted entries carry the placeholder (33 entries across 14 committed runs, all resolved, none open) and are echoed unchanged by `status` and `next` through the live clearing-action lookup (`E-011`); the operator shell boundary (`E-007`); the recovery verifier X1 and its execution guard, which share one placeholder definition (`E-008`, `E-009`); operator documentation that shows the same command with a quoted placeholder (`E-015`). Not reached: guard-raised blocks (`E-005`), gate, rollback, and policy-exception actions (`E-002`). Not observed: non-POSIX shells and the induced runs of a full verifier run (`Q-001`, `Q-002`).\n\n## Root Cause Analysis\n\n- Root cause statement: The clearing-action builder emits `--detail` as an unquoted human-fill placeholder although `release` defaults that flag and no human judgement attaches to it, so the `release` action breaks the runs-as-written contract that the gate and policy-exception branches honour and that X1 enforces by exempting placeholders only on judgement flags.\n- Why detection failed earlier: the admissibility unit tests exercise placeholder forms only on hand-built `release` strings and the builder pin test checks only which subcommands the builder names, so no test drives the action the builder actually emits through `placeholders` (`E-014`); X1 judges only open envelopes of its induced runs, the retry form is short-circuited as prose before parsing (`E-009`), and before FC-027 no check recognised a multi-word placeholder at all (`E-013`).\n\n### Causal Chain\n\n| ID | Step | Claim | Evidence | Confidence |\n|---|---|---|---|---|\n| `C-001` | trigger | A state item is blocked awaiting_recovery_task by the recovery controller with no guard, or a retryable class is scheduled for retry | `E-010`, `E-004`, `E-006` | high |\n| `C-002` | builder | The builder composes release_cmd with a literal unquoted placeholder on --detail, a flag release defaults and drops nothing without, which eliminates the account that the placeholder is unavoidable | `E-002`, `E-003`, `E-008` | high |\n| `C-003` | shell | Run as written, the trailing bracket is parsed as a redirect with no target, the shell rejects the line, and release never executes, independent of any verifier, which eliminates the account that X1 is merely over-strict | `E-007` | high |\n| `C-004` | verifier | The action carries a placeholder on a flag outside every exemption set, so X1 judges the non-retry form inadmissible while the retry form escapes because prose is not parsed | `E-008`, `E-009` | high |\n\n## Fix Strategy\n\n- Proposed fix: the `release` action the builder emits, alone and inside the retry-class reclaim prose, must parse as written in a POSIX shell and carry no placeholder that `placeholders` recognises on a non-judgement flag; either omit `--detail` so `release` applies its default, or supply a quoted literal free of angle brackets, since quoted text containing brackets is itself judged a placeholder (`E-013`). Committed resolved envelopes carrying the old text are run evidence and stay as recorded; none is open, so none is read by X1 (`E-011`).\n- Alternative options: (a) omit `--detail`: smallest change, but the recorded detail becomes \"adapter did not report a result\", which misdescribes a non-guard escalation such as aggregation-conflict; (b) supply a quoted, bracket-free detail derived from the failure class: the recorded transition stays accurate, at the cost of one more value the builder must quote correctly; (c) exempt `--detail` in X1: refused at the FC-027 Triage Gate (`E-013`) and leaves the shell failure of `C-003` in place.\n- Regression risk: low\n- Regression scope: retry-class actions, which embed the same release_cmd string; non-guard aggregation-conflict and dependency-failure envelopes, which return it whole; the builder pin test, which regex-scans the builder source for subcommand names and must still find `release`; X1 and the `executable` guard, which share the `placeholders` definition; the transition and event detail `release` records when invoked from the action, which changes text if a detail is supplied; operator documentation, which shows the same command form (`E-015`).\n\n## Validation Plan\n\n- Verification steps: repeat steps 1 to 5 of the reproduction and expect `placeholders` to return an empty list for both non-guard classes and all three retry classes; repeat step 7 and expect the unedited action admissible against the blocked item; run the emitted action in a POSIX shell against a scratch run whose item is blocked `awaiting_recovery_task` by the recovery controller and expect exit 0 and the release transition recorded; run `verify_recovery.py` and expect X1 and every other check to pass, then run every other verifier.\n- Regression tests added: a test that calls the builder itself, for every branch that names a command including the retry reclaim, and asserts `placeholders` returns nothing outside the judgement-flag exemptions; a test that asserts the emitted action has no unquoted angle bracket after shell tokenisation.\n- Monitoring signals after release: the X1 result on every `verify_recovery.py` run, expected pass; the count of open envelopes whose clearing action yields a non-exempt placeholder, expected 0, where any value above 0 indicates recurrence.\n\n## Closure\n\n- Resolution summary: None identified. The defect is unresolved at triage; resolution is recorded only from decisions made at the Fix, Verification, and Closure Gates.\n- Linked PR and release: None identified.\n- Prevention actions: pending; derived from detection failure: drive builder-emitted actions, not hand-built strings, through the admissibility table, and parse the reclaim command embedded in retry prose.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected steps |\n|---|---|---|---|---|\n| `Q-001` | How do the host's native non-POSIX shells treat the emitted action? Only bash was exercised; running it there would settle whether the shell failure is universal. | no | orchestrator | `C-003` |\n| `Q-002` | Does a full verify_recovery.py run currently fail X1, or do its induced scenarios never leave a non-guard release envelope open? Not run here because it writes run directories outside permitted writes; running it would settle whether the X1 failure is live or latent. | no | qa | `C-004` |\n| `Q-003` | What is the business cost of an unrunnable recovery command for operators? No impact statement was supplied; needed to confirm the technical-impact severity. | no | product-owner | none |",
+        "digest": "sha256:0af7b9c1420c08a4d0880b41f64c7434",
+        "produced_by": "triage-and-impact"
+      },
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-34fbc64712b5/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/distracted-jones-f4cf9a/.claude/runs/run-34fbc64712b5/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "text": "```yaml\nbugAnalysis:\n  analysisId: BA-run-34fbc64712b5-root-cause-analysis\n  defectReference: FC-027/O-002\n  sourceInputs:\n    - type: defect-report\n      reference: runs/inputs/release-clearing-action-placeholder-defect-report.md\n    - type: bug-analysis\n      reference: runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md\n    - type: symptom-evidence\n      reference: runs/run-34fbc64712b5/state.json\n    - type: code-context\n      reference: runtime/framework_runtime.py\n    - type: code-context\n      reference: runtime/verify_recovery.py\n    - type: code-context\n      reference: runtime/recovery_policy.py\n    - type: code-context\n      reference: tests/test_clearing_action_admissibility.py\n    - type: code-context\n      reference: tests/test_gate_rollback.py\n  producedBy: dev-1-bug-analyst\n  agentVersion: 1.0.0\n  schemaVersion: 1.0.0\n  status: provisional\n  severity: medium\n  reproducibility: deterministic\n  inputDigest: sha256:71fa90ad70f8c8ffcafa075848b9659e\n  contextDigest: sha256:a2e10c34bee5ac0f41eda6d9133bfd16\n```\n\n## Metadata\n\n- Bug ID: FC-027/O-002\n- Reporter: the FC-027 change proposal, open item `O-002` (owner architect), raised as the supplied defect report (`E-001`, `E-013`)\n- Severity: medium\n- Status: provisional\n\n## Symptom Summary\n\n- Observed behavior: The `release` command the clearing-action builder emits ends `--detail <what happened>`. `shlex` splits that tail into two arguments, `verify_recovery.placeholders` returns `['<what happened>']`, and bash, PowerShell and cmd.exe each reject the line at parse, so `release` never runs (`E-004`, `E-006`, `E-007`, `E-021`). The same command follows \"To reclaim it sooner:\" in every retry-class action, and that is the only form any current emitter writes (`E-006`, `E-016`). This phase supersedes the triage artifact (`E-022` records the gate it passed). It keeps every triage identifier and changes two facts on registered evidence. No current emitter reaches the non-retry `release` branch (`E-016`), and X1 currently passes, so the verifier failure is latent rather than live (`E-017`).\n- Expected behavior: According to the defect report (`E-001`) and the Triage Gate conditions (`E-022`), the emitted `release` action, both on its own and inside the retry reclaim, should parse as written and carry no placeholder that `placeholders` recognises. X1 should admit it without an exemption, and every verifier should still pass. `release` already defaults `--detail` (`E-003`).\n- First observed date: the placeholder has been in the builder since its first committed form, dated 2026-09-04 (`E-012`). It was first recorded as a defect, `O-002` of FC-027, on 2026-10-19 (`E-013`) and is still present at the analysed revision.\n- Affected environments: known affected: the runtime at the analysed revision, on every retry-class schedule (output-schema-failure, worker-loss, invocation-transport-failure) and in the non-guard `awaiting_recovery_task` builder branch; the bash, PowerShell and cmd.exe shells (`E-005`, `E-006`, `E-007`, `E-021`). Known unaffected: guard-raised blocks, and the gate, rollback, policy-exception and budget-exhausted branches (`E-002`, `E-005`). Not observed: CI and other operating systems.\n\n## Reproduction\n\n- Preconditions: Python with `runtime/` on the import path at the analysed revision; a state work-item dict with `work_type` state. For the builder steps, a classification from `recovery_policy.classify` for a retryable class with budget left, or for aggregation-conflict or dependency-failure with no guard. For the end-to-end steps, a disposable copy of the framework root and the `tests` directory, because the verifiers and the runtime write run directories.\n- Steps to reproduce: (1) Import `framework_runtime`, `recovery_policy`, `verify_recovery` and `shlex`. (2) Build `cls = recovery_policy.classify(\"aggregation-conflict\", attempt=1, attempts_lost=0, max_attempts=3, seed=\"s\")`. (3) Call `framework_runtime.clearing_action(\"run-x\", {\"state_id\": \"triage-and-impact\", \"work_type\": \"state\", \"work_item_id\": \"x\"}, cls, cls.blocked_reason)`. (4) Evaluate `verify_recovery.placeholders(shlex.split(action))` and observe `['<what happened>']`. (5) Repeat for dependency-failure, then for each retryable class using `verify_recovery.runtime_command(action)`. (6) In an empty directory, run `bash -n -c` on the action and observe exit 2; feed the same text to PowerShell's parser only and observe `RedirectionNotSupported`. (7) In the disposable copy, use the verifier helpers `plan`, `dispatch`, `act_as_adapter` with a broken artifact, and `complete` to drive `execution-planning` to `retrying`. Run the embedded reclaim with `--detail` dropped and observe \"ALREADY RETRYING ... nothing to reclaim\". (8) In the copy, set that item to blocked by the recovery controller with `awaiting_recovery_task`. Run `release` without `--detail`, then with a quoted bracket-free detail, and observe `blocked -> pending` and the recorded detail.\n- Reproduction frequency: deterministic\n- Evidence: the Evidence Register below, `E-001` to `E-022`.\n\n### Evidence Register\n\n| ID | Evidence | Source | Confidence |\n|---|---|---|---|\n| `E-001` | Reports the unquoted --detail placeholder, its reuse in retry prose, X1 rejection since FC-027, a redirect failure in a POSIX shell, severity medium | supplied defect-report, digest sha256:71fa90ad70f8c8ffcafa075848b9659e | low |\n| `E-002` | release_cmd is composed once with a literal unquoted --detail placeholder, returned inside retry prose before any guard test and whole for a non-guard awaiting_recovery_task block; gate and policy-exception branches quote values and keep placeholders only on judgement flags | source read of runtime/framework_runtime.py clearing_action, lines 2038-2092, this phase | high |\n| `E-003` | release declares --detail optional with default \"adapter did not report a result\"; on a retrying item cmd_release prints ALREADY RETRYING and returns 0; on a controller-blocked item it records the detail in the resolution, transition, and event | source read of runtime/framework_runtime.py line 6115 and cmd_release lines 3372-3460, this phase | high |\n| `E-004` | aggregation-conflict and dependency-failure without a guard return the release command; placeholders yields one entry, the whole bracketed text; 2 of 2 classes | command: scratch probe over every policy class with and without guard G3, this phase | high |\n| `E-005` | With guard G3-PREDECESSOR the same non-retry classes yield prose naming no command; gate-approval, capability, context, input classes name no release | command: same scratch probe, guard rows | high |\n| `E-006` | output-schema-failure, worker-loss, invocation-transport-failure start \"none required\" and the embedded command yields the same placeholder, with or without a guard; 3 of 3 classes | command: same scratch probe, runtime_command then placeholders | high |\n| `E-007` | bash -n on the emitted action reports a syntax error near newline, exit 2, in an empty directory; nothing executes | command: bash -n -c on the emitted action, this phase | high |\n| `E-008` | clearing_action_admissible judged the non-retry action inadmissible naming the placeholder, the retry action admissible as nothing required, and the action without --detail admissible against a controller-blocked item | command: in-memory admissibility script, triage phase of this run | high |\n| `E-009` | release exemption set is empty; only gate, rollback, and an awaiting_policy_exception item exempt judgement flags; the \"none required\" prefix returns admissible before any parsing; the verifier itself drives release with a filled quoted detail | source read of runtime/verify_recovery.py lines 506 and 581-755, this phase | high |\n| `E-010` | Non-retryable classes whose blocked reason is awaiting_recovery_task are aggregation-conflict, dependency-failure, gate-rejection; gate-rejection routes to rollback | source read of runtime/recovery_policy.py FAILURE_POLICIES and classify, this phase | high |\n| `E-011` | 33 committed ledger entries in 14 runs carry the placeholder: 25 output-schema-failure and 6 worker-loss retry form, 2 pre-rollback gate-rejection release form; confirmed 0 open | command: read-only scan of runs/run-*/recovery-ledger.json, this phase | high |\n| `E-012` | The placeholder string entered the builder in the commit dated 2026-09-04 and has not changed since | command: git log -S over runtime/framework_runtime.py | high |\n| `E-013` | FC-027 records O-002 open (owner architect), the builder left unchanged, a --detail exemption refused, and quoted text holding angle brackets now judged a placeholder (O-001) | read of proposals/framework-change-proposal-FC-027.md lines 38, 97, 125, 149-150 | medium |\n| `E-014` | Placeholder cases use hand-built release strings; the builder pin test scans builder source for subcommand names only; test_gate_rollback carries the old text only as stale persisted fixtures; 64 tests pass in a copy | read of both test modules; unittest run in a disposable copy | high |\n| `E-015` | Operator documentation shows release with a quoted \"<what happened>\" detail, a form placeholders also recognises | read of runtime/README.md line 107 | high |\n| `E-016` | No current emitter reaches the non-retry release branch: aggregation-conflict is raised nowhere; dependency-failure is raised only by G3 with guard set and by G5 with reason awaiting_dependency_output; validation yields only output-schema-failure or policy-failure | source read of every classify and envelope call site in runtime/framework_runtime.py and recovery_policy.py | high |\n| `E-017` | verify_recovery.py passes 74 of 74; X1 passes over 9 open envelopes across 4 induced runs; confirmed no induced run leaves a release-form envelope open | command: verify_recovery.py in a disposable copy of the framework root and tests | high |\n| `E-018` | An induced output-schema-failure leaves the item retrying; its reclaim with --detail dropped exits 0 printing ALREADY RETRYING, nothing to reclaim; the item stays retrying at attempt 1 | command: reclaim probe in the disposable copy | high |\n| `E-019` | On an item blocked awaiting_recovery_task by the recovery controller, release without --detail moves it blocked to pending and records \"adapter did not report a result\"; with a quoted bracket-free detail it records that text | command: release probe in the disposable copy; block set directly in the copy as the precondition | high |\n| `E-020` | placeholders is empty for the command without --detail, with a quoted bracket-free detail, and for retry prose embedding either; a quoted \"<what happened>\" is still flagged | command: in-memory placeholders over candidate forms, this phase | high |\n| `E-021` | PowerShell's parser rejects the emitted form with RedirectionNotSupported and accepts both fixed forms; cmd.exe rejects it with a syntax error, exit 1; a Python-launched bash resolved to a non-functional launcher stub and its results were discarded | command: PowerShell ParseInput only; cmd.exe with echo in place of the runtime, empty directory | high |\n| `E-022` | Triage Gate approved by tech-lead with conditions: change only clearing_action (README optional), no X1 exemption, committed run evidence untouched, builder-driven tests covering the retry reclaim, every verifier passing | read of runs/run-34fbc64712b5/state.json, gate Triage Gate | high |\n\n## Impact Assessment\n\n- User impact: An operator who copies a prescribed reclaim, or the non-guard clearing action, has the shell refuse it at parse and must edit the command by hand before `release` will run (`E-006`, `E-007`, `E-021`). For the retry form, which is the only one written today, the edited command then reclaims nothing (`E-018`, `Q-004`). The number of operators affected depends on how often retries happen, which was not measured here.\n- Business impact: not supplied. No business impact statement accompanied this defect, so severity rests on technical impact alone and `Q-003` routes the question. The reporter's severity in `E-001` is recorded as context only and did not set it.\n- Technical impact: An emitted recovery command fails as written on every shell exercised. This is a secondary path with an acceptable workaround: drop `--detail`, which `release` defaults (`E-003`, `E-019`). No state transition, ledger write, or `release` semantics changes, because the command never runs (`E-007`). X1 would refuse an open non-retry envelope, but no emitter writes one today, and the retry form is accepted as prose before parsing (`E-009`, `E-016`, `E-017`).\n- Blast radius: the clearing-action builder, both where it returns the command and where it embeds it (`E-002`); the failure envelope files and run recovery ledgers, which hold 33 persisted entries with the placeholder, all resolved and none open (`E-011`); the operator shell boundary in bash, PowerShell and cmd.exe (`E-007`, `E-021`); the recovery verifier's X1 check and its execution guard, which share the `placeholders` definition, a latent failure today (`E-009`, `E-017`); operator documentation that shows a quoted placeholder form (`E-015`). The non-guard non-retry branch is reachable only through a direct builder call (`E-016`). Not reached: guard-raised blocks and the gate, rollback, policy-exception and budget-exhausted branches (`E-002`, `E-005`, `E-010`).\n\n## Root Cause Analysis\n\n- Root cause statement: The clearing-action builder treats `release --detail` as an operator-fill slot and emits it as an unquoted multi-word angle-bracket placeholder, although `release` defaults the flag and needs no human judgement there; as a result, the one shared `release` command it emits breaks the runs-as-written contract that its own gate and policy-exception branches honour and that X1 enforces.\n- Why detection failed earlier: no check sends the builder's emitted `release` command through `placeholders` or a shell. The admissibility unit tests use hand-built `release` strings, and the builder pin test only scans source for subcommand names (`E-014`). X1 is the only check that judges emitted actions, and it cannot see this one: no emitter reaches the non-retry branch, and the retry form is accepted on its `none required` prefix before parsing (`E-009`, `E-016`, `E-017`). Before FC-027, no check recognised a multi-word placeholder at all (`E-013`).\n\n### Causal Chain\n\n| ID | Step | Claim | Evidence | Confidence |\n|---|---|---|---|---|\n| `C-001` | trigger | A retryable class with budget left moves the item to retrying and the builder writes its action; no current emitter reaches the non-retry branch, so retry prose is the only live route to the command | `E-016`, `E-018`, `E-011` | high |\n| `C-002` | builder | The builder fills --detail with an unquoted multi-word bracket placeholder in one shared command although release runs on its default, unlike the judgement-only placeholders of the gate and policy-exception branches, which eliminates the account that the placeholder is unavoidable | `E-002`, `E-003`, `E-019` | high |\n| `C-003` | shell | As written, bash, PowerShell, and cmd.exe each reject the line at parse and release never runs, while the fixed forms parse, which eliminates the account that X1 is merely over-strict | `E-007`, `E-021` | high |\n| `C-004` | verifier | The emitted action violates the runs-as-written contract X1 enforces, a placeholder on a flag with no exemption, and quoting the placeholder does not cure it; X1 passes today only because the branch is unreachable and retry prose is not parsed | `E-009`, `E-020`, `E-017` | high |\n\n## Fix Strategy\n\n- Proposed fix: The builder's `release` command, both where it is the whole action and where the retry prose embeds it, must parse as written in bash, PowerShell and cmd.exe, and must leave `placeholders` empty, without any X1 exemption (`E-020`, `E-021`, `E-022`). Recommended: give `--detail` a fixed literal with no angle brackets that truthfully describes an operator clearing the condition, quoted the same way the gate and policy-exception branches already quote their arguments, so the detail `release` records stays accurate (`E-002`, `E-019`). The `none required` prefix and the `release` subcommand name in the builder must not change (`E-009`, `E-014`). The 33 committed resolved entries are run evidence and stay as recorded; none is open (`E-011`, `E-022`).\n- Alternative options: (a) Drop `--detail`. This is the smallest change and also parses with no placeholder, but the recorded detail becomes \"adapter did not report a result\", which misdescribes an operator clearing a non-guard block; X1 admits that form (`E-008`, `E-019`). (b) Quote the existing placeholder. It parses in a shell, but `placeholders` still flags it and the literal bracket text would be recorded, so it is eliminated (`E-013`, `E-020`). (c) Exempt `--detail` in X1. This was refused at both Triage Gates and leaves the shell failure of `C-003` in place (`E-013`, `E-022`).\n- Regression risk: low\n- Regression scope: retry-class envelopes, which embed the shared command, and X1, which treats them as prose only while the `none required` prefix holds (`E-006`, `E-009`); the non-guard `awaiting_recovery_task` branch, which returns the command whole (`E-002`); the builder pin test, which scans builder source for `release` (`E-014`); X1 and the execution guard, which share `placeholders` (`E-009`); the detail `release` records in the transition, the envelope resolution and the escalation event when the action runs (`E-003`, `E-019`); the stale fixtures in the rollback tests, which deliberately keep the old text (`E-014`); operator documentation, which shows a quoted placeholder form (`E-015`).\n\n## Validation Plan\n\n- Verification steps: Repeat reproduction steps 1 to 5 and expect `placeholders` to be empty for both non-guard classes and all three retry classes. Repeat step 6 and expect bash exit 0 and no PowerShell parse error. Repeat step 8 with the unedited non-retry action and expect `blocked -> pending`, with the new literal recorded as the detail. In a disposable copy of the framework root and `tests`, run `verify_recovery.py` and `verify_multi_phase.py`, expecting every check including X1 to pass, then run every other verifier and the full unit suite.\n- Regression tests added: in a new module, `tests/test_release_clearing_action.py`, driven only by builder output and never by hand-built strings: (1) for aggregation-conflict and dependency-failure without a guard, the action's subcommand is `release` and `verify_recovery.placeholders(shlex.split(action))` is empty; (2) for output-schema-failure, worker-loss and invocation-transport-failure, the action starts `none required` and `placeholders(runtime_command(action))` is empty, which covers the retry reclaim; (3) the reclaim's argv equals the non-retry action's argv for the same item; (4) no shell-tokenised argument of either form contains an angle bracket; (5) `clearing_action_admissible` admits the unedited non-retry action against an item the recovery controller blocked, with run-state loading patched in memory; (6) with guard G3-PREDECESSOR the non-retry classes still return prose that names no command. `tests/test_clearing_action_admissibility.py` and the stale fixtures in `tests/test_gate_rollback.py` stay untouched.\n- Monitoring signals after release: the X1 result on every `verify_recovery.py` run, expected pass; among envelopes written after the fix, the count whose clearing action yields a non-exempt placeholder, expected 0, where any value above 0 indicates recurrence.\n\n## Closure\n\n- Resolution summary: None identified. The defect is unresolved at root cause analysis. A resolution is recorded only from decisions made at the Fix, Verification, and Closure Gates.\n- Linked PR and release: None identified.\n- Prevention actions: pending. From the detection failure: send the action each builder branch emits, rather than hand-built strings, through `placeholders` and a parse check, and parse the reclaim command embedded in retry prose.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affected steps |\n|---|---|---|---|---|\n| `Q-004` | Separate defect, outside this fix: the retry prose offers a reclaim that release refuses for a retrying item (`E-018`); decide whether the prose stops offering it or release honours it. | no | architect | `C-001` |\n| `Q-005` | Is the non-guard non-retry release branch meant to be reachable? aggregation-conflict has a policy row but no raiser, and dependency-failure arrives guarded or with an overriding reason (`E-016`). | no | architect | `C-001` |\n| `Q-001` | Resolved by this phase and kept so the triage reference resolves: PowerShell and cmd.exe reject the emitted form as bash does, and accept the fixed forms (`E-021`). | no | orchestrator | `C-003` |\n| `Q-002` | Resolved by this phase and kept so the triage reference resolves: X1 passes today, so the verifier failure is latent; no emitter leaves a non-retry release envelope open (`E-016`, `E-017`). | no | qa | `C-004` |\n| `Q-003` | What is the business cost of an unrunnable recovery command for operators? No impact statement was supplied; one would confirm or move the technical-impact severity. | no | product-owner | none |",
+        "digest": "sha256:7aba6884818f0800604be31fd9c54063",
+        "produced_by": "root-cause-analysis"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the accepted change this agent implements: a technical design for feature work, a bug analysis for a defect fix, or the safety-net validation report for a behaviour-preserving refactor, which is the artifact the refactor workflow's own predecessor phase publishes. Without one there is no accepted change, and implementing anyway would mean designing."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "bug-analysis",
+      "reference": "runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md",
+      "produced_by": "triage-and-impact",
+      "artifact": "bug-analysis.md",
+      "bytes": 15941,
+      "sections": {
+        "read_first": [
+          "Symptom Summary",
+          "Impact Assessment",
+          "Root Cause Analysis",
+          "Fix Strategy",
+          "Validation Plan",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Reproduction",
+          "Closure"
+        ]
+      }
+    },
+    {
+      "type": "bug-analysis",
+      "reference": "runs/run-34fbc64712b5/states/root-cause-analysis/artifacts/bug-analysis.md",
+      "produced_by": "root-cause-analysis",
+      "artifact": "bug-analysis.md",
+      "bytes": 21237,
+      "sections": {
+        "read_first": [
+          "Symptom Summary",
+          "Impact Assessment",
+          "Root Cause Analysis",
+          "Fix Strategy",
+          "Validation Plan",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Reproduction",
+          "Closure"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-34fbc64712b5/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:867906377d16d75c0b1589081a1d96d2",
+    "bytes": 10348,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "fix-implementation"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-19T05:47:32Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:239f9bf99aea57059bdb54c03a50ca01",
+        "supplies": "framework-context",
+        "bytes": 21932,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:089e79af5d18d9b11dce7e6ac8a2c310",
+        "supplies": "framework-context",
+        "bytes": 9561,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:15b32b7dc6a6e5c3c47fac6809f1df7a",
+        "supplies": "framework-context",
+        "bytes": 12345,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:d9accc4117996076a1eeed79e6235645",
+        "supplies": "framework-context",
+        "bytes": 6511,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:dc3463b8a44d89167178839fd616a0e3",
+        "supplies": "framework-context",
+        "bytes": 16779,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:daa929f8e7c5c6a782b6240c63b2b855",
+        "supplies": "framework-context",
+        "bytes": 6407,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/fix-bug.md",
+        "digest": "sha256:b55bd054c59a326cb7945c28c27c1dc1",
+        "supplies": "framework-context",
+        "bytes": 7417,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:d0616790c1cb2c658ccc70b61ebb4a3e",
+        "supplies": null,
+        "bytes": 5809,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/bug-analysis.md",
+        "digest": "sha256:41a09a54f2e915d7481fef9325f3515d",
+        "supplies": null,
+        "bytes": 3716,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/dotnet/engineering-playbook.md",
+        "digest": "sha256:35fc0c6fcd8f834c3e2528d14465e17c",
+        "supplies": null,
+        "bytes": 1507,
+        "read": "required",
+        "read_reason": "skill S03 is required for this phase"
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null,
+        "bytes": 1333,
+        "read": "required",
+        "read_reason": "skill S12 is required for this phase"
+      },
+      {
+        "path": "skills/testing/testing-strategy.md",
+        "digest": "sha256:186a1e81b3ff01bcadec23c9119e86d6",
+        "supplies": null,
+        "bytes": 1265,
+        "read": "required",
+        "read_reason": "skill S07 is required for this phase"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:a61b6b4efb797afb614d6d1da21132e1",
+        "supplies": null,
+        "bytes": 62554,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:40e4067f94b3a676e0e3077abdc83487",
+    "input_digest": "sha256:09f163f93fd8905a7b5cd97f1ed29063",
+    "inputs": [
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/distracted-jones-f4cf9a/.claude/runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md",
+        "digest": "sha256:0af7b9c1420c08a4d0880b41f64c7434"
+      },
+      {
+        "type": "bug-analysis",
+        "reference": "runs/run-34fbc64712b5/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/distracted-jones-f4cf9a/.claude/runs/run-34fbc64712b5/states/root-cause-analysis/artifacts/bug-analysis.md",
+        "digest": "sha256:7aba6884818f0800604be31fd9c54063"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/logging/observability-logging.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/dotnet/engineering-playbook.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/logging/observability-logging.md",
+      "skills/testing/testing-strategy.md",
+      "templates/bug-analysis.md",
+      "templates/implementation-report.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/fix-bug.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 177211,
+    "bytes_required": 16387,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": true,
+    "reason": "lessons from earlier runs hydrated per this run's knowledge_loop record (recorded at plan time)",
+    "store": "memory/lessons/lessons.store.json",
+    "store_digest": "sha256:8a376d60a1d7f6d1fa5be505f3455d2b",
+    "threshold": 2,
+    "matched": 0,
+    "lessons": []
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-34fbc64712b5/states/fix-implementation/artifacts/implementation-report.md",
+      "runs/run-34fbc64712b5/states/fix-implementation/result-envelope.json",
+      "**"
+    ],
+    "write_exclusions": [
+      "runs/**",
+      "proposals/**"
+    ],
+    "command_execution": {
+      "allowed": true,
+      "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "repository history rewriting, publishing, or release actions",
+        "any command whose effect is not recorded in the report's verification results"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "any write matching ['runs/**', 'proposals/**']",
+      "command execution other than the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+      "external system, repository, or ticketing access",
+      "define or widen product scope",
+      "decide or revise the technical design rather than escalating the mismatch",
+      "approve, review, or award a readiness verdict to its own change",
+      "record a merge, release, or gate decision",
+      "relax an acceptance criterion, a quality threshold, or a declared invariant",
+      "introduce an undeclared side effect in critical business logic",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "implement the change the accepted design and analysis describe",
+        "add, modify, and remove production code inside the impacted modules the design names",
+        "add or update automated tests that exercise the change",
+        "execute the project's own test and static-analysis commands to gather evidence",
+        "record the change set, the verification evidence, and the residual risk",
+        "record a tradeoff taken inside this agent's own implementation latitude",
+        "raise a deviation record when the design cannot be implemented as accepted"
+      ],
+      "prohibited": [
+        "define or widen product scope",
+        "decide or revise the technical design rather than escalating the mismatch",
+        "approve, review, or award a readiness verdict to its own change",
+        "record a merge, release, or gate decision",
+        "relax an acceptance criterion, a quality threshold, or a declared invariant",
+        "introduce an undeclared side effect in critical business logic",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": true,
+        "rationale": "This is the only framework role that changes repository source. Its write scope cannot be enumerated per agent, because the files a change touches are named by the accepted design rather than by the manifest. The scope is therefore the repository, minus the evidence classes below, and every file actually written is declared in the change set and in the result envelope, where the runtime compares them.",
+        "scope": [
+          "**"
+        ],
+        "excluded": [
+          "runs/**",
+          "proposals/**"
+        ],
+        "exclusionRationale": "Committed run evidence and governance records are immutable to the agents whose work they record. A run artifact this agent could edit would let a change rewrite the evidence assessed against it."
+      },
+      "commandExecution": {
+        "allowed": true,
+        "purpose": "the repository's own test, build, and static-analysis commands, run to obtain the executed evidence the output contract requires",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "repository history rewriting, publishing, or release actions",
+          "any command whose effect is not recorded in the report's verification results"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical approved inputs and an identical context snapshot must produce the same change-set entry set, the same test-evidence set, the same deviation set, and the same declared verification status.",
+      "identifierSchemes": {
+        "changes": "C-<zero-padded-sequence>",
+        "tests": "T-<zero-padded-sequence>",
+        "deviations": "V-<zero-padded-sequence>",
+        "risks": "R-<zero-padded-sequence>",
+        "openQuestions": "Q-<zero-padded-sequence>"
+      },
+      "orderingRule": "Change-set entries are ordered by the sequence in which the accepted design requires them; ties break toward the lower path in lexical order. Test-evidence entries follow the change-set entries they cover.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied design, standards, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "implementation-report.md",
+    "artifact_path": "runs/run-34fbc64712b5/states/fix-implementation/artifacts/implementation-report.md",
+    "template_ref": "templates/implementation-report.md",
+    "contract_ref": "agents/dev-1-implement/output.md",
+    "quality_ref": "agents/dev-1-implement/quality.md",
+    "validator": "implementation_report_validator",
+    "result_envelope_path": "runs/run-34fbc64712b5/states/fix-implementation/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-19T05:47:32Z",
+  "model_tier": {
+    "tier": "deep",
+    "host_hint": "opus",
+    "basis": "declared deep for fix-bug/fix-implementation in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 68729,
+    "modules_core_bytes": 32672,
+    "slice_all_bytes": 177211,
+    "slice_required_bytes": 16387,
+    "inputs_bytes": 0,
+    "upstream_full_bytes": 37180,
+    "upstream_read_first_bytes": 20360,
+    "task_context_bytes": 10348,
+    "fixed_bytes": 13658,
+    "legacy_estimate_bytes": 296778,
+    "progressive_estimate_bytes": 93425,
+    "legacy_estimate_tokens": 74194,
+    "progressive_estimate_tokens": 23356,
+    "savings_pct": 68.5
+  }
+}

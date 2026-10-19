@@ -1,0 +1,131 @@
+{
+  "invocation_id": "inv-34fbc64712b5-01-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md"
+  ],
+  "structured_output": {
+    "analysisBasis": "triage",
+    "workflow": "fix-bug",
+    "phase": "triage-and-impact",
+    "severity": "medium",
+    "reproducibility": "deterministic",
+    "declaredStatus": "provisional",
+    "counts": {
+      "evidenceRecords": 15,
+      "causalSteps": 4,
+      "causalStepsByConfidence": {
+        "high": 4,
+        "medium": 0,
+        "low": 0
+      },
+      "evidenceByConfidence": {
+        "high": 13,
+        "medium": 1,
+        "low": 1
+      },
+      "openQuestions": 3,
+      "openQuestionsBlocking": 0
+    },
+    "statusBasis": "reasoning.md Stage 9, first matching row: business impact was unquantified and severity rests on technical impact alone (Q-003), therefore provisional. Reproducibility is deterministic; no required input was missing; the chain closes on a condition and both alternative accounts were eliminated with evidence (C-002 via E-003 and E-008, C-003 via E-007); no dependent step is below high.",
+    "severityBasis": "reasoning.md Stage 5, medium: a secondary path (the prescribed recovery command for non-guard awaiting_recovery_task blocks, and the optional retry reclaim) fails as written, with an acceptable workaround because release defaults --detail (E-003, E-007, E-008). No data loss, wrong result, or state change occurs, since the command never executes. The reporter's medium (E-001, low) is context and did not set it.",
+    "reproducibilityBasis": "Established in this run, not copied from the report: 2 of 2 non-guard non-retryable classes and 3 of 3 retryable classes produce the placeholder (E-004, E-006); the guard path is the control that does not (E-005); bash rejects the action with exit 2 (E-007); X1 admissibility rejects it against an in-memory blocked item while the same action without --detail is admitted (E-008). The shell failure observed (syntax error on the trailing bracket) differs from the report's account (redirect from a missing file).",
+    "qualityChecks": {
+      "total": 69,
+      "passed": 69,
+      "failed": 0,
+      "blockingFailed": 0,
+      "notApplicablePassed": 4,
+      "notApplicable": {
+        "V3": "frequency is deterministic, not intermittent",
+        "V4": "frequency is not not-reproduced",
+        "V26": "the causal chain is closed on a condition; status is provisional only on business impact",
+        "B5": "severity is not critical"
+      },
+      "byGroup": {
+        "structural": {"S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass", "S9": "pass"},
+        "metadata": {"D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "D5": "pass", "D6": "pass", "D7": "pass"},
+        "agreement": {"B2": "pass", "B3": "pass", "A1": "pass"},
+        "reproduction": {"B4": "pass", "V1": "pass", "V2": "pass", "V3": "pass", "V4": "pass", "V5": "pass"},
+        "evidence": {"B1": "pass", "V6": "pass", "V7": "pass", "V8": "pass", "V9": "pass", "V10": "pass"},
+        "causalChain": {"V11": "pass", "V12": "pass", "V13": "pass", "V14": "pass", "V15": "pass", "V16": "pass"},
+        "impactAndSeverity": {"V17": "pass", "V18": "pass", "V19": "pass", "V20": "pass", "V21": "pass", "V22": "pass"},
+        "fixStrategy": {"V23": "pass", "V24": "pass", "V25": "pass", "V26": "pass", "V27": "pass", "V28": "pass"},
+        "statusAndQuestions": {"B5": "pass", "V29": "pass", "V30": "pass", "V31": "pass", "V32": "pass", "V33": "pass"},
+        "authority": {"A2": "pass", "A3": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A7": "pass", "A8": "pass"},
+        "content": {"C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass", "C6": "pass", "C7": "pass"}
+      },
+      "repairNote": "No check failed on the rendered artifact; nothing was repaired."
+    },
+    "validationEngine": {
+      "validator": "bug_analysis_validator",
+      "result": "PASS",
+      "checksPassed": 30,
+      "checksTotal": 30,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "digestCrossCheck": "inputDigest and contextDigest match the invocation envelope (validator run with --envelope)"
+    },
+    "notMachineCheckableObligations": {
+      "N1": {
+        "obligation": "The stated root cause is the cause, not the symptom location",
+        "judgement": "discharged",
+        "detail": "The statement names a condition: a flag that release defaults and that carries no human judgement is emitted as an unquoted human-fill placeholder, breaking the runs-as-written contract the other command-naming branches honour (E-002, E-003, E-009). The shell error (E-007) and the X1 refusal (E-008) are registered as symptoms, not offered as the cause."
+      },
+      "N2": {
+        "obligation": "No speculative conclusion appears without supporting data",
+        "judgement": "discharged",
+        "detail": "Every causal step cites first-hand high-confidence records; the unexercised non-POSIX shells and the unrun full verifier are recorded as Q-001 and Q-002 rather than asserted."
+      },
+      "N3": {
+        "obligation": "The declared blast radius covers every boundary the defect crosses",
+        "judgement": "discharged",
+        "detail": "The radius names the builder and every envelope it writes, the persisted ledger and envelope files (33 resolved entries across 14 committed runs, 0 open, E-011), the status and next display path, the operator shell, X1 and its execution guard, and operator documentation (E-015); unreached and unobserved boundaries are named separately."
+      }
+    },
+    "boundariesEnforced": [
+      "No corrective change was produced, in the artifact or in the repository; the fix strategy states what a fix must achieve and leaves building it to dev-1-implement.",
+      "The Triage Gate was not decided; severity and reproducibility are handed to tech-lead.",
+      "verify_recovery.py was not run because it writes run directories under runs/ outside permitted_writes; its outcome is routed as Q-002.",
+      "Reproduction ran in memory and in an empty scratch directory outside the repository; no run directory, source, test, or committed evidence was written."
+    ],
+    "handoffs": {
+      "tech-lead": "severity medium, reproducibility deterministic, blast radius and the evidence behind them, for the Triage Gate",
+      "product-owner": "Q-003, business impact of an unrunnable recovery command",
+      "qa": "Q-002, whether a full verify_recovery.py run currently fails X1",
+      "orchestrator": "Q-001, behaviour of the host's native non-POSIX shells"
+    },
+    "nextPhase": {
+      "phase": "root-cause-analysis",
+      "mustClose": "Confirm or supersede the closed chain C-001 to C-004 and settle Q-001 and Q-002 where they bear on it; the triage chain is already closed on a condition."
+    },
+    "commandsRun": [
+      "scratch reproduction script (clearing_action, shlex.split, placeholders, runtime_command) -> E-004, E-005, E-006",
+      "framework_runtime.py release --help -> E-003",
+      "bash -c with the emitted action in an empty scratch directory -> E-007",
+      "scratch admissibility script with an in-memory state stand-in -> E-008",
+      "scratch read-only scan of committed recovery ledgers -> E-011",
+      "git log -S over runtime/framework_runtime.py -> E-012",
+      "python -m unittest tests.test_clearing_action_admissibility -> E-014",
+      "bug_analysis_validator.py on the artifact with --envelope -> self-verification, recorded under validationEngine"
+    ],
+    "adapterNote": "The host adapter that launched this invocation names the agent omn-dev-1-bug-analyst and its module set under agents/omn-dev-1-bug-analyst/, which does not exist in this repository; the dispatch prompt and invocation envelope name dev-1-bug-analyst, whose manifest and modules were loaded and whose identity, version, and status match the envelope's contract_checks.",
+    "statusNote": "The phase's declared output is bug-analysis.md carrying the severity classification and reproducibility decision; a provisional artifact at triage is this phase's success condition, so the envelope status is succeeded."
+  },
+  "evidence_refs": [
+    "agents/dev-1-bug-analyst/system.md",
+    "agents/dev-1-bug-analyst/identity.md",
+    "agents/dev-1-bug-analyst/reasoning.md",
+    "agents/dev-1-bug-analyst/output.md",
+    "agents/dev-1-bug-analyst/quality.md",
+    "agents/dev-1-bug-analyst/examples.md",
+    "runs/run-34fbc64712b5/states/triage-and-impact/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md",
+    "runs/run-34fbc64712b5/states/triage-and-impact/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}

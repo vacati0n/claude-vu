@@ -1,0 +1,372 @@
+schema: framework.runtime/task-context.v1
+task_id: run-34fbc64712b5
+command: bugfix
+workflow: fix-bug v1.0.0
+run_status: Completed
+updated_at: '2026-10-19T07:22:53Z'
+objective: 'clearing_action in runtime/framework_runtime.py builds one release command and uses it in two places. It is the
+  whole clearing action for a work item blocked awaiting_recovery_task that no guard raised. It is also the optional reclaim
+  the retry-class prose offers ("To reclaim it sooner: ..."). The command ends --detail <what happened>. That text is free
+  prose in angle brackets, unquoted. A shell reads < as an input redirect, so the action cannot be run as written. The X1
+  check of verify_recovery.py, since FC-027, finds the placeholder by placeholders and rejects any open envelope that carries
+  this action. --detail is not one of the flags a human must fill: release already defaults it ("ad...'
+inputs:
+- type: defect-report
+  reference: runs/inputs/release-clearing-action-placeholder-defect-report.md
+  digest: sha256:71fa90ad70f8c8ffcafa075848b9659e
+relevant_agents:
+- phase: triage-and-impact
+  agent: dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S11
+  - S12
+  - S02
+- phase: root-cause-analysis
+  agent: dev-1-bug-analyst
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S08
+  - S12
+- phase: fix-implementation
+  agent: dev-1-implement
+  status: completed
+  required_skills:
+  - S03
+  - S06
+  - S10
+  - S12
+- phase: regression-validation
+  agent: qa
+  status: completed
+  required_skills:
+  - S07
+  - S09
+  - S11
+- phase: closure-and-communication
+  agent: orchestrator
+  status: completed
+  required_skills:
+  - S10
+  - S11
+completed_phases:
+- phase: triage-and-impact
+  agent: dev-1-bug-analyst
+  artifact: runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md
+  digest: sha256:c4a174adfd5977b782bf933cb256d202
+  validation: pass 30/30
+  attempts: 1
+- phase: root-cause-analysis
+  agent: dev-1-bug-analyst
+  artifact: runs/run-34fbc64712b5/states/root-cause-analysis/artifacts/bug-analysis.md
+  digest: sha256:36f2e84f74108ec79ddfcfb4f2271662
+  validation: pass 30/30
+  attempts: 1
+- phase: fix-implementation
+  agent: dev-1-implement
+  artifact: runs/run-34fbc64712b5/states/fix-implementation/artifacts/implementation-report.md
+  digest: sha256:a20368288cef6d6a6785edfba601af6d
+  validation: pass 32/32
+  attempts: 1
+- phase: regression-validation
+  agent: qa
+  artifact: runs/run-34fbc64712b5/states/regression-validation/artifacts/validation-report.md
+  digest: sha256:d2cd9f7f648a5d8a461dbb4db418a6f0
+  validation: pass 31/31
+  attempts: 1
+- phase: closure-and-communication
+  agent: orchestrator
+  artifact: runs/run-34fbc64712b5/states/closure-and-communication/artifacts/orchestration-result.md
+  digest: sha256:c4abc4d5ab1efc1a093041e48e545024
+  validation: pass 34/34
+  attempts: 1
+gates:
+- gate: Triage Gate
+  closes: triage-and-impact
+  decision: approved
+  owner_role: tech-lead
+  decided_by: omn-tech-lead subagent a45d41e5be2175289, recorded by session operator for vuhoangcao
+- gate: Fix Gate
+  closes: fix-implementation
+  decision: approved
+  owner_role: dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent ab11c9038a4496337, recorded by session operator for vuhoangcao
+- gate: Verification Gate
+  closes: regression-validation
+  decision: approved
+  owner_role: dev-2-reviewer
+  decided_by: omn-dev-2-reviewer subagent a95f0bf7692864b39, recorded by session operator for vuhoangcao
+- gate: Closure Gate
+  closes: closure-and-communication
+  decision: approved
+  owner_role: documentation
+  decided_by: omn-documentation subagent a1be4c26f4e69d784, recorded by session operator for vuhoangcao
+artifacts:
+  triage-and-impact: runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md
+  root-cause-analysis: runs/run-34fbc64712b5/states/root-cause-analysis/artifacts/bug-analysis.md
+  fix-implementation: runs/run-34fbc64712b5/states/fix-implementation/artifacts/implementation-report.md
+  regression-validation: runs/run-34fbc64712b5/states/regression-validation/artifacts/validation-report.md
+  closure-and-communication: runs/run-34fbc64712b5/states/closure-and-communication/artifacts/orchestration-result.md
+parallel_groups:
+- - triage-and-impact
+- - root-cause-analysis
+- - fix-implementation
+- - regression-validation
+- - closure-and-communication
+risks:
+- 'User impact: an operator clearing a non-guard awaiting_recovery_task block, or reclaiming a retry-scheduled item early,
+  copies the prescribed command and the...'
+- 'Business impact: not supplied. No business impact statement accompanied this defect, so the severity rests on technical
+  impact alone and Q-003 routes the que...'
+- 'Technical impact: a secondary recovery path fails as written, with an acceptable workaround (omit --detail, which release
+  defaults) (E-003, E-008); no state...'
+- 'Blast radius: the clearing-action builder in the runtime and every failure envelope it writes for non-guard awaiting_recovery_task
+  blocks and retry-class sch...'
+- 'User impact: An operator who copies a prescribed reclaim, or the non-guard clearing action, has the shell refuse it at
+  parse and must edit the command by han...'
+- 'Business impact: not supplied. No business impact statement accompanied this defect, so severity rests on technical impact
+  alone and Q-003 routes the questio...'
+- 'Technical impact: An emitted recovery command fails as written on every shell exercised. This is a secondary path with
+  an acceptable workaround: drop --detai...'
+- 'Blast radius: the clearing-action builder, both where it returns the command and where it embeds it (E-002); the failure
+  envelope files and run recovery ledg...'
+- 'R-001: Three demo-capture end-to-end edit tests fail in this environment (installed ffmpeg rejects an option) | certain
+  on this host | low; unrelated to the change, but full discovery exits non-zero here'
+- 'R-002: The retry reclaim now runs as written but reports nothing to reclaim on a retrying item | likely when used | low;
+  operator wait already prescribed by the prose'
+- 'R-003: runtime/README.md usage synopsis still shows a quoted bracket detail that X1 would flag if copied into an e... |
+  low | low; documentation only'
+- 'Accepted risk: the V-001 version rise outside clearing_action, accepted by dev-2-reviewer at the Fix Gate; the README synopsis
+  left unchanged (implementation...'
+- 'Unmitigated risk: the 3 pre-existing test_demo_capture failures mask any new failure in that module on this host (implementation
+  R-001); the reclaim the retr...'
+- 'Monitoring required: the X1 result on every verify_recovery.py run, expected pass; among envelopes written after the fix,
+  the count whose clearing action yie...'
+decisions:
+- 'Root cause statement: The clearing-action builder emits --detail as an unquoted human-fill placeholder although release
+  defaults that flag and no human judge...'
+- 'Why detection failed earlier: the admissibility unit tests exercise placeholder forms only on hand-built release strings
+  and the builder pin test checks only...'
+- 'C-001: trigger | A state item is blocked awaiting_recovery_task by the recovery controller with no guard, or a retryable
+  cla... | E-010, E-004, E-006'
+- 'C-002: builder | The builder composes release_cmd with a literal unquoted placeholder on --detail, a flag release defaults
+  a... | E-002, E-003, E-008'
+- 'C-003: shell | Run as written, the trailing bracket is parsed as a redirect with no target, the shell rejects the line,
+  an... | E-007'
+- 'C-004: verifier | The action carries a placeholder on a flag outside every exemption set, so X1 judges the non-retry form
+  ina... | E-008, E-009'
+- 'Proposed fix: the release action the builder emits, alone and inside the retry-class reclaim prose, must parse as written
+  in a POSIX shell and carry no place...'
+- 'Alternative options: (a) omit --detail: smallest change, but the recorded detail becomes "adapter did not report a result",
+  which misdescribes a non-guard es...'
+- 'Regression risk: low'
+- 'Regression scope: retry-class actions, which embed the same release_cmd string; non-guard aggregation-conflict and dependency-failure
+  envelopes, which return...'
+- 'Root cause statement: The clearing-action builder treats release --detail as an operator-fill slot and emits it as an unquoted
+  multi-word angle-bracket place...'
+- 'Why detection failed earlier: no check sends the builder''s emitted release command through placeholders or a shell. The
+  admissibility unit tests use hand-bui...'
+- 'C-001: trigger | A retryable class with budget left moves the item to retrying and the builder writes its action; no current...
+  | E-016, E-018, E-011'
+- 'C-002: builder | The builder fills --detail with an unquoted multi-word bracket placeholder in one shared command although
+  r... | E-002, E-003, E-019'
+- 'C-003: shell | As written, bash, PowerShell, and cmd.exe each reject the line at parse and release never runs, while the
+  f... | E-007, E-021'
+- 'C-004: verifier | The emitted action violates the runs-as-written contract X1 enforces, a placeholder on a flag with no
+  exemp... | E-009, E-020, E-017'
+- 'Proposed fix: The builder''s release command, both where it is the whole action and where the retry prose embeds it, must
+  parse as written in bash, PowerShell...'
+- 'Alternative options: (a) Drop --detail. This is the smallest change and also parses with no placeholder, but the recorded
+  detail becomes "adapter did not rep...'
+- 'Regression scope: retry-class envelopes, which embed the shared command, and X1, which treats them as prose only while
+  the none required prefix holds (E-006,...'
+- 'V-001: RUNTIME_VERSION raised 0.10.0 to 0.10.1 in C-001, outside clearing_action | Triage Gate condition limiting the change
+  to clearing_action | FR-07 requires the constant to rise when runtime behaviour changes, and the emitted clearing action
+  is runt...'
+- 'V-002: Existing test pin in C-003 changed from 0.10.0 to 0.10.1 | Analysis Validation Plan, which names only the new test
+  module | The pin asserts the exact constant and fails on any rise; it keeps an exact equality, so nothing is weakened'
+- 'V-003: Detail text chosen as "operator cleared the block with the prescribed release action" in C-001 | Fix Strategy, which
+  leaves the literal to the implementation | Bracket-free, states who cleared the block, and is what release records in the
+  transition, envelope resolut...'
+validation_requirements:
+  test_focus:
+  - 'Verification steps: repeat steps 1 to 5 of the reproduction and expect placeholders to return an empty list for both
+    non-guard classes and all three retry cl...'
+  - 'Regression tests added: a test that calls the builder itself, for every branch that names a command including the retry
+    reclaim, and asserts placeholders ret...'
+  - 'Monitoring signals after release: the X1 result on every verify_recovery.py run, expected pass; the count of open envelopes
+    whose clearing action yields a no...'
+  - 'Verification steps: Repeat reproduction steps 1 to 5 and expect placeholders to be empty for both non-guard classes and
+    all three retry classes. Repeat step...'
+  - 'Regression tests added: in a new module, tests/test_release_clearing_action.py, driven only by builder output and never
+    by hand-built strings: (1) for aggreg...'
+  - 'Monitoring signals after release: the X1 result on every verify_recovery.py run, expected pass; among envelopes written
+    after the fix, the count whose cleari...'
+  evidence:
+  - 'T-001: New module, 12 tests: placeholders empty for shlex.split of the non-retry action (2 classes) and for the re...
+    | regression | C-001, C-002'
+  - 'T-002: Defect witness: with the pre-fix unquoted bracket detail restored in the builder, the module must fail; obs...
+    | regression | C-001, C-002'
+  - 'T-003: Mutation witness: with the bracket detail quoted through _shell_word (rejected alternative b), the module m...
+    | regression | C-002'
+  - 'T-004: Mutation witness: with an unquoted multi-word bracket-free detail, the module must fail; observed 1 failure...
+    | regression | C-002'
+  - 'T-005: Baseline regression re-run: admissibility table and gate-rollback suites unchanged alongside the new module...
+    | regression | C-001, C-002'
+  - 'T-006: Knowledge suite including the version pin, 47 tests | unit | C-001, C-003'
+  - 'T-007: Emitted non-retry action parses as written: bash syntax check exit 0, PowerShell parser 0 errors, cmd.exe w...
+    | static | C-001'
+  - 'T-008: End-to-end: the unedited emitted action run against an item blocked awaiting_recovery_task by the recovery...
+    | end-to-end | C-001'
+  - 'T-009: Recovery verifier, 74 of 74 checks, X1 over 9 open envelopes across 4 induced runs | integration | C-001'
+  - 'T-010: Multi-phase verifier, 15 of 15 checks | integration | C-001'
+  - 'T-011: Full unit suite on a clean clone of HEAD plus this change, every module except the demo-capture module that...
+    | regression | C-001, C-002, C-003'
+  - 'T-012: Remaining verifiers: validators 6/6, manifests 2/2, registry coverage 8/8, vertical slice 10/10, self-hosti...
+    | integration | C-001'
+  verification:
+  - 'Verification method: Baseline captured before any edit (admissibility, gate-rollback and knowledge suites, 111 tests
+    OK; full suite on an unchanged HEAD clon...'
+  - 'Commands executed: python -m unittest -v tests.test_release_clearing_action; the same module three times under temporary
+    mutants (pre-fix detail, quoted brac...'
+  - 'Result summary: 12 evidence entries executed, 12 passed, 0 failed. Full discovery on the fixed clone ran 586 tests with
+    the same 3 demo-capture failures as t...'
+  - 'Unverified areas: none'
+  acceptance_criteria:
+  - 'AC-001: the emitted release action, both on its own and inside the retry reclaim, should parse as written and carry...
+    | root-cause bug-analysis, Symptom Summary, Expected behavior | integration'
+  - 'AC-002: X1 should admit it without an exemption | root-cause bug-analysis, Symptom Summary, Expected behavior | integration'
+  - 'AC-003: every verifier should still pass. | root-cause bug-analysis, Symptom Summary, Expected behavior | integration'
+  - 'AC-004: The builder''s release command, both where it is the whole action and where the retry prose embeds it, must...
+    | root-cause bug-analysis, Fix Strategy | integration'
+  - 'AC-005: give --detail a fixed literal with no angle brackets that truthfully describes an operator clearing the con...
+    | root-cause bug-analysis, Fix Strategy | end-to-end'
+  - 'AC-006: The none required prefix and the release subcommand name in the builder must not change | root-cause bug-analysis,
+    Fix Strategy | unit'
+  - 'AC-007: The 33 committed resolved entries are run evidence and stay as recorded | root-cause bug-analysis, Fix Strategy
+    | integration'
+  - 'AC-008: Repeat reproduction steps 1 to 5 and expect placeholders to be empty for both non-guard classes and all thr...
+    | root-cause bug-analysis, Validation Plan | unit'
+  - 'AC-009: Repeat step 6 and expect bash exit 0 and no PowerShell parse error. | root-cause bug-analysis, Validation Plan
+    | integration'
+  - 'AC-010: Repeat step 8 with the unedited non-retry action and expect blocked -> pending, with the new literal record...
+    | root-cause bug-analysis, Validation Plan | end-to-end'
+  - 'AC-011: In a disposable copy of the framework root and tests, run verify_recovery.py and verify_multi_phase.py, exp...
+    | root-cause bug-analysis, Validation Plan | integration'
+  - 'AC-012: in a new module, tests/test_release_clearing_action.py, driven only by builder output and never by hand-bui...
+    | root-cause bug-analysis, Validation Plan | unit'
+  - 'AC-013: (1) for aggregation-conflict and dependency-failure without a guard, the action''s subcommand is release and...
+    | root-cause bug-analysis, Validation Plan | unit'
+  - 'AC-014: (2) for output-schema-failure, worker-loss and invocation-transport-failure, the action starts none require...
+    | root-cause bug-analysis, Validation Plan | unit'
+  - 'AC-015: (3) the reclaim''s argv equals the non-retry action''s argv for the same item | root-cause bug-analysis, Validation
+    Plan | unit'
+  - 'AC-016: (4) no shell-tokenised argument of either form contains an angle bracket | root-cause bug-analysis, Validation
+    Plan | unit'
+  - 'AC-017: (5) clearing_action_admissible admits the unedited non-retry action against an item the recovery controller...
+    | root-cause bug-analysis, Validation Plan | unit'
+  - 'AC-018: (6) with guard G3-PREDECESSOR the non-retry classes still return prose that names no command. | root-cause bug-analysis,
+    Validation Plan | unit'
+  - 'AC-019: tests/test_clearing_action_admissibility.py and the stale fixtures in tests/test_gate_rollback.py stay unto...
+    | root-cause bug-analysis, Validation Plan | unit'
+open_questions:
+- 'Q-001: How do the host''s native non-POSIX shells treat the emitted action? Only bash was exercised; running it the...
+  | no | orchestrator'
+- 'Q-002: Does a full verify_recovery.py run currently fail X1, or do its induced scenarios never leave a non-guard r... |
+  no | qa'
+- 'Q-003: What is the business cost of an unrunnable recovery command for operators? No impact statement was supplied... |
+  no | product-owner'
+- 'Q-004: Separate defect, outside this fix: the retry prose offers a reclaim that release refuses for a retrying ite... |
+  no | architect'
+- 'Q-005: Is the non-guard non-retry release branch meant to be reachable? aggregation-conflict has a policy row but... |
+  no | architect'
+- 'Q-001: Resolved by this phase and kept so the triage reference resolves: PowerShell and cmd.exe reject the emitted... |
+  no | orchestrator'
+- 'Q-002: Resolved by this phase and kept so the triage reference resolves: X1 passes today, so the verifier failure... |
+  no | qa'
+- 'Q-001: Does the Fix Gate accept the FR-07 version rise to 0.10.1 although the Triage Gate condition limited the ch... |
+  no | tech-lead'
+- 'Q-001: Should DF-001, a timing fault in verify_recovery.py scenario B, in code this change does not touch and outside its
+  scope, be opened as its own fix-bug...'
+- 'Q-002: Behavior was confirmed only on this Windows host with Python 3.14.0; a CI run of the new module and verify_recovery.py
+  would confirm it elsewhere. Rou...'
+- 'Q-001: The fix-bug Phase Model lists known issue status as an input to this phase and none was supplied, so HO-004 rests
+  on the validation report alone. Does...'
+- 'Q-002: No business impact statement was supplied, so severity rests on technical impact alone (root-cause open question
+  3, non-blocking). Routes to product-o...'
+- 'Q-003: Implementation open question 1 asks whether the V-001 rise of RUNTIME_VERSION to 0.10.1 conforms to the Triage Gate
+  condition limiting the change to c...'
+changed_files:
+- runtime/framework_runtime.py (modified)
+- tests/test_release_clearing_action.py (added)
+- tests/test_knowledge.py (modified)
+findings:
+- 'DF-001: low | operational | .claude/runtime/verify_recovery.py wait_for_backoff (line 277) via scenario_b'
+verdicts:
+- 'Decision: pass'
+- 'Rationale: all 19 criteria are met on evidence executed in this invocation, none is not-met or blocked, and the only defect,
+  DF-001, is low and lies in verif...'
+- 'Blocking defects outstanding: None identified.'
+- 'Readiness recommendation: recommend that dev-2-reviewer, who decides the fix-bug Verification Gate because this agent produced
+  its evidence, approve it, carr...'
+affected_areas:
+  determinable: true
+  declared: []
+  triggered:
+    database:
+    - source: artifact:fix-implementation
+      term: migration
+    - source: artifact:regression-validation
+      term: database
+    performance:
+    - source: artifact:regression-validation
+      term: performance
+    security:
+    - source: artifact:triage-and-impact
+      term: token
+    - source: artifact:regression-validation
+      term: security
+  not_triggered:
+  - avalonia-ui
+  - react-frontend
+  sources_scanned:
+  - input:defect-report
+  - artifact:triage-and-impact
+  - artifact:root-cause-analysis
+  - artifact:fix-implementation
+  - artifact:regression-validation
+  - artifact:closure-and-communication
+relevant_skills:
+  triage-and-impact:
+    S11: required
+    S12: required
+    S02: required
+  root-cause-analysis:
+    S03: required
+    S06: required
+    S08: required
+    S12: required
+  fix-implementation:
+    S03: required
+    S06: required
+    S10: required
+    S12: required
+  regression-validation:
+    S07: required
+    S09: required
+    S11: required
+  closure-and-communication:
+    S10: required
+    S11: required
+repository_context:
+  relevant_modules: []
+  relevant_files:
+  - runtime/framework_runtime.py (modified)
+  - tests/test_release_clearing_action.py (added)
+  - tests/test_knowledge.py (modified)
+  rescan_required_when:
+  - the scope or the accepted design changes
+  - a dependency this context does not name is discovered
+  - a named module or file no longer exists at the recorded path

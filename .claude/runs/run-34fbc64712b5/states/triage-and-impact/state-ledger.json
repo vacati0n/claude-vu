@@ -1,0 +1,78 @@
+{
+  "run_id": "run-34fbc64712b5",
+  "slice": "phase:triage-and-impact",
+  "runtime_version": "0.10.0",
+  "status": "completed",
+  "queue_status": "Executing",
+  "command_id": "bugfix",
+  "workflow_id": "fix-bug",
+  "workflow_version": "1.0.0",
+  "state_id": "triage-and-impact",
+  "work_item_id": "run-34fbc64712b5::triage-and-impact",
+  "idempotency_key": "sha256:b020c2ac1ac2cfb7e019bb3cccdf96de",
+  "attempt": 1,
+  "agent_id": "dev-1-bug-analyst",
+  "agent_version": "1.0.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "invocation_id": "inv-34fbc64712b5-01-001",
+  "input_digest": "sha256:71fa90ad70f8c8ffcafa075848b9659e",
+  "context_digest": "sha256:d349d25df9ecf914b11063912c8be2cd",
+  "module_load_order": [
+    "agents/dev-1-bug-analyst/system.md",
+    "agents/dev-1-bug-analyst/identity.md",
+    "agents/dev-1-bug-analyst/reasoning.md",
+    "agents/dev-1-bug-analyst/execution.md",
+    "agents/dev-1-bug-analyst/output.md",
+    "agents/dev-1-bug-analyst/quality.md",
+    "agents/dev-1-bug-analyst/examples.md"
+  ],
+  "artifact_path": "runs/run-34fbc64712b5/states/triage-and-impact/artifacts/bug-analysis.md",
+  "conditional_artifact_globs": [],
+  "result_envelope_path": "runs/run-34fbc64712b5/states/triage-and-impact/result-envelope.json",
+  "validator": "bug_analysis_validator",
+  "load_profile_mode": "progressive",
+  "context_budget": {
+    "modules_full_bytes": 99757,
+    "modules_core_bytes": 52587,
+    "slice_all_bytes": 107490,
+    "slice_required_bytes": 9220,
+    "inputs_bytes": 2662,
+    "upstream_full_bytes": 0,
+    "upstream_read_first_bytes": 0,
+    "task_context_bytes": 3157,
+    "fixed_bytes": 13342,
+    "legacy_estimate_bytes": 223251,
+    "progressive_estimate_bytes": 80968,
+    "legacy_estimate_tokens": 55812,
+    "progressive_estimate_tokens": 20242,
+    "savings_pct": 63.7
+  },
+  "execution_started_at": "2026-10-19T05:18:56Z",
+  "execution_completed_at": "2026-10-19T05:28:22Z",
+  "validation": {
+    "result": "pass",
+    "checksRun": 30,
+    "checksPassed": 30,
+    "blockingFailures": 0,
+    "correctableFailures": 0,
+    "notMachineCheckable": 3,
+    "counts": {
+      "sections": 9,
+      "status": "provisional",
+      "identifiers": {
+        "E": 15,
+        "C": 4,
+        "Q": 3
+      },
+      "tableRows": {
+        "Reproduction": 15,
+        "Root Cause Analysis": 4
+      }
+    },
+    "undeclaredSideEffects": []
+  },
+  "agent_result_status": "succeeded",
+  "artifact_digest": "sha256:c4a174adfd5977b782bf933cb256d202",
+  "recovery": null
+}

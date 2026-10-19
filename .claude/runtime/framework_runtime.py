@@ -122,7 +122,7 @@ RUNS = CLAUDE / "runs"
 # copied runtime names paths that actually exist on disk.
 FW_PREFIX = CLAUDE.name
 
-RUNTIME_VERSION = "0.11.0"
+RUNTIME_VERSION = "0.11.1"
 
 SLICES = {
     "scope-and-acceptance": "vertical-slice-4-product-owner-execution",
@@ -2046,8 +2046,11 @@ def clearing_action(run_id: str, item: dict, cls, blocked_reason: str | None, *,
     `verify_recovery.py` checks for every envelope it induces.
     """
     phase = item["state_id"]
+    # `release` needs no human judgement here, so the detail is fixed text, quoted: the command
+    # runs as written, and the detail it records says that an operator cleared the block.
+    detail = _shell_word("operator cleared the block with the prescribed release action")
     release_cmd = (f"python {FW_PREFIX}/runtime/framework_runtime.py release --run-id {run_id} "
-                   f"--phase {phase} --reason tool_failure --detail <what happened>")
+                   f"--phase {phase} --reason tool_failure --detail {detail}")
     if cls.action == rp.RETRY:
         return (f"none required; the work item becomes dispatchable at {cls.available_at}, "
                 f"and `next` routes it then. To reclaim it sooner: {release_cmd}")

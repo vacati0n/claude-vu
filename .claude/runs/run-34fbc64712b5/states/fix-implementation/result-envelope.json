@@ -1,0 +1,128 @@
+{
+  "invocation_id": "inv-34fbc64712b5-03-001",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-34fbc64712b5/states/fix-implementation/artifacts/implementation-report.md"
+  ],
+  "structured_output": {
+    "reportId": "IR-2026-1020",
+    "workflowPhase": "fix-implementation",
+    "status": "complete",
+    "verificationStatus": "verified",
+    "reviewStatus": "pending-review",
+    "counts": {
+      "changeSetEntries": 3,
+      "testEvidenceEntries": 12,
+      "deviations": 3,
+      "residualRisks": 3,
+      "openQuestions": 1
+    },
+    "evidenceExecution": {
+      "entriesExecuted": 12,
+      "entriesPassed": 12,
+      "entriesFailed": 0,
+      "keyResults": {
+        "tests.test_release_clearing_action": "12/12 OK",
+        "mutation witnesses": "pre-fix detail restored: 7 of 12 tests fail (18 subtests); quoted bracket detail: 18 subtest failures; unquoted bracket-free detail: 1 failure; fix restored each time",
+        "admissibility + gate_rollback + new module": "76/76 OK",
+        "tests.test_knowledge": "47/47 OK",
+        "verify_recovery.py (temp copy)": "74/74, X1 pass",
+        "verify_multi_phase.py (temp copy)": "15/15",
+        "full suite fixed clone": "586 run; only the 3 pre-existing demo-capture failures; 550/550 OK excluding that module",
+        "other verifiers (temp clone)": "validators 6/6, manifests 2/2, registry coverage 8/8, vertical slice 10/10, self-hosting 8/8",
+        "end-to-end release (temp copy)": "exit 0, blocked -> pending, fixed detail recorded"
+      },
+      "baseline": "admissibility, gate_rollback, knowledge 111/111 OK before any edit; full suite on unchanged HEAD clone 574 run with the same 3 demo-capture failures"
+    },
+    "qualityChecks": {
+      "total": 45,
+      "passed": 45,
+      "failed": 0,
+      "results": {
+        "S1": "pass",
+        "S2": "pass",
+        "S3": "pass",
+        "S4": "pass",
+        "S5": "pass",
+        "S6": "pass",
+        "S7": "pass",
+        "S8": "pass",
+        "D1": "pass",
+        "D2": "pass",
+        "D3": "pass",
+        "D4": "pass",
+        "D5": "pass",
+        "D6": "pass",
+        "M1": "pass",
+        "M5": "pass",
+        "M7": "pass",
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "M3": "pass",
+        "M2": "pass",
+        "K1": "pass",
+        "K2": "pass",
+        "M4": "pass",
+        "V1": "pass",
+        "V2": "pass",
+        "V3": "pass",
+        "B1": "pass",
+        "B2": "pass",
+        "B3": "pass",
+        "B4": "pass",
+        "B5": "pass",
+        "B6": "pass",
+        "B7": "pass",
+        "M6": "pass",
+        "A1": "pass",
+        "A2": "pass",
+        "A3": "pass",
+        "C1": "pass",
+        "C2": "pass",
+        "C3": "pass",
+        "C4": "pass",
+        "C5": "pass"
+      },
+      "notes": {
+        "E4": "pre-existing demo-capture failures recorded as R-001 with the baseline clone run as evidence",
+        "B2": "disposable copies and clones written outside the repository under the session temp directory",
+        "B4": "tests/test_knowledge.py pin updated to the new exact value, not weakened (V-002)",
+        "V2": "V-001 changes what the Triage Gate condition accepted and is escalated as Q-001"
+      }
+    },
+    "validationEngine": {
+      "validator": "implementation_report_validator",
+      "result": "PASS",
+      "checksRun": 32,
+      "checksPassed": 32,
+      "blockingFailures": 0,
+      "correctableFailures": 0,
+      "notMachineCheckable": 3
+    },
+    "notMachineCheckableObligations": {
+      "N1": "met: each change-set row describes the change made at that path",
+      "N2": "met: each test row exercises the entries its Covers cell names; T-002 to T-004 are mutation witnesses of C-002 against C-001",
+      "N3": "met: no hidden side effect; only the emitted --detail text and the version constant changed",
+      "N4": "met: no new abstraction or dependency; the one new file is the test module the analysis names, reuse of _shell_word at rung 2"
+    }
+  },
+  "evidence_refs": [
+    "agents/dev-1-implement/system.md",
+    "agents/dev-1-implement/reasoning.md",
+    "agents/dev-1-implement/output.md",
+    "agents/dev-1-implement/quality.md",
+    "runs/run-34fbc64712b5/states/fix-implementation/invocation-envelope.json"
+  ],
+  "confidence": "high",
+  "declared_side_effects": [
+    "runtime/framework_runtime.py",
+    "tests/test_release_clearing_action.py",
+    "tests/test_knowledge.py",
+    "runs/run-34fbc64712b5/states/fix-implementation/artifacts/implementation-report.md",
+    "runs/run-34fbc64712b5/states/fix-implementation/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}
