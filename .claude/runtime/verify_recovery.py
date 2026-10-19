@@ -589,17 +589,47 @@ def runtime_command(action: str) -> list | None:
     return argv
 
 
+def placeholders(argv: list, exempt: set = frozenset()) -> list:
+    """Every placeholder a clearing action's argv may not carry, each as its text.
+
+    A placeholder is free text in angle brackets, written unquoted, so `shlex` splits one of
+    several words (`<fill in owner name>`) across arguments and leaves one glued to its
+    neighbours (`x<who>`, `<who>x`) inside a single argument; neither survives as one argument
+    that starts with `<` and ends with `>`. An argument that opens `<` without closing it
+    therefore extends the placeholder to the next argument that closes it, or to the end when
+    none does, and any argument carrying a bracket at all is part of one. Only a placeholder
+    that is exactly one whole argument directly after a flag in `exempt` is the human's to fill;
+    every other one is not executable as written.
+    """
+    found, i = [], 0
+    while i < len(argv):
+        arg = argv[i]
+        if "<" not in arg and ">" not in arg:
+            i += 1
+            continue
+        end = i
+        if "<" in arg and ">" not in arg[arg.index("<"):]:
+            end = next((k for k in range(i + 1, len(argv)) if ">" in argv[k]), len(argv) - 1)
+        whole = (end == i and arg.startswith("<") and arg.endswith(">")
+                 and arg.count("<") == arg.count(">") == 1)
+        if not (whole and i > 0 and argv[i - 1] in exempt):
+            found.append(" ".join(argv[i:end + 1]))
+        i = end + 1
+    return found
+
+
 def executable(argv: list, decided_by: str = "verify_recovery") -> list:
     """A clearing action's argv with its one human placeholder, `--decided-by <who>`, filled.
 
     The authoriser is the one argument the runtime cannot know, so the envelope leaves it a
     placeholder rather than defaulting it from who rejected; executing the action as written
-    means supplying exactly that and nothing else. Any other placeholder is a harness fault.
+    means supplying exactly that and nothing else. Any other placeholder, in any form
+    `placeholders` recognises, is a harness fault.
     """
     out = list(argv)
     if "--decided-by" in out and out[out.index("--decided-by") + 1] == "<who>":
         out[out.index("--decided-by") + 1] = decided_by
-    left = [a for a in out if a.startswith("<") and a.endswith(">")]
+    left = placeholders(out)
     assert not left, f"clearing action still carries placeholders {left}: {argv}"
     return out
 
@@ -634,6 +664,9 @@ def clearing_action_admissible(run_id: str, entry: dict) -> tuple[bool, str]:
 
     A retry-class action states that nothing is required and appends `release` as an optional
     reclaim; the prescription is the wait, so it is judged as prose.
+
+    A placeholder is whatever `placeholders` recognises, split, glued, or unterminated alike.
+    One that "may stay" above does so only as one whole argument directly after its flag.
     """
     state = load_state(run_id)
     items = state["work_items"]
@@ -660,11 +693,9 @@ def clearing_action_admissible(run_id: str, entry: dict) -> tuple[bool, str]:
              else judgement if (sub == "policy-exception"
                                 and awaiting_policy_exception(opt("--phase")))
              else set())
-    placeholders = [a for i, a in enumerate(argv)
-                    if a.startswith("<") and a.endswith(">")
-                    and not (i > 0 and argv[i - 1] in human)]
-    if placeholders:
-        return False, f"placeholder argument {placeholders} in {argv}"
+    left = placeholders(argv, human)
+    if left:
+        return False, f"placeholder argument {left} in {argv}"
 
     if sub == "release":
         it = items.get(opt("--phase"))
