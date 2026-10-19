@@ -1,0 +1,696 @@
+{
+  "invocation_id": "inv-79276e78d773-06-001",
+  "run_id": "run-79276e78d773",
+  "work_item_id": "run-79276e78d773::documentation-and-release-handoff",
+  "idempotency_key": "sha256:03232e227c479442ef46a03c68953e73",
+  "state_id": "documentation-and-release-handoff",
+  "phase_index": 6,
+  "agent_id": "omn-documentation",
+  "agent_version": "1.2.0",
+  "adapter": "host-subagent",
+  "dispatch_mode": "native",
+  "host_registration": "agents/omn-documentation.agent.md",
+  "capability_bindings": {
+    "manifest": "agents/omn-documentation/manifest.yaml",
+    "load_order": [
+      "agents/omn-documentation/system.md",
+      "agents/omn-documentation/identity.md",
+      "agents/omn-documentation/reasoning.md",
+      "agents/omn-documentation/execution.md",
+      "agents/omn-documentation/output.md",
+      "agents/omn-documentation/quality.md",
+      "agents/omn-documentation/examples.md"
+    ],
+    "module_digests": {
+      "agents/omn-documentation/system.md": "sha256:4e71e507b904998ddee1b673971dd2ed",
+      "agents/omn-documentation/identity.md": "sha256:f542a0ce21283d9bb3c2e80612b283ae",
+      "agents/omn-documentation/reasoning.md": "sha256:21c2b06db283206cca1efe0a7d21f72b",
+      "agents/omn-documentation/execution.md": "sha256:935d4866feec31680640e647446fcbb4",
+      "agents/omn-documentation/output.md": "sha256:a97dc33c33344552e60138b4f2a9923a",
+      "agents/omn-documentation/quality.md": "sha256:d329cae4f9a635367385cd1be066f64d",
+      "agents/omn-documentation/examples.md": "sha256:baead714ded57fbb1d36b103b957ee78"
+    },
+    "load_profile": {
+      "mode": "progressive",
+      "policy_ref": "config/runtime.md#progressive-module-loading",
+      "core": [
+        "agents/omn-documentation/system.md",
+        "agents/omn-documentation/reasoning.md",
+        "agents/omn-documentation/output.md",
+        "agents/omn-documentation/quality.md"
+      ],
+      "on_demand": [
+        {
+          "path": "agents/omn-documentation/identity.md",
+          "role": "agent-contract",
+          "load_when": "before deciding an error class, a refusal, a decision right, or an escalation; whenever the reasoning procedure or the quality contract refers to it; and whenever a supplied input asks for something the charter's boundary table does not settle"
+        },
+        {
+          "path": "agents/omn-documentation/execution.md",
+          "role": "execution-lifecycle",
+          "load_when": "when the run leaves the direct Execution -> Completion path (Waiting, Delegation, Retry, or Failure), when a stage's exit condition is unclear, and before any handoff or gate question the charter does not settle"
+        },
+        {
+          "path": "agents/omn-documentation/examples.md",
+          "role": "reference-examples",
+          "load_when": "only when the output shape is still ambiguous after the output contract has been read, or on a repair pass for a failed structural check"
+        }
+      ],
+      "core_bytes": 45565,
+      "full_bytes": 90936
+    },
+    "contract_checks": {
+      "manifest_identifier": true,
+      "manifest_version": true,
+      "manifest_status_active": true,
+      "load_order_resolves": true,
+      "contract_sections": {
+        "required": 12,
+        "present": 12,
+        "missing": []
+      },
+      "contract_version": "1.0.0",
+      "result": "pass"
+    },
+    "capabilities": [
+      "documentation",
+      "release-communication"
+    ],
+    "agent_skills": [
+      {
+        "skillCode": "S11",
+        "proficiency": "Primary",
+        "registryIdentifier": "observability-logging",
+        "specificationPath": "skills/logging/observability-logging.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S10",
+        "proficiency": "Primary",
+        "registryIdentifier": "git-collaboration",
+        "specificationPath": "skills/git/git-collaboration.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S02",
+        "proficiency": "Secondary",
+        "registryIdentifier": "domain-modeling",
+        "specificationPath": "skills/business/domain-modeling.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S12",
+        "proficiency": "Secondary",
+        "registryIdentifier": "error-handling-strategy",
+        "specificationPath": "skills/error-handling/error-handling-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S07",
+        "proficiency": "Secondary",
+        "registryIdentifier": "testing-strategy",
+        "specificationPath": "skills/testing/testing-strategy.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S03",
+        "proficiency": "Secondary",
+        "registryIdentifier": "engineering-playbook",
+        "specificationPath": "skills/dotnet/engineering-playbook.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S01",
+        "proficiency": "Secondary",
+        "registryIdentifier": "clean-architecture-checklist",
+        "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      },
+      {
+        "skillCode": "S09",
+        "proficiency": "Secondary",
+        "registryIdentifier": "secure-engineering",
+        "specificationPath": "skills/security/secure-engineering.md",
+        "status": "active",
+        "resolved": true,
+        "detail": "skillCode and specificationPath agree"
+      }
+    ],
+    "phase_skills": [
+      {
+        "skillCode": "S11",
+        "registryIdentifier": "observability-logging",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S10",
+        "registryIdentifier": "git-collaboration",
+        "status": "active",
+        "resolved": true
+      },
+      {
+        "skillCode": "S12",
+        "registryIdentifier": "error-handling-strategy",
+        "status": "active",
+        "resolved": true
+      }
+    ]
+  },
+  "skill_dispatch": [
+    {
+      "skillCode": "S11",
+      "displayName": "Logging and Observability",
+      "specificationPath": "skills/logging/observability-logging.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S10",
+      "displayName": "Git Collaboration",
+      "specificationPath": "skills/git/git-collaboration.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S12",
+      "displayName": "Error Handling",
+      "specificationPath": "skills/error-handling/error-handling-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "phase-mandatory"
+    },
+    {
+      "skillCode": "S02",
+      "displayName": "Business Analysis and Domain Modeling",
+      "specificationPath": "skills/business/domain-modeling.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S07",
+      "displayName": "Testing Strategy",
+      "specificationPath": "skills/testing/testing-strategy.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S03",
+      "displayName": ".NET Engineering",
+      "specificationPath": "skills/dotnet/engineering-playbook.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S01",
+      "displayName": "Architecture Foundations",
+      "specificationPath": "skills/architecture/clean-architecture-checklist.md",
+      "status": "required",
+      "basis": "domain-general skill",
+      "source": "agent-manifest (Secondary)"
+    },
+    {
+      "skillCode": "S09",
+      "displayName": "Security Engineering",
+      "specificationPath": "skills/security/secure-engineering.md",
+      "status": "required",
+      "area": "security",
+      "basis": "area security triggered by 'token' in input:architecture-context",
+      "source": "agent-manifest (Secondary)"
+    }
+  ],
+  "input_contract": {
+    "accepted_types": [
+      "implementation-report",
+      "validation-report",
+      "review-package",
+      "deployment-status",
+      "technical-recommendation",
+      "scope-definition",
+      "technical-design",
+      "execution-plan",
+      "bug-analysis",
+      "monitoring-health-record",
+      "final-change-summary",
+      "stakeholder-list",
+      "verification-report",
+      "release-checklist",
+      "known-issues",
+      "risk-profile",
+      "closure-context",
+      "communication-requirements",
+      "existing-documentation",
+      "architecture-context"
+    ],
+    "required_types": [],
+    "supplied": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/okf-lessons-architecture-context.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-architecture-context.md",
+        "text": "# Architecture Context \u2014 Lesson Store as an Open Knowledge Format Bundle\n\n## The current store\n\n- `runtime/knowledge.py` (FC-022) owns the store through three pieces:\n  - `load_store(root)` returns the document `{schema, lessons: [...]}`, or None.\n  - `write_store(root, data)` writes canonical bytes atomically, through a temporary file and\n    `os.replace`, and only when the bytes differ.\n  - `StoreLock` is an exclusive lock file, `memory/lessons/lessons.store.lock`.\n\n  Harvest, governance, recall, effectiveness, the report and the aggregation step all go through\n  `load_store` and `write_store`. If their dict interface stays the same, every caller stays\n  unchanged.\n- A lesson record has a closed field list (`LESSON_FIELDS`):\n  - `lesson_id`: `L-` plus 10 hex characters of the fingerprint digest;\n  - `fingerprint`, `kind`, `artifact_type`, `check_id`, `check_description`, `check_severity`,\n    `gate`, `phases`, `occurrences`, `distinct_runs`, `first_seen`, `last_seen`;\n  - `evidence`: run-relative references such as `runs/<run>/events.jsonl#E-0029`;\n  - `evidence_state`, `status`, `owner`, `rationale`, `remedy`;\n  - `history`: governance actions, each with an actor and a time.\n\n  Timestamps have the form `YYYY-MM-DDTHH:MM:SSZ`.\n- `render_section` builds the bounded, labelled prompt section from lesson records, and\n  neutralises every field (CR-005). It must receive the same records as before.\n\n## OKF v0.2 essentials\n\n- **Files.** `index.md` and `log.md` are reserved. Every other `.md` is a concept document.\n- **Frontmatter.** It is delimited by `---`, and `type` is the only required key. Consumers must\n  preserve unknown keys.\n- **Provenance and trust fields:**\n  - `sources` entries require `resource`;\n  - `generated` requires `by`;\n  - `verified` is a list of `{by, at}`, and a bare map counts as one entry;\n  - `status` defaults to `stable`;\n  - `stale_after` is an absolute instant.\n- **Actors** take one of three forms: `<producer>/<version>`, `human:<id>` or `process:<id>`.\n- **index.md.** A root `index.md` may carry only one frontmatter key, `okf_version: \"0.2\"`. Its\n  body is `# Heading` sections of `* [Title](url) - desc` entries.\n- **log.md.** It starts with `# Title`, followed by `## YYYY-MM-DD` groups, newest first. Entries\n  have the form `* **Creation|Update|Deprecation**: ...`.\n- **\u00a711 conformance:**\n  - every non-reserved `.md` has parseable frontmatter;\n  - every frontmatter block has a non-empty `type`;\n  - the reserved files follow \u00a78 and \u00a79.\n\n## Constraints from the codebase\n\n- The standard library has no YAML parser. The change needs a deterministic writer, and a parser\n  for the subset that the writer emits. The conformance check must parse the frontmatter it judges.\n- `omn_agent/source.py` excludes paths by fnmatch on the name of each path part\n  (`EXCLUDE_PATTERNS`, today `lessons.store.*`). That pattern does not cover a bundle of `index.md`,\n  `log.md` and `L-*.md` files, and generic names such as `index.md` cannot be excluded by name\n  alone.\n- `runtime/optimize_memory.py` rewrites `memory/*.md` to reduce token cost. It skips three kinds of\n  file: denied path segments, denied names, and files that declare themselves generated.\n- The memory directory is excluded from the context slice (`memory/*`), so the bundle's documents\n  are not slice members.\n- Tests in `tests/test_knowledge.py` reference `STORE_REL`, the JSON file name, and the\n  `lessons.store.*` exclusion. The backward-compatibility tests compare a dispatch by the 0.9.0\n  runtime with a current one.\n- `change_proposal_validator.py` F9 validates release checklist items per proposal, and requires\n  only the mandatory items. A new mandatory item would therefore invalidate every recorded proposal.\n\n## Authoring rules\n\n- Artifact validators reject the substring of the host vendor name (check `C3.2`), so write paths\n  without the dot-directory prefix.\n- Never edit `runs/` evidence.\n- Edit the framework directory, then run `python tests/test_bundled_payload.py --sync`.",
+        "digest": "sha256:8859dd1736058635fdf5470ac277b2dc"
+      },
+      {
+        "type": "review-package",
+        "reference": "runs/run-79276e78d773/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/hopeful-einstein-00bc6a/.claude/runs/run-79276e78d773/states/quality-review/artifacts/review-package.md",
+        "text": "```yaml\nreviewPackage:\n  packageId: RP-2026-0011\n  reviewReference: run-79276e78d773 implement-feature quality-review, the uncommitted working-tree change against HEAD 915e884 that moves the lesson store to an OKF v0.2 bundle (implementation report IR-2026-1014)\n  sourceInputs:\n    - type: feature-request\n      reference: runs/inputs/okf-lessons-feature-request.md\n    - type: change-request\n      reference: runs/inputs/okf-lessons-change-request.md\n    - type: business-intent\n      reference: runs/inputs/okf-lessons-business-intent.md\n    - type: architecture-context\n      reference: runs/inputs/okf-lessons-architecture-context.md\n    - type: implementation-report\n      reference: runs/run-79276e78d773/states/implementation/artifacts/implementation-report.md\n    - type: technical-design\n      reference: runs/run-79276e78d773/states/solution-design-and-risk-assessment/artifacts/technical-design.md\n    - type: pull-request-diff\n      reference: working tree versus HEAD 915e884, excluding runs/run-79276e78d773/\n    - type: test-evidence\n      reference: inline\n    - type: standards-checklist\n      reference: OKF v0.2 SPEC copy supplied by the operator, held outside the repository\n  producedBy: omn-dev-2-reviewer\n  agentVersion: 1.1.0\n  schemaVersion: 1.0.0\n  status: complete\n  verdict: approve-with-corrections\n  inputDigest: sha256:e9e4b6d6d164a98a1648f8e99ddf8fa2\n  contextDigest: sha256:dbb6d6ebe90100e36dc74083b2321673\n```\n\n## Metadata\n\n- Review ID: RP-2026-0011\n- Reviewer: omn-dev-2-reviewer\n- Change under review: Lesson store as an OKF v0.2 bundle at memory/lessons (run-79276e78d773, change-set entries C-001 to C-069 of IR-2026-1014), uncommitted in the working tree over HEAD 915e884\n- Review date: 2026-10-17\n\n## Review Scope\n\n- In scope: runtime/okf.py (new); runtime/verify_okf_bundle.py (new); runtime/knowledge.py (bundle read and write, lock path, index and log rendering, migrate, store digest); runtime/optimize_memory.py (bundle denial); omn_agent/source.py (path exclusion); runtime/framework_runtime.py (version); validation/framework-release-checklist.md (FR-13); config/runtime.md, memory/README.md, memory/memory-governance.md, memory/memory-resolver.md; tests/test_okf_bundle.py (new) and tests/test_knowledge.py; the migrated live bundle memory/lessons (43 concept documents, index.md, log.md) and the removal of memory/lessons/lessons.store.json; the operator's six review points (list markers, absent verified key, round-trip and render byte identity, parser robustness against hostile content, orphan deletion and atomicity under the lock, exclusion by relative path).\n- Out of scope: the omn_agent/_bundled_payload mirror files were not read line by line, because they are produced by the sync step and their byte parity with the framework tree is asserted by tests/test_bundled_payload.py, which was run; the architecture decision records D-001 to D-006 were not opened, because the technical design states each decision and was read in full; verify_multi_phase, verify_vertical_slice and verify_recovery were not run, because the operator forbade running them in place; acceptance-criteria and release-threshold validation belongs to omn-qa; run evidence under runs/ other than the documents named below was not examined, because the change does not edit it.\n- Evidence reviewed: full diff of runtime/knowledge.py, runtime/optimize_memory.py, runtime/framework_runtime.py, omn_agent/source.py, validation/framework-release-checklist.md, the four memory and config documents, and tests/test_knowledge.py (git diff against HEAD); runtime/okf.py, runtime/verify_okf_bundle.py and tests/test_okf_bundle.py read in full; memory/lessons/index.md and memory/lessons/log.md read in full; implementation report IR-2026-1014 read in full; technical design run-79276e78d773-okf-lesson-bundle-technical-design read in full; the four okf-lessons input documents read in full; the OKF v0.2 SPEC copy read for sections 3.1, 4.1, 5.1 to 5.5, 7, 8, 9 and 11; executed results listed under Test Adequacy Assessment.\n\n## Findings\n\n| ID | Severity | Category | Location | Requirement | Finding | Correction Request | Status |\n|---|---|---|---|---|---|---|---|\n| `F-001` | high | correctness | runtime/knowledge.py:533 (migrate) | Technical design C-011 and D-005 (migrated lessons keep identifiers, fields and history; JSON store removed only after verified migration) and the transition rule \"with both present, the bundle is authoritative and migrate completes the removal\" | When the JSON store and the bundle are both present and differ, migrate rewrites the bundle from the JSON store, deletes every concept document the JSON store lacks and discards governance history recorded only in the bundle, then reports success and removes the JSON store. Reproduced in a scratch copy: an approval made on the bundle and a lesson harvested after the JSON snapshot were both lost while migrate printed \"42 lesson(s) verified record for record\". Readers and writers refuse only a JSON-only state, so after a migration-mismatch or an interruption harvest and governance keep writing to the bundle, and the documented re-run then destroys that work. Classified high, not critical, because no current checkout is shown to be in the both-forms state (Q-002). | `CR-001` | open |\n| `F-002` | low | correctness | runtime/okf.py:476 (conformance, OKF-11.1) | OKF v0.2 SPEC section 11 rule 1 and design constraint C-022 (the check works on any bundle path) | The verifier accepts any bundle path but reports valid YAML outside the writer's subset (block scalars, anchors, multi-line plain scalars, nested flow) as OKF-11.1 \"frontmatter is not parseable\", so a conformant third-party bundle is reported as failing section 11 without saying the failure is the subset limit. The behaviour itself is an accepted design tradeoff (technical design section 5.3, Tradeoffs accepted, D-007), which is the evidence that sets this at low rather than medium; what remains is that neither the verifier's usage text nor its finding detail discloses the limit. The lesson bundle path is unaffected. | `CR-002` | open |\n| `F-003` | low | correctness | runtime/optimize_memory.py:312 (_denied) | Technical design C-014 and S-030 (the optimiser exclusion is scoped by relative path) | The memory followed by lessons segment pair is matched over every part of the absolute path rather than the path relative to the scan root, unlike classify, which computes the relative path with _rel. A framework placed under any ancestor directory pair memory/lessons would have every scanned document denied. No layout the framework names produces that pair, so there is no behavioural consequence today. | `CR-003` | open |\n\n## Severity Summary\n\n- Critical: 0\n- High: 1\n- Medium: 0\n- Low: 2\n\n## Standards and Architecture Conformance\n\n- Coding standards: Standard-library-only rule (C-016) conforms: tests/test_knowledge.py ModuleBoundaryTestCase passed, asserting runtime/okf.py imports only the standard library and the verifier only okf. Determinism and skip-equal write (C-008) conform: the second write is byte-identical in tests and the CLI JSON output keeps sort_keys. The serialisation subset of D-007 is implemented as designed. Deviations from design C-011 and C-014 are recorded as F-001 and F-003.\n- Architecture rules: Design O-002 boundaries conform: runtime/okf.py imports nothing from the framework, runtime/knowledge.py and runtime/verify_okf_bundle.py depend on it one-way, and callers above load_store and write_store are unchanged. The four-step write order of D-003 (documents, orphan and temporary-file removal, log.md, index.md last, each by temporary file and os.replace) conforms. The OKF v0.2 reserved-file rules (sections 3.1, 8, 9) conform on the live bundle: verify_okf_bundle reported pass over 43 documents and 2 reserved files. The migration transition rule of D-005 does not conform (F-001).\n- Security criteria: Design C-017 (no field value can alter document, index or log structure, or form a path outside the bundle) conforms: every string is double-quoted with non-printable-ASCII characters escaped, index titles escape backslash and square brackets, log entries carry no free text, actors are sanitised by okf_actor, and lesson_id is guarded by the pattern L- followed by ten lowercase hex characters before any file name is formed; tests/test_okf_bundle.py exercises hostile strings and an unsafe lesson_id. No credential or secret is introduced.\n- Exceptions requested: None identified.\n\n## Test Adequacy Assessment\n\n- Test evidence reviewed: Confirmed in this run, from the repository root with the temporary directory set to D: because the C: drive had no free space (TMPDIR, TMP and TEMP set to a scratch directory on D:): PYTHONPATH=. python tests/test_okf_bundle.py, 29 tests OK (T-001); PYTHONPATH=. python tests/test_knowledge.py, 51 tests OK (T-002; a first run with the default temporary directory on C: produced 1 failure and 7 errors, all disk-full, not attributable to the change); PYTHONPATH=. python tests/test_bundled_payload.py, 11 tests OK (T-003); PYTHONPATH=. python tests/test_optimize_memory.py, 31 tests OK (T-004; first run on C: errored with No space left on device); python runtime/verify_validators.py, 6 of 6 COVERED (T-006, run from the repository root; R-004 of the report concerns a run from inside the framework directory); python runtime/verify_registry_coverage.py, 8 of 8 COVERED (T-007); python runtime/verify_okf_bundle.py, pass, 43 documents, 2 reserved, 0 findings, exit 0 (T-009); python runtime/knowledge.py list --json, 43 lessons (T-010); python runtime/knowledge.py recall for execution-planning and execution-plan.md, 2 shown of 2 eligible (T-011); python runtime/self_hosting.py checklist, FR-13 advisory, owner omn-qa (T-014); git status and the live bundle digest sha256:c605eff29d802a01367a0497dee76c94 unchanged before and after. Reproduction for F-001 in a scratch copy outside the repository: python runtime/knowledge.py with --root set to the copy, approve on one lesson, then migrate, with the JSON store restored from git show HEAD. Inspection commands, all read-only: git status, git diff and git show against HEAD, and python runtime/review_package_validator.py over this package with its invocation envelope, PASS 31 of 31. Claimed in IR-2026-1014 and not re-run: T-005 (sync writes the mirror; corroborated by T-003), T-008 (live migrate; corroborated by the absent JSON store and 43 documents), T-012 and T-013 (scratch scripts held outside the repository; T-012 partly corroborated by the render-parity unit test).\n- Coverage of changed behavior: Covered by executed tests: subset dump and parse round-trip over hostile strings and every live record shape, refusal of out-of-subset input, document mapping and field derivation, index and log rendering, render_section byte parity, idempotent second write, unsafe lesson_id and unsupported value refusals, orphan and temporary-file removal, fault injection at each replace and at the removal, seeded conformance defects per rule, verifier exit codes, JSON-only refusal, migrate of a JSON-only store, forced mismatch then re-run, optimiser denial for index.md, log.md and a concept document, payload exclusion by path, documentation text, and the version string. Not covered: migrate with both forms present and divergent (F-001), the verifier against valid YAML outside the subset (F-002), and the optimiser denial under an ancestor directory pair memory/lessons (F-003).\n- Gaps requiring new tests: (1) migrate with the JSON store and the bundle both present, where the bundle holds an extra lesson and a governance history entry the JSON store lacks, asserting that no bundle document or history entry is lost (F-001, CR-001); (2) the verifier on a bundle holding valid YAML outside the subset, asserting the disclosed result (F-002, CR-002); (3) optimiser classification of a memory document whose absolute path has memory/lessons above the scan root (F-003, CR-003); handed to omn-qa.\n\n## Correction Requests\n\n| ID | Addresses | Required change | Blocking | Owner |\n|---|---|---|---|---|\n| `CR-001` | `F-001` | migrate never removes or overwrites a lesson document or a governance history entry that the JSON store lacks; when both forms exist and differ it either refuses with a named error class and writes nothing, or completes only when the two agree, as the architect rules under Q-001; a test proves the divergent case | yes | omn-dev-1-implement |\n| `CR-002` | `F-002` | the verifier's usage text and its OKF-11.1 finding state that frontmatter outside the supported subset is reported as unparseable, or the verifier distinguishes out-of-subset YAML from unparseable YAML, so a fail on a third-party bundle is not read as a section 11 violation | no | architect |\n| `CR-003` | `F-003` | the optimiser's lesson-bundle denial matches memory/lessons only within the path relative to the scan root, as C-014 states, with a test for an ancestor pair | no | omn-dev-1-implement |\n\n## Residual Risk\n\n- Accepted risk: After an interruption, concept documents can disagree with index.md and log.md until the next write (design A-003 and Tradeoffs accepted; the design names omn-business-analyst as confirming A-003 and omn-tech-lead as accepting owner of the Design Gate it passed); governance actions recorded after migration are lost on a revert unless re-applied (design Rollout and Rollback, accepting owner omn-tech-lead); recall parses one document per lesson at each hydrated dispatch (A-005, omn-tech-lead).\n- Unmitigated risk: Other checkouts that still hold a JSON-only store must run migrate once; until CR-001 closes, any of them that reaches the both-forms state through an interruption or a migration-mismatch and then records a governance action or a harvest loses that work on the next migrate. Whether an install ever held a JSON store is unconfirmed (Q-002).\n- Monitoring required: The elapsed time recorded in knowledge-harvest.json as the lesson count grows (design R-006); FR-13 advisory verifier results in change proposals; the migrate outcome and any migration-mismatch reported by other checkouts after they pull the change.\n\n## Verdict\n\n- Decision: approve-with-corrections\n- Rationale: One high finding (F-001) is open with a blocking correction request, no critical finding is open, and executed test evidence was reviewed, so the first matching row of the Stage 8 table is the open-high row, which yields approve-with-corrections with status complete.\n- Blocking findings outstanding: F-001\n- Readiness recommendation: Recommended to omn-qa, owner of the Review Gate, that the change not progress until CR-001 is closed with a test for the divergent both-forms case and re-reviewed; CR-002 and CR-003 may be carried as non-blocking improvements. This is a recommendation, not a gate decision.\n\n## Open Questions\n\n| ID | Question | Blocking | Owner | Affects |\n|---|---|---|---|---|\n| `Q-001` | When the JSON store and the bundle are both present and differ, which form wins: the bundle, as design section 6 states, or the JSON store, as design section 5.3 implies by \"re-running it after an interruption rewrites the bundle\"? | no | architect | CR-001 required outcome |\n| `Q-002` | Can any installed copy hold a JSON store written by runtime 0.10.0, contrary to the design's statement that installs never held one, so that it could reach the both-forms state after upgrading? | no | omn-tech-lead | F-001 severity and the verdict; a yes raises F-001 to critical and the verdict to reject |",
+        "digest": "sha256:fc48c21cd6d68e74f35531067b1f37e5",
+        "produced_by": "quality-review"
+      }
+    ],
+    "minimum_satisfaction": "At least one accepted input must be present. It supplies the account of what was delivered: an implementation report for the change set itself, a validation report for what was proven about it, a review package for a `review-pull-request` run, a deployment status for the `communication-and-post-release` phase, which publishes after a release has landed, or a technical recommendation for the `publication` phase of investigate and the `findings-publication` phase of research, which publish on the `findings` basis what an investigation concluded and is the artifact both phases' predecessor hands over. Without one there is nothing to publish from, and publishing anyway would mean describing a system from this agent's own reading of what it was supposed to become."
+  },
+  "prior_validation": null,
+  "prior_rejection": null,
+  "upstream_artifacts": [
+    {
+      "type": "review-package",
+      "reference": "runs/run-79276e78d773/states/quality-review/artifacts/review-package.md",
+      "produced_by": "quality-review",
+      "artifact": "review-package.md",
+      "bytes": 15561,
+      "sections": {
+        "read_first": [
+          "Findings",
+          "Correction Requests",
+          "Verdict",
+          "Open Questions"
+        ],
+        "on_demand": [
+          "Review Scope",
+          "Severity Summary",
+          "Standards and Architecture Conformance",
+          "Test Adequacy Assessment",
+          "Residual Risk"
+        ]
+      }
+    }
+  ],
+  "task_context": {
+    "path": "runs/run-79276e78d773/task-context.yaml",
+    "schema": "framework.runtime/task-context.v1",
+    "digest": "sha256:737f521e174a18078fe5994c2f617472",
+    "bytes": 69524,
+    "affected_areas": {
+      "determinable": true,
+      "triggered": [
+        "database",
+        "performance",
+        "security"
+      ],
+      "declared": []
+    }
+  },
+  "parallel_group": {
+    "phases": [
+      "documentation-and-release-handoff"
+    ],
+    "dispatchable_now": [],
+    "dispatchable_early": {},
+    "this_phase_forgoes": []
+  },
+  "context_slice": {
+    "frozen_at": "2026-10-17T13:49:34Z",
+    "members": [
+      {
+        "path": "registry/agents.yaml",
+        "digest": "sha256:3300717f35d0b29badb0d146de6af8da",
+        "supplies": "framework-context",
+        "bytes": 22733,
+        "read": "runtime-resolved",
+        "read_reason": "agent routing and versions are resolved by the runtime"
+      },
+      {
+        "path": "registry/workflows.yaml",
+        "digest": "sha256:84e98748204581ef06f3e434c600f794",
+        "supplies": "framework-context",
+        "bytes": 9569,
+        "read": "runtime-resolved",
+        "read_reason": "the workflow is already routed; the phase is in the envelope"
+      },
+      {
+        "path": "registry/skills.yaml",
+        "digest": "sha256:5d2b13401641a169a9e7ea0b9dee344d",
+        "supplies": "framework-context",
+        "bytes": 17318,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "registry/templates.yaml",
+        "digest": "sha256:15b32b7dc6a6e5c3c47fac6809f1df7a",
+        "supplies": "framework-context",
+        "bytes": 12345,
+        "read": "runtime-resolved",
+        "read_reason": "the output template is named in expected_output_schema"
+      },
+      {
+        "path": "agents/capability-matrix.md",
+        "digest": "sha256:db1d746fffa73835f1ec01c89de9b82d",
+        "supplies": "framework-context",
+        "bytes": 7175,
+        "read": "runtime-resolved",
+        "read_reason": "capability ownership is resolved by the runtime"
+      },
+      {
+        "path": "skills/agent-skill-matrix.md",
+        "digest": "sha256:3970e3f036a7be9f092480d59b4f7819",
+        "supplies": "framework-context",
+        "bytes": 17261,
+        "read": "runtime-resolved",
+        "read_reason": "the phase's skills are resolved in skill_dispatch"
+      },
+      {
+        "path": "workflows/workflow-gate-matrix.md",
+        "digest": "sha256:5eb1e4a6bc18b4c453cd940eb51db10b",
+        "supplies": "framework-context",
+        "bytes": 6687,
+        "read": "on-demand",
+        "read_reason": "who decides each gate; consult when naming a gate owner or a handoff"
+      },
+      {
+        "path": "context/product-context.md",
+        "digest": "sha256:3f5566d97d08a70ff34af1975ae50cfd",
+        "supplies": "framework-context",
+        "bytes": 525,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/technical-context.md",
+        "digest": "sha256:a19cf43103ce724e7a3a3ec00bb6cf66",
+        "supplies": "framework-context",
+        "bytes": 554,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "context/release-context.md",
+        "digest": "sha256:b6e7a504da2e00de90ef3702ffefa674",
+        "supplies": "framework-context",
+        "bytes": 470,
+        "read": "required",
+        "read_reason": "declared for this phase"
+      },
+      {
+        "path": "workflows/implement-feature.md",
+        "digest": "sha256:6a75a300f2b0caf734e6c26fc119bc12",
+        "supplies": "framework-context",
+        "bytes": 8085,
+        "read": "on-demand",
+        "read_reason": "the routed workflow; the phase, its gate, and its inputs are already in the envelope"
+      },
+      {
+        "path": "templates/release-note.md",
+        "digest": "sha256:03660e609eceae3e2fb16ae8d5b1b281",
+        "supplies": null,
+        "bytes": 3294,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/review-package.md",
+        "digest": "sha256:d16faf48d6334bf095f041eb6b3611e7",
+        "supplies": null,
+        "bytes": 5292,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "templates/implementation-report.md",
+        "digest": "sha256:64eb3246a198fcb414e3245ba35e7382",
+        "supplies": null,
+        "bytes": 5825,
+        "read": "required",
+        "read_reason": "an artifact template this phase renders or reads"
+      },
+      {
+        "path": "skills/logging/observability-logging.md",
+        "digest": "sha256:f1e4d272b21f98a691f848748ebcffd3",
+        "supplies": null,
+        "bytes": 1208,
+        "read": "required",
+        "read_reason": "skill S11 is required for this phase"
+      },
+      {
+        "path": "skills/git/git-collaboration.md",
+        "digest": "sha256:865c6c5542a6c4490fbcce4163b2d445",
+        "supplies": null,
+        "bytes": 1252,
+        "read": "required",
+        "read_reason": "skill S10 is required for this phase"
+      },
+      {
+        "path": "skills/error-handling/error-handling-strategy.md",
+        "digest": "sha256:f079a0cde78d28036a798b7be398579f",
+        "supplies": null,
+        "bytes": 1333,
+        "read": "required",
+        "read_reason": "skill S12 is required for this phase"
+      },
+      {
+        "path": "runtime/README.md",
+        "digest": "sha256:0fe5a799cafdd70db8744b0287682ffe",
+        "supplies": null,
+        "bytes": 62800,
+        "read": "on-demand",
+        "read_reason": "the implemented runtime surface; consult when the change touches the framework's own runtime or its run evidence"
+      }
+    ],
+    "context_digest": "sha256:598693b3d4e606388ca8c2715f151cf0",
+    "input_digest": "sha256:f6a9f769682c7efc59bfdbb427f51a87",
+    "inputs": [
+      {
+        "type": "architecture-context",
+        "reference": "runs/inputs/okf-lessons-architecture-context.md",
+        "source_file": ".claude/runs/inputs/okf-lessons-architecture-context.md",
+        "digest": "sha256:8859dd1736058635fdf5470ac277b2dc"
+      },
+      {
+        "type": "review-package",
+        "reference": "runs/run-79276e78d773/states/quality-review/artifacts/review-package.md",
+        "source_file": "D:/Project/claude-framework/.claude/worktrees/hopeful-einstein-00bc6a/.claude/runs/run-79276e78d773/states/quality-review/artifacts/review-package.md",
+        "digest": "sha256:fc48c21cd6d68e74f35531067b1f37e5"
+      }
+    ],
+    "unnarrowed": [
+      "runtime/README.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md"
+    ],
+    "read_policy": "config/runtime.md#context-loading",
+    "read_required": [
+      "context/product-context.md",
+      "context/release-context.md",
+      "context/technical-context.md",
+      "skills/error-handling/error-handling-strategy.md",
+      "skills/git/git-collaboration.md",
+      "skills/logging/observability-logging.md",
+      "templates/implementation-report.md",
+      "templates/release-note.md",
+      "templates/review-package.md"
+    ],
+    "read_on_demand": [
+      "runtime/README.md",
+      "workflows/implement-feature.md",
+      "workflows/workflow-gate-matrix.md"
+    ],
+    "runtime_resolved": [
+      "agents/capability-matrix.md",
+      "registry/agents.yaml",
+      "registry/skills.yaml",
+      "registry/templates.yaml",
+      "registry/workflows.yaml",
+      "skills/agent-skill-matrix.md"
+    ],
+    "bytes_total": 183726,
+    "bytes_required": 19753,
+    "excluded": [
+      "memory/* -- memory hydration is not requested by this run; config/runtime.md makes it opt-in per run"
+    ]
+  },
+  "memory_slice": {
+    "hydrated": true,
+    "reason": "lessons from earlier runs hydrated per this run's knowledge_loop record (recorded at plan time)",
+    "store": "memory/lessons",
+    "store_digest": "sha256:c605eff29d802a01367a0497dee76c94",
+    "threshold": 2,
+    "matched": 2,
+    "lessons": [
+      {
+        "lesson_id": "L-a1c32dc2c2",
+        "kind": "validation-check",
+        "check_id": "R7",
+        "gate": null,
+        "artifact_type": "release-note.md",
+        "check_description": "The version is a recognisable version string",
+        "check_severity": "Correctable",
+        "distinct_runs": 3,
+        "occurrences": 3,
+        "last_seen": "2026-09-18T00:25:04Z",
+        "status": "candidate",
+        "remedy": null
+      },
+      {
+        "lesson_id": "L-3999fb5c73",
+        "kind": "validation-check",
+        "check_id": "R1",
+        "gate": null,
+        "artifact_type": "release-note.md",
+        "check_description": "releaseVerdict is one of released, partial, rolled-back, handed-off, findings-published, delta-published",
+        "check_severity": "Blocking",
+        "distinct_runs": 2,
+        "occurrences": 2,
+        "last_seen": "2026-10-17T05:42:02Z",
+        "status": "candidate",
+        "remedy": null
+      }
+    ]
+  },
+  "constraints": {
+    "permitted_writes": [
+      "runs/run-79276e78d773/states/documentation-and-release-handoff/artifacts/release-note.md",
+      "runs/run-79276e78d773/states/documentation-and-release-handoff/result-envelope.json"
+    ],
+    "write_exclusions": [],
+    "command_execution": {
+      "allowed": false,
+      "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+      "prohibitedPurposes": [
+        "external network or service access",
+        "any command that modifies production source or committed run evidence",
+        "repository history rewriting, publishing, or release actions",
+        "reproducing a test or validation result, which belongs to omn-qa"
+      ]
+    },
+    "prohibited": [
+      "any repository write outside permitted_writes",
+      "command execution",
+      "external system, repository, or ticketing access",
+      "write, repair, or refactor production code",
+      "author or amend a technical design, an architecture decision, or a structural constraint",
+      "define, widen, or narrow product scope or acceptance criteria",
+      "award, withhold, or restate a validation verdict as though this agent reached it",
+      "record a merge, release, or deployment decision",
+      "publish a statement the supplied evidence does not support",
+      "omit, soften, or defer a breaking change a supplied input declares",
+      "carry forward prior-release content the delivered change made false",
+      "resolve an engineering gap rather than returning it to the role that owns it",
+      "decide a gate that assesses evidence this agent produced",
+      "modify committed run evidence or a governance record",
+      "access external systems directly"
+    ],
+    "authority_scope": {
+      "permitted": [
+        "describe delivered behavior from the implementation and validation evidence supplied",
+        "draft release notes, change summaries, and closure communication packages",
+        "record usage, limitations, known issues, and troubleshooting guidance",
+        "state the compatibility consequence a declared contract change carries",
+        "identify documentation the delivered change made stale, and propose its correction",
+        "name the audience a communication was addressed to and the handoff it carries",
+        "maintain the trace from each published statement to the artifact that supports it",
+        "record an unresolved engineering question as an open question against its owning role"
+      ],
+      "prohibited": [
+        "write, repair, or refactor production code",
+        "author or amend a technical design, an architecture decision, or a structural constraint",
+        "define, widen, or narrow product scope or acceptance criteria",
+        "award, withhold, or restate a validation verdict as though this agent reached it",
+        "record a merge, release, or deployment decision",
+        "publish a statement the supplied evidence does not support",
+        "omit, soften, or defer a breaking change a supplied input declares",
+        "carry forward prior-release content the delivered change made false",
+        "resolve an engineering gap rather than returning it to the role that owns it",
+        "decide a gate that assesses evidence this agent produced",
+        "modify committed run evidence or a governance record",
+        "access external systems directly"
+      ],
+      "repositoryWrites": {
+        "allowed": false,
+        "scope": "none. This agent writes its own artifact and its result envelope, and nothing else. Product documentation living in the repository is proposed as content inside the artifact and applied by the role that owns the file, so a documentation change never travels as an unreviewed write.",
+        "rationale": "This agent's authority is over what is said about a change, never over the change itself. Writing to the repository would let a publication step alter the delivered behavior it exists to describe, and the resulting document would then be accurate about a system this agent had just modified."
+      },
+      "commandExecution": {
+        "allowed": false,
+        "purpose": "none. Every fact this agent publishes comes from a supplied artifact, and a fact obtained by running a command would be this agent producing evidence rather than communicating it.",
+        "prohibitedPurposes": [
+          "external network or service access",
+          "any command that modifies production source or committed run evidence",
+          "repository history rewriting, publishing, or release actions",
+          "reproducing a test or validation result, which belongs to omn-qa"
+        ]
+      }
+    },
+    "determinism": {
+      "contract": "Identical inputs and an identical context snapshot must produce the same published statements, the same known-issue set, the same compatibility statement, the same declared release verdict, and the same declared artifact status.",
+      "identifierSchemes": {
+        "knownIssues": "K-<zero-padded-sequence>"
+      },
+      "orderingRule": "Known issues keep the order of the source that recorded them, so a supplied defect list and the issues published from it can be read side by side.",
+      "modelIndependence": "No module may reference a specific model, vendor, or agent runtime. Technology names are permitted only when they trace to the supplied evidence, release context, or repository context."
+    }
+  },
+  "timeout_profile": {
+    "max_attempts": 3,
+    "attempt": 1,
+    "policy_ref": "config/runtime.md#retry-policy"
+  },
+  "expected_output_schema": {
+    "artifact": "release-note.md",
+    "artifact_path": "runs/run-79276e78d773/states/documentation-and-release-handoff/artifacts/release-note.md",
+    "template_ref": "templates/release-note.md",
+    "contract_ref": "agents/omn-documentation/output.md",
+    "quality_ref": "agents/omn-documentation/quality.md",
+    "validator": "release_note_validator",
+    "result_envelope_path": "runs/run-79276e78d773/states/documentation-and-release-handoff/result-envelope.json",
+    "conditional_artifacts": []
+  },
+  "built_at": "2026-10-17T13:49:35Z",
+  "model_tier": {
+    "tier": "light",
+    "host_hint": "haiku",
+    "basis": "declared light for implement-feature/documentation-and-release-handoff in config/model-tier-policy.json",
+    "escalation": {}
+  },
+  "context_budget": {
+    "modules_full_bytes": 90936,
+    "modules_core_bytes": 45565,
+    "slice_all_bytes": 183726,
+    "slice_required_bytes": 19753,
+    "inputs_bytes": 4022,
+    "upstream_full_bytes": 15562,
+    "upstream_read_first_bytes": 4962,
+    "task_context_bytes": 69524,
+    "fixed_bytes": 13356,
+    "legacy_estimate_bytes": 307602,
+    "progressive_estimate_bytes": 157182,
+    "legacy_estimate_tokens": 76900,
+    "progressive_estimate_tokens": 39295,
+    "savings_pct": 48.9
+  }
+}

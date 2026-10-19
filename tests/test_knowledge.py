@@ -1,5 +1,5 @@
-"""Tests for the knowledge loop (runtime 0.10.0): harvest of recorded run evidence into governed
-lessons, the store and its governance, eligibility and recall, the plan-time hydration record,
+"""Tests for the knowledge loop (runtime 0.10.0, lesson bundle since 0.11.0): harvest of recorded
+run evidence into governed lessons, the store and its governance, eligibility and recall, the plan-time hydration record,
 dispatch hydration and its prompt section, effectiveness accounting, execution metrics, the
 post-aggregation harvest, the installer exclusion of the store, and backward compatibility of
 every run planned before the change.
@@ -10,6 +10,11 @@ directories while asserting. The backward-compatibility tests compare a dispatch
 pre-change 0.9.0 runtime, taken from the commit the change was built on, with a dispatch by the
 current runtime over the same copy of the live tree; the closed normalisation list and the
 pre-change fixture run are kept in `tests/fixtures/knowledge/baseline-0.9.0/`.
+
+Since 0.11.0 the store is an OKF v0.2 bundle at `memory/lessons/` (`runtime/okf.py`,
+`runtime/verify_okf_bundle.py`); the bundle tests further down cover the frontmatter subset, the
+lesson document mapping, the reserved files, the write order under interruption, conformance,
+and the verify-before-delete migration of the JSON store.
 """
 
 from __future__ import annotations
@@ -59,7 +64,20 @@ import state_engine as se  # noqa: E402
 # A credential-shaped marker (not a real secret): planted in every evidence source.
 MARKER = "password=PLANTED-MARKER-7f3a9c"
 CLOSED_LIST = {"built_at", "context_slice.frozen_at", "task_context.digest"}
-IGNORE = shutil.ignore_patterns("runs", "__pycache__", "worktrees", "lessons.store.*")
+_IGNORE_NAMES = shutil.ignore_patterns("runs", "__pycache__", "worktrees")
+
+
+def IGNORE(directory, names):
+    """Copy-ignore: the usual names, plus the lesson bundle by its path relative to the
+    framework root (memory/lessons), so every other memory file is still copied."""
+    skipped = set(_IGNORE_NAMES(directory, names))
+    try:
+        rel = Path(directory).resolve().relative_to(CLAUDE.resolve()).as_posix()
+    except ValueError:
+        rel = None
+    if rel == "memory" and "lessons" in names:
+        skipped.add("lessons")
+    return skipped
 
 
 # ------------------------------------------------------------------ helpers
@@ -185,11 +203,8 @@ def lesson(fp: str, *, phases, distinct: int, occurrences: int | None = None,
 
 
 def write_store(root: Path, lessons: list):
-    path = root / kl.STORE_REL
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(kl.canonical_bytes({"schema": kl.STORE_SCHEMA,
-                                         "lessons": sorted(lessons,
-                                                           key=lambda l: l["fingerprint"])}))
+    kl.write_store(root, {"schema": kl.STORE_SCHEMA,
+                          "lessons": sorted(lessons, key=lambda l: l["fingerprint"])})
 
 
 def store_files(root: Path) -> dict:
@@ -362,7 +377,8 @@ class IdempotencyTestCase(unittest.TestCase):
         self.assertTrue(first["store_written"])
         self.assertFalse(second["store_written"])
         self.assertEqual(first["empty_failure_lists"], 1)
-        self.assertEqual(set(before), {"lessons.store.json"})
+        self.assertEqual(set(before), {"index.md", "log.md",
+                                       kl.lesson_id_for("check:a.md:C7.1") + ".md"})
 
     def test_one_more_event_raises_the_count_by_one(self):
         kl.harvest(self.root)
@@ -461,25 +477,47 @@ class GovernanceTestCase(unittest.TestCase):
         finally:
             lock.unlink()
         self.assertEqual({k: v for k, v in store_files(self.root).items()
-                          if k != "lessons.store.lock"},
-                         {k: v for k, v in before.items() if k != "lessons.store.lock"})
+                          if k != "lessons.lock"},
+                         {k: v for k, v in before.items() if k != "lessons.lock"})
 
 
 class OptimizerIsolationTestCase(unittest.TestCase):
     """AC-009: the memory optimizer never treats the store as a document it may rewrite."""
 
-    def test_the_store_is_not_a_markdown_candidate_and_stays_byte_identical(self):
+    def test_the_bundle_is_denied_by_path_and_stays_byte_identical(self):
         root = make_root()
         self.addCleanup(shutil.rmtree, root, ignore_errors=True)
+        lid = kl.lesson_id_for("check:a.md:C1.1")
         write_store(root, [lesson("check:a.md:C1.1", phases=["s"], distinct=2)])
         (root / "memory" / "notes.md").write_text("# Notes\n\n" + "text " * 200,
                                                   encoding="utf-8")
+        (root / "memory" / "index.md").write_text("# Memory\n\n" + "text " * 200,
+                                                  encoding="utf-8")
         before = store_files(root)
+        for name in ("index.md", "log.md", lid + ".md"):
+            target = om.classify(root / "memory" / "lessons" / name)
+            self.assertIn("memory/lessons/ is the lesson bundle", target.reason, name)
+        self.assertNotIn("lesson bundle", om.classify(root / "memory" / "index.md").reason)
         found = om.discover([root / "memory"], [])
-        self.assertNotIn("lessons.store.json", {t.path.name for t in found})
-        target = om.classify(root / kl.STORE_REL)
-        self.assertEqual(target.reason, "not a markdown document")
+        self.assertFalse([t for t in found if "lessons" in t.path.parts and not t.reason])
         self.assertEqual(store_files(root), before)
+
+    def test_the_bundle_denial_ignores_an_ancestor_memory_lessons_pair(self):
+        tmp = Path(tempfile.mkdtemp(prefix="omn-kl-")).resolve()
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        framework = tmp / "memory" / "lessons" / "repo" / ".claude"
+        (framework / "memory" / "lessons").mkdir(parents=True)
+        notes = framework / "memory" / "notes.md"
+        notes.write_text("# Notes\n\n" + "text " * 200, encoding="utf-8")
+        doc = framework / "memory" / "lessons" / (kl.lesson_id_for("check:a.md:C1.1") + ".md")
+        doc.write_text("# Lesson\n\n" + "text " * 200, encoding="utf-8")
+        with mock.patch.object(om, "CLAUDE", framework), \
+                mock.patch.object(om, "REPO", framework.parent):
+            self.assertEqual(om.classify(notes).reason, "")
+            self.assertIn("memory/lessons/ is the lesson bundle", om.classify(doc).reason)
+            found = {t.path.name: t.reason for t in om.discover([framework / "memory"], [])}
+        self.assertEqual(found["notes.md"], "")
+        self.assertIn("lesson bundle", found[doc.name])
 
 
 # ------------------------------------------------------------------ eligibility and recall
@@ -609,7 +647,7 @@ class DispatchHydrationTestCase(unittest.TestCase):
         expect = [l["lesson_id"] for l in sorted(self.lessons[:7], key=kl.rank_key)[:5]]
         self.assertEqual(ids, expect)
         self.assertEqual([l["distinct_runs"] for l in ms["lessons"]], [8, 7, 6, 5, 4])
-        self.assertEqual(ms["store"], kl.STORE_REL)
+        self.assertEqual(ms["store"], kl.BUNDLE_REL)
         self.assertTrue(ms["store_digest"].startswith("sha256:"))
         again = kl.recall(self.tmp / ".claude", "scope-and-acceptance", "scope-definition.md")
         self.assertEqual([l["lesson_id"] for l in again["lessons"]], ids)
@@ -637,7 +675,7 @@ class DispatchHydrationTestCase(unittest.TestCase):
     def test_lessons_do_not_enter_the_payload(self):
         for key in ("context_slice", "input_contract"):
             self.assertNotIn("L-", json.dumps(self.env[key]).replace("L-0", ""))
-        self.assertNotIn(kl.STORE_REL, json.dumps(self.env["context_slice"]))
+        self.assertNotIn(kl.BUNDLE_REL, json.dumps(self.env["context_slice"]))
 
     def test_metrics_count_lessons_per_invocation(self):
         data = em.compute(self.run_dir, self.tmp / ".claude")
@@ -678,7 +716,8 @@ class DispatchHydrationTestCase(unittest.TestCase):
         root = make_root()
         self.addCleanup(shutil.rmtree, root, ignore_errors=True)
         (root / "memory" / "lessons").mkdir(parents=True)
-        (root / kl.STORE_REL).write_text("{broken", encoding="utf-8")
+        (root / "memory" / "lessons" / "L-0123456789.md").write_text(
+            '---\ntype: "Lesson"\nlesson_record: [broken\n---\n', encoding="utf-8")
         ms, shown = kl.dispatch_memory_slice(root, {"hydration": "on"}, "s", "a.md")
         self.assertFalse(ms["hydrated"])
         self.assertIn("store-unreadable", ms["reason"])
@@ -1072,7 +1111,7 @@ class AggregationHarvestTestCase(unittest.TestCase):
         write_run(tmp / ".claude", "run-earlier00001",
                   artifacts={self.PHASE: "scope-definition.md"},
                   events=[failed(self.PHASE, [cid], "2026-01-01T00:00:00Z")])
-        self.assertFalse((tmp / ".claude" / kl.STORE_REL).exists())
+        self.assertFalse((tmp / ".claude" / kl.BUNDLE_REL).exists())
         # retry and accept the phase, so the run reaches its gate and aggregates
         state = run_dir / "state.json"
         state.write_text(re.sub(r'"available_at": "[^"]+"',
@@ -1164,7 +1203,9 @@ class AggregationHarvestTestCase(unittest.TestCase):
         outcome = json.loads((run_dir / kl.HARVEST_FILENAME).read_text(encoding="utf-8"))
         self.assertEqual((outcome["status"], outcome["error_class"]),
                          ("skipped", "lock-contention"))
-        self.assertFalse((tmp / ".claude" / kl.STORE_REL).exists())
+        # the held lock lives inside the bundle directory; nothing else was written there
+        self.assertEqual(sorted(p.name for p in (tmp / ".claude" / kl.BUNDLE_REL).iterdir()),
+                         ["lessons.lock"])
 
     def test_a_pre_change_run_aggregates_without_the_step(self):
         tmp = make_tree(None)
@@ -1189,7 +1230,13 @@ class ModuleBoundaryTestCase(unittest.TestCase):
     def test_knowledge_imports_only_the_standard_library_and_state_engine(self):
         mods = {m.split(".")[0] for m in self.imports("runtime/knowledge.py")}
         self.assertNotIn("framework_runtime", mods)
-        self.assertEqual(mods - set(sys.stdlib_module_names), {"state_engine"})
+        self.assertEqual(mods - set(sys.stdlib_module_names), {"state_engine", "okf"})
+
+    def test_okf_and_its_verifier_import_only_the_standard_library_and_okf(self):
+        mods = {m.split(".")[0] for m in self.imports("runtime/okf.py")}
+        self.assertEqual(mods - set(sys.stdlib_module_names), set())
+        mods = {m.split(".")[0] for m in self.imports("runtime/verify_okf_bundle.py")}
+        self.assertEqual(mods - set(sys.stdlib_module_names), {"okf"})
 
     def test_metrics_imports_neither_runtime_nor_knowledge(self):
         mods = {m.split(".")[0] for m in self.imports("runtime/execution_metrics.py")}
@@ -1212,8 +1259,21 @@ class DocumentationTestCase(unittest.TestCase):
                        "config/knowledge-policy.json", "hydration_default"):
             self.assertIn(needed, runtime_md)
 
+    def test_documents_name_the_bundle_and_no_json_store(self):
+        for rel in ("memory/README.md", "memory/memory-governance.md",
+                    "memory/memory-resolver.md", "config/runtime.md"):
+            text = (CLAUDE / rel).read_text(encoding="utf-8")
+            self.assertIn("OKF", text, rel)
+            self.assertIn("v0.2", text, rel)
+            self.assertNotIn("lessons.store", text, rel)
+        runtime_md = " ".join((CLAUDE / "config" / "runtime.md").read_text(
+            encoding="utf-8").split())
+        for needed in ("index.md", "log.md", "lessons.lock", "migrate", "verify_okf_bundle.py",
+                       "store-migration-pending"):
+            self.assertIn(needed, runtime_md)
+
     def test_runtime_version_rose(self):
-        self.assertEqual(fr.RUNTIME_VERSION, "0.10.0")
+        self.assertEqual(fr.RUNTIME_VERSION, "0.11.0")
 
 
 if __name__ == "__main__":

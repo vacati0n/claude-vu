@@ -47,7 +47,6 @@ frameworkChangeProposal:
 | `.claude/runtime/verify_recovery.py` | `SR-1` | in-scope | Injected-run cleanup in `finally` |
 | `.claude/runtime/README.md` | `SR-1` | in-scope | Documentation of `M14` and `S11`, including the Closure Gate's wording corrections |
 | `.claude/validation/framework-release-checklist.md` | `SR-1` | in-scope | One paragraph after the `FR-11` note; no item identifier or obligation changed |
-| `.claude/memory/lessons/lessons.store.json` | `SR-1` | in-scope | Written by the runtime's lesson harvest when this run's phases completed, not edited by hand |
 | `tests/test_release_checklist_clean_tree.py` | no rule | out-of-scope | Outside the framework surface; the clean-tree regression test |
 | `tests/test_verifier_isolation.py` | no rule | out-of-scope | Outside the framework surface; `M14` and recovery isolation tests |
 | `.claude/runs/run-2cf7a34e3daa/state.json` | `SR-3` | out-of-scope | Run evidence written during the run |
@@ -158,6 +157,7 @@ Producer exclusion held at every gate. No gate was decided by the agent that pro
 | `O-006` | Route the Windows `os.replace` save failure seen during triage as its own defect (`FU-007`) | orchestrator | Open |
 | `O-007` | Keep or re-baseline the replay records already committed in `run-c5a8d50d3238` (`FU-008`) | tech-lead | Open |
 | `O-008` | Author this proposal after closure and re-run the full release checklist with it present (`FU-001`) | session operator | Closed: re-run at authoring, see Verification |
+| `O-009` | The lesson harvest this run wrote to the pre-bundle `lessons.store.json` did not survive the merge with main, which replaced that store with the OKF v0.2 bundle; decide whether to re-harvest this run's lessons into `memory/lessons/` | documentation | Open |
 
 ## Sign-off
 

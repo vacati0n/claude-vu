@@ -15,7 +15,12 @@ against a synthetic run state, so a regression names the row that drifted:
   * the rollback row keeps its pre-existing verdicts against a real rejected-gate store:
     only the decider may stay a placeholder, and the role guard still holds;
   * every subcommand the runtime's clearing-action builder can name has a row in the table,
-    so a new command-naming branch cannot ship without one.
+    so a new command-naming branch cannot ship without one;
+  * a placeholder is recognised in every form it can take once `shlex` has split the action
+    -- several words, glued to a prefix or a suffix, unterminated, or one word -- so each is
+    judged inadmissible by the table and refused by the execution guard, while the same
+    action filled in stays admissible and runs unchanged; after an exempt flag, only a
+    placeholder that is one whole argument keeps the exemption.
 """
 
 from __future__ import annotations
@@ -178,6 +183,62 @@ class ExemptionScopeTestCase(_Table):
         ok, why = self.judge(action)
         self.assertFalse(ok, why)
         self.assertIn("placeholder", why)
+
+
+class PlaceholderFormTestCase(_Table):
+    """Every form of placeholder is recognised, by the table and by the execution guard alike.
+
+    Each case is a `release` on a leased item, where the release row alone would admit the
+    action, so a refusal can only come from the placeholder. The reason must name the whole
+    placeholder, and `executable` must refuse the same argv, since both share one definition.
+    """
+
+    @staticmethod
+    def release(reason):
+        return (f"python {fr.FW_PREFIX}/runtime/framework_runtime.py release "
+                f"--run-id {RUN_ID} --phase {PHASE} --reason {reason}")
+
+    def assert_refused(self, reason, placeholder):
+        action = self.release(reason)
+        ok, why = self.judge(action, _state(se.LEASED, None))
+        self.assertFalse(ok, why)
+        self.assertIn(f"placeholder argument [{placeholder!r}]", why)
+        with self.assertRaises(AssertionError):
+            vr.executable(vr.runtime_command(action))
+
+    def test_multi_word_placeholder_is_inadmissible(self):
+        self.assert_refused("<fill in owner name>", "<fill in owner name>")
+
+    def test_glued_prefix_placeholder_is_inadmissible(self):
+        self.assert_refused("x<owner>", "x<owner>")
+
+    def test_glued_suffix_placeholder_is_inadmissible(self):
+        self.assert_refused("<owner>x", "<owner>x")
+
+    def test_unterminated_placeholder_is_inadmissible(self):
+        self.assert_refused("<owner --detail filled", "<owner --detail filled")
+
+    def test_single_word_placeholder_is_inadmissible(self):
+        self.assert_refused("<owner>", "<owner>")
+
+    def test_valid_action_is_admissible(self):
+        action = self.release("tool_failure")
+        ok, why = self.judge(action, _state(se.LEASED, None))
+        self.assertTrue(ok, why)
+        argv = vr.runtime_command(action)
+        self.assertEqual(vr.executable(argv), argv)
+
+    def test_only_a_whole_argument_after_an_exempt_flag_stays_exempt(self):
+        for who, text in (("<who>", "<fill in text>"), ("x<who>", "<text>"),
+                          ("<who>x", "<text>"), ("<who>", "<text")):
+            with self.subTest(who=who, text=text):
+                action = (f"python {fr.FW_PREFIX}/runtime/framework_runtime.py gate "
+                          f"--run-id {RUN_ID} --gate {fr._shell_word(GATE)} "
+                          f"--decision approve --owner-role <role> --decided-by {who} "
+                          f"--rationale {text}")
+                ok, why = self.judge(action)
+                self.assertFalse(ok, why)
+                self.assertIn("placeholder argument", why)
 
 
 class RollbackRowUnchangedTestCase(unittest.TestCase):

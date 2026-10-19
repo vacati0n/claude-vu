@@ -1,0 +1,59 @@
+{
+  "invocation_id": "inv-79276e78d773-01-002",
+  "status": "succeeded",
+  "artifact_refs": [
+    "runs/run-79276e78d773/states/scope-and-acceptance/artifacts/scope-definition.md"
+  ],
+  "structured_output": {
+    "attempt": 2,
+    "repair": {
+      "findings_cleared": ["SD4"],
+      "cause": "the A-009 criterion cell carried escaped pipe characters inside a code span, which split the table row so the Scope Ref column did not read S-006",
+      "change": "A-009 criterion reworded to name the Creation, Update, and Deprecation entry types without pipe characters; threshold, scope ref, verification method, and priority unchanged",
+      "identifiers_renumbered": false,
+      "metadata_changed": false,
+      "operator_notes": "Operator facts on Q-004 and Q-005, and the direction on Q-001 to Q-003, were weighed but not applied: this pass is limited to the raised finding, and the facts are not in the supplied inputs. Resolving those questions needs a re-derivation pass with the facts supplied as an input, or the Scope Gate owner's answer."
+    },
+    "counts": {
+      "scope_items": 18,
+      "exclusions": 7,
+      "acceptance_criteria": 24,
+      "scope_decisions": 4,
+      "open_questions": 7,
+      "blocking_open_questions": 5
+    },
+    "declared_status": "provisional",
+    "scope_verdict": "partially-bounded",
+    "quality_checks": {
+      "S1": "pass", "S2": "pass", "S3": "pass", "S4": "pass", "S5": "pass", "S6": "pass", "S7": "pass", "S8": "pass",
+      "D1": "pass", "D2": "pass", "D3": "pass", "D4": "pass", "SD1": "pass", "SD2": "pass", "D5": "pass", "D6": "pass",
+      "SD3": "pass", "SD4": "pass", "A4": "pass", "A5": "pass", "A6": "pass", "A7": "pass",
+      "SD5": "pass", "SD8": "pass", "G1": "pass", "G2": "pass", "G3": "pass", "G4": "pass", "G5": "pass",
+      "L1": "pass", "L2": "pass", "L3": "pass", "L4": "pass", "L5": "pass",
+      "SD6": "pass", "D7": "pass", "D8": "pass", "D9": "pass",
+      "SD7": "pass", "B1": "pass", "B2": "pass", "B3": "pass", "B4": "pass", "B5": "pass", "B6": "pass",
+      "C1": "pass", "C2": "pass", "C3": "pass", "C4": "pass", "C5": "pass"
+    },
+    "not_machine_checkable": {
+      "SN1": {"result": "pass", "judgement": "each criterion states a zero-exception or exact-match threshold the request's own outcomes imply"},
+      "SN2": {"result": "pass", "judgement": "every scope item traces to the feature request, change request, or business intent; non-goals are excluded, nothing widened"},
+      "SN3": {"result": "pass", "judgement": "the business goal restates the business intent's Intent and Success sections"}
+    },
+    "quality_checks_run": 53,
+    "quality_checks_passed": 53
+  },
+  "evidence_refs": [
+    "agents/omn-product-owner/manifest.yaml",
+    "agents/omn-product-owner/output.md",
+    "agents/omn-product-owner/quality.md",
+    "runs/run-79276e78d773/states/scope-and-acceptance/validation-report.json",
+    "runs/run-79276e78d773/states/scope-and-acceptance/invocation-envelope.json"
+  ],
+  "confidence": 0.9,
+  "declared_side_effects": [
+    "runs/run-79276e78d773/states/scope-and-acceptance/artifacts/scope-definition.md",
+    "runs/run-79276e78d773/states/scope-and-acceptance/result-envelope.json"
+  ],
+  "error_class": null,
+  "error_detail": null
+}
