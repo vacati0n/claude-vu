@@ -113,7 +113,11 @@ Producer exclusion held at every gate. No gate was decided by the agent that pro
 | End-to-end | the unedited emitted action against an item the recovery controller blocked, on a temporary copy | exit 0; the item moves blocked to pending and the fixed detail is recorded |
 | Recovery | `python .claude/runtime/verify_recovery.py` on a temporary copy | pass; 74/74 RECOVERY PROVEN, `X1` passing |
 | Multi-phase state machine | `python .claude/runtime/verify_multi_phase.py` on a temporary copy | pass; 15/15 PROVEN |
-| Other verifiers | `verify_registry_coverage.py`, `verify_validators.py`, `verify_manifests.py`, `verify_vertical_slice.py`, `verify_self_hosting.py` | pass; re-run by the operator at authoring |
+| Registry coverage | `python .claude/runtime/verify_registry_coverage.py` | pass; 8/8 COVERED, re-run at authoring |
+| Validators | `python .claude/runtime/verify_validators.py` | pass; 6/6 COVERED, re-run at authoring |
+| Manifests | `python .claude/runtime/verify_manifests.py` | pass; 2/2 CONFORMS, re-run at authoring |
+| Committed evidence | `python .claude/runtime/verify_vertical_slice.py` | pass; 10/10 PROVEN, re-run at authoring |
+| Self-hosting governance | `python .claude/runtime/verify_self_hosting.py` | pass; 8/8, re-run at authoring |
 | Full suite | `python tools/run_tests_parallel.py` on a temporary copy | the only failures are the 3 known `test_demo_capture` ffmpeg cases, which fail identically without the fix |
 | Run evidence untouched | `git status --short .claude/runs` | only `run-34fbc64712b5` and its input are new; no committed run changed |
 
